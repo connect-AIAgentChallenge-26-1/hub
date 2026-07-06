@@ -1,0 +1,102 @@
+// 자취달력(JachiCal) Prisma schema — db-schema.md ERD 반영
+// SQLite는 enum 미지원 → category/status는 String + 앱 레벨 검증
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int         @id @default(autoincrement())
+  email        String      @unique
+  passwordHash String
+  nickname     String
+  createdAt    DateTime    @default(now())
+
+  bills      Bill[]
+  payments   Payment[]
+  budgets    Budget[]
+  expenses   Expense[]
+  adminTasks AdminTask[]
+}
+
+model Bill {
+  id               Int      @id @default(autoincrement())
+  userId           Int
+  category         String   // ELECTRIC | GAS | WATER | MAINT | ETC
+  name             String
+  dueDay           Int?     // 1~31, null = 납부일 미정
+  defaultAmount    Int?     // null = 금액 미입력
+  provider         String?
+  notifyEnabled    Boolean  @default(true)
+  notifyDaysBefore Int      @default(2)
+  createdAt        DateTime @default(now())
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  payments Payment[]
+
+  @@index([userId])
+}
+
+model Payment {
+  id          Int       @id @default(autoincrement())
+  billId      Int
+  userId      Int
+  periodYear  Int
+  periodMonth Int
+  dueDate     DateTime?
+  amount      Int?
+  status      String    @default("PENDING") // PENDING | PAID | OVERDUE
+  paidAt      DateTime?
+
+  bill    Bill      @relation(fields: [billId], references: [id], onDelete: Cascade)
+  user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expense Expense?
+
+  @@unique([billId, periodYear, periodMonth])
+  @@index([userId, dueDate])
+}
+
+model Budget {
+  id          Int @id @default(autoincrement())
+  userId      Int
+  periodYear  Int
+  periodMonth Int
+  amount      Int
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, periodYear, periodMonth])
+}
+
+model Expense {
+  id              Int      @id @default(autoincrement())
+  userId          Int
+  categoryLabel   String
+  amount          Int
+  spentAt         DateTime
+  memo            String?
+  sourcePaymentId Int?     @unique
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sourcePayment Payment? @relation(fields: [sourcePaymentId], references: [id], onDelete: SetNull)
+
+  @@index([userId, spentAt])
+}
+
+model AdminTask {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  title     String
+  dueDate   DateTime?
+  isDone    Boolean   @default(false)
+  sortOrder Int       @default(0)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}

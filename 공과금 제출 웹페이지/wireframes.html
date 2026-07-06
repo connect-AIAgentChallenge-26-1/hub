@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>자취달력(JachiCal) — 와이어프레임 목업 (1단계 UI/UX)</title>
+<style>
+  :root{
+    --color-primary:#4F6DF5; --color-primary-weak:#EEF1FE;
+    --color-accent:#FF8A5B; --color-success:#12B76A;
+    --color-warning:#F79009; --color-danger:#F04438;
+    --bill-electric:#FDB022; --bill-gas:#F97066; --bill-water:#36BFFA; --bill-maint:#A48AFB;
+    --text-strong:#1D2939; --text-default:#344054; --text-weak:#667085;
+    --bg:#F5F6FA; --surface:#FFFFFF; --border:#EAECF0;
+    --radius-sm:8px; --radius-md:12px; --radius-lg:16px;
+    --shadow-card:0 2px 8px rgba(16,24,40,.06);
+    --font:'Pretendard',-apple-system,system-ui,'Malgun Gothic',sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;font-family:var(--font);}
+  body{background:#E7E9F0;color:var(--text-default);padding:28px 16px 60px;}
+  h1.page-title{text-align:center;color:var(--text-strong);font-size:24px;margin-bottom:4px;}
+  p.page-sub{text-align:center;color:var(--text-weak);font-size:14px;margin-bottom:28px;}
+  .frames{display:flex;flex-wrap:wrap;gap:28px;justify-content:center;align-items:flex-start;}
+  .phone{width:320px;background:var(--bg);border-radius:32px;box-shadow:0 12px 40px rgba(16,24,40,.18);
+    overflow:hidden;border:8px solid #11151f;position:relative;}
+  .screen-label{position:absolute;top:-24px;left:0;right:0;text-align:center;font-size:12px;
+    font-weight:700;color:#3d4560;}
+  .status-bar{height:26px;background:var(--surface);}
+  .scr{height:588px;overflow-y:auto;padding:16px 16px 76px;position:relative;}
+  .scr::-webkit-scrollbar{display:none;}
+  /* generic */
+  .card{background:var(--surface);border-radius:var(--radius-lg);padding:16px;box-shadow:var(--shadow-card);margin-bottom:14px;}
+  .h2{font-size:18px;font-weight:600;color:var(--text-strong);margin-bottom:10px;}
+  .caption{font-size:13px;color:var(--text-weak);}
+  .label{font-size:12px;font-weight:600;}
+  .btn{display:block;width:100%;height:48px;border:none;border-radius:var(--radius-md);
+    background:var(--color-primary);color:#fff;font-size:15px;font-weight:600;cursor:pointer;}
+  .btn.ghost{background:transparent;color:var(--text-weak);height:40px;font-weight:500;}
+  .btn.secondary{background:transparent;border:1.5px solid var(--border);color:var(--text-default);}
+  .chip{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;
+    font-size:12px;font-weight:600;}
+  .dot{width:8px;height:8px;border-radius:50%;display:inline-block;}
+  /* tab bar */
+  .tabbar{position:absolute;bottom:0;left:0;right:0;height:60px;background:var(--surface);
+    border-top:1px solid var(--border);display:flex;justify-content:space-around;align-items:center;}
+  .tab{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--text-weak);}
+  .tab.active{color:var(--color-primary);font-weight:700;}
+  .tab .ic{font-size:20px;line-height:1;}
+  /* onboarding */
+  .preset-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+  .preset{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-md);
+    padding:14px;text-align:center;font-size:14px;font-weight:600;color:var(--text-default);}
+  .preset .ic{font-size:22px;display:block;margin-bottom:6px;}
+  .item-row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--border);}
+  /* gauge */
+  .gauge-wrap{text-align:center;padding:6px 0 2px;}
+  .gauge{position:relative;width:170px;height:90px;margin:0 auto 6px;overflow:hidden;}
+  .gauge svg{display:block;}
+  .gauge-num{font-size:26px;font-weight:700;color:var(--text-strong);}
+  .gauge-cap{font-size:12px;color:var(--text-weak);}
+  /* dday list */
+  .dday{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);}
+  .dday:last-child{border-bottom:none;}
+  .dday .badge{min-width:44px;text-align:center;font-size:12px;font-weight:700;padding:5px 0;border-radius:8px;}
+  .dday .grow{flex:1;}
+  .dday .amt{font-weight:700;color:var(--text-strong);font-size:14px;}
+  /* calendar */
+  .cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+  .cal-head strong{font-size:17px;color:var(--text-strong);}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+  .cal-grid .wd{text-align:center;font-size:11px;color:var(--text-weak);padding:4px 0;font-weight:600;}
+  .cell{aspect-ratio:1;border-radius:10px;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;font-size:13px;color:var(--text-default);position:relative;gap:3px;}
+  .cell.today{outline:2px solid var(--color-primary);color:var(--color-primary);font-weight:700;}
+  .cell.muted{color:#C4C9D4;}
+  .cell .dots{display:flex;gap:2px;height:6px;}
+  /* budget bars */
+  .bar-row{margin-bottom:12px;}
+  .bar-top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px;}
+  .bar{height:8px;border-radius:6px;background:var(--border);overflow:hidden;}
+  .bar > span{display:block;height:100%;border-radius:6px;}
+  .fab{position:absolute;right:16px;bottom:76px;width:52px;height:52px;border-radius:50%;
+    background:var(--color-primary);color:#fff;font-size:26px;border:none;box-shadow:0 6px 16px rgba(79,109,245,.4);}
+  .greet{font-size:20px;font-weight:700;color:var(--text-strong);margin:4px 2px 14px;line-height:1.4;}
+  .greet small{display:block;font-size:13px;font-weight:500;color:var(--text-weak);margin-top:3px;}
+</style>
+</head>
+<body>
+  <h1 class="page-title">자취달력(JachiCal) · 와이어프레임 목업</h1>
+  <p class="page-sub">1단계 UI/UX 산출물 — 미드파이 목업 4종 · 디자인 토큰 적용</p>
+
+  <div class="frames">
+
+    <!-- ============ S1 온보딩 ============ -->
+    <div class="phone">
+      <div class="screen-label">S1 · 온보딩(공과금 등록)</div>
+      <div class="status-bar"></div>
+      <div class="scr">
+        <div class="greet">어떤 공과금을 내고 있나요?<small>자주 내는 항목부터 골라 등록해요 (건너뛰기 가능)</small></div>
+        <div class="preset-grid">
+          <div class="preset"><span class="ic">⚡</span>전기</div>
+          <div class="preset"><span class="ic">🔥</span>가스</div>
+          <div class="preset"><span class="ic">💧</span>수도</div>
+          <div class="preset"><span class="ic">🏢</span>관리비</div>
+        </div>
+        <div class="card">
+          <div class="label" style="color:var(--text-weak);margin-bottom:6px;">등록된 항목 · 2</div>
+          <div class="item-row">
+            <span><span class="dot" style="background:var(--bill-electric)"></span>&nbsp; 전기요금</span>
+            <span class="caption">매월 25일 · ₩32,000</span>
+          </div>
+          <div class="item-row" style="border-bottom:none;">
+            <span><span class="dot" style="background:var(--bill-maint)"></span>&nbsp; 관리비</span>
+            <span class="caption">매월 30일 · 금액 미정</span>
+          </div>
+        </div>
+        <button class="btn">등록 완료</button>
+        <button class="btn ghost">나중에 할게요</button>
+      </div>
+    </div>
+
+    <!-- ============ S2 홈 대시보드 ============ -->
+    <div class="phone">
+      <div class="screen-label">S2 · 홈(대시보드)</div>
+      <div class="status-bar"></div>
+      <div class="scr">
+        <div class="greet">서연님, 이번 달<br>납부 예정 <span style="color:var(--color-primary)">3건</span> 이에요<small>7월 6일 · 오늘도 알뜰하게 💪</small></div>
+
+        <div class="card">
+          <div class="h2">이번 달 예산</div>
+          <div class="gauge-wrap">
+            <div class="gauge">
+              <svg width="170" height="90" viewBox="0 0 170 90">
+                <path d="M15 85 A70 70 0 0 1 155 85" fill="none" stroke="#EAECF0" stroke-width="14" stroke-linecap="round"/>
+                <path d="M15 85 A70 70 0 0 1 128 33" fill="none" stroke="var(--color-success)" stroke-width="14" stroke-linecap="round"/>
+              </svg>
+              <div style="margin-top:-14px;"><span class="gauge-num">₩ 213,000</span><div class="gauge-cap">잔여 · 월 예산 ₩400,000</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="h2">다가오는 납부</div>
+          <div class="dday">
+            <span class="badge" style="background:#FEF0EA;color:var(--color-accent)">D-2</span>
+            <span class="grow"><strong style="color:var(--text-strong)">전기요금</strong><br><span class="caption">7월 8일 · 한전</span></span>
+            <span class="amt">₩32,000</span>
+          </div>
+          <div class="dday">
+            <span class="badge" style="background:var(--color-primary-weak);color:var(--color-primary)">D-5</span>
+            <span class="grow"><strong style="color:var(--text-strong)">도시가스</strong><br><span class="caption">7월 11일</span></span>
+            <span class="amt">₩18,400</span>
+          </div>
+          <div class="dday">
+            <span class="badge" style="background:var(--color-primary-weak);color:var(--color-primary)">D-7</span>
+            <span class="grow"><strong style="color:var(--text-strong)">관리비</strong><br><span class="caption">7월 13일 · 금액 미정</span></span>
+            <span class="caption">입력하기</span>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:0;">
+          <div class="h2">오늘 할 일</div>
+          <div class="caption">☑ 전입신고 — D-3 남음</div>
+        </div>
+      </div>
+      <div class="tabbar">
+        <div class="tab active"><span class="ic">🏠</span>홈</div>
+        <div class="tab"><span class="ic">📅</span>캘린더</div>
+        <div class="tab"><span class="ic">💰</span>예산</div>
+        <div class="tab"><span class="ic">👤</span>마이</div>
+      </div>
+    </div>
+
+    <!-- ============ S3 캘린더 ============ -->
+    <div class="phone">
+      <div class="screen-label">S3 · 캘린더(월간)</div>
+      <div class="status-bar"></div>
+      <div class="scr">
+        <div class="cal-head"><span>‹</span><strong>2026년 7월</strong><span>›</span></div>
+        <div class="card" style="padding:12px;">
+          <div class="cal-grid">
+            <div class="wd">일</div><div class="wd">월</div><div class="wd">화</div><div class="wd">수</div><div class="wd">목</div><div class="wd">금</div><div class="wd">토</div>
+            <div class="cell muted">29</div><div class="cell muted">30</div><div class="cell">1</div><div class="cell">2</div><div class="cell">3</div><div class="cell">4</div><div class="cell">5</div>
+            <div class="cell today">6<div class="dots"></div></div><div class="cell">7</div>
+            <div class="cell">8<div class="dots"><span class="dot" style="background:var(--bill-electric)"></span></div></div>
+            <div class="cell">9</div><div class="cell">10</div>
+            <div class="cell">11<div class="dots"><span class="dot" style="background:var(--bill-gas)"></span></div></div>
+            <div class="cell">12</div>
+            <div class="cell">13<div class="dots"><span class="dot" style="background:var(--bill-maint)"></span></div></div>
+            <div class="cell">14</div><div class="cell">15</div><div class="cell">16</div><div class="cell">17</div><div class="cell">18</div><div class="cell">19</div>
+            <div class="cell">20</div><div class="cell">21</div><div class="cell">22</div><div class="cell">23</div><div class="cell">24</div>
+            <div class="cell">25<div class="dots"><span class="dot" style="background:var(--bill-water)"></span></div></div>
+            <div class="cell">26</div>
+            <div class="cell">27</div><div class="cell">28</div><div class="cell">29</div><div class="cell">30</div><div class="cell">31</div>
+          </div>
+        </div>
+        <div class="card" style="margin-bottom:0;">
+          <div class="label" style="color:var(--text-weak);margin-bottom:8px;">7월 8일 · 목요일</div>
+          <div class="dday" style="border-bottom:none;padding-top:0;">
+            <span class="dot" style="background:var(--bill-electric)"></span>
+            <span class="grow"><strong style="color:var(--text-strong)">전기요금</strong><br><span class="caption">미납부</span></span>
+            <span class="amt">₩32,000</span>
+          </div>
+          <button class="btn secondary">+ 이 날짜에 항목 추가</button>
+        </div>
+      </div>
+      <div class="tabbar">
+        <div class="tab"><span class="ic">🏠</span>홈</div>
+        <div class="tab active"><span class="ic">📅</span>캘린더</div>
+        <div class="tab"><span class="ic">💰</span>예산</div>
+        <div class="tab"><span class="ic">👤</span>마이</div>
+      </div>
+    </div>
+
+    <!-- ============ S5 예산 ============ -->
+    <div class="phone">
+      <div class="screen-label">S5 · 예산 대시보드</div>
+      <div class="status-bar"></div>
+      <div class="scr">
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <div class="h2" style="margin:0;">7월 예산</div>
+            <span class="caption">예산 편집 ›</span>
+          </div>
+          <div class="gauge-wrap">
+            <div class="gauge">
+              <svg width="170" height="90" viewBox="0 0 170 90">
+                <path d="M15 85 A70 70 0 0 1 155 85" fill="none" stroke="#EAECF0" stroke-width="14" stroke-linecap="round"/>
+                <path d="M15 85 A70 70 0 0 1 128 33" fill="none" stroke="var(--color-success)" stroke-width="14" stroke-linecap="round"/>
+              </svg>
+              <div style="margin-top:-14px;"><span class="gauge-num">₩ 213,000</span><div class="gauge-cap">잔여 · 사용 ₩187,000 / ₩400,000</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="h2">카테고리별 지출</div>
+          <div class="bar-row">
+            <div class="bar-top"><span>공과금</span><span>₩82,400</span></div>
+            <div class="bar"><span style="width:55%;background:var(--color-primary)"></span></div>
+          </div>
+          <div class="bar-row">
+            <div class="bar-top"><span>식비</span><span>₩74,600</span></div>
+            <div class="bar"><span style="width:48%;background:var(--bill-electric)"></span></div>
+          </div>
+          <div class="bar-row" style="margin-bottom:0;">
+            <div class="bar-top"><span>생활용품</span><span>₩30,000</span></div>
+            <div class="bar"><span style="width:20%;background:var(--bill-water)"></span></div>
+          </div>
+        </div>
+
+        <div class="card" style="margin-bottom:0;">
+          <div class="h2">최근 지출</div>
+          <div class="item-row"><span>편의점</span><span class="amt">₩8,200</span></div>
+          <div class="item-row" style="border-bottom:none;"><span>도시가스</span><span class="amt">₩18,400</span></div>
+        </div>
+        <button class="fab">＋</button>
+      </div>
+      <div class="tabbar">
+        <div class="tab"><span class="ic">🏠</span>홈</div>
+        <div class="tab"><span class="ic">📅</span>캘린더</div>
+        <div class="tab active"><span class="ic">💰</span>예산</div>
+        <div class="tab"><span class="ic">👤</span>마이</div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
