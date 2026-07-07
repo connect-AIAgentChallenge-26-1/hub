@@ -1,16 +1,28 @@
-# React + Vite
+# hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+N167 프로젝트 모노레포 (npm workspaces).
 
-Currently, two official plugins are available:
+## 구조
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```
+apps/
+  intro/    프로젝트 소개 사이트 (Vite + React)
+  showup/   ShowUp — 노쇼·악성 고객 이력 관리 서비스 (진행 중)
+    docs/   기획서(plan.md) · 작업 체크리스트(checklist.md)
+```
 
-## React Compiler
+## 실행
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install          # 루트에서 1회
+npm run dev          # intro 개발 서버
+npm run build        # intro 빌드
+npm run lint
+```
 
-## Expanding the Oxlint configuration
+워크스페이스 직접 지정: `npm run dev -w intro`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+## ShowUp
+
+소상공인을 위한 노쇼·악성 고객 이력 관리 및 위험도 경고 웹서비스.
+상세: [apps/showup/README.md](apps/showup/README.md)
