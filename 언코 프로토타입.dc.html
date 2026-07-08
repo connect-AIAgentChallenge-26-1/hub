@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--bg:#f4f7fa;--surface:#ffffff;--ink:#182430;--sub:#5b6b7a;--line:#dde5ec;--accent:#2e6da8;--accent-ink:#ffffff;--accent-soft:#e3edf6;--good:#2e8b62;--good-soft:#e2f1e9;--warn:#b98a2f;--warn-soft:#f7edda;--bad:#bf4545;--bad-soft:#f7e3e1;--side:#13293a;--side-ink:#cfe0ee;--side-dim:#7d95a8;}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:"Pretendard Variable",Pretendard,-apple-system,"Noto Sans KR","Malgun Gothic",sans-serif;}
+a{color:var(--accent);text-decoration:none;} a:hover{color:var(--ink);}
+button{font-family:inherit;cursor:pointer;}
+textarea{font-family:inherit;}
+::placeholder{color:#9aa9b6;}
+@keyframes pc-spin{to{transform:rotate(360deg)}}
+@keyframes pc-pulse{0%,100%{opacity:.35}50%{opacity:1}}
+</style>
+</helmet>
+<div style="display:flex;min-height:100vh;background:var(--bg)">
+
+  <sc-if value="{{ showSidebar }}" hint-placeholder-val="{{ false }}">
+    <div style="width:228px;flex:none;background:var(--side);color:var(--side-ink);display:flex;flex-direction:column;position:sticky;top:0;height:100vh;box-sizing:border-box;padding:28px 18px 20px">
+      <div style="padding:0 10px 26px">
+        <div style="font-size:22px;font-weight:800;letter-spacing:-0.02em;color:#fff">언코</div>
+        <div style="font-size:11.5px;color:var(--side-dim);margin-top:4px;line-height:1.5">화용 능력 코칭 에이전트<br>'맞는 상황의 말'을 훈련합니다</div>
+      </div>
+      <nav style="display:flex;flex-direction:column;gap:4px">
+        <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="4">
+          <button onClick="{{ n.go }}" style="{{ n.style }}" style-hover="background:rgba(255,255,255,0.10);color:#ffffff">
+            <span style="{{ n.dotStyle }}"></span>{{ n.label }}
+          </button>
+        </sc-for>
+      </nav>
+      <div style="margin-top:auto;padding:14px 10px 0;border-top:1px solid rgba(255,255,255,0.12)">
+        <div style="font-size:12px;font-weight:600;color:#fff">{{ profileLabel }}</div>
+        <div style="font-size:11px;color:var(--side-dim);margin-top:3px;line-height:1.55">실시간 개입 없음 · 프라이버시 우선<br>찾아와 훈련하는 '헬스장' 모델</div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isOnboarding }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="온보딩" style="flex:1;display:flex;align-items:center;justify-content:center;padding:48px 24px;box-sizing:border-box">
+      <div style="width:640px;max-width:100%">
+        <div style="text-align:center;margin-bottom:36px">
+          <div style="display:inline-block;font-size:12px;font-weight:700;letter-spacing:0.08em;color:var(--accent);background:var(--accent-soft);padding:6px 14px;border-radius:999px">화용 능력 코칭 AI 에이전트</div>
+          <h1 style="font-size:34px;font-weight:800;letter-spacing:-0.02em;margin:18px 0 10px">'맞는 말'이 아니라,<br>'맞는 상황의 말'을 훈련합니다</h1>
+          <p style="font-size:15px;color:var(--sub);line-height:1.7;margin:0">문법은 완벽해도 격식·관계에서 무너지는 글 —<br>말결은 대신 써주지 않고, 스스로 다시 쓰게 합니다.</p>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px;box-shadow:0 1px 4px rgba(20,40,60,0.05)">
+          <div style="font-size:13px;font-weight:700;color:var(--sub);margin-bottom:12px">1 · 지금 나와 가장 가까운 상황은</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px">
+            <sc-for list="{{ roleCards }}" as="r" hint-placeholder-count="3">
+              <button onClick="{{ r.pick }}" style="{{ r.style }}" style-hover="border-color:var(--accent)">
+                <span style="font-size:14px;font-weight:700;display:block">{{ r.title }}</span>
+                <span style="font-size:12px;color:var(--sub);display:block;margin-top:5px;line-height:1.5">{{ r.desc }}</span>
+              </button>
+            </sc-for>
+          </div>
+          <div style="font-size:13px;font-weight:700;color:var(--sub);margin-bottom:12px">2 · 먼저 훈련하고 싶은 것은</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px">
+            <sc-for list="{{ goalChips }}" as="g" hint-placeholder-count="3">
+              <button onClick="{{ g.pick }}" style="{{ g.style }}" style-hover="border-color:var(--accent)">{{ g.label }}</button>
+            </sc-for>
+          </div>
+          <button onClick="{{ startApp }}" disabled="{{ obNotReady }}" style="{{ obStartStyle }}" style-hover="filter:brightness(1.08)">훈련 시작하기</button>
+          <div style="font-size:11.5px;color:var(--sub);text-align:center;margin-top:12px">글은 채점·코칭에만 사용됩니다 · 실시간 감시나 개입은 없습니다</div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="홈 대시보드" style="flex:1;min-width:0;padding:44px 48px;box-sizing:border-box">
+      <div style="max-width:960px;margin:0 auto">
+        <h1 style="font-size:26px;font-weight:800;letter-spacing:-0.01em;margin:0 0 6px">오늘도 훈련하러 오셨네요</h1>
+        <p style="font-size:14px;color:var(--sub);margin:0 0 28px">화용 점수는 '한 번의 잘 쓴 글'이 아니라 궤적으로 오릅니다.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:16px">
+          <sc-for list="{{ homeAxes }}" as="ax" hint-placeholder-count="3">
+            <div style="{{ ax.cardStyle }}">
+              <div style="display:flex;align-items:baseline;justify-content:space-between">
+                <div style="font-size:13px;font-weight:700;word-break:keep-all;white-space:nowrap">{{ ax.num }} {{ ax.name }}</div>
+                <sc-if value="{{ ax.isWeak }}"><span style="font-size:10.5px;font-weight:700;color:var(--bad);background:var(--bad-soft);padding:3px 8px;border-radius:999px">집중 축</span></sc-if>
+              </div>
+              <div style="height:8px;border-radius:999px;background:var(--line);margin:14px 0 10px;overflow:hidden"><div style="{{ ax.fillStyle }}"></div></div>
+              <div style="display:flex;justify-content:space-between;align-items:baseline">
+                <span style="{{ ax.chipStyle }}">{{ ax.levelLabel }}</span>
+                <span style="font-size:11.5px;color:var(--sub)">{{ ax.trend }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:14px">
+          <div style="background:var(--side);color:#fff;border-radius:14px;padding:26px;display:flex;flex-direction:column">
+            <div style="font-size:11.5px;font-weight:700;letter-spacing:0.06em;color:var(--side-dim)">오늘의 추천 훈련</div>
+            <div style="font-size:20px;font-weight:800;margin:10px 0 6px">{{ recoTitle }}</div>
+            <div style="font-size:13px;color:var(--side-ink);line-height:1.65;margin-bottom:20px">{{ recoReason }}</div>
+            <div style="display:flex;gap:10px;margin-top:auto">
+              <button onClick="{{ startReco }}" style="background:#ffffff;color:var(--side);border:none;border-radius:10px;padding:11px 20px;font-size:14px;font-weight:700" style-hover="filter:brightness(0.92)">바로 시작</button>
+              <button onClick="{{ goPicker }}" style="background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.35);border-radius:10px;padding:11px 20px;font-size:14px;font-weight:600" style-hover="background:rgba(255,255,255,0.1)">다른 상황 고르기</button>
+            </div>
+          </div>
+          <div style="background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 24px">
+            <div style="font-size:13px;font-weight:700;margin-bottom:14px">최근 세션</div>
+            <sc-if value="{{ hasRecents }}">
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <sc-for list="{{ recents }}" as="s" hint-placeholder-count="4">
+                  <div style="display:flex;align-items:center;gap:10px">
+                    <span style="font-size:11.5px;color:var(--sub);width:34px;flex:none">{{ s.date }}</span>
+                    <span style="font-size:13px;font-weight:600;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ s.title }}</span>
+                    <span style="display:flex;gap:4px;align-items:center">
+                      <sc-for list="{{ s.chips }}" as="c"><span style="{{ c.style }}">{{ c.t }}</span></sc-for>
+                      <span style="font-size:11.5px;font-weight:800;margin-left:4px">{{ s.total }}</span>
+                    </span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ noRecents }}"><div style="font-size:13px;color:var(--sub);line-height:1.6">아직 세션이 없습니다.<br>첫 훈련을 시작해보세요.</div></sc-if>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isPicker }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="상황 선택" style="flex:1;min-width:0;padding:44px 48px;box-sizing:border-box">
+      <div style="max-width:960px;margin:0 auto">
+        <h1 style="font-size:26px;font-weight:800;margin:0 0 6px">훈련 상황</h1>
+        <p style="font-size:14px;color:var(--sub);margin:0 0 26px">코어 6개 상황 · '적절'의 방향은 관계마다 달라집니다 — 교수에게는 완충이, 조원에게는 가벼움이 3점입니다.</p>
+        <div style="display:flex;flex-direction:column;gap:26px">
+          <sc-for list="{{ relGroups }}" as="grp" hint-placeholder-count="3">
+            <div>
+              <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px">
+                <span style="{{ grp.chipStyle }}">{{ grp.rel }}</span>
+                <span style="font-size:12px;color:var(--sub)">{{ grp.hint }}</span>
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+                <sc-for list="{{ grp.items }}" as="it">
+                  <button onClick="{{ it.pick }}" style="text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px" style-hover="border-color:var(--accent);box-shadow:0 2px 10px rgba(30,60,90,0.08)">
+                    <span style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+                      <span style="font-size:14.5px;font-weight:700">{{ it.title }}</span>
+                      <span style="font-size:10.5px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:3px 8px;border-radius:999px;flex:none">핵심 {{ it.axis }}</span>
+                    </span>
+                    <span style="font-size:12.5px;color:var(--sub);line-height:1.55">{{ it.tension }}</span>
+                  </button>
+                </sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isTrain }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="훈련 루프" style="flex:1;min-width:0;padding:36px 48px 48px;box-sizing:border-box">
+      <div style="max-width:1040px;margin:0 auto">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:22px">
+          <button onClick="{{ goPicker }}" style="background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:8px 14px;font-size:12.5px;font-weight:600;color:var(--sub)" style-hover="color:var(--ink);border-color:var(--accent)">← 상황 다시 고르기</button>
+          <h1 style="font-size:20px;font-weight:800;margin:0;flex:1">{{ sitTitle }}</h1>
+          <span style="{{ sitRelChipStyle }}">{{ sitRel }}</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start">
+
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <div style="background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px">
+              <div style="font-size:12px;font-weight:700;letter-spacing:0.05em;color:var(--sub);margin-bottom:12px">상황 브리핑</div>
+              <div style="display:grid;grid-template-columns:52px 1fr;gap:8px 12px;font-size:13.5px;line-height:1.6">
+                <span style="color:var(--sub);font-weight:600">상대</span><span>{{ sitCounterpart }}</span>
+                <span style="color:var(--sub);font-weight:600">목적</span><span>{{ sitGoal }}</span>
+                <span style="color:var(--sub);font-weight:600">긴장</span><span>{{ sitTension }}</span>
+              </div>
+              <div style="margin-top:14px;background:var(--accent-soft);border-radius:10px;padding:12px 14px;font-size:12.5px;line-height:1.6;color:var(--ink)"><strong style="color:var(--accent)">이 관계에서 '적절'의 방향</strong><br>{{ sitDirection }}</div>
+            </div>
+
+            <div style="background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px">
+                <div style="font-size:12px;font-weight:700;letter-spacing:0.05em;color:var(--sub)">초안 작성</div>
+                <div style="font-size:11.5px;color:var(--sub)">{{ attemptLabel }}</div>
+              </div>
+              <textarea value="{{ draft }}" onChange="{{ onDraft }}" placeholder="여기에 직접 써보세요. 대신 써드리지 않습니다 — 그게 훈련이니까요." rows="{{ taRows }}" style="width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;padding:14px;font-size:14px;line-height:1.7;resize:vertical;background:var(--bg);color:var(--ink);outline:none" style-focus="border-color:var(--accent)"></textarea>
+              <sc-if value="{{ hasError }}"><div style="margin-top:10px;font-size:12.5px;color:var(--bad);background:var(--bad-soft);border-radius:8px;padding:9px 12px">{{ errorMsg }}</div></sc-if>
+              <div style="display:flex;gap:8px;margin-top:12px;align-items:center">
+                <button onClick="{{ submitDraft }}" disabled="{{ isScoring }}" style="{{ submitStyle }}" style-hover="filter:brightness(1.08)">{{ submitLabel }}</button>
+                <button onClick="{{ fillSample }}" style="background:transparent;border:1px solid var(--line);border-radius:10px;padding:11px 16px;font-size:13px;font-weight:600;color:var(--sub)" style-hover="border-color:var(--accent);color:var(--ink)">예시 초안 넣기</button>
+                <span style="margin-left:auto;font-size:11.5px;color:var(--sub)">{{ charCount }}자</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:14px">
+            <sc-if value="{{ showIntroPanel }}">
+              <div style="background:var(--surface);border:1px dashed var(--line);border-radius:14px;padding:22px">
+                <div style="font-size:13px;font-weight:700;margin-bottom:14px">채점 기준 — 화용 루브릭 3축</div>
+                <div style="display:flex;flex-direction:column;gap:12px">
+                  <sc-for list="{{ rubricRows }}" as="rb" hint-placeholder-count="3">
+                    <div style="display:flex;gap:12px;align-items:flex-start">
+                      <span style="{{ rb.numStyle }}">{{ rb.num }}</span>
+                      <span style="flex:1"><span style="font-size:13.5px;font-weight:700;display:block">{{ rb.name }}</span><span style="font-size:12.5px;color:var(--sub);line-height:1.6;display:block;margin-top:2px">{{ rb.desc }}</span></span>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="margin-top:16px;border-top:1px solid var(--line);padding-top:12px;font-size:12px;color:var(--sub);line-height:1.6">세 축은 병렬이 아니라 <strong style="color:var(--ink)">위계</strong>입니다. ①이 무너지면 ②③을 아무리 다듬어도 소용없어요. 그래서 피드백은 가장 낮은 축부터 짚습니다.</div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ isScoring }}">
+              <div style="background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:40px 22px;text-align:center">
+                <div style="width:34px;height:34px;border:3px solid var(--accent-soft);border-top-color:var(--accent);border-radius:50%;margin:0 auto 16px;animation:pc-spin 0.8s linear infinite"></div>
+                <div style="font-size:14px;font-weight:700">3축 루브릭으로 채점 중입니다</div>
+                <div style="font-size:12.5px;color:var(--sub);margin-top:6px;animation:pc-pulse 1.6s ease infinite">맥락·의도 → 관계·격식 → 전략·표현</div>
+              </div>
+            </sc-if>
+
+            <sc-if value="{{ hasResult }}">
+              <div style="background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px">
+                <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px">
+                  <div style="font-size:13px;font-weight:700">채점 결과</div>
+                  <div style="font-size:11.5px;color:var(--sub)">{{ resultAttemptLabel }}</div>
+                </div>
+                <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:6px">
+                  <span style="font-size:36px;font-weight:800;letter-spacing:-0.02em;line-height:1">{{ totalScore }}</span>
+                  <span style="font-size:13px;color:var(--sub)">/ 100점</span>
+                  <sc-if value="{{ totalDelta }}"><span style="{{ totalDeltaStyle }}">{{ totalDelta }}</span></sc-if>
+                </div>
+                <div style="font-size:11px;color:var(--sub);margin-bottom:16px">위계 가중 총점 — 맥락 40 · 격식 30 · 전략 30</div>
+                <sc-if value="{{ allGood }}">
+                  <div style="background:var(--good-soft);color:var(--good);border-radius:10px;padding:12px 14px;font-size:13px;font-weight:700;margin-bottom:14px">세 축 모두 '적절' 구간에 들어왔어요. 이 감각을 자산집에 남겨두세요.</div>
+                </sc-if>
+                <div style="display:flex;flex-direction:column;gap:12px">
+                  <sc-for list="{{ resultRows }}" as="ax" hint-placeholder-count="3">
+                    <div style="{{ ax.rowStyle }}">
+                      <div style="display:flex;align-items:center;gap:8px">
+                        <span style="font-size:13px;font-weight:700;flex:1">{{ ax.num }} {{ ax.name }}</span>
+                        <sc-if value="{{ ax.isLowest }}"><span style="font-size:10px;font-weight:800;letter-spacing:0.04em;color:#fff;background:var(--bad);padding:3px 8px;border-radius:999px">여기부터</span></sc-if>
+                        <sc-if value="{{ ax.delta }}"><span style="{{ ax.deltaStyle }}">{{ ax.delta }}</span></sc-if>
+                        <span style="{{ ax.chipStyle }}">{{ ax.levelLabel }}</span>
+                      </div>
+                      <div style="height:7px;border-radius:999px;background:var(--line);margin:9px 0 8px;overflow:hidden"><div style="{{ ax.fillStyle }}"></div></div>
+                      <div style="font-size:12.5px;color:var(--sub);line-height:1.6">{{ ax.reason }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ showHierarchyNote }}">
+                  <div style="margin-top:14px;font-size:12px;color:var(--sub);line-height:1.6;border-top:1px solid var(--line);padding-top:12px">위계 원칙에 따라 <strong style="color:var(--bad)">가장 낮은 축</strong>부터 고칩니다 — 아래 축이 무너지면 위 축을 다듬어도 소용없어요.</div>
+                </sc-if>
+              </div>
+
+              <sc-if value="{{ hasDeductions }}">
+                <div style="background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px">
+                  <div style="font-size:13px;font-weight:700;margin-bottom:13px">어디서 깎였나 — 감점 포인트</div>
+                  <div style="display:flex;flex-direction:column;gap:11px">
+                    <sc-for list="{{ deductionRows }}" as="d" hint-placeholder-count="2">
+                      <div style="display:flex;gap:10px;align-items:flex-start">
+                        <span style="{{ d.tagStyle }}">{{ d.axisLabel }}</span>
+                        <span style="flex:1;font-size:12.5px;line-height:1.65;min-width:0"><span style="background:var(--bad-soft);color:var(--bad);border-radius:4px;padding:1px 6px;font-weight:600">“{{ d.quote }}”</span> — {{ d.why }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </sc-if>
+
+              <div style="{{ coachCardStyle }}">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+                  <span style="width:26px;height:26px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex:none">결</span>
+                  <span style="font-size:12.5px;font-weight:700;color:var(--accent)">코치</span>
+                </div>
+                <div style="font-size:13.5px;line-height:1.75">{{ coachText }}</div>
+                <sc-if value="{{ hasFix }}">
+                  <div style="margin-top:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:11px 14px;font-size:13px;line-height:1.6"><strong style="color:var(--accent)">딱 하나만 바꿔보세요</strong> — {{ fixText }}</div>
+                </sc-if>
+                <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap">
+                  <sc-if value="{{ notAllGood }}"><button onClick="{{ rewrite }}" style="background:var(--accent);color:var(--accent-ink);border:none;border-radius:10px;padding:11px 18px;font-size:13.5px;font-weight:700" style-hover="filter:brightness(1.08)">다시 써보기</button></sc-if>
+                  <sc-if value="{{ canSaveAsset }}"><button onClick="{{ saveAsset }}" style="background:var(--good);color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:13.5px;font-weight:700" style-hover="filter:brightness(1.08)">자산집에 저장</button></sc-if>
+                  <button onClick="{{ finishSession }}" style="background:transparent;border:1px solid var(--line);border-radius:10px;padding:11px 18px;font-size:13.5px;font-weight:600;color:var(--sub)" style-hover="color:var(--ink);border-color:var(--accent)">세션 마치기</button>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isProgress }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="궤적" style="flex:1;min-width:0;padding:44px 48px;box-sizing:border-box">
+      <div style="max-width:960px;margin:0 auto">
+        <h1 style="font-size:26px;font-weight:800;margin:0 0 6px">궤적</h1>
+        <p style="font-size:14px;color:var(--sub);margin:0 0 26px">한 번의 점수가 아니라, 축별로 오르는 궤적을 봅니다. {{ demoNote }}</p>
+        <sc-if value="{{ hasProgress }}">
+          <div style="background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px 26px;margin-bottom:16px">
+            <div style="display:flex;gap:16px;margin-bottom:18px">
+              <sc-for list="{{ legend }}" as="lg" hint-placeholder-count="3">
+                <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--sub)"><span style="{{ lg.swatch }}"></span>{{ lg.name }}</span>
+              </sc-for>
+            </div>
+            <div style="display:flex;align-items:flex-end;gap:18px;height:110px;border-bottom:1px solid var(--line);padding-bottom:0">
+              <sc-for list="{{ progressCols }}" as="col" hint-placeholder-count="6">
+                <div style="display:flex;flex-direction:column;align-items:center;gap:0;flex:1;height:100%;justify-content:flex-end">
+                  <div style="display:flex;align-items:flex-end;gap:3px;width:100%;justify-content:center">
+                    <sc-for list="{{ col.bars }}" as="b"><div style="{{ b.style }}"></div></sc-for>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="display:flex;gap:18px;margin-top:8px">
+              <sc-for list="{{ progressCols }}" as="col"><div style="flex:1;text-align:center;font-size:10.5px;color:var(--sub)">{{ col.label }}</div></sc-for>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
+            <sc-for list="{{ progressSummary }}" as="ps" hint-placeholder-count="3">
+              <div style="background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 20px">
+                <div style="font-size:12.5px;font-weight:700;color:var(--sub)">{{ ps.num }} {{ ps.name }}</div>
+                <div style="font-size:20px;font-weight:800;margin-top:8px">{{ ps.now }}</div>
+                <div style="{{ ps.deltaStyle }}">{{ ps.delta }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ noProgress }}"><div style="background:var(--surface);border:1px dashed var(--line);border-radius:14px;padding:48px;text-align:center;font-size:14px;color:var(--sub)">아직 기록이 없습니다. 첫 세션을 마치면 궤적이 그려집니다.</div></sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isAssets }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="표현 자산집" style="flex:1;min-width:0;padding:44px 48px;box-sizing:border-box">
+      <div style="max-width:820px;margin:0 auto">
+        <h1 style="font-size:26px;font-weight:800;margin:0 0 6px">내 표현 자산집</h1>
+        <p style="font-size:14px;color:var(--sub);margin:0 0 26px">스스로 완성한 좋은 표현만 저장됩니다 — 대신 써준 문장은 여기 없습니다.</p>
+        <sc-if value="{{ hasAssets }}">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <sc-for list="{{ assetCards }}" as="a" hint-placeholder-count="3">
+              <div style="background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 24px;border-left:3px solid var(--good)">
+                <div style="font-size:15px;line-height:1.7;font-weight:500">“{{ a.text }}”</div>
+                <div style="display:flex;gap:10px;margin-top:12px;align-items:center">
+                  <span style="font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:999px">{{ a.sit }}</span>
+                  <span style="font-size:11.5px;color:var(--sub)">{{ a.date }}</span>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ noAssets }}"><div style="background:var(--surface);border:1px dashed var(--line);border-radius:14px;padding:48px;text-align:center;font-size:14px;color:var(--sub)">아직 저장된 표현이 없습니다. 훈련에서 '적절'에 도달하면 저장할 수 있어요.</div></sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:13px;font-weight:600;padding:12px 22px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,0.25);z-index:50">{{ toastMsg }}</div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;소프트 블루&quot;, &quot;세이지 그린&quot;, &quot;잉크 미니멀&quot;], &quot;default&quot;: &quot;소프트 블루&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;스타일&quot;}, &quot;demoData&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;데모&quot;}, &quot;aiModel&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;정밀 (sonnet)&quot;, &quot;빠름 (haiku)&quot;], &quot;default&quot;: &quot;정밀 (sonnet)&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;데모&quot;}}">
+const AXES = [
+  { key: 'context', num: '①', name: '맥락·의도', desc: '상대가 왜 이 상황에 있고 무엇을 기대·우려하는지 읽었는가 — 최상위 축' },
+  { key: 'register', num: '②', name: '관계·격식', desc: '호칭·존대·문체가 관계에 맞는가 (과함·부족 모두 감점)' },
+  { key: 'strategy', num: '③', name: '전략·표현', desc: '완곡함·정보 배열·명료성 — 판단을 효과적인 글로 실현' },
+];
+
+const LEVELS = { 1: { label: '위험', c: 'var(--bad)', soft: 'var(--bad-soft)' }, 2: { label: '무난', c: 'var(--warn)', soft: 'var(--warn-soft)' }, 3: { label: '적절', c: 'var(--good)', soft: 'var(--good-soft)' } };
+
+const SITS = [
+  { id: 'pq', rel: '교수', title: '교수님께 질문 메일', counterpart: '전공 수업 담당 교수 (성적·평가 권한, 하루 수십 통의 메일을 받음)', goal: '과제 채점 결과에 대해 확인을 요청한다', tension: '근거 없이 항의로 읽히면 관계·평판 리스크', direction: '오류 가능성을 내 쪽에 귀속하고("제가 놓쳤을 수 있으니"), 확인할 지점을 특정하세요. 신중한 완충은 과해도 대체로 안전합니다.', axis: '① 맥락', sample: '쌤 저 과제 점수 왜 이렇게 나왔어요? 저 진짜 열심히 했는데 이건 좀 아닌 것 같아요. 다시 봐주세요ㅠㅠ' },
+  { id: 'pm', rel: '교수', title: '교수님께 면담 요청', counterpart: '지도교수 (일정이 빡빡하고, 목적 없는 면담 요청을 부담스러워함)', goal: '진로 상담을 위한 면담 시간을 요청한다', tension: '용건·소요 시간이 막연하면 부담스러운 요청이 됨', direction: '용건과 예상 소요 시간을 먼저 밝히고, 일정 선택권을 교수에게 넘기세요.', axis: '① 맥락', sample: '교수님 안녕하세요. 이번 주에 시간 되세요? 진로 때문에 상담 좀 하고 싶은데요. 답장 주세요.' },
+  { id: 'pd', rel: '교수', title: '과제 마감 연장 요청', counterpart: '전공 수업 담당 교수 (형평성 때문에 예외 요청에 민감함)', goal: '사정을 설명하고 마감 연장을 요청한다', tension: '사유가 막연하거나 당연시하면 형평성 침해로 읽힘', direction: '구체적 사유 + 현재까지의 진행 상황 + 수용 가능한 대안(감점 감수 등)을 함께 제시하세요. 판단은 교수에게 위임합니다.', axis: '③ 전략', sample: '교수님 죄송한데 과제를 기한까지 못 낼 것 같습니다. 개인 사정이 있어서요. 며칠만 봐주시면 안 될까요? 다음엔 절대 안 그러겠습니다.' },
+  { id: 'ta', rel: '조교·행정', title: '조교님께 채점 문의', counterpart: '수업 조교 (대학원생, 수십 명의 문의를 처리 — 필요한 정보가 빠진 메일에 지침)', goal: '퀴즈 채점 결과 확인을 요청한다', tension: '학번·과목·문항 등 처리 정보가 빠지면 왕복이 늘어남', direction: '간결·정확이 3점입니다. 학번·과목·분반·문항을 완비하세요. 장황한 완충은 오히려 감점입니다.', axis: '③ 전략', sample: '조교님 안녕하세요. 제 퀴즈 점수가 잘못된 것 같습니다. 바쁘시겠지만 넓은 아량으로 살펴봐주시면 정말 감사하겠습니다. 늘 고생 많으십니다.' },
+  { id: 'fp', rel: '동료(조원)', title: '초면 조원에게 첫 연락', counterpart: '같은 수업에서 처음 만난 동갑내기 조원 (아직 서로 존댓말)', goal: '팀플 첫 회의 일정을 잡자고 연락한다', tension: '너무 격식차리면 거리감, 너무 편하면 무례 — 밸런스', direction: '가볍고 명확한 톤이 3점입니다. 교수님께 쓰듯 과공하면 거리감을 만들어 오히려 1–2점이 됩니다.', axis: '② 격식', sample: '안녕하십니까. 이번 팀 프로젝트에서 함께하게 되어 진심으로 영광입니다. 귀하께서 편하신 일정을 회신해 주시면 감사드리겠습니다.' },
+  { id: 'rr', rel: '동료(조원)', title: '조원에게 역할 분담·독촉', counterpart: '자료 업로드가 늦어지는 조원 (발표는 이틀 뒤)', goal: '늦어지는 자료를 부담 주지 않으면서 받아낸다', tension: '통보조가 되면 갈등, 눈치만 보면 발표가 무너짐', direction: '비난 없이 상황(마감)을 주어로 말하고, 구체적 시점을 합의하세요. 상대의 사정을 여는 질문이 들어가면 좋습니다.', axis: '③ 전략', sample: '다들 뭐 하세요? 발표가 모레인데 아직 아무도 자료 안 올렸네요. 오늘까지 무조건 올려주세요.' },
+];
+
+const REL_HINTS = { '교수': '신중한 완충 + 자기 귀속이 안전 구간', '조교·행정': '간결·정확·필요 정보 완비가 3점', '동료(조원)': "'적절'의 방향이 뒤집힘 — 과공은 감점" };
+
+const THEMES = {
+  '소프트 블루': { '--bg': '#f4f7fa', '--surface': '#ffffff', '--ink': '#182430', '--sub': '#5b6b7a', '--line': '#dde5ec', '--accent': '#2e6da8', '--accent-ink': '#ffffff', '--accent-soft': '#e3edf6', '--good': '#2e8b62', '--good-soft': '#e2f1e9', '--warn': '#b98a2f', '--warn-soft': '#f7edda', '--bad': '#bf4545', '--bad-soft': '#f7e3e1', '--side': '#13293a', '--side-ink': '#cfe0ee', '--side-dim': '#7d95a8' },
+  '세이지 그린': { '--bg': '#f5f7f3', '--surface': '#ffffff', '--ink': '#1d2a22', '--sub': '#5f6f64', '--line': '#dee6dd', '--accent': '#3d7d5f', '--accent-ink': '#ffffff', '--accent-soft': '#e4efe7', '--good': '#2e8b62', '--good-soft': '#e2f1e9', '--warn': '#b98a2f', '--warn-soft': '#f6eeda', '--bad': '#b64f42', '--bad-soft': '#f6e5e1', '--side': '#1e3328', '--side-ink': '#d3e4d8', '--side-dim': '#87a08e' },
+  '잉크 미니멀': { '--bg': '#f7f6f3', '--surface': '#ffffff', '--ink': '#1b1b19', '--sub': '#6b6a64', '--line': '#e4e2db', '--accent': '#2c3e50', '--accent-ink': '#ffffff', '--accent-soft': '#eceae3', '--good': '#3d7355', '--good-soft': '#e6efe8', '--warn': '#a3823a', '--warn-soft': '#f2ecdb', '--bad': '#a84f45', '--bad-soft': '#f3e4e0', '--side': '#191918', '--side-ink': '#d9d8d2', '--side-dim': '#8a897f' },
+};
+
+const SEED_HISTORY = [
+  { d: '6.18', sid: 'pq', scores: { context: 1, register: 1, strategy: 2 } },
+  { d: '6.21', sid: 'fp', scores: { context: 1, register: 2, strategy: 2 } },
+  { d: '6.24', sid: 'pq', scores: { context: 2, register: 2, strategy: 2 } },
+  { d: '6.27', sid: 'ta', scores: { context: 2, register: 3, strategy: 2 } },
+  { d: '7.1', sid: 'pm', scores: { context: 2, register: 3, strategy: 3 } },
+  { d: '7.5', sid: 'rr', scores: { context: 3, register: 2, strategy: 3 } },
+];
+
+const SEED_ASSETS = [
+  { text: '혹시 제가 놓친 부분이 있는지, 3번 문항만 다시 확인해주실 수 있을까요?', sid: 'pq', date: '6.24' },
+  { text: '혹시 어제 필기 있어? 내가 놓친 부분이 있어서, 부탁해도 될까!', sid: 'fp', date: '6.21' },
+];
+
+const RUBRIC_SYSTEM = `당신은 한국어 '화용 능력' 채점 엔진입니다. 문법·어휘가 아니라 오직 화용(이 글이 이 상황·관계·의도에서 적절한가)만 채점합니다.
+
+[3축 루브릭 — 위계 순]
+① context 맥락·의도: 상대가 왜 이 상황에 있고 무엇을 기대·우려하는지 읽었는가. 최상위 축. (예: 교수에게 채점 문의 시 '교수 탓'이 아니라 '내가 놓쳤을 수 있음'으로 귀속했는가, 확인할 지점을 특정했는가)
+② register 관계·격식: 호칭·존대·문체 레지스터가 관계에 맞는가. 과함(과공)도 부족도 모두 감점.
+③ strategy 전략·표현: 완곡함·정보 배열·명료성. 판단을 효과적인 글로 실현했는가.
+위계 원칙: ①이 무너지면 ②③이 아무리 좋아도 글 전체가 실패합니다. 피드백은 항상 가장 낮은 축부터.
+
+[점수 척도 — 3단계]
+1 = 위험(관계·평판에 실질 리스크), 2 = 무난(목적은 전달되나 어색하거나 막연), 3 = 적절(대부분의 상대에게 안전한 구간 — '최적'이 아니라 '리스크 최소').
+
+[관계별 '적절'의 방향 — 격식은 높을수록 좋은 것이 아님]
+- 교수: 신중한 완충 + 오류 가능성의 자기 귀속 + 요청 범위 특정. 과한 완충도 대체로 허용.
+- 조교·행정: 간결·정확·필요 정보(학번·과목·문항 등) 완비. 장황한 완충·아부는 감점.
+- 동료(조원): 가볍고 명확한 톤이 3점. 교수식 과공·과격식은 거리감을 만들어 1~2점.
+정중한 단어를 써도 상대 입장을 읽지 않으면 '정중한 항의'일 뿐입니다.
+
+[코칭 원칙]
+- 대신 써주지 않습니다. 전체 모범 답안 작성 금지. 방향만 짚고 재작성을 유도합니다.
+- 가장 낮은 축부터, 깔끔한 존댓말로, 2~4문장. 마지막은 재작성을 권하는 문장으로.
+- 수정 방향(fix)은 딱 하나만. 재시도라면 직전 대비 나아진 점을 먼저 인정하세요.
+
+[출력 형식 — 아래 JSON만 출력, 다른 텍스트·마크다운 금지]
+{"scores":{"context":1,"register":1,"strategy":1},"reasons":{"context":"근거 한 문장","register":"근거 한 문장","strategy":"근거 한 문장"},"deductions":[{"axis":"context","quote":"감점의 원인이 된 초안 속 구절(짧게, 원문 그대로)","why":"왜 감점인지 한 문장"}],"coach":"코칭 멘트(존댓말 2~4문장)","fix":"딱 하나의 수정 방향 한 문장","bestSentence":"초안에서 그대로 살릴 만한 좋은 문장(없으면 null)"}
+deductions는 점수가 3 미만인 축마다 1~2개씩, 반드시 초안에 실제로 있는 구절을 인용하세요. 모두 3점이면 빈 배열.`;
+
+const AXIS_WEIGHT = { context: 40, register: 30, strategy: 30 };
+const totalOf = scores => Math.round(AXES.reduce((t, ax) => t + (scores[ax.key] / 3) * AXIS_WEIGHT[ax.key], 0));
+
+const STORE_KEY = 'malgyeol-proto-v1';
+
+class Component extends DCLogic {
+  state = {
+    screen: 'onboarding', obRole: null, obGoal: null,
+    situationId: null, draft: '', phase: 'write', attempts: [],
+    error: null, profile: null, history: [], assets: [], toast: null,
+  };
+
+  componentDidMount() {
+    this.applyTheme();
+    try {
+      const s = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+      if (s && s.profile) this.setState({ profile: s.profile, history: s.history || [], assets: s.assets || [], screen: 'home' });
+    } catch (e) {}
+  }
+  componentDidUpdate() { this.applyTheme(); }
+  applyTheme() {
+    const t = THEMES[this.props.theme ?? '소프트 블루'] || THEMES['소프트 블루'];
+    if (this._appliedTheme === t) return;
+    this._appliedTheme = t;
+    for (const k in t) document.documentElement.style.setProperty(k, t[k]);
+  }
+  persist(extra) {
+    const m = { ...this.state, ...extra };
+    try { localStorage.setItem(STORE_KEY, JSON.stringify({ profile: m.profile, history: m.history, assets: m.assets })); } catch (e) {}
+  }
+  showToast(msg) {
+    this.setState({ toast: msg });
+    clearTimeout(this._tt);
+    this._tt = setTimeout(() => this.setState({ toast: null }), 2400);
+  }
+  combined() { return ((this.props.demoData ?? true) ? SEED_HISTORY : []).concat(this.state.history); }
+
+  async evaluate() {
+    const draft = this.state.draft.trim();
+    if (draft.length < 10) { this.setState({ error: '초안을 조금 더 써주세요 (10자 이상).' }); return; }
+    const sit = SITS.find(s => s.id === this.state.situationId);
+    this.setState({ phase: 'scoring', error: null });
+    const prev = this.state.attempts[this.state.attempts.length - 1];
+    let userMsg = `[상황] ${sit.title}\n[상대(관계)] ${sit.rel} — ${sit.counterpart}\n[목적] ${sit.goal}\n[긴장 포인트] ${sit.tension}\n`;
+    if (prev) userMsg += `[직전 시도 (점수: 맥락 ${prev.scores.context} / 격식 ${prev.scores.register} / 전략 ${prev.scores.strategy})]\n${prev.text}\n`;
+    userMsg += `[채점할 초안]\n"""\n${draft}\n"""\nJSON만 출력하세요.`;
+    let out = null;
+    try {
+      const body = { max_tokens: 1600, system: RUBRIC_SYSTEM, messages: [{ role: 'user', content: userMsg }] };
+      let text;
+      const wantSonnet = (this.props.aiModel ?? '정밀 (sonnet)').includes('sonnet');
+      try { text = await window.claude.complete(wantSonnet ? { model: 'claude-sonnet-4-5', ...body } : body); }
+      catch (e) { text = await window.claude.complete(body); }
+      const m = text.match(/\{[\s\S]*\}/);
+      out = JSON.parse(m[0]);
+    } catch (e) {
+      this.setState({ phase: 'write', error: '채점 중 문제가 발생했습니다. 잠시 후 다시 시도해주세요.' });
+      return;
+    }
+    const clamp = v => Math.max(1, Math.min(3, Math.round(Number(v) || 1)));
+    const scores = { context: clamp(out.scores && out.scores.context), register: clamp(out.scores && out.scores.register), strategy: clamp(out.scores && out.scores.strategy) };
+    const deductions = (Array.isArray(out.deductions) ? out.deductions : []).filter(d => d && d.axis && AXES.some(a => a.key === d.axis) && d.quote).map(d => ({ axis: d.axis, quote: String(d.quote).slice(0, 90), why: String(d.why || '').slice(0, 160) }));
+    const attempt = { text: draft, scores, reasons: out.reasons || {}, deductions, coach: out.coach || '', fix: out.fix || '', best: (out.bestSentence && out.bestSentence !== 'null') ? out.bestSentence : null };
+    this.setState({ attempts: [...this.state.attempts, attempt], phase: 'result' });
+  }
+
+  finishSession() {
+    const last = this.state.attempts[this.state.attempts.length - 1];
+    let history = this.state.history;
+    if (last) {
+      const now = new Date();
+      history = [...history, { d: `${now.getMonth() + 1}.${now.getDate()}`, sid: this.state.situationId, scores: last.scores }];
+    }
+    this.setState({ history, screen: 'home', situationId: null, draft: '', attempts: [], phase: 'write', error: null });
+    this.persist({ history });
+    if (last) this.showToast('세션이 궤적에 기록되었습니다');
+  }
+
+  renderVals() {
+    const st = this.state;
+    const S = (o) => o; // style-object shorthand
+    const lvl = n => LEVELS[n] || LEVELS[1];
+    const fill = n => S({ width: `${Math.round(n / 3 * 100)}%`, height: '100%', borderRadius: '999px', background: lvl(n).c, transition: 'width .4s ease' });
+    const chip = n => S({ fontSize: '11px', fontWeight: 700, color: lvl(n).c, background: lvl(n).soft, padding: '3px 10px', borderRadius: '999px', flex: 'none' });
+    const sit = SITS.find(s => s.id === st.situationId) || SITS[0];
+    const combined = this.combined();
+    const last = combined[combined.length - 1];
+    const firstS = combined[0];
+
+    // nav
+    const navDefs = [['home', '홈'], ['train', '훈련'], ['progress', '궤적'], ['assets', '표현 자산집']];
+    const activeKey = st.screen === 'picker' ? 'train' : st.screen;
+    const navItems = navDefs.map(([key, label]) => ({
+      key, label,
+      go: () => this.setState({ screen: key === 'train' ? (st.situationId ? 'train' : 'picker') : key }),
+      style: S({ display: 'flex', alignItems: 'center', gap: '10px', width: '100%', textAlign: 'left', background: activeKey === key ? 'rgba(255,255,255,0.13)' : 'transparent', color: activeKey === key ? '#fff' : 'var(--side-dim)', border: 'none', borderRadius: '9px', padding: '10px 12px', fontSize: '13.5px', fontWeight: 600 }),
+      dotStyle: S({ width: '7px', height: '7px', borderRadius: '50%', background: activeKey === key ? 'var(--accent-soft)' : 'rgba(255,255,255,0.25)', flex: 'none' }),
+    }));
+
+    // onboarding
+    const roles = [['대학생', '교수·조교·조원 사이의 격식 혼선'], ['대학원생', '지도교수·학회·행정 메일의 부담'], ['취준생', '처음 겪는 사회 격식 글이 두렵다'], ['사회초년생', '상사·거래처 메신저의 매 순간'], ['프리랜서·자영업', '클라이언트와의 거리 조절이 어렵다'], ['경력·이직', '새 조직의 말결이 낯설다']];
+    const goals = ['교수·조교 메일 격식', '팀플 소통 (부탁·독촉·거절)', '사회 격식 전반'];
+    const roleCards = roles.map(([title, desc]) => ({
+      title, desc, pick: () => this.setState({ obRole: title }),
+      style: S({ textAlign: 'left', background: st.obRole === title ? 'var(--accent-soft)' : 'var(--bg)', border: `1.5px solid ${st.obRole === title ? 'var(--accent)' : 'var(--line)'}`, borderRadius: '12px', padding: '14px 15px' }),
+    }));
+    const goalChips = goals.map(label => ({
+      label, pick: () => this.setState({ obGoal: label }),
+      style: S({ background: st.obGoal === label ? 'var(--accent)' : 'var(--bg)', color: st.obGoal === label ? 'var(--accent-ink)' : 'var(--ink)', border: `1.5px solid ${st.obGoal === label ? 'var(--accent)' : 'var(--line)'}`, borderRadius: '999px', padding: '9px 16px', fontSize: '13px', fontWeight: 600 }),
+    }));
+    const obReady = !!(st.obRole && st.obGoal);
+
+    // home stats
+    const axStats = AXES.map((ax, i) => {
+      const cur = last ? last.scores[ax.key] : null;
+      const past = firstS ? firstS.scores[ax.key] : null;
+      return { ax, cur, delta: (cur != null && past != null) ? cur - past : 0 };
+    });
+    const weakKey = axStats.reduce((w, a) => (a.cur != null && (w == null || a.cur < w.cur)) ? a : w, null);
+    const homeAxes = axStats.map(({ ax, cur, delta }) => ({
+      num: ax.num, name: ax.name,
+      isWeak: !!(weakKey && weakKey.ax.key === ax.key && cur != null && cur < 3),
+      fillStyle: fill(cur || 0),
+      chipStyle: cur ? chip(cur) : S({ fontSize: '11px', color: 'var(--sub)' }),
+      levelLabel: cur ? lvl(cur).label : '기록 없음',
+      trend: cur == null ? '' : (delta > 0 ? `첫 세션 대비 +${delta}` : delta < 0 ? `첫 세션 대비 ${delta}` : '유지 중'),
+      cardStyle: S({ background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: '14px', padding: '18px 20px' }),
+    }));
+    const weakAxis = weakKey ? weakKey.ax : AXES[0];
+    const axisMark = { context: '①', register: '②', strategy: '③' }[weakAxis.key];
+    const recoSit = SITS.find(s => s.axis.startsWith(axisMark)) || SITS[0];
+    const recents = combined.slice(-4).reverse().map(s => {
+      const ss = SITS.find(x => x.id === s.sid) || SITS[0];
+      return { date: s.d, title: ss.title, total: `${totalOf(s.scores)}점`, chips: AXES.map(ax => ({ t: `${ax.num}${s.scores[ax.key]}`, style: chip(s.scores[ax.key]) })) };
+    });
+
+    // picker
+    const relOrder = ['교수', '조교·행정', '동료(조원)'];
+    const relGroups = relOrder.map(rel => ({
+      rel, hint: REL_HINTS[rel],
+      chipStyle: S({ fontSize: '12px', fontWeight: 800, color: 'var(--accent)', background: 'var(--accent-soft)', padding: '4px 12px', borderRadius: '999px' }),
+      items: SITS.filter(s => s.rel === rel).map(s => ({
+        title: s.title, axis: s.axis, tension: s.tension,
+        pick: () => this.setState({ screen: 'train', situationId: s.id, draft: '', attempts: [], phase: 'write', error: null }),
+      })),
+    }));
+
+    // train
+    const lastAttempt = st.attempts[st.attempts.length - 1];
+    const prevAttempt = st.attempts[st.attempts.length - 2];
+    const scoring = st.phase === 'scoring';
+    const hasResult = st.phase === 'result' && !!lastAttempt;
+    const allGood = hasResult && AXES.every(ax => lastAttempt.scores[ax.key] === 3);
+    const lowestVal = hasResult ? Math.min(...AXES.map(ax => lastAttempt.scores[ax.key])) : 0;
+    const lowestKey = hasResult ? AXES.find(ax => lastAttempt.scores[ax.key] === lowestVal).key : null;
+    const resultRows = hasResult ? AXES.map(ax => {
+      const sc = lastAttempt.scores[ax.key];
+      const isLowest = ax.key === lowestKey && sc < 3;
+      const d = prevAttempt ? sc - prevAttempt.scores[ax.key] : 0;
+      return {
+        num: ax.num, name: ax.name, isLowest,
+        levelLabel: lvl(sc).label, chipStyle: chip(sc), fillStyle: fill(sc),
+        reason: (lastAttempt.reasons || {})[ax.key] || '',
+        delta: d !== 0 ? (d > 0 ? `▲ +${d}` : `▼ ${d}`) : null,
+        deltaStyle: S({ fontSize: '11px', fontWeight: 800, color: d > 0 ? 'var(--good)' : 'var(--bad)' }),
+        rowStyle: S({ border: `1.5px solid ${isLowest ? 'var(--bad)' : 'var(--line)'}`, background: isLowest ? 'var(--bad-soft)' : 'var(--bg)', borderRadius: '12px', padding: '13px 15px' }),
+      };
+    }) : [];
+
+    // progress
+    const progressCols = combined.slice(-8).map(s => ({
+      label: s.d,
+      bars: AXES.map(ax => ({ style: S({ width: '16px', height: `${(s.scores[ax.key] / 3) * 96}px`, borderRadius: '4px 4px 0 0', background: ax.key === 'context' ? 'var(--accent)' : ax.key === 'register' ? 'var(--good)' : 'var(--warn)' }) })),
+    }));
+    const legend = AXES.map(ax => ({ name: `${ax.num} ${ax.name}`, swatch: S({ width: '10px', height: '10px', borderRadius: '3px', display: 'inline-block', background: ax.key === 'context' ? 'var(--accent)' : ax.key === 'register' ? 'var(--good)' : 'var(--warn)' }) }));
+    const progressSummary = AXES.map(ax => {
+      const cur = last ? last.scores[ax.key] : null;
+      const past = firstS ? firstS.scores[ax.key] : null;
+      const d = (cur != null && past != null) ? cur - past : 0;
+      return {
+        num: ax.num, name: ax.name,
+        now: cur ? `${lvl(cur).label} (${cur}/3)` : '—',
+        delta: d > 0 ? `▲ 첫 세션 대비 +${d}` : d < 0 ? `▼ 첫 세션 대비 ${d}` : '변화 없음',
+        deltaStyle: S({ fontSize: '12px', fontWeight: 700, marginTop: '6px', color: d > 0 ? 'var(--good)' : d < 0 ? 'var(--bad)' : 'var(--sub)' }),
+      };
+    });
+
+    const assetCards = ((this.props.demoData ?? true) ? SEED_ASSETS : []).concat(st.assets).slice().reverse().map(a => ({
+      text: a.text, date: a.date, sit: (SITS.find(x => x.id === a.sid) || SITS[0]).title,
+    }));
+
+    const attemptsN = st.attempts.length;
+    const canSave = hasResult && (allGood || !!lastAttempt.best);
+    const totalScore = hasResult ? totalOf(lastAttempt.scores) : 0;
+    const prevTotal = prevAttempt ? totalOf(prevAttempt.scores) : null;
+    const totalD = prevTotal != null ? totalScore - prevTotal : 0;
+    const axName = k => { const a = AXES.find(x => x.key === k); return `${a.num} ${a.name.split('·')[0]}`; };
+    const deductionRows = hasResult ? (lastAttempt.deductions || []).map(d => ({
+      axisLabel: axName(d.axis), quote: d.quote, why: d.why,
+      tagStyle: S({ fontSize: '11px', fontWeight: 700, color: 'var(--sub)', background: 'var(--bg)', border: '1px solid var(--line)', padding: '3px 9px', borderRadius: '999px', flex: 'none', whiteSpace: 'nowrap' }),
+    })) : [];
+
+    return {
+      // screens
+      isOnboarding: st.screen === 'onboarding',
+      isHome: st.screen === 'home',
+      isPicker: st.screen === 'picker',
+      isTrain: st.screen === 'train',
+      isProgress: st.screen === 'progress',
+      isAssets: st.screen === 'assets',
+      showSidebar: st.screen !== 'onboarding',
+      navItems,
+      profileLabel: st.profile ? `${st.profile.role} · ${st.profile.goal}` : '',
+
+      // onboarding
+      roleCards, goalChips,
+      obNotReady: !obReady,
+      obStartStyle: S({ width: '100%', background: obReady ? 'var(--accent)' : 'var(--line)', color: obReady ? 'var(--accent-ink)' : 'var(--sub)', border: 'none', borderRadius: '11px', padding: '14px', fontSize: '15px', fontWeight: 700, cursor: obReady ? 'pointer' : 'default' }),
+      startApp: () => {
+        if (!obReady) return;
+        const profile = { role: st.obRole, goal: st.obGoal };
+        this.setState({ profile, screen: 'home' });
+        this.persist({ profile });
+      },
+
+      // home
+      homeAxes,
+      recoTitle: recoSit.title,
+      recoReason: last ? `최근 세션에서 '${weakAxis.name}' 축이 가장 낮았어요. 이 상황이 그 축을 정면으로 훈련합니다.` : '첫 훈련으로 가장 빈도가 높은 상황을 추천합니다.',
+      startReco: () => this.setState({ screen: 'train', situationId: recoSit.id, draft: '', attempts: [], phase: 'write', error: null }),
+      goPicker: () => this.setState({ screen: 'picker' }),
+      hasRecents: recents.length > 0, noRecents: recents.length === 0, recents,
+
+      // picker
+      relGroups,
+
+      // train
+      sitTitle: sit.title, sitRel: sit.rel,
+      sitRelChipStyle: S({ fontSize: '12px', fontWeight: 800, color: 'var(--accent)', background: 'var(--accent-soft)', padding: '5px 13px', borderRadius: '999px', flex: 'none' }),
+      sitCounterpart: sit.counterpart, sitGoal: sit.goal, sitTension: sit.tension, sitDirection: sit.direction,
+      draft: st.draft,
+      onDraft: e => this.setState({ draft: e.target.value, error: null }),
+      taRows: 9,
+      charCount: st.draft.length,
+      attemptLabel: `${attemptsN + (st.phase === 'result' ? 0 : 1)}번째 시도`,
+      resultAttemptLabel: `${attemptsN}번째 시도`,
+      hasError: !!st.error, errorMsg: st.error || '',
+      isScoring: scoring,
+      submitLabel: scoring ? '채점 중…' : attemptsN > 0 ? '다시 채점 받기' : '화용 채점 받기',
+      submitStyle: S({ background: 'var(--accent)', color: 'var(--accent-ink)', border: 'none', borderRadius: '10px', padding: '11px 20px', fontSize: '13.5px', fontWeight: 700, opacity: scoring ? 0.6 : 1 }),
+      submitDraft: () => this.evaluate(),
+      fillSample: () => this.setState({ draft: sit.sample, error: null }),
+      showIntroPanel: !scoring && !hasResult,
+      rubricRows: AXES.map(ax => ({ num: ax.num, name: ax.name, desc: ax.desc, numStyle: S({ width: '26px', height: '26px', borderRadius: '50%', background: 'var(--accent-soft)', color: 'var(--accent)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontSize: '13px', fontWeight: 800, flex: 'none' }) })),
+      totalScore,
+      totalDelta: totalD !== 0 ? (totalD > 0 ? `▲ +${totalD}점` : `▼ ${totalD}점`) : null,
+      totalDeltaStyle: S({ fontSize: '12.5px', fontWeight: 800, color: totalD > 0 ? 'var(--good)' : 'var(--bad)', background: totalD > 0 ? 'var(--good-soft)' : 'var(--bad-soft)', padding: '3px 10px', borderRadius: '999px' }),
+      hasDeductions: deductionRows.length > 0,
+      deductionRows,
+      hasResult, allGood, notAllGood: hasResult && !allGood,
+      showHierarchyNote: hasResult && !allGood,
+      resultRows,
+      coachCardStyle: S({ background: 'var(--accent-soft)', border: '1px solid var(--line)', borderRadius: '14px', padding: '20px 22px' }),
+      coachText: hasResult ? lastAttempt.coach : '',
+      hasFix: hasResult && !!lastAttempt.fix && !allGood,
+      fixText: hasResult ? lastAttempt.fix : '',
+      rewrite: () => this.setState({ phase: 'write' }),
+      canSaveAsset: canSave,
+      saveAsset: () => {
+        const now = new Date();
+        const text = (lastAttempt && lastAttempt.best) || st.draft.trim();
+        const assets = [...st.assets, { text, sid: st.situationId, date: `${now.getMonth() + 1}.${now.getDate()}` }];
+        this.setState({ assets });
+        this.persist({ assets });
+        this.showToast('내 표현 자산집에 저장했습니다');
+      },
+      finishSession: () => this.finishSession(),
+
+      // progress
+      hasProgress: combined.length > 0, noProgress: combined.length === 0,
+      progressCols, legend, progressSummary,
+      demoNote: (this.props.demoData ?? true) ? '(데모 데이터 포함 — Tweaks에서 끌 수 있습니다)' : '',
+
+      // assets
+      hasAssets: assetCards.length > 0, noAssets: assetCards.length === 0, assetCards,
+
+      // toast
+      hasToast: !!st.toast, toastMsg: st.toast || '',
+    };
+  }
+}
+</script>
+</body>
+</html>
