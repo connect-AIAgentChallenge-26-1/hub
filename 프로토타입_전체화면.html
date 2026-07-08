@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>보증금 타임키퍼 - 프로토타입 전체 화면</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, "Noto Sans KR", sans-serif;
+    background: #f0ede6;
+    color: #2a2724;
+    line-height: 1.5;
+    padding-bottom: 80px;
+  }
+
+  /* 페이지 상단 소개 */
+  .page-head {
+    background: #2a2724;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  .page-head h1 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+  .page-head p { font-size: 14px; color: #c9c4ba; }
+
+  /* 화면 간 이동 목차 (상단 고정) */
+  .toc {
+    position: sticky; top: 0; z-index: 100;
+    background: #fff; border-bottom: 1px solid #e5e2da;
+    padding: 12px 20px;
+    display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;
+  }
+  .toc a {
+    font-size: 13px; color: #6b6558; text-decoration: none;
+    padding: 6px 12px; border: 1px solid #d5cdbb; border-radius: 20px;
+  }
+  .toc a:hover { background: #35586b; color: #fff; border-color: #35586b; }
+
+  /* 각 화면 섹션 */
+  .screen-section {
+    max-width: 760px; margin: 0 auto; padding: 48px 20px 0;
+  }
+  /* 화면 설명 (팀 설명용) */
+  .screen-intro { margin-bottom: 20px; }
+  .screen-intro .badge {
+    display: inline-block; font-size: 12px; font-weight: 700;
+    color: #35586b; background: #eef3f6;
+    padding: 4px 12px; border-radius: 20px; margin-bottom: 10px;
+  }
+  .screen-intro h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+  .screen-intro p { font-size: 14px; color: #6b6558; line-height: 1.7; }
+  .screen-intro ul {
+    margin-top: 10px; padding-left: 18px;
+    font-size: 13px; color: #6b6558; line-height: 1.8;
+  }
+
+  /* 실제 화면 카드 공통 */
+  .card {
+    background: #fff;
+    border: 1px solid #e5e2da;
+    border-radius: 12px;
+    padding: 32px;
+  }
+  .card.wide { max-width: 720px; }
+
+  /* ===== 공통 폼/버튼 요소 ===== */
+  input {
+    width: 100%; height: 44px; padding: 0 12px;
+    border: 1px solid #d5cdbb; border-radius: 8px;
+    font-size: 15px; font-family: inherit; background: #fff;
+  }
+  input:focus { outline: 2px solid #35586b; outline-offset: 1px; }
+  button { font-family: inherit; cursor: pointer; }
+
+  /* 헤더 공통 */
+  .s-header {
+    display: flex; align-items: center; justify-content: space-between;
+    border-bottom: 1px solid #eeece5; padding-bottom: 16px; margin-bottom: 22px;
+  }
+  .s-header .s-title { font-size: 18px; font-weight: 700; }
+  .s-header .s-sub { font-size: 12px; color: #999; margin-top: 3px; }
+  .s-header .s-step { font-size: 12px; color: #999; }
+  .s-actions { display: flex; gap: 8px; }
+  .icon-btn {
+    height: 36px; padding: 0 14px; background: #fff;
+    border: 1px solid #d5cdbb; border-radius: 8px;
+    font-size: 13px; color: #6b6558;
+  }
+  .icon-btn:hover { background: #f5f3ee; }
+
+  .desc { font-size: 14px; color: #6b6558; line-height: 1.6; margin-bottom: 22px; }
+  .section-label { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+
+  /* --- 화면1: 계약 입력 --- */
+  .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .field { margin-bottom: 18px; }
+  .field label { display: block; font-size: 13px; color: #6b6558; margin-bottom: 6px; }
+  .required { color: #d64545; }
+  .money-wrap { position: relative; }
+  .money-wrap .unit { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 13px; color: #999; }
+  .money-wrap input { padding-right: 44px; }
+  .money-word { display: block; font-size: 12px; color: #35586b; margin-top: 6px; min-height: 16px; }
+  .notice-box {
+    display: flex; gap: 8px; background: #eef3f6; border-radius: 8px;
+    padding: 12px; font-size: 12px; color: #35586b; line-height: 1.6; margin-bottom: 24px;
+  }
+  .submit-btn {
+    width: 100%; height: 48px; background: #35586b; color: #fff;
+    border: none; border-radius: 8px; font-size: 15px; font-weight: 700;
+  }
+  .submit-btn:hover { background: #294453; }
+
+  /* --- 화면2: 타임라인 --- */
+  .alert-banner {
+    display: flex; align-items: center; gap: 12px;
+    background: #fbf3e2; border-radius: 8px; padding: 16px; margin-bottom: 26px;
+  }
+  .alert-banner .alert-title { font-size: 14px; font-weight: 700; color: #8a5a1a; }
+  .alert-banner .alert-desc { font-size: 13px; color: #a06f2a; margin-top: 3px; }
+  .alert-banner .alert-btn {
+    margin-left: auto; height: 38px; padding: 0 16px; background: #b07a2a;
+    color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 700; white-space: nowrap;
+  }
+  .timeline-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+  .timeline-head .label { font-size: 13px; color: #6b6558; }
+  .legend { display: flex; gap: 14px; font-size: 11px; color: #999; }
+  .legend span { display: flex; align-items: center; gap: 4px; }
+  .legend .dot-sm { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .timeline { position: relative; padding: 0 4px; }
+  .timeline .line { position: absolute; left: 11%; right: 11%; top: 11px; height: 2px; background: #e5e2da; }
+  .today-marker { position: absolute; left: 38%; top: -6px; bottom: 26px; border-left: 1.5px dashed #35586b; z-index: 2; }
+  .today-label { position: absolute; left: 38%; top: -20px; transform: translateX(-50%); font-size: 11px; font-weight: 700; color: #35586b; z-index: 3; white-space: nowrap; }
+  .points { position: relative; display: flex; justify-content: space-between; }
+  .point { display: flex; flex-direction: column; align-items: center; width: 22%; text-align: center; }
+  .point .dot {
+    width: 22px; height: 22px; border-radius: 50%; background: #fff;
+    border: 2px solid #b4b2a9; z-index: 1;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 13px; font-weight: bold;
+  }
+  .point .name { font-size: 12px; font-weight: 500; color: #6b6558; margin-top: 10px; }
+  .point .date { font-size: 11px; color: #999; margin-top: 2px; }
+  .point .status { font-size: 11px; color: #999; margin-top: 6px; }
+  .point.done .dot { background: #3f6e4f; border-color: #3f6e4f; }
+  .point.done .status { color: #3f6e4f; font-weight: 700; }
+  .point.active .dot { background: #b07a2a; border-color: #b07a2a; }
+  .point.active .name { color: #2a2724; }
+  .point.active .status { color: #b07a2a; font-weight: 700; }
+  .point.expiry .dot { border-color: #d64545; }
+
+  /* --- 화면3-1: 갱신 선택 --- */
+  .back-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .back-btn { width: 34px; height: 34px; background: #fff; border: 1px solid #d5cdbb; border-radius: 8px; font-size: 16px; color: #6b6558; }
+  .back-row span { font-size: 13px; color: #999; }
+  .question { text-align: center; padding: 24px 0 28px; }
+  .question .icon-circle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 56px; height: 56px; border-radius: 50%; background: #fbf3e2; margin-bottom: 16px; font-size: 28px;
+  }
+  .question .q-title { font-size: 20px; font-weight: 700; }
+  .question .q-desc { font-size: 14px; color: #6b6558; margin-top: 8px; line-height: 1.6; }
+  .choices { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .choice {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    padding: 28px 16px; background: #fff; border: 1px solid #d5cdbb; border-radius: 12px;
+  }
+  .choice:hover { border-color: #35586b; background: #f7f9fa; }
+  .choice .choice-icon { font-size: 32px; }
+  .choice .choice-title { font-size: 16px; font-weight: 700; }
+  .choice .choice-sub { font-size: 12px; color: #6b6558; text-align: center; }
+  .hint {
+    display: flex; align-items: flex-start; gap: 8px; margin-top: 20px; padding: 12px;
+    background: #f5f3ee; border-radius: 8px; font-size: 12px; color: #6b6558; line-height: 1.6;
+  }
+
+  /* --- 화면3-2: 갱신 결과 --- */
+  .title-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .title-row .t-icon { font-size: 22px; }
+  .title-row .t-text { font-size: 18px; font-weight: 700; }
+  .intro { font-size: 13px; color: #6b6558; line-height: 1.6; margin-bottom: 22px; }
+  .steps-guide { background: #eef3f6; border-radius: 12px; padding: 16px 18px; margin-bottom: 24px; }
+  .steps-guide .sg-title { font-size: 13px; font-weight: 700; color: #35586b; margin-bottom: 12px; }
+  .steps-guide .sg-item { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 12px; }
+  .steps-guide .sg-item:last-child { margin-bottom: 0; }
+  .steps-guide .sg-num {
+    flex-shrink: 0; width: 20px; height: 20px; border-radius: 50%;
+    background: #35586b; color: #fff; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .steps-guide .sg-text { font-size: 13px; color: #35586b; line-height: 1.5; }
+  .method-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
+  .method { padding: 14px; border: 1px solid #eeece5; border-radius: 8px; }
+  .method .m-head { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
+  .method .m-icon { font-size: 18px; }
+  .method .m-title { font-size: 13px; font-weight: 500; }
+  .method .m-badge { margin-left: auto; font-size: 11px; padding: 2px 8px; border-radius: 10px; }
+  .method .m-badge.easy { color: #3f6e4f; background: #eaf3e0; }
+  .method .m-badge.proof { color: #35586b; background: #eef3f6; }
+  .method .m-prep { font-size: 12px; color: #6b6558; line-height: 1.6; padding-left: 28px; }
+  .method .m-prep b { color: #2a2724; font-weight: 500; }
+  .official-link {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 14px; background: #fff; border: 1px solid #eeece5; border-radius: 8px;
+    text-decoration: none; margin-bottom: 22px;
+  }
+  .official-link span { font-size: 13px; color: #35586b; }
+  .official-link .arrow { font-size: 15px; color: #35586b; }
+  .method-select { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 20px; }
+  .method-select button { padding: 10px; background: #fff; border: 1px solid #d5cdbb; border-radius: 8px; font-size: 13px; color: #2a2724; }
+  .method-select button:hover { border-color: #35586b; background: #f7f9fa; }
+  .method-select button.picked { background: #35586b; color: #fff; border-color: #35586b; }
+  .done-check {
+    display: flex; align-items: center; gap: 10px; padding: 14px;
+    border: 1px solid #d5cdbb; border-radius: 8px; margin-bottom: 18px;
+  }
+  .done-check input { width: 18px; height: 18px; }
+  .done-check .dc-label { font-size: 14px; font-weight: 500; }
+  .done-check .dc-note { margin-left: auto; font-size: 12px; color: #999; }
+  .save-btn { width: 100%; height: 46px; background: #35586b; color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; }
+  .save-btn:hover { background: #294453; }
+
+  @media (max-width: 520px) {
+    .row-2, .choices { grid-template-columns: 1fr; }
+    .method-select { grid-template-columns: 1fr; }
+    .card { padding: 24px; }
+    .legend { display: none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="page-head">
+    <h1>보증금 타임키퍼</h1>
+    <p>프로토타입 전체 화면 · 팀 설명용 (스크롤하며 순서대로 확인)</p>
+  </div>
+
+  <nav class="toc">
+    <a href="#screen1">① 계약 입력</a>
+    <a href="#screen2">② 타임라인(홈)</a>
+    <a href="#screen3">③ 갱신 선택</a>
+    <a href="#screen4">④ 갱신 결과</a>
+  </nav>
+
+  <!-- ========== 화면 1: 계약 입력 ========== -->
+  <section class="screen-section" id="screen1">
+    <div class="screen-intro">
+      <span class="badge">화면 1 · 기능 1</span>
+      <h2>계약 입력</h2>
+      <p>앱을 처음 켰을 때 만나는 화면. 계약 시작일·만료일·보증금만 입력하면 일정이 자동 계산돼요.</p>
+      <ul>
+        <li>전세·월세·반전세 구분 없이 동일하게 입력</li>
+        <li>보증금 입력 시 천 단위 콤마 자동 표시</li>
+        <li>"만료일 &gt; 시작일" 검증</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="s-header">
+        <span class="s-title">계약 정보 입력</span>
+        <span class="s-step">1 / 1 단계</span>
+      </div>
+      <p class="desc">계약서에 적힌 날짜와 보증금을 입력하면 챙겨야 할 일정이 자동으로 만들어져요. 전세·월세·반전세 모두 같은 방식으로 입력하면 돼요.</p>
+      <div class="row-2">
+        <div class="field"><label>계약 시작일 <span class="required">*</span></label><input type="date"></div>
+        <div class="field"><label>계약 만료일 <span class="required">*</span></label><input type="date"></div>
+      </div>
+      <div class="field">
+        <label>보증금 액수 <span class="required">*</span></label>
+        <div class="money-wrap"><input type="text" inputmode="numeric" id="deposit" placeholder="15,000"><span class="unit">만원</span></div>
+        <span class="money-word" id="depositWord"></span>
+      </div>
+      <div class="notice-box"><span>만료일은 시작일보다 나중이어야 해요. 입력한 날짜로 갱신·반환 일정을 계산해요.</span></div>
+      <button class="submit-btn">타임라인 만들기</button>
+    </div>
+  </section>
+
+  <!-- ========== 화면 2: 타임라인(홈) ========== -->
+  <section class="screen-section" id="screen2">
+    <div class="screen-intro">
+      <span class="badge">화면 2 · 기능 1</span>
+      <h2>타임라인 (홈)</h2>
+      <p>앱의 중심 화면. 자동 계산된 일정을 가로 시간축으로 한눈에 보여줘요. 이후 앱을 열면 기본으로 뜨는 곳.</p>
+      <ul>
+        <li>지금 가장 중요한 할 일 하나를 상단 배너로 강조</li>
+        <li>완료(초록)·임박(주황)·예정 상태를 색으로 구분</li>
+        <li>"오늘" 마커로 현재 위치 표시</li>
+      </ul>
+    </div>
+    <div class="card wide">
+      <div class="s-header">
+        <div>
+          <div class="s-title">내 계약 타임라인</div>
+          <div class="s-sub">2024.03.01 ~ 2026.03.01 · 보증금 15,000만원</div>
+        </div>
+        <div class="s-actions">
+          <button class="icon-btn">보관함</button>
+          <button class="icon-btn">설정</button>
+        </div>
+      </div>
+      <div class="alert-banner">
+        <div>
+          <div class="alert-title">다가오는 할 일 · D-45</div>
+          <div class="alert-desc">갱신 여부를 결정할 시점이 다가와요. 계속 살지, 나갈지 정해주세요.</div>
+        </div>
+        <button class="alert-btn">결정하러 가기</button>
+      </div>
+      <div class="timeline-head">
+        <div class="label">전체 일정</div>
+        <div class="legend">
+          <span><span class="dot-sm" style="background:#3f6e4f;"></span>완료</span>
+          <span><span class="dot-sm" style="background:#b07a2a;"></span>임박</span>
+          <span><span class="dot-sm" style="border:1.5px solid #b4b2a9;"></span>예정</span>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="line"></div>
+        <div class="today-marker"></div>
+        <div class="today-label">오늘</div>
+        <div class="points">
+          <div class="point done"><div class="dot">&#10003;</div><div class="name">보증보험 마감</div><div class="date">2025.03.01</div><div class="status">완료</div></div>
+          <div class="point active"><div class="dot">!</div><div class="name">갱신 결정</div><div class="date">2025.09.01</div><div class="status">D-45</div></div>
+          <div class="point"><div class="dot"></div><div class="name">통보 마지노선</div><div class="date">2026.01.01</div><div class="status">예정</div></div>
+          <div class="point expiry"><div class="dot"></div><div class="name">계약 만료</div><div class="date">2026.03.01</div><div class="status">예정</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 화면 3-1: 갱신 선택 ========== -->
+  <section class="screen-section" id="screen3">
+    <div class="screen-intro">
+      <span class="badge">화면 3-1 · 기능 2</span>
+      <h2>갱신 선택</h2>
+      <p>만료 6개월 전 알림을 받고 진입하는 화면. "계속 살지, 나갈지" 딱 하나만 결정하게 해요.</p>
+      <ul>
+        <li>두 선택지를 크게, 부연 설명과 함께</li>
+        <li>"지금 안 정해도 된다"는 안심 문구로 부담 완화</li>
+        <li>선택에 따라 결과 화면(갱신/퇴거)으로 분리 이동</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="back-row"><button class="back-btn">&#8592;</button><span>타임라인으로 돌아가기</span></div>
+      <div class="question">
+        <div class="icon-circle">&#128197;</div>
+        <div class="q-title">계약 만료가 6개월 남았어요</div>
+        <div class="q-desc">이 집에서 계속 사실 건가요, 아니면 나가실 건가요?<br>선택하면 다음에 뭘 해야 하는지 알려드려요.</div>
+      </div>
+      <div class="choices">
+        <button class="choice"><span class="choice-icon">&#127968;</span><span class="choice-title">갱신할래요</span><span class="choice-sub">계속 살고 싶어요</span></button>
+        <button class="choice"><span class="choice-icon">&#128682;</span><span class="choice-title">나갈래요</span><span class="choice-sub">이사 나갈 거예요</span></button>
+      </div>
+      <div class="hint"><span>아직 안 정하셨어도 괜찮아요. 통보 마지노선(만료 2개월 전)까지는 여유가 있어요.</span></div>
+    </div>
+  </section>
+
+  <!-- ========== 화면 3-2: 갱신 결과 ========== -->
+  <section class="screen-section" id="screen4">
+    <div class="screen-intro">
+      <span class="badge">화면 3-2 · 기능 2</span>
+      <h2>갱신 결과 (갱신 선택 시)</h2>
+      <p>"갱신할래요"를 고른 뒤 진입. 통보를 어떤 순서로, 뭘 준비해서 하면 되는지 알려줘요.</p>
+      <ul>
+        <li>진행 순서를 번호로 안내 (처음 하는 사람 배려)</li>
+        <li>통보 방법별 준비물 안내, 정확한 문구는 공식 링크로</li>
+        <li>통보 완료 체크 시 날짜 자동 기록</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="back-row"><button class="back-btn">&#8592;</button><span>선택 다시 하기</span></div>
+      <div class="title-row"><span class="t-icon">&#127968;</span><span class="t-text">갱신하기로 하셨네요</span></div>
+      <p class="intro">계약갱신청구권을 집주인에게 통보하면 돼요. 아래 순서대로 진행해보세요.</p>
+      <div class="steps-guide">
+        <div class="sg-title">이렇게 진행하면 돼요</div>
+        <div class="sg-item"><span class="sg-num">1</span><span class="sg-text">집주인에게 "계약을 갱신하겠다"고 통보해요</span></div>
+        <div class="sg-item"><span class="sg-num">2</span><span class="sg-text">문자·카톡이면 캡처, 내용증명이면 영수증을 보관해요</span></div>
+        <div class="sg-item"><span class="sg-num">3</span><span class="sg-text">아래에서 통보 완료 표시를 남겨요</span></div>
+      </div>
+      <div class="section-label">통보 방법 · 뭘 준비하면 되나요?</div>
+      <div class="method-list">
+        <div class="method">
+          <div class="m-head"><span class="m-icon">&#128172;</span><span class="m-title">문자·카카오톡</span><span class="m-badge easy">간편</span></div>
+          <div class="m-prep"><b>준비물</b> · 따로 없어요. 바로 보낼 수 있어요<br>보낸 뒤 화면 캡처만 남겨두세요</div>
+        </div>
+        <div class="method">
+          <div class="m-head"><span class="m-icon">&#9993;</span><span class="m-title">내용증명</span><span class="m-badge proof">증빙 확실</span></div>
+          <div class="m-prep"><b>준비물</b> · 집주인 주소, 갱신 요청 내용을 적은 문서<br>우체국 방문 또는 인터넷우체국에서 접수, 접수증 보관</div>
+        </div>
+      </div>
+      <a class="official-link" href="https://www.easylaw.go.kr" target="_blank" rel="noopener">
+        <span>정확한 문구·양식 확인하기 · 생활법령정보</span><span class="arrow">&#8599;</span>
+      </a>
+      <div class="section-label">어떤 방법으로 통보하셨나요?</div>
+      <div class="method-select">
+        <button onclick="pickMethod(this)">문자·카톡</button>
+        <button onclick="pickMethod(this)">내용증명</button>
+        <button onclick="pickMethod(this)">직접 얘기</button>
+      </div>
+      <label class="done-check">
+        <input type="checkbox">
+        <span class="dc-label">통보 완료했어요</span>
+        <span class="dc-note">완료 시 오늘 날짜가 기록돼요</span>
+      </label>
+      <button class="save-btn">저장하고 타임라인으로</button>
+    </div>
+  </section>
+
+<script>
+  // 화면1: 보증금 천 단위 콤마
+  const deposit = document.getElementById('deposit');
+  if (deposit) {
+    deposit.addEventListener('input', function () {
+      let raw = this.value.replace(/[^0-9]/g, '');
+      this.value = raw ? Number(raw).toLocaleString('ko-KR') : '';
+      document.getElementById('depositWord').textContent = raw ? Number(raw).toLocaleString('ko-KR') + '만원' : '';
+    });
+  }
+  // 화면3-2: 통보 방법 하나만 선택
+  function pickMethod(btn) {
+    document.querySelectorAll('.method-select button').forEach(b => b.classList.remove('picked'));
+    btn.classList.add('picked');
+  }
+</script>
+</body>
+</html>
