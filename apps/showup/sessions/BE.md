@@ -11,7 +11,7 @@ Cloud Functions, 시드 데이터, 위험도 계산 로직을 담당한다.
 - **AI 에이전트**: Hermes Agent (by Nous Research)
 - **모델**: Kimi K2.7 Code (Ollama 연결)
 - **운영 방식**: 같은 default 프로필에서 채팅 세션 4개(LEAD/FE/BE/SECURITY)를 열어 역할별로 운영
-- 세션별 모델: LEAD·GLM 5.2 / FE·Kimi K2.7 Code / BE·Kimi K2.7 Code / SECURITY·GPT-OSS 120B
+- 세션별 모델: LEAD·GLM 5.2 / FE·Qwen 3.5 / BE·Kimi K2.7 Code / SECURITY·GPT-OSS 120B
 
 ## 공통 프로젝트 맥락
 

@@ -10,7 +10,7 @@
 | 세션 | 모델 |
 |------|------|
 | **리드** | GLM 5.2 |
-| **프론트** | Kimi K2.7 Code |
+| **프론트** | Qwen 3.5 |
 | **백엔드** | Kimi K2.7 Code |
 | **시큐리티** | GPT-OSS 120B |
 
@@ -279,7 +279,7 @@ Phase 1.5(통계 차트)·Phase 2(본인 조회/정정·삭제 요청/이의제�
 | 세션 | 소유 영역 | 책임 | 모델 |
 |------|----------|------|------|
 | **리드** | 기획·통합·배포 | plan/checklist 관리, PR 리뷰·머지, 통합 QA, Hosting 배포, 발표 문서 | GLM 5.2 |
-| **프론트** | `src/` UI 전부 | 페이지·컴포넌트·폼·라우팅·상태관리·모바일 QA | Kimi K2.7 Code |
+| **프론트** | `src/` UI 전부 | 페이지·컴포넌트·폼·라우팅·상태관리·모바일 QA | Qwen 3.5 |
 | **백엔드** | Firebase 설정·Functions | Firestore 모델, riskStats 갱신 Function, 시드 데이터, 인덱스 | Kimi K2.7 Code |
 | **시큐리티** | 규칙·개인정보 | Security Rules 작성·침투 테스트(에뮬레이터), 마스킹·삭제 검증, /privacy·/terms 문안 | GPT-OSS 120B |
 

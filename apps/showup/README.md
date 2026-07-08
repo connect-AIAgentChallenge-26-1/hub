@@ -8,7 +8,7 @@
 
 - 기간: 2026-07-07 ~ 2026-07-30
 - 진행: Hermes Agent 4세션 (프론트 / 백엔드 / 시큐리티 / 리드)
-- 모델: Lead·GLM 5.2 / Frontend·Kimi K2.7 Code / Backend·Kimi K2.7 Code / Security·GPT-OSS 120B (Ollama)
+- 모델: Lead·GLM 5.2 / Frontend·Qwen 3.5 / Backend·Kimi K2.7 Code / Security·GPT-OSS 120B (Ollama)
 
 ## 문제 정의
 

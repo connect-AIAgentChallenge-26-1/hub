@@ -9,7 +9,7 @@ apps/
   intro/    프로젝트 소개 사이트 (Vite + React)
   showup/   ShowUp — 노쇼·악성 고객 이력 관리 서비스 (진행 중, Hermes Agent 4세션)
     docs/   기획서(plan.md) · 작업 체크리스트(checklist.md)
-    sessions/  Hermes Agent 세션 가이드 (LEAD·GLM 5.2 / FE·Kimi K2.7 Code / BE·Kimi K2.7 Code / SECURITY·GPT-OSS 120B)
+    sessions/  Hermes Agent 세션 가이드 (LEAD·GLM 5.2 / FE·Qwen 3.5 / BE·Kimi K2.7 Code / SECURITY·GPT-OSS 120B)
 ```
 
 ## 실행
