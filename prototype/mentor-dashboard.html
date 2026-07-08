@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>멘토 홈 | 면담 신청 목록</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="mentor-page">
+  <header class="topbar mentor-topbar">
+    <div>
+      <p class="eyebrow">멘토 로그인 화면</p>
+      <h1>면담 신청 목록</h1>
+    </div>
+    <nav class="top-links" aria-label="프로토타입 화면 이동">
+      <a href="index.html">멘티 화면</a>
+    </nav>
+  </header>
+
+  <main class="page-shell dashboard-shell">
+    <section class="dashboard-status" aria-label="면담 상태 필터">
+      <input type="radio" name="status-filter" id="filter-all" checked>
+      <input type="radio" name="status-filter" id="filter-waiting">
+      <input type="radio" name="status-filter" id="filter-confirmed">
+      <input type="radio" name="status-filter" id="filter-done">
+
+      <div class="status-tabs">
+        <label for="filter-all">전체</label>
+        <label for="filter-waiting">대기중</label>
+        <label for="filter-confirmed">확정</label>
+        <label for="filter-done">완료</label>
+      </div>
+
+      <div class="request-grid">
+        <article class="request-card waiting">
+          <div class="request-head">
+            <div>
+              <strong>민서연</strong>
+              <span>전산학부 3학년</span>
+            </div>
+            <mark>대기중</mark>
+          </div>
+          <p>AI 연구실 인턴 지원 전, 논문 읽기와 연구 주제 선택 방식이 궁금합니다.</p>
+          <div class="request-meta">
+            <span>희망 시간: 목 18:30</span>
+            <span>신청일: 2026.07.08</span>
+          </div>
+          <details class="question-preview">
+            <summary>사전 질문지 보기</summary>
+            <dl>
+              <dt>자기 소개</dt>
+              <dd>전산학부 3학년이며 컴퓨터비전에 관심이 있습니다.</dd>
+              <dt>가장 큰 고민</dt>
+              <dd>연구실 컨택 전에 어떤 역량을 준비해야 할지 모르겠습니다.</dd>
+              <dt>얻고 싶은 것</dt>
+              <dd>학부생 연구 참여 준비 방법과 추천 공부 순서를 알고 싶습니다.</dd>
+            </dl>
+          </details>
+          <div class="request-actions">
+            <button type="button">수락하기</button>
+            <button type="button" class="danger-button">거절하기</button>
+          </div>
+        </article>
+
+        <article class="request-card confirmed">
+          <div class="request-head">
+            <div>
+              <strong>오하준</strong>
+              <span>전자공학과 4학년</span>
+            </div>
+            <mark>확정</mark>
+          </div>
+          <p>대학원 진학과 취업 사이에서 고민 중이며 반도체 연구실 생활을 알고 싶습니다.</p>
+          <div class="request-meta">
+            <span>희망 시간: 금 15:00</span>
+            <span>확정일: 2026.07.07</span>
+          </div>
+          <details class="question-preview">
+            <summary>사전 질문지 보기</summary>
+            <dl>
+              <dt>자기 소개</dt>
+              <dd>전자공학 전공으로 소자 수업을 들으며 진로를 고민하고 있습니다.</dd>
+              <dt>가장 큰 고민</dt>
+              <dd>석사 진학이 제 커리어에 맞는 선택인지 판단하고 싶습니다.</dd>
+              <dt>얻고 싶은 것</dt>
+              <dd>연구실 생활의 실제 루틴과 준비할 과목을 알고 싶습니다.</dd>
+            </dl>
+          </details>
+          <div class="request-actions">
+            <button type="button">수락하기</button>
+            <button type="button" class="danger-button">거절하기</button>
+          </div>
+        </article>
+
+        <article class="request-card done">
+          <div class="request-head">
+            <div>
+              <strong>한유진</strong>
+              <span>생명과학과 2학년</span>
+            </div>
+            <mark>완료</mark>
+          </div>
+          <p>바이오 데이터 분석을 시작하고 싶은데, 전산 기초 공부 순서가 궁금합니다.</p>
+          <div class="request-meta">
+            <span>면담 시간: 월 20:00</span>
+            <span>완료일: 2026.07.05</span>
+          </div>
+          <details class="question-preview">
+            <summary>사전 질문지 보기</summary>
+            <dl>
+              <dt>자기 소개</dt>
+              <dd>생명과학 전공이고 파이썬을 막 배우기 시작했습니다.</dd>
+              <dt>가장 큰 고민</dt>
+              <dd>연구실 인턴을 위해 어느 정도까지 코딩을 해야 하는지 궁금합니다.</dd>
+              <dt>얻고 싶은 것</dt>
+              <dd>데이터 분석 로드맵과 추천 프로젝트 예시를 얻고 싶습니다.</dd>
+            </dl>
+          </details>
+          <div class="request-actions">
+            <button type="button">수락하기</button>
+            <button type="button" class="danger-button">거절하기</button>
+          </div>
+        </article>
+
+        <article class="request-card waiting">
+          <div class="request-head">
+            <div>
+              <strong>강도윤</strong>
+              <span>기계공학과 3학년</span>
+            </div>
+            <mark>대기중</mark>
+          </div>
+          <p>로보틱스 연구실 컨택 전에 필요한 프로젝트 경험과 영어 발표 준비가 궁금합니다.</p>
+          <div class="request-meta">
+            <span>희망 시간: 화 13:00</span>
+            <span>신청일: 2026.07.08</span>
+          </div>
+          <details class="question-preview">
+            <summary>사전 질문지 보기</summary>
+            <dl>
+              <dt>자기 소개</dt>
+              <dd>기계공학과 3학년이며 제어와 로봇 분야를 탐색 중입니다.</dd>
+              <dt>가장 큰 고민</dt>
+              <dd>연구실 컨택 메일과 포트폴리오 구성 방법을 모르겠습니다.</dd>
+              <dt>얻고 싶은 것</dt>
+              <dd>컨택 전 준비물과 해외 학회 경험을 듣고 싶습니다.</dd>
+            </dl>
+          </details>
+          <div class="request-actions">
+            <button type="button">수락하기</button>
+            <button type="button" class="danger-button">거절하기</button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
