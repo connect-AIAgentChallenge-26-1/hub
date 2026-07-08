@@ -1,0 +1,147 @@
+.head h1 {
+  margin: 0 0 4px;
+  font-size: 1.7rem;
+}
+.head p {
+  margin: 0;
+  color: #6b7280;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 24px 0 8px;
+  padding: 16px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.82rem;
+  color: #6b7280;
+}
+.form select {
+  padding: 8px 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  background: #fff;
+}
+
+.section-title {
+  font-size: 1rem;
+  margin: 26px 0 10px;
+}
+.section-title.ok {
+  color: #16a34a;
+}
+.section-title.no {
+  color: #9ca3af;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card {
+  padding: 14px 16px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+}
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+.cat {
+  font-size: 0.72rem;
+  color: #2563eb;
+  background: #eff6ff;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+.deadline {
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+.title {
+  font-weight: 600;
+  color: #111827;
+  text-decoration: none;
+}
+.title:hover {
+  text-decoration: underline;
+}
+.org {
+  margin: 4px 0 0;
+  font-size: 0.82rem;
+  color: #9ca3af;
+}
+
+.card.muted {
+  background: #fafafa;
+  border-style: dashed;
+}
+.title-muted {
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+.reason {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: #ef4444;
+}
+.empty {
+  color: #9ca3af;
+  padding: 10px;
+}
+
+/* 확인 필요 */
+.section-title.review {
+  color: #d97706;
+}
+.review-card {
+  border-left: 3px solid #f59e0b;
+}
+.note {
+  margin: 6px 0 0;
+  font-size: 0.8rem;
+  color: #b45309;
+}
+
+/* 지원 불가 사유 비교 (요구값 vs 내값) */
+.reasons {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.reasons li {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 0.8rem;
+}
+.rlabel {
+  min-width: 56px;
+  color: #6b7280;
+}
+.req {
+  color: #6b7280;
+}
+.mine {
+  color: #ef4444;
+  font-weight: 600;
+}
