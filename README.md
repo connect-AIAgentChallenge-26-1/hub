@@ -1,16 +1,47 @@
-# React + Vite
+# 🤖 화용 능력 코칭 AI 에이전트 (Pragmatics Coaching AI)
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> **“'맞는 말'이 아니라 '맞는 상황의 말'을 훈련하는 코치”**
+> 한국인 대학생·사회초년생이 격식과 관계 속에서 겪는 화용(Pragmatics) 실수를 진단하고 스스로 다시 쓰도록 훈련하는 AI 글쓰기 에이전트입니다.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📌 1. 프로젝트 개요
+* **핵심 타겟**: 한국인 대학생, 취업 준비생, 사회초년생.
+* **핵심 매체**: 이메일, 메신저 등 격식이 명확한 **‘단발성 글쓰기’** 코어.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🫀 2. 핵심 엔진: 화용 루브릭 3축
+에이전트는 3축의 위계적 루브릭을 기준으로 피드백을 제공합니다. (점수가 가장 낮은 하위 축부터 우선 진단)
 
-## Expanding the Oxlint configuration
+1. **① 맥락·의도 (최상위)**: 상대방의 상황, 기대, 우려를 정확히 읽었는가.
+2. **② 관계·격식**: 관계에 맞는 호칭과 문체 레지스터를 갖추었는가 (과공도 감점).
+3. **③ 전략·표현**: 완곡함과 명료성을 활용해 판단을 효과적인 글로 실현했는가.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+> 💡 **특징**: '적절함'의 기준은 상대(교수/조원 등)에 따라 유연하게 변동됩니다.
+
+---
+
+## 🛠️ 3. 주요 기능 (에이전트 도구)
+* **`generate_task`**: 개인별 맞춤형 실전 글쓰기 상황 시나리오 출제.
+* **`evaluate_pragmatics`**: 3축 루브릭 기반 정밀 화용 채점.
+* **`explain_and_coach`**: 약점 진단 및 스스로 재작성하도록 유도 (대필 없음).
+* **`track_progress`**: 시간에 따른 화용 점수 및 성장 궤적 시각화.
+* **`asset_book`**: 통과된 좋은 표현을 수집하는 ‘내 표현 자산집’.
+
+---
+
+## 🚀 4. 초기 집중 개발 범위 (코어 6대 상황)
+1. **교수**: 질문 메일 작성
+2. **교수**: 면담 요청 메일 작성
+3. **교수**: 과제 마감 연장 요청
+4. **조교·행정**: 채점 및 행정 문의
+5. **동료(팀플)**: 초면 조원 인사
+6. **동료(팀플)**: 역할 분담 및 독촉
+
+---
+
+## 📈 5. Next Steps
+* [ ] seed 데이터를 명제 형태의 '판단 규칙'으로 전환 및 규칙화.
+* [ ] 교수/조교/동료 관계별 '4점 안전 구간' 기준표 확립.
+* [ ] 3단계 척도(위험/무난/적절) 도입 실측 비교 후 척도 확정.
