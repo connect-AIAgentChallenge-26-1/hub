@@ -4,15 +4,15 @@
 
 - 프로젝트 기간: **2026-07-07 ~ 2026-07-30** (3주 + 2일)
 - 프론트엔드: **React** (Vite + TypeScript)
-- 진행 방식: **Hermes Agent 4세션** (프론트 / 백엔드 / 시큐리티 / 리드)
+- 진행 방식: **Hermes Agent 4세션** (프론트엔드 / 백엔드 / 보안 / 리드)
 - 세션별 모델 (Ollama 연결):
 
 | 세션 | 모델 |
 |------|------|
 | **리드** | GLM 5.2 |
-| **프론트** | Qwen 3.5 |
+| **프론트엔드** | Qwen 3.5 |
 | **백엔드** | Kimi K2.7 Code |
-| **시큐리티** | GPT-OSS 120B |
+| **보안** | GPT-OSS 120B |
 
 ---
 
@@ -66,7 +66,7 @@
 | 이벤트 | 기록 방법 | 점수 |
 |--------|----------|------|
 | 노쇼 (no-show) | 예약 상태 버튼 | +8 |
-| 당일 취소 (late-cancel) | 예약 상태 버튼 (당일 취소 시 자동 구분) | +4 |
+| 당일 취소 (late-cancel) | 예약 상태 버튼 → cancelled + `cancelledSameDay: true`일 때 자동 판별 | +4 |
 | 상습 지각 30분+ (late) | 사건 기록 | +2 |
 | 폭언·위협·무례 (abuse) | 사건 기록 | +10 |
 | 환불·결제 분쟁 (dispute) | 사건 기록 | +6 |
@@ -159,7 +159,7 @@ flowchart TD
 |------|------|
 | MVP 필수 | `/login` `/register` `/dashboard` `/customers` `/customers/:id` `/reservations` `/reservations/new` |
 | 필수 문서 (최소 정적 페이지) | `/privacy` `/terms` |
-| MVP 제외 | `/stats` (Phase 1.5) · `/me` (Phase 2) |
+| MVP 제외 | `/` 랜딩 (막판 배포 시 프론트엔드 담당) · `/stats` (Phase 1.5) · `/me` (Phase 2) |
 
 ## 7. 와이어프레임 (텍스트 스펙)
 
@@ -189,7 +189,7 @@ flowchart TD
 │ 6/28 ⚠️ 폭언·무례 "환불 요구하며…"│
 │ 6/10 ✅ 방문                     │
 │ [ + 사건 기록 ]                  │
-│   └ 카테고리 선택(5종) + 사실 메모 │
+│   └ 카테고리 선택(4종) + 사실 메모 │
 │     "사실만 기록해주세요" 안내     │
 └─────────────────────────────────┘
 ```
@@ -203,7 +203,7 @@ flowchart TD
 ### 스택
 | 영역 | 선택 |
 |------|------|
-| 프론트 | **React** + Vite + TypeScript + Tailwind CSS |
+| 프론트엔드 | **React** + Vite + TypeScript + Tailwind CSS |
 | 상태 | TanStack Query(서버) / Zustand(UI) — 서버 데이터는 Zustand 금지 |
 | 폼 | React Hook Form + Zod |
 | 백엔드 | Firebase: Auth / Firestore / Cloud Functions / Hosting |
@@ -279,9 +279,9 @@ Phase 1.5(통계 차트)·Phase 2(본인 조회/정정·삭제 요청/이의제�
 | 세션 | 소유 영역 | 책임 | 모델 |
 |------|----------|------|------|
 | **리드** | 기획·통합·배포 | plan/checklist 관리, PR 리뷰·머지, 통합 QA, Hosting 배포, 발표 문서 | GLM 5.2 |
-| **프론트** | `src/` UI 전부 | 페이지·컴포넌트·폼·라우팅·상태관리·모바일 QA | Qwen 3.5 |
+| **프론트엔드** | `src/` UI 전부 | 페이지·컴포넌트·폼·라우팅·상태관리·모바일 QA | Qwen 3.5 |
 | **백엔드** | Firebase 설정·Functions | Firestore 모델, riskStats 갱신 Function, 시드 데이터, 인덱스 | Kimi K2.7 Code |
-| **시큐리티** | 규칙·개인정보 | Security Rules 작성·침투 테스트(에뮬레이터), 마스킹·삭제 검증, /privacy·/terms 문안 | GPT-OSS 120B |
+| **보안** | 규칙·개인정보 | Security Rules 작성·침투 테스트(에뮬레이터), 마스킹·삭제 검증, /privacy·/terms 문안 | GPT-OSS 120B |
 
 **협업 규칙 (Git — challenge 구조 기준)**
 - 실제 작업 브랜치: **`N167_채민석` 단일 브랜치**
@@ -289,8 +289,8 @@ Phase 1.5(통계 차트)·Phase 2(본인 조회/정정·삭제 요청/이의제�
 - PR 방향: `Min0504/hub:N167_채민석` → `connect-AIAgentChallenge-26-1/hub:N167_채민석`
 - Hermes Agent 세션은 **git 브랜치 분리가 아니라 역할 분리** — 같은 브랜치에서 영역별 작업
 - **Hermes Agent가 commit, push, PR을 직접 수행** — 사용자가 명시적으로 요청하면 세션에서 실행
-- 인터페이스 우선: 백엔드가 `types/schema.ts` + 시드 데이터 먼저 확정 → 프론트는 mock으로 병행 개발
-- 시큐리티는 매주 금요일 규칙 침투 테스트 리포트 제출
+- 인터페이스 우선: 백엔드가 `types/schema.ts` + 시드 데이터 먼저 확정 → 프론트엔드는 mock으로 병행 개발
+- 보안은 매주 금요일 규칙 침투 테스트 리포트 제출
 - 세션 간 의존 충돌 시 리드가 결정
 
 세션별 상세 작업은 [checklist.md](checklist.md)에 분배.
@@ -321,9 +321,9 @@ Phase 1.5(통계 차트)·Phase 2(본인 조회/정정·삭제 요청/이의제�
 | 단계 | 담당 | 내용 |
 |------|------|------|
 | 기능 검증 | 각 Hermes Agent 세션 | 체크리스트 항목별 검증 시나리오 통과 |
-| 보안 검증 | 시큐리티 | 에뮬레이터 타 가게 접근 차단, 규칙 침투 테스트 |
-| 법무 체크 | 시큐리티 | 처리방침·약관·동의·삭제 동작, 사건 기록 "사실만" 가이드 |
-| 성능 | 프론트 | Lighthouse 90+, 코드 스플리팅 |
+| 보안 검증 | 보안 | 에뮬레이터 타 가게 접근 차단, 규칙 침투 테스트 |
+| 법무 체크 | 보안 | 처리방침·약관·동의·삭제 동작, 사건 기록 "사실만" 가이드 |
+| 성능 | 프론트엔드 | Lighthouse 90+, 코드 스플리팅 |
 | 통합 QA | 리드 | 시나리오 A 전체 플로우 E2E 수동 테스트 |
 | 문서·발표 | 리드 | README 갱신, 발표 자료 |
 

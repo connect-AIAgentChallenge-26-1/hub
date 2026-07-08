@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShowUp — 프로토타입</title>
+<style>
+  /* ===== Reset & Base ===== */
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #f4f4f5;
+    --card: #ffffff;
+    --border: #e4e4e7;
+    --border-hover: #d4d4d8;
+    --text: #18181b;
+    --text-sub: #71717a;
+    --text-muted: #a1a1aa;
+    --primary: #2563eb;
+    --primary-bg: #eff6ff;
+    --primary-border: #bfdbfe;
+    --danger: #dc2626;
+    --danger-bg: #fef2f2;
+    --danger-border: #fecaca;
+    --danger-sub: #991b1b;
+    --warning: #ca8a04;
+    --warning-bg: #fefce8;
+    --warning-border: #fef08a;
+    --success: #16a34a;
+    --success-bg: #f0fdf4;
+    --success-border: #bbf7d0;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.06);
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== Top Bar ===== */
+  .topbar {
+    background: var(--card);
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 6px; }
+  .topbar h1 { font-size: 17px; font-weight: 700; letter-spacing: -0.02em; }
+  .topbar .store-name { font-size: 13px; color: var(--text-sub); font-weight: 500; }
+  .back-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: var(--text);
+    padding: 0 6px 0 0;
+    line-height: 1;
+  }
+
+  /* ===== Bottom Nav ===== */
+  .bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    display: flex;
+    height: 56px;
+    z-index: 100;
+  }
+  .bottom-nav a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 500;
+    gap: 4px;
+    min-height: 44px;
+    cursor: pointer;
+    transition: color 0.15s;
+  }
+  .bottom-nav a.active { color: var(--primary); font-weight: 600; }
+  .nav-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-icon svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ===== Content Area ===== */
+  .content { padding: 16px 16px 80px; }
+
+  /* ===== Screen Toggle ===== */
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ===== Search ===== */
+  .search-box {
+    position: relative;
+    margin-bottom: 12px;
+  }
+  .search-box input {
+    width: 100%;
+    padding: 12px 16px 12px 40px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    background: var(--card);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .search-box input::placeholder { color: var(--text-muted); }
+  .search-box input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(37,99,235,0.08); }
+  .search-box .search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    opacity: 0.4;
+  }
+  .search-box .search-icon svg { width: 18px; height: 18px; stroke: var(--text); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* ===== Risk Alert Banner ===== */
+  .risk-banner {
+    background: var(--danger-bg);
+    border: 1px solid var(--danger-border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    display: none;
+  }
+  .risk-banner.show { display: block; }
+  .risk-banner .title {
+    color: var(--danger);
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .risk-banner .title .alert-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+  .risk-banner .title .alert-icon svg { width: 16px; height: 16px; stroke: var(--danger); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .risk-banner .desc {
+    color: var(--danger-sub);
+    font-size: 12px;
+  }
+
+  /* ===== Customer Card ===== */
+  .customer-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    box-shadow: var(--shadow-sm);
+  }
+  .customer-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-md); }
+  .customer-card .info { display: flex; flex-direction: column; gap: 3px; }
+  .customer-card .name { font-weight: 600; font-size: 15px; letter-spacing: -0.01em; }
+  .customer-card .phone { font-size: 13px; color: var(--text-sub); }
+  .customer-card .arrow { color: var(--text-muted); font-size: 18px; }
+  .card-right { display: flex; align-items: center; gap: 10px; }
+
+  /* ===== Risk Badge ===== */
+  .risk-badge {
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .risk-badge.low { background: var(--success-bg); color: var(--success); }
+  .risk-badge.medium { background: var(--warning-bg); color: var(--warning); }
+  .risk-badge.high { background: var(--danger-bg); color: var(--danger); }
+
+  /* ===== Button ===== */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+  .btn:active { opacity: 0.7; }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-secondary { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
+  .btn-danger { background: var(--danger); color: #fff; }
+  .btn-success { background: var(--success); color: #fff; }
+  .btn-warning { background: #f59e0b; color: #fff; }
+  .btn-full { width: 100%; }
+  .btn-sm { min-height: 36px; padding: 6px 12px; font-size: 13px; border-radius: 6px; }
+
+  /* ===== Dashboard ===== */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .stat-card .label { font-size: 12px; color: var(--text-sub); margin-bottom: 6px; }
+  .stat-card .value { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+  .stat-card .value.danger { color: var(--danger); }
+  .stat-card .value.warning { color: var(--warning); }
+  .stat-card .value.success { color: var(--success); }
+
+  /* ===== Section Title ===== */
+  .section-title {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    margin-top: 4px;
+    letter-spacing: -0.01em;
+  }
+
+  /* ===== Customer Detail ===== */
+  .detail-header {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-sm);
+  }
+  .detail-header .name { font-size: 18px; font-weight: 700; letter-spacing: -0.02em; }
+  .detail-header .score { font-size: 13px; color: var(--text-sub); margin-top: 3px; }
+
+  /* ===== Timeline ===== */
+  .timeline {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-sm);
+  }
+  .timeline-label { font-size: 13px; font-weight: 600; color: var(--text-sub); margin-bottom: 10px; }
+  .timeline-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f4f4f5;
+  }
+  .timeline-item:last-child { border-bottom: none; padding-bottom: 0; }
+  .timeline-item .date { font-size: 12px; color: var(--text-muted); min-width: 44px; padding-top: 1px; }
+  .timeline-item .icon-dot {
+    width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;
+  }
+  .icon-dot.noShow { background: var(--danger-bg); color: var(--danger); }
+  .icon-dot.visit { background: var(--success-bg); color: var(--success); }
+  .icon-dot.incident { background: var(--warning-bg); color: var(--warning); }
+  .icon-dot.cancel { background: #f4f4f5; color: var(--text-sub); }
+  .timeline-item .event-text { font-size: 14px; font-weight: 500; }
+  .timeline-item .memo-text { font-size: 12px; color: var(--text-sub); margin-top: 2px; }
+
+  /* ===== Reservation List ===== */
+  .reservation-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    box-shadow: var(--shadow-sm);
+  }
+  .reservation-card .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  .reservation-card .cust-name { font-weight: 600; font-size: 14px; }
+  .reservation-card .time { font-size: 13px; color: var(--text-sub); }
+  .reservation-card .status-badge {
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .status-badge.pending { background: #f4f4f5; color: var(--text-sub); }
+  .status-badge.confirmed { background: var(--primary-bg); color: var(--primary); }
+  .status-badge.visited { background: var(--success-bg); color: var(--success); }
+  .status-badge.noShow { background: var(--danger-bg); color: var(--danger); }
+  .status-badge.cancelled { background: #f4f4f5; color: var(--text-muted); }
+  .reservation-card .actions {
+    display: flex;
+    gap: 6px;
+  }
+  .reservation-card .actions .btn { flex: 1; }
+
+  /* ===== Modal ===== */
+  .modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.35);
+    display: none;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 200;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: var(--card);
+    width: 100%;
+    max-width: 480px;
+    border-radius: 20px 20px 0 0;
+    padding: 20px 16px 24px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .modal h3 { font-size: 17px; font-weight: 700; margin-bottom: 14px; letter-spacing: -0.01em; }
+  .modal label { font-size: 13px; color: var(--text-sub); display: block; margin-bottom: 6px; margin-top: 14px; font-weight: 500; }
+  .modal select, .modal textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    outline: none;
+    font-family: inherit;
+    background: var(--card);
+    transition: border-color 0.15s;
+  }
+  .modal select:focus, .modal textarea:focus { border-color: var(--primary); }
+  .modal textarea { resize: vertical; min-height: 60px; }
+  .modal .guide {
+    font-size: 11px;
+    color: var(--text-sub);
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+  .modal .actions { display: flex; gap: 8px; margin-top: 18px; }
+  .modal .actions .btn { flex: 1; }
+
+  /* ===== Toast ===== */
+  .toast {
+    position: fixed;
+    bottom: 76px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--text);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    z-index: 300;
+    display: none;
+    white-space: nowrap;
+  }
+  .toast.show { display: block; }
+
+  /* ===== Empty State ===== */
+  .empty {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Top Bar ===== -->
+<div class="topbar">
+  <div class="topbar-left">
+    <button class="back-btn" onclick="showScreen('customers')" id="backBtn" style="display:none;">←</button>
+    <h1 id="pageTitle">고객 검색</h1>
+  </div>
+  <span class="store-name">카페 햇살</span>
+</div>
+
+<!-- ===== Content ===== -->
+<div class="content">
+
+  <!-- ===== Screen: Dashboard ===== -->
+  <div class="screen" id="screen-dashboard">
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="label">오늘 예약</div>
+        <div class="value">5</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">오늘 노쇼</div>
+        <div class="value danger">1</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">이번 달 노쇼율</div>
+        <div class="value warning">12%</div>
+      </div>
+      <div class="stat-card">
+        <div class="label">주의 고객 수</div>
+        <div class="value warning">3</div>
+      </div>
+    </div>
+
+    <div class="section-title">주의 고객 Top 5</div>
+    <div id="dashboardAttentionList"></div>
+  </div>
+
+  <!-- ===== Screen: Customers (Search) ===== -->
+  <div class="screen active" id="screen-customers">
+    <div class="search-box">
+      <span class="search-icon">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </span>
+      <input type="text" id="searchInput" placeholder="전화 뒤 4자리 / 이름" oninput="handleSearch()">
+    </div>
+
+    <div class="risk-banner" id="riskBanner">
+      <div class="title">
+        <span class="alert-icon">
+          <svg viewBox="0 0 24 24"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </span>
+        <span id="bannerTitle">위험 고객: 노쇼 3회 · 응대 사건 1회</span>
+      </div>
+      <div class="desc">예약금 요청 또는 사전 확인을 권장합니다</div>
+    </div>
+
+    <div id="customerList"></div>
+
+    <button class="btn btn-primary btn-full" style="margin-top:12px;" onclick="showToast('신규 고객 등록 화면으로 이동합니다')">+ 신규 고객 등록</button>
+  </div>
+
+  <!-- ===== Screen: Customer Detail ===== -->
+  <div class="screen" id="screen-detail">
+    <div class="detail-header">
+      <div>
+        <div class="name" id="detailName">김철수</div>
+        <div class="score" id="detailScore">위험 40점 · (참고용 지표)</div>
+      </div>
+      <span class="risk-badge high" id="detailBadge">위험</span>
+    </div>
+
+    <div class="timeline" id="detailTimeline"></div>
+
+    <button class="btn btn-secondary btn-full" onclick="openModal()">+ 사건 기록</button>
+  </div>
+
+  <!-- ===== Screen: Reservations ===== -->
+  <div class="screen" id="screen-reservations">
+    <div class="section-title">오늘 예약 (7/8)</div>
+    <div id="reservationList"></div>
+  </div>
+
+</div>
+
+<!-- ===== Modal: Incident Form ===== -->
+<div class="modal-overlay" id="incidentModal">
+  <div class="modal">
+    <h3>사건 기록</h3>
+    <label>카테고리</label>
+    <select id="incidentType">
+      <option value="abuse">폭언·위협·무례 (abuse)</option>
+      <option value="dispute">환불·결제 분쟁 (dispute)</option>
+      <option value="late">상습 지각 30분+ (late)</option>
+      <option value="unreasonable">무리한 요구 반복 (unreasonable)</option>
+    </select>
+    <label>사실 메모</label>
+    <textarea id="incidentMemo" placeholder="발생한 일을 사실만 기록해주세요"></textarea>
+    <div class="guide">사실만 기록해주세요. 주관적 평가나 비방은 명예훼손 소지가 있습니다.</div>
+    <div class="actions">
+      <button class="btn btn-secondary" onclick="closeModal()">취소</button>
+      <button class="btn btn-primary" onclick="submitIncident()">기록</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Toast ===== -->
+<div class="toast" id="toast"></div>
+
+<!-- ===== Bottom Nav ===== -->
+<div class="bottom-nav">
+  <a onclick="showScreen('dashboard')" id="nav-dashboard" class="active">
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+    </span>
+    대시보드
+  </a>
+  <a onclick="showScreen('customers')" id="nav-customers">
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    </span>
+    고객
+  </a>
+  <a onclick="showScreen('reservations')" id="nav-reservations">
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    </span>
+    예약
+  </a>
+  <a onclick="showToast('설정 화면은 MVP 이후입니다')">
+    <span class="nav-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    </span>
+    설정
+  </a>
+</div>
+
+<script>
+// ===== Mock Data =====
+const customers = [
+  { id: 1, name: '김철수', phone: '010-****-1234', score: 40, grade: 'high', noShow: 3, abuse: 1, lateCancel: 0, unreasonable: 0, lastNoShow: '2026-07-01' },
+  { id: 2, name: '이영희', phone: '010-****-5678', score: 8, grade: 'low', noShow: 1, abuse: 0, lateCancel: 0, unreasonable: 0, lastNoShow: '2026-06-20' },
+  { id: 3, name: '박정수', phone: '010-****-1234', score: 24, grade: 'medium', noShow: 3, abuse: 0, lateCancel: 0, unreasonable: 0, lastNoShow: '2026-07-05' },
+  { id: 4, name: '최민준', phone: '010-****-9999', score: 10, grade: 'low', noShow: 0, abuse: 0, lateCancel: 1, unreasonable: 1, lastNoShow: null },
+  { id: 5, name: '강유나', phone: '010-****-5678', score: 0, grade: 'low', noShow: 0, abuse: 0, lateCancel: 0, unreasonable: 0, lastNoShow: null },
+];
+
+const events = {
+  1: [
+    { date: '7/05', type: 'noShow', event: '노쇼', memo: '' },
+    { date: '6/28', type: 'incident', event: '폭언·무례', memo: '환불 요구하며 소리침' },
+    { date: '6/20', type: 'noShow', event: '노쇼', memo: '' },
+    { date: '6/14', type: 'noShow', event: '노쇼', memo: '' },
+    { date: '6/10', type: 'visit', event: '방문', memo: '' },
+  ],
+  2: [
+    { date: '6/20', type: 'noShow', event: '노쇼', memo: '' },
+    { date: '6/15', type: 'visit', event: '방문', memo: '' },
+    { date: '6/05', type: 'visit', event: '방문', memo: '' },
+  ],
+  3: [
+    { date: '7/05', type: 'noShow', event: '노쇼', memo: '' },
+    { date: '7/01', type: 'noShow', event: '노쇼', memo: '' },
+    { date: '6/25', type: 'noShow', event: '노쇼', memo: '' },
+    { date: '6/18', type: 'visit', event: '방문', memo: '' },
+  ],
+  4: [
+    { date: '7/03', type: 'cancel', event: '당일 취소', memo: '' },
+    { date: '6/28', type: 'incident', event: '무리한 요구', memo: '예약 시간 외 방문 요구' },
+    { date: '6/20', type: 'visit', event: '방문', memo: '' },
+  ],
+  5: [],
+};
+
+const reservations = [
+  { id: 1, customerId: 2, name: '이영희', time: '10:00', status: 'visited' },
+  { id: 2, customerId: 1, name: '김철수', time: '11:30', status: 'noShow' },
+  { id: 3, customerId: 3, name: '박정수', time: '14:00', status: 'pending' },
+  { id: 4, customerId: 4, name: '최민준', time: '15:30', status: 'confirmed' },
+  { id: 5, customerId: 5, name: '강유나', time: '17:00', status: 'confirmed' },
+];
+
+const statusLabels = {
+  pending: '대기', confirmed: '확정', visited: '방문', noShow: '노쇼', cancelled: '취소'
+};
+
+const iconDots = {
+  noShow: { cls: 'noShow', label: 'X' },
+  visit: { cls: 'visit', label: 'V' },
+  incident: { cls: 'incident', label: '!' },
+  cancel: { cls: 'cancel', label: 'C' },
+};
+
+// ===== Screen Navigation =====
+function showScreen(name, customerId) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + name).classList.add('active');
+
+  document.querySelectorAll('.bottom-nav a').forEach(a => a.classList.remove('active'));
+  const navMap = { dashboard: 'nav-dashboard', customers: 'nav-customers', reservations: 'nav-reservations' };
+  if (navMap[name]) document.getElementById(navMap[name]).classList.add('active');
+
+  const titles = { dashboard: '대시보드', customers: '고객 검색', detail: '고객 상세', reservations: '예약 관리' };
+  document.getElementById('pageTitle').textContent = titles[name] || '';
+  document.getElementById('backBtn').style.display = (name === 'detail') ? 'block' : 'none';
+
+  if (name === 'dashboard') renderDashboard();
+  if (name === 'customers') renderCustomerList();
+  if (name === 'detail' && customerId) renderDetail(customerId);
+  if (name === 'reservations') renderReservations();
+
+  window.scrollTo(0, 0);
+}
+
+// ===== Grade helpers =====
+function gradeLabel(grade) {
+  return { low: '안심', medium: '주의', high: '위험' }[grade];
+}
+function gradeClass(grade) {
+  return { low: 'low', medium: 'medium', high: 'high' }[grade];
+}
+
+// ===== Search =====
+function handleSearch() {
+  renderCustomerList();
+}
+
+function shouldShowBanner(customer) {
+  return customer.noShow >= 3 || customer.abuse >= 1;
+}
+
+function renderCustomerList() {
+  const query = document.getElementById('searchInput').value.trim().toLowerCase();
+  const list = document.getElementById('customerList');
+
+  let filtered = customers;
+  if (query) {
+    filtered = customers.filter(c =>
+      c.phone.replace(/\*/g,'').includes(query) ||
+      c.name.toLowerCase().includes(query) ||
+      c.phone.includes(query)
+    );
+  }
+
+  const bannerCustomer = filtered.find(c => shouldShowBanner(c));
+  const banner = document.getElementById('riskBanner');
+  if (bannerCustomer) {
+    const c = bannerCustomer;
+    const parts = [];
+    if (c.noShow >= 3) parts.push('노쇼 ' + c.noShow + '회');
+    if (c.abuse >= 1) parts.push('응대 사건 ' + c.abuse + '회');
+    document.getElementById('bannerTitle').textContent = '위험 고객: ' + parts.join(' · ');
+    banner.classList.add('show');
+  } else {
+    banner.classList.remove('show');
+  }
+
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="empty">검색 결과가 없습니다<br>신규 고객으로 등록해주세요</div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(c => `
+    <div class="customer-card" onclick="showScreen('detail', ${c.id})">
+      <div class="info">
+        <span class="name">${c.name}</span>
+        <span class="phone">${c.phone}</span>
+      </div>
+      <div class="card-right">
+        <span class="risk-badge ${gradeClass(c.grade)}">${gradeLabel(c.grade)}</span>
+        <span class="arrow">›</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== Dashboard =====
+function renderDashboard() {
+  const attentionList = document.getElementById('dashboardAttentionList');
+  const sorted = [...customers].sort((a,b) => b.score - a.score).slice(0, 5);
+  attentionList.innerHTML = sorted.map(c => `
+    <div class="customer-card" onclick="showScreen('detail', ${c.id})">
+      <div class="info">
+        <span class="name">${c.name}</span>
+        <span class="phone">${c.phone} · ${c.score}점</span>
+      </div>
+      <span class="risk-badge ${gradeClass(c.grade)}">${gradeLabel(c.grade)}</span>
+    </div>
+  `).join('');
+}
+
+// ===== Customer Detail =====
+function renderDetail(customerId) {
+  const c = customers.find(x => x.id === customerId);
+  if (!c) return;
+
+  document.getElementById('detailName').textContent = c.name;
+  document.getElementById('detailScore').textContent = gradeLabel(c.grade) + ' ' + c.score + '점 · (참고용 지표)';
+  const badge = document.getElementById('detailBadge');
+  badge.className = 'risk-badge ' + gradeClass(c.grade);
+  badge.textContent = gradeLabel(c.grade);
+
+  const tl = document.getElementById('detailTimeline');
+  const items = events[customerId] || [];
+  if (items.length === 0) {
+    tl.innerHTML = '<div class="empty">이벤트 기록이 없습니다</div>';
+  } else {
+    tl.innerHTML = '<div class="timeline-label">이벤트 타임라인</div>' +
+      items.map(e => {
+        const dot = iconDots[e.type] || iconDots.incident;
+        return `
+          <div class="timeline-item">
+            <span class="date">${e.date}</span>
+            <span class="icon-dot ${dot.cls}">${dot.label}</span>
+            <div>
+              <div class="event-text">${e.event}</div>
+              ${e.memo ? '<div class="memo-text">"' + e.memo + '"</div>' : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+  }
+}
+
+// ===== Reservations =====
+function renderReservations() {
+  const list = document.getElementById('reservationList');
+  list.innerHTML = reservations.map(r => `
+    <div class="reservation-card">
+      <div class="top">
+        <div>
+          <span class="cust-name">${r.name}</span>
+          <span class="time"> · ${r.time}</span>
+        </div>
+        <span class="status-badge ${r.status}">${statusLabels[r.status]}</span>
+      </div>
+      ${(r.status === 'pending' || r.status === 'confirmed') ? `
+        <div class="actions">
+          <button class="btn btn-success btn-sm" onclick="updateStatus(${r.id}, 'visited')">방문</button>
+          <button class="btn btn-danger btn-sm" onclick="updateStatus(${r.id}, 'noShow')">노쇼</button>
+          <button class="btn btn-secondary btn-sm" onclick="updateStatus(${r.id}, 'cancelled')">취소</button>
+        </div>
+      ` : ''}
+    </div>
+  `).join('');
+}
+
+function updateStatus(resId, status) {
+  const r = reservations.find(x => x.id === resId);
+  if (!r) return;
+  r.status = status;
+  renderReservations();
+  showToast('상태 변경: ' + statusLabels[status]);
+}
+
+// ===== Modal =====
+function openModal() { document.getElementById('incidentModal').classList.add('show'); }
+function closeModal() {
+  document.getElementById('incidentModal').classList.remove('show');
+  document.getElementById('incidentMemo').value = '';
+}
+function submitIncident() {
+  const type = document.getElementById('incidentType').value;
+  const memo = document.getElementById('incidentMemo').value;
+  if (!memo.trim()) { showToast('메모를 입력해주세요'); return; }
+  const typeLabels = { abuse: '폭언·무례', dispute: '환불 분쟁', late: '지각', unreasonable: '무리한 요구' };
+  showToast('사건 기록 완료: ' + typeLabels[type]);
+  closeModal();
+}
+
+// ===== Toast =====
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ===== Init =====
+renderCustomerList();
+</script>
+</body>
+</html>

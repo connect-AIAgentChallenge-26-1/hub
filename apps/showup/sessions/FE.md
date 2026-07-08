@@ -40,8 +40,8 @@ ShowUp의 프론트엔드 화면, 컴포넌트, 라우팅, 폼, 상태 표시, �
 - `apps/showup/src/pages/`
 - `apps/showup/src/routes/`
 - `apps/showup/src/hooks/`
-- `apps/showup/src/utils/` — 프론트 전용 util만
-- `apps/showup/src/types/` — 프론트 전용 타입만
+- `apps/showup/src/utils/` — 프론트엔드 전용 util만
+- `apps/showup/src/types/` — 프론트엔드 전용 타입만
 - 프론트엔드 스타일과 반응형 레이아웃
 
 **제외 — 다른 세션 소유 (읽기만, 수정 금지):**
@@ -80,8 +80,8 @@ ShowUp의 프론트엔드 화면, 컴포넌트, 라우팅, 폼, 상태 표시, �
 ## 건드려도 되는 것
 
 - React 페이지와 컴포넌트
-- 프론트 전용 hook
-- 프론트 전용 util
+- 프론트엔드 전용 hook
+- 프론트엔드 전용 util
 - Tailwind 스타일
 - mock 데이터
 - 로딩, 에러, 빈 상태 UI

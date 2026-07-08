@@ -7,8 +7,8 @@
 > 위험도를 관리하고 예약 전에 경고하는 데 초점을 둔다.
 
 - 기간: 2026-07-07 ~ 2026-07-30
-- 진행: Hermes Agent 4세션 (프론트 / 백엔드 / 시큐리티 / 리드)
-- 모델: Lead·GLM 5.2 / Frontend·Qwen 3.5 / Backend·Kimi K2.7 Code / Security·GPT-OSS 120B (Ollama)
+- 진행: Hermes Agent 4세션 (프론트엔드 / 백엔드 / 보안 / 리드)
+- 모델: 리드·GLM 5.2 / 프론트엔드·Qwen 3.5 / 백엔드·Kimi K2.7 Code / 보안·GPT-OSS 120B (Ollama)
 
 ## 문제 정의
 
@@ -35,6 +35,7 @@
 - [기획서 전문](docs/plan.md)
 - [작업 체크리스트](docs/checklist.md)
 - [유저 플로우](docs/user-flow.md)
+- [프로토타입 (HTML/CSS)](prototype/index.html) — 핵심 기능 2개 시연 (고객 검색·경고 배너·예약 상태·사건 기록)
 
 ## 원칙
 

@@ -24,7 +24,7 @@
 | 단계 | 행동 | 화면 | 비고 |
 |------|------|------|------|
 | 1 | 전화 뒤 4자리/이름 검색 | `/customers` | 300ms debounce. 결과는 항상 **후보 목록** — 단일 자동 매칭 금지, 이름+마스킹 번호 확인 후 선택 |
-| 2 | 경고 배너 자동 표시 | `/customers`, `/reservations/new` | `noShowCount >= 3 \|\| incidentCounts.abuse >= 1` 충족 시 강제 표시 |
+| 2 | 경고 배너 자동 표시 | `/customers`, `/reservations/new` | `noShowCount >= 3 || incidentCounts.abuse >= 1` 충족 시 강제 표시 |
 | 3 | 예약 생성 or 거절/예약금 판단 | `/reservations/new` | 자동 차단 아님 — 최종 판단은 사장님 |
 | 4 | 예약 당일 상태 원터치 + 사건 기록 | `/reservations`, `/customers/:id` | 방문 −1 / 노쇼 +8 / 당일취소 +4. 사건은 카테고리 선택 + 사실 메모 |
 | 5 | riskStats 재계산 | (백그라운드) | 원칙 Cloud Function, MVP 대안은 `risk.ts` 클라이언트 갱신 — 로직은 한 곳만 |
@@ -74,7 +74,7 @@ flowchart TD
 | 총점 24–39 | 주의 (medium) 노랑 — 노쇼 3회(24점)부터 |
 | 총점 40+ | 위험 (high) 빨강 — 노쇼 5회(40점)부터 |
 | abuse 1회+ | 점수 무관 최소 '주의' |
-| `noShowCount >= 3 \|\| incidentCounts.abuse >= 1` | 검색 결과·예약 생성 화면에 강제 경고 배너 |
+| `noShowCount >= 3 || incidentCounts.abuse >= 1` | 검색 결과·예약 생성 화면에 강제 경고 배너 |
 | 최근 30일 내 노쇼 존재 | +5 (최신성 가중) |
 | 검색 결과 후보 2명 이상 | 자동 선택 없음 — 목록에서 수동 선택 |
 | 검색 결과 0명 | 신규 고객 등록 유도 |
@@ -91,7 +91,7 @@ flowchart TD
 | `/customers/:id` | 4 | CustomerTimeline, IncidentFormModal, RiskBadge |
 | `/reservations` | 4 | ReservationStatusActions (방문/노쇼/취소 원터치, 44px+) |
 | `/reservations/new` | 2, 3 | RiskAlertBanner |
-| `/privacy`, `/terms` | — | 정적 문서 (SECURITY 문안) |
+| `/privacy`, `/terms` | — | 정적 문서 (보안 문안) |
 
 `/stats`(Phase 1.5), `/me`(Phase 2)는 MVP 제외.
 
