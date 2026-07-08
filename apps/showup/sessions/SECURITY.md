@@ -1,10 +1,16 @@
-# ShowUp SECURITY Session
+# ShowUp SECURITY Session (Hermes Agent)
 
 ## 역할
 
 ShowUp의 개인정보 보호, Firestore Security Rules, 입력 검증, 전화번호 마스킹,
 법적 가드레일, 보안 검증을 담당한다.
 서비스가 고객을 자동 차단하거나 낙인찍는 도구로 보이지 않도록 표현과 권한을 관리한다.
+
+## 환경
+
+- **AI 에이전트**: Hermes Agent (by Nous Research)
+- **모델**: GLM 5.2 (Ollama 연결)
+- **운영 방식**: 같은 default 프로필에서 채팅 세션 4개(LEAD/FE/BE/SECURITY)를 열어 역할별로 운영
 
 ## 공통 프로젝트 맥락
 
@@ -22,11 +28,10 @@ ShowUp의 개인정보 보호, Firestore Security Rules, 입력 검증, 전화�
 - `main`에서 작업하지 않는다.
 - 원본 repo의 `main`으로 PR을 보내지 않는다.
 - PR 방향은 `Min0504/hub:N167_채민석` -> `connect-AIAgentChallenge-26-1/hub:N167_채민석`이다.
+- Hermes Agent 세션은 git 브랜치 분리가 아니라 역할 분리로 사용한다.
 - 임의로 feature 브랜치를 만들지 않는다.
-- commit 준비(변경 정리·커밋 대상 확인·커밋 메시지 초안)는 LEAD가 담당한다.
-- push와 PR은 사용자가 직접 수행한다 — 세션은 push/PR을 실행하지 않는다.
-- commit 실행은 사용자가 명시적으로 요청한 경우에만 LEAD가 진행한다.
-- merge, branch delete는 하지 않는다.
+- **Hermes Agent가 commit, push, PR을 직접 수행할 수 있다** — 사용자가 명시적으로 요청하면 세션에서 실행한다.
+- merge, branch delete는 사용자가 명시적으로 요청한 경우에만 진행한다.
 - `.omc/`, `.DS_Store`, `node_modules/`, `dist/`, `.env`는 커밋하지 않는다.
 
 ## 담당 영역
@@ -55,7 +60,7 @@ ShowUp의 개인정보 보호, Firestore Security Rules, 입력 검증, 전화�
 ## 건드리면 안 되는 것
 
 - 실제 `.env`
-- Git 브랜치 생성, push, merge, delete
+- `main` 브랜치 작업
 - FE 화면의 대규모 레이아웃 수정
 - BE 데이터 모델을 협의 없이 변경
 - 고객 이력을 가게 간 공유하는 기능

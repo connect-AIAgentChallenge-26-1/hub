@@ -1,10 +1,17 @@
-# ShowUp LEAD Session
+# ShowUp LEAD Session (Hermes Agent)
 
 ## 역할
 
 ShowUp 프로젝트의 기획, 구조, 일정, 통합, 검증, 문서, Git 상태 관리를 담당한다.
 LEAD는 직접 기능 구현을 많이 하기보다 FE, BE, SECURITY 세션이 같은 목표와
 같은 인터페이스 위에서 충돌 없이 작업하도록 조율한다.
+
+## 환경
+
+- **AI 에이전트**: Hermes Agent (by Nous Research)
+- **모델**: GLM 5.2 (Ollama 연결)
+- **운영 방식**: 같은 default 프로필에서 채팅 세션 4개(LEAD/FE/BE/SECURITY)를 열어 역할별로 운영
+- 기존 Conductor 기반 세션 구조는 Claude 구독 만료 + Codex 정지로 인해 Hermes Agent로 이관
 
 ## 공통 프로젝트 맥락
 
@@ -22,12 +29,10 @@ LEAD는 직접 기능 구현을 많이 하기보다 FE, BE, SECURITY 세션이 �
 - `main`에서 작업하지 않는다.
 - 원본 repo의 `main`으로 PR을 보내지 않는다.
 - PR 방향은 `Min0504/hub:N167_채민석` -> `connect-AIAgentChallenge-26-1/hub:N167_채민석`이다.
-- Conductor 세션은 git 브랜치 분리가 아니라 역할 분리로 사용한다.
+- Hermes Agent 세션은 git 브랜치 분리가 아니라 역할 분리로 사용한다.
 - 임의로 feature 브랜치를 만들지 않는다.
-- commit 준비(변경 정리·커밋 대상 확인·커밋 메시지 초안)는 LEAD가 담당한다.
-- push와 PR은 사용자가 직접 수행한다 — 세션은 push/PR을 실행하지 않는다.
-- commit 실행은 사용자가 명시적으로 요청한 경우에만 LEAD가 진행한다.
-- merge, branch delete는 하지 않는다.
+- **Hermes Agent가 commit, push, PR을 직접 수행할 수 있다** — 사용자가 명시적으로 요청하면 세션에서 실행한다.
+- merge, branch delete는 사용자가 명시적으로 요청한 경우에만 진행한다.
 - `.omc/`, `.DS_Store`, `node_modules/`, `dist/`, `.env`는 커밋하지 않는다.
 
 ## 담당 영역
@@ -54,7 +59,6 @@ LEAD는 직접 기능 구현을 많이 하기보다 FE, BE, SECURITY 세션이 �
 
 ## 건드리면 안 되는 것
 
-- 사용자가 명시하지 않은 브랜치 생성, push, merge, delete
 - `main` 브랜치 작업
 - FE, BE, SECURITY가 담당 중인 파일의 불필요한 대규모 수정
 - 실제 비밀값이 들어간 `.env`
@@ -71,7 +75,7 @@ LEAD는 직접 기능 구현을 많이 하기보다 FE, BE, SECURITY 세션이 �
 7. 통합 전 `npm run build` 또는 해당 앱의 빌드 명령을 확인한다.
 8. 핵심 시나리오 A를 수동으로 확인한다.
 9. 커밋 전 변경 파일 목록과 제외 파일을 확인한다.
-10. commit 준비(변경 정리·커밋 대상 확인·메시지 초안)까지만 진행한다. commit 실행은 사용자가 명시적으로 요청할 때만, push/PR은 사용자가 직접 한다.
+10. 사용자가 명시적으로 요청하면 Hermes Agent가 commit, push, PR을 직접 실행한다.
 
 ## 핵심 통합 시나리오
 
