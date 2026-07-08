@@ -1,2 +1,2 @@
 # hub
-# 프로젝트 기획서 링크 <https://github.com/meatbest9/hub/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B8%B0%ED%9A%8D>
+# 프로젝트 기획서 링크 <[https://github.com/meatbest9/hub/wiki/%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B8%B0%ED%9A%8D](https://github.com/meatbest9/hub/wiki/%EC%B0%90-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%EA%B8%B0%ED%9A%8D%EC%84%9C)>
