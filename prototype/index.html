@@ -1,1 +1,205 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>멘티 홈 | 멘토 프로필 목록</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="mentee-page">
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">멘티 로그인 화면</p>
+      <h1>멘토 프로필 목록</h1>
+    </div>
+    <nav class="top-links" aria-label="프로토타입 화면 이동">
+      <a href="mentor-dashboard.html">멘토 화면</a>
+    </nav>
+  </header>
 
+  <main class="page-shell mentor-list-shell">
+    <section class="search-panel" aria-label="멘토 검색">
+      <div class="search-field">
+        <span aria-hidden="true"></span>
+        <input type="search" placeholder="검색어를 입력하세요" aria-label="멘토 검색어">
+      </div>
+      <button type="button" class="icon-button" aria-label="검색"></button>
+      <button type="button" class="sort-button">인기순</button>
+    </section>
+
+    <section class="mentor-list" aria-label="멘토 목록">
+      <input class="mentor-toggle" type="checkbox" id="mentor-kim">
+      <article class="mentor-card">
+        <div class="mentor-card-header">
+          <label class="select-mentor" for="mentor-kim" aria-label="김OO 멘토 선택">
+            <span class="check-icon" aria-hidden="true"></span>
+          </label>
+          <div>
+            <h2>김OO 멘토 <span>재료공학부 박사과정</span></h2>
+            <p>전고체 배터리와 나노소재 기반 에너지 저장을 연구합니다.</p>
+          </div>
+        </div>
+        <div class="tag-row" aria-label="연구 해시태그">
+          <span>#GAA</span>
+          <span>#FinFET</span>
+          <span>#차세대반도체</span>
+        </div>
+        <dl class="mentor-meta">
+          <div>
+            <dt>전공</dt>
+            <dd>재료공학</dd>
+          </div>
+          <div>
+            <dt>연구실</dt>
+            <dd>나노소자 연구실</dd>
+          </div>
+          <div>
+            <dt>면담 가능</dt>
+            <dd>화 19:00, 금 15:00</dd>
+          </div>
+        </dl>
+        <a class="detail-link" href="mentor-detail.html">프로필 상세 보기</a>
+      </article>
+
+      <input class="mentor-toggle" type="checkbox" id="mentor-lee">
+      <article class="mentor-card">
+        <div class="mentor-card-header">
+          <label class="select-mentor" for="mentor-lee" aria-label="이OO 멘토 선택">
+            <span class="check-icon" aria-hidden="true"></span>
+          </label>
+          <div>
+            <h2>이OO 멘토 <span>전산학부 석사과정</span></h2>
+            <p>딥러닝 기반 영상 분석과 의료 AI 서비스 개발을 다룹니다.</p>
+          </div>
+        </div>
+        <div class="tag-row" aria-label="연구 해시태그">
+          <span>#AI</span>
+          <span>#딥러닝</span>
+          <span>#컴퓨터비전</span>
+        </div>
+        <dl class="mentor-meta">
+          <div>
+            <dt>전공</dt>
+            <dd>전산학</dd>
+          </div>
+          <div>
+            <dt>연구실</dt>
+            <dd>비전지능 연구실</dd>
+          </div>
+          <div>
+            <dt>면담 가능</dt>
+            <dd>월 20:00, 목 18:30</dd>
+          </div>
+        </dl>
+        <a class="detail-link" href="mentor-detail.html">프로필 상세 보기</a>
+      </article>
+
+      <input class="mentor-toggle" type="checkbox" id="mentor-park">
+      <article class="mentor-card">
+        <div class="mentor-card-header">
+          <label class="select-mentor" for="mentor-park" aria-label="박OO 멘토 선택">
+            <span class="check-icon" aria-hidden="true"></span>
+          </label>
+          <div>
+            <h2>박OO 멘토 <span>생명과학과 석박통합</span></h2>
+            <p>단백질 구조 예측과 바이오 데이터 분석 진로를 도와드립니다.</p>
+          </div>
+        </div>
+        <div class="tag-row" aria-label="연구 해시태그">
+          <span>#BioAI</span>
+          <span>#단백질</span>
+          <span>#데이터분석</span>
+        </div>
+        <dl class="mentor-meta">
+          <div>
+            <dt>전공</dt>
+            <dd>생명과학</dd>
+          </div>
+          <div>
+            <dt>연구실</dt>
+            <dd>계산생물학 연구실</dd>
+          </div>
+          <div>
+            <dt>면담 가능</dt>
+            <dd>수 17:00, 토 11:00</dd>
+          </div>
+        </dl>
+        <a class="detail-link" href="mentor-detail.html">프로필 상세 보기</a>
+      </article>
+
+      <input class="mentor-toggle" type="checkbox" id="mentor-choi">
+      <article class="mentor-card">
+        <div class="mentor-card-header">
+          <label class="select-mentor" for="mentor-choi" aria-label="최OO 멘토 선택">
+            <span class="check-icon" aria-hidden="true"></span>
+          </label>
+          <div>
+            <h2>최OO 멘토 <span>산업공학과 석사과정</span></h2>
+            <p>최적화, UX 리서치, 기술 창업 프로젝트 경험을 공유합니다.</p>
+          </div>
+        </div>
+        <div class="tag-row" aria-label="연구 해시태그">
+          <span>#HCI</span>
+          <span>#최적화</span>
+          <span>#스타트업</span>
+        </div>
+        <dl class="mentor-meta">
+          <div>
+            <dt>전공</dt>
+            <dd>산업공학</dd>
+          </div>
+          <div>
+            <dt>연구실</dt>
+            <dd>인간중심시스템 연구실</dd>
+          </div>
+          <div>
+            <dt>면담 가능</dt>
+            <dd>화 13:00, 금 18:00</dd>
+          </div>
+        </dl>
+        <a class="detail-link" href="mentor-detail.html">프로필 상세 보기</a>
+      </article>
+
+      <input class="mentor-toggle" type="checkbox" id="mentor-jung">
+      <article class="mentor-card">
+        <div class="mentor-card-header">
+          <label class="select-mentor" for="mentor-jung" aria-label="정OO 멘토 선택">
+            <span class="check-icon" aria-hidden="true"></span>
+          </label>
+          <div>
+            <h2>정OO 멘토 <span>기계공학과 박사과정</span></h2>
+            <p>로보틱스 연구실 생활과 해외 학회 준비 경험을 알려드립니다.</p>
+          </div>
+        </div>
+        <div class="tag-row" aria-label="연구 해시태그">
+          <span>#로보틱스</span>
+          <span>#제어</span>
+          <span>#해외학회</span>
+        </div>
+        <dl class="mentor-meta">
+          <div>
+            <dt>전공</dt>
+            <dd>기계공학</dd>
+          </div>
+          <div>
+            <dt>연구실</dt>
+            <dd>지능로봇 연구실</dd>
+          </div>
+          <div>
+            <dt>면담 가능</dt>
+            <dd>월 16:00, 목 21:00</dd>
+          </div>
+        </dl>
+        <a class="detail-link" href="mentor-detail.html">프로필 상세 보기</a>
+      </article>
+
+      <p class="limit-warning">최대 3명까지 선택할 수 있습니다. 선택을 바꾸려면 체크 표시를 한 번 더 눌러 해제하세요.</p>
+    </section>
+  </main>
+
+  <footer class="apply-bar" aria-label="면담 신청">
+    <span>최대 3명의 멘토에게 면담을 신청할 수 있습니다.</span>
+    <a class="primary-action" href="questionnaire.html">여기서 면담 신청</a>
+  </footer>
+</body>
+</html>
