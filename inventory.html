@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>리락쿠마의 재고 탐색기</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+    <style>
+        body { background: #FFFDEB; padding: 30px; font-family: 'Poor Story', cursive; color: #5D4037; }
+        .card { 
+            background: white; padding: 30px; border-radius: 30px; max-width: 700px; margin: auto;
+            border: 4px solid #FFD700; box-shadow: 0 15px 0 #FFE082;
+        }
+        .header-area { display: flex; align-items: center; gap: 20px; margin-bottom: 30px; border-bottom: 3px dashed #BCAAA4; padding-bottom: 20px; }
+        .lab-master { width: 90px; border-radius: 50%; border: 3px solid #5D4037; padding: 5px; background: white; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; background: #FFFBF2; border-radius: 20px; overflow: hidden; }
+        th { background: #FFF3E0; padding: 15px; text-align: center; color: #5D4037; font-size: 1.3rem; }
+        td { padding: 15px; border-bottom: 1px solid #FFE082; text-align: center; font-size: 1.2rem; }
+        
+        .status-ok { color: #2e7d32; font-weight: bold; }
+        .status-no { color: #c62828; font-weight: bold; }
+        
+        .back-btn { display: inline-block; margin-top:30px; padding: 10px 20px; background: #5D4037; color: white; border-radius: 15px; text-decoration: none; font-size: 1.2rem;}
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header-area">
+            <img src="rilakkuma.png.jpg" class="lab-master" alt="연구소장">
+            <div>
+                <h1 style="margin:0;">📍 실시간 재고 탐색 엔진</h1>
+                <p style="margin:0; color:#8D6E63;">"주변 편의점에 재고가 있는지 내가 다 확인했어!"</p>
+            </div>
+        </div>
+
+        <table>
+            <tr><th>점포명</th><th>거리</th><th>상태</th></tr>
+            <tr><td>GS25 동탄점</td><td>500m</td><td><span class="status-ok">재고 있음(3)</span></td></tr>
+            <tr><td>CU 센트럴점</td><td>1.2km</td><td><span class="status-no">품절</span></td></tr>
+            <tr><td>세븐일레븐 역전점</td><td>2.1km</td><td><span class="status-ok">여유(12)</span></td></tr>
+        </table>
+
+        <div style="margin-top:30px; padding:20px; background:#f9f7f5; border-radius:15px; text-align:center;">
+            <p><strong>연구소장 팁:</strong><br>
+            "재고가 없는 곳은 헛걸음하지 않게 조심해! 리락쿠마가 확인한 정보는 10분마다 업데이트돼."</p>
+        </div>
+
+        <center><a href="index.html" class="back-btn">← 연구소 메인으로 돌아가기</a></center>
+    </div>
+</body>
+</html>

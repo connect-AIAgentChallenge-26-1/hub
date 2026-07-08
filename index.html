@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>리락쿠마의 스낵 연구소</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #FFFDEB; font-family: 'Poor Story', cursive; color: #5D4037; padding: 40px; }
+        .container { max-width: 800px; margin: auto; }
+        
+        .main-header { display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 40px; }
+        .main-header h1 { font-size: 2.5rem; color: #5D4037; margin: 0; }
+        .header-dango { width: 80px; border-radius: 50%; border: 3px solid #5D4037; padding: 5px; background: white; }
+        
+        .card { background: white; padding: 30px; border-radius: 40px; border: 4px solid #FFD700; box-shadow: 0 10px 0 #FFE082; margin-bottom: 25px; }
+        .grid-top { display: grid; grid-template-columns: 2fr 1fr; gap: 20px; }
+        .grid-bottom { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        
+        .menu-box { background: white; padding: 25px; border-radius: 30px; border: 3px solid #FFE082; text-align: center; text-decoration: none; color: #5D4037; transition: all 0.3s; }
+        .menu-box:hover { background: #FFE082; transform: scale(1.05); }
+        .menu-box img { width: 80px; margin-bottom: 10px; border-radius: 20px; border: 2px solid #FFD700; }
+        
+        .badge { background: #FF9800; padding: 5px 15px; border-radius: 20px; font-size: 0.9rem; color: #fff; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="main-header">
+        <img src="rila1.jpg" class="header-dango">
+        <h1>리락쿠마의 스낵 연구소</h1>
+    </div>
+
+    <div class="grid-top">
+        <div class="card">
+            <h2>✨ 오늘의 연구 결과</h2>
+            <div style="padding: 10px 0; border-bottom: 2px dashed #FFE082;">✔ 두바이 찰떡파이 <span class="badge">Hot</span></div>
+            <div style="padding: 10px 0; border-bottom: 2px dashed #FFE082;">✔ 오예스 우베라떼맛 <span class="badge">New</span></div>
+            <div style="padding: 10px 0;">✔ 후레쉬베리 펑리수 <span class="badge">Limited</span></div>
+        </div>
+        
+        <div class="card" style="text-align: center;">
+            <img src="rilakkuma.png.jpg" width="80" style="margin-bottom: 10px; border-radius: 50%; border: 3px solid #FFD700;">
+            <p><strong>데이터 분석 중</strong><br>찾았다! 맛있는 과자!</p>
+        </div>
+    </div>
+
+    <div class="grid-bottom">
+        <a href="nutrition.html" class="menu-box">
+            <img src="rila3.jpg"><p><strong>영양분석</strong></p>
+        </a>
+        <a href="inventory.html" class="menu-box">
+            <img src="rila4.jpg"><p><strong>재고탐색</strong></p>
+        </a>
+        <div class="menu-box">
+            <img src="rila5.jpg"><p><strong>출시예정</strong></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
