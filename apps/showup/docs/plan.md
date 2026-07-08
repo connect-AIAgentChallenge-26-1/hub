@@ -4,7 +4,15 @@
 
 - 프로젝트 기간: **2026-07-07 ~ 2026-07-30** (3주 + 2일)
 - 프론트엔드: **React** (Vite + TypeScript)
-- 진행 방식: **Hermes Agent 4세션** (프론트 / 백엔드 / 시큐리티 / 리드) — GLM 5.2 (Ollama)
+- 진행 방식: **Hermes Agent 4세션** (프론트 / 백엔드 / 시큐리티 / 리드)
+- 세션별 모델 (Ollama 연결):
+
+| 세션 | 모델 |
+|------|------|
+| **리드** | GLM 5.2 |
+| **프론트** | Kimi K2.7 Code |
+| **백엔드** | Kimi K2.7 Code |
+| **시큐리티** | GPT-OSS 120B |
 
 ---
 
@@ -266,14 +274,14 @@ Phase 1.5(통계 차트)·Phase 2(본인 조회/정정·삭제 요청/이의제�
 
 ## 10. Hermes Agent 세션 구조 (4 lanes)
 
-> **이관 배경**: Claude 구독 만료 + Codex 정지 이슈로 Ollama GLM 5.2를 Hermes Agent에 연결하여 기존 Conductor 기반 세션 구조를 Hermes Agent로 이관. 같은 default 프로필에서 채팅 세션 4개를 열어 역할별로 운영.
+> **이관 배경**: Claude 구독 만료 + Codex 정지 이슈로 Ollama 기반 모델들을 Hermes Agent에 연결하여 기존 Conductor 기반 세션 구조를 Hermes Agent로 이관. 같은 default 프로필에서 채팅 세션 4개를 열어 역할별로 운영.
 
-| 세션 | 소유 영역 | 책임 |
-|------|----------|------|
-| **리드** | 기획·통합·배포 | plan/checklist 관리, PR 리뷰·머지, 통합 QA, Hosting 배포, 발표 문서 |
-| **프론트** | `src/` UI 전부 | 페이지·컴포넌트·폼·라우팅·상태관리·모바일 QA |
-| **백엔드** | Firebase 설정·Functions | Firestore 모델, riskStats 갱신 Function, 시드 데이터, 인덱스 |
-| **시큐리티** | 규칙·개인정보 | Security Rules 작성·침투 테스트(에뮬레이터), 마스킹·삭제 검증, /privacy·/terms 문안 |
+| 세션 | 소유 영역 | 책임 | 모델 |
+|------|----------|------|------|
+| **리드** | 기획·통합·배포 | plan/checklist 관리, PR 리뷰·머지, 통합 QA, Hosting 배포, 발표 문서 | GLM 5.2 |
+| **프론트** | `src/` UI 전부 | 페이지·컴포넌트·폼·라우팅·상태관리·모바일 QA | Kimi K2.7 Code |
+| **백엔드** | Firebase 설정·Functions | Firestore 모델, riskStats 갱신 Function, 시드 데이터, 인덱스 | Kimi K2.7 Code |
+| **시큐리티** | 규칙·개인정보 | Security Rules 작성·침투 테스트(에뮬레이터), 마스킹·삭제 검증, /privacy·/terms 문안 | GPT-OSS 120B |
 
 **협업 규칙 (Git — challenge 구조 기준)**
 - 실제 작업 브랜치: **`N167_채민석` 단일 브랜치**
