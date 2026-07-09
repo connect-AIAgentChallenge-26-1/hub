@@ -17,7 +17,7 @@ LEAD는 직접 기능 구현을 많이 하기보다 FE, BE, 보안 세션이 같
 ## 공통 프로젝트 맥락
 
 - 서비스: 소상공인을 위한 노쇼·악성 고객 이력 관리 및 위험도 경고 웹서비스
-- 기간: 2026-07-07 ~ 2026-07-30
+- 기간: 2026-07-09 ~ 2026-07-30 (주 5일, 16영업일)
 - 프론트엔드: Vite + React + TypeScript + Tailwind CSS
 - 백엔드: Firebase Auth, Firestore, Cloud Functions, Hosting
 - 핵심 MVP:
