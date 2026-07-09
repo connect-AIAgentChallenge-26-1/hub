@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>스킬 검증 — 사장님 주간 리포트 (신규 화면)</title>
+<style>
+  /* ↓↓↓ 아래 값은 전부 SKILL.md의 "1. 색상 토큰" 섹션을 그대로 옮겨온 것. 새로 정하지 않음 */
+  :root{
+    --bg:#FBF7F0; --surface:#FFFFFF; --ink:#2B2622; --ink-soft:#6F6459; --line:#EAE1D4;
+    --brand:#3E6B4F; --brand-soft:#EAF1EB;
+    --owner:#7A5C9E; --owner-soft:#F0EBF5;
+    --accent:#C9683D; --accent-soft:#FBEBE2;
+    --mark:#E4322B;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+    background:var(--bg);color:var(--ink);display:flex;justify-content:center;padding:24px;line-height:1.5}
+  .phone{width:390px;background:var(--surface);border-radius:38px;
+    box-shadow:0 10px 40px rgba(43,38,34,.10), 0 0 0 10px #17130F, 0 0 0 12px #2B2622;
+    overflow:hidden}
+  .topbar{padding:26px 18px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:12px}
+  .topbar .icon{width:38px;height:38px;border-radius:12px;background:var(--owner-soft);
+    display:grid;place-items:center;font-size:16px}
+  .topbar b{font-size:16px;letter-spacing:-.02em;display:block}
+  .topbar small{font-size:11px;color:var(--ink-soft)}
+
+  .pad{padding:18px 16px 24px}
+  .eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--owner);font-weight:700}
+  .h1{font-size:21px;letter-spacing:-.02em;margin:6px 0 4px}
+  .sub{font-size:13px;color:var(--ink-soft);margin-bottom:18px}
+
+  /* 카드 — SKILL.md 3-3 규칙: 흰배경+옅은테두리+둥근모서리, 카테고리는 알약태그 */
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;
+    padding:16px;margin-bottom:14px;box-shadow:0 4px 16px rgba(43,38,34,.05)}
+  .tag{font-size:10.5px;font-weight:700;letter-spacing:.02em;display:inline-block;
+    padding:3px 9px;border-radius:99px;margin-bottom:9px}
+  .tag.gap{background:var(--accent-soft);color:var(--accent)}
+  .tag.voice{background:var(--owner-soft);color:var(--owner)}
+  .card h4{font-size:15px;letter-spacing:-.01em;margin-bottom:6px}
+  .card p{font-size:12.5px;color:var(--ink-soft)}
+  .count{font-size:11px;color:var(--ink-soft);margin-top:8px;display:flex;align-items:center;gap:5px}
+  .count b{color:var(--ink)}
+
+  /* 콜아웃 — SKILL.md 3-5 규칙 */
+  .callout{background:var(--owner-soft);border:1px solid #E3D7EF;border-radius:14px;
+    padding:12px 14px;font-size:12.5px;color:#4A3A63;margin-bottom:18px;display:flex;gap:9px}
+  .callout b{color:var(--owner)}
+
+  /* 긴급/대기 카드 — 3-3 규칙: accent-soft 톤으로 "이건 다르다" */
+  .card.gapcard{border-color:#EAD3C6;background:linear-gradient(0deg,var(--accent-soft),var(--surface))}
+
+  /* 행동 버튼 — SKILL.md 3-2 패턴: 정보만 주지 않고 다음 행동을 심는다 */
+  .actionbtn{margin-top:11px;width:100%;border:none;background:var(--owner);color:#fff;
+    border-radius:12px;padding:10px 13px;font-size:13px;font-weight:700;font-family:inherit;
+    cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="topbar">
+    <div class="icon">📊</div>
+    <div><b>첫날.</b><small>사장님 · 이번 주 리포트</small></div>
+  </div>
+  <div class="pad">
+    <div class="eyebrow">사장님용</div>
+    <h1 class="h1">이번 주 리포트</h1>
+    <p class="sub">알바생들이 자주 물은 질문과 익명 의견을 모았어요.</p>
+
+    <div class="callout">
+      <span>💬</span>
+      <span>개별 발언이 아니라 <b>여러 명 것을 묶어 익명 집계</b>했어요. 누가 말했는지는 알 수 없어요.</span>
+    </div>
+
+    <!-- 교육 공백 카드 -->
+    <div class="card gapcard">
+      <span class="tag gap">교육 공백 · 확인 필요</span>
+      <h4>포스기 전원 문제 대응</h4>
+      <p>지침서에 없어서 AI가 일반 답변으로 넘긴 질문이에요. 답을 채워주시면 다음부턴 정확히 안내해요.</p>
+      <div class="count">🙋 이번 주 <b>3명</b>이 물었어요</div>
+      <button class="actionbtn"><span>지금 답 채워주기</span><span>›</span></button>
+    </div>
+
+    <div class="card gapcard">
+      <span class="tag gap">교육 공백 · 확인 필요</span>
+      <h4>단골 손님 특이사항</h4>
+      <p>"자주 오시는 그 손님 얼음 빼달라는데 맞나요?" 같은 질문이 반복돼요.</p>
+      <div class="count">🙋 이번 주 <b>2명</b>이 물었어요</div>
+      <button class="actionbtn"><span>지금 답 채워주기</span><span>›</span></button>
+    </div>
+
+    <!-- 익명 의견 카드 -->
+    <div class="card">
+      <span class="tag voice">익명 의견 집계</span>
+      <h4>마감 시간대 인력 부족</h4>
+      <p>마감 30분 전부터 혼자 감당하기 벅차다는 의견이 여러 번 나왔어요. 스케줄 조정을 고려해보시면 좋을 것 같아요.</p>
+      <div class="count">💭 관련 언급 <b>4건</b></div>
+    </div>
+
+    <div class="card">
+      <span class="tag voice">익명 의견 집계</span>
+      <h4>휴게시간 안내 부족</h4>
+      <p>쉬는 시간을 언제 써야 하는지 헷갈린다는 의견이 있었어요.</p>
+      <div class="count">💭 관련 언급 <b>2건</b></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
