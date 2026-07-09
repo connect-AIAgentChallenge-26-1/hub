@@ -9,5 +9,9 @@
     "dev": "npm run dev -w intro",
     "build": "npm run build -w intro",
     "lint": "npm run lint -w intro"
+  },
+  "overrides": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0"
   }
 }
