@@ -3,7 +3,7 @@
 > 각 항목 = AI에게 내리는 작업 1단위. 덩어리가 크면 실패 — 잘게 유지.
 > 매 작업: Plan 모드 → 계획 검토 → 구현 → 검증 시나리오 실행 → 다음.
 > 브랜치: **`N167_채민석` 단일 작업 브랜치** (challenge 규칙). main 사용 금지, 원본 main PR 금지.
-> 세션 분리는 브랜치가 아니라 역할 분리. **Hermes Agent가 commit, push, PR을 직접 수행** — 사용자가 명시적으로 요청하면 세션에서 실행.
+> **커밋은 각 세션에서 하나의 작업이 끝날 때마다 자동 수행** — push와 PR은 사용자가 명시적으로 지시할 때만 실행. **커밋 메시지 규칙**: 세션별 접두어 — `FE-` / `BE-` / `SEC-` / `LEAD-`.
 > 세션별 모델: 🟨 리드·GLM 5.2 / 🟦 프론트엔드·Qwen 3.5 / 🟩 백엔드·Kimi K2.7 Code / 🟥 보안·GPT-OSS 120B
 > 기간: 2026-07-07 ~ 2026-07-30
 
@@ -12,31 +12,31 @@
 ## Week 1 (7/07–7/13) — 기반
 
 ### 🟦 프론트엔드
-- [ ] Vite + React + TS + Tailwind 프로젝트 세팅 (`@` 경로 별칭 포함)
-- [ ] 라우터 골격: 라우트 9개 + ProtectedRoute
-- [ ] 레이아웃: 하단 네비(모바일 4탭) / 사이드바(PC)
-- [ ] 로그인 폼 (RHF + Zod)
-- [ ] 회원가입 폼: 가게 이름 + 이메일/비번 + 개인정보 동의 체크박스
-- [ ] 공통 컴포넌트: Button, Input, Modal, Toast 연결(sonner)
+- [x] Vite + React + TS + Tailwind 프로젝트 세팅 (`@` 경로 별칭 포함)
+- [x] 라우터 골격: 라우트 9개 + ProtectedRoute
+- [x] 레이아웃: 하단 네비(모바일 4탭) / 사이드바(PC)
+- [ ] 로그인 폼 (RHF + Zod) — 페이지 생성, RHF+Zod 적용 미완료
+- [ ] 회원가입 폼: 가게 이름 + 이메일/비번 + 개인정보 동의 체크박스 — 페이지 생성, 폼 검증 미완료
+- [x] 공통 컴포넌트: Button, Input, Modal, Toast 연결(sonner)
 
 ### 🟩 백엔드
-- [ ] Firebase 프로젝트 생성, Auth(이메일) 활성화
-- [ ] `types/schema.ts` 확정 (Store, Customer, Reservation, Incident, RiskStats) → **전 세션 공유 인터페이스, 최우선**
-- [ ] Firestore 컬렉션 구조 생성 + 복합 인덱스 (phoneLast4, date)
-- [ ] 회원가입 시 stores 문서 생성 플로우
-- [ ] 시드 데이터 스크립트 (고객 10명, 예약 30건, 사건 5건 — 프론트엔드 mock용)
+- [ ] Firebase 프로젝트 생성, Auth(이메일) 활성화 — 관리자 직접 수행 필요
+- [x] `types/schema.ts` 확정 (Store, Customer, Reservation, Incident, RiskStats) → **전 세션 공유 인터페이스, 최우선**
+- [x] Firestore 컬렉션 구조 생성 + 복합 인덱스 (phoneLast4, date)
+- [ ] 회원가입 시 stores 문서 생성 플로우 — createStore 함수 있으나 Auth 연동 미완료
+- [x] 시드 데이터 스크립트 (고객 10명, 예약 30건, 사건 5건 — 프론트엔드 mock용)
 
 ### 🟥 보안
-- [ ] Firestore Security Rules 초안: 가게 격리 (ownerUid 검증)
-- [ ] Firebase 에뮬레이터 셋업 + 규칙 테스트 환경
-- [ ] 침투 테스트 1차: 타 가게 storeId로 read/write 시도 → 전부 거부 확인
-- [ ] /privacy, /terms 법적 문안 작성 (사건 기록 관련 조항 포함)
+- [x] Firestore Security Rules 초안: 가게 격리 (ownerUid 검증)
+- [x] Firebase 에뮬레이터 셋업 + 규칙 테스트 환경
+- [ ] 침투 테스트 1차: 타 가게 storeId로 read/write 시도 → 전부 거부 확인 — 계획서만 있음, 실행 필요
+- [x] /privacy, /terms 법적 문안 작성 (사건 기록 관련 조항 포함)
 
 ### 🟨 리드
-- [ ] fork/브랜치 확인: `N167_채민석` 단일 작업 브랜치, PR 대상(`connect-AIAgentChallenge-26-1/hub:N167_채민석`) 확인
-- [ ] 이 plan.md/checklist.md를 repo docs/에 반영
-- [ ] 세션별 작업 할당 확인, 일일 진행 체크
-- [ ] Week 1 말 통합: 회원가입→로그인→빈 대시보드 E2E 확인
+- [x] fork/브랜치 확인: `N167_채민석` 단일 작업 브랜치, PR 대상(`connect-AIAgentChallenge-26-1/hub:N167_채민석`) 확인
+- [x] 이 plan.md/checklist.md를 repo docs/에 반영
+- [ ] 세션별 작업 할당 확인, 일일 진행 체크 — 1일차 점검 완료, 2일차부터 매일 체크
+- [ ] Week 1 말 통합: 회원가입→로그인→빈 대시보드 E2E 확인 — 7/13 예정
 
 ---
 
