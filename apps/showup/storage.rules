@@ -1,0 +1,7 @@
+// All the rules for Firebase Storage (but no bucket used yet). Keeping as placeholder for future media uploads.
+service firebase.storage {
+  match /​b​{bucket}/​{allPaths=**} {
+    allow read: if request.auth != null;
+    allow write: if false;  // no write allowed until a bucket is configured
+  }
+}
