@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "typecheck": "tsc -b",
     "verify:risk": "tsx src/utils/risk.test.ts",
-    "verify:phone": "tsx src/utils/phone.test.ts"
+    "verify:phone": "tsx src/utils/phone.test.ts",
+    "verify:seed": "tsx src/seeds/seed.test.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
