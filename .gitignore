@@ -23,3 +23,12 @@ dist-ssr
 *.sln
 *.sw?
 .omc/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# TypeScript build output (don't commit .js next to .tsx)
+apps/showup/src/**/*.js
+!apps/showup/src/config/**/*.js
