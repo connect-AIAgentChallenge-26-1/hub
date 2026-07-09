@@ -1,0 +1,14 @@
+// Firestore Security Rules - ShowUp Security Session (Day 1)
+// Owner UID based store isolation and field validation
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Store level isolation: only owner can read/write the store document
+    match /stores/{storeId} {
+      allow read, write: if request.auth != null && resource.data.ownerUid == request.auth.uid;
+      // Sub-collections under a store
+      match /{document=**} {
+        allow read, write: if request.auth != null && get(/databases/$(database)/documents/stores/$(storeId)).data.ownerUid == request.auth.uid;
+      }
+    }
+  }
+}
