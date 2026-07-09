@@ -10,8 +10,8 @@ Cloud Functions, 시드 데이터, 위험도 계산 로직을 담당한다.
 
 - **AI 에이전트**: Hermes Agent (by Nous Research)
 - **모델**: Kimi K2.7 Code (Ollama 연결)
-- **운영 방식**: 같은 default 프로필에서 채팅 세션 4개(LEAD/FE/BE/SECURITY)를 열어 역할별로 운영
-- 세션별 모델: LEAD·GLM 5.2 / FE·Qwen 3.5 / BE·Kimi K2.7 Code / SECURITY·GPT-OSS 120B
+- **운영 방식**: 같은 default 프로필에서 채팅 세션 4개(리드/프론트엔드/백엔드/보안)를 열어 역할별로 운영
+- 세션별 모델: LEAD·GLM 5.2 / FE·Qwen 3.5 / BE·Kimi K2.7 Code / 보안·GPT-OSS 120B
 
 ## 공통 프로젝트 맥락
 
@@ -28,7 +28,12 @@ Cloud Functions, 시드 데이터, 위험도 계산 로직을 담당한다.
 - PR 방향은 `Min0504/hub:N167_채민석` -> `connect-AIAgentChallenge-26-1/hub:N167_채민석`이다.
 - Hermes Agent 세션은 git 브랜치 분리가 아니라 역할 분리로 사용한다.
 - 임의로 feature 브랜치를 만들지 않는다.
-- **Hermes Agent가 commit, push, PR을 직접 수행할 수 있다** — 사용자가 명시적으로 요청하면 세션에서 실행한다.
+- **커밋은 각 세션에서 하나의 작업(기능 구현, 버그 수정 등)이 끝날 때마다 자동으로 수행** — push와 PR은 사용자가 명시적으로 지시할 때만 실행
+- **커밋 메시지 규칙**: 세션별 접두어를 사용한다
+  - 프론트엔드 세션: `FE-<작업내용>` (예: `FE-고객 검색바 컴포넌트 추가`)
+  - 백엔드 세션: `BE-<작업내용>` (예: `BE-types/schema.ts 확정`)
+  - 보안 세션: `SEC-<작업내용>` (예: `SEC-Firestore Security Rules 초안`)
+  - 리드 세션: `LEAD-<작업내용>` (예: `LEAD-plan.md 일정 수정`)
 - merge, branch delete는 사용자가 명시적으로 요청한 경우에만 진행한다.
 - `.omc/`, `.DS_Store`, `node_modules/`, `dist/`, `.env`는 커밋하지 않는다.
 
@@ -38,7 +43,7 @@ Cloud Functions, 시드 데이터, 위험도 계산 로직을 담당한다.
 - `apps/showup/src/lib/firebase.ts`
 - `apps/showup/src/services/`
 - `apps/showup/src/utils/risk.ts`
-- `apps/showup/src/utils/phone.ts` — 구현 소유는 BE, 마스킹 누락 검증은 SECURITY
+- `apps/showup/src/utils/phone.ts` — 구현 소유는 BE, 마스킹 누락 검증은 보안
 - `apps/showup/functions/`
 - `apps/showup/firebase.json`
 - `apps/showup/firestore.indexes.json`
@@ -59,7 +64,7 @@ Cloud Functions, 시드 데이터, 위험도 계산 로직을 담당한다.
 
 ## 건드리면 안 되는 것
 
-- Firestore Security Rules 최종 정책을 SECURITY와 협의 없이 변경하지 않는다.
+- Firestore Security Rules 최종 정책을 보안과 협의 없이 변경하지 않는다.
 - FE 화면을 임의로 대규모 수정하지 않는다.
 - 실제 `.env` 값을 작성하지 않는다.
 - Express `server/` 구조를 만들지 않는다.
@@ -133,7 +138,7 @@ noShowCount >= 3 || incidentCounts.abuse >= 1
 
 - reservation status가 `visited`, `noShow`, `cancelled`로 변경될 때 riskStats 재계산
 - incident가 생성, 수정, 삭제될 때 riskStats 재계산
-- 고객 삭제 시 관련 예약과 사건 처리 정책을 SECURITY와 함께 확인
+- 고객 삭제 시 관련 예약과 사건 처리 정책을 보안과 함께 확인
 
 MVP 초기에 Cloud Function 구현이 부담되면 `src/utils/risk.ts` 순수 함수를 먼저 만들고,
 이벤트 기록 시점에 같은 함수를 사용해 riskStats를 갱신한다. 계산 로직은 한 곳에만 둔다.
@@ -153,7 +158,7 @@ MVP 초기에 Cloud Function 구현이 부담되면 `src/utils/risk.ts` 순수 �
 
 ## 완료 기준
 
-- FE와 SECURITY가 공유할 타입이 명확하다.
+- FE와 보안이 공유할 타입이 명확하다.
 - Firestore 경로가 기획서와 일치한다.
 - `phoneLast4` 검색이 가능하다.
 - 원본 phone과 마스킹 phone의 용도가 분리된다.

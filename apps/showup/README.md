@@ -25,10 +25,10 @@
 
 ## 기술 스택
 
-- Frontend: Vite + React + TypeScript + Tailwind CSS
+- 프론트엔드: Vite + React + TypeScript + Tailwind CSS
 - 상태 관리: TanStack Query(서버 상태) + Zustand(UI 상태)
 - 폼: React Hook Form + Zod
-- Backend: Firebase (Auth / Firestore / Cloud Functions / Hosting)
+- 백엔드: Firebase (Auth / Firestore / Cloud Functions / Hosting)
 
 ## 문서
 

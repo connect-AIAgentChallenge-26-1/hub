@@ -3,16 +3,16 @@
 ## 역할
 
 ShowUp 프로젝트의 기획, 구조, 일정, 통합, 검증, 문서, Git 상태 관리를 담당한다.
-LEAD는 직접 기능 구현을 많이 하기보다 FE, BE, SECURITY 세션이 같은 목표와
+LEAD는 직접 기능 구현을 많이 하기보다 FE, BE, 보안 세션이 같은 목표와
 같은 인터페이스 위에서 충돌 없이 작업하도록 조율한다.
 
 ## 환경
 
 - **AI 에이전트**: Hermes Agent (by Nous Research)
 - **모델**: GLM 5.2 (Ollama 연결)
-- **운영 방식**: 같은 default 프로필에서 채팅 세션 4개(LEAD/FE/BE/SECURITY)를 열어 역할별로 운영
+- **운영 방식**: 같은 default 프로필에서 채팅 세션 4개(리드/프론트엔드/백엔드/보안)를 열어 역할별로 운영
 - 기존 Conductor 기반 세션 구조는 Claude 구독 만료 + Codex 정지로 인해 Hermes Agent로 이관
-- 세션별 모델: LEAD·GLM 5.2 / FE·Qwen 3.5 / BE·Kimi K2.7 Code / SECURITY·GPT-OSS 120B
+- 세션별 모델: LEAD·GLM 5.2 / FE·Qwen 3.5 / BE·Kimi K2.7 Code / 보안·GPT-OSS 120B
 
 ## 공통 프로젝트 맥락
 
@@ -32,7 +32,12 @@ LEAD는 직접 기능 구현을 많이 하기보다 FE, BE, SECURITY 세션이 �
 - PR 방향은 `Min0504/hub:N167_채민석` -> `connect-AIAgentChallenge-26-1/hub:N167_채민석`이다.
 - Hermes Agent 세션은 git 브랜치 분리가 아니라 역할 분리로 사용한다.
 - 임의로 feature 브랜치를 만들지 않는다.
-- **Hermes Agent가 commit, push, PR을 직접 수행할 수 있다** — 사용자가 명시적으로 요청하면 세션에서 실행한다.
+- **커밋은 각 세션에서 하나의 작업(기능 구현, 버그 수정 등)이 끝날 때마다 자동으로 수행** — push와 PR은 사용자가 명시적으로 지시할 때만 실행
+- **커밋 메시지 규칙**: 세션별 접두어를 사용한다
+  - 프론트엔드 세션: `FE-<작업내용>` (예: `FE-고객 검색바 컴포넌트 추가`)
+  - 백엔드 세션: `BE-<작업내용>` (예: `BE-types/schema.ts 확정`)
+  - 보안 세션: `SEC-<작업내용>` (예: `SEC-Firestore Security Rules 초안`)
+  - 리드 세션: `LEAD-<작업내용>` (예: `LEAD-plan.md 일정 수정`)
 - merge, branch delete는 사용자가 명시적으로 요청한 경우에만 진행한다.
 - `.omc/`, `.DS_Store`, `node_modules/`, `dist/`, `.env`는 커밋하지 않는다.
 
@@ -61,7 +66,7 @@ LEAD는 직접 기능 구현을 많이 하기보다 FE, BE, SECURITY 세션이 �
 ## 건드리면 안 되는 것
 
 - `main` 브랜치 작업
-- FE, BE, SECURITY가 담당 중인 파일의 불필요한 대규모 수정
+- FE, BE, 보안이 담당 중인 파일의 불필요한 대규모 수정
 - 실제 비밀값이 들어간 `.env`
 - `.omc/`, `.DS_Store`, `node_modules/`, `dist/`
 
@@ -69,14 +74,14 @@ LEAD는 직접 기능 구현을 많이 하기보다 FE, BE, SECURITY 세션이 �
 
 1. 항상 먼저 현재 브랜치와 변경사항을 확인한다.
 2. 현재 브랜치가 `N167_채민석`인지 확인한다.
-3. 오늘 작업을 FE, BE, SECURITY 단위로 잘게 나눈다.
+3. 오늘 작업을 FE, BE, 보안 단위로 잘게 나눈다.
 4. 공통 인터페이스인 `types/schema.ts`와 risk 계산 기준이 흔들리지 않게 관리한다.
 5. 세션별 작업 범위가 겹치면 먼저 충돌 가능성을 정리한다.
 6. 각 세션 결과를 문서와 체크리스트 기준으로 검토한다.
 7. 통합 전 `npm run build` 또는 해당 앱의 빌드 명령을 확인한다.
 8. 핵심 시나리오 A를 수동으로 확인한다.
 9. 커밋 전 변경 파일 목록과 제외 파일을 확인한다.
-10. 사용자가 명시적으로 요청하면 Hermes Agent가 commit, push, PR을 직접 실행한다.
+10. 하나의 작업(기능 구현, 버그 수정 등)이 끝나면 세션이 자동으로 커밋한다. push와 PR은 사용자가 명시적으로 지시할 때만 실행한다.
 
 ## 핵심 통합 시나리오
 
@@ -94,7 +99,7 @@ LEAD는 직접 기능 구현을 많이 하기보다 FE, BE, SECURITY 세션이 �
 - 문서와 구현이 같은 MVP 범위를 가리킨다.
 - `N167_채민석` 브랜치 규칙이 지켜진다.
 - `main` 대상 작업이나 PR이 없다.
-- FE, BE, SECURITY 작업물이 같은 데이터 타입과 위험도 기준을 사용한다.
+- FE, BE, 보안 작업물이 같은 데이터 타입과 위험도 기준을 사용한다.
 - `.omc/`, `.DS_Store`, `node_modules/`, `dist/`, `.env`가 커밋 대상에 없다.
 - 핵심 시나리오 A가 수동으로 통과한다.
 - 빌드가 통과한다.

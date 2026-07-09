@@ -10,8 +10,8 @@ ShowUp의 개인정보 보호, Firestore Security Rules, 입력 검증, 전화�
 
 - **AI 에이전트**: Hermes Agent (by Nous Research)
 - **모델**: GPT-OSS 120B (Ollama 연결)
-- **운영 방식**: 같은 default 프로필에서 채팅 세션 4개(LEAD/FE/BE/SECURITY)를 열어 역할별로 운영
-- 세션별 모델: LEAD·GLM 5.2 / FE·Qwen 3.5 / BE·Kimi K2.7 Code / SECURITY·GPT-OSS 120B
+- **운영 방식**: 같은 default 프로필에서 채팅 세션 4개(리드/프론트엔드/백엔드/보안)를 열어 역할별로 운영
+- 세션별 모델: LEAD·GLM 5.2 / FE·Qwen 3.5 / BE·Kimi K2.7 Code / 보안·GPT-OSS 120B
 
 ## 공통 프로젝트 맥락
 
@@ -31,7 +31,12 @@ ShowUp의 개인정보 보호, Firestore Security Rules, 입력 검증, 전화�
 - PR 방향은 `Min0504/hub:N167_채민석` -> `connect-AIAgentChallenge-26-1/hub:N167_채민석`이다.
 - Hermes Agent 세션은 git 브랜치 분리가 아니라 역할 분리로 사용한다.
 - 임의로 feature 브랜치를 만들지 않는다.
-- **Hermes Agent가 commit, push, PR을 직접 수행할 수 있다** — 사용자가 명시적으로 요청하면 세션에서 실행한다.
+- **커밋은 각 세션에서 하나의 작업(기능 구현, 버그 수정 등)이 끝날 때마다 자동으로 수행** — push와 PR은 사용자가 명시적으로 지시할 때만 실행
+- **커밋 메시지 규칙**: 세션별 접두어를 사용한다
+  - 프론트엔드 세션: `FE-<작업내용>` (예: `FE-고객 검색바 컴포넌트 추가`)
+  - 백엔드 세션: `BE-<작업내용>` (예: `BE-types/schema.ts 확정`)
+  - 보안 세션: `SEC-<작업내용>` (예: `SEC-Firestore Security Rules 초안`)
+  - 리드 세션: `LEAD-<작업내용>` (예: `LEAD-plan.md 일정 수정`)
 - merge, branch delete는 사용자가 명시적으로 요청한 경우에만 진행한다.
 - `.omc/`, `.DS_Store`, `node_modules/`, `dist/`, `.env`는 커밋하지 않는다.
 
@@ -46,7 +51,7 @@ ShowUp의 개인정보 보호, Firestore Security Rules, 입력 검증, 전화�
 - `apps/showup/.env.example`
 - 보안 테스트 문서
 
-> `src/utils/phone.ts` 구현은 BE 소유. SECURITY는 마스킹 누락·오동작을 **검증**만 한다 (수정 필요 시 BE에 요청).
+> `src/utils/phone.ts` 구현은 BE 소유. 보안은 마스킹 누락·오동작을 **검증**만 한다 (수정 필요 시 BE에 요청).
 
 ## 건드려도 되는 것
 

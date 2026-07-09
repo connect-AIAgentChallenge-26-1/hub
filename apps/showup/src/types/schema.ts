@@ -1,5 +1,5 @@
 // ShowUp Firestore 스키마 타입
-// BE/FE/SECURITY 세션이 공유하는 인터페이스.
+// BE/FE/보안 세션이 공유하는 인터페이스.
 // Firestore Timestamp 는 서버 시간 기준으로 생성/갱신되며,
 // 클라이언트에서 Date 로 입출력할 때는 변환 레이어를 거친다.
 // 쓰기 시 serverTimestamp() 등 FieldValue 를 허용하기 위해 Timestamp | FieldValue 로 정의.
