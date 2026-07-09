@@ -2,8 +2,11 @@
 // BE/FE/SECURITY 세션이 공유하는 인터페이스.
 // Firestore Timestamp 는 서버 시간 기준으로 생성/갱신되며,
 // 클라이언트에서 Date 로 입출력할 때는 변환 레이어를 거친다.
+// 쓰기 시 serverTimestamp() 등 FieldValue 를 허용하기 위해 Timestamp | FieldValue 로 정의.
 
-import type { Timestamp } from 'firebase/firestore';
+import type { FieldValue, Timestamp } from 'firebase/firestore';
+
+export type FirestoreTimestamp = Timestamp | FieldValue;
 
 export type ReservationStatus =
   | 'pending'
@@ -18,7 +21,7 @@ export interface Store {
   ownerUid: string;
   name: string;
   category: string;
-  createdAt: Timestamp;
+  createdAt: FirestoreTimestamp;
 }
 
 export interface IncidentCounts {
@@ -34,8 +37,8 @@ export interface RiskStats {
   lateCancelCount: number;
   incidentCounts: IncidentCounts;
   score: number;
-  lastNoShowAt: Timestamp | null;
-  updatedAt: Timestamp;
+  lastNoShowAt: FirestoreTimestamp | null;
+  updatedAt: FirestoreTimestamp;
 }
 
 export interface Customer {
@@ -44,7 +47,7 @@ export interface Customer {
   phone: string;
   // 검색용 식별자. 항상 마지막 4자리 숫자.
   phoneLast4: string;
-  createdAt: Timestamp;
+  createdAt: FirestoreTimestamp;
   riskStats: RiskStats;
 }
 
@@ -58,7 +61,7 @@ export interface Reservation {
   // status === 'cancelled' 일 때만 의미 있음. 당일 취소면 true.
   cancelledSameDay: boolean;
   memo: string;
-  createdAt: Timestamp;
+  createdAt: FirestoreTimestamp;
 }
 
 export interface Incident {
@@ -66,8 +69,8 @@ export interface Incident {
   type: IncidentType;
   // 사실 기록용 짧은 메모
   memo: string;
-  occurredAt: Timestamp;
-  createdAt: Timestamp;
+  occurredAt: FirestoreTimestamp;
+  createdAt: FirestoreTimestamp;
 }
 
 // 파생 타입 — FE 에서 화면 표시용으로 계산
