@@ -1,4 +1,4 @@
-# ShowUp 작업 체크리스트 (Hermes Agent 4세션 분배)
+# ShowUp 작업 체크리스트 (Hermes Agent 프레임워크 + Ollama Pro 모델 4세션 분배)
 
 > 각 항목 = AI에게 내리는 작업 1단위. 덩어리가 크면 실패 — 잘게 유지.
 > 매 작업: Plan 모드 → 계획 검토 → 구현 → 검증 시나리오 실행 → 다음.
@@ -20,7 +20,7 @@
 
 ### 🟦 프론트엔드
 - [x] Vite + React + TS + Tailwind 프로젝트 세팅 (`@` 경로 별칭 포함)
-- [x] 라우터 골격: 라우트 9개 + ProtectedRoute
+- [ ] 라우터 골격: MVP 라우트 9개 (필수 7 + 문서 2) + ProtectedRoute
 - [x] 레이아웃: 하단 네비(모바일 4탭) / 사이드바(PC)
 - [x] 공통 컴포넌트: Button, Input, Modal, Toast 연결(sonner)
 

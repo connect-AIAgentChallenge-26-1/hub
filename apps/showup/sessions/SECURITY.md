@@ -1,4 +1,4 @@
-# ShowUp SECURITY Session (Hermes Agent)
+# ShowUp SECURITY Session (Hermes Agent 프레임워크 + Ollama Pro 모델)
 
 ## 역할
 
@@ -8,7 +8,7 @@ ShowUp의 개인정보 보호, Firestore Security Rules, 입력 검증, 전화�
 
 ## 환경
 
-- **AI 에이전트**: Hermes Agent (by Nous Research)
+- **AI 에이전트 프레임워크**: Hermes Agent (by Nous Research) + Ollama Pro 모델
 - **모델**: GPT-OSS 120B (Ollama 연결)
 - **운영 방식**: 같은 default 프로필에서 채팅 세션 4개(리드/프론트엔드/백엔드/보안)를 열어 역할별로 운영
 - 세션별 모델: LEAD·GLM 5.2 / FE·Qwen 3.5 / BE·Kimi K2.7 Code / 보안·GPT-OSS 120B
@@ -29,7 +29,7 @@ ShowUp의 개인정보 보호, Firestore Security Rules, 입력 검증, 전화�
 - `main`에서 작업하지 않는다.
 - 원본 repo의 `main`으로 PR을 보내지 않는다.
 - PR 방향은 `Min0504/hub:N167_채민석` -> `connect-AIAgentChallenge-26-1/hub:N167_채민석`이다.
-- Hermes Agent 세션은 git 브랜치 분리가 아니라 역할 분리로 사용한다.
+- Hermes Agent 프레임워크 + Ollama Pro 모델 세션은 git 브랜치 분리가 아니라 역할 분리로 사용한다.
 - 임의로 feature 브랜치를 만들지 않는다.
 - **커밋은 각 세션에서 하나의 작업(기능 구현, 버그 수정 등)이 끝날 때마다 자동으로 수행** — push와 PR은 사용자가 명시적으로 지시할 때만 실행
 - **커밋 메시지 규칙**: 세션별 접두어를 사용한다
