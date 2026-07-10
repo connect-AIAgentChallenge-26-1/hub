@@ -2,8 +2,8 @@
 
 ## Metadata
 
-- ID:
-- 날짜:
+- ID: VER-YYYYMMDD-NNN
+- 날짜: YYYY-MM-DD
 - 적용자:
 - 변경 타입: create | update | delete
 - 대상 문서:

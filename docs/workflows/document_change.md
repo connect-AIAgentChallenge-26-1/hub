@@ -21,11 +21,13 @@
 
 1. 사용자 요청에서 대상 주제, 문서 타입 후보, 요청 동사를 파악한다.
 2. `docs/workflows/project_search.md` 기준으로 관련 문서를 검색한다.
-3. 검색 결과를 확정 문서, 승인 큐, 임시 아이디어, 결정 로그, 버전 기록으로 구분한다.
+3. 검색 결과를 Document Plan, 확정 문서, 승인 큐, 원본 자료, 임시 아이디어,
+   결정 로그, 버전 기록으로 구분한다.
 4. 기존 확정 문서에 반영하는 것이 자연스러운지, 새 문서가 필요한지 판정한다.
 5. 아래 Branch Rules 중 하나를 선택한다.
 6. 승인 전에는 `workspace/design/`을 수정하지 않는다.
 7. 생성, 수정, 기획서화 결과물은 승인 큐 항목 초안으로 작성한다.
+8. 문서 타입은 `docs/skills/document_type_selection.md` 기준으로 선택한다.
 
 ## Branch Rules
 
@@ -39,9 +41,9 @@
 
 처리:
 
-- `docs/templates/design_doc.md` 또는 문서 타입별 템플릿을 따른다.
-- 누락 정보는 `TBD`로 남긴다.
-- 승인 큐 항목 초안으로 만든다.
+- `docs/templates/design/`의 전문 template 또는 `docs/templates/design_doc.md` fallback을 따른다.
+- unanswered 필드는 먼저 질문하고 사용자가 확인한 경우만 `TBD` 또는 `N/A - 사유`로 기록한다.
+- readiness gate를 통과한 경우만 승인 큐 항목 초안으로 만든다.
 
 ### update_existing_document
 
@@ -82,9 +84,10 @@
 처리:
 
 - `docs/workflows/write_design_doc.md`를 하위 workflow로 따른다.
+- 등록된 source 자료를 지정했다면 `docs/workflows/material_to_design.md`를 함께 따른다.
 - 기존 자료에 있는 내용만 확정 정보처럼 사용한다.
-- 부족한 항목은 `TBD`로 둔다.
-- 승인 큐 항목 초안으로 만든다.
+- 부족한 항목은 먼저 질문하고 사용자가 확인한 경우만 `TBD` 또는 `N/A - 사유`로 기록한다.
+- readiness gate를 통과한 경우만 승인 큐 항목 초안으로 만든다.
 
 ### ask_for_clarification
 
@@ -117,3 +120,5 @@
 - 관련 문서가 있다고 해서 무조건 수정하지 않는다. 독립 주제면 신규 문서 후보로 둔다.
 - 관련 문서가 없다고 해서 무조건 신규 문서를 만들지 않는다. 정보가 부족하면 질문한다.
 - 승인 큐, 임시 아이디어, 결정 로그는 확정 문서와 구분한다.
+- Document Plan은 가이드이며 계획 밖 문서 요청을 차단하지 않는다.
+- 원본 자료 등록만으로 기획서를 자동 생성하지 않는다.

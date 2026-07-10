@@ -5,3 +5,5 @@
 ## Ideas
 
 아직 등록된 아이디어가 없다.
+
+새 항목은 `docs/templates/temporary_idea.md` 형식을 사용한다.

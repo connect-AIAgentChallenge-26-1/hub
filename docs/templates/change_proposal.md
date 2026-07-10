@@ -23,7 +23,15 @@
 
 - 충돌 가능성:
 - 영향 범위:
+- confidence:
 - 확인 필요:
+
+## Recommendation
+
+- 제안:
+- 근거:
+- 장점:
+- 단점:
 
 ## Missing Information
 

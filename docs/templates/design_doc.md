@@ -3,6 +3,8 @@
 ## Metadata
 
 - 문서 타입:
+- template: generic_fallback
+- 전문 template 미사용 이유:
 - 상태: draft | confirmed
 - 관련 문서:
 - 마지막 변경:
@@ -31,4 +33,8 @@
 
 ## Sources
 
-- 경로:
+- 파일 경로:
+- 근거 위치:
+- 확정 상태: confirmed | pending | material | temporary
+
+이 template은 9종 전문 타입에 자연스럽게 맞지 않는 장르 고유 기획에만 사용한다.
