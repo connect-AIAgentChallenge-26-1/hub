@@ -1,3 +1,33 @@
+# fiTArchive Prototype
+
+데일리룩 사진과 짧은 메모를 함께 기록하는 패션 아카이브 서비스 프로토타입입니다.
+
+## 프로토타입 실행 방법
+
+```bash
+npm install
+npm run dev
+```
+
+## 프로토타입 주요 기능
+
+- 홈 화면의 월별 달력 UI
+- 기록이 있는 날짜의 컬러 표시
+- 데일리룩 사진 업로드 UI
+- look name, memo 입력
+- AI color 자동 감지 UI
+- 색상 추가, 삭제, 수정
+- 기존 기록 수정
+- FitCheck 리포트 화면
+
+## 검증
+
+```bash
+npm run build
+```
+
+---
+
 # fiTArchive
 
 ## 문서
