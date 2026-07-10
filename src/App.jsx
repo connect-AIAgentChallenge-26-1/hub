@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import "./App.css";
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -135,8 +135,8 @@ function App() {
     <main className="app-shell">
       <section className="topbar">
         <div>
-          <p className="eyebrow">AI 자취 식단 추천</p>
-          <h1>집에 있는 재료를 정리하고 오늘의 식단을 추천받아요</h1>
+          <p className="eyebrow">오늘의 냉장고</p>
+          <h1>집에 있는 재료를 정리하고 따뜻한 한 끼를 추천받아요</h1>
         </div>
         <div className="status-card"><span>오늘 우선 소비</span><strong>{urgentCount}개</strong></div>
       </section>
@@ -155,7 +155,7 @@ function App() {
 
 function FridgeWorkspace({ ingredients, visibleIngredients, activeStorage, setActiveStorage, urgentCount, isFormOpen, setIsFormOpen, editingIngredientId, formValues, handleFormChange, handleSubmitIngredient, resetForm, editIngredient, deleteIngredient, message }) {
   return <section className="workspace-panel ingredient-panel">
-    <div className="workspace-header"><div><p className="eyebrow">Step 1</p><h2>우리집 재료 워크스페이스</h2><p>냉장고, 냉동실, 실온 보관 재료를 한 곳에 추가하고 소비 임박 재료를 먼저 확인하세요.</p></div><button className={`add-toggle ${isFormOpen ? "active" : ""}`} type="button" aria-expanded={isFormOpen} onClick={() => editingIngredientId ? resetForm(false) : setIsFormOpen(!isFormOpen)}>{isFormOpen ? "입력 닫기" : "+ 재료 추가"}</button></div>
+    <div className="workspace-header"><div><p className="eyebrow">Step 1</p><h2>내 냉장고 워크스페이스</h2><p>냉장고, 냉동실, 실온 보관 재료를 한 곳에 추가하고 소비 임박 재료를 먼저 확인하세요.</p></div><button className={`add-toggle ${isFormOpen ? "active" : ""}`} type="button" aria-expanded={isFormOpen} onClick={() => editingIngredientId ? resetForm(false) : setIsFormOpen(!isFormOpen)}>{isFormOpen ? "입력 닫기" : "+ 재료 추가"}</button></div>
     <div className="workspace-summary"><div className="summary-card"><span>전체 재료</span><strong>{ingredients.length}개</strong></div><div className="summary-card urgent-summary"><span>임박 재료</span><strong>{urgentCount}개</strong></div><div className="summary-card recommendation-summary"><span>오늘 추천 기준</span><strong>{urgentCount > 0 ? "임박 재료 우선" : "종합 추천"}</strong></div></div>
     <nav className="storage-tabs" aria-label="보관 위치 필터">{Object.entries(storageLabels).map(([id, label]) => <button key={id} type="button" className={`storage-tab ${activeStorage === id ? "active" : ""}`} onClick={() => { setActiveStorage(id); if (!editingIngredientId) resetForm(true, id); }}>{label}</button>)}</nav>
     {isFormOpen && <section className="form-panel"><div className="form-panel-title"><h3>{editingIngredientId ? "재료 정보 수정" : "새 재료 등록"}</h3><button type="button" onClick={() => resetForm(true)}>닫기</button></div><form className="ingredient-form" onSubmit={handleSubmitIngredient}><label className="wide-field"><span>재료명</span><input name="name" value={formValues.name} onChange={handleFormChange} placeholder="예: 두부" /></label><label><span>수량</span><input name="quantity" value={formValues.quantity} onChange={handleFormChange} placeholder="예: 1모" /></label><label><span>보관 위치</span><select name="storage" value={formValues.storage} onChange={handleFormChange}><option value="fridge">냉장</option><option value="freezer">냉동</option><option value="pantry">실온</option></select></label><label><span>카테고리</span><select name="category" value={formValues.category} onChange={handleFormChange}>{categoryOptions.map((item) => <option key={item} value={item}>{item}</option>)}</select></label><label><span>유통기한</span><input name="expiry" type="date" value={formValues.expiry} onChange={handleFormChange} /></label><button type="submit">{editingIngredientId ? "수정 완료" : "재료 등록"}</button></form></section>}
