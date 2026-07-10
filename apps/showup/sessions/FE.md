@@ -126,13 +126,7 @@ ShowUp의 프론트엔드 화면, 컴포넌트, 라우팅, 폼, 상태 표시, �
 
 ## 위험도 UI 기준
 
-> 기준 원본은 `docs/plan.md` §4. 수치가 다르면 plan.md가 정답이고, 변경은 plan.md 먼저 고친 뒤 세션 문서에 반영한다.
-
-- score 0-23: low, 안심, 초록
-- score 24-39: medium, 주의, 노랑
-- score 40 이상: high, 위험, 빨강
-- abuse 1회 이상이면 최소 medium으로 표시한다.
-- 경고 배너 조건은 `noShowCount >= 3 || incidentCounts.abuse >= 1`이다.
+> 기준 원본은 `docs/plan.md` §4. 수치가 다르면 plan.md가 정답이고, 변경은 plan.md 먼저 고친 뒤 세션 문서에 반영한다. 점수·등급·경고 배너 조건은 plan.md를 참조.
 
 ## 완료 기준
 

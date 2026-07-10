@@ -49,7 +49,7 @@ ShowUp의 개인정보 보호, Firestore Security Rules, 입력 검증, 전화�
 - `apps/showup/src/pages/Privacy.tsx` — 문안 소유, 라우팅/레이아웃은 FE
 - `apps/showup/src/pages/Terms.tsx` — 문안 소유, 라우팅/레이아웃은 FE
 - `apps/showup/.env.example`
-- 보안 테스트 문서
+- `apps/showup/security-docs/` — 보안 산출물 (침투 테스트 시나리오, riskStats 예외 정책, 개인정보 처리방침 초안, 약관 초안)
 
 > `src/utils/phone.ts` 구현은 BE 소유. 보안은 마스킹 누락·오동작을 **검증**만 한다 (수정 필요 시 BE에 요청).
 

@@ -105,34 +105,7 @@ stores/{storeId}/customers/{customerId}/incidents/{incidentId}
 
 ## riskStats 기준
 
-> 기준 원본은 `docs/plan.md` §4. 수치가 다르면 plan.md가 정답이고, 변경은 plan.md 먼저 고친 뒤 세션 문서에 반영한다.
-
-```txt
-noShow: +8
-lateCancel: +4
-late: +2
-abuse: +10
-dispute: +6
-unreasonable: +4
-visited: -1
-recent noShow within 30 days: +5
-minimum score: 0
-```
-
-등급:
-
-```txt
-0-23: low
-24-39: medium
-40+: high
-abuse 1회 이상: 최소 medium
-```
-
-경고 배너 조건:
-
-```txt
-noShowCount >= 3 || incidentCounts.abuse >= 1
-```
+> 기준 원본은 `docs/plan.md` §4. 가중치·등급·경고 배너 조건 전부 plan.md를 참조. 수치가 다르면 plan.md가 정답이고, 변경은 plan.md 먼저 고친 뒤 세션 문서에 반영한다.
 
 ## Cloud Function 트리거
 
