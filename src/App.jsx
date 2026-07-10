@@ -3,11 +3,12 @@ import "./App.css";
 
 const MS_PER_DAY = 1000 * 60 * 60 * 24;
 const storageLabels = { all: "전체", fridge: "냉장", freezer: "냉동", pantry: "실온" };
+const storageDescriptions = { all: "모든 보관함", fridge: "신선 재료", freezer: "오래 보관", pantry: "실온 보관" };
 const categoryOptions = ["단백질", "채소", "주식", "소스/양념", "간편식"];
 const mainTabs = [
   ["fridge", "내 냉장고"],
   ["recommend", "식단 추천"],
-  ["recipe", "레시피 상세"],
+  ["recipe", "레시피"],
   ["shopping", "구매 추천"],
 ];
 const recommendTabs = [
@@ -73,7 +74,6 @@ function App() {
   const [activeStorage, setActiveStorage] = useState("all");
   const [selectedFilter, setSelectedFilter] = useState("balanced");
   const [selectedMenuId, setSelectedMenuId] = useState(null);
-  const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingIngredientId, setEditingIngredientId] = useState(null);
   const [message, setMessage] = useState("");
   const [formValues, setFormValues] = useState({ name: "", quantity: "", storage: "fridge", category: "단백질", expiry: addDays(5) });
@@ -81,16 +81,21 @@ function App() {
   const visibleIngredients = useMemo(() => activeStorage === "all" ? ingredients : ingredients.filter((item) => item.storage === activeStorage), [activeStorage, ingredients]);
   const selectedMenu = useMemo(() => Object.values(menusByFilter).flat().find((menu) => menu.id === selectedMenuId) ?? null, [selectedMenuId]);
   const urgentCount = ingredients.filter((item) => getDday(item.expiry) <= 2).length;
+  const recommendedCount = menusByFilter[selectedFilter].length;
 
   const flash = (text) => {
     setMessage(text);
     window.setTimeout(() => setMessage(""), 2200);
   };
 
-  const resetForm = (close = false, storage = activeStorage) => {
+  const resetForm = (storage = activeStorage) => {
     setFormValues({ name: "", quantity: "", storage: storage === "all" ? "fridge" : storage, category: "단백질", expiry: addDays(5) });
     setEditingIngredientId(null);
-    if (close) setIsFormOpen(false);
+  };
+
+  const openIngredientForm = () => {
+    setActiveMainTab("fridge");
+    resetForm(activeStorage);
   };
 
   const handleFormChange = ({ target }) => setFormValues((current) => ({ ...current, [target.name]: target.value }));
@@ -108,21 +113,21 @@ function App() {
     } else {
       const nextId = Math.max(...ingredients.map((item) => item.id), 0) + 1;
       setIngredients((current) => [{ id: nextId, ...formValues, name, quantity }, ...current]);
-      flash("집 재료 보드에 새 재료를 추가했습니다.");
+      flash("내 냉장고에 새 재료를 추가했습니다.");
     }
     if (activeStorage !== "all" && activeStorage !== formValues.storage) setActiveStorage(formValues.storage);
-    resetForm(true, formValues.storage);
+    resetForm(formValues.storage);
   };
 
   const editIngredient = (ingredient) => {
+    setActiveMainTab("fridge");
     setEditingIngredientId(ingredient.id);
     setFormValues({ name: ingredient.name, quantity: ingredient.quantity, storage: ingredient.storage, category: ingredient.category, expiry: ingredient.expiry });
-    setIsFormOpen(true);
   };
 
   const deleteIngredient = (id) => {
     setIngredients((current) => current.filter((item) => item.id !== id));
-    if (editingIngredientId === id) resetForm(true);
+    if (editingIngredientId === id) resetForm();
     flash("재료를 삭제했습니다.");
   };
 
@@ -132,54 +137,122 @@ function App() {
   };
 
   return (
-    <main className="app-shell">
-      <section className="topbar">
-        <div>
-          <p className="eyebrow">오늘의 냉장고</p>
-          <h1>집에 있는 재료를 정리하고 따뜻한 한 끼를 추천받아요</h1>
-        </div>
-        <div className="status-card"><span>오늘 우선 소비</span><strong>{urgentCount}개</strong></div>
-      </section>
+    <div className="app-shell">
+      <header className="site-header">
+        <button className="brand-mark" type="button" onClick={() => setActiveMainTab("fridge")}>오늘의 냉장고</button>
+        <nav className="header-nav" aria-label="상단 메뉴">
+          <button type="button">서비스 소개</button>
+          {mainTabs.map(([id, label]) => <button key={id} type="button" className={activeMainTab === id ? "active" : ""} onClick={() => setActiveMainTab(id)}>{label}</button>)}
+        </nav>
+        <button className="header-cta" type="button" onClick={openIngredientForm}>재료 등록하기</button>
+      </header>
 
-      <nav className="main-tabs" aria-label="주요 워크스페이스">
-        {mainTabs.map(([id, label]) => <button key={id} type="button" className={`main-tab ${activeMainTab === id ? "active" : ""}`} onClick={() => setActiveMainTab(id)}>{label}</button>)}
-      </nav>
-
-      {activeMainTab === "fridge" && <FridgeWorkspace ingredients={ingredients} visibleIngredients={visibleIngredients} activeStorage={activeStorage} setActiveStorage={setActiveStorage} urgentCount={urgentCount} isFormOpen={isFormOpen} setIsFormOpen={setIsFormOpen} editingIngredientId={editingIngredientId} formValues={formValues} handleFormChange={handleFormChange} handleSubmitIngredient={handleSubmitIngredient} resetForm={resetForm} editIngredient={editIngredient} deleteIngredient={deleteIngredient} message={message} />}
-      {activeMainTab === "recommend" && <RecommendWorkspace menus={menusByFilter[selectedFilter]} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} selectedMenuId={selectedMenuId} setSelectedMenuId={setSelectedMenuId} selectMenu={selectMenu} />}
-      {activeMainTab === "recipe" && <RecipeWorkspace menu={selectedMenu} />}
-      {activeMainTab === "shopping" && <ShoppingWorkspace menu={selectedMenu} />}
-    </main>
+      <main>
+        {activeMainTab === "fridge" && <FridgeWorkspace ingredients={ingredients} visibleIngredients={visibleIngredients} activeStorage={activeStorage} setActiveStorage={setActiveStorage} urgentCount={urgentCount} recommendedCount={recommendedCount} editingIngredientId={editingIngredientId} formValues={formValues} handleFormChange={handleFormChange} handleSubmitIngredient={handleSubmitIngredient} resetForm={resetForm} editIngredient={editIngredient} deleteIngredient={deleteIngredient} message={message} />}
+        {activeMainTab === "recommend" && <RecommendWorkspace menus={menusByFilter[selectedFilter]} selectedFilter={selectedFilter} setSelectedFilter={setSelectedFilter} selectedMenuId={selectedMenuId} setSelectedMenuId={setSelectedMenuId} selectMenu={selectMenu} />}
+        {activeMainTab === "recipe" && <RecipeWorkspace menu={selectedMenu} />}
+        {activeMainTab === "shopping" && <ShoppingWorkspace menu={selectedMenu} />}
+      </main>
+    </div>
   );
 }
 
-function FridgeWorkspace({ ingredients, visibleIngredients, activeStorage, setActiveStorage, urgentCount, isFormOpen, setIsFormOpen, editingIngredientId, formValues, handleFormChange, handleSubmitIngredient, resetForm, editIngredient, deleteIngredient, message }) {
-  return <section className="workspace-panel ingredient-panel">
-    <div className="workspace-header"><div><p className="eyebrow">Step 1</p><h2>내 냉장고 워크스페이스</h2><p>냉장고, 냉동실, 실온 보관 재료를 한 곳에 추가하고 소비 임박 재료를 먼저 확인하세요.</p></div><button className={`add-toggle ${isFormOpen ? "active" : ""}`} type="button" aria-expanded={isFormOpen} onClick={() => editingIngredientId ? resetForm(false) : setIsFormOpen(!isFormOpen)}>{isFormOpen ? "입력 닫기" : "+ 재료 추가"}</button></div>
-    <div className="workspace-summary"><div className="summary-card"><span>전체 재료</span><strong>{ingredients.length}개</strong></div><div className="summary-card urgent-summary"><span>임박 재료</span><strong>{urgentCount}개</strong></div><div className="summary-card recommendation-summary"><span>오늘 추천 기준</span><strong>{urgentCount > 0 ? "임박 재료 우선" : "종합 추천"}</strong></div></div>
-    <nav className="storage-tabs" aria-label="보관 위치 필터">{Object.entries(storageLabels).map(([id, label]) => <button key={id} type="button" className={`storage-tab ${activeStorage === id ? "active" : ""}`} onClick={() => { setActiveStorage(id); if (!editingIngredientId) resetForm(true, id); }}>{label}</button>)}</nav>
-    {isFormOpen && <section className="form-panel"><div className="form-panel-title"><h3>{editingIngredientId ? "재료 정보 수정" : "새 재료 등록"}</h3><button type="button" onClick={() => resetForm(true)}>닫기</button></div><form className="ingredient-form" onSubmit={handleSubmitIngredient}><label className="wide-field"><span>재료명</span><input name="name" value={formValues.name} onChange={handleFormChange} placeholder="예: 두부" /></label><label><span>수량</span><input name="quantity" value={formValues.quantity} onChange={handleFormChange} placeholder="예: 1모" /></label><label><span>보관 위치</span><select name="storage" value={formValues.storage} onChange={handleFormChange}><option value="fridge">냉장</option><option value="freezer">냉동</option><option value="pantry">실온</option></select></label><label><span>카테고리</span><select name="category" value={formValues.category} onChange={handleFormChange}>{categoryOptions.map((item) => <option key={item} value={item}>{item}</option>)}</select></label><label><span>유통기한</span><input name="expiry" type="date" value={formValues.expiry} onChange={handleFormChange} /></label><button type="submit">{editingIngredientId ? "수정 완료" : "재료 등록"}</button></form></section>}
-    <div className="form-message" role="status">{message}</div><div className="board-label-row"><span>{storageLabels[activeStorage]} 재료 보드</span><strong>{visibleIngredients.length}개</strong></div><div className="ingredient-grid">{visibleIngredients.length ? visibleIngredients.map((ingredient) => <IngredientTile key={ingredient.id} ingredient={ingredient} onEdit={editIngredient} onDelete={deleteIngredient} />) : <div className="empty-board">{storageLabels[activeStorage]} 보드에 등록된 재료가 없습니다.<br />+ 재료 추가로 집 재료를 채워보세요.</div>}</div>
+function FridgeWorkspace({ ingredients, visibleIngredients, activeStorage, setActiveStorage, urgentCount, recommendedCount, editingIngredientId, formValues, handleFormChange, handleSubmitIngredient, resetForm, editIngredient, deleteIngredient, message }) {
+  return <section className="fridge-screen">
+    <div className="screen-title">
+      <p className="eyebrow">오늘의 냉장고</p>
+      <h1>내 냉장고</h1>
+      <p>집에 있는 재료를 등록하고 유통기한이 임박한 재료를 먼저 확인하세요.</p>
+    </div>
+
+    <div className="summary-row">
+      <SummaryCard tone="warning" label="임박 재료 알림" value={`${urgentCount}개`} description="D-2 이하 먼저 사용" />
+      <SummaryCard tone="green" label="신선한 재료" value={`${ingredients.length}개`} description="현재 등록된 전체 재료" />
+      <SummaryCard tone="neutral" label="추천 가능 메뉴" value={`${recommendedCount}개`} description="지금 바로 추천 가능" />
+    </div>
+
+    <div className="fridge-layout">
+      <aside className="add-panel">
+        <div className="panel-heading">
+          <span className="panel-icon">+</span>
+          <div>
+            <h2>{editingIngredientId ? "재료 수정" : "새 재료 추가"}</h2>
+            <p>{editingIngredientId ? "선택한 재료 정보를 다시 저장하세요." : "냉장고에 있는 재료를 간단히 등록하세요."}</p>
+          </div>
+        </div>
+
+        <form className="ingredient-form" onSubmit={handleSubmitIngredient}>
+          <label><span>재료명</span><input name="name" value={formValues.name} onChange={handleFormChange} placeholder="예: 두부" /></label>
+          <label><span>수량</span><input name="quantity" value={formValues.quantity} onChange={handleFormChange} placeholder="예: 1모" /></label>
+          <label><span>유통기한</span><input name="expiry" type="date" value={formValues.expiry} onChange={handleFormChange} /></label>
+          <div className="form-split">
+            <label><span>보관위치</span><select name="storage" value={formValues.storage} onChange={handleFormChange}><option value="fridge">냉장</option><option value="freezer">냉동</option><option value="pantry">실온</option></select></label>
+            <label><span>분류</span><select name="category" value={formValues.category} onChange={handleFormChange}>{categoryOptions.map((item) => <option key={item} value={item}>{item}</option>)}</select></label>
+          </div>
+          <button type="submit">{editingIngredientId ? "수정 완료" : "냉장고에 담기"}</button>
+          {editingIngredientId && <button className="ghost-action" type="button" onClick={() => resetForm()}>수정 취소</button>}
+        </form>
+
+        <div className="form-message" role="status">{message}</div>
+        <div className="tip-box"><strong>Tip</strong><p>재료를 등록하면 D-day가 자동 계산되고, D-2 이하 재료는 빨간 배지로 표시됩니다.</p></div>
+      </aside>
+
+      <section className="board-panel">
+        <div className="board-toolbar">
+          <div>
+            <p className="eyebrow">Ingredient Board</p>
+            <h2>등록된 재료</h2>
+          </div>
+          <nav className="storage-tabs" aria-label="보관 위치 필터">{Object.entries(storageLabels).map(([id, label]) => <button key={id} type="button" className={activeStorage === id ? "active" : ""} onClick={() => { setActiveStorage(id); if (!editingIngredientId) resetForm(id); }}>{label}</button>)}</nav>
+        </div>
+
+        <div className="ingredient-grid">{visibleIngredients.length ? visibleIngredients.map((ingredient) => <IngredientTile key={ingredient.id} ingredient={ingredient} onEdit={editIngredient} onDelete={deleteIngredient} />) : <div className="empty-board">{storageLabels[activeStorage]} 보드에 등록된 재료가 없습니다.</div>}<button className="add-tile" type="button" onClick={() => resetForm(activeStorage)}><span>+</span><strong>새 재료 추가</strong></button></div>
+      </section>
+    </div>
   </section>;
+}
+
+function SummaryCard({ tone, label, value, description }) {
+  return <article className={`summary-card ${tone}`}><span>{label}</span><strong>{value}</strong><p>{description}</p></article>;
 }
 
 function IngredientTile({ ingredient, onEdit, onDelete }) {
   const dday = getDday(ingredient.expiry);
   const isUrgent = dday <= 2;
-  return <article className={`ingredient-tile ${isUrgent ? "urgent" : ""}`}><div className="tile-top"><span className="ingredient-name">{ingredient.name}</span><span className="ingredient-dday">{formatDday(dday)}</span></div><div className="tile-badges"><span className={`storage-badge ${ingredient.storage}`}>{storageLabels[ingredient.storage]}</span><span className="category-badge">{ingredient.category}</span>{isUrgent && <span className="use-first-label">먼저 사용</span>}</div><div className="tile-meta"><span>수량 <strong>{ingredient.quantity}</strong></span><span>예상 소비 권장일 <strong>{ingredient.expiry}</strong></span></div><div className="tile-actions"><button type="button" onClick={() => onEdit(ingredient)}>수정</button><button className="delete-button" type="button" onClick={() => onDelete(ingredient.id)}>삭제</button></div></article>;
+  return <article className={`ingredient-tile ${isUrgent ? "urgent" : ""}`}>
+    <div className="tile-head"><span className="dday-badge">{formatDday(dday)}</span><button type="button" onClick={() => onEdit(ingredient)} aria-label={`${ingredient.name} 수정`}>...</button></div>
+    <h3>{ingredient.name}</h3>
+    <p>{ingredient.quantity} · {storageDescriptions[ingredient.storage]}</p>
+    <div className="tile-meta"><span>{storageLabels[ingredient.storage]}</span><span>{ingredient.category}</span>{isUrgent && <span className="use-first">먼저 사용</span>}</div>
+    <div className="tile-date">유통기한 {ingredient.expiry}</div>
+    <div className="tile-actions"><button type="button" onClick={() => onEdit(ingredient)}>수정</button><button type="button" onClick={() => onDelete(ingredient.id)}>삭제</button></div>
+  </article>;
+}
+
+function WorkspaceShell({ eyebrow, title, description, children }) {
+  return <section className="content-screen"><div className="screen-title"><p className="eyebrow">{eyebrow}</p><h1>{title}</h1><p>{description}</p></div>{children}</section>;
 }
 
 function RecommendWorkspace({ menus, selectedFilter, setSelectedFilter, selectedMenuId, setSelectedMenuId, selectMenu }) {
-  return <section className="workspace-panel recommend-panel"><div className="section-title"><div><p className="eyebrow">Step 2</p><h2>식단 추천 결과</h2></div></div><nav className="tab-list" aria-label="추천 기준">{recommendTabs.map(([id, label]) => <button key={id} type="button" className={`tab-button ${selectedFilter === id ? "active" : ""}`} onClick={() => { setSelectedFilter(id); setSelectedMenuId(null); }}>{label}</button>)}</nav><div className="menu-grid">{menus.map((menu) => <article key={menu.id} className={`menu-card ${selectedMenuId === menu.id ? "selected" : ""}`} onClick={() => selectMenu(menu)}><span className="menu-badge">{menu.badge}</span><h3>{menu.name}</h3><div className="menu-meta"><div className="meta-box"><span>조리 시간</span><strong>{menu.time}</strong></div><div className="meta-box"><span>영양 균형</span><strong>{menu.balance}</strong></div></div><span className="label">사용 재료</span><div className="ingredient-list">{menu.used.map((item) => <span className="chip" key={item}>{item}</span>)}</div><span className="label">부족 재료</span><div className="ingredient-list">{menu.missing.length ? menu.missing.map((item) => <span className="chip missing" key={item}>{item}</span>) : <span className="chip">부족 재료 없음</span>}</div><button className="recipe-button" type="button" onClick={(event) => { event.stopPropagation(); selectMenu(menu, true); }}>레시피 보기</button></article>)}</div></section>;
+  return <WorkspaceShell eyebrow="Meal Recommendation" title="식단 추천" description="추천 기준을 바꿔 지금 재료로 만들 수 있는 메뉴를 확인하세요.">
+    <nav className="recommend-tabs" aria-label="추천 기준">{recommendTabs.map(([id, label]) => <button key={id} type="button" className={selectedFilter === id ? "active" : ""} onClick={() => { setSelectedFilter(id); setSelectedMenuId(null); }}>{label}</button>)}</nav>
+    <div className="menu-grid">{menus.map((menu) => <article key={menu.id} className={`menu-card ${selectedMenuId === menu.id ? "selected" : ""}`} onClick={() => selectMenu(menu)}><span>{menu.badge}</span><h3>{menu.name}</h3><p>{menu.summary}</p><div className="menu-stats"><div><small>조리 시간</small><strong>{menu.time}</strong></div><div><small>영양 균형</small><strong>{menu.balance}</strong></div></div><div className="chip-list">{menu.used.map((item) => <em key={item}>{item}</em>)}</div><div className="chip-list missing">{menu.missing.length ? menu.missing.map((item) => <em key={item}>{item}</em>) : <em>부족 재료 없음</em>}</div><button type="button" onClick={(event) => { event.stopPropagation(); selectMenu(menu, true); }}>레시피 보기</button></article>)}</div>
+  </WorkspaceShell>;
 }
 
 function RecipeWorkspace({ menu }) {
-  if (!menu) return <section className="workspace-panel recipe-detail"><div className="empty-state"><p className="eyebrow">Step 3</p><h2>메뉴를 선택하면 레시피가 표시됩니다</h2><p>식단 추천 탭에서 메뉴 카드 또는 레시피 보기 버튼을 눌러주세요.</p></div></section>;
-  return <section className="workspace-panel recipe-detail"><div className="recipe-header"><div><p className="eyebrow">레시피 상세</p><h2>{menu.name}</h2><p className="summary-text">{menu.summary}</p></div><div className="recipe-stats"><div className="stat-card"><span className="label">조리 시간</span><strong>{menu.time}</strong></div><div className="stat-card"><span className="label">난이도</span><strong>{menu.level}</strong></div></div></div><ol className="steps">{menu.steps.map((step, index) => <li key={step}><span className="step-number">{index + 1}</span><span>{step}</span></li>)}</ol>{menu.missing.length > 0 && <div className="substitute-box"><strong>대체 재료 안내</strong><br />{menu.substitutes}</div>}</section>;
+  if (!menu) return <WorkspaceShell eyebrow="Recipe Detail" title="레시피 상세" description="식단 추천에서 메뉴를 선택하면 조리 과정이 표시됩니다."><div className="empty-board">아직 선택된 메뉴가 없습니다.</div></WorkspaceShell>;
+  return <WorkspaceShell eyebrow="Recipe Detail" title={menu.name} description={menu.summary}>
+    <div className="recipe-summary"><SummaryCard tone="green" label="조리 시간" value={menu.time} description="예상 소요 시간" /><SummaryCard tone="neutral" label="난이도" value={menu.level} description="초보자 기준" /><SummaryCard tone="orange" label="사용 재료" value={`${menu.used.length}개`} description={menu.used.join(", ")} /></div>
+    <ol className="recipe-steps">{menu.steps.map((step, index) => <li key={step}><span>{index + 1}</span><p>{step}</p></li>)}</ol>
+    {menu.missing.length > 0 && <div className="substitute-box"><strong>대체 재료 안내</strong><p>{menu.substitutes}</p></div>}
+  </WorkspaceShell>;
 }
 
 function ShoppingWorkspace({ menu }) {
-  return <section className="workspace-panel shopping-panel"><div className="section-title"><div><p className="eyebrow">Step 4</p><h2>부족 재료 구매 추천</h2></div></div>{!menu ? <div className="empty-shopping">부족 재료가 있는 메뉴를 선택하면 구매 추천 카드가 표시됩니다.</div> : menu.missing.length ? <div className="shopping-list">{menu.missing.map((item) => <div className="shopping-card" key={item}><h3>{item}</h3><p>{menu.name}에 넣으면 맛과 완성도가 올라가는 추천 구매 재료입니다.</p><button className="buy-button" type="button">더미 구매 버튼</button></div>)}</div> : <div className="empty-shopping">이 메뉴는 현재 재료만으로 만들 수 있습니다.</div>}</section>;
+  return <WorkspaceShell eyebrow="Shopping Recommendation" title="구매 추천" description="선택한 메뉴에 필요한 부족 재료를 카드로 확인하세요.">
+    {!menu ? <div className="empty-board">부족 재료가 있는 메뉴를 선택하면 구매 추천 카드가 표시됩니다.</div> : menu.missing.length ? <div className="shopping-grid">{menu.missing.map((item) => <article className="shopping-card" key={item}><span>부족 재료</span><h3>{item}</h3><p>{menu.name}에 넣으면 맛과 완성도가 올라가는 추천 구매 재료입니다.</p><small>사용될 메뉴</small><strong>{menu.name}</strong><button type="button">더미 구매 버튼</button></article>)}</div> : <div className="empty-board">이 메뉴는 현재 재료만으로 만들 수 있습니다.</div>}
+  </WorkspaceShell>;
 }
 
 export default App;
