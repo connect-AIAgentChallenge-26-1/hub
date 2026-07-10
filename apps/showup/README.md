@@ -35,6 +35,7 @@
 - [기획서 전문](docs/plan.md)
 - [작업 체크리스트](docs/checklist.md)
 - [유저 플로우](docs/user-flow.md)
+- [발표 자료](docs/presentations/0710.md) — 1주차 발표 (7/10 금)
 - [프로토타입 (HTML/CSS)](prototype/index.html) — 4개 화면 시연 (대시보드·고객 검색·고객 상세·예약 관리)
 
 ## 원칙
