@@ -20,6 +20,9 @@ class MeetupSession(Base):
     creator_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
+    title: Mapped[str] = mapped_column(String(100), nullable=False)
+    # matching(시간·장소 조율 중) → confirmed(확정) → cancelled(취소)
+    status: Mapped[str] = mapped_column(String(20), nullable=False, server_default="matching")
     location_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
     food_category: Mapped[str | None] = mapped_column(String(100), nullable=True)
     created_at: Mapped[datetime] = mapped_column(
