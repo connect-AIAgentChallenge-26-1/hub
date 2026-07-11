@@ -1,0 +1,259 @@
+.home-page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.home-header h1 {
+  font-size: 20px;
+  margin: 0;
+  color: var(--accent);
+}
+
+.home-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+}
+
+.home-logout {
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.home-main {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.home-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+
+.home-card h2 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.home-card-dim {
+  opacity: 0.65;
+}
+
+.home-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.home-sync {
+  width: auto;
+  margin: 0;
+  padding: 8px 14px;
+  font-size: 14px;
+}
+
+.home-muted {
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.home-connect {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.home-integration-badge {
+  color: #1a7f37;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 12px;
+}
+
+.provider-list {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.provider-row {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.provider-row:last-child {
+  border-bottom: none;
+}
+
+.provider-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.provider-chip {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-h);
+  min-width: 96px;
+}
+
+.provider-status {
+  font-size: 12px;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 2px 10px;
+}
+
+.provider-status.connected {
+  color: #1a7f37;
+  border-color: #1a7f37;
+}
+
+.provider-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 6px;
+}
+
+.provider-btn {
+  font: inherit;
+  font-size: 13px;
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-h);
+  cursor: pointer;
+}
+
+.provider-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.provider-btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.provider-btn-danger {
+  color: #d33;
+}
+
+.provider-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.provider-form input {
+  flex: 1;
+  min-width: 200px;
+  font: inherit;
+  font-size: 14px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.provider-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.provider-hint {
+  width: 100%;
+  margin: 0;
+  font-size: 12px;
+  color: var(--text);
+}
+
+.event-source {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.event-source-google {
+  background: #4285f4;
+}
+
+.event-source-everytime {
+  background: #f91f15;
+}
+
+.event-source-apple {
+  background: #8e8e93;
+}
+
+.home-events {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-events li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.home-events li:last-child {
+  border-bottom: none;
+}
+
+.home-event-title {
+  color: var(--text-h);
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.home-event-time {
+  color: var(--text);
+  font-size: 13px;
+  white-space: nowrap;
+}
