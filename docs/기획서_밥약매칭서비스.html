@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>밥약 매칭 서비스 — 기획서</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+  :root {
+    --bg: #fffdf8;
+    --ink: #221b15;
+    --muted: #857a70;
+    --accent: #ff6a3d;
+    --accent-deep: #e5501f;
+    --green: #2e9e6b;
+    --chip: #fff3d6;
+    --card: #ffffff;
+    --line: #efe3d7;
+    --code-bg: #faf4ec;
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 24px 96px;
+  }
+
+  a { color: var(--accent-deep); text-decoration: none; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  /* ── 히어로 ─────────────────────────── */
+  .hero { padding: 72px 0 40px; }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--accent-deep);
+    background: var(--chip);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    margin: 0 0 8px;
+    font-size: clamp(38px, 6vw, 56px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  .hero h1 .bowl {
+    display: inline-block;
+    vertical-align: -2px;
+    margin-right: 6px;
+  }
+
+  .hero .tagline {
+    margin: 0 0 12px;
+    font-size: clamp(19px, 2.6vw, 23px);
+    font-weight: 600;
+    color: var(--accent-deep);
+    letter-spacing: -0.01em;
+  }
+
+  .hero .lede {
+    margin: 0 0 28px;
+    max-width: 620px;
+    color: var(--muted);
+    font-size: 17px;
+  }
+
+  .meta-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .meta-chips span {
+    font-size: 13.5px;
+    font-weight: 600;
+    padding: 7px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--card);
+    color: var(--ink);
+  }
+
+  /* ── 목차 ─────────────────────────── */
+  .toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 20px 0 0;
+  }
+
+  .toc a {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--muted);
+    padding: 5px 12px;
+    border-radius: 999px;
+    transition: color 0.15s, background 0.15s;
+  }
+
+  .toc a:hover { color: var(--accent-deep); background: var(--chip); }
+
+  /* ── 섹션 공통 ─────────────────────── */
+  section { padding-top: 64px; }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+
+  .sec-num {
+    flex-shrink: 0;
+    font-size: 14px;
+    font-weight: 800;
+    color: #fff;
+    background: var(--accent);
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateY(4px);
+  }
+
+  .sec-head h2 {
+    margin: 0;
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  p { margin: 0 0 14px; }
+  .muted { color: var(--muted); }
+
+  /* ── 핵심 가치 인용 ─────────────────── */
+  .value-quote {
+    margin: 26px 0 0;
+    padding: 26px 30px;
+    background: linear-gradient(135deg, #fff3d6, #ffe9dc);
+    border-radius: var(--radius);
+    font-size: clamp(19px, 2.5vw, 22px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  .value-quote em { font-style: normal; color: var(--accent-deep); }
+
+  .value-quote .q-sub {
+    display: block;
+    margin-top: 6px;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  /* ── 카드 그리드 ────────────────────── */
+  .grid { display: grid; gap: 14px; }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+
+  @media (max-width: 720px) {
+    .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+  }
+
+  .card h3 {
+    margin: 0 0 8px;
+    font-size: 16.5px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .card p { margin: 0; font-size: 14.5px; color: var(--muted); }
+
+  .card .k {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    color: var(--accent-deep);
+    margin-bottom: 6px;
+  }
+
+  /* ── 시나리오 플로우 ────────────────── */
+  .flows { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 780px) { .flows { grid-template-columns: 1fr; } }
+
+  .flow {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .flow-title {
+    font-size: 15.5px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .flow-title .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .flow ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: step;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .flow ol li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 34px;
+    font-size: 14.5px;
+    line-height: 1.55;
+  }
+
+  .flow ol li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 1px;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--chip);
+    color: var(--accent-deep);
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flow ol li small { color: var(--muted); }
+
+  .after-note {
+    margin-top: 14px;
+    padding: 16px 20px;
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+    font-size: 14.5px;
+    color: var(--muted);
+    background: var(--card);
+  }
+  .after-note strong { color: var(--ink); }
+
+  /* ── 표 ────────────────────────────── */
+  .tbl-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14.5px;
+    min-width: 520px;
+  }
+
+  th {
+    text-align: left;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    padding: 14px 18px 10px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+
+  td {
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  code, .mono {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.92em;
+  }
+
+  td code {
+    background: var(--code-bg);
+    padding: 2px 7px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11.5px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 7px;
+    letter-spacing: 0.03em;
+  }
+
+  .badge.get  { background: #e5f4ec; color: #1d7a4f; }
+  .badge.post { background: #ffe9dc; color: var(--accent-deep); }
+
+  /* ── 계산 로직 하이라이트 ───────────── */
+  .algo {
+    margin-top: 14px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+  }
+
+  .algo .k {
+    display: block;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    color: var(--accent-deep);
+    margin-bottom: 12px;
+  }
+
+  .algo-steps {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    font-size: 14.5px;
+    font-weight: 600;
+  }
+
+  .algo-steps .step {
+    background: var(--chip);
+    padding: 8px 15px;
+    border-radius: 999px;
+  }
+
+  .algo-steps .arrow { color: var(--accent); font-weight: 800; }
+
+  .algo .cond { margin: 12px 0 0; font-size: 13.5px; color: var(--muted); }
+
+  /* ── ERD ───────────────────────────── */
+  .erd-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  @media (max-width: 720px) { .erd-grid { grid-template-columns: 1fr; } }
+
+  .entity {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .entity-name {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 13.5px;
+    font-weight: 700;
+    padding: 12px 18px;
+    background: var(--code-bg);
+    border-bottom: 1px solid var(--line);
+    letter-spacing: 0.02em;
+  }
+
+  .entity ul { margin: 0; padding: 10px 18px 14px; list-style: none; }
+
+  .entity li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 4px 0;
+    font-size: 13.5px;
+  }
+
+  .entity .fname { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-weight: 600; }
+  .entity .ftype { color: var(--muted); font-size: 12.5px; }
+
+  .entity .fk, .entity .pk {
+    font-size: 10.5px;
+    font-weight: 800;
+    padding: 1px 7px;
+    border-radius: 6px;
+    letter-spacing: 0.05em;
+  }
+  .entity .pk { background: var(--chip); color: var(--accent-deep); }
+  .entity .fk { background: #e5f4ec; color: #1d7a4f; }
+
+  .entity .fnote { color: var(--muted); font-size: 12px; margin-left: auto; text-align: right; }
+
+  .rels {
+    margin-top: 14px;
+    padding: 16px 22px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+  .rels b { color: var(--ink); font-weight: 600; }
+  .rels .r-arrow { color: var(--accent); }
+
+  /* ── MVP 범위 ──────────────────────── */
+  .mvp-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+
+  .mvp-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    font-size: 14.5px;
+  }
+
+  .mvp-list .m-dot {
+    flex-shrink: 0;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    transform: translateY(-1px);
+  }
+
+  .mvp-must .m-dot { background: var(--accent); }
+  .mvp-nice .m-dot { background: transparent; border: 2px solid var(--line); }
+
+  .mvp-head {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+  }
+  .mvp-must .mvp-head { color: var(--accent-deep); }
+  .mvp-nice .mvp-head { color: var(--muted); }
+
+  /* ── 로드맵 ─────────────────────────── */
+  .timeline { display: flex; flex-direction: column; }
+
+  .tl-item {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 20px;
+    position: relative;
+    padding-bottom: 26px;
+  }
+
+  .tl-item:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    left: 31px;
+    top: 40px;
+    bottom: 0;
+    width: 2px;
+    background: var(--line);
+  }
+
+  .tl-week {
+    width: 64px; height: 36px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: #fff;
+    font-size: 13.5px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 0.02em;
+  }
+
+  .tl-body { padding-top: 5px; }
+  .tl-body h3 { margin: 0 0 6px; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+
+  .tl-done {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 7px;
+    font-size: 13.5px;
+    color: var(--muted);
+  }
+
+  .tl-done .check {
+    color: var(--green);
+    font-weight: 800;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* ── 비기능 / 리스크 ────────────────── */
+  .nfr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  @media (max-width: 720px) { .nfr-grid { grid-template-columns: 1fr; } }
+
+  .risk-list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+  .risk-list li {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    font-size: 14.5px;
+  }
+
+  .risk-list b { display: block; margin-bottom: 4px; font-size: 15px; }
+
+  .risk-list .mitigate {
+    display: block;
+    margin-top: 6px;
+    color: var(--green);
+    font-weight: 600;
+    font-size: 13.5px;
+  }
+
+  /* ── 푸터 ──────────────────────────── */
+  footer {
+    margin-top: 80px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    font-size: 13.5px;
+    color: var(--muted);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media print {
+    .toc { display: none; }
+    section { padding-top: 36px; }
+    body { font-size: 13px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- 히어로 -->
+  <header class="hero">
+    <span class="hero-eyebrow">프로젝트 기획서 · 완성본</span>
+    <h1>
+      <span class="bowl" aria-hidden="true">
+        <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+          <path d="M8 22h32a1 1 0 0 1 1 1c0 8-6 15-14 16v2h-6v-2C13 38 7 31 7 23a1 1 0 0 1 1-1z" fill="#FF6A3D"/>
+          <path d="M14 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M23 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M32 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      </span>밥약 매칭 서비스
+    </h1>
+    <p class="tagline">"언제 볼까 + 어디서 볼까"를 한 번에</p>
+    <p class="lede">
+      친구들 캘린더를 모아 모두가 비는 시간을 자동으로 찾고,
+      그 시간에 맞춰 위치·음식 카테고리 기반 맛집까지 추천하는 대학생 밥약 서비스.
+    </p>
+    <div class="meta-chips">
+      <span>🎓 국내 대학생 대상</span>
+      <span>개인 프로젝트</span>
+      <span>4주 완성</span>
+      <span>웹 서비스</span>
+    </div>
+    <nav class="toc" aria-label="목차">
+      <a href="#problem">문제 정의</a>
+      <a href="#users">사용자</a>
+      <a href="#scenario">시나리오</a>
+      <a href="#features">핵심 기능</a>
+      <a href="#erd">DB 설계</a>
+      <a href="#api">API</a>
+      <a href="#nfr">비기능 요구사항</a>
+      <a href="#mvp">MVP 범위</a>
+      <a href="#roadmap">로드맵</a>
+      <a href="#risks">리스크</a>
+    </nav>
+  </header>
+
+  <!-- 1. 문제 정의 -->
+  <section id="problem">
+    <div class="sec-head"><span class="sec-num">1</span><h2>문제 정의</h2></div>
+    <p>
+      대학생은 수업 시간표(에타), 개인 일정, 동아리 일정이 각각 다른 곳에 흩어져 관리된다.
+      친구 여러 명(보통 3~4명)과 밥약을 잡으려면 각자에게 <b>"언제 시간 돼?"</b>를 반복해서
+      물어보며 스케줄을 맞춰야 하고, 시간이 겹치는 걸 확인해도 막상 어디서 먹을지
+      다시 논의하느라 시간이 낭비된다.
+    </p>
+    <div class="grid grid-2" style="margin-top: 20px;">
+      <div class="card">
+        <span class="k">자동화 1</span>
+        <h3>모두가 비어있는 시간 찾기</h3>
+        <p>여러 사람의 캘린더를 모아 비교해서 공통 공강 시간을 자동으로 계산한다.</p>
+      </div>
+      <div class="card">
+        <span class="k">자동화 2</span>
+        <h3>맛집 추천</h3>
+        <p>찾은 시간에 맞춰 위치·음식 카테고리 기반으로 맛집을 추천한다.</p>
+      </div>
+    </div>
+    <div class="value-quote">
+      <em>"언제 볼까"</em>와 <em>"어디서 볼까"</em>를 한 번에 해결한다.
+      <span class="q-sub">이것이 이 서비스의 핵심 가치다.</span>
+    </div>
+  </section>
+
+  <!-- 2. 사용자 정의 -->
+  <section id="users">
+    <div class="sec-head"><span class="sec-num">2</span><h2>사용자 정의</h2></div>
+    <div class="grid grid-3">
+      <div class="card">
+        <span class="k">주 사용자</span>
+        <h3>국내 대학생</h3>
+        <p>특히 시간표가 자주 바뀌는 학기 초·중반에 필요성이 크다.</p>
+      </div>
+      <div class="card">
+        <span class="k">사용 상황</span>
+        <h3>밥약을 잡을 때</h3>
+        <p>친구·동아리·스터디원과 식사 약속을 잡는 모든 순간.</p>
+      </div>
+      <div class="card">
+        <span class="k">기술 숙련도</span>
+        <h3>일반 사용자 수준</h3>
+        <p>스마트폰·웹 서비스에 익숙한 정도면 충분. 기술적 능숙함 불필요.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 사용자 시나리오 -->
+  <section id="scenario">
+    <div class="sec-head"><span class="sec-num">3</span><h2>사용자 시나리오</h2></div>
+    <div class="flows">
+      <div class="flow">
+        <div class="flow-title"><span class="dot"></span>온보딩</div>
+        <ol>
+          <li>회원가입/로그인 <small>— 구글 로그인 시 캘린더 읽기 권한도 동시에 요청</small></li>
+          <li>마이페이지에서 캘린더 추가 연동 <small>— 에타는 공유 링크, 애플은 앱 암호 또는 webcal 링크</small></li>
+          <li>통합 캘린더에서 모든 일정을 한 곳에서 확인</li>
+        </ol>
+      </div>
+      <div class="flow">
+        <div class="flow-title"><span class="dot"></span>밥약 모임 생성</div>
+        <ol>
+          <li>"새 밥약 모임 만들기" 버튼 클릭</li>
+          <li>가입된 친구를 검색해 초대</li>
+          <li>친구 수락 시 전원의 캘린더를 비교해 <small>모두가 비는 시간대 후보를 리스트로 제시</small></li>
+          <li>후보 중 하나(또는 여러 개)를 선택</li>
+        </ol>
+      </div>
+      <div class="flow">
+        <div class="flow-title"><span class="dot"></span>맛집 추천</div>
+        <ol>
+          <li>위치 입력 <small>— GPS 자동 또는 학교 이름 직접 입력</small></li>
+          <li>음식 카테고리 선택 <small>— 한식/일식/중식/양식/카페 등</small></li>
+          <li>네이버+카카오 결과를 합쳐 리뷰순·평점순 상위 3~4곳을 카드로 제시</li>
+          <li>하나를 선택하면 모임 최종 확정</li>
+        </ol>
+      </div>
+    </div>
+    <div class="after-note">
+      <strong>모임 확정 후</strong> — 참여자 전원에게 확정된 시간·장소가 표시된다. (확장: 알림 발송)
+    </div>
+  </section>
+
+  <!-- 4. 핵심 기능 명세 -->
+  <section id="features">
+    <div class="sec-head"><span class="sec-num">4</span><h2>핵심 기능 명세</h2></div>
+
+    <div class="grid grid-2" style="margin-bottom: 14px;">
+      <div class="card">
+        <span class="k">회원 관리</span>
+        <h3>두 가지 로그인</h3>
+        <p>이메일/비밀번호 회원가입·로그인, 그리고 구글 OAuth 로그인(로그인 + 캘린더 읽기 권한 동시 획득).</p>
+      </div>
+      <div class="card">
+        <span class="k">맛집 추천</span>
+        <h3>두 API 병합 + 통합 점수</h3>
+        <p>네이버 지역검색 + 카카오 로컬 결과를 병합, 리뷰 수·평점을 정규화한 통합 점수로 정렬해 상위 3~4곳만 노출.</p>
+      </div>
+    </div>
+
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr><th>캘린더 소스</th><th>연동 방식</th><th>비고</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>구글 캘린더</b></td>
+            <td>OAuth 2.0, <code>calendar.readonly</code> 스코프</td>
+            <td>최우선 구현</td>
+          </tr>
+          <tr>
+            <td><b>에타 시간표</b></td>
+            <td>공유 링크 identifier로 데이터 파싱</td>
+            <td>비공식 방식, 정책 변경 리스크</td>
+          </tr>
+          <tr>
+            <td><b>애플 캘린더</b></td>
+            <td>webcal 공개 링크 → <code>.ics</code> 파싱 (1순위) 또는 CalDAV + 앱 암호 (2순위)</td>
+            <td>읽기 전용으로 충분</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="font-size: 13.5px; margin-top: 10px;">
+      연동된 일정은 주기적으로(또는 수동 새로고침 시) 동기화해 EVENT 테이블에 저장하며,
+      마이페이지에서 연동 상태 확인과 해제가 가능하다.
+    </p>
+
+    <div class="algo">
+      <span class="k">공통 공강 계산 로직</span>
+      <div class="algo-steps">
+        <span class="step">참여자별 일정을 시간순 정렬</span>
+        <span class="arrow">→</span>
+        <span class="step">전원의 "바쁜 시간" 합집합</span>
+        <span class="arrow">→</span>
+        <span class="step">활동 시간(09:00~22:00)의 나머지 = 공통 공강</span>
+      </div>
+      <p class="cond">최소 지속 시간(예: 1시간) 이상인 구간만 후보로 제시한다.</p>
+    </div>
+  </section>
+
+  <!-- 5. DB 설계 -->
+  <section id="erd">
+    <div class="sec-head"><span class="sec-num">5</span><h2>데이터베이스 설계</h2></div>
+    <div class="erd-grid">
+      <div class="entity">
+        <div class="entity-name">USER</div>
+        <ul>
+          <li><span class="fname">id</span><span class="ftype">uuid</span><span class="pk">PK</span></li>
+          <li><span class="fname">name</span><span class="ftype">string</span></li>
+          <li><span class="fname">email</span><span class="ftype">string</span></li>
+          <li><span class="fname">password_hash</span><span class="ftype">string</span><span class="fnote">구글 로그인 시 null 가능</span></li>
+        </ul>
+      </div>
+      <div class="entity">
+        <div class="entity-name">CALENDAR_INTEGRATION</div>
+        <ul>
+          <li><span class="fname">id</span><span class="ftype">uuid</span><span class="pk">PK</span></li>
+          <li><span class="fname">user_id</span><span class="ftype">uuid</span><span class="fk">FK</span></li>
+          <li><span class="fname">provider</span><span class="ftype">string</span><span class="fnote">google · apple · everytime</span></li>
+          <li><span class="fname">external_calendar_id</span><span class="ftype">string</span></li>
+          <li><span class="fname">credential_encrypted</span><span class="ftype">string</span><span class="fnote">암호화 저장 필수</span></li>
+        </ul>
+      </div>
+      <div class="entity">
+        <div class="entity-name">EVENT</div>
+        <ul>
+          <li><span class="fname">id</span><span class="ftype">uuid</span><span class="pk">PK</span></li>
+          <li><span class="fname">integration_id</span><span class="ftype">uuid</span><span class="fk">FK</span></li>
+          <li><span class="fname">title</span><span class="ftype">string</span></li>
+          <li><span class="fname">start_time</span><span class="ftype">datetime</span></li>
+          <li><span class="fname">end_time</span><span class="ftype">datetime</span></li>
+        </ul>
+      </div>
+      <div class="entity">
+        <div class="entity-name">MEETUP_SESSION</div>
+        <ul>
+          <li><span class="fname">id</span><span class="ftype">uuid</span><span class="pk">PK</span></li>
+          <li><span class="fname">creator_id</span><span class="ftype">uuid</span><span class="fk">FK</span></li>
+          <li><span class="fname">location_name</span><span class="ftype">string</span></li>
+          <li><span class="fname">food_category</span><span class="ftype">string</span></li>
+          <li><span class="fname">status</span><span class="ftype">string</span><span class="fnote">matching · confirmed · cancelled</span></li>
+          <li><span class="fname">created_at</span><span class="ftype">datetime</span></li>
+        </ul>
+      </div>
+      <div class="entity">
+        <div class="entity-name">SESSION_PARTICIPANT</div>
+        <ul>
+          <li><span class="fname">id</span><span class="ftype">uuid</span><span class="pk">PK</span></li>
+          <li><span class="fname">session_id</span><span class="ftype">uuid</span><span class="fk">FK</span></li>
+          <li><span class="fname">user_id</span><span class="ftype">uuid</span><span class="fk">FK</span></li>
+          <li><span class="fname">invite_status</span><span class="ftype">string</span><span class="fnote">pending · accepted · declined</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="rels">
+      <span><b>USER</b> <span class="r-arrow">1 — N</span> <b>CALENDAR_INTEGRATION</b></span>
+      <span><b>CALENDAR_INTEGRATION</b> <span class="r-arrow">1 — N</span> <b>EVENT</b></span>
+      <span><b>USER</b> <span class="r-arrow">1 — N</span> <b>MEETUP_SESSION</b> <span class="muted">(생성)</span></span>
+      <span><b>MEETUP_SESSION</b> <span class="r-arrow">1 — N</span> <b>SESSION_PARTICIPANT</b></span>
+      <span><b>USER</b> <span class="r-arrow">1 — N</span> <b>SESSION_PARTICIPANT</b> <span class="muted">(참여)</span></span>
+    </div>
+  </section>
+
+  <!-- 6. API 설계 -->
+  <section id="api">
+    <div class="sec-head"><span class="sec-num">6</span><h2>API 설계 <span class="muted" style="font-size:15px; font-weight:500;">(초안)</span></h2></div>
+    <div class="tbl-scroll">
+      <table>
+        <thead>
+          <tr><th style="width:80px;">Method</th><th>Endpoint</th><th>설명</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="badge post">POST</span></td><td><code>/auth/signup</code></td><td>이메일 회원가입</td></tr>
+          <tr><td><span class="badge post">POST</span></td><td><code>/auth/login</code></td><td>이메일 로그인</td></tr>
+          <tr><td><span class="badge get">GET</span></td><td><code>/auth/google/login</code></td><td>구글 로그인 시작</td></tr>
+          <tr><td><span class="badge get">GET</span></td><td><code>/auth/google/callback</code></td><td>구글 로그인 콜백, 캘린더 토큰 저장</td></tr>
+          <tr><td><span class="badge post">POST</span></td><td><code>/calendar/everytime</code></td><td>에타 시간표 링크 등록</td></tr>
+          <tr><td><span class="badge post">POST</span></td><td><code>/calendar/apple</code></td><td>애플 캘린더 등록 (webcal 링크 또는 앱 암호)</td></tr>
+          <tr><td><span class="badge get">GET</span></td><td><code>/calendar/me</code></td><td>내 통합 캘린더 조회</td></tr>
+          <tr><td><span class="badge post">POST</span></td><td><code>/meetups</code></td><td>밥약 모임 생성</td></tr>
+          <tr><td><span class="badge post">POST</span></td><td><code>/meetups/{id}/invite</code></td><td>참여자 초대</td></tr>
+          <tr><td><span class="badge post">POST</span></td><td><code>/meetups/{id}/respond</code></td><td>초대 수락/거절</td></tr>
+          <tr><td><span class="badge get">GET</span></td><td><code>/meetups/{id}/available-times</code></td><td>공통 공강 시간 계산 결과 조회</td></tr>
+          <tr><td><span class="badge get">GET</span></td><td><code>/restaurants?lat=&amp;lng=&amp;category=</code></td><td>맛집 추천 조회</td></tr>
+          <tr><td><span class="badge post">POST</span></td><td><code>/meetups/{id}/confirm</code></td><td>모임 확정 (시간/장소)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 7. 비기능 요구사항 -->
+  <section id="nfr">
+    <div class="sec-head"><span class="sec-num">7</span><h2>비기능 요구사항</h2></div>
+    <div class="nfr-grid">
+      <div class="card">
+        <span class="k">보안</span>
+        <h3>자격증명 암호화 저장</h3>
+        <p>OAuth 토큰·앱 암호는 반드시 암호화해서 저장한다. 평문 저장 금지.</p>
+      </div>
+      <div class="card">
+        <span class="k">에러 처리</span>
+        <h3>사람이 이해하는 메시지</h3>
+        <p>외부 API 실패 시 원인이 이해되는 메시지로 안내하고, 원본 에러를 그대로 노출하지 않는다.</p>
+      </div>
+      <div class="card">
+        <span class="k">확장성</span>
+        <h3>provider 기반 구조</h3>
+        <p>캘린더 소스 추가를 감안해 provider 필드 기반으로 새 소스를 붙이기 쉽게 설계한다.</p>
+      </div>
+      <div class="card">
+        <span class="k">배포</span>
+        <h3>로컬 데모로 충분</h3>
+        <p>배포는 필수가 아니다. 시간이 되면 진행한다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. MVP 범위 -->
+  <section id="mvp">
+    <div class="sec-head"><span class="sec-num">8</span><h2>MVP 범위와 우선순위</h2></div>
+    <div class="grid grid-2">
+      <div class="card mvp-must">
+        <div class="mvp-head">반드시 있어야 함 — MVP</div>
+        <ul class="mvp-list">
+          <li><span class="m-dot"></span>회원가입/로그인 (이메일 + 구글)</li>
+          <li><span class="m-dot"></span>구글 캘린더 연동</li>
+          <li><span class="m-dot"></span>밥약 모임 생성 + 공통 공강 시간 계산</li>
+          <li><span class="m-dot"></span>네이버 또는 카카오 중 하나로 맛집 추천</li>
+        </ul>
+      </div>
+      <div class="card mvp-nice">
+        <div class="mvp-head">있으면 좋음 — 여유 시</div>
+        <ul class="mvp-list">
+          <li><span class="m-dot"></span>에타 연동</li>
+          <li><span class="m-dot"></span>애플 캘린더 연동</li>
+          <li><span class="m-dot"></span>네이버 + 카카오 결과 병합</li>
+          <li><span class="m-dot"></span>배포</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. 로드맵 -->
+  <section id="roadmap">
+    <div class="sec-head"><span class="sec-num">9</span><h2>4주 로드맵</h2></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-week">1주</div>
+        <div class="tl-body">
+          <h3>기획 확정 · ERD/API 설계 · 회원가입/로그인 · 구글 OAuth 연동</h3>
+          <span class="tl-done"><span class="check">✓ 완료 기준</span>구글 로그인 후 본인 캘린더 일정이 DB에 저장됨</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-week">2주</div>
+        <div class="tl-body">
+          <h3>밥약 모임 생성 + 참여자 초대 + 공통 공강 계산 로직</h3>
+          <span class="tl-done"><span class="check">✓ 완료 기준</span>참여자 2명 이상으로 공강 시간이 정상 계산됨</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-week">3주</div>
+        <div class="tl-body">
+          <h3>에타/애플 캘린더 연동 (여유 되는 만큼)</h3>
+          <span class="tl-done"><span class="check">✓ 완료 기준</span>최소 하나의 추가 소스가 통합 캘린더에 반영됨</span>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-week">4주</div>
+        <div class="tl-body">
+          <h3>네이버/카카오 맛집 추천 연동 + UI 다듬기</h3>
+          <span class="tl-done"><span class="check">✓ 완료 기준</span>확정된 시간·위치·카테고리로 맛집 3~4곳이 추천됨</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. 리스크 -->
+  <section id="risks">
+    <div class="sec-head"><span class="sec-num">10</span><h2>알려진 리스크</h2></div>
+    <ul class="risk-list">
+      <li>
+        <b>에타 연동은 비공식 방식</b>
+        정책 변경 시 깨질 수 있다.
+        <span class="mitigate">→ 파싱 로직을 별도 모듈로 분리해 대응이 쉽게 설계</span>
+      </li>
+      <li>
+        <b>애플 로그인에는 캘린더 권한 스코프가 없음</b>
+        구글처럼 로그인과 캘린더 연동을 한 번에 처리할 수 없다.
+        <span class="mitigate">→ 로그인과 캘린더 연동을 별개 절차로 안내</span>
+      </li>
+      <li>
+        <b>초대 수락은 실시간이 아님</b>
+        모든 참여자가 응답하기 전까지 기다려야 한다.
+        <span class="mitigate">→ 전원 응답 전에는 "매칭 대기 중" 상태를 명확히 표시</span>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <span>밥약 매칭 서비스 · 프로젝트 기획서</span>
+    <span>개인 프로젝트 · 4주</span>
+  </footer>
+
+</div>
+</body>
+</html>

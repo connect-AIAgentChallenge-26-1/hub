@@ -1,0 +1,1054 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>밥약 — 웹 디자인 시안</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+  :root {
+    --bg: #f7f1e8;          /* 스튜디오 배경 */
+    --app-bg: #fffdf8;      /* 앱 화면 배경 */
+    --card: #ffffff;
+    --ink: #221b15;
+    --muted: #857a70;
+    --accent: #ff6a3d;
+    --accent-deep: #e5501f;
+    --accent-soft: #ffe9dc;
+    --chip: #fff3d6;
+    --green: #2e9e6b;
+    --green-soft: #e5f4ec;
+    --yellow: #f5c518;
+    --line: #efe3d7;
+    --r: 14px;
+    --shadow: 0 2px 14px rgba(90, 60, 30, 0.07);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button { font: inherit; cursor: pointer; }
+  input { font: inherit; }
+  a { color: inherit; text-decoration: none; }
+  button:focus-visible, input:focus-visible, a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+  /* ═══ 스튜디오 바 (시안 네비게이션) ═══ */
+  .studio {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 28px 20px 90px;
+  }
+
+  .studio-head {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    margin-bottom: 18px;
+  }
+
+  .studio-head .t { font-weight: 800; font-size: 16px; letter-spacing: -0.01em; }
+  .studio-head .t small { color: var(--muted); font-weight: 500; margin-left: 8px; }
+
+  .screen-tabs { display: flex; flex-wrap: wrap; gap: 6px; margin-left: auto; }
+
+  .screen-tabs button {
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 7px 14px;
+    border-radius: 999px;
+    transition: all 0.15s;
+  }
+
+  .screen-tabs button:hover { color: var(--ink); }
+
+  .screen-tabs button.on {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+  }
+
+  /* ═══ 브라우저 프레임 ═══ */
+  .frame {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 18px 50px rgba(90, 60, 30, 0.12);
+  }
+
+  .frame-bar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--line);
+    background: #fbf7f0;
+  }
+
+  .frame-dots { display: flex; gap: 6px; }
+  .frame-dots i { width: 11px; height: 11px; border-radius: 50%; background: #e8ddd0; }
+
+  .frame-url {
+    flex: 1;
+    max-width: 340px;
+    margin: 0 auto;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: center;
+    padding: 5px 12px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  .screen { display: none; background: var(--app-bg); min-height: 680px; }
+  .screen.on { display: block; }
+
+  /* ═══ 앱 공통: 네비바 ═══ */
+  .appnav {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    padding: 14px 32px;
+    background: var(--card);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .brand { display: flex; align-items: center; gap: 8px; font-size: 19px; font-weight: 800; letter-spacing: -0.02em; white-space: nowrap; }
+  .brand svg { display: block; }
+
+  .appnav .links { display: flex; gap: 20px; font-size: 14.5px; font-weight: 600; color: var(--muted); white-space: nowrap; }
+  @media (max-width: 700px) {
+    .appnav { padding: 14px 18px; gap: 16px; }
+    .appnav .links { gap: 14px; font-size: 13.5px; }
+    .content { padding: 24px 18px 40px; }
+  }
+  .appnav .links .cur { color: var(--ink); position: relative; }
+  .appnav .links .cur::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: -15px;
+    height: 2.5px;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+
+  .appnav .me { margin-left: auto; display: flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 600; }
+
+  .avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13.5px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .av-a { background: #ff8a5c; }
+  .av-b { background: #58b98a; }
+  .av-c { background: #6d9ee8; }
+  .av-d { background: #c98ad6; }
+
+  .content { padding: 30px 32px 48px; }
+
+  /* 공통 부품 */
+  .btn {
+    border: none;
+    border-radius: 10px;
+    padding: 11px 20px;
+    font-weight: 700;
+    font-size: 14.5px;
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn:hover { background: var(--accent-deep); }
+
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .btn-ghost:hover { background: var(--chip); border-color: var(--chip); }
+
+  .btn-sm { padding: 7px 13px; font-size: 13px; border-radius: 8px; }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 3.5px 10px;
+    border-radius: 999px;
+  }
+  .tag-green { background: var(--green-soft); color: #1d7a4f; }
+  .tag-orange { background: var(--accent-soft); color: var(--accent-deep); }
+  .tag-warm { background: var(--chip); color: #9a6a00; }
+
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+  }
+
+  .panel-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 22px 0;
+  }
+  .panel-head h2 { margin: 0; font-size: 17px; font-weight: 800; letter-spacing: -0.01em; }
+  .panel-head .spacer { margin-left: auto; }
+  .panel-body { padding: 16px 22px 22px; }
+
+  /* ═══ S1 로그인 ═══ */
+  .login-wrap {
+    min-height: 680px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background:
+      radial-gradient(420px 300px at 12% 8%, #ffe9dc 0%, transparent 70%),
+      radial-gradient(430px 320px at 88% 92%, #fff3d6 0%, transparent 70%),
+      var(--app-bg);
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 400px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    padding: 40px 36px 32px;
+    text-align: center;
+  }
+
+  .login-card .brand { justify-content: center; font-size: 30px; margin-bottom: 6px; }
+  .login-card .tagline { margin: 0 0 30px; color: var(--muted); font-size: 14.5px; }
+
+  .g-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 14.5px;
+  }
+  .g-btn:hover { background: #faf7f2; }
+  .g-btn em { font-style: normal; font-size: 11.5px; color: var(--muted); font-weight: 500; }
+
+  .login-div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--muted);
+    font-size: 12.5px;
+    margin: 22px 0 18px;
+  }
+  .login-div::before, .login-div::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+
+  .field { text-align: left; margin-bottom: 14px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; color: var(--muted); margin-bottom: 6px; }
+  .field input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: var(--app-bg);
+  }
+  .field input::placeholder { color: #c4b8ac; }
+
+  .login-card .btn { width: 100%; margin-top: 6px; padding: 13px; }
+  .login-foot { margin-top: 22px; font-size: 13.5px; color: var(--muted); }
+  .login-foot b { color: var(--accent-deep); font-weight: 700; }
+
+  /* ═══ S2 홈 ═══ */
+  .home-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; align-items: start; }
+  @media (max-width: 860px) { .home-grid { grid-template-columns: 1fr; } }
+
+  .hello { margin: 0 0 4px; font-size: 23px; font-weight: 800; letter-spacing: -0.02em; }
+  .hello-sub { margin: 0 0 24px; color: var(--muted); font-size: 14px; }
+
+  .cal-sources { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 22px 16px; }
+
+  .src {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 13px;
+    background: var(--card);
+  }
+  .src i { width: 8px; height: 8px; border-radius: 50%; }
+  .src .g { background: #4285f4; }
+  .src .e { background: #f91f15; }
+  .src .a { background: #8e8e93; }
+  .src small { color: var(--green); font-weight: 700; font-size: 11.5px; }
+
+  .day-group { padding: 0 22px; }
+  .day-label {
+    font-size: 12.5px;
+    font-weight: 800;
+    color: var(--accent-deep);
+    letter-spacing: 0.04em;
+    padding: 12px 0 6px;
+  }
+
+  .evt {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .day-group:last-child .evt:last-child { border-bottom: none; }
+
+  .evt i { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .evt .t { font-weight: 600; }
+  .evt .tm { margin-left: auto; color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+  .cta-new {
+    width: 100%;
+    padding: 16px;
+    font-size: 15.5px;
+    border-radius: var(--r);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 6px 18px rgba(255, 106, 61, 0.3);
+    margin-bottom: 20px;
+  }
+
+  .meet-item { padding: 16px 22px; border-bottom: 1px solid var(--line); }
+  .meet-item:last-child { border-bottom: none; }
+  .meet-item .r1 { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+  .meet-item .name { font-weight: 700; font-size: 15px; }
+  .meet-item .sub { color: var(--muted); font-size: 13px; }
+
+  .av-stack { display: flex; margin-left: auto; }
+  .av-stack .avatar { width: 28px; height: 28px; font-size: 11.5px; border: 2px solid var(--card); margin-left: -8px; }
+  .av-stack .avatar:first-child { margin-left: 0; }
+
+  /* ═══ S3 모임 만들기 (모달) ═══ */
+  .modal-back {
+    min-height: 616px;
+    background: rgba(60, 40, 25, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .modal {
+    width: 100%;
+    max-width: 480px;
+    background: var(--card);
+    border-radius: 20px;
+    box-shadow: 0 24px 60px rgba(40, 25, 10, 0.25);
+    padding: 30px 32px;
+  }
+
+  .modal h2 { margin: 0 0 4px; font-size: 20px; font-weight: 800; letter-spacing: -0.01em; }
+  .modal .sub { margin: 0 0 24px; color: var(--muted); font-size: 13.5px; }
+
+  .invite-box { border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; background: var(--app-bg); }
+
+  .invite-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+
+  .ichip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 4px 6px 4px 12px;
+    border-radius: 999px;
+  }
+  .ichip b { font-weight: 800; opacity: 0.55; padding: 0 4px; }
+
+  .invite-box input { width: 100%; border: none; background: transparent; padding: 4px 2px; }
+  .invite-box input:focus { outline: none; }
+
+  .found { margin-top: 10px; }
+  .found-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 6px;
+    border-radius: 10px;
+  }
+  .found-row:hover { background: var(--chip); }
+  .found-row .nm { font-weight: 600; font-size: 14px; }
+  .found-row .em { color: var(--muted); font-size: 12.5px; }
+  .found-row .add { margin-left: auto; }
+
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 26px; }
+
+  /* ═══ S4 공강 매칭 ═══ */
+  .meet-head { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 6px; }
+  .meet-head h1 { margin: 0; font-size: 23px; font-weight: 800; letter-spacing: -0.02em; }
+
+  .people-row { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; margin: 14px 0 20px; }
+
+  .person { display: flex; align-items: center; gap: 8px; font-size: 13.5px; font-weight: 600; }
+  .person .st { font-size: 12px; font-weight: 700; }
+  .person .ok { color: var(--green); }
+  .person .wait { color: #b98a1c; }
+
+  .notice {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--chip);
+    border-radius: 12px;
+    padding: 13px 18px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #7a5a10;
+    margin-bottom: 24px;
+  }
+
+  .slot-filters { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; }
+  .slot-filters button {
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    padding: 6px 14px;
+    white-space: nowrap;
+  }
+  .slot-filters .on { background: var(--ink); border-color: var(--ink); color: #fff; }
+
+  .slots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  @media (max-width: 760px) { .slots { grid-template-columns: 1fr; } }
+
+  .slot {
+    position: relative;
+    background: var(--card);
+    border: 1.5px solid var(--line);
+    border-radius: var(--r);
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .slot .d { font-size: 13px; font-weight: 700; color: var(--muted); }
+  .slot .tm { font-size: 19px; font-weight: 800; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+  .slot .len { font-size: 12.5px; color: var(--muted); }
+
+  .slot .pick {
+    position: absolute;
+    top: 16px; right: 16px;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    border: 2px solid var(--line);
+    background: var(--card);
+  }
+
+  .slot.sel { border-color: var(--accent); background: #fff8f4; }
+  .slot.sel .pick { border-color: var(--accent); background: var(--accent); }
+  .slot.sel .pick::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border-radius: 50%;
+    background: #fff;
+  }
+
+  .slot .who { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+  .slot .who .avatar { width: 22px; height: 22px; font-size: 10px; }
+  .slot .who small { color: var(--green); font-size: 12px; font-weight: 700; }
+
+  .match-cta { display: flex; justify-content: flex-end; margin-top: 22px; }
+  .match-cta .btn { padding: 13px 26px; font-size: 15px; }
+
+  /* ═══ S5 맛집 추천 ═══ */
+  .pick-summary {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 15px 22px;
+    margin-bottom: 22px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .pick-summary .lbl { color: var(--muted); font-weight: 500; font-size: 12.5px; margin-right: 4px; }
+  .pick-summary > span { white-space: nowrap; }
+
+  .cat-row { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
+  .cat {
+    border: 1px solid var(--line);
+    background: var(--card);
+    border-radius: 999px;
+    padding: 7px 16px;
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .cat.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  .rest-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  @media (max-width: 760px) { .rest-grid { grid-template-columns: 1fr; } }
+
+  .rest {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    overflow: hidden;
+  }
+
+  .rest-img {
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+  }
+  .ri-1 { background: linear-gradient(135deg, #ffe9dc, #fff3d6); }
+  .ri-2 { background: linear-gradient(135deg, #e5f4ec, #f2f8e8); }
+  .ri-3 { background: linear-gradient(135deg, #fff3d6, #ffeef2); }
+  .ri-4 { background: linear-gradient(135deg, #eef2ff, #e9f7f4); }
+
+  .rest-body { padding: 14px 18px 18px; }
+  .rest .nm { font-size: 16px; font-weight: 800; letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; }
+
+  .rest .meta { display: flex; align-items: center; gap: 10px; margin-top: 5px; font-size: 13px; color: var(--muted); }
+  .rest .meta .star { color: #e9a800; font-weight: 800; }
+  .rest .meta b { color: var(--ink); font-weight: 700; }
+
+  .srcb {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px; height: 18px;
+    border-radius: 5px;
+    font-size: 10.5px;
+    font-weight: 900;
+    color: #fff;
+  }
+  .srcb.n { background: #03c75a; }
+  .srcb.k { background: #fee500; color: #3c1e1e; }
+
+  .rest .foot { display: flex; align-items: center; margin-top: 12px; }
+  .rest .foot .btn-sm { margin-left: auto; }
+
+  .ribbon {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11.5px;
+    font-weight: 800;
+    padding: 4px 11px;
+    border-radius: 999px;
+    box-shadow: 0 3px 8px rgba(229, 80, 31, 0.35);
+  }
+
+  /* ═══ S6 확정 ═══ */
+  .done-wrap {
+    min-height: 616px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background:
+      radial-gradient(430px 300px at 85% 10%, #fff3d6 0%, transparent 70%),
+      radial-gradient(380px 300px at 10% 90%, #ffe9dc 0%, transparent 70%),
+      var(--app-bg);
+  }
+
+  .done-card {
+    width: 100%;
+    max-width: 460px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    box-shadow: var(--shadow);
+    padding: 40px 38px 34px;
+    text-align: center;
+  }
+
+  .done-emoji { font-size: 44px; line-height: 1; margin-bottom: 12px; }
+  .done-card h1 { margin: 0 0 6px; font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+  .done-card .sub { margin: 0 0 26px; color: var(--muted); font-size: 14px; }
+
+  .done-info {
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    text-align: left;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .done-info .row {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--line);
+    font-size: 14.5px;
+  }
+  .done-info .row:last-child { border-bottom: none; }
+  .done-info .ic { width: 20px; text-align: center; flex-shrink: 0; }
+  .done-info b { font-weight: 700; }
+  .done-info .row small { display: block; color: var(--muted); font-size: 12.5px; }
+
+  .done-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .done-actions .btn, .done-actions .btn-ghost { flex: 1; min-width: 170px; padding: 13px; border-radius: 11px; white-space: nowrap; }
+
+  .kakao-btn {
+    background: #fee500;
+    color: #3c1e1e;
+    border: none;
+    font-weight: 700;
+  }
+  .kakao-btn:hover { background: #f5dc00; }
+
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="studio">
+
+  <div class="studio-head">
+    <span class="t">🍚 밥약 — 웹 디자인 시안<small>6개 화면 · 사용자 시나리오 순서</small></span>
+    <nav class="screen-tabs" aria-label="화면 선택">
+      <button class="on" data-s="s1">1 로그인</button>
+      <button data-s="s2">2 홈</button>
+      <button data-s="s3">3 모임 만들기</button>
+      <button data-s="s4">4 공강 매칭</button>
+      <button data-s="s5">5 맛집 추천</button>
+      <button data-s="s6">6 확정</button>
+    </nav>
+  </div>
+
+  <div class="frame">
+    <div class="frame-bar">
+      <span class="frame-dots"><i></i><i></i><i></i></span>
+      <span class="frame-url">bapyak.app</span>
+    </div>
+
+    <!-- ═══════════ S1 로그인 ═══════════ -->
+    <div class="screen on" id="s1">
+      <div class="login-wrap">
+        <div class="login-card">
+          <div class="brand">
+            <svg width="34" height="34" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+              <path d="M8 22h32a1 1 0 0 1 1 1c0 8-6 15-14 16v2h-6v-2C13 38 7 31 7 23a1 1 0 0 1 1-1z" fill="#FF6A3D"/>
+              <path d="M14 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M23 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+              <path d="M32 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+            </svg>
+            밥약
+          </div>
+          <p class="tagline">언제 볼까, 어디서 볼까를 한 번에</p>
+
+          <button class="g-btn">
+            <svg width="17" height="17" viewBox="0 0 48 48" aria-hidden="true">
+              <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+              <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+              <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+            </svg>
+            Google로 시작하기 <em>— 캘린더도 함께 연동돼요</em>
+          </button>
+
+          <div class="login-div">또는 이메일로</div>
+
+          <div class="field">
+            <label>이메일</label>
+            <input type="email" placeholder="university@example.com" />
+          </div>
+          <div class="field">
+            <label>비밀번호</label>
+            <input type="password" placeholder="8자 이상" />
+          </div>
+          <button class="btn">로그인</button>
+
+          <p class="login-foot">아직 계정이 없나요? <b>회원가입</b></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ S2 홈 ═══════════ -->
+    <div class="screen" id="s2">
+      <nav class="appnav">
+        <span class="brand">
+          <svg width="24" height="24" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M8 22h32a1 1 0 0 1 1 1c0 8-6 15-14 16v2h-6v-2C13 38 7 31 7 23a1 1 0 0 1 1-1z" fill="#FF6A3D"/>
+            <path d="M14 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M23 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M32 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          밥약
+        </span>
+        <span class="links"><a class="cur">홈</a><a>밥약 모임</a><a>마이페이지</a></span>
+        <span class="me"><span class="avatar av-a">준</span></span>
+      </nav>
+
+      <div class="content">
+        <h1 class="hello">좋은 오후예요, 준님 🍽️</h1>
+        <p class="hello-sub">이번 주에 밥약 2개가 기다리고 있어요.</p>
+
+        <div class="home-grid">
+          <div class="panel">
+            <div class="panel-head">
+              <h2>내 통합 캘린더</h2>
+              <span class="spacer"></span>
+              <button class="btn-ghost btn-sm">전체 동기화</button>
+            </div>
+            <div class="panel-body" style="padding-bottom: 8px;">
+              <div class="cal-sources" style="padding: 0 0 14px;">
+                <span class="src"><i class="g"></i>구글 <small>연동됨</small></span>
+                <span class="src"><i class="e"></i>에브리타임 <small>연동됨</small></span>
+                <span class="src"><i class="a"></i>애플 <small>연동됨</small></span>
+              </div>
+            </div>
+            <div style="padding-bottom: 18px;">
+              <div class="day-group">
+                <div class="day-label">오늘 · 7월 8일 (수)</div>
+                <div class="evt"><i style="background:#f91f15"></i><span class="t">운영체제</span><span class="tm">14:00 – 15:30</span></div>
+                <div class="evt"><i style="background:#f91f15"></i><span class="t">이산수학</span><span class="tm">16:00 – 17:30</span></div>
+              </div>
+              <div class="day-group">
+                <div class="day-label">내일 · 7월 9일 (목)</div>
+                <div class="evt"><i style="background:#f91f15"></i><span class="t">대학글쓰기</span><span class="tm">10:30 – 12:00</span></div>
+                <div class="evt"><i style="background:#4285f4"></i><span class="t">동아리 회의</span><span class="tm">18:00 – 19:00</span></div>
+              </div>
+              <div class="day-group">
+                <div class="day-label">7월 10일 (금)</div>
+                <div class="evt"><i style="background:#f91f15"></i><span class="t">인공지능과컴퓨팅</span><span class="tm">09:00 – 10:30</span></div>
+                <div class="evt"><i style="background:#8e8e93"></i><span class="t">치과 예약</span><span class="tm">15:00 – 16:00</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <button class="btn cta-new">+ 새 밥약 만들기</button>
+            <div class="panel">
+              <div class="panel-head"><h2>내 밥약</h2></div>
+              <div style="padding-top: 8px;">
+                <div class="meet-item">
+                  <div class="r1">
+                    <span class="name">종강 전 마지막 밥약</span>
+                    <span class="tag tag-warm">매칭 중</span>
+                    <span class="av-stack"><span class="avatar av-a">준</span><span class="avatar av-b">지</span><span class="avatar av-c">민</span></span>
+                  </div>
+                  <div class="sub">1명 응답 대기 중 · 공강 후보 4개</div>
+                </div>
+                <div class="meet-item">
+                  <div class="r1">
+                    <span class="name">스터디 회식</span>
+                    <span class="tag tag-green">확정</span>
+                    <span class="av-stack"><span class="avatar av-a">준</span><span class="avatar av-d">서</span></span>
+                  </div>
+                  <div class="sub">7월 15일 (수) 18:00 · 청춘국밥</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ S3 모임 만들기 ═══════════ -->
+    <div class="screen" id="s3">
+      <nav class="appnav">
+        <span class="brand">
+          <svg width="24" height="24" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M8 22h32a1 1 0 0 1 1 1c0 8-6 15-14 16v2h-6v-2C13 38 7 31 7 23a1 1 0 0 1 1-1z" fill="#FF6A3D"/>
+            <path d="M14 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M23 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M32 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          밥약
+        </span>
+        <span class="links"><a>홈</a><a class="cur">밥약 모임</a><a>마이페이지</a></span>
+        <span class="me"><span class="avatar av-a">준</span></span>
+      </nav>
+
+      <div class="modal-back">
+        <div class="modal">
+          <h2>새 밥약 만들기</h2>
+          <p class="sub">친구를 초대하면 모두의 공강 시간을 자동으로 찾아드려요.</p>
+
+          <div class="field">
+            <label>모임 이름</label>
+            <input type="text" value="종강 전 마지막 밥약" />
+          </div>
+
+          <div class="field">
+            <label>친구 초대</label>
+            <div class="invite-box">
+              <div class="invite-chips">
+                <span class="ichip">김지우 <b>×</b></span>
+                <span class="ichip">박민준 <b>×</b></span>
+              </div>
+              <input type="text" placeholder="이름 또는 이메일로 검색" value="이서" />
+            </div>
+            <div class="found">
+              <div class="found-row">
+                <span class="avatar av-d">서</span>
+                <span><span class="nm">이서연</span><br /><span class="em">seoyeon@university.ac.kr</span></span>
+                <button class="btn btn-sm add">추가</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button class="btn-ghost btn" style="background:transparent; color:var(--ink); border:1px solid var(--line); font-weight:600;">취소</button>
+            <button class="btn">모임 만들고 초대 보내기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ S4 공강 매칭 ═══════════ -->
+    <div class="screen" id="s4">
+      <nav class="appnav">
+        <span class="brand">
+          <svg width="24" height="24" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M8 22h32a1 1 0 0 1 1 1c0 8-6 15-14 16v2h-6v-2C13 38 7 31 7 23a1 1 0 0 1 1-1z" fill="#FF6A3D"/>
+            <path d="M14 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M23 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M32 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          밥약
+        </span>
+        <span class="links"><a>홈</a><a class="cur">밥약 모임</a><a>마이페이지</a></span>
+        <span class="me"><span class="avatar av-a">준</span></span>
+      </nav>
+
+      <div class="content">
+        <div class="meet-head">
+          <h1>종강 전 마지막 밥약</h1>
+          <span class="tag tag-warm">매칭 중</span>
+        </div>
+
+        <div class="people-row">
+          <span class="person"><span class="avatar av-a">준</span>나 <span class="st ok">✓ 수락</span></span>
+          <span class="person"><span class="avatar av-b">지</span>김지우 <span class="st ok">✓ 수락</span></span>
+          <span class="person"><span class="avatar av-c">민</span>박민준 <span class="st wait">⏳ 대기 중</span></span>
+        </div>
+
+        <div class="notice">
+          ⏳ 박민준님의 수락을 기다리고 있어요. 지금은 수락한 2명 기준의 공강이에요 — 전원 수락 시 자동으로 다시 계산됩니다.
+        </div>
+
+        <div class="slot-filters">
+          <button class="on">점심 · 저녁</button>
+          <button>점심만</button>
+          <button>저녁만</button>
+          <button>전체 시간</button>
+        </div>
+
+        <div class="slots">
+          <div class="slot sel">
+            <span class="pick"></span>
+            <span class="d">7월 10일 (금)</span>
+            <span class="tm">11:30 – 13:00</span>
+            <span class="len">90분 · 점심</span>
+            <span class="who"><span class="avatar av-a">준</span><span class="avatar av-b">지</span><small>2명 모두 가능</small></span>
+          </div>
+          <div class="slot">
+            <span class="pick"></span>
+            <span class="d">7월 13일 (월)</span>
+            <span class="tm">12:00 – 14:00</span>
+            <span class="len">120분 · 점심</span>
+            <span class="who"><span class="avatar av-a">준</span><span class="avatar av-b">지</span><small>2명 모두 가능</small></span>
+          </div>
+          <div class="slot">
+            <span class="pick"></span>
+            <span class="d">7월 14일 (화)</span>
+            <span class="tm">11:00 – 12:30</span>
+            <span class="len">90분 · 점심</span>
+            <span class="who"><span class="avatar av-a">준</span><span class="avatar av-b">지</span><small>2명 모두 가능</small></span>
+          </div>
+          <div class="slot">
+            <span class="pick"></span>
+            <span class="d">7월 16일 (목)</span>
+            <span class="tm">17:30 – 19:00</span>
+            <span class="len">90분 · 저녁</span>
+            <span class="who"><span class="avatar av-a">준</span><span class="avatar av-b">지</span><small>2명 모두 가능</small></span>
+          </div>
+        </div>
+
+        <div class="match-cta">
+          <button class="btn">이 시간으로 맛집 찾기 →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ S5 맛집 추천 ═══════════ -->
+    <div class="screen" id="s5">
+      <nav class="appnav">
+        <span class="brand">
+          <svg width="24" height="24" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M8 22h32a1 1 0 0 1 1 1c0 8-6 15-14 16v2h-6v-2C13 38 7 31 7 23a1 1 0 0 1 1-1z" fill="#FF6A3D"/>
+            <path d="M14 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M23 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M32 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          밥약
+        </span>
+        <span class="links"><a>홈</a><a class="cur">밥약 모임</a><a>마이페이지</a></span>
+        <span class="me"><span class="avatar av-a">준</span></span>
+      </nav>
+
+      <div class="content">
+        <div class="meet-head" style="margin-bottom: 18px;">
+          <h1>어디서 먹을까요?</h1>
+        </div>
+
+        <div class="pick-summary">
+          <span><span class="lbl">시간 </span> 7월 10일 (금) 11:30</span>
+          <span><span class="lbl">위치 </span> 📍 학교 근처 (GPS)</span>
+          <span><span class="lbl">함께 </span> 준 · 지우 · 민준</span>
+        </div>
+
+        <div class="cat-row">
+          <button class="cat on">한식</button>
+          <button class="cat">일식</button>
+          <button class="cat">중식</button>
+          <button class="cat">양식</button>
+          <button class="cat">분식</button>
+          <button class="cat">카페</button>
+        </div>
+
+        <div class="rest-grid">
+          <div class="rest">
+            <span class="ribbon">추천 1위</span>
+            <div class="rest-img ri-1" aria-hidden="true">🍲</div>
+            <div class="rest-body">
+              <div class="nm">온담식당 <span class="srcb n">N</span><span class="srcb k">K</span></div>
+              <div class="meta"><span class="star">★ <b>4.6</b></span><span>리뷰 214</span><span>도보 4분</span></div>
+              <div class="foot"><span class="tag tag-orange">점심 웨이팅 적음</span><button class="btn btn-sm">여기로 확정</button></div>
+            </div>
+          </div>
+          <div class="rest">
+            <div class="rest-img ri-2" aria-hidden="true">🍚</div>
+            <div class="rest-body">
+              <div class="nm">밥꽃마을 <span class="srcb n">N</span></div>
+              <div class="meta"><span class="star">★ <b>4.5</b></span><span>리뷰 187</span><span>도보 6분</span></div>
+              <div class="foot"><span class="tag tag-green">가성비</span><button class="btn-ghost btn-sm">여기로 확정</button></div>
+            </div>
+          </div>
+          <div class="rest">
+            <div class="rest-img ri-3" aria-hidden="true">🥘</div>
+            <div class="rest-body">
+              <div class="nm">청춘국밥 <span class="srcb k">K</span></div>
+              <div class="meta"><span class="star">★ <b>4.4</b></span><span>리뷰 342</span><span>도보 8분</span></div>
+              <div class="foot"><span class="tag tag-green">단체석</span><button class="btn-ghost btn-sm">여기로 확정</button></div>
+            </div>
+          </div>
+          <div class="rest">
+            <div class="rest-img ri-4" aria-hidden="true">🍜</div>
+            <div class="rest-body">
+              <div class="nm">순이네 백반 <span class="srcb n">N</span><span class="srcb k">K</span></div>
+              <div class="meta"><span class="star">★ <b>4.3</b></span><span>리뷰 156</span><span>도보 3분</span></div>
+              <div class="foot"><span class="tag tag-orange">회전 빠름</span><button class="btn-ghost btn-sm">여기로 확정</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ S6 확정 ═══════════ -->
+    <div class="screen" id="s6">
+      <nav class="appnav">
+        <span class="brand">
+          <svg width="24" height="24" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M8 22h32a1 1 0 0 1 1 1c0 8-6 15-14 16v2h-6v-2C13 38 7 31 7 23a1 1 0 0 1 1-1z" fill="#FF6A3D"/>
+            <path d="M14 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M23 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+            <path d="M32 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+          </svg>
+          밥약
+        </span>
+        <span class="links"><a>홈</a><a class="cur">밥약 모임</a><a>마이페이지</a></span>
+        <span class="me"><span class="avatar av-a">준</span></span>
+      </nav>
+
+      <div class="done-wrap">
+        <div class="done-card">
+          <div class="done-emoji">🎉</div>
+          <h1>밥약 확정!</h1>
+          <p class="sub">참여자 모두에게 확정 내용이 표시돼요.</p>
+
+          <div class="done-info">
+            <div class="row"><span class="ic">🗓️</span><span><b>7월 10일 금요일 · 11:30</b><small>90분 · 모두의 공강 시간</small></span></div>
+            <div class="row"><span class="ic">🍲</span><span><b>온담식당</b><small>한식 · ★ 4.6 (리뷰 214) · 도보 4분</small></span></div>
+            <div class="row">
+              <span class="ic">👥</span>
+              <span style="display:flex; align-items:center; gap:8px;">
+                <span class="av-stack" style="margin:0;"><span class="avatar av-a">준</span><span class="avatar av-b">지</span><span class="avatar av-c">민</span></span>
+                <b style="font-size:13.5px;">나 · 김지우 · 박민준</b>
+              </span>
+            </div>
+          </div>
+
+          <div class="done-actions">
+            <button class="btn-ghost btn">🗓️ 캘린더에 추가</button>
+            <button class="btn kakao-btn">💬 카톡으로 공유</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /frame -->
+</div>
+
+<script>
+  const tabs = document.querySelectorAll('.screen-tabs button');
+  const screens = document.querySelectorAll('.screen');
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      tabs.forEach((t) => t.classList.remove('on'));
+      screens.forEach((s) => s.classList.remove('on'));
+      tab.classList.add('on');
+      document.getElementById(tab.dataset.s).classList.add('on');
+    });
+  });
+</script>
+</body>
+</html>

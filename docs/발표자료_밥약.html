@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>밥약 매칭 서비스 — 발표자료</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+<style>
+  :root {
+    --bg: #fffdf8;
+    --ink: #221b15;
+    --muted: #857a70;
+    --accent: #ff6a3d;
+    --accent-deep: #e5501f;
+    --accent-soft: #ffe9dc;
+    --chip: #fff3d6;
+    --green: #2e9e6b;
+    --green-soft: #e5f4ec;
+    --line: #efe3d7;
+    --card: #ffffff;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body { height: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Pretendard Variable", Pretendard, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── 슬라이드 스테이지 ── */
+  .deck { position: relative; height: 100%; }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6vh 8vw 12vh;
+    opacity: 0;
+    transform: translateX(28px);
+    transition: opacity 0.32s ease, transform 0.32s ease;
+    pointer-events: none;
+    overflow-y: auto;
+  }
+
+  .slide.on {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+  }
+
+  .slide-inner { width: 100%; max-width: 880px; }
+
+  /* ── 공통 타이포 ── */
+  .eyebrow {
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--accent-deep);
+    background: var(--chip);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+  }
+
+  h1 { margin: 0 0 10px; font-size: clamp(30px, 5vw, 46px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; text-wrap: balance; }
+  h2 { margin: 0 0 26px; font-size: clamp(24px, 3.6vw, 34px); font-weight: 800; letter-spacing: -0.02em; text-wrap: balance; }
+  .sub { color: var(--muted); font-size: clamp(15px, 1.8vw, 17px); line-height: 1.7; margin: 0; }
+  .hl { color: var(--accent-deep); }
+
+  /* ── 카드/그리드 ── */
+  .grid { display: grid; gap: 14px; }
+  .g2 { grid-template-columns: repeat(2, 1fr); }
+  .g3 { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 680px) { .g2, .g3 { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px 22px;
+    text-align: left;
+  }
+  .card .k { display: block; font-size: 12px; font-weight: 800; letter-spacing: 0.07em; color: var(--accent-deep); margin-bottom: 6px; }
+  .card b { display: block; font-size: 16px; font-weight: 800; letter-spacing: -0.01em; margin-bottom: 4px; }
+  .card p { margin: 0; font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+  /* ── S1 타이틀 ── */
+  .title-slide { text-align: center; }
+  .title-slide .logo { margin-bottom: 14px; }
+  .title-slide .tag { font-size: clamp(17px, 2.4vw, 21px); font-weight: 700; color: var(--accent-deep); margin: 0 0 14px; }
+  .meta-chips { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+  .meta-chips span { font-size: 13px; font-weight: 600; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--card); }
+
+  /* ── S2 문제 ── */
+  .bubble-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0; }
+  .bubble {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 18px 18px 18px 4px;
+    padding: 12px 18px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .value-quote {
+    margin-top: 22px;
+    padding: 22px 28px;
+    background: linear-gradient(135deg, #fff3d6, #ffe9dc);
+    border-radius: 16px;
+    font-size: clamp(17px, 2.4vw, 21px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    text-align: center;
+    text-wrap: balance;
+  }
+
+  /* ── S3 흐름 ── */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 680px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+  .step-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 20px 16px;
+    text-align: center;
+  }
+  .step-card .n {
+    width: 30px; height: 30px;
+    margin: 0 auto 10px;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step-card .ic { font-size: 26px; margin-bottom: 8px; }
+  .step-card b { display: block; font-size: 14.5px; font-weight: 800; margin-bottom: 4px; }
+  .step-card p { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+  /* ── S5 알고리즘 ── */
+  .algo-steps { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px; font-size: 14.5px; font-weight: 700; margin: 20px 0; }
+  .algo-steps .st { background: var(--chip); padding: 10px 18px; border-radius: 999px; }
+  .algo-steps .ar { color: var(--accent); font-weight: 800; font-size: 18px; }
+
+  /* ── S6 화면 플로우 ── */
+  .screens { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 8px; }
+  @media (max-width: 760px) { .screens { grid-template-columns: repeat(3, 1fr); } }
+  .scr {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 8px 12px;
+    text-align: center;
+  }
+  .scr .mini {
+    height: 54px;
+    border-radius: 9px;
+    margin-bottom: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+  }
+  .m1 { background: linear-gradient(135deg, #ffe9dc, #fff3d6); }
+  .m2 { background: linear-gradient(135deg, #fff3d6, #f2f8e8); }
+  .m3 { background: linear-gradient(135deg, #eef2ff, #ffe9dc); }
+  .m4 { background: linear-gradient(135deg, #e5f4ec, #fff3d6); }
+  .m5 { background: linear-gradient(135deg, #ffeef2, #fff3d6); }
+  .m6 { background: linear-gradient(135deg, #fff3d6, #e9f7f4); }
+  .scr b { display: block; font-size: 12.5px; font-weight: 800; }
+  .scr small { font-size: 11px; color: var(--muted); }
+
+  .palette { display: flex; justify-content: center; gap: 8px; margin-top: 22px; }
+  .sw { width: 34px; height: 34px; border-radius: 10px; border: 1px solid var(--line); }
+
+  /* ── S8 로드맵 ── */
+  .road { display: flex; flex-direction: column; gap: 10px; text-align: left; }
+  .road-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 20px;
+  }
+  .road-item .w {
+    flex-shrink: 0;
+    width: 52px; height: 30px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: #fff;
+    font-size: 12.5px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .road-item b { font-size: 14.5px; font-weight: 700; }
+  .road-item .done {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-size: 12px; font-weight: 800;
+    color: #1d7a4f;
+    background: var(--green-soft);
+    padding: 4px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .road-item .todo {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-size: 12px; font-weight: 700;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 4px 12px;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  /* ── S9 마무리 ── */
+  .links-row { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+  .links-row a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .links-row a:hover { border-color: var(--accent); color: var(--accent-deep); }
+
+  /* ── 내비게이션 ── */
+  .nav {
+    position: fixed;
+    bottom: 22px;
+    left: 0; right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    z-index: 10;
+  }
+  .nav button {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(90,60,30,0.08);
+  }
+  .nav button:hover { border-color: var(--accent); color: var(--accent-deep); }
+  .nav button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  .counter { font-size: 13px; font-weight: 700; color: var(--muted); min-width: 52px; text-align: center; font-variant-numeric: tabular-nums; }
+
+  .progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 3px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+    z-index: 10;
+  }
+
+  .hint {
+    position: fixed;
+    bottom: 30px;
+    right: 26px;
+    font-size: 12px;
+    color: var(--muted);
+    z-index: 10;
+  }
+  @media (max-width: 680px) { .hint { display: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .slide { transition: none; }
+    .progress { transition: none; }
+  }
+</style>
+</head>
+<body>
+<div class="progress" id="bar"></div>
+
+<div class="deck" id="deck">
+
+  <!-- 1. 타이틀 -->
+  <section class="slide on">
+    <div class="slide-inner title-slide">
+      <div class="logo">
+        <svg width="72" height="72" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M8 22h32a1 1 0 0 1 1 1c0 8-6 15-14 16v2h-6v-2C13 38 7 31 7 23a1 1 0 0 1 1-1z" fill="#FF6A3D"/>
+          <path d="M14 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M23 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M32 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h1>밥약 매칭 서비스</h1>
+      <p class="tag">"언제 볼까 + 어디서 볼까"를 한 번에</p>
+      <p class="sub">대학생 친구들의 캘린더를 모아 모두가 비는 시간을 찾고,<br />그 시간에 맞는 맛집까지 추천하는 서비스</p>
+      <div class="meta-chips">
+        <span>🎓 대학생 대상</span><span>개인 프로젝트</span><span>4주</span><span>Naver AI Challenge</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 문제 -->
+  <section class="slide">
+    <div class="slide-inner">
+      <span class="eyebrow">문제 정의</span>
+      <h2>밥약 하나 잡는 데<br />왜 이렇게 오래 걸릴까?</h2>
+      <p class="sub">수업 시간표는 에타에, 개인 일정은 구글에, 동아리 일정은 또 다른 곳에.<br />친구 3~4명과 약속을 잡으려면 이 대화가 무한 반복됩니다:</p>
+      <div class="bubble-row">
+        <span class="bubble">"언제 시간 돼?"</span>
+        <span class="bubble">"난 화요일 빼고 다 돼"</span>
+        <span class="bubble">"어? 나 화요일만 되는데"</span>
+        <span class="bubble">"그럼 어디서 먹을까…"</span>
+      </div>
+      <div class="value-quote">시간 맞추기 + 장소 정하기 = <span class="hl">두 가지 낭비를 한 번에 자동화</span></div>
+    </div>
+  </section>
+
+  <!-- 3. 핵심 흐름 -->
+  <section class="slide">
+    <div class="slide-inner">
+      <span class="eyebrow">핵심 흐름</span>
+      <h2>연결하고, 모으고, 겹치고, 추천한다</h2>
+      <div class="steps">
+        <div class="step-card">
+          <div class="n">1</div>
+          <div class="ic">🔗</div>
+          <b>캘린더 연동</b>
+          <p>구글·에타·애플을 한 번만 연결하면 계속 재사용</p>
+        </div>
+        <div class="step-card">
+          <div class="n">2</div>
+          <div class="ic">👥</div>
+          <b>모임 생성</b>
+          <p>밥약 모임을 만들고 친구 초대</p>
+        </div>
+        <div class="step-card">
+          <div class="n">3</div>
+          <div class="ic">🧮</div>
+          <b>공강 자동 계산</b>
+          <p>참여자 전원의 일정을 겹쳐 빈 시간 후보 제시</p>
+        </div>
+        <div class="step-card">
+          <div class="n">4</div>
+          <div class="ic">🍜</div>
+          <b>맛집 추천</b>
+          <p>위치·카테고리 기반 상위 3~4곳 추천 후 확정</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 캘린더 연동 -->
+  <section class="slide">
+    <div class="slide-inner">
+      <span class="eyebrow">주요 기능 ①</span>
+      <h2>캘린더 3종 연동 <span class="hl">— 구현 완료</span></h2>
+      <p class="sub">흩어진 일정을 하나의 통합 캘린더로. 세 가지 모두 실계정으로 검증했습니다.</p>
+      <div class="grid g3" style="margin-top: 22px;">
+        <div class="card">
+          <span class="k">GOOGLE</span>
+          <b>구글 캘린더</b>
+          <p>OAuth 로그인과 캘린더 읽기 권한을 <b style="display:inline;font-size:13.5px;">한 번의 동의로</b> 동시에 획득</p>
+        </div>
+        <div class="card">
+          <span class="k">EVERYTIME</span>
+          <b>에타 시간표</b>
+          <p>공유 링크만 붙여넣으면 주간 시간표를 실제 일정으로 자동 확장</p>
+        </div>
+        <div class="card">
+          <span class="k">APPLE</span>
+          <b>애플 캘린더</b>
+          <p>iCloud CalDAV + 앱 암호로 아이폰 일정까지 통합</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 공강 계산 + 맛집 -->
+  <section class="slide">
+    <div class="slide-inner" style="text-align:center;">
+      <span class="eyebrow">주요 기능 ②</span>
+      <h2>모두의 빈 시간을 찾는 법</h2>
+      <div class="algo-steps">
+        <span class="st">참여자별 일정 시간순 정렬</span>
+        <span class="ar">→</span>
+        <span class="st">전원의 "바쁜 시간" 합집합</span>
+        <span class="ar">→</span>
+        <span class="st">활동 시간의 나머지 = 공통 공강</span>
+      </div>
+      <p class="sub">최소 1시간 이상 이어지는 구간만 후보로 제시</p>
+      <div class="grid g2" style="margin-top: 24px;">
+        <div class="card">
+          <span class="k">맛집 추천</span>
+          <b>네이버 + 카카오 병합</b>
+          <p>두 API의 리뷰 수·평점을 정규화한 통합 점수로 정렬, 상위 3~4곳만 노출</p>
+        </div>
+        <div class="card">
+          <span class="k">위치</span>
+          <b>GPS 또는 학교 이름</b>
+          <p>위치 허용 시 자동, 미허용 시 학교 이름 입력으로 좌표 변환</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 화면 디자인 -->
+  <section class="slide">
+    <div class="slide-inner" style="text-align:center;">
+      <span class="eyebrow">화면 디자인</span>
+      <h2>로그인부터 확정까지, 6개 화면</h2>
+      <div class="screens">
+        <div class="scr"><div class="mini m1">🔑</div><b>로그인</b><small>구글 = 연동까지</small></div>
+        <div class="scr"><div class="mini m2">📅</div><b>홈</b><small>통합 캘린더</small></div>
+        <div class="scr"><div class="mini m3">✉️</div><b>모임 만들기</b><small>친구 초대</small></div>
+        <div class="scr"><div class="mini m4">🧩</div><b>공강 매칭</b><small>후보 선택</small></div>
+        <div class="scr"><div class="mini m5">🍲</div><b>맛집 추천</b><small>카드 3~4곳</small></div>
+        <div class="scr"><div class="mini m6">🎉</div><b>확정</b><small>공유·캘린더 추가</small></div>
+      </div>
+      <p class="sub" style="margin-top: 22px;">밝고 따뜻한 캠퍼스 감성 — 쌀밥 화이트 바탕에 귤색 포인트, Pretendard</p>
+      <div class="palette">
+        <span class="sw" style="background:#fffdf8;"></span>
+        <span class="sw" style="background:#ff6a3d;"></span>
+        <span class="sw" style="background:#fff3d6;"></span>
+        <span class="sw" style="background:#2e9e6b;"></span>
+        <span class="sw" style="background:#221b15;"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. 기술 스택 -->
+  <section class="slide">
+    <div class="slide-inner">
+      <span class="eyebrow">기술 스택</span>
+      <h2>가볍게, 그러나 확장 가능하게</h2>
+      <div class="grid g2" style="margin-top: 6px;">
+        <div class="card">
+          <span class="k">FRONTEND</span>
+          <b>React + TypeScript (Vite)</b>
+          <p>빠른 개발 서버와 타입 안정성</p>
+        </div>
+        <div class="card">
+          <span class="k">BACKEND</span>
+          <b>Python FastAPI + SQLAlchemy</b>
+          <p>자동 API 문서, Alembic 마이그레이션</p>
+        </div>
+        <div class="card">
+          <span class="k">DATABASE</span>
+          <b>PostgreSQL</b>
+          <p>UUID 기반 5개 테이블 — USER, INTEGRATION, EVENT, SESSION, PARTICIPANT</p>
+        </div>
+        <div class="card">
+          <span class="k">EXTERNAL</span>
+          <b>Google · 에타 · iCloud · 네이버 · 카카오</b>
+          <p>provider 필드 기반 구조로 새 캘린더 소스 추가가 쉬움</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. 로드맵 -->
+  <section class="slide">
+    <div class="slide-inner">
+      <span class="eyebrow">4주 로드맵</span>
+      <h2>절반은 이미 완성 <span class="hl">✓</span></h2>
+      <div class="road" style="margin-top: 6px;">
+        <div class="road-item"><span class="w">1주</span><b>기획 · ERD/API 설계 · 회원가입/로그인 · 구글 OAuth</b><span class="done">✓ 완료</span></div>
+        <div class="road-item"><span class="w">2주</span><b>캘린더 3종 연동 (구글 · 에타 · 애플)</b><span class="done">✓ 완료 · 실계정 검증</span></div>
+        <div class="road-item"><span class="w">3주</span><b>밥약 모임 생성 + 공통 공강 시간 자동 계산</b><span class="todo">다음</span></div>
+        <div class="road-item"><span class="w">4주</span><b>네이버/카카오 맛집 추천 + UI 다듬기</b><span class="todo">예정</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. 마무리 -->
+  <section class="slide">
+    <div class="slide-inner title-slide">
+      <div class="logo">
+        <svg width="56" height="56" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M8 22h32a1 1 0 0 1 1 1c0 8-6 15-14 16v2h-6v-2C13 38 7 31 7 23a1 1 0 0 1 1-1z" fill="#FF6A3D"/>
+          <path d="M14 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M23 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+          <path d="M32 16c0-2 2-2 2-4s-2-2-2-4" stroke="#FFB38A" stroke-width="2.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <h2 style="margin-bottom: 10px;">"오늘 밥약 잡자"가<br />1분 안에 끝나는 세상</h2>
+      <p class="sub">감사합니다 🍚</p>
+      <div class="links-row">
+        <a href="https://aiden-park11.github.io/naver-ai-challenge/%EA%B8%B0%ED%9A%8D%EC%84%9C_%EB%B0%A5%EC%95%BD%EB%A7%A4%EC%B9%AD%EC%84%9C%EB%B9%84%EC%8A%A4.html">📋 기획서 전문</a>
+        <a href="https://aiden-park11.github.io/naver-ai-challenge/%EB%94%94%EC%9E%90%EC%9D%B8%EC%8B%9C%EC%95%88_%EB%B0%A5%EC%95%BD%EC%9B%B9.html">🎨 디자인 시안</a>
+        <a href="https://github.com/Aiden-Park11/naver-ai-challenge">💻 GitHub</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<nav class="nav" aria-label="슬라이드 이동">
+  <button id="prev" aria-label="이전 슬라이드">←</button>
+  <span class="counter" id="counter">1 / 9</span>
+  <button id="next" aria-label="다음 슬라이드">→</button>
+</nav>
+<span class="hint">← → 방향키로 이동</span>
+
+<script>
+  const slides = [...document.querySelectorAll('.slide')];
+  const counter = document.getElementById('counter');
+  const bar = document.getElementById('bar');
+  let idx = 0;
+
+  function show(n) {
+    idx = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, i) => s.classList.toggle('on', i === idx));
+    counter.textContent = (idx + 1) + ' / ' + slides.length;
+    bar.style.width = ((idx + 1) / slides.length * 100) + '%';
+  }
+
+  document.getElementById('prev').addEventListener('click', () => show(idx - 1));
+  document.getElementById('next').addEventListener('click', () => show(idx + 1));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') show(idx + 1);
+    if (e.key === 'ArrowLeft' || e.key === 'PageUp') show(idx - 1);
+    if (e.key === 'Home') show(0);
+    if (e.key === 'End') show(slides.length - 1);
+  });
+
+  show(0);
+</script>
+</body>
+</html>
