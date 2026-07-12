@@ -16,6 +16,8 @@
 | [checklist.md](checklist.md) | C0~C16 검증 가능한 완료 조건 | 매 작업 시작·종료 시 |
 | [prerequisites.md](prerequisites.md) | 사용자가 준비할 API key·계정·결정 사항 | Task 착수 전 외부 자격증명 필요 여부 확인 |
 | [harness.md](harness.md) | 최소 검증 하네스(verify·CI·secret scan) 구축 지시서 | 하네스 구축·확장 시 |
+| [report/claude.md](report/claude.md) | 구현 세션 작업 보고 (append-only) | 작업 종료 시 append |
+| [report/gpt.md](report/gpt.md) | 리뷰 세션 보고 (append-only) | GPT 등 리뷰 세션 종료 시 append |
 
 우선순위 충돌 시: CLAUDE.md 안전 원칙 > plan.md > skills.md > checklist.md > backlog.md > 코드·테스트 결과 순서를 따른다.
 
@@ -27,7 +29,8 @@
 2. **완료 조건 로드** — Task의 종료 조건에 해당하는 [checklist.md](checklist.md)의 C 섹션 체크박스를 전부 읽는다. 이것이 acceptance criteria다.
 3. **계약 로드** — 해당 Task가 포함하는 S 스킬의 [skills.md](skills.md) 계약(입력·출력·제약·envelope·verdict·reason code)을 읽는다.
 4. **범위 확인** — 의존 관계나 아키텍처 판단이 필요하면 [plan.md](plan.md)의 R 레지스트리·기술 아키텍처를 확인한다.
-5. backlog.md의 해당 Task 상태를 `진행중`으로 바꾸고 구현을 시작한다.
+5. **하네스 확인** — `npm run verify`를 한 번 돌려 현재 baseline이 green인지 확인한다. 이미 실패 상태에서 시작하면 자신의 작업으로 인한 실패와 기존 실패를 구분할 수 없다.
+6. backlog.md의 해당 Task 상태를 `진행중`으로 바꾸고 구현을 시작한다.
 
 ## 작업 중 규칙
 
@@ -38,7 +41,7 @@
 
 ## 작업 종료 절차
 
-1. checklist.md에서 통과한 항목만 체크한다. 테스트가 실제로 통과했을 때만 체크하며, 문서에 적혀 있다는 이유로 체크하지 않는다.
+1. `npm run verify`를 실행해 통과를 확인한다(backend가 생기면 `scripts/verify.sh` 등 확장된 명령을 따른다). checklist.md는 이 결과로 실제 통과한 항목만 체크하며, 항목이 여러 계층(frontend+backend 등)을 묶고 있으면 전부 충족했을 때만 체크한다. 문서에 적혀 있다는 이유로 체크하지 않는다.
 2. backlog.md 상태를 갱신한다 (`진행중` → `완료` 또는 `BLOCKED`+사유).
 3. 하위 체크박스가 전부 통과하기 전에는 상위 Task를 `완료`로 바꾸지 않는다.
 4. 실행 명령·구현 상태가 바뀌었으면 CLAUDE.md의 「현재 구현 상태」·「현재 실행 명령」을 즉시 갱신한다.
