@@ -47,11 +47,19 @@
 - 수치 판정을 LLM 자유 텍스트에 맡기지 않는다.
 - auto-merge와 릴리스는 테스트·lint·type·security·I9 평가 gate를 모두 통과해야 한다.
 
+## 개발 도구 역할
+
+- **구현은 Claude Code 한 세션만 담당한다.** 두 agent가 동시에 같은 브랜치를 수정하지 않는다. 기본 모델은 Sonnet 5이며, schema·verdict 집계 규칙 같은 설계 판단이 필요하거나 막힌 경우에만 Opus/Fable로 전환한다.
+- **GPT(또는 별도 agent)는 리뷰 전담이며 코드를 직접 수정하지 않는다.** diff·PR을 이 문서와 해당 Task의 `docs/skills.md`·`docs/checklist.md` 계약 기준으로 리뷰한다.
+- GPT 세션은 AGENTS.md를 자동으로 읽지 않을 수 있으므로, 세션 시작 시 "AGENTS.md와 docs/instructions.md를 먼저 읽고 진행해줘"를 명시적으로 지시한다.
+- 이 역할 분담은 워크플로우 관례이며 CI가 강제하지 않는다. 실제 품질 판정은 하네스(`npm run verify`, CI)가 한다.
+
 ## 작업 보고
 
-- 모든 작업·리뷰 세션 종료 시 `docs/report/`에 보고를 남긴다. 구현 agent는 `claude.md`, 리뷰 agent는 `gpt.md`.
-- 보고 파일은 **읽지 않는다**. `cat >> docs/report/<파일>.md` shell append로 하단에만 추가하고 기존 내용을 수정·삭제하지 않는다.
-- 형식은 각 보고 파일 상단의 템플릿을 따른다 (날짜·Task·요약·검증 결과·미결 사항).
+- 모든 작업·리뷰 세션 종료 시 `docs/report/`에 보고를 남긴다. 구현 agent는 `report_claude.md`, 리뷰 agent는 `report_gpt.md`.
+- 보고 파일은 **읽지 않는다**. `cat >> docs/report/<파일>.md` shell append로 하단에만 추가하고 기존 내용을 수정·삭제하지 않는다. 유일한 예외는 `docs/report/review.md` 절차에 따라 점검 완료한 항목의 `- 확인: [ ]`를 `[x]`로 바꾸는 한 줄이다.
+- 형식은 각 보고 파일 상단의 템플릿을 따른다 (날짜·Task·요약·검증 결과·미결 사항·확인 체크박스).
+- 보고서 교차 점검(리뷰 LLM의 구현 보고 점검, 구현 agent의 리뷰 피드백 반영)은 `docs/report/review.md`를 따르며, `확인: [ ]` 미체크 항목부터 처리한다.
 
 ## 기술 아키텍처
 
@@ -79,13 +87,15 @@ LangGraph는 단순 계산 파이프라인을 감싸기 위해 쓰지 않는다.
 
 ## 현재 상태
 
-현재 실행 코드는 React 소개 페이지뿐이고 Backend·S1~S23은 미구현이다. 목표 문서에 적혔다는 이유로 구현 완료로 간주하지 않는다.
+현재 실행 코드는 React 소개 페이지, `contracts/`(T00 계약 contract test), `backend/`(T01 FastAPI 인증 기반)뿐이고 S1~S23 도메인 스킬은 미구현이다. 목표 문서에 적혔다는 이유로 구현 완료로 간주하지 않는다.
 
 ```bash
 npm install
 npm run dev
 npm run build
 npm run preview
+
+./scripts/verify.sh   # frontend+backend 전체 검증 단일 진입점
 ```
 
-Backend 명령은 T01에서 추가한다.
+backend 세부 명령은 CLAUDE.md 「현재 실행 명령」을 따른다.

@@ -71,26 +71,29 @@ Envelope<T> {
 | 전부 `SUPPORTED` | `SUPPORTED` |
 | 전부 `REFUTED` | `REFUTED` |
 
+타입 표기: `필드:타입`, `?`는 선택 필드, `[]`는 배열, `이름(A/B/C)`는 그 이름의 값이 A/B/C 중 하나인 문자열 enum, `as_of`·날짜류 문자열은 Envelope와 동일한 `YYYY-MM-DD` 형식이다. `contracts/schemas.js`의 `*_SPEC`이 이 타입을 그대로 강제하는 executable mirror다.
+
 ### Structured Claim
 
 ```text
-claim_id, claim_group_id?, original_span,
-corp_code, stock_code, claim_type, metric,
-evidence_domain, comparison_entity_ref?, peer_universe_ref?,
-comparator{op, target_value, target_unit,
-           tolerance_value?, tolerance_unit?},
-direction, current_period, comparison_period,
-as_of, verifiable, ambiguity_flags, condition?
+claim_id:string, claim_group_id?:string, original_span:string,
+corp_code:string, stock_code:string, claim_type:string, metric:string,
+evidence_domain:string(financial/market/flow/valuation/peer),
+comparison_entity_ref?:string, peer_universe_ref?:string,
+comparator:object{op:string, target_value:number, target_unit:string,
+                   tolerance_value?:number, tolerance_unit?:string},
+direction:string, current_period:string, comparison_period:string,
+as_of:string, verifiable:boolean, ambiguity_flags:string[], condition?:string
 ```
 
 ### Financial Fact
 
 ```text
-corp_code, stock_code, account_id, account_name,
-raw_value, raw_unit, normalized_value, normalized_unit,
-fiscal_period, reprt_code, report_type,
-fs_div(CFS/OFS), is_cumulative, is_provisional,
-rcept_no, filed_at, source_url, collected_at
+corp_code:string, stock_code:string, account_id:string, account_name:string,
+raw_value:number, raw_unit:string, normalized_value:number, normalized_unit:string,
+fiscal_period:string, reprt_code:string, report_type:string,
+fs_div:string(CFS/OFS), is_cumulative:boolean, is_provisional:boolean,
+rcept_no:string, filed_at:string, source_url:string, collected_at:string
 ```
 
 ### Raw Source Record
@@ -98,20 +101,20 @@ rcept_no, filed_at, source_url, collected_at
 `RawDisclosureRecord`, `RawMarketRecord`, `RawExternalRecord`는 다음 공통 metadata를 가진 immutable provider record다. provider별 원문 필드는 `raw_payload`에 그대로 보존한다.
 
 ```text
-raw_record_id, source_provider, source_url?, source_native_id?,
-corp_code?, stock_code?, published_at?, revised_at?, target_period?,
-raw_payload, checksum, collected_at
+raw_record_id:string, source_provider:string, source_url?:string, source_native_id?:string,
+corp_code?:string, stock_code?:string, published_at?:string, revised_at?:string, target_period?:string,
+raw_payload:object, checksum:string, collected_at:string
 ```
 
 ### Evidence
 
 ```text
-evidence_id, corp_code, claim_id?, presentation_item_id?, evidence_type,
-document_id, rcept_no, filed_at, target_period,
-source_url, quote, chunk_offset, retrieval_score,
-relation(SUPPORTS/REFUTES/NEUTRAL/CONFLICTS),
-relation_reason, relation_rule_version,
-integrity_status, as_of
+evidence_id:string, corp_code:string, claim_id?:string, presentation_item_id?:string,
+evidence_type:string, document_id:string, rcept_no:string, filed_at:string, target_period:string,
+source_url:string, quote:string, chunk_offset:number, retrieval_score:number,
+relation:string(SUPPORTS/REFUTES/NEUTRAL/CONFLICTS),
+relation_reason:string, relation_rule_version:string,
+integrity_status:string, as_of:string
 ```
 
 `claim_id`와 `presentation_item_id` 중 정확히 하나가 필수다. 기능 A의 공시·리포트 provenance는 `presentation_item_id`와 `relation=NEUTRAL`, 기능 C의 검증 근거는 `claim_id`와 판정된 relation을 사용한다.
@@ -119,14 +122,24 @@ integrity_status, as_of
 ### Numeric Evidence
 
 ```text
-numeric_evidence_id,
-evidence_domain(financial/market/flow/valuation/peer),
-corp_code, comparison_entity_ref?, peer_universe_ref?,
-metric, value, unit, target_period, as_of,
-formula?, source_ids[], provenance, integrity_status
+numeric_evidence_id:string,
+evidence_domain:string(financial/market/flow/valuation/peer),
+corp_code:string, comparison_entity_ref?:string, peer_universe_ref?:string,
+metric:string, value:number, unit:string, target_period:string, as_of:string,
+formula?:string, source_ids:string[], provenance:object(구조 미정 — 계산 근거를 담되 필드 형태는 각 skill이 정의), integrity_status:string
 ```
 
 근거 기반 verdict에는 계산식 또는 인용문, 사용 값, 기업, 기간, `as_of`, 출처가 필수다. `INSUFFICIENT_EVIDENCE`와 `UNVERIFIABLE`에는 `reason_code`, `missing_fields`, 확인한 데이터 범위를 포함한다.
+
+## 스키마 버전·migration 정책
+
+Envelope는 `schema_version`, Claim·Fact·Evidence·Numeric Evidence 등 개별 타입은 `contracts/schemas.js`의 `SCHEMA_VERSIONS`로 각각 semver를 관리한다. 이 문서(skills.md)가 타입의 진실 소스이며, [contracts/](../contracts/)의 코드는 이 문서를 실행 가능한 형태로 미러링한 contract test 대상이다.
+
+- **문서 먼저**: 계약을 바꿀 때는 이 문서를 먼저 수정하고, 같은 변경에서 `contracts/`의 필드 목록·enum·버전과 관련 테스트를 동기화한다 (AGENTS.md "계약 변경은 문서 먼저").
+- **additive(하위호환) 변경**: 선택 필드 추가, enum 값 append는 PATCH 또는 MINOR를 올린다. 기존 소비자는 변경 없이 계속 동작해야 한다.
+- **breaking 변경**: 필드 이름 변경·삭제, 새 필수 필드 추가, 기존 필드 의미 변경은 MAJOR를 올린다. 과거 immutable snapshot(원본 raw record, 복기 스냅샷 등)은 저장된 `schema_version`을 그대로 보존하며 새 버전으로 소급 rewrite하지 않는다.
+- **호환 기간**: MAJOR 변경 이후 과거 버전 데이터를 읽는 경로는 T13 migration tooling이 공식 폐기 절차를 정의하기 전까지 유지한다. 조기 폐기하지 않는다.
+- **DB migration 도구**(Alembic 등 실제 스키마 마이그레이션 실행)는 T01 범위다. 이 정책은 그 이전에도 문서·contract test 수준에서 버전 호환 규칙을 고정하기 위한 것이며, T01에서 DB migration이 생기면 동일 규칙을 참조해 구현한다.
 
 ## 금융 데이터 정합성 계약
 

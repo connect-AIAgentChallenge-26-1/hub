@@ -6,15 +6,15 @@
 
 ## C0. 계약·저장소 품질 게이트 [T00]
 
-- [ ] `plan.md`, `skills.md`, `backlog.md`, `checklist.md`, `CLAUDE.md`, `AGENTS.md`의 기능 ID·용어·상태 동기화
-- [ ] `schema_version`, request/trace ID, `as_of`, status, reason code, warning, source, rule/model version 공통 envelope 확정
-- [ ] Claim·Fact·Evidence·Verdict·Citation schema와 migration 정책 확정
-- [ ] 5상태 verdict 및 그룹 `PARTIALLY_SUPPORTED` 규칙 계약 테스트
-- [ ] repository-level build·test·lint·type·security workflow와 gate 정책 구성
-- [ ] frontend/backend lint, backend type check, secret·dependency security scan 구성
-- [ ] CI에 build·test·lint·type·security 차단 gate 연결
-- [ ] auto-merge 승인·품질 gate 추가, 충돌 자동 close와 반복 코멘트 제거
-- [ ] tracked 문서가 ignored 문서를 필수 참조하지 않도록 문서 정책 정리
+- [x] `plan.md`, `skills.md`, `backlog.md`, `checklist.md`, `CLAUDE.md`, `AGENTS.md`의 기능 ID·용어·상태 동기화
+- [x] `schema_version`, request/trace ID, `as_of`, status, reason code, warning, source, rule/model version 공통 envelope 확정 — `docs/skills.md` 계약 + `contracts/envelope.js`·`contracts/envelope.test.js` 실행 가능한 contract test. GPT 리뷰(2026-07-12) 반영: `source_ids[]` 필수화, 비문자열 `as_of` 거부, id/timestamp 필드 타입 검사(Python 미러 `app/schemas/envelope.py`도 동일 변경)
+- [x] Claim·Fact·Evidence·Verdict·Citation schema와 migration 정책 확정 — `docs/skills.md` "스키마 버전·migration 정책" 절 + `contracts/schemas.js`·`contracts/schemas.test.js`. GPT 리뷰(2026-07-12) 반영: 필드 존재 검사를 typed spec(타입·enum·날짜 pattern·중첩 comparator·array item 타입)으로 교체하고 RawSourceRecord/NumericEvidence/Citation 포함 6개 타입 전부 정상·실패 테스트 구비
+- [x] 5상태 verdict 및 그룹 `PARTIALLY_SUPPORTED` 규칙 계약 테스트 — `contracts/verdict.js`·`contracts/verdict.test.js`, red→green 검증 완료
+- [x] repository-level build·test·lint·type·security workflow와 gate 정책 구성 — frontend(lint·test·build)·backend(ruff·mypy·pytest, T01)·secret scan·dependency audit까지 구성. 단일 로컬 진입점은 `scripts/verify.sh`(harness.md H1 승격)
+- [x] frontend/backend lint, backend type check, secret·dependency security scan 구성 — frontend lint(eslint)·backend lint(ruff)+type check(mypy, T01 `backend/`)·secret scan(gitleaks)·dependency scan 전부 구성, red→green 검증 완료. GPT 리뷰(2026-07-12) 반영: npm audit에서 `--omit=dev` 제거(vite 7 업그레이드로 esbuild/vite 취약점 해소, 현재 0건), backend `uv.lock` 전체를 pip-audit로 스캔(`scripts/verify.sh`·CI), Dependabot을 npm+uv+github-actions 3개 생태계로 확장
+- [x] CI에 build·test·lint·type·security 차단 gate 연결 — `ci.yml`의 `frontend` job(`npm run verify`)과 `backend` job(ruff→mypy→alembic upgrade→pytest, postgres service container)이 각각 차단 gate. `backend` job의 GitHub Actions 런타임(서비스 컨테이너·`astral-sh/setup-uv`)은 YAML 구문 검증만 했고 실제 PR에서는 미검증
+- [x] auto-merge 승인·품질 gate 추가, 충돌 자동 close와 반복 코멘트 제거 — GPT 리뷰(2026-07-12)에서 main 대상 PR을 첫 규칙이 전부 스킵해 병합 경로가 죽어 있던 결함과 commentOnce 반복 코멘트 결함 발견. 판정 로직을 `scripts/auto-merge-rules.js`(순수 함수)로 추출해 수정: main 대상 PR만 처리, `reviewDecision` 기준 승인 판정, 충돌은 연기만. 1차 수정은 최근 100개 댓글 안에서 marker를 찾는 방식이었으나 재리뷰에서 "PR이 오래 열려 있으면 창 밖으로 밀릴 수 있다"는 잔여 결함이 지적돼 label 기반 상태 추적(`auto-merge:상태` label, PR당 유일해 pagination 창과 무관하게 정확)으로 교체. label이 저장소에 없으면 `addLabels`가 실패하는 문제를 막기 위해 4개 상태 label을 멱등하게 사전 생성. rule 단위 테스트 14건(`scripts/auto-merge-rules.test.js`)으로 병합/스킵/연기/label 전환 경로 검증. GitHub Actions 런타임 동작(label 생성·부착 포함)은 여전히 실제 PR로 미검증
+- [x] tracked 문서가 ignored 문서를 필수 참조하지 않도록 문서 정책 정리 — grep으로 tracked 문서가 ignored 아카이브를 근거로 인용하지 않음을 확인. 부수적으로 `.gitignore`의 `docs/*` 규칙이 `docs/report/`의 신규 파일까지 가려버리는 결함을 발견해 `!docs/report/` 예외 추가로 수정
 
 ## C1. 종목 해석 [R01][S1][T02]
 
@@ -192,9 +192,9 @@
 
 ## C13. Backend 기반·FastAPI·React·인증 통합 [R13][T01·T11]
 
-- [ ] backend package scaffold·dependency lock·환경변수 schema·secret 예제 구성 [T01]
-- [ ] FastAPI app factory, Pydantic 공통 envelope, backend unit·integration test runner [T01]
-- [ ] PostgreSQL 기본 schema·migration·repository·인증 기반 contract test [T01]
+- [x] backend package scaffold·dependency lock·환경변수 schema·secret 예제 구성 [T01] — `backend/`(uv, `pyproject.toml`+`uv.lock`), `app/config.py`(pydantic-settings), 루트 `.env.example`
+- [x] FastAPI app factory, Pydantic 공통 envelope, backend unit·integration test runner [T01] — `app/main.py:create_app()`, `app/schemas/envelope.py`(contracts/envelope.js와 동일 계약의 Python 미러), pytest 36개 통과. GPT 리뷰(2026-07-12) 반영: provider rate limit·인증 실패를 `EXTERNAL_ERROR`로 정정(skills.md status 의미 준수), `source_ids` 필수화, `UserRepository` 동시 가입 경쟁을 rollback 후 결정론적 CONFLICT로 변환, 구조화 JSON 요청/오류 로그(`app/observability.py`)와 Prometheus 요청 metrics(`/metrics`) 추가
+- [x] PostgreSQL 기본 schema·migration·repository·인증 기반 contract test [T01] — `app/models/user.py`+Alembic 초기 migration(`alembic/versions/c4f6e182a5f8_*`), `UserRepository`, `/api/v1/auth/register·login·me` e2e contract test(정상·중복 이메일 409·오답 비밀번호 401·미인증 401·validation 422). GPT 재리뷰(2026-07-12) 반영: `IntegrityError`를 `constraint_name`으로 선별해 `ix_users_email` 위반만 CONFLICT 변환, 무관한 무결성 오류는 그대로 전파(오분류 방지 테스트 추가, backend pytest 37개)
 - [ ] versioned FastAPI endpoint와 OpenAPI schema
 - [ ] 인증·인가·tenant filter를 모든 사용자 데이터 endpoint에 적용
 - [ ] 동기/비동기 분석 job, timeout, 취소, idempotency

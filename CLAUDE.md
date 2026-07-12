@@ -82,22 +82,35 @@
 
 ## 현재 구현 상태
 
-현재 HEAD의 실행 코드는 Vite + React 소개 페이지 한 장이다. Backend와 S1~S23은 아직 구현되지 않았다. 문서가 목표 상태를 정의하더라도 실제 완료 여부는 [docs/checklist.md](docs/checklist.md)와 자동 테스트 결과로만 판단한다.
+현재 HEAD의 실행 코드는 Vite + React 소개 페이지, T00 계약 contract test, T01 backend 인증 기반(FastAPI+PostgreSQL)이다. S1~S23(도메인 스킬)은 아직 구현되지 않았다. 문서가 목표 상태를 정의하더라도 실제 완료 여부는 [docs/checklist.md](docs/checklist.md)와 자동 테스트 결과로만 판단한다.
 
 - [src/ProjectIntro.jsx](src/ProjectIntro.jsx) — 하드코딩된 소개용 예시
 - [src/App.jsx](src/App.jsx) — 소개 컴포넌트 렌더링
 - [src/main.jsx](src/main.jsx) — React 진입점
+- [contracts/](contracts/) — Envelope·5상태 Verdict 집계·Claim/Fact/Evidence 필드 계약의 실행 가능한 미러(frontend 쪽 contract test). 진실 소스는 여전히 [docs/skills.md](docs/skills.md)
+- [backend/](backend/) — FastAPI + Pydantic v2 + SQLAlchemy + Alembic + PostgreSQL. 현재는 T01 인증 기반(users, JWT, `/api/v1/auth/*`)과 `Envelope[T]`·provider 인터페이스뿐이며, 기업·공시·Claim 등 도메인 스키마는 T02 이후에 추가된다.
 
 ## 현재 실행 명령
 
 ```bash
+# frontend
 npm install
 npm run dev
 npm run build
 npm run preview
+
+# 전체 검증(frontend+backend, 단일 진입점)
+./scripts/verify.sh
+
+# backend만 실행
+docker compose up -d postgres        # 로컬 PostgreSQL (postgres:18, localhost:5442)
+cd backend
+uv run alembic upgrade head          # migration 적용
+uv run uvicorn app.main:app --reload # API 서버
+uv run pytest                        # backend 테스트
 ```
 
-Backend 명령은 T01에서 package scaffold와 함께 추가하고 이 문서를 즉시 갱신한다.
+backend 실행에는 루트 `.env`에 `DATABASE_URL`·`JWT_SECRET_KEY`가 필요하다 (`.env.example` 참고, 실제 값은 절대 커밋하지 않는다).
 
 ## 컨벤션
 

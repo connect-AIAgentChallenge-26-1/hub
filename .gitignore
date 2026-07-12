@@ -17,6 +17,15 @@ dist
 dist-ssr
 *.local
 
+# Backend (Python)
+backend/.venv
+backend/__pycache__
+**/__pycache__
+*.pyc
+.mypy_cache
+.ruff_cache
+.pytest_cache
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -36,3 +45,7 @@ docs/*
 !docs/instructions.md
 !docs/prerequisites.md
 !docs/harness.md
+!docs/report/
+!docs/report/*.md
+
+memo.md

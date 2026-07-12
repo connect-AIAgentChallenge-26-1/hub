@@ -15,8 +15,8 @@
 
 | 순서 | Task | 범위 | 선행조건 | 종료 조건 | 상태 |
 |---:|---|---|---|---|:---:|
-| T00 | 계약·저장소 품질 게이트 | 문서 동기화, 공통 schema·verdict·reason code, 테스트/lint/type/security CI, auto-merge 승인·테스트 gate | 없음 | C0 전체 통과 | 진행중 |
-| T01 | Backend·DB 기반 | FastAPI, Pydantic, PostgreSQL schema, migration, 인증·secret 기반, trace/error envelope, provider interface | T00 | API·DB·인증 기반 contract test | 대기 |
+| T00 | 계약·저장소 품질 게이트 | 문서 동기화, 공통 schema·verdict·reason code, 테스트/lint/type/security CI, auto-merge 승인·테스트 gate | 없음 | C0 전체 통과 | 완료 |
+| T01 | Backend·DB 기반 | FastAPI, Pydantic, PostgreSQL schema, migration, 인증·secret 기반, trace/error envelope, provider interface | T00 | API·DB·인증 기반 contract test | 완료 |
 | T02 | 종목·OpenDART 수집 | S1·S2, 종목 master, 공시검색, 전체 재무제표, 원문·checksum·정정 이력, retry/rate limit/cache | T01 | C1·C2 통과 | 대기 |
 | T03 | 시세·외부 근거 수집 | S13·S14, 시세·거래일·기업행위, 뉴스·공식 외부 근거 provider와 라이선스 | T02 | C3 통과 | 대기 |
 | T04 | Temporal Integrity·재무 계산 | S15·S3, as_of·정정·잠정/확정·CFS/OFS·누적/단일·단위·기업행위, 파생 지표 | T02·T03 | C4 통과 | 대기 |
@@ -57,7 +57,14 @@
 - auto-merge는 승인과 품질 gate를 만족할 때만 실행하고 충돌 PR을 자동 종료하지 않는다.
 - 추적 문서가 ignore된 문서에 의존하지 않도록 문서 정책을 정리한다.
 
+**완료 (2026-07-12)**: checklist.md C0의 9개 항목 전부 체크. H1~H7 하네스(lint·test·build·secret scan·CI·auto-merge)는 이전 세션에서, `contracts/`(envelope·verdict·schemas 실행 가능 contract test)와 dependency audit는 같은 날 앞선 T00 세션에서 완료했다. T01에서 `backend/` package scaffold와 ruff·mypy·pytest가 생기면서 "type"(backend type check)을 포함해 frontend+backend를 함께 요구하던 나머지 3개 항목(BLOCKED였던 repository-level workflow·frontend/backend lint+type+security·CI 차단 gate)이 해제됐다. `ci.yml`의 `backend` job과 `scripts/verify.sh`(harness.md H1 승격)로 로컬·CI 모두 frontend+backend를 한 번에 검증한다.
+
 ### T01~T04. 플랫폼·원천·무결성
+
+**T01 완료 (2026-07-12)**: `backend/`(uv 관리, Python 3.12, FastAPI·Pydantic v2·SQLAlchemy·Alembic·PyJWT·passlib[argon2]). `app/config.py`(pydantic-settings, 루트 `.env`/`.env.example`), `app/schemas/envelope.py`(`contracts/envelope.js`와 동일 계약의 Python 미러), `app/middleware.py`(request_id/trace_id), `app/exception_handlers.py`(모든 오류를 Envelope로 매핑), `app/providers/base.py`(T02~T14 provider가 구현할 추상 인터페이스와 timeout/rate-limit/auth/maintenance/not-found → status·reason_code 매핑), `app/models/user.py`+Alembic 초기 migration, `UserRepository`, `app/security/`(argon2 hashing, JWT), `/api/v1/auth/register·login·me` FastAPI 엔드포인트. 로컬 Postgres는 `docker-compose.yml`(port 5442, postgres:18)로 실행한다. 31개 backend pytest(unit+integration, 실제 Postgres 대상) 전부 통과, ruff·mypy strict 통과, red→green 검증 완료. `scripts/verify.sh`로 frontend+backend 통합 검증, `ci.yml`의 `backend` job에 postgres service container로 연결(YAML 구문만 검증, 실제 PR 미검증).
+- 전체 도메인 스키마(기업·공시·Claim 등)는 T02 이후 범위이며 T01은 인증 기반(users)만 다룬다.
+- 사용자의 실제 `.env`에는 `DATABASE_URL`·`JWT_SECRET_KEY`가 아직 없다 — 로컬 실행 전 `.env.example`을 참고해 채워야 한다(에이전트가 실제 `.env` 내용을 읽거나 쓰지 않았음, CLAUDE.md 절대 원칙 8).
+- **GPT 리뷰 반영 (2026-07-12, report_gpt.md 3건)**: provider rate limit·인증 실패 status를 `EXTERNAL_ERROR`로 정정, Envelope `source_ids` 필수화(JS·Python 동시), `UserRepository` 동시 가입 경쟁을 rollback 후 `CONFLICT`로 변환, 구조화 JSON 로그·Prometheus metrics(`app/observability.py`, `/metrics`) 추가(backend pytest 36개). auto-merge 판정 로직을 `scripts/auto-merge-rules.js`로 추출해 main 대상 PR 스킵 결함·반복 코멘트 결함 수정(rule 테스트 10건). `contracts/` schema를 typed spec으로 강화. npm audit dev 포함(vite 7 업그레이드로 0건), pip-audit·Dependabot(uv·github-actions) 확장.
 
 - raw 데이터는 immutable snapshot과 checksum을 보존한다.
 - OpenDART `rcept_no`로 공시검색의 접수일과 재무제표를 연결한다.

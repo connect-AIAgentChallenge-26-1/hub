@@ -16,11 +16,19 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
+      # 판정 로직은 scripts/auto-merge-rules.js(단위 테스트 대상)에 있고,
+      # 이 스텝은 GraphQL 조회·label·코멘트·병합 API 호출만 담당한다 (H6).
+      - uses: actions/checkout@v4
+
       - name: "Merge pull request"
         uses: "actions/github-script@v7"
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
+            const { pathToFileURL } = require('node:url');
+            const rulesPath = `${process.env.GITHUB_WORKSPACE}/scripts/auto-merge-rules.js`;
+            const { decide, hasStateLabel, staleStateLabels } = await import(pathToFileURL(rulesPath).href);
+
             const query = `query($owner:String!, $name:String!) {
               repository(owner: $owner, name: $name) {
                 pullRequests(last: 100, states: OPEN) {
@@ -30,10 +38,9 @@ jobs:
                       headRefName
                       baseRefName
                       author { login }
-                      repository { name }
                       mergeable
-                      labels(first: 10) { nodes { name } }
-                      reviews(last: 1) { nodes { state } }
+                      reviewDecision
+                      labels(first: 20) { nodes { name } }
                       commits(last: 1) {
                         nodes {
                           commit {
@@ -41,109 +48,61 @@ jobs:
                           }
                         }
                       }
-                      comments(last: 10) {
-                        nodes { body author { login } }
-                      }
                     }
                   }
                 }
               }
-            }`
+            }`;
 
             const repo = { owner: context.repo.owner, repo: context.repo.repo };
 
-            // ---------- low-level API helpers ----------
-            async function comment(pr, body) {
-              try {
-                await github.rest.issues.createComment({ ...repo, issue_number: pr.number, body });
-                console.log(`PR #${pr.number} 코멘트 추가: "${body}"`);
-              } catch (e) {
-                console.log(`PR #${pr.number} 코멘트 실패:`, e);
-              }
-            }
-
-            // 동일한 봇 코멘트가 이미 마지막으로 달려 있으면 다시 달지 않는다.
-            async function commentOnce(pr, body) {
-              const lastBotComment = [...pr.comments.nodes]
-                .reverse()
-                .find((c) => c.author?.login === "github-actions[bot]");
-              if (lastBotComment?.body === body) {
-                console.log(`PR #${pr.number} 동일 코멘트 반복 생략`);
-                return;
-              }
-              await comment(pr, body);
-            }
-
-            async function mergePR(pr) {
-              await github.rest.pulls.merge({ ...repo, pull_number: pr.number, merge_method: "merge" });
-            }
-
-            // ---------- predicates ----------
-            const isTargetingMain     = (pr) => pr.baseRefName === "main";
-            const hasReviewLabel      = (pr) => pr.labels.nodes.some(l => l.name.toLowerCase() === "review");
-            const isChangesRequested  = (pr) => pr.reviews?.nodes?.[0]?.state === "CHANGES_REQUESTED";
-            const isApproved          = (pr) => pr.reviews?.nodes?.[0]?.state === "APPROVED";
-            const isConflicting       = (pr) => pr.mergeable === "CONFLICTING";
-            const ciState             = (pr) => pr.commits?.nodes?.[0]?.commit?.statusCheckRollup?.state ?? null;
-            const isCIPassing         = (pr) => ciState(pr) === "SUCCESS";
-
-            // ---------- actions ----------
-            async function skipMain(pr) {
-              await commentOnce(pr, "main 브랜치로 병합 시도");
-            }
-
-            async function skipReviewLabel(pr) {
-              // 코멘트 없이 로그만 (기존 동작 유지)
-            }
-
-            async function deferChangesRequested(pr) {
-              await commentOnce(pr, "변경 요청 중인 브랜치의 머지를 연기합니다.");
-            }
-
-            async function deferNotApproved(pr) {
-              await commentOnce(pr, "리뷰 승인 대기 중이라 자동 병합을 연기합니다.");
-            }
-
-            async function deferCIFailing(pr) {
-              const state = ciState(pr) ?? "NO_CHECKS";
-              await commentOnce(pr, `CI 상태(${state})가 통과하지 않아 자동 병합을 연기합니다.`);
-            }
-
-            async function deferConflicting(pr) {
-              // 품질 게이트 정책: 충돌 PR을 자동 close하지 않는다. 사용자가 직접 해소한다.
-              await commentOnce(pr, "충돌로 인해 자동 병합을 연기합니다. 충돌을 해결한 뒤 다시 시도해 주세요.");
-            }
-
-            async function mergeIfReady(pr) {
-              try {
-                await mergePR(pr);
-                console.log(`PR #${pr.number} 병합 완료`);
-              } catch (e) {
-                console.log(`PR #${pr.number} 병합 실패:`, e);
-              }
-            }
-
-            // ---------- rules (배열 순서 = 우선순위) ----------
-            // 품질 게이트 정책(T00): CI 성공 + 리뷰 승인을 모두 만족해야 병합한다.
-            // 충돌은 close가 아니라 연기 코멘트로 처리하고, 동일 코멘트를 반복하지 않는다.
-            const rules = [
-              { name: "main 브랜치 타겟 → 스킵",     match: isTargetingMain,             run: skipMain              },
-              { name: "review 라벨 → 스킵",          match: hasReviewLabel,              run: skipReviewLabel       },
-              { name: "변경 요청 상태 → 연기",       match: isChangesRequested,          run: deferChangesRequested },
-              { name: "충돌 → 연기",                 match: isConflicting,               run: deferConflicting      },
-              { name: "미승인 → 연기",               match: (pr) => !isApproved(pr),     run: deferNotApproved      },
-              { name: "CI 미통과 → 연기",            match: (pr) => !isCIPassing(pr),    run: deferCIFailing        },
+            // addLabels는 저장소에 이미 존재하는 label만 붙일 수 있다(없으면 404).
+            // 4개 상태 label을 멱등하게 미리 보장해 둔다(이미 있으면 422 무시).
+            const STATE_LABELS = [
+              ['auto-merge:changes-requested', 'ededed'],
+              ['auto-merge:conflicting', 'ededed'],
+              ['auto-merge:not-approved', 'ededed'],
+              ['auto-merge:ci-failing', 'ededed'],
             ];
-            const defaultRule = { name: "조건 통과 → 머지", match: () => true, run: mergeIfReady };
+            for (const [name, color] of STATE_LABELS) {
+              await github.rest.issues.createLabel({ ...repo, name, color }).catch((e) => {
+                if (e.status !== 422) console.log(`label "${name}" 생성 실패:`, e);
+              });
+            }
 
-            // ---------- main ----------
             const { repository: { pullRequests: { edges: list } } } = await github.graphql(query, {
               owner: repo.owner,
               name: repo.repo,
             });
 
             for (const { node: pr } of list) {
-              const rule = rules.find(r => r.match(pr)) ?? defaultRule;
-              console.log(`\n---- PR #${pr.number} → ${rule.name}`);
-              await rule.run(pr);
+              const decision = decide(pr);
+              console.log(`\n---- PR #${pr.number} → ${decision.name}`);
+
+              if (decision.action === 'merge') {
+                try {
+                  await github.rest.pulls.merge({ ...repo, pull_number: pr.number, merge_method: "merge" });
+                  console.log(`PR #${pr.number} 병합 완료`);
+                } catch (e) {
+                  console.log(`PR #${pr.number} 병합 실패:`, e);
+                }
+              } else if (decision.action === 'comment') {
+                // "1회만"은 label로 보장한다 — 댓글은 pagination 창이 있어
+                // PR이 오래 열려 있으면 marker가 창 밖으로 밀릴 수 있지만,
+                // label은 PR당 유일해 생애 전체에서 정확히 추적된다.
+                if (hasStateLabel(pr, decision.stateLabel)) {
+                  console.log(`PR #${pr.number} 동일 상태(${decision.stateLabel}) 이미 처리됨 — 생략`);
+                  continue;
+                }
+                try {
+                  for (const stale of staleStateLabels(pr, decision.stateLabel)) {
+                    await github.rest.issues.removeLabel({ ...repo, issue_number: pr.number, name: stale }).catch(() => {});
+                  }
+                  await github.rest.issues.addLabels({ ...repo, issue_number: pr.number, labels: [decision.stateLabel] });
+                  await github.rest.issues.createComment({ ...repo, issue_number: pr.number, body: decision.body });
+                  console.log(`PR #${pr.number} 연기 코멘트 추가 (${decision.stateLabel})`);
+                } catch (e) {
+                  console.log(`PR #${pr.number} 코멘트 실패:`, e);
+                }
+              }
             }

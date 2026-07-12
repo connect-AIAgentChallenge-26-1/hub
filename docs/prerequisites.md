@@ -6,14 +6,15 @@
 
 ## 지금 바로 (T00 전후)
 
-- [ ] **문서 커밋** — 현재 uncommitted인 CLAUDE.md, AGENTS.md, docs/* 를 커밋해 기준점 확정
-- [ ] **GitHub branch protection** — main에 required status checks 설정 (T00에서 CI가 생기면 build·test·lint·type·security를 required로 지정)
-- [ ] **auto-merge 정책 결정** — 품질 gate 통과를 머지 조건으로 바꾸는 T00 수정에 동의하는지, 아예 워크플로우를 제거할지 결정
+- [x] **문서 커밋** — T00·T01 계약·backend·하네스 기준점을 확정하고 upstream 추적 이슈 [#643](https://github.com/connect-AIAgentChallenge-26-1/hub/issues/643)에 후속 검증 항목을 기록
+- [ ] **GitHub branch protection** — main에 required status checks 설정 (`ci.yml`의 `frontend`·`backend`·`secret-scan` job을 required로 지정)
+- [x] **auto-merge 정책 결정** — 품질 gate(CI 성공+리뷰 승인) 통과를 머지 조건으로 반영 완료 (`.github/workflows/auto-merge.yml`)
 
 ## T01 — Backend·DB 기반
 
-- [ ] **PostgreSQL 실행 환경** — 로컬 Docker Desktop 설치 또는 로컬 PostgreSQL. agent가 docker compose 파일은 만들 수 있지만 Docker 설치·실행은 사용자 몫
-- [ ] **secret 관리 방식 결정** — 로컬은 `.env`, 배포 환경은 무엇을 쓸지(플랫폼 내장 secrets, AWS Secrets Manager 등) 방향만 미리 결정
+- [x] **PostgreSQL 실행 환경** — Docker Desktop이 이미 설치·실행 중이어서 `docker-compose.yml`(postgres:18, localhost:5442)로 해결. 실제 배포 환경의 PostgreSQL 호스팅은 T13에서 별도 결정
+- [ ] **로컬 `.env`에 T01 변수 채우기** — 저장소의 `.env`는 아직 `DATABASE_URL`·`JWT_SECRET_KEY`가 없다(agent는 실제 `.env`를 읽거나 쓰지 않았음). `.env.example`을 참고해 다음을 추가해야 backend가 로컬에서 실행된다: `DATABASE_URL=postgresql+psycopg://hub:hub@localhost:5442/hub`, `JWT_SECRET_KEY=<32바이트 이상의 무작위 값>`
+- [ ] **secret 관리 방식 결정 (배포 환경)** — 로컬은 `.env`로 확정. 배포 환경은 무엇을 쓸지(플랫폼 내장 secrets, AWS Secrets Manager 등) 방향만 T13 이전에 미리 결정
 
 ## T02 — OpenDART 수집
 
@@ -59,6 +60,7 @@
 | `NEWS_API_KEY` 등 | 선택한 외부 근거 provider | T03 |
 | `UPSTAGE_API_KEY` | console.upstage.ai | T06 |
 | `DATABASE_URL` | 로컬/배포 PostgreSQL | T01 |
+| `JWT_SECRET_KEY` | 직접 생성(32바이트 이상 무작위 값) | T01 |
 | `BROKER_APP_KEY` / `BROKER_APP_SECRET` | 증권사 개발자 포털 | T14 |
 
 ## 원칙
