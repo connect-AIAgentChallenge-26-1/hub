@@ -34,6 +34,16 @@ jobs:
                       mergeable
                       labels(first: 10) { nodes { name } }
                       reviews(last: 1) { nodes { state } }
+                      commits(last: 1) {
+                        nodes {
+                          commit {
+                            statusCheckRollup { state }
+                          }
+                        }
+                      }
+                      comments(last: 10) {
+                        nodes { body author { login } }
+                      }
                     }
                   }
                 }
@@ -52,8 +62,16 @@ jobs:
               }
             }
 
-            async function closePR(pr) {
-              await github.rest.pulls.update({ ...repo, pull_number: pr.number, state: "closed" });
+            // 동일한 봇 코멘트가 이미 마지막으로 달려 있으면 다시 달지 않는다.
+            async function commentOnce(pr, body) {
+              const lastBotComment = [...pr.comments.nodes]
+                .reverse()
+                .find((c) => c.author?.login === "github-actions[bot]");
+              if (lastBotComment?.body === body) {
+                console.log(`PR #${pr.number} 동일 코멘트 반복 생략`);
+                return;
+              }
+              await comment(pr, body);
             }
 
             async function mergePR(pr) {
@@ -64,11 +82,14 @@ jobs:
             const isTargetingMain     = (pr) => pr.baseRefName === "main";
             const hasReviewLabel      = (pr) => pr.labels.nodes.some(l => l.name.toLowerCase() === "review");
             const isChangesRequested  = (pr) => pr.reviews?.nodes?.[0]?.state === "CHANGES_REQUESTED";
+            const isApproved          = (pr) => pr.reviews?.nodes?.[0]?.state === "APPROVED";
             const isConflicting       = (pr) => pr.mergeable === "CONFLICTING";
+            const ciState             = (pr) => pr.commits?.nodes?.[0]?.commit?.statusCheckRollup?.state ?? null;
+            const isCIPassing         = (pr) => ciState(pr) === "SUCCESS";
 
             // ---------- actions ----------
             async function skipMain(pr) {
-              await comment(pr, "main 브랜치로 병합 시도");
+              await commentOnce(pr, "main 브랜치로 병합 시도");
             }
 
             async function skipReviewLabel(pr) {
@@ -76,16 +97,21 @@ jobs:
             }
 
             async function deferChangesRequested(pr) {
-              await comment(pr, "변경 요청 중인 브랜치의 머지를 연기합니다.");
+              await commentOnce(pr, "변경 요청 중인 브랜치의 머지를 연기합니다.");
             }
 
-            async function closeOnConflict(pr) {
-              try {
-                await closePR(pr);
-                await comment(pr, "충돌로 인해 자동 병합이 불가능합니다.");
-              } catch (e) {
-                console.log(`PR #${pr.number} 충돌 close 처리 실패:`, e);
-              }
+            async function deferNotApproved(pr) {
+              await commentOnce(pr, "리뷰 승인 대기 중이라 자동 병합을 연기합니다.");
+            }
+
+            async function deferCIFailing(pr) {
+              const state = ciState(pr) ?? "NO_CHECKS";
+              await commentOnce(pr, `CI 상태(${state})가 통과하지 않아 자동 병합을 연기합니다.`);
+            }
+
+            async function deferConflicting(pr) {
+              // 품질 게이트 정책: 충돌 PR을 자동 close하지 않는다. 사용자가 직접 해소한다.
+              await commentOnce(pr, "충돌로 인해 자동 병합을 연기합니다. 충돌을 해결한 뒤 다시 시도해 주세요.");
             }
 
             async function mergeIfReady(pr) {
@@ -98,11 +124,15 @@ jobs:
             }
 
             // ---------- rules (배열 순서 = 우선순위) ----------
+            // 품질 게이트 정책(T00): CI 성공 + 리뷰 승인을 모두 만족해야 병합한다.
+            // 충돌은 close가 아니라 연기 코멘트로 처리하고, 동일 코멘트를 반복하지 않는다.
             const rules = [
-              { name: "main 브랜치 타겟 → 스킵",   match: isTargetingMain,     run: skipMain              },
-              { name: "review 라벨 → 스킵",        match: hasReviewLabel,      run: skipReviewLabel       },
-              { name: "변경 요청 상태 → 연기",     match: isChangesRequested,  run: deferChangesRequested },
-              { name: "충돌 → close",              match: isConflicting,       run: closeOnConflict       },
+              { name: "main 브랜치 타겟 → 스킵",     match: isTargetingMain,             run: skipMain              },
+              { name: "review 라벨 → 스킵",          match: hasReviewLabel,              run: skipReviewLabel       },
+              { name: "변경 요청 상태 → 연기",       match: isChangesRequested,          run: deferChangesRequested },
+              { name: "충돌 → 연기",                 match: isConflicting,               run: deferConflicting      },
+              { name: "미승인 → 연기",               match: (pr) => !isApproved(pr),     run: deferNotApproved      },
+              { name: "CI 미통과 → 연기",            match: (pr) => !isCIPassing(pr),    run: deferCIFailing        },
             ];
             const defaultRule = { name: "조건 통과 → 머지", match: () => true, run: mergeIfReady };
 
