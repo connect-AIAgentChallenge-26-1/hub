@@ -1,3 +1,8 @@
+# Secrets — 절대 커밋 금지
+.env
+.env.*
+!.env.example
+
 # Logs
 logs
 *.log
@@ -28,3 +33,8 @@ docs/*
 !docs/backlog.md
 !docs/plan.md
 !docs/checklist.md
+!docs/instructions.md
+!docs/prerequisites.md
+!docs/harness.md
+!docs/report/
+!docs/report/**

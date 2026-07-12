@@ -1,40 +1,91 @@
 # AGENTS.md
 
-대학생 소액 투자자를 위한 **근거 검증 Agent**의 범용 에이전트 지침. 어떤 코딩 에이전트(Claude Code, Codex, Cursor 등)로 작업하든 이 파일을 기준으로 삼는다. Claude Code 전용 안내와 상세 아키텍처는 [CLAUDE.md](CLAUDE.md)에, 기획은 [docs/plan.md](docs/plan.md)에, **Agent 스킬 계약은 [docs/skills.md](docs/skills.md)** 에 있다.
+대학생 소액 투자자를 위한 **근거 검증 Agent**의 범용 개발 지침. 안전 원칙과 제품 경계는 [CLAUDE.md](CLAUDE.md), 전체 범위는 [docs/plan.md](docs/plan.md), 스킬 계약은 [docs/skills.md](docs/skills.md), 완료 조건은 [docs/checklist.md](docs/checklist.md), 작업 순서는 [docs/backlog.md](docs/backlog.md)를 따른다.
 
-## 이 프로젝트가 하는 일
+## 제품 범위
 
-종목을 추천하지 않는다. 사용자가 보는 현재가와 예상 적정가를 비교한 뒤, 매수 판단이 실제 공시·재무 데이터로 뒷받침되는지 **검증**한다. Agent는 세 기능(A 종목 공부 / B 현재가·적정가 / C 근거 검증)으로 구성되며, 각 기능은 [docs/skills.md](docs/skills.md)의 스킬(S1~S11)을 조합한 파이프라인이다.
+기능 A~D, S1~S23, 감사 개선안 I1~I11, 인증·FastAPI·React UI·평가·배포·운영은 모두 최종 완료 범위다.
 
-## 절대 원칙 (코드·문구·출력 전반)
+- A: 종목 공부
+- B: 가치 범위·중립 가격 위치
+- C: Structured Claim 기반 근거 검증
+- D: 사용자 직접 입력 기반 개인 주문
 
-1. **추천 금지** — 목표가·"사세요/파세요" 문구를 출력하지 않는다. 판정·근거 제시까지만.
-2. **환각 금지** — 원문 공시에 없는 수치·사실을 만들지 않는다. 데이터가 없으면 빈 값을 채우지 말고 `데이터 부족`을 명시한다.
-3. **기준일 필수** — 데이터를 담은 모든 화면·출력에 `기준일(YYYY-MM-DD)`을 표시한다.
-4. **출처 동반** — 재무 수치·근거는 출처 공시와 함께 표시한다.
+단계는 의존 순서일 뿐 기능 포함 여부를 바꾸지 않는다. 작업이 차단되면 삭제하거나 “나중”으로 돌리지 말고 `BLOCKED`, 원인, 해제 조건을 기록한다.
 
-이 4개는 [docs/skills.md](docs/skills.md)의 스킬 공통 계약과 동일하다. 스킬을 구현·수정할 때 이 계약을 게이트로 재검증한다.
+## 절대 원칙
+
+1. **추천 금지** — 목표가·매수·매도·관망·분할매수·보류 지시를 출력하지 않는다.
+2. **환각 금지** — 원문에 없는 수치·사실·출처를 생성하지 않고 결측을 0으로 채우지 않는다.
+3. **기준시점 필수** — 데이터에 `as_of`, 접수일, 대상 기간을 포함한다.
+4. **출처 필수** — 수치·판정은 공식 원천으로 추적 가능해야 한다.
+5. **결정론 우선** — 숫자·단위·기간·verdict 계산은 코드가 수행한다.
+6. **정합성 강제** — 다른 기업·기간·단위·CFS/OFS·누적/단일 값을 섞지 않는다.
+7. **보안·격리** — 사용자·문서 입력을 신뢰하지 않고 사용자별 데이터·secret을 격리한다.
+8. **주문 분리** — 분석 결과에서 S12를 자동 호출하거나 가격·수량을 채우지 않는다.
+
+## Source of Truth
+
+1. `CLAUDE.md`: 안전·제품 경계
+2. `docs/plan.md`: 전체 요구사항 R01~R15
+3. `docs/skills.md`: S1~S23 typed 계약
+4. `docs/checklist.md`: C0~C16 완료 조건
+5. `docs/backlog.md`: T00~T15 순서·상태
+6. 코드와 자동 테스트: 실제 구현 상태
+
+감사 보고서와 보관 문서는 변경 근거이며 현재 범위를 직접 재정의하지 않는다.
 
 ## 작업 규칙
 
-- **스킬 우선 참조** — Agent 기능을 건드리기 전에 [docs/skills.md](docs/skills.md)에서 해당 스킬의 입력/출력/제약을 확인한다. 새 스킬 추가나 계약 변경 시 `docs/skills.md`를 **먼저** 갱신하고 코드를 맞춘다.
-- **문서 동기화** — 기능·아키텍처를 바꾸면 `docs/skills.md`, `CLAUDE.md`, 관련 `docs/*.md`를 함께 갱신한다.
-- **언어·톤** — 사용자 대면 문구는 한국어, 초보 투자자 눈높이, 추천이 아닌 **검증** 톤.
-- **LLM** — LLM 작업은 Claude API를 기본(최신 모델 우선)으로 한다. 스택은 [docs/docs_1.md](docs/docs_1.md) §3을 따른다.
+- 스킬 입력·출력·제약을 바꾸면 `docs/skills.md`를 먼저 수정한다.
+- 제품 범위를 바꾸면 `docs/plan.md`, checklist, backlog, CLAUDE/AGENTS를 같은 변경에서 동기화한다.
+- 모든 기능은 코드 + 정상/실패/공격 테스트 + 문서 + 로그·metrics가 있어야 완료다.
+- provider 응답은 공식 문서와 immutable record/replay fixture로 검증한다.
+- 데이터 없음, 지원 불가, 외부 장애와 구현 오류를 구분한다.
+- raw 값과 정규화·파생 값을 분리하고 계산 공식·rule version을 남긴다.
+- LLM 출력은 Structured Outputs와 S23 allowlist 검사를 통과해야 한다.
+- 수치 판정을 LLM 자유 텍스트에 맡기지 않는다.
+- auto-merge와 릴리스는 테스트·lint·type·security·I9 평가 gate를 모두 통과해야 한다.
 
-## 기술 스택 / 아키텍처
+## 작업 보고
 
-React · FastAPI · LangGraph · Claude API · PostgreSQL · Chroma · OpenDART. LangGraph 노드 = 스킬 실행 순서이며 대응 관계는 [docs/skills.md](docs/skills.md)의 "파이프라인 대응" 절 참고. Redis·Next.js·Docker+EC2는 의도적으로 제외.
+- 모든 작업·리뷰 세션 종료 시 `docs/report/`에 보고를 남긴다. 구현 agent는 `claude.md`, 리뷰 agent는 `gpt.md`.
+- 보고 파일은 **읽지 않는다**. `cat >> docs/report/<파일>.md` shell append로 하단에만 추가하고 기존 내용을 수정·삭제하지 않는다.
+- 형식은 각 보고 파일 상단의 템플릿을 따른다 (날짜·Task·요약·검증 결과·미결 사항).
+
+## 기술 아키텍처
+
+- React + Vite frontend
+- FastAPI + Pydantic backend
+- 일반 Python deterministic core
+- LangGraph conditional retrieval loop
+- Upstage Solar(solar-pro3) Structured Outputs
+- PostgreSQL + migration
+- Chroma + metadata filtering
+- OpenDART, 공식 시세·외부 근거 provider, 증권사 adapter
+- pytest·lint·type check·security scan·CI
+- 인증·권한·secrets·관측·backup/restore·rollback
+
+LangGraph는 단순 계산 파이프라인을 감싸기 위해 쓰지 않는다. S8·S17~S20의 상태·재검색·반증 분기가 필요할 때만 사용한다.
+
+## 기능 D 경계
+
+- S12는 A/B/C와 분리된 guarded command 경로다.
+- paper와 broker sandbox가 필수다.
+- live adapter는 구현하되 기본 비활성·개인 전용이다.
+- 공개·데모 build는 paper-only다.
+- 사용자 직접 입력, 2단계 확인, idempotency, 한도, kill switch, reconciliation과 감사 로그가 필수다.
+- 실제 live 활성화는 코드 완료와 별도의 법률·컴플라이언스·운영 승인 대상이다.
 
 ## 현재 상태
 
-`src/`는 소개(랜딩) 페이지 한 장. Agent 스킬은 전부 미구현이며 [docs/checklist.md](docs/checklist.md)의 5주 계획을 따라 노드 단위로 만든다.
-
-## 명령어
+현재 실행 코드는 React 소개 페이지뿐이고 Backend·S1~S23은 미구현이다. 목표 문서에 적혔다는 이유로 구현 완료로 간주하지 않는다.
 
 ```bash
 npm install
-npm run dev      # Vite 개발 서버
-npm run build    # dist/ 프로덕션 빌드
-npm run preview  # 빌드 결과 미리보기
+npm run dev
+npm run build
+npm run preview
 ```
+
+Backend 명령은 T01에서 추가한다.

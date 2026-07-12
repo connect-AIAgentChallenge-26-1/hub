@@ -1,188 +1,496 @@
-# Agent 스킬 정의 — 근거 검증 Agent
+# Agent 스킬 계약 — 근거 검증 시스템 전체 구현 범위
 
-Agent A/B/C(핵심 기능 3개)가 실제로 하는 일을 **재사용 가능한 스킬 단위**로 분해한 문서. 스킬은 LangGraph 노드에 대응하며, 하나의 스킬이 여러 Agent에 재사용된다. 기획 배경은 [plan.md](plan.md)·[docs_1.md](docs_1.md), 작업 분해는 [checklist.md](checklist.md) 참고.
+이 문서는 기능 A~D를 구성하는 S1~S23의 입력·출력·제약을 정의하는 **구현 계약의 단일 진실 소스**다. 제품 전체 범위는 [plan.md](plan.md), 구현 순서는 [backlog.md](backlog.md), 검증 가능한 완료 조건은 [checklist.md](checklist.md)를 따른다.
 
-> **스킬 = "Agent가 조합해서 쓰는 최소 능력 단위."** 기능 A/B/C는 이 스킬들을 순서대로 엮은 파이프라인이지 별도 로직 덩어리가 아니다. 체크리스트·복기 리포트가 기능 C의 부산물인 이유도 같은 스킬 재사용이기 때문이다.
+등록된 모든 스킬은 최종 완료 범위에 포함된다. 단계와 선행조건은 구현 순서를 정할 뿐 기능을 범위에서 제거하지 않는다. 계약을 바꿀 때는 이 문서를 먼저 수정한 뒤 코드·테스트·관련 문서를 함께 갱신한다.
 
-## 공통 원칙 (모든 스킬에 적용)
+## 공통 원칙
 
-[CLAUDE.md](../CLAUDE.md)의 절대 원칙을 스킬 계약(contract)으로 못 박는다. 어떤 스킬도 아래를 위반하는 출력을 내면 안 된다.
+1. **추천 금지** — 목표가, 매수·매도 지시, `관망·분할매수·보류` 같은 행동 라벨을 생성하지 않는다. 데이터 판정과 가격 위치 설명까지만 제공한다.
+2. **환각 금지** — 원문에 없는 수치·사실·출처를 만들지 않는다. 결측값을 0으로 채우지 않는다.
+3. **기준시점 필수** — 모든 데이터 출력에 `as_of(YYYY-MM-DD)`와 사용한 공시 접수일을 포함한다.
+4. **출처 동반** — 수치와 판정은 `rcept_no`, 계정, 대상 기간, 원문 위치 또는 공식 URL을 포함한다.
+5. **결정론 우선** — 수치 계산·비교·단위 변환·판정은 코드가 수행한다. LLM은 자연어 구조화와 서술형 근거 해석에만 사용한다.
+6. **정합성 우선** — 기업·기간·단위·연결/별도·누적/단일 값이 일치하지 않으면 결합하지 않는다.
+7. **실패 구분** — 데이터 부재, 지원 범위 밖, 외부 API 장애, 구현 오류를 서로 다른 `reason_code`로 반환한다.
+8. **보안 경계** — 사용자 입력과 공시 원문은 데이터로 취급한다. LLM 출력은 schema와 허용 필드 검사를 통과해야 한다.
+9. **사용자 격리** — 로그·분석·주문 데이터는 인증 주체별로 분리하며 다른 사용자의 결과를 재사용하지 않는다.
+10. **추적 가능성** — 각 요청은 입력, 데이터 기준시점, 검색·계산 단계, 외부 호출, 비용과 최종 판정을 trace로 남긴다. 주문·인증 trace에는 credential·계좌 원문·secret을 기록하지 않고 마스킹된 식별자만 허용한다.
+11. **LLM 단일 보안 경로** — S4·S7·S8·S11을 포함한 모든 LLM 호출은 공통 S23 middleware를 반드시 통과한다. 각 스킬이 보안 게이트를 우회해 provider를 직접 호출하지 않는다.
 
-- **추천 금지** — 목표가·"사세요/파세요" 문구를 생성하지 않는다. 판정과 근거 제시까지만 한다.
-- **환각 금지** — 원문 공시에 없는 수치·사실을 만들지 않는다. 데이터가 없으면 빈 값을 채우지 말고 `데이터 부족`을 명시한다.
-- **기준일 필수** — 데이터를 담은 모든 출력에 `기준일(YYYY-MM-DD)`을 포함한다.
-- **출처 동반** — 재무 수치·근거는 어떤 공시(문서/항목)에서 왔는지 함께 반환한다.
+## 공통 데이터 계약
 
----
+모든 스킬 출력은 다음 generic envelope를 공통으로 갖는다. 아래 각 스킬 표의 `출력`은 `data`에 들어가는 payload만 축약해 표시하며, bare object나 array로 직접 반환하지 않는다.
+
+```text
+Envelope<T> {
+  schema_version, request_id, trace_id, as_of,
+  status, reason_code?, warnings[],
+  source_provider?, source_ids[],
+  model_or_rule_version, started_at, completed_at,
+  data?: T
+}
+```
+
+`status`는 다음 enum만 사용한다.
+
+| Status | 의미 |
+|---|---|
+| `SUCCESS` | 요청한 payload가 계약대로 생성됨 |
+| `PARTIAL_SUCCESS` | 일부 독립 source/항목만 성공했으며 누락과 warning을 명시 |
+| `VALIDATION_ERROR` | 요청 또는 schema가 유효하지 않음 |
+| `AUTHENTICATION_ERROR` | 사용자 인증이 없거나 만료됨 |
+| `AUTHORIZATION_ERROR` | 인증 주체에게 해당 자원·동작 권한이 없음 |
+| `NOT_FOUND` | 요청 자원이나 기업을 찾지 못함 |
+| `CONFLICT` | idempotency·버전·상태 전이가 충돌함 |
+| `RATE_LIMITED` | 우리 서비스의 사용자·tenant·비용 한도 초과 |
+| `EXTERNAL_ERROR` | provider timeout·점검·rate limit·인증·응답 오류로 필요한 처리를 완료하지 못함 |
+| `INTERNAL_ERROR` | 구현·저장소·예상하지 못한 내부 오류 |
+
+도메인 verdict와 주문 상태는 envelope `status`에 넣지 않고 `data` 안의 별도 enum으로 반환한다. 검증에 필요한 데이터가 정상 조회됐지만 부족하면 envelope는 `SUCCESS`이고 verdict는 `INSUFFICIENT_EVIDENCE`다. provider 장애 때문에 필요한 조회를 완료하지 못하면 `EXTERNAL_ERROR`이며 이를 부족 verdict로 바꾸지 않는다.
+
+### Verdict
+
+| 값 | 의미 |
+|---|---|
+| `SUPPORTED` | 필요한 근거가 있고 원자 Claim의 비교식이 참 |
+| `PARTIALLY_SUPPORTED` | 같은 그룹의 원자 verdict가 `SUPPORTED`와 `REFUTED`로만 구성되고 두 값이 모두 존재하는 집계 결과 |
+| `REFUTED` | 필요한 근거가 있고 원자 Claim의 비교식이 거짓 |
+| `INSUFFICIENT_EVIDENCE` | 검증 가능한 유형이지만 필요한 값·기간·출처가 부족 |
+| `UNVERIFIABLE` | 의견·미래 예측·비사실 주장 또는 비교식을 정의할 수 없는 주장 |
+
+원자 수치 Claim은 크기가 일부만 맞는다는 이유로 `PARTIALLY_SUPPORTED`를 사용하지 않는다. 예를 들어 `배수 >= 2`인데 실제 1.38배면 `REFUTED`다. 흑자전환·적자지속은 verdict가 아니라 `reason_code`다.
+
+그룹 집계 우선순위는 다음과 같으며 원자 결과는 항상 함께 보존한다.
+
+| 원자 결과 구성 | 그룹 verdict |
+|---|---|
+| 하나 이상 `INSUFFICIENT_EVIDENCE` | `INSUFFICIENT_EVIDENCE` |
+| 부족은 없고 하나 이상 `UNVERIFIABLE` | `UNVERIFIABLE` |
+| `SUPPORTED`와 `REFUTED`가 모두 존재 | `PARTIALLY_SUPPORTED` |
+| 전부 `SUPPORTED` | `SUPPORTED` |
+| 전부 `REFUTED` | `REFUTED` |
+
+### Structured Claim
+
+```text
+claim_id, claim_group_id?, original_span,
+corp_code, stock_code, claim_type, metric,
+evidence_domain, comparison_entity_ref?, peer_universe_ref?,
+comparator{op, target_value, target_unit,
+           tolerance_value?, tolerance_unit?},
+direction, current_period, comparison_period,
+as_of, verifiable, ambiguity_flags, condition?
+```
+
+### Financial Fact
+
+```text
+corp_code, stock_code, account_id, account_name,
+raw_value, raw_unit, normalized_value, normalized_unit,
+fiscal_period, reprt_code, report_type,
+fs_div(CFS/OFS), is_cumulative, is_provisional,
+rcept_no, filed_at, source_url, collected_at
+```
+
+### Raw Source Record
+
+`RawDisclosureRecord`, `RawMarketRecord`, `RawExternalRecord`는 다음 공통 metadata를 가진 immutable provider record다. provider별 원문 필드는 `raw_payload`에 그대로 보존한다.
+
+```text
+raw_record_id, source_provider, source_url?, source_native_id?,
+corp_code?, stock_code?, published_at?, revised_at?, target_period?,
+raw_payload, checksum, collected_at
+```
+
+### Evidence
+
+```text
+evidence_id, corp_code, claim_id?, presentation_item_id?, evidence_type,
+document_id, rcept_no, filed_at, target_period,
+source_url, quote, chunk_offset, retrieval_score,
+relation(SUPPORTS/REFUTES/NEUTRAL/CONFLICTS),
+relation_reason, relation_rule_version,
+integrity_status, as_of
+```
+
+`claim_id`와 `presentation_item_id` 중 정확히 하나가 필수다. 기능 A의 공시·리포트 provenance는 `presentation_item_id`와 `relation=NEUTRAL`, 기능 C의 검증 근거는 `claim_id`와 판정된 relation을 사용한다.
+
+### Numeric Evidence
+
+```text
+numeric_evidence_id,
+evidence_domain(financial/market/flow/valuation/peer),
+corp_code, comparison_entity_ref?, peer_universe_ref?,
+metric, value, unit, target_period, as_of,
+formula?, source_ids[], provenance, integrity_status
+```
+
+근거 기반 verdict에는 계산식 또는 인용문, 사용 값, 기업, 기간, `as_of`, 출처가 필수다. `INSUFFICIENT_EVIDENCE`와 `UNVERIFIABLE`에는 `reason_code`, `missing_fields`, 확인한 데이터 범위를 포함한다.
+
+## 금융 데이터 정합성 계약
+
+- `filed_at <= as_of`인 데이터만 사용한다.
+- 정정공시는 `as_of` 안의 동일 보고서 체인에서 가장 최근 접수분을 선택하고 원본·정정 이력을 보존한다.
+- 잠정·확정 실적을 구분하고 충돌 시 확정 실적을 우선하되 사용 여부를 출력한다.
+- 두 기간 모두 CFS가 있으면 CFS를 사용한다. 그렇지 않고 두 기간 모두 OFS가 있으면 OFS를 사용하고 별도재무제표임을 표시한다. CFS와 OFS를 기간 사이에 섞지 않는다.
+- 사업보고서·분기·반기·3분기 보고서를 구분한다. 손익계산서의 당기 단일값과 누적값을 필드 수준에서 구분한다.
+- 누적분기를 단일분기로 변환할 때 사용한 산식과 원본값을 보존한다.
+- 금액·통화·비율 단위를 명시적으로 정규화한다. `0.15`와 `15%`를 묵시적으로 같은 값으로 취급하지 않는다.
+- 분모가 0 또는 음수면 일반 증가율·배수 공식을 적용하지 않고 전환 상태와 검증 가능 여부를 별도 판정한다.
+- 시세, 발행주식 수, 시가총액, 기업행위 정보는 같은 기준일을 사용한다. 액면분할·증자·배당락 영향을 기록한다.
+- 공식 구조화 수치와 공시 원문이 충돌하면 자동 확정하지 않고 충돌 상태와 양쪽 출처를 반환한다.
 
 ## 스킬 목록
 
 ### S1. 종목 해석 (Company Resolver)
 
-| 항목 | 내용 |
+| 항목 | 계약 |
 |---|---|
-| 목적 | 사용자가 입력한 종목명/약칭을 종목코드·고유번호로 확정 |
-| 입력 | 종목명 문자열 (예: "삼성전자") |
-| 처리 | 종목 마스터 대조 → 동명이인/유사명 후보 처리 → OpenDART `corp_code` 매핑 |
-| 출력 | `{corp_name, stock_code, corp_code, 후보목록?}` |
-| 노드 | Company Resolver |
-| 제약 | KOSPI·KOSDAQ 외 종목이면 "지원 대상 아님" 반환. 조용히 임의 매칭하지 않는다 |
+| 목적 | 종목명·약칭·종목코드를 `corp_code`와 `stock_code`로 확정 |
+| 입력 | `{query, market?, as_of}` |
+| 처리 | OpenDART 고유번호·상장 종목 마스터 대조, 유사명 후보 생성, 사용자 선택 요구 |
+| 출력 | `{corp_name, corp_code, stock_code, market, matched_by, listing_status, resolved_at, candidates?}` |
+| 제약 | 동명·유사 종목을 임의 확정하지 않는다. 지원 외 종목은 명시적으로 반환한다 |
 
-### S2. 공시 수집 (Disclosure Collector)
+### S2. 공시·원천 데이터 수집 (Disclosure Collector)
 
-| 항목 | 내용 |
+| 항목 | 계약 |
 |---|---|
-| 목적 | 대상 종목의 최근 공시(사업·분기보고서 등)를 원천에서 수집 |
-| 입력 | `corp_code`, 조회 기간/유형 |
-| 처리 | OpenDART API 조회 → 사업/분기보고서 원문 파싱 → 원문 청크를 Chroma에 적재(RAG 근거용) |
-| 출력 | `{공시목록, 원문청크, 접수일자}` + `기준일` |
-| 노드 | Disclosure Collector |
-| 제약 | 공시가 일정 개수 미만이면 `데이터 부족` 플래그를 세워 하위 스킬에 전파 |
+| 목적 | 공시 목록·재무제표·원문·정정 이력을 OpenDART에서 수집 |
+| 입력 | discriminated union: `{operation: COLLECT, corp_code, as_of, period, reprt_codes, fs_divs}` 또는 `{operation: NORMALIZE, eligible_raw_disclosure_records: RawDisclosureRecord[], normalization_policy_ref}` |
+| 처리 | `COLLECT`는 공시검색·전체 재무제표·원문 API 응답을 immutable `RawDisclosureRecord`로 저장한다. `NORMALIZE`는 S15 `PRE_NORMALIZE` 통과분만 `rcept_no`로 조인하고 정정 chain·문서 청크·A 화면용 중립 `Evidence`를 생성 |
+| 출력 | `COLLECT`는 `{raw_disclosure_records, provider_trace}`, `NORMALIZE`는 `{disclosures, eligible_financial_rows, document_chunks, document_evidence, correction_chains, trace}` |
+| 오류 | `000` 정상, 데이터 없음, 제한 초과, 점검, 인증, timeout을 서로 다른 상태로 매핑 |
+| 제약 | timeout·retry·rate limit을 적용한다. 종목·접수일·대상기간 metadata 없는 청크는 검색 인덱스에 넣지 않는다 |
 
-### S3. 재무지표 계산 (Financial Calculator)
+### S3. 재무 정규화·계산 (Financial Calculator)
 
-| 항목 | 내용 |
+| 항목 | 계약 |
 |---|---|
-| 목적 | 파싱된 재무제표에서 표준 지표 계산 |
-| 입력 | S2가 넘긴 재무제표 원문 수치 |
-| 처리 | 매출·영업이익·부채비율·영업현금흐름·PER/PBR/ROE·성장률·변동성 계산 |
-| 출력 | `{지표명: 값, 산출식, 원문출처}` + `기준일` |
-| 노드 | Financial Calculator |
-| 제약 | **환각 방지 핵심 스킬.** 모든 수치는 원문과 대조 가능한 값만 반환. 계산 불가 항목은 `데이터 부족` |
+| 목적 | 원천 재무 행을 Financial Fact로 정규화하고 재현 가능한 지표를 계산 |
+| 입력 | S2 `NORMALIZE`의 `eligible_financial_rows`와 S15 `PRE_NORMALIZE`를 통과해 S13 `NORMALIZE`가 만든 시세·발행주식 수·기업행위 데이터 |
+| 처리 | 계정 매핑, 단위·통화 정규화, CFS/OFS 선택, 누적→단일분기 변환, YoY/QoQ/연속 추세, PER/PBR/ROE/부채비율/현금흐름 계산 |
+| 출력 | `{facts, numeric_evidence, metrics, formulas, warnings, provenance}` |
+| 제약 | 원본 문자열을 보존한다. 매핑 후보가 복수면 임의 선택하지 않고 부족 상태를 반환한다. 계산은 LLM을 사용하지 않는다 |
 
 ### S4. 전문용어 설명 (Term Explainer)
 
-| 항목 | 내용 |
+| 항목 | 계약 |
 |---|---|
-| 목적 | 리포트에 등장한 전문용어를 초보자 눈높이로 풀이 |
-| 입력 | 리포트 텍스트에 등장한 용어(PER, PBR, 부채비율 등) |
-| 처리 | Claude API로 문맥에 맞춘 짧은 풀이 생성 |
-| 출력 | `{용어: 한 줄 설명}` |
-| 노드 | Report Generator 보조 |
-| 제약 | 설명은 일반 정의만. 특정 종목이 "싸다/비싸다"는 가치판단을 섞지 않는다 |
+| 목적 | 리포트의 금융 용어를 초보자 눈높이로 설명 |
+| 입력 | `{terms, report_context}` |
+| 처리 | 승인된 정의 사전 우선, 필요한 경우 S23을 거친 Solar Structured Outputs로 문맥 설명 생성 |
+| 출력 | `[{term, definition, source?}]` |
+| 제약 | 특정 종목의 매수·매도·고평가 판단을 설명에 섞지 않는다 |
 
-### S5. 적정가 산출 (Valuation)
+### S5. 가치 시나리오 계산 (Valuation Scenarios)
 
-| 항목 | 내용 |
+| 항목 | 계약 |
 |---|---|
-| 목적 | 현재가 대비 적정 예상가 **범위**를 산출 (단일 목표가 아님) |
-| 입력 | 현재가(입력/조회), S3 지표 |
-| 처리 | PER/PBR/ROE/성장률/변동성 가중 규칙으로 예상가 밴드 계산 → 현재가 대비 괴리율 |
-| 출력 | `{적정가_하단, 적정가_상단, 괴리율}` + `기준일` |
-| 노드 | Financial Calculator 확장 |
-| 제약 | **범위**로만 제시. "목표가 N원" 같은 단정적 단일값을 내지 않는다 |
+| 목적 | 여러 가정에 따른 가치 범위와 민감도를 계산 |
+| 입력 | S3 지표, S13 동일 기준일 시세, S21이 확정한 peer 통계 |
+| 처리 | PER/PBR/ROE/성장률/변동성 기반 복수 시나리오·괴리율·민감도 계산 |
+| 출력 | `{value_ranges, numeric_evidence, assumptions, peer_comparison, data_quality, as_of}` |
+| 제약 | 단일 목표가를 만들지 않는다. peer universe의 유일한 구성·통계 소유자는 S21이며 S5는 결과만 소비한다 |
 
-### S6. 밸류에이션 판정 (Valuation Judge)
+### S6. 가격 위치 설명 (Price Position)
 
-| 항목 | 내용 |
+| 항목 | 계약 |
 |---|---|
-| 목적 | 현재가가 적정 범위 대비 어디인지 판정 |
-| 입력 | 현재가, S5 예상가 범위 |
-| 처리 | 고평가 / 저평가 / 중립 분류 + 매수 가능 구간(관망·분할매수·보류) 규칙 매핑 |
-| 출력 | `{판정, 구간_제안, 근거지표}` |
-| 노드 | Report Generator |
-| 제약 | 구간 제안은 사용자 판단 보조용 라벨. "지금 사라"는 지시가 아님을 UI 문구로 유지 |
+| 목적 | 현재가가 계산된 범위의 어느 위치인지 사실적으로 설명 |
+| 입력 | 현재가, S5 범위·가정 |
+| 처리 | 범위 하단 아래/범위 내부/범위 상단 위 및 민감도 계산 |
+| 출력 | `{position, distance, sensitivity, assumptions, as_of}` |
+| 제약 | `매수 가능`, `관망`, `분할매수`, `보류` 같은 행동 지시를 출력하지 않는다 |
 
-### S7. 근거 유형 추출 (Claim Extractor)
+### S7. 구조화 Claim 추출 (Structured Claim Extractor)
 
-| 항목 | 내용 |
+| 항목 | 계약 |
 |---|---|
-| 목적 | 사용자의 자연어 매수 이유에서 검증 가능한 근거 유형을 뽑아냄 |
-| 입력 | 매수 이유 자연어 (예: "실적도 좋고 뉴스도 좋아서") |
-| 처리 | Claude API로 유형 **리스트** 추출: 실적 / 공시 / 뉴스 / 테마 / 감 |
-| 출력 | `[{유형, 원문근거구절}]` |
-| 노드 | Claim Extractor (기능 C 전용) |
-| 제약 | 여러 유형 동시 추출 지원. "그냥 감"처럼 추출 근거 없으면 즉시 `근거 없음(감정적 판단)` + 후속 질문 트리거. 에러로 막지 않는다 |
+| 목적 | 자연어 이유를 검증 가능한 원자 Claim과 그룹으로 변환 |
+| 입력 | `{text, resolved_company?, as_of}` |
+| 처리 | S23 middleware → Solar Structured Outputs → schema 검증 → 원문 span 실존 검사 → 의미 검증. 다중 주장, 부정, 조건문, 비교 대상, 모호한 기간을 구조화 |
+| 출력 | `{claims: StructuredClaim[], warnings, extraction_trace}` |
+| 제약 | 원문에 없는 span·수치·기업을 만들지 않는다. 모호성을 임의 기준으로 숨기지 않고 사용자 확인 또는 `UNVERIFIABLE`로 보낸다 |
 
-### S8. 근거 대조 검증 (Evidence Verifier) — ReAct형 반복 루프
+### S8. 근거 계획·검증·검색 (Evidence Verification)
 
-| 항목 | 내용 |
+| 항목 | 계약 |
 |---|---|
-| 목적 | 추출된 각 근거를 공시·재무 데이터와 대조해 뒷받침 여부 판정. 단발 조회가 아니라, 증거가 부족하면 **스스로 재검색을 반복**해 확신이 설 때까지(또는 한도까지) 검증한다 — 이 스킬이 파이프라인 중 가장 "에이전트답게" 동작하는 지점이다 |
-| 입력 | S7 근거 리스트, S2 공시 청크, S3 지표 |
-| 처리 | 1) Chroma RAG로 공시 원문 1차 검색 → 근거-데이터 대조 → 유형별 확신도 산출 2) 확신도가 낮거나 근거 부족 시, 재검색 쿼리를 스스로 재구성(다른 키워드, 분기→반기→사업보고서로 조회 범위 확장 등)해 재시도 3) 충분한 근거를 찾으면 즉시 멈춤(불필요한 반복 방지) 4) 최대 반복 횟수(기본 3회) 도달 시 "데이터 부족"으로 확정 |
-| 출력 | `[{유형, 판정: 있음/부족/없음, 인용출처, 확신도, 검색시도로그}]` + `기준일` |
-| 노드 | Evidence Verifier (반복 루프, LangGraph에서 조건부 셀프 엣지로 구현) |
-| 제약 | 유형별로 판정을 **나눠서** 반환(예: 실적→있음 / 뉴스→확인 불가). 인용 없는 "있음" 판정 금지. **반복 횟수 상한(기본 3회)을 반드시 둔다** — 과다 LLM 호출·응답 지연 방지. 반복 중에도 원문에 없는 수치·사실 생성 금지 원칙은 동일 적용. 각 반복에서 무엇을 재검색했는지 `검색시도로그`로 남겨, "부족" 판정 시 사용자에게 무엇을 확인했는지 투명하게 보여준다 |
+| 목적 | Claim별 필요한 근거를 계획하고 지지·반박·부족·검증불가를 판정 |
+| 입력 | S7 Claim, S2/S14 문서·청크, S3/S5/S13/S21 수치 근거, S15 정합성 결과, 검색 예산·timeout 설정 |
+| 처리 | S15~S21을 오케스트레이션하고 모든 LLM 단계는 S23 middleware를 거친다. S17 계획 후 S16 수치 검산과 `S18 검색 → S19 반증 → S15.POST_DERIVED → S20 인용 검사`를 병렬 branch로 실행하고, 두 branch가 끝난 뒤 5상태 판정·그룹 집계를 수행 |
+| 출력 | `{claim_results, group_results, evidence_plans, calculations, citations, search_logs, confidence_basis, as_of}` |
+| 반복 | LangGraph 조건부 루프로 미충족 근거만 최대 3회 재검색한다. 유효 검색 완료 후 근거가 없을 때만 `INSUFFICIENT_EVIDENCE`; timeout·rate limit·인증·provider 장애면 envelope `status=EXTERNAL_ERROR`로 종료 |
+| 제약 | 수치형 verdict를 LLM이 덮어쓸 수 없다. 인용이 원문과 일치하지 않으면 판정을 확정하지 않는다. 종목·기간 metadata 필터를 필수 적용한다 |
 
-### S9. 체크리스트 생성 (Checklist)
+### S9. 확인 체크리스트 생성 (Checklist)
 
-| 항목 | 내용 |
+| 항목 | 계약 |
 |---|---|
-| 목적 | 매매 실행 전 사용자가 점검할 항목 도출 |
-| 입력 | S8 판정 결과(부족·없음 항목) |
-| 처리 | 부족한 근거·위험 요소를 확인 질문으로 변환 |
-| 출력 | `[체크 항목]` |
-| 노드 | Report Generator (기능 C 부산물) |
-| 제약 | 별도 파이프라인 아님 — S8 출력의 재구성 |
+| 목적 | 부족·반박·충돌·검증불가 결과를 사용자가 확인할 질문으로 변환 |
+| 입력 | S8 결과 |
+| 처리 | `reason_code`, missing evidence, conflicting evidence를 확인 항목으로 변환 |
+| 출력 | `[{item, related_claim_ids, status, source_links}]` |
+| 제약 | 주문이나 매수 행동을 유도하지 않는다. 이미 충족된 항목을 미충족으로 표시하지 않는다 |
 
-### S10. 복기 로그 (Review Logger)
+### S10. 복기·가설 추적 (Review & Hypothesis Tracker)
 
-| 항목 | 내용 |
+| 항목 | 계약 |
 |---|---|
-| 목적 | 판정 결과를 누적 저장하고, 쌓이면 반복 패턴 리포트 생성 |
-| 입력 | `{기기ID, 종목, 매수이유, 판정, 시점}` |
-| 처리 | PostgreSQL 저장 → 시계열 집계(예: "최근 5건 중 3건 감정적 판단") |
-| 출력 | 복기 로그 항목 / 누적 복기 리포트 |
-| 노드 | Review Logger |
-| 제약 | MVP는 로그인 없이 임시 기기 ID로 구분. 누적 리포트도 별도 기능 아닌 S8 출력의 시계열 재사용 |
+| 목적 | 분석 시점의 Claim·Evidence·Verdict를 보존하고 사용자별 복기·패턴을 관리 |
+| 입력 | `{auth_subject, analysis_snapshot, user_note, created_at, hypothesis_updates?}`. `auth_subject.user_id`는 서버 인증 context에서 주입 |
+| 처리 | PostgreSQL immutable snapshot 저장, 사용자별 집계, 태그·주석·체크리스트 상태, 내보내기·삭제·보존기간 적용 |
+| 출력 | `{review_log, pattern_report, export_ref?, hypothesis_updates?}` |
+| 제약 | client가 다른 `user_id`를 선택할 수 없고 사용자 데이터를 격리한다. 과거 snapshot을 덮어쓰지 않으며 신규 공시 재검증은 S22가 담당한다 |
 
-### S11. 리포트 생성 (Report Generator)
+### S11. 리포트·Provenance UI 생성 (Report Generator)
 
-| 항목 | 내용 |
+| 항목 | 계약 |
 |---|---|
-| 목적 | 앞 스킬들의 출력을 초보자용 화면 문구로 합성 |
-| 입력 | S2~S10 산출물 |
-| 처리 | Claude API로 요약·확인 포인트 생성, S4 용어 풀이 삽입 |
-| 출력 | 화면별 리포트(기업개요/공시요약/지표변화/확인포인트 등) + `기준일` |
-| 노드 | Report Generator |
-| 제약 | 공통 원칙 4개를 최종 게이트로 재검증. 위반 시 해당 문장 제거 후 `데이터 부족`으로 대체 |
+| 목적 | 모든 산출물을 초보자용 리포트와 원문 검증 화면으로 구성 |
+| 입력 | S1~S10·S13~S22 산출물을 정규화한 typed presentation payload, S15 경고, 해당 시 S20 검증 인용 |
+| 처리 | 규칙 기반 데이터 카드 우선, S23을 거친 Solar 요약, 인용·계산·정정·기준일·검색 로그 연결 |
+| 출력 | 기능 A/B/C 화면 데이터, 원문 하이라이트, 공식 DART 링크, 용어 설명, 데이터 한계 |
+| 제약 | schema·출처·금지 문구 게이트를 통과하지 못한 문장을 제거한다. 숨겨진 근거나 생성된 출처를 표시하지 않는다 |
 
-### S12. 주문 실행 (Order Executor) — 개인용 확장, MVP 범위 밖
+### S12. 개인 계좌 주문 실행 (Guarded Order Executor)
 
-| 항목 | 내용 |
+| 항목 | 계약 |
 |---|---|
-| 목적 | 사용자가 직접 정한 지정가·수량으로 매수 주문을 실제 증권 계좌에 전송 |
-| 입력 | `{종목코드, 지정가, 수량, 모드: 모의투자\|실거래}` — 지정가는 항상 사용자가 확정한 값 (S5·S6이 산출한 적정가 범위는 참고용일 뿐 자동으로 지정가에 대입하지 않음) |
-| 처리 | 증권사 Open API(예: 한국투자증권 KIS Developers) 인증 → 주문 전 최종 확인 프롬프트 → 1회 주문 금액 상한 검사 → 주문 전송 |
-| 출력 | `{주문결과, 체결여부, 주문시각}` |
-| 노드 | Order Executor (다른 노드와 분리된 독립 실행 경로, 근거 검증 파이프라인 A/B/C와 직접 연결하지 않음) |
-| 제약 | **본인 계좌 전용, 타인 대상 서비스로 제공 금지.** 기본값은 모의투자 모드이며 실거래 전환은 명시적 설정 변경 필요. 실주문 직전 사용자 확인 단계 생략 불가. Agent가 지정가를 자동 산출·대입하지 않는다(=추천 금지 원칙 유지). MVP(기능 A·B·C) 완료 후 여유 있을 때만 착수 |
+| 목적 | 인증된 사용자가 직접 입력한 지정가·수량을 본인 계좌에 전송 |
+| 입력 | 아래 `OrderCommand` discriminated union. `user_id`, 실행 mode와 live entitlement는 client payload가 아니라 인증 context·서버 환경·권한에서만 결정 |
+| 처리 | 증권사 adapter 인증, 재인증·confirmation nonce 검증, broker executable quote·시장·잔고·1회/일일 한도 검사, immutable preview, idempotency, 주문·체결·취소·부분체결 조회, 감사 로그 |
+| 출력 | operation별 payload를 `Envelope<PreviewPayload | OrderPayload | OrderHistoryPayload>`로 반환 |
+| 선행조건 | 사용자 인증, 비밀정보 암호화, 권한 분리, 모의투자 계약 테스트, 중복 주문 방지, 취소·조회 경로 |
+| 제약 | 서버 승인이 없는 live 의도는 거부한다. 기본값은 paper이며 side=BUY·order_type=LIMIT만 허용한다. S5·S6 결과 자동 대입·자동 주문·예약 반복 주문을 금지한다. expiring nonce, kill switch, 금액 한도와 session timeout을 강제한다. network timeout 후 맹목 재시도하지 않고 broker 상태를 조회해 reconcile한다. 공개·데모에서는 실거래를 비활성화한다 |
 
----
+```text
+OrderCommand =
+  | PreviewOrderRequest {
+      operation: PREVIEW,
+      account_ref, stock_code,
+      side_intent: BUY, order_type: LIMIT,
+      user_price: Money, quantity: PositiveInt, reauth_token
+    }
+  | SubmitOrderRequest {
+      operation: SUBMIT,
+      preview_id, confirmation_nonce, client_order_id
+    }
+  | GetOrderRequest { operation: STATUS, order_id }
+  | CancelOrderRequest {
+      operation: CANCEL,
+      order_id, client_action_id, reauth_token
+    }
+  | OrderHistoryRequest {
+      operation: HISTORY,
+      account_ref?, cursor?, state_filter?, from?, to?
+    }
 
-## Agent × 스킬 매트릭스
+PreviewPayload {
+  preview_id, mode, account_masked, stock_code,
+  side_intent: BUY, order_type: LIMIT, user_price, quantity,
+  executable_quote_snapshot {price, quoted_at, provider},
+  market_status, estimated_amount, estimated_fees,
+  applicable_limits, expires_at, confirmation_nonce
+}
 
-| 스킬 | A. 종목 공부 | B. 현재가·적정가 | C. 근거 검증 |
-|---|:---:|:---:|:---:|
-| S1 종목 해석 | ● | ● | ● |
-| S2 공시 수집 | ● | ○ | ● |
-| S3 재무지표 계산 | ● | ● | ● |
-| S4 전문용어 설명 | ● | ○ | ○ |
-| S5 적정가 산출 | | ● | |
-| S6 밸류에이션 판정 | | ● | ○ |
-| S7 근거 유형 추출 | | | ● |
-| S8 근거 대조 검증 | | | ● |
-| S9 체크리스트 | | | ● |
-| S10 복기 로그 | | | ● |
-| S11 리포트 생성 | ● | ● | ● |
+OrderPayload {
+  order_id, client_order_id?, client_action_id?, mode,
+  state, submitted_at?, updated_at, fills[],
+  broker_order_ref?, rejection_reason?, audit_ref
+}
 
-● 핵심 사용 · ○ 조건부/재사용
+OrderHistoryPayload {items: OrderPayload[], next_cursor?}
 
-## 파이프라인 대응
+OrderMode = PAPER | SANDBOX | LIVE
+Money {amount_decimal, currency}
 
-`docs_1.md §4`의 LangGraph 노드 순서 = 스킬 실행 순서다.
-
+OrderState =
+  PREVIEWED | SUBMITTING | ACCEPTED | REJECTED |
+  PARTIALLY_FILLED | FILLED | CANCEL_PENDING | CANCELED |
+  EXPIRED | UNKNOWN_RECONCILING
 ```
-Query Parser → S1 → S2 → S3 → (S5·S6 | S7·S8) → S9 → S11 → S10
+
+`PREVIEW`는 재인증 뒤 만료되는 `confirmation_nonce`와 broker 기준 quote snapshot을 발급한다. `SUBMIT`은 서버에 보존된 immutable preview만 사용하며 client가 종목·가격·수량·mode를 다시 덮어쓸 수 없다. quote가 stale이면 새 preview를 요구한다. `STATUS`, `CANCEL`, `HISTORY`는 인증 주체가 소유한 `account_ref/order_id`에만 접근한다.
+
+### S13. 시세·기업행위 수집 (Market Data Collector)
+
+| 항목 | 계약 |
+|---|---|
+| 목적 | 현재·과거 가격, 거래량, 발행주식 수와 기업행위 데이터를 수집 |
+| 입력 | discriminated union: `{operation: COLLECT, stock_code, start, end, as_of}` 또는 `{operation: NORMALIZE, raw_market_records, normalization_policy_ref, adjusted_policy}` |
+| 처리 | `COLLECT`는 공식 시세 provider 원문을 immutable raw record로 저장한다. `NORMALIZE`는 S15 `PRE_NORMALIZE` 통과분만 거래일 정렬하고 조정·비조정 가격 및 분할·증자·배당락 metadata와 `NumericEvidence`로 변환 |
+| 출력 | `COLLECT`는 `{raw_market_records, provider, license, collected_at}`, `NORMALIZE`는 `{quotes, corporate_actions, shares_outstanding, numeric_evidence, provider, license}` |
+| 제약 | quote timestamp와 데이터 라이선스를 기록한다. provider 장애 시 수동 입력 경로를 제공하되 출처를 구분하며 대체값이 없으면 `EXTERNAL_ERROR`를 반환한다 |
+
+### S14. 외부 근거 수집 (External Evidence Collector)
+
+| 항목 | 계약 |
+|---|---|
+| 목적 | 뉴스·수급·테마·계약 등 OpenDART 밖 Claim의 검증 가능한 근거를 수집 |
+| 입력 | discriminated union: `{operation: COLLECT, claim: StructuredClaim}` 또는 `{operation: NORMALIZE, raw_external_records, normalization_policy_ref}` |
+| 처리 | `COLLECT`는 versioned deterministic query-builder가 Claim의 기업·유형·metric·기간으로 검색어를 만들고 허용된 뉴스·거래소·공식 기관 provider 원문과 시각·URL을 immutable record로 저장한다. `NORMALIZE`는 S15 `PRE_NORMALIZE` 통과분만 entity match하고 provider의 구조화 수급·계약 수치를 결정론적으로 `NumericEvidence`로 변환 |
+| 출력 | `COLLECT`는 `{raw_external_records, provider_trace}`, `NORMALIZE`는 `{external_documents, numeric_evidence, publication_times, entity_matches, provider_trace}` |
+| 제약 | 커뮤니티 소문은 사실 근거로 승격하지 않는다. 산문에서 LLM이 추출한 수치를 검증 전 `NumericEvidence`로 승격하지 않는다. 지원 가능한 신뢰 원천 자체가 없으면 `UNVERIFIABLE`, 구성된 provider 장애면 `EXTERNAL_ERROR`를 반환한다 |
+
+### S15. 시점·단위 정합성 계층 (Temporal Integrity Layer)
+
+| 항목 | 계약 |
+|---|---|
+| 목적 | I4의 `as_of`, 정정, 잠정/확정, CFS/OFS, 누적/단일, 단위 규칙을 중앙에서 강제 |
+| 입력 | discriminated union: `{mode: PRE_NORMALIZE, raw_records: RawDisclosureRecord[] | RawMarketRecord[] | RawExternalRecord[], as_of}` 또는 `{mode: POST_DERIVED, derived_records: FinancialFact[] | NumericEvidence[] | Evidence[], normalization_policy_ref, as_of}` |
+| 처리 | `PRE_NORMALIZE`는 미래 데이터 차단·정정 chain·보고서 범위·단위·기업행위 적용 정책을 확정한다. `POST_DERIVED`는 계산 입력 provenance·공식·기업·기간·단위·기준시점 일치와 원천 연결을 재검증한다 |
+| 출력 | `{mode, eligible_records, rejected_records, normalization_policy, integrity_log, temporal_warnings}` |
+| 제약 | 원천은 계산 전에 `PRE_NORMALIZE`, 파생 Fact/Evidence는 소비·노출 전에 `POST_DERIVED`를 반드시 통과한다. 자동 선택 규칙과 버전을 기록하고 해소 못한 충돌을 숨기지 않는다 |
+
+### S16. 결정론 검산·판정 집계 (Deterministic Verifier)
+
+| 항목 | 계약 |
+|---|---|
+| 목적 | I2·I3 수치 Claim을 코드로 검산하고 원자·그룹 verdict를 산출 |
+| 입력 | Structured Claim, S3·S5·S13·S14·S21 adapter가 생성하고 S15 `POST_DERIVED`를 통과한 `NumericEvidence[]`, metric mapping |
+| 처리 | 재무·시세·거래량·수급·가치·peer 도메인의 비교식·배수·증감률·연속성 계산, tolerance 적용, reason code 생성, 그룹 집계 |
+| 출력 | `{atomic_verdicts, group_verdicts, calculations, used_facts}` |
+| 제약 | 동일 입력은 동일 출력을 내야 한다. LLM이 계산값이나 verdict를 변경할 수 없다 |
+
+### S17. 필수 근거 계획 (Required-Evidence Planner)
+
+| 항목 | 계약 |
+|---|---|
+| 목적 | I5 Claim별 검증에 필요한 데이터·문서·기간을 사전 정의 |
+| 입력 | Structured Claim |
+| 처리 | versioned rule registry로 required facts/documents와 충족 조건 생성 |
+| 출력 | `{evidence_plan, required_items, coverage_formula, planner_version}` |
+| 제약 | LLM 자기확신도를 사용하지 않는다. 충족률은 확보된 필수 항목으로 계산한다 |
+
+### S18. 근거 검색 (Evidence Retriever)
+
+| 항목 | 계약 |
+|---|---|
+| 목적 | 공시·외부 문서에서 Claim 관련 근거를 hybrid 검색 |
+| 입력 | Claim, S17 계획, S2 `document_chunks`, S14 `external_documents`가 적재된 검색 index |
+| 처리 | S2/S14 문서의 versioned chunk·embedding index 구성 또는 조회, dense+sparse 검색, 종목·날짜·문서 metadata filter, 중복 제거, reranking |
+| 출력 | `{ranked_evidence, retrieval_trace, coverage, scores}` |
+| 제약 | 낮은 점수 근거를 확정 근거로 사용하지 않는다. 검색 결과 0건을 거짓으로 판정하지 않는다 |
+
+### S19. 반증 근거 검색 (Counter-Evidence Retriever)
+
+| 항목 | 계약 |
+|---|---|
+| 목적 | I6 확증편향을 줄이기 위해 Claim 반대 방향 근거를 별도로 검색 |
+| 입력 | Claim, S17 계획, S18 `ranked_evidence` |
+| 처리 | 방향 반전 규칙·반대 키워드로 검색 후 동일한 metadata·인용 게이트 적용 |
+| 출력 | `{counter_evidence, conflicts, search_trace}` |
+| 제약 | 기본 검색 대비 Recall·precision 변화를 I9에서 A/B 측정하고 노이즈를 숨기지 않는다 |
+
+### S20. 인용 무결성·Provenance (Citation Integrity)
+
+| 항목 | 계약 |
+|---|---|
+| 목적 | I7 인용이 실제 원문과 일치하고 사용자에게 추적 가능한지 검사 |
+| 입력 | S2 `document_evidence` 또는 S18 `ranked_evidence`와 S19 `counter_evidence`를 합친 `Evidence[]`, 원문·offset·공식 URL |
+| 처리 | exact/fuzzy/offset 검사, 문서 checksum 확인, DART 공식 링크 또는 허용 provider canonical URL 생성 |
+| 출력 | `{verified_citations, rejected_citations, integrity_scores}` |
+| 제약 | 검사 실패 인용으로 `SUPPORTED`·`REFUTED`를 확정하지 않는다 |
+
+### S21. 비교군 구성·비교 (Peer Universe Builder)
+
+| 항목 | 계약 |
+|---|---|
+| 목적 | I8 업종·사업 특성에 따른 비교군을 구성하고 상대 지표를 계산 |
+| 입력 | 대상 기업, KRX 업종, 가용 사업·재무 metadata, `as_of` |
+| 처리 | 포함·제외 규칙 적용, 표본 수·중앙값·분포 계산, peer 품질 점수 산출 |
+| 출력 | `{peer_universe, exclusions, statistics, numeric_evidence, quality_score, as_of}` |
+| 제약 | 비교군 구성 내역을 공개한다. 품질·표본 기준 미달이면 비교 Claim을 `UNVERIFIABLE`로 처리한다 |
+
+### S22. 투자 가설 추적 (Hypothesis Tracker)
+
+| 항목 | 계약 |
+|---|---|
+| 목적 | I10 신규 공시 이벤트 감지·재실행과 과거/최신 판정 비교를 전담 |
+| 입력 | Claim·Evidence·Verdict snapshot, 신규 공시 이벤트 |
+| 처리 | 신규 공시 scheduler, idempotent 재실행, 과거 `as_of` 불변 보존, 신규 시점 별도 실행, 차이·유효기간·판정 변화 계산 |
+| 출력 | `{hypothesis_timeline, verdict_changes, new_evidence, review_prompts}` |
+| 제약 | 미래 데이터를 과거 판정에 섞지 않는다. 역사 fixture와 실제 신규 공시 이벤트를 모두 지원한다 |
+
+### S23. LLM 보안 게이트 (LLM Security Gateway)
+
+| 항목 | 계약 |
+|---|---|
+| 목적 | I11 사용자 입력·문서 기반 프롬프트 인젝션과 schema 이탈을 차단 |
+| 입력 | LLM 요청 context, untrusted blocks, schema, 허용 필드 |
+| 처리 | 지시와 데이터 분리, secret/PII 제거, structured output·strict tool schema, allowlist 검증, 공격 패턴 trace |
+| 출력 | `{sanitized_request, validated_output, blocked_fields, security_events}` |
+| 제약 | 차단 실패 시 판정·주문 경로를 중단한다. S12 자격증명은 어떤 LLM context에도 넣지 않는다 |
+
+## 기능 × 스킬 매트릭스
+
+| 스킬 | A. 종목 공부 | B. 가치·가격 위치 | C. 근거 검증 | D. 개인 주문 |
+|---|:---:|:---:|:---:|:---:|
+| S1 종목 해석 | ● | ● | ● | ● |
+| S2 공시 수집 | ● | ○ | ● |  |
+| S3 재무 계산 | ● | ● | ● |  |
+| S4 용어 설명 | ● | ○ | ○ |  |
+| S5 가치 시나리오 | ○ | ● | ○ |  |
+| S6 가격 위치 |  | ● | ○ |  |
+| S7 Claim 추출 |  |  | ● |  |
+| S8 근거 검증 |  |  | ● |  |
+| S9 체크리스트 |  |  | ● |  |
+| S10 복기·패턴 | ○ | ○ | ● |  |
+| S11 리포트 | ● | ● | ● |  |
+| S12 주문 실행 |  |  |  | ● |
+| S13 시세·기업행위 | ○ | ● | ○ |  |
+| S14 외부 근거 | ○ | ○ | ● |  |
+| S15 시점·단위 정합성 | ● | ● | ● |  |
+| S16 결정론 검산 | ○ | ○ | ● |  |
+| S17 필수 근거 계획 |  |  | ● |  |
+| S18 근거 검색 | ○ |  | ● |  |
+| S19 반증 검색 |  |  | ● |  |
+| S20 인용 무결성 | ● |  | ● |  |
+| S21 비교군 구성 |  | ● | ● |  |
+| S22 가설 추적 | ○ | ○ | ● |  |
+| S23 LLM 보안 | ● | ● | ● |  |
+
+● 핵심 사용 · ○ 결과 재사용
+
+## 파이프라인
+
+```text
+A: S1 → S2.collect → S15.PRE_NORMALIZE → S2.normalize → S3 → S15.POST_DERIVED → S4/S20 → S11 → S10
+B: S1 → S2/S13.collect → S15.PRE_NORMALIZE → S2/S13.normalize → S3 → S15.POST_DERIVED → S21 → S15.POST_DERIVED → S5 → S15.POST_DERIVED → S6 → S11 → S10
+C: S1 → S7 → S2/S13.collect/S14.collect(Claim) → S15.PRE_NORMALIZE → S2/S13/S14.normalize → S3 → S15.POST_DERIVED → S21 → S15.POST_DERIVED → S5 → S15.POST_DERIVED → S8[S17 → (S16 ∥ (S18 → S19 → S15.POST_DERIVED → S20)) → 집계] → S9 → S11 → S10/S22
+D: 사용자 인증·직접 입력 → S1 → S12
 ```
 
-- **기능 A**: S1 → S2 → S3 → S4 → S11
-- **기능 B**: S1 → S3 → S5 → S6 → S11
-- **기능 C**: S1 → S2 → S3 → S7 → S8 → S9 → S11 → S10
+S4·S7·S8·S11을 포함한 A/B/C의 모든 LLM 호출은 파이프라인 표기와 무관하게 S23 middleware가 감싼다. 결정론 구간은 일반 Python 함수와 명시적 서비스 경계로 구현한다. LangGraph는 S8·S17~S20의 근거 재검색·반증 탐색처럼 상태·조건부 반복이 실제로 필요한 구간에 적용한다.
+
+## 감사 개선안 매핑
+
+| 개선안 | 구현 위치 |
+|---|---|
+| I1 Structured Claim | S7 |
+| I2 Deterministic Verification | S16 |
+| I3 5-state Verdict | 공통 Verdict·S16 |
+| I4 Temporal Integrity | S15 |
+| I5 Required-Evidence Planner | S17 |
+| I6 Counter-Evidence Retrieval | S19 |
+| I7 Provenance·Citation Integrity | S20·S11 |
+| I8 Peer Comparison | S21·S5 |
+| I9 Golden Evaluation Harness | 공통 품질 게이트 |
+| I10 Hypothesis Tracking | S22·S10 |
+| I11 Injection Defense | S23 |
+
+## 공통 품질 게이트
+
+- I9 골든셋은 Claim·Verdict 5종, 정정공시, 단위, CFS/OFS, 누적분기, API 장애, 인젝션, 상충 근거를 포함한다.
+- 수치 계산 consistency와 동일 입력 I2 verdict 재현성은 100%여야 한다.
+- Claim extraction precision·recall, verdict accuracy, retrieval Recall@K, citation correctness, insufficient detection, latency, API 실패율과 LLM 비용을 자동 기록한다.
+- 인용문은 원문 exact/fuzzy 검사와 공식 링크 검증을 통과해야 한다.
+- 각 스킬은 단위 테스트, 계약 테스트, 오류·timeout 테스트를 가져야 한다.
+- 전체 A~D 파이프라인은 통합 테스트와 권한·사용자 격리 테스트를 통과해야 한다.
 
 ## 구현 상태
 
-전 스킬 **미구현**. 현재 `src/`는 소개 랜딩 페이지 한 장이며, 위 스킬은 [backlog.md](backlog.md)의 4주 계획에 따라 노드 단위로 구현한다. 새 스킬을 추가하거나 계약(입력/출력/제약)을 바꾸면 이 문서를 먼저 갱신한다.
-
-**S8 반복 루프 관련 참고**: 이 프로젝트의 다른 스킬(S1~S7, S9~S11)은 대부분 고정 순서로 실행되는 결정론적 파이프라인이다. S8만 유일하게 "부족하면 스스로 다시 찾아본다"는 자율 반복 판단을 수행하므로, 데모·포트폴리오 설명 시 이 지점을 "Agent"의 핵심 근거로 든다.
+S1~S23과 I1~I11은 모두 **REQUIRED / 미구현** 상태다. 현재 실행 코드는 React 소개 페이지뿐이다. 완료 상태는 [checklist.md](checklist.md)의 검증 조건을 통과했을 때만 변경한다.
