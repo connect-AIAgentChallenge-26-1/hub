@@ -3,6 +3,7 @@ import { AuthProvider } from './context/AuthContext'
 import { ProtectedRoute } from './routes/ProtectedRoute'
 import { HomePage } from './pages/HomePage'
 import { LoginPage } from './pages/LoginPage'
+import { MeetupDetailPage } from './pages/MeetupDetailPage'
 import { OAuthCallbackPage } from './pages/OAuthCallbackPage'
 import { SignupPage } from './pages/SignupPage'
 
@@ -18,6 +19,14 @@ function App() {
           element={
             <ProtectedRoute>
               <HomePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/meetups/:id"
+          element={
+            <ProtectedRoute>
+              <MeetupDetailPage />
             </ProtectedRoute>
           }
         />
