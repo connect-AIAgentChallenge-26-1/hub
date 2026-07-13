@@ -4,6 +4,7 @@
 
 ## 문서
 - [기획서](https://github.com/Aiden-Park11/hub/wiki/기획서)
+- [이번 주 계획 (3주차)](WEEK3-PLAN.md)
 - [개발 Task 백로그](TASKS.md)
 - [프로토타입 코드 및 실행 방법](prototype/README.md)
 
