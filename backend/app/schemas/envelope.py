@@ -10,7 +10,7 @@ from datetime import UTC, date, datetime
 from enum import Enum
 from typing import Generic, TypeVar
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 ENVELOPE_SCHEMA_VERSION = "1.0.0"
 
@@ -55,6 +55,18 @@ class Envelope(BaseModel, Generic[T]):
             raise ValueError(
                 "reason_code is required when status is not SUCCESS/PARTIAL_SUCCESS"
             )
+
+    @field_validator("started_at", "completed_at")
+    @classmethod
+    def _require_timezone(cls, value: datetime) -> datetime:
+        # pydantic's datetime type alone accepts naive datetimes and
+        # date-only strings ("2026-07-12"). docs/skills.md requires a full
+        # RFC3339 timestamp with an explicit offset — the same contract
+        # contracts/envelope.js enforces — so a naive value is rejected here
+        # rather than silently treated as some implicit timezone.
+        if value.tzinfo is None:
+            raise ValueError("must be an RFC3339 timestamp with a UTC/offset designator")
+        return value
 
 
 def new_ids() -> tuple[str, str]:

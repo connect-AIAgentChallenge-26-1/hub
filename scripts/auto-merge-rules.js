@@ -11,6 +11,12 @@
 // 안에서 찾는 방식은 PR이 오래 열려 있으면(댓글이 창 밖으로 밀림) 창을
 // 아무리 늘려도 무한정 재발할 수 있다. label은 PR당 유일하게 존재하고
 // pagination 걱정 없이 조회되므로 PR 생애 전체에서 상태를 정확히 추적한다.
+//
+// label은 상태 전환 시 지우지 않고 누적만 한다(staleStateLabels는 존재하지
+// 않는다). 전환할 때 지우면 A→B→A처럼 같은 상태로 돌아왔을 때 label이 이미
+// 사라진 상태라 "생애 전체 1회"가 깨지고 다시 코멘트가 달린다 — 이전에 있던
+// 실제 결함이었다(2026-07-12 23:51 리뷰). 한 번 안내한 상태는 그 PR이 살아있는
+// 동안 다시 안내하지 않는다.
 
 export const BOT_LOGIN = 'github-actions[bot]'
 
@@ -86,9 +92,4 @@ function stateLabelNames(pr) {
 /** PR이 이미 이 상태의 label을 달고 있으면(=이미 이 상태로 1회 코멘트했으면) true. */
 export function hasStateLabel(pr, stateLabel) {
   return stateLabelNames(pr).includes(stateLabel)
-}
-
-/** 상태가 바뀔 때 정리해야 할, 현재 상태가 아닌 과거 auto-merge:* label들. */
-export function staleStateLabels(pr, stateLabel) {
-  return stateLabelNames(pr).filter((name) => name !== stateLabel)
 }

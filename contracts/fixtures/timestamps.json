@@ -1,0 +1,20 @@
+{
+  "_comment": "Canonical RFC3339 timestamp fixture for started_at/completed_at (docs/skills.md 공통 데이터 계약). Consumed by both contracts/envelope.test.js and backend/tests/test_envelope_contract.py so the JS and Python Envelope mirrors reject/accept the exact same inputs.",
+  "valid": [
+    "2026-07-12T00:00:00Z",
+    "2026-07-12T00:00:00+09:00",
+    "2026-07-12T00:00:00.123456Z",
+    "2026-07-12T23:59:59-05:00"
+  ],
+  "invalid": [
+    "01/02/2026",
+    "2026-07-12T00:00:00",
+    "2026-07-12",
+    "2026-13-01T00:00:00Z",
+    "2026-07-12T25:00:00Z",
+    "not-a-date",
+    "",
+    "20260712T000000Z",
+    "2026-7-12T00:00:00Z"
+  ]
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { decide, hasStateLabel, staleStateLabels } from './auto-merge-rules.js'
+import { decide, hasStateLabel } from './auto-merge-rules.js'
 
 // GraphQL PR 노드 fixture — 기본값은 "main 대상 · 승인 · CI 성공"의 병합 가능 PR.
 function pr(overrides = {}) {
@@ -77,7 +77,7 @@ describe('decide', () => {
   })
 })
 
-describe('hasStateLabel / staleStateLabels', () => {
+describe('hasStateLabel', () => {
   it('detects an existing state label regardless of comment history depth', () => {
     // label 기반이므로 댓글이 아무리 많이 쌓여도(과거 100개 창 한계와 무관하게)
     // "이미 이 상태로 코멘트했다"를 정확히 알 수 있다.
@@ -93,20 +93,64 @@ describe('hasStateLabel / staleStateLabels', () => {
   it('does not confuse the review label with an auto-merge state label', () => {
     const withReviewLabel = pr({ labels: { nodes: [{ name: 'review' }] } })
     expect(hasStateLabel(withReviewLabel, 'auto-merge:not-approved')).toBe(false)
-    expect(staleStateLabels(withReviewLabel, 'auto-merge:not-approved')).toEqual([])
   })
 
-  it('lists stale auto-merge labels to remove when the state transitions', () => {
-    const staleLabeled = pr({
-      labels: { nodes: [{ name: 'auto-merge:ci-failing' }, { name: 'review' }] },
+  it('keeps recognizing a past state label after other auto-merge labels accumulate', () => {
+    // label은 상태 전환 때 지우지 않고 누적한다 — 과거에 이미 겪은 상태는
+    // 다른 상태 label이 붙은 뒤에도 여전히 "이미 안내함"으로 인식돼야 한다.
+    const accumulated = pr({
+      labels: {
+        nodes: [{ name: 'auto-merge:not-approved' }, { name: 'auto-merge:ci-failing' }],
+      },
     })
-    expect(staleStateLabels(staleLabeled, 'auto-merge:not-approved')).toEqual([
-      'auto-merge:ci-failing',
-    ])
+    expect(hasStateLabel(accumulated, 'auto-merge:not-approved')).toBe(true)
+    expect(hasStateLabel(accumulated, 'auto-merge:ci-failing')).toBe(true)
   })
+})
 
-  it('reports no stale labels when the PR already carries the current state label', () => {
-    const current = pr({ labels: { nodes: [{ name: 'auto-merge:not-approved' }] } })
-    expect(staleStateLabels(current, 'auto-merge:not-approved')).toEqual([])
+describe('A -> B -> A round trip (2026-07-12 23:51 리뷰 회귀 방지)', () => {
+  it('does not re-comment for a state the PR already visited, even after cycling through another state', () => {
+    // 1) 미승인 → 코멘트 + not-approved label 부착(누적, 삭제 없음)
+    let node = pr({ reviewDecision: 'REVIEW_REQUIRED', labels: { nodes: [] } })
+    let decision = decide(node)
+    expect(decision.action).toBe('comment')
+    expect(hasStateLabel(node, decision.stateLabel)).toBe(false)
+    node = pr({
+      reviewDecision: 'REVIEW_REQUIRED',
+      labels: { nodes: [{ name: decision.stateLabel }] },
+    })
+
+    // 2) 승인됐지만 CI 실패 → 새 상태이므로 코멘트 + ci-failing label 누적
+    //    (not-approved label은 지우지 않는다)
+    node = pr({
+      reviewDecision: 'APPROVED',
+      commits: { nodes: [{ commit: { statusCheckRollup: { state: 'FAILURE' } } }] },
+      labels: { nodes: [{ name: 'auto-merge:not-approved' }] },
+    })
+    decision = decide(node)
+    expect(decision.action).toBe('comment')
+    expect(decision.stateLabel).toBe('auto-merge:ci-failing')
+    expect(hasStateLabel(node, decision.stateLabel)).toBe(false)
+    node = pr({
+      reviewDecision: 'APPROVED',
+      commits: { nodes: [{ commit: { statusCheckRollup: { state: 'FAILURE' } } }] },
+      labels: {
+        nodes: [{ name: 'auto-merge:not-approved' }, { name: decision.stateLabel }],
+      },
+    })
+
+    // 3) 다시 미승인 상태로 돌아옴(A로 복귀) — 예전 결함이라면 not-approved
+    //    label이 이미 지워져 있어 다시 코멘트가 달렸다. 지금은 label이
+    //    누적돼 있으므로 hasStateLabel이 true를 반환해 재코멘트를 막는다.
+    node = pr({
+      reviewDecision: 'REVIEW_REQUIRED',
+      labels: {
+        nodes: [{ name: 'auto-merge:not-approved' }, { name: 'auto-merge:ci-failing' }],
+      },
+    })
+    decision = decide(node)
+    expect(decision.action).toBe('comment')
+    expect(decision.stateLabel).toBe('auto-merge:not-approved')
+    expect(hasStateLabel(node, decision.stateLabel)).toBe(true) // → 워크플로가 continue로 스킵
   })
 })

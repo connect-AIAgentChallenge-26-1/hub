@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { ENVELOPE_SCHEMA_VERSION, ENVELOPE_STATUS, validateEnvelope } from './envelope.js'
+import timestampFixtures from './fixtures/timestamps.json' with { type: 'json' }
 
 function baseEnvelope(overrides = {}) {
   return {
@@ -94,8 +95,24 @@ describe('validateEnvelope', () => {
       baseEnvelope({ started_at: 'not-a-timestamp', completed_at: '' }),
     )
     expect(result.valid).toBe(false)
-    expect(result.errors).toContain('started_at must be a parseable timestamp string')
-    expect(result.errors).toContain('completed_at must be a parseable timestamp string')
+    expect(result.errors).toContain('started_at must be an RFC3339 timestamp with a UTC/offset designator (Z or ±HH:MM)')
+    expect(result.errors).toContain('completed_at must be an RFC3339 timestamp with a UTC/offset designator (Z or ±HH:MM)')
+  })
+
+  // 이 fixture는 backend/tests/test_envelope_contract.py도 그대로 읽어 같은
+  // 입력에 대해 JS/Python Envelope가 동일하게 판정하는지 검증한다
+  // (docs/skills.md started_at/completed_at RFC3339 계약, 2026-07-12 23:51 리뷰).
+  describe('cross-runtime timestamp fixture (contracts/fixtures/timestamps.json)', () => {
+    it.each(timestampFixtures.valid)('accepts valid timestamp %s', (value) => {
+      const result = validateEnvelope(baseEnvelope({ started_at: value }))
+      expect(result.valid, JSON.stringify(result.errors)).toBe(true)
+    })
+
+    it.each(timestampFixtures.invalid)('rejects invalid timestamp %s', (value) => {
+      const result = validateEnvelope(baseEnvelope({ started_at: value }))
+      expect(result.valid).toBe(false)
+      expect(result.errors.some((e) => e.startsWith('started_at must be'))).toBe(true)
+    })
   })
 
   it('rejects an envelope missing source_ids (required by docs/skills.md)', () => {
@@ -116,7 +133,7 @@ describe('validateEnvelope', () => {
     const result = validateEnvelope(baseEnvelope({ request_id: 42, started_at: 1720742400 }))
     expect(result.valid).toBe(false)
     expect(result.errors).toContain('request_id must be a string')
-    expect(result.errors).toContain('started_at must be a parseable timestamp string')
+    expect(result.errors).toContain('started_at must be an RFC3339 timestamp with a UTC/offset designator (Z or ±HH:MM)')
   })
 
   it('rejects warnings that are not an array', () => {

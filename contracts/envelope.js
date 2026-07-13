@@ -51,8 +51,28 @@ function isCalendarDate(value) {
   )
 }
 
+// RFC3339, offset mandatory (Z or ±HH:MM) — docs/skills.md "공통 데이터 계약"
+// started_at/completed_at 정의. Date.parse alone is too lenient (accepts
+// "01/02/2026", silently treats an offset-less string as local time), so we
+// match structure with a regex and validate each numeric component's range
+// explicitly rather than relying on Date's silent rollover (25:00 -> +1 day).
+const TIMESTAMP_PATTERN =
+  /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.\d+)?(Z|[+-]\d{2}:\d{2})$/
+
 function isTimestamp(value) {
-  return typeof value === 'string' && value.length > 0 && !Number.isNaN(Date.parse(value))
+  if (typeof value !== 'string') return false
+  const match = TIMESTAMP_PATTERN.exec(value)
+  if (!match) return false
+
+  const [, y, mo, d, h, mi, s, offset] = match
+  if (!isCalendarDate(`${y}-${mo}-${d}`)) return false
+  if (Number(h) > 23 || Number(mi) > 59 || Number(s) > 59) return false
+
+  if (offset !== 'Z') {
+    const [, offH, offM] = /^[+-](\d{2}):(\d{2})$/.exec(offset)
+    if (Number(offH) > 23 || Number(offM) > 59) return false
+  }
+  return true
 }
 
 /**
@@ -102,7 +122,7 @@ export function validateEnvelope(envelope) {
 
   for (const field of TIMESTAMP_FIELDS) {
     if (field in envelope && !isTimestamp(envelope[field])) {
-      errors.push(`${field} must be a parseable timestamp string`)
+      errors.push(`${field} must be an RFC3339 timestamp with a UTC/offset designator (Z or ±HH:MM)`)
     }
   }
 
