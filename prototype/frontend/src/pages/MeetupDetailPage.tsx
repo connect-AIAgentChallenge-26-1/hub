@@ -9,6 +9,7 @@ import {
   type MeetupDetail,
   type UserSearchResult,
 } from '../api/meetups'
+import { AvailabilitySection } from '../components/AvailabilitySection'
 import { useAuth } from '../context/AuthContext'
 import './auth.css'
 import './home.css'
@@ -203,10 +204,7 @@ export function MeetupDetailPage() {
           )}
         </section>
 
-        <section className="home-card home-card-dim">
-          <h2>공강 시간</h2>
-          <p className="home-muted">참여자가 모이면 공통 공강 시간을 계산합니다. (Feat-3)</p>
-        </section>
+        {id && <AvailabilitySection meetupId={id} />}
       </main>
     </div>
   )
