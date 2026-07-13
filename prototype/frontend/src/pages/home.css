@@ -241,16 +241,26 @@
 }
 
 .meetup-list li {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 11px 0;
   border-bottom: 1px solid var(--border);
   font-size: 14px;
 }
 
 .meetup-list li:last-child {
   border-bottom: none;
+}
+
+.meetup-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 4px;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 8px;
+}
+
+.meetup-link:hover {
+  background: var(--bg-soft, rgba(0, 0, 0, 0.03));
 }
 
 .meetup-title {
@@ -289,6 +299,136 @@
   color: var(--text);
   font-size: 12.5px;
   white-space: nowrap;
+}
+
+/* 모임 상세 페이지 */
+.meetup-back {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.meetup-subhead {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 20px 0 10px;
+  color: var(--text-h);
+}
+
+.invite-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  background: #fff7e0;
+  border: 1px solid #e6c76a;
+  border-radius: 10px;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #7a5a10;
+}
+
+.invite-banner-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.participant-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.participant-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.participant-list li:last-child {
+  border-bottom: none;
+}
+
+.participant-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.participant-tag {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--chip, #fff3d6);
+  padding: 1px 8px;
+  border-radius: 999px;
+}
+
+.pstatus-accepted {
+  color: #1a7f37;
+  border-color: #1a7f37;
+}
+
+.pstatus-pending {
+  color: #9a6a00;
+  border-color: #e6c76a;
+  background: #fff7e0;
+}
+
+.pstatus-declined {
+  color: #999;
+  border-color: var(--border);
+}
+
+.invite-box-wrap {
+  margin-top: 4px;
+}
+
+.invite-search {
+  width: 100%;
+  font: inherit;
+  font-size: 14px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.invite-search:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.search-results {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.search-results li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.search-results li:last-child {
+  border-bottom: none;
 }
 
 .event-source {

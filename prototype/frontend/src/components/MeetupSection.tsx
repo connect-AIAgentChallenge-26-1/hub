@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import type { FormEvent } from 'react'
+import { Link } from 'react-router-dom'
 import { createMeetup, fetchMeetups, type Meetup } from '../api/meetups'
 
 const STATUS_LABELS: Record<string, string> = {
@@ -74,11 +75,13 @@ export function MeetupSection() {
         <ul className="meetup-list">
           {meetups.map((meetup) => (
             <li key={meetup.id}>
-              <span className="meetup-title">{meetup.title}</span>
-              <span className={`meetup-status meetup-status-${meetup.status}`}>
-                {STATUS_LABELS[meetup.status] ?? meetup.status}
-              </span>
-              <span className="meetup-date">{formatCreatedAt(meetup.created_at)}</span>
+              <Link className="meetup-link" to={`/meetups/${meetup.id}`}>
+                <span className="meetup-title">{meetup.title}</span>
+                <span className={`meetup-status meetup-status-${meetup.status}`}>
+                  {STATUS_LABELS[meetup.status] ?? meetup.status}
+                </span>
+                <span className="meetup-date">{formatCreatedAt(meetup.created_at)}</span>
+              </Link>
             </li>
           ))}
         </ul>
