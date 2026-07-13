@@ -15,19 +15,54 @@
 ## 다이어그램
 
 ```mermaid
-flowchart TD
-  User[사용자 입력] --> Auth[인증]
-  Auth --> Search[종목 검색]
-  Search --> Data[공시·재무·시세·외부 근거 수집]
-  Data --> Normalize[시점·단위·출처 정리]
-  Normalize --> Study[종목 공부]
-  Normalize --> Value[가치 범위·가격 위치]
-  User --> Claim[투자 근거 Claim 구조화]
-  Claim --> Verify[숫자 검산·RAG·반증 검색]
-  Verify --> Result[5상태 판정·인용·체크리스트]
-  Result --> Review[복기·가설 추적]
-  Auth --> Order[개인 주문 입력]
-  Order --> Guard[2단계 확인·안전 gate]
+flowchart LR
+  User[사용자] --> Auth[회원가입·로그인]
+  Auth --> Search[종목 검색·회사 확정]
+
+  subgraph Sources[데이터 원천]
+    Dart[OpenDART 공시·재무]
+    Market[시세·기업행위]
+    External[뉴스·거래소·공식기관 근거]
+  end
+
+  Search --> Collect[원천 수집]
+  Dart --> Collect
+  Market --> Collect
+  External --> Collect
+  Collect --> Normalize[시점·단위·출처 정리]
+  Normalize --> Store[(PostgreSQL·Chroma)]
+
+  subgraph Features[사용자 기능]
+    Study[기능 A: 종목 공부]
+    Value[기능 B: 가치 범위·가격 위치]
+    Claim[기능 C: 투자 근거 Claim 구조화]
+    Order[기능 D: 개인 주문 직접 입력]
+  end
+
+  Store --> Study
+  Store --> Value
+  User --> Claim
+  Store --> Claim
+  Auth --> Order
+
+  Claim --> Evidence[필수 근거 계획]
+  Evidence --> Check[숫자 검산·지지/반증 검색]
+  Check --> Citation[인용·출처 검사]
+  Citation --> Verdict[검증 결과 판정]
+  Verdict --> Review[체크리스트·복기·가설 추적]
+
+  Order --> Guard[2단계 확인·한도·kill switch]
+  Guard --> Paper[paper·sandbox 주문]
+
+  subgraph Quality[품질 게이트]
+    Tests[테스트·lint·type check]
+    Security[secret·dependency scan]
+    Eval[I9 평가·회귀 차단]
+  end
+
+  Normalize --> Tests
+  Verdict --> Eval
+  Guard --> Security
 ```
 
 ## 계획 테이블
