@@ -32,8 +32,11 @@ class Settings(BaseSettings):
     # Populated in later Tasks (T02/T03/T06); optional now so backend startup
     # does not require credentials it does not yet use.
     dart_api_key: str | None = None
-    market_api_key: str | None = None
-    news_api_key: str | None = None
+    kis_app_key: str | None = None
+    kis_app_secret: str | None = None
+    kis_env: str = "vps"
+    naver_client_id: str | None = None
+    naver_client_secret: str | None = None
     upstage_api_key: str | None = None
 
 

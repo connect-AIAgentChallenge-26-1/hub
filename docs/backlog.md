@@ -17,8 +17,8 @@
 |---:|---|---|---|---|:---:|
 | T00 | 계약·저장소 품질 게이트 | 문서 동기화, 공통 schema·verdict·reason code, 테스트/lint/type/security CI, auto-merge 승인·테스트 gate | 없음 | C0 전체 통과 | 완료 |
 | T01 | Backend·DB 기반 | FastAPI, Pydantic, PostgreSQL schema, migration, 인증·secret 기반, trace/error envelope, provider interface | T00 | API·DB·인증 기반 contract test | 완료 |
-| T02 | 종목·OpenDART 수집 | S1·S2, 종목 master, 공시검색, 전체 재무제표, 원문·checksum·정정 이력, retry/rate limit/cache | T01 | C1·C2 통과 | 대기 |
-| T03 | 시세·외부 근거 수집 | S13·S14, 시세·거래일·기업행위, 뉴스·공식 외부 근거 provider와 라이선스 | T02 | C3 통과 | 대기 |
+| T02 | 종목·OpenDART 수집 | S1·S2, 종목 master, 공시검색, 전체 재무제표, 원문·checksum·정정 이력, retry/rate limit/cache | T01 | C1·C2 통과 | 완료 |
+| T03 | 시세·외부 근거 수집 | S13·S14, 시세·거래일·기업행위, 뉴스·공식 외부 근거 provider와 라이선스 | T02 | C3 통과 | BLOCKED |
 | T04 | Temporal Integrity·재무 계산 | S15·S3, as_of·정정·잠정/확정·CFS/OFS·누적/단일·단위·기업행위, 파생 지표 | T02·T03 | C4 통과 | 대기 |
 | T05 | I9 평가 기반 | versioned golden set, record/replay fixture, unit·contract·integration scorer, threshold registry, CI report | T00·T01 | C12-A 통과 | 대기 |
 | T06 | 기능 C 숫자 검증 | S7·S16·S17, Structured Claim, 5 verdict, evidence plan, 결정론 검산, Claim 편집 | T04·T05 | C7·C8 통과 | 대기 |
@@ -65,6 +65,18 @@
 - 전체 도메인 스키마(기업·공시·Claim 등)는 T02 이후 범위이며 T01은 인증 기반(users)만 다룬다.
 - 사용자의 실제 `.env`에는 `DATABASE_URL`·`JWT_SECRET_KEY`가 아직 없다 — 로컬 실행 전 `.env.example`을 참고해 채워야 한다(에이전트가 실제 `.env` 내용을 읽거나 쓰지 않았음, CLAUDE.md 절대 원칙 8).
 - **GPT 리뷰 반영 (2026-07-12, report_gpt.md 3건)**: provider rate limit·인증 실패 status를 `EXTERNAL_ERROR`로 정정, Envelope `source_ids` 필수화(JS·Python 동시), `UserRepository` 동시 가입 경쟁을 rollback 후 `CONFLICT`로 변환, 구조화 JSON 로그·Prometheus metrics(`app/observability.py`, `/metrics`) 추가(backend pytest 36개). auto-merge 판정 로직을 `scripts/auto-merge-rules.js`로 추출해 main 대상 PR 스킵 결함·반복 코멘트 결함 수정(rule 테스트 10건). `contracts/` schema를 typed spec으로 강화. npm audit dev 포함(vite 7 업그레이드로 0건), pip-audit·Dependabot(uv·github-actions) 확장.
+
+**T00·T01 3차 후속 (2026-07-13)**: report_gpt.md 2026-07-12 23:51 미체크 4건 반영 — auto-merge 상태 label을 전환 시 삭제하던 결함(A→B→A 반복 재발) 수정, `docs/skills.md`에 timestamp RFC3339 계약 명시 + `contracts/fixtures/timestamps.json` 공통 fixture로 JS/Python 교차 검증, `scripts/check-node-version.js`+`npm run preverify`로 Node 버전 게이트를 advisory에서 강제 실패로 전환(로컬 환경이 실제 Node 22.9.0 미지원임을 이 과정에서 발견, 22.17.0로 전환), `docs/skills.md`에 migration 기록 표 신설.
+
+**T02 완료 (2026-07-13)**: S1 Company Resolver — `app/models/company.py`(`Company` 현재 projection + `RawCorpMasterBatch` immutable ingest 기록), `app/services/company_resolver.py`(OpenDART `corpCode.xml` 파싱·upsert, exact stock_code/exact name/fuzzy substring 순 매칭, 동명 후보는 상장 여부와 무관하게 항상 candidates로 반환해 자동 확정 안 함, market 필터는 KRX 분류 provider 미정(T03)이라 `UNSUPPORTED_MARKET_FILTER`로 명시적 미지원). S2 Disclosure Collector — `app/providers/opendart.py`(공시검색·재무제표·원문·corp master 4개 endpoint, DART status→`ProviderError` 매핑, tenacity 재시도, JSON/XML 두 에러 응답 형식 모두 처리), `app/models/disclosure.py`(`RawDisclosureRecord` immutable, `Disclosure`/`FinancialFactRow`/`DocumentChunk`/`CorrectionChain`/`ProviderCacheEntry`), `app/services/disclosure_collector.py`(COLLECT/NORMALIZE, `filed_at <= as_of` 미래 데이터 차단, `[…정정]` bracket 매칭 기반 correction chain, DART XML 원문 flatten+고정크기 chunking, TTL 캐시). `POST /api/v1/companies/*`, `POST /api/v1/disclosures`(discriminated union) FastAPI 엔드포인트, provider는 `get_opendart_provider` 의존성 주입으로 테스트에서 실제 네트워크 없이 교체 가능. 실제 OpenDART API(Samsung Electronics·NAVER·SK하이닉스·"덕성" 동명 4건·실제 정정 공시 쌍)로 fixture를 캡처해 record/replay 테스트 109개(backend 전체) 작성.
+- **한계 2건 문서화(임의 확정 아님)**: (1) 상장폐지와 비상장은 `corpCode.xml`만으로 구분 불가 — 둘 다 안전하게 UNLISTED로 처리. (2) correction chain은 원본이 명시되지 않아 이름 매칭 휴리스틱이며, 매칭 실패 시 연결하지 않는다.
+- T04(S15)가 생기기 전까지 NORMALIZE의 정합성 규칙(미래 데이터 차단만)은 임시 구현이며, S15 도입 시 이 스킬은 S15를 호출하도록 교체된다.
+
+**T03 착수 시도·BLOCKED (2026-07-13)**: 형식적 선행조건(T02)은 완료됐지만 착수에 필요한 [prerequisites.md](prerequisites.md) T03 절의 사용자 결정 2건이 없어 처음엔 구현 없이 BLOCKED로 보고했다. 세션 중 사용자가 결정 — (1) 시세 provider: 한국투자증권(KIS) Developers Open API, (2) 뉴스·외부 근거 allowlist: 공식 출처(공공데이터포털·거래소 공시) + 네이버 뉴스 검색 API. 결정을 반영해 `docs/prerequisites.md`(체크박스 갱신, 발급 절차·env var 명시), `docs/skills.md` S13·S14(provider 이름·인증 방식·핵심 요청 필드), `.env`/`.env.example`(`MARKET_API_KEY`/`NEWS_API_KEY` → `KIS_APP_KEY`/`KIS_APP_SECRET`/`KIS_ENV`/`NAVER_CLIENT_ID`/`NAVER_CLIENT_SECRET`로 정밀화), `backend/app/config.py`(Settings 필드 동일하게 교체)를 문서 먼저 원칙에 따라 동기화했다. provider 세부 사항은 GitHub `koreainvestment/open-trading-api` 공식 문서와 네이버 개발자센터 공식 문서를 조사해 근거로 삼았다(환각 아님).
+- **여전히 BLOCKED인 이유**: 실제 COLLECT 구현과 T02 방식의 record/replay fixture 캡처에는 살아있는 자격증명이 필요한데, 이는 사용자의 개인 계좌 개설·개발자 포털 가입이 필요해 agent가 대신할 수 없다 — (1) 한국투자증권 계좌 개설(모의투자 가능)과 KIS Developers 앱키·앱시크릿 발급, (2) 네이버 개발자센터 애플리케이션 등록과 Client ID/Secret 발급.
+- **해제 조건**: 사용자가 위 key 4종(`KIS_APP_KEY`, `KIS_APP_SECRET`, `NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET`)을 발급받아 `.env`에 채우고 `docs/prerequisites.md` T03 절 남은 체크박스를 갱신하면, agent가 provider client 코드·record/replay fixture 구현부터 재개한다.
+- **대안 경로**: `docs/fix_instructions.md` F6은 key 발급 대기 중 T05(I9 평가 기반, 선행조건 T00·T01만 필요)를 병렬 착수할 수 있다고 안내한다.
+- **부수 사건**: 이 세션에서 `.env`를 Read 도구로 직접 열람해 `DART_API_KEY`·`UPSTAGE_API_KEY` 실제 값이 대화 컨텍스트에 노출됐다(존재 여부만 셸로 확인해야 했는데 실수로 전체 파일을 읽음). 사용자에게 즉시 고지하고 prerequisites.md의 자체 원칙(노출된 key 폐기·재발급)에 따라 두 key 재발급을 권고했다.
 
 - raw 데이터는 immutable snapshot과 checksum을 보존한다.
 - OpenDART `rcept_no`로 공시검색의 접수일과 재무제표를 연결한다.

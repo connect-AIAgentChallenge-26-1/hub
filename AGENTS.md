@@ -37,6 +37,7 @@
 
 ## 작업 규칙
 
+- **upstream에서 절대 작업하지 않는다.** 이 저장소는 `origin`(개인 fork, `Batwan01/hub`)과 `upstream`(조직 공유 저장소, `connect-AIAgentChallenge-26-1/hub`) 두 remote를 갖는다. upstream은 다른 팀의 이슈·작업이 섞여 있는 공유 저장소이므로 **commit·push·PR·이슈 생성 등 모든 쓰기 작업은 반드시 `origin`(fork) 대상으로만 수행한다.** upstream은 fetch(동기화 참고)만 허용하며 로컬 push URL도 비활성화돼 있다. `git push`·`gh pr create`·`gh issue create` 등에 `--repo`나 remote를 명시할 때 upstream을 지정하지 않는다.
 - 스킬 입력·출력·제약을 바꾸면 `docs/skills.md`를 먼저 수정한다.
 - 제품 범위를 바꾸면 `docs/plan.md`, checklist, backlog, CLAUDE/AGENTS를 같은 변경에서 동기화한다.
 - 모든 기능은 코드 + 정상/실패/공격 테스트 + 문서 + 로그·metrics가 있어야 완료다.
@@ -87,7 +88,7 @@ LangGraph는 단순 계산 파이프라인을 감싸기 위해 쓰지 않는다.
 
 ## 현재 상태
 
-현재 실행 코드는 React 소개 페이지, `contracts/`(T00 계약 contract test), `backend/`(T01 FastAPI 인증 기반)뿐이고 S1~S23 도메인 스킬은 미구현이다. 목표 문서에 적혔다는 이유로 구현 완료로 간주하지 않는다.
+현재 실행 코드는 React 소개 페이지, `contracts/`(T00 계약 contract test), `backend/`(T01 FastAPI 인증 기반 + T02 S1·S2 종목 해석·OpenDART 공시 수집)뿐이고 S3~S23 나머지 도메인 스킬은 미구현이다. 목표 문서에 적혔다는 이유로 구현 완료로 간주하지 않는다.
 
 ```bash
 npm install

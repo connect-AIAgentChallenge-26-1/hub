@@ -32,6 +32,8 @@ Envelope<T> {
 }
 ```
 
+`as_of`는 `YYYY-MM-DD` 달력 날짜 문자열이다. `started_at`/`completed_at`과 모든 timestamp 필드는 **RFC3339이며 UTC/offset designator(`Z` 또는 `±HH:MM`)가 필수**다 — naive(시간대 없는) 문자열이나 날짜만 있는 값은 거부한다. `contracts/fixtures/timestamps.json`이 이 규칙의 정상·실패 fixture이며 `contracts/envelope.test.js`와 `backend/tests/test_envelope_contract.py` 양쪽이 동일 fixture로 같은 판정을 내리는지 검증한다.
+
 `status`는 다음 enum만 사용한다.
 
 | Status | 의미 |
@@ -141,6 +143,15 @@ Envelope는 `schema_version`, Claim·Fact·Evidence·Numeric Evidence 등 개별
 - **호환 기간**: MAJOR 변경 이후 과거 버전 데이터를 읽는 경로는 T13 migration tooling이 공식 폐기 절차를 정의하기 전까지 유지한다. 조기 폐기하지 않는다.
 - **DB migration 도구**(Alembic 등 실제 스키마 마이그레이션 실행)는 T01 범위다. 이 정책은 그 이전에도 문서·contract test 수준에서 버전 호환 규칙을 고정하기 위한 것이며, T01에서 DB migration이 생기면 동일 규칙을 참조해 구현한다.
 
+### migration 기록
+
+버전 번호를 실제로 올릴지, 아니면 아직 pre-release(외부 소비자·저장된 데이터 없음) 상태에서의 명세 보정으로 취급할지는 사후에 판단 근거가 남아야 한다. 이 표가 그 판단 기록이다.
+
+| 날짜 | 대상 | 변경 | 판단 |
+|---|---|---|---|
+| 2026-07-12 | `contracts/schemas.js` (StructuredClaim·FinancialFact·RawSourceRecord·Evidence·NumericEvidence) | 필드 존재만 검사하던 것을 타입·enum·날짜 형식·comparator 중첩 구조까지 검증하도록 강화 | **pre-release 보정, 버전 유지(1.0.0)**. 아직 어떤 실제 provider·DB row·저장된 snapshot도 이 schema로 생성되지 않았다(T02 이후 착수). 소급 적용될 기존 데이터가 없으므로 이번 강화는 "breaking 변경"이 아니라 최초 명세의 누락을 메우는 보정이다. T02에서 실제 데이터가 쌓이기 시작한 뒤 같은 종류의 강화가 필요하면 그때는 MAJOR를 올린다. |
+| 2026-07-12 | Envelope `started_at`/`completed_at` | RFC3339 timestamp에 offset(`Z`/`±HH:MM`) 필수 조건을 명시하고 JS/Python 양쪽에 강제 | **pre-release 보정, 버전 유지(1.0.0)**. 위와 동일 사유 — 저장된 실제 응답이 없다. |
+
 ## 금융 데이터 정합성 계약
 
 - `filed_at <= as_of`인 데이터만 사용한다.
@@ -225,7 +236,7 @@ Envelope는 `schema_version`, Claim·Fact·Evidence·Numeric Evidence 등 개별
 | 입력 | `{text, resolved_company?, as_of}` |
 | 처리 | S23 middleware → Solar Structured Outputs → schema 검증 → 원문 span 실존 검사 → 의미 검증. 다중 주장, 부정, 조건문, 비교 대상, 모호한 기간을 구조화 |
 | 출력 | `{claims: StructuredClaim[], warnings, extraction_trace}` |
-| 제약 | 원문에 없는 span·수치·기업을 만들지 않는다. 모호성을 임의 기준으로 숨기지 않고 사용자 확인 또는 `UNVERIFIABLE`로 보낸다 |
+| 제약 | 원문에 없는 span·수치·기업을 만들지 않는다. `ambiguity_flags`가 progressive disclosure의 판정 근거다 — 비어 있으면 해당 Claim은 편집기를 열지 않고 요약 카드로 자동 진행하고, 비어 있지 않으면 해당 항목만 사용자에게 객관식 확인 질문으로 묻는다(F9). 모호성을 임의 기준으로 숨기지 않으며, 사용자가 질문에 답하지 않으면 해당 Claim은 `UNVERIFIABLE`로 처리한다 |
 
 ### S8. 근거 계획·검증·검색 (Evidence Verification)
 
@@ -264,7 +275,7 @@ Envelope는 `schema_version`, Claim·Fact·Evidence·Numeric Evidence 등 개별
 |---|---|
 | 목적 | 모든 산출물을 초보자용 리포트와 원문 검증 화면으로 구성 |
 | 입력 | S1~S10·S13~S22 산출물을 정규화한 typed presentation payload, S15 경고, 해당 시 S20 검증 인용 |
-| 처리 | 규칙 기반 데이터 카드 우선, S23을 거친 Solar 요약, 인용·계산·정정·기준일·검색 로그 연결 |
+| 처리 | 규칙 기반 데이터 카드 우선, S23을 거친 Solar 요약, 인용·계산·정정·기준일·검색 로그 연결. S7 `ambiguity_flags` 기반 Claim 요약 카드(무편집 경로)와 모호 항목 확인 질문 UI를 구성(F9) |
 | 출력 | 기능 A/B/C 화면 데이터, 원문 하이라이트, 공식 DART 링크, 용어 설명, 데이터 한계 |
 | 제약 | schema·출처·금지 문구 게이트를 통과하지 못한 문장을 제거한다. 숨겨진 근거나 생성된 출처를 표시하지 않는다 |
 
@@ -333,20 +344,22 @@ OrderState =
 | 항목 | 계약 |
 |---|---|
 | 목적 | 현재·과거 가격, 거래량, 발행주식 수와 기업행위 데이터를 수집 |
+| provider | 한국투자증권(KIS) Developers Open API(`apiportal.koreainvestment.com`). 앱키+앱시크릿으로 REST 접근토큰(Bearer, 분당 1회 발급 제한)을 받아 호출한다. 실전투자(`prod`)와 모의투자(`vps`) 환경은 base URL·앱키가 분리되며 `KIS_ENV`로 선택한다 |
 | 입력 | discriminated union: `{operation: COLLECT, stock_code, start, end, as_of}` 또는 `{operation: NORMALIZE, raw_market_records, normalization_policy_ref, adjusted_policy}` |
-| 처리 | `COLLECT`는 공식 시세 provider 원문을 immutable raw record로 저장한다. `NORMALIZE`는 S15 `PRE_NORMALIZE` 통과분만 거래일 정렬하고 조정·비조정 가격 및 분할·증자·배당락 metadata와 `NumericEvidence`로 변환 |
+| 처리 | `COLLECT`는 KIS 국내주식 현재가·기간별시세 API(`FID_COND_MRKT_DIV_CODE`="J", `FID_INPUT_ISCD`=6자리 종목코드) 원문을 immutable raw record로 저장한다. `NORMALIZE`는 S15 `PRE_NORMALIZE` 통과분만 거래일 정렬하고 조정·비조정 가격 및 분할·증자·배당락 metadata와 `NumericEvidence`로 변환 |
 | 출력 | `COLLECT`는 `{raw_market_records, provider, license, collected_at}`, `NORMALIZE`는 `{quotes, corporate_actions, shares_outstanding, numeric_evidence, provider, license}` |
-| 제약 | quote timestamp와 데이터 라이선스를 기록한다. provider 장애 시 수동 입력 경로를 제공하되 출처를 구분하며 대체값이 없으면 `EXTERNAL_ERROR`를 반환한다 |
+| 제약 | quote timestamp와 데이터 라이선스를 기록한다. provider 장애 시 수동 입력 경로를 제공하되 출처를 구분하며 대체값이 없으면 `EXTERNAL_ERROR`를 반환한다. 접근토큰 발급 자체의 rate limit(분당 1회) 초과는 `EXTERNAL_ERROR`+전용 reason_code로 구분한다 |
 
 ### S14. 외부 근거 수집 (External Evidence Collector)
 
 | 항목 | 계약 |
 |---|---|
 | 목적 | 뉴스·수급·테마·계약 등 OpenDART 밖 Claim의 검증 가능한 근거를 수집 |
+| provider allowlist | (1) 공공데이터포털(data.go.kr) 공식 금융·기업행위 API, (2) 거래소(KRX) 공식 공시·데이터, (3) 네이버 뉴스 검색 API(`openapi.naver.com/v1/search/news.json`, `X-Naver-Client-Id`/`X-Naver-Client-Secret` 헤더 인증, 응답 `title/originallink/link/description/pubDate`). 이 3개 외 출처는 COLLECT 대상이 아니다 |
 | 입력 | discriminated union: `{operation: COLLECT, claim: StructuredClaim}` 또는 `{operation: NORMALIZE, raw_external_records, normalization_policy_ref}` |
 | 처리 | `COLLECT`는 versioned deterministic query-builder가 Claim의 기업·유형·metric·기간으로 검색어를 만들고 허용된 뉴스·거래소·공식 기관 provider 원문과 시각·URL을 immutable record로 저장한다. `NORMALIZE`는 S15 `PRE_NORMALIZE` 통과분만 entity match하고 provider의 구조화 수급·계약 수치를 결정론적으로 `NumericEvidence`로 변환 |
 | 출력 | `COLLECT`는 `{raw_external_records, provider_trace}`, `NORMALIZE`는 `{external_documents, numeric_evidence, publication_times, entity_matches, provider_trace}` |
-| 제약 | 커뮤니티 소문은 사실 근거로 승격하지 않는다. 산문에서 LLM이 추출한 수치를 검증 전 `NumericEvidence`로 승격하지 않는다. 지원 가능한 신뢰 원천 자체가 없으면 `UNVERIFIABLE`, 구성된 provider 장애면 `EXTERNAL_ERROR`를 반환한다 |
+| 제약 | 커뮤니티 소문은 사실 근거로 승격하지 않는다. 네이버 뉴스 검색 결과의 `description`은 기사 산문 요약이므로, LLM이 그 산문에서 추출한 수치를 검증 전 `NumericEvidence`로 승격하지 않는다(수치 근거는 (1)(2) 공식 구조화 provider에서만 결정론적으로 만든다). 지원 가능한 신뢰 원천 자체가 없으면 `UNVERIFIABLE`, 구성된 provider 장애면 `EXTERNAL_ERROR`를 반환한다 |
 
 ### S15. 시점·단위 정합성 계층 (Temporal Integrity Layer)
 

@@ -18,24 +18,26 @@
 
 ## C1. 종목 해석 [R01][S1][T02]
 
-- [ ] OpenDART 고유번호와 상장 종목 master 수집·버전 관리
-- [ ] 종목명·약칭·6자리 종목코드 → `corp_code` 매핑
-- [ ] 동명·유사 종목 후보와 `matched_by`, listing status, 기준일 반환
-- [ ] 사용자 확정 없이 모호한 후보를 자동 확정하지 않는 테스트
-- [ ] 비상장·상장폐지·지원 외 시장 안전 종료 테스트
+- [x] OpenDART 고유번호와 상장 종목 master 수집·버전 관리 — `RawCorpMasterBatch`(immutable) + `Company`(현재 projection), `CompanyResolver.ingest_corp_master`
+- [x] 종목명·약칭·6자리 종목코드 → `corp_code` 매핑 — `CompanyResolver.resolve`(exact stock_code → exact name → fuzzy substring)
+- [x] 동명·유사 종목 후보와 `matched_by`, listing status, 기준일 반환 — `ResolveResult`(`matched_by`, `listing_status`, `resolved_at`, `candidates[]`)
+- [x] 사용자 확정 없이 모호한 후보를 자동 확정하지 않는 테스트 — 실제 OpenDART 동명 4건("덕성", 상장 1+비상장 3)으로 재현, 상장사가 하나뿐이어도 항상 후보 반환 확인
+- [x] 비상장·상장폐지·지원 외 시장 안전 종료 테스트 — 비상장(UNLISTED reason_code)·시장 필터 미지원(UNSUPPORTED_MARKET_FILTER) 테스트. **한계**: OpenDART `corpCode.xml`은 상장폐지 시 `stock_code`가 공란으로 되돌아가 "비상장"과 "상장폐지"를 데이터만으로 구분할 수 없다 — 둘 다 안전하게 UNLISTED로 처리하며 구분하지 않음을 문서화
 
 ## C2. OpenDART 공시·재무·원문 [R02][S2][T02]
 
-- [ ] 공시검색 API client와 `status` 오류 매핑
-- [ ] 단일회사 전체 재무제표 API client(CFS/OFS·보고서 코드)
-- [ ] S2 `COLLECT`의 immutable `RawDisclosureRecord`와 `NORMALIZE` discriminated union contract
-- [ ] `rcept_no`로 공시 접수일·보고서명·재무 행 조인
-- [ ] 사업·분기·반기·3분기 보고서와 정정 chain 저장
-- [ ] 공시 원문 다운로드·파싱·checksum·immutable raw snapshot
-- [ ] 표·본문 chunking과 종목·접수일·대상기간·문서 metadata
-- [ ] S2 `NORMALIZE`의 `eligible_financial_rows`, `document_chunks`, A용 `document_evidence` typed output
-- [ ] timeout·retry/backoff·rate limit·cache·점검 응답 테스트
-- [ ] 데이터 없음과 provider 장애를 다른 reason code로 반환
+- [x] 공시검색 API client와 `status` 오류 매핑 — `OpenDartProvider.fetch_disclosure_list`, 8개 status 코드(000/013/014/020/010·011·012/100/900) 실제·문서 기반 매핑 테스트
+- [x] 단일회사 전체 재무제표 API client(CFS/OFS·보고서 코드) — `OpenDartProvider.fetch_financial_statements`
+- [x] S2 `COLLECT`의 immutable `RawDisclosureRecord`와 `NORMALIZE` discriminated union contract — `RawDisclosureRecord` 모델 + `POST /api/v1/disclosures`의 `{operation: COLLECT|NORMALIZE}` Pydantic discriminated union
+- [x] `rcept_no`로 공시 접수일·보고서명·재무 행 조인 — `Disclosure.rcept_no`/`FinancialFactRow.rcept_no`가 조인 키
+- [x] 사업·분기·반기·3분기 보고서와 정정 chain 저장 — `classify_report_type`(ANNUAL/Q1/HALF/Q3/OTHER), `CorrectionChain`(실제 정정 공시 2건이 동일 원본 1건에 연결되는 것을 실제 데이터로 확인). **한계**: OpenDART가 "이 공시가 어떤 원본을 정정하는지"를 직접 알려주지 않아 `[…정정]` bracket 제거 후 동일 corp_code·보고서명·이전 접수일 매칭 휴리스틱이며, 매칭 실패 시 임의로 연결하지 않고 미연결 상태로 남김(테스트로 확인)
+- [x] 공시 원문 다운로드·파싱·checksum·immutable raw snapshot — `collect_document`(base64 zip payload, checksum), 실제 공시 원문으로 검증. GPT 리뷰(2026-07-13) 반영: 캐시 hit 경로가 원본 fetch와 다른 JSON 직렬화(`ensure_ascii` 기본값 차이)로 checksum을 재계산해 한글 payload에서 checksum이 흔들리던 결함을 발견 — `opendart.py`에 공용 `stable_json_bytes()`를 두고 원본·캐시 hit 양쪽이 동일 함수를 쓰도록 통일, 회귀 테스트 추가
+- [x] 표·본문 chunking과 종목·접수일·대상기간·문서 metadata — `_normalize_document`(고정 크기 chunking). **한계**: DART 고유 XML(SECTION/TABLE) 태그를 모두 평문으로 flatten해 표 구조는 보존하지 않음(문서화된 단순화)
+- [x] S2 `NORMALIZE`의 `eligible_financial_rows`, `document_chunks`, A용 `document_evidence` typed output — `NormalizeResult` + `document_evidence`는 `presentation_item_id`+`relation=NEUTRAL` Evidence 계약 준수. GPT 리뷰(2026-07-13) 반영: `eligible_raw_record_ids` 중 DB에 없는 id를 조용히 버리던 것을 Envelope `warnings[]`로 드러내도록 수정(호출자 오류를 삼키지 않음, CLAUDE.md 오류 구분 원칙)
+- [x] timeout·retry/backoff·rate limit·cache·점검 응답 테스트 — httpx `QueueTransport`로 timeout 2회 후 성공(재시도 확인)·3회 연속 실패(포기) 재현, TTL 캐시로 동일 요청 2회차 provider 미호출 확인
+- [x] 데이터 없음과 provider 장애를 다른 reason code로 반환 — `013`(no data)→`ProviderNotFoundError`, `020`(rate limit)/`010·011·012`(auth)→`EXTERNAL_ERROR` 계열, `100`/`900`(예상 밖 상태)→`ProviderMaintenanceError`로 서로 다른 예외 타입·reason_code. GPT 리뷰(2026-07-13) 반영: `ProviderError` 전용 exception handler가 없어 실제 API 응답에서는 이 구분이 generic `Exception` handler로 흘러 전부 `INTERNAL_ERROR`/`UNHANDLED_EXCEPTION`이 되던 결함 발견 — `map_provider_error()` 기반 handler를 등록해 `/api/v1/disclosures` envelope에서 실제로 구분되도록 수정, API 레벨 테스트 추가
+
+**T04(S15) 선행 의존**: NORMALIZE의 `filed_at <= as_of` 미래 데이터 차단은 지금 구현했지만, 정정 chain 최신본 선택·잠정/확정 우선순위·CFS/OFS 기간 간 선택 정책은 S15(T04)가 중앙화하기 전까지 이 스킬 안의 임시 규칙이다 — T04에서 S15가 생기면 이 NORMALIZE는 S15를 호출하도록 교체된다.
 
 ## C3. 시세·기업행위·외부 근거 [R03][S13·S14][T03]
 
@@ -99,7 +101,7 @@
 - [ ] 복합 문장 → 원자 Claim + `claim_group_id`
 - [ ] 원문 span, 기업, 유형, evidence domain, metric, comparator, 비교 대상·peer ref, 기간, 방향, 조건 구조화
 - [ ] 의견·미래 예측·수치·비교·부정·조건문 분류
-- [ ] 모호어·기간·비교대상 warning과 Claim 확인·수정 UI
+- [ ] 모호어·기간·비교대상 `ambiguity_flags` 기반 확인 질문 UI — 비어 있으면 요약 카드로 자동 진행, 있으면 해당 항목만 객관식 질문으로 확인(F9 progressive disclosure)
 - [ ] 원문에 없는 span·기업·숫자 생성 0건
 - [ ] S14 외부 근거 수집이 S7 `StructuredClaim` 이후에만 실행되는 contract test
 - [ ] schema allowlist, 허용 필드 밖 출력 차단
@@ -160,6 +162,7 @@
 - [ ] 과거 `as_of` snapshot과 신규 결과를 별도 저장
 - [ ] 역사 fixture replay로 가설 변화 E2E 테스트
 - [ ] 미래 데이터가 과거 판정에 들어가는 사례 0건
+- [ ] citation open 이벤트 저장(사용자·claim·evidence·연 시각) — plan.md 제품 성공 지표("인용 열람 횟수") 측정 근거
 
 ## C12. I9 평가·CI [R12][I9][T05·T12]
 
