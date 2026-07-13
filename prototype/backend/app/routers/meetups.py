@@ -15,6 +15,7 @@ from app.models.user import User
 from app.schemas.meetup import (
     AvailableSlot,
     AvailableTimesResponse,
+    ConfirmTimePayload,
     InviteCreate,
     MeetupCreate,
     MeetupDetail,
@@ -53,6 +54,8 @@ def _build_detail(meetup: MeetupSession) -> MeetupDetail:
         creator_id=meetup.creator_id,
         title=meetup.title,
         status=meetup.status,
+        confirmed_start=meetup.confirmed_start,
+        confirmed_end=meetup.confirmed_end,
         location_name=meetup.location_name,
         food_category=meetup.food_category,
         created_at=meetup.created_at,
@@ -202,3 +205,27 @@ def available_times(
         accepted_count=len(accepted_ids),
         slots=[AvailableSlot(**vars(s)) for s in slots],
     )
+
+
+@router.post("/{meetup_id}/confirm-time", response_model=MeetupDetail)
+def confirm_time(
+    meetup_id: uuid.UUID,
+    payload: ConfirmTimePayload,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> MeetupDetail:
+    meetup = _load_meetup(db, meetup_id)
+    if meetup is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="모임을 찾을 수 없습니다.")
+    if meetup.creator_id != current_user.id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="모임 생성자만 시간을 확정할 수 있습니다.")
+    if payload.end <= payload.start:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="종료 시간이 시작 시간보다 빨라요."
+        )
+
+    meetup.confirmed_start = payload.start
+    meetup.confirmed_end = payload.end
+    meetup.status = "time_fixed"
+    db.commit()
+    return _build_detail(_load_meetup(db, meetup_id))

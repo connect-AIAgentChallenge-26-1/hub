@@ -15,6 +15,8 @@ class MeetupRead(BaseModel):
     creator_id: uuid.UUID
     title: str
     status: str
+    confirmed_start: datetime | None
+    confirmed_end: datetime | None
     location_name: str | None
     food_category: str | None
     created_at: datetime
@@ -58,3 +60,8 @@ class AvailableSlot(BaseModel):
 class AvailableTimesResponse(BaseModel):
     accepted_count: int  # 계산에 반영된 수락 참여자 수
     slots: list[AvailableSlot]
+
+
+class ConfirmTimePayload(BaseModel):
+    start: datetime
+    end: datetime

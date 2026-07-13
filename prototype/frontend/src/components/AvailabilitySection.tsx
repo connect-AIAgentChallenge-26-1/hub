@@ -1,5 +1,11 @@
 import { useEffect, useState } from 'react'
-import { fetchAvailableTimes, type AvailableSlot } from '../api/meetups'
+import axios from 'axios'
+import {
+  confirmTime,
+  fetchAvailableTimes,
+  type AvailableSlot,
+  type MeetupDetail,
+} from '../api/meetups'
 
 type Filter = 'all' | 'lunch' | 'dinner'
 
@@ -18,12 +24,20 @@ function formatSlot(slot: AvailableSlot): { date: string; time: string; len: str
   }
 }
 
-export function AvailabilitySection({ meetupId }: { meetupId: string }) {
+interface Props {
+  meetupId: string
+  isCreator: boolean
+  confirmedStart: string | null
+  onConfirmed: (meetup: MeetupDetail) => void
+}
+
+export function AvailabilitySection({ meetupId, isCreator, confirmedStart, onConfirmed }: Props) {
   const [slots, setSlots] = useState<AvailableSlot[]>([])
   const [acceptedCount, setAcceptedCount] = useState(0)
   const [isLoaded, setIsLoaded] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [filter, setFilter] = useState<Filter>('all')
+  const [confirming, setConfirming] = useState<string | null>(null)
 
   useEffect(() => {
     fetchAvailableTimes(meetupId)
@@ -40,6 +54,19 @@ export function AvailabilitySection({ meetupId }: { meetupId: string }) {
     if (filter === 'dinner') return s.overlaps_dinner
     return true
   })
+
+  async function handleConfirm(slot: AvailableSlot) {
+    setConfirming(slot.start)
+    setError(null)
+    try {
+      onConfirmed(await confirmTime(meetupId, slot.start, slot.end))
+    } catch (err) {
+      const detail = axios.isAxiosError(err) ? err.response?.data?.detail : null
+      setError(typeof detail === 'string' ? detail : '시간 확정에 실패했습니다.')
+    } finally {
+      setConfirming(null)
+    }
+  }
 
   return (
     <section className="home-card">
@@ -77,8 +104,9 @@ export function AvailabilitySection({ meetupId }: { meetupId: string }) {
             <ul className="slot-list">
               {filtered.map((slot, i) => {
                 const f = formatSlot(slot)
+                const isConfirmed = confirmedStart === slot.start
                 return (
-                  <li key={i} className="slot-card">
+                  <li key={i} className={`slot-card${isConfirmed ? ' slot-card-confirmed' : ''}`}>
                     <span className="slot-date">{f.date}</span>
                     <span className="slot-time">{f.time}</span>
                     <span className="slot-meta">
@@ -86,6 +114,19 @@ export function AvailabilitySection({ meetupId }: { meetupId: string }) {
                       {slot.overlaps_lunch && <span className="slot-tag slot-tag-lunch">점심</span>}
                       {slot.overlaps_dinner && <span className="slot-tag slot-tag-dinner">저녁</span>}
                     </span>
+                    {isCreator && (
+                      <button
+                        className={`provider-btn slot-confirm-btn${isConfirmed ? '' : ' provider-btn-primary'}`}
+                        disabled={confirming !== null || isConfirmed}
+                        onClick={() => handleConfirm(slot)}
+                      >
+                        {isConfirmed
+                          ? '✓ 확정됨'
+                          : confirming === slot.start
+                            ? '확정 중...'
+                            : '이 시간으로 확정'}
+                      </button>
+                    )}
                   </li>
                 )
               })}
