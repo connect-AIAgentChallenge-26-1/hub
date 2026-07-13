@@ -5,6 +5,8 @@ export interface Meetup {
   creator_id: string
   title: string
   status: string
+  confirmed_start: string | null
+  confirmed_end: string | null
   location_name: string | null
   food_category: string | null
   created_at: string
@@ -77,5 +79,14 @@ export interface AvailableTimes {
 
 export async function fetchAvailableTimes(id: string): Promise<AvailableTimes> {
   const { data } = await apiClient.get<AvailableTimes>(`/meetups/${id}/available-times`)
+  return data
+}
+
+export async function confirmTime(
+  id: string,
+  start: string,
+  end: string,
+): Promise<MeetupDetail> {
+  const { data } = await apiClient.post<MeetupDetail>(`/meetups/${id}/confirm-time`, { start, end })
   return data
 }

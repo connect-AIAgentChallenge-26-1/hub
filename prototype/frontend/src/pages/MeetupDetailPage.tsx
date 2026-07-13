@@ -25,6 +25,20 @@ function errorDetail(err: unknown, fallback: string): string {
   return typeof detail === 'string' ? detail : fallback
 }
 
+function formatConfirmed(startIso: string, endIso: string | null): string {
+  const start = new Date(startIso)
+  const dateFmt: Intl.DateTimeFormatOptions = {
+    month: 'long',
+    day: 'numeric',
+    weekday: 'short',
+  }
+  const timeFmt: Intl.DateTimeFormatOptions = { hour: '2-digit', minute: '2-digit', hour12: false }
+  const base = `${start.toLocaleDateString('ko-KR', dateFmt)} ${start.toLocaleTimeString('ko-KR', timeFmt)}`
+  if (!endIso) return base
+  const end = new Date(endIso)
+  return `${base} ~ ${end.toLocaleTimeString('ko-KR', timeFmt)}`
+}
+
 export function MeetupDetailPage() {
   const { id } = useParams<{ id: string }>()
   const { user } = useAuth()
@@ -134,9 +148,23 @@ export function MeetupDetailPage() {
           <div className="home-card-head">
             <h2>{meetup.title}</h2>
             <span className={`meetup-status meetup-status-${meetup.status}`}>
-              {meetup.status === 'matching' ? '매칭 중' : meetup.status}
+              {meetup.status === 'matching'
+                ? '매칭 중'
+                : meetup.status === 'time_fixed'
+                  ? '시간 확정'
+                  : meetup.status}
             </span>
           </div>
+
+          {meetup.confirmed_start && (
+            <div className="confirmed-banner">
+              <span className="confirmed-icon">🗓️</span>
+              <div>
+                <div className="confirmed-label">확정된 밥약 시간</div>
+                <div className="confirmed-time">{formatConfirmed(meetup.confirmed_start, meetup.confirmed_end)}</div>
+              </div>
+            </div>
+          )}
 
           {canRespond && (
             <div className="invite-banner">
@@ -204,7 +232,14 @@ export function MeetupDetailPage() {
           )}
         </section>
 
-        {id && <AvailabilitySection meetupId={id} />}
+        {id && (
+          <AvailabilitySection
+            meetupId={id}
+            isCreator={isCreator}
+            confirmedStart={meetup.confirmed_start}
+            onConfirmed={setMeetup}
+          />
+        )}
       </main>
     </div>
   )

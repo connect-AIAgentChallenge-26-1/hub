@@ -431,6 +431,36 @@
   border-bottom: none;
 }
 
+/* 확정된 시간 배너 */
+.confirmed-banner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: #e5f4ec;
+  border: 1px solid #1a7f37;
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin-bottom: 8px;
+}
+
+.confirmed-icon {
+  font-size: 24px;
+}
+
+.confirmed-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #1a7f37;
+  letter-spacing: 0.03em;
+}
+
+.confirmed-time {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-h);
+  letter-spacing: -0.01em;
+}
+
 /* 공강 슬롯 */
 .slot-filters {
   display: flex;
@@ -472,6 +502,17 @@
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 12px 16px;
+}
+
+.slot-card-confirmed {
+  border-color: #1a7f37;
+  background: #f2faf5;
+}
+
+.slot-confirm-btn {
+  align-self: flex-start;
+  margin-top: 10px;
+  font-size: 13px;
 }
 
 .slot-date {
