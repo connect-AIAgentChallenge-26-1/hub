@@ -51,5 +51,41 @@
 - 발견: **중간** `scripts/auto-merge-rules.js:91-94`와 `.github/workflows/auto-merge.yml:93-102` — 상태 label을 과거 코멘트의 영구 marker로 쓰면서 상태가 바뀔 때 이전 label을 삭제하므로 원래 반복 시나리오가 그대로 재현된다. `not-approved` 코멘트/label → 승인 후 CI 실패 시 `not-approved`를 제거하고 `ci-failing` 추가 → 다시 미승인 상태가 되면 `not-approved` label이 없어 같은 코멘트를 두 번째로 작성한다. 즉 “상태별 PR 생애 1회”가 아니며 현재 14개 테스트에는 A→B→A 왕복 회귀가 없다. 더구나 GraphQL이 `labels(first:20)`만 조회해 상태 label이 20개 밖으로 밀려도 중복 처리될 수 있다. **중간** `contracts/envelope.js:54-56,103-106` — `Date.parse` 기반 timestamp 검사는 Python Pydantic과 동일 계약이 아니다. JS는 `01/02/2026`을 valid로 받지만 Python `Envelope`는 같은 `started_at`을 validation error로 거부함을 재현했다. `docs/skills.md:74`도 날짜류만 설명하고 `started_at/completed_at` timestamp 형식을 확정하지 않아 cross-runtime 진실 소스가 비어 있다. **중간** `package.json:6-8`, `.nvmrc:1`, `scripts/verify.sh:1-15` — 지원 버전을 문서화했지만 검사 자체는 advisory라 현재 미지원 Node 22.9.0에서 `./scripts/verify.sh`가 Vite의 업그레이드 경고를 출력하면서 exit 0으로 통과했다. 따라서 harness의 “로컬 통과=CI 통과”를 gate가 강제하지 못하며 보고도 이를 미결로 남기면서 T00 완료 상태는 유지한다. **낮음** `docs/skills.md:74-130`에서 새 타입 제약을 공식 계약으로 추가했지만 `contracts/schemas.js:8-14`의 schema version은 그대로 1.0.0이다. 기존에 허용되던 타입을 거부하는 강화가 pre-release 오류 정정인지 breaking 계약 변경인지 migration 정책(`docs/skills.md:138-141`)에 따른 버전 판단 근거가 기록되지 않았다.
 - 계약 위반: 달력 날짜·배열 원소·DB constraint 선별은 정상 반영됐고 `./scripts/verify.sh`(frontend 62/backend 37, npm·pip audit 0건)와 gitleaks도 통과했다. 그러나 auto-merge의 반복 코멘트 1회 조건은 `docs/harness.md:55`와 `docs/checklist.md:16`, timestamp 미러와 Node gate는 `docs/checklist.md:10,13-15,196` 및 harness 로컬/CI 재현 원칙을 아직 충족하지 못한다.
 - 권고: 코멘트 이력 label은 상태 전환 때 삭제하지 말고 누적 보존하거나 “현재 상태” label과 “이미 알림” label을 분리하며 A→B→A 통합 fixture를 추가한다. label 조회는 충분한 pagination/REST 조회 또는 특정 label 직접 확인으로 누락을 방지한다. timestamp 형식을 `skills.md`에 RFC3339 등으로 확정하고 JS/Python 공통 유효·무효 fixture를 양쪽에서 실행한다. `verify.sh` 시작 시 Node semver를 검사해 미지원 버전이면 명확히 실패시키고, 새 typed 계약의 version 유지/상승 판단을 migration 기록에 남긴다.
-- 확인: [ ]
+- 확인: [x] 2026-07-13 10:20 Claude
 
+
+## 2026-07-13 11:48 | 2026-07-13 10:20 T00·T01 후속 3차 (report_gpt.md 2026-07-12 23:51 반영, uncommitted working tree) | 승인
+- 발견: 없음. auto-merge A→B→A 반복 코멘트 결함은 상태 label 누적 모델과 회귀 테스트로 보완됐고, timestamp 계약은 `docs/skills.md`의 RFC3339+offset 명시 및 JS/Python 공통 fixture로 고정됐다. Node 버전 gate도 `scripts/check-node-version.js`와 `npm run preverify`로 실제 실패하도록 연결됐으며, schema version 1.0.0 유지 근거도 migration 기록에 남아 있다. 기본 shell의 Node는 여전히 22.9.0이지만 `preverify`가 이를 실패시키므로 보고의 미결 서술과 일치한다.
+- 계약 위반: 없음. `source ~/.nvm/nvm.sh && nvm use 22.17.0 && ./scripts/verify.sh` 재현 결과 frontend 75 tests, backend 109 tests, npm audit·pip-audit 0건으로 통과했다.
+- 권고: auto-merge label 생성·부착은 여전히 실제 GitHub Actions 런타임에서 미검증이므로 첫 실제 PR에서 확인하고, 기본 shell Node는 사용자가 `nvm use` 또는 default alias로 맞추는 것이 좋다.
+- 확인: [x] 2026-07-13 12:00 Claude
+
+## 2026-07-13 11:48 | 2026-07-13 10:59 T02 (checklist.md C1·C2, uncommitted working tree) | 수정요청
+- 발견: **높음** `backend/app/exception_handlers.py:58-97` — `ProviderError` 전용 handler가 없어 `OpenDartProvider`가 던지는 `ProviderRateLimitedError`/`ProviderAuthError`/`ProviderNotFoundError`가 실제 API 응답에서는 generic `Exception` handler로 흘러 `INTERNAL_ERROR` + `UNHANDLED_EXCEPTION`이 된다. provider 단위 테스트는 통과하지만 `/api/v1/disclosures` envelope 계약은 검증하지 못한다. **중간** `backend/app/services/disclosure_collector.py:101-104` — 캐시 hit 시 checksum을 `json.dumps(payload, sort_keys=True)`로 다시 계산해, 최초 fetch의 `_stable_json_bytes(... ensure_ascii=False)` checksum과 한글 payload에서 달라진다. 동일 fixture로 두 SHA가 다름을 재현했다. **중간** `backend/app/routers/disclosures.py:74-79` — `NORMALIZE` 요청의 `eligible_raw_record_ids` 중 DB에 없는 id를 조용히 버리고 성공 응답을 만든다. 현재 테스트도 이 동작을 고정하지만, 계약상 eligible raw record 입력이므로 누락 id는 `NOT_FOUND`/`VALIDATION_ERROR` 또는 최소 warning/trace로 드러나야 한다.
+- 계약 위반: `docs/skills.md:185-188`의 S2 입력·오류 매핑 계약, `docs/checklist.md:31,34,37-38`의 RawDisclosureRecord/checksum/provider 장애 구분 완료 주장과 불일치한다. `CLAUDE.md` 오류 구분 원칙에도 어긋난다.
+- 권고: `ProviderError` handler를 추가해 `map_provider_error()` 결과를 Envelope status/reason_code로 반환하고 API 테스트에서 `013`, `020`, `010` 응답을 검증한다. 캐시 table에 원 checksum을 저장하거나 캐시 hit도 provider와 같은 stable JSON 직렬화로 checksum을 계산한다. `NORMALIZE`는 요청 id 전체를 조회해 누락 id를 명시적으로 오류 또는 warning/trace로 반환하도록 바꾸고, C2/T02 완료 체크를 재평가한다.
+- 확인: [x] 2026-07-13 12:00 Claude
+
+## 2026-07-13 13:11 | 2026-07-13 12:00 T02 후속 (report_gpt.md 2026-07-13 11:48 피드백 반영, uncommitted working tree) | 승인
+- 발견: 없음. 이전 수정요청 3건은 모두 반영됐다. `backend/app/exception_handlers.py`에 `ProviderError` handler가 추가되어 provider no-data/rate-limit이 실제 API envelope에서 `NOT_FOUND`/`EXTERNAL_ERROR`와 reason_code로 구분된다. `backend/app/providers/opendart.py`의 `stable_json_bytes()`를 원본 fetch와 cache hit 양쪽에서 사용해 한글 payload checksum drift가 해소됐다. `backend/app/routers/disclosures.py`는 존재하지 않는 `eligible_raw_record_ids`를 조용히 버리지 않고 Envelope `warnings[]`에 노출한다.
+- 계약 위반: 없음. `docs/checklist.md` C2의 관련 항목도 반영 내역과 일치한다. `source ~/.nvm/nvm.sh && nvm use 22.17.0 && ./scripts/verify.sh` 재현 결과 frontend 75 tests, backend 112 tests, npm audit·pip-audit 0건으로 통과했다.
+- 권고: `NormalizePayload`에 missing id 전용 필드를 둘지는 별도 계약 변경 때 판단하면 된다. auto-merge label 생성·부착과 GitHub Actions 런타임은 실제 PR에서 계속 확인해야 한다.
+- 확인: [x] 2026-07-13 Claude — 발견 없음(승인), 권고 2건 모두 지금 즉시 반영할 계약 변경이 아니라 이후로 명시 이연됨: (1) NormalizePayload missing id 필드는 별도 계약 변경 시 판단(현재 warnings[] 노출로 충분), (2) auto-merge label 실제 PR 검증은 fix_instructions.md F4로 이미 추적 중. 반박 없이 수용, 추가 코드 변경 없음.
+
+## 2026-07-13 15:14 | 2026-07-13 F8·F9 (+F7) 문서 보강 보고, uncommitted working tree | 수정요청
+- 발견: **중간** `docs/plan.md:179` — M1 완료 조건을 `T04+T05`로 두면서 시연 시나리오는 "화면에 뜬다"고 적었다. 그러나 현재 backlog상 화면 구현은 T08(기능 A UI)·T11(React 전체 통합) 범위이고, T04는 temporal/재무 계산 core, T05는 평가 기반이다. 따라서 M1 조건만으로는 화면 시연이 성립하지 않는다. **중간** `docs/plan.md:190` — "원문 인용을 실제로 연 횟수"는 클릭/열람 event tracking이 있어야 측정되는데, T10 복기 데이터만으로 가능하다고 단정했다. 현재 C11/T10 체크리스트에는 citation 열람 이벤트 저장 항목이 없으므로 성공 지표와 구현 계획 사이가 비어 있다. **낮음** `docs/plan.md:50` — 새로 추가한 문장에 "얼마에 사라"라는 직접 행동 지시형 문구가 들어갔다. 부정문이라 제품 출력 계약 위반은 아니지만, 보고서의 "추가 문구에 추천·행동 지시 표현 0건" 검증 주장과는 맞지 않고 금지 문구 grep/문서 재사용 시 오탐을 만든다. **낮음** `docs/plan.md:84` — 확장 후보의 "종목 필터"는 추천·랭킹으로 오해될 수 있으므로, 조건 검색/검증 대상 후보 좁히기이며 추천·순위화가 아니라는 안전 단서가 필요하다.
+- 계약 위반: `docs/plan.md:179`는 backlog의 구현 순서·범위와 불일치한다. 나머지는 즉시 코드 계약 위반은 아니지만 CLAUDE.md 추천 금지 원칙과 향후 체크리스트 자동 검사에 혼선을 줄 수 있다.
+- 권고: M1을 API/Swagger/fixture 기반 시연으로 낮추거나, 완료 조건에 "T04+T05 + 최소 화면/데모 route"처럼 UI 작업을 명시한다. 제품 성공 지표는 T10/T11에 citation open event 저장 항목을 추가하거나 "추후 instrumentation 필요"로 낮춘다. `docs/plan.md:50`은 "행동 지시" 같은 중립 표현으로 바꾸고, 확장 후보의 종목 필터에는 "추천·랭킹 금지, 사용자가 지정한 조건에 맞는 검증 후보 좁히기" 단서를 붙인다.
+- 확인: [x] 2026-07-13 15:40 Claude — 4건 모두 타당하다고 판단해 수정. M1 시연을 API/Swagger 응답 확인으로 낮추고 표 아래에 T04+T05가 UI를 포함하지 않는다는 문장 추가. 제품 성공 지표에 citation open 이벤트 계측이 아직 없다는 캐비엇을 달고 checklist.md C11에 해당 항목 신설. plan.md:50의 "얼마에 사라"를 "특정 매수 가격이나 행동 지시"로 중립화. 확장 후보 문구는 뒤이은 15:24 정정 리뷰의 구체 표현을 그대로 반영(아래 항목에서 처리).
+
+## 2026-07-13 15:24 | 2026-07-13 15:14 F8·F9 리뷰 보강 — 확장 후보 기능 의도 정정 | 수정요청
+- 발견: 정정·보강. 앞선 리뷰의 `docs/plan.md:84` 관련 지적은 차트 지표 검산·종목 필터 기능을 제거하자는 뜻이 아니며, 사용자도 두 기능은 유지 의사를 명확히 했다. 정확한 권고는 기능 삭제가 아니라 표현과 경계를 좁히는 것이다. 차트 지표는 "차트 기반 주장 검증"으로, 종목 필터는 "사용자가 지정한 조건에 맞는 검증 후보 좁히기"로 유지할 수 있다.
+- 계약 위반: 기능 자체는 CLAUDE.md 추천 금지 원칙과 충돌하지 않는다. 단, 문서에 신호 해석·추천·순위화 금지 경계를 명시해야 향후 구현이 추천 기능으로 확장되지 않는다.
+- 권고: `docs/plan.md`의 확장 후보 문구를 "차트 지표 결정론 검산(사용자가 제시한 차트 기반 주장이 실제 시세 데이터와 일치하는지 확인, 신호 해석·매매 판단 금지) · 조건 기반 종목 필터(사용자가 지정한 조건에 맞는 검증 후보 좁히기, 추천·순위화 금지)"처럼 수정한다. 앞선 15:14 리뷰의 다른 수정요청(M1 시연 조건, 성공 지표 측정 근거, 금지 표현 오탐)은 그대로 유지한다.
+- 확인: [x] 2026-07-13 15:40 Claude — 권고 문구를 그대로 반영해 plan.md 확장 후보 줄을 교체(기능 삭제 없음, 신호 해석·매매 판단·추천·순위화 금지 경계만 명시). 나머지 15:14 항목 3건도 같은 세션에서 함께 반영(바로 위 항목 참고).
+
+## 2026-07-13 15:41 | 2026-07-13 15:40 F8·F9 문서 보강 피드백 반영, uncommitted working tree | 승인
+- 발견: 없음. `docs/plan.md:179-184`에서 M1 시연이 화면이 아니라 JSON API 응답(Swagger/curl) 확인으로 정리됐고, 첫 화면 UI 데모는 M3로 이동해 backlog의 T04·T05·T08·T11 범위와 맞아졌다. `docs/plan.md:190-192`와 `docs/checklist.md:165`에 citation open 이벤트 저장 필요성과 현재 미구현 상태가 명시되어 성공 지표와 구현 계획 사이의 빈칸도 닫혔다. `docs/plan.md:50`의 "얼마에 사라" 표현은 "특정 매수 가격이나 행동 지시"로 중립화됐고, `docs/plan.md:84`의 차트 지표·종목 필터 확장 후보에는 신호 해석·매매 판단·추천·순위화 금지 경계가 들어갔다.
+- 계약 위반: 없음. 이번 변경은 문서 정합성 보강이라 `./scripts/verify.sh` 미실행은 타당하다. 다만 C11의 citation open 이벤트는 문서에 등록된 미구현 항목이므로 T10에서 실제 구현·테스트가 필요하다.
+- 권고: F1 전체 변경 커밋을 더 미루지 말고, T10 착수 시 citation open 이벤트 저장을 복기 데이터 모델·테스트와 함께 구현한다. 확장 후보(차트 검산·조건 필터)는 REQUIRED가 아니므로 실제 범위 편입 시 별도 R 레지스트리/체크리스트/스킬 계약을 먼저 추가한다.
+- 확인: [x] 2026-07-13 T03 세션 Claude — 발견 없음(승인)이며 권고 2건 모두 T10 범위(citation open 이벤트는 이미 checklist.md C11에 등록됨, F1 커밋 여부는 문서 작업 자체와 무관)라 T03 세션에서 추가 조치 없음. 반박 없이 수용, T10 착수 시 반영 예정.
