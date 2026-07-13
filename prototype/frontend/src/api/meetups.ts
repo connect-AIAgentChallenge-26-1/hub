@@ -61,3 +61,21 @@ export async function respondToInvite(
   const { data } = await apiClient.post<MeetupDetail>(`/meetups/${id}/respond`, { action })
   return data
 }
+
+export interface AvailableSlot {
+  start: string
+  end: string
+  duration_min: number
+  overlaps_lunch: boolean
+  overlaps_dinner: boolean
+}
+
+export interface AvailableTimes {
+  accepted_count: number
+  slots: AvailableSlot[]
+}
+
+export async function fetchAvailableTimes(id: string): Promise<AvailableTimes> {
+  const { data } = await apiClient.get<AvailableTimes>(`/meetups/${id}/available-times`)
+  return data
+}

@@ -45,3 +45,16 @@ class InviteCreate(BaseModel):
 
 class RespondPayload(BaseModel):
     action: str = Field(pattern="^(accept|decline)$")
+
+
+class AvailableSlot(BaseModel):
+    start: datetime
+    end: datetime
+    duration_min: int
+    overlaps_lunch: bool
+    overlaps_dinner: bool
+
+
+class AvailableTimesResponse(BaseModel):
+    accepted_count: int  # 계산에 반영된 수락 참여자 수
+    slots: list[AvailableSlot]

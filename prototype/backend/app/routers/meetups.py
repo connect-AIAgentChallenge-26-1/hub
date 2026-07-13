@@ -1,14 +1,20 @@
 import uuid
+from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session, joinedload
 
+from app.core.availability import compute_free_slots
 from app.core.deps import get_current_user
 from app.database import get_db
+from app.models.calendar_integration import CalendarIntegration
+from app.models.event import Event
 from app.models.meetup_session import MeetupSession
 from app.models.session_participant import SessionParticipant
 from app.models.user import User
 from app.schemas.meetup import (
+    AvailableSlot,
+    AvailableTimesResponse,
     InviteCreate,
     MeetupCreate,
     MeetupDetail,
@@ -16,6 +22,8 @@ from app.schemas.meetup import (
     ParticipantRead,
     RespondPayload,
 )
+
+AVAILABILITY_WINDOW_DAYS = 14
 
 router = APIRouter(prefix="/meetups", tags=["meetups"])
 
@@ -158,3 +166,39 @@ def respond_to_invite(
     participant.invite_status = "accepted" if payload.action == "accept" else "declined"
     db.commit()
     return _build_detail(_load_meetup(db, meetup_id))
+
+
+@router.get("/{meetup_id}/available-times", response_model=AvailableTimesResponse)
+def available_times(
+    meetup_id: uuid.UUID,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> AvailableTimesResponse:
+    meetup = _load_meetup(db, meetup_id)
+    if meetup is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="모임을 찾을 수 없습니다.")
+    if not any(p.user_id == current_user.id for p in meetup.participants):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="이 모임에 접근할 수 없습니다.")
+
+    accepted_ids = [p.user_id for p in meetup.participants if p.invite_status == "accepted"]
+
+    # 수락한 참여자 전원의 일정(EVENT)을 busy 구간으로 모은다
+    busy: list[tuple[datetime, datetime]] = []
+    if accepted_ids:
+        events = (
+            db.query(Event.start_time, Event.end_time)
+            .join(CalendarIntegration, Event.integration_id == CalendarIntegration.id)
+            .filter(CalendarIntegration.user_id.in_(accepted_ids))
+            .all()
+        )
+        busy = [(e.start_time, e.end_time) for e in events]
+
+    now = datetime.now(timezone.utc)
+    slots = compute_free_slots(busy, now.astimezone().date(), AVAILABILITY_WINDOW_DAYS)
+    # 이미 지난 시간대는 제외 (오늘 앞부분)
+    slots = [s for s in slots if s.end > now]
+
+    return AvailableTimesResponse(
+        accepted_count=len(accepted_ids),
+        slots=[AvailableSlot(**vars(s)) for s in slots],
+    )
