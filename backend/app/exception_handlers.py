@@ -11,10 +11,20 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
 from app.dependencies import NotAuthenticatedError
+from app.providers.base import ProviderError, map_provider_error
 from app.repositories.user_repository import EmailAlreadyRegisteredError
 from app.schemas.envelope import Envelope, Status, now_utc
 
 logger = logging.getLogger("app.error")
+
+# ProviderError는 map_provider_error()가 이미 status/reason_code를 결정하므로
+# 여기서는 그 status를 HTTP status code로만 옮긴다. provider 쪽 실패(외부 장애·
+# rate limit·no-data)는 우리 구현 오류가 아니므로 500으로 뭉개지 않는다.
+_PROVIDER_STATUS_TO_HTTP = {
+    Status.EXTERNAL_ERROR: status.HTTP_502_BAD_GATEWAY,
+    Status.RATE_LIMITED: status.HTTP_429_TOO_MANY_REQUESTS,
+    Status.NOT_FOUND: status.HTTP_404_NOT_FOUND,
+}
 
 
 def _envelope_response(
@@ -86,6 +96,12 @@ def register_exception_handlers(app: FastAPI) -> None:
             Status.AUTHENTICATION_ERROR,
             "AUTHENTICATION_REQUIRED",
         )
+
+    @app.exception_handler(ProviderError)
+    async def provider_error_handler(request: Request, exc: ProviderError) -> JSONResponse:
+        mapping = map_provider_error(exc)
+        http_status = _PROVIDER_STATUS_TO_HTTP.get(mapping.status, status.HTTP_502_BAD_GATEWAY)
+        return _envelope_response(request, http_status, mapping.status, mapping.reason_code)
 
     @app.exception_handler(Exception)
     async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONResponse:

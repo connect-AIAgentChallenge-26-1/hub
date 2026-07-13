@@ -5,8 +5,10 @@ from fastapi import Depends
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
 
+from app.config import get_settings
 from app.db import SessionLocal
 from app.models.user import User
+from app.providers.opendart import OpenDartProvider
 from app.repositories.user_repository import UserRepository
 from app.security.tokens import InvalidTokenError, decode_access_token
 
@@ -19,6 +21,14 @@ def get_db() -> Generator[Session, None, None]:
         yield db
     finally:
         db.close()
+
+
+def get_opendart_provider() -> Generator[OpenDartProvider, None, None]:
+    # A FastAPI dependency (rather than direct instantiation in the router)
+    # so tests can override it with a fixture-backed fake instead of making
+    # real network calls (docs/checklist.md C2 "정상/실패/공격 테스트").
+    with OpenDartProvider(api_key=get_settings().dart_api_key or "") as provider:
+        yield provider
 
 
 class NotAuthenticatedError(Exception):

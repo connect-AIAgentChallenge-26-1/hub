@@ -1,0 +1,14 @@
+{
+  "_comment": "OpenDART status codes -> {status, message} response shape. 013, 100, 010 are captured live (2026-07-13: list.json with a future date range, fnlttSinglAcntAll.json with a malformed corp_code, corpCode.xml with an invalid key respectively). Note the shape differs by endpoint family: JSON endpoints (list.json/fnlttSinglAcntAll.json) return {status,message} as JSON; file-download endpoints (corpCode.xml/document.xml) return the same fields but as XML `<result><status/><message/></result>` instead of a zip body. The remaining codes use the exact status codes and message text documented at https://opendart.fss.or.kr/guide/main.do?apiGrpCd=DS001 (개발가이드 > 에러코드), not independently re-verified live.",
+  "000_success_shape_note": "정상: status=000, list[]가 채워진다(JSON) 또는 zip 바이너리(파일 다운로드). 별도 fixture(disclosure_list_samsung.json 등) 참고.",
+  "013_no_data": { "status": "013", "message": "조회된 데이타가 없습니다." },
+  "100_invalid_field": { "status": "100", "message": "corp_code가 필드의 부적절한 값입니다." },
+  "010_unregistered_key": { "status": "010", "message": "등록되지 않은 인증키입니다." },
+  "011_locked_key": { "status": "011", "message": "사용할수없는 키입니다." },
+  "012_forbidden_ip": { "status": "012", "message": "접근할 수 없는 IP입니다." },
+  "014_file_not_found": { "status": "014", "message": "파일이 존재하지 않습니다." },
+  "020_rate_limited": { "status": "020", "message": "요청 제한을 초과하였습니다." },
+  "800_no_registered_url": { "status": "800", "message": "등록된 URL이 없습니다." },
+  "900_undefined_error": { "status": "900", "message": "정의되지 않은 오류가 발생하였습니다." },
+  "901_account_expired": { "status": "901", "message": "사용자 계정의 개인정보 보유기간이 만료되어 사용할 수 없습니다." }
+}
