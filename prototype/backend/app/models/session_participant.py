@@ -1,7 +1,7 @@
 import uuid
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey, UniqueConstraint
+from sqlalchemy import ForeignKey, String, UniqueConstraint
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -23,6 +23,8 @@ class SessionParticipant(Base):
     user_id: Mapped[uuid.UUID] = mapped_column(
         UUID(as_uuid=True), ForeignKey("users.id", ondelete="CASCADE"), nullable=False
     )
+    # pending(초대됨) → accepted(수락) | declined(거절). 생성자는 accepted로 자동 등록.
+    invite_status: Mapped[str] = mapped_column(String(20), nullable=False, server_default="pending")
 
     session: Mapped["MeetupSession"] = relationship(back_populates="participants")
     user: Mapped["User"] = relationship(back_populates="session_participations")
