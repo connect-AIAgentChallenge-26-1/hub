@@ -71,8 +71,8 @@ flowchart LR
 |---:|---|:---:|---|
 | T00 | 계약·저장소 품질 게이트 | 완료 | [#1](https://github.com/Batwan01/hub/issues/1) |
 | T01 | Backend·DB 기반 | 완료 | [#1](https://github.com/Batwan01/hub/issues/1) |
-| T02 | 종목·OpenDART 수집 | 대기 | [#2](https://github.com/Batwan01/hub/issues/2) |
-| T03 | 시세·외부 근거 수집 | 대기 | [#3](https://github.com/Batwan01/hub/issues/3) |
+| T02 | 종목·OpenDART 수집 | 완료 | [#2](https://github.com/Batwan01/hub/issues/2) |
+| T03 | 시세·외부 근거 수집 | BLOCKED | [#3](https://github.com/Batwan01/hub/issues/3) |
 | T04 | Temporal Integrity·재무 계산 | 대기 | [#4](https://github.com/Batwan01/hub/issues/4) |
 | T05 | I9 평가 기반 | 대기 | [#5](https://github.com/Batwan01/hub/issues/5) |
 | T06 | 기능 C 숫자 검증 | 대기 | [#6](https://github.com/Batwan01/hub/issues/6) |
