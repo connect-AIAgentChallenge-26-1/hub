@@ -163,15 +163,17 @@ describe('eval/run.js CLI process exit codes', () => {
     expect(existsSync(join(import.meta.dirname, 'reports', 'latest.json'))).toBe(true)
   })
 
-  it(
-    'loadPreviousRegistryFromGit skips (returns null) instead of throwing when there is ' +
-      'nothing to diff against (eval/ is not committed yet)',
-    () => {
-      // docs/harness.md 설계 원칙 3 — 인프라 상태(파일이 아직 커밋되지 않음)
-      // 때문에 하네스 자체가 죽어서는 안 된다. eval/이 커밋된 뒤에는 이 함수가
-      // 실제 이전 registry를 반환하고, validateThresholdChangeApproval() 단위
-      // 테스트(schema.test.js)가 그 diff 로직 자체를 검증한다.
-      expect(loadPreviousRegistryFromGit()).toBeNull()
-    },
-  )
+  it('loadPreviousRegistryFromGit never throws and returns the committed registry when available', () => {
+    // docs/harness.md 설계 원칙 3 — 인프라 상태(파일이 아직 커밋되지 않음)
+    // 때문에 하네스 자체가 죽어서는 안 된다. eval/이 커밋되기 전에는 null을
+    // 반환하고, 커밋된 뒤에는 실제 이전 registry를 반환한다. diff 승인 로직
+    // 자체는 validateThresholdChangeApproval() 단위 테스트(schema.test.js)가 검증한다.
+    const previous = loadPreviousRegistryFromGit()
+    if (previous === null) {
+      expect(previous).toBeNull()
+    } else {
+      expect(previous.thresholds_version).toBe(thresholdsV1.thresholds_version)
+      expect(previous.compatible_dataset_version).toBe(thresholdsV1.compatible_dataset_version)
+    }
+  })
 })
