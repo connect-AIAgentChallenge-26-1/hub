@@ -90,3 +90,44 @@ export async function confirmTime(
   const { data } = await apiClient.post<MeetupDetail>(`/meetups/${id}/confirm-time`, { start, end })
   return data
 }
+
+export interface Restaurant {
+  name: string
+  category: string
+  rating: number
+  review_count: number
+  distance_min: number
+  sources: string[]
+  address: string
+  place_url: string
+}
+
+export interface RestaurantSearch {
+  is_mock: boolean
+  restaurants: Restaurant[]
+}
+
+export const FOOD_CATEGORIES = ['한식', '일식', '중식', '양식', '분식', '카페']
+
+export async function searchRestaurants(
+  id: string,
+  location: string,
+  category: string,
+): Promise<RestaurantSearch> {
+  const { data } = await apiClient.get<RestaurantSearch>(`/meetups/${id}/restaurants`, {
+    params: { location, category },
+  })
+  return data
+}
+
+export async function confirmPlace(
+  id: string,
+  locationName: string,
+  foodCategory: string,
+): Promise<MeetupDetail> {
+  const { data } = await apiClient.post<MeetupDetail>(`/meetups/${id}/confirm-place`, {
+    location_name: locationName,
+    food_category: foodCategory,
+  })
+  return data
+}

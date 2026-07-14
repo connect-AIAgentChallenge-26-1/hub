@@ -65,3 +65,24 @@ class AvailableTimesResponse(BaseModel):
 class ConfirmTimePayload(BaseModel):
     start: datetime
     end: datetime
+
+
+class RestaurantResult(BaseModel):
+    name: str
+    category: str
+    rating: float
+    review_count: int
+    distance_min: int
+    sources: list[str]
+    address: str
+    place_url: str
+
+
+class RestaurantSearchResponse(BaseModel):
+    is_mock: bool  # 목업 데이터인지 (키 미설정 시 true)
+    restaurants: list[RestaurantResult]
+
+
+class ConfirmPlacePayload(BaseModel):
+    location_name: str = Field(min_length=1, max_length=255)
+    food_category: str = Field(min_length=1, max_length=100)
