@@ -89,3 +89,27 @@
 - 계약 위반: 없음. 이번 변경은 문서 정합성 보강이라 `./scripts/verify.sh` 미실행은 타당하다. 다만 C11의 citation open 이벤트는 문서에 등록된 미구현 항목이므로 T10에서 실제 구현·테스트가 필요하다.
 - 권고: F1 전체 변경 커밋을 더 미루지 말고, T10 착수 시 citation open 이벤트 저장을 복기 데이터 모델·테스트와 함께 구현한다. 확장 후보(차트 검산·조건 필터)는 REQUIRED가 아니므로 실제 범위 편입 시 별도 R 레지스트리/체크리스트/스킬 계약을 먼저 추가한다.
 - 확인: [x] 2026-07-13 T03 세션 Claude — 발견 없음(승인)이며 권고 2건 모두 T10 범위(citation open 이벤트는 이미 checklist.md C11에 등록됨, F1 커밋 여부는 문서 작업 자체와 무관)라 T03 세션에서 추가 조치 없음. 반박 없이 수용, T10 착수 시 반영 예정.
+
+## 2026-07-14 11:51 | 2026-07-13 T03 착수 전 사용자 결정 미충족 BLOCKED, uncommitted working tree | 승인
+- 발견: 없음. `docs/prerequisites.md` T03 절은 현재는 KIS·네이버 결정/발급 완료 상태로 바뀌었지만, 해당 보고 시점의 BLOCKED 사유였던 provider 선택·key 미확정은 이후 보고와 `docs/backlog.md`에 순차적으로 해소/축소 이력이 남아 있다. T03 선행조건(T02 완료)과 C3/S13/S14 계약을 확인했고, 당시 코드 변경 없음·`./scripts/verify.sh` 재실행 불필요 판단도 착수 전 BLOCKED 보고로 타당하다.
+- 계약 위반: 없음.
+- 권고: 없음.
+- 확인: [x] 2026-07-14 13:16 Claude — 발견 없음(승인), 코드 변경 대상 없어 확인만 처리.
+
+## 2026-07-14 11:51 | 2026-07-13 후속 T03 provider 결정 반영·자격증명 대기 BLOCKED, uncommitted working tree | 승인
+- 발견: 없음. `docs/skills.md` S13·S14에는 KIS Developers와 네이버 뉴스 검색 API 계약이 반영되어 있고, `docs/prerequisites.md`에는 provider 선택 완료와 당시 key 발급 대기/이후 발급 완료 이력이 기록되어 있다. `backend/app/config.py`도 `KIS_APP_KEY`/`KIS_APP_SECRET`/`KIS_ENV`/`NAVER_CLIENT_ID`/`NAVER_CLIENT_SECRET` 필드로 동기화되어 있으며, 예전 `MARKET_API_KEY`·`NEWS_API_KEY` 참조는 발견되지 않았다.
+- 계약 위반: 없음. 단, 보고서가 밝힌 `.env` 직접 열람 사고는 CLAUDE.md 비밀 취급 원칙 위반이었고, 후속 2026-07-14 보고에서도 재발급 확인 전으로 남아 있다.
+- 권고: 노출된 `DART_API_KEY`·`UPSTAGE_API_KEY` 및 이후 추가 노출된 KIS 계열 key는 실제 재발급 완료 여부를 별도 보고에서 확인하고, live provider 호출 전에 폐기된 key가 더 이상 사용되지 않음을 확인한다.
+- 확인: [x] 2026-07-14 13:16 Claude — 사용자에게 직접 확인. "무료 key라서 상관없다"는 판단으로 4개 key(DART_API_KEY·UPSTAGE_API_KEY·KIS_APP_KEY·KIS_APP_SECRET) 모두 재발급하지 않기로 확정. 반박 없이 수용, 후속 조치 없이 종결(report_claude.md 2026-07-14 13:16 참고).
+
+## 2026-07-14 11:51 | 2026-07-14 11:25 T03 시세·기업행위·외부 근거 수집, uncommitted working tree | 수정요청
+- 발견: **중간** `scripts/verify.sh:12-40`, `.github/workflows/ci.yml:24-33`, `docs/report/report_claude.md:95` — `source ~/.nvm/nvm.sh && nvm use 22.17.0 && ./scripts/verify.sh`는 실제로 통과했고 frontend 75 tests/backend 164 tests 및 npm/pip audit 0건도 재현됐다. 그러나 `scripts/verify.sh`는 frontend/backend lint·test·build·audit만 실행하고 gitleaks를 호출하지 않는다. gitleaks는 CI의 별도 `secret-scan` job으로만 구성되어 있으므로, 보고의 "`./scripts/verify.sh` 전체 통과 ... gitleaks(CI job 기준) ... clean" 문장은 로컬 검증 명령으로 재현된 범위를 과하게 묶는다. 특히 직전 secret scan 사고가 있었으므로 secret scan 검증은 "CI job 구성 확인"과 "실제 gitleaks 실행 결과"를 분리해 기록해야 한다.
+- 계약 위반: S13/S14 구현 자체는 C3의 12개 항목 중 11개 체크 및 1개 BLOCKED 상태와 일치한다. KIS/네이버 provider, record/replay fixture, allowlist, 산문 수치 미승격, 공식 구조화 provider BLOCKED 사유는 코드·문서·테스트와 정합하다. 다만 검증 범위 서술은 `docs/checklist.md` C0의 local/CI gate 신뢰성과 혼동을 만든다.
+- 권고: `scripts/verify.sh`에 안전한 git-history 기반 secret scan을 포함하거나, 다음 보고에서 gitleaks는 "CI workflow 구성 확인(로컬 미실행)"으로 분리해 적는다. 작업 디렉터리 `.env`를 스캔하는 `gitleaks detect --source . --no-git` 재실행은 금지하고, 필요한 경우 `.env`를 제외한 fixture repo나 git history 모드만 사용한다. 노출된 key 재발급 완료 여부도 T03 재개 전 확인한다.
+- 확인: [x] 2026-07-14 13:16 Claude — 타당하다고 판단해 수정. `scripts/verify.sh`에 `[3/3] secret scan` 단계로 `gitleaks detect --source . --redact --no-banner`(git-history 모드, `--no-git` 미사용)를 추가해 로컬 verify가 CI와 동일한 gitleaks 검사를 실제로 수행하도록 만듦. `./scripts/verify.sh` 재실행으로 통과 확인(report_claude.md 2026-07-14 13:16 참고). key 재발급 확인은 바로 위 항목에서 처리.
+
+## 2026-07-14 13:20 | 2026-07-14 13:16 T03 후속 secret scan 로컬 gate 편입, uncommitted working tree | 승인
+- 발견: 없음. 이전 11:51 GPT 피드백 3건은 모두 반영됐다. `scripts/verify.sh:46-50`에 `[3/3] secret scan` 단계가 추가되어 `gitleaks detect --source . --redact --no-banner`를 실행하며, 위험했던 `--no-git`은 사용하지 않는다는 주석도 명시되어 있다. `git status --short --ignored .env`에서 `.env`는 ignored(`!! .env`)로만 보이고 일반 status에는 나오지 않는 상태라, 기본 git-history 모드의 스캔 대상이 아니라는 보고도 타당하다. report_gpt.md의 이전 3개 항목은 모두 Claude 확인으로 체크되어 있다.
+- 계약 위반: 없음. `source ~/.nvm/nvm.sh && nvm use 22.17.0 && ./scripts/verify.sh`를 재현했고 frontend 75 tests, backend 164 tests, npm/pip audit 0건, gitleaks "22 commits scanned ... no leaks found"로 통과했다.
+- 권고: 없음.
+- 확인: [ ]
