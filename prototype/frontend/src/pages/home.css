@@ -287,10 +287,16 @@
   background: #fff7e0;
 }
 
+.meetup-status-time_fixed {
+  color: var(--accent-deep);
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
 .meetup-status-confirmed {
   color: #1a7f37;
   border-color: #1a7f37;
-  background: transparent;
+  background: var(--green-soft);
 }
 
 .meetup-date {
@@ -459,6 +465,172 @@
   font-weight: 800;
   color: var(--text-h);
   letter-spacing: -0.01em;
+}
+
+.confirmed-place {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-h);
+  margin-top: 3px;
+}
+
+.confirmed-cat {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.confirmed-banner-full {
+  background: linear-gradient(135deg, #fff3d6, #ffe9dc);
+  border-color: var(--accent);
+}
+
+/* 맛집 추천 */
+.rest-search {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.rest-search input {
+  flex: 1;
+  font: inherit;
+  font-size: 14px;
+  padding: 9px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.rest-search input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.rest-search-btn {
+  width: auto;
+  margin: 0;
+  padding: 9px 18px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.cat-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 16px;
+}
+
+.cat-chip {
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  border: 1px solid var(--border);
+  background: var(--card);
+  border-radius: 999px;
+  padding: 6px 15px;
+  cursor: pointer;
+}
+
+.cat-chip.on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.rest-mock-note {
+  font-size: 12.5px;
+  color: var(--text);
+  background: var(--chip);
+  border-radius: 8px;
+  padding: 8px 12px;
+  margin: 0 0 14px;
+}
+
+.rest-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rest-card {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+}
+
+.rest-card-confirmed {
+  border-color: var(--accent);
+  background: #fff8f4;
+}
+
+.rest-ribbon {
+  position: absolute;
+  top: -8px;
+  left: 14px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(229, 80, 31, 0.3);
+}
+
+.rest-name {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--text-h);
+}
+
+.src-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  font-size: 10.5px;
+  font-weight: 900;
+}
+
+.src-n {
+  background: #03c75a;
+  color: #fff;
+}
+
+.src-k {
+  background: #fee500;
+  color: #3c1e1e;
+}
+
+.rest-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+  font-size: 13px;
+  color: var(--text);
+}
+
+.rest-star {
+  color: #e9a800;
+  font-weight: 700;
+}
+
+.rest-confirm-btn {
+  margin-top: 12px;
+  font-size: 13px;
 }
 
 /* 공강 슬롯 */

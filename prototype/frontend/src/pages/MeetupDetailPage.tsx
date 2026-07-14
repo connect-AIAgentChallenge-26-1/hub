@@ -10,6 +10,7 @@ import {
   type UserSearchResult,
 } from '../api/meetups'
 import { AvailabilitySection } from '../components/AvailabilitySection'
+import { RestaurantSection } from '../components/RestaurantSection'
 import { useAuth } from '../context/AuthContext'
 import './auth.css'
 import './home.css'
@@ -152,16 +153,26 @@ export function MeetupDetailPage() {
                 ? '매칭 중'
                 : meetup.status === 'time_fixed'
                   ? '시간 확정'
-                  : meetup.status}
+                  : meetup.status === 'confirmed'
+                    ? '확정 완료'
+                    : meetup.status}
             </span>
           </div>
 
           {meetup.confirmed_start && (
-            <div className="confirmed-banner">
-              <span className="confirmed-icon">🗓️</span>
+            <div className={`confirmed-banner${meetup.status === 'confirmed' ? ' confirmed-banner-full' : ''}`}>
+              <span className="confirmed-icon">{meetup.status === 'confirmed' ? '🎉' : '🗓️'}</span>
               <div>
-                <div className="confirmed-label">확정된 밥약 시간</div>
+                <div className="confirmed-label">
+                  {meetup.status === 'confirmed' ? '밥약 확정!' : '확정된 밥약 시간'}
+                </div>
                 <div className="confirmed-time">{formatConfirmed(meetup.confirmed_start, meetup.confirmed_end)}</div>
+                {meetup.location_name && (
+                  <div className="confirmed-place">
+                    🍽️ {meetup.location_name}
+                    {meetup.food_category && <span className="confirmed-cat"> · {meetup.food_category}</span>}
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -237,6 +248,15 @@ export function MeetupDetailPage() {
             meetupId={id}
             isCreator={isCreator}
             confirmedStart={meetup.confirmed_start}
+            onConfirmed={setMeetup}
+          />
+        )}
+
+        {id && meetup.confirmed_start && (
+          <RestaurantSection
+            meetupId={id}
+            isCreator={isCreator}
+            confirmedPlace={meetup.location_name}
             onConfirmed={setMeetup}
           />
         )}

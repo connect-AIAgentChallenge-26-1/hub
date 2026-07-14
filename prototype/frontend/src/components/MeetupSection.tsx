@@ -5,7 +5,8 @@ import { createMeetup, fetchMeetups, type Meetup } from '../api/meetups'
 
 const STATUS_LABELS: Record<string, string> = {
   matching: '매칭 중',
-  confirmed: '확정',
+  time_fixed: '시간 확정',
+  confirmed: '확정 완료',
   cancelled: '취소됨',
 }
 
