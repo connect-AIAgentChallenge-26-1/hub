@@ -2,10 +2,9 @@
 immutable RawMarketRecord; NORMALIZE turns eligible raw records into
 quotes/corporate_actions/shares_outstanding + market-domain NumericEvidence.
 
-S15(Temporal Integrity, T04)는 아직 없다. `trade_date <= as_of`/`record_date <= as_of`
-차단은 disclosure_collector.py와 동일하게 지금 심을 수 있는 유일한 PRE_NORMALIZE
-규칙이고, 그 밖의 시점 정합성 정책은 T04에서 S15로 중앙화된다 — 이 NORMALIZE는 그
-전 단계의 임시 구현이다(docs/skills.md "T04(S15) 선행 의존"과 동일 패턴).
+T04에서 S15(app/services/temporal_integrity.py)가 생기면서 `trade_date <=
+as_of`/`record_date <= as_of` 차단은 이제 inline 규칙이 아니라
+`temporal_integrity.pre_normalize()` 호출로 중앙화됐다.
 """
 
 from __future__ import annotations
@@ -28,6 +27,7 @@ from app.models.market import (
     SharesOutstanding,
 )
 from app.providers.kis import KisProvider, RawFetch
+from app.services.temporal_integrity import TemporalCandidate, pre_normalize
 
 LICENSE_NOTICE = (
     "한국투자증권 KIS Developers Open API(apiportal.koreainvestment.com) 이용약관에 "
@@ -168,12 +168,23 @@ class MarketCollector:
         basis_token = (record.target_period or "").rsplit("-", 1)[-1]
         basis = PriceBasis.ADJUSTED if basis_token == "adjusted" else PriceBasis.UNADJUSTED
         rows = record.raw_payload.get("output2") or []
+        rows_by_id = {f"{record.raw_record_id}#{i}": row for i, row in enumerate(rows)}
+        candidates = [
+            TemporalCandidate(
+                record_id=candidate_id,
+                effective_date=datetime.strptime(row["stck_bsop_date"], "%Y%m%d").date(),
+                source_type="market",
+                corp_code=corp_code,
+            )
+            for candidate_id, row in rows_by_id.items()
+        ]
+        pre_normalize_result = pre_normalize(candidates, as_of)
+        trace.extend(pre_normalize_result.integrity_log)
+
         results: list[Quote] = []
-        for row in rows:
-            trade_date = datetime.strptime(row["stck_bsop_date"], "%Y%m%d").date()
-            if trade_date > as_of:
-                trace.append(f"quote {trade_date} > as_of {as_of}, excluded")
-                continue
+        for candidate in pre_normalize_result.eligible:
+            row = rows_by_id[candidate.record_id]
+            trade_date = candidate.effective_date
             existing = self._db.query(Quote).filter_by(
                 stock_code=record.stock_code, trade_date=trade_date, price_basis=basis
             ).one_or_none()
@@ -233,20 +244,31 @@ class MarketCollector:
     ) -> list[CorporateAction]:
         action_type = CorporateActionType((record.target_period or "").split("-", 1)[0])
         rows = record.raw_payload.get("output1") or []
-        results: list[CorporateAction] = []
-        for row in rows:
+        rows_by_id: dict[str, dict[str, object]] = {}
+        for i, row in enumerate(rows):
             raw_date = row.get("record_date")
             if not raw_date:
                 trace.append(
-                    f"corporate_action {record.raw_record_id}: record_date missing, skipped"
+                    f"corporate_action {record.raw_record_id}#{i}: record_date missing, skipped"
                 )
                 continue
-            record_date = datetime.strptime(raw_date, "%Y%m%d").date()
-            if record_date > as_of:
-                trace.append(
-                    f"corporate_action {action_type.value} {record_date} > as_of {as_of}, excluded"
-                )
-                continue
+            rows_by_id[f"{record.raw_record_id}#{i}"] = row
+        candidates = [
+            TemporalCandidate(
+                record_id=candidate_id,
+                effective_date=datetime.strptime(str(row["record_date"]), "%Y%m%d").date(),
+                source_type="market",
+                corp_code=corp_code,
+            )
+            for candidate_id, row in rows_by_id.items()
+        ]
+        pre_normalize_result = pre_normalize(candidates, as_of)
+        trace.extend(pre_normalize_result.integrity_log)
+
+        results: list[CorporateAction] = []
+        for candidate in pre_normalize_result.eligible:
+            row = rows_by_id[candidate.record_id]
+            record_date = candidate.effective_date
             existing = self._db.query(CorporateAction).filter_by(
                 stock_code=record.stock_code, action_type=action_type, record_date=record_date
             ).one_or_none()

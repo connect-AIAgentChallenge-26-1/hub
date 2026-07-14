@@ -10,7 +10,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from app.config import get_settings  # noqa: E402
 from app.db import Base  # noqa: E402
-from app.models import company, disclosure, external_evidence, market, user  # noqa: E402,F401
+from app.models import (  # noqa: E402,F401
+    company,
+    disclosure,
+    external_evidence,
+    financial_fact,
+    market,
+    user,
+)
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

@@ -4,11 +4,11 @@ records into disclosures / eligible_financial_rows / document_chunks /
 document_evidence / correction_chains, matching the discriminated union
 input contract `{operation: NORMALIZE, eligible_raw_disclosure_records, ...}`.
 
-S15 (Temporal Integrity, T04) does not exist yet. The `filed_at <= as_of`
-eligibility check below is the one PRE_NORMALIZE rule simple enough to seed
-now (docs/skills.md 금융 데이터 정합성 계약); correction-chain selection,
-잠정/확정 우선순위, CFS/OFS 선택 정책은 T04에서 S15로 중앙화된다 — 이
-NORMALIZE는 그 전 단계의 임시 구현이다.
+T04에서 S15(app/services/temporal_integrity.py)가 생기면서 `filed_at <= as_of`
+차단은 이제 이 파일의 inline 규칙이 아니라 `temporal_integrity.pre_normalize()`
+호출로 중앙화됐다(과거 주석이 예고했던 교체). correction-chain 선택은 여전히
+이 파일(disclosure 도메인 고유 정책)이 맡고, CFS/OFS 선택 정책은
+app/services/financial_calculator.py(S3)가 맡는다.
 """
 
 from __future__ import annotations
@@ -36,6 +36,7 @@ from app.models.disclosure import (
     ReportType,
 )
 from app.providers.opendart import OpenDartProvider, RawFetch, checksum_of, stable_json_bytes
+from app.services.temporal_integrity import TemporalCandidate, pre_normalize
 
 CORRECTION_BRACKET = re.compile(r"^\[[^\]]*정정[^\]]*\]\s*")
 
@@ -240,13 +241,24 @@ class DisclosureCollector:
         self, record: RawDisclosureRecord, as_of: date, trace: list[str]
     ) -> list[Disclosure]:
         items = record.raw_payload.get("list") or []
+        items_by_id = {item["rcept_no"]: item for item in items}
+        candidates = [
+            TemporalCandidate(
+                record_id=item["rcept_no"],
+                effective_date=datetime.strptime(item["rcept_dt"], "%Y%m%d").date(),
+                source_type="disclosure",
+                corp_code=item.get("corp_code"),
+            )
+            for item in items
+        ]
+        pre_normalize_result = pre_normalize(candidates, as_of)
+        trace.extend(pre_normalize_result.integrity_log)
+
         results = []
-        for item in items:
+        for candidate in pre_normalize_result.eligible:
+            item = items_by_id[candidate.record_id]
             rcept_no = item["rcept_no"]
-            filed_at = datetime.strptime(item["rcept_dt"], "%Y%m%d").date()
-            if filed_at > as_of:
-                trace.append(f"{rcept_no}: filed_at {filed_at} > as_of {as_of}, excluded")
-                continue
+            filed_at = candidate.effective_date
             report_nm = item["report_nm"]
             _, is_correction = strip_correction_bracket(report_nm)
             existing = self._db.get(Disclosure, rcept_no)
@@ -276,24 +288,36 @@ class DisclosureCollector:
         items = record.raw_payload.get("list") or []
         # fs_div is a query parameter, not echoed per-row by fnlttSinglAcntAll.
         fs_div = (record.target_period or "").split("-")[-1] or "CFS"
+        # rcept_no repeats across rows (one per account line), so the candidate
+        # id needs the row index to stay unique per row.
+        items_by_id = {f"{row['rcept_no']}#{i}": row for i, row in enumerate(items)}
+        candidates = [
+            TemporalCandidate(
+                record_id=candidate_id,
+                # OpenDART rcept_no's leading 8 digits are the filing (submission)
+                # date — the same convention used to order correction chains.
+                effective_date=datetime.strptime(row["rcept_no"][:8], "%Y%m%d").date(),
+                source_type="disclosure",
+                corp_code=row.get("corp_code"),
+            )
+            for candidate_id, row in items_by_id.items()
+        ]
+        pre_normalize_result = pre_normalize(candidates, as_of)
+        trace.extend(pre_normalize_result.integrity_log)
+
         results = []
-        for row in items:
+        for candidate in pre_normalize_result.eligible:
+            row = items_by_id[candidate.record_id]
             rcept_no = row["rcept_no"]
-            # OpenDART rcept_no's leading 8 digits are the filing (submission)
-            # date — the same convention used to order correction chains.
-            filed_at = datetime.strptime(rcept_no[:8], "%Y%m%d").date()
-            is_eligible = filed_at <= as_of
-            if not is_eligible:
-                trace.append(
-                    f"{rcept_no}/{row['account_id']}: filed_at {filed_at} > as_of {as_of}, excluded"
-                )
-                continue
+            filed_at = candidate.effective_date
+            is_eligible = True
             existing = self._db.execute(
                 select(FinancialFactRow).where(
                     FinancialFactRow.rcept_no == rcept_no,
                     FinancialFactRow.fs_div == fs_div,
                     FinancialFactRow.account_id == row["account_id"],
                     FinancialFactRow.sj_div == row["sj_div"],
+                    FinancialFactRow.account_detail == row.get("account_detail"),
                 )
             ).scalar_one_or_none()
             if existing is not None:
@@ -312,6 +336,9 @@ class DisclosureCollector:
                 account_detail=row.get("account_detail"),
                 thstrm_nm=row.get("thstrm_nm"),
                 thstrm_amount=row.get("thstrm_amount"),
+                # annual 보고서는 이 필드가 빈 문자열로 온다 — "" 그대로 저장하면
+                # 나중에 "값이 있다"로 오독될 수 있어 None으로 정규화한다.
+                thstrm_add_amount=row.get("thstrm_add_amount") or None,
                 frmtrm_nm=row.get("frmtrm_nm"),
                 frmtrm_amount=row.get("frmtrm_amount"),
                 bfefrmtrm_nm=row.get("bfefrmtrm_nm"),

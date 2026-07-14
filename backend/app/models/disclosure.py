@@ -128,8 +128,14 @@ class FinancialFactRow(Base):
 
     __tablename__ = "financial_fact_rows"
     __table_args__ = (
+        # account_detail도 키에 포함해야 한다 — 자본변동표(SCE)는 같은 rcept_no·
+        # fs_div·account_id·sj_div(예: ifrs-full_ProfitLoss) 아래 자본금/이익잉여금
+        # 등 서로 다른 구성요소를 account_detail로만 구분해 여러 행으로 낸다(T04에서
+        # 실제 삼성전자 SCE 데이터로 발견 — account_detail을 빼면 이 행들이 "이미
+        # 존재"로 오인되어 조용히 유실된다).
         UniqueConstraint(
-            "rcept_no", "fs_div", "account_id", "sj_div", name="uq_financial_fact_row"
+            "rcept_no", "fs_div", "account_id", "sj_div", "account_detail",
+            name="uq_financial_fact_row",
         ),
     )
 
@@ -148,6 +154,11 @@ class FinancialFactRow(Base):
     account_detail: Mapped[str | None] = mapped_column(String(255), nullable=True)
     thstrm_nm: Mapped[str | None] = mapped_column(String(50), nullable=True)
     thstrm_amount: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    # 분기·반기 보고서의 IS/CIS 계정에서만 채워진다 — 있으면 "연초부터 누적값"이고
+    # 이때 thstrm_amount는 이미 "해당 분기·반기 단일 기간" 실제값이다(T04에서 실제
+    # 라이브 호출로 확인, app/services/financial_calculator.py 모듈 docstring 참고).
+    # annual 보고서는 항상 빈 문자열, BS·CF 계정은 필드 자체가 없어 None이다.
+    thstrm_add_amount: Mapped[str | None] = mapped_column(String(50), nullable=True)
     frmtrm_nm: Mapped[str | None] = mapped_column(String(50), nullable=True)
     frmtrm_amount: Mapped[str | None] = mapped_column(String(50), nullable=True)
     bfefrmtrm_nm: Mapped[str | None] = mapped_column(String(50), nullable=True)
