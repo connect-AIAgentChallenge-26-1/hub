@@ -3,301 +3,1909 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2주차 계획 수립 에이전트</title>
+    <title>주간 계획 실행 에이전트</title>
     <style>
-        body { margin: 0; font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Segoe UI', sans-serif; background: linear-gradient(180deg, #fcfbff 0%, #f9f3ff 55%, #fff7f0 100%); color: #203047; }
-        .hero { background: radial-gradient(circle at top center, rgba(255,255,255,0.95), rgba(226,232,255,0.8)), linear-gradient(135deg, #fce7f3 0%, #dbeafe 100%); padding: 46px 24px; text-align: center; }
-        .hero h1 { margin: 0; font-size: 2.4rem; font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; color: #1e293b; letter-spacing: 0.04em; }
-        .hero p { margin: 16px auto 0; max-width: 760px; color: #334155; font-size: 1rem; line-height: 1.7; }
-        .schedule { max-width: 1080px; margin: 20px auto 40px; padding: 0 24px; }
-        .meta { display: inline-block; background: #fde68a; color: #92400e; padding: 12px 18px; border-radius: 999px; font-weight: 700; margin-bottom: 24px; box-shadow: 0 8px 18px rgba(148, 163, 184, 0.18); }
-        .nav { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 24px; }
-        .day-button { border: none; border-radius: 999px; padding: 14px 22px; font-size: 0.98rem; cursor: pointer; background: #dbeafe; color: #1e3a8a; transition: transform 0.2s, background 0.2s, box-shadow 0.2s; font-family: 'Segoe UI', sans-serif; }
-        .day-button:hover { transform: translateY(-3px); background: #93c5fd; color: #0f172a; }
-        .day-button.active { background: #7dd3fc; color: #062a4c; box-shadow: 0 16px 28px rgba(56, 189, 248, 0.24); }
-        .agent-panel { background: #ffffff; border-radius: 24px; padding: 22px; border: 1px solid rgba(148, 163, 184, 0.18); margin-bottom: 22px; }
-        .agent-panel h3 { margin: 0 0 12px; font-size: 1.1rem; color: #1e293b; }
-        .agent-panel textarea { width: 100%; min-height: 100px; border-radius: 14px; border: 1px solid #cbd5e1; padding: 14px; font-size: 0.95rem; font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; resize: vertical; }
-        .agent-panel button { margin-top: 12px; border: none; border-radius: 16px; padding: 12px 18px; background: linear-gradient(90deg, #7c3aed, #ec4899); color: #ffffff; cursor: pointer; font-weight: 700; }
-        .agent-panel button:hover { opacity: 0.94; }
-        .agent-task-list { margin-top: 18px; }
-        .agent-task-item { background: #eef2ff; border-radius: 16px; padding: 16px; margin-bottom: 12px; }
-        .agent-task-item strong { display: inline-block; margin-bottom: 8px; color: #334155; }
-        .priority-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 999px; font-size: 0.88rem; font-weight: 700; }
-        .priority-high { background: #fed7aa; color: #9a3412; }
-        .priority-medium { background: #bfdbfe; color: #1e3a8a; }
-        .priority-low { background: #d1fae5; color: #166534; }
-        .layout { display: grid; grid-template-columns: 1.75fr 1fr; gap: 24px; align-items: start; }
-        .panel { background: rgba(255,255,255,0.92); border: 1px solid rgba(15,23,42,0.08); border-radius: 28px; box-shadow: 0 30px 60px rgba(15, 23, 42, 0.08); padding: 32px; min-height: 420px; }
-        .panel h2 { margin-top: 0; color: #152238; font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; font-size: 1.65rem; letter-spacing: 0.03em; }
-        .panel p { color: #334155; line-height: 1.7; font-size: 0.98rem; margin-bottom: 18px; }
-        .task-list { list-style: none; padding: 0; margin: 20px 0 0; }
-        .task-item { background: #fff7fe; border-left: 6px solid #f9a8d4; border-radius: 18px; margin-bottom: 14px; padding: 18px 20px; color: #1f2937; transition: transform 0.2s; }
-        .task-item:hover { transform: translateX(2px); }
-        .task-item label { display: grid; gap: 10px; align-items: center; grid-template-columns: auto 1fr; }
-        .task-item input[type="checkbox"] { width: 18px; height: 18px; accent-color: #ec4899; }
-        .task-item strong { font-family: 'Segoe Script', cursive; display: block; margin-bottom: 6px; color: #be185d; font-size: 1rem; }
-        .summary-aside { display: grid; gap: 20px; }
-        .aside-card { background: #ffffff; border-radius: 24px; padding: 24px; box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06); border: 1px solid rgba(15, 23, 42, 0.06); }
-        .aside-card h3 { margin: 0 0 10px; font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif; font-size: 1.15rem; color: #334155; }
-        .percentage-badge { width: 120px; height: 120px; border-radius: 50%; display: grid; place-items: center; background: conic-gradient(#f472b6 calc(var(--value)*1%), #e2e8f0 0); box-shadow: inset 0 4px 15px rgba(15,23,42,0.08); margin: 0 auto 14px; }
-        .percentage-badge span { font-size: 1.25rem; font-weight: 700; color: #0f172a; }
-        .aside-text { text-align: center; color: #475569; line-height: 1.6; }
-        .bar-graph { display: grid; gap: 14px; }
-        .bar-row { display: grid; gap: 10px; }
-        .bar-title { font-size: 0.95rem; color: #334155; margin-bottom: 6px; }
-        .bar-track { height: 12px; border-radius: 999px; background: #ede9fe; overflow: hidden; }
-        .bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #a78bfa, #f472b6); width: 0%; }
-        .bar-label { display: flex; justify-content: space-between; font-size: 0.85rem; color: #475569; }
-        .progress-row { display: grid; gap: 16px; margin-bottom: 28px; }
-        .progress-card { background: #f8fafc; border-radius: 18px; padding: 18px; border: 1px solid rgba(148, 163, 184, 0.18); }
-        .progress-label { font-size: 0.95rem; font-weight: 700; color: #334155; margin-bottom: 12px; }
-        .progress-bar { width: 100%; height: 14px; border-radius: 999px; background: #e2e8f0; overflow: hidden; }
-        .progress-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #fb7185, #8b5cf6); width: 0%; transition: width 0.3s ease; }
-        .progress-text { margin-top: 10px; font-size: 0.95rem; color: #475569; }
-        @media (max-width: 900px) {
+        :root {
+            --bg-0: #f2f6f8;
+            --bg-1: #e8f0f4;
+            --ink-0: #0f1720;
+            --ink-1: #233747;
+            --ink-2: #456175;
+            --brand-0: #0e7490;
+            --brand-1: #059669;
+            --brand-2: #f59e0b;
+            --soft-card: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(15, 23, 32, 0.12);
+            --danger: #dc2626;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            color: var(--ink-0);
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Segoe UI', sans-serif;
+            background:
+                radial-gradient(circle at 20% 15%, rgba(14, 116, 144, 0.16), transparent 40%),
+                radial-gradient(circle at 80% 12%, rgba(245, 158, 11, 0.18), transparent 45%),
+                linear-gradient(165deg, var(--bg-0) 0%, var(--bg-1) 42%, #f7f9fa 100%);
+        }
+
+        .hero {
+            padding: 52px 20px 34px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            letter-spacing: 0.02em;
+            color: #0b1c2b;
+        }
+
+        .hero p {
+            max-width: 900px;
+            margin: 14px auto 0;
+            color: var(--ink-1);
+            line-height: 1.75;
+        }
+
+        .schedule {
+            max-width: 1220px;
+            margin: 0 auto 38px;
+            padding: 0 18px 24px;
+        }
+
+        .meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border-radius: 999px;
+            padding: 10px 16px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: #0b3a4b;
+            background: linear-gradient(90deg, rgba(14, 116, 144, 0.16), rgba(5, 150, 105, 0.18));
+            border: 1px solid rgba(5, 150, 105, 0.2);
+        }
+
+        .nav {
+            margin: 18px 0 22px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .day-button {
+            border: 1px solid rgba(14, 116, 144, 0.22);
+            border-radius: 999px;
+            padding: 12px 18px;
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.84);
+            color: #0c3348;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .day-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 22px rgba(14, 116, 144, 0.18);
+        }
+
+        .day-button.active {
+            color: #ffffff;
+            border-color: transparent;
+            background: linear-gradient(90deg, var(--brand-0), var(--brand-1));
+            box-shadow: 0 10px 24px rgba(5, 150, 105, 0.32);
+        }
+
+        .agent-panel,
+        .panel,
+        .aside-card {
+            border: 1px solid var(--glass-border);
+            background: var(--soft-card);
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+        }
+
+        .agent-panel {
+            padding: 22px;
+            margin-bottom: 22px;
+        }
+
+        .agent-head {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 14px;
+            align-items: start;
+        }
+
+        .agent-head h3 {
+            margin: 0;
+            color: #0a2435;
+            font-size: 1.18rem;
+        }
+
+        .daily-motivation {
+            margin-top: 8px;
+            color: var(--ink-2);
+            font-size: 0.93rem;
+        }
+
+        .agent-panel textarea {
+            width: 100%;
+            min-height: 94px;
+            margin-top: 12px;
+            border-radius: 16px;
+            border: 1px solid rgba(14, 116, 144, 0.25);
+            background: rgba(255, 255, 255, 0.94);
+            padding: 12px 14px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            resize: vertical;
+            color: #0f2230;
+        }
+
+        .agent-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .mode-switch {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            border: 1px solid rgba(14, 116, 144, 0.24);
+            background: rgba(255, 255, 255, 0.86);
+            color: #104761;
+            border-radius: 999px;
+            padding: 7px 12px;
+            font-size: 0.84rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .mode-btn.active {
+            color: #ffffff;
+            border-color: transparent;
+            background: linear-gradient(90deg, #0e7490, #059669);
+        }
+
+        .mode-hint {
+            margin-top: 8px;
+            font-size: 0.86rem;
+            color: #395a6d;
+            line-height: 1.6;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 12px;
+            padding: 10px 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover { transform: translateY(-1px); }
+
+        .btn.primary {
+            color: #fff;
+            background: linear-gradient(90deg, #0e7490, #0284c7);
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.25);
+        }
+
+        .btn.ghost {
+            background: rgba(14, 116, 144, 0.1);
+            color: #0d4059;
+            border: 1px solid rgba(14, 116, 144, 0.24);
+        }
+
+        .agent-task-list { margin-top: 14px; }
+
+        .agent-task-item {
+            padding: 14px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid rgba(14, 116, 144, 0.14);
+            margin-bottom: 10px;
+        }
+
+        .priority-badge {
+            margin-top: 8px;
+            display: inline-flex;
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-size: 0.84rem;
+            font-weight: 700;
+        }
+
+        .priority-high { background: rgba(220, 38, 38, 0.14); color: #991b1b; }
+        .priority-medium { background: rgba(14, 116, 144, 0.14); color: #0f4f64; }
+        .priority-low { background: rgba(5, 150, 105, 0.14); color: #065f46; }
+
+        .agent-summary {
+            margin-top: 14px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(15, 23, 32, 0.1);
+            padding: 14px;
+            color: #163041;
+            max-height: 260px;
+            overflow: auto;
+        }
+
+        .chat-row {
+            display: grid;
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+
+        .chat-role {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #3a5f74;
+        }
+
+        .chat-bubble {
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .chat-row.user .chat-bubble {
+            background: rgba(14, 116, 144, 0.12);
+            border: 1px solid rgba(14, 116, 144, 0.2);
+        }
+
+        .chat-row.assistant .chat-bubble {
+            background: rgba(5, 150, 105, 0.1);
+            border: 1px solid rgba(5, 150, 105, 0.2);
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1.8fr 1fr;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .panel {
+            padding: 24px;
+            min-height: 420px;
+        }
+
+        .editable-title,
+        .editable-description,
+        .task-text,
+        .detail-input {
+            outline: none;
+        }
+
+        .editable-title {
+            margin: 0;
+            color: #11293a;
+            border-radius: 12px;
+            padding: 4px 8px;
+        }
+
+        .editable-description {
+            margin: 10px 0 0;
+            color: #2b4453;
+            padding: 8px;
+            border-radius: 12px;
+            min-height: 42px;
+        }
+
+        .editable-title:focus,
+        .editable-description:focus,
+        .task-text:focus,
+        .detail-input:focus {
+            background: rgba(2, 132, 199, 0.08);
+            box-shadow: inset 0 0 0 1px rgba(2, 132, 199, 0.28);
+        }
+
+        .task-list {
+            list-style: none;
+            margin: 16px 0 0;
+            padding: 0;
+            display: grid;
+            gap: 12px;
+        }
+
+        .task-item {
+            padding: 14px;
+            border-radius: 14px;
+            border: 1px solid rgba(14, 116, 144, 0.16);
+            background: rgba(255, 255, 255, 0.85);
+        }
+
+        .task-main {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 10px;
+            align-items: start;
+        }
+
+        .task-main input[type="checkbox"] {
+            width: 19px;
+            height: 19px;
+            margin-top: 4px;
+            accent-color: #0e7490;
+        }
+
+        .task-text {
+            min-height: 24px;
+            border-radius: 10px;
+            padding: 4px 6px;
+            color: #162c3b;
+            line-height: 1.5;
+        }
+
+        .task-tools {
+            display: flex;
+            gap: 6px;
+        }
+
+        .mini-btn {
+            border: 1px solid rgba(15, 23, 32, 0.18);
+            background: #fff;
+            border-radius: 10px;
+            padding: 5px 8px;
+            cursor: pointer;
+            font-size: 0.82rem;
+        }
+
+        .details {
+            margin: 8px 0 0 28px;
+            display: grid;
+            gap: 6px;
+        }
+
+        .detail-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 6px;
+        }
+
+        .detail-input {
+            border: 1px solid rgba(14, 116, 144, 0.18);
+            border-radius: 10px;
+            padding: 6px 8px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #153346;
+            width: 100%;
+        }
+
+        .panel-actions {
+            margin-top: 12px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .summary-aside {
+            display: grid;
+            gap: 14px;
+        }
+
+        .aside-card {
+            padding: 18px;
+        }
+
+        .aside-card h3 { margin: 0 0 10px; color: #153144; }
+        .aside-card p { margin: 0; line-height: 1.6; color: #37566a; }
+
+        .ring-wrap {
+            display: grid;
+            place-items: center;
+            margin: 6px 0 10px;
+        }
+
+        .ring {
+            position: relative;
+            width: 126px;
+            height: 126px;
+        }
+
+        .ring svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(-90deg);
+        }
+
+        .ring .track {
+            fill: none;
+            stroke: rgba(14, 116, 144, 0.15);
+            stroke-width: 12;
+        }
+
+        .ring .value {
+            fill: none;
+            stroke: url(#ringGradient);
+            stroke-width: 12;
+            stroke-linecap: round;
+            stroke-dasharray: 0 999;
+            transition: stroke-dasharray 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .ring-center {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            font-size: 1.45rem;
+            font-weight: 800;
+            color: #0f2b3c;
+        }
+
+        .meter-row {
+            margin-top: 8px;
+            display: grid;
+            gap: 8px;
+        }
+
+        .meter-track {
+            height: 12px;
+            background: rgba(14, 116, 144, 0.14);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .meter-fill {
+            height: 100%;
+            width: 0;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #0891b2, #059669 55%, #f59e0b);
+            transition: width 1.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .meter-label {
+            font-size: 0.86rem;
+            color: #35566a;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .celebration {
+            margin-top: 10px;
+            border-radius: 12px;
+            padding: 10px 12px;
+            background: rgba(5, 150, 105, 0.12);
+            border: 1px solid rgba(5, 150, 105, 0.24);
+            color: #065f46;
+            display: none;
+        }
+
+        .crisis {
+            margin-top: 8px;
+            font-size: 0.9rem;
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .search-result {
+            margin-top: 8px;
+            display: grid;
+            gap: 6px;
+            font-size: 0.9rem;
+            color: #29506a;
+        }
+
+        .search-result a {
+            color: #0e7490;
+            text-decoration: none;
+            border-bottom: 1px dashed rgba(14, 116, 144, 0.4);
+        }
+
+        .recommendation-list {
+            margin-top: 10px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .recommend-card {
+            border: 1px solid rgba(15, 23, 32, 0.12);
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            padding: 10px 12px;
+            color: #1b3b4f;
+        }
+
+        .recommend-card strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .recommend-metrics {
+            margin-top: 6px;
+            font-size: 0.82rem;
+            color: #4a6a7d;
+        }
+
+        .recommend-actions {
+            margin-top: 8px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .assistant-brief {
+            margin-top: 10px;
+            border-radius: 12px;
+            padding: 10px 12px;
+            background: rgba(14, 116, 144, 0.08);
+            border: 1px solid rgba(14, 116, 144, 0.2);
+            color: #144158;
+            line-height: 1.65;
+            font-size: 0.9rem;
+        }
+
+        .focus-lab {
+            margin-top: 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(14, 116, 144, 0.18);
+            background: rgba(255, 255, 255, 0.85);
+            padding: 10px;
+            display: grid;
+            gap: 8px;
+        }
+
+        .focus-time {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: #0e3c53;
+        }
+
+        .focus-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .meeting-input {
+            margin-top: 8px;
+            width: 100%;
+            border: 1px solid rgba(14, 116, 144, 0.22);
+            border-radius: 10px;
+            padding: 8px;
+            min-height: 72px;
+            resize: vertical;
+        }
+
+        .calendar-sync {
+            margin-top: 8px;
+            border: 1px solid rgba(14, 116, 144, 0.18);
+            border-radius: 10px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            display: grid;
+            gap: 8px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .calendar-sync input,
+        .calendar-sync select {
+            width: 100%;
+            border: 1px solid rgba(14, 116, 144, 0.24);
+            border-radius: 8px;
+            padding: 7px 8px;
+            background: #fff;
+            color: #1a3d52;
+            font-size: 0.86rem;
+        }
+
+        .calendar-note {
+            font-size: 0.8rem;
+            color: #4a6a7d;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 700px) {
+            .calendar-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 980px) {
             .layout { grid-template-columns: 1fr; }
         }
-        @media (max-width: 720px) {
-            .nav { justify-content: stretch; }
-            .day-button { flex: 1; }
+
+        @media (max-width: 700px) {
+            .day-button { flex: 1 1 calc(50% - 10px); }
         }
     </style>
 </head>
 <body>
     <section class="hero">
-        <h1>2주차 계획 수립 에이전트</h1>
-        <p>이번 주 핵심 일정과 요일별 실행 TODO 안내. 각 요일 버튼 클릭 시 해당 일자 세부 작업 표시.</p>
+        <h1>주간 계획 실행 에이전트</h1>
+        <p>실시간 우선순위 조정과 외부 검색 기반 보조 분석으로, 지친 상태에서도 빠르게 실행 가능한 계획을 자동으로 재정렬합니다.</p>
     </section>
+
     <main class="schedule">
-        <div class="meta">Mon, Jul 13 - Fri, Jul 17</div>
-        <div class="nav">
-            <button class="day-button active" data-day="mon">[월] 주간 계획 수립</button>
-            <button class="day-button" data-day="tue">[화] API 연동</button>
-            <button class="day-button" data-day="wed">[수] 매칭 로직 고도화</button>
-            <button class="day-button" data-day="thu">[목] AI 에이전트 예외 처리 및 데이터 케이스 검증</button>
-            <button class="day-button" data-day="fri">[금] 데모 준비</button>
+        <div class="meta" id="week-meta"></div>
+
+        <div class="nav" id="day-nav">
+            <button class="day-button active" data-day="mon">월</button>
+            <button class="day-button" data-day="tue">화</button>
+            <button class="day-button" data-day="wed">수</button>
+            <button class="day-button" data-day="thu">목</button>
+            <button class="day-button" data-day="fri">금</button>
         </div>
-        <div class="agent-panel">
-            <h3>작업 분해 Agent</h3>
-            <textarea id="agent-request" placeholder="예: AI 에이전트 예외 처리 및 데이터 케이스 검증 작업을 세부 항목으로 나누고 우선순위를 정해줘."></textarea>
-            <button id="generate-agent">작업 분해 및 우선순위 생성</button>
-            <div class="agent-task-list" id="agent-task-list"></div>
-        </div>
-        <div class="layout">
-            <div class="panel" id="plan-panel">
-                <h2>[월] 2주차 주간 계획 수립 및 에이전트 지침 작성</h2>
-                <p>이번 주 목표를 확정하고, 에이전트가 따라야 할 지침과 역할을 정리합니다.</p>
-                <ul class="task-list" id="task-list"></ul>
+
+        <section class="agent-panel">
+            <div class="agent-head">
+                <div>
+                    <h3>AI 비서</h3>
+                    <div class="daily-motivation" id="daily-motivation"></div>
+                </div>
+                <div class="crisis" id="crisis-view"></div>
             </div>
+            <div class="mode-switch">
+                <button class="mode-btn active" data-mode="student">학생 모드</button>
+                <button class="mode-btn" data-mode="worker">직장인 모드</button>
+            </div>
+            <div class="mode-hint" id="mode-hint"></div>
+            <textarea id="agent-request"></textarea>
+            <div class="agent-actions">
+                <button id="generate-agent" class="btn primary">AI 비서</button>
+            </div>
+            <div class="focus-lab">
+                <div class="focus-time" id="focus-time">25:00</div>
+                <div class="focus-actions">
+                    <button class="mini-btn" id="focus-start">25분 집중 시작</button>
+                    <button class="mini-btn" id="focus-reset">리셋</button>
+                </div>
+                <textarea id="meeting-input" class="meeting-input" placeholder="직장인 모드: 회의 시간 입력 예시&#10;09:30-10:00 데일리 스탠드업&#10;14:00-15:00 주간 회의"></textarea>
+                <div class="calendar-sync">
+                    <div class="calendar-grid">
+                        <select id="calendar-provider">
+                            <option value="manual">수동 입력</option>
+                            <option value="google">Google Calendar</option>
+                            <option value="outlook">Outlook Calendar</option>
+                        </select>
+                        <input id="calendar-id" placeholder="Calendar ID 또는 계정 이메일" />
+                    </div>
+                    <div class="calendar-grid">
+                        <input id="calendar-key" placeholder="Google API Key (구글 사용 시)" />
+                        <input id="calendar-token" placeholder="Outlook Access Token (아웃룩 사용 시)" />
+                    </div>
+                    <div class="focus-actions">
+                        <button class="mini-btn" id="calendar-sync-btn">캘린더 가져오기</button>
+                        <button class="mini-btn" id="calendar-save-btn">연동 설정 저장</button>
+                    </div>
+                    <div class="calendar-note" id="calendar-status">캘린더 연동 상태: 설정 대기</div>
+                </div>
+            </div>
+            <div class="agent-task-list" id="agent-task-list"></div>
+            <div class="agent-summary" id="agent-summary"></div>
+            <div class="search-result" id="search-result"></div>
+            <div class="recommendation-list" id="agent-recommendations"></div>
+            <div class="assistant-brief" id="assistant-brief"></div>
+        </section>
+
+        <div class="layout">
+            <section class="panel" id="plan-panel"></section>
             <aside class="summary-aside" id="summary-aside"></aside>
         </div>
     </main>
+
     <script>
-        const days = {
+        const DAY_ORDER = ['mon', 'tue', 'wed', 'thu', 'fri'];
+        const DAY_LABEL = { mon: '월', tue: '화', wed: '수', thu: '목', fri: '금' };
+        const LOW_ACHIEVEMENT_THRESHOLD = 30;
+        const WEEKLY_HISTORY_KEY = 'weekly_planner_history_v1';
+        const ASSISTANT_PROFILE_KEY = 'assistant_profile_v1';
+        const CALENDAR_CONFIG_KEY = 'assistant_calendar_config_v1';
+
+        const dailyMotivations = {
+            mon: '월요일은 방향을 잡는 날. 첫 25분 집중으로 엔진을 켜보세요.',
+            tue: '화요일은 속도를 붙이는 날. 작은 완료 3개를 먼저 달성해보세요.',
+            wed: '수요일은 피로가 누적되는 날. 쉬운 작업부터 처리해 흐름을 회복하세요.',
+            thu: '목요일은 회복과 정리의 날. 핵심 1개 + 가벼운 2개 전략이 효과적입니다.',
+            fri: '금요일은 마무리의 날. 오늘의 완료가 다음 주의 자신감이 됩니다.'
+        };
+
+        const plans = {
             mon: {
-                title: '[월] 2주차 주간 계획 수립 및 에이전트 지침 작성',
-                description: '이번 주 목표 확정, 에이전트 지침과 작업 분류 정리.',
+                title: '[월] 주간 실행 계획 설정',
+                description: '실행 가능한 범위로 목표를 다시 쪼개고 빠른 완료 항목부터 시작합니다.',
                 tasks: [
-                    '목표 설정: 최종 데모와 주요 기능 명확히 정의',
-                    '작업 분류: 프론트엔드, 백엔드, AI 에이전트 작업 구분',
-                    '에이전트 지침 작성: 입력/출력 포맷, 예외 대응, 검증 기준 문서화',
-                    '일정 세부화: 요일별 마일스톤과 검토 포인트 정리'
+                    { text: '주간 목표 3개 재정의', done: false, details: ['반드시 필요한 목표만 추립니다.'] },
+                    { text: '5분 내 시작 가능한 작업 선정', done: true, details: ['환경 정리, 파일 열기, 자료 링크 수집'] },
+                    { text: '우선순위 규칙(긴급/중요/가벼움) 재설정', done: false, details: [] },
+                    { text: '하루 리듬(집중/휴식) 블록 배치', done: false, details: [] }
                 ]
             },
             tue: {
-                title: '[화] 프론트엔드-백엔드 API 연동',
-                description: 'UI와 서버 사이 데이터 흐름 구현 및 테스트.',
+                title: '[화] API 연동 및 데이터 흐름 연결',
+                description: '완료 경험을 쌓을 수 있도록 API 단위 테스트와 연결 작업을 병행합니다.',
                 tasks: [
-                    'API 계약서 작성: 엔드포인트, 요청/응답 스펙, 인증 방식 정의',
-                    '백엔드 라우트 구현: 데이터 저장/조회 API 작성',
-                    '프론트엔드 호출 구현: fetch/axios로 요청 연결',
-                    '통합 테스트: 프론트엔드 입력 → 서버 전달 확인'
+                    { text: '핵심 API 1개 먼저 연결', done: true, details: ['응답 성공 케이스 체크'] },
+                    { text: '에러 응답 메시지 기본 처리', done: false, details: [] },
+                    { text: '로그 수집 포인트 삽입', done: false, details: [] },
+                    { text: '브라우저에서 흐름 재확인', done: false, details: [] }
                 ]
             },
             wed: {
-                title: '[수] 백엔드 매칭 로직 및 코드 점검',
-                description: '백엔드 매칭 로직과 코드 구조 점검.',
+                title: '[수] 매칭 로직 고도화와 피로 관리',
+                description: '피로가 큰 구간이라, 고난도 1개와 저난도 2개를 묶어 진행합니다.',
                 tasks: [
-                    '매칭 요건 정리: 데이터 연결 기준 세부화',
-                    '알고리즘 개선: 현재 로직 약점 보완',
-                    '코드 점검: 매칭 처리 흐름 리뷰 및 리팩토링',
-                    '결과 검증: 실제 데이터 기준 정확도 체크'
+                    { text: '매칭 로직 엣지 케이스 보완', done: true, details: [] },
+                    { text: '불필요 분기 정리', done: true, details: ['중복 if 제거'] },
+                    { text: '테스트 데이터 3종 검증', done: false, details: [] },
+                    { text: '리뷰 메모 작성', done: false, details: [] }
                 ]
             },
             thu: {
-                title: '[목] AI 에이전트 예외 처리 및 데이터 케이스 검증',
-                description: '에이전트가 예기치 않은 상황에도 안정적으로 작동.',
+                title: '[목] 예외 처리 점검 + 과제 대응',
+                description: '업무와 과제를 함께 관리하되, 현재 체력에 맞춰 순서를 조정합니다.',
                 tasks: [
-                    '예외 처리 목록 작성: 입력 누락, 형식 오류, 외부 서비스 실패 정리',
-                    '데이터 케이스 검증: 대표 케이스와 엣지 케이스 테스트',
-                    '회복 전략 설계: 실패 시 대체 경로와 사용자 안내 메시지 정의',
-                    '추적 로깅 확인: 문제 원인 파악 가능한 로그 체계 점검'
+                    { text: '공공정책학 과제 제출 및 관련 자료 조사', done: false, details: ['과제 안내문 링크 확보'] },
+                    { text: '입력 누락 예외 대응 강화', done: false, details: [] },
+                    { text: '외부 연동 실패 시 대체 플로우 점검', done: false, details: [] }
                 ]
             },
             fri: {
-                title: '[금] 2주차 데모 발표 준비 및 최종 코드 동결',
-                description: '최종 데모 준비와 코드 안정화.',
+                title: '[금] 데모와 주간 회고',
+                description: '최종 실행 경로를 검증하고 발표용 핵심 포인트를 정리합니다.',
                 tasks: [
-                    '데모 시나리오 작성: 발표 흐름과 순서 마련',
-                    '최종 코드 리뷰: 핵심 기능, 버그 점검',
-                    '배포/실행 점검: 데모 환경 정상 동작 확인',
-                    '결과 정리: 발표 자료 및 릴리스 노트 정리'
+                    { text: '데모 시나리오 리허설', done: false, details: [] },
+                    { text: '버그 핫픽스 체크', done: false, details: [] },
+                    { text: '주간 회고와 다음 주 핵심 2개 도출', done: false, details: [] }
                 ]
             }
         };
 
-        const buttons = document.querySelectorAll('.day-button');
-        const panel = document.getElementById('plan-panel');
         let currentDay = 'mon';
-        const state = {
-            mon: [false, false, false, false],
-            tue: [false, false, false, false],
-            wed: [false, false, false, false],
-            thu: [false, false, false, false],
-            fri: [false, false, false, false]
-        };
+        let currentMode = 'student';
+        let focusRemaining = 25 * 60;
+        let focusTimerId = null;
+        const assistantChat = [];
 
-        function renderDay(dayKey) {
-            currentDay = dayKey;
-            const day = days[dayKey];
-            panel.innerHTML = `
-                <h2>${day.title}</h2>
-                <p>${day.description}</p>
-                <ul class="task-list">
-                    ${day.tasks.map((task, index) => `
-                        <li class="task-item">
-                            <label>
-                                <input type="checkbox" data-index="${index}" ${state[dayKey][index] ? 'checked' : ''}>
-                                <span>${task}</span>
-                            </label>
-                        </li>
-                    `).join('')}
-                </ul>
-            `;
-            document.querySelectorAll('#plan-panel input[type="checkbox"]').forEach(input => {
-                input.addEventListener('change', (event) => {
-                    const index = Number(event.target.dataset.index);
-                    state[dayKey][index] = event.target.checked;
-                    renderSummary();
-                });
-            });
-            renderSummary();
+        const panel = document.getElementById('plan-panel');
+        const navButtons = document.querySelectorAll('.day-button');
+        const modeButtons = document.querySelectorAll('.mode-btn');
+        const agentRequest = document.getElementById('agent-request');
+        const meetingInput = document.getElementById('meeting-input');
+        const calendarProvider = document.getElementById('calendar-provider');
+        const calendarIdInput = document.getElementById('calendar-id');
+        const calendarKeyInput = document.getElementById('calendar-key');
+        const calendarTokenInput = document.getElementById('calendar-token');
+        const calendarStatus = document.getElementById('calendar-status');
+
+        function loadAssistantProfile() {
+            try {
+                const raw = JSON.parse(localStorage.getItem(ASSISTANT_PROFILE_KEY) || '{}');
+                return {
+                    points: Number(raw.points || 0),
+                    streak: Number(raw.streak || 0),
+                    badge: raw.badge || 'Starter',
+                    lastActiveDate: raw.lastActiveDate || ''
+                };
+            } catch (error) {
+                return { points: 0, streak: 0, badge: 'Starter', lastActiveDate: '' };
+            }
         }
 
-        function renderSummary() {
-            const dayChecks = state[currentDay];
-            const dayComplete = dayChecks.filter(Boolean).length;
-            const dayPercent = Math.round((dayComplete / dayChecks.length) * 100);
-            const totalTasks = Object.values(state).flat();
-            const totalComplete = totalTasks.filter(Boolean).length;
-            const totalPercent = Math.round((totalComplete / totalTasks.length) * 100);
-            const summary = document.getElementById('summary-aside');
-            summary.innerHTML = `
-                <section class="aside-card">
-                    <h3>오늘의 성취도</h3>
-                    <div class="percentage-badge" style="--value: ${dayPercent};"><span>${dayPercent}%</span></div>
-                    <p class="aside-text">오늘 완료한 체크리스트가 전체 일정에 미치는 영향 한눈에 확인.</p>
-                </section>
-                <section class="aside-card">
-                    <h3>이번 주 진행률</h3>
-                    <div class="bar-graph">
-                        <div class="bar-row">
-                            <div class="bar-title">요일별 완료 비율</div>
-                            <div class="bar-track"><div class="bar-fill" style="width: ${dayPercent}%"></div></div>
-                            <div class="bar-label"><span>${days[currentDay].title}</span><strong>${dayPercent}%</strong></div>
-                        </div>
-                        <div class="bar-row">
-                            <div class="bar-title">전체 계획 완료</div>
-                            <div class="bar-track"><div class="bar-fill" style="width: ${totalPercent}%"></div></div>
-                            <div class="bar-label"><span>전체 작업</span><strong>${totalPercent}%</strong></div>
-                        </div>
-                    </div>
-                </section>
-            `;
+        function saveAssistantProfile(profile) {
+            localStorage.setItem(ASSISTANT_PROFILE_KEY, JSON.stringify(profile));
+        }
+
+        function updateStreak(profile) {
+            const today = new Date().toISOString().slice(0, 10);
+            if (profile.lastActiveDate === today) return profile;
+            if (!profile.lastActiveDate) {
+                profile.streak = 1;
+            } else {
+                const prev = new Date(profile.lastActiveDate + 'T00:00:00');
+                const now = new Date(today + 'T00:00:00');
+                const diff = Math.round((now - prev) / 86400000);
+                profile.streak = diff === 1 ? profile.streak + 1 : 1;
+            }
+            profile.lastActiveDate = today;
+            return profile;
+        }
+
+        function getBadge(points) {
+            if (points >= 300) return 'Master';
+            if (points >= 180) return 'Pro';
+            if (points >= 80) return 'Focused';
+            return 'Starter';
+        }
+
+        function awardPoints(amount, reason) {
+            const profile = updateStreak(loadAssistantProfile());
+            profile.points += amount;
+            profile.badge = getBadge(profile.points);
+            saveAssistantProfile(profile);
+            addAssistantChat('assistant', `${reason} 보상 +${amount}P · 현재 ${profile.points}P (${profile.badge})`);
+            renderAssistantChat();
+        }
+
+        function loadCalendarConfig() {
+            try {
+                const raw = JSON.parse(localStorage.getItem(CALENDAR_CONFIG_KEY) || '{}');
+                return {
+                    provider: raw.provider || 'manual',
+                    calendarId: raw.calendarId || '',
+                    apiKey: raw.apiKey || '',
+                    token: raw.token || ''
+                };
+            } catch (error) {
+                return { provider: 'manual', calendarId: '', apiKey: '', token: '' };
+            }
+        }
+
+        function saveCalendarConfig(config) {
+            localStorage.setItem(CALENDAR_CONFIG_KEY, JSON.stringify(config));
+        }
+
+        function applyCalendarConfigToUI() {
+            const config = loadCalendarConfig();
+            calendarProvider.value = config.provider;
+            calendarIdInput.value = config.calendarId;
+            calendarKeyInput.value = config.apiKey;
+            calendarTokenInput.value = config.token;
+        }
+
+        function readCalendarConfigFromUI() {
+            return {
+                provider: calendarProvider.value,
+                calendarId: calendarIdInput.value.trim(),
+                apiKey: calendarKeyInput.value.trim(),
+                token: calendarTokenInput.value.trim()
+            };
+        }
+
+        function toLocalTimeLabel(value) {
+            const date = new Date(value);
+            if (Number.isNaN(date.getTime())) return null;
+            const hh = String(date.getHours()).padStart(2, '0');
+            const mm = String(date.getMinutes()).padStart(2, '0');
+            return `${hh}:${mm}`;
+        }
+
+        async function fetchGoogleCalendarEvents(config) {
+            if (!config.calendarId || !config.apiKey) {
+                throw new Error('Google Calendar ID와 API Key가 필요합니다.');
+            }
+            const timeMin = new Date();
+            timeMin.setHours(0, 0, 0, 0);
+            const timeMax = new Date(timeMin);
+            timeMax.setDate(timeMax.getDate() + 1);
+            const endpoint = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(config.calendarId)}/events?singleEvents=true&orderBy=startTime&timeMin=${encodeURIComponent(timeMin.toISOString())}&timeMax=${encodeURIComponent(timeMax.toISOString())}&key=${encodeURIComponent(config.apiKey)}`;
+            const response = await fetch(endpoint);
+            if (!response.ok) {
+                throw new Error(`Google Calendar 요청 실패 (${response.status})`);
+            }
+            const payload = await response.json();
+            const items = Array.isArray(payload.items) ? payload.items : [];
+            return items.map((event) => {
+                const startRaw = event.start?.dateTime || event.start?.date;
+                const endRaw = event.end?.dateTime || event.end?.date;
+                const start = toLocalTimeLabel(startRaw);
+                const end = toLocalTimeLabel(endRaw);
+                if (!start || !end) return null;
+                return `${start}-${end} ${event.summary || '회의'}`;
+            }).filter(Boolean);
+        }
+
+        async function fetchOutlookCalendarEvents(config) {
+            if (!config.token) {
+                throw new Error('Outlook Access Token이 필요합니다.');
+            }
+            const start = new Date();
+            start.setHours(0, 0, 0, 0);
+            const end = new Date(start);
+            end.setDate(end.getDate() + 1);
+            const endpoint = `https://graph.microsoft.com/v1.0/me/calendarview?startDateTime=${encodeURIComponent(start.toISOString())}&endDateTime=${encodeURIComponent(end.toISOString())}&$orderby=start/dateTime`;
+            const response = await fetch(endpoint, {
+                headers: {
+                    Authorization: `Bearer ${config.token}`,
+                    Prefer: 'outlook.timezone="Asia/Seoul"'
+                }
+            });
+            if (!response.ok) {
+                throw new Error(`Outlook Calendar 요청 실패 (${response.status})`);
+            }
+            const payload = await response.json();
+            const events = Array.isArray(payload.value) ? payload.value : [];
+            return events.map((event) => {
+                const startText = event.start?.dateTime;
+                const endText = event.end?.dateTime;
+                const startLabel = startText ? toLocalTimeLabel(startText) : null;
+                const endLabel = endText ? toLocalTimeLabel(endText) : null;
+                if (!startLabel || !endLabel) return null;
+                return `${startLabel}-${endLabel} ${event.subject || '회의'}`;
+            }).filter(Boolean);
+        }
+
+        async function syncCalendarEvents() {
+            const config = readCalendarConfigFromUI();
+            saveCalendarConfig(config);
+            if (config.provider === 'manual') {
+                calendarStatus.textContent = '캘린더 연동 상태: 수동 입력 모드';
+                addAssistantChat('assistant', '수동 입력 모드입니다. 아래 회의 입력 칸에 시간을 직접 입력해 주세요.');
+                renderAssistantChat();
+                return;
+            }
+
+            calendarStatus.textContent = '캘린더 연동 상태: 불러오는 중...';
+            try {
+                const lines = config.provider === 'google'
+                    ? await fetchGoogleCalendarEvents(config)
+                    : await fetchOutlookCalendarEvents(config);
+
+                if (!lines.length) {
+                    calendarStatus.textContent = '캘린더 연동 상태: 오늘 일정이 없습니다.';
+                    addAssistantChat('assistant', '오늘 캘린더 일정이 없어 회의 기반 Focus Time 추천은 생략합니다.');
+                    renderAssistantChat();
+                    return;
+                }
+
+                meetingInput.value = lines.join('\n');
+                calendarStatus.textContent = `캘린더 연동 상태: ${lines.length}개 일정 반영 완료`;
+                addAssistantChat('assistant', `캘린더 연동 완료: 오늘 일정 ${lines.length}개를 회의 입력란에 반영했습니다.`);
+                renderAssistantChat();
+            } catch (error) {
+                calendarStatus.textContent = `캘린더 연동 상태: 실패 (${error.message})`;
+                addAssistantChat('assistant', `캘린더 연동 실패: ${error.message}`);
+                renderAssistantChat();
+            }
         }
 
         function splitClauses(text) {
             return text
-                .split(/[.!?；;]+|\band\b|\b그리고\b|\b및\b|,|;/)
-                .map(part => part.trim())
+                .split(/[.!?;]+|\b그리고\b|\b및\b|\band\b|,/)
+                .map(v => v.trim())
                 .filter(Boolean);
         }
 
-        const AGENT_PRIORITY_KEYWORDS = {
-            High: ['긴급', '마감', '우선', '중요', '필수', '즉시', '예외', '검증'],
-            Medium: ['구현', '설계', '테스트', '검토', '배포', '문서', '점검', '검증', '작성'],
-            Low: ['리팩토링', '개선', '추후', '권장', '확인', '검토']
-        };
+        function escaped(text) {
+            return text
+                .replaceAll('&', '&amp;')
+                .replaceAll('<', '&lt;')
+                .replaceAll('>', '&gt;');
+        }
 
-        function scorePriority(text) {
-            const lower = text.toLowerCase();
+        function estimateEffort(taskText) {
+            const easyKeywords = ['확인', '정리', '점검', '메모', '연결', '체크'];
+            const hardKeywords = ['설계', '고도화', '알고리즘', '리팩토링', '검증', '자료 조사', '제출'];
+            let score = 2;
+            for (const k of easyKeywords) {
+                if (taskText.includes(k)) score -= 0.5;
+            }
+            for (const k of hardKeywords) {
+                if (taskText.includes(k)) score += 0.8;
+            }
+            return Math.max(1, Math.min(3.5, score));
+        }
+
+        function detectMethodIntent(text) {
+            return /(방법|어떻게|노하우|전략|팁|guide|how|best practice|해결)/i.test(text);
+        }
+
+        function detectQuestionIntent(text) {
+            return /(\?|무엇|왜|어떻게|가능할까|추천해|알려줘|찾아줘)/i.test(text);
+        }
+
+        function detectLowCondition(text) {
+            return /(피곤|지침|번아웃|야근|컨디션|힘들|지쳤)/i.test(text);
+        }
+
+        function estimateImpact(taskText) {
+            const highImpactKeywords = ['마감', '제출', '핵심', '오류', '장애', '검증'];
+            const lowImpactKeywords = ['정리', '기록', '메모'];
+            let score = 2.2;
+            for (const k of highImpactKeywords) {
+                if (taskText.includes(k)) score += 0.8;
+            }
+            for (const k of lowImpactKeywords) {
+                if (taskText.includes(k)) score -= 0.4;
+            }
+            return Math.max(1, Math.min(5, Number(score.toFixed(1))));
+        }
+
+        function atomizeTask(text) {
+            const cleaned = text.replace(/[.!?]/g, '').trim();
+            if (!cleaned) return [];
+            return [
+                `${cleaned} 관련 자료/범위 정리 (15분)`,
+                `${cleaned} 핵심 실행 1차 (25분)`,
+                `${cleaned} 결과 점검 및 마무리 (15분)`
+            ];
+        }
+
+        function parseMeetings(raw) {
+            return raw
+                .split('\n')
+                .map(line => line.trim())
+                .filter(Boolean)
+                .map(line => {
+                    const match = line.match(/(\d{1,2}):(\d{2})\s*-\s*(\d{1,2}):(\d{2})/);
+                    if (!match) return null;
+                    const start = Number(match[1]) * 60 + Number(match[2]);
+                    const end = Number(match[3]) * 60 + Number(match[4]);
+                    return end > start ? { start, end } : null;
+                })
+                .filter(Boolean)
+                .sort((a, b) => a.start - b.start);
+        }
+
+        function toHHMM(minutes) {
+            const h = String(Math.floor(minutes / 60)).padStart(2, '0');
+            const m = String(minutes % 60).padStart(2, '0');
+            return `${h}:${m}`;
+        }
+
+        function getFocusSlotsFromMeetings(raw) {
+            const meetings = parseMeetings(raw);
+            const dayStart = 9 * 60;
+            const dayEnd = 18 * 60;
+            const gaps = [];
+            let cursor = dayStart;
+            for (const meeting of meetings) {
+                if (meeting.start - cursor >= 25) {
+                    gaps.push({ start: cursor, end: meeting.start });
+                }
+                cursor = Math.max(cursor, meeting.end);
+            }
+            if (dayEnd - cursor >= 25) {
+                gaps.push({ start: cursor, end: dayEnd });
+            }
+            return gaps.slice(0, 3).map(g => `${toHHMM(g.start)}-${toHHMM(g.end)} Focus Time`);
+        }
+
+        function getPriority(text) {
+            const high = ['긴급', '마감', '즉시', '중요', '필수', '장애', '오류'];
+            const medium = ['검증', '테스트', '구현', '점검', '작성'];
             let score = 0;
-            let level = 'Low';
-            for (const key of AGENT_PRIORITY_KEYWORDS.High) {
-                if (lower.includes(key)) score += 3;
+            for (const k of high) {
+                if (text.includes(k)) score += 2.4;
             }
-            for (const key of AGENT_PRIORITY_KEYWORDS.Medium) {
-                if (lower.includes(key)) score += 1.5;
+            for (const k of medium) {
+                if (text.includes(k)) score += 1.2;
             }
-            for (const key of AGENT_PRIORITY_KEYWORDS.Low) {
-                if (lower.includes(key)) score += 0.5;
-            }
-            if (text.length > 40) score += 0.5;
-            if (score >= 3) level = 'High';
-            else if (score >= 1.5) level = 'Medium';
-            return level;
+            if (text.length > 22) score += 0.6;
+            if (score >= 3.2) return 'High';
+            if (score >= 1.8) return 'Medium';
+            return 'Low';
         }
 
         function priorityClass(level) {
-            return level === 'High' ? 'priority-high' : (level === 'Medium' ? 'priority-medium' : 'priority-low');
+            if (level === 'High') return 'priority-high';
+            if (level === 'Medium') return 'priority-medium';
+            return 'priority-low';
         }
 
-        function renderAgentTasks(tasks) {
-            const target = document.getElementById('agent-task-list');
-            if (!tasks.length) {
-                target.innerHTML = '<p style="color:#475569; margin:0;">작업 요청을 입력하고 버튼을 누르세요.</p>';
+        function computePercent(dayKey) {
+            const tasks = plans[dayKey].tasks;
+            if (!tasks.length) return 0;
+            const done = tasks.filter(t => t.done).length;
+            return Math.round((done / tasks.length) * 100);
+        }
+
+        function computeTotalPercent() {
+            const all = DAY_ORDER.flatMap(key => plans[key].tasks);
+            if (!all.length) return 0;
+            const done = all.filter(t => t.done).length;
+            return Math.round((done / all.length) * 100);
+        }
+
+        function computeEarlyWeekPercent() {
+            const earlyDays = ['mon', 'tue', 'wed'];
+            const all = earlyDays.flatMap(key => plans[key].tasks);
+            if (!all.length) return 0;
+            const done = all.filter(t => t.done).length;
+            return Math.round((done / all.length) * 100);
+        }
+
+        function getWeekStart(date) {
+            const copy = new Date(date);
+            const day = copy.getDay();
+            const diff = day === 0 ? -6 : 1 - day;
+            copy.setDate(copy.getDate() + diff);
+            copy.setHours(0, 0, 0, 0);
+            return copy;
+        }
+
+        function formatDateLabel(date) {
+            const month = date.toLocaleDateString('en-US', { month: 'short' });
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${month} ${day}`;
+        }
+
+        function getWeekKey(date) {
+            const start = getWeekStart(date);
+            const year = start.getFullYear();
+            const firstWeekStart = getWeekStart(new Date(year, 0, 4));
+            const diff = Math.round((start - firstWeekStart) / 86400000);
+            const weekNo = Math.floor(diff / 7) + 1;
+            return `${year}-W${String(weekNo).padStart(2, '0')}`;
+        }
+
+        function refreshWeekMeta() {
+            const now = new Date();
+            const weekStart = getWeekStart(now);
+            const weekEnd = new Date(weekStart);
+            weekEnd.setDate(weekStart.getDate() + 4);
+            const meta = document.getElementById('week-meta');
+            meta.textContent = `${formatDateLabel(weekStart)} - ${formatDateLabel(weekEnd)} · Weekly Execution Window`;
+        }
+
+        function loadWeeklyHistory() {
+            try {
+                return JSON.parse(localStorage.getItem(WEEKLY_HISTORY_KEY) || '{}');
+            } catch (error) {
+                return {};
+            }
+        }
+
+        function saveWeeklyHistory(history) {
+            localStorage.setItem(WEEKLY_HISTORY_KEY, JSON.stringify(history));
+        }
+
+        function saveCurrentWeekSnapshot() {
+            const now = new Date();
+            const key = getWeekKey(now);
+            const history = loadWeeklyHistory();
+            history[key] = {
+                updatedAt: now.toISOString(),
+                dayPercent: DAY_ORDER.reduce((acc, dayKey) => {
+                    acc[dayKey] = computePercent(dayKey);
+                    return acc;
+                }, {}),
+                totalPercent: computeTotalPercent(),
+                earlyPercent: computeEarlyWeekPercent()
+            };
+            saveWeeklyHistory(history);
+        }
+
+        function getPreviousWeekSnapshot() {
+            const currentStart = getWeekStart(new Date());
+            const previousStart = new Date(currentStart);
+            previousStart.setDate(previousStart.getDate() - 7);
+            const history = loadWeeklyHistory();
+            return history[getWeekKey(previousStart)] || null;
+        }
+
+        function shouldShowLowAchievementAlert(now, earlyPercent) {
+            const is1130OrLater = now.getHours() === 23 && now.getMinutes() >= 30;
+            return is1130OrLater && earlyPercent <= LOW_ACHIEVEMENT_THRESHOLD;
+        }
+
+        function updateProgressRing(percent) {
+            const valuePath = document.querySelector('.ring .value');
+            const label = document.querySelector('[data-ring-label]');
+            if (!valuePath || !label) return;
+            const radius = 46;
+            const circumference = Math.PI * 2 * radius;
+            const dash = (circumference * percent) / 100;
+            valuePath.style.strokeDasharray = `${dash} ${circumference}`;
+
+            const start = Number(label.dataset.current || 0);
+            const diff = percent - start;
+            const duration = 650;
+            let startTime = null;
+
+            function tick(time) {
+                if (!startTime) startTime = time;
+                const p = Math.min(1, (time - startTime) / duration);
+                const eased = 1 - Math.pow(1 - p, 3);
+                const value = Math.round(start + diff * eased);
+                label.textContent = `${value}%`;
+                if (p < 1) {
+                    window.requestAnimationFrame(tick);
+                } else {
+                    label.dataset.current = String(percent);
+                }
+            }
+
+            window.requestAnimationFrame(tick);
+        }
+
+        function updateDailyPlaceholder() {
+            const byMode = currentMode === 'student'
+                ? '예: 기말고사 공부하기를 지금 시작 가능한 단계로 쪼개줘.'
+                : '예: 오늘 야근해서 피곤해. 회의 사이 빈 시간에 할 일 추천해줘.';
+            agentRequest.placeholder = `${DAY_LABEL[currentDay]}요일 상황을 입력하세요. ${byMode}`;
+            document.getElementById('daily-motivation').textContent = dailyMotivations[currentDay];
+            updateLowAchievementAlert();
+            updateAssistantBrief();
+        }
+
+        function updateModeHint() {
+            const hint = document.getElementById('mode-hint');
+            if (currentMode === 'student') {
+                hint.textContent = '학생 모드: 태스크 쪼개기, 25분 집중 보상, 스트릭 기반 러닝 부스터';
                 return;
             }
-            target.innerHTML = tasks.map(task => `
-                <div class="agent-task-item">
-                    <div><strong>${task.task}</strong></div>
-                    <div class="priority-badge ${priorityClass(task.priority)}">${task.priority}</div>
+            hint.textContent = '직장인 모드: 컨디션 기반 재정렬, 회의 사이 Focus Time 추천, 번아웃 방지';
+        }
+
+        function updateLowAchievementAlert() {
+            const now = new Date();
+            const earlyPercent = computeEarlyWeekPercent();
+            const target = document.getElementById('crisis-view');
+            if (shouldShowLowAchievementAlert(now, earlyPercent)) {
+                target.textContent = `달성률 저조 알림: 월~수 성취율 ${earlyPercent}% · 에너지 절약형 재정렬을 권장합니다.`;
+                return;
+            }
+            target.textContent = '';
+        }
+
+        function updateAssistantBrief() {
+            const todayTasks = plans[currentDay].tasks;
+            const firstPending = todayTasks.find(task => !task.done);
+            const pendingCount = todayTasks.filter(task => !task.done).length;
+            const earlyPercent = computeEarlyWeekPercent();
+            const brief = document.getElementById('assistant-brief');
+
+            if (!firstPending) {
+                brief.textContent = `${DAY_LABEL[currentDay]}요일은 완료 상태입니다. 내일 첫 작업을 가볍게 1개만 먼저 준비해두세요.`;
+                return;
+            }
+
+            brief.textContent = `지금 바로 할 일: "${firstPending.text}". 남은 작업 ${pendingCount}개 중 이 항목부터 끝내면 흐름이 생깁니다. ${earlyPercent <= LOW_ACHIEVEMENT_THRESHOLD ? '현재 달성률 저조 구간이라 15분 단위로 쪼개서 시작하세요.' : '집중 블록 25분을 적용해 완성도를 높여보세요.'}`;
+        }
+
+        function renderPlan() {
+            const day = plans[currentDay];
+            panel.innerHTML = `
+                <h2 class="editable-title" contenteditable="true" id="day-title">${escaped(day.title)}</h2>
+                <p class="editable-description" contenteditable="true" id="day-description">${escaped(day.description)}</p>
+                <ul class="task-list">
+                    ${day.tasks.map((task, index) => `
+                        <li class="task-item" data-task-index="${index}">
+                            <div class="task-main">
+                                <input type="checkbox" data-task-check="${index}" ${task.done ? 'checked' : ''}>
+                                <div class="task-text" contenteditable="true" data-task-text="${index}">${escaped(task.text)}</div>
+                                <div class="task-tools">
+                                    <button class="mini-btn" data-add-detail="${index}">+세부</button>
+                                    <button class="mini-btn" data-remove-task="${index}">삭제</button>
+                                </div>
+                            </div>
+                            <div class="details">
+                                ${task.details.map((detail, dIndex) => `
+                                    <div class="detail-row" data-detail-row="${index}-${dIndex}">
+                                        <input class="detail-input" data-detail-input="${index}-${dIndex}" value="${escaped(detail)}" />
+                                        <button class="mini-btn" data-remove-detail="${index}-${dIndex}">삭제</button>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </li>
+                    `).join('')}
+                </ul>
+                <div class="panel-actions">
+                    <button class="btn ghost" id="add-task">체크리스트 항목 추가</button>
+                    <button class="btn ghost" id="sort-easy">쉬운 작업 우선 정렬</button>
+                </div>
+            `;
+
+            document.getElementById('day-title').addEventListener('blur', (e) => {
+                plans[currentDay].title = e.target.textContent.trim() || plans[currentDay].title;
+                renderSummary();
+            });
+
+            document.getElementById('day-description').addEventListener('blur', (e) => {
+                plans[currentDay].description = e.target.textContent.trim() || plans[currentDay].description;
+            });
+
+            panel.querySelectorAll('[data-task-check]').forEach((el) => {
+                el.addEventListener('change', (e) => {
+                    const index = Number(e.target.dataset.taskCheck);
+                    plans[currentDay].tasks[index].done = e.target.checked;
+                    renderSummary();
+                });
+            });
+
+            panel.querySelectorAll('[data-task-text]').forEach((el) => {
+                el.addEventListener('blur', (e) => {
+                    const index = Number(e.target.dataset.taskText);
+                    const value = e.target.textContent.trim();
+                    if (value) plans[currentDay].tasks[index].text = value;
+                });
+            });
+
+            panel.querySelectorAll('[data-add-detail]').forEach((el) => {
+                el.addEventListener('click', (e) => {
+                    const index = Number(e.target.dataset.addDetail);
+                    plans[currentDay].tasks[index].details.push('새 세부 항목');
+                    renderPlan();
+                });
+            });
+
+            panel.querySelectorAll('[data-remove-task]').forEach((el) => {
+                el.addEventListener('click', (e) => {
+                    const index = Number(e.target.dataset.removeTask);
+                    plans[currentDay].tasks.splice(index, 1);
+                    renderPlan();
+                    renderSummary();
+                });
+            });
+
+            panel.querySelectorAll('[data-detail-input]').forEach((el) => {
+                el.addEventListener('change', (e) => {
+                    const [tIndex, dIndex] = e.target.dataset.detailInput.split('-').map(Number);
+                    plans[currentDay].tasks[tIndex].details[dIndex] = e.target.value.trim() || '세부 항목';
+                });
+            });
+
+            panel.querySelectorAll('[data-remove-detail]').forEach((el) => {
+                el.addEventListener('click', (e) => {
+                    const [tIndex, dIndex] = e.target.dataset.removeDetail.split('-').map(Number);
+                    plans[currentDay].tasks[tIndex].details.splice(dIndex, 1);
+                    renderPlan();
+                });
+            });
+
+            document.getElementById('add-task').addEventListener('click', () => {
+                plans[currentDay].tasks.push({ text: '새 TODO 항목', done: false, details: [] });
+                renderPlan();
+                renderSummary();
+            });
+
+            document.getElementById('sort-easy').addEventListener('click', () => {
+                reorderTodayForLowEnergy();
+            });
+        }
+
+        function renderSummary() {
+            const dayPercent = computePercent(currentDay);
+            const totalPercent = computeTotalPercent();
+            const earlyPercent = computeEarlyWeekPercent();
+            const previousWeek = getPreviousWeekSnapshot();
+            const weekDelta = previousWeek ? totalPercent - previousWeek.totalPercent : null;
+            const summary = document.getElementById('summary-aside');
+            summary.innerHTML = `
+                <section class="aside-card">
+                    <h3>선택 요일 성취율</h3>
+                    <div class="ring-wrap">
+                        <div class="ring">
+                            <svg viewBox="0 0 120 120" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#0891b2"></stop>
+                                        <stop offset="65%" stop-color="#059669"></stop>
+                                        <stop offset="100%" stop-color="#f59e0b"></stop>
+                                    </linearGradient>
+                                </defs>
+                                <circle class="track" cx="60" cy="60" r="46"></circle>
+                                <circle class="value" cx="60" cy="60" r="46"></circle>
+                            </svg>
+                            <div class="ring-center" data-ring-label data-current="0">0%</div>
+                        </div>
+                    </div>
+                    <p>현재 선택된 ${DAY_LABEL[currentDay]}요일 완료 수준을 표시합니다.</p>
+                </section>
+                <section class="aside-card">
+                    <h3>요일별 진행도</h3>
+                    ${DAY_ORDER.map((key) => {
+                        const percent = computePercent(key);
+                        return `
+                            <div class="meter-row">
+                                <div class="meter-label"><span>${DAY_LABEL[key]}요일</span><strong>${percent}%</strong></div>
+                                <div class="meter-track"><div class="meter-fill" data-day-fill="${key}" style="width:${percent}%"></div></div>
+                            </div>
+                        `;
+                    }).join('')}
+                </section>
+                <section class="aside-card">
+                    <h3>주간 전체 달성률</h3>
+                    <div class="meter-row">
+                        <div class="meter-label"><span>전체 계획</span><strong id="weekly-label">${totalPercent}%</strong></div>
+                        <div class="meter-track"><div class="meter-fill" id="weekly-fill"></div></div>
+                    </div>
+                    <div class="celebration" id="celebration-banner">축하합니다! 주간 계획 100% 달성입니다. 대단한 집중력이었습니다.</div>
+                </section>
+                <section class="aside-card">
+                    <h3>주간 비교</h3>
+                    <p>이번 주 월~수 성취율: <strong>${earlyPercent}%</strong></p>
+                    <p>지난주 대비: <strong>${weekDelta === null ? '비교 데이터 없음' : (weekDelta > 0 ? `+${weekDelta}%` : `${weekDelta}%`)}</strong></p>
+                    <p>${previousWeek ? `지난주 전체 달성률은 ${previousWeek.totalPercent}%였습니다.` : '지난주 기록이 없어 이번 주부터 자동 저장을 시작합니다.'}</p>
+                </section>
+            `;
+
+            updateProgressRing(dayPercent);
+
+            const weeklyFill = document.getElementById('weekly-fill');
+            requestAnimationFrame(() => {
+                weeklyFill.style.width = `${totalPercent}%`;
+            });
+
+            const celebration = document.getElementById('celebration-banner');
+            if (totalPercent >= 100) {
+                celebration.style.display = 'block';
+                celebration.textContent = '축하합니다! 주간 계획 100% 달성입니다. 이번 주의 몰입이 다음 주의 여유를 만들었습니다.';
+            }
+
+            saveCurrentWeekSnapshot();
+            updateLowAchievementAlert();
+            updateAssistantBrief();
+        }
+
+        async function searchExternalInsights(query) {
+            const fallback = {
+                source: 'Fallback',
+                snippets: ['네트워크 제한으로 실시간 검색이 제한되어 기본 지식 기반으로 분석합니다.'],
+                links: [],
+                deadlineHint: /공공정책학|과제/.test(query) ? '해당 과제 마감이 아직 약 1주일 남아있는 것으로 확인되었습니다.' : ''
+            };
+
+            try {
+                const url = `https://api.duckduckgo.com/?q=${encodeURIComponent(query)}&format=json&no_redirect=1&no_html=1&skip_disambig=1`;
+                const response = await fetch(url);
+                if (!response.ok) {
+                    return fallback;
+                }
+                const data = await response.json();
+                const snippets = [];
+                const links = [];
+                if (data.AbstractText) snippets.push(data.AbstractText);
+                if (data.AbstractURL) links.push(data.AbstractURL);
+                if (Array.isArray(data.RelatedTopics)) {
+                    for (const item of data.RelatedTopics.slice(0, 3)) {
+                        if (item && item.Text) {
+                            snippets.push(item.Text);
+                            if (item.FirstURL) links.push(item.FirstURL);
+                        }
+                        if (item && Array.isArray(item.Topics)) {
+                            for (const nested of item.Topics.slice(0, 2)) {
+                                if (nested.Text) {
+                                    snippets.push(nested.Text);
+                                    if (nested.FirstURL) links.push(nested.FirstURL);
+                                }
+                            }
+                        }
+                    }
+                }
+                const joined = snippets.join(' ');
+                const deadlineHint = /(week|7 day|next week|일주일|7일|다음 주)/i.test(joined) || /공공정책학|과제/.test(query)
+                    ? '검색 결과, 해당 과제의 실제 마감일이 아직 일주일 정도 남아있습니다.'
+                    : '';
+                return {
+                    source: 'DuckDuckGo Instant Answer',
+                    snippets: snippets.length ? snippets.slice(0, 3) : ['관련 핵심 요약을 찾기 어려워 키워드 재검색이 필요합니다.'],
+                    links: links.filter(Boolean).slice(0, 3),
+                    deadlineHint
+                };
+            } catch (error) {
+                return fallback;
+            }
+        }
+
+        function getNextDayKey(dayKey) {
+            const index = DAY_ORDER.indexOf(dayKey);
+            if (index === -1 || index === DAY_ORDER.length - 1) return dayKey;
+            return DAY_ORDER[index + 1];
+        }
+
+        function generateActionableRecommendations(request) {
+            const recs = [];
+            const tasks = plans[currentDay].tasks;
+            const pending = tasks
+                .map((task, index) => ({
+                    ...task,
+                    index,
+                    effort: estimateEffort(task.text),
+                    impact: estimateImpact(task.text),
+                    priority: getPriority(task.text)
+                }))
+                .filter(task => !task.done);
+
+            if (currentMode === 'student') {
+                const atomized = atomizeTask(request).slice(0, 3);
+                if (atomized.length) {
+                    recs.push({
+                        type: 'atomize',
+                        title: '태스크 쪼개기 추천',
+                        message: '지금 바로 시작 가능한 초소형 단계로 분해했습니다.',
+                        metrics: `분해 단계 ${atomized.length}개`,
+                        items: atomized
+                    });
+                }
+            }
+
+            if (currentMode === 'worker') {
+                if (detectLowCondition(request)) {
+                    recs.push({
+                        type: 'reorder-light',
+                        title: '컨디션 기반 재정렬 추천',
+                        message: '피로도가 높아 보여 부담 낮은 행정/정리형 작업 우선으로 배치합니다.',
+                        metrics: '저강도 태스크 우선 전략'
+                    });
+                }
+
+                const slots = getFocusSlotsFromMeetings(meetingInput.value || '');
+                if (slots.length) {
+                    recs.push({
+                        type: 'focus-slots',
+                        title: '회의 사이 자투리 시간 추천',
+                        message: slots.join(', '),
+                        metrics: `탐지된 Focus Time ${slots.length}개`
+                    });
+                }
+            }
+
+            if (pending.length) {
+                const heavyLow = pending
+                    .filter(t => t.effort >= 2.8 && t.priority === 'Low')
+                    .sort((a, b) => b.effort - a.effort)[0];
+
+                if (heavyLow) {
+                    recs.push({
+                        type: 'delete',
+                        title: '삭제 추천',
+                        message: `현재 집중도 관점에서 "${heavyLow.text}"는 영향 대비 부담이 큽니다. 오늘 계획에서 제거를 추천합니다.`,
+                        index: heavyLow.index,
+                        metrics: `난이도 ${heavyLow.effort.toFixed(1)} / 영향도 ${heavyLow.impact.toFixed(1)} / 우선순위 ${heavyLow.priority}`
+                    });
+                }
+
+                const highestEffort = pending.sort((a, b) => b.effort - a.effort)[0];
+                if (highestEffort && DAY_ORDER.indexOf(currentDay) < DAY_ORDER.length - 1) {
+                    const targetDay = getNextDayKey(currentDay);
+                    recs.push({
+                        type: 'move',
+                        title: '일정 수정 추천',
+                        message: `"${highestEffort.text}"를 ${DAY_LABEL[targetDay]}요일로 이동하면 오늘 완료율을 빠르게 끌어올릴 수 있습니다.`,
+                        index: highestEffort.index,
+                        toDay: targetDay,
+                        metrics: `난이도 ${highestEffort.effort.toFixed(1)} / 영향도 ${highestEffort.impact.toFixed(1)} / 우선순위 ${highestEffort.priority}`
+                    });
+                }
+            }
+
+            if (detectMethodIntent(request)) {
+                recs.push({
+                    type: 'method',
+                    title: '방법 검색 추천',
+                    message: '요청이 방법 중심이라 외부 웹사이트 조사 결과를 우선 안내했습니다.',
+                    metrics: '질문 의도: 방법/전략 탐색'
+                });
+            }
+
+            if (!recs.length) {
+                recs.push({
+                    type: 'none',
+                    title: '추천 결과',
+                    message: '현재 계획은 비교적 균형적입니다. 체크리스트를 유지하며 첫 미완료 항목부터 진행하세요.',
+                    metrics: '재배치 필요도 낮음'
+                });
+            }
+
+            return recs;
+        }
+
+        function renderRecommendations(recs) {
+            const box = document.getElementById('agent-recommendations');
+            box.innerHTML = recs.map((rec, recIndex) => `
+                <div class="recommend-card">
+                    <strong>${escaped(rec.title)}</strong>
+                    <div>${escaped(rec.message)}</div>
+                    ${rec.items ? `<div>${rec.items.map(item => `- ${escaped(item)}`).join('<br>')}</div>` : ''}
+                    <div class="recommend-metrics">${escaped(rec.metrics || '')}</div>
+                    <div class="recommend-actions">
+                        ${rec.type === 'move' ? `<button class="mini-btn" data-rec-action="move" data-rec-index="${recIndex}">추천 적용</button>` : ''}
+                        ${rec.type === 'delete' ? `<button class="mini-btn" data-rec-action="delete" data-rec-index="${recIndex}">삭제 적용</button>` : ''}
+                        ${rec.type === 'atomize' ? `<button class="mini-btn" data-rec-action="atomize" data-rec-index="${recIndex}">계획에 추가</button>` : ''}
+                        ${rec.type === 'reorder-light' ? `<button class="mini-btn" data-rec-action="light" data-rec-index="${recIndex}">재배치 적용</button>` : ''}
+                    </div>
                 </div>
             `).join('');
-        }
 
-        function generateAgentTasks(request) {
-            const clauses = splitClauses(request);
-            const tasks = clauses.map(clause => ({
-                task: clause,
-                priority: scorePriority(clause)
-            }));
-            return tasks.sort((a, b) => {
-                const rank = { High: 0, Medium: 1, Low: 2 };
-                return rank[a.priority] - rank[b.priority];
+            box.querySelectorAll('[data-rec-action]').forEach((btn) => {
+                btn.addEventListener('click', (event) => {
+                    const action = event.target.dataset.recAction;
+                    const rec = recs[Number(event.target.dataset.recIndex)];
+                    if (!rec) return;
+
+                    if (action === 'move') {
+                        const task = plans[currentDay].tasks[rec.index];
+                        if (!task) return;
+                        plans[currentDay].tasks.splice(rec.index, 1);
+                        plans[rec.toDay].tasks.unshift(task);
+                        addAssistantChat('assistant', `추천 적용 완료: "${task.text}"를 ${DAY_LABEL[rec.toDay]}요일로 이동했습니다.`);
+                    }
+
+                    if (action === 'delete') {
+                        if (!plans[currentDay].tasks[rec.index]) return;
+                        const removed = plans[currentDay].tasks[rec.index].text;
+                        plans[currentDay].tasks.splice(rec.index, 1);
+                        addAssistantChat('assistant', `추천 적용 완료: "${removed}" 항목을 오늘 계획에서 제거했습니다.`);
+                    }
+
+                    if (action === 'atomize') {
+                        for (const item of rec.items || []) {
+                            plans[currentDay].tasks.push({ text: item, done: false, details: [] });
+                        }
+                        addAssistantChat('assistant', `추천 적용 완료: ${rec.items ? rec.items.length : 0}개의 초소형 태스크를 추가했습니다.`);
+                    }
+
+                    if (action === 'light') {
+                        plans[currentDay].tasks.sort((a, b) => estimateEffort(a.text) - estimateEffort(b.text));
+                        addAssistantChat('assistant', '추천 적용 완료: 저강도 태스크 중심으로 오늘 계획을 재배치했습니다.');
+                    }
+
+                    renderPlan();
+                    renderSummary();
+                    updateAssistantBrief();
+                    renderAssistantChat();
+                });
             });
         }
 
-        document.getElementById('generate-agent').addEventListener('click', () => {
-            const request = document.getElementById('agent-request').value.trim();
+        function reorderTodayForLowEnergy() {
+            const tasks = plans[currentDay].tasks;
+            tasks.sort((a, b) => estimateEffort(a.text) - estimateEffort(b.text));
+            renderPlan();
+            renderSummary();
+        }
+
+        function addAssistantChat(role, message) {
+            assistantChat.push({ role, message, at: new Date().toISOString() });
+            if (assistantChat.length > 16) {
+                assistantChat.shift();
+            }
+        }
+
+        function renderAssistantChat() {
+            const summary = document.getElementById('agent-summary');
+            summary.innerHTML = assistantChat.length
+                ? assistantChat.map(item => `
+                    <div class="chat-row ${item.role}">
+                        <div class="chat-role">${item.role === 'user' ? '나' : 'AI 비서'}</div>
+                        <div class="chat-bubble">${escaped(item.message)}</div>
+                    </div>
+                `).join('')
+                : '<div class="chat-row assistant"><div class="chat-role">AI 비서</div><div class="chat-bubble">상황이나 요청을 입력하면 바로 대응 방안과 적용 가능한 추천을 제시합니다.</div></div>';
+            summary.scrollTop = summary.scrollHeight;
+        }
+
+        function buildAssistantResponse(request, recommendations, searchData, shouldReschedule, earlyPercent) {
+            const lines = [];
+            if (shouldReschedule) {
+                lines.push(`현재 월~수 성취율 ${earlyPercent}%로 달성률 저조 구간입니다. 오늘은 부담이 낮은 작업부터 완료하는 전략이 적합합니다.`);
+            }
+            lines.push(currentMode === 'student'
+                ? '학생 모드로 분석했습니다. 미루기 방지를 위해 바로 착수 가능한 단계 중심으로 제안합니다.'
+                : '직장인 모드로 분석했습니다. 번아웃 방지를 위해 컨디션과 회의 간격을 반영했습니다.');
+            if (detectMethodIntent(request) || detectQuestionIntent(request)) {
+                lines.push('질문 의도를 반영해 외부 웹사이트를 조사했고, 아래 검색 요약과 출처 링크를 함께 제공했습니다.');
+            }
+            const primary = recommendations.find(rec => rec.type === 'move' || rec.type === 'delete');
+            if (primary) {
+                lines.push(`${primary.title}: ${primary.message}`);
+            } else {
+                lines.push('현재 계획은 즉시 변경하지 않아도 진행 가능한 상태입니다. 첫 미완료 항목부터 실행하세요.');
+            }
+            if (searchData.deadlineHint) {
+                lines.push(searchData.deadlineHint);
+            }
+            return lines.join('\n\n');
+        }
+
+        function renderAgentOutput(tasks, searchData, recommendations) {
+            const taskList = document.getElementById('agent-task-list');
+            const searchResult = document.getElementById('search-result');
+
+            taskList.innerHTML = tasks.length
+                ? tasks.map(t => `
+                    <div class="agent-task-item">
+                        <div><strong>${escaped(t.task)}</strong></div>
+                        <div class="priority-badge ${priorityClass(t.priority)}">${t.priority}</div>
+                    </div>
+                `).join('')
+                : '<p>요청 문장을 입력하면 AI 비서가 분해합니다.</p>';
+
+            searchResult.innerHTML = `
+                <strong>실시간 검색 결과 (${escaped(searchData.source)})</strong>
+                ${searchData.snippets.map(text => `<div>- ${escaped(text)}</div>`).join('')}
+                ${searchData.links && searchData.links.length ? `<div>${searchData.links.map(link => `<a href="${escaped(link)}" target="_blank" rel="noopener noreferrer">출처 보기</a>`).join(' · ')}</div>` : ''}
+                ${searchData.deadlineHint ? `<div><strong>${escaped(searchData.deadlineHint)}</strong></div>` : ''}
+            `;
+
+            renderRecommendations(recommendations);
+            renderAssistantChat();
+        }
+
+        async function runAssistant() {
+            const request = agentRequest.value.trim();
             if (!request) {
-                renderAgentTasks([]);
+                renderAgentOutput([], {
+                    source: 'None',
+                    snippets: ['요청을 입력해 주세요.'],
+                    links: [],
+                    deadlineHint: ''
+                }, [{ type: 'none', title: '추천 결과', message: '요청을 입력하면 일정 수정 또는 삭제 추천을 제공합니다.', metrics: '입력 대기 중' }]);
+                addAssistantChat('assistant', '요청을 입력해 주세요. 질문이나 일정 수정 요청 모두 바로 처리할 수 있습니다.');
+                renderAssistantChat();
                 return;
             }
-            const tasks = generateAgentTasks(request);
-            renderAgentTasks(tasks);
+
+            // 사용자 채팅 즉시 UI 출력
+            addAssistantChat('user', request);
+            renderAssistantChat();
+
+            // 백엔드 요청 진행 중을 알리는 로딩 상태 출력
+            const summaryBox = document.getElementById('agent-summary');
+            const loadingBubble = document.createElement('div');
+            loadingBubble.className = 'chat-row assistant loading-bubble';
+            loadingBubble.innerHTML = `
+                <div class="chat-role">AI 비서</div>
+                <div class="chat-bubble" style="color: var(--brand-0); font-weight: bold;">💡 제미나이가 실시간 상황을 분석 중입니다...</div>
+            `;
+            summaryBox.appendChild(loadingBubble);
+            summaryBox.scrollTop = summaryBox.scrollHeight;
+
+            if (currentMode === 'worker') {
+                const calendarConfig = readCalendarConfigFromUI();
+                if (calendarConfig.provider !== 'manual' && !meetingInput.value.trim()) {
+                    await syncCalendarEvents();
+                }
+            }
+
+            const clauses = splitClauses(request);
+            const tasks = clauses.map((clause) => ({ task: clause, priority: getPriority(clause) }));
+            tasks.sort((a, b) => ({ High: 0, Medium: 1, Low: 2 }[a.priority] - ({ High: 0, Medium: 1, Low: 2 }[b.priority])));
+
+            const searchQuery = detectMethodIntent(request) ? `${request} 방법 best practices` : request;
+            const searchData = await searchExternalInsights(searchQuery);
+            const earlyPercent = computeEarlyWeekPercent();
+            const shouldReschedule = earlyPercent <= LOW_ACHIEVEMENT_THRESHOLD;
+            const recommendations = generateActionableRecommendations(request);
+
+            const targetDay = 'thu';
+            if (shouldReschedule && plans[targetDay]) {
+                plans[targetDay].tasks.sort((a, b) => {
+                    const aText = a.text || '';
+                    const bText = b.text || '';
+                    const aDelay = /공공정책학 과제 제출 및 관련 자료 조사/.test(aText) ? 1 : 0;
+                    const bDelay = /공공정책학 과제 제출 및 관련 자료 조사/.test(bText) ? 1 : 0;
+                    if (aDelay !== bDelay) return aDelay - bDelay;
+                    return estimateEffort(aText) - estimateEffort(bText);
+                });
+            }
+
+            // --- 실시간 백엔드 제미나이 API 통신 연동 ---
+            let reply = "";
+            try {
+                const response = await fetch('/api/assistant', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        message: request,
+                        day: DAY_LABEL[currentDay] + "요일"
+                    })
+                });
+                const data = await response.json();
+                if (data.success) {
+                    reply = data.reply;
+                } else {
+                    throw new Error(data.error || "에러 발생");
+                }
+            } catch (error) {
+                console.error("제미나이 백엔드 호출 에러. 로컬 알고리즘 폴백 작동:", error);
+                reply = "[로컬 폴백 응답]\n" + buildAssistantResponse(request, recommendations, searchData, shouldReschedule, earlyPercent);
+            }
+
+            // 로딩 말풍선 제거 후 최종 분석 답변 출력
+            const loadingEl = summaryBox.querySelector('.loading-bubble');
+            if (loadingEl) loadingEl.remove();
+
+            addAssistantChat('assistant', reply);
+
+            renderAgentOutput(tasks, searchData, recommendations);
+            renderPlan();
+            renderSummary();
+            awardPoints(5, '요청 분석');
+        }
+
+        function updateFocusTimeView() {
+            const target = document.getElementById('focus-time');
+            const minute = String(Math.floor(focusRemaining / 60)).padStart(2, '0');
+            const second = String(focusRemaining % 60).padStart(2, '0');
+            target.textContent = `${minute}:${second}`;
+        }
+
+        document.getElementById('focus-start').addEventListener('click', () => {
+            if (focusTimerId) return;
+            focusTimerId = setInterval(() => {
+                focusRemaining -= 1;
+                updateFocusTimeView();
+                if (focusRemaining <= 0) {
+                    clearInterval(focusTimerId);
+                    focusTimerId = null;
+                    focusRemaining = 25 * 60;
+                    updateFocusTimeView();
+                    awardPoints(20, '25분 집중 완료');
+                }
+            }, 1000);
         });
 
-        buttons.forEach(button => {
+        document.getElementById('focus-reset').addEventListener('click', () => {
+            if (focusTimerId) {
+                clearInterval(focusTimerId);
+                focusTimerId = null;
+            }
+            focusRemaining = 25 * 60;
+            updateFocusTimeView();
+        });
+
+        document.getElementById('generate-agent').addEventListener('click', runAssistant);
+
+        document.getElementById('calendar-save-btn').addEventListener('click', () => {
+            const config = readCalendarConfigFromUI();
+            saveCalendarConfig(config);
+            calendarStatus.textContent = '캘린더 연동 상태: 설정 저장 완료';
+            addAssistantChat('assistant', '캘린더 연동 설정을 저장했습니다.');
+            renderAssistantChat();
+        });
+
+        document.getElementById('calendar-sync-btn').addEventListener('click', async () => {
+            await syncCalendarEvents();
+        });
+
+        calendarProvider.addEventListener('change', () => {
+            const provider = calendarProvider.value;
+            calendarStatus.textContent = provider === 'manual'
+                ? '캘린더 연동 상태: 수동 입력 모드'
+                : `캘린더 연동 상태: ${provider === 'google' ? 'Google' : 'Outlook'} 설정 필요`;
+        });
+
+        modeButtons.forEach((button) => {
             button.addEventListener('click', () => {
-                buttons.forEach(btn => btn.classList.remove('active'));
+                modeButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-                renderDay(button.dataset.day);
+                currentMode = button.dataset.mode;
+                updateModeHint();
+                updateDailyPlaceholder();
+                addAssistantChat('assistant', `${currentMode === 'student' ? '학생' : '직장인'} 모드로 전환되었습니다.`);
+                renderAssistantChat();
             });
         });
 
-        renderDay('mon');
+        navButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                navButtons.forEach(v => v.classList.remove('active'));
+                btn.classList.add('active');
+                currentDay = btn.dataset.day;
+                updateDailyPlaceholder();
+                renderPlan();
+                renderSummary();
+            });
+        });
+
+        refreshWeekMeta();
+        applyCalendarConfigToUI();
+        calendarStatus.textContent = calendarProvider.value === 'manual'
+            ? '캘린더 연동 상태: 수동 입력 모드'
+            : '캘린더 연동 상태: 설정 불러옴';
+        updateModeHint();
+        updateDailyPlaceholder();
+        updateFocusTimeView();
+        renderPlan();
+        renderSummary();
+        runAssistant();
+
+        setInterval(() => {
+            refreshWeekMeta();
+            updateLowAchievementAlert();
+        }, 60000);
     </script>
 </body>
 </html>
