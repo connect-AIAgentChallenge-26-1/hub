@@ -144,6 +144,7 @@ npm run build
 Phase 4 이후의 AI 연동 계약, 테스트 corpus, batch calendar export 로드맵은 repository 문서로 관리합니다.
 
 - [Current Implementation Summary](docs/project/current-implementation-summary.md)
+- [Foundation.25.1 Standalone Release Record](docs/releases/foundation-25.1.md) — 검증된 standalone crawler release 기록이며 root runtime에는 연결되지 않았습니다.
 - [Phase 4 Plan](docs/roadmap/phase-4-plan.md)
 - [AI Output Schema](docs/ai/ai-output-schema.md)
 - [Prompt Contract](docs/ai/prompt-contract.md)

@@ -18,6 +18,13 @@ long notice
 → selected all-day `.ics` export
 ```
 
+### Standalone Crawler Release Boundary
+
+Foundation.25.1 is a verified standalone crawler release that remains separate
+from the root application runtime. Runtime wiring and deployment were not
+performed. See the [Foundation.25.1 standalone release record](../releases/foundation-25.1.md)
+for the detailed release authority and upstream distribution boundary.
+
 NoticePilot is not a generic summarization app. Its purpose is to extract actionable notice information:
 
 - deadlines
