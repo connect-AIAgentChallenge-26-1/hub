@@ -3,7 +3,7 @@ from fastapi import FastAPI, Request, Response
 from app.exception_handlers import register_exception_handlers
 from app.middleware import RequestContextMiddleware
 from app.observability import configure_logging, latest_metrics
-from app.routers import auth, companies, disclosures
+from app.routers import auth, companies, disclosures, external_evidence, market
 from app.schemas.envelope import Envelope, Status, now_utc
 
 
@@ -16,6 +16,8 @@ def create_app() -> FastAPI:
     app.include_router(auth.router)
     app.include_router(companies.router)
     app.include_router(disclosures.router)
+    app.include_router(market.router)
+    app.include_router(external_evidence.router)
 
     @app.get("/api/v1/health", response_model=Envelope[dict[str, bool]])
     def health(request: Request) -> Envelope[dict[str, bool]]:

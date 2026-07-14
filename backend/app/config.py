@@ -8,6 +8,7 @@ loudly instead of silently running with an empty key (CLAUDE.md 절대 원칙 8)
 
 from functools import lru_cache
 from pathlib import Path
+from typing import Literal
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -34,7 +35,10 @@ class Settings(BaseSettings):
     dart_api_key: str | None = None
     kis_app_key: str | None = None
     kis_app_secret: str | None = None
-    kis_env: str = "vps"
+    # "vps" = 모의투자, "prod" = 실전투자 — base URL/appkey 환경이 갈리므로
+    # (docs/skills.md S13) 오타·오입력이 잘못된 환경으로 조용히 넘어가지 않도록
+    # free-form str이 아닌 enum으로 startup에서 강제한다.
+    kis_env: Literal["vps", "prod"] = "vps"
     naver_client_id: str | None = None
     naver_client_secret: str | None = None
     upstage_api_key: str | None = None

@@ -37,6 +37,14 @@ class ProviderRateLimitedError(ProviderError):
     reason_code = "PROVIDER_RATE_LIMITED"
 
 
+class ProviderTokenRateLimitedError(ProviderRateLimitedError):
+    """OAuth 접근토큰 발급 자체의 rate limit(예: KIS 분당 1회, docs/skills.md S13
+    제약)에 걸린 경우. 일반 호출 rate limit과 원인·해제 조건이 다르므로("잠시 뒤
+    재시도"가 아니라 "발급 주기를 기다려야 함") 별도 reason_code로 구분한다."""
+
+    reason_code = "PROVIDER_TOKEN_RATE_LIMITED"
+
+
 class ProviderAuthError(ProviderError):
     """provider 자격증명(API key 등) 실패. AUTHENTICATION_ERROR는 우리 서비스
     사용자의 인증 실패 전용이므로 provider-side 인증 오류는 EXTERNAL_ERROR다."""
