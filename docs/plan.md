@@ -66,7 +66,7 @@ B는 특정 매수 가격이나 행동 지시가 아니라 **지금 가격이 �
 | R01 | 종목·기업 식별 | REQUIRED | 없음 | S1 | checklist C1 | IMPLEMENTED |
 | R02 | OpenDART 공시·재무·원문 수집 | REQUIRED | R01 | S2 | C2 | IMPLEMENTED |
 | R03 | 시세·기업행위·외부 뉴스 근거 | REQUIRED | R01 | S13·S14 | C3 | 미구현 |
-| R04 | 시점·정정·단위 정합성·재무 계산 core | REQUIRED | R02·R03 | S3·S15 | C4 | 미구현 |
+| R04 | 시점·정정·단위 정합성·재무 계산 core | REQUIRED | R02·R03 | S3·S15 | C4 | IMPLEMENTED |
 | R05 | 종목 공부 리포트 A | REQUIRED | R04·R09 | S4·S11·S20 | C5 | 미구현 |
 | R06 | 가치 범위·가격 위치 B | REQUIRED | R03·R04 | S5·S6·S21 | C6 | 미구현 |
 | R07 | Structured Claim | REQUIRED | R01 | S7·S23 | C7 | 미구현 |

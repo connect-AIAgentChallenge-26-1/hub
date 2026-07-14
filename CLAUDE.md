@@ -82,7 +82,7 @@
 
 ## 현재 구현 상태
 
-현재 HEAD의 실행 코드는 Vite + React 소개 페이지, T00 계약 contract test, T01 backend 인증 기반(FastAPI+PostgreSQL), T02 S1·S2(종목 해석·OpenDART 공시 수집), T03 S13·S14(시세·기업행위·외부 근거 수집, 일부)다. S3~S12·S15~S23(나머지 도메인 스킬)은 아직 구현되지 않았다. 문서가 목표 상태를 정의하더라도 실제 완료 여부는 [docs/checklist.md](docs/checklist.md)와 자동 테스트 결과로만 판단한다.
+현재 HEAD의 실행 코드는 Vite + React 소개 페이지, T00 계약 contract test, T01 backend 인증 기반(FastAPI+PostgreSQL), T02 S1·S2(종목 해석·OpenDART 공시 수집), T03 S13·S14(시세·기업행위·외부 근거 수집, 일부), T04 S3·S15(재무 계산·시점 정합성), T05 I9 골든 평가 하네스(대부분 완료, BLOCKED 1항목)다. S4~S12·S16~S23(나머지 도메인 스킬)은 아직 구현되지 않았다. 문서가 목표 상태를 정의하더라도 실제 완료 여부는 [docs/checklist.md](docs/checklist.md)와 자동 테스트 결과로만 판단한다.
 
 - [src/ProjectIntro.jsx](src/ProjectIntro.jsx) — 하드코딩된 소개용 예시
 - [src/App.jsx](src/App.jsx) — 소개 컴포넌트 렌더링
@@ -90,8 +90,10 @@
 - [contracts/](contracts/) — Envelope·5상태 Verdict 집계·Claim/Fact/Evidence 필드 계약의 실행 가능한 미러(frontend 쪽 contract test). 진실 소스는 여전히 [docs/skills.md](docs/skills.md)
 - [backend/](backend/) — FastAPI + Pydantic v2 + SQLAlchemy + Alembic + PostgreSQL.
   - T01: 인증 기반(users, JWT, `/api/v1/auth/*`), `Envelope[T]`, provider 인터페이스
-  - T02: S1 종목 해석(`app/services/company_resolver.py`, `/api/v1/companies/*`), S2 OpenDART 공시·재무·원문 수집(`app/providers/opendart.py`, `app/services/disclosure_collector.py`, `/api/v1/disclosures`). 재무 계산(S3)·시점 정합성(S15)은 T04에서 추가된다.
-  - T03(대부분 완료, BLOCKED 1항목): S13 시세·기업행위 수집(`app/providers/kis.py` 한국투자증권 KIS Developers Open API, `app/services/market_collector.py`, `/api/v1/market`), S14 외부 근거 수집(`app/providers/naver_news.py`, `app/services/external_evidence_collector.py`, `/api/v1/external-evidence`). 공공데이터포털/KRX 공식 구조화 provider는 자격증명이 없어 `docs/checklist.md` C3의 마지막 1항목만 BLOCKED(해제 조건은 `docs/prerequisites.md` T03 참고).
+  - T02: S1 종목 해석(`app/services/company_resolver.py`, `/api/v1/companies/*`), S2 OpenDART 공시·재무·원문 수집(`app/providers/opendart.py`, `app/services/disclosure_collector.py`, `/api/v1/disclosures`)
+  - T03(대부분 완료, BLOCKED 1항목): S13 시세·기업행위 수집(`app/providers/kis.py` 한국투자증권 KIS Developers Open API, `app/services/market_collector.py`, `/api/v1/market`), S14 외부 근거 수집(`app/providers/naver_news.py`, `app/services/external_evidence_collector.py`, `/api/v1/external-evidence`). 공공데이터포털/KRX 공식 구조화 provider는 자격증명이 없어 `docs/checklist.md` C3의 마지막 1항목만 BLOCKED(해제 조건은 `docs/prerequisites.md` T03 참고)
+  - T04(완료): S15 시점·단위 정합성 계층(`app/services/temporal_integrity.py`, `PRE_NORMALIZE`/`POST_DERIVED`, `/api/v1/temporal-integrity`) — S2·S13의 T02·T03 시절 inline 임시 as_of 규칙을 이 중앙 서비스 호출로 교체. S3 재무 정규화·계산(`app/models/financial_fact.py`, `app/services/financial_calculator.py`, `/api/v1/financial-facts/calculate`) — 계정 매핑, CFS/OFS 선택, 누적→단일분기 변환, PER/PBR/ROE 등 지표와 버전. 삼성전자 실제 DART 재무제표로 검증(`backend/tests/fixtures/opendart/financial_calculator/`)
+- [eval/](eval/) — T05(대부분 완료, BLOCKED 1항목): I9 골든 평가 하네스. `schema.js`(golden dataset·threshold registry typed 계약), `golden-v1.json`(30개 case), `thresholds-v1.json`(C12-A 명시값 등록 + 초기 placeholder, `change_log[]` 변경 승인), `scorers.js`(14개 카테고리 scorer, `contracts/schemas.js`·`contracts/verdict.js` 재사용), `report.js`(리포트+regression diff), `run.js`(CLI, `scripts/verify.sh`·`ci.yml` `eval` job에 배선, threshold 누락·dataset 위반·scorer 예외·fixture checksum drift를 exit 2로 차단). OpenDART·KIS·네이버 record/replay는 T02~T04 fixture를 재사용(`fixtures-manifest.json`), LLM(Solar) fixture는 S7(T06)·`UPSTAGE_API_KEY` 대기로 BLOCKED
 
 ## 현재 실행 명령
 
@@ -111,6 +113,9 @@ cd backend
 uv run alembic upgrade head          # migration 적용
 uv run uvicorn app.main:app --reload # API 서버
 uv run pytest                        # backend 테스트
+
+# I9 골든 평가 하네스만 실행
+node eval/run.js                     # eval/reports/latest.json·history/에 리포트 저장
 ```
 
 backend 실행에는 루트 `.env`에 `DATABASE_URL`·`JWT_SECRET_KEY`가 필요하다 (`.env.example` 참고, 실제 값은 절대 커밋하지 않는다).

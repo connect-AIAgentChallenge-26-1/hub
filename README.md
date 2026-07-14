@@ -10,6 +10,7 @@
 - 스킬 계약: [docs/skills.md](docs/skills.md)
 - 구현 순서·상태: [docs/backlog.md](docs/backlog.md)
 - 완료 조건: [docs/checklist.md](docs/checklist.md)
+- 화면 컴포넌트 트리: [docs/etc/component-tree.md](docs/etc/component-tree.md)
 - 개발·안전 지침: [CLAUDE.md](CLAUDE.md) / [AGENTS.md](AGENTS.md)
 
 ## 다이어그램

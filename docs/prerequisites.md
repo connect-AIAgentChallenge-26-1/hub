@@ -7,7 +7,7 @@
 ## 지금 바로 (T00 전후)
 
 - [x] **문서 커밋** — T00·T01 계약·backend·하네스 기준점을 확정하고 upstream 추적 이슈 [#643](https://github.com/connect-AIAgentChallenge-26-1/hub/issues/643)에 후속 검증 항목을 기록
-- [ ] **GitHub branch protection** — main에 required status checks 설정 (`ci.yml`의 `frontend`·`backend`·`secret-scan` job을 required로 지정)
+- [ ] **GitHub branch protection** — main에 required status checks 설정 (`ci.yml`의 `frontend`·`backend`·`eval`·`secret-scan` job을 required로 지정. `eval`은 T05에서 추가된 I9 골든 평가 하네스 gate)
 - [x] **auto-merge 정책 결정** — 품질 gate(CI 성공+리뷰 승인) 통과를 머지 조건으로 반영 완료 (`.github/workflows/auto-merge.yml`)
 
 ## T01 — Backend·DB 기반

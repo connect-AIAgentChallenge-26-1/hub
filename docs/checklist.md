@@ -56,21 +56,21 @@
 
 ## C4. Temporal Integrity·재무 계산 [R04][S3·S15][I4][T04]
 
-- [ ] `filed_at <= as_of` 미래 데이터 차단
-- [ ] `as_of` 내 정정 chain 최신본 선택과 원본 이력 보존
-- [ ] 잠정·확정 실적 구분·우선순위·충돌 표시
-- [ ] 두 기간 CFS 우선, OFS 일관 fallback, CFS/OFS 혼합 금지
-- [ ] `thstrm_amount`·누적값·전기 비교값의 의미를 보고서 종류별 매핑
-- [ ] 반기·3분기 누적값 → 단일분기 변환 공식·원본값 보존
-- [ ] raw 값·단위·통화와 normalized 값·단위 동시 저장
-- [ ] 0.15/15%, 원/천원/백만원 혼동 방지 테스트
-- [ ] 분모 0·음수·흑자전환·적자지속 규칙 테스트
-- [ ] 매출·영업이익·순이익·부채·현금흐름·배당·PER/PBR/ROE 공식과 버전
-- [ ] 시세·발행주식 수·시가총액 기준일 일치와 기업행위 보정
-- [ ] 다른 기업·기간·단위·재무범위 혼합 시 계산 중단
-- [ ] 모든 원천의 S15 `PRE_NORMALIZE`와 모든 파생 Fact/Evidence의 `POST_DERIVED` 2단계 계약 테스트
-- [ ] S15 discriminated union이 PRE의 derived payload와 POST의 raw payload를 schema 단계에서 거부
-- [ ] S3·S5·S21 파생 결과의 공식·입력 provenance·기업·기간·단위·`as_of` 사후 검증
+- [x] `filed_at <= as_of` 미래 데이터 차단 — `app/services/temporal_integrity.py`(S15) `pre_normalize()`가 중앙에서 처리. S2(`disclosure_collector.py`)·S13(`market_collector.py`)의 T02·T03 시절 inline 임시 규칙을 이 호출로 교체(T02·T03 기존 테스트 전부 회귀 없이 통과 확인)
+- [x] `as_of` 내 정정 chain 최신본 선택과 원본 이력 보존 — T02에서 구현한 `DisclosureCollector._resolve_correction_chains`(원본 미변경, `CorrectionChain`으로 연결만 추가) 유지, 회귀 테스트 통과
+- [x] 잠정·확정 실적 구분·우선순위·충돌 표시 — `temporal_integrity.resolve_provisional_confirmed()`(확정 우선, 충돌 시 warning). **한계**: OpenDART `fnlttSinglAcntAll`은 항상 확정(감사) 수치만 주고 잠정실적 flag가 없어 실제 잠정 데이터로는 아직 검증하지 못함 — 규칙 자체는 구현·테스트 완료
+- [x] 두 기간 CFS 우선, OFS 일관 fallback, CFS/OFS 혼합 금지 — `select_fs_div`(기간별 CFS 우선, 없으면 OFS+warning), `assert_single_fs_div`(혼합 시 계산 중단). `financial_facts.py` 라우터가 fiscal_period별로 facts를 그룹화해 `select_fs_div`를 호출하므로 요청에 여러 기간이 섞여도 최신 기간만 남기고 나머지를 버리지 않는다(GPT 리뷰 2026-07-14 15:25 반영 — 이전에는 `filed_at` 최신 기간 하나만 계산 대상이었음). 삼성전자 실제 CFS+OFS 연간 데이터로 검증
+- [x] `thstrm_amount`·누적값·전기 비교값의 의미를 보고서 종류별 매핑 — `app/services/financial_calculator.py` 모듈 docstring·`_row_fact_candidates`. **실 라이브 호출로 발견(임의 추정 아님)**: 분기·반기 IS/CIS는 `thstrm_amount`가 이미 단일기간, `thstrm_add_amount`가 누적값(둘 다 제공); CF는 중간기간에 누적값만 제공(`thstrm_add_amount` 필드 자체 없음); annual은 `thstrm_add_amount`가 항상 빈 문자열
+- [x] 반기·3분기 누적값 → 단일분기 변환 공식·원본값 보존 — `derive_single_period_value`/`derive_single_quarter_fact`(`derivation_note`에 원본 두 누적값 보존). 삼성전자 2025 영업활동현금흐름 실수치로 Q2·Q3 단일분기 값을 도출해 검증(Q1+Q2+Q3=3분기 누적과 정확히 일치)
+- [x] raw 값·단위·통화와 normalized 값·단위 동시 저장 — `FinancialFact.raw_value`/`raw_unit` + `normalized_value`/`normalized_unit`
+- [x] 0.15/15%, 원/천원/백만원 혼동 방지 테스트 — `normalize_amount`(원/천원/백만원 배율 테스트로 서로 다른 값임을 확인), `parse_ratio`+`UnitConfusionError`(source_unit 미명시 시 거부, RATIO/PERCENT 자동 혼용 금지)
+- [x] 분모 0·음수·흑자전환·적자지속 규칙 테스트 — `_safe_ratio`(분모 0 → `None`+warning, 크래시 아님), 음수 자본 ROE 테스트(수학적으로 계산은 되지만 크래시 없음), `classify_sign_transition`(PROFIT_TURNAROUND/CONTINUED_LOSS/PROFIT_TO_LOSS/CONTINUED_PROFIT 4개 reason_code, verdict 아님)
+- [x] 매출·영업이익·순이익·부채·현금흐름·배당·PER/PBR/ROE 공식과 버전 — `ACCOUNT_METRIC_MAP`(실제 IFRS/DART 표준계정코드) + `FORMULA_REGISTRY` + `S3_FORMULA_VERSION`, 전부 삼성전자 실제 연간 데이터로 계산 검증
+- [x] 시세·발행주식 수·시가총액 기준일 일치와 기업행위 보정 — `CalculateFinancialFactsRequest.price_as_of`/`shares_outstanding_as_of`를 S15 `POST_DERIVED`의 `source_as_of`에 포함시켜 미래 기준일이면 계산에서 거부한다. PER/PBR은 발행주식 수·가격 기준일을 모두 검증하고, EPS/BPS는 가격을 쓰지 않으므로 발행주식 수 기준일만 검증한다(GPT 리뷰 2026-07-14 15:25 반영 — 이전에는 price_as_of 하나만 미래여도 가격을 쓰지 않는 EPS/BPS까지 함께 거부됐음). 기준일 없이 값만 오면 아예 미사용. **한계**: 기업행위 보정은 S13이 조정주가(`PriceBasis.ADJUSTED`)와 KIS 실시간 발행주식수를 제공하는 것에 의존하며, S3 자체가 재무제표 시점과 시세 시점 사이의 액면분할 등을 감지해 과거 수치를 소급 조정하지는 않는다(호출자가 조정된 값을 넘겨야 함, 문서화된 단순화)
+- [x] 다른 기업·기간·단위·재무범위 혼합 시 계산 중단 — `assert_single_fs_div`가 corp_code·fiscal_period·fs_div·unit 4개 모두 검사해 하나라도 섞이면 `ValueError`
+- [x] 모든 원천의 S15 `PRE_NORMALIZE`와 모든 파생 Fact/Evidence의 `POST_DERIVED` 2단계 계약 테스트 — `tests/test_temporal_integrity.py`(PRE_NORMALIZE 3건·POST_DERIVED 9건) + `financial_facts.py` 라우터가 실제로 POST_DERIVED를 호출해 검증 실패 시 numeric_evidence에서 제외
+- [x] S15 discriminated union이 PRE의 derived payload와 POST의 raw payload를 schema 단계에서 거부 — `tests/test_temporal_integrity_api.py`의 양방향 422 테스트
+- [x] S3·S5·S21 파생 결과의 공식·입력 provenance·기업·기간·단위·`as_of` 사후 검증 — S3는 `financial_facts.py`에서 실제로 배선 완료(POST_DERIVED 호출). `DerivedCheckInput`/`PostDerivedCheckInput`에 `target_period`/`source_periods`를 추가해 `post_derived()`가 파생 레코드의 대상 기간과 원천 fact들의 기간 불일치도 실제로 거부한다(GPT 리뷰 2026-07-14 15:25 반영 — 이전에는 기업·단위·기준시점만 검증하고 기간은 검증하지 않았음). `post_derived()`는 `source_ids`가 채워져 있어도 `source_corp_codes`/`source_units`/`source_periods` 개수가 다르거나 `source_as_of`가 더 적으면 거부한다(GPT 리뷰 2026-07-14 15:56 반영 — 이전에는 `source_ids`만 비어 있지 않으면 나머지 배열이 비어 있어도 통과했다). `source_as_of`는 fact 기준일 외에 자체 source_id가 없는 시세·발행주식 수 기준일도 포함하므로 "이상"만 요구하고 정확히 같은 길이를 강제하지 않는다. `PostDerivedCheckInput`에도 `min_length=1`과 동일한 model-level validator를 추가해 API 단계에서 먼저 422로 막는다. S5·S21은 아직 미구현(T09)이라 재사용만 준비된 상태 — S15가 도메인 무관 공용 서비스로 설계돼 있어 그때 그대로 호출하면 된다
 
 ## C5. 기능 A 종목 공부 [R05][S4·S11·S20][T08]
 
@@ -168,15 +168,15 @@
 
 ### C12-A. 평가 기반 [T05]
 
-- [ ] versioned golden dataset schema와 fixture validation
-- [ ] dataset·metric version별 `eval/thresholds` registry와 변경 승인 규칙 확정
-- [ ] extraction P/R 0.80, numerical·지원 범위 verdict 100%, citation 100%, temporal·hallucination·injection·추천·schema 실패 0건을 registry에 등록
-- [ ] retrieval Recall@K·relevance precision·counter retrieval·insufficient/unverifiable·상충 판정 최소값을 registry에 수치로 고정
-- [ ] latency·LLM token/cost·provider 실패율 budget을 환경별 수치로 registry에 고정
-- [ ] OpenDART·시세·외부 근거·LLM용 immutable record/replay fixture와 checksum
-- [ ] scorer가 완전·불완전 synthetic 결과를 정확히 통과/차단하는 unit test
-- [ ] 평가 리포트 schema와 이전 dataset·rule·model 버전 대비 회귀 diff 생성
-- [ ] threshold 누락·dataset schema 실패·scorer 오류 시 CI를 차단하는 harness smoke test
+- [x] versioned golden dataset schema와 fixture validation — `eval/schema.js` `validateGoldenDataset`(카테고리 14종, 필수 커버리지 태그 7종, verdict 5상태 커버리지 강제) + `eval/golden-v1.json`(`dataset_version: golden-v1.0.0`, 30개 case), `eval/schema.test.js`
+- [x] dataset·metric version별 `eval/thresholds` registry와 변경 승인 규칙 확정 — `eval/schema.js` `validateThresholdRegistry`(버전 패턴·`change_log[]` 필수 강제, 단일 파일 shape만 검사) + `eval/thresholds-v1.json`(`thresholds_version: thresholds-v1.0.0`). GPT 리뷰(2026-07-14 18:23) 반영: shape 검사만으로는 threshold 값을 낮추면서 버전·change_log를 그대로 둬도 통과함을 재현으로 확인 — `validateThresholdChangeApproval(previous, next)`를 추가해 값이 바뀐 metric마다 버전 bump와 그 metric을 지목하는 새 change_log 항목을 요구하고, `eval/run.js`가 `git show HEAD:eval/thresholds-v1.json`으로 이전 커밋 registry를 불러와 실행 시 자동 검증(`THRESHOLD_CHANGE_NOT_APPROVED`, exit 2). GPT 리뷰(2026-07-14 18:37) 후속 반영: metric 이름만 정확히 지목하고 `before`/`after`는 조작된 change_log 항목도 통과하던 결함을 재현으로 확인 — `extractBound()`로 실제 이전/이후 bound(`min`/`max`/`equals`/`per_environment`)를 뽑아 change_log 항목의 `before`/`after`와 정확히 일치하는지까지 검증하도록 강화. GPT 리뷰(2026-07-14 18:44) 후속 반영: `min`+`max`처럼 bound kind를 2개 이상 선언한 ambiguous metric entry가 `validateThresholdRegistry()`를 통과하고, `extractBound()`의 우선순위(min→max→equals→per_environment)가 `eval/report.js` `resolveThreshold()`의 실제 평가 우선순위(per_environment→min→max→equals)와 달라 malformed entry에서 감사 로그 검증과 실제 평가가 서로 다른 bound를 볼 수 있던 결함을 재현으로 확인 — `validateThresholdRegistry()`가 bound kind를 정확히 하나만 허용하도록 강화하고 `extractBound()`의 우선순위를 `resolveThreshold()`와 동일하게 맞춤. 변경 승인 규칙은 `docs/skills.md` "I9 골든 평가 하네스 계약"에 문서화(버전 갱신+정확한 change_log 2요건은 코드로 강제, review.md 교차 점검은 사람이 수행)
+- [x] extraction P/R 0.80, numerical·지원 범위 verdict 100%, citation 100%, temporal·hallucination·injection·추천·schema 실패 0건을 registry에 등록 — `eval/thresholds-v1.json` metrics(`extraction_precision`/`extraction_recall` min 0.80, `verdict_accuracy_rate`/`numerical_consistency_rate`/`citation_correctness_rate` equals 1.0, `temporal_leakage_failures`/`provider_fault_classification_failures`/`hallucination_failures`/`injection_defense_failures`/`recommendation_ban_failures`/`schema_violation_failures` max 0)
+- [x] retrieval Recall@K·relevance precision·counter retrieval·insufficient/unverifiable·상충 판정 최소값을 registry에 수치로 고정 — `eval/thresholds-v1.json`의 `retrieval_recall_at_5`/`retrieval_relevance_precision`/`counter_retrieval_recall`/`insufficient_unverifiable_detection_accuracy`/`conflict_detection_accuracy`. **한계**: S18~S20(T07) 착수 전이라 실측 데이터가 없어 보수적 초기 placeholder로 고정했고(수치 근거는 `change_log[0]`), 실측이 쌓이면 change_log를 통해 조정한다(임의 추정 아님, 명시적으로 placeholder라고 문서화)
+- [x] latency·LLM token/cost·provider 실패율 budget을 환경별 수치로 registry에 고정 — `eval/thresholds-v1.json`의 `latency_p95_ms`/`llm_cost_budget_usd_per_month`/`provider_failure_rate_max`(`per_environment: {dev,staging,production}`). **한계**: 위와 동일 — T11 통합·실측 전 초기 placeholder, T12에서 실측 E2E로 재검증
+- [ ] OpenDART·시세·외부 근거·LLM용 immutable record/replay fixture와 checksum — **BLOCKED(부분)**: OpenDART·KIS(시세)·네이버(외부 근거)는 T02~T04에서 이미 캡처한 `backend/tests/fixtures/{opendart,kis,naver}/`를 재캡처 없이 `eval/fixtures-manifest.json`에 sha256 checksum으로 고정 참조했고, `eval/run.js`가 매 실행마다 실제 파일과 checksum을 대조해 드리프트를 검증한다(red→green으로 실제 checksum 불일치를 잡음을 확인). LLM(Solar) fixture만 남았다: S7(T06)이 아직 없어 Solar를 호출하는 코드 경로 자체가 없고 `UPSTAGE_API_KEY`도 미발급(`docs/prerequisites.md` T06·T07 절 미체크)이라 캡처할 수 없다. 해제 조건: 사용자가 UPSTAGE_API_KEY를 발급해 `.env`에 채우고 T06에서 S7이 Solar를 실제로 호출하게 되면, 그 세션에서 T02~T04와 동일한 방식(실 라이브 호출 캡처)으로 `eval/fixtures-manifest.json`의 `llm_solar` 항목을 채운다
+- [x] scorer가 완전·불완전 synthetic 결과를 정확히 통과/차단하는 unit test — `eval/scorers.js` 14개 카테고리 scorer 전부, `eval/scorers.test.js`에서 각 카테고리마다 완전한 결과(기본 `reference_prediction`)는 통과·의도적으로 틀린 predicted는 차단됨을 확인(예: unit 혼동 시뮬레이션, 환각 span 주입, injection marker 누출, 상충 근거 누락 등). GPT 리뷰(2026-07-14 18:23) 반영: `hallucination`/`injection_defense`/`recommendation_ban` 3개 scorer는 docs/skills.md:529가 "0건/false가 아니면 실패"라는 불변식으로 정의하는데, 실제 구현은 이 불변식이 아니라 case별 `expected.*` gold label과 비교하고 있어 dataset이 실수로 `expected.hallucinated=true` 등으로 잘못 기록되면 실제 환각·leak·추천 문구가 있어도 통과함을 재현으로 확인 — 세 scorer 모두 결과를 불변식(`hallucinated===false`/`leaked===false`/`banned_phrase_count===0`)에 직접 비교하도록 고치고, `expected.*`가 그 불변식과 다르면(=dataset이 위반을 정상으로 기록하면) scorer가 조용히 넘기지 않고 던지도록 함(scoreVerdictAccuracy의 dataset 내부 일관성 검사와 같은 패턴)
+- [x] 평가 리포트 schema와 이전 dataset·rule·model 버전 대비 회귀 diff 생성 — `eval/report.js` `buildReport`(schema_version·overall_pass·blocking_failures)·`regressionDiff`(이전 `eval/reports/latest.json` 대비 metric별 delta·regressed 판정, 이전 리포트 없으면 빈 배열), `eval/run.js`가 매 실행마다 `eval/reports/latest.json`+`eval/reports/history/`에 저장. `eval/report.test.js`로 검증
+- [x] threshold 누락·dataset schema 실패·scorer 오류 시 CI를 차단하는 harness smoke test — `eval/run.js`가 `MISSING_THRESHOLD`/`INVALID_DATASET`/`INVALID_THRESHOLD_REGISTRY`/`SCORER_ERROR`/`FIXTURE_CHECKSUM_MISMATCH`/`DATASET_THRESHOLD_MISMATCH`를 exit code 2로 구분해 차단(정상 실패는 exit 1). `eval/run.test.js`(자동 테스트, 실 파일은 건드리지 않고 임시 사본으로 검증) + `scripts/verify.sh`/`node eval/run.js`로 실제 red→green 수동 검증 완료(threshold 제거·필수 태그 제거·잘못된 operation 주입 3가지 모두 exit 2로 차단 후 원복 확인). `scripts/verify.sh` [3/4]와 `ci.yml`의 `eval` job에 배선
 
 ### C12-B. 전체 품질 게이트 [T12]
 

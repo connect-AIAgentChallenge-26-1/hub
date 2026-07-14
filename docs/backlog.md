@@ -19,8 +19,8 @@
 | T01 | Backend·DB 기반 | FastAPI, Pydantic, PostgreSQL schema, migration, 인증·secret 기반, trace/error envelope, provider interface | T00 | API·DB·인증 기반 contract test | 완료 |
 | T02 | 종목·OpenDART 수집 | S1·S2, 종목 master, 공시검색, 전체 재무제표, 원문·checksum·정정 이력, retry/rate limit/cache | T01 | C1·C2 통과 | 완료 |
 | T03 | 시세·외부 근거 수집 | S13·S14, 시세·거래일·기업행위, 뉴스·공식 외부 근거 provider와 라이선스 | T02 | C3 통과 | BLOCKED(좁혀짐) |
-| T04 | Temporal Integrity·재무 계산 | S15·S3, as_of·정정·잠정/확정·CFS/OFS·누적/단일·단위·기업행위, 파생 지표 | T02·T03 | C4 통과 | 대기 |
-| T05 | I9 평가 기반 | versioned golden set, record/replay fixture, unit·contract·integration scorer, threshold registry, CI report | T00·T01 | C12-A 통과 | 대기 |
+| T04 | Temporal Integrity·재무 계산 | S15·S3, as_of·정정·잠정/확정·CFS/OFS·누적/단일·단위·기업행위, 파생 지표 | T02·T03 | C4 통과 | 완료 |
+| T05 | I9 평가 기반 | versioned golden set, record/replay fixture, unit·contract·integration scorer, threshold registry, CI report | T00·T01 | C12-A 통과 | BLOCKED(좁혀짐) |
 | T06 | 기능 C 숫자 검증 | S7·S16·S17, Structured Claim, 5 verdict, evidence plan, 결정론 검산, Claim 편집 | T04·T05 | C7·C8 통과 | 대기 |
 | T07 | 기능 C RAG·반증·인용 | S18·S19·S20·S23·S8·S9·S11, hybrid RAG, counter evidence, citation gate, injection defense, 3회 제한 루프·체크리스트·결과 UI | T02·T03·T06 | C9·C10 통과 | 대기 |
 | T08 | 기능 A 종목 공부 | S4·S11, 기업개요·공시·지표·용어·확인 포인트·원문 viewer | T04·T07 | C5 통과 | 대기 |
@@ -91,11 +91,27 @@
 - 다른 기업·기간·단위·CFS/OFS 값이 섞이는 테스트를 실패시킨다.
 - 시세와 재무·발행주식 수 기준시점을 맞춘다.
 
+**T04 착수 판단 (2026-07-14)**: 형식적 선행조건은 `T02·T03`이고 T03은 `BLOCKED(좁혀짐)`(완료 아님)이다. 그러나 T03의 남은 BLOCKED 사유는 C3의 "공식 provider(공공데이터포털/KRX)의 구조화 수급·계약 수치를 NumericEvidence로 변환" 1개 항목뿐이며, 이는 S14(뉴스·수급 외부 근거)의 일부다. T04(S15·S3)가 실제로 소비하는 것은 S2 `eligible_financial_rows`와 S13 `NORMALIZE`가 만드는 시세·발행주식 수(`docs/skills.md` S3 입력 계약, S13 전체 완료)이며 S14 데이터를 입력으로 쓰지 않는다. 즉 T04가 필요로 하는 T03의 실제 산출물(S13 전체, S14의 raw record 모델·allowlist)은 이미 갖춰져 있고 BLOCKED 항목은 T04와 무관하다고 판단해 착수한다 — 이 판단에 동의하지 않으면 GPT 리뷰에서 반박해 달라.
+
+**T04 완료 (2026-07-14)**: `docs/checklist.md` C4 15개 항목 전부 체크. S15(`app/services/temporal_integrity.py`) — `pre_normalize`(미래 데이터 차단, S2·S13 공용 중앙화), `resolve_provisional_confirmed`(잠정·확정 충돌 표시), `post_derived`(파생 결과 provenance·기업·기간·단위·기준시점 재검증). S3(`app/services/financial_calculator.py`, `app/models/financial_fact.py`) — 계정 매핑(`ACCOUNT_METRIC_MAP`, 실제 IFRS/DART 표준계정코드), 단위 정규화(원/천원/백만원), CFS 우선·OFS fallback·혼합 금지(`select_fs_div`/`assert_single_fs_div`), 누적→단일분기 변환(`derive_single_period_value`), PER/PBR/ROE/부채비율/마진/배당성향 공식과 버전(`FORMULA_REGISTRY`), 흑자전환·적자지속 reason_code(`classify_sign_transition`). `POST /api/v1/temporal-integrity`(S15 discriminated union)·`POST /api/v1/financial-facts/calculate`(S3) 라우터, Alembic migration 5건. 삼성전자 실제 DART 재무제표(연간 2023·2024 CFS+OFS, 2025 1/2/3분기 CFS)를 라이브 캡처해(`backend/tests/fixtures/opendart/financial_calculator/`) 계정 매핑·누적/단일 구분·CFS/OFS 선택·지표 계산 전부를 실수치로 검증. 신규 backend pytest 53개(기존 164 + 53 = 217개) 전부 통과, `./scripts/verify.sh` 전체(frontend 75 + backend 217, lint·type·secret·dependency audit) green.
+- **개발 중 실제로 발견·수정한 T02 결함 2건(T04 범위 밖이지만 T04 작업으로 노출됨)**: (1) `FinancialFactRow`의 unique constraint가 `account_detail`을 포함하지 않아 자본변동표(SCE)처럼 같은 `account_id`·`sj_div` 아래 여러 구성요소 행이 있는 경우 두 번째 행부터 "이미 존재"로 오인되어 조용히 유실되던 결함을 실제 삼성전자 데이터로 재현·수정(`account_detail`을 키에 추가, `FinancialFact`에도 동일 적용). (2) S2가 DART의 `thstrm_add_amount`(분기·반기 누적값) 필드를 아예 저장하지 않고 있어 S3가 단일분기/누적을 구분할 방법이 없었던 것을 발견 — `FinancialFactRow.thstrm_add_amount` 컬럼 추가로 해결.
+- **S3 자체 설계 중 발견한 버그 1건**: 같은 `metric_key`(예: NET_INCOME)가 IS·CIS·CF·SCE 여러 곳에 나타나고 SCE는 0값 구성요소 행을 포함해, "metric_key로만 dict를 만들면 마지막에 순회된 값이 이긴다" 방식이 실제로 진짜 순이익을 0으로 덮어쓰는 것을 재현 — `select_canonical_facts`+`METRIC_CANONICAL_SJ_DIV`(지표별 신뢰할 단일 sj_div 고정)로 해결, 회귀 테스트 추가.
+- **한계 2건 문서화**: (1) 잠정·확정 구분 규칙은 구현·테스트했지만 OpenDART 재무제표 API가 항상 확정치만 줘서 실제 잠정 데이터로는 검증하지 못했다. (2) 기업행위 보정은 S13의 조정주가·실시간 발행주식수 제공에 의존하며 S3가 재무제표 시점과 시세 시점 사이의 액면분할 등을 자동으로 소급 조정하지는 않는다(호출자 책임).
+- plan.md R04 상태를 `미구현` → `IMPLEMENTED`로 갱신(C4 전체 통과 확인 후).
+
 ### T05·T12. I9 품질 계약
 
 - T05에서 C12-A의 scorer·threshold registry·초기 golden set·record/replay 기반을 구현하고 각 Task와 함께 확장한다.
 - T12에서 C12-B의 A/B/C 전체 E2E, 안전, 공격, 장애, 성능, 비용 기준을 CI 차단 gate로 확정한다.
 - 평가 결과는 versioned report로 저장하고 이전 버전 대비 회귀를 표시한다.
+
+**T05 착수·대부분 완료, BLOCKED 범위 축소 (2026-07-14)**: 선행조건(T00·T01)은 완료 상태였고 `docs/prerequisites.md`에도 T05 전용 항목이 없어(외부 자격증명 불필요) 즉시 착수했다. `docs/skills.md`에 "I9 골든 평가 하네스 계약" 절을 문서 먼저 원칙에 따라 추가한 뒤 [eval/](../eval/)를 구현했다 — `contracts/`가 Envelope·Verdict·Claim/Fact/Evidence 계약의 실행 가능한 미러이듯, `eval/`은 I9 하네스 계약의 실행 가능한 미러다.
+- **구현**: `eval/schema.js`(golden dataset·threshold registry typed 계약, 카테고리 14종·필수 커버리지 태그 7종·verdict 5상태 강제), `eval/golden-v1.json`(30개 case: claim extraction, verdict 5상태(그룹 `PARTIALLY_SUPPORTED` 포함), 단위 혼동·CFS/OFS·누적분기, 정정공시·미래데이터 차단, provider 장애 분류, 인용 exact/fuzzy/none, 환각, injection, 추천 금지, schema 위반, retrieval recall/precision, counter retrieval, insufficient/unverifiable, 상충 근거), `eval/thresholds-v1.json`(`docs/checklist.md` C12-A 명시값 그대로 등록 + retrieval·latency·cost·실패율은 초기 placeholder로 명시, `change_log[]`로 변경 승인 기록), `eval/scorers.js`(카테고리별 순수 함수 scorer + aggregate, `contracts/schemas.js`의 `validateShape`/`validateEvidence`와 `contracts/verdict.js`의 `groupVerdict`를 재사용해 로직 중복 없음), `eval/report.js`(리포트 schema + 이전 리포트 대비 regression diff), `eval/run.js`(CLI 러너, `eval/reports/latest.json`+`history/`에 저장, threshold 누락/dataset 위반/scorer 예외/fixture checksum drift/dataset-registry 버전 불일치를 exit code 2로 구분해 차단), `eval/fixtures-manifest.json`(OpenDART·KIS·네이버는 T02~T04 fixture를 재캡처 없이 sha256으로 고정 참조, LLM은 BLOCKED로 명시).
+- **검증**: `eval/*.test.js`(vitest, 70개) — 14개 scorer 전부 완전/불완전 synthetic 쌍으로 통과/차단 확인, dataset·registry schema validator의 정상/위반 case, report의 threshold 평가·regression diff, 그리고 harness smoke test(`MISSING_THRESHOLD`/`INVALID_DATASET`/`SCORER_ERROR`/`FIXTURE_CHECKSUM_MISMATCH`/`DATASET_THRESHOLD_MISMATCH`)가 실제 HarnessError로 이어짐을 임시 사본(실 파일 미변경)으로 자동 검증. 추가로 `scripts/verify.sh`에 배선한 실제 `node eval/run.js` 게이트에 대해 threshold 제거·필수 태그 제거·잘못된 operation 3가지를 수동으로 주입해 매번 exit code 2로 차단하고 원복 후 정상 통과함을 확인(H7과 동일한 red→green 증거, `diff`로 원복 정확성 확인). `scripts/verify.sh`(4단계로 확장: frontend→backend→I9 eval→secret scan)와 `ci.yml`(신규 `eval` job)에 배선. `./scripts/verify.sh` 전체(frontend 145 + backend 222 + I9 eval 16개 metric 전부 PASS + gitleaks clean) green.
+- **여전히 BLOCKED인 부분(범위 축소, C12-A 9개 중 1개)**: "OpenDART·시세·외부 근거·LLM용 immutable record/replay fixture와 checksum" 중 LLM(Solar) fixture만 남았다. S7(Structured Claim, T06)이 아직 구현되지 않아 Solar를 호출하는 코드 경로 자체가 없고, `UPSTAGE_API_KEY`도 미발급이다(`docs/prerequisites.md` T06·T07 절 미체크) — agent가 대신 발급받을 수 없다.
+- **해제 조건**: 사용자가 https://console.upstage.ai 에서 UPSTAGE_API_KEY를 발급해 `.env`에 채우고 `docs/prerequisites.md` T06·T07 절을 갱신하며, T06에서 S7이 Solar를 실제로 호출하는 지점이 생기면, 그 세션에서 T02~T04와 동일한 방식(실 라이브 호출 캡처, redacted placeholder로 token 치환)으로 `eval/fixtures-manifest.json`의 `llm_solar` 항목을 채운다.
+- **대안 경로**: T05의 나머지 8개 항목이 이미 완료 상태이고 남은 1개는 T06(S7) 착수 이후에만 채울 수 있는 종속 관계이므로, T04와 동일한 판단으로 T06(기능 C 숫자 검증, 선행조건 T04·T05)에 착수할 수 있다 — T06이 실제로 소비하는 golden dataset·threshold registry·scorer 기반은 이미 갖춰져 있고, 막힌 항목은 T06 자체가 만드는 산출물(S7 LLM 호출 경로)에 대한 fixture이기 때문이다.
+- plan.md R12는 최종 완료(R01~R11·R13 통합 평가)가 아직이므로 상태를 갱신하지 않는다(`docs/plan.md`에 이미 "C12-A는 T05에서 먼저 구현" 명시).
 
 ### T06·T07. 기능 C
 

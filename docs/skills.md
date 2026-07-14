@@ -517,6 +517,54 @@ S4·S7·S8·S11을 포함한 A/B/C의 모든 LLM 호출은 파이프라인 표�
 - 각 스킬은 단위 테스트, 계약 테스트, 오류·timeout 테스트를 가져야 한다.
 - 전체 A~D 파이프라인은 통합 테스트와 권한·사용자 격리 테스트를 통과해야 한다.
 
+## I9 골든 평가 하네스 계약 [T05·T12]
+
+executable 대상은 [eval/](../eval/)다(`contracts/`가 Envelope·Verdict·Claim/Fact/Evidence 타입 계약의 실행 가능한 미러이듯, `eval/`은 이 절의 실행 가능한 미러다). 이 절이 진실 소스이며 `eval/`의 스키마·threshold·scorer는 이 절을 그대로 따른다.
+
+### Golden Dataset
+
+- 파일: `eval/golden-v<major>.json`, 형태 `{ dataset_version, generated_at, cases: GoldenCase[] }`.
+- `dataset_version`은 `golden-v<semver>` 형식(예: `golden-v1.0.0`)이며 [`schemas.js`](../contracts/schemas.js) `SCHEMA_VERSIONS`와 동일한 semver 규칙(additive=PATCH/MINOR, breaking=MAJOR)을 따른다.
+- `GoldenCase`: `id`(string, dataset 내 unique), `category`(아래 카테고리 enum), `tags`(string[], 정정공시/단위/CFS_OFS/누적분기/API장애/인젝션/상충근거 등 커버리지 태그), `description`(string), `input`(카테고리별 typed payload), `expected`(gold label), `reference_prediction`(optional, "완전한" synthetic 시스템 출력 — 아직 없는 실 파이프라인 대신 harness 자체 정합성을 검증하는 기본 입력), `source`(optional, `{ provider, fixture_path, checksum }` — record/replay fixture 참조).
+- 카테고리: `claim_extraction`(I1) · `verdict_accuracy`(I2·I3, Claim·Verdict 5종 커버) · `numerical_consistency`(I2, 단위·CFS/OFS·누적분기 포함) · `temporal_integrity`(I4, 정정공시·미래데이터 차단) · `provider_fault_classification`(데이터 없음 vs provider 장애 구분) · `citation_correctness`(I7) · `hallucination`(환각 금지, 원문에 없는 span 생성 0건) · `injection_defense`(I11) · `recommendation_ban`(추천 금지 문구 0건) · `schema_violation`(Envelope/Claim/Evidence/Verdict typed 계약 위반 탐지) · `retrieval_recall_precision`(I6) · `counter_retrieval`(I6, 상충 근거 포함) · `insufficient_unverifiable_detection` · `conflict_detection`(Evidence `relation=CONFLICTS`).
+- 최소 커버리지: `verdict_accuracy` 카테고리에 5상태(`SUPPORTED`/`PARTIALLY_SUPPORTED`/`REFUTED`/`INSUFFICIENT_EVIDENCE`/`UNVERIFIABLE`) 각 1건 이상, `tags`에 `correction_disclosure`·`unit_confusion`·`cfs_ofs`·`cumulative_quarter`·`provider_fault`·`injection`·`conflicting_evidence` 각 1건 이상 포함해야 dataset validator가 통과시킨다.
+- schema 위반 dataset은 CI를 차단한다(아래 harness smoke test).
+
+### Threshold Registry
+
+- 파일: `eval/thresholds-v<major>.json`, 형태 `{ thresholds_version, compatible_dataset_version, environments: {dev, staging, production}, metrics: { <metric_key>: {...} }, change_log: [...] }`.
+- `thresholds_version`은 `thresholds-v<semver>` 형식이며 `compatible_dataset_version`이 가리키는 `dataset_version`과만 호환된다(다른 dataset_version과 조합해 실행하면 harness가 거부한다).
+- metric 항목은 `min`/`max`/`equals`/`per_environment` 중 **정확히 하나만** 선언해야 한다(`validateThresholdRegistry()`가 강제, GPT 리뷰 2026-07-14 18:44 — 두 개 이상 선언되면 `eval/report.js`의 실제 평가와 change_log 감사 검증이 서로 다른 필드를 "그 metric의 bound"로 볼 수 있어 금지한다).
+- **변경 승인 규칙**: registry 값을 바꾸는 변경은 (1) `thresholds_version`을 같은 변경에서 갱신하고, (2) `change_log[]`에 바뀐 `metric_or_field`를 정확히 지목하며 그 metric의 실제 이전/이후 bound(`min`/`max`/`equals`/`per_environment` 중 선언된 것)를 `before`/`after`에 정확히 기록한 새 `{date, actor, metric_or_field, before, after, reason}` 항목을 추가해야 하며, (3) [report/review.md](report/review.md) B절 교차 점검을 거쳐야 확정으로 간주한다. `eval/schema.js`의 `validateThresholdRegistry()`는 파일 한 장의 shape(버전 패턴·`change_log[]` 비어있지 않음·항목 필드)만 강제하므로 (1)·(2)가 실제로 지켰는지는 이 함수 혼자 알 수 없다 — 이전 커밋과 비교해야 하는 diff 성격의 규칙이라 별도의 `validateThresholdChangeApproval(previous, next)`가 두 registry 스냅샷을 받아 "값이 바뀐 metric마다 버전이 올라갔고, 그 metric을 지목하며 실제 bound 변화(`before`/`after`)를 정확히 기록한 새 change_log 항목이 있는지"를 강제한다(metric 이름만 맞고 `before`/`after`가 조작된 항목은 거부 — GPT 리뷰 2026-07-14 18:37). `eval/run.js`의 CLI 실행(`node eval/run.js`)이 `git show HEAD:eval/thresholds-v1.json`으로 마지막 커밋 버전을 불러와 이 검사를 자동 수행하며(git/커밋이 없으면 비교 대상이 없으므로 건너뛴다 — 인프라 상태 때문에 하네스 자체를 죽이지 않는다), 위반 시 `THRESHOLD_CHANGE_NOT_APPROVED` harness error(exit 2)로 (1)·(2) 위반을 거부한다. (3)은 review.md 절차로 사람(리뷰 LLM)이 수행하며 코드로 강제하지 않는다.
+- 필수 metric key와 최소 기준(체크리스트 C12-A 명시값을 그대로 사용): `extraction_precision >= 0.80`, `extraction_recall >= 0.80`, `numerical_consistency_rate == 1.0`, `verdict_accuracy_rate == 1.0`(원자 verdict, 지원 범위 내), `citation_correctness_rate == 1.0`, `temporal_leakage_failures == 0`, `provider_fault_classification_failures == 0`(데이터 없음 vs provider 장애 구분, "API 장애" 커버리지), `hallucination_failures == 0`, `injection_defense_failures == 0`, `recommendation_ban_failures == 0`, `schema_violation_failures == 0`.
+- retrieval·비용·장애 metric은 실 RAG(S18~S20, T07)·실 LLM(S7, T06) 파이프라인이 없어 아직 측정 불가하므로 초기값은 **placeholder로 명시**하고 실측 데이터가 쌓이면 change_log를 통해 조정한다: `retrieval_recall_at_5 >= 0.70`, `retrieval_relevance_precision >= 0.70`, `counter_retrieval_recall >= 0.50`, `insufficient_unverifiable_detection_accuracy >= 0.90`, `conflict_detection_accuracy >= 0.90`, `latency_p95_ms`(dev 5000 / staging 3000 / production 2000), `llm_cost_budget_usd_per_month`(dev 20 / staging 50 / production 200), `provider_failure_rate_max`(모든 환경 0.05).
+
+### Scorer
+
+- `eval/scorers.js`가 카테고리별 순수 함수로 구현한다. 각 scorer는 `(goldenCase, predicted) -> { metric, value, pass, reason }`를 반환하고 threshold registry 값과만 비교한다 — LLM 자기확신도나 임의 판단을 쓰지 않는다(CLAUDE.md 절대 원칙 5).
+- 완전한 결과(모든 gold와 일치)와 불완전한 결과(하나 이상 어긋남) synthetic fixture를 각 scorer마다 최소 1쌍씩 갖고, scorer가 완전은 통과·불완전은 차단함을 unit test로 증명한다(checklist "scorer가 완전·불완전 synthetic 결과를 정확히 통과/차단하는 unit test").
+- `schema_violation` scorer는 [`contracts/schemas.js`](../contracts/schemas.js)의 `validateShape`/`validateEvidence`를, `verdict_accuracy`의 그룹 집계 검증은 [`contracts/verdict.js`](../contracts/verdict.js)의 `groupVerdict`를 그대로 재사용한다(로직 중복 금지).
+
+### Record/Replay Fixture
+
+- OpenDART·KIS(시세)·네이버(외부 근거) golden case는 T02~T04에서 이미 캡처한 `backend/tests/fixtures/{opendart,kis,naver}/`의 immutable record/replay·checksum을 **그대로 참조**한다(재캡처하지 않음, `GoldenCase.source`로 경로+checksum을 가리킴).
+- LLM(Solar) fixture는 `eval/fixtures-manifest.json`의 `llm` 항목에 스키마·의도만 선언하고 실제 캡처는 S7(T06)이 생기고 `UPSTAGE_API_KEY`가 발급된 뒤 진행한다(현재 BLOCKED, 아래 참고).
+- 전체 fixture 목록과 checksum은 `eval/fixtures-manifest.json`에서 관리하며 harness가 시작 시 각 참조 경로·checksum이 실제로 존재/일치하는지 검증한다.
+
+### 평가 리포트·회귀 diff
+
+- `eval/run.js`가 `eval/reports/latest.json`(최신)과 `eval/reports/history/<dataset_version>__<thresholds_version>__<ISO8601>.json`(이력)을 생성한다.
+- Report 형태: `{ report_schema_version, dataset_version, thresholds_version, generated_at, environment, results: [{category, metric, value, threshold, pass, reason}], overall_pass, blocking_failures: [] }`.
+- 직전 이력 리포트가 있으면 metric별 이전 값과 비교한 `regression: [{metric, previous, current, delta, regressed}]`를 함께 생성한다. 이전 리포트가 없으면(최초 실행) regression은 빈 배열이다.
+
+### Harness Smoke Test (CI 차단)
+
+다음 3가지는 각각 CI를 실제로 차단해야 한다(H7과 동일한 red→green 증거 필요):
+
+1. 스코어링 대상 metric에 threshold registry 항목이 없음 — `run.js`가 `MISSING_THRESHOLD`로 non-zero 종료.
+2. golden dataset이 schema를 위반함(필수 카테고리·태그 누락 포함) — `run.js`가 `INVALID_DATASET`으로 non-zero 종료.
+3. scorer가 예외를 던짐 — `run.js`가 예외를 삼키지 않고 `SCORER_ERROR`로 non-zero 종료(항상 통과하는 게이트 금지, harness.md 설계 원칙 3과 동일).
+
 ## 구현 상태
 
 S1~S23과 I1~I11은 모두 **REQUIRED / 미구현** 상태다. 현재 실행 코드는 React 소개 페이지뿐이다. 완료 상태는 [checklist.md](checklist.md)의 검증 조건을 통과했을 때만 변경한다.
