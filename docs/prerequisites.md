@@ -24,10 +24,12 @@
 ## T03 — 시세·외부 근거 수집
 
 - [x] **시세 provider 선택 (2026-07-13)** — 한국투자증권(KIS) Developers Open API로 결정(T14 개인 주문과 겸용 가능해 F6 권고를 따름). 인증은 앱키(App Key)+앱시크릿(App Secret)으로 REST 접근토큰을 발급받는 방식이며, 실전투자(prod)와 모의투자(vps) 환경의 앱키가 서로 다르다. 국내주식 현재가 조회 등은 `FID_COND_MRKT_DIV_CODE`(시장 구분, 예: "J")·`FID_INPUT_ISCD`(종목코드) 파라미터를 사용한다.
-- [ ] **시세 provider 가입·key 발급** — 아직 사용자 조치 필요. (1) 한국투자증권 계좌(모의투자 가능) 개설, (2) KIS Developers 포털(apiportal.koreainvestment.com)에서 Open API 서비스 신청, (3) 앱키·앱시크릿 발급(실전/모의 중 최소 모의투자용 1세트). agent는 개인 명의 계좌 개설을 대신할 수 없다.
+- [x] **시세 provider 가입·key 발급 (2026-07-14)** — 모의투자 앱키·앱시크릿 발급 완료, `.env`의 `KIS_APP_KEY`·`KIS_APP_SECRET`·`KIS_ENV=vps`에 채워짐을 확인(agent는 값을 읽거나 표시하지 않고 존재 여부·형식만 확인). 실제 API 호출로 인증·현재가·기간별시세·예탁원 기업행위 4종 endpoint 검증 완료(`backend/tests/fixtures/kis/`).
 - [x] **뉴스·외부 근거 provider allowlist 결정 (2026-07-13)** — 공식 출처(공공데이터포털·거래소 공시) + 네이버 뉴스 검색 API로 결정. 네이버 API는 `X-Naver-Client-Id`/`X-Naver-Client-Secret` 헤더 인증, 엔드포인트 `https://openapi.naver.com/v1/search/news.json`, 응답 필드 `title/originallink/link/description/pubDate`. **주의**: 뉴스 기사 본문은 산문이므로 CLAUDE.md 절대 원칙 2·[skills.md](skills.md) S14 제약에 따라 여기서 나온 수치를 검증 없이 `NumericEvidence`로 승격하지 않는다 — 사실 근거가 아닌 "검증 대상 주장의 출처"로만 쓰인다.
-- [ ] **네이버 뉴스 API key 발급** — 아직 사용자 조치 필요. developers.naver.com에서 애플리케이션 등록(사용 API: 검색) 후 Client ID/Secret 발급.
-- [ ] 발급받은 key를 `.env`의 `KIS_APP_KEY`·`KIS_APP_SECRET`·`NAVER_CLIENT_ID`·`NAVER_CLIENT_SECRET`에 입력(`KIS_ENV`는 모의투자면 `vps`, 실전이면 `prod`)
+- [x] **네이버 뉴스 API key 발급 (2026-07-14)** — `.env`의 `NAVER_CLIENT_ID`·`NAVER_CLIENT_SECRET`에 채워짐을 확인. 실제 뉴스 검색 호출로 검증 완료(`backend/tests/fixtures/naver/`).
+- [x] 발급받은 key를 `.env`의 `KIS_APP_KEY`·`KIS_APP_SECRET`·`NAVER_CLIENT_ID`·`NAVER_CLIENT_SECRET`에 입력(`KIS_ENV`는 모의투자면 `vps`, 실전이면 `prod`)
+- [ ] **공식 구조화 provider(공공데이터포털/KRX) key 발급 — 신규 식별(2026-07-14)** — `docs/checklist.md` C3의 "공식 provider의 구조화 수급·계약 수치를 NumericEvidence로 변환" 항목에 필요. (1) data.go.kr(공공데이터포털)에서 원하는 금융·기업행위 API를 검색해 활용신청 후 서비스 key 발급, 또는 (2) KRX 정보데이터시스템의 공식 API/데이터 신청. 둘 중 최소 1곳만 있어도 재개 가능. agent는 개인 명의 계정 등록을 대신할 수 없다.
+- [ ] 발급받은 key를 `.env`에 입력(변수명은 key 발급 시점에 `docs/skills.md` S14와 함께 확정)
 
 ## T06·T07 — LLM (기능 C)
 
@@ -58,6 +60,7 @@
 | `KIS_APP_KEY` / `KIS_APP_SECRET` | apiportal.koreainvestment.com(한국투자증권 KIS Developers) | T03 |
 | `KIS_ENV` | `vps`(모의투자) 또는 `prod`(실전투자) | T03 |
 | `NAVER_CLIENT_ID` / `NAVER_CLIENT_SECRET` | developers.naver.com | T03 |
+| (미확정) 공공데이터포털 또는 KRX 공식 구조화 provider key | data.go.kr 또는 KRX 정보데이터시스템 | T03(BLOCKED, C3 마지막 1항목) |
 | `UPSTAGE_API_KEY` | console.upstage.ai | T06 |
 | `DATABASE_URL` | 로컬/배포 PostgreSQL | T01 |
 | `JWT_SECRET_KEY` | 직접 생성(32바이트 이상 무작위 값) | T01 |

@@ -41,18 +41,18 @@
 
 ## C3. 시세·기업행위·외부 근거 [R03][S13·S14][T03]
 
-- [ ] 공식 시세 provider와 수동 입력 adapter 계약 확정
-- [ ] S13·S14 `COLLECT` raw record → S15 PRE → `NORMALIZE` discriminated union contract
-- [ ] 거래 캘린더, quote timestamp, 거래량, 발행주식 수 수집
-- [ ] 조정·비조정 주가, 액면분할·증자·배당락 metadata 보존
-- [ ] 시세 provider 라이선스·최신성·장애 fallback 표시
-- [ ] 뉴스·거래소·공식기관 외부 근거 provider allowlist
-- [ ] S14 versioned deterministic query-builder가 Structured Claim에서만 검색어를 생성하는 contract test
-- [ ] 뉴스 게시·수정 시각, URL, 기업 entity match, checksum 저장
-- [ ] 공식 provider의 구조화 수급·계약 수치를 provenance 포함 `NumericEvidence`로 변환
-- [ ] 산문에서 LLM이 추출한 미검증 수치를 `NumericEvidence`로 승격하지 않는 테스트
-- [ ] 커뮤니티 소문을 사실 근거로 승격하지 않는 테스트
-- [ ] 뉴스·테마 원천 부재 시 `UNVERIFIABLE` 반환
+- [x] 공식 시세 provider와 수동 입력 adapter 계약 확정 — 한국투자증권(KIS) Developers Open API(`app/providers/kis.py`) + `MarketCollector.record_manual_quote`(provider="manual_input", 별도 license 문구로 출처 구분)
+- [x] S13·S14 `COLLECT` raw record → S15 PRE → `NORMALIZE` discriminated union contract — `POST /api/v1/market`(`COLLECT_CURRENT_PRICE|COLLECT_PERIOD_PRICE|COLLECT_CORPORATE_ACTION|MANUAL_INPUT|NORMALIZE`), `POST /api/v1/external-evidence`(`COLLECT|NORMALIZE`) Pydantic discriminated union. S15(T04)가 아직 없어 `trade_date/record_date <= as_of` 차단만 임시 PRE_NORMALIZE 규칙으로 심음(T02와 동일 패턴, T04에서 S15로 교체)
+- [x] 거래 캘린더, quote timestamp, 거래량, 발행주식 수 수집 — `Quote.trade_date`(quote timestamp), `Quote.volume`, `SharesOutstanding`(KIS `lstn_stcn`). **한계**: KIS 전용 국내휴장일조회 TR(`CTCA0903R`)이 모의투자(vps)에서 `EGW02006`("모의투자 TR이 아닙니다")로 거부됨을 실제 호출로 확인 — 실전투자 전용이라 거래 캘린더는 기간별시세 응답에 실제 존재하는 거래일 집합에서 파생한다(문서화된 단순화)
+- [x] 조정·비조정 주가, 액면분할·증자·배당락 metadata 보존 — `PriceBasis.ADJUSTED/UNADJUSTED`(`FID_ORG_ADJ_PRC`), `CorporateActionType.DIVIDEND/BONUS_ISSUE/PAID_IN_CAPITAL_INCREASE/FACE_VALUE_CHANGE`(예탁원 4종 API). 삼성전자 2018-05-04 실제 50:1 액면분할(`inter_bf_face_amt` 5000→`inter_af_face_amt` 100)로 검증
+- [x] 시세 provider 라이선스·최신성·장애 fallback 표시 — `Quote.license`(`LICENSE_NOTICE` 상수), 수동 입력 시 `license`에 "수동 입력 — {source_note}" 별도 표시
+- [x] 뉴스·거래소·공식기관 외부 근거 provider allowlist — `ExternalSourceProvider`(`naver_news`/`data_go_kr`/`krx_official` 3개만 존재, 그 외 값 표현 불가)
+- [x] S14 versioned deterministic query-builder가 Structured Claim에서만 검색어를 생성하는 contract test — `build_news_query`(`s14-query-builder-1.0.0`), 결정론·claim 필드만 사용 테스트(`test_external_evidence_collector.py`)
+- [x] 뉴스 게시·수정 시각, URL, 기업 entity match, checksum 저장 — `ExternalDocument.published_at`(`pubDate` 파싱)·`source_url`·`entity_matched`·`checksum`. **한계**: 네이버 뉴스 검색 API가 기사 수정 시각을 제공하지 않아 `revised_at`은 항상 NULL(임의 추정 금지, CLAUDE.md 절대 원칙 2)
+- [ ] 공식 provider의 구조화 수급·계약 수치를 provenance 포함 `NumericEvidence`로 변환 — **BLOCKED**: 변환 로직(`promote_official_numeric_evidence`)은 구현·unit test(synthetic fixture, 실 provider 캡처 아님) 완료했지만, 공공데이터포털(data.go.kr)·KRX 공식 구조화 provider는 자격증명이 없어(`docs/prerequisites.md` T03) 실제 COLLECT client 구현·live 검증을 하지 못했다. 해제 조건: 사용자가 두 provider 중 최소 1곳의 API key를 발급받아 `.env`에 채우면 재개
+- [x] 산문에서 LLM이 추출한 미검증 수치를 `NumericEvidence`로 승격하지 않는 테스트 — `ExternalEvidenceCollector.normalize`는 네이버 뉴스 출처에서 `numeric_evidence`를 항상 빈 배열로 반환, `promote_official_numeric_evidence`는 네이버 뉴스 record를 주면 `ValueError`로 즉시 거부
+- [x] 커뮤니티 소문을 사실 근거로 승격하지 않는 테스트 — `ExternalSourceProvider` allowlist 자체에 커뮤니티 출처를 나타낼 값이 없음(enum 3개 고정), `promote_official_numeric_evidence`가 비공식 출처를 거부하는 테스트로 실행 지점 확인
+- [x] 뉴스·테마 원천 부재 시 `UNVERIFIABLE` 반환 — `ExternalNormalizeResult.verifiable_status`(entity-matched 문서 없으면 `UNVERIFIABLE`)
 
 ## C4. Temporal Integrity·재무 계산 [R04][S3·S15][I4][T04]
 

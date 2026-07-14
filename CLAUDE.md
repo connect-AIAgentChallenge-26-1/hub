@@ -82,7 +82,7 @@
 
 ## 현재 구현 상태
 
-현재 HEAD의 실행 코드는 Vite + React 소개 페이지, T00 계약 contract test, T01 backend 인증 기반(FastAPI+PostgreSQL), T02 S1·S2(종목 해석·OpenDART 공시 수집)다. S3~S23(나머지 도메인 스킬)은 아직 구현되지 않았다. 문서가 목표 상태를 정의하더라도 실제 완료 여부는 [docs/checklist.md](docs/checklist.md)와 자동 테스트 결과로만 판단한다.
+현재 HEAD의 실행 코드는 Vite + React 소개 페이지, T00 계약 contract test, T01 backend 인증 기반(FastAPI+PostgreSQL), T02 S1·S2(종목 해석·OpenDART 공시 수집), T03 S13·S14(시세·기업행위·외부 근거 수집, 일부)다. S3~S12·S15~S23(나머지 도메인 스킬)은 아직 구현되지 않았다. 문서가 목표 상태를 정의하더라도 실제 완료 여부는 [docs/checklist.md](docs/checklist.md)와 자동 테스트 결과로만 판단한다.
 
 - [src/ProjectIntro.jsx](src/ProjectIntro.jsx) — 하드코딩된 소개용 예시
 - [src/App.jsx](src/App.jsx) — 소개 컴포넌트 렌더링
@@ -91,6 +91,7 @@
 - [backend/](backend/) — FastAPI + Pydantic v2 + SQLAlchemy + Alembic + PostgreSQL.
   - T01: 인증 기반(users, JWT, `/api/v1/auth/*`), `Envelope[T]`, provider 인터페이스
   - T02: S1 종목 해석(`app/services/company_resolver.py`, `/api/v1/companies/*`), S2 OpenDART 공시·재무·원문 수집(`app/providers/opendart.py`, `app/services/disclosure_collector.py`, `/api/v1/disclosures`). 재무 계산(S3)·시점 정합성(S15)은 T04에서 추가된다.
+  - T03(대부분 완료, BLOCKED 1항목): S13 시세·기업행위 수집(`app/providers/kis.py` 한국투자증권 KIS Developers Open API, `app/services/market_collector.py`, `/api/v1/market`), S14 외부 근거 수집(`app/providers/naver_news.py`, `app/services/external_evidence_collector.py`, `/api/v1/external-evidence`). 공공데이터포털/KRX 공식 구조화 provider는 자격증명이 없어 `docs/checklist.md` C3의 마지막 1항목만 BLOCKED(해제 조건은 `docs/prerequisites.md` T03 참고).
 
 ## 현재 실행 명령
 
