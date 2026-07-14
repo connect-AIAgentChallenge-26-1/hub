@@ -1,0 +1,12 @@
+{
+  "name": "uncoach-scoring",
+  "version": "0.1.0",
+  "private": true,
+  "description": "결(結) 화용 채점 파이프라인 (규칙 신호 + Claude 채점 + 합성)",
+  "dependencies": {
+    "@anthropic-ai/sdk": ">=0.110.0",
+    "@upstash/ratelimit": ">=2.0.0",
+    "@upstash/redis": ">=1.34.0",
+    "postgres": ">=3.4.0"
+  }
+}

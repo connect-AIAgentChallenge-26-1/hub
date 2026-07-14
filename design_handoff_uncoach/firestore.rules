@@ -1,0 +1,12 @@
+rules_version = '2';
+
+// 결(結) — Firestore 보안 규칙
+// 각 사용자는 자기 문서(users/{uid})만 읽고 쓸 수 있다. (익명 로그인 포함)
+// 로그인(uid) 없으면 접근 불가 → 앱 데이터가 기기/계정 단위로 격리된다.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid} {
+      allow read, write: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}

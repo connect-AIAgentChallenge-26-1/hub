@@ -3,7 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- React runtime (double-click 실행용). 인터넷 연결 필요 -->
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
 <script src="./support.js"></script>
+<!-- Firebase (Hosting/Firestore/Auth). db/browser-global.js(Postgres) 대신 사용 -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script src="./firebase-client.js"></script>
+<!-- 채점 프록시(Vercel): 키 없이 채점. Vercel에 ALLOWED_ORIGINS로 이 앱 도메인 허용 필요 -->
+<script>window.UNCOACH_PROXY_URL = "https://uncoach-pi.vercel.app/api/gemini";</script>
+<!-- 로그인/회원가입 오버레이 (이메일 + Google) -->
+<script src="./auth-ui.js"></script>
 </head>
 <body>
 <x-dc>
@@ -740,6 +752,13 @@ class Component extends DCLogic {
       const s = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
       if (s && s.profile) this.setState({ profile: s.profile, history: s.history || [], assets: s.assets || [], customSits: s.customSits || [], screen: 'home' });
     } catch (e) {}
+    // 서버(배포 시)에서 저장 상태를 불러와 로컬보다 우선 적용. 실패(file://·서버없음)하면 로컬 유지.
+    if (window.UncoachStore) {
+      window.UncoachStore.loadBlob().then(r => {
+        const s = r && r.state;
+        if (s && s.profile) this.setState({ profile: s.profile, history: s.history || [], assets: s.assets || [], customSits: s.customSits || [], screen: 'home' });
+      }).catch(() => {});
+    }
   }
   componentDidUpdate() { this.applyTheme(); }
   applyTheme() {
@@ -750,7 +769,10 @@ class Component extends DCLogic {
   }
   persist(extra) {
     const m = { ...this.state, ...extra };
-    try { localStorage.setItem(STORE_KEY, JSON.stringify({ profile: m.profile, history: m.history, assets: m.assets, customSits: m.customSits })); } catch (e) {}
+    const blob = { profile: m.profile, history: m.history, assets: m.assets, customSits: m.customSits };
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(blob)); } catch (e) {}
+    // 서버(배포 시)에도 미러링. 실패해도 로컬 저장은 유지되므로 무해.
+    if (window.UncoachStore) window.UncoachStore.saveBlob(blob).catch(() => {});
   }
   allSits() { return SITS.concat(this.state.customSits || []); }
   removeCustom(id) {
@@ -1136,7 +1158,7 @@ class Component extends DCLogic {
       changeApiKey: () => this.resetApiKey(),
       clearHistory: () => { if (window.confirm('훈련 기록(궤적)을 모두 지울까요? 되돌릴 수 없습니다.')) { this.setState({ history: [] }); this.persist({ history: [] }); this.showToast('훈련 기록을 초기화했습니다'); } },
       clearAssets: () => { if (window.confirm('저장한 표현을 모두 비울까요? 되돌릴 수 없습니다.')) { this.setState({ assets: [] }); this.persist({ assets: [] }); this.showToast('자산집을 비웠습니다'); } },
-      logout: () => { if (window.confirm('로그아웃하면 이 기기에 저장된 프로필·훈련 기록·자산·내 상황이 모두 지워집니다. 계속할까요?')) { try { localStorage.removeItem(STORE_KEY); } catch (e) {} this.setState({ profile: null, history: [], assets: [], customSits: [], showAllSits: false, obRole: null, obGoal: null, situationId: null, attempts: [], thread: [], draft: '', phase: 'write', screen: 'onboarding' }); } },
+      logout: () => { if (window.confirm('로그아웃하면 이 기기에 저장된 프로필·훈련 기록·자산·내 상황이 모두 지워집니다. 계속할까요?')) { try { localStorage.removeItem(STORE_KEY); } catch (e) {} if (window.UncoachStore) window.UncoachStore.saveBlob({ profile: null, history: [], assets: [], customSits: [] }).catch(() => {}); this.setState({ profile: null, history: [], assets: [], customSits: [], showAllSits: false, obRole: null, obGoal: null, situationId: null, attempts: [], thread: [], draft: '', phase: 'write', screen: 'onboarding' }); } },
 
       // onboarding
       roleCards, goalChips,

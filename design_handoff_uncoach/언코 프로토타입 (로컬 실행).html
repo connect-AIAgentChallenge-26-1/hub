@@ -7,6 +7,7 @@
 <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
 <script src="./support.js"></script>
+<script src="./db/browser-global.js"></script>
 </head>
 <body>
 <x-dc>
@@ -51,7 +52,7 @@ textarea{font-family:inherit;}
       <div style="margin-top:auto;padding:14px 10px 0;border-top:1px solid rgba(255,255,255,0.12)">
         <div style="font-size:12px;font-weight:600;color:#fff">{{ profileLabel }}</div>
         <div style="font-size:11px;color:var(--side-dim);margin-top:3px;line-height:1.55">실시간 개입 없음 · 프라이버시 우선<br>찾아와 훈련하는 '헬스장' 모델</div>
-        <button onClick="{{ setApiKey }}" style="margin-top:10px;background:transparent;border:1px solid rgba(255,255,255,0.2);color:var(--side-dim);border-radius:8px;padding:6px 10px;font-size:11px;font-weight:600" style-hover="color:#fff;border-color:rgba(255,255,255,0.4)">API 키 변경</button>
+        <button onClick="{{ setApiKey }}" style="margin-top:10px;background:transparent;border:1px solid rgba(255,255,255,0.2);color:var(--side-dim);border-radius:8px;padding:6px 10px;font-size:11px;font-weight:600" style-hover="color:#fff;border-color:rgba(255,255,255,0.4)">API 키 설정</button>
       </div>
     </div>
   </sc-if>
@@ -429,7 +430,7 @@ textarea{font-family:inherit;}
           <div style="display:flex;flex-direction:column;gap:12px">
             <sc-for list="{{ assetCards }}" as="a" hint-placeholder-count="3">
               <div style="background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 24px;border-left:3px solid var(--good)">
-                <div style="font-size:15px;line-height:1.7;font-weight:500">“{{ a.text }}”</div>
+                <div style="font-size:15px;line-height:1.7;font-weight:500">"{{ a.text }}"</div>
                 <div style="display:flex;gap:10px;margin-top:12px;align-items:center">
                   <span style="font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-soft);padding:3px 9px;border-radius:999px">{{ a.sit }}</span>
                   <span style="font-size:11.5px;color:var(--sub)">{{ a.date }}</span>
@@ -464,7 +465,13 @@ textarea{font-family:inherit;}
             <span style="color:var(--sub);font-weight:600">채점 모델</span><span>{{ modelLabel }}</span>
             <span style="color:var(--sub);font-weight:600">Gemini API 키</span><span>{{ apiKeyLabel }}</span>
           </div>
-          <button onClick="{{ changeApiKey }}" style="margin-top:16px;background:transparent;color:var(--ink);border:1px solid var(--line);border-radius:9px;padding:9px 16px;font-size:13px;font-weight:700" style-hover="border-color:var(--accent);color:var(--accent)">API 키 변경 · 삭제</button>
+          <input value="{{ apiKeyDraft }}" onChange="{{ onApiKeyDraft }}" type="password" placeholder="AIza… — 이 브라우저에만 저장됩니다" style="width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;padding:11px 13px;font-size:14px;background:var(--bg);color:var(--ink);outline:none;margin-top:16px" style-focus="border-color:var(--accent)">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+            <button onClick="{{ saveApiKeyBtn }}" style="background:var(--accent-soft);color:var(--accent);border:none;border-radius:9px;padding:9px 16px;font-size:13px;font-weight:700" style-hover="filter:brightness(0.97)">키 저장</button>
+            <button onClick="{{ changeApiKey }}" style="background:transparent;color:var(--sub);border:1px solid var(--line);border-radius:9px;padding:9px 16px;font-size:13px;font-weight:600" style-hover="border-color:var(--bad);color:var(--bad)">키 삭제</button>
+            <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="display:inline-block;color:var(--sub);border:1px solid var(--line);border-radius:9px;padding:9px 16px;font-size:13px;font-weight:600;text-decoration:none" style-hover="border-color:var(--accent);color:var(--accent)">키 무료 발급받기 ↗</a>
+          </div>
+          <div style="font-size:12px;color:var(--sub);line-height:1.7;margin-top:12px">무료 티어는 분당·하루 요청 수에 한도가 있습니다. 한도에 걸리면 안내된 시간만큼 기다렸다가 자동으로 다시 시도합니다.</div>
         </div>
 
         <div style="background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin-bottom:14px">
@@ -577,7 +584,7 @@ const SITS = [
   { id: 'pm', roles: ['대학생'], rel: '교수', title: '교수님께 면담 요청', counterpart: '지도교수 (일정이 빡빡하고, 목적 없는 면담 요청을 부담스러워함)', goal: '진로 상담을 위한 면담 시간을 요청한다', tension: '용건·소요 시간이 막연하면 부담스러운 요청이 됨', direction: '용건과 예상 소요 시간을 먼저 밝히고, 일정 선택권을 교수에게 넘기세요.', axis: '① 맥락', sample: '교수님 안녕하세요. 이번 주에 시간 되세요? 진로 때문에 상담 좀 하고 싶은데요. 답장 주세요.', opener: 'OO 학생, 요즘 진로 때문에 고민이 많다고 들었어요. 편할 때 한번 이야기 나눠볼까요?', rubric: { context: ['바쁜 일정·부담을 무시하고 목적 불명으로 통보("시간 되세요?")', '면담은 청하나 용건이 막연하거나 예상 소요시간을 밝히지 않음', '구체적 용건 + 예상 소요시간 명시 + 교수 사정 배려'], register: ['반말·과한 친근함 또는 명령조("답장 주세요")', '존댓말이나 딱딱하거나 다소 일방적', '정중한 존댓말로 요청을 부탁의 형태로 표현'], strategy: ['일정을 내가 정해 통보하고 선택권을 주지 않음', '일정 언급은 있으나 선택지가 부족함', '후보 시간대를 제시하거나 교수 편한 시간을 여쭙고 선택권을 위임'] } },
   { id: 'pd', roles: ['대학생'], rel: '교수', title: '과제 마감 연장 요청', counterpart: '전공 수업 담당 교수 (형평성 때문에 예외 요청에 민감함)', goal: '사정을 설명하고 마감 연장을 요청한다', tension: '사유가 막연하거나 당연시하면 형평성 침해로 읽힘', direction: '구체적 사유 + 현재까지의 진행 상황 + 수용 가능한 대안(감점 감수 등)을 함께 제시하세요. 판단은 교수에게 위임합니다.', axis: '③ 전략', sample: '교수님 죄송한데 과제를 기한까지 못 낼 것 같습니다. 개인 사정이 있어서요. 며칠만 봐주시면 안 될까요? 다음엔 절대 안 그러겠습니다.', opener: '내일 자정까지 과제 제출 마감입니다. 혹시 어려운 점 있으면 미리 알려주세요.', rubric: { context: ['연장을 당연시하고 형평성을 무시하며 사유가 막연함', '사유는 대나 다른 학생·형평성에 대한 고려가 없음', '구체적 사유 + 현재까지 진행 상황 + 형평성 의식(대안·감점 감수) + 판단 위임'], register: ['반말·가벼운 톤 또는 변명조', '존댓말이나 사과가 과하거나 실질 정보가 부족함', '책임지는 정중한 존댓말, 과한 자기비하 없이'], strategy: ['"안 될까요?"만 있고 진행 상황·대안이 없음', '사유+요청은 있으나 대안이 없음', '사유→진행상황→구체적 연장기간+수용 가능한 대안 순으로 명료함'] } },
   { id: 'ta', roles: ['대학생'], rel: '조교·행정', title: '조교님께 채점 문의', counterpart: '수업 조교 (대학원생, 수십 명의 문의를 처리 — 필요한 정보가 빠진 메일에 지침)', goal: '퀴즈 채점 결과 확인을 요청한다', tension: '학번·과목·문항 등 처리 정보가 빠지면 왕복이 늘어남', direction: '간결·정확이 3점입니다. 학번·과목·분반·문항을 완비하세요. 장황한 완충은 오히려 감점입니다.', axis: '③ 전략', sample: '조교님 안녕하세요. 제 퀴즈 점수가 잘못된 것 같습니다. 바쁘시겠지만 넓은 아량으로 살펴봐주시면 정말 감사하겠습니다. 늘 고생 많으십니다.', opener: '이번 주 퀴즈 채점 결과 관련 문의는 학번·분반·문항 번호를 적어 회신해주세요.', rubric: { context: ['조교를 교수처럼 대하거나(과공) 처리에 필요한 정보가 뭔지 못 읽어 누락함', '문의는 하나 학번·분반·문항 중 일부를 누락함', '조교의 처리 편의를 읽어 학번·과목·분반·문항을 완비함'], register: ['반말 또는 지나친 아부·과공("넓은 아량으로")으로 부담을 줌', '존댓말이나 완충이 다소 장황함', '정중하되 간결한 존댓말, 군더더기 없음'], strategy: ['감정·아부 위주로 핵심 정보가 묻힘', '정보는 있으나 배열이 흐트러짐', '용건+필요정보를 목록화하듯 간결·정확(여기선 간결=3점, 장황=감점)'] } },
-  { id: 'fp', roles: ['대학생'], rel: '동료(조원)', title: '초면 조원에게 첫 연락', counterpart: '같은 수업에서 처음 만난 동갑내기 조원 (아직 서로 존댓말)', goal: '팀플 첫 회의 일정을 잡자고 연락한다', tension: '너무 격식차리면 거리감, 너무 편하면 무례 — 밸런스', direction: '가볍고 명확한 톤이 3점입니다. 교수님께 쓰듯 과공하면 거리감을 만들어 오히려 1–2점이 됩니다.', axis: '② 격식', sample: '안녕하십니까. 이번 팀 프로젝트에서 함께하게 되어 진심으로 영광입니다. 귀하께서 편하신 일정을 회신해 주시면 감사드리겠습니다.', opener: '안녕하세요! 이번 팀플 같이 하게 됐네요. 잘 부탁드려요 :)', rubric: { context: ['과한 격식으로 부담을 주거나 초면인데 훅 반말을 함', '무난하나 회의 목적이 흐릿함', '초면 동료의 어색함을 배려한 가벼운 톤 + 회의 목적이 분명함'], register: ['교수식 과공("영광입니다","귀하") 또는 초면 반말', '존댓말이나 다소 딱딱하거나 과함', '가벼운 존댓말(친근하되 예의) — 여기선 과공이 감점'], strategy: ['인사만 있고 구체 제안이 없거나 일방 통보', '일정 얘기는 있으나 막연함', '가벼운 인사 + 구체 일정 제안/선택지 + 열린 질문'] } },
+  { id: 'fp', roles: ['대학생'], rel: '동료(조원)', title: '초면 조원에게 첫 연락', counterpart: '같은 수업에서 처음 만난 동갑내기 조원 (아직 서로 존댓말)', goal: '팀플 첫 회의 일정을 잡자고 연락한다', tension: '너무 격식차리면 거리감, 너무 편하면 무례 — 밸런스', direction: '가볍고 명확한 톤이 3점입니다. 교수님께 쓰듯 과공하면 거리감을 만들어 오히려 1~2점이 됩니다.', axis: '② 격식', sample: '안녕하십니까. 이번 팀 프로젝트에서 함께하게 되어 진심으로 영광입니다. 귀하께서 편하신 일정을 회신해 주시면 감사드리겠습니다.', opener: '안녕하세요! 이번 팀플 같이 하게 됐네요. 잘 부탁드려요 :)', rubric: { context: ['과한 격식으로 부담을 주거나 초면인데 훅 반말을 함', '무난하나 회의 목적이 흐릿함', '초면 동료의 어색함을 배려한 가벼운 톤 + 회의 목적이 분명함'], register: ['교수식 과공("영광입니다","귀하") 또는 초면 반말', '존댓말이나 다소 딱딱하거나 과함', '가벼운 존댓말(친근하되 예의) — 여기선 과공이 감점'], strategy: ['인사만 있고 구체 제안이 없거나 일방 통보', '일정 얘기는 있으나 막연함', '가벼운 인사 + 구체 일정 제안/선택지 + 열린 질문'] } },
   { id: 'rr', roles: ['대학생'], rel: '동료(조원)', title: '조원에게 역할 분담·독촉', counterpart: '자료 업로드가 늦어지는 조원 (발표는 이틀 뒤)', goal: '늦어지는 자료를 부담 주지 않으면서 받아낸다', tension: '통보조가 되면 갈등, 눈치만 보면 발표가 무너짐', direction: '비난 없이 상황(마감)을 주어로 말하고, 구체적 시점을 합의하세요. 상대의 사정을 여는 질문이 들어가면 좋습니다.', axis: '③ 전략', sample: '다들 뭐 하세요? 발표가 모레인데 아직 아무도 자료 안 올렸네요. 오늘까지 무조건 올려주세요.', opener: '미안 나 자료 조사가 생각보다 오래 걸려서 오늘 못 올릴 것 같아ㅠㅠ', rubric: { context: ['조원을 비난·통보("다들 뭐 하세요","무조건")해 갈등을 유발하고 상대 사정을 무시함', '독촉은 하나 상대 사정 배려·협의 톤이 부족함', '상대 사정을 여는 질문 + 마감(상황)을 주어로 삼아 개인 비난이 아니게 함'], register: ['명령조·차가운 통보 또는 지나친 눈치보기로 요지가 실종됨', '무난하나 톤이 딱딱하거나 미안함이 과다함', '동료다운 편안하고 명확한 톤'], strategy: ['"무조건 오늘까지" 식 일방 통보, 협의·대안이 없음', '요청은 있으나 구체 시점 합의·대안이 부족함', '구체 시점 제안 + 상대 사정 묻기 + 필요 시 분담/도움 제안'] } },
   { id: 'gm1', roles: ['대학원생'], rel: '지도교수', title: '지도교수께 연구 진행 보고', counterpart: '지도교수 (연구 방향·진척에 책임, 막연한 보고를 답답해함)', goal: '현재 연구 진행 상황을 보고하고 면담 시간을 요청한다', tension: '진척이 더뎌 보이거나 방향이 막연하면 신뢰가 흔들림', direction: '진행된 것/막힌 것/판단이 필요한 지점을 구분해 구체적으로 보고하고, 면담에서 논의할 안건과 예상 소요시간을 밝히세요.', axis: '① 맥락', sample: '교수님 안녕하세요. 연구가 잘 안 되고 있는데 어떻게 해야 할지 모르겠습니다. 시간 되실 때 면담 가능할까요?', opener: 'OO 학생, 이번 주 미팅 전에 진행 상황 간단히 정리해서 보내줄 수 있을까요?', rubric: { context: ['막연히 "잘 안 된다"만 전하고 무엇을 논의할지 없음', '진행 보고는 하나 막힌 지점·필요한 결정이 불명확', '진행/난관/결정 필요 지점을 구분해 제시하고 면담 안건·소요시간 명시'], register: ['반말·과한 감정 호소 또는 지나친 격식', '존댓말이나 다소 장황하거나 호칭 애매', '지도교수께 맞는 정중하고 담백한 존댓말'], strategy: ['핵심 없이 하소연조', '정보는 있으나 배열이 흐트러짐', '두괄식 요약→세부→요청 순으로 명료'] } },
   { id: 'gm2', roles: ['대학원생'], rel: '외부 교수', title: '타 연구실 교수께 자료 협조 요청', counterpart: '다른 학교·연구실 교수 (나를 모르고, 바쁘며 도와줄 의무가 없음)', goal: '연구에 필요한 자료·데이터 공유를 정중히 요청한다', tension: '초면에 의무 없는 상대에게 요청 — 무례하거나 목적이 불명하면 거절', direction: '소속·목적을 먼저 밝히고, 요청 범위를 좁게 특정하며, 거절해도 괜찮다는 여지를 두세요. 초면 격식은 갖추되 장황하지 않게.', axis: '② 격식', sample: '교수님 안녕하세요! 논문 쓰는데 데이터가 필요해서요. 혹시 자료 좀 보내주실 수 있나요? 급합니다.', opener: null, rubric: { context: ['상대가 의무 없고 바쁘다는 점을 무시, 급함만 강조', '목적은 밝히나 요청 범위가 막연', '소속·목적 명확 + 요청 범위 특정 + 상대 부담 배려'], register: ['초면인데 가벼운 반말투·느낌표 남발', '존댓말이나 어색하거나 자기소개 부족', '초면에 맞는 정중한 존댓말 + 간결한 자기소개'], strategy: ['요구조·기한 압박', '요청은 있으나 대안·거절 여지 없음', '좁은 요청 + 거절 여지 + 감사 표현'] } },
@@ -672,13 +679,62 @@ function parseLooseJson(raw) {
 }
 
 const STORE_KEY = 'malgyeol-proto-v1';
+const KEY_STORE = 'uncoach-gemini-key';
+const NO_KEY_MSG = 'Gemini API 키가 필요합니다. 왼쪽 사이드바의 "설정"에서 키를 입력해주세요.';
+
+// ── Gemini 호출 인프라 ────────────────────────────────────────────────────────
+// 두 가지 배포 시나리오를 같은 코드로 지원한다.
+//  (A) 서버리스 프록시가 있는 배포(Vercel/Netlify 등): 키는 서버 환경변수에만 두고
+//      브라우저는 PROXY_URL로만 요청한다. 방문자는 키를 입력할 필요가 없다.
+//  (B) 정적 호스팅(GitHub Pages 등) 또는 file:// 로컬 실행: 방문자가 자기 키를
+//      설정 화면에 넣고 브라우저가 Google에 직접 요청한다.
+// (A)를 먼저 시도해보고 프록시가 없으면 자동으로 (B)로 내려간다.
+// 페이지에서 window.UNCOACH_PROXY_URL 을 지정하면 그 값을 강제로 쓴다('' 이면 항상 (B)).
+const PROXY_URL = (typeof window.UNCOACH_PROXY_URL === 'string')
+  ? window.UNCOACH_PROXY_URL
+  : (location.protocol === 'http:' || location.protocol === 'https:') ? '/api/gemini' : '';
+// 'unknown' → 아직 안 써봄 / 'present' → 프록시 살아있음 / 'absent' → 없음, 방문자 키 모드
+let proxyState = PROXY_URL ? 'unknown' : 'absent';
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+// 429·503 응답에서 "몇 초 뒤에 다시 오라"는 값을 뽑는다.
+// Google은 error.details 안에 RetryInfo{retryDelay:"32.7s"} 를 넣어준다.
+function retryAfterSec(data) {
+  const details = (data && data.error && data.error.details) || [];
+  for (const d of details) {
+    const v = d && (d.retryDelay || (d.retryInfo && d.retryInfo.retryDelay));
+    const n = parseFloat(v);
+    if (n > 0) return n;
+  }
+  const m = String((data && data.error && data.error.message) || '').match(/retry in ([\d.]+)\s*s/i);
+  return m ? parseFloat(m[1]) : null;
+}
+
+// 영문 원문 대신 사용자가 무엇을 해야 하는지 알 수 있는 한국어 메시지로 바꾼다.
+function friendlyError(status, data) {
+  const raw = (data && data.error && data.error.message) || `HTTP ${status}`;
+  if (status === 429) {
+    const s = retryAfterSec(data);
+    // 대기가 길면(또는 재시도 안내가 없으면) 분당 한도가 아니라 하루 한도를 다 쓴 경우다.
+    if (!s || s > 300) {
+      const when = s ? `약 ${Math.ceil(s / 60)}분 뒤` : '내일';
+      return new Error(`Gemini 무료 사용량 한도를 다 썼습니다. ${when}에 다시 시도하거나, 설정에서 다른 API 키로 바꿔주세요.`);
+    }
+    return new Error(`Gemini 요청 한도에 걸렸습니다. 약 ${Math.ceil(s)}초 뒤에 다시 시도해주세요. (무료 티어는 분당 요청 수가 제한됩니다)`);
+  }
+  if (status === 400 && /API[_ ]key not valid|API_KEY_INVALID/i.test(raw)) return new Error('API 키가 올바르지 않습니다. 설정 화면에서 키를 다시 입력해주세요.');
+  if (status === 403) return new Error('이 API 키로는 요청이 거부되었습니다. 키의 사용 권한이나 도메인 제한을 확인해주세요.');
+  if (status >= 500) return new Error('Gemini 서버가 일시적으로 불안정합니다. 잠시 뒤 다시 시도해주세요.');
+  return new Error(raw);
+}
 
 class Component extends DCLogic {
   state = {
     screen: 'onboarding', obRole: null, obGoal: null,
     situationId: null, draft: '', phase: 'write', attempts: [], openerActive: false, thread: [], lastScores: null,
     error: null, profile: null, history: [], assets: [], toast: null,
-    customSits: [], showAllSits: false,
+    customSits: [], showAllSits: false, apiKeyDraft: '',
     newSit: { title: '', rel: '', who: '', goal: '', tension: '' }, newSitPhase: 'form', newSitError: null, newSitPreview: null,
   };
 
@@ -688,6 +744,13 @@ class Component extends DCLogic {
       const s = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
       if (s && s.profile) this.setState({ profile: s.profile, history: s.history || [], assets: s.assets || [], customSits: s.customSits || [], screen: 'home' });
     } catch (e) {}
+    // 서버(배포 시)에서 저장 상태를 불러와 로컬보다 우선 적용. 실패(file://·서버없음)하면 로컬 유지.
+    if (window.UncoachStore) {
+      window.UncoachStore.loadBlob().then(r => {
+        const s = r && r.state;
+        if (s && s.profile) this.setState({ profile: s.profile, history: s.history || [], assets: s.assets || [], customSits: s.customSits || [], screen: 'home' });
+      }).catch(() => {});
+    }
   }
   componentDidUpdate() { this.applyTheme(); }
   applyTheme() {
@@ -698,7 +761,10 @@ class Component extends DCLogic {
   }
   persist(extra) {
     const m = { ...this.state, ...extra };
-    try { localStorage.setItem(STORE_KEY, JSON.stringify({ profile: m.profile, history: m.history, assets: m.assets, customSits: m.customSits })); } catch (e) {}
+    const blob = { profile: m.profile, history: m.history, assets: m.assets, customSits: m.customSits };
+    try { localStorage.setItem(STORE_KEY, JSON.stringify(blob)); } catch (e) {}
+    // 서버(배포 시)에도 미러링. 실패해도 로컬 저장은 유지되므로 무해.
+    if (window.UncoachStore) window.UncoachStore.saveBlob(blob).catch(() => {});
   }
   allSits() { return SITS.concat(this.state.customSits || []); }
   removeCustom(id) {
@@ -720,7 +786,7 @@ class Component extends DCLogic {
     const brief = `[제목] ${n.title}\n[상대] ${n.who}\n[관계 라벨(있으면)] ${n.rel || '(비어있음, 네가 정해줘)'}\n[목적] ${n.goal}\n[긴장 포인트(있으면)] ${n.tension || '(비어있음, 네가 추론)'}\nJSON만 출력하세요.`;
     try {
       const model = (this.props.aiModel ?? '빠름 (flash)').includes('pro') ? 'gemini-2.5-pro' : 'gemini-2.5-flash';
-      const text = await this.callGemini(sys, brief, model);
+      const text = await this.callGemini(sys, brief, model, sec => this.showToast(`요청이 몰렸습니다 · ${sec}초 뒤 자동으로 다시 시도합니다`));
       const out = parseLooseJson(text);
       const arr3 = v => Array.isArray(v) && v.length >= 3 ? [String(v[0] || ''), String(v[1] || ''), String(v[2] || '')] : null;
       const rb = out.rubric || {};
@@ -741,7 +807,7 @@ class Component extends DCLogic {
       this.setState({ newSitPhase: 'preview', newSitPreview: preview });
     } catch (e) {
       console.error('[uncoach] generateSituation failed:', e);
-      const msg = (e && e.message === 'NO_KEY') ? 'Gemini API 키가 필요합니다. 다시 시도해주세요.' : `상황 생성에 실패했습니다: ${(e && e.message) || e}`;
+      const msg = (e && e.message === 'NO_KEY') ? NO_KEY_MSG : `상황 생성에 실패했습니다: ${(e && e.message) || e}`;
       this.setState({ newSitPhase: 'form', newSitError: msg });
     }
   }
@@ -761,45 +827,95 @@ class Component extends DCLogic {
   combined() { return ((this.props.demoData ?? true) ? SEED_HISTORY : []).concat(this.state.history); }
 
   getApiKey() {
-    let k = localStorage.getItem('uncoach-gemini-key');
-    if (!k) {
-      k = window.prompt('Gemini API 키를 입력하세요.\n(Google AI Studio에서 무료 발급: https://aistudio.google.com/apikey — 이 브라우저에만 저장됩니다)');
-      if (k) { k = k.trim(); localStorage.setItem('uncoach-gemini-key', k); }
-    }
-    return k || null;
+    try { const k = localStorage.getItem(KEY_STORE); return k ? k.trim() : null; } catch (e) { return null; }
+  }
+  saveApiKey(raw) {
+    const k = String(raw || '').trim();
+    if (!k) { this.setState({ error: null }); this.showToast('키를 입력해주세요'); return; }
+    try { localStorage.setItem(KEY_STORE, k); } catch (e) {}
+    this.setState({ apiKeyDraft: '', error: null });
+    this.showToast('API 키를 저장했습니다');
   }
   resetApiKey() {
-    localStorage.removeItem('uncoach-gemini-key');
+    try { localStorage.removeItem(KEY_STORE); } catch (e) {}
+    this.setState({ apiKeyDraft: '' });
     this.showToast('API 키가 초기화되었습니다');
   }
-  async callGemini(system, userMsg, model) {
+
+  // 프록시가 있으면 프록시로, 없으면 Google로 직접. 키는 URL 쿼리가 아니라 헤더로 보낸다
+  // (쿼리에 실으면 리퍼러·중간 로그·브라우저 히스토리에 키가 남는다).
+  async sendGemini(model, body) {
+    if (proxyState !== 'absent') {
+      try {
+        const res = await fetch(PROXY_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ model, ...body }),
+        });
+        // 프록시가 없는 정적 호스팅은 404/405를 주거나, SPA라면 200 + index.html을 준다.
+        // 둘 다 "프록시 없음"으로 보고 방문자 키 모드로 내려간다.
+        const isJson = (res.headers.get('content-type') || '').includes('json');
+        if (res.status === 404 || res.status === 405 || res.status === 501 || !isJson) {
+          proxyState = 'absent';
+        } else {
+          proxyState = 'present';
+          return res;
+        }
+      } catch (e) {
+        proxyState = 'absent';   // 네트워크 차단·CORS 등
+      }
+    }
     const key = this.getApiKey();
     if (!key) throw new Error('NO_KEY');
+    return fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'x-goog-api-key': key },
+      body: JSON.stringify(body),
+    });
+  }
+
+  // onRetry(초, 시도횟수) — 재시도 대기 중임을 UI에 알리는 용도.
+  async callGemini(system, userMsg, model, onRetry) {
     const generationConfig = { maxOutputTokens: 2048, responseMimeType: 'application/json' };
     if (model === 'gemini-2.5-flash') generationConfig.thinkingConfig = { thinkingBudget: 0 };
-    const res = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(key)}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          system_instruction: { parts: [{ text: system }] },
-          contents: [{ role: 'user', parts: [{ text: userMsg }] }],
-          generationConfig,
-        }),
+    const body = {
+      system_instruction: { parts: [{ text: system }] },
+      contents: [{ role: 'user', parts: [{ text: userMsg }] }],
+      generationConfig,
+    };
+
+    const MAX_ATTEMPTS = 3;
+    const MAX_WAIT_SEC = 45; // 이보다 더 기다리라는 응답이면 사용자에게 넘긴다(하루 한도 등)
+    for (let attempt = 1; ; attempt++) {
+      let res;
+      try {
+        res = await this.sendGemini(model, body);
+      } catch (e) {
+        if (e && e.message === 'NO_KEY') throw e;
+        if (attempt < MAX_ATTEMPTS) { await sleep(700 * attempt); continue; }
+        throw new Error('네트워크 문제로 Gemini에 연결하지 못했습니다. 연결 상태를 확인해주세요.');
       }
-    );
-    const data = await res.json().catch(() => null);
-    if (!res.ok) {
-      const detail = (data && data.error && data.error.message) || `HTTP ${res.status}`;
-      throw new Error(detail);
+      const data = await res.json().catch(() => null);
+
+      if (res.ok) {
+        const text = (data?.candidates?.[0]?.content?.parts || []).map(p => p.text || '').join('');
+        if (text) return text;
+        const reason = data?.candidates?.[0]?.finishReason || data?.promptFeedback?.blockReason || '알 수 없음';
+        if (reason === 'MAX_TOKENS') throw new Error('응답이 너무 길어 잘렸습니다. 초안을 조금 줄여서 다시 시도해주세요.');
+        if (reason === 'SAFETY' || reason === 'PROHIBITED_CONTENT') throw new Error('안전 필터에 걸려 채점하지 못했습니다. 표현을 바꿔 다시 시도해주세요.');
+        throw new Error(`Gemini가 빈 응답을 보냈습니다 (사유: ${reason})`);
+      }
+
+      // 429(한도 초과)·5xx(일시 장애)는 안내한 시간만큼 기다렸다가 자동 재시도
+      const retryable = res.status === 429 || res.status >= 500;
+      const wait = res.status === 429 ? (retryAfterSec(data) ?? 20) : 2 * attempt;
+      if (retryable && attempt < MAX_ATTEMPTS && wait <= MAX_WAIT_SEC) {
+        if (onRetry) onRetry(Math.ceil(wait), attempt);
+        await sleep(wait * 1000 + 400);
+        continue;
+      }
+      throw friendlyError(res.status, data);
     }
-    const text = (data?.candidates?.[0]?.content?.parts || []).map(p => p.text || '').join('');
-    if (!text) {
-      const reason = data?.candidates?.[0]?.finishReason || data?.promptFeedback?.blockReason || '알 수 없음';
-      throw new Error(`빈 응답 (사유: ${reason})`);
-    }
-    return text;
   }
 
   async evaluate() {
@@ -826,12 +942,12 @@ class Component extends DCLogic {
     let out = null;
     try {
       const model = (this.props.aiModel ?? '빠름 (flash)').includes('pro') ? 'gemini-2.5-pro' : 'gemini-2.5-flash';
-      const text = await this.callGemini(RUBRIC_SYSTEM, userMsg, model);
+      const text = await this.callGemini(RUBRIC_SYSTEM, userMsg, model, sec => this.showToast(`요청이 몰렸습니다 · ${sec}초 뒤 자동으로 다시 시도합니다`));
       out = parseLooseJson(text);
     } catch (e) {
       console.error('[uncoach] evaluate failed:', e);
       const msg = (e && e.message === 'NO_KEY')
-        ? 'Gemini API 키가 필요합니다. 다시 시도해주세요.'
+        ? NO_KEY_MSG
         : `채점 중 문제가 발생했습니다: ${(e && e.message) || e}`;
       // 실패 시 롤백: 내 메시지와 입력값을 원복
       this.setState({ phase: 'write', error: msg, thread: priorThread, draft });
@@ -1017,20 +1133,24 @@ class Component extends DCLogic {
       showSidebar: st.screen !== 'onboarding',
       navItems,
       profileLabel: st.profile ? `${st.profile.role} · ${st.profile.goal}` : '',
-      setApiKey: () => this.resetApiKey(),
+      // 키 입력 UI는 설정 화면에 있다. 여기서 바로 지워버리면 다시 넣을 방법이 안 보인다.
+      setApiKey: () => this.setState({ screen: 'settings' }),
 
       // settings
       profileRole: st.profile ? st.profile.role : '-',
       profileGoal: st.profile ? st.profile.goal : '-',
       modelLabel: this.props.aiModel ?? '빠름 (flash)',
-      apiKeyLabel: (() => { try { return localStorage.getItem('uncoach-gemini-key') ? '저장됨' : '미설정'; } catch (e) { return '미설정'; } })(),
+      apiKeyLabel: proxyState === 'present' ? '서버 프록시 사용 중 (입력 불필요)' : (this.getApiKey() ? '저장됨' : '미설정'),
+      apiKeyDraft: st.apiKeyDraft,
+      onApiKeyDraft: e => this.setState({ apiKeyDraft: e.target.value }),
+      saveApiKeyBtn: () => this.saveApiKey(st.apiKeyDraft),
       historyCount: `${st.history.length}건`,
       assetCount: `${st.assets.length}개`,
       reProfile: () => this.setState({ screen: 'onboarding', obRole: st.profile ? st.profile.role : null, obGoal: st.profile ? st.profile.goal : null }),
       changeApiKey: () => this.resetApiKey(),
       clearHistory: () => { if (window.confirm('훈련 기록(궤적)을 모두 지울까요? 되돌릴 수 없습니다.')) { this.setState({ history: [] }); this.persist({ history: [] }); this.showToast('훈련 기록을 초기화했습니다'); } },
       clearAssets: () => { if (window.confirm('저장한 표현을 모두 비울까요? 되돌릴 수 없습니다.')) { this.setState({ assets: [] }); this.persist({ assets: [] }); this.showToast('자산집을 비웠습니다'); } },
-      logout: () => { if (window.confirm('로그아웃하면 이 기기에 저장된 프로필·훈련 기록·자산·내 상황이 모두 지워집니다. 계속할까요?')) { try { localStorage.removeItem(STORE_KEY); } catch (e) {} this.setState({ profile: null, history: [], assets: [], customSits: [], showAllSits: false, obRole: null, obGoal: null, situationId: null, attempts: [], thread: [], draft: '', phase: 'write', screen: 'onboarding' }); } },
+      logout: () => { if (window.confirm('로그아웃하면 이 기기에 저장된 프로필·훈련 기록·자산·내 상황이 모두 지워집니다. 계속할까요?')) { try { localStorage.removeItem(STORE_KEY); } catch (e) {} if (window.UncoachStore) window.UncoachStore.saveBlob({ profile: null, history: [], assets: [], customSits: [] }).catch(() => {}); this.setState({ profile: null, history: [], assets: [], customSits: [], showAllSits: false, obRole: null, obGoal: null, situationId: null, attempts: [], thread: [], draft: '', phase: 'write', screen: 'onboarding' }); } },
 
       // onboarding
       roleCards, goalChips,

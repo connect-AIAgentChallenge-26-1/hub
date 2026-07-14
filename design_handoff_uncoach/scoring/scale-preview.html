@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>결(結) — 1~5점 척도 프리뷰</title>
+<style>
+  :root{
+    --bg:#f4f7fa; --surface:#fff; --ink:#182430; --sub:#5b6b7a; --line:#dde5ec;
+    --accent:#2e6da8; --good:#2e8b62; --good-soft:#e2f1e9; --warn:#b98a2f;
+    --warn-soft:#f7edda; --bad:#bf4545; --bad-soft:#f7e3e1;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Pretendard Variable",-apple-system,"Noto Sans KR","Malgun Gothic",sans-serif;
+    padding:28px;line-height:1.6;word-break:keep-all}
+  h1{font-size:22px;font-weight:800;letter-spacing:-.02em;margin:0 0 4px}
+  .sub{color:var(--sub);font-size:13px;margin-bottom:20px}
+  .themes{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+  .themes button{border:1px solid var(--line);background:var(--surface);color:var(--ink);
+    border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;cursor:pointer}
+  .themes button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    padding:20px;margin-bottom:20px;box-shadow:0 1px 4px rgba(20,40,60,.05)}
+  .card h2{font-size:14px;font-weight:700;margin:0 0 14px}
+  .lvls{display:grid;gap:12px}
+  .lvl{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:12px}
+  .chip{font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;text-align:center}
+  .gauge{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+  .gauge>i{display:block;height:100%;border-radius:999px;transition:width .4s}
+  .pct{font-size:12px;color:var(--sub);font-variant-numeric:tabular-nums}
+  /* 결과 카드 */
+  .total{display:flex;align-items:baseline;gap:10px;margin-bottom:16px}
+  .total b{font-size:36px;font-weight:800;letter-spacing:-.02em}
+  .total .cap{font-size:12px;color:var(--sub)}
+  .axis{border:1px solid var(--line);border-radius:11px;padding:12px 14px;margin-bottom:10px}
+  .axis.focus{border-color:var(--bad);border-width:1.5px}
+  .axis .top{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+  .axis .nm{font-size:14px;font-weight:700}
+  .badge{font-size:11px;font-weight:700;color:#fff;background:var(--bad);
+    border-radius:999px;padding:2px 8px}
+  .reason{font-size:13px;color:var(--sub);margin-top:8px}
+</style>
+</head>
+<body>
+  <h1>1~5점 척도 — UI 매핑 프리뷰</h1>
+  <div class="sub">기존 3색(위험/무난/적절)을 5단계로 확장. 중간 단계는 color-mix로 섞어 구분하고, 테마 CSS 변수를 그대로 써서 아래 3개 테마에서 모두 자연스럽게 보입니다.</div>
+
+  <div class="themes" id="themes"></div>
+
+  <div class="card">
+    <h2>5단계 레벨 · 게이지</h2>
+    <div class="lvls" id="lvls"></div>
+  </div>
+
+  <div class="card">
+    <h2>결과 카드 예시</h2>
+    <div class="total">
+      <b id="totalNum" style="color:var(--warn)">74</b>
+      <span class="cap">/ 100점 · 위계 가중(맥락 40 · 격식 30 · 전략 30)</span>
+    </div>
+    <div id="rows"></div>
+  </div>
+
+<script>
+// display.mjs 의 LEVELS5 와 동일한 매핑(프리뷰라 인라인)
+const LEVELS5 = {
+  1:{label:'위험', color:'var(--bad)', soft:'var(--bad-soft)'},
+  2:{label:'주의', color:'color-mix(in srgb, var(--bad) 60%, var(--warn))', soft:'color-mix(in srgb, var(--bad-soft) 60%, var(--warn-soft))'},
+  3:{label:'무난', color:'var(--warn)', soft:'var(--warn-soft)'},
+  4:{label:'양호', color:'color-mix(in srgb, var(--good) 60%, var(--warn))', soft:'color-mix(in srgb, var(--good-soft) 60%, var(--warn-soft))'},
+  5:{label:'적절', color:'var(--good)', soft:'var(--good-soft)'},
+};
+const pct = s => s/5*100;
+
+const THEMES = {
+  '소프트 블루':{'--bg':'#f4f7fa','--surface':'#fff','--ink':'#182430','--sub':'#5b6b7a','--line':'#dde5ec','--accent':'#2e6da8','--good':'#2e8b62','--good-soft':'#e2f1e9','--warn':'#b98a2f','--warn-soft':'#f7edda','--bad':'#bf4545','--bad-soft':'#f7e3e1'},
+  '세이지 그린':{'--bg':'#f5f7f3','--surface':'#fff','--ink':'#1d2a22','--sub':'#5f6f64','--line':'#dee6dd','--accent':'#3d7d5f','--good':'#2e8b62','--good-soft':'#e2f1e9','--warn':'#b98a2f','--warn-soft':'#f6eeda','--bad':'#b64f42','--bad-soft':'#f6e5e1'},
+  '잉크 미니멀':{'--bg':'#f7f6f3','--surface':'#fff','--ink':'#1b1b19','--sub':'#6b6a64','--line':'#e4e2db','--accent':'#2c3e50','--good':'#3d7355','--good-soft':'#e6efe8','--warn':'#a3823a','--warn-soft':'#f2ecdb','--bad':'#a84f45','--bad-soft':'#f3e4e0'},
+};
+
+function applyTheme(name){
+  const t = THEMES[name];
+  for (const k in t) document.documentElement.style.setProperty(k, t[k]);
+  document.querySelectorAll('#themes button').forEach(b=>b.classList.toggle('on', b.dataset.n===name));
+}
+
+// 테마 토글
+const tb = document.getElementById('themes');
+Object.keys(THEMES).forEach((n,i)=>{
+  const b=document.createElement('button'); b.textContent=n; b.dataset.n=n;
+  b.onclick=()=>applyTheme(n); tb.appendChild(b);
+});
+
+// 5단계 레벨 행
+document.getElementById('lvls').innerHTML = [1,2,3,4,5].map(s=>{
+  const lv=LEVELS5[s];
+  return `<div class="lvl">
+    <span class="chip" style="background:${lv.soft};color:${lv.color}">${s} ${lv.label}</span>
+    <div class="gauge"><i style="width:${pct(s)}%;background:${lv.color}"></i></div>
+    <span class="pct">${pct(s)}%</span></div>`;
+}).join('');
+
+// 결과 카드 예시(맥락 4 / 격식 3(집중) / 전략 4)
+const AX = [
+  {num:'①',name:'맥락·의도',score:4,reason:'오류 가능성을 자기 귀속하고 문항을 특정.'},
+  {num:'②',name:'관계·격식',score:3,reason:'정중하나 다소 과공 — 여기부터 다듬으면 좋습니다.',focus:true},
+  {num:'③',name:'전략·표현',score:4,reason:'배경→문항→요청으로 명료.'},
+];
+document.getElementById('rows').innerHTML = AX.map(a=>{
+  const lv=LEVELS5[a.score];
+  return `<div class="axis ${a.focus?'focus':''}">
+    <div class="top">
+      <span class="nm">${a.num} ${a.name}</span>
+      <span class="chip" style="background:${lv.soft};color:${lv.color}">${lv.label}</span>
+      ${a.focus?'<span class="badge">여기부터</span>':''}
+    </div>
+    <div class="gauge"><i style="width:${pct(a.score)}%;background:${lv.color}"></i></div>
+    <div class="reason">${a.reason}</div></div>`;
+}).join('');
+
+applyTheme('소프트 블루');
+</script>
+</body>
+</html>
