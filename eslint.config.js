@@ -39,8 +39,8 @@ export default [
   },
   {
     // Node에서 직접 실행되는 CLI 스크립트(GitHub Actions 판정 로직, verify
-    // 게이트). 브라우저 전역이 아니라 Node 전역(process 등)이 필요하다.
-    files: ['scripts/**/*.js'],
+    // 게이트, I9 평가 하네스 러너). 브라우저 전역이 아니라 Node 전역(process 등)이 필요하다.
+    files: ['scripts/**/*.js', 'eval/run.js'],
     languageOptions: {
       globals: { ...globals.node, ...globals.es2021 },
     },

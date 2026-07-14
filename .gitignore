@@ -17,6 +17,10 @@ dist
 dist-ssr
 *.local
 
+# I9 평가 리포트 — 매 실행마다 재생성되는 산출물(CI artifact), 커밋 대상 아님.
+# docs/skills.md "I9 골든 평가 하네스 계약" 참고.
+eval/reports/
+
 # Backend (Python)
 backend/.venv
 backend/__pycache__
@@ -48,4 +52,7 @@ docs/*
 !docs/report/
 !docs/report/*.md
 
+!docs/etc/
+docs/etc/*
+!docs/etc/component-tree.md
 memo.md

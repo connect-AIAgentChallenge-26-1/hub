@@ -1,0 +1,59 @@
+{
+  "manifest_version": "1.0.0",
+  "generated_at": "2026-07-14T17:45:00+09:00",
+  "note": "OpenDART/KIS/네이버는 T02~T04에서 이미 실 provider를 라이브 호출해 캡처한 immutable record/replay fixture다(docs/backlog.md T02~T04 참고). 이 manifest는 재캡처하지 않고 그 파일들을 sha256으로 고정 참조한다 — eval/fixtures-manifest.test.js가 매 실행마다 실제 파일 checksum과 대조해 드리프트를 잡는다.",
+  "providers": {
+    "opendart": {
+      "status": "AVAILABLE",
+      "fixtures": [
+        { "fixture_path": "backend/tests/fixtures/opendart/corp_code_sample.xml", "checksum": "83d253d39ee0ba5f59dcb4c7adc860d16096fc53a0e24a1cb4ce9c3cadda1032" },
+        { "fixture_path": "backend/tests/fixtures/opendart/corp_code_sample.zip", "checksum": "61828932b112f68aba09befb0e4ce01af613c528ca4d229fe915485a8bcfe15b" },
+        { "fixture_path": "backend/tests/fixtures/opendart/disclosure_list_samsung.json", "checksum": "2a2a67ef7127f407c7fd4d300870fd6bba2af4664e1bf9230289d6fadd6629af" },
+        { "fixture_path": "backend/tests/fixtures/opendart/disclosure_list_with_correction.json", "checksum": "68f3d0f1c03e555737ca6225bb49dc669d3b876fb62946b32d35710f554be0c2" },
+        { "fixture_path": "backend/tests/fixtures/opendart/document_20241129001733.xml", "checksum": "62df627877f0b480a3dbdf186cdab07198dd4b3b2b1fa1b502ca28e5c11d521a" },
+        { "fixture_path": "backend/tests/fixtures/opendart/document_20241129001733.zip", "checksum": "38a7edc8d5b75d04a115435928822cd972241482150b90ee9e473297eaae01fc" },
+        { "fixture_path": "backend/tests/fixtures/opendart/error_responses.json", "checksum": "c1d0edbfec678c5d6b97251fad48e4c3f7d8536e9518e653f58bade4dba27e5e" },
+        { "fixture_path": "backend/tests/fixtures/opendart/financial_statements_samsung.json", "checksum": "bd6ace88de592c3f68082bc73cd4e57bec9c9f2914ea35ef53fddb32e4f76e91" },
+        { "fixture_path": "backend/tests/fixtures/opendart/financial_calculator/annual_2023_CFS.json", "checksum": "7ce767dc71cb43d26c081f9c1a51c5c5c9a585a7e67b0f9aadc6167a1622fefd" },
+        { "fixture_path": "backend/tests/fixtures/opendart/financial_calculator/annual_2024_CFS.json", "checksum": "abcfdfe7e91e52d6e8224e0adb7ce27ced4f1a4b1e7d7139c8cb711c94632e3e" },
+        { "fixture_path": "backend/tests/fixtures/opendart/financial_calculator/annual_2024_OFS.json", "checksum": "fa8a9062fa1e008b8db7bc2f09a212561ed10d24edd8dfb600d4aeea2dbfc76a" },
+        { "fixture_path": "backend/tests/fixtures/opendart/financial_calculator/half_2025_CFS.json", "checksum": "7801369d43f3e68340ff673d364b861a136c148f82e1ccc93b5e74b34ce56296" },
+        { "fixture_path": "backend/tests/fixtures/opendart/financial_calculator/q1_2025_CFS.json", "checksum": "8c4085c8ad042d604d361c6b620c3759846b3556c8c200ab9507ba9b53a734f1" },
+        { "fixture_path": "backend/tests/fixtures/opendart/financial_calculator/q3_2025_CFS.json", "checksum": "b3882a941d577ba91f22c2984193529b21b6d4979a16b5cfaef034a16170145a" }
+      ]
+    },
+    "kis": {
+      "status": "AVAILABLE",
+      "fixtures": [
+        { "fixture_path": "backend/tests/fixtures/kis/corp_action_bonus_issue_005930.json", "checksum": "64f2739890d2be81bc87bb068fea383ecbaefb2635199165ead76729e13501e7" },
+        { "fixture_path": "backend/tests/fixtures/kis/corp_action_dividend_005930.json", "checksum": "b4be42aea81f0826324769795b90912a1b9d89bd59e6c64223bf67c0af854584" },
+        { "fixture_path": "backend/tests/fixtures/kis/corp_action_paidin_capin_005930.json", "checksum": "64f2739890d2be81bc87bb068fea383ecbaefb2635199165ead76729e13501e7" },
+        { "fixture_path": "backend/tests/fixtures/kis/corp_action_rev_split_005930_2018.json", "checksum": "65eaac65157e64f43c7575eedb50765b32cfeb8886e51506c41354ad54a2068b" },
+        { "fixture_path": "backend/tests/fixtures/kis/current_price_005930.json", "checksum": "dd68b97de086d6a2e99cc1147634a1221691154763f1e11d3f6b7351cb7f0722" },
+        { "fixture_path": "backend/tests/fixtures/kis/current_price_invalid_credentials.json", "checksum": "593acac09ca43ab14ae29c0e59eaa14c49ed17f3fd7d4a190a1561fa85470b33" },
+        { "fixture_path": "backend/tests/fixtures/kis/current_price_invalid_stock_code.json", "checksum": "832f3062abb6f32f60c0e1711760e1d927c14e389405e5b2239f21b2173a486c" },
+        { "fixture_path": "backend/tests/fixtures/kis/current_price_per_second_rate_limited.json", "checksum": "5b192ba8cf45637531575d88173b481b3dbea1aab3889af54b00e3b9497819ab" },
+        { "fixture_path": "backend/tests/fixtures/kis/period_price_005930_adjusted.json", "checksum": "8de504a823f17520d89dff72bb7049a128f9f19328c3330d3189606121c14a3b" },
+        { "fixture_path": "backend/tests/fixtures/kis/period_price_005930_unadjusted.json", "checksum": "d3019bcddff35572f3e339b9af34393d96d11d627d8f9d89bff093d889c907d4" },
+        { "fixture_path": "backend/tests/fixtures/kis/token_issue_success_redacted.json", "checksum": "e1c22b9d1d6e2b906893b90870d1cc9bf5617e1b7c00ed20c60718e4740faa99" },
+        { "fixture_path": "backend/tests/fixtures/kis/token_rate_limited_raw.json", "checksum": "d4048570a1d9ba1dab4d3dfdaa28877a1565c33c1493c8a87f2df78f9f4f6d78" },
+        { "fixture_path": "backend/tests/fixtures/kis/trading_calendar_20260714.json", "checksum": "a657cbcab53fa6f5de2059e1d542056a4cb2a33deca646037eeadf5f94457702" }
+      ]
+    },
+    "naver_news": {
+      "status": "AVAILABLE",
+      "fixtures": [
+        { "fixture_path": "backend/tests/fixtures/naver/news_search_invalid_credentials.json", "checksum": "20d51088f59ec6049c44f8619a23dc660ea33a163745f476ead766ca3d9ff787" },
+        { "fixture_path": "backend/tests/fixtures/naver/news_search_missing_query.json", "checksum": "61dc1fe1c3b8f3ce58e74f10b80ce59deba6c21330a0dc6e3c16ddd4d72c8dbc" },
+        { "fixture_path": "backend/tests/fixtures/naver/news_search_samsung.json", "checksum": "049b3e793b343fde839ebcb6ed9ee9e5170bff971ef73079a6476e8487ad56d2" }
+      ]
+    },
+    "llm_solar": {
+      "status": "BLOCKED",
+      "fixtures": [],
+      "blocked_reason": "S7(Structured Claim, T06)이 아직 구현되지 않아 Solar를 호출하는 실제 코드 경로가 없고, docs/prerequisites.md T06·T07 절의 UPSTAGE_API_KEY도 아직 발급되지 않았다(2026-07-14 기준 미체크).",
+      "unblock_condition": "(1) 사용자가 https://console.upstage.ai 에서 UPSTAGE_API_KEY를 발급해 .env에 채우고 docs/prerequisites.md T06·T07 절을 갱신하며, (2) T06에서 S7 구현이 Solar를 실제로 호출하는 지점이 생기면, 그 세션에서 T02~T04와 동일한 방식(실 라이브 호출 캡처, redacted placeholder로 token 치환)으로 이 항목을 채운다.",
+      "expected_shape_note": "캡처될 fixture는 최소한 요청 prompt(schema 포함)·원본 응답·파싱된 StructuredClaim(app/schemas/structured_claim.py)·정상/malformed output/timeout 각 1건을 포함해야 한다(docs/checklist.md C7)."
+    }
+  }
+}

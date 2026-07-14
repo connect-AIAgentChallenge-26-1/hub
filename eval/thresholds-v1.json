@@ -1,0 +1,92 @@
+{
+  "thresholds_version": "thresholds-v1.0.0",
+  "compatible_dataset_version": "golden-v1.0.0",
+  "metrics": {
+    "extraction_precision": {
+      "min": 0.80,
+      "description": "docs/checklist.md C12-A: Claim extraction precision >= 0.80"
+    },
+    "extraction_recall": {
+      "min": 0.80,
+      "description": "docs/checklist.md C12-A: Claim extraction recall >= 0.80"
+    },
+    "verdict_accuracy_rate": {
+      "equals": 1.0,
+      "description": "docs/checklist.md C12-A: 지원 범위 내 verdict accuracy 100% (동일 입력 재현성 포함, CLAUDE.md 절대 원칙 5)"
+    },
+    "numerical_consistency_rate": {
+      "equals": 1.0,
+      "description": "docs/checklist.md C12-A: numerical consistency 100% (단위·CFS/OFS·누적분기 포함)"
+    },
+    "citation_correctness_rate": {
+      "equals": 1.0,
+      "description": "docs/checklist.md C12-A: citation correctness 100%"
+    },
+    "temporal_leakage_failures": {
+      "max": 0,
+      "description": "docs/checklist.md C12-A: temporal 실패 0건(미래 데이터·정정공시 처리 오류)"
+    },
+    "provider_fault_classification_failures": {
+      "max": 0,
+      "description": "docs/skills.md I9: 데이터 없음과 provider 장애 오분류 0건"
+    },
+    "hallucination_failures": {
+      "max": 0,
+      "description": "docs/checklist.md C12-A: hallucination 실패 0건"
+    },
+    "injection_defense_failures": {
+      "max": 0,
+      "description": "docs/checklist.md C12-A: injection 실패 0건"
+    },
+    "recommendation_ban_failures": {
+      "max": 0,
+      "description": "docs/checklist.md C12-A: 추천 문구 실패 0건(CLAUDE.md 절대 원칙 1)"
+    },
+    "schema_violation_failures": {
+      "max": 0,
+      "description": "docs/checklist.md C12-A: schema 실패 0건"
+    },
+    "retrieval_recall_at_5": {
+      "min": 0.70,
+      "description": "docs/checklist.md C12-A: retrieval Recall@K 최소값(초기 placeholder). S18~S20(T07) 착수 전이라 실측 데이터가 없어 보수적으로 고정했고, 실측이 쌓이면 change_log를 통해 조정한다."
+    },
+    "retrieval_relevance_precision": {
+      "min": 0.70,
+      "description": "docs/checklist.md C12-A: retrieval relevance precision 최소값(초기 placeholder, retrieval_recall_at_5와 동일 사유)"
+    },
+    "counter_retrieval_recall": {
+      "min": 0.50,
+      "description": "docs/checklist.md C12-A: counter retrieval 최소값(초기 placeholder, I6 반증 검색 착수 전)"
+    },
+    "insufficient_unverifiable_detection_accuracy": {
+      "min": 0.90,
+      "description": "docs/checklist.md C12-A: insufficient/unverifiable 판정 최소값(초기 placeholder)"
+    },
+    "conflict_detection_accuracy": {
+      "min": 0.90,
+      "description": "docs/checklist.md C12-A: 상충 판정 최소값(초기 placeholder)"
+    },
+    "latency_p95_ms": {
+      "per_environment": { "dev": 5000, "staging": 3000, "production": 2000 },
+      "description": "docs/checklist.md C12-A: latency budget(초기 placeholder). T11 통합 전에는 measurement 없이 등록만 하고, T12에서 실측 E2E로 재검증한다."
+    },
+    "llm_cost_budget_usd_per_month": {
+      "per_environment": { "dev": 20, "staging": 50, "production": 200 },
+      "description": "docs/checklist.md C12-A: LLM token/cost budget(초기 placeholder). docs/prerequisites.md T06·T07 절의 사용자 월 상한 결정이 확정되면 change_log로 갱신한다."
+    },
+    "provider_failure_rate_max": {
+      "per_environment": { "dev": 0.05, "staging": 0.05, "production": 0.05 },
+      "description": "docs/checklist.md C12-A: provider 실패율 budget(초기 placeholder)"
+    }
+  },
+  "change_log": [
+    {
+      "date": "2026-07-14",
+      "actor": "Claude (T05)",
+      "metric_or_field": "thresholds_version",
+      "before": null,
+      "after": "thresholds-v1.0.0",
+      "reason": "T05 최초 도입 — docs/checklist.md C12-A 항목 3·4·5에 명시된 값(extraction 0.80, numerical/verdict/citation 100%, temporal/hallucination/injection/추천/schema 실패 0건)을 그대로 등록하고, 문서에 수치가 없는 retrieval·counter-retrieval·insufficient/unverifiable·conflict·latency·cost·provider 실패율은 실측 파이프라인(S7·S18~S20, T06·T07) 착수 전 보수적 placeholder로 고정했다. 실측 데이터가 쌓이면 이 change_log에 항목을 추가해 갱신한다."
+    }
+  ]
+}
