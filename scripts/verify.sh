@@ -9,10 +9,10 @@ set -euo pipefail
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$REPO_ROOT"
 
-echo "==> [1/2] frontend verify (lint -> test -> build -> dependency audit)"
+echo "==> [1/3] frontend verify (lint -> test -> build -> dependency audit)"
 npm run verify
 
-echo "==> [2/2] backend verify (lint -> type check -> migrate -> test -> dependency audit)"
+echo "==> [2/3] backend verify (lint -> type check -> migrate -> test -> dependency audit)"
 
 STARTED_LOCAL_DB=0
 if [ -z "${DATABASE_URL:-}" ]; then
@@ -42,5 +42,11 @@ export JWT_SECRET_KEY="${JWT_SECRET_KEY:-local-verify-only-not-for-production}"
 if [ "$STARTED_LOCAL_DB" -eq 1 ]; then
   echo "(hub-postgres left running for the next verify — 'docker compose down' to stop it)"
 fi
+
+echo "==> [3/3] secret scan (gitleaks, git history — NOT the working tree)"
+# --no-git is intentionally never used here: it would scan working-tree files
+# directly, including untracked/gitignored .env, and print any match to stdout.
+# Default (git-history) mode only reads commits, where .env never lands.
+gitleaks detect --source . --redact --no-banner
 
 echo "==> verify passed"
