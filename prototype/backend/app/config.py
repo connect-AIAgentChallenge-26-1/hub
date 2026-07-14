@@ -15,5 +15,10 @@ class Settings(BaseSettings):
     google_redirect_uri: str = "http://localhost:8000/auth/google/callback"
     frontend_url: str = "http://localhost:5173"
 
+    # 맛집 추천 (없으면 목업 데이터로 동작)
+    naver_client_id: str = ""
+    naver_client_secret: str = ""
+    kakao_rest_api_key: str = ""
+
 
 settings = Settings()

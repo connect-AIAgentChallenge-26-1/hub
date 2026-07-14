@@ -5,6 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session, joinedload
 
 from app.core.availability import compute_free_slots
+from app.core import restaurants as restaurants_svc
 from app.core.deps import get_current_user
 from app.database import get_db
 from app.models.calendar_integration import CalendarIntegration
@@ -15,6 +16,7 @@ from app.models.user import User
 from app.schemas.meetup import (
     AvailableSlot,
     AvailableTimesResponse,
+    ConfirmPlacePayload,
     ConfirmTimePayload,
     InviteCreate,
     MeetupCreate,
@@ -22,6 +24,8 @@ from app.schemas.meetup import (
     MeetupRead,
     ParticipantRead,
     RespondPayload,
+    RestaurantResult,
+    RestaurantSearchResponse,
 )
 
 AVAILABILITY_WINDOW_DAYS = 14
@@ -227,5 +231,66 @@ def confirm_time(
     meetup.confirmed_start = payload.start
     meetup.confirmed_end = payload.end
     meetup.status = "time_fixed"
+    db.commit()
+    return _build_detail(_load_meetup(db, meetup_id))
+
+
+@router.get("/{meetup_id}/restaurants", response_model=RestaurantSearchResponse)
+def recommend_restaurants(
+    meetup_id: uuid.UUID,
+    location: str,
+    category: str,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> RestaurantSearchResponse:
+    meetup = _load_meetup(db, meetup_id)
+    if meetup is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="모임을 찾을 수 없습니다.")
+    if not any(p.user_id == current_user.id for p in meetup.participants):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="이 모임에 접근할 수 없습니다.")
+    if not location.strip():
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="위치를 입력해주세요.")
+    if category not in restaurants_svc.CATEGORIES:
+        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY, detail="지원하지 않는 카테고리입니다.")
+
+    results = restaurants_svc.search_restaurants(location.strip(), category)
+    return RestaurantSearchResponse(
+        is_mock=not restaurants_svc.keys_configured(),
+        restaurants=[
+            RestaurantResult(
+                name=r.name,
+                category=r.category,
+                rating=r.rating,
+                review_count=r.review_count,
+                distance_min=r.distance_min,
+                sources=r.sources,
+                address=r.address,
+                place_url=r.place_url,
+            )
+            for r in results
+        ],
+    )
+
+
+@router.post("/{meetup_id}/confirm-place", response_model=MeetupDetail)
+def confirm_place(
+    meetup_id: uuid.UUID,
+    payload: ConfirmPlacePayload,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+) -> MeetupDetail:
+    meetup = _load_meetup(db, meetup_id)
+    if meetup is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="모임을 찾을 수 없습니다.")
+    if meetup.creator_id != current_user.id:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="모임 생성자만 장소를 확정할 수 있습니다.")
+    if meetup.confirmed_start is None:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT, detail="먼저 시간을 확정한 뒤 장소를 정할 수 있어요."
+        )
+
+    meetup.location_name = payload.location_name
+    meetup.food_category = payload.food_category
+    meetup.status = "confirmed"
     db.commit()
     return _build_detail(_load_meetup(db, meetup_id))
