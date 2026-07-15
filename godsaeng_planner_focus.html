@@ -78,6 +78,55 @@
             gap: 10px;
         }
 
+        .top-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .top-action-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .icon-btn {
+            border: 1px solid rgba(14, 116, 144, 0.24);
+            background: rgba(255, 255, 255, 0.88);
+            color: #0e3d53;
+            border-radius: 999px;
+            padding: 10px 14px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .energy-strip {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 0 0 22px;
+        }
+
+        .energy-btn {
+            border: 1px solid rgba(15, 23, 32, 0.12);
+            background: rgba(255,255,255,0.88);
+            border-radius: 999px;
+            padding: 10px 14px;
+            font-weight: 700;
+            cursor: pointer;
+            color: #244555;
+        }
+
+        .energy-btn.active {
+            background: linear-gradient(90deg, #0e7490, #22c55e);
+            color: #fff;
+            border-color: transparent;
+        }
+
         .day-button {
             border: 1px solid rgba(14, 116, 144, 0.22);
             border-radius: 999px;
@@ -101,7 +150,6 @@
             box-shadow: 0 10px 24px rgba(5, 150, 105, 0.32);
         }
 
-        .agent-panel,
         .panel,
         .aside-card {
             border: 1px solid var(--glass-border);
@@ -110,9 +158,87 @@
             border-radius: 24px;
         }
 
-        .agent-panel {
+        .drawer-backdrop,
+        .modal-backdrop,
+        .focus-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(7, 18, 26, 0.44);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+            z-index: 30;
+        }
+
+        .drawer-backdrop.open,
+        .modal-backdrop.open,
+        .focus-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .assistant-drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: min(460px, 100vw);
+            height: 100vh;
+            z-index: 40;
+            background: rgba(245, 249, 250, 0.96);
+            backdrop-filter: blur(14px);
+            border-left: 1px solid rgba(15, 23, 32, 0.1);
+            box-shadow: -20px 0 50px rgba(15, 23, 42, 0.14);
             padding: 22px;
-            margin-bottom: 22px;
+            transform: translateX(100%);
+            transition: transform 0.28s ease;
+            overflow: auto;
+        }
+
+        .assistant-drawer.open { transform: translateX(0); }
+
+        .settings-modal {
+            position: fixed;
+            inset: 50% auto auto 50%;
+            transform: translate(-50%, -48%) scale(0.98);
+            width: min(760px, calc(100vw - 28px));
+            max-height: calc(100vh - 40px);
+            overflow: auto;
+            z-index: 41;
+            background: rgba(247, 251, 252, 0.98);
+            border: 1px solid rgba(15,23,32,0.12);
+            border-radius: 24px;
+            box-shadow: 0 30px 80px rgba(15,23,42,0.22);
+            padding: 22px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.22s ease, transform 0.22s ease;
+        }
+
+        .settings-modal.open {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .modal-head,
+        .drawer-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .close-btn {
+            border: none;
+            background: rgba(14, 116, 144, 0.12);
+            color: #0e3c53;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
         }
 
         .agent-head {
@@ -135,7 +261,8 @@
             font-size: 0.93rem;
         }
 
-        .agent-panel textarea {
+        .assistant-drawer textarea,
+        .settings-modal textarea {
             width: 100%;
             min-height: 94px;
             margin-top: 12px;
@@ -154,6 +281,10 @@
             gap: 10px;
             margin-top: 10px;
             flex-wrap: wrap;
+        }
+
+        .agent-actions.secondary {
+            margin-top: 8px;
         }
 
         .mode-switch {
@@ -584,6 +715,176 @@
             resize: vertical;
         }
 
+        .mini-focus-card {
+            margin-bottom: 16px;
+            padding: 16px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.88);
+            border: 1px solid rgba(14, 116, 144, 0.14);
+            display: grid;
+            gap: 10px;
+        }
+
+        .assistant-compose {
+            margin-bottom: 18px;
+            padding: 22px;
+            border-radius: 28px;
+            border: 1px solid rgba(14, 116, 144, 0.12);
+            background:
+                radial-gradient(circle at top right, rgba(14, 116, 144, 0.08), transparent 32%),
+                linear-gradient(180deg, rgba(255,255,255,0.96), rgba(247,251,252,0.92));
+            box-shadow: 0 22px 44px rgba(15, 23, 42, 0.08);
+        }
+
+        .assistant-compose h3 {
+            margin: 0 0 8px;
+            color: #123247;
+            font-size: 1.3rem;
+            letter-spacing: 0.01em;
+        }
+
+        .assistant-compose p {
+            margin: 0;
+            color: #4b6677;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .assistant-compose textarea {
+            width: 100%;
+            min-height: 132px;
+            margin-top: 14px;
+            border-radius: 20px;
+            border: 1px solid rgba(14, 116, 144, 0.16);
+            background: rgba(255,255,255,0.98);
+            padding: 16px 18px;
+            font-size: 0.98rem;
+            line-height: 1.7;
+            color: #102636;
+            resize: vertical;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+        }
+
+        .assistant-compose .mode-switch {
+            margin-top: 14px;
+        }
+
+        .assistant-compose .agent-actions {
+            margin-top: 14px;
+        }
+
+        .assistant-compose .btn.primary {
+            min-width: 174px;
+        }
+
+        .assistant-compose .btn.ghost {
+            background: rgba(255,255,255,0.86);
+            border: 1px solid rgba(14, 116, 144, 0.16);
+        }
+
+        .day-title-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 4px;
+        }
+
+        .day-chip {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 52px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, rgba(14, 116, 144, 0.14), rgba(5, 150, 105, 0.16));
+            color: #0f3c52;
+            font-size: 1.05rem;
+            font-weight: 800;
+        }
+
+        .plan-title-input {
+            flex: 1;
+            min-width: 220px;
+            border: 1px solid rgba(14, 116, 144, 0.14);
+            background: rgba(255,255,255,0.65);
+            border-radius: 14px;
+            padding: 10px 12px;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #11293a;
+        }
+
+        .task-quick-add {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+            margin: 14px 0 18px;
+        }
+
+        .task-quick-add input {
+            border: 1px solid rgba(14, 116, 144, 0.22);
+            border-radius: 14px;
+            padding: 12px 14px;
+            font-size: 0.95rem;
+            background: rgba(255,255,255,0.96);
+            color: #153346;
+        }
+
+        .focus-stage {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.22s ease;
+        }
+
+        .focus-stage.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .focus-card {
+            width: min(720px, calc(100vw - 36px));
+            background: rgba(247, 251, 252, 0.98);
+            border: 1px solid rgba(255,255,255,0.35);
+            border-radius: 28px;
+            padding: 28px;
+            box-shadow: 0 30px 90px rgba(0,0,0,0.28);
+            text-align: center;
+        }
+
+        .focus-card h2 {
+            margin: 0 0 12px;
+            font-size: 1.15rem;
+            color: #456175;
+        }
+
+        .focus-task {
+            font-size: clamp(1.5rem, 3vw, 2.4rem);
+            line-height: 1.35;
+            font-weight: 800;
+            color: #0d2230;
+            margin-bottom: 16px;
+        }
+
+        .focus-stage .focus-time {
+            font-size: clamp(2rem, 5vw, 3.6rem);
+        }
+
+        body.focus-active main,
+        body.focus-active .hero {
+            filter: blur(1px) saturate(0.92);
+        }
+
+        body.focus-active .schedule > *:not(.focus-stage):not(.focus-backdrop) {
+            opacity: 0.18;
+        }
+
         .calendar-sync {
             margin-top: 8px;
             border: 1px solid rgba(14, 116, 144, 0.18);
@@ -626,6 +927,7 @@
         }
 
         @media (max-width: 700px) {
+            .task-quick-add { grid-template-columns: 1fr; }
             .day-button { flex: 1 1 calc(50% - 10px); }
         }
     </style>
@@ -639,6 +941,13 @@
     <main class="schedule">
         <div class="meta" id="week-meta"></div>
 
+        <div class="top-actions">
+            <div class="top-action-buttons">
+                <button class="icon-btn" id="assistant-toggle">AI 비서</button>
+                <button class="icon-btn" id="settings-toggle">설정</button>
+            </div>
+        </div>
+
         <div class="nav" id="day-nav">
             <button class="day-button active" data-day="mon">월</button>
             <button class="day-button" data-day="tue">화</button>
@@ -647,61 +956,109 @@
             <button class="day-button" data-day="fri">금</button>
         </div>
 
-        <section class="agent-panel">
+        <div class="energy-strip" id="energy-strip">
+            <button class="energy-btn active" data-energy="high">🔥 최상</button>
+            <button class="energy-btn" data-energy="mid">☕ 보통</button>
+            <button class="energy-btn" data-energy="low">🔋 방전</button>
+        </div>
+
+        <section class="mini-focus-card">
             <div class="agent-head">
                 <div>
-                    <h3>AI 비서</h3>
+                    <h3>오늘의 집중 준비</h3>
                     <div class="daily-motivation" id="daily-motivation"></div>
                 </div>
                 <div class="crisis" id="crisis-view"></div>
             </div>
-            <div class="mode-switch">
+            <div class="focus-time" id="focus-time">25:00</div>
+            <div class="focus-actions">
+                <button class="mini-btn" id="focus-start">25분 집중 시작</button>
+                <button class="mini-btn" id="focus-reset">리셋</button>
+            </div>
+            <div class="assistant-brief" id="assistant-brief"></div>
+        </section>
+
+        <section class="assistant-compose">
+            <h3>AI 비서에게 요청</h3>
+            <p>상황 설명이나 질문을 입력하면 바로 추천과 대응 방안을 정리합니다.</p>
+            <div class="mode-switch" style="margin-top:12px;">
                 <button class="mode-btn active" data-mode="student">학생 모드</button>
                 <button class="mode-btn" data-mode="worker">직장인 모드</button>
             </div>
             <div class="mode-hint" id="mode-hint"></div>
             <textarea id="agent-request"></textarea>
             <div class="agent-actions">
-                <button id="generate-agent" class="btn primary">AI 비서</button>
+                <button id="generate-agent" class="btn primary">AI 비서에게 요청</button>
+                <button id="assistant-drawer-open" class="btn ghost">대화창 열기</button>
             </div>
-            <div class="focus-lab">
-                <div class="focus-time" id="focus-time">25:00</div>
-                <div class="focus-actions">
-                    <button class="mini-btn" id="focus-start">25분 집중 시작</button>
-                    <button class="mini-btn" id="focus-reset">리셋</button>
-                </div>
-                <textarea id="meeting-input" class="meeting-input" placeholder="직장인 모드: 회의 시간 입력 예시&#10;09:30-10:00 데일리 스탠드업&#10;14:00-15:00 주간 회의"></textarea>
-                <div class="calendar-sync">
-                    <div class="calendar-grid">
-                        <select id="calendar-provider">
-                            <option value="manual">수동 입력</option>
-                            <option value="google">Google Calendar</option>
-                            <option value="outlook">Outlook Calendar</option>
-                        </select>
-                        <input id="calendar-id" placeholder="Calendar ID 또는 계정 이메일" />
-                    </div>
-                    <div class="calendar-grid">
-                        <input id="calendar-key" placeholder="Google API Key (구글 사용 시)" />
-                        <input id="calendar-token" placeholder="Outlook Access Token (아웃룩 사용 시)" />
-                    </div>
-                    <div class="focus-actions">
-                        <button class="mini-btn" id="calendar-sync-btn">캘린더 가져오기</button>
-                        <button class="mini-btn" id="calendar-save-btn">연동 설정 저장</button>
-                    </div>
-                    <div class="calendar-note" id="calendar-status">캘린더 연동 상태: 설정 대기</div>
-                </div>
+            <div class="agent-actions secondary">
+                <button id="restore-request" class="btn ghost">최근 요청 불러오기</button>
+                <button id="clear-request" class="btn ghost">입력 지우기</button>
             </div>
-            <div class="agent-task-list" id="agent-task-list"></div>
-            <div class="agent-summary" id="agent-summary"></div>
-            <div class="search-result" id="search-result"></div>
-            <div class="recommendation-list" id="agent-recommendations"></div>
-            <div class="assistant-brief" id="assistant-brief"></div>
         </section>
 
         <div class="layout">
             <section class="panel" id="plan-panel"></section>
             <aside class="summary-aside" id="summary-aside"></aside>
         </div>
+
+        <div class="drawer-backdrop" id="drawer-backdrop"></div>
+        <aside class="assistant-drawer" id="assistant-drawer">
+            <div class="drawer-head">
+                <div>
+                    <h3 style="margin:0;">AI 비서</h3>
+                    <div class="calendar-note">추천 결과와 대화 기록을 여기서 확인합니다.</div>
+                </div>
+                <button class="close-btn" id="assistant-close">×</button>
+            </div>
+            <div class="agent-task-list" id="agent-task-list"></div>
+            <div class="agent-summary" id="agent-summary"></div>
+            <div class="search-result" id="search-result"></div>
+            <div class="recommendation-list" id="agent-recommendations"></div>
+        </aside>
+
+        <div class="modal-backdrop" id="modal-backdrop"></div>
+        <section class="settings-modal" id="settings-modal">
+            <div class="modal-head">
+                <div>
+                    <h3 style="margin:0;">설정</h3>
+                    <div class="calendar-note">캘린더 연동과 모드 설정은 여기에서 한 번만 관리합니다.</div>
+                </div>
+                <button class="close-btn" id="settings-close">×</button>
+            </div>
+            <div class="calendar-sync">
+                <div class="calendar-grid">
+                    <select id="calendar-provider">
+                        <option value="manual">수동 입력</option>
+                        <option value="google">Google Calendar</option>
+                        <option value="outlook">Outlook Calendar</option>
+                    </select>
+                    <input id="calendar-id" placeholder="Calendar ID 또는 계정 이메일" />
+                </div>
+                <div class="calendar-grid">
+                    <input id="calendar-key" placeholder="Google API Key (구글 사용 시)" />
+                    <input id="calendar-token" placeholder="Outlook Access Token (아웃룩 사용 시)" />
+                </div>
+                <textarea id="meeting-input" class="meeting-input" placeholder="직장인 모드: 회의 시간 입력 예시&#10;09:30-10:00 데일리 스탠드업&#10;14:00-15:00 주간 회의"></textarea>
+                <div class="focus-actions">
+                    <button class="mini-btn" id="calendar-sync-btn">캘린더 가져오기</button>
+                    <button class="mini-btn" id="calendar-save-btn">연동 설정 저장</button>
+                </div>
+                <div class="calendar-note" id="calendar-status">캘린더 연동 상태: 설정 대기</div>
+            </div>
+        </section>
+
+        <div class="focus-backdrop" id="focus-backdrop"></div>
+        <section class="focus-stage" id="focus-stage">
+            <div class="focus-card">
+                <h2>지금은 이 한 가지에만 집중하세요</h2>
+                <div class="focus-task" id="focus-task-text"></div>
+                <div class="focus-time" id="focus-stage-time">25:00</div>
+                <div class="focus-actions" style="justify-content:center; margin-top:16px;">
+                    <button class="mini-btn" id="focus-stop">몰입 모드 종료</button>
+                </div>
+            </div>
+        </section>
     </main>
 
     <script>
@@ -711,6 +1068,7 @@
         const WEEKLY_HISTORY_KEY = 'weekly_planner_history_v1';
         const ASSISTANT_PROFILE_KEY = 'assistant_profile_v1';
         const CALENDAR_CONFIG_KEY = 'assistant_calendar_config_v1';
+        const ASSISTANT_REQUEST_STATE_KEY = 'assistant_request_state_v1';
 
         const dailyMotivations = {
             mon: '월요일은 방향을 잡는 날. 첫 25분 집중으로 엔진을 켜보세요.',
@@ -722,7 +1080,7 @@
 
         const plans = {
             mon: {
-                title: '[월] 주간 실행 계획 설정',
+                title: '',
                 description: '실행 가능한 범위로 목표를 다시 쪼개고 빠른 완료 항목부터 시작합니다.',
                 tasks: [
                     { text: '주간 목표 3개 재정의', done: false, details: ['반드시 필요한 목표만 추립니다.'] },
@@ -732,7 +1090,7 @@
                 ]
             },
             tue: {
-                title: '[화] API 연동 및 데이터 흐름 연결',
+                title: '',
                 description: '완료 경험을 쌓을 수 있도록 API 단위 테스트와 연결 작업을 병행합니다.',
                 tasks: [
                     { text: '핵심 API 1개 먼저 연결', done: true, details: ['응답 성공 케이스 체크'] },
@@ -742,7 +1100,7 @@
                 ]
             },
             wed: {
-                title: '[수] 매칭 로직 고도화와 피로 관리',
+                title: '',
                 description: '피로가 큰 구간이라, 고난도 1개와 저난도 2개를 묶어 진행합니다.',
                 tasks: [
                     { text: '매칭 로직 엣지 케이스 보완', done: true, details: [] },
@@ -752,7 +1110,7 @@
                 ]
             },
             thu: {
-                title: '[목] 예외 처리 점검 + 과제 대응',
+                title: '',
                 description: '업무와 과제를 함께 관리하되, 현재 체력에 맞춰 순서를 조정합니다.',
                 tasks: [
                     { text: '공공정책학 과제 제출 및 관련 자료 조사', done: false, details: ['과제 안내문 링크 확보'] },
@@ -761,7 +1119,7 @@
                 ]
             },
             fri: {
-                title: '[금] 데모와 주간 회고',
+                title: '',
                 description: '최종 실행 경로를 검증하고 발표용 핵심 포인트를 정리합니다.',
                 tasks: [
                     { text: '데모 시나리오 리허설', done: false, details: [] },
@@ -773,6 +1131,7 @@
 
         let currentDay = 'mon';
         let currentMode = 'student';
+        let currentEnergy = 'high';
         let focusRemaining = 25 * 60;
         let focusTimerId = null;
         const assistantChat = [];
@@ -780,6 +1139,7 @@
         const panel = document.getElementById('plan-panel');
         const navButtons = document.querySelectorAll('.day-button');
         const modeButtons = document.querySelectorAll('.mode-btn');
+        const energyButtons = document.querySelectorAll('.energy-btn');
         const agentRequest = document.getElementById('agent-request');
         const meetingInput = document.getElementById('meeting-input');
         const calendarProvider = document.getElementById('calendar-provider');
@@ -787,6 +1147,32 @@
         const calendarKeyInput = document.getElementById('calendar-key');
         const calendarTokenInput = document.getElementById('calendar-token');
         const calendarStatus = document.getElementById('calendar-status');
+        const assistantDrawer = document.getElementById('assistant-drawer');
+        const drawerBackdrop = document.getElementById('drawer-backdrop');
+        const settingsModal = document.getElementById('settings-modal');
+        const modalBackdrop = document.getElementById('modal-backdrop');
+        const focusBackdrop = document.getElementById('focus-backdrop');
+        const focusStage = document.getElementById('focus-stage');
+
+        function loadAssistantRequestState() {
+            try {
+                const raw = JSON.parse(localStorage.getItem(ASSISTANT_REQUEST_STATE_KEY) || '{}');
+                return {
+                    draft: raw.draft || '',
+                    lastSubmitted: raw.lastSubmitted || ''
+                };
+            } catch (error) {
+                return { draft: '', lastSubmitted: '' };
+            }
+        }
+
+        function saveAssistantRequestState(nextState) {
+            const current = loadAssistantRequestState();
+            localStorage.setItem(ASSISTANT_REQUEST_STATE_KEY, JSON.stringify({
+                draft: typeof nextState.draft === 'string' ? nextState.draft : current.draft,
+                lastSubmitted: typeof nextState.lastSubmitted === 'string' ? nextState.lastSubmitted : current.lastSubmitted
+            }));
+        }
 
         function loadAssistantProfile() {
             try {
@@ -1008,6 +1394,10 @@
             return /(피곤|지침|번아웃|야근|컨디션|힘들|지쳤)/i.test(text);
         }
 
+        function energyLabel() {
+            return currentEnergy === 'high' ? '최상' : currentEnergy === 'mid' ? '보통' : '방전';
+        }
+
         function estimateImpact(taskText) {
             const highImpactKeywords = ['마감', '제출', '핵심', '오류', '장애', '검증'];
             const lowImpactKeywords = ['정리', '기록', '메모'];
@@ -1223,7 +1613,7 @@
             const byMode = currentMode === 'student'
                 ? '예: 기말고사 공부하기를 지금 시작 가능한 단계로 쪼개줘.'
                 : '예: 오늘 야근해서 피곤해. 회의 사이 빈 시간에 할 일 추천해줘.';
-            agentRequest.placeholder = `${DAY_LABEL[currentDay]}요일 상황을 입력하세요. ${byMode}`;
+            agentRequest.placeholder = `${DAY_LABEL[currentDay]}요일 상황을 입력하세요. 현재 에너지 ${energyLabel()} 상태입니다. ${byMode}`;
             document.getElementById('daily-motivation').textContent = dailyMotivations[currentDay];
             updateLowAchievementAlert();
             updateAssistantBrief();
@@ -1261,14 +1651,73 @@
                 return;
             }
 
-            brief.textContent = `지금 바로 할 일: "${firstPending.text}". 남은 작업 ${pendingCount}개 중 이 항목부터 끝내면 흐름이 생깁니다. ${earlyPercent <= LOW_ACHIEVEMENT_THRESHOLD ? '현재 달성률 저조 구간이라 15분 단위로 쪼개서 시작하세요.' : '집중 블록 25분을 적용해 완성도를 높여보세요.'}`;
+            brief.textContent = `지금 바로 할 일: "${firstPending.text}". 남은 작업 ${pendingCount}개 중 이 항목부터 끝내면 흐름이 생깁니다. ${currentEnergy === 'low' ? '현재 에너지가 낮으니 가장 가벼운 작업부터 시작하세요.' : earlyPercent <= LOW_ACHIEVEMENT_THRESHOLD ? '현재 달성률 저조 구간이라 15분 단위로 쪼개서 시작하세요.' : '집중 블록 25분을 적용해 완성도를 높여보세요.'}`;
+        }
+
+        function openAssistantDrawer() {
+            assistantDrawer.classList.add('open');
+            drawerBackdrop.classList.add('open');
+        }
+
+        function closeAssistantDrawer() {
+            assistantDrawer.classList.remove('open');
+            drawerBackdrop.classList.remove('open');
+        }
+
+        function restoreLastRequest() {
+            const state = loadAssistantRequestState();
+            if (!state.lastSubmitted) return;
+            agentRequest.value = state.lastSubmitted;
+            saveAssistantRequestState({ draft: state.lastSubmitted });
+        }
+
+        function clearAssistantRequest() {
+            agentRequest.value = '';
+            saveAssistantRequestState({ draft: '' });
+            agentRequest.focus();
+        }
+
+        function openSettingsModal() {
+            settingsModal.classList.add('open');
+            modalBackdrop.classList.add('open');
+        }
+
+        function closeSettingsModal() {
+            settingsModal.classList.remove('open');
+            modalBackdrop.classList.remove('open');
+        }
+
+        function getCurrentFocusTask() {
+            const task = plans[currentDay].tasks.find(item => !item.done);
+            return task ? task.text : '오늘 가장 중요한 한 가지를 정리하세요';
+        }
+
+        function openFocusMode() {
+            document.body.classList.add('focus-active');
+            focusBackdrop.classList.add('open');
+            focusStage.classList.add('open');
+            document.getElementById('focus-task-text').textContent = getCurrentFocusTask();
+            document.getElementById('focus-stage-time').textContent = document.getElementById('focus-time').textContent;
+        }
+
+        function closeFocusMode() {
+            document.body.classList.remove('focus-active');
+            focusBackdrop.classList.remove('open');
+            focusStage.classList.remove('open');
         }
 
         function renderPlan() {
             const day = plans[currentDay];
             panel.innerHTML = `
-                <h2 class="editable-title" contenteditable="true" id="day-title">${escaped(day.title)}</h2>
+                <div class="day-title-row">
+                    <div class="day-chip">${DAY_LABEL[currentDay]}</div>
+                    <input class="plan-title-input" id="day-title" placeholder="계획 제목을 입력하세요." />
+                </div>
                 <p class="editable-description" contenteditable="true" id="day-description">${escaped(day.description)}</p>
+                <div class="task-quick-add">
+                    <input id="quick-task-input" placeholder="오늘 할 일을 입력하세요." />
+                    <button class="btn primary" id="quick-task-submit">추가</button>
+                </div>
                 <ul class="task-list">
                     ${day.tasks.map((task, index) => `
                         <li class="task-item" data-task-index="${index}">
@@ -1292,13 +1741,14 @@
                     `).join('')}
                 </ul>
                 <div class="panel-actions">
-                    <button class="btn ghost" id="add-task">체크리스트 항목 추가</button>
                     <button class="btn ghost" id="sort-easy">쉬운 작업 우선 정렬</button>
                 </div>
             `;
 
-            document.getElementById('day-title').addEventListener('blur', (e) => {
-                plans[currentDay].title = e.target.textContent.trim() || plans[currentDay].title;
+            document.getElementById('day-title').value = day.title;
+
+            document.getElementById('day-title').addEventListener('input', (e) => {
+                plans[currentDay].title = e.target.value;
                 renderSummary();
             });
 
@@ -1354,10 +1804,22 @@
                 });
             });
 
-            document.getElementById('add-task').addEventListener('click', () => {
-                plans[currentDay].tasks.push({ text: '새 TODO 항목', done: false, details: [] });
+            function submitQuickTask() {
+                const input = document.getElementById('quick-task-input');
+                const value = input.value.trim();
+                if (!value) return;
+                plans[currentDay].tasks.unshift({ text: value, done: false, details: [] });
+                input.value = '';
                 renderPlan();
                 renderSummary();
+            }
+
+            document.getElementById('quick-task-submit').addEventListener('click', submitQuickTask);
+            document.getElementById('quick-task-input').addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    submitQuickTask();
+                }
             });
 
             document.getElementById('sort-easy').addEventListener('click', () => {
@@ -1522,7 +1984,7 @@
             }
 
             if (currentMode === 'worker') {
-                if (detectLowCondition(request)) {
+                if (detectLowCondition(request) || currentEnergy === 'low') {
                     recs.push({
                         type: 'reorder-light',
                         title: '컨디션 기반 재정렬 추천',
@@ -1540,6 +2002,15 @@
                         metrics: `탐지된 Focus Time ${slots.length}개`
                     });
                 }
+            }
+
+            if (currentEnergy === 'low' && pending.length) {
+                recs.push({
+                    type: 'reorder-light',
+                    title: '에너지 절약형 정렬 추천',
+                    message: '현재 방전 상태 기준으로 가장 짧고 쉬운 작업부터 처리하는 순서가 적합합니다.',
+                    metrics: '에너지 입력: 방전'
+                });
             }
 
             if (pending.length) {
@@ -1679,6 +2150,7 @@
 
         function buildAssistantResponse(request, recommendations, searchData, shouldReschedule, earlyPercent) {
             const lines = [];
+            lines.push(`현재 에너지 상태는 ${energyLabel()}입니다.`);
             if (shouldReschedule) {
                 lines.push(`현재 월~수 성취율 ${earlyPercent}%로 달성률 저조 구간입니다. 오늘은 부담이 낮은 작업부터 완료하는 전략이 적합합니다.`);
             }
@@ -1708,7 +2180,7 @@
                 ? tasks.map(t => `
                     <div class="agent-task-item">
                         <div><strong>${escaped(t.task)}</strong></div>
-                        <div class="priority-badge ${priorityClass(t.priority)}">${t.priority}</div>
+                        ${t.priority === 'Low' ? '' : `<div class="priority-badge ${priorityClass(t.priority)}">${t.priority}</div>`}
                     </div>
                 `).join('')
                 : '<p>요청 문장을 입력하면 AI 비서가 분해합니다.</p>';
@@ -1726,6 +2198,7 @@
 
         async function runAssistant() {
             const request = agentRequest.value.trim();
+            openAssistantDrawer();
             if (!request) {
                 renderAgentOutput([], {
                     source: 'None',
@@ -1738,6 +2211,8 @@
                 return;
             }
 
+
+            saveAssistantRequestState({ draft: request, lastSubmitted: request });
             // 사용자 채팅 즉시 UI 출력
             addAssistantChat('user', request);
             renderAssistantChat();
@@ -1764,7 +2239,8 @@
             const tasks = clauses.map((clause) => ({ task: clause, priority: getPriority(clause) }));
             tasks.sort((a, b) => ({ High: 0, Medium: 1, Low: 2 }[a.priority] - ({ High: 0, Medium: 1, Low: 2 }[b.priority])));
 
-            const searchQuery = detectMethodIntent(request) ? `${request} 방법 best practices` : request;
+            const enrichedRequest = `[현재 사용자의 에너지: ${energyLabel()} 상태] ${request}`;
+            const searchQuery = detectMethodIntent(request) ? `${enrichedRequest} 방법 best practices` : enrichedRequest;
             const searchData = await searchExternalInsights(searchQuery);
             const earlyPercent = computeEarlyWeekPercent();
             const shouldReschedule = earlyPercent <= LOW_ACHIEVEMENT_THRESHOLD;
@@ -1820,11 +2296,15 @@
             const target = document.getElementById('focus-time');
             const minute = String(Math.floor(focusRemaining / 60)).padStart(2, '0');
             const second = String(focusRemaining % 60).padStart(2, '0');
-            target.textContent = `${minute}:${second}`;
+            const value = `${minute}:${second}`;
+            target.textContent = value;
+            const stageTime = document.getElementById('focus-stage-time');
+            if (stageTime) stageTime.textContent = value;
         }
 
         document.getElementById('focus-start').addEventListener('click', () => {
             if (focusTimerId) return;
+            openFocusMode();
             focusTimerId = setInterval(() => {
                 focusRemaining -= 1;
                 updateFocusTimeView();
@@ -1834,6 +2314,7 @@
                     focusRemaining = 25 * 60;
                     updateFocusTimeView();
                     awardPoints(20, '25분 집중 완료');
+                    closeFocusMode();
                 }
             }, 1000);
         });
@@ -1845,7 +2326,26 @@
             }
             focusRemaining = 25 * 60;
             updateFocusTimeView();
+            closeFocusMode();
         });
+
+        document.getElementById('focus-stop').addEventListener('click', closeFocusMode);
+        document.getElementById('restore-request').addEventListener('click', restoreLastRequest);
+        document.getElementById('clear-request').addEventListener('click', clearAssistantRequest);
+
+        agentRequest.addEventListener('input', () => {
+            saveAssistantRequestState({ draft: agentRequest.value });
+        });
+
+        document.getElementById('assistant-toggle').addEventListener('click', openAssistantDrawer);
+        document.getElementById('assistant-drawer-open').addEventListener('click', openAssistantDrawer);
+        document.getElementById('assistant-close').addEventListener('click', closeAssistantDrawer);
+        drawerBackdrop.addEventListener('click', closeAssistantDrawer);
+
+        document.getElementById('settings-toggle').addEventListener('click', openSettingsModal);
+        document.getElementById('settings-close').addEventListener('click', closeSettingsModal);
+        modalBackdrop.addEventListener('click', closeSettingsModal);
+        focusBackdrop.addEventListener('click', closeFocusMode);
 
         document.getElementById('generate-agent').addEventListener('click', runAssistant);
 
@@ -1871,12 +2371,24 @@
         modeButtons.forEach((button) => {
             button.addEventListener('click', () => {
                 modeButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
+                modeButtons.forEach(btn => {
+                    if (btn.dataset.mode === button.dataset.mode) btn.classList.add('active');
+                });
                 currentMode = button.dataset.mode;
                 updateModeHint();
                 updateDailyPlaceholder();
                 addAssistantChat('assistant', `${currentMode === 'student' ? '학생' : '직장인'} 모드로 전환되었습니다.`);
                 renderAssistantChat();
+            });
+        });
+
+        energyButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                energyButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                currentEnergy = button.dataset.energy;
+                updateDailyPlaceholder();
+                updateAssistantBrief();
             });
         });
 
@@ -1893,6 +2405,8 @@
 
         refreshWeekMeta();
         applyCalendarConfigToUI();
+        const initialRequestState = loadAssistantRequestState();
+        agentRequest.value = initialRequestState.draft || '';
         calendarStatus.textContent = calendarProvider.value === 'manual'
             ? '캘린더 연동 상태: 수동 입력 모드'
             : '캘린더 연동 상태: 설정 불러옴';
@@ -1901,7 +2415,6 @@
         updateFocusTimeView();
         renderPlan();
         renderSummary();
-        runAssistant();
 
         setInterval(() => {
             refreshWeekMeta();
