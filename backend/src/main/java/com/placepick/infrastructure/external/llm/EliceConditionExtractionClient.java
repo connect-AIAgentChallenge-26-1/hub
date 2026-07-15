@@ -193,11 +193,16 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
             ProviderResponse response = execute(requestBody(command));
             JsonNode root = parseJson(response.body(), response.httpStatus());
             String content = validateEnvelopeAndReadContent(root, response.httpStatus());
-            return new ExtractionDiagnostic(parseContent(content, response.httpStatus()), null);
+            return new ExtractionDiagnostic(
+                parseContent(content, response.httpStatus()),
+                null,
+                null
+            );
         } catch (LlmProviderException exception) {
             return new ExtractionDiagnostic(
                 ExtractionOutcome.providerFailure(toErrorCode(exception.failure())),
-                exception.boundaryCode()
+                exception.boundaryCode(),
+                exception.stage()
             );
         }
     }
@@ -725,7 +730,11 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         );
     }
 
-    record ExtractionDiagnostic(ExtractionOutcome outcome, String boundaryCode) {
+    record ExtractionDiagnostic(
+        ExtractionOutcome outcome,
+        String boundaryCode,
+        LlmProviderFailureStage failureStage
+    ) {
         ExtractionDiagnostic {
             Objects.requireNonNull(outcome, "outcome");
         }

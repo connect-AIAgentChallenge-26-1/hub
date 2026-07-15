@@ -30,12 +30,17 @@ public final class LinkedLiveConditionClientFactory {
     ) {
         EliceConditionExtractionClient.ExtractionDiagnostic diagnostic =
             client.extractForDiagnostics(command);
-        return new LinkedLiveExtraction(diagnostic.outcome(), diagnostic.boundaryCode());
+        return new LinkedLiveExtraction(
+            diagnostic.outcome(),
+            diagnostic.boundaryCode(),
+            diagnostic.failureStage() == null ? null : diagnostic.failureStage().name()
+        );
     }
 
     public record LinkedLiveExtraction(
         ExtractionOutcome outcome,
-        String boundaryCode
+        String boundaryCode,
+        String failureStage
     ) {
     }
 }

@@ -100,7 +100,11 @@ class WorkflowLinkedLiveProbeTest {
                 extractionClient,
                 new ExtractionCommand(SYNTHETIC_INPUT, SAFETY_IDENTIFIER)
             );
-        requireExpectedExtraction(extractionResult.outcome(), extractionResult.boundaryCode());
+        requireExpectedExtraction(
+            extractionResult.outcome(),
+            extractionResult.boundaryCode(),
+            extractionResult.failureStage()
+        );
         ConfirmedRecommendationCondition confirmed = confirmedFixture();
 
         NaverApiHubAdapter naver = LinkedLiveNaverAdapterFactory.create(
@@ -236,11 +240,14 @@ class WorkflowLinkedLiveProbeTest {
 
     private static void requireExpectedExtraction(
         ExtractionOutcome extraction,
-        String boundaryCode
+        String boundaryCode,
+        String failureStage
     ) {
         if (extraction == null || !extraction.extracted() || extraction.condition() == null) {
             String errorCode = boundaryCode != null
                 ? boundaryCode
+                : extraction != null && failureStage != null
+                    ? extraction.errorCode().name() + "_" + failureStage
                 : extraction == null
                 ? "INVALID_RESPONSE"
                 : extraction.errorCode().name();
