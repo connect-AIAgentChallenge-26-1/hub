@@ -198,6 +198,8 @@ class EliceGroundedReasonClientIntegrationTest {
         );
         assertThat(statementProperties.path("evidenceIds").path("minItems").asInt()).isOne();
         assertThat(statementProperties.path("evidenceIds").path("maxItems").asInt()).isOne();
+        assertThat(statementProperties.path("evidenceIds").path("uniqueItems").isMissingNode())
+            .isTrue();
     }
 
     private static void verifyOneRequest() {

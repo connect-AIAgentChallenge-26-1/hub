@@ -46,8 +46,10 @@ mkdir -p \
   "${TEST_ROOT}/scripts/lib" \
   "${TEST_ROOT}/edge" \
   "${TEST_ROOT}/node_modules/.bin" \
+  "${TEST_ROOT}/node_modules/esbuild" \
   "${TEST_ROOT}/fake-bin"
 cp "${ROOT_DIR}/scripts/workflow-live-linked.sh" "${TEST_ROOT}/scripts/"
+cp "${ROOT_DIR}/scripts/run-local-linked-workflow-gateway.mjs" "${TEST_ROOT}/scripts/"
 cp "${ROOT_DIR}/scripts/scan-test-reports.sh" "${TEST_ROOT}/scripts/"
 cp "${ROOT_DIR}/scripts/lib/live-contract-env.sh" "${TEST_ROOT}/scripts/lib/"
 cp "${ROOT_DIR}/edge/wrangler.local-linked-workflow-gateway.jsonc" "${TEST_ROOT}/edge/"
@@ -89,6 +91,9 @@ case "${1:-}" in
     printf '%043d' "${count}" | tr '0' 'l'
     ;;
   -) cat >/dev/null; printf '18766\n' ;;
+  */run-local-linked-workflow-gateway.mjs)
+    exec "${FAKE_NODE_GATEWAY:?}" --env-file "${4:?}"
+    ;;
   *) exit 1 ;;
 esac
 NODE
@@ -181,6 +186,9 @@ esac
 trap 'exit 0' TERM INT
 while true; do sleep 1; done
 WRANGLER
+cat > "${TEST_ROOT}/node_modules/esbuild/package.json" <<'ESBUILD'
+{"name":"esbuild","version":"0.28.1"}
+ESBUILD
 cat > "${TEST_ROOT}/gradlew" <<'GRADLE'
 #!/usr/bin/env bash
 if [[ "${1:-}" == '--version' ]]; then
@@ -189,7 +197,7 @@ if [[ "${1:-}" == '--version' ]]; then
 fi
 {
   printf 'args=%s\n' "$*"
-  for name in PLACEPICK_EXTERNAL_MODE WORKFLOW_LINKED_GATEWAY_URL WORKFLOW_LINKED_CONTROL_TOKEN WORKFLOW_LINKED_NAVER_KEY_ID WORKFLOW_LINKED_NAVER_KEY WORKFLOW_LINKED_ELICE_TOKEN APPROVED_SHA NAVER_API_HUB_KEY_ID NAVER_API_HUB_KEY PROXY_TOKEN CHAT_PROXY_URL EMBEDDING_PROXY_URL OPENAI_MODEL OPENAI_EMBEDDING_MODEL; do
+  for name in PLACEPICK_EXTERNAL_MODE WORKFLOW_LINKED_GATEWAY_URL WORKFLOW_LINKED_CONTROL_TOKEN WORKFLOW_LINKED_NAVER_KEY_ID WORKFLOW_LINKED_NAVER_KEY WORKFLOW_LINKED_ELICE_TOKEN WORKFLOW_LINKED_SCENARIO APPROVED_SHA NAVER_API_HUB_KEY_ID NAVER_API_HUB_KEY PROXY_TOKEN CHAT_PROXY_URL EMBEDDING_PROXY_URL OPENAI_MODEL OPENAI_EMBEDDING_MODEL; do
     if [[ -v "${name}" ]]; then state=present; else state=absent; fi
     printf '%s=%s\n' "${name}" "${state}"
   done
@@ -200,7 +208,7 @@ mkdir -p backend/build/test-results/workflowLiveLinkedTest
 [[ "${FAKE_GRADLE_FAIL:-false}" != true ]] || exit 1
 [[ "${FAKE_GRADLE_MISSING_MARKER:-false}" != true ]] || exit 0
 printf '%s\n' \
-  'WORKFLOW_LINKED result=validated linked=true status=passed degraded=false reasonFallback=false callCount=8' \
+  "WORKFLOW_LINKED result=validated scenario=${WORKFLOW_LINKED_SCENARIO:-missing} linked=true status=passed degraded=false reasonFallback=false callCount=8" \
   > backend/build/test-results/workflowLiveLinkedTest/safe-output.txt
 case "${FAKE_REPORT_LEAK:-}" in
   credential) printf '%s\n' 'synthetic-secret-key' >> backend/build/test-results/workflowLiveLinkedTest/safe-output.txt ;;
@@ -223,9 +231,11 @@ chmod +x \
 git -C "${TEST_ROOT}" init --quiet
 git -C "${TEST_ROOT}" config user.email 'guard@example.invalid'
 git -C "${TEST_ROOT}" config user.name 'Workflow Guard'
-git -C "${TEST_ROOT}" add .gitignore scripts edge node_modules/.bin/wrangler gradlew fake-bin
+git -C "${TEST_ROOT}" add .gitignore scripts edge node_modules/.bin/wrangler \
+  node_modules/esbuild/package.json gradlew fake-bin
 git -C "${TEST_ROOT}" commit --quiet -m 'guard fixture'
 head_sha="$(git -C "${TEST_ROOT}" rev-parse HEAD)"
+fixture_branch="$(git -C "${TEST_ROOT}" branch --show-current)"
 git -C "${TEST_ROOT}" update-ref refs/remotes/origin/main "${head_sha}"
 
 common_env=(
@@ -237,6 +247,8 @@ common_env=(
   FAKE_NODE_COUNTER="${TEST_ROOT}/node-counter"
   FAKE_GIT_COUNTER="${TEST_ROOT}/git-counter"
   FAKE_FIND_COUNTER="${TEST_ROOT}/find-counter"
+  FAKE_NODE_GATEWAY="${TEST_ROOT}/node_modules/.bin/wrangler"
+  SCENARIO=seoul-cafe-complete-v1
 )
 
 expect_failure "CI execution is forbidden" \
@@ -265,7 +277,50 @@ feature_sha="$(git -C "${TEST_ROOT}" rev-parse HEAD)"
 expect_failure "allowed only for the fetched origin/main SHA" \
   "${common_env[@]}" APPROVED_SHA="${feature_sha}" \
     bash "${TEST_ROOT}/scripts/workflow-live-linked.sh"
+
+git -C "${TEST_ROOT}" branch -m feat/workflow-linked-live-validation
+git -C "${TEST_ROOT}" update-ref \
+  refs/remotes/origin/feat/workflow-linked-live-validation "${feature_sha}"
+development_output="$(
+  "${common_env[@]}" WORKFLOW_LINKED_EXECUTION_POLICY=development \
+    APPROVED_SHA="${feature_sha}" bash "${TEST_ROOT}/scripts/workflow-live-linked.sh" 2>&1
+)" || fail "the reviewed development Live fixture failed."
+assert_fake_cleanup
+[[ "${development_output}" == *"scenario=seoul-cafe-complete-v1 linked=true status=passed"* ]] ||
+  fail "the development Live success marker was not produced."
+
+# 같은 pushed SHA의 수동 재실행은 허용하되 invocation마다 Gateway와 자격을 새로 만든다.
+development_repeat_output="$(
+  "${common_env[@]}" WORKFLOW_LINKED_EXECUTION_POLICY=development \
+    APPROVED_SHA="${feature_sha}" bash "${TEST_ROOT}/scripts/workflow-live-linked.sh" 2>&1
+)" || fail "the explicit same-SHA development Live repeat failed."
+assert_fake_cleanup
+[[ "${development_repeat_output}" == *"cleanup=true"* ]] ||
+  fail "the repeated development Live run did not clean up."
+
+expect_failure "must be main or development" \
+  "${common_env[@]}" WORKFLOW_LINKED_EXECUTION_POLICY=unknown \
+    APPROVED_SHA="${feature_sha}" bash "${TEST_ROOT}/scripts/workflow-live-linked.sh"
+expect_failure "SCENARIO must be an allowlisted" \
+  "${common_env[@]}" SCENARIO=unknown WORKFLOW_LINKED_EXECUTION_POLICY=development \
+    APPROVED_SHA="${feature_sha}" bash "${TEST_ROOT}/scripts/workflow-live-linked.sh"
+git -C "${TEST_ROOT}" update-ref \
+  refs/remotes/origin/feat/workflow-linked-live-validation "${head_sha}"
+expect_failure "must match the pushed validation branch" \
+  "${common_env[@]}" WORKFLOW_LINKED_EXECUTION_POLICY=development \
+    APPROVED_SHA="${feature_sha}" bash "${TEST_ROOT}/scripts/workflow-live-linked.sh"
+git -C "${TEST_ROOT}" update-ref \
+  refs/remotes/origin/feat/workflow-linked-live-validation "${feature_sha}"
+mkdir "${TEST_ROOT}/.git/placepick-workflow-live-linked.lock"
+expect_failure "another linked Live workflow is already running" \
+  "${common_env[@]}" WORKFLOW_LINKED_EXECUTION_POLICY=development \
+    APPROVED_SHA="${feature_sha}" bash "${TEST_ROOT}/scripts/workflow-live-linked.sh"
+rmdir "${TEST_ROOT}/.git/placepick-workflow-live-linked.lock"
+
 git -C "${TEST_ROOT}" reset --quiet --hard "${head_sha}"
+git -C "${TEST_ROOT}" branch -m "${fixture_branch}"
+git -C "${TEST_ROOT}" update-ref -d \
+  refs/remotes/origin/feat/workflow-linked-live-validation
 
 mkdir -p "${TEST_ROOT}/backend/src/workflowLiveLinkedTest/java/example"
 printf 'final class UntrackedInjection {}\n' \
@@ -384,12 +439,12 @@ success_output="$(
     bash "${TEST_ROOT}/scripts/workflow-live-linked.sh" 2>&1
 )" || fail "the synthetic linked workflow success fixture failed."
 assert_fake_cleanup
-[[ "${success_output}" == *"WORKFLOW_LINKED mode=linked linked=true status=passed"* ]] ||
+[[ "${success_output}" == *"scenario=seoul-cafe-complete-v1 linked=true status=passed"* ]] ||
   fail "the synthetic linked workflow success marker was not produced."
 
 grep -Fxq 'args=:backend:workflowLiveLinkedTest --no-daemon' "${TEST_ROOT}/gradle-record" ||
   fail "the dedicated linked workflow Gradle task was not invoked."
-for name in PLACEPICK_EXTERNAL_MODE WORKFLOW_LINKED_GATEWAY_URL WORKFLOW_LINKED_CONTROL_TOKEN WORKFLOW_LINKED_NAVER_KEY_ID WORKFLOW_LINKED_NAVER_KEY WORKFLOW_LINKED_ELICE_TOKEN APPROVED_SHA; do
+for name in PLACEPICK_EXTERNAL_MODE WORKFLOW_LINKED_GATEWAY_URL WORKFLOW_LINKED_CONTROL_TOKEN WORKFLOW_LINKED_NAVER_KEY_ID WORKFLOW_LINKED_NAVER_KEY WORKFLOW_LINKED_ELICE_TOKEN WORKFLOW_LINKED_SCENARIO APPROVED_SHA; do
   grep -Fxq "${name}=present" "${TEST_ROOT}/gradle-record" ||
     fail "the Java linked workflow process missed ${name}."
 done

@@ -2,7 +2,7 @@
 id: WI-0042
 title: PP-040 Naver·Elice 실제 Linked Live 워크플로 검증
 type: work-record
-status: in-progress
+status: done
 date: 2026-07-15
 owners:
   - placepick-team
@@ -15,17 +15,23 @@ related:
   - ../troubleshooting/TS-0014-cross-runtime-canonical-url-evidence-id.md
   - ../troubleshooting/TS-0015-cross-runtime-naver-html-plain-text.md
   - ../troubleshooting/TS-0016-linked-live-provider-error-flattening.md
+  - ../troubleshooting/TS-0017-workerd-linked-live-outbound-transport.md
+  - ../troubleshooting/TS-0018-elice-structured-output-unsupported-array-keyword.md
+  - ../experiments/EXP-0001-linked-live-representative-scenario-repeatability.md
   - WI-0041-recommendation-core-split-live-workflow.md
   - https://github.com/gdh0730/hub/issues/50
 paths:
   - build.gradle
+  - package-lock.json
   - backend/src/integrationTest/java/com/placepick/recommendation/**
+  - backend/src/integrationTest/java/com/placepick/infrastructure/external/llm/**
   - backend/src/workflowLiveLinkedTest/**
   - backend/build.gradle
   - backend/gradle.lockfile
   - backend/src/main/java/com/placepick/recommendation/application/candidate/**
   - backend/src/main/java/com/placepick/shared/text/**
   - backend/src/main/java/com/placepick/infrastructure/external/naver/NaverTextSanitizer.java
+  - backend/src/main/java/com/placepick/infrastructure/external/llm/**
   - backend/src/main/java/com/placepick/recommendation/reason/**
   - backend/src/test/java/com/placepick/recommendation/application/candidate/**
   - backend/src/test/java/com/placepick/infrastructure/external/naver/NaverTextSanitizerTest.java
@@ -35,6 +41,8 @@ paths:
   - edge/src/shared/naver-html-text.ts
   - edge/tests/naver-html-text.test.ts
   - scripts/workflow-live-linked*.sh
+  - scripts/run-local-linked-workflow-gateway.mjs
+  - scripts/run-local-linked-workflow-gateway-test.sh
   - scripts/check.sh
   - Makefile
   - AGENTS.md
@@ -46,8 +54,9 @@ paths:
 
 PP-040은 fork 저장소의 [Issue #50](https://github.com/gdh0730/hub/issues/50)으로
 추적한다. 이 Work Record는 자동 harness 구현과 실제 Provider 실행 증거를 분리한다.
-코드가 자동 검증을 통과해도 병합된 `main`에서 Linked Live가 성공하기 전에는 실제
-워크플로 계약을 `implemented`로 바꾸지 않는다.
+코드 자동 검증과 실제 Provider 실행 증거를 같은 완료로 취급하지 않는다. 최종 검증
+SHA `e789af65e94441aa38a018a2931c3705f7125112`에서 허용된 세 사용자 시나리오가 모두
+strict Linked 성공 조건을 충족했으므로 PP-040의 동기 Linked core 범위는 완료했다.
 
 ## 문제와 근거
 
@@ -79,8 +88,9 @@ Live를 정확히 한 번 실행했으나 안전한 실패 상태로 종료했�
 - Embedding 호출은 0회이며 추천·정렬·중복 제거에 사용하지 않는다.
 - retry·redirect는 0회이고 비밀, 검색 결과, prompt·completion과 전체 응답은 저장하지
   않는다.
-- 실제 성공은 harness가 병합된 깨끗한 `main`의 정확한 SHA에서 한 번 실행한 뒤에만
-  기록한다.
+- 실제 성공은 병합 `main` 또는 저장소 소유자가 명시적으로 승인하고 원격에 push한 전용
+  검증 브랜치의 깨끗한 정확한 SHA에서 기록한다. 같은 SHA의 수동 재실행은 허용하되 각
+  invocation은 새 Gateway·일회성 자격·6~9회 예산을 사용하고 HTTP retry는 0회다.
 
 ## 범위, 비범위와 제약
 
@@ -97,7 +107,9 @@ Linked Live 성공도 이 비범위가 구현되거나 운영 약관 준수와 �
 저장소 소유자는 Naver와 Elice 양쪽의 실행 승인이 있고 주소·도로명 주소를 포함한 현재
 전체 제품 문맥 전달을 승인했다고 진술했다. 승인 원문은 저장소와 이 작업에서 독립적으로
 검토하지 않았다. 따라서 이 기록은 법률·약관 적합성 판단이나 제3자 보관·학습 부재의
-증거가 아니며, 고정 합성 입력의 로컬 일회성 검증에만 적용한다.
+증거가 아니며, 고정 합성 입력을 사용하는 invocation-bound 로컬 반복 검증에만 적용한다.
+각 invocation은 새 Gateway·일회성 로컬 자격·독립 호출 예산을 가지며 HTTP 재시도와는
+구분한다.
 
 ## 판단 기준과 대안
 
@@ -174,10 +186,47 @@ Linked Live 성공도 이 비범위가 구현되거나 운영 약관 준수와 �
     경로의 ignored 파일을 거부하고, 각 evidence 파일의 검색 종료 코드 0·1·기타를
     leak·미검출·scan 실패로 구분했다. 합성 성공 marker는 guard 내부에서만 캡처해 실제
     Live 성공처럼 표준 check 로그에 남지 않게 했다.
+16. 저장소 소유자는 Provider 호출 여유가 있으므로 merge-per-attempt 제한을 제거하고
+    실제 연결을 충분히 반복 검증하도록 승인했다. 기본 `main` 경계는 유지하면서
+    `feat/workflow-linked-live-validation`의 정확한 pushed SHA만 허용하는 development
+    명령을 추가했다. clean tree, `origin/main` ancestry, 원격 SHA 일치, Java 17·Node 24,
+    실행 source 주입 차단과 process lock은 그대로 적용한다. 같은 SHA 반복은 자동 HTTP
+    retry가 아니라 사용자가 시작한 서로 독립적인 invocation이다.
+17. 병합 SHA `69e95c62e72917804868bdb883fcb26f80c9e4cf`에서 두 번째 Linked 실행도
+    `conditionExtraction / PROVIDER_UNAVAILABLE`로 재현됐지만, 곧이어 Elice Chat·Embedding
+    개별 실제 계약은 성공했다. 이에 인증·routing 전체 장애와 제품형 조건 추출 문제를
+    분리했다. Gateway가 strict JSON 구조뿐 아니라 `서울`·`조용한`·`흡연`의 한 표현까지
+    강제해 동치 표현을 502로 바꾸고, Java가 그 safe code를 가용성 오류로 평탄화하는
+    결함을 확인했다. Gateway는 JSON Schema 인스턴스 구조만 검사하고 fixture 의미는
+    Java가 NFKC+유한 allowlist로 검사하도록 책임을 분리했다. loopback 전용 safe header의
+    고정 오류 code만 Java가 신뢰하며 원문 body는 읽거나 보존하지 않는다.
+18. 세부 code 보강 뒤 실제 실행은 `LINKED_PROVIDER_UNAVAILABLE`로 분류됐다. 이는 Elice
+    upstream 5xx가 아니라 로컬 workerd의 fetch·timeout·redirect 전송 경로가 응답을 얻지
+    못했다는 뜻이다. 같은 endpoint의 Java 17 개별 Chat 계약은 직전에 실제 성공했으므로
+    API 자격과 workerd 전송을 분리했다. Gateway의 검증 코드는 유지하면서 실행 adapter만
+    Node 24 loopback HTTP server로 교체했다. Node runner는 고정 env-file allowlist를 직접
+    파싱하고 esbuild 0.28.1로 같은 Worker 코드를 임시 bundle하며, raw 자격은 여전히
+    Gateway process에만 존재한다. 자세한 진단과 rollback은 TS-0017에 기록한다.
+19. Node 전송 경로를 복구한 뒤 이유 생성 단계가 Elice 400으로 실패했다. 조건 추출
+    schema에는 없고 이유 schema에만 있던 `uniqueItems`가 Provider의 strict Structured
+    Outputs 지원 부분집합과 맞지 않는 차이였다. 문장당 evidence ID 정확히 하나라는 계약은
+    `minItems=1`과 `maxItems=1`만으로 충분하므로 `uniqueItems`를 제거했다. Java의 후검증과
+    Gateway provenance 검증은 배열 크기와 단일 evidence 소유 관계를 계속 강제한다.
+20. nullable 대표 시나리오에서 Elice가 지역을 정본 `서울`과 의미가 같은 exact `Seoul`로
+    반환할 수 있음을 관찰했다. 사용자 확인 전 Draft의 동치 표현만 닫힌 finite alias로
+    수용하고, 확정 fixture에서는 정본 `서울`로 정규화했다. 부분 문자열·광범위 번역·fuzzy
+    비교는 도입하지 않았다. 위치·유형·인원·예산·선호·제외의 cross-field 불일치는 원문을
+    노출하지 않는 field별 safe code로 구분해 확인 경계에서 fail-closed한다.
+21. 최종 push SHA `e789af65e94441aa38a018a2931c3705f7125112`에서 allowlist된 세
+    시나리오를 각각 독립 invocation으로 실행했다. 세 실행 모두 실제 Elice 조건 추출,
+    versioned 사용자 확인, 실제 Naver Local·Blog, 제품 core 점수·Top 3, 실제 Elice 이유,
+    서버 place/evidence 검증을 끝까지 통과했다. safe summary의 논리 호출 수는 각각
+    `7/6/6`이고 모두 `linked=true`, `degraded=false`, `reasonFallback=false`,
+    `cleanup=true`, HTTP retry 0회였다.
 
 ## 구현 결과와 검증 증거
 
-현재 상태는 `in-progress`다. 이 변경은 다음 자동 검증 기반을 구현 대상으로 둔다.
+현재 상태는 `done`이다. 다음 자동 검증 기반과 실제 Provider 캠페인을 모두 완료했다.
 
 - `RecommendationCoreUseCase`의 정상, 한 번의 완화, 후보 부족, Blog degraded, LLM
   전체 fallback 다섯 흐름
@@ -192,10 +241,11 @@ Linked Live 성공도 이 비범위가 구현되거나 운영 약관 준수와 �
 - 종료 시 Gateway·일회성 자격·임시 파일 정리와 report secret scan
 
 2026-07-15 Java 17 Dev Container에서 별도 cache 우회 옵션 없는 표준 `make check`가
-통과했다. Mock core 다섯 흐름은 `5 tests / 0 failures`, Linked Gateway는 `50/50`, Edge
-전체는 `13 files / 153 tests`, 문서 95개와 음성 검증 `8/8`이었고 생성 report 97개 안전
-scan도 통과했다. Gradle check는 Linked Live source를 컴파일했지만 live task를 실행하지
-않았으며 일반 검증은 Mock 경로만 수행했다. guard 내부의 합성 fixture가 만든
+최종 코드와 증거 문서에 대해 통과했다. Linked Gateway는 `58/58`, Edge 전체는
+`13 files / 161 tests`, 문서 99개와 음성 검증 `8/8`이었고 생성 report 127개 안전 scan도
+통과했다. Gradle `check`의 17개 task는 단위·통합·Eval과 Linked offline 계약을 통과했지만
+Live task를 실행하지 않았으며 일반 검증은 Mock 경로만 수행했다. guard 내부의 합성
+fixture가 만든
 `linked=true` marker는 캡처해 검증하되 표준 check 로그에는 출력하지 않는다. 이는 실제
 Provider 성공 증거가 아니다.
 
@@ -248,7 +298,36 @@ make workflow-live-linked APPROVED_SHA=541a98b3b73bfdaa3a1c7396aaea32ce410a7237
 오류나 일시 장애라고 임의로 단정하지 않으며 Provider dashboard 미대조로 실제 wire 호출
 수도 확정하지 않았다. 다음 결정은 원본 자격 없이 실패 범주를 Mock으로 재현하고 body를
 노출하지 않는 안전한 세부 code를 보존한 뒤, 수정 PR이 병합된 새로운 `main` SHA에서만
-한 번 재검증하는 것이다.
+한 번 재검증하는 것이다. 이 진단은 이후 문제 해결 이력이며 최종 상태 설명은 아래 반복
+캠페인 증거를 따른다.
+
+### 2026-07-15 최종 Linked Live 반복 캠페인의 사용자 흐름
+
+최종 실행 기준은 push된 SHA `e789af65e94441aa38a018a2931c3705f7125112`다. 아래 세
+시나리오는 같은 호출의 재시도가 아니라 새 Gateway·새 일회성 로컬 자격을 사용하는 독립
+invocation이며, 응답 원문·장소명·주소·검색어·prompt·completion은 기록하지 않았다.
+
+1. `seoul-cafe-complete-v1`은 서울 카페, 2명, 1인당 최대 2만원, 조용함 선호와 흡연 제외를
+   가진 완전 입력 흐름이다. Elice Draft의 모든 범주를 확인한 뒤 versioned 사용자 확인
+   fixture로 확정했고, Naver 장소·Blog 근거를 제품 core가 정규화·필터·중복 제거·점수화해
+   Top 3를 만들었다. Elice 이유의 place/evidence 집합과 금지 속성을 서버가 다시 검증했다.
+   결과는 strict success, 논리 호출 7회였다.
+2. `seoul-restaurant-nullable-v1`은 서울 음식점이 필요하지만 인원과 예산을 명시하지 않은
+   흐름이다. Draft가 누락값을 추정하지 않는지, exact `Seoul` 표현은 닫힌 alias로만
+   해석한 뒤 사용자 확인 fixture가 `서울` 정본을 적용하는지 검증했다. 이후 같은 실제
+   Local→Blog→점수·Top 3→근거 이유 경로를 통과했으며 결과는 strict success, 논리 호출
+   6회였다.
+3. `seoul-cafe-dessert-v1`은 서울의 디저트 카페 선호와 흡연 제외를 포함하되 인원과 예산은
+   명시하지 않은 흐름이다. 선호·제외와 nullable field의 cross-field 의미를 확인한 뒤 실제
+   검색 근거만으로 Top 3와 이유를 만들고 provenance를 검증했다. 결과는 strict success,
+   논리 호출 6회였다.
+
+세 실행 모두 후보 3개, 실제 Blog evidence, place ID 집합 일치와 같은 후보의 evidence만
+인용하는 계약을 통과했고 `linked=true`, `degraded=false`, `reasonFallback=false`,
+`cleanup=true`였다. adapter 자동 retry와 redirect는 0회였고 Embedding은 호출하지 않았다.
+`7/6/6`은 이 캠페인의 안전 요약이지 가용성·성능 SLA나 Provider 성공률 표본은 아니다.
+과거 조건 추출 실패와 이유 schema 400은 삭제하지 않고 위 문제 해결 기록에 원인·수정·
+재검증 순서로 보존한다.
 
 ## AI 사용과 사람의 검증
 
@@ -263,12 +342,15 @@ safe summary를 직접 확인한다. 이번 작업에서 확인한 사람의 입
 ## 남은 위험과 학습
 
 실제 검색 분포에 따라 세 후보가 나오지 않거나 Blog·Elice가 실패할 수 있다. 이런 안전한
-종료는 제품 fallback 동작의 증거가 될 수 있지만 Linked Live 성공은 아니다. 같은 SHA의
-자동 재실행 대신 Mock에서 원인을 재현하고 새 코드가 병합된 새 SHA에서 다시 승인한다.
+종료는 제품 fallback 동작의 증거가 될 수 있지만 Linked Live 성공은 아니다. 같은 run의
+HTTP 자동 재시도는 금지한다. 원인을 Mock에서 재현해 새 clean commit으로 만든 뒤에는
+승인된 전용 검증 브랜치에서 새 invocation으로 다시 실행할 수 있다.
 
-첫 실제 실행은 검색 분포에 도달하기 전에 조건 추출 `PROVIDER_UNAVAILABLE`로 중단됐다.
-안전 오류의 세분성이 부족해 upstream 5xx와 전송·timeout을 구분하지 못한 점 자체를 후속
-진단 요구로 남긴다. 재시도를 추가하거나 schema를 완화해 우연한 성공을 만들지 않는다.
+초기 실행은 검색 분포에 도달하기 전에 조건 추출 `PROVIDER_UNAVAILABLE`로 중단됐고,
+후속 실행은 이유 schema의 지원되지 않는 `uniqueItems` 때문에 400으로 실패했다. 전자는
+cross-field safe diagnostics와 Node 24 전송 adapter로 분리했고 후자는 정확히 한 evidence
+계약을 유지하면서 해당 keyword만 제거해 최종 세 시나리오로 재검증했다. finite alias는
+관찰된 exact 동치만 허용하며 새로운 언어·표기 변형을 자동 확장하지 않는다.
 
 Windows bind mount의 Gradle task output cache mode 문제는 TS-0013 정책을 적용한 뒤
 별도 우회 없는 표준 `make check`로 해결을 검증했다. 향후 host filesystem이나 Gradle

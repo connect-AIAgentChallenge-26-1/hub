@@ -13,6 +13,7 @@ source "${ROOT_DIR}/scripts/lib/live-contract-env.sh"
 temp_dir=''
 gateway_pid=''
 gateway_started_pid=''
+lock_dir=''
 # shellcheck disable=SC2329,SC2317 # trap에서 간접 호출되는 정리 함수다.
 stop_gateway() {
   if [[ -n "${gateway_pid}" ]] && kill -0 "${gateway_pid}" 2>/dev/null; then
@@ -32,6 +33,8 @@ cleanup() {
   stop_gateway
   [[ -z "${temp_dir}" ]] || rm -rf -- "${temp_dir}" 2>/dev/null || true
   temp_dir=''
+  [[ -z "${lock_dir}" ]] || rmdir -- "${lock_dir}" 2>/dev/null || true
+  lock_dir=''
 }
 trap cleanup EXIT INT TERM
 
@@ -42,10 +45,36 @@ live_contract_assert_local_file "${ROOT_DIR}" "${LIVE_ENV_FILE}"
 approved_sha="${APPROVED_SHA:-}"
 [[ "${approved_sha}" =~ ^[0-9a-f]{40}$ ]] ||
   live_contract_fail "APPROVED_SHA must be an exact 40-character lowercase commit SHA."
+scenario="${SCENARIO:-}"
+case "${scenario}" in
+  seoul-cafe-complete-v1|seoul-restaurant-nullable-v1|seoul-cafe-dessert-v1) ;;
+  *) live_contract_fail "SCENARIO must be an allowlisted linked workflow scenario." ;;
+esac
 [[ "$(git -C "${ROOT_DIR}" rev-parse HEAD)" == "${approved_sha}" ]] ||
   live_contract_fail "APPROVED_SHA must exactly match HEAD."
-[[ "$(git -C "${ROOT_DIR}" rev-parse origin/main)" == "${approved_sha}" ]] ||
-  live_contract_fail "the probe is allowed only for the fetched origin/main SHA."
+execution_policy="${WORKFLOW_LINKED_EXECUTION_POLICY:-main}"
+case "${execution_policy}" in
+  main)
+    [[ "$(git -C "${ROOT_DIR}" rev-parse origin/main)" == "${approved_sha}" ]] ||
+      live_contract_fail "the probe is allowed only for the fetched origin/main SHA."
+    ;;
+  development)
+    readonly development_branch='feat/workflow-linked-live-validation'
+    current_branch="$(git -C "${ROOT_DIR}" symbolic-ref --quiet --short HEAD 2>/dev/null || true)"
+    [[ "${current_branch}" == "${development_branch}" ]] ||
+      live_contract_fail "development Live is allowed only on the dedicated validation branch."
+    remote_ref="refs/remotes/origin/${development_branch}"
+    git -C "${ROOT_DIR}" show-ref --verify --quiet "${remote_ref}" ||
+      live_contract_fail "the dedicated validation branch must be pushed before development Live."
+    [[ "$(git -C "${ROOT_DIR}" rev-parse "${remote_ref}")" == "${approved_sha}" ]] ||
+      live_contract_fail "APPROVED_SHA must match the pushed validation branch."
+    git -C "${ROOT_DIR}" merge-base --is-ancestor origin/main HEAD ||
+      live_contract_fail "the validation branch must descend from fetched origin/main."
+    ;;
+  *)
+    live_contract_fail "WORKFLOW_LINKED_EXECUTION_POLICY must be main or development."
+    ;;
+esac
 git -C "${ROOT_DIR}" diff --quiet -- ||
   live_contract_fail "tracked working tree changes must be absent."
 git -C "${ROOT_DIR}" diff --cached --quiet -- ||
@@ -74,6 +103,12 @@ mapfile -d '' -t ignored_execution_files < "${ignored_manifest}"
 (( ${#ignored_execution_files[@]} == 0 )) ||
   live_contract_fail "ignored files in executable source paths must be absent."
 
+git_dir="$(git -C "${ROOT_DIR}" rev-parse --absolute-git-dir)"
+lock_candidate="${git_dir}/placepick-workflow-live-linked.lock"
+mkdir -- "${lock_candidate}" 2>/dev/null ||
+  live_contract_fail "another linked Live workflow is already running."
+lock_dir="${lock_candidate}"
+
 command -v node >/dev/null 2>&1 || live_contract_fail "Node.js is required."
 command -v java >/dev/null 2>&1 || live_contract_fail "Java is required."
 command -v curl >/dev/null 2>&1 || live_contract_fail "curl is required."
@@ -87,8 +122,10 @@ gradle_jvm="$("${ROOT_DIR}/gradlew" --version \
   | awk -F: '/^(Launcher )?JVM:/{sub(/^[[:space:]]*/, "", $2); print $2; exit}')"
 [[ "${gradle_jvm}" =~ ^17([.[:space:]]|$) ]] ||
   live_contract_fail "the Gradle launcher JVM must be Java 17."
-[[ -x "${ROOT_DIR}/node_modules/.bin/wrangler" ]] ||
-  live_contract_fail "pinned Wrangler is missing; run npm ci in the Dev Container."
+[[ -f "${ROOT_DIR}/node_modules/esbuild/package.json" ]] ||
+  live_contract_fail "pinned esbuild is missing; run npm ci in the Dev Container."
+[[ -f "${ROOT_DIR}/scripts/run-local-linked-workflow-gateway.mjs" ]] ||
+  live_contract_fail "the Node linked Gateway runner is missing."
 
 live_contract_load_env "${LIVE_ENV_FILE}"
 live_contract_require_mode
@@ -144,6 +181,7 @@ NODE
 
 gateway_log="${temp_dir}/gateway.log"
 gateway_env_file="${temp_dir}/gateway.env"
+gateway_bundle="${temp_dir}/local-linked-workflow-gateway.mjs"
 printf '%s=%s\n' \
   'PLACEPICK_EXTERNAL_MODE' "${mode}" \
   'LOCAL_WORKFLOW_CONTROL_TOKEN' "${control_token}" \
@@ -157,7 +195,7 @@ printf '%s=%s\n' \
   'OPENAI_MODEL' "${chat_model}" \
   > "${gateway_env_file}"
 (
-  cd "${ROOT_DIR}/edge"
+  cd "${ROOT_DIR}"
   exec env \
     -u PLACEPICK_EXTERNAL_MODE \
     -u NAVER_API_HUB_KEY_ID \
@@ -167,12 +205,11 @@ printf '%s=%s\n' \
     -u EMBEDDING_PROXY_URL \
     -u OPENAI_MODEL \
     -u OPENAI_EMBEDDING_MODEL \
-    "${ROOT_DIR}/node_modules/.bin/wrangler" dev \
-      --config wrangler.local-linked-workflow-gateway.jsonc \
-      --env-file "${gateway_env_file}" \
-      --ip 127.0.0.1 \
-      --port "${port}" \
-      --log-level error
+    node "${ROOT_DIR}/scripts/run-local-linked-workflow-gateway.mjs" \
+      "${ROOT_DIR}/edge/src/local-linked-workflow-gateway/worker.ts" \
+      "${gateway_bundle}" \
+      "${gateway_env_file}" \
+      "${port}"
 ) >"${gateway_log}" 2>&1 &
 gateway_pid=$!
 gateway_started_pid="${gateway_pid}"
@@ -207,6 +244,7 @@ env \
   WORKFLOW_LINKED_NAVER_KEY_ID="${local_naver_key_id}" \
   WORKFLOW_LINKED_NAVER_KEY="${local_naver_key}" \
   WORKFLOW_LINKED_ELICE_TOKEN="${local_elice_token}" \
+  WORKFLOW_LINKED_SCENARIO="${scenario}" \
   APPROVED_SHA="${approved_sha}" \
   ./gradlew :backend:workflowLiveLinkedTest --no-daemon
 gradle_status=$?
@@ -291,7 +329,11 @@ if evidence_contains_regex \
 fi
 for request_marker in \
   '서울에서 2명이 1인당 20000원 이하로 조용한 카페를 찾습니다.' \
+  '서울 음식점을 찾습니다.' \
+  '서울 디저트 카페를 찾습니다.' \
   '서울 카페 조용한' \
+  '서울 음식점' \
+  '서울 카페 디저트' \
   'You extract a draft venue recommendation condition.' \
   'Return grounded reason statements for exactly the supplied three place IDs.'; do
   if evidence_contains_fixed "${request_marker}"; then
@@ -308,7 +350,7 @@ done
 
 safe_call_count=''
 if (( gradle_status == 0 )); then
-  result_pattern='WORKFLOW_LINKED result=validated linked=true status=passed degraded=false reasonFallback=false callCount=[6-9]'
+  result_pattern="WORKFLOW_LINKED result=validated scenario=${scenario} linked=true status=passed degraded=false reasonFallback=false callCount=[6-9]"
   result_matches=()
   for evidence_file in "${evidence_files[@]}"; do
     set +e
@@ -339,8 +381,8 @@ cleanup
   live_contract_fail "the linked workflow temporary directory was not removed."
 
 if (( gradle_status == 0 )); then
-  printf 'WORKFLOW_LINKED mode=linked linked=true status=passed degraded=false reasonFallback=false callCount=%s cleanup=true\n' \
-    "${safe_call_count}"
+  printf 'WORKFLOW_LINKED mode=linked scenario=%s linked=true status=passed degraded=false reasonFallback=false callCount=%s cleanup=true\n' \
+    "${scenario}" "${safe_call_count}"
 fi
 
 exit "${gradle_status}"

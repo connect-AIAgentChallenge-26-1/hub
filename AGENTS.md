@@ -39,7 +39,10 @@ Work Record가 있을 때만 구현한다. 구현·테스트·계약 문서는 �
 - 승인된 Naver 실제 계약: `make naver-live-contract`
 - 승인된 Elice 합성 계약: `make llm-live-contract`
 - 승인된 Split Live: `make workflow-live-probe APPROVED_SHA=<40자리-main-SHA>`
-- 승인된 Naver→Elice Linked Live: `make workflow-live-linked APPROVED_SHA=<40자리-main-SHA>`
+- 승인된 Naver→Elice Linked Live:
+  `make workflow-live-linked APPROVED_SHA=<40자리-main-SHA> SCENARIO=<id>`
+- 검토·push된 전용 브랜치 반복 Live:
+  `make workflow-live-linked-dev APPROVED_SHA=<40자리-브랜치-SHA> SCENARIO=<id>`
 - 관측성: `make observe`
 - 부하 smoke: `make load-smoke`
 - 데이터 초기화: `make reset`
@@ -63,7 +66,9 @@ Gradle을 직접 실행할 때도 루트의 `./gradlew`만 사용한다. `check`
 - Elice 개별 Local Live에서는 합성 데이터만 사용하고 Embedding을 추천·검색·중복 제거에
   사용하지 않는다. 직접 OpenAI Responses는 자동 fallback이 아니다.
 - PP-040 Linked Live만 저장소 소유자의 양쪽 Provider 승인 진술과 ADR-0013의 field
-  allowlist 아래 고정 합성 입력·메모리 처리·로컬 일회성 Naver→Elice 전달을 허용한다.
+  allowlist 아래 고정 합성 입력·메모리 처리·로컬 Naver→Elice 전달을 허용한다. 허용된
+  `SCENARIO`는 `seoul-cafe-complete-v1`, `seoul-restaurant-nullable-v1`,
+  `seoul-cafe-dessert-v1`뿐이다.
   승인 원문은 독립 검토하지 않았으며 제품 runtime·실제 사용자·배포나 법률 준수로
   확장하지 않는다.
 - 배포 Live의 원본 provider key는 외부 Provider Gateway만 소유한다. 공유 Fork,
@@ -71,7 +76,10 @@ Gradle을 직접 실행할 때도 루트의 `./gradlew`만 사용한다. `check`
 - Mock 자동 검증, Naver·Elice 개별 Local Live, Split Live, Linked Live, 제품 runtime과
   클라우드 배포 상태를 별도 증거로 기록한다.
 - 표준 `make check`와 CI는 `.env.live.local`을 읽거나 실제 Provider를 호출하지 않는다.
-  Live 명령은 깨끗한 병합 `main`과 정확한 승인 SHA에서만 실행한다.
+  Live 명령은 깨끗한 병합 `main` 또는 검토·push된 전용 validation branch의 정확한 승인
+  SHA에서만 실행한다. 각 invocation은 새 Gateway·port·일회성 local 자격과 독립 호출
+  예산을 사용하고 HTTP retry·redirect를 0회로 유지한다. 같은 검증 campaign 안에서
+  닫힌 합성 시나리오를 독립 invocation으로 반복하는 것은 허용한다.
 - 실제 사용자·제품 runtime의 검색 결과 결합·영구 저장·LLM 전달은 별도 약관·보안·
   개인정보 승인 전 차단한다.
 - 비밀값, `.env`, 토큰, 개인정보를 출력하거나 커밋하지 않는다.

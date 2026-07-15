@@ -289,7 +289,7 @@ Worker가 DB에서 읽어 event의 개인정보와 크기를 줄인다. relay는
 | `implemented` | Mock linked 추천 core | 정상·완화·후보 부족·Blog degraded·LLM fallback의 다섯 전체 application 흐름 | PP-039, PP-040 |
 | `specified` | Split Live Probe | 2026-07-15 실제 실행은 safe failure; 성공 4회·`linked=false` 증거 없음 | PP-039 |
 | `implemented` | Linked Live 자동 harness | 실제 호출 없이 source compile·Gateway·launcher·provenance·redaction 검증 | PP-040 |
-| `specified` | Linked Live Workflow | 2026-07-15 첫 병합-main 실행은 조건 추출 `PROVIDER_UNAVAILABLE`; 새 SHA의 `linked=true` 성공 필요 | PP-040 |
+| `implemented` | Linked Live Workflow | SHA `e789af65...`의 allowlist 3개 실제 연결 시나리오가 strict success, 호출 `7/6/6` | PP-040 |
 | `implemented` | Naver Java adapter | 현행 API HUB Local·Blog port와 오류 정규화 | PP-013 |
 | `implemented` | Naver Local Live | Local·Blog 각 1회 2xx·schema, safe report scan 통과 | PP-013 |
 | `implemented` | Elice Chat Local Live | 합성 입력 1회 2xx·strict schema·usage, safe report scan 통과 | PP-038 |
@@ -329,6 +329,9 @@ draft를 저장하지 않고 422로 종료한다.
 enum으로, evidence 배열은 `minItems=1`, `maxItems=1`로 제한하고 서버는 인용한 evidence
 유형과 문장이 일치하는지 다시 검증한다. 장소명 같은 token을 공유하더라도
 `장소명에는 루프탑이 있습니다`와 같은 자유 속성 문장은 거부한다.
+정확히 한 항목이라는 의미는 `minItems=1`, `maxItems=1`과 서버 post-validation으로
+완결하며, Elice strict Structured Outputs 지원 부분집합에서 400을 일으킨 `uniqueItems`는
+사용하지 않는다.
 
 LLM은 새로운 사실을 요약·추론하거나 점수·순위를 정하는 주체가 아니다. 결정론적 서버가
 후보와 순위를 먼저 확정하고 LLM은 위 두 개의 보수적 표시 문장 중 근거 유형에 맞는 것을
@@ -385,7 +388,9 @@ fallback하지 않는다. Elice의 보관·로깅·학습 사용·삭제·개인
 아니다.
 
 PP-040의 로컬 Linked Live는 저장소 소유자가 Naver·Elice 양쪽 실행과 현재 전체 제품
-문맥 전달을 승인했다고 진술한 고정 합성 입력의 일회성 예외다. 승인 원문은 독립 검토하지
+문맥 전달을 승인했다고 진술한 고정 합성 입력의 invocation-bound 반복 검증 예외다.
+각 실행은 새 Gateway·일회성 로컬 자격·독립 호출 예산을 사용하며 HTTP retry가 아니다.
+승인 원문은 독립 검토하지
 않았으므로 법률·약관 준수나 실제 사용자 데이터 처리 허용을 주장하지 않는다. Elice
 요청 allowlist는 확정 조건의 `locationQuery`·`placeType`·`placeTypeDetail`·
 `preferences`·`exclusions`, 장소의 UUID·이름·category, Local evidence의 ID·유형·
@@ -413,10 +418,18 @@ Vercel과 Render에는 원본 Naver key를 저장하지 않는다. Elice token�
 | Elice Local Live | 합성 Chat·Embedding 각 1회 2xx와 schema 확인 | 2026-07-14 통과; strict Chat·usage와 Embedding 1,536차원, 논리 호출 2회 |
 | Mock linked 추천 core | 합성 Naver·LLM fixture를 같은 application use case로 연결 | 다섯 core 사용자 흐름 구현·자동 검증; 실제 외부 호출 0회 |
 | Split Live Probe | Elice 합성 추출·Naver Local·Blog·Elice 합성 이유 4회, provider 간 실제 데이터 전달 없음 | 2026-07-15 main 실행 safe failure; 성공 summary 없음, `specified` 유지 |
-| Linked Live 자동 harness | 자격 격리·실제 Naver provenance·6~9회 budget·safe summary | 코드·자동 검증 `implemented`; 실제 Provider 호출 0회 |
-| Linked Live Workflow | 실제 Naver 근거를 Elice에 연결한 전체 흐름 | 첫 실제 실행은 조건 추출에서 안전 실패; `linked=true` 없음, `specified` 유지 |
+| Linked Live 자동 harness | 자격 격리·실제 Naver provenance·6~9회 budget·safe summary | 코드·자동 검증 `implemented`; 표준 `make check`의 실제 Provider 호출 0회 |
+| Linked Live Workflow | 실제 Naver 근거를 Elice에 연결한 동기 core 전체 흐름 | SHA `e789af65...`의 3개 allowlist 시나리오 strict success; 호출 `7/6/6`, 모두 `degraded=false`, `reasonFallback=false`, `cleanup=true`, retry 0회 |
 | 제품 LLM runtime | PP-009·PP-016·PP-029 구현과 provider 정책 승인 | 구현되지 않음 |
 | 클라우드 배포 | Gate·Gateway와 demo stack에서 승인 SHA E2E 확인 | 배포되지 않음 |
+
+Linked 반복 캠페인은 완전 입력 카페, 인원·예산 nullable 음식점, 인원·예산 nullable
+디저트 카페의 세 닫힌 시나리오를 사용했다. 조건 Draft의 exact `Seoul`은 finite alias로만
+사용자 확인 정본 `서울`에 연결하며 broad·fuzzy 비교는 금지한다. 조건 field 간 불일치는
+원문을 포함하지 않는 safe code로 fail-closed한다. 초기 조건 추출 전송 실패와 이유
+schema의 `uniqueItems` 400은 성공으로 덮어쓰지 않고 WI-0042에 원인·수정·재검증 이력으로
+보존한다. 세 번의 성공은 동기 Linked core 호환성 증거이지 SLA·성공률이나 제품 runtime
+가용성 증거가 아니다.
 
 2026-07-15 첫 코드 자동 검증 baseline은 Windows bind mount의 Gradle task output cache
 mode 복원 실패 뒤 전체 build cache를 임시로 끄고 원인을 분리했다. 영구 정책은 모든

@@ -15,6 +15,7 @@ public final class LlmProviderException extends RuntimeException {
     private final LlmProviderFailure failure;
     private final Integer httpStatus;
     private final LlmProviderFailureStage stage;
+    private final String boundaryCode;
 
     LlmProviderException(
         LlmProviderFailure failure,
@@ -22,10 +23,21 @@ public final class LlmProviderException extends RuntimeException {
         LlmProviderFailureStage stage,
         String message
     ) {
+        this(failure, httpStatus, stage, message, null);
+    }
+
+    LlmProviderException(
+        LlmProviderFailure failure,
+        Integer httpStatus,
+        LlmProviderFailureStage stage,
+        String message,
+        String boundaryCode
+    ) {
         super(message, null, false, false);
         this.failure = Objects.requireNonNull(failure, "failure");
         this.httpStatus = httpStatus;
         this.stage = Objects.requireNonNull(stage, "stage");
+        this.boundaryCode = boundaryCode;
     }
 
     public LlmProviderFailure failure() {
@@ -38,5 +50,9 @@ public final class LlmProviderException extends RuntimeException {
 
     public LlmProviderFailureStage stage() {
         return stage;
+    }
+
+    String boundaryCode() {
+        return boundaryCode;
     }
 }

@@ -100,7 +100,8 @@ class EliceConditionExtractionClientIntegrationTest {
         WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH))
             .willReturn(jsonResponse(200, validChatResponse(content))));
 
-        var outcome = client.extract(command());
+        var diagnostic = client.extractForDiagnostics(command());
+        var outcome = diagnostic.outcome();
 
         assertThat(outcome.errorCode())
             .isEqualTo(ConditionExtractionErrorCode.UNPROCESSABLE_CONDITION);
@@ -109,6 +110,30 @@ class EliceConditionExtractionClientIntegrationTest {
             ConditionWarning.PARTY_SIZE_NOT_PROVIDED,
             ConditionWarning.BUDGET_NOT_PROVIDED
         );
+        assertThat(diagnostic.boundaryCode()).isEqualTo("UNPROCESSABLE_LOCATION_MISSING");
+        verifyOneRequest();
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+        "\"placeTypeDetail\":null|\"placeTypeDetail\":\"디저트\"|CONDITION_TYPE_DETAIL_UNEXPECTED",
+        "\"budgetPerPersonMin\":10000|\"budgetPerPersonMin\":30000|CONDITION_BUDGET_ORDER_INVALID"
+    }, delimiter = '|')
+    void classifiesCrossFieldViolationsWithoutReturningProviderValues(
+        String target,
+        String replacement,
+        String expectedCode
+    ) {
+        String content = validContent().replace(target, replacement);
+        WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH))
+            .willReturn(jsonResponse(200, validChatResponse(content))));
+
+        var diagnostic = client.extractForDiagnostics(command());
+
+        assertThat(diagnostic.outcome().errorCode())
+            .isEqualTo(ConditionExtractionErrorCode.PROVIDER_INVALID_RESPONSE);
+        assertThat(diagnostic.boundaryCode()).isEqualTo(expectedCode)
+            .doesNotContain("디저트", "30000");
         verifyOneRequest();
     }
 
@@ -132,6 +157,38 @@ class EliceConditionExtractionClientIntegrationTest {
         var outcome = client.extract(command());
 
         assertThat(outcome.errorCode()).isEqualTo(expected);
+        assertThat(outcome.condition()).isNull();
+        verifyOneRequest();
+    }
+
+    @Test
+    void preservesAllowlistedLoopbackGatewayFailureWithoutReadingProviderPayload() {
+        WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH)).willReturn(aResponse()
+            .withStatus(502)
+            .withHeader("Content-Type", "application/problem+json")
+            .withHeader("X-PlacePick-Linked-Error-Code", "INVALID_RESPONSE")
+            .withBody("{\"secret\":\"must-not-escape\"}")));
+
+        var outcome = client.extract(command());
+
+        assertThat(outcome.errorCode())
+            .isEqualTo(ConditionExtractionErrorCode.PROVIDER_INVALID_RESPONSE);
+        assertThat(outcome.condition()).isNull();
+        verifyOneRequest();
+    }
+
+    @Test
+    void ignoresUnknownLoopbackGatewayFailureCodeAndUsesHttpStatus() {
+        WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH)).willReturn(aResponse()
+            .withStatus(502)
+            .withHeader("Content-Type", "application/problem+json")
+            .withHeader("X-PlacePick-Linked-Error-Code", "UNTRUSTED_VALUE")
+            .withBody("{\"secret\":\"must-not-escape\"}")));
+
+        var outcome = client.extract(command());
+
+        assertThat(outcome.errorCode())
+            .isEqualTo(ConditionExtractionErrorCode.PROVIDER_UNAVAILABLE);
         assertThat(outcome.condition()).isNull();
         verifyOneRequest();
     }

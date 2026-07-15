@@ -11,6 +11,7 @@ import com.placepick.recommendation.application.candidate.CandidateNormalizer;
 import com.placepick.recommendation.application.candidate.CandidateQueryPlanner;
 import com.placepick.recommendation.application.candidate.CategoryTaxonomy;
 import com.placepick.recommendation.application.candidate.LocationMatcher;
+import com.placepick.recommendation.application.candidate.SearchTextNormalizer;
 import com.placepick.recommendation.application.port.out.SearchProviderException;
 import com.placepick.recommendation.application.scoring.CandidateRanker;
 import com.placepick.recommendation.application.scoring.CandidateRankingService;
@@ -20,9 +21,6 @@ import com.placepick.recommendation.condition.application.port.out.ExtractionCom
 import com.placepick.recommendation.condition.application.port.out.ExtractionOutcome;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
 import com.placepick.recommendation.condition.domain.DraftRecommendationCondition;
-import com.placepick.recommendation.condition.domain.PlaceType;
-import com.placepick.recommendation.condition.domain.Preference;
-import com.placepick.recommendation.reason.adapter.out.llm.EliceGroundedReasonClient;
 import com.placepick.recommendation.reason.adapter.out.llm.LinkedLiveReasonClientFactory;
 import com.placepick.recommendation.reason.application.GroundedReasonService;
 import com.placepick.recommendation.workflow.application.RecommendationCorePlace;
@@ -39,22 +37,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Tag;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
+@Tag("live")
 class WorkflowLinkedLiveProbeTest {
 
-    private static final String FIXTURE_HASH =
-        "2afeef2b02ae9f168745b1d842277c2bcba0e9fb11b534d6683b319e81e6e2b0";
     private static final String SCOPE_HASH =
         "73b6d630cb24b9222e05b289822b11a64c2f23ad04acb09b5fe01accafe3b2d0";
-    private static final String SYNTHETIC_INPUT =
-        "서울에서 2명이 1인당 20000원 이하로 조용한 카페를 찾습니다. " +
-            "흡연 장소는 제외합니다.";
-    private static final String SAFETY_IDENTIFIER =
-        "synthetic-linked-workflow-session-0001";
     private static final int MAX_CONTROL_RESPONSE_BYTES = 32 * 1024;
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     private static final List<String> EXPECTED_STAGES = List.of(
@@ -73,39 +66,53 @@ class WorkflowLinkedLiveProbeTest {
         String naverKey = requiredCredential("WORKFLOW_LINKED_NAVER_KEY");
         String eliceToken = requiredCredential("WORKFLOW_LINKED_ELICE_TOKEN");
         String approvedSha = requiredSha("APPROVED_SHA");
+        LinkedWorkflowScenario scenario = LinkedWorkflowScenario.require(
+            requiredEnvironment("WORKFLOW_LINKED_SCENARIO")
+        );
         RestClient control = controlClient(controlToken);
 
         byte[] start = postControl(
             control,
             gatewayRoot.resolve("/v1/probes/workflow-linked/start"),
-            startBody(approvedSha),
+            startBody(approvedSha, scenario),
             "start"
         );
-        validateReadySummary(start, approvedSha);
+        validateReadySummary(start, approvedSha, scenario);
 
         EliceConditionExtractionClient extractionClient =
             LinkedLiveConditionClientFactory.create(gatewayRoot.resolve("/v1"), eliceToken);
-        ExtractionOutcome extraction = extractionClient.extract(
-            new ExtractionCommand(SYNTHETIC_INPUT, SAFETY_IDENTIFIER)
+        LinkedLiveConditionClientFactory.LinkedLiveExtraction extractionResult =
+            LinkedLiveConditionClientFactory.extract(
+                extractionClient,
+                new ExtractionCommand(scenario.syntheticInput(), scenario.safetyIdentifier())
+            );
+        requireExpectedExtraction(
+            extractionResult.outcome(),
+            extractionResult.boundaryCode(),
+            extractionResult.failureStage(),
+            scenario
         );
-        requireExpectedExtraction(extraction);
-        ConfirmedRecommendationCondition confirmed = confirmedFixture();
+        ConfirmedRecommendationCondition confirmed = scenario.confirmedCondition();
 
         NaverApiHubAdapter naver = LinkedLiveNaverAdapterFactory.create(
             gatewayRoot,
             naverKeyId,
             naverKey
         );
-        EliceGroundedReasonClient reasonClient = LinkedLiveReasonClientFactory.create(
-            gatewayRoot.resolve("/v1"),
-            eliceToken
+        LinkedLiveReasonClientFactory.DiagnosticClient reasonClient =
+            LinkedLiveReasonClientFactory.create(
+                gatewayRoot.resolve("/v1"),
+                eliceToken
         );
         CategoryTaxonomy taxonomy = new CategoryTaxonomy();
+        CandidateQueryPlanner queryPlanner = new CandidateQueryPlanner(taxonomy);
+        validateScenarioQueries(queryPlanner, confirmed, scenario);
+        LocationMatcher locationMatcher = new LocationMatcher();
         CandidateRankingService ranking = new CandidateRankingService(
             naver,
             naver,
-            new CandidateQueryPlanner(taxonomy),
-            new CandidateNormalizer(taxonomy, new LocationMatcher()),
+            queryPlanner,
+            new CandidateNormalizer(taxonomy, locationMatcher),
             new CandidateRanker(new CandidateScoringPolicy())
         );
         RecommendationCoreUseCase core = new RecommendationCoreUseCase(
@@ -121,16 +128,23 @@ class WorkflowLinkedLiveProbeTest {
         } catch (SearchProviderException exception) {
             throw safeFailure("naverLocal", exception.failure().name());
         }
-        CoreEvidence coreEvidence = validateCoreResult(result);
+        CoreEvidence coreEvidence = validateCoreResult(
+            result,
+            reasonClient.safeFailureCode(),
+            confirmed,
+            taxonomy,
+            locationMatcher
+        );
         byte[] completed = postControl(
             control,
             gatewayRoot.resolve("/v1/probes/workflow-linked/complete"),
-            completionBody(approvedSha, result),
+            completionBody(approvedSha, scenario, result),
             "complete"
         );
         SafeSummary summary = validateSafeSummary(
             completed,
             approvedSha,
+            scenario,
             result,
             coreEvidence
         );
@@ -145,7 +159,8 @@ class WorkflowLinkedLiveProbeTest {
                 " relaxed=" + result.relaxed() + " degraded=false"
         );
         System.out.println(
-            "WORKFLOW_LINKED result=validated linked=true status=passed degraded=false " +
+            "WORKFLOW_LINKED result=validated scenario=" + scenario.id() +
+                " linked=true status=passed degraded=false " +
                 "reasonFallback=false callCount=" + summary.callCount()
         );
     }
@@ -200,20 +215,27 @@ class WorkflowLinkedLiveProbeTest {
         return result.body();
     }
 
-    private static Map<String, Object> startBody(String approvedSha) {
+    private static Map<String, Object> startBody(
+        String approvedSha,
+        LinkedWorkflowScenario scenario
+    ) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("approvedSha", approvedSha);
-        body.put("fixtureHash", FIXTURE_HASH);
+        body.put("scenarioId", scenario.id());
+        body.put("fixtureVersion", scenario.version());
+        body.put("fixtureHash", scenario.fixtureHash());
         body.put("scopeHash", SCOPE_HASH);
         return body;
     }
 
     private static Map<String, Object> completionBody(
         String approvedSha,
+        LinkedWorkflowScenario scenario,
         RecommendationCoreResult result
     ) {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("approvedSha", approvedSha);
+        body.put("scenarioId", scenario.id());
         body.put("resultCount", result.places().size());
         body.put("placeSearchCalls", result.placeSearchCalls());
         body.put("blogSearchCalls", result.blogSearchCalls());
@@ -222,43 +244,64 @@ class WorkflowLinkedLiveProbeTest {
         return body;
     }
 
-    private static void requireExpectedExtraction(ExtractionOutcome extraction) {
+    private static void requireExpectedExtraction(
+        ExtractionOutcome extraction,
+        String boundaryCode,
+        String failureStage,
+        LinkedWorkflowScenario scenario
+    ) {
         if (extraction == null || !extraction.extracted() || extraction.condition() == null) {
-            String errorCode = extraction == null
+            String errorCode = boundaryCode != null
+                ? boundaryCode
+                : extraction != null && failureStage != null
+                    ? extraction.errorCode().name() + "_" + failureStage
+                : extraction == null
                 ? "INVALID_RESPONSE"
                 : extraction.errorCode().name();
             throw safeFailure("conditionExtraction", errorCode);
         }
         DraftRecommendationCondition draft = extraction.condition();
-        if (
-            !"서울".equals(draft.locationQuery()) ||
-            draft.placeType() != PlaceType.CAFE ||
-            draft.placeTypeDetail() != null || !Integer.valueOf(2).equals(draft.partySize()) ||
-            draft.budgetPerPersonMin() != null ||
-            !Integer.valueOf(20_000).equals(draft.budgetPerPersonMax()) ||
-            draft.preferences().size() != 1 ||
-            !Set.of("조용한", "조용함", "조용").contains(
-                draft.preferences().get(0).value()
-            ) || draft.preferences().get(0).priority() != null ||
-            !draft.exclusions().equals(List.of("흡연"))) {
-            throw safeFailure("conditionExtraction", "SEMANTIC_MISMATCH");
+        String mismatch = LinkedDraftSemanticVerifier.firstMismatchCode(
+            draft,
+            extraction.warnings(),
+            scenario.expectedDraft()
+        );
+        if (mismatch != null) {
+            throw safeFailure("conditionExtraction", mismatch);
         }
     }
 
-    private static ConfirmedRecommendationCondition confirmedFixture() {
-        return new ConfirmedRecommendationCondition(
-            "서울",
-            PlaceType.CAFE,
-            null,
-            2,
-            null,
-            20_000,
-            List.of(new Preference("조용한", 10)),
-            List.of("흡연")
-        );
+    private static void requireSemantic(boolean condition, String errorCode) {
+        if (!condition) {
+            throw safeFailure("conditionExtraction", errorCode);
+        }
     }
 
-    private static CoreEvidence validateCoreResult(RecommendationCoreResult result) {
+    private static void validateScenarioQueries(
+        CandidateQueryPlanner planner,
+        ConfirmedRecommendationCondition condition,
+        LinkedWorkflowScenario scenario
+    ) {
+        var initial = planner.initial(condition);
+        requireSemantic(initial.query().equals(scenario.initialQuery()), "SCENARIO_QUERY_MISMATCH");
+        var relaxed = planner.relax(initial);
+        if (scenario.relaxedQuery() == null) {
+            requireSemantic(relaxed.isEmpty(), "SCENARIO_RELAXATION_MISMATCH");
+        } else {
+            requireSemantic(
+                relaxed.isPresent() && relaxed.orElseThrow().query().equals(scenario.relaxedQuery()),
+                "SCENARIO_RELAXATION_MISMATCH"
+            );
+        }
+    }
+
+    private static CoreEvidence validateCoreResult(
+        RecommendationCoreResult result,
+        String reasonFailureCode,
+        ConfirmedRecommendationCondition confirmed,
+        CategoryTaxonomy taxonomy,
+        LocationMatcher locationMatcher
+    ) {
         if (result == null) {
             throw safeFailure("recommendationCore", "INVALID_CORE_RESULT");
         }
@@ -266,7 +309,10 @@ class WorkflowLinkedLiveProbeTest {
             throw safeFailure("naverBlog", "BLOG_EVIDENCE_UNAVAILABLE");
         }
         if (result.reasonFallback()) {
-            throw safeFailure("reasonGeneration", "LLM_REASON_FALLBACK");
+            throw safeFailure(
+                "reasonGeneration",
+                reasonFailureCode == null ? "LLM_REASON_FALLBACK" : reasonFailureCode
+            );
         }
         if (result.places().size() != 3 || result.degraded() ||
             result.placeSearchCalls() < 1 ||
@@ -282,6 +328,21 @@ class WorkflowLinkedLiveProbeTest {
         int maximumScore = Integer.MIN_VALUE;
         int blogEvidenceCount = 0;
         for (RecommendationCorePlace place : result.places()) {
+            var candidate = place.rankedPlace().candidate();
+            boolean excluded = confirmed.exclusions().stream()
+                .map(SearchTextNormalizer::comparison)
+                .filter(value -> !value.isBlank())
+                .anyMatch(candidate.searchableText()::contains);
+            if (!locationMatcher.matches(
+                    confirmed.locationQuery(), candidate.address(), candidate.roadAddress()
+                ) || !taxonomy.matches(
+                    confirmed.placeType(),
+                    confirmed.placeTypeDetail(),
+                    candidate.name(),
+                    candidate.category()
+                ) || excluded) {
+                throw safeFailure("ranking", "FINAL_CANDIDATE_CONDITION_MISMATCH");
+            }
             int score = place.rankedPlace().score();
             int evidenceCount = place.rankedPlace().evidence().size();
             String candidateKey = place.rankedPlace().candidate().candidateKey().value();
@@ -321,9 +382,14 @@ class WorkflowLinkedLiveProbeTest {
         return new CoreEvidence(minimumScore, maximumScore, blogEvidenceCount);
     }
 
-    private static void validateReadySummary(byte[] body, String approvedSha) {
+    private static void validateReadySummary(
+        byte[] body,
+        String approvedSha,
+        LinkedWorkflowScenario scenario
+    ) {
         JsonNode root = readControlJson(body, "start");
-        if (root.size() != 3 || !approvedSha.equals(text(root, "approvedSha")) ||
+        if (root.size() != 4 || !approvedSha.equals(text(root, "approvedSha")) ||
+            !scenario.id().equals(text(root, "scenarioId")) ||
             !"linked".equals(text(root, "mode")) ||
             !"ready".equals(text(root, "status"))) {
             throw safeFailure("start", "INVALID_CONTROL_RESPONSE");
@@ -333,6 +399,7 @@ class WorkflowLinkedLiveProbeTest {
     private static SafeSummary validateSafeSummary(
         byte[] body,
         String approvedSha,
+        LinkedWorkflowScenario scenario,
         RecommendationCoreResult result,
         CoreEvidence coreEvidence
     ) {
@@ -344,6 +411,7 @@ class WorkflowLinkedLiveProbeTest {
         }
         if (root == null || !root.isObject() ||
             !approvedSha.equals(text(root, "approvedSha")) ||
+            !scenario.id().equals(text(root, "scenarioId")) ||
             !"linked".equals(text(root, "mode")) ||
             !"passed".equals(text(root, "status")) ||
             !root.path("linked").asBoolean(false) ||
