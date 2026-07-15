@@ -117,8 +117,10 @@ gradle_jvm="$("${ROOT_DIR}/gradlew" --version \
   | awk -F: '/^(Launcher )?JVM:/{sub(/^[[:space:]]*/, "", $2); print $2; exit}')"
 [[ "${gradle_jvm}" =~ ^17([.[:space:]]|$) ]] ||
   live_contract_fail "the Gradle launcher JVM must be Java 17."
-[[ -x "${ROOT_DIR}/node_modules/.bin/wrangler" ]] ||
-  live_contract_fail "pinned Wrangler is missing; run npm ci in the Dev Container."
+[[ -f "${ROOT_DIR}/node_modules/esbuild/package.json" ]] ||
+  live_contract_fail "pinned esbuild is missing; run npm ci in the Dev Container."
+[[ -f "${ROOT_DIR}/scripts/run-local-linked-workflow-gateway.mjs" ]] ||
+  live_contract_fail "the Node linked Gateway runner is missing."
 
 live_contract_load_env "${LIVE_ENV_FILE}"
 live_contract_require_mode
@@ -174,6 +176,7 @@ NODE
 
 gateway_log="${temp_dir}/gateway.log"
 gateway_env_file="${temp_dir}/gateway.env"
+gateway_bundle="${temp_dir}/local-linked-workflow-gateway.mjs"
 printf '%s=%s\n' \
   'PLACEPICK_EXTERNAL_MODE' "${mode}" \
   'LOCAL_WORKFLOW_CONTROL_TOKEN' "${control_token}" \
@@ -187,7 +190,7 @@ printf '%s=%s\n' \
   'OPENAI_MODEL' "${chat_model}" \
   > "${gateway_env_file}"
 (
-  cd "${ROOT_DIR}/edge"
+  cd "${ROOT_DIR}"
   exec env \
     -u PLACEPICK_EXTERNAL_MODE \
     -u NAVER_API_HUB_KEY_ID \
@@ -197,12 +200,11 @@ printf '%s=%s\n' \
     -u EMBEDDING_PROXY_URL \
     -u OPENAI_MODEL \
     -u OPENAI_EMBEDDING_MODEL \
-    "${ROOT_DIR}/node_modules/.bin/wrangler" dev \
-      --config wrangler.local-linked-workflow-gateway.jsonc \
-      --env-file "${gateway_env_file}" \
-      --ip 127.0.0.1 \
-      --port "${port}" \
-      --log-level error
+    node "${ROOT_DIR}/scripts/run-local-linked-workflow-gateway.mjs" \
+      "${ROOT_DIR}/edge/src/local-linked-workflow-gateway/worker.ts" \
+      "${gateway_bundle}" \
+      "${gateway_env_file}" \
+      "${port}"
 ) >"${gateway_log}" 2>&1 &
 gateway_pid=$!
 gateway_started_pid="${gateway_pid}"

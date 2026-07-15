@@ -16,6 +16,7 @@ related:
   - RUN-0002-elice-llm-local-live-and-token-rotation.md
   - RUN-0003-recommendation-workflow-split-live-probe.md
   - ../troubleshooting/TS-0016-linked-live-provider-error-flattening.md
+  - ../troubleshooting/TS-0017-workerd-linked-live-outbound-transport.md
 ---
 
 # RUN-0004 Naver→Elice 실제 Linked Live 워크플로 실행과 중단

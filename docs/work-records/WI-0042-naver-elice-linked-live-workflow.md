@@ -15,10 +15,12 @@ related:
   - ../troubleshooting/TS-0014-cross-runtime-canonical-url-evidence-id.md
   - ../troubleshooting/TS-0015-cross-runtime-naver-html-plain-text.md
   - ../troubleshooting/TS-0016-linked-live-provider-error-flattening.md
+  - ../troubleshooting/TS-0017-workerd-linked-live-outbound-transport.md
   - WI-0041-recommendation-core-split-live-workflow.md
   - https://github.com/gdh0730/hub/issues/50
 paths:
   - build.gradle
+  - package-lock.json
   - backend/src/integrationTest/java/com/placepick/recommendation/**
   - backend/src/integrationTest/java/com/placepick/infrastructure/external/llm/**
   - backend/src/workflowLiveLinkedTest/**
@@ -37,6 +39,8 @@ paths:
   - edge/src/shared/naver-html-text.ts
   - edge/tests/naver-html-text.test.ts
   - scripts/workflow-live-linked*.sh
+  - scripts/run-local-linked-workflow-gateway.mjs
+  - scripts/run-local-linked-workflow-gateway-test.sh
   - scripts/check.sh
   - Makefile
   - AGENTS.md
@@ -191,6 +195,13 @@ Linked Live 성공도 이 비범위가 구현되거나 운영 약관 준수와 �
     결함을 확인했다. Gateway는 JSON Schema 인스턴스 구조만 검사하고 fixture 의미는
     Java가 NFKC+유한 allowlist로 검사하도록 책임을 분리했다. loopback 전용 safe header의
     고정 오류 code만 Java가 신뢰하며 원문 body는 읽거나 보존하지 않는다.
+18. 세부 code 보강 뒤 실제 실행은 `LINKED_PROVIDER_UNAVAILABLE`로 분류됐다. 이는 Elice
+    upstream 5xx가 아니라 로컬 workerd의 fetch·timeout·redirect 전송 경로가 응답을 얻지
+    못했다는 뜻이다. 같은 endpoint의 Java 17 개별 Chat 계약은 직전에 실제 성공했으므로
+    API 자격과 workerd 전송을 분리했다. Gateway의 검증 코드는 유지하면서 실행 adapter만
+    Node 24 loopback HTTP server로 교체했다. Node runner는 고정 env-file allowlist를 직접
+    파싱하고 esbuild 0.28.1로 같은 Worker 코드를 임시 bundle하며, raw 자격은 여전히
+    Gateway process에만 존재한다. 자세한 진단과 rollback은 TS-0017에 기록한다.
 
 ## 구현 결과와 검증 증거
 

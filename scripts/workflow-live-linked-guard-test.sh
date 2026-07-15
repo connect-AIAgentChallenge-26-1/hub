@@ -46,8 +46,10 @@ mkdir -p \
   "${TEST_ROOT}/scripts/lib" \
   "${TEST_ROOT}/edge" \
   "${TEST_ROOT}/node_modules/.bin" \
+  "${TEST_ROOT}/node_modules/esbuild" \
   "${TEST_ROOT}/fake-bin"
 cp "${ROOT_DIR}/scripts/workflow-live-linked.sh" "${TEST_ROOT}/scripts/"
+cp "${ROOT_DIR}/scripts/run-local-linked-workflow-gateway.mjs" "${TEST_ROOT}/scripts/"
 cp "${ROOT_DIR}/scripts/scan-test-reports.sh" "${TEST_ROOT}/scripts/"
 cp "${ROOT_DIR}/scripts/lib/live-contract-env.sh" "${TEST_ROOT}/scripts/lib/"
 cp "${ROOT_DIR}/edge/wrangler.local-linked-workflow-gateway.jsonc" "${TEST_ROOT}/edge/"
@@ -89,6 +91,9 @@ case "${1:-}" in
     printf '%043d' "${count}" | tr '0' 'l'
     ;;
   -) cat >/dev/null; printf '18766\n' ;;
+  */run-local-linked-workflow-gateway.mjs)
+    exec "${FAKE_NODE_GATEWAY:?}" --env-file "${4:?}"
+    ;;
   *) exit 1 ;;
 esac
 NODE
@@ -181,6 +186,9 @@ esac
 trap 'exit 0' TERM INT
 while true; do sleep 1; done
 WRANGLER
+cat > "${TEST_ROOT}/node_modules/esbuild/package.json" <<'ESBUILD'
+{"name":"esbuild","version":"0.28.1"}
+ESBUILD
 cat > "${TEST_ROOT}/gradlew" <<'GRADLE'
 #!/usr/bin/env bash
 if [[ "${1:-}" == '--version' ]]; then
@@ -223,7 +231,8 @@ chmod +x \
 git -C "${TEST_ROOT}" init --quiet
 git -C "${TEST_ROOT}" config user.email 'guard@example.invalid'
 git -C "${TEST_ROOT}" config user.name 'Workflow Guard'
-git -C "${TEST_ROOT}" add .gitignore scripts edge node_modules/.bin/wrangler gradlew fake-bin
+git -C "${TEST_ROOT}" add .gitignore scripts edge node_modules/.bin/wrangler \
+  node_modules/esbuild/package.json gradlew fake-bin
 git -C "${TEST_ROOT}" commit --quiet -m 'guard fixture'
 head_sha="$(git -C "${TEST_ROOT}" rev-parse HEAD)"
 fixture_branch="$(git -C "${TEST_ROOT}" branch --show-current)"
@@ -238,6 +247,7 @@ common_env=(
   FAKE_NODE_COUNTER="${TEST_ROOT}/node-counter"
   FAKE_GIT_COUNTER="${TEST_ROOT}/git-counter"
   FAKE_FIND_COUNTER="${TEST_ROOT}/find-counter"
+  FAKE_NODE_GATEWAY="${TEST_ROOT}/node_modules/.bin/wrangler"
 )
 
 expect_failure "CI execution is forbidden" \
