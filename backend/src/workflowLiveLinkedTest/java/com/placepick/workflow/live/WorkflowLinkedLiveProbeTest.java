@@ -22,7 +22,6 @@ import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCond
 import com.placepick.recommendation.condition.domain.DraftRecommendationCondition;
 import com.placepick.recommendation.condition.domain.PlaceType;
 import com.placepick.recommendation.condition.domain.Preference;
-import com.placepick.recommendation.reason.adapter.out.llm.EliceGroundedReasonClient;
 import com.placepick.recommendation.reason.adapter.out.llm.LinkedLiveReasonClientFactory;
 import com.placepick.recommendation.reason.application.GroundedReasonService;
 import com.placepick.recommendation.workflow.application.RecommendationCorePlace;
@@ -112,10 +111,11 @@ class WorkflowLinkedLiveProbeTest {
             naverKeyId,
             naverKey
         );
-        EliceGroundedReasonClient reasonClient = LinkedLiveReasonClientFactory.create(
-            gatewayRoot.resolve("/v1"),
-            eliceToken
-        );
+        LinkedLiveReasonClientFactory.DiagnosticClient reasonClient =
+            LinkedLiveReasonClientFactory.create(
+                gatewayRoot.resolve("/v1"),
+                eliceToken
+            );
         CategoryTaxonomy taxonomy = new CategoryTaxonomy();
         CandidateRankingService ranking = new CandidateRankingService(
             naver,
@@ -137,7 +137,7 @@ class WorkflowLinkedLiveProbeTest {
         } catch (SearchProviderException exception) {
             throw safeFailure("naverLocal", exception.failure().name());
         }
-        CoreEvidence coreEvidence = validateCoreResult(result);
+        CoreEvidence coreEvidence = validateCoreResult(result, reasonClient.safeFailureCode());
         byte[] completed = postControl(
             control,
             gatewayRoot.resolve("/v1/probes/workflow-linked/complete"),
@@ -291,7 +291,10 @@ class WorkflowLinkedLiveProbeTest {
         );
     }
 
-    private static CoreEvidence validateCoreResult(RecommendationCoreResult result) {
+    private static CoreEvidence validateCoreResult(
+        RecommendationCoreResult result,
+        String reasonFailureCode
+    ) {
         if (result == null) {
             throw safeFailure("recommendationCore", "INVALID_CORE_RESULT");
         }
@@ -299,7 +302,10 @@ class WorkflowLinkedLiveProbeTest {
             throw safeFailure("naverBlog", "BLOG_EVIDENCE_UNAVAILABLE");
         }
         if (result.reasonFallback()) {
-            throw safeFailure("reasonGeneration", "LLM_REASON_FALLBACK");
+            throw safeFailure(
+                "reasonGeneration",
+                reasonFailureCode == null ? "LLM_REASON_FALLBACK" : reasonFailureCode
+            );
         }
         if (result.places().size() != 3 || result.degraded() ||
             result.placeSearchCalls() < 1 ||

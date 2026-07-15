@@ -58,6 +58,8 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
 
     private static final String APPROVED_HOST = "mlapi.run";
     private static final String CHAT_SUFFIX = "/chat/completions";
+    private static final String LINKED_GATEWAY_ERROR_HEADER =
+        "X-PlacePick-Linked-Error-Code";
     private static final Set<String> APPROVED_RESPONSE_MODELS = Set.of(
         MODEL,
         "gpt-4.1-mini",
@@ -81,19 +83,22 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
     private final URI chatEndpoint;
     private final String model;
     private final int maxResponseBytes;
+    private final boolean trustLinkedGatewayErrors;
 
     private EliceGroundedReasonClient(
         RestClient restClient,
         ObjectMapper objectMapper,
         URI chatEndpoint,
         String model,
-        int maxResponseBytes
+        int maxResponseBytes,
+        boolean trustLinkedGatewayErrors
     ) {
         this.restClient = restClient;
         this.objectMapper = objectMapper;
         this.chatEndpoint = chatEndpoint;
         this.model = model;
         this.maxResponseBytes = maxResponseBytes;
+        this.trustLinkedGatewayErrors = trustLinkedGatewayErrors;
     }
 
     public static EliceGroundedReasonClient create(
@@ -108,7 +113,8 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
             model,
             CONNECT_TIMEOUT,
             RESPONSE_TIMEOUT,
-            MAX_RESPONSE_BYTES
+            MAX_RESPONSE_BYTES,
+            false
         );
     }
 
@@ -127,7 +133,8 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
             model,
             connectTimeout,
             responseTimeout,
-            maxResponseBytes
+            maxResponseBytes,
+            true
         );
     }
 
@@ -137,7 +144,8 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
         String model,
         Duration connectTimeout,
         Duration responseTimeout,
-        int maxResponseBytes
+        int maxResponseBytes,
+        boolean trustLinkedGatewayErrors
     ) {
         requireCredential(token);
         if (!MODEL.equals(model)) {
@@ -158,22 +166,33 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
             strictObjectMapper(),
             URI.create(chatBaseUrl.toString() + CHAT_SUFFIX),
             model,
-            maxResponseBytes
+            maxResponseBytes,
+            trustLinkedGatewayErrors
         );
     }
 
     @Override
     public ReasonGenerationOutcome generate(ReasonGenerationCommand command) {
+        return generateForDiagnostics(command).outcome();
+    }
+
+    ReasonDiagnostic generateForDiagnostics(ReasonGenerationCommand command) {
         Objects.requireNonNull(command, "command");
         try {
             ProviderResponse response = execute(requestBody(command));
             JsonNode root = parseJson(response.body(), response.httpStatus());
             String content = validateEnvelopeAndReadContent(root, response.httpStatus());
-            return ReasonGenerationOutcome.generated(
-                parseContent(content, response.httpStatus(), command)
+            return new ReasonDiagnostic(
+                ReasonGenerationOutcome.generated(
+                    parseContent(content, response.httpStatus(), command)
+                ),
+                null
             );
         } catch (ProviderFailureException exception) {
-            return ReasonGenerationOutcome.providerFailure(exception.errorCode());
+            return new ReasonDiagnostic(
+                ReasonGenerationOutcome.providerFailure(exception.errorCode()),
+                exception.boundaryCode()
+            );
         }
     }
 
@@ -321,7 +340,12 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
         HttpStatusCode statusCode = response.getStatusCode();
         int status = statusCode.value();
         if (!statusCode.is2xxSuccessful()) {
-            throw failure(classifyStatus(status));
+            String boundaryCode = trustLinkedGatewayErrors
+                ? safeLinkedGatewayErrorCode(
+                    response.getHeaders().getFirst(LINKED_GATEWAY_ERROR_HEADER)
+                )
+                : null;
+            throw failure(classifyStatus(status, boundaryCode), boundaryCode);
         }
         MediaType contentType = response.getHeaders().getContentType();
         if (contentType == null || !MediaType.APPLICATION_JSON.isCompatibleWith(contentType)) {
@@ -509,7 +533,21 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
         return actual.equals(expected);
     }
 
-    private static ReasonGenerationErrorCode classifyStatus(int status) {
+    private static ReasonGenerationErrorCode classifyStatus(int status, String boundaryCode) {
+        if (boundaryCode != null) {
+            ReasonGenerationErrorCode boundaryFailure = switch (boundaryCode) {
+                case "INVALID_RESPONSE", "PROVIDER_RESPONSE_TOO_LARGE" ->
+                    ReasonGenerationErrorCode.PROVIDER_INVALID_RESPONSE;
+                case "AUTHENTICATION_FAILED" ->
+                    ReasonGenerationErrorCode.PROVIDER_AUTHENTICATION_FAILED;
+                case "RATE_LIMITED" -> ReasonGenerationErrorCode.PROVIDER_RATE_LIMITED;
+                case "INVALID_REQUEST" -> ReasonGenerationErrorCode.PROVIDER_INVALID_REQUEST;
+                case "PROVIDER_UNAVAILABLE", "LINKED_PROVIDER_UNAVAILABLE" ->
+                    ReasonGenerationErrorCode.PROVIDER_UNAVAILABLE;
+                default -> null;
+            };
+            if (boundaryFailure != null) return boundaryFailure;
+        }
         return switch (status) {
             case 400 -> ReasonGenerationErrorCode.PROVIDER_INVALID_REQUEST;
             case 401, 403 -> ReasonGenerationErrorCode.PROVIDER_AUTHENTICATION_FAILED;
@@ -520,12 +558,29 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
         };
     }
 
+    private static String safeLinkedGatewayErrorCode(String value) {
+        if (value == null) return null;
+        return switch (value) {
+            case "INVALID_RESPONSE", "PROVIDER_RESPONSE_TOO_LARGE", "AUTHENTICATION_FAILED",
+                "RATE_LIMITED", "INVALID_REQUEST", "PROVIDER_UNAVAILABLE",
+                "LINKED_PROVIDER_UNAVAILABLE" -> value;
+            default -> null;
+        };
+    }
+
     private static ProviderFailureException invalidResponse() {
         return failure(ReasonGenerationErrorCode.PROVIDER_INVALID_RESPONSE);
     }
 
     private static ProviderFailureException failure(ReasonGenerationErrorCode errorCode) {
-        return new ProviderFailureException(errorCode);
+        return failure(errorCode, null);
+    }
+
+    private static ProviderFailureException failure(
+        ReasonGenerationErrorCode errorCode,
+        String boundaryCode
+    ) {
+        return new ProviderFailureException(errorCode, boundaryCode);
     }
 
     private static int requiredNonNegativeInteger(JsonNode node) {
@@ -622,19 +677,34 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
     private record ProviderResponse(int httpStatus, byte[] body) {
     }
 
+    record ReasonDiagnostic(ReasonGenerationOutcome outcome, String boundaryCode) {
+        ReasonDiagnostic {
+            Objects.requireNonNull(outcome, "outcome");
+        }
+    }
+
     private static final class ProviderFailureException extends RuntimeException {
         @Serial
         private static final long serialVersionUID = 1L;
 
         private final ReasonGenerationErrorCode errorCode;
+        private final String boundaryCode;
 
-        private ProviderFailureException(ReasonGenerationErrorCode errorCode) {
+        private ProviderFailureException(
+            ReasonGenerationErrorCode errorCode,
+            String boundaryCode
+        ) {
             super("LLM grounded reason request failed.", null, false, false);
             this.errorCode = Objects.requireNonNull(errorCode, "errorCode");
+            this.boundaryCode = boundaryCode;
         }
 
         private ReasonGenerationErrorCode errorCode() {
             return errorCode;
+        }
+
+        private String boundaryCode() {
+            return boundaryCode;
         }
     }
 }
