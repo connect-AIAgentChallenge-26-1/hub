@@ -76,8 +76,8 @@ record LinkedWorkflowScenario(
         add(scenarios, new LinkedWorkflowScenario(
             "seoul-restaurant-nullable-v1",
             1,
-            "5434d6e396c53cc134188fffc37e0504852afa9d5fea8cf3dbfab4967adc7788",
-            "서울 음식점을 찾습니다. 인원수와 1인당 예산 정보는 제공하지 않았습니다.",
+            "ba1d572734bd18c3f7c7e429c7c8cea70ed584318140bc16ca12fc2744f7f47e",
+            "서울 음식점을 찾습니다.",
             "synthetic-linked-workflow-session-0002",
             new ExpectedDraft(
                 Set.of("서울", "서울시", "서울특별시"),
@@ -103,8 +103,8 @@ record LinkedWorkflowScenario(
         add(scenarios, new LinkedWorkflowScenario(
             "seoul-cafe-dessert-v1",
             1,
-            "e643c0f5dac940033f43644c09da6919eefbf78d33b0156b70ac8f870ebb0a65",
-            "서울 디저트 카페를 찾습니다. 흡연 장소는 제외합니다. 인원수와 1인당 예산 정보는 제공하지 않았습니다.",
+            "742c38751f9a0cbbcb5fa61ddbfef1ea80c0644f40fc51974c4f0eabf2462465",
+            "서울 디저트 카페를 찾습니다. 흡연 장소는 제외합니다.",
             "synthetic-linked-workflow-session-0003",
             new ExpectedDraft(
                 Set.of("서울", "서울시", "서울특별시"),
