@@ -435,13 +435,13 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
             JsonNode root = objectMapper.readTree(content);
             if (root == null || !root.isObject() || !hasExactFields(root, CONTENT_FIELDS) ||
                 !ExtractionOutcome.SCHEMA_VERSION.equals(text(root, "schemaVersion"))) {
-                throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+                throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_SCHEMA);
             }
 
             JsonNode conditionNode = root.get("condition");
             if (conditionNode == null || !conditionNode.isObject() ||
                 !hasExactFields(conditionNode, CONDITION_FIELDS)) {
-                throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+                throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_SCHEMA);
             }
             DraftRecommendationCondition condition = parseCondition(conditionNode, httpStatus);
             List<ConditionWarning> warnings = parseWarnings(root.get("warnings"), httpStatus);
@@ -450,7 +450,7 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
                 ? ExtractionOutcome.extracted(condition, warnings)
                 : ExtractionOutcome.unprocessable(warnings);
         } catch (JsonProcessingException exception) {
-            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_SCHEMA);
         }
     }
 
@@ -467,22 +467,22 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
                 parseExclusions(node.get("exclusions"), httpStatus)
             );
         } catch (IllegalArgumentException | NullPointerException exception) {
-            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_CONDITION);
         }
     }
 
     private List<Preference> parsePreferences(JsonNode node, int httpStatus) {
         if (node == null || !node.isArray() || node.size() > 10) {
-            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_CONDITION);
         }
         List<Preference> preferences = new ArrayList<>();
         for (JsonNode item : node) {
             if (item == null || !item.isObject() || !hasExactFields(item, PREFERENCE_FIELDS)) {
-                throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+                throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_CONDITION);
             }
             JsonNode value = item.get("value");
             if (value == null || !value.isTextual()) {
-                throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+                throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_CONDITION);
             }
             preferences.add(
                 new Preference(value.textValue(), nullableInteger(item.get("priority"), httpStatus))
@@ -493,12 +493,12 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
 
     private List<String> parseExclusions(JsonNode node, int httpStatus) {
         if (node == null || !node.isArray() || node.size() > 10) {
-            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_CONDITION);
         }
         List<String> exclusions = new ArrayList<>();
         for (JsonNode item : node) {
             if (item == null || !item.isTextual()) {
-                throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+                throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_CONDITION);
             }
             exclusions.add(item.textValue());
         }
@@ -507,19 +507,19 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
 
     private static List<ConditionWarning> parseWarnings(JsonNode node, int httpStatus) {
         if (node == null || !node.isArray() || node.size() > 2) {
-            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_WARNINGS);
         }
         Set<ConditionWarning> warnings = new LinkedHashSet<>();
         for (JsonNode item : node) {
             if (item == null || !item.isTextual()) {
-                throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+                throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_WARNINGS);
             }
             try {
                 if (!warnings.add(ConditionWarning.valueOf(item.textValue()))) {
-                    throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+                    throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_WARNINGS);
                 }
             } catch (IllegalArgumentException exception) {
-                throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+                throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_WARNINGS);
             }
         }
         return List.copyOf(warnings);
@@ -539,7 +539,7 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
             expected.add(ConditionWarning.BUDGET_NOT_PROVIDED);
         }
         if (!expected.equals(new LinkedHashSet<>(warnings))) {
-            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_WARNINGS);
         }
     }
 
@@ -615,26 +615,26 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
 
     private static String nullableText(JsonNode node, int httpStatus) {
         if (node == null) {
-            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_CONDITION);
         }
         if (node.isNull()) {
             return null;
         }
         if (!node.isTextual()) {
-            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_CONDITION);
         }
         return node.textValue();
     }
 
     private static Integer nullableInteger(JsonNode node, int httpStatus) {
         if (node == null) {
-            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_CONDITION);
         }
         if (node.isNull()) {
             return null;
         }
         if (!node.isIntegralNumber() || !node.canConvertToInt()) {
-            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_CONDITION);
         }
         return node.intValue();
     }
@@ -647,7 +647,7 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         try {
             return PlaceType.valueOf(value);
         } catch (IllegalArgumentException exception) {
-            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
+            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_CONDITION);
         }
     }
 
