@@ -100,7 +100,8 @@ class EliceConditionExtractionClientIntegrationTest {
         WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH))
             .willReturn(jsonResponse(200, validChatResponse(content))));
 
-        var outcome = client.extract(command());
+        var diagnostic = client.extractForDiagnostics(command());
+        var outcome = diagnostic.outcome();
 
         assertThat(outcome.errorCode())
             .isEqualTo(ConditionExtractionErrorCode.UNPROCESSABLE_CONDITION);
@@ -109,6 +110,7 @@ class EliceConditionExtractionClientIntegrationTest {
             ConditionWarning.PARTY_SIZE_NOT_PROVIDED,
             ConditionWarning.BUDGET_NOT_PROVIDED
         );
+        assertThat(diagnostic.boundaryCode()).isEqualTo("UNPROCESSABLE_LOCATION_MISSING");
         verifyOneRequest();
     }
 

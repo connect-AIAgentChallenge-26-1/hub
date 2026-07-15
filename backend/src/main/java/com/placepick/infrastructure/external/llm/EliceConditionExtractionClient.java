@@ -193,9 +193,10 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
             ProviderResponse response = execute(requestBody(command));
             JsonNode root = parseJson(response.body(), response.httpStatus());
             String content = validateEnvelopeAndReadContent(root, response.httpStatus());
+            ParsedContent parsed = parseContent(content, response.httpStatus());
             return new ExtractionDiagnostic(
-                parseContent(content, response.httpStatus()),
-                null,
+                parsed.outcome(),
+                parsed.boundaryCode(),
                 null
             );
         } catch (LlmProviderException exception) {
@@ -430,7 +431,7 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         return content.textValue();
     }
 
-    private ExtractionOutcome parseContent(String content, int httpStatus) {
+    private ParsedContent parseContent(String content, int httpStatus) {
         try {
             JsonNode root = objectMapper.readTree(content);
             if (root == null || !root.isObject() || !hasExactFields(root, CONTENT_FIELDS) ||
@@ -446,12 +447,28 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
             DraftRecommendationCondition condition = parseCondition(conditionNode, httpStatus);
             List<ConditionWarning> warnings = parseWarnings(root.get("warnings"), httpStatus);
             validateWarnings(condition, warnings, httpStatus);
-            return condition.isProcessable()
-                ? ExtractionOutcome.extracted(condition, warnings)
-                : ExtractionOutcome.unprocessable(warnings);
+            if (condition.isProcessable()) {
+                return new ParsedContent(
+                    ExtractionOutcome.extracted(condition, warnings),
+                    null
+                );
+            }
+            return new ParsedContent(
+                ExtractionOutcome.unprocessable(warnings),
+                unprocessableBoundaryCode(condition)
+            );
         } catch (JsonProcessingException exception) {
             throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_SCHEMA);
         }
+    }
+
+    private static String unprocessableBoundaryCode(DraftRecommendationCondition condition) {
+        if (condition.locationQuery() == null && condition.placeType() == null) {
+            return "UNPROCESSABLE_LOCATION_AND_TYPE_MISSING";
+        }
+        return condition.locationQuery() == null
+            ? "UNPROCESSABLE_LOCATION_MISSING"
+            : "UNPROCESSABLE_PLACE_TYPE_MISSING";
     }
 
     private DraftRecommendationCondition parseCondition(JsonNode node, int httpStatus) {
@@ -736,6 +753,12 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         LlmProviderFailureStage failureStage
     ) {
         ExtractionDiagnostic {
+            Objects.requireNonNull(outcome, "outcome");
+        }
+    }
+
+    private record ParsedContent(ExtractionOutcome outcome, String boundaryCode) {
+        private ParsedContent {
             Objects.requireNonNull(outcome, "outcome");
         }
     }
