@@ -10,10 +10,10 @@
 | `implemented` | 코드와 자동 테스트가 계약을 검증함 |
 | `deprecated` | 대체 계약과 제거 조건이 확정됨 |
 
-현재 실행 코드가 공개하는 HTTP 표면은 `/actuator/health`와
-`/actuator/prometheus`뿐이다. 아래 `specified` 비즈니스 경로는 구현됐거나 호출할 수
-있다는 뜻이 아니다. 각 연결 Task가 코드와 자동 검증을 완료한 뒤에만 상태를
-`implemented`로 변경한다.
+현재 실행 코드에는 아래 정식 `/api/v1/**` 경로와 Actuator가 구현돼 있다. 정식 API는
+Mock·Testcontainers 자동 검증을 통과한 행만 `implemented`로 표시한다. 개발 전용
+`/__dev/api/**`는 `live-dev` profile에서만 등록되고 정식 제품 API로 재사용하지 않는다.
+이 구현 상태는 실제 cloud 배포나 배포된 실제 Provider E2E 완료를 뜻하지 않는다.
 
 ## 공통 HTTP 규칙
 
@@ -24,9 +24,15 @@
   `application/problem+json`, stream은 `text/event-stream`이다.
 - 익명 세션 cookie 이름은 `PLACEPICK_SESSION`, 주최자 capability cookie 이름은
   `PLACEPICK_ORGANIZER`다. 두 cookie는 `HttpOnly`, `SameSite=Lax`, 운영에서
-  `Secure`이며 URL·응답 body·로그에 원문을 노출하지 않는다.
+  `Secure`이며 URL·응답 body·로그에 원문을 노출하지 않는다. 주최자 cookie의 Path는
+  `/api/v1/rooms/{shareToken}`으로 방마다 격리해 여러 방의 capability가 서로
+  덮어쓰이거나 다른 방 요청에 전송되지 않게 한다.
 - 세션 생성 이외의 상태 변경 요청은 `X-CSRF-Token` header를 검사한다. GET과 SSE는
   CSRF 검증 대상이 아니지만 resource 소유권과 만료는 검사한다.
+- 같은 cookie를 공유하는 다른 탭이 익명 세션을 갱신해 기존 탭의 CSRF token이
+  만료된 경우, 클라이언트는 `403 CSRF_INVALID`에서 세션을 정확히 한 번 다시
+  동기화한다. 멱등성 대상 요청은 최초 `Idempotency-Key`를 유지하며 두 번째 실패는
+  반복 재시도하지 않는다.
 - resource 생성과 최종 확정은 `Idempotency-Key` header가 필수다. 같은 세션·method·
   path·body의 재요청은 최초 status와 body를 반환하고, 같은 key에 다른 body를 쓰면
   409 `IDEMPOTENCY_KEY_REUSED`를 반환한다. 기록은 최소 24시간 유지한다.
@@ -48,7 +54,7 @@ priority는 필수다. 추출 결과를 자동으로 추천에 연결하지 않�
 | --- | --- |
 | `locationQuery` | 1~100자의 검색 지역, 비어 있을 수 없음 |
 | `placeType` | `RESTAURANT`, `CAFE`, `BAR`, `OTHER` 중 하나 |
-| `placeTypeDetail` | `OTHER`일 때 필수인 1~30자 문자열, 그 외에는 null |
+| `placeTypeDetail` | `OTHER`일 때 필수인 1~30자 문자열; 알려진 유형의 Provider 값은 무시하고 null로 정규화 |
 | `partySize` | nullable, 값이 있으면 1~100 정수 |
 | `budgetPerPersonMin` | nullable, 값이 있으면 0~10,000,000 정수 |
 | `budgetPerPersonMax` | nullable, 값이 있으면 최솟값 이상 10,000,000 이하 정수 |
@@ -58,6 +64,10 @@ priority는 필수다. 추출 결과를 자동으로 추천에 연결하지 않�
 위치는 필수 조건이며 장소 유형도 검색 확장에서 제거하지 않는다. 후보가 세 개보다
 적으면 `preferences` 중 가장 낮은 priority의 항목만 한 번 제거해 재검색한다. 같은
 priority가 여러 개면 배열의 마지막 항목을 제거해 결과를 결정적으로 만든다.
+
+누락된 인원·예산 warning은 LLM이 반환한 warning 문자열을 제품 상태로 채택하지 않고,
+정규화가 끝난 조건에서 서버가 안정적인 code로 결정한다. 같은 조건은 Provider 표현과
+무관하게 같은 warning을 만든다.
 
 검색어는 `locationQuery`, 유형 token과 priority 내림차순·원래 배열 순의 선호를 최대
 100자 안에서 완전한 token 단위로 조합한다. 문자열을 중간에서 자르지 않는다. 최초
@@ -142,21 +152,28 @@ TypeScript가 같은 conformance vector를 사용한다. encoded dot segment는 
 | --- | --- | --- | --- | --- |
 | `implemented` | `GET /actuator/health` | 공개 | 200과 프로세스·의존성 상태 | WI-0001 |
 | `implemented` | `GET /actuator/prometheus` | 공개 | 200 Prometheus text exposition | WI-0001 |
-| `specified` | `POST /api/v1/anonymous-sessions` | 공개 | 201, session cookie, CSRF token·만료 | PP-008 |
-| `specified` | `POST /api/v1/recommendation-drafts` | 익명 세션 | 201 조건 추출 draft | PP-009, PP-010 |
-| `specified` | `GET /api/v1/recommendation-drafts/{draftId}` | draft 소유 세션 | 200 draft snapshot | PP-010 |
-| `specified` | `PUT /api/v1/recommendation-drafts/{draftId}` | draft 소유 세션 | 200 확정 조건으로 전체 교체 | PP-010 |
-| `specified` | `POST /api/v1/recommendations` | 확정 draft 소유 세션 | 반드시 202와 Job locator | PP-011 |
-| `specified` | `GET /api/v1/recommendations/{jobId}` | Job 소유 세션 | 200 최신 Job snapshot | PP-018 |
-| `specified` | `GET /api/v1/recommendations/{jobId}/events` | Job 소유 세션 | 추천 진행 SSE | PP-019 |
-| `specified` | `POST /api/v1/recommendations/{jobId}/rooms` | 완료 Job 소유 세션 | 201 공유방과 주최자 capability | PP-023 |
-| `specified` | `GET /api/v1/rooms/{shareToken}` | share token | 200 후보·집계·만료 | PP-023 |
-| `specified` | `PUT /api/v1/rooms/{shareToken}/votes/{placeId}` | 익명 세션과 share token | 200 자기 투표·최신 집계 | PP-024 |
-| `specified` | `DELETE /api/v1/rooms/{shareToken}/votes/{placeId}` | 익명 세션과 share token | 204, 없어도 동일 | PP-024 |
-| `specified` | `GET /api/v1/rooms/{shareToken}/events` | share token | 투표·확정 SSE | PP-025 |
-| `specified` | `PUT /api/v1/rooms/{shareToken}/final-result` | organizer capability | 200 최종 결과 | PP-025 |
-| `specified` | `GET /api/v1/rooms/{shareToken}/result` | share token | 200 확정 결과 | PP-025 |
-| `specified` | `POST /api/v1/events` | 익명 세션 | 202 allowlist event 수락 | PP-027 |
+| `implemented` | `POST /api/v1/anonymous-sessions` | 공개 | 201, session cookie, CSRF token·만료 | PP-008 |
+| `implemented` | `POST /api/v1/recommendation-drafts` | 익명 세션 | 201 조건 추출 draft | PP-009, PP-010 |
+| `implemented` | `GET /api/v1/recommendation-drafts/{draftId}` | draft 소유 세션 | 200 draft snapshot | PP-010 |
+| `implemented` | `PUT /api/v1/recommendation-drafts/{draftId}` | draft 소유 세션 | 200 확정 조건으로 전체 교체 | PP-010 |
+| `implemented` | `POST /api/v1/recommendations` | 확정 draft 소유 세션 | 반드시 202와 Job locator | PP-011 |
+| `implemented` | `GET /api/v1/recommendations/{jobId}` | Job 소유 세션 | 200 최신 Job snapshot | PP-018 |
+| `implemented` | `GET /api/v1/recommendations/{jobId}/events` | Job 소유 세션 | snapshot-first·heartbeat·cursor·재연결·terminal close | PP-019 |
+| `implemented` | `POST /api/v1/recommendations/{jobId}/rooms` | 완료 Job 소유 세션 | 201 공유방과 주최자 capability | PP-023 |
+| `implemented` | `GET /api/v1/rooms/{shareToken}` | share token | 200 후보·집계·만료 | PP-023 |
+| `implemented` | `PUT /api/v1/rooms/{shareToken}/votes/{placeId}` | 익명 세션과 share token | 200 자기 투표·최신 집계 | PP-024 |
+| `implemented` | `DELETE /api/v1/rooms/{shareToken}/votes/{placeId}` | 익명 세션과 share token | 204, 없어도 동일 | PP-024 |
+| `implemented` | `GET /api/v1/rooms/{shareToken}/events` | share token | snapshot-first·투표 변경/삭제·재연결·finalized close | PP-025 |
+| `implemented` | `PUT /api/v1/rooms/{shareToken}/final-result` | organizer capability | 200 최종 결과 | PP-025 |
+| `implemented` | `GET /api/v1/rooms/{shareToken}/result` | share token | 200 확정 결과 | PP-025 |
+| `implemented` | `POST /api/v1/events` | 익명 세션 | 202 allowlist event 수락 | PP-027 |
+
+`implemented` API 행은 `SessionDraftApiIntegrationTest`,
+`RecommendationJobApiIntegrationTest`, `VotingRoomApiIntegrationTest`와
+`ProductEventApiIntegrationTest`가 정상·권한·만료·멱등·경합·오류 경계를 검증한다.
+`SseWireContractIntegrationTest`는 실제 HTTP 연결에서 두 SSE의 snapshot-first,
+heartbeat, 단조 증가 event ID, `Last-Event-ID` 재연결, terminal EOF와 emitter 정리를
+양성 검증한다.
 
 ## Endpoint 상세 계약
 
@@ -206,9 +223,14 @@ warning `LLM_REASON_FALLBACK`을 포함한다.
 1~168이다. 생략하면 72시간이다. 완료된 Job만 방으로 만들 수 있다. 201 body는
 `{shareToken, shareUrl, expiresAt}`이며 organizer 원문은 cookie에만 둔다.
 
-`GET /rooms/{shareToken}`은 `{roomId, status, places, aggregate, expiresAt}`을 반환한다.
-status는 `OPEN` 또는 `FINALIZED`다. 내부 `roomId`는 UUID지만 외부 route에는 사용하지
-않는다. 존재하지 않거나 형식이 잘못된 token은 동일한 404, 만료된 방은 410이다.
+`GET /rooms/{shareToken}`은 `{roomId, status, places, aggregate, myVotes, canFinalize,
+finalizedPlaceId, expiresAt}`을 반환한다. `aggregate`는 place별
+`{placeId, likeCount, dislikeCount}`, `myVotes`는 현재 익명 세션의 place ID를 key로 하고
+`LIKE` 또는 `DISLIKE`를 값으로 갖는 object다. `canFinalize`는 현재 요청의 HttpOnly
+organizer cookie가 이 방에 유효한지만 나타내며 capability 원문이나 hash를 노출하지
+않는다. `finalizedPlaceId`는 확정 전 null이다. status는 `OPEN` 또는 `FINALIZED`다. 내부
+`roomId`는 UUID지만 외부 route에는 사용하지 않는다. 존재하지 않거나 형식이 잘못된
+token은 동일한 404, 만료된 방은 410이다.
 
 투표 `PUT` body는 `{value}`이고 value는 `LIKE` 또는 `DISLIKE`다. 같은 값을 다시
 보내면 집계를 바꾸지 않는다. 다른 값은 원자적으로 교체한다. 응답은
@@ -229,6 +251,8 @@ name은 `draftCreated`, `recommendationViewed`, `roomShared`, `voteChanged`,
 `viewportClass` 중 해당 값만 포함하며 자유 텍스트, 검색 문장, cookie, token과 PII를
 거부한다. body는 4 KiB 이하이고 중복 event ID는 다시 저장하지 않으면서 202를
 반환한다. 시스템 처리 event는 server가 직접 생성하며 이 endpoint로 받지 않는다.
+수집 endpoint·allowlist·중복 제거·보존 정리는 자동 검증됐지만 제품 화면에서 다섯 event를
+실제로 발행하는 instrumentation은 아직 연결 증거가 없어 별도 구현 범위로 남긴다.
 
 ## 오류 계약
 
@@ -243,6 +267,7 @@ SQL을 넣지 않는다.
 | 401 | `SESSION_REQUIRED` | 익명 세션이 없거나 유효하지 않음 |
 | 403 | `CSRF_INVALID`, `ORGANIZER_REQUIRED` | 상태 변경 또는 주최자 권한 거부 |
 | 404 | `RESOURCE_NOT_FOUND` | 소유하지 않거나 존재하지 않는 resource |
+| 405 | `METHOD_NOT_ALLOWED` | 알려진 resource에 허용되지 않은 HTTP method, `Allow` 포함 |
 | 409 | `INVALID_STATE`, `IDEMPOTENCY_KEY_REUSED`, `FINAL_RESULT_CONFLICT` | 상태·멱등성 충돌 |
 | 410 | `DRAFT_EXPIRED`, `ROOM_EXPIRED`, `JOB_EXPIRED` | 존재했지만 보존 기간 종료 |
 | 422 | `UNPROCESSABLE_CONDITION` | 안전한 추천 조건을 만들 수 없음 |
@@ -258,6 +283,10 @@ stream event는 `snapshot`, `voteUpdated`, `voteRemoved`, `finalized`, `heartbea
 
 - 연결 직후 현재 DB snapshot을 먼저 보낸다.
 - 모든 상태 event는 증가하는 event ID와 `occurredAt`, aggregate ID를 가진다.
+- 공통 JSON envelope는 `{eventId, occurredAt, aggregateId, snapshot}`이다. 최초
+  `snapshot`과 terminal event의 `snapshot`에는 각각 완전한 `RecommendationJobView` 또는
+  room view를 넣는다. 중간 event도 같은 최신 snapshot을 넣어 클라이언트가 event별
+  부분 payload 조합에 의존하지 않게 한다.
 - 15초 안에 상태 event가 없으면 heartbeat를 보낸다.
 - client는 `Last-Event-ID`로 재연결할 수 있다. 서버가 event gap을 재생할 수 없으면
   최신 snapshot을 보내 상태를 수렴시킨다.
@@ -270,7 +299,7 @@ stream event는 `snapshot`, `voteUpdated`, `voteRemoved`, `finalized`, `heartbea
 
 | 상태 | 이름 | 생산자 | 소비자 | 의미 |
 | --- | --- | --- | --- | --- |
-| `specified` | `recommendation.requested.v1` | 추천 application service | 추천 Worker | 저장·확정된 Job 처리 요청 |
+| `implemented` | `recommendation.requested.v1` | 추천 application service | 추천 Worker | 저장·확정된 Job 처리 요청 |
 
 event envelope는 `eventId`, `eventType`, `version`, `aggregateId`, `idempotencyKey`,
 `occurredAt`, `traceId`, `payload`를 가진다. payload에는 `jobId`만 두고 draft 조건은
@@ -278,182 +307,105 @@ Worker가 DB에서 읽어 event의 개인정보와 크기를 줄인다. relay는
 수 있고 Worker는 at-least-once delivery를 전제로 처리한다. DB commit 뒤에만 ACK하며
 제한 재시도 뒤에는 원본 event ID와 안전한 오류 code를 DLQ에 보존한다.
 
+`RecommendationJobPipelineIntegrationTest`는 Job·outbox 원자성, 멱등 replay, pending
+claim, commit 전 ACK 금지, 제한 retry와 DLQ를 PostgreSQL·Redis Testcontainers로 검증한다.
+
 ## LLM과 외부 검색
 
-| 상태 | 계약 | 기준 | 연결 Task |
+### 구현 상태
+
+| 상태 | 경계 | 의미 | Task |
 | --- | --- | --- | --- |
-| `implemented` | 개발·테스트 외부 모드 | `PLACEPICK_EXTERNAL_MODE=mock`만 허용 | WI-0001 |
-| `implemented` | Mock Naver·LLM | 정상·오류·timeout fixture | WI-0001 |
-| `implemented` | 조건 추출 | Draft nullable과 사용자 확인 경계를 포함한 `placepick.condition-extraction.v1` strict schema | PP-009 |
-| `implemented` | 추천 이유 | place ID별 단일 evidence와 유형별 고정 문장만 허용하는 `placepick.reason-statements.v1` strict schema | PP-016 |
-| `implemented` | Mock linked 추천 core | 정상·완화·후보 부족·Blog degraded·LLM fallback의 다섯 전체 application 흐름 | PP-039, PP-040 |
-| `specified` | Split Live Probe | 2026-07-15 실제 실행은 safe failure; 성공 4회·`linked=false` 증거 없음 | PP-039 |
-| `implemented` | Linked Live 자동 harness | 실제 호출 없이 source compile·Gateway·launcher·provenance·redaction 검증 | PP-040 |
-| `implemented` | Linked Live Workflow | SHA `e789af65...`의 allowlist 3개 실제 연결 시나리오가 strict success, 호출 `7/6/6` | PP-040 |
-| `implemented` | Naver Java adapter | 현행 API HUB Local·Blog port와 오류 정규화 | PP-013 |
-| `implemented` | Naver Local Live | Local·Blog 각 1회 2xx·schema, safe report scan 통과 | PP-013 |
-| `implemented` | Elice Chat Local Live | 합성 입력 1회 2xx·strict schema·usage, safe report scan 통과 | PP-038 |
-| `implemented` | Elice Embedding capability | 합성 입력 1회 2xx·1 item·1,536 finite dimensions; runtime 미사용 | PP-038 |
-| `implemented` | Approval Gate·Provider Gateway 프로그램 | OIDC·workflow hash·replay·JWT·Local/Blog allowlist 자동 검증 | PP-037 |
-| `planned` | Gate·Gateway 클라우드 배포 | Cloudflare secret과 승인 SHA canary E2E | PP-033, PP-035 |
-| `planned` | 전체 배포 Live | Gateway를 거친 Naver·Elice 전체 E2E | PP-029, PP-033 |
+| `implemented` | Naver Local·Blog adapter | API HUB header·schema·오류 정규화와 Mock 계약 검증 | PP-013 |
+| `implemented` | Elice Chat adapter | 조건 추출·근거 이유 strict schema와 Mock·Eval 검증 | PP-009, PP-016 |
+| `implemented` | 동기 추천 Core | 확정 조건부터 후보·근거·점수·Top 3·이유 fallback | PP-039 |
+| `implemented` | 직접 실제 Core 연결 증거 | 직접 Java adapter의 세 합성 Naver→Elice 흐름; CASE-0002가 정본 | PP-040, PP-042 |
+| `implemented` | 제품 runtime wiring | production Elice·Naver bean과 Worker Core 연결; Mock pipeline·wiring 자동 검증 | PP-029 |
+| `implemented` | Live Playground | 개발 profile API·SSE·화면·TTL·삭제와 직접 Provider 실행 | PP-042 |
+| `implemented` | 로컬 정식 API→Worker→Provider E2E | 별도 주최자·참여자 세션, 202·Outbox·Redis Worker·추천/방 SSE·투표·확정을 실제 Provider로 검증 | PP-042, PP-043 |
+| `planned` | 배포된 정식 API→Worker→Provider E2E | 실제 cloud runtime에서 제품 전체 경로 검증 | PP-043 |
+| `planned` | 무료 Cloud Demo | Render secret과 배포 E2E | PP-043 |
 
-조건 추출은 사용자 입력을 instruction이 아닌 data로 격리하고 schema 외 field를
-허용하지 않는다. refusal, incomplete, malformed와 안전하게 해석할 수 없는 입력은
-draft를 저장하지 않고 422로 종료한다.
+PP-037의 Approval Gate·Provider Gateway와 Split/Linked 전용 Gateway는 MVP 계약에서
+제외한다. 과거 결정과 검증 결과는 ADR-0009, ADR-0013과
+[CASE-0002](case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)에 보존한다.
 
-추천 이유 입력은 확정 조건과 이미 선택된 Top 3의 검증된 최소 근거만 포함한다. 출력은
-다음 versioned strict schema이며 `additionalProperties=false`를 적용한다.
+### Naver 검색
 
-```json
-{
-  "schemaVersion": "placepick.reason-statements.v1",
-  "places": [
-    {
-      "placeId": "00000000-0000-4000-8000-000000000001",
-      "statements": [
-        {
-          "text": "검증된 장소 정보에 따라 이 후보를 제안합니다.",
-          "evidenceIds": ["e1"]
-        }
-      ]
-    }
-  ]
-}
-```
-
-입력 Top 3와 출력의 place ID 집합은 정확히 같아야 한다. 장소당 문장은 1~3개지만 각
-문장은 evidence ID를 정확히 하나만 인용한다. `LOCAL` evidence의 문장은 정확히
-`검증된 장소 정보에 따라 이 후보를 제안합니다.`, `BLOG` evidence의 문장은 정확히
-`연결된 블로그 근거를 함께 확인할 수 있습니다.`만 허용한다. JSON Schema는 두 문장을
-enum으로, evidence 배열은 `minItems=1`, `maxItems=1`로 제한하고 서버는 인용한 evidence
-유형과 문장이 일치하는지 다시 검증한다. 장소명 같은 token을 공유하더라도
-`장소명에는 루프탑이 있습니다`와 같은 자유 속성 문장은 거부한다.
-정확히 한 항목이라는 의미는 `minItems=1`, `maxItems=1`과 서버 post-validation으로
-완결하며, Elice strict Structured Outputs 지원 부분집합에서 400을 일으킨 `uniqueItems`는
-사용하지 않는다.
-
-LLM은 새로운 사실을 요약·추론하거나 점수·순위를 정하는 주체가 아니다. 결정론적 서버가
-후보와 순위를 먼저 확정하고 LLM은 위 두 개의 보수적 표시 문장 중 근거 유형에 맞는 것을
-선택한다. 다른 후보 또는 알 수 없는 evidence, 가격·영업 상태·도보 시간·출구와 입력에
-없는 속성, 점수·순위·주의점·공유 문구 field를 거부한다. 한 후보라도 schema·ID·evidence
-검증에 실패하면 batch 전체를 폐기하고 Top 3 모두 검증된 장소 field와 warning을 조합한
-서버 template fallback을 사용한다. 서버가 주의점과 `shareText`를 조합하며 결과 순서와
-점수는 바꾸지 않는다.
-
-Naver adapter는 `https://naverapihub.apigw.ntruss.com`의 `/search/v1/local`과
-`/search/v1/blog`, `X-NCP-APIGW-API-KEY-ID`와 `X-NCP-APIGW-API-KEY` 인증 header를
-사용한다. adapter는 자동 재시도하지 않고 400, 401·403, 429, schema 오류와
-5xx·timeout을 안정적인 application 오류로 정규화한다.
-현재 일반 Spring 애플리케이션에는 원본 Naver key를 받는 bean이나 자동 구성을 연결하지
-않는다. 직접 Naver adapter는 격리된 Local Live task와 자동 계약 테스트에서만 만들며,
-향후 배포 runtime은 PP-029에서 원본 key가 아닌 Provider Gateway 자격을 사용하는 별도
-adapter를 연결한다.
-Local 실패는 제한 재시도 뒤 Job 실패, Blog 실패는 `LOCAL_ONLY` degraded 완료다.
-원문 Naver response의 cache·영구 저장뿐 아니라 Local·Blog 결과 결합, 추천 후보로
-저장하고 LLM에 전달하는 동작은 약관과 표시 의무를 사람이 확인하기 전까지 금지한다.
-Naver 문서가 item 상세 field의 필수 존재를 보장하지 않으므로 누락된 상세값은 빈
-문자열로 정규화한다. 단, 제목이 없는 item은 공식 schema 오류가 아니라 추천 후보로
-식별할 수 없는 제품 적합성 실패로 분리해 거부한다.
-Local Live 계약 검증은 응답을 메모리에서 schema 확인 후 폐기한다. 2026-07-14
-SHA `128692bdcaa8ef4e5e00a06362c02f25da223a4b`에서 Local·Blog 메서드를 각각 한 번
-호출해 모두 2xx·schema를 통과했다. automatic retry·redirect는 비활성화했고 논리 호출
-수는 2다. safe summary와 report scan 외 원문은 artifact로 보존하지 않았으며 Naver
-Live 상태는 `implemented`다. provider console의 wire 사용량 대조는 별도 운영 증거다.
-
-MVP LLM 방향은 Elice OpenAI-compatible Chat Completions다. Local Live는 승인된
-`https://mlapi.run/{canonical-uuid}/v1` 형태의 Chat base에서
-`POST /chat/completions`, exact model `openai/gpt-4.1-mini`, strict
-`response_format=json_schema`, `stream=false`, `store=false`, tool 없음과 제한된
-output을 요구한다. 고정 합성 입력의 출력은 추가 field 없는 `{"status":"ok"}`만
-허용한다. [공식 GPT-4.1 mini 사양](https://developers.openai.com/api/docs/models/gpt-4.1-mini)은
-Chat Completions와 Structured Outputs 지원을 비교 기준으로 제공하지만 Elice proxy의
-호환성·보관 정책을 증명하지 않는다.
-
-요청 model pin은 바꾸지 않는다. 응답 model metadata는 Chat 요청 alias,
-`gpt-4.1-mini`, `gpt-4.1-mini-2025-04-14`와 Embedding 요청 alias,
-`text-embedding-3-small`만 닫힌 목록으로 허용한다. 실제 관찰값을 자동 등록하거나
-부분 문자열로 수용하지 않으며 목록 밖 model은 `INVALID_RESPONSE`로 실패한다.
-
-Embedding은 별도 base의 `POST /embeddings`, exact model
-`openai/text-embedding-3-small`, 합성 입력 한 건과 float encoding으로 capability만
-확인한다. [공식 Embeddings 가이드](https://developers.openai.com/api/docs/guides/embeddings)는
-`text-embedding-3-small`의 기본 길이를 1,536으로 설명한다. vector는 출력·저장하지
-않고 추천·검색·점수·중복 제거 runtime에 사용하지 않는다.
-
-직접 OpenAI Responses API는 provider port 뒤의 대안으로 남기되 Elice 실패 시 자동
-fallback하지 않는다. Elice의 보관·로깅·학습 사용·삭제·개인정보 정책을 사람이 확인하기
-전에는 실제 사용자 입력, Naver 결과, 장소·블로그 근거와 생성 응답을 Elice에 보내거나
-저장하는 제품 runtime을 활성화하지 않는다. `store=false` 전달은 proxy 미보관의 증거가
-아니다.
-
-PP-040의 로컬 Linked Live는 저장소 소유자가 Naver·Elice 양쪽 실행과 현재 전체 제품
-문맥 전달을 승인했다고 진술한 고정 합성 입력의 invocation-bound 반복 검증 예외다.
-각 실행은 새 Gateway·일회성 로컬 자격·독립 호출 예산을 사용하며 HTTP retry가 아니다.
-승인 원문은 독립 검토하지
-않았으므로 법률·약관 준수나 실제 사용자 데이터 처리 허용을 주장하지 않는다. Elice
-요청 allowlist는 확정 조건의 `locationQuery`·`placeType`·`placeTypeDetail`·
-`preferences`·`exclusions`, 장소의 UUID·이름·category, Local evidence의 ID·유형·
-장소명 `title`과 category·description·주소·도로명 주소를 정규화해 결합한 `summary`,
-Blog evidence의 ID·유형·제목·요약이다.
-자격, 원문 응답 전체, source URL, 좌표, `CandidateKey`, Blog 작성자·작성일, 점수·순위,
-session·개인정보와 Provider routing URL은 전달하지 않는다. 제품 runtime·실제 사용자
-입력·영구 저장과 배포에는 이 예외를 승계하지 않는다.
-
-실제 endpoint와 secret은 source, fixture, 문서와 일반 CI에 넣지 않는다. 공식 Naver
-API HUB host는 allowlist 계약으로 공개하지만 credential은 Git에서 제외한
-`.env.live.local` 또는 배포 Provider Gateway에만 둔다. 공유 Fork, GitHub Actions,
-Vercel과 Render에는 원본 Naver key를 저장하지 않는다. Elice token과 routing identifier가
-포함된 전체 proxy URL도 같은 위치에 저장하지 않는다. 전체 프롬프트나 내부 추론을
-포트폴리오에 저장하지 않고 schema, 정책, fixture와 검증 결과만 기록한다.
-
-### 외부 검증 상태 계약
-
-외부 연동 완료 여부는 다음 증거 축으로 분리한다.
-
-| 상태 축 | 의미 | 현재 상태 |
-| --- | --- | --- |
-| 코드 자동 검증 | Mock·adapter·fail-closed·redaction과 Gate/Gateway 음성 테스트 | 2026-07-15 표준 `make check` 통과; Live 호출 0회 |
-| Naver Local Live | 교체된 key로 Local·Blog 논리 호출 각 1회 2xx·schema 확인 | 2026-07-14 통과; item 각 1개, 논리 호출 2회, safe report scan 통과 |
-| Elice Local Live | 합성 Chat·Embedding 각 1회 2xx와 schema 확인 | 2026-07-14 통과; strict Chat·usage와 Embedding 1,536차원, 논리 호출 2회 |
-| Mock linked 추천 core | 합성 Naver·LLM fixture를 같은 application use case로 연결 | 다섯 core 사용자 흐름 구현·자동 검증; 실제 외부 호출 0회 |
-| Split Live Probe | Elice 합성 추출·Naver Local·Blog·Elice 합성 이유 4회, provider 간 실제 데이터 전달 없음 | 2026-07-15 main 실행 safe failure; 성공 summary 없음, `specified` 유지 |
-| Linked Live 자동 harness | 자격 격리·실제 Naver provenance·6~9회 budget·safe summary | 코드·자동 검증 `implemented`; 표준 `make check`의 실제 Provider 호출 0회 |
-| Linked Live Workflow | 실제 Naver 근거를 Elice에 연결한 동기 core 전체 흐름 | SHA `e789af65...`의 3개 allowlist 시나리오 strict success; 호출 `7/6/6`, 모두 `degraded=false`, `reasonFallback=false`, `cleanup=true`, retry 0회 |
-| 제품 LLM runtime | PP-009·PP-016·PP-029 구현과 provider 정책 승인 | 구현되지 않음 |
-| 클라우드 배포 | Gate·Gateway와 demo stack에서 승인 SHA E2E 확인 | 배포되지 않음 |
-
-Linked 반복 캠페인은 완전 입력 카페, 인원·예산 nullable 음식점, 인원·예산 nullable
-디저트 카페의 세 닫힌 시나리오를 사용했다. 조건 Draft의 exact `Seoul`은 finite alias로만
-사용자 확인 정본 `서울`에 연결하며 broad·fuzzy 비교는 금지한다. 조건 field 간 불일치는
-원문을 포함하지 않는 safe code로 fail-closed한다. 초기 조건 추출 전송 실패와 이유
-schema의 `uniqueItems` 400은 성공으로 덮어쓰지 않고 WI-0042에 원인·수정·재검증 이력으로
-보존한다. 세 번의 성공은 동기 Linked core 호환성 증거이지 SLA·성공률이나 제품 runtime
-가용성 증거가 아니다.
-
-2026-07-15 첫 코드 자동 검증 baseline은 Windows bind mount의 Gradle task output cache
-mode 복원 실패 뒤 전체 build cache를 임시로 끄고 원인을 분리했다. 영구 정책은 모든
-Gradle task output의 build cache를 끄고, Test의 up-to-date 재사용도 끄는 것이다.
-dependency·configuration cache와 compile을 포함한 일반 up-to-date 판단은 유지한다.
-이 설정에서 별도 `GRADLE_OPTS` 없는 표준 `make check`가 통과했다. 자세한 원인과 증거는
-[TS-0013](troubleshooting/TS-0013-gradle-test-output-cache-bind-mount-mode.md)을 따른다.
-
-한 축의 성공을 다른 축의 완료로 표현하지 않는다. 특히 Mock 성공은 실제 credential
-호환성을, Local Live 2xx는 provider 정책 승인이나 클라우드 가용성을, Gateway 코드
-테스트는 실제 edge 배포를 증명하지 않는다. Local Live capability 성공도 Naver 약관,
-Elice 데이터 정책, 제품 LLM 기능 구현이나 운영 가용성을 뜻하지 않는다. Split Live는
-실제 provider의 제품형 schema를 분리 검증하지만 Naver→Elice 연결 성공을 뜻하지 않는다.
-Linked harness 자동 성공도 실제 `linked=true` 실행이나 제품 runtime·배포 성공을 뜻하지
+domain은 Naver DTO가 아닌 `PlaceSearchPort`와 `BlogSearchPort`에 의존한다. adapter는
+NAVER API HUB의 Local·Blog 계약을 사용하고 HTML 제거, Unicode·공백 정규화와 provider
+오류 분류를 adapter 경계에서 수행한다. 원문 응답은 영구 저장하거나 일반 로그에 남기지
 않는다.
 
-2026-07-15 21:10 KST SHA `541a98b3b73bfdaa3a1c7396aaea32ce410a7237`에서 Linked
-Live를 한 번 실행했다. Gateway를 통한 Elice 조건 추출 논리 단계가
-`PROVIDER_UNAVAILABLE`로 종료되어 사용자 확인과 Naver Local·Blog, 점수·Top 3, 근거
-이유에는 도달하지 않았다. JUnit 결과는
-`1 test / 1 failure`였고 생성 report 10개 안전 scan은 통과했다. 이는 Provider wire 호출
-수나 전체 비노출을 독립 증명하지 않으며 같은 SHA에서는 재실행하지 않는다. application
-논리 요청은 한 번이고 코드상 automatic retry는 0회지만 upstream wire 요청 수는
-dashboard·network telemetry 미대조로 확정하지 않았다.
+Local 결과는 유효한 HTTP(S) source link, 위치 token과 versioned category taxonomy를
+통과해야 한다. canonical link가 같거나 정규화한 이름과 비어 있지 않은 주소가 모두
+같을 때만 중복으로 병합한다. 후보가 부족하면 검색어에 실제 포함된 최저 priority 선호
+한 개만 제거해 Local을 한 번 더 호출한다. 여전히 세 개 미만이면
+`INSUFFICIENT_CANDIDATES`로 종료한다.
+
+Blog 근거는 후보별 최대 세 개를 연결한다. 하나의 Blog provider 호출이라도 실패하면
+이미 받은 Blog 근거를 모두 폐기하고 `LOCAL_ONLY`, `degraded=true`,
+`BLOG_EVIDENCE_UNAVAILABLE`로 처리한다.
+
+### Elice Chat
+
+MVP LLM은 Elice OpenAI-compatible Chat Completions의
+`openai/gpt-4.1-mini`를 사용한다. 조건 추출과 근거 이유 생성은 각각 strict JSON
+Schema, `additionalProperties=false`, bounded output, timeout, retry 0과 tool 미사용을
+요구한다. 자유 text나 Responses API로 자동 fallback하지 않는다.
+
+Embedding `openai/text-embedding-3-small`은 과거 capability만 확인했으며 추천·검색·
+점수·중복 제거 runtime에는 사용하지 않는다.
+
+이유 생성에는 Top 3의 허용된 장소·근거만 전달한다. 출력 place ID 집합은 입력 Top 3와
+정확히 같고, 모든 evidence ID는 같은 후보의 입력 근거에 속해야 한다. 가격, 영업 상태,
+도보 시간, 출구처럼 제공되지 않은 속성은 금지한다. 한 후보라도 schema·근거 검증에
+실패하면 batch 전체를 버리고 서버 template fallback을 사용한다. 점수·순위·주의점·
+공유 문구는 서버가 결정한다.
+
+이유 출력은 `placepick.reason-statements.v2`다. 장소마다 1~3개의 자연스러운 한국어
+문장을 허용하고 각 문장은 1~160자, 같은 장소에 속한 1~3개의 고유 evidence ID를
+인용한다. 서버는 place/evidence 소유 관계, 금지 속성, 입력 근거와의 최소 어휘 연결을
+다시 검증한다. LLM 결과 일부만 섞지 않으며 한 문장이라도 실패하면 Top 3 전체를 서버
+template으로 교체한다.
+
+2026-07-16 직접 Live Evidence는 알려진 유형의 불필요한 detail 정규화, 서버 warning
+생성, v2 자연 문장과 동일 후보 evidence 검증을 적용한 세 시나리오에서
+`reasonFallback=false`를 확인했다. 실행 과정과 safe summary는
+[CASE-0002](case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)를 정본으로 삼는다.
+
+### 실행과 비밀 경계
+
+`local`, `test`, 일반 CI와 `make check`는 Mock만 사용하고 실제 외부 호출을
+허용하지 않는다. 실제 Provider는 개발자가 명시적으로 `make dev-live` 또는
+`make live-evidence`를 실행할 때만 사용한다.
+
+로컬 자격은 Git에서 제외한 `.env.live.local`, 배포 자격은 Render runtime secret
+store에 둔다. Naver key, Elice token과 routing URL을 Git, GitHub Actions, Vercel
+browser bundle, PR·Issue·artifact에 넣지 않는다. GitHub Actions에는 배포에 필요한 최소
+scope credential만 둔다.
+
+`make live-evidence`는 안전한 단계·count·latency·schema 결과만 증거로 남긴다.
+실제 장소명·주소·링크·사용자 입력·prompt·completion을 문서나 기본 로그에 남기지 않는다.
+사람이 값 단위로 확인하는 PP-042 Live Playground는 로컬 화면에만 표시하고 저장·공유
+모드는 별도로 통제한다.
+
+실제 사용자 입력, Naver 결과의 제3자 LLM 전달과 영구 저장은 Naver·Elice 정책, 표시
+의무, 개인정보와 데이터 수명 검토를 통과한 제품 runtime에서만 활성화한다. `store=false`
+전달만으로 제3자 미보관을 보증하지 않는다.
+
+### 검증 축
+
+| 축 | 증명하는 것 | 증명하지 않는 것 |
+| --- | --- | --- |
+| Mock 자동 검증 | 변환·오류·fallback·redaction 회귀 | 현재 자격·Provider 가용성 |
+| 직접 Live Evidence | 현재 직접 adapter의 실제 Naver→Elice 연결 | 정식 API 전체·cloud·장기 품질·SLA |
+| Live Playground | 사람이 단계별 실제 값을 확인 | 자동 회귀·운영 안정성 |
+| 로컬 제품 Live E2E | 정식 API·DB·Redis Worker·추천/방 SSE·투표·확정의 실제 Provider 연결 | cloud revision·cold start·rollback |
+| Cloud Demo E2E | 배포된 대표 사용자 여정 | 상시 운영·무중단·SLA |
+
+한 축의 성공을 다른 축의 완료로 표현하지 않는다. 실제 실행의 과정·결과와 제한은
+[CASE-0002](case-studies/CASE-0002-naver-elice-linked-live-user-flow.md) 한 곳에서 관리한다.
 
 ## 계약 검증 책임
 

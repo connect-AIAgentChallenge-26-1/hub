@@ -9,6 +9,6 @@ load_env_file
 assert_docker_engine
 assert_mock_mode
 
-log 'starting PostgreSQL, Redis, Mock Naver, and Mock LLM'
-compose_base up --detach --build --wait
+log 'starting PostgreSQL and Redis'
+compose_base up --detach --wait
 log 'base infrastructure is healthy'

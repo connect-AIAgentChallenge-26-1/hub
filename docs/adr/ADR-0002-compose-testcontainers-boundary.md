@@ -7,7 +7,7 @@ date: 2026-07-13
 owners:
   - placepick-backend
 related:
-  - ../work-records/WI-0001-agentic-development-environment.md
+  - ../archive/work-records/WI-0001-agentic-development-environment.md
 ---
 
 # ADR-0002 Compose와 Testcontainers의 생명주기 책임을 분리

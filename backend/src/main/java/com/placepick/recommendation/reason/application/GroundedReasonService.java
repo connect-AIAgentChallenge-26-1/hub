@@ -1,6 +1,7 @@
 package com.placepick.recommendation.reason.application;
 
 import com.placepick.recommendation.application.scoring.CandidateRankingResult;
+import com.placepick.recommendation.application.trace.RecommendationTraceSink;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
 import com.placepick.recommendation.domain.scoring.RankedPlace;
 import com.placepick.recommendation.domain.scoring.RecommendationWarning;
@@ -26,11 +27,20 @@ public final class GroundedReasonService {
     private final GroundedReasonGenerationPort generationPort;
     private final ReasonContextFactory contextFactory;
     private final ReasonBatchValidator validator;
+    private final RecommendationTraceSink traceSink;
 
     public GroundedReasonService(GroundedReasonGenerationPort generationPort) {
+        this(generationPort, RecommendationTraceSink.none());
+    }
+
+    public GroundedReasonService(
+        GroundedReasonGenerationPort generationPort,
+        RecommendationTraceSink traceSink
+    ) {
         this.generationPort = Objects.requireNonNull(generationPort, "generationPort");
         this.contextFactory = new ReasonContextFactory();
         this.validator = new ReasonBatchValidator(new ReasonStatementPolicy());
+        this.traceSink = Objects.requireNonNull(traceSink, "traceSink");
     }
 
     public ReasonEnrichmentResult enrich(
@@ -43,21 +53,26 @@ public final class GroundedReasonService {
             .map(contextFactory::create)
             .toList();
         ReasonGenerationCommand command = new ReasonGenerationCommand(condition, contexts);
+        traceSink.reasonGenerationRequested(command);
 
         try {
             ReasonGenerationOutcome outcome = generationPort.generate(command);
             if (outcome == null || !outcome.generated()) {
+                traceSink.reasonGenerationCompleted(outcome, true);
                 return fallback(ranking, contexts);
             }
             List<PlaceReasonStatements> ordered = validator.validateAndOrder(
                 command,
                 outcome.batch()
             );
-            return new ReasonEnrichmentResult(
+            ReasonEnrichmentResult result = new ReasonEnrichmentResult(
                 assemble(ranking, ordered, false),
                 false
             );
+            traceSink.reasonGenerationCompleted(outcome, false);
+            return result;
         } catch (RuntimeException exception) {
+            traceSink.reasonGenerationCompleted(null, true);
             return fallback(ranking, contexts);
         }
     }
@@ -75,7 +90,7 @@ public final class GroundedReasonService {
                 : place.candidate().category();
             String text = bounded(
                 "검색 후보: " + place.candidate().name() + " / 유형: " + category,
-                120
+                160
             );
             statements.add(new PlaceReasonStatements(
                 place.placeId(),

@@ -29,8 +29,8 @@ public final class NoRetryHttpRequestFactory {
 
         PoolingHttpClientConnectionManager connectionManager =
             PoolingHttpClientConnectionManagerBuilder.create()
-                .setMaxConnTotal(1)
-                .setMaxConnPerRoute(1)
+                .setMaxConnTotal(4)
+                .setMaxConnPerRoute(4)
                 .setDefaultConnectionConfig(ConnectionConfig.custom()
                     .setConnectTimeout(Timeout.of(connectTimeout))
                     .setSocketTimeout(Timeout.of(responseTimeout))

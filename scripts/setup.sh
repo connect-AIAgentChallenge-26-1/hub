@@ -23,6 +23,8 @@ assert_gradle_jvm17
 if [[ -f "${ROOT_DIR}/package-lock.json" ]]; then
   log 'installing locked documentation tooling dependencies'
   (cd "${ROOT_DIR}" && npm ci --ignore-scripts)
+  log 'installing the Playwright Chromium binary for local browser verification'
+  "${ROOT_DIR}/node_modules/.bin/playwright" install chromium
 fi
 
 log 'setup validation completed; existing local configuration was not overwritten'

@@ -1,0 +1,51 @@
+spring:
+  config:
+    activate:
+      on-profile: production
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    hikari:
+      maximum-pool-size: ${DB_POOL_SIZE:5}
+      minimum-idle: 0
+      connection-timeout: 10000
+  flyway:
+    url: ${SPRING_FLYWAY_URL:${SPRING_DATASOURCE_URL}}
+    user: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+    connect-retries: 6
+    connect-retries-interval: 5s
+  data:
+    redis:
+      url: ${SPRING_DATA_REDIS_URL}
+      connect-timeout: 5s
+      timeout: 5s
+  mvc:
+    log-request-details: false
+  task:
+    scheduling:
+      pool:
+        size: ${PLACEPICK_SCHEDULER_POOL_SIZE:4}
+      thread-name-prefix: placepick-scheduler-
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+
+placepick:
+  role: ${PLACEPICK_ROLE:all}
+  external:
+    mode: ${PLACEPICK_EXTERNAL_MODE:production}
+    naver-base-url: https://naverapihub.apigw.ntruss.com
+    llm-base-url: ${CHAT_PROXY_URL}
+
+server:
+  port: ${PORT:${SERVER_PORT:8080}}
+  forward-headers-strategy: framework
+  error:
+    include-message: never
+    include-binding-errors: never
+    include-stacktrace: never

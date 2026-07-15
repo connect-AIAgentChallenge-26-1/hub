@@ -3,7 +3,13 @@ services:
     build:
       context: .
       dockerfile: .devcontainer/Dockerfile
-    command: ["sleep", "infinity"]
+    command:
+      - bash
+      - -lc
+      - >-
+        sudo mkdir -p /workspace/frontend/.next &&
+        sudo chown -R vscode:vscode /workspace/frontend/.next &&
+        exec sleep infinity
     working_dir: /workspace
     init: true
     environment:
@@ -14,24 +20,20 @@ services:
       SPRING_DATA_REDIS_HOST: redis
       SPRING_DATA_REDIS_PORT: 6379
       PLACEPICK_EXTERNAL_MODE: mock
-      PLACEPICK_NAVER_BASE_URL: http://mock-naver:8080
-      PLACEPICK_LLM_BASE_URL: http://mock-llm:8080
       TESTCONTAINERS_HOST_OVERRIDE: host.docker.internal
     ports:
       - "127.0.0.1:${APP_PORT:-8080}:8080"
+      - "127.0.0.1:${FRONTEND_PORT:-3000}:3000"
     volumes:
       - .:/workspace:cached
       - gradle-cache:/home/vscode/.gradle
+      - frontend-next-cache:/workspace/frontend/.next
     extra_hosts:
       - "host.docker.internal:host-gateway"
     depends_on:
       postgres:
         condition: service_healthy
       redis:
-        condition: service_healthy
-      mock-naver:
-        condition: service_healthy
-      mock-llm:
         condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "java -version 2>&1 | grep -Eq 'version \\\"17([.\\\"]|$)'"]
@@ -42,3 +44,4 @@ services:
 
 volumes:
   gradle-cache:
+  frontend-next-cache:

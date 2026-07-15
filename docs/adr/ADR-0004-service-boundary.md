@@ -8,7 +8,7 @@ owners:
   - placepick-team
 related:
   - ../roadmap.md
-  - ../work-records/WI-0002-service-completion-backlog.md
+  - ../archive/work-records/WI-0002-service-completion-backlog.md
 ---
 
 # ADR-0004 완성형 MVP 경계와 조건 확인 후 추천 시작

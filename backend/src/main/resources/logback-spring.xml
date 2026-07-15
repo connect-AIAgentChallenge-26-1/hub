@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <conversionRule
+    conversionWord="safeMsg"
+    converterClass="com.placepick.security.RedactingMessageConverter" />
+
+  <springProfile name="production">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+      <encoder>
+        <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5level [%thread] %logger{36} - %safeMsg%nopex%n</pattern>
+      </encoder>
+    </appender>
+    <root level="${LOG_LEVEL:-INFO}">
+      <appender-ref ref="STDOUT" />
+    </root>
+  </springProfile>
+
+  <springProfile name="!production">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+      <encoder>
+        <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n%ex</pattern>
+      </encoder>
+    </appender>
+    <root level="${LOG_LEVEL:-INFO}">
+      <appender-ref ref="STDOUT" />
+    </root>
+  </springProfile>
+</configuration>

@@ -21,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.test.annotation.DirtiesContext;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.containers.wait.strategy.Wait;
@@ -32,6 +33,7 @@ import org.testcontainers.utility.DockerImageName;
 @ActiveProfiles("test")
 @AutoConfigureObservability(metrics = true, tracing = false)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 class PlacepickInfrastructureIntegrationTest {
 
     private static final WireMockServer WIRE_MOCK = startWireMock();
@@ -94,7 +96,7 @@ class PlacepickInfrastructureIntegrationTest {
     }
 
     @Test
-    void exposesPrometheusButNoUnplannedActuatorOrBusinessEndpoint() {
+    void exposesPrometheusAndSafeRevisionInfoAndRejectsUnsupportedCollectionGet() {
         ResponseEntity<String> prometheus = restTemplate.getForEntity(
             "http://localhost:" + serverPort + "/actuator/prometheus",
             String.class
@@ -110,8 +112,11 @@ class PlacepickInfrastructureIntegrationTest {
 
         assertThat(prometheus.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(prometheus.getBody()).contains("# HELP");
-        assertThat(info.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(recommendation.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(info.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(info.getBody()).contains("git", "commit", "local");
+        assertThat(recommendation.getStatusCode()).isEqualTo(HttpStatus.METHOD_NOT_ALLOWED);
+        assertThat(recommendation.getHeaders().getAllow())
+            .containsExactly(org.springframework.http.HttpMethod.POST);
     }
 
     @Test

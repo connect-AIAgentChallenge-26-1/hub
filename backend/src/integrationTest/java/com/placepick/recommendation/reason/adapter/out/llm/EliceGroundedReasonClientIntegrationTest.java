@@ -76,7 +76,7 @@ class EliceGroundedReasonClientIntegrationTest {
         assertThat(outcome.batch().places()).hasSize(3);
         assertThat(outcome.batch().places()).allSatisfy(place ->
             assertThat(place.statements()).singleElement().satisfies(statement -> {
-                assertThat(statement.text()).isEqualTo(ReasonStatementPolicy.BLOG_STATEMENT_TEXT);
+                assertThat(statement.text()).contains("조용한 공간");
                 assertThat(statement.evidenceIds()).singleElement().asString()
                     .startsWith("e-blog-");
             })
@@ -84,6 +84,23 @@ class EliceGroundedReasonClientIntegrationTest {
         verifyOneRequest();
         verifyRequestBody();
         WIRE_MOCK.verify(0, postRequestedFor(urlPathEqualTo(RESPONSES_PATH)));
+    }
+
+    @Test
+    void acceptsANaturalStatementGroundedByTwoEvidenceItems() {
+        String content = validContent().replace(
+            "\"evidenceIds\":[\"e-blog-1\"]",
+            "\"evidenceIds\":[\"local:1\",\"e-blog-1\"]"
+        );
+        WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH))
+            .willReturn(jsonResponse(200, validChatResponse(content))));
+
+        var outcome = client.generate(command());
+
+        assertThat(outcome.generated()).isTrue();
+        assertThat(outcome.batch().places().get(0).statements().get(0).evidenceIds())
+            .containsExactly("local:1", "e-blog-1");
+        verifyOneRequest();
     }
 
     @ParameterizedTest
@@ -189,15 +206,11 @@ class EliceGroundedReasonClientIntegrationTest {
         JsonNode statementProperties = format.path("json_schema").path("schema")
             .path("properties").path("places").path("items")
             .path("properties").path("statements").path("items").path("properties");
-        List<String> allowedTexts = new java.util.ArrayList<>();
-        statementProperties.path("text").path("enum")
-            .forEach(value -> allowedTexts.add(value.asText()));
-        assertThat(allowedTexts).containsExactly(
-            ReasonStatementPolicy.LOCAL_STATEMENT_TEXT,
-            ReasonStatementPolicy.BLOG_STATEMENT_TEXT
-        );
+        assertThat(statementProperties.path("text").path("type").asText())
+            .isEqualTo("string");
+        assertThat(statementProperties.path("text").path("enum").isMissingNode()).isTrue();
         assertThat(statementProperties.path("evidenceIds").path("minItems").asInt()).isOne();
-        assertThat(statementProperties.path("evidenceIds").path("maxItems").asInt()).isOne();
+        assertThat(statementProperties.path("evidenceIds").path("maxItems").asInt()).isEqualTo(3);
         assertThat(statementProperties.path("evidenceIds").path("uniqueItems").isMissingNode())
             .isTrue();
     }
@@ -283,22 +296,36 @@ class EliceGroundedReasonClientIntegrationTest {
             Arguments.of(
                 "free claim sharing only the place name",
                 validChatResponse(content.replace(
-                    ReasonStatementPolicy.BLOG_STATEMENT_TEXT,
+                    naturalText(1),
                     "카페 1에는 루프탑이 있습니다"
+                ))
+            ),
+            Arguments.of(
+                "unsupported price claim",
+                validChatResponse(content.replace(
+                    naturalText(1),
+                    "카페 1의 가격은 10000원입니다"
+                ))
+            ),
+            Arguments.of(
+                "oversized statement",
+                validChatResponse(content.replace(
+                    naturalText(1),
+                    "카페 ".repeat(60)
                 ))
             ),
             Arguments.of(
                 "local text citing blog evidence",
                 validChatResponse(content.replace(
-                    ReasonStatementPolicy.BLOG_STATEMENT_TEXT,
+                    naturalText(1),
                     ReasonStatementPolicy.LOCAL_STATEMENT_TEXT
                 ))
             ),
             Arguments.of(
-                "multiple evidence IDs",
+                "duplicate evidence IDs",
                 validChatResponse(content.replace(
                     "\"evidenceIds\":[\"e-blog-1\"]",
-                    "\"evidenceIds\":[\"e-blog-1\",\"local:1\"]"
+                    "\"evidenceIds\":[\"e-blog-1\",\"e-blog-1\"]"
                 ))
             ),
             Arguments.of(
@@ -313,8 +340,8 @@ class EliceGroundedReasonClientIntegrationTest {
             Arguments.of(
                 "duplicate key",
                 validChatResponse(content.replace(
-                    "\"schemaVersion\":\"placepick.reason-statements.v1\"",
-                    "\"schemaVersion\":\"wrong\",\"schemaVersion\":\"placepick.reason-statements.v1\""
+                    "\"schemaVersion\":\"placepick.reason-statements.v2\"",
+                    "\"schemaVersion\":\"wrong\",\"schemaVersion\":\"placepick.reason-statements.v2\""
                 ))
             ),
             Arguments.of("trailing token", validChatResponse(content) + " trailing")
@@ -324,7 +351,7 @@ class EliceGroundedReasonClientIntegrationTest {
     private static String validContent() {
         return """
             {
-              "schemaVersion":"placepick.reason-statements.v1",
+              "schemaVersion":"placepick.reason-statements.v2",
               "places":[
             %s%s%s  ]
             }
@@ -338,10 +365,14 @@ class EliceGroundedReasonClientIntegrationTest {
                   {"text":"%s","evidenceIds":["e-blog-%d"]}
                 ]}%s""".formatted(
             placeId(index),
-            ReasonStatementPolicy.BLOG_STATEMENT_TEXT,
+            naturalText(index),
             index,
             suffix
         );
+    }
+
+    private static String naturalText(int index) {
+        return "카페 " + index + "은 블로그에서 조용한 공간으로 소개되었습니다.";
     }
 
     private static UUID placeId(int index) {

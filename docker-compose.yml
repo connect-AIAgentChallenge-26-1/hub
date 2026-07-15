@@ -34,42 +34,6 @@ services:
       retries: 20
       start_period: 5s
 
-  mock-naver:
-    image: placepick/mock-naver:wiremock-3.13.2
-    build:
-      context: ./mock-api
-      dockerfile: Dockerfile
-      args:
-        MOCK_NAME: naver
-    restart: unless-stopped
-    command: ["--disable-gzip", "--verbose"]
-    ports:
-      - "127.0.0.1:${MOCK_NAVER_PORT:-8089}:8080"
-    healthcheck:
-      test: ["CMD", "/bin/bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/8080"]
-      interval: 5s
-      timeout: 3s
-      retries: 20
-      start_period: 10s
-
-  mock-llm:
-    image: placepick/mock-llm:wiremock-3.13.2
-    build:
-      context: ./mock-api
-      dockerfile: Dockerfile
-      args:
-        MOCK_NAME: llm
-    restart: unless-stopped
-    command: ["--disable-gzip", "--verbose"]
-    ports:
-      - "127.0.0.1:${MOCK_LLM_PORT:-8090}:8080"
-    healthcheck:
-      test: ["CMD", "/bin/bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/8080"]
-      interval: 5s
-      timeout: 3s
-      retries: 20
-      start_period: 10s
-
 volumes:
   postgres-data:
   redis-data:

@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: live-dev
+
+server:
+  address: 127.0.0.1
+
+placepick:
+  external:
+    mode: ${PLACEPICK_EXTERNAL_MODE:mock}
+    naver-base-url: ${NAVER_API_HUB_BASE_URL:http://127.0.0.1:8089}
+    llm-base-url: ${CHAT_PROXY_URL:http://127.0.0.1:8090/v1}
+  live-dev:
+    ttl: PT30M
+    max-concurrency: ${PLACEPICK_LIVE_DEV_MAX_CONCURRENCY:${PLACEPICK_PROVIDER_MAXIMUM_CONCURRENCY:2}}

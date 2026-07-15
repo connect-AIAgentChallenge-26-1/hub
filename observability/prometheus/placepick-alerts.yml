@@ -1,0 +1,27 @@
+groups:
+  - name: placepick-invariant-signals
+    rules:
+      - alert: PlacePickDlqDetected
+        expr: sum(increase(placepick_stream_dlq_total[10m])) > 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: Recommendation stream event entered the DLQ
+          runbook: RUN-0007
+      - alert: PlacePickProviderAuthenticationFailed
+        expr: sum(increase(placepick_provider_calls_total{outcome="authentication_failed"}[10m])) > 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: A provider rejected the configured credential
+          runbook: RUN-0007
+      - alert: PlacePickProviderQuotaPressure
+        expr: sum(increase(placepick_provider_quota_protected_total[10m])) > 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: A provider reported quota or rate-limit pressure
+          runbook: RUN-0007

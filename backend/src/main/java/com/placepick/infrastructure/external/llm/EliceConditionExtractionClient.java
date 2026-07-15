@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.placepick.infrastructure.external.http.NoRetryHttpRequestFactory;
+import com.placepick.infrastructure.external.http.DirectProviderRestClientFactory;
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionErrorCode;
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
 import com.placepick.recommendation.condition.application.port.out.ConditionWarning;
@@ -29,7 +29,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpResponse;
@@ -40,8 +39,8 @@ import org.springframework.web.client.RestClientException;
 /**
  * Product-shaped Elice Chat Completions condition extraction adapter.
  *
- * <p>This class is deliberately not a Spring component. PP-029 owns runtime activation and policy
- * gates; constructing this adapter explicitly cannot publish a business endpoint.</p>
+ * <p>This class remains framework-neutral. Explicit profile configuration creates it only for
+ * approved live development or production modes.</p>
  */
 public final class EliceConditionExtractionClient implements ConditionExtractionPort {
 
@@ -84,8 +83,9 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         schema. If no explicit 1-to-10 preference priority is supplied, return priority as null.
         Interpret "N or less" as a null minimum and N as the maximum. Preserve an exclusion as the
         excluded concept instead of rewriting it as an opposite attribute. Normalize a location to
-        an administrative-area name without grammatical particles. Never add provider facts, place
-        names, prices, or explanations.
+        an administrative-area name without grammatical particles. Set placeTypeDetail to null for
+        RESTAURANT, CAFE, and BAR; use it only when placeType is OTHER. Never add provider facts,
+        place names, prices, or explanations.
         """.strip();
 
     private final RestClient restClient;
@@ -167,11 +167,11 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
             throw new IllegalArgumentException("LLM response byte limit is invalid.");
         }
 
-        RestClient restClient = RestClient.builder()
-            .requestFactory(NoRetryHttpRequestFactory.create(connectTimeout, responseTimeout))
-            .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token)
-            .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-            .build();
+        RestClient restClient = DirectProviderRestClientFactory.bearerJson(
+            token,
+            connectTimeout,
+            responseTimeout
+        );
         return new EliceConditionExtractionClient(
             restClient,
             strictObjectMapper(),
@@ -445,8 +445,8 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
                 throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_SCHEMA);
             }
             DraftRecommendationCondition condition = parseCondition(conditionNode, httpStatus);
-            List<ConditionWarning> warnings = parseWarnings(root.get("warnings"), httpStatus);
-            validateWarnings(condition, warnings, httpStatus);
+            parseWarnings(root.get("warnings"), httpStatus);
+            List<ConditionWarning> warnings = derivedWarnings(condition);
             if (condition.isProcessable()) {
                 return new ParsedContent(
                     ExtractionOutcome.extracted(condition, warnings),
@@ -484,7 +484,7 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
             throw conditionBoundary(httpStatus, "CONDITION_OTHER_DETAIL_MISSING");
         }
         if (placeType != null && placeType != PlaceType.OTHER && placeTypeDetail != null) {
-            throw conditionBoundary(httpStatus, "CONDITION_TYPE_DETAIL_UNEXPECTED");
+            placeTypeDetail = null;
         }
         if (budgetMinimum != null && budgetMaximum != null && budgetMinimum > budgetMaximum) {
             throw conditionBoundary(httpStatus, "CONDITION_BUDGET_ORDER_INVALID");
@@ -568,10 +568,8 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         return List.copyOf(warnings);
     }
 
-    private static void validateWarnings(
-        DraftRecommendationCondition condition,
-        List<ConditionWarning> warnings,
-        int httpStatus
+    private static List<ConditionWarning> derivedWarnings(
+        DraftRecommendationCondition condition
     ) {
         Set<ConditionWarning> expected = new LinkedHashSet<>();
         if (condition.partySize() == null) {
@@ -581,9 +579,7 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
             condition.budgetPerPersonMax() == null) {
             expected.add(ConditionWarning.BUDGET_NOT_PROVIDED);
         }
-        if (!expected.equals(new LinkedHashSet<>(warnings))) {
-            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_WARNINGS);
-        }
+        return List.copyOf(expected);
     }
 
     private static void validateUsage(JsonNode usage, int httpStatus) {

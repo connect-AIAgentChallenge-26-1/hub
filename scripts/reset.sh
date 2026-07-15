@@ -21,7 +21,7 @@ fi
 log 'deleting local service containers and application data volumes'
 # Keep the current Dev Container and its Gradle cache alive; reset only application state.
 compose_full rm --stop --force \
-  postgres redis mock-naver mock-llm prometheus grafana k6
+  postgres redis prometheus grafana
 
 project_name="${COMPOSE_PROJECT_NAME:-placepick}"
 for compose_volume in postgres-data redis-data grafana-data; do

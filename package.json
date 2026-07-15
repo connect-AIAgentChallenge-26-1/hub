@@ -4,23 +4,28 @@
   "private": true,
   "type": "module",
   "workspaces": [
-    "edge"
+    "frontend"
   ],
   "engines": {
     "node": ">=24"
   },
   "scripts": {
-    "docs:lint": "markdownlint-cli2 --config tools/docs/markdownlint-cli2.jsonc \"README.md\" \"AGENTS.md\" \"docs/**/*.md\" \".github/**/*.md\"",
+    "docs:lint": "markdownlint-cli2 --config tools/docs/markdownlint-cli2.jsonc \"README.md\" \"AGENTS.md\" \"docs/**/*.md\" \"!docs/archive/**\" \".github/**/*.md\"",
     "docs:validate": "node tools/docs/validate.mjs",
     "docs:check": "npm run docs:lint && npm run docs:validate",
     "docs:test": "node --test tools/docs/tests/*.test.mjs",
     "docs:links:external": "node tools/docs/external-links.mjs",
-    "edge:check": "npm run check --workspace @placepick/edge-security",
+    "frontend:check": "npm run check --workspace @placepick/frontend",
+    "frontend:e2e": "npm run test:e2e --workspace @placepick/frontend",
     "test": "npm run docs:test"
+  },
+  "overrides": {
+    "postcss": "8.5.19"
   },
   "devDependencies": {
     "markdown-link-check": "3.14.2",
     "markdownlint-cli2": "0.23.0",
+    "vercel": "56.2.0",
     "yaml": "2.9.0"
   }
 }

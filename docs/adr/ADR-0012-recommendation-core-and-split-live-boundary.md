@@ -1,6 +1,6 @@
 ---
 id: ADR-0012
-title: 동기 추천 Core와 Split Live 검증 경계
+title: 동기 추천 Core와 사용자 확인 경계
 type: adr
 status: accepted
 date: 2026-07-15
@@ -9,110 +9,61 @@ owners:
 related:
   - ../roadmap.md
   - ../contracts.md
-  - ../work-records/WI-0041-recommendation-core-split-live-workflow.md
-  - ../runbooks/RUN-0003-recommendation-workflow-split-live-probe.md
-  - ADR-0009-mock-local-live-gateway-boundary.md
+  - ../archive/work-records/WI-0041-recommendation-core-split-live-workflow.md
+  - ADR-0006-api-worker-outbox-events.md
   - ADR-0011-elice-chat-completions-provider-boundary.md
-  - ADR-0013-naver-elice-linked-live-boundary.md
+  - ADR-0014-mvp-direct-provider-and-simplified-trust-boundary.md
 ---
 
-# ADR-0012 동기 추천 Core와 Split Live 검증 경계
+# ADR-0012 동기 추천 Core와 사용자 확인 경계
 
 ## 맥락과 문제
 
-Naver Local·Blog와 Elice Chat·Embedding의 개별 Local Live는 실제 인증과 schema를
-통과했다. 그러나 제품에는 조건 추출, 사용자 확인, 검색, 후보 정규화·점수화와 근거
-문장을 하나의 application 흐름으로 연결하는 core가 없다. 이 상태에서 provider canary를
-서비스 통합 성공이라고 표현할 수 없다.
+Provider 개별 계약만으로는 조건 추출, 사용자 확인, 장소 검색, 후보 처리, 점수와 근거
+문장이 하나의 제품 규칙으로 맞물리는지 증명할 수 없다. 이 규칙을 비동기 Job·DB·Redis와
+동시에 구현하면 추천 정책 실패와 전달·복구 실패도 분리하기 어렵다.
 
-추천 규칙을 비동기 Job·DB·Redis와 동시에 구현하면 순수한 후보 선택 실패와 전달·복구
-실패를 구분하기 어렵다. 한편 실제 Naver 응답을 Elice에 보내는 전체 Live는 Naver의
-검색 결과 가공·저장·제3자 전달 범위와 Elice의 요청·응답 보관·학습·하위 처리자 정책이
-확정되지 않아 실행할 수 없다.
+## 판단 기준과 대안
 
-## 판단 기준과 검토 대안
+기준은 사용자 확인권, 결정적 추천, domain·Provider 독립성, 근거 추적, 후속 Worker
+재사용과 실패 원인의 분리다.
 
-기준은 사용자 확인권, 결정적 추천, domain과 provider 독립성, 근거 추적성, 호출 상한,
-비밀·데이터 최소화, 후속 Worker 재사용과 각 검증 증거의 해석 가능성이다.
-
-- provider canary만 유지하면 인증 drift는 찾지만 제품 규칙과 schema 연결을 검증하지
-  못한다.
-- 처음부터 Worker에 구현하면 최종 구조와 가깝지만 queue·transaction과 추천 정책의
-  실패 원인이 결합된다.
-- 실제 provider를 즉시 연결하면 가장 실제에 가깝지만 현재 약관·데이터 정책 gate를
-  통과하지 못한다.
-- 동기 core를 먼저 만들고 Mock 전체 연결과 Split Live를 분리하면 구조가 하나 더
-  생기지만 application 규칙과 실제 provider 호환성을 독립적으로 검증할 수 있다.
+- Provider canary만 유지하면 인증 drift는 찾지만 제품 규칙을 검증하지 못한다.
+- 처음부터 Worker에서 구현하면 queue·transaction과 추천 정책의 실패가 결합된다.
+- 동기 Core를 먼저 만들면 경계가 하나 늘지만 순수 규칙을 결정적으로 검증하고 Worker가
+  같은 use case를 재사용할 수 있다.
 
 ## 결정
 
-PP-009·PP-014~PP-016의 핵심 추천 로직을 이후 PP-017 Worker가 그대로 호출할 수 있는
-동기식 application use case로 구현한다. domain은 외부 DTO, HTTP, JPA와 Spring bean
-세부 구현에 의존하지 않는다.
+PP-009·PP-014~PP-016의 추천 규칙을 동기식 application use case로 유지한다.
 
 ```text
 ConditionExtractionPort
-  -> 사용자 확인·수정 경계
+  -> 사용자 확인·수정
     -> RecommendationCoreUseCase(ConfirmedRecommendationCondition)
       -> PlaceSearchPort / BlogSearchPort
       -> 정규화·hard filter·dedup·0~80 점수·Top 3
       -> GroundedReasonGenerationPort
-      -> 서버 검증·주의점·공유 문구 조합
+      -> 서버 검증·fallback·공유 문구 조합
 ```
 
-추출 결과는 자동 추천으로 이어지지 않는다. 사용자 확인을 나타내는 확정 조건만 core가
-받고 원본 `requestText`는 검색·점수·이유 생성에 전달하지 않는다. 필드·검색·점수·LLM
-schema의 상세 계약은 `docs/contracts.md`를 정본으로 한다.
+추출 Draft를 자동 추천에 넣지 않는다. Core는 확인된 조건만 받고 원본 request text를
+검색·점수·이유 생성으로 전달하지 않는다. LLM은 점수·순위를 바꾸지 않고 근거 문장만
+생성한다. 세부 schema와 실패 규칙은 [계약 정본](../contracts.md)을 따른다.
 
-검증을 세 축으로 고정한다.
-
-| 축 | 데이터와 호출 | 증명 범위 | 현재 정책 |
-| --- | --- | --- | --- |
-| Mock linked | 합성 조건·Naver·LLM fixture를 실제 core로 연결 | 전체 application 규칙·fallback·호출 상한 | 필수 자동 검증 |
-| Split Live | Elice 합성 추출, Naver Local·Blog, Elice 합성 이유를 각각 호출 | 실제 provider의 제품형 schema 호환성 | 로컬 수동 4회만 허용 |
-| Linked Live | 실제 Naver 결과를 Elice 이유 생성에 전달 | 실제 provider 간 전체 데이터 흐름 | PP-040 로컬 일회성 검증만 별도 승인 |
-
-Split Live는 Naver 결과를 Elice에 전달하지 않는다. 이유 생성은 versioned synthetic
-candidate·evidence fixture만 사용하고 그 요청의 hash를 launcher와 Loopback Gateway에서
-고정한다. Embedding은 호출하지 않는다. 출력에는 `mode=split`, `linked=false`를 포함한다.
-
-원본 provider 자격은 Git에서 제외한 `.env.live.local`을 직접 parsing하는 로컬 전용
-TypeScript Loopback Gateway 하위 프로세스에만 전달한다. Java에는 127.0.0.1 임시 URL과
-일회성 256-bit token만 전달한다. Gateway는 고정 method·route·fixture·호출 예산만
-허용하고 redirect·retry와 임의 URL·query·header·body를 거부한다. standard `make check`,
-일반 앱과 CI는 이 파일을 읽지 않는다.
+Mock은 정상, 선호 한 번 완화, 후보 부족, Blog degraded와 LLM batch fallback을 같은 Core
+경계에서 검증한다. 실제 Provider 연결의 과거 과정과 결과는
+[CASE-0002](../case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)에 보존한다. 현재 직접
+Live 신뢰 경계는 ADR-0014를 따른다.
 
 ## 결과와 트레이드오프
 
-추천 core를 DB·queue와 분리해 결정론적 단위·통합·Eval을 먼저 만들 수 있고, Worker는
-같은 use case를 orchestration 안에서 재사용할 수 있다. Mock 전체 연결과 실제 provider
-호환성도 서로 다른 실패로 설명할 수 있다. 사용자 확인 경계와 LLM의 설명 전용 역할이
-코드 구조에 드러난다.
-
-대신 Split Live는 실제 Naver→Elice 연결을 증명하지 않는다. 로컬 Gateway와 별도 source
-set을 유지해야 하며, 실제 Linked Live에는 약관·표시·개인정보·비용 검토와 새로운 승인
-절차가 필요하다. 동기 core 성공도 Job·Outbox·Streams·SSE 복구를 증명하지 않는다.
-
-2026-07-15 이후 Linked Live의 로컬 신뢰·데이터 경계는
-[ADR-0013](ADR-0013-naver-elice-linked-live-boundary.md)이 구체화한다. 저장소 소유자의
-양쪽 Provider 승인 진술을 근거로 합성 입력의 로컬 일회성 harness만 허용하며, 승인
-원문을 독립 검토하거나 법률·약관 준수를 확인했다는 뜻은 아니다. 제품 runtime과 배포
-gate는 이 예외로 해제하지 않는다.
+추천 규칙을 DB·queue 없이 빠르게 검증하고 PP-017 Worker가 그대로 호출할 수 있다.
+사용자 확인과 LLM 설명 전용 역할이 코드 구조에 드러난다. 반면 동기 Core 성공은
+Job·Outbox·Streams·SSE, 영속화, UI와 배포 성공을 증명하지 않는다.
 
 ## 검증과 재검토 조건
 
-Mock linked는 정상, 선호 완화, 후보 부족, Blog degraded, LLM batch fallback의 다섯
-`RecommendationCoreUseCase` 흐름과 호출 상한, provider credential 교차 전달 금지,
-외부 network 0건을 자동 검증한다. Split Live는
-[RUN-0003](../runbooks/RUN-0003-recommendation-workflow-split-live-probe.md)의 검토 SHA와
-안전장치로 네 논리 호출의 2xx·schema만 확인한다. 2026-07-15 `main` SHA
-`dc6e1e2aacee47f2ac87bb425ff73299ba09854a`의 첫 실행은 safe failure로 종료해 이 증거를
-얻지 못했으므로 Split 상태는 `specified`로 유지한다.
-
-PP-040의 Linked Live는 별도 Work Record·Runbook·명령으로만 실행한다. 사용자는 Naver와
-Elice 양쪽 승인과 주소·도로명 주소를 포함한 현재 전체 문맥 전달을 승인했다고 진술했지만
-승인 원문은 이 작업에서 독립 검토하지 않았다. 따라서 실제 사용자 데이터·영구 저장·
-제품 runtime·배포에는 이 진술을 자동 적용하지 않는다. Provider가 strict schema를
-지원하지 않거나 승인 범위가 철회·변경되면 데이터 공급자 또는 LLM provider를
-재선정한다. 가격 구조화 근거가 생기거나 점수 품질 측정이 나오면 0~80 정책도 별도
-Experiment와 ADR 변경으로 재검토한다.
+Mock Core 흐름, 호출 상한, Provider credential 교차 전달 금지와 표준 검증의 외부 network
+0건을 유지한다. 가격 구조화 근거, 사용자 만족 측정 또는 새로운 ranking 요구가 생기면
+점수·Top 3 정책을 Experiment와 ADR로 재검토한다.

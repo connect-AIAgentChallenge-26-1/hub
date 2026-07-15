@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --color-brand: #0f766e;
+}
+
+:root {
+  color-scheme: light;
+  background: #f5f7f6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at 8% 30%, rgb(204 251 241 / 0.42), transparent 28rem),
+    radial-gradient(circle at 92% 75%, rgb(254 243 199 / 0.38), transparent 26rem),
+    #f5f7f6;
+  color: #0f172a;
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button:not(:disabled),
+select:not(:disabled) {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.hero-grid::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  pointer-events: none;
+  opacity: 0.13;
+  background-image:
+    linear-gradient(to right, #fff 1px, transparent 1px),
+    linear-gradient(to bottom, #fff 1px, transparent 1px);
+  background-size: 52px 52px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+.hero-grid::after {
+  position: absolute;
+  right: -8rem;
+  top: 2rem;
+  width: 30rem;
+  height: 30rem;
+  content: "";
+  pointer-events: none;
+  border-radius: 9999px;
+  background: rgb(45 212 191 / 0.16);
+  filter: blur(70px);
+}
+
+.surface-card {
+  border: 1px solid rgb(226 232 240 / 0.9);
+  border-radius: 1.5rem;
+  background: rgb(255 255 255 / 0.94);
+  box-shadow: 0 18px 60px rgb(15 23 42 / 0.07);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #0f766e;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.field-label {
+  display: block;
+  color: #334155;
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
+.field-control {
+  display: block;
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.85rem;
+  background: #fff;
+  padding: 0.72rem 0.9rem;
+  color: #0f172a;
+  outline: none;
+  transition: border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.field-control:hover {
+  border-color: #94a3b8;
+}
+
+.field-control:focus-visible {
+  border-color: #0f766e;
+  box-shadow: 0 0 0 3px rgb(20 184 166 / 0.17);
+}
+
+.primary-button,
+.secondary-button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border-radius: 0.85rem;
+  padding: 0.7rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 800;
+  transition: transform 140ms ease, background-color 140ms ease, border-color 140ms ease;
+}
+
+.primary-button {
+  border: 1px solid #0f766e;
+  background: #0f766e;
+  color: #fff;
+  box-shadow: 0 8px 24px rgb(15 118 110 / 0.2);
+}
+
+.primary-button:not(:disabled):hover {
+  background: #115e59;
+  transform: translateY(-1px);
+}
+
+.secondary-button {
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  color: #334155;
+}
+
+.secondary-button:not(:disabled):hover {
+  border-color: #5eead4;
+  background: #f0fdfa;
+  color: #115e59;
+}
+
+.primary-button:focus-visible,
+.secondary-button:focus-visible {
+  outline: 2px solid #0f766e;
+  outline-offset: 3px;
+}
+
+.warning-chip {
+  display: inline-flex;
+  border: 1px solid #fde68a;
+  border-radius: 9999px;
+  background: #fff;
+  padding: 0.25rem 0.65rem;
+  color: #92400e;
+  font-size: 0.7rem;
+  font-weight: 750;
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  border-radius: 0.6rem;
+  background: #fff;
+  padding: 0.7rem 1rem;
+  color: #0f172a;
+  font-weight: 800;
+  box-shadow: 0 8px 30px rgb(15 23 42 / 0.18);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

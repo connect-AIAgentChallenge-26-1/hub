@@ -8,7 +8,7 @@ owners:
   - placepick-team
 related:
   - ../roadmap.md
-  - ../work-records/WI-0002-service-completion-backlog.md
+  - ../archive/work-records/WI-0002-service-completion-backlog.md
 ---
 
 # ADR-0005 익명 세션과 분리된 공유·주최자 capability 사용
@@ -36,9 +36,16 @@ MVP는 가입 없이 링크로 투표할 수 있어야 하지만 클라이언트
 cookie로 전달한다. 운영에서는 `Secure`를 강제하며 상태 변경 요청은 CSRF token을
 검사한다. 공개 방은 충분한 entropy를 가진 share token으로 조회한다.
 
+여러 브라우저 탭은 session cookie를 공유하지만 CSRF token 저장소는 탭별일 수 있다.
+새 탭의 세션 갱신으로 기존 token이 무효화되면 클라이언트가 `CSRF_INVALID`를 받은
+최초 한 번만 세션을 다시 동기화하고 원래 멱등성 key로 요청을 재전송한다. 탭 간
+복구를 지원하되 무한 재시도와 중복 mutation은 허용하지 않는다.
+
 방 생성자에게만 별도의 organizer capability를 cookie로 발급하고 서버에는 원문
-대신 hash를 저장한다. 참여자는 자기 세션의 후보별 투표만 `PUT`으로 생성·교체하고
-`DELETE`로 제거한다. DB unique constraint가 세션·방·후보당 한 표를 보장한다.
+대신 hash를 저장한다. 같은 브라우저가 여러 방을 만들 수 있으므로 cookie 이름은
+유지하되 Path를 `/api/v1/rooms/{shareToken}`으로 방마다 격리한다. 참여자는 자기
+세션의 후보별 투표만 `PUT`으로 생성·교체하고 `DELETE`로 제거한다. DB unique
+constraint가 세션·방·후보당 한 표를 보장한다.
 최종 확정은 organizer capability가 있어야 하며 같은 후보 재요청은 성공, 다른 후보
 변경은 409로 처리한다.
 

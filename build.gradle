@@ -14,12 +14,6 @@ if (JavaVersion.current() != JavaVersion.VERSION_17) {
 allprojects {
     group = 'com.placepick'
     version = '0.1.0'
-
-    // Windows bind-mounted workspaces cannot reliably store or restore Unix modes in task outputs.
-    // Keep dependency/configuration caches and task up-to-date checks, but disable output caching.
-    tasks.configureEach {
-        outputs.cacheIf { false }
-    }
 }
 
 subprojects {

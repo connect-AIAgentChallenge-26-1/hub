@@ -116,7 +116,6 @@ class EliceConditionExtractionClientIntegrationTest {
 
     @ParameterizedTest
     @CsvSource(value = {
-        "\"placeTypeDetail\":null|\"placeTypeDetail\":\"디저트\"|CONDITION_TYPE_DETAIL_UNEXPECTED",
         "\"budgetPerPersonMin\":10000|\"budgetPerPersonMin\":30000|CONDITION_BUDGET_ORDER_INVALID"
     }, delimiter = '|')
     void classifiesCrossFieldViolationsWithoutReturningProviderValues(
@@ -134,6 +133,40 @@ class EliceConditionExtractionClientIntegrationTest {
             .isEqualTo(ConditionExtractionErrorCode.PROVIDER_INVALID_RESPONSE);
         assertThat(diagnostic.boundaryCode()).isEqualTo(expectedCode)
             .doesNotContain("디저트", "30000");
+        verifyOneRequest();
+    }
+
+    @Test
+    void ignoresRedundantDetailForAKnownPlaceType() {
+        String content = validContent().replace(
+            "\"placeTypeDetail\":null",
+            "\"placeTypeDetail\":\"디저트\""
+        );
+        WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH))
+            .willReturn(jsonResponse(200, validChatResponse(content))));
+
+        var outcome = client.extract(command());
+
+        assertThat(outcome.extracted()).isTrue();
+        assertThat(outcome.condition().placeType()).isEqualTo(PlaceType.CAFE);
+        assertThat(outcome.condition().placeTypeDetail()).isNull();
+        verifyOneRequest();
+    }
+
+    @Test
+    void derivesMissingFieldWarningsInsteadOfTrustingTheProviderList() {
+        String content = validContent()
+            .replace("\"partySize\":4", "\"partySize\":null")
+            .replace("\"warnings\":[]", "\"warnings\":[\"BUDGET_NOT_PROVIDED\"]");
+        WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH))
+            .willReturn(jsonResponse(200, validChatResponse(content))));
+
+        var outcome = client.extract(command());
+
+        assertThat(outcome.extracted()).isTrue();
+        assertThat(outcome.warnings()).containsExactly(
+            ConditionWarning.PARTY_SIZE_NOT_PROVIDED
+        );
         verifyOneRequest();
     }
 
@@ -321,13 +354,6 @@ class EliceConditionExtractionClientIntegrationTest {
             Arguments.of(
                 "out of range party size",
                 validChatResponse(content.replace("\"partySize\":4", "\"partySize\":101"))
-            ),
-            Arguments.of(
-                "warning mismatch",
-                validChatResponse(content.replace(
-                    "\"warnings\":[]",
-                    "\"warnings\":[\"BUDGET_NOT_PROVIDED\"]"
-                ))
             ),
             Arguments.of("refusal", chatResponse("stop", content, "blocked")),
             Arguments.of("incomplete", chatResponse("length", content, null)),

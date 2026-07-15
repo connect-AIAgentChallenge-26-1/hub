@@ -9,6 +9,7 @@ import com.placepick.recommendation.application.port.out.PlaceSearchItem;
 import com.placepick.recommendation.application.port.out.PlaceSearchPort;
 import com.placepick.recommendation.application.port.out.PlaceSearchQuery;
 import com.placepick.recommendation.application.port.out.SearchProviderException;
+import com.placepick.recommendation.application.trace.RecommendationTraceSink;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
 import com.placepick.recommendation.domain.candidate.CandidateEvidence;
 import com.placepick.recommendation.domain.candidate.NormalizedCandidate;
@@ -41,6 +42,7 @@ public final class CandidateRankingService {
     private final CandidateNormalizer normalizer;
     private final CandidateRanker ranker;
     private final Supplier<UUID> placeIdSupplier;
+    private final RecommendationTraceSink traceSink;
 
     public CandidateRankingService(
         PlaceSearchPort placeSearchPort,
@@ -55,7 +57,27 @@ public final class CandidateRankingService {
             queryPlanner,
             normalizer,
             ranker,
-            UUID::randomUUID
+            UUID::randomUUID,
+            RecommendationTraceSink.none()
+        );
+    }
+
+    public CandidateRankingService(
+        PlaceSearchPort placeSearchPort,
+        BlogSearchPort blogSearchPort,
+        CandidateQueryPlanner queryPlanner,
+        CandidateNormalizer normalizer,
+        CandidateRanker ranker,
+        RecommendationTraceSink traceSink
+    ) {
+        this(
+            placeSearchPort,
+            blogSearchPort,
+            queryPlanner,
+            normalizer,
+            ranker,
+            UUID::randomUUID,
+            traceSink
         );
     }
 
@@ -67,39 +89,66 @@ public final class CandidateRankingService {
         CandidateRanker ranker,
         Supplier<UUID> placeIdSupplier
     ) {
+        this(
+            placeSearchPort,
+            blogSearchPort,
+            queryPlanner,
+            normalizer,
+            ranker,
+            placeIdSupplier,
+            RecommendationTraceSink.none()
+        );
+    }
+
+    public CandidateRankingService(
+        PlaceSearchPort placeSearchPort,
+        BlogSearchPort blogSearchPort,
+        CandidateQueryPlanner queryPlanner,
+        CandidateNormalizer normalizer,
+        CandidateRanker ranker,
+        Supplier<UUID> placeIdSupplier,
+        RecommendationTraceSink traceSink
+    ) {
         this.placeSearchPort = Objects.requireNonNull(placeSearchPort, "placeSearchPort");
         this.blogSearchPort = Objects.requireNonNull(blogSearchPort, "blogSearchPort");
         this.queryPlanner = Objects.requireNonNull(queryPlanner, "queryPlanner");
         this.normalizer = Objects.requireNonNull(normalizer, "normalizer");
         this.ranker = Objects.requireNonNull(ranker, "ranker");
         this.placeIdSupplier = Objects.requireNonNull(placeIdSupplier, "placeIdSupplier");
+        this.traceSink = Objects.requireNonNull(traceSink, "traceSink");
     }
 
     public CandidateRankingResult rank(ConfirmedRecommendationCondition condition) {
         Objects.requireNonNull(condition, "condition");
         CandidateQueryPlan initialPlan = queryPlanner.initial(condition);
-        List<PlaceSearchItem> localItems = new ArrayList<>(searchPlaces(initialPlan));
+        traceSink.queryPlanned(initialPlan, false);
+        List<PlaceSearchItem> localItems = new ArrayList<>(searchPlaces(initialPlan, false));
         int placeSearchCalls = 1;
         boolean relaxed = false;
 
         List<NormalizedCandidate> eligible = normalizer.normalizeEligible(localItems, condition);
+        traceSink.candidatesNormalized(eligible, false);
         if (eligible.size() < REQUIRED_RESULT_SIZE) {
             CandidateQueryPlan relaxedPlan = queryPlanner.relax(initialPlan)
                 .orElseThrow(InsufficientCandidatesException::new);
-            localItems.addAll(searchPlaces(relaxedPlan));
+            traceSink.queryPlanned(relaxedPlan, true);
+            localItems.addAll(searchPlaces(relaxedPlan, true));
             placeSearchCalls++;
             relaxed = true;
             eligible = normalizer.normalizeEligible(localItems, condition);
+            traceSink.candidatesNormalized(eligible, true);
         }
         if (eligible.size() < REQUIRED_RESULT_SIZE) {
             throw new InsufficientCandidatesException();
         }
 
-        List<NormalizedCandidate> preliminaryPool = ranker.rank(
+        List<ScoredCandidate> preliminaryRanking = ranker.rank(
             condition,
             eligible,
             Map.of()
-        ).stream()
+        );
+        traceSink.preliminaryRankingCompleted(preliminaryRanking);
+        List<NormalizedCandidate> preliminaryPool = preliminaryRanking.stream()
             .limit(PRELIMINARY_POOL_SIZE)
             .map(ScoredCandidate::candidate)
             .toList();
@@ -110,15 +159,19 @@ public final class CandidateRankingService {
         for (NormalizedCandidate candidate : preliminaryPool) {
             try {
                 blogSearchCalls++;
+                BlogSearchQuery query = new BlogSearchQuery(
+                    queryPlanner.blogQuery(candidate.name(), condition.locationQuery()),
+                    3
+                );
+                var searchResult = blogSearchPort.searchBlogs(query);
+                traceSink.blogSearchCompleted(candidate, query, searchResult);
                 List<CandidateEvidence> evidence = normalizer.normalizeEvidence(
                     candidate,
-                    blogSearchPort.searchBlogs(new BlogSearchQuery(
-                        queryPlanner.blogQuery(candidate.name(), condition.locationQuery()),
-                        3
-                    )).items()
+                    searchResult.items()
                 );
                 evidenceByCandidate.put(candidate, evidence);
             } catch (SearchProviderException exception) {
+                traceSink.blogSearchFailed(candidate, exception.failure().name());
                 evidenceByCandidate.clear();
                 degraded = true;
                 break;
@@ -138,6 +191,7 @@ public final class CandidateRankingService {
                 candidate.scoreBreakdown()
             ))
             .toList();
+        traceSink.finalRankingCompleted(places, degraded);
 
         Set<RecommendationWarning> warnings = EnumSet.noneOf(RecommendationWarning.class);
         if (condition.budgetPerPersonMin() != null || condition.budgetPerPersonMax() != null) {
@@ -157,7 +211,10 @@ public final class CandidateRankingService {
         );
     }
 
-    private List<PlaceSearchItem> searchPlaces(CandidateQueryPlan plan) {
-        return placeSearchPort.searchPlaces(new PlaceSearchQuery(plan.query(), 5)).items();
+    private List<PlaceSearchItem> searchPlaces(CandidateQueryPlan plan, boolean relaxed) {
+        PlaceSearchQuery query = new PlaceSearchQuery(plan.query(), 5);
+        var result = placeSearchPort.searchPlaces(query);
+        traceSink.localSearchCompleted(query, result, relaxed);
+        return result.items();
     }
 }

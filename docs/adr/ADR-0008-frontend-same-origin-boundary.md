@@ -8,7 +8,7 @@ owners:
   - placepick-team
 related:
   - ../roadmap.md
-  - ../work-records/WI-0002-service-completion-backlog.md
+  - ../archive/work-records/WI-0002-service-completion-backlog.md
 ---
 
 # ADR-0008 Next.js 프런트엔드와 same-origin 배포 경계

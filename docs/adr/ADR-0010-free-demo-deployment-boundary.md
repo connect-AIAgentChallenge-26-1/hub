@@ -8,10 +8,10 @@ owners:
   - placepick-team
 related:
   - ../roadmap.md
-  - ../work-records/WI-0039-shared-fork-live-security-foundation.md
+  - ../work-records/WI-0043-repository-validation-documentation-simplification.md
   - ADR-0006-api-worker-outbox-events.md
   - ADR-0008-frontend-same-origin-boundary.md
-  - ADR-0009-mock-local-live-gateway-boundary.md
+  - ADR-0014-mvp-direct-provider-and-simplified-trust-boundary.md
 ---
 
 # ADR-0010 무료 포트폴리오 데모 배포 경계
@@ -48,22 +48,18 @@ Redis Streams, secret 격리와 유료 전환 시 재설계 비용이다.
 | Java API·Worker | Render Free Singapore | Java container 한 개의 `all` 역할, idle sleep 수용 |
 | PostgreSQL | Neon Free | 작은 데모 DB와 scale-to-zero |
 | Redis Streams | Upstash Free | 영속 Redis 호환 저장소와 Streams 지원 |
-| Naver 비밀 | Provider Gateway | 프런트·백엔드·GitHub에 원본 key 미전달 |
+| Provider 비밀 | Render secret store | 프런트·Git·GitHub Actions에 원본 자격 미전달 |
 
-GitHub Actions는 배포 조정자이되 장기 secret의 소유자가 되지 않는다. 향후 수동 배포
-흐름은 `승인할 main SHA 입력 → GitHub OIDC 발급 → 사용자 소유 Approval Gate 검증 →
-외부 Deployment Controller가 그 SHA를 지정해 Vercel·Render 배포 API 호출 → 배포 ID와
-commit SHA 대조` 순서로 고정한다. Cloudflare·Vercel·Render API token은 사용자만 관리하는
-외부 서비스의 secret store에 두고 GitHub repository·Environment secret에는 두지 않는다.
-플랫폼 API가 immutable SHA나 동등한 artifact digest를 지정하지 못하면 자동 배포를
-허용하지 않는다.
+GitHub Actions는 수동 dispatch와 보호된 `main`의 검토된 SHA만 배포한다. Provider key와
+Elice token·routing URL은 GitHub repository·Environment secret에 두지 않고 Render runtime
+secret store에만 둔다. GitHub에는 Vercel·Render 배포에 필요한 최소 scope credential만
+두며 environment approval, 사용량 audit와 rotation을 적용한다. 브라우저 bundle과 Vercel
+프런트에는 Provider 자격을 전달하지 않는다.
 
-Vercel·Render의 Git 연동 자동 배포와 임의 branch preview는 기본 비활성화한다. 공유 Fork
-관리자가 main이나 workflow를 바꾸더라도 사용자 actor가 정확한 SHA를 다시 승인하지 않으면
-외부 Gate가 배포를 시작하지 않는 것이 경계의 핵심이다. 배포 앱의 DB·Redis 자격은 각
-runtime의 secret store에, 원본 Naver key는 Provider Gateway에만 둔다. 후속 Task에서는
-runtime이 사용할 짧은 수명·경로별 scope의 Gateway 자격 발급과 이전 배포 ID로의 rollback을
-별도로 검증한다.
+Vercel·Render의 임의 branch production 배포는 비활성화한다. 배포 결과의 commit SHA와
+health를 확인하고 이전 정상 배포로 rollback할 수 있어야 한다. 더 강한 관리자 격리가
+필요해지면 [ADR-0014](ADR-0014-mvp-direct-provider-and-simplified-trust-boundary.md)의
+재검토 조건에 따라 workload identity 또는 외부 배포 계정을 도입한다.
 
 Render Free의 무료 web service는 512MB RAM과 0.1 CPU이며 15분 동안 요청이 없으면
 sleep하고 다음 요청의 기동에 약 1분이 걸릴 수 있다. 무료 background worker가 없으므로
@@ -87,9 +83,8 @@ command·10GB bandwidth다. Upstash REST는 blocking `XREAD`·`XREADGROUP`을 �
 [Neon 가격](https://neon.com/pricing), [Upstash 가격](https://upstash.com/pricing/redis),
 [Upstash REST 호환성](https://upstash.com/docs/redis/features/restapi)
 
-현재 PR에서는 네 클라우드의 계정, 프로젝트, secret, DB와 배포 workflow를 생성하지
-않는다. Git 자동 배포는 기본 비활성화하고 PP-033·PP-035에서 ADR-0009의 Approval
-Gate가 승인한 정확한 SHA만 배포하도록 연결한다.
+현재 결정만으로 네 클라우드의 계정, 프로젝트, secret과 DB가 생성되거나 배포된 것은
+아니다. PP-043에서 정확한 SHA, 최소 권한 secret, 대표 E2E와 rollback을 실제로 검증한다.
 
 ## 결과와 트레이드오프
 

@@ -1,313 +1,297 @@
 ---
 id: CASE-0002
-title: 실제 Naver→Elice 추천 핵심 워크플로 사용자 여정 검증
+title: 실제 Naver→Elice 추천과 정식 서비스 사용자 여정 검증
 type: case-study
 status: verified
 date: 2026-07-16
 owners:
   - placepick-team
 related:
-  - ../work-records/WI-0042-naver-elice-linked-live-workflow.md
-  - ../experiments/EXP-0001-linked-live-representative-scenario-repeatability.md
-  - ../adr/ADR-0013-naver-elice-linked-live-boundary.md
-  - ../runbooks/RUN-0004-recommendation-workflow-linked-live.md
+  - ../work-records/WI-0044-live-playground.md
+  - ../work-records/WI-0045-free-cloud-demo-deployment.md
+  - ../adr/ADR-0014-mvp-direct-provider-and-simplified-trust-boundary.md
+  - ../runbooks/RUN-0005-direct-live-development.md
   - ../contracts.md
-  - ../troubleshooting/TS-0016-linked-live-provider-error-flattening.md
-  - ../troubleshooting/TS-0017-workerd-linked-live-outbound-transport.md
-  - ../troubleshooting/TS-0018-elice-structured-output-unsupported-array-keyword.md
-  - https://github.com/gdh0730/hub/pull/53
+  - ../archive/work-records/WI-0042-naver-elice-linked-live-workflow.md
+  - ../archive/experiments/EXP-0001-linked-live-representative-scenario-repeatability.md
+  - https://github.com/gdh0730/hub/issues/56
 ---
 
-# CASE-0002 실제 Naver→Elice 추천 핵심 워크플로 사용자 여정 검증
+# CASE-0002 실제 Naver→Elice 추천과 정식 서비스 사용자 여정 검증
 
-## 결론과 검증 범위
+## 결론
 
-고정 합성 사용자 조건 세 건을 사용해 실제 Elice 조건 추출, 실제 Naver Local·Blog
-검색, 서버의 정규화·필터·중복 제거·결정론적 점수·Top 3, 실제 Elice 근거 이유 생성,
-서버의 최종 근거 검증을 하나의 동기식 추천 core로 끝까지 연결했다. 세 시나리오는
-동일한 최종 코드 SHA `e789af65e94441aa38a018a2931c3705f7125112`에서 각각 독립적으로
-실행했고 모두 strict success였다.
+2026-07-16 `make live-evidence`로 세 고정 합성 사용자 시나리오를 각각 독립 실행했다.
+제품과 같은 Java adapter가 실제 Elice 조건 추출, 실제 Naver Local·Blog 검색, 서버의
+정규화·필터·점수·Top 3, 실제 Elice 근거 이유 생성과 서버의 최종 evidence 검증을 끝까지
+연결했다.
 
-이 결과가 증명하는 것은 실제 Provider가 연결된 **추천 핵심 엔진**이 검증한 세 합성
-시나리오에서 작동했다는 사실이다. 브라우저에서 실제 사용자가 입력한 서비스 E2E를
-뜻하지는 않는다. 사용자 확인은 versioned fixture로 모사했으며 공개 HTTP API, DB,
-비동기 Job·Worker, SSE, 프런트엔드와 배포 runtime은 아직 이 경로에 연결되지 않았다.
+세 시나리오는 모두 장소 3개, `linked=true`, `degraded=false`,
+`reasonFallback=false`로 통과했다. 호출 수는 각각 7·6·6회, 합계 19회였고 자동 retry와
+Embedding 호출은 없었다. 실행 뒤 생성 report를 대상으로 한 secret scan도 통과했다.
 
-| 실제로 검증한 범위 | 이번 결과가 아직 증명하지 않는 범위 |
-| --- | --- |
-| 실제 Elice 조건 Draft 추출과 의미 검증 | 실제 사용자 입력과 브라우저 UI |
-| 실제 Naver Local·Blog 검색과 후보 처리 | Controller, Draft·Job DB 영속화 |
-| 서버의 결정론적 점수와 Top 3 | Outbox, Redis Worker, SSE 재연결 |
-| 실제 Naver 파생 근거의 Elice 전달 | 공유방·투표·최종 확정 |
-| Elice 출력의 place·evidence 사후 검증 | 클라우드 배포·운영 가용성·SLA |
-| 비밀 격리, 무재시도, 종료 정리 | 풍부한 자연어 추천 이유의 품질 |
+이 결과는 **현재 직접 Java Provider 경로의 추천 핵심 워크플로가 세 합성 조건에서 실제로
+작동했다**는 증거다. 실제 cloud에 배포된 브라우저 E2E, 장기 가용성·추천 품질·성능·SLA를
+증명하지는 않는다.
 
-## 해결하려던 사용자 문제
+같은 날 두 단계의 추가 검증도 수행했다. 첫째, Live Playground 브라우저에서 실제 Elice
+Draft를 사람이 검토·보정한 뒤 실제 Naver evidence, 서버 Top 3와 Elice 이유를 화면에서
+확인하고 데이터를 삭제했다. 둘째, same-origin 정식 API로 주최자·참여자 여정을 실행해
+`202` Job, PostgreSQL Outbox, Redis Streams Worker, 추천·방 SSE, 투표 변경·삭제와 최종
+확정까지 실제 Provider로 통과했다. 따라서 Core 호환성뿐 아니라 **로컬에서 정식 서비스
+구성요소가 실제 Provider와 연결돼 사용자 여정을 완료한다**는 사실도 확인했다. 다만
+Vercel·Render·Neon·Upstash에 배포한 결과는 아니므로 Cloud Demo는 계속 `planned`다.
 
-Mock 전체 흐름은 입력부터 추천 결과까지 application 로직을 검증하지만 실제 Naver와
-Elice의 응답 차이를 발견하지 못한다. 반대로 Provider별 Local Live는 인증과 schema만
-확인하기 때문에 실제 Naver 검색 결과가 추천 후보가 되고 그 근거가 Elice 이유 생성에
-연결되는지는 증명하지 못한다. Split Live도 의도적으로 Naver 응답을 Elice에 전달하지
-않는다.
+## 무엇을 검증했는가
 
-따라서 검증 질문을 다음처럼 정의했다.
-
-> 사용자가 장소 조건을 자연어로 입력했다고 가정할 때, 실제 Elice가 조건을 안전하게
-> 구조화하고 사용자가 확인한 조건만으로 실제 Naver 후보를 찾은 뒤, 서버가 정한 Top 3의
-> 실제 근거만 Elice에 전달해 검증 가능한 추천 결과를 만들 수 있는가?
-
-성공 판정은 단순히 조건 추출·Local·Blog·이유 생성의 네 Provider 단계가 2xx였는지가
-아니다. 사용자 입력의 의미 보존, 명시적 확인 경계, 후보 필수 조건, 점수·순위 결정 주체,
-근거 provenance, fallback과 degraded 부재, 비밀 비노출과 cleanup까지 모두 충족해야
-한다.
-
-## 테스트 구조와 신뢰 경계
-
-```mermaid
-sequenceDiagram
-    actor U as 합성 사용자
-    participant H as Live 검증 하네스
-    participant A as Java 17 추천 Core
-    participant G as 일회성 Loopback Gateway
-    participant E as 실제 Elice Chat
-    participant N as 실제 Naver API HUB
-
-    U->>H: 자연어 장소 조건 시나리오
-    H->>A: versioned 합성 입력
-    A->>G: 조건 추출 요청
-    G->>E: 허용된 합성 입력만 전달
-    E-->>G: strict 조건 Draft
-    G-->>A: 검증된 조건 응답
-    A->>A: schema·의미 검증
-    H->>A: versioned 사용자 확인 조건 적용
-    A->>G: Local 검색
-    G->>N: 실제 Local 호출
-    N-->>G: 장소 후보 응답
-    G-->>A: 검증된 Local 응답
-    A->>A: 정규화·필터·중복 제거
-    A->>G: 후보별 Blog 검색
-    G->>N: 실제 Blog 호출
-    N-->>G: 후보별 Blog 응답
-    G-->>A: 검증된 Blog 응답
-    A->>A: 결정론적 점수·Top 3
-    A->>G: 허용된 Top 3 근거 문맥
-    G->>E: 실제 이유 생성 요청
-    E-->>G: strict place·evidence 문장
-    G-->>A: 검증된 이유 응답
-    A->>A: 근거 소유 관계·금지 속성 검증
-    A-->>H: RecommendationCoreResult
-    H-->>U: 합성 사용자 시나리오의 후보 3개 판정
+```text
+고정 합성 자연어
+  → 실제 Elice 조건 Draft 추출
+  → 서버의 필수 의미 검증
+  → versioned 확정 조건으로 사용자 검토·수정 경계 모사
+  → 실제 Naver Local 후보 검색
+  → 서버 정규화·필수 조건 filter·중복 제거
+  → 실제 Naver Blog 근거 수집
+  → 서버의 결정론적 점수·Top 3
+  → 실제 Elice reason-statements.v2 생성
+  → 서버의 place/evidence·금지 속성 검증
+  → 세 장소의 완료 결과
 ```
 
-원본 Naver·Elice 자격은 invocation마다 새로 시작하는 Gateway 프로세스만 보유했다.
-Java 테스트 프로세스에는 loopback 주소와 역할별 일회성 로컬 자격만 전달했다. Naver
-응답은 메모리에서 정규화했으며 원문 응답 전체를 파일, JUnit artifact 또는 문서에
-저장하지 않았다.
+실제 Provider 원문 응답, 장소명, 주소, 링크, prompt, completion과 인증정보는 증거 문서에
+저장하지 않았다. 아래 내용은 versioned synthetic fixture의 의미와 안전한 실행 요약만
+설명한다.
 
-Elice 이유 생성에는 확정 조건과 Top 3의 허용된 최소 문맥만 전달했다. 장소 UUID·이름·
-category, 정규화된 Local 근거, Blog 근거 ID·제목·요약은 허용했지만 Provider 자격,
-원문 응답 전체, source URL, 좌표, CandidateKey, 점수·순위, 사용자 식별자는 제외했다.
-Gateway는 전달할 장소와 근거가 앞선 실제 Naver 응답에서 파생됐는지 Elice 호출 전에
+## 사용자 여정
+
+### 1. 사용자가 자연어 조건을 입력한다
+
+세 시나리오는 서로 다른 조건 누락과 선호가 제품 규칙에 어떤 영향을 주는지 확인하도록
+구성했다.
+
+| 시나리오 | 합성 사용자의 의도 | 확인하려는 경계 |
+| --- | --- | --- |
+| `seoul-cafe-complete-v1` | 서울, 카페, 2명, 1인당 최대 2만원, 조용함, 흡연 제외 | 인원·예산·선호·제외가 있는 완전 조건 |
+| `seoul-restaurant-nullable-v1` | 서울 음식점, 인원·예산·선호 미지정 | 누락값을 추정하지 않는 nullable 조건 |
+| `seoul-cafe-dessert-v1` | 서울, 디저트 카페, 흡연 제외 | 선호·제외가 검색과 근거에 연결되는 조건 |
+
+Elice에는 이 합성 자연어와 비가역 synthetic safety identifier만 보냈다. 실제 사용자나
+개인정보는 사용하지 않았다.
+
+### 2. Elice가 조건 Draft를 추출하고 서버가 의미를 확인한다
+
+Elice Chat Completions가 strict JSON Schema로 Draft를 반환했다. 서버는 각 응답이 성공
+schema를 만족하고, 장소 유형과 위치가 합성 입력의 허용 의미와 일치하는지 확인했다.
+
+추출 결과를 곧바로 추천에 사용하지 않았다. 실제 사용자가 화면에서 검토·수정하고
+확정하는 경계를 재현하기 위해, 검증이 끝난 versioned `ConfirmedRecommendationCondition`
+fixture를 추천 Core에 넘겼다. 따라서 이번 증거는 사용자 확인 경계를 보존하지만 사람이
+실제 브라우저에서 버튼을 누른 E2E는 아니다. 그 차이는 뒤의 Live Playground 검증에서
+별도로 확인했다.
+
+### 3. Provider 표현 차이를 서버 의미로 정규화한다
+
+실제 응답을 연결하면서 Mock만으로 드러나지 않던 세 차이를 확인했고 서버 정책으로
+고정했다.
+
+| 관찰한 문제 | 잘못된 처리의 위험 | 채택한 서버 정책 |
+| --- | --- | --- |
+| 이미 알려진 `CAFE`·`RESTAURANT`·`BAR`에도 `placeTypeDetail`이 올 수 있음 | 의미는 맞는 응답을 schema 실패로 오판 | 알려진 유형의 detail은 무시해 null로 정규화하고 `OTHER`만 필수 검증 |
+| LLM warning 목록의 표현·누락이 달라질 수 있음 | 같은 조건이 호출마다 다른 제품 상태가 됨 | 누락 인원·예산 warning은 정규화 조건에서 서버가 결정적으로 생성 |
+| 이유 v1의 단일 고정 문구는 실제 추천 문장으로 부자연스러움 | 계약은 통과하지만 사용자 가치가 낮음 | v2 자연어를 허용하되 서버 evidence 검증을 강화 |
+
+즉, Provider JSON이 제품 상태의 정본이 아니다. Provider는 구조화된 후보를 제안하고
+warning·정규화·최종 유효성은 서버가 결정한다.
+
+### 4. Naver Local 후보를 검색하고 서버가 후보를 선별한다
+
+사용자 확인을 거친 조건으로 실제 Naver Local을 호출했다. Java adapter는 HTML·공백을
+정리하고 provider DTO를 domain-neutral 후보로 변환했다. 추천 Core는 다음 순서로 후보를
 검사했다.
 
-## 공통 사용자 여정과 단계별 판정
+1. 유효한 source link가 있는지 확인한다.
+2. 주소가 위치 조건을 충족하는지 확인한다.
+3. category taxonomy가 장소 유형을 충족하는지 확인한다.
+4. 제외 조건과 충돌하는 후보를 제거한다.
+5. canonical link 또는 이름과 비어 있지 않은 주소가 같은 후보만 중복으로 병합한다.
+6. 유효 후보가 세 개보다 적을 때만 가장 낮은 priority 선호 하나를 최대 한 번 완화한다.
 
-세 시나리오는 같은 제품 흐름을 통과하고 입력 조건의 완전성만 달리했다. 다음 표의
-각 통과 기준을 만족한 경우에만 다음 단계로 진행했다.
+세 실행 모두 최종 장소 3개를 만들 수 있었고 `degraded=false`였다. 호출별 실제 장소와
+검색어는 Provider 데이터 비보존 원칙에 따라 기록하지 않았다.
 
-| 단계 | 유저 관점 | 시스템 처리 | 통과 기준 | 실제 결과 |
-| --- | --- | --- | --- | --- |
-| 1. 입력 | 원하는 장소 조건을 자연어로 제시 | 허용된 versioned 합성 입력을 actual Elice 조건 추출에 전달 | 실제 사용자·개인정보가 없고 fixture hash가 승인값과 일치 | 세 fixture 모두 승인된 입력으로 시작 |
-| 2. 조건 초안 | 서비스가 이해한 조건을 확인할 준비 | Elice가 `placepick.condition-extraction.v1` strict JSON을 반환 | 2xx, schema 유효, 추가 필드 없음 | 세 시나리오 모두 통과 |
-| 3. 의미 검증 | 입력한 뜻이 바뀌지 않았는지 확인 | 위치·유형·인원·예산·선호·제외·warning을 닫힌 기준으로 대조 | 누락값 임의 추정, 다른 위치·유형, 조건 손실이 없음 | 세 시나리오 모두 통과 |
-| 4. 사용자 확인 | 추출 초안을 검토·수정한 뒤 추천 시작 | 실제 UI 대신 versioned 확정 fixture를 명시적으로 적용 | Draft를 자동 확정하지 않고 정본 조건만 core에 전달 | `applied=true`, `semanticMatch=true` |
-| 5. 장소 검색 | 조건에 맞는 실제 후보 탐색 | 서버가 확정 조건으로 query를 만들고 Naver Local을 실제 호출 | 2xx·schema, 위치·유형 필수 조건을 만족하는 후보 3개 이상 | 세 시나리오 모두 통과 |
-| 6. 후보 정제 | 중복·부적합 후보가 결과에 섞이지 않음 | HTML·NFKC·공백 정리, 주소·category·제외 조건, URL, 중복을 검사 | 유효 source가 있고 필수 조건을 만족한 고유 후보만 유지 | 세 시나리오 모두 통과 |
-| 7. 완화 판단 | 후보가 부족할 때만 낮은 우선순위 선호를 한 번 완화 | 유효 후보 수를 검사하고 필요 시 lowest priority preference 하나만 제거 | 위치·유형은 유지하고 Local 추가 호출은 최대 1회 | 실제 캠페인은 완화 대표성을 주장하지 않음; 해당 분기는 Mock 전체 흐름에서 검증 |
-| 8. 근거 수집 | 후보를 설명할 실제 근거 확보 | 예비 후보별 Naver Blog를 실제 호출하고 후보 이름과 근거를 연결 | Blog 호출 성공, 연결 근거 1개 이상, 후보 간 근거 교차 없음 | 세 시나리오 모두 실제 Blog 근거로 통과 |
-| 9. 점수·Top 3 | 조건과 근거가 나은 후보 3개를 받음 | 서버가 위치 30, 유형 25, 선호 최대 15, Blog 최대 10으로 계산 | 정확히 3개, 점수 0~80, 정렬 계약 유지 | 세 시나리오 모두 Top 3 확정 |
-| 10. 이유 생성 | 각 후보를 추천한 근거를 확인 | 서버가 Top 3와 허용된 근거만 actual Elice에 batch 전달 | 출력 place ID 집합이 Top 3와 같고 각 문장이 같은 후보 근거 하나만 인용 | 세 시나리오 모두 통과 |
-| 11. 서버 사후 검증 | LLM이 순위나 사실을 임의로 바꾸지 않음 | place·evidence 소유 관계, 문장 유형, 금지 속성과 추가 필드를 재검사 | 가격·영업·도보·출구 등 입력에 없는 주장 0건, fallback 없음 | `reasonFallback=false` |
-| 12. 완료·정리 | 정상 결과를 받고 실행 자격이 남지 않음 | safe summary를 검증하고 Gateway·port·일회성 자격·임시 파일 제거 | `linked=true`, `degraded=false`, `cleanup=true`, retry·redirect 0회 | 세 invocation 모두 strict success |
+### 5. Naver Blog 근거를 후보에 연결한다
 
-현재 이유 문장은 `LOCAL`과 `BLOG` 근거 유형별로 허용된 두 개의 보수적 문장 중 하나를
-선택하는 구조다. 이는 Elice가 실제 Naver 파생 근거와 올바르게 연결되는지 검증하지만,
-자유롭고 풍부한 추천 카피의 품질을 입증하지는 않는다. 점수와 순위는 Elice가 아니라
-서버가 먼저 확정했으며 Elice 출력이 이를 변경할 수 없다. Embedding 호출은 0회였고
-검색·중복 제거·점수 계산에도 사용하지 않았다.
+예비 후보마다 실제 Naver Blog를 조회하고, 서버가 해당 후보에 연결할 수 있는 근거만
+남겼다. Blog 호출 하나라도 Provider 장애가 나면 일부 근거를 섞지 않고 전체를
+`LOCAL_ONLY`로 낮추는 정책이지만 이번 세 실행에서는 그 경로가 발생하지 않았다.
 
-## 시나리오 1: 조건이 모두 있는 카페 탐색
+이 단계의 성공은 단순히 Blog가 2xx를 반환했다는 뜻이 아니다. 다음 Elice 이유 요청과
+최종 검증에 사용할 수 있는 후보별 evidence가 구성됐다는 뜻이다.
 
-### 사용자 의도
+### 6. 서버가 점수와 Top 3를 결정한다
 
-사용자는 서울에서 2명이 방문할 카페를 찾는다. 1인당 예산 상한은 2만 원이고 조용한
-환경을 선호하며 흡연 장소는 제외한다. versioned 합성 입력은 재현 가능한 계약으로
-source에 보존했다. Provider에 전송된 전체 HTTP request body와 실제 response body는
-로그·JUnit artifact·문서에 보존하지 않았다.
+순위는 LLM이 아니라 서버가 결정했다. 위치 30, 유형 25, 선호 최대 15, Blog 근거 최대
+10점으로 계산하며 구조화된 가격 근거가 없어 예산 점수는 0으로 유지한다. 동점은 필수
+조건 일치율, evidence 수, 내부 `CandidateKey` 순으로 안정적으로 정렬한다.
 
-### 과정과 관찰
+점수·순위·`CandidateKey`는 Elice에 보내지 않았다. Top 3를 고른 뒤에만 UUID v4
+`placeId`를 발급했으므로 임의 UUID가 정렬 결과를 바꾸지 않는다.
 
-1. 실제 Elice는 위치, `CAFE`, 인원 2명, 예산 상한, 조용함 선호와 흡연 제외를 Draft
-   범주로 추출했다.
-2. 서버는 각 필드를 닫힌 의미 집합으로 검증했다. 추출 결과를 바로 검색에 사용하지 않고
-   사용자가 확인했다고 정의한 versioned 조건에서 위치를 `서울`, 선호 우선순위를 10으로
-   확정했다.
-3. 확정 조건으로 실제 Naver Local 후보를 받고 위치·카페 category·흡연 제외·source와
-   중복을 검사했다.
-4. 예비 후보에 실제 Naver Blog 근거를 연결한 뒤 서버가 결정론적 점수와 Top 3를 먼저
-   확정했다. 구조화된 가격 근거가 없으므로 예산을 맞는다고 추론해 점수를 주지 않았다.
-5. Elice에는 Top 3의 허용된 파생 근거만 전달했다. 반환된 세 장소의 ID 집합, 각 문장이
-   인용한 evidence 소유 관계와 금지 속성 부재를 서버가 다시 검증했다.
+### 7. Elice가 실제 Naver 파생 근거로 이유를 만든다
 
-### 결과와 판정
+Top 3의 허용된 장소 정보와 후보별 evidence만 한 번의 batch로 Elice에 전달했다.
+`placepick.reason-statements.v2`는 장소마다 1~3개의 자연스러운 한국어 문장과 문장당
+1~3개의 evidence ID를 허용한다.
 
-application 논리 호출 수는 7회였다. 조건 추출, 실제 Local·Blog, 이유 생성과 서버
-사후 검증을 모두 완료했고 `linked=true`, `degraded=false`, `reasonFallback=false`,
-`cleanup=true`였다. 따라서 “조건이 모두 채워진 사용자 입력”의 실제 연결 경로는
-strict success로 판정했다.
+v2는 문장 표현을 자연스럽게 만들지만 사실 권한을 LLM에 넘기지 않는다. 서버는 다음을
+다시 검사한다.
 
-## 시나리오 2: 선택 조건을 입력하지 않은 음식점 탐색
+- 출력 place ID 집합이 입력 Top 3와 정확히 같은가
+- 각 evidence ID가 같은 후보에 속하는가
+- 가격, 영업 상태, 도보 시간, 출구처럼 제공하지 않은 속성을 만들지 않았는가
+- 문장이 인용한 근거와 최소한의 어휘 연결을 가지는가
+- 점수·순위·주의점·공유 문구를 LLM이 만들지 않았는가
 
-### 사용자 의도
+한 문장이라도 실패하면 일부 결과를 섞지 않고 세 후보 전체를 서버 template으로 바꾼다.
+이번 세 실행은 모두 이 검증을 통과해 `reasonFallback=false`였다.
 
-사용자는 서울 음식점을 찾지만 인원, 예산, 선호와 제외 조건은 입력하지 않는다. 핵심
-검증 목적은 LLM이나 서버가 비어 있는 값을 그럴듯하게 추정하지 않는지 확인하는 것이다.
+### 8. 안전한 완료 결과만 증거로 남긴다
 
-### 과정과 관찰
+| 시나리오 | 실제 호출 수 | 장소 수 | 연결 | 저하 | 이유 fallback | 판정 |
+| --- | ---: | ---: | --- | --- | --- | --- |
+| `seoul-cafe-complete-v1` | 7 | 3 | true | false | false | 통과 |
+| `seoul-restaurant-nullable-v1` | 6 | 3 | true | false | false | 통과 |
+| `seoul-cafe-dessert-v1` | 6 | 3 | true | false | false | 통과 |
+| 합계 | 19 | 시나리오마다 3 | true | false | false | 통과 |
 
-1. 실제 Elice 조건 Draft에서 위치와 `RESTAURANT`만 존재하고 인원·예산은 nullable로
-   유지되는지 검사했다.
-2. 누락된 인원에는 `PARTY_SIZE_NOT_PROVIDED`, 예산에는 `BUDGET_NOT_PROVIDED` warning이
-   대응해야 다음 단계로 진행했다. 입력하지 않은 선호나 제외 조건의 생성도 허용하지 않았다.
-3. 실제 실행에서 관찰된 exact 영문 동치 `Seoul`은 사용자 확인 전 Draft에서만 닫힌
-   alias로 인정했다. 부분 일치나 추가 단어를 허용하지 않았고, 확인 fixture에서는 정본
-   `서울`을 적용했다.
-4. 이 확정 조건으로 실제 Naver Local·Blog를 처리하고 서버가 Top 3를 결정했다. 가격
-   정보가 없다는 사실은 유지하며 음식점의 예산 적합도를 추정하지 않았다.
-5. 실제 Elice 이유와 서버의 place·evidence 사후 검증을 완료했다.
+`linked=true`는 같은 invocation 안에서 실제 Naver 파생 근거가 실제 Elice 이유 입력으로
+연결됐다는 뜻이다. `degraded=false`는 Blog 전체 저하가 없었다는 뜻이고,
+`reasonFallback=false`는 Elice v2 결과가 서버 evidence 검증을 통과했다는 뜻이다.
 
-### 결과와 판정
+실행 종료 후 생성된 JUnit·Gradle report에서 credential과 Provider payload marker를 찾는
+secret scan도 통과했다. 이 검사는 생성 report의 비노출을 검증하며 로컬 PC 전체나
+Provider 측 보관 정책까지 증명하는 검사는 아니다.
 
-application 논리 호출 수는 6회였다. `linked=true`, `degraded=false`,
-`reasonFallback=false`, `cleanup=true`였고, 누락 정보를 만들어내지 않은 채 후보 3개까지
-완료했다. 따라서 “사용자가 선택 조건을 생략한 흐름”도 strict success로 판정했다.
+## Live Playground에서 실제 값을 확인한 사용자 흐름
 
-## 시나리오 3: nullable과 선호·제외가 함께 있는 디저트 카페 탐색
+고정 합성 증거와 별도로 `make dev-live`를 실행하고 브라우저의 `/playground`에서 사람이
+실제 단계 값을 확인했다. 값 자체는 로컬 화면에서만 확인하고 이 문서에는 검색어,
+장소명·주소·링크, Blog 제목, prompt·completion과 Provider 응답 body를 기록하지 않았다.
 
-### 사용자 의도
+1. 사용자가 비개인성 자연어 조건을 입력했다.
+2. 실제 Elice가 조건 Draft를 반환했다. 장소 유형은 입력 의미와 맞았지만 위치 표현은
+   제품 확정 조건으로 그대로 사용하기에 충분하지 않았다.
+3. 사용자가 화면에서 위치를 정규화해 확정했다. 자동 추천을 시작하지 않았으므로 실제
+   Provider 변동을 이 경계에서 바로잡을 수 있었다.
+4. 실제 Naver Local 후보와 후보별 필터·중복 제거 결과가 단계 trace에 나타났다.
+5. 실제 Blog evidence가 후보별로 연결되고 서버 점수와 Top 3가 표시됐다.
+6. 실제 Elice 이유와 서버의 place/evidence 소유 관계 검증 결과가 표시됐다.
+7. 완료 결과를 삭제했고 연결 Draft와 메모리 실행 데이터가 더 이상 조회되지 않았다.
 
-사용자는 서울의 디저트 카페를 원하고 흡연 장소는 제외한다. 인원과 예산은 입력하지
-않는다. 이 시나리오는 누락 필드와 명시 필드를 동시에 정확히 분리하는지 확인한다.
+브라우저 자동 검증은 실제 동적 값 대신 `INPUT_READY`, Draft 검증, 조건 보정·확정, Naver
+evidence, Top 3와 삭제라는 고정 단계의 성공만 출력했다. screenshot·video·trace는 만들지
+않았다. 이 결과는 Live 화면이 단순한 정적 prototype이 아니라 실제 adapter와 추천 Core를
+호출하고, 사람이 조건을 수정할 수 있는 실행 가능한 검증 도구임을 보여 준다.
 
-### 과정과 관찰
+## 정식 제품 API에서 실제로 완료한 사용자 흐름
 
-1. 실제 Elice Draft에서 위치·`CAFE`·디저트 선호·흡연 제외는 유지하고 인원·예산은
-   nullable과 대응 warning으로 남기는지 검증했다.
-2. 사용자 확인 fixture는 위치를 `서울`, 디저트 선호 우선순위를 10으로 확정하되 누락된
-   인원·예산을 채우지 않았다.
-3. 실제 Naver Local은 1회 호출됐고 유효 후보 3개 이상을 반환했다. 제품 core는 정규화·
-   필터·중복 제거를 수행했고 이 실행에서는 `relaxed=false`였다.
-4. 실제 Naver Blog는 후보별 3회 호출돼 9개 item을 처리했고, 서버는 Blog 근거를 후보에
-   연결한 뒤 Top 3를 확정했다. 보존된 safe report에서 세 후보의 점수는 모두 80이었다.
-5. 실제 Elice는 연결된 근거를 사용한 이유 batch를 반환했다. 서버는 Blog evidence 9개의
-   소유 관계와 세 place ID 집합을 검증했고 fallback 없이 완료했다.
+다음 검증은 개발 전용 `/__dev/api/**`가 아니라 same-origin Next 경로의 정식
+`/api/v1/**`를 사용했다. PostgreSQL과 Redis를 사용했고 추천 Worker는 실제 Naver·Elice
+adapter를 호출했다. 로그에는 고정 단계명과 성공 여부만 남겼다.
 
-### 결과와 판정
+### 1. 주최자가 익명 세션을 시작하고 조건을 확인한다
 
-application 논리 호출 수는 조건 추출 1, Local 1, Blog 3, 이유 생성 1의 총 6회였다.
-JUnit safe report는 `linked=true`, `degraded=false`, `reasonFallback=false`,
-`callCount=6`을 기록했다. launcher의 종료 guard가 Gateway·port·일회성 자격·임시 파일
-제거 뒤 별도로 `cleanup=true`를 확인했고 HTTP retry·redirect는 0회였다. 이는
-“nullable과 선호·제외가 함께 있는 흐름”의 strict success다.
+서버가 주최자용 HttpOnly session cookie와 CSRF token을 발급했다. 주최자의 자연어는
+실제 Elice 조건 추출을 거쳤고, 응답을 자동 소비하지 않고 versioned 제품 조건으로
+명시적으로 확정했다. Draft 상태가 `CONFIRMED`가 된 뒤에만 추천을 제출했다.
 
-시나리오 3의 item·evidence·점수는 로컬에 남은 safe JUnit report에서 확인 가능한
-비식별 수치다. 시나리오 1·2의 세부 stage 수치는 최종 추적 문서에 보존하지 않았으므로
-총 논리 호출 수와 strict 판정 외 수치를 추정해 추가하지 않았다.
+### 2. 추천이 202 Job으로 접수되고 Worker가 처리한다
 
-## 세 시나리오 결과 비교
+추천 생성은 동기 결과나 200을 반환하지 않고 `202 Accepted`, UUID v4 `jobId`와 정확한
+`Location`을 반환했다. PostgreSQL에 Job과 transactional outbox가 함께 생성됐고 relay가
+Redis Streams로 전달했다. Worker는 실제 추천 Core를 실행해 결과를 PostgreSQL에
+저장했다.
 
-| 시나리오 | 사용자 조건의 차이 | 논리 호출 | 최종 후보 | Linked | Blog 저하 | 이유 fallback | 정리 | 판정 |
-| --- | --- | ---: | ---: | --- | --- | --- | --- | --- |
-| 완전 조건 카페 | 인원·예산·선호·제외 모두 입력 | 7 | 3 | `true` | 없음 | 없음 | 완료 | strict success |
-| nullable 음식점 | 인원·예산·선호·제외 미입력 | 6 | 3 | `true` | 없음 | 없음 | 완료 | strict success |
-| nullable 디저트 카페 | 인원·예산 미입력, 선호·제외 입력 | 6 | 3 | `true` | 없음 | 없음 | 완료 | strict success |
+### 3. 추천 SSE와 조회가 실제 Top 3 완료 상태로 수렴한다
 
-`7/6/6`은 application이 허용한 Provider 논리 호출 수다. 처리량, 성공률, SLA 또는
-Provider 내부 wire retry 수치가 아니다. 세 invocation은 같은 호출을 자동 재시도한 것이
-아니며 각각 새 Gateway·port·일회성 자격과 독립 호출 예산을 사용했다.
+same-origin 추천 SSE의 첫 상태 event가 `snapshot`인지 확인하고 이후 progress가 감소하지
+않는지 검사했다. terminal `completed` 뒤 snapshot 조회는 정확히 세 장소와 각 장소의
+서버 검증 추천 이유를 반환했다. 이때 점수·순위는 서버가 정했고 Elice 출력은 이를
+변경하지 않았다.
 
-## 실패에서 실제 성공까지의 문제 해결
+### 4. 주최자가 방을 만들고 별도 참여자가 투표한다
 
-성공 결과만 남기지 않고 중간 실패를 원인과 함께 보존했다.
+완료 Job으로 방을 만들고 주최자 capability를 방 경로에 한정된 cookie로 받았다. 별도
+cookie jar로 새 익명 참여자 세션을 만들었다. 참여자는 같은 후보에 대해
+`LIKE → DISLIKE → DELETE → LIKE`를 차례로 실행했다. 이는 투표 생성, 원자적 교체,
+멱등 삭제와 삭제 뒤 재생성을 한 흐름에서 확인한다.
 
-| 관찰 | 원인 가설과 검증 | 선택한 수정 | 실제 재검증 결과 |
-| --- | --- | --- | --- |
-| 조건 추출이 `PROVIDER_UNAVAILABLE`로만 보임 | Gateway·Java 사이에서 transport, schema, 의미 오류가 한 코드로 평탄화됨 | 원문 없이 transport·schema·semantic·cross-field safe code를 보존 | 잘못된 Draft는 downstream Naver 호출 전에 fail closed |
-| Java 개별 계약은 성공하지만 Gateway outbound 실패 | workerd 로컬 fetch 경로와 실제 endpoint 조합에서 응답을 얻지 못함 | Gateway 보안 정책은 유지하고 로컬 실행 adapter만 Node 24로 교체 | 조건 추출부터 Naver·이유 생성까지 전체 경로 진입 |
-| 이유 생성에서 Elice 400 | strict Structured Outputs 지원 부분집합이 배열의 `uniqueItems`를 수용하지 않음 | 정확히 1개 근거 계약은 `minItems=1`, `maxItems=1`과 서버 검증으로 유지하고 미지원 keyword만 제거 | 실제 이유 생성과 사후 provenance 검증 성공 |
-| nullable 시나리오 위치가 exact `Seoul`로 반환 | 정본 한국어만 허용한 의미 검증이 정확한 번역 동치도 거부 | 관찰된 `Seoul`·`seoul`만 finite alias로 추가하고 fuzzy·부분 일치는 계속 거부 | 사용자 확인 정본 `서울`로 전체 흐름 성공 |
+방 SSE는 첫 상태 event `snapshot`, 투표 중 `voteUpdated`, 확정 시 `finalized`를 받았다.
+주최자만 최종 후보를 확정했고, 참여자 세션의 결과 조회가 주최자 선택과 같은 장소와
+확정 시각을 반환했다.
 
-계약을 약화해 우연히 2xx를 만드는 방식은 사용하지 않았다. Provider가 지원하지 않은
-keyword만 제거하면서 정확히 한 evidence라는 의미는 서버 post-validation으로 유지했고,
-위치 표현도 관찰된 정확 동치만 제한적으로 허용했다.
+### 5. 최초 SSE timeout을 원인과 계약으로 분리했다
 
-## 결과의 의미와 남은 위험
+최초 정식 흐름은 방 SSE에서 90초 timeout으로 종료됐다. 서버는 HTTP 200,
+`text/event-stream`과 response body를 제공했고 투표·확정 mutation은 아직 시작되지 않은
+상태였다. Next rewrite를 지난 작은 초기 frame을 smoke가 먼저 읽어야만 mutation을
+시작하도록 만든 상호 대기가 원인이었다. 즉, 방 transaction이나 SSE emitter가 실패한
+것이 아니었다.
 
-이번 검증으로 다음 결론은 근거를 갖는다.
+smoke는 transport의 HTTP 200, content type과 body 연결이 확인되면 mutation을 시작하도록
+수정했다. 대신 상태 계약은 약화하지 않았다. 첫 non-heartbeat event는 여전히
+`snapshot`이어야 하고, `voteUpdated`와 `finalized`를 모두 받아야 성공한다. 같은 수정으로
+Mock과 실제 Provider 흐름을 각각 다시 실행해 모두 통과했다.
 
-- 실제 Elice 조건 추출 결과를 schema뿐 아니라 사용자 입력 의미와 대조할 수 있다.
-- Draft를 자동 확정하지 않고 명시적인 사용자 확인 경계 뒤에만 추천 core를 실행한다.
-- 실제 Naver Local·Blog 결과를 제품 normalizer·filter·dedup·ranker가 처리한다.
-- 서버가 점수와 Top 3를 먼저 결정하므로 LLM이 순위나 점수를 바꾸지 않는다.
-- 실제 Naver에서 파생한 후보별 근거만 실제 Elice 이유 생성에 전달된다.
-- Elice가 다른 후보의 근거를 인용하거나 허용되지 않은 속성을 만들면 서버가 거부한다.
-- 실패 시 fallback이 안전하더라도 실제 Linked 성공으로 기록하지 않는 strict 기준이 작동한다.
+### 6. 정식 로컬 Live 판정
 
-실제 후보의 장소명·주소·링크를 이 Case Study에 표시하지 않은 이유는 결과가 없어서가
-아니다. 원문 응답과 장소 식별 정보를 포트폴리오 artifact로 영구 보존하지 않는 데이터
-최소화 정책 때문이다. 최종 결과의 의미는 “필수 조건을 통과한 세 후보, 서버가 고정한
-순위, 후보별 실제 근거와 검증된 보수적 이유”로 제한한다. 구조화된 가격 근거가 없으므로
-예산 점수는 0이고 가격 근거 부재 warning을 유지한다.
+| 단계 | 실제로 확인한 결과 |
+| --- | --- |
+| 세션·보안 | 분리된 주최자·참여자 세션과 CSRF 적용 |
+| 조건 | 실제 Elice 추출 뒤 명시적 사용자 확정 |
+| 비동기 처리 | 202, Location, Job·Outbox, Redis Worker 완료 |
+| 추천 stream | snapshot-first, progress, terminal 완료 |
+| 추천 결과 | 실제 Provider 기반 Top 3와 검증 이유 |
+| 공유·투표 | 방 생성, LIKE·DISLIKE·DELETE·LIKE 반영 |
+| 방 stream | snapshot, voteUpdated, finalized 수신 |
+| 최종 결과 | 주최자 확정과 참여자 결과 조회 일치 |
+| 비노출 | Provider 값·자격·응답 body를 출력하지 않음 |
 
-다음 내용은 별도 Task와 증거가 필요하다.
+최종 safe summary는 `userFlow=complete`, `providerDataLogged=false`로 통과했다. 이 판정은
+로컬 Dev Container와 same-origin 개발 proxy에서 수행한 실제 제품 흐름이다. 무료 Cloud의
+sleep·TLS Redis·Neon migration·배포 revision·rollback은 별도의 PP-043 검증 항목이다.
 
-- 실제 사용자 입력과 Naver 데이터의 제품 runtime 처리를 허용할 약관·보안·개인정보 승인
-- 익명 session, Draft 저장, 202 Job, transactional outbox, Redis Worker와 SSE
-- Next.js에서의 조건 확인, 진행 상태, 결과 표시와 브라우저 E2E
-- 실제 사용자 만족도와 추천 이유 품질 Eval
-- 장애·시간대·검색 분포를 포함한 장기 가용성, 처리량과 성능 기준선
-- Gateway와 애플리케이션의 승인된 cloud 배포 Live E2E
+## 자동 검증과 실제 검증의 역할 분리
 
-세 개의 닫힌 합성 시나리오가 각 한 번 성공한 결과만으로 실제 사용자 성공률이나
-Provider SLA를 계산하지 않는다. 실제 Live에서 충분히 대표하지 못한 선호 완화, 후보
-부족, Blog 장애와 이유 fallback은 Mock core 전체 테스트로 회귀 검증했지만 별도의 실제
-장애 주입 결과로 주장하지 않는다.
+실제 호출만 반복하면 오류·경합·만료를 결정적으로 재현할 수 없고, Mock만으로는 현재
+Provider 응답 차이를 알 수 없다. 두 검증은 다음처럼 역할을 나눈다.
 
-## 개인 기여와 검증 책임
+| 검증 축 | 확인한 내용 | 한계 |
+| --- | --- | --- |
+| 단위·Mock 계약 | Java 단위 162, 통합 158, 프런트 단위 29, 브라우저 E2E 4개로 schema·정규화·fallback·제품 흐름 검증 | 현재 Provider 가용성은 모름 |
+| Testcontainers 통합 | Session, Draft, 202 Job, Outbox, Redis Worker, SSE, Room, Vote, 이벤트 | 외부 Provider는 Mock |
+| 직접 Live Evidence | 실제 Elice→Naver→Elice 추천 Core 3개 시나리오 | 브라우저·cloud·장기 품질은 아님 |
+| Live Playground | 사람이 실제 Draft 보정, 후보·evidence·Top 3·이유와 삭제를 확인 | 로컬 개발 profile이며 cloud가 아님 |
+| 로컬 제품 Live E2E | 정식 API·DB·Redis Worker·두 SSE·별도 참여자 투표·확정 | 로컬 same-origin이며 배포 revision·cold start는 아님 |
+| Cloud Demo E2E | 배포된 대표 사용자 여정 | 아직 `planned` |
 
-사람은 실제 Naver→Elice 전달 범위, Provider 실행 승인, 검증 SHA, 합격 기준과 Live 실행을
-결정하고 safe summary와 PR diff를 확인했다. Provider 약관·비용·표시 의무와 실제 사용자
-데이터 사용 여부도 사람의 승인 책임으로 남겼다.
+정식 `/api/v1/**` 제품 경로와 DB·Worker·SSE·Room은 자동 통합 테스트와 로컬 제품 Live
+E2E가 각각 결정적 경계와 실제 Provider 연결을 검증한다. 직접 Live Evidence는 동일 추천
+Core의 세 시나리오 반복성을 보완한다. 따라서 “코드가 존재한다”, “실제 Provider가
+호환된다”, “로컬 정식 사용자 여정이 끝까지 작동한다”는 사실은 말할 수 있다. 배포
+환경의 전체 E2E가 끝났다고는 표현하지 않는다.
 
-AI에는 기존 계약 탐색, 테스트·Gateway 초안, 실패 분류 후보, 자동 회귀와 문서 구조화를
-위임했다. 실제 Provider 2xx만으로 결과를 채택하지 않고, 코드는 strict schema, 사용자
-의미, 후보 조건, 점수 순서와 place·evidence provenance를 검증했다. 사람은 승인 SHA와
-diff, safe summary의 허용 형식, redaction과 cleanup 결과를 확인했다. 전체 LLM prompt,
-내부 추론, 비밀값과 Provider 원문은 문서에 남기지 않았다.
+## 남은 위험과 다음 검증
 
-## 재현 근거
+- 합성 세 건은 대표 경로이지 임의 자연어와 지역·유형 전체의 품질 표본이 아니다.
+- Provider schema·모델 동작·검색 결과는 앞으로 바뀔 수 있다.
+- 실제 사용자 데이터 처리, 보관, 표시 의무와 제3자 전달 정책은 운영 활성화 전에 사람이
+  다시 검토해야 한다.
+- Live Playground에서 실제 값을 사람이 확인하는 것과 report의 redacted evidence는 목적이
+  다르다. 화면 공유·브라우저 확장·로컬 접근 위험을 별도로 관리해야 한다.
+- Vercel·Render·Neon·Upstash의 실제 리소스, secret 주입, migration, cold start,
+  rollback과 배포 사용자 여정은 PP-043에서 검증하기 전까지 `planned`다.
 
-- 작업과 실제 실행 이력:
-  [WI-0042](../work-records/WI-0042-naver-elice-linked-live-workflow.md)
-- 세 대표 시나리오의 가설과 결과:
-  [EXP-0001](../experiments/EXP-0001-linked-live-representative-scenario-repeatability.md)
-- 승인 SHA·호출 상한·실패 중단 절차:
-  [RUN-0004](../runbooks/RUN-0004-recommendation-workflow-linked-live.md)
-- 데이터·자격 신뢰 경계:
-  [ADR-0013](../adr/ADR-0013-naver-elice-linked-live-boundary.md)
-- 구현·검증 PR:
-  [PR #53](https://github.com/gdh0730/hub/pull/53)
-
-이 문서는 기존 실제 실행을 사용자 여정 관점으로 재구성한 포트폴리오 증거다. 문서
-작성 과정에서는 Provider를 다시 호출하지 않았으며 기존 검증 SHA와 safe report에 없는
-결과를 새로 추정하지 않았다.
+이번 검증의 핵심 학습은 LLM 출력을 더 엄격한 문자열 모양으로 제한하는 것보다, Provider가
+표현할 수 있는 변동은 정규화하고 제품 의미·warning·순위·근거 소유권을 서버가 다시
+결정하는 편이 실제 사용자 가치와 안전성을 함께 높인다는 점이다.

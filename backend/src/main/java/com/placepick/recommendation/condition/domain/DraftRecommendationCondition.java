@@ -1,5 +1,6 @@
 package com.placepick.recommendation.condition.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
 /**
@@ -45,6 +46,7 @@ public record DraftRecommendationCondition(
         );
     }
 
+    @JsonIgnore
     public boolean isProcessable() {
         return locationQuery != null && placeType != null;
     }

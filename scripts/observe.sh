@@ -14,4 +14,4 @@ compose_observe up --detach --build --wait
 
 log "Prometheus: http://localhost:${PROMETHEUS_PORT:-9090}"
 log "Grafana:    http://localhost:${GRAFANA_PORT:-3001}"
-log 'Prometheus reports the backend target as up after make run is active on port 8080'
+log 'Prometheus reports the backend target as up after make dev is active on port 8080'

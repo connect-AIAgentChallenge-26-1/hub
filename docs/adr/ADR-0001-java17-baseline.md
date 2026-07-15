@@ -7,7 +7,7 @@ date: 2026-07-13
 owners:
   - placepick-backend
 related:
-  - ../work-records/WI-0001-agentic-development-environment.md
+  - ../archive/work-records/WI-0001-agentic-development-environment.md
 ---
 
 # ADR-0001 Java 17과 Spring Boot 3.5를 전체 실행 기준으로 사용

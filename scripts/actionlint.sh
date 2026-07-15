@@ -21,7 +21,7 @@ version_output="$(
     --security-opt no-new-privileges \
     --entrypoint /usr/local/bin/actionlint \
     "${ACTIONLINT_IMAGE}" \
-    -version
+    -version 2>&1
 )"
 
 detected_version="$(printf '%s\n' "${version_output}" | sed -n '1p')"

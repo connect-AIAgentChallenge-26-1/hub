@@ -213,11 +213,159 @@
       ],
       "title": "CPU usage",
       "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "fieldConfig": {"defaults": {"unit": "ops"}, "overrides": []},
+      "gridPos": {"h": 7, "w": 6, "x": 0, "y": 13},
+      "id": 6,
+      "options": {
+        "legend": {"displayMode": "list", "placement": "bottom", "showLegend": true},
+        "tooltip": {"mode": "multi", "sort": "desc"}
+      },
+      "targets": [{
+        "expr": "sum by (stage) (rate(placepick_job_stage_events_total{application=\"placepick-backend\"}[5m]))",
+        "legendFormat": "{{stage}}",
+        "refId": "A"
+      }],
+      "title": "Job stage transitions",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "fieldConfig": {"defaults": {"unit": "ops"}, "overrides": []},
+      "gridPos": {"h": 7, "w": 6, "x": 6, "y": 13},
+      "id": 7,
+      "options": {
+        "legend": {"displayMode": "list", "placement": "bottom", "showLegend": true},
+        "tooltip": {"mode": "multi", "sort": "desc"}
+      },
+      "targets": [{
+        "expr": "sum by (outcome, degraded) (rate(placepick_job_outcomes_total{application=\"placepick-backend\"}[5m]))",
+        "legendFormat": "{{outcome}} degraded={{degraded}}",
+        "refId": "A"
+      }],
+      "title": "Job outcomes and degraded completions",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "fieldConfig": {"defaults": {"unit": "ops"}, "overrides": []},
+      "gridPos": {"h": 7, "w": 6, "x": 12, "y": 13},
+      "id": 8,
+      "options": {
+        "legend": {"displayMode": "table", "placement": "bottom", "showLegend": true},
+        "tooltip": {"mode": "multi", "sort": "desc"}
+      },
+      "targets": [{
+        "expr": "sum by (provider, operation, outcome) (rate(placepick_provider_calls_total{application=\"placepick-backend\"}[5m]))",
+        "legendFormat": "{{provider}}/{{operation}} {{outcome}}",
+        "refId": "A"
+      }],
+      "title": "Provider calls",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "fieldConfig": {"defaults": {"unit": "s"}, "overrides": []},
+      "gridPos": {"h": 7, "w": 6, "x": 18, "y": 13},
+      "id": 9,
+      "options": {
+        "legend": {"displayMode": "table", "placement": "bottom", "showLegend": true},
+        "tooltip": {"mode": "multi", "sort": "desc"}
+      },
+      "targets": [{
+        "expr": "sum by (provider, operation) (rate(placepick_provider_latency_seconds_sum{application=\"placepick-backend\"}[5m])) / clamp_min(sum by (provider, operation) (rate(placepick_provider_latency_seconds_count{application=\"placepick-backend\"}[5m])), 0.000001)",
+        "legendFormat": "{{provider}}/{{operation}}",
+        "refId": "A"
+      }],
+      "title": "Provider mean latency",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
+      "gridPos": {"h": 6, "w": 5, "x": 0, "y": 20},
+      "id": 10,
+      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
+      "targets": [{
+        "expr": "sum(increase(placepick_stream_dlq_total{application=\"placepick-backend\"}[15m]))",
+        "legendFormat": "DLQ",
+        "refId": "A"
+      }],
+      "title": "DLQ events (15m)",
+      "type": "stat"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
+      "gridPos": {"h": 6, "w": 5, "x": 5, "y": 20},
+      "id": 11,
+      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
+      "targets": [{
+        "expr": "sum by (stream) (placepick_sse_connections{application=\"placepick-backend\"})",
+        "legendFormat": "{{stream}}",
+        "refId": "A"
+      }],
+      "title": "Active SSE connections",
+      "type": "stat"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
+      "gridPos": {"h": 6, "w": 5, "x": 10, "y": 20},
+      "id": 12,
+      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
+      "targets": [{
+        "expr": "sum(increase(placepick_vote_contention_total{application=\"placepick-backend\"}[15m]))",
+        "legendFormat": "contention",
+        "refId": "A"
+      }],
+      "title": "Vote contention (15m)",
+      "type": "stat"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
+      "gridPos": {"h": 6, "w": 5, "x": 15, "y": 20},
+      "id": 13,
+      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
+      "targets": [{
+        "expr": "sum by (scope) (increase(placepick_rate_limit_rejected_total{application=\"placepick-backend\"}[15m]))",
+        "legendFormat": "{{scope}}",
+        "refId": "A"
+      }],
+      "title": "API rate-limit rejects (15m)",
+      "type": "stat"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
+      "gridPos": {"h": 6, "w": 4, "x": 20, "y": 20},
+      "id": 14,
+      "options": {
+        "legend": {"displayMode": "list", "placement": "bottom", "showLegend": true},
+        "tooltip": {"mode": "multi", "sort": "desc"}
+      },
+      "targets": [
+        {
+          "expr": "sum by (provider) (increase(placepick_provider_quota_protected_total{application=\"placepick-backend\"}[15m]))",
+          "legendFormat": "quota {{provider}}",
+          "refId": "A"
+        },
+        {
+          "expr": "sum by (provider) (increase(placepick_provider_timeout_budget_exhausted_total{application=\"placepick-backend\"}[15m]))",
+          "legendFormat": "timeout {{provider}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Provider protection (15m)",
+      "type": "timeseries"
     }
   ],
   "refresh": "10s",
   "schemaVersion": 41,
-  "tags": ["placepick", "local", "starter"],
+  "tags": ["placepick", "runtime", "mvp"],
   "templating": {
     "list": []
   },
@@ -227,8 +375,8 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "PlacePick Runtime Starter",
+  "title": "PlacePick MVP Runtime",
   "uid": "placepick-runtime",
-  "version": 1,
+  "version": 2,
   "weekStart": ""
 }
