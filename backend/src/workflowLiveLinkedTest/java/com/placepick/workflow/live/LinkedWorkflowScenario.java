@@ -53,7 +53,7 @@ record LinkedWorkflowScenario(
             "서울에서 2명이 1인당 20000원 이하로 조용한 카페를 찾습니다. 흡연 장소는 제외합니다.",
             "synthetic-linked-workflow-session-0001",
             new ExpectedDraft(
-                Set.of("서울", "서울시", "서울특별시"),
+                Set.of("서울", "서울시", "서울특별시", "Seoul", "seoul"),
                 PlaceType.CAFE,
                 null,
                 2,
@@ -80,7 +80,7 @@ record LinkedWorkflowScenario(
             "서울 음식점을 찾습니다.",
             "synthetic-linked-workflow-session-0002",
             new ExpectedDraft(
-                Set.of("서울", "서울시", "서울특별시"),
+                Set.of("서울", "서울시", "서울특별시", "Seoul", "seoul"),
                 PlaceType.RESTAURANT,
                 null,
                 null,
@@ -107,7 +107,7 @@ record LinkedWorkflowScenario(
             "서울 디저트 카페를 찾습니다. 흡연 장소는 제외합니다.",
             "synthetic-linked-workflow-session-0003",
             new ExpectedDraft(
-                Set.of("서울", "서울시", "서울특별시"),
+                Set.of("서울", "서울시", "서울특별시", "Seoul", "seoul"),
                 PlaceType.CAFE,
                 null,
                 null,

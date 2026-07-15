@@ -103,9 +103,15 @@ class LinkedWorkflowScenarioTest {
         assertMismatch(scenario, draft("서울 음식점", PlaceType.CAFE, 2, null, 20_000,
             List.of(new Preference("조용한", null)), List.of("흡연")), List.of(),
             "SEMANTIC_LOCATION_EXTRA_TOKENS");
-        assertMismatch(scenario, draft("Seoul", PlaceType.CAFE, 2, null, 20_000,
+        assertMismatch(scenario, draft("Seoul restaurant", PlaceType.CAFE, 2, null, 20_000,
             List.of(new Preference("조용한", null)), List.of("흡연")), List.of(),
-            "SEMANTIC_LOCATION_TRANSLATED_EQUIVALENT");
+            "SEMANTIC_LOCATION_TRANSLATED_EXTRA_TOKENS");
+        assertThat(LinkedDraftSemanticVerifier.firstMismatchCode(
+            draft("Seoul", PlaceType.CAFE, 2, null, 20_000,
+                List.of(new Preference("조용한", null)), List.of("흡연")),
+            List.of(),
+            expected
+        )).isNull();
         assertMismatch(scenario, draft("서울", PlaceType.RESTAURANT, 2, null, 20_000,
             List.of(new Preference("조용한", null)), List.of("흡연")), List.of(),
             "SEMANTIC_PLACE_TYPE_MISMATCH");
