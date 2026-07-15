@@ -18,7 +18,8 @@ MVP의 기능·계약·선행 관계는 [서비스 완성 roadmap](docs/roadmap.
 측정하지 않은 처리량이나 품질 수치는 성과로 기재하지 않는다. 상세 실행 증거와
 의사 결정은 [WI-0001](docs/work-records/WI-0001-agentic-development-environment.md),
 검증 완료 결과의 포트폴리오 요약은
-[CASE-0001](docs/case-studies/CASE-0001-agentic-development-environment.md)에 기록한다.
+[CASE-0001](docs/case-studies/CASE-0001-agentic-development-environment.md)과
+[CASE-0002](docs/case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)에 기록한다.
 
 2026-07-15 Split Live는 `main` SHA `dc6e1e2...`에서 한 번 실행했지만 성공 summary 없이
 안전하게 실패했다. 비밀·Provider 원문 노출은 관찰되지 않았으나 실패 stage를 구분하지
@@ -59,7 +60,10 @@ Local·Blog → 서버 결정론적 Top 3 → 실제 Elice 근거 이유 → 서
 세 결과 모두 `linked=true`, `degraded=false`, `reasonFallback=false`, `cleanup=true`인
 strict success였다. 이는 실제 Provider와 동기식 추천 core의 연결을 검증한 결과다.
 Controller, DB, 202 Job, Outbox, Worker, SSE, 프런트엔드와 cloud 배포는 아직 구현·검증하지
-않았으므로 전체 제품 서비스가 완료됐다는 의미는 아니다.
+않았으므로 전체 제품 서비스가 완료됐다는 의미는 아니다. 단계별 사용자 여정, 세
+시나리오의 기대·관찰·판정과 실패 해결 과정은
+[CASE-0002](docs/case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)에서 확인할 수
+있다.
 
 목표 사용자 여정은 `익명 세션 → 자연어 조건 초안 → 사용자 확인 → 202 추천 Job →
 근거 기반 후보 3개 → 공유방 → LIKE/DISLIKE → 주최자 최종 확정`이다. 현재 코드가
@@ -118,6 +122,7 @@ Mock LLM 8090, Prometheus 9090, Grafana 3001이다.
 - [Naver Local Live Runbook](docs/runbooks/RUN-0001-naver-local-live-and-credential-rotation.md): 실제 계약 검증과 key 교체
 - [Elice LLM Local Live Runbook](docs/runbooks/RUN-0002-elice-llm-local-live-and-token-rotation.md): 합성 계약 검증과 token 교체
 - [Linked Live Runbook](docs/runbooks/RUN-0004-recommendation-workflow-linked-live.md): 실제 Naver→Elice 독립 invocation 검증과 중단
+- [Linked Live 사용자 여정 Case Study](docs/case-studies/CASE-0002-naver-elice-linked-live-user-flow.md): 세 실제 시나리오의 단계별 과정·결과와 입증 범위
 
 `documents/`는 최초 기획과 참고 자료를 보존하는 원문 영역이고, 실제 구현과
 함께 갱신되는 정본은 `docs/`다. 작업은 `main`에서 분기한 짧은 브랜치에서

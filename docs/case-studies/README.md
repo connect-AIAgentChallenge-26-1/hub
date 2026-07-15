@@ -5,3 +5,4 @@
 위임, 사람의 검증을 구분한다.
 
 - [CASE-0001 Java 17 기반 재현 가능한 Agentic 개발 환경 구축](CASE-0001-agentic-development-environment.md)
+- [CASE-0002 실제 Naver→Elice 추천 핵심 워크플로 사용자 여정 검증](CASE-0002-naver-elice-linked-live-user-flow.md)

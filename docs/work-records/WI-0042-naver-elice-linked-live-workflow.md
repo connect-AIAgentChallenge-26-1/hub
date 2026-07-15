@@ -18,6 +18,7 @@ related:
   - ../troubleshooting/TS-0017-workerd-linked-live-outbound-transport.md
   - ../troubleshooting/TS-0018-elice-structured-output-unsupported-array-keyword.md
   - ../experiments/EXP-0001-linked-live-representative-scenario-repeatability.md
+  - ../case-studies/CASE-0002-naver-elice-linked-live-user-flow.md
   - WI-0041-recommendation-core-split-live-workflow.md
   - https://github.com/gdh0730/hub/issues/50
 paths:
@@ -328,6 +329,12 @@ invocation이며, 응답 원문·장소명·주소·검색어·prompt·completio
 `7/6/6`은 이 캠페인의 안전 요약이지 가용성·성능 SLA나 Provider 성공률 표본은 아니다.
 과거 조건 추출 실패와 이유 schema 400은 삭제하지 않고 위 문제 해결 기록에 원인·수정·
 재검증 순서로 보존한다.
+
+세 실행의 공통 12단계 흐름, 시나리오별 사용자 의도·기대·관찰·판정과 이 결과가
+입증하거나 입증하지 않는 범위는
+[CASE-0002](../case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)에 포트폴리오
+관점으로 정리했다. Case Study는 이 Work Record와 safe report에 없는 수치를 추정하지
+않으며 문서화 과정에서 Provider를 다시 호출하지 않았다.
 
 ## AI 사용과 사람의 검증
 
