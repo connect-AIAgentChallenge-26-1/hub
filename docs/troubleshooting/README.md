@@ -21,3 +21,4 @@
 - [TS-0015 Java·TypeScript Naver HTML plain text 불일치](TS-0015-cross-runtime-naver-html-plain-text.md)
 - [TS-0016 Linked Live Provider 오류 분류 평탄화](TS-0016-linked-live-provider-error-flattening.md)
 - [TS-0017 workerd Linked Live outbound 전송 실패](TS-0017-workerd-linked-live-outbound-transport.md)
+- [TS-0018 Elice Structured Output 미지원 배열 keyword](TS-0018-elice-structured-output-unsupported-array-keyword.md)

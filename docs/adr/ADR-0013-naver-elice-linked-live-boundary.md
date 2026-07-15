@@ -11,6 +11,8 @@ related:
   - ../contracts.md
   - ../work-records/WI-0042-naver-elice-linked-live-workflow.md
   - ../runbooks/RUN-0004-recommendation-workflow-linked-live.md
+  - ../experiments/EXP-0001-linked-live-representative-scenario-repeatability.md
+  - ../troubleshooting/TS-0018-elice-structured-output-unsupported-array-keyword.md
   - https://github.com/gdh0730/hub/issues/50
   - ADR-0009-mock-local-live-gateway-boundary.md
   - ADR-0011-elice-chat-completions-provider-boundary.md
@@ -49,7 +51,9 @@ Naver 장소·Blog 근거가 제품 점수와 Top 3를 거쳐 실제 Elice 이�
 
 ## 결정
 
-PP-040에서 고정 합성 입력을 사용하는 로컬 일회성 Linked Live harness를 도입한다.
+PP-040에서 고정 합성 입력을 사용하는 invocation-bound 로컬 반복 Linked Live harness를
+도입한다. 각 invocation은 새 Gateway·일회성 로컬 자격·독립 호출 예산을 가지며 HTTP
+retry와 구분한다.
 제품 runtime이나 배포 Live를 활성화하지 않는다. 실행 계약은 다음과 같다.
 이 결정은 ADR-0009·ADR-0011·ADR-0012를 폐기하지 않고, 그중 Linked Live의 로컬
 검증 예외와 성공 증거만 구체화한다.
@@ -90,6 +94,9 @@ evidence ID를 인용한다. strict schema의 text enum과 단일 ID 배열에 �
 Gateway가 evidence 유형과 문장을 다시 대조한다. 장소명·근거 단어가 겹친다는 이유만으로
 속성을 지어내는 false-success를 막기 위한 결정이다. 점수·순위는 결정론적 서버가 Elice
 호출 전에 확정하므로 LLM에는 전달하지 않고 생성 권한도 주지 않는다.
+정확히 한 evidence라는 배열 제약은 `minItems=1`, `maxItems=1`과 서버 검증으로
+완결한다. Elice strict Structured Outputs 지원 부분집합에서 400을 일으킨
+`uniqueItems`는 사용하지 않는다.
 
 Naver·Elice 자격, 원문 응답 전체, Local·Blog URL, 좌표, `CandidateKey`, Blog 작성자·
 작성일, 점수·순위, session·개인정보와 Provider routing URL은 전달하지 않는다. 응답은
@@ -101,9 +108,9 @@ Naver·Elice 자격, 원문 응답 전체, Local·Blog URL, 좌표, `CandidateKe
 배포는 기존 PP-029·PP-030·PP-033·PP-035 gate를 유지한다.
 
 자동 harness와 실제 실행 증거도 구분한다. source set·Gateway·guard가 Mock 기반 검증을
-통과하면 harness 코드는 `implemented`가 될 수 있지만, Linked Live 계약은 병합된 깨끗한
-`main`에서 한 번 성공하기 전까지 `specified`다. 실패·degraded·fallback은 안전 동작이지
-Linked 성공이 아니다.
+통과하면 harness 코드는 `implemented`가 될 수 있다. 실제 Linked 계약은 검토·push된
+정확한 SHA의 allowlist 시나리오가 독립 invocation으로 strict success를 통과해야
+`implemented`다. 실패·degraded·fallback은 안전 동작이지 Linked 성공이 아니다.
 
 ## 결과와 트레이드오프
 
@@ -112,7 +119,7 @@ Split Live보다 강한 핵심 워크플로 증거를 얻을 수 있다. Java·G
 raw credential을 전달하지 않고 호출·데이터 범위를 Gateway가 강제한다.
 
 대신 stateful Gateway와 별도 source set·launcher를 유지해야 하고, 실제 Provider 결과가
-달라 일회성 실행이 비결정적으로 실패할 수 있다. 승인 원문을 검토하지 않았으므로 이
+달라 개별 invocation이 비결정적으로 실패할 수 있다. 승인 원문을 검토하지 않았으므로 이
 결정 자체는 규제·계약 적합성 증거가 아니다. 주소·도로명 주소를 Elice에 전달하는 선택은
 최소 필드 방식보다 데이터 범위가 크며 승인 범위가 바뀌면 즉시 축소해야 한다.
 
@@ -134,6 +141,23 @@ invocation을 반복할 수 있다. 각 invocation의 9회 상한과 no-retry·n
 증거일 뿐 전체 Linked 성공, Provider 가용성 또는 약관 적합성 증거가 아니다. 현재 안전
 오류만으로 upstream 5xx와 전송·timeout을 구분할 수 없으므로 Mock 진단과 검토·push된 새
 검증 SHA가 후속 재검증 조건이다.
+
+후속 진단에서 로컬 workerd 전송 경계와 제품 Provider 오류를 분리했고 Node 24 실행
+adapter로 같은 Gateway 정책을 유지했다. 이유 생성 400은 strict schema의
+`uniqueItems`가 Provider 지원 부분집합과 맞지 않은 원인이었으며 정확히 한 ID 의미를
+`minItems=1`, `maxItems=1`과 서버 검증으로 유지한 채 해당 keyword를 제거했다. nullable
+시나리오의 exact `Seoul`은 finite alias로만 사용자 확인 정본 `서울`에 연결하며 broad·
+fuzzy 해석은 금지한다. 조건 cross-field 불일치는 원문 없는 field별 safe code로
+fail-closed한다.
+
+2026-07-15 최종 push SHA `e789af65e94441aa38a018a2931c3705f7125112`에서 완전
+입력 카페, nullable 음식점, nullable 디저트 카페의 세 allowlist 시나리오를 독립 실행했다.
+세 실행 모두 실제 Elice 조건 추출, 사용자 확인 fixture, 실제 Naver Local·Blog, 제품
+점수·Top 3, 실제 Elice 이유와 서버 provenance 검증을 통과했다. safe summary의 논리 호출은
+`7/6/6`이고 모두 `linked=true`, `degraded=false`, `reasonFallback=false`,
+`cleanup=true`, retry 0회였다. 이에 PP-040의 동기 Linked core와 WI-0042, 로컬 Linked
+계약을 `done`/`implemented`로 확정한다. 이 결과는 공개 API·DB·Worker·SSE·frontend,
+제품 runtime, cloud 배포, SLA 또는 법률·약관 적합성의 완료 증거가 아니다.
 
 승인 범위 철회·변경, 주소 전달 불허, Elice 보관·학습 정책 변화, Provider endpoint·schema
 변화, 비밀·원문 노출 또는 호출 상한 초과가 관찰되면 즉시 실행을 중단하고 이 ADR을

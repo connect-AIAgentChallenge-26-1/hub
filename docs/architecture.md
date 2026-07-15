@@ -30,9 +30,11 @@ SHA `e619066...`에서 각각 2xx와 필수 schema를 통과했다. 최초 `INVA
 정규화·점수화·Top 3와 근거 문장을 연결하는 동기 use case와 Mock workflow는 구현됐다.
 Mock core는 PP-040에서 정상·완화·후보 부족·Blog degraded·LLM fallback의 다섯 흐름으로
 보강했고 모두 자동 검증됐다. Split Live는 2026-07-15 병합 `main`에서 한 번 실행했지만
-safe failure로 종료했다. Linked harness의 자동 경계도 구현됐지만 같은 날 SHA
-`541a98b3...`의 첫 실제 실행은 Elice 조건 추출에서 `PROVIDER_UNAVAILABLE`로 종료했다.
-두 Live 계약은 계속 `specified`이며 공개 HTTP 표면은 여전히 Actuator로 제한한다.
+safe failure로 종료했다. Linked harness는 첫 조건 추출 실패와 이유 schema의
+`uniqueItems` 400을 수정한 뒤 최종 SHA `e789af65...`에서 세 allowlist 사용자 시나리오가
+실제 Elice→Naver Local·Blog→core→Elice 이유 흐름을 `7/6/6`회로 모두 통과했다.
+동기 Linked core는 `implemented`지만 Split은 계속 `specified`이고 공개 HTTP 표면은
+여전히 Actuator로 제한한다.
 
 ## 책임 경계
 
@@ -134,10 +136,10 @@ Local Live
      -> Naver Local 1 call + Blog 1 call
      -> Elice synthetic grounded reason 1 call
      -> linked=false, Naver-to-Elice data transfer 0
-  -> Linked Live harness (automatic boundary implemented)
-     -> first merged-main run: condition extraction safe failure
-     -> Naver Local / Blog / product core / reason not reached
-     -> linked=true only after a successful merged-main run
+  -> Linked Live harness (synchronous core implemented)
+     -> three allowlisted synthetic user scenarios
+     -> actual Elice extraction -> Naver Local / Blog -> product core -> Elice reason
+     -> strict success 7 / 6 / 6 calls, retry 0, cleanup=true
 
 Deployment Live (planned)
   -> GitHub OIDC -> Approval Gate
@@ -150,7 +152,8 @@ Deployment Live (planned)
 fallback을 자동 검증한다. `Split Live`는 실제 provider의 제품형 schema를 각각 확인하지만
 provider 간 실제 데이터를 연결하지 않는다. `Linked Live`는 PP-040의 별도 승인·
 allowlist·Loopback Gateway에서만 실제 데이터를 연결한다. 자동 harness 구현과 실제
-병합-main 실행 증거는 별도 상태다.
+Provider 실행 증거는 별도 상태로 검증했으며, 최종 세 invocation이 strict success를
+통과했다.
 
 `local`, `test`, `load`와 필수 CI는 Mock adapter만 허용한다. 일반 앱과 표준 검증은
 `.env.live.local`을 읽지 않는다. Naver와 Elice Local Live task는 공용 파일을
@@ -167,9 +170,10 @@ SHA·workflow, OIDC issuer·audience·만료와 replay를 검증한다. 이 Gate
 Local·Blog 결과 결합, 후보 영구 저장과 LLM 전달은 사람의 승인 범위에서만 허용한다.
 저장소 소유자는 Naver·Elice 양쪽 승인과 주소·도로명 주소를 포함한 현재 전체 문맥의
 로컬 Linked 검증을 승인했다고 진술했지만 원문은 이 작업에서 독립 검토하지 않았다.
-따라서 PP-040의 고정 합성 입력·메모리 처리·일회성 Gateway 예외만 허용하며 법률·약관
-준수나 실제 사용자 데이터 처리 허용을 주장하지 않는다. 제품 runtime·영구 저장과
-배포에는 이 예외를 자동 적용하지 않는다.
+따라서 PP-040의 고정 합성 입력·메모리 처리·invocation-bound 반복 Gateway 예외만
+허용하며 법률·약관 준수나 실제 사용자 데이터 처리 허용을 주장하지 않는다. 각 실행은
+새 Gateway·일회성 로컬 자격·독립 호출 예산을 사용하고 HTTP retry와 구분한다. 제품
+runtime·영구 저장과 배포에는 이 예외를 자동 적용하지 않는다.
 
 합성 Chat canary는 OpenAI-compatible strict schema만, Embedding canary는 1,536차원
 capability만 확인하며 제품 runtime을 활성화하지 않는다. Split Live 이유 생성도

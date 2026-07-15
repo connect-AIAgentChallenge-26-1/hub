@@ -2,7 +2,7 @@
 id: TS-0017
 title: workerd Linked Live outbound 전송 실패
 type: troubleshooting
-status: draft
+status: verified
 date: 2026-07-15
 owners:
   - placepick-team
@@ -10,6 +10,7 @@ related:
   - ../work-records/WI-0042-naver-elice-linked-live-workflow.md
   - ../runbooks/RUN-0004-recommendation-workflow-linked-live.md
   - TS-0016-linked-live-provider-error-flattening.md
+  - ../experiments/EXP-0001-linked-live-representative-scenario-repeatability.md
 ---
 
 # TS-0017 workerd Linked Live outbound 전송 실패
@@ -63,7 +64,7 @@ Cloudflare 배포용 Worker 코드를 Node용으로 복제하지 않고 같은 c
 - Node runner syntax와 exact dependency pin을 검사한다.
 - launcher 합성 guard에서 env 격리, pushed SHA, 반복 invocation, process lock과 cleanup을
   검증한다.
-- Edge 155개 보안 테스트로 Gateway 상태·provenance·timeout·no-retry를 유지한다.
+- Edge 보안 테스트로 Gateway 상태·provenance·timeout·no-retry를 유지한다.
 - 실제 Linked Live에서 조건 추출을 넘어 Naver Local·Blog와 Elice 이유 생성까지 같은
   Node Gateway를 통과해야 이 문서를 `verified`로 바꾼다.
 - Gateway log나 JUnit에 자유 예외 message, Provider body, credential 또는 routing URL이
@@ -71,3 +72,11 @@ Cloudflare 배포용 Worker 코드를 Node용으로 복제하지 않고 같은 c
 
 Node runner가 실패하거나 보안 경계가 달라지면 workerd로 자동 fallback하지 않는다.
 실행을 중단하고 Mock에서 재현한 뒤 별도 검토한다.
+
+2026-07-15 최종 검증 SHA
+`e789af65e94441aa38a018a2931c3705f7125112`에서 Node runner를 통해 세 개의 고정 사용자
+시나리오가 모두 조건 추출을 넘어 실제 Naver Local·Blog, 서버 Top 3와 실제 Elice 이유
+생성까지 완료됐다. 논리 호출 수는 7·6·6회였고 세 실행 모두 degraded·fallback 없이
+끝났으며 임시 Gateway·자격 정리와 report safety scan이 통과했다. 따라서 로컬 transport
+교체의 완료 조건은 충족됐다. 이는 Cloudflare 배포 Worker의 네트워크 가용성을 검증한
+결과가 아니다.

@@ -2,7 +2,7 @@
 id: RUN-0004
 title: Naver→Elice 실제 Linked Live 워크플로 실행과 중단
 type: runbook
-status: draft
+status: verified
 date: 2026-07-15
 owners:
   - placepick-team
@@ -17,6 +17,8 @@ related:
   - RUN-0003-recommendation-workflow-split-live-probe.md
   - ../troubleshooting/TS-0016-linked-live-provider-error-flattening.md
   - ../troubleshooting/TS-0017-workerd-linked-live-outbound-transport.md
+  - ../troubleshooting/TS-0018-elice-structured-output-unsupported-array-keyword.md
+  - ../experiments/EXP-0001-linked-live-representative-scenario-repeatability.md
 ---
 
 # RUN-0004 Naver→Elice 실제 Linked Live 워크플로 실행과 중단
@@ -26,12 +28,13 @@ related:
 고정 합성 사용자 입력을 실제 Elice 조건 추출, 실제 Naver Local·Blog, 제품 추천 core와
 실제 Elice 근거 이유 생성으로 연결해 핵심 Linked Live 경로를 반복 가능하게 검증하는 절차다.
 이 Runbook은 harness의 자동 검증과 main 병합 뒤 실제 정상 실행이 끝나기 전까지
-`draft`다. 문서 존재만으로 Live 실행을 승인하지 않는다.
+`draft`였고, 2026-07-15 세 대표 시나리오의 실제 정상 실행 뒤 절차가 검증됐다. 문서
+존재만으로 개별 Live 실행을 승인하지 않는다.
 
 저장소 소유자는 양쪽 Provider 실행과 주소·도로명 주소를 포함한 현재 전체 문맥 전달을
 승인했다고 진술했다. 승인 원문은 독립 검토하지 않았으며 이 절차는 법률·약관 준수나
-실제 사용자 데이터 처리 승인을 증명하지 않는다. 합성 입력의 로컬 일회성 검증에만
-적용한다.
+실제 사용자 데이터 처리 승인을 증명하지 않는다. 닫힌 합성 입력의 로컬 검증에만
+적용하며, 각 invocation은 일회성 자격과 독립 호출 예산으로 격리한다.
 
 ## 사전 조건과 안전장치
 
@@ -48,13 +51,21 @@ related:
 - `.env.live.local`은 Git에서 제외되고 기존 8개 allowlist 변수만 가져야 한다. 값을
   shell·대화·Issue·PR·log에 출력하지 않는다.
 - launcher와 Gateway의 고정 합성 입력, 전송 field allowlist, 상태 순서, 9회 호출 상한,
-  no-retry·no-redirect와 report scan을 사람이 확인한다.
+  HTTP retry=0·redirect=0과 report scan을 사람이 확인한다.
 - Naver·Elice raw credential은 Gateway만 받고 Java에는 loopback URL과 일회성 local
   자격만 전달돼야 한다.
 - 실제 Provider 결과, 검색어, 장소명·주소·링크, prompt·completion과 전체 Elice routing
   URL을 console·JUnit·Gradle report·Git에 남기지 않는다.
 - 같은 SHA의 수동 재실행은 허용한다. 각 invocation은 새 process·port·일회성 자격과 독립
-  9회 상한을 가져야 하며, 한 invocation 내부 retry·redirect와 병렬 실행은 금지한다.
+  9회 상한을 가져야 하며, 한 invocation 내부 HTTP retry·redirect와 병렬 실행은
+  금지한다. 한 검증 campaign에서 아래 닫힌 시나리오들을 독립 invocation으로 반복할 수
+  있지만 결과를 SLA나 성공률로 일반화하지 않는다.
+
+  | `SCENARIO` | 검증 의도 |
+  | --- | --- |
+  | `seoul-cafe-complete-v1` | 위치·인원·예산·선호·제외 조건이 모두 있는 완전 입력 |
+  | `seoul-restaurant-nullable-v1` | 인원·예산을 입력하지 않았을 때 추정하지 않는 nullable 경계 |
+  | `seoul-cafe-dessert-v1` | 선호·제외 조건과 누락된 인원·예산을 함께 처리하는 경계 |
 
 ## 진단과 실행 절차
 
@@ -67,8 +78,10 @@ related:
    git status --short
    ```
 
-   두 SHA가 같아야 한다. tracked 변경이 있거나 실행 코드의 출처를 설명할 수 없으면
-   중단한다.
+   병합 경로에서는 두 SHA가 같아야 한다. 반복 검증 경로에서는 검토·push된
+   `feat/workflow-linked-live-validation`의 `HEAD`, 원격 branch와 승인 SHA가 정확히 같고
+   `origin/main`의 descendant여야 한다. tracked 변경이 있거나 실행 코드의 출처를 설명할
+   수 없으면 중단한다.
 2. 비밀값을 출력하지 않고 환경 파일이 Git에서 제외됐는지 확인한다.
 
    ```powershell
@@ -88,14 +101,14 @@ related:
 4. 병합본 검증은 승인할 40자리 `origin/main` SHA로 실행한다.
 
    ```powershell
-   make workflow-live-linked APPROVED_SHA=<40자리-origin/main-SHA>
+   make workflow-live-linked APPROVED_SHA=<40자리-origin/main-SHA> SCENARIO=<id>
    ```
 
    수정·재검증을 merge마다 끊지 않는 개발 경로는 전용 branch를 push한 정확한 SHA에서만
    다음 명령으로 실행한다.
 
    ```powershell
-   make workflow-live-linked-dev APPROVED_SHA=<40자리-pushed-validation-SHA>
+   make workflow-live-linked-dev APPROVED_SHA=<40자리-pushed-validation-SHA> SCENARIO=<id>
    ```
 
 5. launcher는 임시 127.0.0.1 port와 256-bit local 자격을 만들고 Gateway를 시작한다.
@@ -115,7 +128,7 @@ related:
 7. 마지막 summary는 안전한 count·boolean·latency·token 수와 다음 상태만 포함해야 한다.
 
    ```text
-   WORKFLOW_LINKED mode=linked linked=true status=passed degraded=false reasonFallback=false callCount=<6..9> cleanup=true
+   WORKFLOW_LINKED mode=linked scenario=<id> linked=true status=passed degraded=false reasonFallback=false callCount=<6..9> cleanup=true
    ```
 
    실제 field 값이나 응답 본문이 보이면 성공 여부와 관계없이 노출 대응으로 이동한다.
@@ -169,6 +182,33 @@ process count도 0이었다. 성공 전용 `cleanup=true` summary는 Gradle 실�
 5xx·전송·timeout 중 세부 원인도 확정하지 않았다. 이 실패 분기만으로 RUN-0004를
 `verified`로 올리지 않는다.
 
+이후 실패 원인을 Provider stage와 안전한 세부 code로 분리하고, Elice strict JSON Schema가
+지원하지 않는 배열 제약을 제거하되 장소·근거 집합의 서버 검증은 유지했다. 조건 추출의
+번역·nullable·필드 간 제약 불일치도 원문 없이 구분해 fail-closed로 진단하도록 보강했다.
+이 과정의 실패 invocation은 삭제하거나 성공으로 재분류하지 않았다.
+
+2026-07-15, 검토·push된 validation SHA
+`e789af65e94441aa38a018a2931c3705f7125112`에서 다음 세 사용자 흐름을 각각 독립
+invocation으로 실행했다.
+
+1. `seoul-cafe-complete-v1`은 서울, 2명, 1인당 2만 원 이하, 조용한 카페와 흡연 장소
+   제외를 포함했다. Elice가 초안을 추출한 뒤 versioned fixture로 사용자 확인 경계를
+   적용했고, 실제 Naver Local·Blog 근거를 정규화·연결했다. 서버가 점수와 Top 3를
+   결정한 뒤 Elice는 허용된 근거로만 이유를 생성했고 서버가 place/evidence 관계를
+   재검증했다. `callCount=7`이었다.
+2. `seoul-restaurant-nullable-v1`은 서울 음식점만 요청했다. Elice 초안과 사용자 확인
+   경계에서 입력하지 않은 인원·예산을 추정하지 않고 nullable과 warning으로 유지했다.
+   이후 실제 검색·근거 연결·결정론적 Top 3·근거 이유·서버 검증을 완료했다.
+   `callCount=6`이었다.
+3. `seoul-cafe-dessert-v1`은 서울 디저트 카페와 흡연 장소 제외를 요청하고 인원·예산은
+   입력하지 않았다. 누락값은 추정하지 않고 선호·제외 조건을 유지한 채 실제 Local·Blog,
+   서버 순위 결정과 Elice 근거 이유 검증을 완료했다. `callCount=6`이었다.
+
+세 invocation 모두 `linked=true`, `degraded=false`, `reasonFallback=false`,
+`cleanup=true`인 strict success였다. invocation마다 새 Gateway process·port·일회성 local
+자격을 사용했고 HTTP retry·redirect는 0회였다. 이 작은 합성 campaign의 3회 성공을
+Provider 가용성·품질 SLA나 실제 사용자 성공률로 해석하지 않는다.
+
 ## 노출 대응과 rollback
 
 1. Gateway와 Live 실행을 즉시 중단한다.
@@ -180,10 +220,12 @@ process count도 0이었다. 성공 전용 `cleanup=true` summary는 Gradle 실�
 
 ## 검증과 rollback
 
-정상 완료는 검토된 병합 `main`, 선행 `make check`, 실제 6~9회 경로, 후보 3개,
+정상 완료는 검토된 병합 `main` 또는 검토·push된 전용 validation branch의 exact SHA,
+선행 `make check`, 실제 6~9회 경로, 후보 3개,
 `linked=true`, `degraded=false`, `reasonFallback=false`, provenance 검증, 안전한 report와
 완전한 cleanup이다. 하나라도 없으면 RUN-0004를 `verified`로 올리지 않는다.
 
 이 검증은 DB나 앱 runtime을 바꾸지 않는다. 기능 rollback은 Gateway 종료와 임시 자격
-제거다. Linked Live 성공도 공개 API·Job·Worker·SSE·frontend·배포나 실제 사용자 데이터
-정책 완료를 뜻하지 않으며 각 후속 Task에서 별도로 검증한다.
+제거다. Linked Live 성공은 동기식 추천 core와 실제 Provider의 연결만 증명한다.
+Controller, DB, 202 Job, Outbox, Worker, SSE, frontend와 cloud 배포 또는 실제 사용자 데이터
+정책 완료를 뜻하지 않으며 각 후속 Task에서 별도로 구현·검증한다.

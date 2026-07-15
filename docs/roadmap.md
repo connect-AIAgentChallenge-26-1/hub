@@ -52,7 +52,7 @@ Neon·Upstash 리소스 배포나 제품 LLM runtime을 포함하지 않는다. 
 - Mock 자동 검증, 제한된 Local Live provider 검증과 클라우드 배포 검증을 서로
   다른 증거로 관리한다.
 - 합성 Naver·LLM fixture를 연결한 Mock 전체 추천 core, provider 데이터를 연결하지 않는
-  Split Live와 승인된 로컬 일회성 Linked Live를 서로 다른 증거로 관리한다.
+  Split Live와 승인된 invocation-bound 로컬 반복 Linked Live를 서로 다른 증거로 관리한다.
 - 향후 Approval Gate를 거친 제한된 배포 Live에서 하나의 전체 실제 추천 경로가
   schema와 근거 검증을 통과한다.
 - 단위·통합·계약·Eval·브라우저 E2E·접근성·보안·부하 검증이 통과한다.
@@ -85,7 +85,8 @@ Neon·Upstash 리소스 배포나 제품 LLM runtime을 포함하지 않는다. 
   Live는 Git에서 제외한 개발자 파일, 배포 Live는 외부 Provider Gateway를 사용한다.
 - Naver 검색 결과 결합·영구 저장·LLM 전달과 Elice 데이터 처리는 사람의 승인 범위에서만
   허용한다. PP-040은 저장소 소유자의 양쪽 Provider 승인 진술에 근거한 고정 합성 입력의
-  로컬 일회성 Linked 검증 예외이며, 승인 원문을 독립 검토하거나 법률 준수를 확인했다는
+  invocation-bound 로컬 반복 Linked 검증 예외이며, 승인 원문을 독립 검토하거나 법률
+  준수를 확인했다는
   뜻은 아니다.
 - 실제 사용자 데이터·제품 runtime·배포에는 PP-040의 로컬 예외를 자동 적용하지 않는다.
 - Elice Chat Completions를 MVP 방향으로 두고 직접 OpenAI Responses는 자동 fallback이
@@ -159,7 +160,7 @@ PP-002는 이 문서에 고정된 계약을 OpenAPI와 자동 schema 검증으�
 | [PP-037](https://github.com/gdh0730/hub/issues/40) | Approval Gate·Provider Gateway 기반 | PP-005 | [WI-0039](work-records/WI-0039-shared-fork-live-security-foundation.md) | 무비밀 CI의 OIDC·JWT·replay·allowlist 검증과 세 상태 분리 |
 | [PP-038](https://github.com/gdh0730/hub/issues/42) | Elice LLM Proxy Local Live 계약 | PP-005 | [WI-0040](work-records/WI-0040-elice-llm-proxy-live-contract.md) | Chat strict schema·Embedding capability와 provider별 secret 격리 |
 | [PP-039](https://github.com/gdh0730/hub/issues/44) | 핵심 추천 core·Split Live 검증 | PP-009, PP-013~PP-016, PP-038 | [WI-0041](work-records/WI-0041-recommendation-core-split-live-workflow.md) | Mock 전체 연결과 실제 provider 4회·`linked=false` 검증 |
-| [PP-040](https://github.com/gdh0730/hub/issues/50) | Naver→Elice 실제 Linked Live 워크플로 | PP-039 | [WI-0042](work-records/WI-0042-naver-elice-linked-live-workflow.md) | 다섯 Mock core 흐름과 병합 main의 실제 `linked=true` 로컬 증거 |
+| [PP-040](https://github.com/gdh0730/hub/issues/50) | Naver→Elice 실제 Linked Live 워크플로 | PP-039 | [WI-0042](work-records/WI-0042-naver-elice-linked-live-workflow.md) | 다섯 Mock core 흐름과 SHA `e789af65...`의 실제 3개 `linked=true` strict success |
 
 PP-037은 PP-013의 Local Live 검증 및 PP-033·PP-035의 향후 배포가 사용할 횡단
 신뢰 기반이다. PP-038은 PP-009·PP-016·PP-029가 사용할 Elice 계약을 제품 runtime과
@@ -168,16 +169,18 @@ PP-037은 PP-013의 Local Live 검증 및 PP-033·PP-035의 향후 배포가 사
 동기 core를 Mock으로 연결하고 Split Live를 분리 검증한다. Split Probe는 2026-07-15
 병합 `main`에서 한 번 실행했지만 safe failure로 종료해 PP-039는 `in-progress`다.
 PP-040은 누락된 세 Mock 실패 흐름을 core 전체로 보강하고 실제 Naver→Elice Linked
-Live harness를 별도 검증한다. harness 코드의 자동 검증과 병합 뒤 실제 성공 증거는
+Live harness를 별도 검증했다. harness 코드의 자동 검증과 실제 Provider 성공 증거는
 분리하며 공개 API, Worker와 cloud 배포는 완료 범위가 아니다.
 
-2026-07-15 SHA `541a98b3b73bfdaa3a1c7396aaea32ce410a7237`의 첫 Linked Live는
-Gateway를 통한 Elice 조건 추출 논리 단계에서 `PROVIDER_UNAVAILABLE`로 안전 종료했다.
-사용자 확인 이후와 Naver Local·Blog·Top 3·이유 생성에는 도달하지 않았으므로 PP-040과
-WI-0042는
-`in-progress`, RUN-0004는 `draft`, Linked 계약은 `specified`, Issue #50은 open으로
-유지한다. 같은 SHA 재실행 대신 Mock에서 원인을 분리하고 수정이 병합된 새 SHA에서만
-다시 한 번 승인한다.
+2026-07-15 첫 SHA `541a98b3b73bfdaa3a1c7396aaea32ce410a7237`의 조건 추출
+`PROVIDER_UNAVAILABLE`과 후속 이유 schema `uniqueItems` 400은 실패 이력으로 보존한다.
+전송 경계와 safe diagnostics를 분리하고, exact 동치 `Seoul`만 finite alias로 사용자 확인
+정본 `서울`에 연결했으며 broad·fuzzy 해석은 허용하지 않았다. 최종 push SHA
+`e789af65e94441aa38a018a2931c3705f7125112`에서 완전 입력 카페, nullable 음식점,
+nullable 디저트 카페의 세 allowlist 시나리오가 각각 논리 호출 `7/6/6`으로 strict
+success를 통과했다. 모두 `linked=true`, `degraded=false`, `reasonFallback=false`,
+`cleanup=true`, retry 0회이므로 PP-040의 동기 Linked core와 WI-0042는 완료다. 공개 API,
+DB·Worker·SSE·frontend, 제품 runtime과 cloud 배포는 계속 후속 Task다.
 
 ### M1 Backend 도메인 기반과 익명 보안
 
@@ -327,12 +330,13 @@ wire 호출 수는 확인하지 못했다. 따라서 PP-039·WI-0041은 `in-prog
 PP-040의 Linked harness는 저장소 소유자가 양쪽 Provider 승인과 주소·도로명 주소를
 포함한 현재 전체 문맥 전달을 승인했다고 진술한 범위에서만 만든다. 승인 원문을 독립
 검토하지 않았으므로 법률·약관 준수나 실제 사용자 데이터 처리를 주장하지 않는다.
-실제 Linked 증거는 harness가 병합된 깨끗한 `main`에서 한 번 성공하기 전까지
-`specified`이며, 제품 runtime과 배포 Live는 계속 별도 Task다.
-첫 실행은 2026-07-15 21:10 KST SHA `541a98b3...`에서 조건 추출
-`PROVIDER_UNAVAILABLE`로 끝났다. `1 test / 1 failure`는 JUnit 결과이며 Provider wire
-호출 수가 아니다. 10개 report 안전 scan과 같은 SHA 재실행 0회만 확인했고, 전체 연결
-성공으로 해석하지 않는다.
+최종 SHA `e789af65e94441aa38a018a2931c3705f7125112`의 세 allowlist 시나리오는 실제
+Elice 추출→사용자 확인→Naver Local·Blog→결정론적 Top 3→실제 Elice 이유→서버
+provenance 검증을 끝까지 통과했다. 논리 호출은 `7/6/6`, 세 실행 모두
+`degraded=false`, `reasonFallback=false`, `cleanup=true`, retry 0회였다. 따라서 로컬
+동기 Linked 계약은 `implemented`다. 이 작은 반복 캠페인은 SLA·성공률 증거가 아니며,
+제품 runtime과 배포 Live는 계속 별도 Task다. 첫 실행의 조건 추출 안전 실패와 후속 이유
+schema 400도 원인·수정 이력으로 WI-0042에 남긴다.
 PP-033의 배포 Live는 외부 Approval Gate가 사용자 actor, main의 승인 SHA와 고정
 workflow를 검증한 뒤 제한된 provider 요청만 실행한다.
 
