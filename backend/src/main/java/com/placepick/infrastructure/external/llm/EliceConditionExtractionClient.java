@@ -184,14 +184,21 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
 
     @Override
     public ExtractionOutcome extract(ExtractionCommand command) {
+        return extractForDiagnostics(command).outcome();
+    }
+
+    ExtractionDiagnostic extractForDiagnostics(ExtractionCommand command) {
         Objects.requireNonNull(command, "command");
         try {
             ProviderResponse response = execute(requestBody(command));
             JsonNode root = parseJson(response.body(), response.httpStatus());
             String content = validateEnvelopeAndReadContent(root, response.httpStatus());
-            return parseContent(content, response.httpStatus());
+            return new ExtractionDiagnostic(parseContent(content, response.httpStatus()), null);
         } catch (LlmProviderException exception) {
-            return ExtractionOutcome.providerFailure(toErrorCode(exception.failure()));
+            return new ExtractionDiagnostic(
+                ExtractionOutcome.providerFailure(toErrorCode(exception.failure())),
+                exception.boundaryCode()
+            );
         }
     }
 
@@ -343,10 +350,12 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
             String linkedErrorCode = trustLinkedGatewayErrors
                 ? response.getHeaders().getFirst(LINKED_GATEWAY_ERROR_HEADER)
                 : null;
+            String safeBoundaryCode = safeLinkedGatewayErrorCode(linkedErrorCode);
             throw failure(
-                classifyStatus(status, linkedErrorCode),
+                classifyStatus(status, safeBoundaryCode),
                 status,
-                LlmProviderFailureStage.HTTP_STATUS
+                LlmProviderFailureStage.HTTP_STATUS,
+                safeBoundaryCode
             );
         }
         MediaType contentType = response.getHeaders().getContentType();
@@ -663,6 +672,18 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         };
     }
 
+    private static String safeLinkedGatewayErrorCode(String value) {
+        if (value == null) {
+            return null;
+        }
+        return switch (value) {
+            case "INVALID_RESPONSE", "PROVIDER_RESPONSE_TOO_LARGE", "AUTHENTICATION_FAILED",
+                "RATE_LIMITED", "INVALID_REQUEST", "PROVIDER_UNAVAILABLE",
+                "LINKED_PROVIDER_UNAVAILABLE" -> value;
+            default -> null;
+        };
+    }
+
     private static ConditionExtractionErrorCode toErrorCode(LlmProviderFailure failure) {
         return switch (failure) {
             case INVALID_REQUEST -> ConditionExtractionErrorCode.PROVIDER_INVALID_REQUEST;
@@ -686,12 +707,28 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         Integer httpStatus,
         LlmProviderFailureStage stage
     ) {
+        return failure(failure, httpStatus, stage, null);
+    }
+
+    private static LlmProviderException failure(
+        LlmProviderFailure failure,
+        Integer httpStatus,
+        LlmProviderFailureStage stage,
+        String boundaryCode
+    ) {
         return new LlmProviderException(
             failure,
             httpStatus,
             stage,
-            "LLM condition extraction request failed."
+            "LLM condition extraction request failed.",
+            boundaryCode
         );
+    }
+
+    record ExtractionDiagnostic(ExtractionOutcome outcome, String boundaryCode) {
+        ExtractionDiagnostic {
+            Objects.requireNonNull(outcome, "outcome");
+        }
     }
 
     private static int requiredNonNegativeInteger(

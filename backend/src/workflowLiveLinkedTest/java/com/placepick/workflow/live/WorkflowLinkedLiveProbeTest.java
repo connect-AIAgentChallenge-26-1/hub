@@ -95,10 +95,12 @@ class WorkflowLinkedLiveProbeTest {
 
         EliceConditionExtractionClient extractionClient =
             LinkedLiveConditionClientFactory.create(gatewayRoot.resolve("/v1"), eliceToken);
-        ExtractionOutcome extraction = extractionClient.extract(
-            new ExtractionCommand(SYNTHETIC_INPUT, SAFETY_IDENTIFIER)
-        );
-        requireExpectedExtraction(extraction);
+        LinkedLiveConditionClientFactory.LinkedLiveExtraction extractionResult =
+            LinkedLiveConditionClientFactory.extract(
+                extractionClient,
+                new ExtractionCommand(SYNTHETIC_INPUT, SAFETY_IDENTIFIER)
+            );
+        requireExpectedExtraction(extractionResult.outcome(), extractionResult.boundaryCode());
         ConfirmedRecommendationCondition confirmed = confirmedFixture();
 
         NaverApiHubAdapter naver = LinkedLiveNaverAdapterFactory.create(
@@ -232,9 +234,14 @@ class WorkflowLinkedLiveProbeTest {
         return body;
     }
 
-    private static void requireExpectedExtraction(ExtractionOutcome extraction) {
+    private static void requireExpectedExtraction(
+        ExtractionOutcome extraction,
+        String boundaryCode
+    ) {
         if (extraction == null || !extraction.extracted() || extraction.condition() == null) {
-            String errorCode = extraction == null
+            String errorCode = boundaryCode != null
+                ? boundaryCode
+                : extraction == null
                 ? "INVALID_RESPONSE"
                 : extraction.errorCode().name();
             throw safeFailure("conditionExtraction", errorCode);
