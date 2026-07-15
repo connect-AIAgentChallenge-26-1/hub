@@ -254,19 +254,41 @@ class WorkflowLinkedLiveProbeTest {
             throw safeFailure("conditionExtraction", errorCode);
         }
         DraftRecommendationCondition draft = extraction.condition();
-        if (
-            !equivalent(draft.locationQuery(), EQUIVALENT_LOCATIONS) ||
-            draft.placeType() != PlaceType.CAFE ||
-            draft.placeTypeDetail() != null || !Integer.valueOf(2).equals(draft.partySize()) ||
-            draft.budgetPerPersonMin() != null ||
-            !Integer.valueOf(20_000).equals(draft.budgetPerPersonMax()) ||
-            draft.preferences().size() != 1 ||
-            !equivalent(draft.preferences().get(0).value(), EQUIVALENT_PREFERENCES) ||
-            draft.preferences().get(0).priority() != null ||
-            draft.exclusions().size() != 1 ||
-            !equivalent(draft.exclusions().get(0), EQUIVALENT_EXCLUSIONS) ||
-            !extraction.warnings().isEmpty()) {
-            throw safeFailure("conditionExtraction", "SEMANTIC_MISMATCH");
+        requireSemantic(
+            equivalent(draft.locationQuery(), EQUIVALENT_LOCATIONS),
+            "SEMANTIC_LOCATION_MISMATCH"
+        );
+        requireSemantic(draft.placeType() == PlaceType.CAFE, "SEMANTIC_PLACE_TYPE_MISMATCH");
+        requireSemantic(draft.placeTypeDetail() == null, "SEMANTIC_TYPE_DETAIL_MISMATCH");
+        requireSemantic(
+            Integer.valueOf(2).equals(draft.partySize()),
+            "SEMANTIC_PARTY_SIZE_MISMATCH"
+        );
+        requireSemantic(
+            draft.budgetPerPersonMin() == null &&
+                Integer.valueOf(20_000).equals(draft.budgetPerPersonMax()),
+            "SEMANTIC_BUDGET_MISMATCH"
+        );
+        requireSemantic(draft.preferences().size() == 1, "SEMANTIC_PREFERENCE_COUNT_MISMATCH");
+        requireSemantic(
+            equivalent(draft.preferences().get(0).value(), EQUIVALENT_PREFERENCES),
+            "SEMANTIC_PREFERENCE_VALUE_MISMATCH"
+        );
+        requireSemantic(
+            draft.preferences().get(0).priority() == null,
+            "SEMANTIC_PREFERENCE_PRIORITY_MISMATCH"
+        );
+        requireSemantic(draft.exclusions().size() == 1, "SEMANTIC_EXCLUSION_COUNT_MISMATCH");
+        requireSemantic(
+            equivalent(draft.exclusions().get(0), EQUIVALENT_EXCLUSIONS),
+            "SEMANTIC_EXCLUSION_VALUE_MISMATCH"
+        );
+        requireSemantic(extraction.warnings().isEmpty(), "SEMANTIC_WARNING_MISMATCH");
+    }
+
+    private static void requireSemantic(boolean condition, String errorCode) {
+        if (!condition) {
+            throw safeFailure("conditionExtraction", errorCode);
         }
     }
 
