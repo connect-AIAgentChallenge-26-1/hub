@@ -102,6 +102,7 @@ class EliceGroundedReasonClientSecurityTest {
         Map<String, Object> evidenceIds =
             (Map<String, Object>) statementProperties.get("evidenceIds");
         assertThat(evidenceIds).containsEntry("minItems", 1).containsEntry("maxItems", 1);
+        assertThat(evidenceIds).doesNotContainKey("uniqueItems");
     }
 
     @Test

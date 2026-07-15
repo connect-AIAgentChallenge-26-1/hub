@@ -221,8 +221,7 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
                     "type", "array",
                     "items", Map.of("type", "string", "enum", evidenceIds),
                     "minItems", 1,
-                    "maxItems", 1,
-                    "uniqueItems", true
+                    "maxItems", 1
                 )
             ),
             List.of("text", "evidenceIds")

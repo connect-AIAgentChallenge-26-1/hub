@@ -1126,8 +1126,7 @@ function validReasonStatementSchema(value: unknown, evidenceIds: string[]): bool
       validArraySchema(properties.evidenceIds, {
         items: (item) => validStringEnum(item, evidenceIds),
         minItems: 1,
-        maxItems: 1,
-        uniqueItems: true
+        maxItems: 1
       })
   );
 }

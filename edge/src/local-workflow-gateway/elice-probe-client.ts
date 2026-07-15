@@ -252,7 +252,6 @@ function reasonRequest(model: string): Record<string, unknown> {
                     type: "array",
                     minItems: 1,
                     maxItems: 1,
-                    uniqueItems: true,
                     items: { type: "string", enum: allowedEvidenceIds }
                   }
                 },

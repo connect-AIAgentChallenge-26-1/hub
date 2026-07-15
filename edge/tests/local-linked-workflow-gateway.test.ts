@@ -561,8 +561,8 @@ describe("Local Linked Workflow Gateway", () => {
     ["loose statement", (schema: Record<string, unknown>) => {
       reasonStatementSchema(schema).additionalProperties = true;
     }],
-    ["missing uniqueItems", (schema: Record<string, unknown>) => {
-      delete reasonEvidenceIdsSchema(schema).uniqueItems;
+    ["unsupported uniqueItems", (schema: Record<string, unknown>) => {
+      reasonEvidenceIdsSchema(schema).uniqueItems = true;
     }],
     ["free text schema", (schema: Record<string, unknown>) => {
       const properties = reasonStatementSchema(schema).properties as Record<string, unknown>;
@@ -961,8 +961,7 @@ function reasonWireSchema(placeIds: string[], evidenceIds: string[]): Record<str
       type: "array",
       items: { type: "string", enum: evidenceIds },
       minItems: 1,
-      maxItems: 1,
-      uniqueItems: true
+      maxItems: 1
     }
   }, ["text", "evidenceIds"]);
   const place = objectSchema({

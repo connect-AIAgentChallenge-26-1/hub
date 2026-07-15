@@ -185,9 +185,9 @@ describe("Local Split Live workflow gateway", () => {
     });
     expect(statements.items.properties.evidenceIds).toMatchObject({
       minItems: 1,
-      maxItems: 1,
-      uniqueItems: true
+      maxItems: 1
     });
+    expect(statements.items.properties.evidenceIds).not.toHaveProperty("uniqueItems");
     const reasonBody = calls[3]!.body!;
     expect(reasonBody).toContain("합성 카페");
     expect(reasonBody).not.toContain("검증 장소");
