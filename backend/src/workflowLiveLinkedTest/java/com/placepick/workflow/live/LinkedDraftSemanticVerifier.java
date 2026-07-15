@@ -5,6 +5,7 @@ import com.placepick.recommendation.condition.domain.DraftRecommendationConditio
 import com.placepick.recommendation.condition.domain.Preference;
 import java.text.Normalizer;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Set;
 
@@ -85,6 +86,16 @@ final class LinkedDraftSemanticVerifier {
         }
         if (allowlist.stream().anyMatch(normalized::contains)) {
             return "SEMANTIC_LOCATION_EMBEDDED_TOKEN";
+        }
+        String lower = normalized.toLowerCase(Locale.ROOT);
+        if (lower.equals("seoul")) {
+            return "SEMANTIC_LOCATION_TRANSLATED_EQUIVALENT";
+        }
+        if (lower.startsWith("seoul ") || lower.endsWith(" seoul")) {
+            return "SEMANTIC_LOCATION_TRANSLATED_EXTRA_TOKENS";
+        }
+        if (lower.contains("seoul")) {
+            return "SEMANTIC_LOCATION_TRANSLATED_EMBEDDED";
         }
         return "SEMANTIC_LOCATION_UNRELATED";
     }
