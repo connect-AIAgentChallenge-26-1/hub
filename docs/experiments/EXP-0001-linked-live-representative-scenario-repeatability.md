@@ -10,6 +10,7 @@ related:
   - ../work-records/WI-0042-naver-elice-linked-live-workflow.md
   - ../adr/ADR-0013-naver-elice-linked-live-boundary.md
   - ../runbooks/RUN-0004-recommendation-workflow-linked-live.md
+  - ../case-studies/CASE-0002-naver-elice-linked-live-user-flow.md
   - ../troubleshooting/TS-0016-linked-live-provider-error-flattening.md
   - ../troubleshooting/TS-0017-workerd-linked-live-outbound-transport.md
   - ../troubleshooting/TS-0018-elice-structured-output-unsupported-array-keyword.md

@@ -15,6 +15,7 @@
 ## 작업과 의사 결정
 
 - [CASE-0001 Java 17 기반 재현 가능한 Agentic 개발 환경 구축](case-studies/CASE-0001-agentic-development-environment.md)
+- [CASE-0002 실제 Naver→Elice 추천 핵심 워크플로 사용자 여정 검증](case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)
 - [WI-0001 Agentic 개발 환경 구축](work-records/WI-0001-agentic-development-environment.md)
 - [ADR-0001 Java 17 기술 기준](adr/ADR-0001-java17-baseline.md)
 - [ADR-0002 Compose와 Testcontainers의 책임 경계](adr/ADR-0002-compose-testcontainers-boundary.md)
