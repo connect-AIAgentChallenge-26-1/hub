@@ -74,7 +74,7 @@ status="$(curl --silent --output "${response_file}" --write-out '%{http_code}' \
   --header 'accept: application/json' \
   --header "authorization: Bearer ${local_token}" \
   --header 'content-type: application/json' \
-  --data '{"approvedSha":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","scenarioId":"seoul-cafe-complete-v1","fixtureVersion":1,"fixtureHash":"af0245449bbcb15d0fac9d1e847d29090bcca83617c6921226bf88ee712b7c58","scopeHash":"73b6d630cb24b9222e05b289822b11a64c2f23ad04acb09b5fe01accafe3b2d0"}' \
+  --data '{"approvedSha":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","scenarioId":"seoul-cafe-complete-v1","fixtureVersion":1,"fixtureHash":"44be4ffb2ac0b034f6c10d7d9d9c66ed7850bed4ce493e87296f211dd44636fd","scopeHash":"73b6d630cb24b9222e05b289822b11a64c2f23ad04acb09b5fe01accafe3b2d0"}' \
   "http://127.0.0.1:${port}/v1/probes/workflow-linked/start")"
 [[ "${status}" == '200' ]] || fail 'the Node Gateway rejected the synthetic start contract.'
 grep -Fq '"status":"ready"' "${response_file}" ||

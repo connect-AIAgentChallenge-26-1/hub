@@ -9,7 +9,10 @@ import com.placepick.recommendation.condition.application.port.out.ConditionWarn
 import com.placepick.recommendation.condition.domain.DraftRecommendationCondition;
 import com.placepick.recommendation.condition.domain.PlaceType;
 import com.placepick.recommendation.condition.domain.Preference;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.HashSet;
+import java.util.HexFormat;
 import java.util.List;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -30,6 +33,8 @@ class LinkedWorkflowScenarioTest {
             );
         assertThat(new HashSet<>(scenarios.stream()
             .map(LinkedWorkflowScenario::fixtureHash).toList())).hasSize(3);
+        scenarios.forEach(scenario -> assertThat(scenario.fixtureHash())
+            .isEqualTo(sha256(scenario.syntheticInput())));
 
         CandidateQueryPlanner planner = new CandidateQueryPlanner(new CategoryTaxonomy());
         for (LinkedWorkflowScenario scenario : scenarios) {
@@ -46,6 +51,15 @@ class LinkedWorkflowScenarioTest {
         assertThatThrownBy(() -> LinkedWorkflowScenario.require("unknown-v1"))
             .isInstanceOf(IllegalStateException.class)
             .hasMessageNotContaining("서울");
+    }
+
+    private static String sha256(String value) {
+        try {
+            return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256")
+                .digest(value.getBytes(StandardCharsets.UTF_8)));
+        } catch (java.security.NoSuchAlgorithmException exception) {
+            throw new IllegalStateException("SHA-256 is unavailable.", exception);
+        }
     }
 
     @Test
