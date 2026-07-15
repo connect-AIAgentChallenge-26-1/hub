@@ -16,17 +16,14 @@ import {
 import { naverPlainText } from "../shared/naver-html-text";
 import {
   LINKED_COMPLETE_PATH,
-  LINKED_INITIAL_QUERY,
   LINKED_MODEL,
-  LINKED_RELAXED_QUERY,
-  LINKED_SAFETY_IDENTIFIER,
   LINKED_START_PATH,
-  LINKED_SYNTHETIC_INPUT,
   hasExactKeys,
   parseLinkedComplete,
   parseLinkedStart,
   requireUuidV4,
-  type LinkedCompleteRequest
+  type LinkedCompleteRequest,
+  type LinkedScenario
 } from "./contract";
 
 const PROVIDER_RESPONSE_MAX_BYTES = 1024 * 1024;
@@ -108,6 +105,7 @@ interface BlogCapture {
 
 interface ActiveSession {
   approvedSha: string;
+  scenario: LinkedScenario;
   phase: Phase;
   providerCalls: number;
   localCalls: number;
@@ -191,6 +189,7 @@ export class LocalLinkedWorkflowGateway {
     requireEnvironment(env);
     this.activeSession = {
       approvedSha: start.approvedSha,
+      scenario: start.scenario,
       phase: "condition",
       providerCalls: 0,
       localCalls: 0,
@@ -201,7 +200,12 @@ export class LocalLinkedWorkflowGateway {
       reasonEvidenceCount: 0,
       inFlight: false
     };
-    return jsonResponse({ approvedSha: start.approvedSha, mode: "linked", status: "ready" });
+    return jsonResponse({
+      approvedSha: start.approvedSha,
+      scenarioId: start.scenarioId,
+      mode: "linked",
+      status: "ready"
+    });
   }
 
   private async complete(
@@ -225,6 +229,7 @@ export class LocalLinkedWorkflowGateway {
     session.phase = "complete";
     const summary = {
       approvedSha: session.approvedSha,
+      scenarioId: session.scenario.id,
       mode: "linked",
       linked: true,
       status: "passed",
@@ -251,9 +256,11 @@ export class LocalLinkedWorkflowGateway {
       throw invalidState();
     }
     const query = exactNaverQuery(url, 5);
+    const relaxedQuery = session.scenario.relaxedQuery;
     if (
-      (session.localCalls === 0 && query !== LINKED_INITIAL_QUERY) ||
-      (session.localCalls === 1 && query !== LINKED_RELAXED_QUERY) ||
+      (session.localCalls === 0 && query !== session.scenario.initialQuery) ||
+      (session.localCalls === 1 &&
+        (relaxedQuery === undefined || query !== relaxedQuery)) ||
       session.localCalls >= 2
     ) {
       throw new SecurityBoundaryError(
@@ -308,7 +315,11 @@ export class LocalLinkedWorkflowGateway {
       throw invalidState();
     }
     const query = exactNaverQuery(url, 3);
-    const candidateName = candidateForBlogQuery(query, session.localItems);
+    const candidateName = candidateForBlogQuery(
+      query,
+      session.localItems,
+      session.scenario.locationQuery
+    );
     const identity = comparable(candidateName);
     if (session.blogCaptures.has(identity)) {
       throw new SecurityBoundaryError(
@@ -363,12 +374,17 @@ export class LocalLinkedWorkflowGateway {
       if (responseFormatName(requestBody) === "placepick_reason_statements_v1") {
         throw invalidState();
       }
-      validateConditionRequest(requestBody, env.OPENAI_MODEL);
+      validateConditionRequest(requestBody, env.OPENAI_MODEL, session.scenario);
     } else {
       if (session.phase !== "blog" || session.blogCalls < MIN_BLOG_CALLS) {
         throw invalidState();
       }
-      reasonRequest = await validateReasonRequest(requestBody, session, env.OPENAI_MODEL);
+      reasonRequest = await validateReasonRequest(
+        requestBody,
+        session,
+        env.OPENAI_MODEL,
+        session.scenario
+      );
     }
 
     const started = now(dependencies);
@@ -492,6 +508,7 @@ export class LocalLinkedWorkflowGateway {
   ): void {
     if (
       completion.approvedSha !== session.approvedSha ||
+      completion.scenarioId !== session.scenario.id ||
       completion.resultCount !== 3 ||
       completion.placeSearchCalls !== session.localCalls ||
       completion.blogSearchCalls !== session.blogCalls ||
@@ -665,11 +682,14 @@ async function readCanonicalControlJson(
   const canonical = kind === "start"
     ? JSON.stringify({
         approvedSha: parsed.approvedSha,
+        scenarioId: parsed.scenarioId,
+        fixtureVersion: parsed.fixtureVersion,
         fixtureHash: parsed.fixtureHash,
         scopeHash: parsed.scopeHash
       })
     : JSON.stringify({
         approvedSha: parsed.approvedSha,
+        scenarioId: parsed.scenarioId,
         resultCount: parsed.resultCount,
         placeSearchCalls: parsed.placeSearchCalls,
         blogSearchCalls: parsed.blogSearchCalls,
@@ -800,15 +820,20 @@ function exactNaverQuery(url: URL, display: 3 | 5): string {
   return query;
 }
 
-function candidateForBlogQuery(query: string, localItems: NaverLocalItem[]): string {
-  if (!query.endsWith(" 서울")) {
+function candidateForBlogQuery(
+  query: string,
+  localItems: NaverLocalItem[],
+  locationQuery: string
+): string {
+  const suffix = ` ${locationQuery}`;
+  if (!query.endsWith(suffix)) {
     throw new SecurityBoundaryError(
       400,
       "LINKED_BLOG_QUERY_REJECTED",
       "Linked Live Blog query가 고정 계약과 일치하지 않습니다."
     );
   }
-  const candidate = query.slice(0, -3);
+  const candidate = query.slice(0, -suffix.length);
   const matched = localItems.find((item) => comparable(item.title) === comparable(candidate));
   if (candidate === "" || matched === undefined) {
     throw new SecurityBoundaryError(
@@ -820,15 +845,19 @@ function candidateForBlogQuery(query: string, localItems: NaverLocalItem[]): str
   return matched.title;
 }
 
-function validateConditionRequest(value: Record<string, unknown>, configuredModel: string | undefined): void {
+function validateConditionRequest(
+  value: Record<string, unknown>,
+  configuredModel: string | undefined,
+  scenario: LinkedScenario
+): void {
   if (!hasExactKeys(value, [
     "model", "messages", "stream", "store", "temperature",
     "max_completion_tokens", "safety_identifier", "response_format"
   ]) || value.model !== LINKED_MODEL || configuredModel !== LINKED_MODEL ||
     value.stream !== false || value.store !== false || value.temperature !== 0 ||
     value.max_completion_tokens !== 600 ||
-    value.safety_identifier !== LINKED_SAFETY_IDENTIFIER ||
-    !validMessages(value.messages, CONDITION_SYSTEM_MESSAGE, LINKED_SYNTHETIC_INPUT) ||
+    value.safety_identifier !== scenario.safetyIdentifier ||
+    !validMessages(value.messages, CONDITION_SYSTEM_MESSAGE, scenario.syntheticInput) ||
     !validConditionFormat(value.response_format)) {
     throw new SecurityBoundaryError(
       400,
@@ -841,7 +870,8 @@ function validateConditionRequest(value: Record<string, unknown>, configuredMode
 async function validateReasonRequest(
   value: Record<string, unknown>,
   session: ActiveSession,
-  configuredModel: string | undefined
+  configuredModel: string | undefined,
+  scenario: LinkedScenario
 ): Promise<ParsedReasonRequest> {
   if (!hasExactKeys(value, [
     "model", "messages", "stream", "store", "temperature",
@@ -867,7 +897,7 @@ async function validateReasonRequest(
     throw reasonRejected();
   }
   if (!isPlainObject(data) || !hasExactKeys(data, ["condition", "places"]) ||
-    !validConfirmedCondition(data.condition) || !Array.isArray(data.places) ||
+    !validConfirmedCondition(data.condition, scenario) || !Array.isArray(data.places) ||
     data.places.length !== 3) {
     throw reasonRejected();
   }
@@ -989,18 +1019,26 @@ function responseFormatName(value: Record<string, unknown>): string | undefined 
   return typeof format.json_schema.name === "string" ? format.json_schema.name : undefined;
 }
 
-function validConfirmedCondition(value: unknown): boolean {
+function validConfirmedCondition(value: unknown, scenario: LinkedScenario): boolean {
   if (!isPlainObject(value) || !hasExactKeys(value, [
     "locationQuery", "placeType", "placeTypeDetail", "preferences", "exclusions"
-  ]) || value.locationQuery !== "서울" || value.placeType !== "CAFE" ||
-    value.placeTypeDetail !== null || !Array.isArray(value.preferences) ||
-    value.preferences.length !== 1 || !Array.isArray(value.exclusions) ||
-    value.exclusions.length !== 1 || value.exclusions[0] !== "흡연") {
+  ]) || !Array.isArray(value.preferences) || !Array.isArray(value.exclusions)) {
     return false;
   }
-  const preference = value.preferences[0];
-  return isPlainObject(preference) && hasExactKeys(preference, ["value", "priority"]) &&
-    preference.value === "조용한" && preference.priority === 10;
+  const expected = scenario.confirmedCondition;
+  return value.locationQuery === expected.locationQuery &&
+    value.placeType === expected.placeType &&
+    value.placeTypeDetail === expected.placeTypeDetail &&
+    value.preferences.length === expected.preferences.length &&
+    value.preferences.every((preference, index) => {
+      const expectedPreference = expected.preferences[index];
+      return expectedPreference !== undefined && isPlainObject(preference) &&
+        hasExactKeys(preference, ["value", "priority"]) &&
+        preference.value === expectedPreference.value &&
+        preference.priority === expectedPreference.priority;
+    }) &&
+    value.exclusions.length === expected.exclusions.length &&
+    value.exclusions.every((exclusion, index) => exclusion === expected.exclusions[index]);
 }
 
 function validateReasonSchemaEnums(

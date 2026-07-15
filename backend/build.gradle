@@ -136,6 +136,21 @@ tasks.register('workflowLiveLinkedTest', Test) {
     maxParallelForks = 1
     outputs.upToDateWhen { false }
     outputs.cacheIf { false }
+    useJUnitPlatform {
+        includeTags 'live'
+    }
+}
+
+tasks.register('workflowLiveLinkedContractTest', Test) {
+    group = 'verification'
+    description = 'Runs secret-free linked workflow scenario and semantic boundary tests.'
+    testClassesDirs = sourceSets.workflowLiveLinkedTest.output.classesDirs
+    classpath = sourceSets.workflowLiveLinkedTest.runtimeClasspath
+    shouldRunAfter tasks.named('evalTest')
+    maxParallelForks = 1
+    useJUnitPlatform {
+        includeTags 'offline'
+    }
 }
 
 tasks.named('check') {
@@ -145,6 +160,7 @@ tasks.named('check') {
     dependsOn tasks.named('llmLiveContractTestClasses')
     dependsOn tasks.named('workflowLiveProbeTestClasses')
     dependsOn tasks.named('workflowLiveLinkedTestClasses')
+    dependsOn tasks.named('workflowLiveLinkedContractTest')
     dependsOn tasks.named('bootJar')
 }
 

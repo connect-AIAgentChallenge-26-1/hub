@@ -197,7 +197,7 @@ if [[ "${1:-}" == '--version' ]]; then
 fi
 {
   printf 'args=%s\n' "$*"
-  for name in PLACEPICK_EXTERNAL_MODE WORKFLOW_LINKED_GATEWAY_URL WORKFLOW_LINKED_CONTROL_TOKEN WORKFLOW_LINKED_NAVER_KEY_ID WORKFLOW_LINKED_NAVER_KEY WORKFLOW_LINKED_ELICE_TOKEN APPROVED_SHA NAVER_API_HUB_KEY_ID NAVER_API_HUB_KEY PROXY_TOKEN CHAT_PROXY_URL EMBEDDING_PROXY_URL OPENAI_MODEL OPENAI_EMBEDDING_MODEL; do
+  for name in PLACEPICK_EXTERNAL_MODE WORKFLOW_LINKED_GATEWAY_URL WORKFLOW_LINKED_CONTROL_TOKEN WORKFLOW_LINKED_NAVER_KEY_ID WORKFLOW_LINKED_NAVER_KEY WORKFLOW_LINKED_ELICE_TOKEN WORKFLOW_LINKED_SCENARIO APPROVED_SHA NAVER_API_HUB_KEY_ID NAVER_API_HUB_KEY PROXY_TOKEN CHAT_PROXY_URL EMBEDDING_PROXY_URL OPENAI_MODEL OPENAI_EMBEDDING_MODEL; do
     if [[ -v "${name}" ]]; then state=present; else state=absent; fi
     printf '%s=%s\n' "${name}" "${state}"
   done
@@ -208,7 +208,7 @@ mkdir -p backend/build/test-results/workflowLiveLinkedTest
 [[ "${FAKE_GRADLE_FAIL:-false}" != true ]] || exit 1
 [[ "${FAKE_GRADLE_MISSING_MARKER:-false}" != true ]] || exit 0
 printf '%s\n' \
-  'WORKFLOW_LINKED result=validated linked=true status=passed degraded=false reasonFallback=false callCount=8' \
+  "WORKFLOW_LINKED result=validated scenario=${WORKFLOW_LINKED_SCENARIO:-missing} linked=true status=passed degraded=false reasonFallback=false callCount=8" \
   > backend/build/test-results/workflowLiveLinkedTest/safe-output.txt
 case "${FAKE_REPORT_LEAK:-}" in
   credential) printf '%s\n' 'synthetic-secret-key' >> backend/build/test-results/workflowLiveLinkedTest/safe-output.txt ;;
@@ -248,6 +248,7 @@ common_env=(
   FAKE_GIT_COUNTER="${TEST_ROOT}/git-counter"
   FAKE_FIND_COUNTER="${TEST_ROOT}/find-counter"
   FAKE_NODE_GATEWAY="${TEST_ROOT}/node_modules/.bin/wrangler"
+  SCENARIO=seoul-cafe-complete-v1
 )
 
 expect_failure "CI execution is forbidden" \
@@ -285,7 +286,7 @@ development_output="$(
     APPROVED_SHA="${feature_sha}" bash "${TEST_ROOT}/scripts/workflow-live-linked.sh" 2>&1
 )" || fail "the reviewed development Live fixture failed."
 assert_fake_cleanup
-[[ "${development_output}" == *"WORKFLOW_LINKED mode=linked linked=true status=passed"* ]] ||
+[[ "${development_output}" == *"scenario=seoul-cafe-complete-v1 linked=true status=passed"* ]] ||
   fail "the development Live success marker was not produced."
 
 # 같은 pushed SHA의 수동 재실행은 허용하되 invocation마다 Gateway와 자격을 새로 만든다.
@@ -299,6 +300,9 @@ assert_fake_cleanup
 
 expect_failure "must be main or development" \
   "${common_env[@]}" WORKFLOW_LINKED_EXECUTION_POLICY=unknown \
+    APPROVED_SHA="${feature_sha}" bash "${TEST_ROOT}/scripts/workflow-live-linked.sh"
+expect_failure "SCENARIO must be an allowlisted" \
+  "${common_env[@]}" SCENARIO=unknown WORKFLOW_LINKED_EXECUTION_POLICY=development \
     APPROVED_SHA="${feature_sha}" bash "${TEST_ROOT}/scripts/workflow-live-linked.sh"
 git -C "${TEST_ROOT}" update-ref \
   refs/remotes/origin/feat/workflow-linked-live-validation "${head_sha}"
@@ -435,12 +439,12 @@ success_output="$(
     bash "${TEST_ROOT}/scripts/workflow-live-linked.sh" 2>&1
 )" || fail "the synthetic linked workflow success fixture failed."
 assert_fake_cleanup
-[[ "${success_output}" == *"WORKFLOW_LINKED mode=linked linked=true status=passed"* ]] ||
+[[ "${success_output}" == *"scenario=seoul-cafe-complete-v1 linked=true status=passed"* ]] ||
   fail "the synthetic linked workflow success marker was not produced."
 
 grep -Fxq 'args=:backend:workflowLiveLinkedTest --no-daemon' "${TEST_ROOT}/gradle-record" ||
   fail "the dedicated linked workflow Gradle task was not invoked."
-for name in PLACEPICK_EXTERNAL_MODE WORKFLOW_LINKED_GATEWAY_URL WORKFLOW_LINKED_CONTROL_TOKEN WORKFLOW_LINKED_NAVER_KEY_ID WORKFLOW_LINKED_NAVER_KEY WORKFLOW_LINKED_ELICE_TOKEN APPROVED_SHA; do
+for name in PLACEPICK_EXTERNAL_MODE WORKFLOW_LINKED_GATEWAY_URL WORKFLOW_LINKED_CONTROL_TOKEN WORKFLOW_LINKED_NAVER_KEY_ID WORKFLOW_LINKED_NAVER_KEY WORKFLOW_LINKED_ELICE_TOKEN WORKFLOW_LINKED_SCENARIO APPROVED_SHA; do
   grep -Fxq "${name}=present" "${TEST_ROOT}/gradle-record" ||
     fail "the Java linked workflow process missed ${name}."
 done

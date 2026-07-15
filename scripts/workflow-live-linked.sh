@@ -45,6 +45,11 @@ live_contract_assert_local_file "${ROOT_DIR}" "${LIVE_ENV_FILE}"
 approved_sha="${APPROVED_SHA:-}"
 [[ "${approved_sha}" =~ ^[0-9a-f]{40}$ ]] ||
   live_contract_fail "APPROVED_SHA must be an exact 40-character lowercase commit SHA."
+scenario="${SCENARIO:-}"
+case "${scenario}" in
+  seoul-cafe-complete-v1|seoul-restaurant-nullable-v1|seoul-cafe-dessert-v1) ;;
+  *) live_contract_fail "SCENARIO must be an allowlisted linked workflow scenario." ;;
+esac
 [[ "$(git -C "${ROOT_DIR}" rev-parse HEAD)" == "${approved_sha}" ]] ||
   live_contract_fail "APPROVED_SHA must exactly match HEAD."
 execution_policy="${WORKFLOW_LINKED_EXECUTION_POLICY:-main}"
@@ -239,6 +244,7 @@ env \
   WORKFLOW_LINKED_NAVER_KEY_ID="${local_naver_key_id}" \
   WORKFLOW_LINKED_NAVER_KEY="${local_naver_key}" \
   WORKFLOW_LINKED_ELICE_TOKEN="${local_elice_token}" \
+  WORKFLOW_LINKED_SCENARIO="${scenario}" \
   APPROVED_SHA="${approved_sha}" \
   ./gradlew :backend:workflowLiveLinkedTest --no-daemon
 gradle_status=$?
@@ -323,7 +329,11 @@ if evidence_contains_regex \
 fi
 for request_marker in \
   '서울에서 2명이 1인당 20000원 이하로 조용한 카페를 찾습니다.' \
+  '서울에서 음식점을 추천해 주세요.' \
+  '서울에서 디저트 카페를 찾습니다.' \
   '서울 카페 조용한' \
+  '서울 음식점' \
+  '서울 카페 디저트' \
   'You extract a draft venue recommendation condition.' \
   'Return grounded reason statements for exactly the supplied three place IDs.'; do
   if evidence_contains_fixed "${request_marker}"; then
@@ -340,7 +350,7 @@ done
 
 safe_call_count=''
 if (( gradle_status == 0 )); then
-  result_pattern='WORKFLOW_LINKED result=validated linked=true status=passed degraded=false reasonFallback=false callCount=[6-9]'
+  result_pattern="WORKFLOW_LINKED result=validated scenario=${scenario} linked=true status=passed degraded=false reasonFallback=false callCount=[6-9]"
   result_matches=()
   for evidence_file in "${evidence_files[@]}"; do
     set +e
@@ -371,8 +381,8 @@ cleanup
   live_contract_fail "the linked workflow temporary directory was not removed."
 
 if (( gradle_status == 0 )); then
-  printf 'WORKFLOW_LINKED mode=linked linked=true status=passed degraded=false reasonFallback=false callCount=%s cleanup=true\n' \
-    "${safe_call_count}"
+  printf 'WORKFLOW_LINKED mode=linked scenario=%s linked=true status=passed degraded=false reasonFallback=false callCount=%s cleanup=true\n' \
+    "${scenario}" "${safe_call_count}"
 fi
 
 exit "${gradle_status}"
