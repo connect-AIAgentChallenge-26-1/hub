@@ -1287,10 +1287,8 @@ exclusions. Preserve uncertainty as null or an empty list and return only the st
 schema. If no explicit 1-to-10 preference priority is supplied, return priority as null.
 Interpret "N or less" as a null minimum and N as the maximum. Preserve an exclusion as the
 excluded concept instead of rewriting it as an opposite attribute. Normalize a location to
-an administrative-area name without grammatical particles. A missing optional party size or
-budget never removes an explicitly supplied location or place type. For example, extract the
-location in a Korean phrase such as "서울에서" as "서울" even when party size and budget are unknown.
-Never add provider facts, place names, prices, or explanations.`;
+an administrative-area name without grammatical particles. Never add provider facts, place
+names, prices, or explanations.`;
 }
 
 function reasonSystemMessage(): string {
