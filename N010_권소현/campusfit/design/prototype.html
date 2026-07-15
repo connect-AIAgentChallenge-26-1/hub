@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>캠퍼스핏 — 프로토타입</title>
+<style>
+  :root{
+    --paper: oklch(1 0 0);
+    --surface: oklch(0.96 0.005 260);
+    --card: oklch(0.96 0.03 250);
+    --ink: oklch(0.2 0.01 260);
+    --ink-soft: oklch(0.4 0.01 260);
+    --ink-faint: oklch(0.55 0.01 260);
+    --line: oklch(0.9 0.005 260);
+    --line-strong: oklch(0.88 0.005 260);
+    --bulb: oklch(0.55 0.14 250);
+    --bulb-soft: oklch(0.96 0.03 250);
+    --bulb-ink: oklch(0.45 0.14 250);
+    --alert-soft: oklch(0.93 0.06 45);
+    --alert-ink: oklch(0.45 0.14 45);
+    --font-body:'Noto Sans KR','Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,BlinkMacSystemFont,sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper: oklch(0.19 0.006 260); --surface: oklch(0.26 0.008 260); --card: oklch(0.28 0.05 255);
+      --ink: oklch(0.94 0.005 260); --ink-soft: oklch(0.78 0.01 260); --ink-faint: oklch(0.62 0.01 260);
+      --line: oklch(0.32 0.008 260); --line-strong: oklch(0.38 0.008 260);
+      --bulb: oklch(0.75 0.13 255); --bulb-soft: oklch(0.28 0.05 255); --bulb-ink: oklch(0.82 0.1 255);
+      --alert-soft: oklch(0.32 0.07 45); --alert-ink: oklch(0.82 0.12 55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper: oklch(0.19 0.006 260); --surface: oklch(0.26 0.008 260); --card: oklch(0.28 0.05 255);
+    --ink: oklch(0.94 0.005 260); --ink-soft: oklch(0.78 0.01 260); --ink-faint: oklch(0.62 0.01 260);
+    --line: oklch(0.32 0.008 260); --line-strong: oklch(0.38 0.008 260);
+    --bulb: oklch(0.75 0.13 255); --bulb-soft: oklch(0.28 0.05 255); --bulb-ink: oklch(0.82 0.1 255);
+    --alert-soft: oklch(0.32 0.07 45); --alert-ink: oklch(0.82 0.12 55);
+  }
+  :root[data-theme="light"]{
+    --paper: oklch(1 0 0); --surface: oklch(0.96 0.005 260); --card: oklch(0.96 0.03 250);
+    --ink: oklch(0.2 0.01 260); --ink-soft: oklch(0.4 0.01 260); --ink-faint: oklch(0.55 0.01 260);
+    --line: oklch(0.9 0.005 260); --line-strong: oklch(0.88 0.005 260);
+    --bulb: oklch(0.55 0.14 250); --bulb-soft: oklch(0.96 0.03 250); --bulb-ink: oklch(0.45 0.14 250);
+    --alert-soft: oklch(0.93 0.06 45); --alert-ink: oklch(0.45 0.14 45);
+  }
+
+  *{box-sizing:border-box;}
+  body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--paper);}
+  input[type="radio"],input[type="checkbox"].toggle{position:absolute;opacity:0;pointer-events:none;}
+  a{text-decoration:none;color:inherit;}
+
+  .proto-banner{background:var(--surface);color:var(--ink-soft);font-size:12.5px;text-align:center;padding:8px 12px;}
+
+  /* ── 화면 전환 (라디오 트릭) — 라디오/체크박스를 header보다 앞, body 최상위에 둬서
+     header·aside 내비게이션 활성 상태까지 `~` 형제 선택자로 제어한다 ── */
+  .screen{display:none;}
+  #s-main:checked ~ #scr-main,
+  #s-cat-scholarship:checked ~ #scr-cat-scholarship,
+  #s-cat-contest:checked ~ #scr-cat-contest,
+  #s-cat-local:checked ~ #scr-cat-local,
+  #s-cat-activity:checked ~ #scr-cat-activity,
+  #s-cat-internship:checked ~ #scr-cat-internship,
+  #s-board-all:checked ~ #scr-board-all,
+  #s-board-contest1:checked ~ #scr-board-contest1,
+  #s-board-contest2:checked ~ #scr-board-contest2,
+  #s-post:checked ~ #scr-post,
+  #s-post2:checked ~ #scr-post2,
+  #s-applied:checked ~ #scr-applied,
+  #s-listing-sch-1:checked ~ #scr-listing-sch-1,
+  #s-listing-sch-2:checked ~ #scr-listing-sch-2,
+  #s-listing-sch-3:checked ~ #scr-listing-sch-3,
+  #s-listing-sch-4:checked ~ #scr-listing-sch-4,
+  #s-listing-sch-5:checked ~ #scr-listing-sch-5,
+  #s-listing-sch-6:checked ~ #scr-listing-sch-6,
+  #s-listing-con-1:checked ~ #scr-listing-con-1,
+  #s-listing-con-2:checked ~ #scr-listing-con-2,
+  #s-listing-con-3:checked ~ #scr-listing-con-3,
+  #s-listing-con-4:checked ~ #scr-listing-con-4,
+  #s-listing-con-5:checked ~ #scr-listing-con-5,
+  #s-listing-loc-1:checked ~ #scr-listing-loc-1,
+  #s-listing-loc-2:checked ~ #scr-listing-loc-2,
+  #s-listing-loc-3:checked ~ #scr-listing-loc-3,
+  #s-listing-loc-4:checked ~ #scr-listing-loc-4,
+  #s-listing-loc-5:checked ~ #scr-listing-loc-5,
+  #s-listing-act-1:checked ~ #scr-listing-act-1,
+  #s-listing-act-2:checked ~ #scr-listing-act-2,
+  #s-listing-act-3:checked ~ #scr-listing-act-3,
+  #s-listing-act-4:checked ~ #scr-listing-act-4,
+  #s-listing-act-5:checked ~ #scr-listing-act-5,
+  #s-listing-int-1:checked ~ #scr-listing-int-1,
+  #s-listing-int-2:checked ~ #scr-listing-int-2,
+  #s-listing-int-3:checked ~ #scr-listing-int-3,
+  #s-listing-int-4:checked ~ #scr-listing-int-4,
+  #s-listing-int-5:checked ~ #scr-listing-int-5{display:block;}
+
+  /* ── 상단 내비게이션 ── */
+  .topnav{position:sticky;top:0;z-index:20;background:color-mix(in oklab, var(--paper) 92%, transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line-strong);}
+  .topnav-inner{max-width:1160px;margin:0 auto;padding:18px 24px;display:flex;align-items:center;gap:36px;}
+  .topnav .logo{font-weight:800;font-size:20px;letter-spacing:-.02em;cursor:pointer;flex:0 0 auto;}
+  .nav-links{display:flex;gap:18px;flex:1 1 0;overflow-x:auto;}
+  .nav-links label{font-size:14px;font-weight:500;color:var(--ink-soft);cursor:pointer;white-space:nowrap;flex-shrink:0;}
+  .nav-links label:hover{color:var(--ink);}
+  .nav-links label.active{font-weight:700;color:var(--ink);}
+
+  /* 필터 드롭다운 — 체크박스 하나(#filter-toggle)를 header 버튼과 홈 히어로 CTA가 공유해서 연다 */
+  .filter-wrap{position:relative;flex:0 0 auto;}
+  .filter-btn{font:500 13px var(--font-body);background:var(--surface);border:1px solid var(--line-strong);color:var(--ink);border-radius:999px;padding:8px 16px;cursor:pointer;display:flex;align-items:center;gap:6px;white-space:nowrap;}
+  .filter-btn .chev{font-size:10px;opacity:.6;}
+  .filter-scrim{position:fixed;inset:0;z-index:19;display:none;}
+  #filter-toggle:checked ~ .topnav .filter-scrim{display:block;}
+  .filter-dd{position:absolute;right:0;top:calc(100% + 8px);width:340px;background:var(--paper);border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.14);padding:18px;z-index:21;display:none;}
+  #filter-toggle:checked ~ .topnav .filter-dd{display:block;}
+  .filter-label{font-size:12px;color:var(--ink-faint);margin:0 0 8px;}
+  .filter-note{font-weight:400;}
+  .chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+  .chip-row.scroll{max-height:180px;overflow-y:auto;gap:6px;}
+  .chip{font-size:13px;padding:6px 12px;border-radius:999px;cursor:pointer;white-space:nowrap;flex-shrink:0;border:1px solid var(--line-strong);background:var(--paper);color:var(--ink-soft);display:inline-block;}
+  .chip.sm{font-size:12.5px;padding:6px 11px;}
+  .filter-apply{width:100%;margin-top:2px;font:600 14px var(--font-body);background:var(--ink);color:var(--paper);border:none;border-radius:8px;padding:11px;cursor:pointer;}
+
+  /* 필터 칩 선택 상태 — .filter-dd는 body 직속이 아니라 .topnav 안에 중첩돼 있으므로
+     `~ .topnav .filter-dd`로 조상까지 포함해서 참조해야 한다 */
+  #f-univ-all:checked ~ .topnav .filter-dd label[for="f-univ-all"],
+  #f-univ-nat:checked ~ .topnav .filter-dd label[for="f-univ-nat"],
+  #f-univ-priv:checked ~ .topnav .filter-dd label[for="f-univ-priv"],
+  #f-grade-all:checked ~ .topnav .filter-dd label[for="f-grade-all"],
+  #f-grade-1:checked ~ .topnav .filter-dd label[for="f-grade-1"],
+  #f-grade-2:checked ~ .topnav .filter-dd label[for="f-grade-2"],
+  #f-grade-3:checked ~ .topnav .filter-dd label[for="f-grade-3"],
+  #f-grade-4:checked ~ .topnav .filter-dd label[for="f-grade-4"],
+  #f-region-all:checked ~ .topnav .filter-dd label[for="f-region-all"],
+  #f-region-seoul:checked ~ .topnav .filter-dd label[for="f-region-seoul"],
+  #f-region-busan:checked ~ .topnav .filter-dd label[for="f-region-busan"],
+  #f-region-daegu:checked ~ .topnav .filter-dd label[for="f-region-daegu"],
+  #f-region-incheon:checked ~ .topnav .filter-dd label[for="f-region-incheon"],
+  #f-region-gwangju:checked ~ .topnav .filter-dd label[for="f-region-gwangju"],
+  #f-region-daejeon:checked ~ .topnav .filter-dd label[for="f-region-daejeon"],
+  #f-region-ulsan:checked ~ .topnav .filter-dd label[for="f-region-ulsan"],
+  #f-region-sejong:checked ~ .topnav .filter-dd label[for="f-region-sejong"],
+  #f-region-gyeonggi:checked ~ .topnav .filter-dd label[for="f-region-gyeonggi"],
+  #f-region-gangwon:checked ~ .topnav .filter-dd label[for="f-region-gangwon"],
+  #f-region-chungbuk:checked ~ .topnav .filter-dd label[for="f-region-chungbuk"],
+  #f-region-chungnam:checked ~ .topnav .filter-dd label[for="f-region-chungnam"],
+  #f-region-jeonbuk:checked ~ .topnav .filter-dd label[for="f-region-jeonbuk"],
+  #f-region-jeonnam:checked ~ .topnav .filter-dd label[for="f-region-jeonnam"],
+  #f-region-gyeongbuk:checked ~ .topnav .filter-dd label[for="f-region-gyeongbuk"],
+  #f-region-gyeongnam:checked ~ .topnav .filter-dd label[for="f-region-gyeongnam"],
+  #f-region-jeju:checked ~ .topnav .filter-dd label[for="f-region-jeju"]{
+    border-color:var(--bulb);background:var(--bulb-soft);color:var(--bulb-ink);font-weight:600;
+  }
+
+  /* 필터 요약 문구 — 헤더 버튼과 각 카테고리 페이지 pill이 공유하는 .filter-summary 안에서
+     그룹(대학유형/지역/학년)별로 선택된 라벨 하나씩만 보이게 한다. .topnav와 .screen이 전부
+     라디오와 body 직속 형제라 `:is(.topnav,.screen)`로 두 위치를 한 번에 참조할 수 있다. */
+  .filter-summary .opt{display:none;}
+  .filter-summary .sep{color:var(--ink-faint);}
+  #f-univ-all:checked ~ :is(.topnav,.screen) .filter-summary .opt.u-all,
+  #f-univ-nat:checked ~ :is(.topnav,.screen) .filter-summary .opt.u-nat,
+  #f-univ-priv:checked ~ :is(.topnav,.screen) .filter-summary .opt.u-priv,
+  #f-region-all:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-all,
+  #f-region-seoul:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-seoul,
+  #f-region-busan:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-busan,
+  #f-region-daegu:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-daegu,
+  #f-region-incheon:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-incheon,
+  #f-region-gwangju:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-gwangju,
+  #f-region-daejeon:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-daejeon,
+  #f-region-ulsan:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-ulsan,
+  #f-region-sejong:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-sejong,
+  #f-region-gyeonggi:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-gyeonggi,
+  #f-region-gangwon:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-gangwon,
+  #f-region-chungbuk:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-chungbuk,
+  #f-region-chungnam:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-chungnam,
+  #f-region-jeonbuk:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-jeonbuk,
+  #f-region-jeonnam:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-jeonnam,
+  #f-region-gyeongbuk:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-gyeongbuk,
+  #f-region-gyeongnam:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-gyeongnam,
+  #f-region-jeju:checked ~ :is(.topnav,.screen) .filter-summary .opt.r-jeju,
+  #f-grade-all:checked ~ :is(.topnav,.screen) .filter-summary .opt.g-all,
+  #f-grade-1:checked ~ :is(.topnav,.screen) .filter-summary .opt.g-1,
+  #f-grade-2:checked ~ :is(.topnav,.screen) .filter-summary .opt.g-2,
+  #f-grade-3:checked ~ :is(.topnav,.screen) .filter-summary .opt.g-3,
+  #f-grade-4:checked ~ :is(.topnav,.screen) .filter-summary .opt.g-4{
+    display:inline;
+  }
+
+  /* 필터 조건 실제 적용 — 공고마다 실제 대상 지역/학년과 다른 값이 선택되면 목록에서 숨긴다.
+     조건이 없는(전체 대상) 공고는 어떤 필터에도 항상 남는다. */
+  #f-region-busan:checked ~ .screen .reg-seoul-only,
+  #f-region-daegu:checked ~ .screen .reg-seoul-only,
+  #f-region-incheon:checked ~ .screen .reg-seoul-only,
+  #f-region-gwangju:checked ~ .screen .reg-seoul-only,
+  #f-region-daejeon:checked ~ .screen .reg-seoul-only,
+  #f-region-ulsan:checked ~ .screen .reg-seoul-only,
+  #f-region-sejong:checked ~ .screen .reg-seoul-only,
+  #f-region-gyeonggi:checked ~ .screen .reg-seoul-only,
+  #f-region-gangwon:checked ~ .screen .reg-seoul-only,
+  #f-region-chungbuk:checked ~ .screen .reg-seoul-only,
+  #f-region-chungnam:checked ~ .screen .reg-seoul-only,
+  #f-region-jeonbuk:checked ~ .screen .reg-seoul-only,
+  #f-region-jeonnam:checked ~ .screen .reg-seoul-only,
+  #f-region-gyeongbuk:checked ~ .screen .reg-seoul-only,
+  #f-region-gyeongnam:checked ~ .screen .reg-seoul-only,
+  #f-region-jeju:checked ~ .screen .reg-seoul-only,
+
+  #f-region-busan:checked ~ .screen .reg-seoul-gg,
+  #f-region-daegu:checked ~ .screen .reg-seoul-gg,
+  #f-region-incheon:checked ~ .screen .reg-seoul-gg,
+  #f-region-gwangju:checked ~ .screen .reg-seoul-gg,
+  #f-region-daejeon:checked ~ .screen .reg-seoul-gg,
+  #f-region-ulsan:checked ~ .screen .reg-seoul-gg,
+  #f-region-sejong:checked ~ .screen .reg-seoul-gg,
+  #f-region-gangwon:checked ~ .screen .reg-seoul-gg,
+  #f-region-chungbuk:checked ~ .screen .reg-seoul-gg,
+  #f-region-chungnam:checked ~ .screen .reg-seoul-gg,
+  #f-region-jeonbuk:checked ~ .screen .reg-seoul-gg,
+  #f-region-jeonnam:checked ~ .screen .reg-seoul-gg,
+  #f-region-gyeongbuk:checked ~ .screen .reg-seoul-gg,
+  #f-region-gyeongnam:checked ~ .screen .reg-seoul-gg,
+  #f-region-jeju:checked ~ .screen .reg-seoul-gg,
+
+  #f-grade-1:checked ~ .screen .grade-2to4,
+  #f-grade-1:checked ~ .screen .grade-3to4,
+  #f-grade-2:checked ~ .screen .grade-3to4{
+    display:none;
+  }
+
+  /* ── 공용 레이아웃 ── */
+  .shell{max-width:1160px;margin:0 auto;padding:0 24px;}
+  .divider-list{border-top:1px solid var(--line);}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 4px;border-bottom:1px solid var(--line);cursor:pointer;}
+  .row:hover{background:var(--surface);}
+  .row .main{flex:1 1 0;min-width:0;}
+  .row .top-line{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;}
+  .row .tag{font-size:11px;color:var(--bulb-ink);font-weight:600;flex-shrink:0;}
+  .row .title{font-size:15px;font-weight:500;}
+  .row .desc{font-size:13px;color:var(--ink-faint);}
+  .pill-alert{font-size:12px;font-weight:600;background:var(--alert-soft);color:var(--alert-ink);padding:4px 11px;border-radius:999px;white-space:nowrap;flex-shrink:0;}
+  .pill-neutral{font-size:12px;font-weight:600;background:var(--surface);color:var(--ink-soft);padding:4px 11px;border-radius:999px;white-space:nowrap;flex-shrink:0;}
+  .pill-team{font-size:11px;font-weight:600;background:var(--bulb-soft);color:var(--bulb-ink);padding:3px 9px;border-radius:999px;white-space:nowrap;}
+
+  .btn-primary{display:inline-block;text-align:center;font:600 14px var(--font-body);background:var(--ink);color:var(--paper);border:none;border-radius:8px;padding:13px 22px;cursor:pointer;}
+  .btn-outline{display:block;text-align:center;font:600 14px var(--font-body);border:1px solid var(--line-strong);background:var(--paper);color:var(--ink);border-radius:8px;padding:14px;cursor:pointer;}
+  .btn-accent{display:block;width:100%;text-align:center;font:600 14px var(--font-body);background:var(--bulb);color:#fff;border:none;border-radius:8px;padding:14px;cursor:pointer;}
+  .btn-team{display:block;width:100%;text-align:center;font:600 14px var(--font-body);background:var(--bulb-soft);color:var(--bulb-ink);border:none;border-radius:8px;padding:14px;cursor:pointer;margin-top:12px;}
+
+  .crumb{font-size:13px;color:var(--ink-faint);margin-bottom:14px;}
+  .crumb label{cursor:pointer;}
+  .crumb label:hover{color:var(--ink);}
+
+  /* ── 홈 화면 ── */
+  .hero{padding:88px 24px 64px;display:grid;grid-template-columns:1.3fr 1fr;gap:64px;align-items:start;}
+  .eyebrow{font:600 12px var(--font-body);letter-spacing:.12em;color:var(--bulb-ink);margin-bottom:18px;}
+  .hero h1{font-weight:800;font-size:46px;line-height:1.2;letter-spacing:-.03em;margin:0 0 22px;}
+  .hero p{font-size:16px;line-height:1.75;color:var(--ink-soft);max-width:520px;margin:0 0 28px;}
+  .stat-col{border-left:1px solid var(--line);padding-left:36px;display:flex;flex-direction:column;gap:22px;}
+  .stat-num{font-weight:800;font-size:32px;letter-spacing:-.02em;}
+  .stat-label{font-size:13px;color:var(--ink-faint);}
+  .section{padding:0 24px 64px;}
+  .section:last-of-type{padding-bottom:96px;}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;}
+  .section-head h2{font-size:15px;font-weight:700;margin:0;}
+  .section-head .note{font-size:12px;color:var(--ink-soft);}
+  .cat-row{display:flex;align-items:center;justify-content:space-between;padding:22px 4px;border-bottom:1px solid var(--line);cursor:pointer;}
+  .cat-row:hover{background:var(--surface);}
+  .cat-row .name{font-size:17px;font-weight:600;margin-bottom:4px;}
+  .cat-row .desc{font-size:13px;color:var(--ink-faint);}
+  .cat-row .meta{display:flex;align-items:center;gap:14px;flex:0 0 auto;font-size:13px;color:var(--ink-faint);}
+  .cat-row .arrow{color:var(--ink-faint);}
+
+  /* ── 카테고리 목록 화면 (사이드바 + 목록) ── */
+  .cat-layout{padding:40px 24px 96px;display:grid;grid-template-columns:220px 1fr;gap:56px;}
+  .cat-aside .aside-label{font-size:12px;color:var(--ink-faint);margin-bottom:12px;}
+  .cat-aside label{display:block;font-size:14px;padding:9px 0;cursor:pointer;font-weight:400;color:var(--ink-soft);}
+  .cat-aside label:hover{color:var(--ink);}
+  .cat-aside label.active{font-weight:700;color:var(--bulb-ink);}
+  .cat-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+  .cat-head h1{font-weight:800;font-size:32px;letter-spacing:-.02em;margin:0;}
+  .cat-head .filter-pill{font-size:12px;background:var(--surface);border:1px solid var(--line-strong);border-radius:999px;padding:5px 12px;color:var(--ink-soft);white-space:nowrap;flex-shrink:0;}
+  .cat-sub{font-size:14px;color:var(--ink-faint);margin:0 0 32px;}
+
+  /* ── 리스팅/게시글 상세 (단일 컬럼) ── */
+  .detail{max-width:760px;margin:0 auto;padding:48px 24px 96px;}
+  .detail-meta{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap;}
+  .detail-meta .cat{font-size:12px;color:var(--bulb-ink);font-weight:600;}
+  .detail h1{font-weight:800;font-size:34px;letter-spacing:-.02em;line-height:1.3;margin:0 0 24px;}
+  .detail .thumb{width:100%;aspect-ratio:1/1;margin:0 0 32px;border-radius:16px;background:var(--surface);border:1px dashed var(--line-strong);display:flex;align-items:center;justify-content:center;color:var(--ink-faint);font-size:13px;}
+  .detail .body-txt{font-size:15px;line-height:1.85;color:var(--ink-soft);margin:0 0 32px;}
+  .info-box{border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:32px;}
+  .info-box .info-title{font-size:13px;font-weight:700;margin-bottom:14px;}
+  .info-row{display:flex;gap:16px;padding:9px 0;border-top:1px solid var(--line);}
+  .info-row:first-of-type{border-top:none;}
+  .info-row .k{width:84px;flex:0 0 auto;font-size:13px;color:var(--ink-faint);}
+  .info-row .v{font-size:13.5px;color:var(--ink);}
+
+  /* ── 팀원모집 게시판 ── */
+  .board-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+  .post-card{display:block;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:10px;cursor:pointer;}
+  .post-card:hover{border-color:var(--bulb);}
+  .post-card .top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px;}
+  .post-card .title{font-size:15px;font-weight:600;}
+  .post-card .meta{font-size:12.5px;color:var(--ink-faint);margin-top:4px;}
+
+  .apply-box{background:var(--bulb-soft);border-radius:12px;padding:20px;margin-bottom:32px;}
+  .apply-box .label{font-size:12px;color:var(--bulb-ink);margin-bottom:10px;}
+  .comment-head{font-size:14px;font-weight:700;margin-bottom:14px;}
+  .comment{padding:16px 2px;border-bottom:1px solid var(--line);}
+  .comment:first-of-type{border-top:1px solid var(--line);}
+  .comment .who{font-size:13px;font-weight:600;margin-bottom:4px;}
+  .comment .txt{font-size:14px;color:var(--ink-soft);}
+  textarea{width:100%;margin-top:18px;border:1px solid var(--line-strong);border-radius:10px;padding:12px 14px;font-family:var(--font-body);font-size:14px;color:var(--ink);resize:none;min-height:56px;background:var(--paper);}
+
+  .center-msg{max-width:480px;margin:0 auto;text-align:center;padding:96px 24px 48px;}
+  .center-msg .icon{width:52px;height:52px;border-radius:50%;background:var(--bulb-soft);color:var(--bulb-ink);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:22px;font-weight:700;}
+  .center-msg h1{font-weight:800;font-size:26px;margin:0 0 10px;}
+  .center-msg p{font-size:14px;color:var(--ink-soft);line-height:1.6;}
+
+  footer{border-top:1px solid var(--line);padding:36px 24px;}
+  footer .inner{max-width:1160px;margin:0 auto;display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  footer .brand{font-weight:800;font-size:14px;}
+  footer .note{font-size:12px;color:var(--ink-faint);}
+
+  @media (max-width:860px){
+    .nav-links{display:none;}
+    .hero{grid-template-columns:1fr;gap:32px;padding:56px 24px 40px;}
+    .stat-col{border-left:none;border-top:1px solid var(--line);padding-left:0;padding-top:24px;flex-direction:row;gap:32px;}
+    .cat-layout{grid-template-columns:1fr;gap:24px;}
+    .cat-aside{display:flex;gap:16px;overflow-x:auto;padding-bottom:8px;}
+    .cat-aside .aside-label{display:none;}
+    .cat-aside label{white-space:nowrap;padding:6px 0;}
+  }
+</style>
+</head>
+<body>
+
+<div class="proto-banner">클릭해서 둘러보는 프로토타입입니다. 실제 데이터는 연결되어 있지 않아요.</div>
+
+<input type="checkbox" id="filter-toggle" class="toggle">
+<input type="radio" name="step" id="s-main" checked>
+<input type="radio" name="step" id="s-cat-scholarship">
+<input type="radio" name="step" id="s-cat-contest">
+<input type="radio" name="step" id="s-cat-local">
+<input type="radio" name="step" id="s-cat-activity">
+<input type="radio" name="step" id="s-cat-internship">
+<input type="radio" name="step" id="s-board-all">
+<input type="radio" name="step" id="s-board-contest1">
+<input type="radio" name="step" id="s-board-contest2">
+<input type="radio" name="step" id="s-post">
+<input type="radio" name="step" id="s-post2">
+<input type="radio" name="step" id="s-applied">
+<input type="radio" name="step" id="s-listing-sch-1">
+<input type="radio" name="step" id="s-listing-sch-2">
+<input type="radio" name="step" id="s-listing-sch-3">
+<input type="radio" name="step" id="s-listing-sch-4">
+<input type="radio" name="step" id="s-listing-sch-5">
+<input type="radio" name="step" id="s-listing-sch-6">
+<input type="radio" name="step" id="s-listing-con-1">
+<input type="radio" name="step" id="s-listing-con-2">
+<input type="radio" name="step" id="s-listing-con-3">
+<input type="radio" name="step" id="s-listing-con-4">
+<input type="radio" name="step" id="s-listing-con-5">
+<input type="radio" name="step" id="s-listing-loc-1">
+<input type="radio" name="step" id="s-listing-loc-2">
+<input type="radio" name="step" id="s-listing-loc-3">
+<input type="radio" name="step" id="s-listing-loc-4">
+<input type="radio" name="step" id="s-listing-loc-5">
+<input type="radio" name="step" id="s-listing-act-1">
+<input type="radio" name="step" id="s-listing-act-2">
+<input type="radio" name="step" id="s-listing-act-3">
+<input type="radio" name="step" id="s-listing-act-4">
+<input type="radio" name="step" id="s-listing-act-5">
+<input type="radio" name="step" id="s-listing-int-1">
+<input type="radio" name="step" id="s-listing-int-2">
+<input type="radio" name="step" id="s-listing-int-3">
+<input type="radio" name="step" id="s-listing-int-4">
+<input type="radio" name="step" id="s-listing-int-5">
+
+<input type="radio" name="f-univ" id="f-univ-all" checked>
+<input type="radio" name="f-univ" id="f-univ-nat">
+<input type="radio" name="f-univ" id="f-univ-priv">
+<input type="radio" name="f-region" id="f-region-all" checked>
+<input type="radio" name="f-region" id="f-region-seoul">
+<input type="radio" name="f-region" id="f-region-busan">
+<input type="radio" name="f-region" id="f-region-daegu">
+<input type="radio" name="f-region" id="f-region-incheon">
+<input type="radio" name="f-region" id="f-region-gwangju">
+<input type="radio" name="f-region" id="f-region-daejeon">
+<input type="radio" name="f-region" id="f-region-ulsan">
+<input type="radio" name="f-region" id="f-region-sejong">
+<input type="radio" name="f-region" id="f-region-gyeonggi">
+<input type="radio" name="f-region" id="f-region-gangwon">
+<input type="radio" name="f-region" id="f-region-chungbuk">
+<input type="radio" name="f-region" id="f-region-chungnam">
+<input type="radio" name="f-region" id="f-region-jeonbuk">
+<input type="radio" name="f-region" id="f-region-jeonnam">
+<input type="radio" name="f-region" id="f-region-gyeongbuk">
+<input type="radio" name="f-region" id="f-region-gyeongnam">
+<input type="radio" name="f-region" id="f-region-jeju">
+<input type="radio" name="f-grade" id="f-grade-all" checked>
+<input type="radio" name="f-grade" id="f-grade-1">
+<input type="radio" name="f-grade" id="f-grade-2">
+<input type="radio" name="f-grade" id="f-grade-3">
+<input type="radio" name="f-grade" id="f-grade-4">
+
+<header class="topnav">
+  <div class="topnav-inner">
+    <label class="logo" for="s-main">캠퍼스핏</label>
+    <nav class="nav-links">
+      <label for="s-main" class="nav-home">홈</label>
+      <label for="s-cat-scholarship" class="nav-scholarship">장학금</label>
+      <label for="s-cat-contest" class="nav-contest">공모전</label>
+      <label for="s-cat-local" class="nav-local">지자체 혜택</label>
+      <label for="s-cat-activity" class="nav-activity">대외활동</label>
+      <label for="s-cat-internship" class="nav-internship">인턴십</label>
+      <label for="s-board-all" class="nav-board">팀원모집</label>
+    </nav>
+    <div class="filter-wrap">
+      <label class="filter-btn" for="filter-toggle"><span class="filter-summary"><span class="opt u-all">전체</span><span class="opt u-nat">국립대</span><span class="opt u-priv">사립대</span><span class="sep"> · </span><span class="opt r-all">전체</span><span class="opt r-seoul">서울</span><span class="opt r-busan">부산</span><span class="opt r-daegu">대구</span><span class="opt r-incheon">인천</span><span class="opt r-gwangju">광주</span><span class="opt r-daejeon">대전</span><span class="opt r-ulsan">울산</span><span class="opt r-sejong">세종</span><span class="opt r-gyeonggi">경기</span><span class="opt r-gangwon">강원</span><span class="opt r-chungbuk">충북</span><span class="opt r-chungnam">충남</span><span class="opt r-jeonbuk">전북</span><span class="opt r-jeonnam">전남</span><span class="opt r-gyeongbuk">경북</span><span class="opt r-gyeongnam">경남</span><span class="opt r-jeju">제주</span><span class="sep"> · </span><span class="opt g-all">전체 학년</span><span class="opt g-1">1학년</span><span class="opt g-2">2학년</span><span class="opt g-3">3학년</span><span class="opt g-4">4학년</span></span><span class="chev">▾</span></label>
+      <label class="filter-scrim" for="filter-toggle"></label>
+      <div class="filter-dd">
+        <p class="filter-label">설립 유형</p>
+        <div class="chip-row">
+          <label class="chip" for="f-univ-all">전체</label>
+          <label class="chip" for="f-univ-nat">국립대</label>
+          <label class="chip" for="f-univ-priv">사립대</label>
+        </div>
+        <p class="filter-label">지역 <span class="filter-note">— 재학 학교 소재지 기준</span></p>
+        <div class="chip-row scroll">
+          <label class="chip sm" for="f-region-all">전체</label>
+          <label class="chip sm" for="f-region-seoul">서울</label>
+          <label class="chip sm" for="f-region-busan">부산</label>
+          <label class="chip sm" for="f-region-daegu">대구</label>
+          <label class="chip sm" for="f-region-incheon">인천</label>
+          <label class="chip sm" for="f-region-gwangju">광주</label>
+          <label class="chip sm" for="f-region-daejeon">대전</label>
+          <label class="chip sm" for="f-region-ulsan">울산</label>
+          <label class="chip sm" for="f-region-sejong">세종</label>
+          <label class="chip sm" for="f-region-gyeonggi">경기</label>
+          <label class="chip sm" for="f-region-gangwon">강원</label>
+          <label class="chip sm" for="f-region-chungbuk">충북</label>
+          <label class="chip sm" for="f-region-chungnam">충남</label>
+          <label class="chip sm" for="f-region-jeonbuk">전북</label>
+          <label class="chip sm" for="f-region-jeonnam">전남</label>
+          <label class="chip sm" for="f-region-gyeongbuk">경북</label>
+          <label class="chip sm" for="f-region-gyeongnam">경남</label>
+          <label class="chip sm" for="f-region-jeju">제주</label>
+        </div>
+        <p class="filter-label">학년 <span class="filter-note">— 학년 조건이 있는 공고에만 적용돼요</span></p>
+        <div class="chip-row">
+          <label class="chip" for="f-grade-all">전체</label>
+          <label class="chip" for="f-grade-1">1학년</label>
+          <label class="chip" for="f-grade-2">2학년</label>
+          <label class="chip" for="f-grade-3">3학년</label>
+          <label class="chip" for="f-grade-4">4학년</label>
+        </div>
+        <label class="filter-apply" for="filter-toggle">확인</label>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════ 홈 ══════════ -->
+<section class="screen" id="scr-main">
+  <div class="hero shell">
+    <div>
+      <p class="eyebrow">CAMPUS INFO PLATFORM</p>
+      <h1>흩어진 정보 중,<br>내게 필요한 것만.</h1>
+      <p>장학금·공모전·지자체 혜택·대외활동·인턴십. 학과 네트워크가 없어도 괜찮아요 — 국립/사립과 지역만 알려주시면, 지원 자격이 되는 것만 걸러서 보여드려요.</p>
+      <label class="btn-primary" for="filter-toggle">필터 설정하고 보기</label>
+    </div>
+    <div class="stat-col">
+      <div><div class="stat-num">5개</div><div class="stat-label">카테고리</div></div>
+      <div><div class="stat-num">26건</div><div class="stat-label">등록된 정보</div></div>
+      <div><div class="stat-num">3건</div><div class="stat-label">팀원모집 중</div></div>
+    </div>
+  </div>
+
+  <div class="section shell">
+    <div class="section-head"><h2>마감 임박</h2><span class="note">7일 이내</span></div>
+    <div class="divider-list">
+      <label class="row" for="s-listing-sch-1">
+        <div class="main"><div class="top-line"><span class="tag">장학금</span><span class="title">국가장학금 2차</span></div><div class="desc">소득분위 기준</div></div>
+        <span class="pill-alert">D-3</span>
+      </label>
+      <label class="row" for="s-listing-con-1">
+        <div class="main"><div class="top-line"><span class="tag">공모전</span><span class="title">청년 아이디어 공모전</span></div><div class="desc">팀 단위 지원 · 3인 이내</div></div>
+        <span class="pill-alert">D-3</span>
+      </label>
+      <label class="row" for="s-listing-act-1">
+        <div class="main"><div class="top-line"><span class="tag">대외활동</span><span class="title">대학생 서포터즈 14기</span></div><div class="desc">전국 대학생</div></div>
+        <span class="pill-alert">D-4</span>
+      </label>
+      <label class="row reg-seoul-only" for="s-listing-loc-1" style="border-bottom:none;">
+        <div class="main"><div class="top-line"><span class="tag">지자체 혜택</span><span class="title">청년 월세 지원</span></div><div class="desc">서울 거주 무주택 청년</div></div>
+        <span class="pill-alert">D-5</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="section shell">
+    <div class="section-head"><h2>카테고리별로 보기</h2></div>
+    <div class="divider-list">
+      <label class="cat-row" for="s-cat-scholarship">
+        <div><div class="name">장학금</div><div class="desc">국가·교내 장학금 모아보기</div></div>
+        <div class="meta"><span>6건</span><span class="arrow">→</span></div>
+      </label>
+      <label class="cat-row" for="s-cat-contest">
+        <div><div class="name">공모전</div><div class="desc">팀 단위 공모전, 팀원모집까지</div></div>
+        <div class="meta"><span>5건</span><span class="arrow">→</span></div>
+      </label>
+      <label class="cat-row" for="s-cat-local">
+        <div><div class="name">지자체 혜택</div><div class="desc">거주·소속 지역 혜택 확인</div></div>
+        <div class="meta"><span>5건</span><span class="arrow">→</span></div>
+      </label>
+      <label class="cat-row" for="s-cat-activity">
+        <div><div class="name">대외활동</div><div class="desc">서포터즈·홍보대사 모집 정보</div></div>
+        <div class="meta"><span>5건</span><span class="arrow">→</span></div>
+      </label>
+      <label class="cat-row" for="s-cat-internship" style="border-bottom:none;">
+        <div><div class="name">인턴십</div><div class="desc">공공·민간 인턴십 채용 공고</div></div>
+        <div class="meta"><span>5건</span><span class="arrow">→</span></div>
+      </label>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 카테고리: 장학금 ══════════ -->
+<section class="screen" id="scr-cat-scholarship">
+  <div class="cat-layout shell">
+    <aside class="cat-aside">
+      <p class="aside-label">카테고리</p>
+      <label class="active" for="s-cat-scholarship">장학금</label>
+      <label for="s-cat-contest">공모전</label>
+      <label for="s-cat-local">지자체 혜택</label>
+      <label for="s-cat-activity">대외활동</label>
+      <label for="s-cat-internship">인턴십</label>
+      <label for="s-board-all">팀원모집</label>
+    </aside>
+    <div>
+      <p class="crumb"><label for="s-main">홈</label> / 장학금</p>
+      <div class="cat-head"><h1>장학금</h1><span class="filter-pill"><span class="filter-summary"><span class="opt u-all">전체</span><span class="opt u-nat">국립대</span><span class="opt u-priv">사립대</span><span class="sep"> · </span><span class="opt r-all">전체</span><span class="opt r-seoul">서울</span><span class="opt r-busan">부산</span><span class="opt r-daegu">대구</span><span class="opt r-incheon">인천</span><span class="opt r-gwangju">광주</span><span class="opt r-daejeon">대전</span><span class="opt r-ulsan">울산</span><span class="opt r-sejong">세종</span><span class="opt r-gyeonggi">경기</span><span class="opt r-gangwon">강원</span><span class="opt r-chungbuk">충북</span><span class="opt r-chungnam">충남</span><span class="opt r-jeonbuk">전북</span><span class="opt r-jeonnam">전남</span><span class="opt r-gyeongbuk">경북</span><span class="opt r-gyeongnam">경남</span><span class="opt r-jeju">제주</span><span class="sep"> · </span><span class="opt g-all">전체 학년</span><span class="opt g-1">1학년</span><span class="opt g-2">2학년</span><span class="opt g-3">3학년</span><span class="opt g-4">4학년</span></span></span></div>
+      <p class="cat-sub">국가·교내 장학금 모아보기</p>
+      <div class="divider-list">
+        <label class="row" for="s-listing-sch-1"><div class="main"><div class="title">국가장학금 2차</div><div class="desc">소득분위 기준</div></div><span class="pill-alert">D-3</span></label>
+        <label class="row" for="s-listing-sch-2"><div class="main"><div class="title">교내 성적우수 장학금</div><div class="desc">평점 3.5 이상</div></div><span class="pill-neutral">D-14</span></label>
+        <label class="row" for="s-listing-sch-3"><div class="main"><div class="title">근로 장학생 모집</div><div class="desc">주 10시간 이내</div></div><span class="pill-neutral">D-16</span></label>
+        <label class="row reg-seoul-only" for="s-listing-sch-4"><div class="main"><div class="title">지역인재 장학금</div><div class="desc">서울 소재 대학 재학생</div></div><span class="pill-neutral">D-21</span></label>
+        <label class="row" for="s-listing-sch-5"><div class="main"><div class="title">다자녀 가정 장학금</div><div class="desc">3자녀 이상 가정</div></div><span class="pill-neutral">D-24</span></label>
+        <label class="row" for="s-listing-sch-6" style="border-bottom:none;"><div class="main"><div class="title">사회배려대상자 장학금</div><div class="desc">국가보훈·기초생활수급 등</div></div><span class="pill-neutral">D-30</span></label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 카테고리: 공모전 ══════════ -->
+<section class="screen" id="scr-cat-contest">
+  <div class="cat-layout shell">
+    <aside class="cat-aside">
+      <p class="aside-label">카테고리</p>
+      <label for="s-cat-scholarship">장학금</label>
+      <label class="active" for="s-cat-contest">공모전</label>
+      <label for="s-cat-local">지자체 혜택</label>
+      <label for="s-cat-activity">대외활동</label>
+      <label for="s-cat-internship">인턴십</label>
+      <label for="s-board-all">팀원모집</label>
+    </aside>
+    <div>
+      <p class="crumb"><label for="s-main">홈</label> / 공모전</p>
+      <div class="cat-head"><h1>공모전</h1><span class="filter-pill"><span class="filter-summary"><span class="opt u-all">전체</span><span class="opt u-nat">국립대</span><span class="opt u-priv">사립대</span><span class="sep"> · </span><span class="opt r-all">전체</span><span class="opt r-seoul">서울</span><span class="opt r-busan">부산</span><span class="opt r-daegu">대구</span><span class="opt r-incheon">인천</span><span class="opt r-gwangju">광주</span><span class="opt r-daejeon">대전</span><span class="opt r-ulsan">울산</span><span class="opt r-sejong">세종</span><span class="opt r-gyeonggi">경기</span><span class="opt r-gangwon">강원</span><span class="opt r-chungbuk">충북</span><span class="opt r-chungnam">충남</span><span class="opt r-jeonbuk">전북</span><span class="opt r-jeonnam">전남</span><span class="opt r-gyeongbuk">경북</span><span class="opt r-gyeongnam">경남</span><span class="opt r-jeju">제주</span><span class="sep"> · </span><span class="opt g-all">전체 학년</span><span class="opt g-1">1학년</span><span class="opt g-2">2학년</span><span class="opt g-3">3학년</span><span class="opt g-4">4학년</span></span></span></div>
+      <p class="cat-sub">팀 단위 공모전, 팀원모집까지</p>
+      <div class="divider-list">
+        <label class="row" for="s-listing-con-1"><div class="main"><div class="top-line"><span class="title">청년 아이디어 공모전</span><span class="pill-team">팀원모집 2건</span></div><div class="desc">팀 단위 지원 · 3인 이내</div></div><span class="pill-alert">D-3</span></label>
+        <label class="row" for="s-listing-con-2"><div class="main"><div class="title">교내 캡스톤 경진대회</div><div class="desc">개인 지원 가능</div></div><span class="pill-neutral">D-14</span></label>
+        <label class="row" for="s-listing-con-3"><div class="main"><div class="title">SNS 콘텐츠 공모전</div><div class="desc">개인·팀 자유</div></div><span class="pill-neutral">D-17</span></label>
+        <label class="row" for="s-listing-con-4"><div class="main"><div class="top-line"><span class="title">지역 해커톤</span><span class="pill-team">팀원모집 1건</span></div><div class="desc">4인 1팀 · 개발 직군 우대</div></div><span class="pill-neutral">D-21</span></label>
+        <label class="row" for="s-listing-con-5" style="border-bottom:none;"><div class="main"><div class="title">지속가능경영 아이디어 공모전</div><div class="desc">3인 이내 팀</div></div><span class="pill-neutral">D-26</span></label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 카테고리: 지자체 혜택 ══════════ -->
+<section class="screen" id="scr-cat-local">
+  <div class="cat-layout shell">
+    <aside class="cat-aside">
+      <p class="aside-label">카테고리</p>
+      <label for="s-cat-scholarship">장학금</label>
+      <label for="s-cat-contest">공모전</label>
+      <label class="active" for="s-cat-local">지자체 혜택</label>
+      <label for="s-cat-activity">대외활동</label>
+      <label for="s-cat-internship">인턴십</label>
+      <label for="s-board-all">팀원모집</label>
+    </aside>
+    <div>
+      <p class="crumb"><label for="s-main">홈</label> / 지자체 혜택</p>
+      <div class="cat-head"><h1>지자체 혜택</h1><span class="filter-pill"><span class="filter-summary"><span class="opt u-all">전체</span><span class="opt u-nat">국립대</span><span class="opt u-priv">사립대</span><span class="sep"> · </span><span class="opt r-all">전체</span><span class="opt r-seoul">서울</span><span class="opt r-busan">부산</span><span class="opt r-daegu">대구</span><span class="opt r-incheon">인천</span><span class="opt r-gwangju">광주</span><span class="opt r-daejeon">대전</span><span class="opt r-ulsan">울산</span><span class="opt r-sejong">세종</span><span class="opt r-gyeonggi">경기</span><span class="opt r-gangwon">강원</span><span class="opt r-chungbuk">충북</span><span class="opt r-chungnam">충남</span><span class="opt r-jeonbuk">전북</span><span class="opt r-jeonnam">전남</span><span class="opt r-gyeongbuk">경북</span><span class="opt r-gyeongnam">경남</span><span class="opt r-jeju">제주</span><span class="sep"> · </span><span class="opt g-all">전체 학년</span><span class="opt g-1">1학년</span><span class="opt g-2">2학년</span><span class="opt g-3">3학년</span><span class="opt g-4">4학년</span></span></span></div>
+      <p class="cat-sub">거주·소속 지역 혜택 확인</p>
+      <div class="divider-list">
+        <label class="row reg-seoul-only" for="s-listing-loc-1"><div class="main"><div class="title">청년 월세 지원</div><div class="desc">서울 거주 무주택 청년</div></div><span class="pill-alert">D-5</span></label>
+        <label class="row" for="s-listing-loc-2"><div class="main"><div class="title">문화가 있는 날 통합할인권</div><div class="desc">전 지역</div></div><span class="pill-neutral">D-10</span></label>
+        <label class="row reg-seoul-only" for="s-listing-loc-3"><div class="main"><div class="title">청년 취업 장려금</div><div class="desc">서울 거주 미취업 청년</div></div><span class="pill-neutral">D-15</span></label>
+        <label class="row reg-seoul-only" for="s-listing-loc-4"><div class="main"><div class="title">청년 교통비 지원</div><div class="desc">서울 거주 대학생</div></div><span class="pill-neutral">D-18</span></label>
+        <label class="row" for="s-listing-loc-5" style="border-bottom:none;"><div class="main"><div class="title">청년 문화패스</div><div class="desc">지역 문화시설 할인</div></div><span class="pill-neutral">D-23</span></label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 카테고리: 대외활동 ══════════ -->
+<section class="screen" id="scr-cat-activity">
+  <div class="cat-layout shell">
+    <aside class="cat-aside">
+      <p class="aside-label">카테고리</p>
+      <label for="s-cat-scholarship">장학금</label>
+      <label for="s-cat-contest">공모전</label>
+      <label for="s-cat-local">지자체 혜택</label>
+      <label class="active" for="s-cat-activity">대외활동</label>
+      <label for="s-cat-internship">인턴십</label>
+      <label for="s-board-all">팀원모집</label>
+    </aside>
+    <div>
+      <p class="crumb"><label for="s-main">홈</label> / 대외활동</p>
+      <div class="cat-head"><h1>대외활동</h1><span class="filter-pill"><span class="filter-summary"><span class="opt u-all">전체</span><span class="opt u-nat">국립대</span><span class="opt u-priv">사립대</span><span class="sep"> · </span><span class="opt r-all">전체</span><span class="opt r-seoul">서울</span><span class="opt r-busan">부산</span><span class="opt r-daegu">대구</span><span class="opt r-incheon">인천</span><span class="opt r-gwangju">광주</span><span class="opt r-daejeon">대전</span><span class="opt r-ulsan">울산</span><span class="opt r-sejong">세종</span><span class="opt r-gyeonggi">경기</span><span class="opt r-gangwon">강원</span><span class="opt r-chungbuk">충북</span><span class="opt r-chungnam">충남</span><span class="opt r-jeonbuk">전북</span><span class="opt r-jeonnam">전남</span><span class="opt r-gyeongbuk">경북</span><span class="opt r-gyeongnam">경남</span><span class="opt r-jeju">제주</span><span class="sep"> · </span><span class="opt g-all">전체 학년</span><span class="opt g-1">1학년</span><span class="opt g-2">2학년</span><span class="opt g-3">3학년</span><span class="opt g-4">4학년</span></span></span></div>
+      <p class="cat-sub">서포터즈·홍보대사 모집 정보</p>
+      <div class="divider-list">
+        <label class="row" for="s-listing-act-1"><div class="main"><div class="title">대학생 서포터즈 14기</div><div class="desc">전국 대학생</div></div><span class="pill-alert">D-4</span></label>
+        <label class="row grade-2to4" for="s-listing-act-2"><div class="main"><div class="title">기업 홍보대사 모집</div><div class="desc">2~4학년</div></div><span class="pill-neutral">D-12</span></label>
+        <label class="row" for="s-listing-act-3"><div class="main"><div class="title">대학생 기자단 모집</div><div class="desc">전공 무관</div></div><span class="pill-neutral">D-16</span></label>
+        <label class="row" for="s-listing-act-4"><div class="main"><div class="title">봉사활동 캠페인</div><div class="desc">주말 참여 가능자</div></div><span class="pill-neutral">D-20</span></label>
+        <label class="row" for="s-listing-act-5" style="border-bottom:none;"><div class="main"><div class="title">해외 탐방단 모집</div><div class="desc">4인 1팀</div></div><span class="pill-neutral">D-28</span></label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 카테고리: 인턴십 ══════════ -->
+<section class="screen" id="scr-cat-internship">
+  <div class="cat-layout shell">
+    <aside class="cat-aside">
+      <p class="aside-label">카테고리</p>
+      <label for="s-cat-scholarship">장학금</label>
+      <label for="s-cat-contest">공모전</label>
+      <label for="s-cat-local">지자체 혜택</label>
+      <label for="s-cat-activity">대외활동</label>
+      <label class="active" for="s-cat-internship">인턴십</label>
+      <label for="s-board-all">팀원모집</label>
+    </aside>
+    <div>
+      <p class="crumb"><label for="s-main">홈</label> / 인턴십</p>
+      <div class="cat-head"><h1>인턴십</h1><span class="filter-pill"><span class="filter-summary"><span class="opt u-all">전체</span><span class="opt u-nat">국립대</span><span class="opt u-priv">사립대</span><span class="sep"> · </span><span class="opt r-all">전체</span><span class="opt r-seoul">서울</span><span class="opt r-busan">부산</span><span class="opt r-daegu">대구</span><span class="opt r-incheon">인천</span><span class="opt r-gwangju">광주</span><span class="opt r-daejeon">대전</span><span class="opt r-ulsan">울산</span><span class="opt r-sejong">세종</span><span class="opt r-gyeonggi">경기</span><span class="opt r-gangwon">강원</span><span class="opt r-chungbuk">충북</span><span class="opt r-chungnam">충남</span><span class="opt r-jeonbuk">전북</span><span class="opt r-jeonnam">전남</span><span class="opt r-gyeongbuk">경북</span><span class="opt r-gyeongnam">경남</span><span class="opt r-jeju">제주</span><span class="sep"> · </span><span class="opt g-all">전체 학년</span><span class="opt g-1">1학년</span><span class="opt g-2">2학년</span><span class="opt g-3">3학년</span><span class="opt g-4">4학년</span></span></span></div>
+      <p class="cat-sub">공공·민간 인턴십 채용 공고</p>
+      <div class="divider-list">
+        <label class="row reg-seoul-gg" for="s-listing-int-1"><div class="main"><div class="title">공공기관 하계 인턴십</div><div class="desc">서울·경기 소재 대학</div></div><span class="pill-alert">D-6</span></label>
+        <label class="row" for="s-listing-int-2"><div class="main"><div class="title">스타트업 인턴 채용</div><div class="desc">개발/기획 직군</div></div><span class="pill-neutral">D-15</span></label>
+        <label class="row" for="s-listing-int-3"><div class="main"><div class="title">사회적기업 인턴십</div><div class="desc">마케팅/기획 직군</div></div><span class="pill-neutral">D-19</span></label>
+        <label class="row grade-3to4" for="s-listing-int-4"><div class="main"><div class="title">대기업 체험형 인턴</div><div class="desc">3학년 이상</div></div><span class="pill-neutral">D-25</span></label>
+        <label class="row" for="s-listing-int-5" style="border-bottom:none;"><div class="main"><div class="title">공기업 채용연계형 인턴</div><div class="desc">서류·면접 전형</div></div><span class="pill-neutral">D-31</span></label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 리스팅 상세 (장학금 6) ══════════ -->
+<section class="screen" id="scr-listing-sch-1">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-scholarship">장학금</label></p>
+    <div class="detail-meta"><span class="pill-alert">D-3</span><span class="cat" style="color:var(--ink-faint);font-weight:400;">소득분위 기준</span></div>
+    <h1>국가장학금 2차</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">소득분위 기준 조건에 해당하는 분들을 위한 장학금 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">소득분위 기준</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">장학금 · 국가장학금 2차</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-3</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-sch-2">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-scholarship">장학금</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-14</span><span style="font-size:13px;color:var(--ink-faint);">평점 3.5 이상</span></div>
+    <h1>교내 성적우수 장학금</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">평점 3.5 이상 조건에 해당하는 분들을 위한 장학금 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">평점 3.5 이상</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">장학금 · 교내 성적우수 장학금</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-14</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-sch-3">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-scholarship">장학금</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-16</span><span style="font-size:13px;color:var(--ink-faint);">주 10시간 이내</span></div>
+    <h1>근로 장학생 모집</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">주 10시간 이내 조건에 해당하는 분들을 위한 장학금 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">주 10시간 이내</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">장학금 · 근로 장학생 모집</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-16</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-sch-4">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-scholarship">장학금</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-21</span><span style="font-size:13px;color:var(--ink-faint);">서울 소재 대학 재학생</span></div>
+    <h1>지역인재 장학금</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">서울 소재 대학 재학생 조건에 해당하는 분들을 위한 장학금 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">서울 소재 대학 재학생</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">장학금 · 지역인재 장학금</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-21</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-sch-5">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-scholarship">장학금</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-24</span><span style="font-size:13px;color:var(--ink-faint);">3자녀 이상 가정</span></div>
+    <h1>다자녀 가정 장학금</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">3자녀 이상 가정 조건에 해당하는 분들을 위한 장학금 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">3자녀 이상 가정</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">장학금 · 다자녀 가정 장학금</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-24</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-sch-6">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-scholarship">장학금</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-30</span><span style="font-size:13px;color:var(--ink-faint);">국가보훈·기초생활수급 등</span></div>
+    <h1>사회배려대상자 장학금</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">국가보훈·기초생활수급 등 조건에 해당하는 분들을 위한 장학금 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">국가보훈·기초생활수급 등</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">장학금 · 사회배려대상자 장학금</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-30</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+
+<!-- ══════════ 리스팅 상세 (공모전 5) ══════════ -->
+<section class="screen" id="scr-listing-con-1">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-contest">공모전</label></p>
+    <div class="detail-meta"><span class="pill-alert">D-3</span><span style="font-size:13px;color:var(--ink-faint);">팀 단위 지원 · 3인 이내</span></div>
+    <h1>청년 아이디어 공모전</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">팀 단위 지원 · 3인 이내 조건에 해당하는 분들을 위한 공모전 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">팀 단위 지원 · 3인 이내</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">공모전 · 청년 아이디어 공모전</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-3</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+    <label class="btn-team" for="s-board-contest1">팀원 모집하기</label>
+  </div>
+</section>
+<section class="screen" id="scr-listing-con-2">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-contest">공모전</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-14</span><span style="font-size:13px;color:var(--ink-faint);">개인 지원 가능</span></div>
+    <h1>교내 캡스톤 경진대회</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">개인 지원 가능 조건에 해당하는 분들을 위한 공모전 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">개인 지원 가능</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">공모전 · 교내 캡스톤 경진대회</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-14</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-con-3">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-contest">공모전</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-17</span><span style="font-size:13px;color:var(--ink-faint);">개인·팀 자유</span></div>
+    <h1>SNS 콘텐츠 공모전</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">개인·팀 자유 조건에 해당하는 분들을 위한 공모전 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">개인·팀 자유</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">공모전 · SNS 콘텐츠 공모전</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-17</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-con-4">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-contest">공모전</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-21</span><span style="font-size:13px;color:var(--ink-faint);">4인 1팀 · 개발 직군 우대</span></div>
+    <h1>지역 해커톤</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">4인 1팀 · 개발 직군 우대 조건에 해당하는 분들을 위한 공모전 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">4인 1팀 · 개발 직군 우대</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">공모전 · 지역 해커톤</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-21</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+    <label class="btn-team" for="s-board-contest2">팀원 모집하기</label>
+  </div>
+</section>
+<section class="screen" id="scr-listing-con-5">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-contest">공모전</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-26</span><span style="font-size:13px;color:var(--ink-faint);">3인 이내 팀</span></div>
+    <h1>지속가능경영 아이디어 공모전</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">3인 이내 팀 조건에 해당하는 분들을 위한 공모전 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">3인 이내 팀</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">공모전 · 지속가능경영 아이디어 공모전</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-26</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+
+<!-- ══════════ 리스팅 상세 (지자체 혜택 5) ══════════ -->
+<section class="screen" id="scr-listing-loc-1">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-local">지자체 혜택</label></p>
+    <div class="detail-meta"><span class="pill-alert">D-5</span><span style="font-size:13px;color:var(--ink-faint);">서울 거주 무주택 청년</span></div>
+    <h1>청년 월세 지원</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">서울 거주 무주택 청년 조건에 해당하는 분들을 위한 지자체 혜택 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">서울 거주 무주택 청년</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">지자체 혜택 · 청년 월세 지원</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-5</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-loc-2">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-local">지자체 혜택</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-10</span><span style="font-size:13px;color:var(--ink-faint);">전 지역</span></div>
+    <h1>문화가 있는 날 통합할인권</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">전 지역 조건에 해당하는 분들을 위한 지자체 혜택 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">전 지역</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">지자체 혜택 · 문화가 있는 날 통합할인권</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-10</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-loc-3">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-local">지자체 혜택</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-15</span><span style="font-size:13px;color:var(--ink-faint);">서울 거주 미취업 청년</span></div>
+    <h1>청년 취업 장려금</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">서울 거주 미취업 청년 조건에 해당하는 분들을 위한 지자체 혜택 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">서울 거주 미취업 청년</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">지자체 혜택 · 청년 취업 장려금</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-15</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-loc-4">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-local">지자체 혜택</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-18</span><span style="font-size:13px;color:var(--ink-faint);">서울 거주 대학생</span></div>
+    <h1>청년 교통비 지원</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">서울 거주 대학생 조건에 해당하는 분들을 위한 지자체 혜택 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">서울 거주 대학생</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">지자체 혜택 · 청년 교통비 지원</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-18</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-loc-5">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-local">지자체 혜택</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-23</span><span style="font-size:13px;color:var(--ink-faint);">지역 문화시설 할인</span></div>
+    <h1>청년 문화패스</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">지역 문화시설 할인 조건에 해당하는 분들을 위한 지자체 혜택 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">지역 문화시설 할인</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">지자체 혜택 · 청년 문화패스</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-23</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+
+<!-- ══════════ 리스팅 상세 (대외활동 5) ══════════ -->
+<section class="screen" id="scr-listing-act-1">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-activity">대외활동</label></p>
+    <div class="detail-meta"><span class="pill-alert">D-4</span><span style="font-size:13px;color:var(--ink-faint);">전국 대학생</span></div>
+    <h1>대학생 서포터즈 14기</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">전국 대학생 조건에 해당하는 분들을 위한 대외활동 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">전국 대학생</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">대외활동 · 대학생 서포터즈 14기</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-4</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-act-2">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-activity">대외활동</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-12</span><span style="font-size:13px;color:var(--ink-faint);">2~4학년</span></div>
+    <h1>기업 홍보대사 모집</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">2~4학년 조건에 해당하는 분들을 위한 대외활동 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">2~4학년</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">대외활동 · 기업 홍보대사 모집</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-12</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-act-3">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-activity">대외활동</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-16</span><span style="font-size:13px;color:var(--ink-faint);">전공 무관</span></div>
+    <h1>대학생 기자단 모집</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">전공 무관 조건에 해당하는 분들을 위한 대외활동 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">전공 무관</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">대외활동 · 대학생 기자단 모집</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-16</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-act-4">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-activity">대외활동</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-20</span><span style="font-size:13px;color:var(--ink-faint);">주말 참여 가능자</span></div>
+    <h1>봉사활동 캠페인</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">주말 참여 가능자 조건에 해당하는 분들을 위한 대외활동 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">주말 참여 가능자</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">대외활동 · 봉사활동 캠페인</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-20</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-act-5">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-activity">대외활동</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-28</span><span style="font-size:13px;color:var(--ink-faint);">4인 1팀</span></div>
+    <h1>해외 탐방단 모집</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">4인 1팀 조건에 해당하는 분들을 위한 대외활동 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">4인 1팀</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">대외활동 · 해외 탐방단 모집</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-28</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+
+<!-- ══════════ 리스팅 상세 (인턴십 5) ══════════ -->
+<section class="screen" id="scr-listing-int-1">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-internship">인턴십</label></p>
+    <div class="detail-meta"><span class="pill-alert">D-6</span><span style="font-size:13px;color:var(--ink-faint);">서울·경기 소재 대학</span></div>
+    <h1>공공기관 하계 인턴십</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">서울·경기 소재 대학 조건에 해당하는 분들을 위한 인턴십 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">서울·경기 소재 대학</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">인턴십 · 공공기관 하계 인턴십</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-6</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-int-2">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-internship">인턴십</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-15</span><span style="font-size:13px;color:var(--ink-faint);">개발/기획 직군</span></div>
+    <h1>스타트업 인턴 채용</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">개발/기획 직군 조건에 해당하는 분들을 위한 인턴십 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">개발/기획 직군</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">인턴십 · 스타트업 인턴 채용</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-15</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-int-3">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-internship">인턴십</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-19</span><span style="font-size:13px;color:var(--ink-faint);">마케팅/기획 직군</span></div>
+    <h1>사회적기업 인턴십</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">마케팅/기획 직군 조건에 해당하는 분들을 위한 인턴십 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">마케팅/기획 직군</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">인턴십 · 사회적기업 인턴십</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-19</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-int-4">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-internship">인턴십</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-25</span><span style="font-size:13px;color:var(--ink-faint);">3학년 이상</span></div>
+    <h1>대기업 체험형 인턴</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">3학년 이상 조건에 해당하는 분들을 위한 인턴십 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">3학년 이상</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">인턴십 · 대기업 체험형 인턴</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-25</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+<section class="screen" id="scr-listing-int-5">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-cat-internship">인턴십</label></p>
+    <div class="detail-meta"><span class="pill-neutral">D-31</span><span style="font-size:13px;color:var(--ink-faint);">서류·면접 전형</span></div>
+    <h1>공기업 채용연계형 인턴</h1>
+    <div class="thumb">카드뉴스 이미지</div>
+    <p class="body-txt">서류·면접 전형 조건에 해당하는 분들을 위한 인턴십 정보예요. 지원 자격을 다시 확인하고, 마감 전에 공식 페이지에서 신청을 완료해주세요.</p>
+    <div class="info-box">
+      <p class="info-title">한눈에 정리</p>
+      <div class="info-row"><span class="k">대상</span><span class="v">서류·면접 전형</span></div>
+      <div class="info-row"><span class="k">지원내용</span><span class="v">인턴십 · 공기업 채용연계형 인턴</span></div>
+      <div class="info-row"><span class="k">신청기간</span><span class="v">마감 D-31</span></div>
+      <div class="info-row"><span class="k">신청방법</span><span class="v">공식 페이지에서 온라인 접수</span></div>
+    </div>
+    <a class="btn-outline" href="javascript:void(0)">공식 페이지에서 지원하기 ↗</a>
+  </div>
+</section>
+
+<!-- ══════════ 팀원모집 게시판 (전체) ══════════ -->
+<section class="screen" id="scr-board-all">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label></p>
+    <div class="board-head"><h1 style="font-weight:800;font-size:32px;letter-spacing:-.02em;margin:0;">팀원모집</h1><label class="btn-primary" style="padding:9px 18px;font-size:13px;" for="s-post">글쓰기</label></div>
+    <p class="cat-sub">공모전·대외활동을 함께할 팀원을 구하고, 지원할 수 있어요.</p>
+    <label class="post-card" for="s-post">
+      <div class="top"><span class="title">디자이너 1명 구해요</span><span class="pill-alert">D-3</span></div>
+      <p class="meta"><span class="tag" style="color:var(--bulb-ink);font-weight:600;">청년 아이디어 공모전</span> · 기획·개발 2명 확정</p>
+    </label>
+    <label class="post-card" for="s-post">
+      <div class="top"><span class="title">기획 같이 하실 분</span><span class="pill-neutral">D-6</span></div>
+      <p class="meta"><span class="tag" style="color:var(--bulb-ink);font-weight:600;">청년 아이디어 공모전</span> · 1인 팀</p>
+    </label>
+    <label class="post-card" for="s-post2">
+      <div class="top"><span class="title">프론트엔드 1명 구해요</span><span class="pill-neutral">D-21</span></div>
+      <p class="meta"><span class="tag" style="color:var(--bulb-ink);font-weight:600;">지역 해커톤</span> · 백엔드·기획 2명 확정</p>
+    </label>
+  </div>
+</section>
+
+<!-- ══════════ 팀원모집 게시판 (공고별) ══════════ -->
+<section class="screen" id="scr-board-contest1">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-listing-con-1">청년 아이디어 공모전</label></p>
+    <h1 style="font-weight:800;font-size:30px;letter-spacing:-.02em;margin:0 0 8px;">청년 아이디어 공모전의 팀원모집</h1>
+    <p class="cat-sub">2건 — 이 공고에 지원하려는 학생만 모여요</p>
+    <label class="post-card" for="s-post">
+      <div class="top"><span class="title">디자이너 1명 구해요</span><span class="pill-alert">D-3</span></div>
+      <p class="meta">기획·개발 2명 확정 · UI/UX 담당자 모집</p>
+    </label>
+    <label class="post-card" for="s-post">
+      <div class="top"><span class="title">기획 같이 하실 분</span><span class="pill-neutral">D-6</span></div>
+      <p class="meta">1인 팀 · 아이디어부터 같이 짤 팀원 구함</p>
+    </label>
+  </div>
+</section>
+<section class="screen" id="scr-board-contest2">
+  <div class="detail">
+    <p class="crumb"><label for="s-main">홈</label> / <label for="s-listing-con-4">지역 해커톤</label></p>
+    <h1 style="font-weight:800;font-size:30px;letter-spacing:-.02em;margin:0 0 8px;">지역 해커톤의 팀원모집</h1>
+    <p class="cat-sub">1건 — 이 공고에 지원하려는 학생만 모여요</p>
+    <label class="post-card" for="s-post2">
+      <div class="top"><span class="title">프론트엔드 1명 구해요</span><span class="pill-neutral">D-21</span></div>
+      <p class="meta">백엔드·기획 2명 확정 · React 다룰 줄 아는 분</p>
+    </label>
+  </div>
+</section>
+
+<!-- ══════════ 게시글 상세 ══════════ -->
+<section class="screen" id="scr-post">
+  <div class="detail">
+    <p class="crumb"><label for="s-board-contest1">홈</label> / <label for="s-board-contest1">팀원모집</label></p>
+    <div class="detail-meta"><span class="cat">청년 아이디어 공모전 · D-3</span></div>
+    <h1 style="font-size:30px;">디자이너 1명 구해요</h1>
+    <p class="body-txt">기획·개발 각 1명 확정됐고, UI/UX 디자인 맡아주실 분 찾습니다. Figma 다룰 줄 아시면 좋아요. 주 2회 온라인 미팅, 마감까지 같이 갑니다.</p>
+    <div class="apply-box">
+      <p class="label">지원 방법</p>
+      <label class="btn-accent" for="s-applied">댓글로 지원하기</label>
+    </div>
+    <p class="comment-head">댓글 3</p>
+    <div class="comment"><div class="who">공모전러버</div><div class="txt">저 포트폴리오 있어요! 지원할게요 🙋</div></div>
+    <div class="comment"><div class="who">디자이너지망생</div><div class="txt">주제 방향 조금만 더 알 수 있을까요?</div></div>
+    <div class="comment"><div class="who">글쓴이</div><div class="txt">위 댓글에 답장 남겼어요, 확인해주세요!</div></div>
+    <textarea placeholder="댓글로 지원 의사를 남겨보세요"></textarea>
+  </div>
+</section>
+<section class="screen" id="scr-post2">
+  <div class="detail">
+    <p class="crumb"><label for="s-board-contest2">홈</label> / <label for="s-board-contest2">팀원모집</label></p>
+    <div class="detail-meta"><span class="cat">지역 해커톤 · D-21</span></div>
+    <h1 style="font-size:30px;">프론트엔드 1명 구해요</h1>
+    <p class="body-txt">백엔드·기획 2명은 확정됐고, 화면 붙여줄 프론트엔드 팀원을 찾습니다. React 다룰 줄 아시면 좋아요. 주말 오프라인 1회 예정입니다.</p>
+    <div class="apply-box">
+      <p class="label">지원 방법</p>
+      <label class="btn-accent" for="s-applied">댓글로 지원하기</label>
+    </div>
+    <p class="comment-head">댓글 1</p>
+    <div class="comment"><div class="who">프론트엔드지망</div><div class="txt">경험은 적지만 배우면서 하고 싶어요, 지원할게요!</div></div>
+    <textarea placeholder="댓글로 지원 의사를 남겨보세요"></textarea>
+  </div>
+</section>
+
+<!-- ══════════ 지원 완료 ══════════ -->
+<section class="screen" id="scr-applied">
+  <div class="center-msg">
+    <div class="icon">✓</div>
+    <h1>지원 완료</h1>
+    <p>댓글이 등록됐어요. 글쓴이가 확인하면 알림 없이도 이 화면에서 다시 상태를 볼 수 있어요.</p>
+    <label class="btn-primary" for="s-board-all" style="margin-top:20px;">팀원모집으로 돌아가기</label>
+  </div>
+</section>
+
+<footer>
+  <div class="inner">
+    <span class="brand">캠퍼스핏</span>
+    <span class="note">대학생을 위한 정보 큐레이션 · 실제 서비스가 아닌 프로토타입입니다.</span>
+  </div>
+</footer>
+
+<!-- 헤더/사이드바 내비게이션 활성 표시 — 라디오가 header/aside보다 앞이라 `~`로 참조 가능 -->
+<style>
+  #s-main:checked ~ .topnav .nav-home,
+  #s-cat-scholarship:checked ~ .topnav .nav-scholarship,
+  #s-cat-contest:checked ~ .topnav .nav-contest,
+  #s-cat-local:checked ~ .topnav .nav-local,
+  #s-cat-activity:checked ~ .topnav .nav-activity,
+  #s-cat-internship:checked ~ .topnav .nav-internship,
+  #s-board-all:checked ~ .topnav .nav-board,
+  #s-board-contest1:checked ~ .topnav .nav-board,
+  #s-board-contest2:checked ~ .topnav .nav-board,
+  #s-post:checked ~ .topnav .nav-board,
+  #s-post2:checked ~ .topnav .nav-board,
+  #s-applied:checked ~ .topnav .nav-board{
+    font-weight:700;color:var(--ink);
+  }
+</style>
+
+</body>
+</html>
