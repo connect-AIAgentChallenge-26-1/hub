@@ -71,8 +71,8 @@ B는 특정 매수 가격이나 행동 지시가 아니라 **지금 가격이 �
 | R06 | 가치 범위·가격 위치 B | REQUIRED | R03·R04 | S5·S6·S21 | C6 | 미구현 |
 | R07 | Structured Claim | REQUIRED | R01 | S7·S23 | C7 | IMPLEMENTED |
 | R08 | 필수 근거 계획·결정론 검산 | REQUIRED | R04·R07 | S16·S17 | C8 | IMPLEMENTED |
-| R09 | RAG·반증·인용 무결성 | REQUIRED | R02·R03·R07·R08 | S18·S19·S20·S23 | C9 | 미구현 |
-| R10 | 5상태 검증·체크리스트 C | REQUIRED | R08·R09 | S8·S9·S11 | C10 | 미구현 |
+| R09 | RAG·반증·인용 무결성 | REQUIRED | R02·R03·R07·R08 | S18·S19·S20·S23 | C9 | IMPLEMENTED |
+| R10 | 5상태 검증·체크리스트 C | REQUIRED | R08·R09 | S8·S9·S11 | C10 | IMPLEMENTED |
 | R11 | 복기·가설 추적·사용자 데이터 정책 | REQUIRED | R10 | S10·S22 | C11 | 미구현 |
 | R12 | 골든 평가·품질 게이트 | REQUIRED | R01~R11·R13 | I9 | C12-A·C12-B | 미구현 |
 | R13 | FastAPI·React·인증·사용자 격리 | REQUIRED | R05~R11 | S1~S11·S13~S23 | C13 | 미구현 |

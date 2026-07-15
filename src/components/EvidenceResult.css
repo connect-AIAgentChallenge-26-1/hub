@@ -1,0 +1,84 @@
+/* 기능 C 근거 검증 결과 화면 (docs/checklist.md C10). 검증(추천 아님) 톤의
+   중립 색만 쓴다 — 상승/하락을 빨강·초록으로 유도하지 않는다. */
+
+.evidence-result {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 720px;
+}
+
+.evidence-result__error {
+  border: 1px solid #b45309;
+  background: #fffbeb;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.evidence-claim {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.evidence-claim__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.verdict-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+}
+.verdict-badge--SUPPORTED { color: #1d4ed8; }
+.verdict-badge--REFUTED { color: #6b7280; }
+.verdict-badge--PARTIALLY_SUPPORTED { color: #7c3aed; }
+.verdict-badge--INSUFFICIENT_EVIDENCE { color: #b45309; }
+.verdict-badge--UNVERIFIABLE { color: #4b5563; }
+
+.evidence-claim__span { font-weight: 600; margin: 0; }
+.evidence-claim__reason { color: #4b5563; font-size: 0.9rem; margin: 0; }
+
+.evidence-calc {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85rem;
+  background: #f9fafb;
+  border-radius: 6px;
+  padding: 8px 10px;
+  overflow-x: auto;
+}
+
+.evidence-conflict {
+  border-left: 3px solid #7c3aed;
+  padding: 6px 10px;
+  background: #faf5ff;
+  font-size: 0.85rem;
+}
+
+.citation {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 0.85rem;
+}
+.citation__quote { margin: 0 0 6px; }
+.citation__meta { color: #6b7280; display: flex; gap: 12px; flex-wrap: wrap; }
+.citation__meta a { color: #1d4ed8; }
+
+.evidence-checklist { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.evidence-checklist__item {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 0.9rem;
+}
+.evidence-trace { color: #9ca3af; font-size: 0.75rem; }
+.evidence-versions { color: #9ca3af; font-size: 0.75rem; }

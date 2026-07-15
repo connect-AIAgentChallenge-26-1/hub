@@ -125,33 +125,36 @@
 
 ## C9. RAG·반증·인용·보안 [R09][S18·S19·S20·S23][I6·I7·I11][T07]
 
-- [ ] Chroma document·embedding·chunk schema와 checksum/version
-- [ ] dense+sparse hybrid 검색과 metadata filter
-- [ ] reranking·중복 제거·검색 score threshold
-- [ ] retrieval Recall@K·relevance precision baseline
-- [ ] 지지 query와 반대 방향 query 동시 실행
-- [ ] counter retrieval A/B 결과와 노이즈 기록
-- [ ] 상충 근거 감지·표시·판정 규칙
-- [ ] Evidence relation `SUPPORTS/REFUTES/NEUTRAL/CONFLICTS`와 rule version 계약 테스트
-- [ ] Evidence가 `claim_id`·`presentation_item_id`를 둘 다 누락하거나 둘 다 포함하면 schema가 거부하는 negative test
-- [ ] exact/fuzzy/offset 인용 검사와 공식 URL 검증
-- [ ] S20이 S2 A용 `presentation_item_id` Evidence와 S18/S19 C용 `claim_id` Evidence를 모두 검사
-- [ ] 인용 실패 근거로 확정 verdict를 내리지 않는 테스트
-- [ ] 사용자 입력·공시 문서 인젝션 데이터 블록 격리
-- [ ] secret·PII redaction, tool/schema allowlist, 공격 event trace
-- [ ] S4·S7·S8·S11의 provider 직접 호출을 막고 모든 LLM 호출이 S23을 통과하는 테스트
-- [ ] S17 충족률·예산·timeout 기준 최대 3회 재검색 종료
+- [x] Chroma document·embedding·chunk schema와 checksum/version — `app/services/vector_store.py` `IndexedChunk`(chunk_id·document_id·text·embedding·metadata + `checksum`(sha256)·`chunk_schema_version`·`embedding_model`) + `chunk_checksum()`. **한계(문서화, BLOCKED 아님)**: CLAUDE.md 목표는 Chroma persistent store지만, Chroma 영속·호스팅은 배포 결정(C14/T13)이므로 T07은 Chroma와 동일 시맨틱(collection add / cosine 거리 / metadata `where` filter)의 `InProcessVectorStore`로 검색 로직·schema를 확정하고 `VectorStore` 인터페이스로 T13 `ChromaVectorStore` 어댑터 교체를 준비했다(사용자 결정 2026-07-15). `test_evidence_retriever.py::test_chunk_schema_carries_checksum_and_version`
+- [x] dense+sparse hybrid 검색과 metadata filter — `app/services/evidence_retriever.py`(dense=임베딩 코사인 via vector store, sparse=순수 Python BM25, RRF 융합) + 종목(`corp_code`) metadata filter 필수 적용. `test_metadata_filter_excludes_other_companies`·`test_hybrid_ranks_lexically_relevant_chunk_first`
+- [x] reranking·중복 제거·검색 score threshold — RRF 우선·정규화 관련도 rerank, (document_id·offset·본문) dedup, `DEFAULT_SCORE_THRESHOLD` 이하 드롭. `test_low_score_below_threshold_is_dropped`·`test_duplicate_chunks_are_deduplicated`·`test_top_k_limits_results`
+- [x] retrieval Recall@K·relevance precision baseline — `recall_at_k()`·`relevance_precision_at_k()` + I9 eval `retrieval_recall_at_5`/`retrieval_relevance_precision` PASS. **한계**: 로컬 해싱 임베딩은 표기 겹침을 밀집 벡터에 투영한 결정론 baseline이며, 학습된 의미 임베딩(Solar) 품질은 `UPSTAGE_API_KEY` 발급·T12 실측 전까지 placeholder threshold다(docs/skills.md "Threshold Registry", C7과 동일 분류)
+- [x] 지지 query와 반대 방향 query 동시 실행 — S18 지지 검색 + `app/services/counter_evidence_retriever.py` `build_counter_query`(방향 반전 규칙·반대 키워드). `test_counter_query_appends_opposite_keywords`
+- [x] counter retrieval A/B 결과와 노이즈 기록 — `CounterEvidenceResult.search_trace`(기본 검색 대비 재검색 로그)·`noise`(반박 아닌 결과를 숨기지 않고 기록). `test_noise_is_recorded_not_hidden`
+- [x] 상충 근거 감지·표시·판정 규칙 — 같은 Claim에 SUPPORTS·REFUTES 공존 시 `ConflictPair`로 감지, S8이 `confidence_basis`·체크리스트로 표시. `test_conflict_detected_when_support_and_refute_coexist`
+- [x] Evidence relation `SUPPORTS/REFUTES/NEUTRAL/CONFLICTS`와 rule version 계약 테스트 — `app/schemas/evidence.py` `EvidenceRelation` Literal + `relation_rule_version`, `classify_relation`(`RELATION_RULE_VERSION="s19-relation-rule-1.0.0"`, 결정론 lexical 방향 규칙). `test_relation_classification_is_deterministic`·`test_relation_rule_version_is_stable`·`test_relation_enum_enforced`
+- [x] Evidence가 `claim_id`·`presentation_item_id`를 둘 다 누락하거나 둘 다 포함하면 schema가 거부하는 negative test — `Evidence` model_validator(정확히 하나 강제, contracts/schemas.js `validateEvidence` Python 미러). `test_both_owners_rejected`·`test_neither_owner_rejected`
+- [x] exact/fuzzy/offset 인용 검사와 공식 URL 검증 — `app/services/citation_integrity.py`(`_match_method` EXACT/OFFSET/FUZZY/NONE, `verify_source_url` DART canonical·허용 host allowlist, checksum 대조). `test_exact_match_verified`·`test_offset_match_verified`·`test_fuzzy_match_on_whitespace_variation`·`test_dart_url_must_match_canonical`. **수정 이력(2026-07-15, GPT 리뷰 15:38)**: S8 통합 경로(`evidence_orchestrator._to_citation_input`)에서 `stored_checksum`·`recomputed_checksum`을 둘 다 검색 결과의 현재 `doc.text`로 동시에 재계산해 항상 같은 값이 되던 결함(자기 자신과만 비교 — 실제 변조를 절대 탐지 못함) 수정. `RetrievedEvidence`가 `index_checksum`(index() 시점 `IndexedChunk.checksum`, `EvidenceRetriever._checksums`로 보존)을 carry하도록 하고, `_to_citation_input`은 `stored_checksum=ev.index_checksum`(색인 시점)과 `recomputed_checksum`(인용 시점 `doc.text` 재계산)을 서로 다른 시점의 값으로 비교하게 함. `test_evidence_retriever.py::test_retrieved_evidence_carries_index_time_checksum`, `test_evidence_orchestrator.py::test_citation_input_checksum_survives_untampered_round_trip`·`test_citation_input_detects_post_index_text_tampering`·`test_post_index_tampering_downgrades_confirmed_verdict_via_orchestrator`(색인 이후 원문 변조 시 S8이 실제로 `CITATION_UNVERIFIED`로 하향함을 red→green 실측)
+  - 후속 보강(2026-07-15): API 호출자가 S2/S14 원본 snapshot checksum을 넘길 수 있도록 `EvidenceDocumentInput.stored_checksum`·`SourceDocument.stored_checksum`을 추가하고, 값이 있으면 index 시점 checksum으로 보존한다. `test_retrieved_evidence_uses_stored_checksum_when_provided`·`test_stored_checksum_mismatch_downgrades_confirmed_verdict`로 API 레벨 mismatch 하향까지 고정.
+- [x] S20이 S2 A용 `presentation_item_id` Evidence와 S18/S19 C용 `claim_id` Evidence를 모두 검사 — `CitationInput`은 owner 무관하게 quote·checksum·URL을 검사해 A/C 두 출처 모두 게이트 통과. `test_checks_both_a_side_presentation_and_c_side_claim_evidence`
+- [x] 인용 실패 근거로 확정 verdict를 내리지 않는 테스트 — `verdict_gate_ok()` + S8이 수치 검산 확정이라도 인용 전부 실패면 `CITATION_UNVERIFIED`로 `INSUFFICIENT_EVIDENCE` 하향. `test_verdict_gate_only_passes_verified_citations`·`test_citation_failure_downgrades_confirmed_verdict`
+- [x] 사용자 입력·공시 문서 인젝션 데이터 블록 격리 — S23 `sanitize_request`가 공시 문서를 `UntrustedBlock`으로 격리·delimiter 중화, API e2e에서 문서 인젝션이 결정론 판정에 개입 못 함 확인. `test_s23_llm_gate_coverage.py::test_disclosure_document_injection_is_isolated_as_untrusted_block`·`test_evidence_api.py::test_injection_in_document_does_not_change_verdict`
+- [x] secret·PII redaction, tool/schema allowlist, 공격 event trace — S23 `redact_secrets`·`detect_injection_patterns`·`run_structured`(schema allowlist blocked_fields) + `Evidence`/`StructuredClaim` `extra="forbid"`. `test_secret_in_user_input_is_redacted_and_traced`·`test_injection_pattern_detector_flags_override_attempts`
+- [x] S4·S7·S8·S11의 provider 직접 호출을 막고 모든 LLM 호출이 S23을 통과하는 테스트 — `test_s23_llm_gate_coverage.py`가 LLM 사용 모듈이 `app.providers.solar`를 직접 import하지 않고 게이트(`llm_security_gateway`)를 진입점으로 씀을 정적 검사(S7 `structured_claim_extractor`, S8 `evidence_orchestrator`). **한계**: S4(용어 설명, T08)·S11의 LLM 요약 경로는 아직 미구현이라 provider 호출 지점 자체가 없다 — 구현 시 `_LLM_SKILL_MODULES`에 추가해 같은 불변식을 강제한다(C7 mock 한계와 동일 분류)
+- [x] S17 충족률·예산·timeout 기준 최대 3회 재검색 종료 — `EvidenceOrchestrator._document_branch`가 `search_budget`(≤`MAX_SEARCH_ATTEMPTS`=3)·`timeout_seconds`·S18 coverage로 종료(LLM 자기확신도 미사용). `test_retry_loop_terminates_within_budget`
+
+**한계(BLOCKED 아님, 문서화)**: C9 16개는 전부 코드+정상/실패/공격 테스트로 완료했으나, dense 임베딩·S8 서술형 근거 의미 판정은 `UPSTAGE_API_KEY` 미발급으로 라이브 검증하지 못했다(docs/prerequisites.md T06·T07). T06 C7 선례와 동일하게 — 임베딩은 주입 가능한 결정론 로컬 provider(`HashingEmbeddingProvider`)로, 서술형 판정은 주입 가능한 `narrative_interpreter`(미주입 시 결정론 안전 경로)로 계약을 검증했고, 체크리스트 문구가 실 provider 캡처를 직접 요구하지 않아(T03/T05와 달리) BLOCKED가 아닌 한계로 분류했다. 키 발급 시 `SolarEmbeddingProvider`(공식 `/v1/embeddings` 계약, httpx mock 검증 완료) 라이브 호출을 캡처한다. CLAUDE.md 목표 스택의 Chroma·LangGraph 실바인딩은 사용자 결정(2026-07-15)에 따라 인터페이스·결정론 인메모리로 구현하고 T13(배포)·T11(통합)로 연기했다.
 
 ## C10. 기능 C 결과·체크리스트 [R10][S8·S9·S11][T07]
 
-- [ ] Claim별 5상태 verdict와 그룹 결과 API/UI
-- [ ] 계산식·지지·반증·상충·부족·검증불가 이유 표시
-- [ ] 검색 시도·필수 근거 충족 범위·rule/model version 표시
-- [ ] missing/conflicting evidence 기반 확인 체크리스트
-- [ ] 데이터 부재와 API 장애를 구분하고 provider 장애는 재검색 후에도 `EXTERNAL_ERROR`로 보존
-- [ ] 인용 원문 viewer와 출처·기준일 유지
-- [ ] 같은 입력 반복 결과 안정성·비결정 구간 trace
-- [ ] 근거 없음·의견을 거짓으로 표시하지 않는 테스트
+- [x] Claim별 5상태 verdict와 그룹 결과 API/UI — `POST /api/v1/evidence/verify`(`app/routers/evidence.py`, `claim_results`·`group_results`) + `src/components/EvidenceResult.jsx`(5상태 verdict 배지·그룹 판정). `test_evidence_api.py::test_verify_returns_supported_with_checklist`·`EvidenceResult.test.jsx`
+- [x] 계산식·지지·반증·상충·부족·검증불가 이유 표시 — payload `calculation`·`reason_code`·`missing_fields`·`conflicts` + UI `Calculation`·상충 note·사유. `EvidenceResult.test.jsx`
+- [x] 검색 시도·필수 근거 충족 범위·rule/model version 표시 — payload `search_attempts`·`evidence_plans`·`orchestrator_version` + UI 검색 시도 횟수·규칙 버전. `EvidenceResult.test.jsx`
+- [x] missing/conflicting evidence 기반 확인 체크리스트 — `app/services/checklist_generator.py`(S9, reason/missing/conflict → 확인 항목, 충족 항목은 미충족 표시 안 함, 주문·매수 문구 0건) + UI `Checklist`. `test_checklist_generator.py`
+- [x] 데이터 부재와 API 장애를 구분하고 provider 장애는 재검색 후에도 `EXTERNAL_ERROR`로 보존 — `EvidenceOrchestrator`가 `ProviderError`를 재검색 후에도 `EXTERNAL_ERROR`+reason_code로 보존, UI `ProviderError`가 "근거 부족"과 구분해 표시. `test_provider_fault_preserved_as_external_error`·`EvidenceResult.test.jsx`
+- [x] 인용 원문 viewer와 출처·기준일 유지 — payload `citations`(quote·source_url·filed_at·target_period·relation·method) + UI `Citation`(원문·출처 링크·기준일). `EvidenceResult.test.jsx`
+- [x] 같은 입력 반복 결과 안정성·비결정 구간 trace — `test_orchestration_is_deterministic`(동일 입력 동일 verdict·인용) + payload `search_logs`(검색 trace 노출). 결정론 경로에 비결정 구간이 없음
+- [x] 근거 없음·의견을 거짓으로 표시하지 않는 테스트 — S16이 OPINION/미래예측을 `UNVERIFIABLE`, 근거 부족을 `INSUFFICIENT_EVIDENCE`로 처리하고 UI가 이를 "반증됨"(거짓)으로 표시하지 않음. `EvidenceResult.test.jsx::does not render an opinion or missing-evidence claim as false`
 
 ## C11. 복기·가설 추적·사용자 데이터 정책 [R11][S10·S22][I10][T10]
 
