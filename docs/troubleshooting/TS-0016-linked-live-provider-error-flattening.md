@@ -70,8 +70,16 @@ launcher까지 전달해야 한다.
 의미를 검증한다. 구조는 유효하지만 의미가 다르면 `SEMANTIC_MISMATCH`이며 Provider
 unavailable로 기록하지 않는다.
 
-이 수정은 아직 구현되지 않았다. 안전한 failure summary의 인증·상태 전이와 report
-redaction을 별도 코드 PR에서 검증한 뒤에만 이 문서를 `verified`로 올린다.
+loopback Gateway는 이제 allowlist된 safe error code를 전용 response header에도 싣고,
+loopback test factory로 생성된 Java client만 해당 code를 허용 목록으로 매핑한다.
+`INVALID_RESPONSE`와 `PROVIDER_RESPONSE_TOO_LARGE`는 더 이상 일반 502 가용성 오류로
+평탄화되지 않는다. 직접 Provider runtime client는 이 header를 신뢰하지 않는다.
+
+Gateway 조건 응답 검증은 JSON Schema 인스턴스의 exact field·type·enum·길이·범위·배열
+상한으로 제한하고, fixture 의미 동치는 Java Live harness의 NFKC+유한 allowlist가
+검사한다. 따라서 구조가 유효한 동치 표현은 Java까지 전달되고 잘못된 의미는
+`SEMANTIC_MISMATCH`가 된다. 실제 Linked 성공과 후속 단계 전체 오류 요약은 별도 검증
+대상이므로 이 문서는 아직 `draft`다.
 
 ## 검증과 재발 방지
 
@@ -84,7 +92,8 @@ redaction을 별도 코드 PR에서 검증한 뒤에만 이 문서를 `verified`
 - 400·401·403·429
 - 실패 summary의 인증, 호출 예산과 raw body·message 비노출
 
-같은 SHA를 반복 호출하거나 실제 자격을 붙인 임의 `curl`로 진단하지 않는다. 수정 PR과
-Mock 회귀가 병합된 새 `origin/main` SHA에서만 Linked Live를 다시 한 번 승인한다. Elice
+실제 자격을 붙인 임의 `curl`이나 한 invocation 내부 HTTP retry로 진단하지 않는다.
+저장소 소유자가 승인한 pushed 검증 SHA에서는 새 Gateway와 독립 호출 예산으로 수동
+invocation을 반복할 수 있다. Elice
 관리 화면의 같은 시각 사용량을 사람이 대조할 수 있으면 upstream 도달 가설의 보조 증거로
 기록하되 token, request, response 또는 Provider 내부 식별자는 저장소에 남기지 않는다.

@@ -123,15 +123,17 @@ raw credential을 전달하지 않고 호출·데이터 범위를 Gateway가 강
 표준 `make check`와 CI에서는 실제 Provider 호출이 0건이어야 한다.
 
 실제 실행은 [RUN-0004](../runbooks/RUN-0004-recommendation-workflow-linked-live.md)에 따라
-병합된 정확한 `origin/main` SHA에서 한 번만 수행한다. 성공 전에는 PP-040·WI-0042와
-Linked 계약을 완료 처리하지 않는다.
+기본적으로 병합된 정확한 `origin/main` SHA에서 수행한다. 저장소 소유자가 반복 개발
+검증을 승인한 경우에는 exact allowlist 전용 branch의 clean·pushed SHA에서 독립
+invocation을 반복할 수 있다. 각 invocation의 9회 상한과 no-retry·no-redirect는 유지한다.
+성공 전에는 PP-040·WI-0042와 Linked 계약을 완료 처리하지 않는다.
 
 2026-07-15 21:10 KST 첫 실행은 SHA `541a98b3b73bfdaa3a1c7396aaea32ce410a7237`에서
 조건 추출 `PROVIDER_UNAVAILABLE`로 종료됐다. 같은 SHA에서 재실행하지 않았고 생성 report
 10개 안전 scan과 downstream 중단을 확인했다. 이는 fail-closed 결정이 작동한 제한된
 증거일 뿐 전체 Linked 성공, Provider 가용성 또는 약관 적합성 증거가 아니다. 현재 안전
-오류만으로 upstream 5xx와 전송·timeout을 구분할 수 없으므로 Mock 진단과 새 병합 SHA가
-후속 재검증 조건이다.
+오류만으로 upstream 5xx와 전송·timeout을 구분할 수 없으므로 Mock 진단과 검토·push된 새
+검증 SHA가 후속 재검증 조건이다.
 
 승인 범위 철회·변경, 주소 전달 불허, Elice 보관·학습 정책 변화, Provider endpoint·schema
 변화, 비밀·원문 노출 또는 호출 상한 초과가 관찰되면 즉시 실행을 중단하고 이 ADR을

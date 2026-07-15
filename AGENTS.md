@@ -40,6 +40,7 @@ Work Record가 있을 때만 구현한다. 구현·테스트·계약 문서는 �
 - 승인된 Elice 합성 계약: `make llm-live-contract`
 - 승인된 Split Live: `make workflow-live-probe APPROVED_SHA=<40자리-main-SHA>`
 - 승인된 Naver→Elice Linked Live: `make workflow-live-linked APPROVED_SHA=<40자리-main-SHA>`
+- 검토·push된 전용 브랜치 반복 Live: `make workflow-live-linked-dev APPROVED_SHA=<40자리-브랜치-SHA>`
 - 관측성: `make observe`
 - 부하 smoke: `make load-smoke`
 - 데이터 초기화: `make reset`

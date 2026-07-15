@@ -31,6 +31,7 @@ import com.placepick.recommendation.workflow.application.RecommendationCoreUseCa
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
+import java.text.Normalizer;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -62,6 +63,15 @@ class WorkflowLinkedLiveProbeTest {
         "naverLocal",
         "naverBlog",
         "reasonGeneration"
+    );
+    private static final Set<String> EQUIVALENT_LOCATIONS = Set.of(
+        "서울", "서울시", "서울특별시"
+    );
+    private static final Set<String> EQUIVALENT_PREFERENCES = Set.of(
+        "조용", "조용한", "조용함", "조용한 곳", "조용한 장소", "조용한 분위기"
+    );
+    private static final Set<String> EQUIVALENT_EXCLUSIONS = Set.of(
+        "흡연", "흡연 장소", "흡연 가능", "흡연 가능 장소"
     );
 
     @Test
@@ -231,18 +241,27 @@ class WorkflowLinkedLiveProbeTest {
         }
         DraftRecommendationCondition draft = extraction.condition();
         if (
-            !"서울".equals(draft.locationQuery()) ||
+            !equivalent(draft.locationQuery(), EQUIVALENT_LOCATIONS) ||
             draft.placeType() != PlaceType.CAFE ||
             draft.placeTypeDetail() != null || !Integer.valueOf(2).equals(draft.partySize()) ||
             draft.budgetPerPersonMin() != null ||
             !Integer.valueOf(20_000).equals(draft.budgetPerPersonMax()) ||
             draft.preferences().size() != 1 ||
-            !Set.of("조용한", "조용함", "조용").contains(
-                draft.preferences().get(0).value()
-            ) || draft.preferences().get(0).priority() != null ||
-            !draft.exclusions().equals(List.of("흡연"))) {
+            !equivalent(draft.preferences().get(0).value(), EQUIVALENT_PREFERENCES) ||
+            draft.preferences().get(0).priority() != null ||
+            draft.exclusions().size() != 1 ||
+            !equivalent(draft.exclusions().get(0), EQUIVALENT_EXCLUSIONS) ||
+            !extraction.warnings().isEmpty()) {
             throw safeFailure("conditionExtraction", "SEMANTIC_MISMATCH");
         }
+    }
+
+    private static boolean equivalent(String value, Set<String> allowlist) {
+        if (value == null) {
+            return false;
+        }
+        String normalized = Normalizer.normalize(value, Normalizer.Form.NFKC).strip();
+        return allowlist.contains(normalized);
     }
 
     private static ConfirmedRecommendationCondition confirmedFixture() {

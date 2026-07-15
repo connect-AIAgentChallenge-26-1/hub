@@ -20,12 +20,14 @@ related:
 paths:
   - build.gradle
   - backend/src/integrationTest/java/com/placepick/recommendation/**
+  - backend/src/integrationTest/java/com/placepick/infrastructure/external/llm/**
   - backend/src/workflowLiveLinkedTest/**
   - backend/build.gradle
   - backend/gradle.lockfile
   - backend/src/main/java/com/placepick/recommendation/application/candidate/**
   - backend/src/main/java/com/placepick/shared/text/**
   - backend/src/main/java/com/placepick/infrastructure/external/naver/NaverTextSanitizer.java
+  - backend/src/main/java/com/placepick/infrastructure/external/llm/**
   - backend/src/main/java/com/placepick/recommendation/reason/**
   - backend/src/test/java/com/placepick/recommendation/application/candidate/**
   - backend/src/test/java/com/placepick/infrastructure/external/naver/NaverTextSanitizerTest.java
@@ -79,8 +81,9 @@ Live를 정확히 한 번 실행했으나 안전한 실패 상태로 종료했�
 - Embedding 호출은 0회이며 추천·정렬·중복 제거에 사용하지 않는다.
 - retry·redirect는 0회이고 비밀, 검색 결과, prompt·completion과 전체 응답은 저장하지
   않는다.
-- 실제 성공은 harness가 병합된 깨끗한 `main`의 정확한 SHA에서 한 번 실행한 뒤에만
-  기록한다.
+- 실제 성공은 병합 `main` 또는 저장소 소유자가 명시적으로 승인하고 원격에 push한 전용
+  검증 브랜치의 깨끗한 정확한 SHA에서 기록한다. 같은 SHA의 수동 재실행은 허용하되 각
+  invocation은 새 Gateway·일회성 자격·6~9회 예산을 사용하고 HTTP retry는 0회다.
 
 ## 범위, 비범위와 제약
 
@@ -174,6 +177,20 @@ Linked Live 성공도 이 비범위가 구현되거나 운영 약관 준수와 �
     경로의 ignored 파일을 거부하고, 각 evidence 파일의 검색 종료 코드 0·1·기타를
     leak·미검출·scan 실패로 구분했다. 합성 성공 marker는 guard 내부에서만 캡처해 실제
     Live 성공처럼 표준 check 로그에 남지 않게 했다.
+16. 저장소 소유자는 Provider 호출 여유가 있으므로 merge-per-attempt 제한을 제거하고
+    실제 연결을 충분히 반복 검증하도록 승인했다. 기본 `main` 경계는 유지하면서
+    `feat/workflow-linked-live-validation`의 정확한 pushed SHA만 허용하는 development
+    명령을 추가했다. clean tree, `origin/main` ancestry, 원격 SHA 일치, Java 17·Node 24,
+    실행 source 주입 차단과 process lock은 그대로 적용한다. 같은 SHA 반복은 자동 HTTP
+    retry가 아니라 사용자가 시작한 서로 독립적인 invocation이다.
+17. 병합 SHA `69e95c62e72917804868bdb883fcb26f80c9e4cf`에서 두 번째 Linked 실행도
+    `conditionExtraction / PROVIDER_UNAVAILABLE`로 재현됐지만, 곧이어 Elice Chat·Embedding
+    개별 실제 계약은 성공했다. 이에 인증·routing 전체 장애와 제품형 조건 추출 문제를
+    분리했다. Gateway가 strict JSON 구조뿐 아니라 `서울`·`조용한`·`흡연`의 한 표현까지
+    강제해 동치 표현을 502로 바꾸고, Java가 그 safe code를 가용성 오류로 평탄화하는
+    결함을 확인했다. Gateway는 JSON Schema 인스턴스 구조만 검사하고 fixture 의미는
+    Java가 NFKC+유한 allowlist로 검사하도록 책임을 분리했다. loopback 전용 safe header의
+    고정 오류 code만 Java가 신뢰하며 원문 body는 읽거나 보존하지 않는다.
 
 ## 구현 결과와 검증 증거
 
@@ -263,8 +280,9 @@ safe summary를 직접 확인한다. 이번 작업에서 확인한 사람의 입
 ## 남은 위험과 학습
 
 실제 검색 분포에 따라 세 후보가 나오지 않거나 Blog·Elice가 실패할 수 있다. 이런 안전한
-종료는 제품 fallback 동작의 증거가 될 수 있지만 Linked Live 성공은 아니다. 같은 SHA의
-자동 재실행 대신 Mock에서 원인을 재현하고 새 코드가 병합된 새 SHA에서 다시 승인한다.
+종료는 제품 fallback 동작의 증거가 될 수 있지만 Linked Live 성공은 아니다. 같은 run의
+HTTP 자동 재시도는 금지한다. 원인을 Mock에서 재현해 새 clean commit으로 만든 뒤에는
+승인된 전용 검증 브랜치에서 새 invocation으로 다시 실행할 수 있다.
 
 첫 실제 실행은 검색 분포에 도달하기 전에 조건 추출 `PROVIDER_UNAVAILABLE`로 중단됐다.
 안전 오류의 세분성이 부족해 upstream 5xx와 전송·timeout을 구분하지 못한 점 자체를 후속

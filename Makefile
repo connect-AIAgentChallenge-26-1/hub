@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
-.PHONY: help setup up down run test integration eval edge-check actionlint naver-live-contract llm-live-contract workflow-live-probe workflow-live-linked check observe load-smoke reset
+.PHONY: help setup up down run test integration eval edge-check actionlint naver-live-contract llm-live-contract workflow-live-probe workflow-live-linked workflow-live-linked-dev check observe load-smoke reset
 
 help: ## Show the canonical development commands.
 	@awk 'BEGIN {FS = ":.*## "} /^[a-zA-Z0-9_-]+:.*## / {printf "\033[36m%-16s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -44,6 +44,9 @@ workflow-live-probe: ## Run the four-call split-provider live workflow probe for
 
 workflow-live-linked: ## Run the actual Naver-to-Elice linked workflow for an approved main SHA.
 	@bash scripts/workflow-live-linked.sh
+
+workflow-live-linked-dev: ## Re-run the reviewed linked workflow from the pushed validation branch.
+	@WORKFLOW_LINKED_EXECUTION_POLICY=development bash scripts/workflow-live-linked.sh
 
 check: ## Run policy, docs, Compose, shell, unit, integration, and eval checks once.
 	@bash scripts/check.sh

@@ -13,6 +13,7 @@ source "${ROOT_DIR}/scripts/lib/live-contract-env.sh"
 temp_dir=''
 gateway_pid=''
 gateway_started_pid=''
+lock_dir=''
 # shellcheck disable=SC2329,SC2317 # trap에서 간접 호출되는 정리 함수다.
 stop_gateway() {
   if [[ -n "${gateway_pid}" ]] && kill -0 "${gateway_pid}" 2>/dev/null; then
@@ -32,6 +33,8 @@ cleanup() {
   stop_gateway
   [[ -z "${temp_dir}" ]] || rm -rf -- "${temp_dir}" 2>/dev/null || true
   temp_dir=''
+  [[ -z "${lock_dir}" ]] || rmdir -- "${lock_dir}" 2>/dev/null || true
+  lock_dir=''
 }
 trap cleanup EXIT INT TERM
 
@@ -44,8 +47,29 @@ approved_sha="${APPROVED_SHA:-}"
   live_contract_fail "APPROVED_SHA must be an exact 40-character lowercase commit SHA."
 [[ "$(git -C "${ROOT_DIR}" rev-parse HEAD)" == "${approved_sha}" ]] ||
   live_contract_fail "APPROVED_SHA must exactly match HEAD."
-[[ "$(git -C "${ROOT_DIR}" rev-parse origin/main)" == "${approved_sha}" ]] ||
-  live_contract_fail "the probe is allowed only for the fetched origin/main SHA."
+execution_policy="${WORKFLOW_LINKED_EXECUTION_POLICY:-main}"
+case "${execution_policy}" in
+  main)
+    [[ "$(git -C "${ROOT_DIR}" rev-parse origin/main)" == "${approved_sha}" ]] ||
+      live_contract_fail "the probe is allowed only for the fetched origin/main SHA."
+    ;;
+  development)
+    readonly development_branch='feat/workflow-linked-live-validation'
+    current_branch="$(git -C "${ROOT_DIR}" symbolic-ref --quiet --short HEAD 2>/dev/null || true)"
+    [[ "${current_branch}" == "${development_branch}" ]] ||
+      live_contract_fail "development Live is allowed only on the dedicated validation branch."
+    remote_ref="refs/remotes/origin/${development_branch}"
+    git -C "${ROOT_DIR}" show-ref --verify --quiet "${remote_ref}" ||
+      live_contract_fail "the dedicated validation branch must be pushed before development Live."
+    [[ "$(git -C "${ROOT_DIR}" rev-parse "${remote_ref}")" == "${approved_sha}" ]] ||
+      live_contract_fail "APPROVED_SHA must match the pushed validation branch."
+    git -C "${ROOT_DIR}" merge-base --is-ancestor origin/main HEAD ||
+      live_contract_fail "the validation branch must descend from fetched origin/main."
+    ;;
+  *)
+    live_contract_fail "WORKFLOW_LINKED_EXECUTION_POLICY must be main or development."
+    ;;
+esac
 git -C "${ROOT_DIR}" diff --quiet -- ||
   live_contract_fail "tracked working tree changes must be absent."
 git -C "${ROOT_DIR}" diff --cached --quiet -- ||
@@ -73,6 +97,12 @@ fi
 mapfile -d '' -t ignored_execution_files < "${ignored_manifest}"
 (( ${#ignored_execution_files[@]} == 0 )) ||
   live_contract_fail "ignored files in executable source paths must be absent."
+
+git_dir="$(git -C "${ROOT_DIR}" rev-parse --absolute-git-dir)"
+lock_candidate="${git_dir}/placepick-workflow-live-linked.lock"
+mkdir -- "${lock_candidate}" 2>/dev/null ||
+  live_contract_fail "another linked Live workflow is already running."
+lock_dir="${lock_candidate}"
 
 command -v node >/dev/null 2>&1 || live_contract_fail "Node.js is required."
 command -v java >/dev/null 2>&1 || live_contract_fail "Java is required."

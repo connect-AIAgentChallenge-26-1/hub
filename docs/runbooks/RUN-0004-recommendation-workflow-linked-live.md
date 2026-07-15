@@ -23,7 +23,7 @@ related:
 ## 목적과 적용 조건
 
 고정 합성 사용자 입력을 실제 Elice 조건 추출, 실제 Naver Local·Blog, 제품 추천 core와
-실제 Elice 근거 이유 생성으로 연결해 핵심 Linked Live 경로를 한 번 검증하는 절차다.
+실제 Elice 근거 이유 생성으로 연결해 핵심 Linked Live 경로를 반복 가능하게 검증하는 절차다.
 이 Runbook은 harness의 자동 검증과 main 병합 뒤 실제 정상 실행이 끝나기 전까지
 `draft`다. 문서 존재만으로 Live 실행을 승인하지 않는다.
 
@@ -34,11 +34,12 @@ related:
 
 ## 사전 조건과 안전장치
 
-- PP-040 harness가 필수 CI를 통과해 `main`에 병합되고 전체 diff를 사람이 검토해야 한다.
-- `HEAD`, `origin/main`, `APPROVED_SHA`는 같은 정확한 40자리 commit이고 tracked tree가
-  깨끗해야 한다. 직접 하위의 미추적 `plans/*.md`만 보존할 수 있고 실행 입력으로
-  사용하지 않는다. 그 밖의 untracked 파일과 executable source 경로에서 ignore된 파일은
-  실행 전에 거부한다.
+- 기본 경로에서는 PP-040 harness가 필수 CI를 통과해 `main`에 병합되고 전체 diff를 사람이
+  검토해야 한다. 개발 반복 경로는 `feat/workflow-linked-live-validation` exact branch만
+  허용하며, `HEAD`, 원격 branch와 `APPROVED_SHA`가 같고 `origin/main`의 descendant여야 한다.
+- 두 경로 모두 tracked tree가 깨끗해야 한다. 직접 하위의 미추적 `plans/*.md`만 보존할 수
+  있고 실행 입력으로 사용하지 않는다. 그 밖의 untracked 파일과 executable source
+  경로에서 ignore된 파일은 실행 전에 거부한다.
 - Dev Container의 Java 17·Node 24에서 표준 `make check`가 먼저 통과해야 한다. Windows
   bind mount의 Gradle task output cache mode 문제가 재현되면 실패를 숨기거나 전체
   cache를 임의로 끄지 말고 TS-0013의 영구 정책이 적용됐는지 확인한다.
@@ -51,7 +52,8 @@ related:
   자격만 전달돼야 한다.
 - 실제 Provider 결과, 검색어, 장소명·주소·링크, prompt·completion과 전체 Elice routing
   URL을 console·JUnit·Gradle report·Git에 남기지 않는다.
-- 같은 SHA에서는 성공·실패와 관계없이 한 번만 실행한다.
+- 같은 SHA의 수동 재실행은 허용한다. 각 invocation은 새 process·port·일회성 자격과 독립
+  9회 상한을 가져야 하며, 한 invocation 내부 retry·redirect와 병렬 실행은 금지한다.
 
 ## 진단과 실행 절차
 
@@ -82,10 +84,17 @@ related:
 
    실제 Provider 호출 없이 다섯 Mock core 흐름, Linked source compile, Gateway·launcher
    음성 테스트와 secret scan이 모두 통과해야 한다.
-4. 승인할 40자리 `origin/main` SHA를 별도로 확인하고 전용 명령을 한 번 실행한다.
+4. 병합본 검증은 승인할 40자리 `origin/main` SHA로 실행한다.
 
    ```powershell
    make workflow-live-linked APPROVED_SHA=<40자리-origin/main-SHA>
+   ```
+
+   수정·재검증을 merge마다 끊지 않는 개발 경로는 전용 branch를 push한 정확한 SHA에서만
+   다음 명령으로 실행한다.
+
+   ```powershell
+   make workflow-live-linked-dev APPROVED_SHA=<40자리-pushed-validation-SHA>
    ```
 
 5. launcher는 임시 127.0.0.1 port와 256-bit local 자격을 만들고 Gateway를 시작한다.
@@ -126,7 +135,7 @@ safe summary 형식만 포함하는지 별도로 확인한다. 예상하지 않�
 | SHA·diff·CI guard 실패 | Provider를 호출하지 않고 깨끗한 병합 main을 준비한다. |
 | 환경 parsing·Git ignore 실패 | 값을 출력하지 않고 allowlist·누락·placeholder와 ignore 규칙만 수정한다. |
 | 조건 추출 의미·schema 실패 | Draft를 자동 보정·확정하지 않고 안전한 오류만 기록한다. |
-| 조건 추출 `PROVIDER_UNAVAILABLE` | 사용자 확인·Naver·Blog·이유 단계를 진행하지 않는다. 같은 SHA 재실행 없이 Mock에서 5xx와 전송 실패를 분리한다. |
+| 조건 추출 `PROVIDER_UNAVAILABLE` | 사용자 확인·Naver·Blog·이유 단계를 진행하지 않는다. Mock에서 5xx와 전송 실패를 분리한 뒤 새 독립 invocation을 승인한다. |
 | Local 후 한 번 완화해도 후보 3개 미만 | `INSUFFICIENT_CANDIDATES`로 종료하고 Blog·이유를 호출하지 않는다. |
 | Blog Provider 오류 | Gateway가 phase를 `failed`로 바꾸고 이후 Java 이유 요청을 409로 막아 실제 Elice upstream 호출을 0으로 유지한다. core의 degraded·fallback 결과도 Linked 성공으로 처리하지 않는다. |
 | 정상 Blog 응답이지만 연결 근거 0건 | 이유 provenance 검증 전에 중단하고 Linked 성공으로 처리하지 않는다. |
@@ -139,9 +148,9 @@ safe summary 형식만 포함하는지 별도로 확인한다. 예상하지 않�
 | report 파일 읽기·검색 실패 | 미검출로 간주하지 않고 scan 실패로 중단한다. |
 | cleanup 실패 | local process를 중지하고 임시 자격·파일을 제거한 뒤 Mock으로 원인을 재현한다. |
 
-실패 뒤 실제 자격을 붙인 임의 `curl`, URL 변경, schema 완화 또는 같은 SHA 반복 실행으로
+실패 뒤 실제 자격을 붙인 임의 `curl`, URL 변경 또는 계약을 약화하는 schema 완화로
 진단하지 않는다. 안전한 stage·오류 code만 남기고 원인을 Mock에서 먼저 재현한다. 수정은
-새 PR로 병합한 새 `main` SHA에서 별도 승인을 받아 한 번 검증한다.
+검토·commit·push한 전용 branch의 새 SHA에서 별도 invocation으로 검증할 수 있다.
 
 ## 실행 이력
 

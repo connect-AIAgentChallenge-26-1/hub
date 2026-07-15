@@ -136,6 +136,38 @@ class EliceConditionExtractionClientIntegrationTest {
         verifyOneRequest();
     }
 
+    @Test
+    void preservesAllowlistedLoopbackGatewayFailureWithoutReadingProviderPayload() {
+        WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH)).willReturn(aResponse()
+            .withStatus(502)
+            .withHeader("Content-Type", "application/problem+json")
+            .withHeader("X-PlacePick-Linked-Error-Code", "INVALID_RESPONSE")
+            .withBody("{\"secret\":\"must-not-escape\"}")));
+
+        var outcome = client.extract(command());
+
+        assertThat(outcome.errorCode())
+            .isEqualTo(ConditionExtractionErrorCode.PROVIDER_INVALID_RESPONSE);
+        assertThat(outcome.condition()).isNull();
+        verifyOneRequest();
+    }
+
+    @Test
+    void ignoresUnknownLoopbackGatewayFailureCodeAndUsesHttpStatus() {
+        WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH)).willReturn(aResponse()
+            .withStatus(502)
+            .withHeader("Content-Type", "application/problem+json")
+            .withHeader("X-PlacePick-Linked-Error-Code", "UNTRUSTED_VALUE")
+            .withBody("{\"secret\":\"must-not-escape\"}")));
+
+        var outcome = client.extract(command());
+
+        assertThat(outcome.errorCode())
+            .isEqualTo(ConditionExtractionErrorCode.PROVIDER_UNAVAILABLE);
+        assertThat(outcome.condition()).isNull();
+        verifyOneRequest();
+    }
+
     @ParameterizedTest(name = "[{index}] rejects {0}")
     @MethodSource("invalidResponses")
     void rejectsMalformedRefusedIncompleteOrSchemaDrift(String name, String response) {

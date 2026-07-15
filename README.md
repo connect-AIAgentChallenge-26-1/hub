@@ -78,6 +78,7 @@ make load-smoke
 | `make llm-live-contract` | 별도 승인 후 Elice 합성 Chat·Embedding 계약을 각 1회 검증 |
 | `make workflow-live-probe APPROVED_SHA=<sha>` | 병합 main에서 네 Provider를 분리 호출하는 Split Live |
 | `make workflow-live-linked APPROVED_SHA=<sha>` | 병합 main에서 실제 Naver→Elice 핵심 경로를 한 번 검증 |
+| `make workflow-live-linked-dev APPROVED_SHA=<sha>` | 검토·push된 전용 검증 브랜치에서 실제 경로를 독립적으로 재검증 |
 | `make down` | 로컬 서비스 종료 |
 | `make reset` | 확인 후 로컬 데이터 볼륨 초기화 |
 

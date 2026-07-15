@@ -226,6 +226,7 @@ git -C "${TEST_ROOT}" config user.name 'Workflow Guard'
 git -C "${TEST_ROOT}" add .gitignore scripts edge node_modules/.bin/wrangler gradlew fake-bin
 git -C "${TEST_ROOT}" commit --quiet -m 'guard fixture'
 head_sha="$(git -C "${TEST_ROOT}" rev-parse HEAD)"
+fixture_branch="$(git -C "${TEST_ROOT}" branch --show-current)"
 git -C "${TEST_ROOT}" update-ref refs/remotes/origin/main "${head_sha}"
 
 common_env=(
@@ -265,7 +266,47 @@ feature_sha="$(git -C "${TEST_ROOT}" rev-parse HEAD)"
 expect_failure "allowed only for the fetched origin/main SHA" \
   "${common_env[@]}" APPROVED_SHA="${feature_sha}" \
     bash "${TEST_ROOT}/scripts/workflow-live-linked.sh"
+
+git -C "${TEST_ROOT}" branch -m feat/workflow-linked-live-validation
+git -C "${TEST_ROOT}" update-ref \
+  refs/remotes/origin/feat/workflow-linked-live-validation "${feature_sha}"
+development_output="$(
+  "${common_env[@]}" WORKFLOW_LINKED_EXECUTION_POLICY=development \
+    APPROVED_SHA="${feature_sha}" bash "${TEST_ROOT}/scripts/workflow-live-linked.sh" 2>&1
+)" || fail "the reviewed development Live fixture failed."
+assert_fake_cleanup
+[[ "${development_output}" == *"WORKFLOW_LINKED mode=linked linked=true status=passed"* ]] ||
+  fail "the development Live success marker was not produced."
+
+# 같은 pushed SHA의 수동 재실행은 허용하되 invocation마다 Gateway와 자격을 새로 만든다.
+development_repeat_output="$(
+  "${common_env[@]}" WORKFLOW_LINKED_EXECUTION_POLICY=development \
+    APPROVED_SHA="${feature_sha}" bash "${TEST_ROOT}/scripts/workflow-live-linked.sh" 2>&1
+)" || fail "the explicit same-SHA development Live repeat failed."
+assert_fake_cleanup
+[[ "${development_repeat_output}" == *"cleanup=true"* ]] ||
+  fail "the repeated development Live run did not clean up."
+
+expect_failure "must be main or development" \
+  "${common_env[@]}" WORKFLOW_LINKED_EXECUTION_POLICY=unknown \
+    APPROVED_SHA="${feature_sha}" bash "${TEST_ROOT}/scripts/workflow-live-linked.sh"
+git -C "${TEST_ROOT}" update-ref \
+  refs/remotes/origin/feat/workflow-linked-live-validation "${head_sha}"
+expect_failure "must match the pushed validation branch" \
+  "${common_env[@]}" WORKFLOW_LINKED_EXECUTION_POLICY=development \
+    APPROVED_SHA="${feature_sha}" bash "${TEST_ROOT}/scripts/workflow-live-linked.sh"
+git -C "${TEST_ROOT}" update-ref \
+  refs/remotes/origin/feat/workflow-linked-live-validation "${feature_sha}"
+mkdir "${TEST_ROOT}/.git/placepick-workflow-live-linked.lock"
+expect_failure "another linked Live workflow is already running" \
+  "${common_env[@]}" WORKFLOW_LINKED_EXECUTION_POLICY=development \
+    APPROVED_SHA="${feature_sha}" bash "${TEST_ROOT}/scripts/workflow-live-linked.sh"
+rmdir "${TEST_ROOT}/.git/placepick-workflow-live-linked.lock"
+
 git -C "${TEST_ROOT}" reset --quiet --hard "${head_sha}"
+git -C "${TEST_ROOT}" branch -m "${fixture_branch}"
+git -C "${TEST_ROOT}" update-ref -d \
+  refs/remotes/origin/feat/workflow-linked-live-validation
 
 mkdir -p "${TEST_ROOT}/backend/src/workflowLiveLinkedTest/java/example"
 printf 'final class UntrackedInjection {}\n' \
