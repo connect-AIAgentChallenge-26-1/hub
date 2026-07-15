@@ -19,7 +19,7 @@ final class LinkedDraftSemanticVerifier {
         LinkedWorkflowScenario.ExpectedDraft expected
     ) {
         if (!equivalent(draft.locationQuery(), expected.locationAliases())) {
-            return "SEMANTIC_LOCATION_MISMATCH";
+            return locationMismatchCode(draft.locationQuery(), expected.locationAliases());
         }
         if (draft.placeType() != expected.placeType()) {
             return "SEMANTIC_PLACE_TYPE_MISMATCH";
@@ -66,7 +66,30 @@ final class LinkedDraftSemanticVerifier {
         if (value == null) {
             return false;
         }
-        String normalized = Normalizer.normalize(value, Normalizer.Form.NFKC).strip();
-        return allowlist.contains(normalized);
+        return allowlist.contains(normalize(value));
+    }
+
+    private static String locationMismatchCode(String value, Set<String> allowlist) {
+        if (value == null) {
+            return "SEMANTIC_LOCATION_MISSING";
+        }
+        String normalized = normalize(value);
+        Set<String> finiteSuffixes = Set.of("에서", "지역", "전역", "일대", "권역");
+        if (allowlist.stream().anyMatch(alias -> finiteSuffixes.stream()
+            .anyMatch(suffix -> normalized.equals(alias + suffix)))) {
+            return "SEMANTIC_LOCATION_EQUIVALENT_SUFFIX";
+        }
+        if (allowlist.stream().anyMatch(alias ->
+            normalized.startsWith(alias + " ") || normalized.endsWith(" " + alias))) {
+            return "SEMANTIC_LOCATION_EXTRA_TOKENS";
+        }
+        if (allowlist.stream().anyMatch(normalized::contains)) {
+            return "SEMANTIC_LOCATION_EMBEDDED_TOKEN";
+        }
+        return "SEMANTIC_LOCATION_UNRELATED";
+    }
+
+    private static String normalize(String value) {
+        return Normalizer.normalize(value, Normalizer.Form.NFKC).strip();
     }
 }
