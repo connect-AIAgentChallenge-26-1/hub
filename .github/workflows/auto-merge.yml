@@ -1,4 +1,4 @@
-name: "PR merge on time v3.3 by crong"
+name: "PR merge on time v3.4 by crong"
 
 on:
   schedule:
@@ -62,15 +62,27 @@ jobs:
             }
 
             // ---------- predicates ----------
-            const isTargetingMain     = (pr) => pr.baseRefName === "main";
-            const hasReviewLabel      = (pr) => pr.labels.nodes.some(l => l.name.toLowerCase() === "review");
-            const isChangesRequested  = (pr) => pr.reviews?.nodes?.[0]?.state === "CHANGES_REQUESTED";
-            const isConflicting       = (pr) => pr.mergeable === "CONFLICTING";
-            const isUnknown           = (pr) => pr.mergeable === "UNKNOWN";
+            const hasLabel = (pr, labelName) =>
+              pr.labels.nodes.some(l => l.name.toLowerCase() === labelName);
+
+            const hasAllowMainLabel  = (pr) => hasLabel(pr, "allow-main");
+            const isTargetingMain    = (pr) => pr.baseRefName === "main" && !hasAllowMainLabel(pr);
+            const hasReviewLabel     = (pr) => hasLabel(pr, "review");
+            const isChangesRequested = (pr) => pr.reviews?.nodes?.[0]?.state === "CHANGES_REQUESTED";
+            const isConflicting      = (pr) => pr.mergeable === "CONFLICTING";
+            const isUnknown          = (pr) => pr.mergeable === "UNKNOWN";
 
             // ---------- actions ----------
-            async function skipMain(pr) {
-              await comment(pr, "main 브랜치로 병합 시도");
+            async function closeMain(pr) {
+              try {
+                await closePR(pr);
+                await comment(
+                  pr,
+                  "main 브랜치 대상 PR은 자동 병합 대상이 아닙니다. 본인 브랜치/지정된 제출 흐름으로 다시 PR을 보내주세요."
+                );
+              } catch (e) {
+                console.log(`PR #${pr.number} main 대상 close 처리 실패:`, e);
+              }
             }
 
             async function skipReviewLabel(pr) {
@@ -78,7 +90,7 @@ jobs:
             }
 
             async function skipUnknown(pr) {
-                await comment(pr, "머지 가능 여부 확인 중이라 다음 실행에서 재시도합니다.");
+              await comment(pr, "머지 가능 여부 확인 중이라 다음 실행에서 재시도합니다.");
             }
 
             async function deferChangesRequested(pr) {
@@ -105,11 +117,11 @@ jobs:
 
             // ---------- rules (배열 순서 = 우선순위) ----------
             const rules = [
-              { name: "main 브랜치 타겟 → 스킵",   match: isTargetingMain,     run: skipMain              },
-              { name: "review 라벨 → 스킵",        match: hasReviewLabel,      run: skipReviewLabel       },
-              { name: "변경 요청 상태 → 연기",     match: isChangesRequested,  run: deferChangesRequested },
+              { name: "main 브랜치 타겟 → close", match: isTargetingMain, run: closeMain },
+              { name: "review 라벨 → 스킵", match: hasReviewLabel, run: skipReviewLabel },
+              { name: "변경 요청 상태 → 연기", match: isChangesRequested, run: deferChangesRequested },
               { name: "머지 상태 확인 중 → 스킵", match: isUnknown, run: skipUnknown },
-              { name: "충돌 → close",              match: isConflicting,       run: closeOnConflict       }
+              { name: "충돌 → close", match: isConflicting, run: closeOnConflict }
             ];
             const defaultRule = { name: "조건 통과 → 머지", match: () => true, run: mergeIfReady };
 
