@@ -79,14 +79,27 @@ Envelope<T> {
 
 ```text
 claim_id:string, claim_group_id?:string, original_span:string,
-corp_code:string, stock_code:string, claim_type:string, metric:string,
+corp_code:string, stock_code:string,
+claim_type:string(OPINION/FUTURE_PREDICTION/NUMERIC/COMPARISON/NEGATION/CONDITIONAL),
+metric:string,
 evidence_domain:string(financial/market/flow/valuation/peer),
 comparison_entity_ref?:string, peer_universe_ref?:string,
-comparator:object{op:string, target_value:number, target_unit:string,
-                   tolerance_value?:number, tolerance_unit?:string},
+comparator:object{
+  op:string(THRESHOLD/INCREASE/DECREASE/MULTIPLE/RATIO/CONTINUITY),
+  comparison_operator:string(GTE/LTE/GT/LT/EQ),
+  target_value:number, target_unit:string,
+  continuity_direction?:string(INCREASE/DECREASE),
+  tolerance_value?:number, tolerance_unit?:string
+},
 direction:string, current_period:string, comparison_period:string,
 as_of:string, verifiable:boolean, ambiguity_flags:string[], condition?:string
 ```
+
+`claim_type`은 S7이 문장을 분류하는 6종이다(docs/checklist.md C7 "의견·미래 예측·수치·비교·부정·조건문 분류"). `OPINION`·`FUTURE_PREDICTION`은 S17이 필수 근거를 아예 요구하지 않고 S16이 바로 `UNVERIFIABLE`로 판정한다(사실 주장이 아니므로 검증 대상이 아님). `CONDITIONAL`은 조건 자체를 평가하는 스킬이 아직 없어 `INSUFFICIENT_EVIDENCE`로 처리한다(임의 추정 금지, 조건 평가 스킬이 생기면 이 규칙을 교체한다).
+
+`comparator.op`은 docs/checklist.md C8 "증가·감소·배수·비율·연속성 comparator"의 5종 + 단순 값 비교(`THRESHOLD`)다. `comparison_operator`가 `target_value`에 적용되는 관계 연산자다 — 예: "영업이익 배수가 2배 이상"은 `{op: MULTIPLE, comparison_operator: GTE, target_value: 2}`, 실제 1.38배는 `comparison_operator` 판정이 거짓이라 `REFUTED`다(원자 결과는 근접해도 완화하지 않는다, "Verdict" 절 참고). `op=CONTINUITY`(예: "3분기 연속 증가")만 `continuity_direction`을 함께 쓴다.
+
+S7·S16이 이 두 필드를 `Literal` enum으로 강제하며, 목록 밖 값은 LLM 출력이든 어디서 오든 schema 단계에서 거부한다(C7 "schema allowlist, 허용 필드 밖 출력 차단"). `StructuredClaim`·`Comparator`는 선언되지 않은 추가 필드도 함께 거부한다(`extra=forbid`, Python `model_config`/JS `validateShape`의 strict 모드).
 
 ### Financial Fact
 
@@ -151,6 +164,7 @@ Envelope는 `schema_version`, Claim·Fact·Evidence·Numeric Evidence 등 개별
 |---|---|---|---|
 | 2026-07-12 | `contracts/schemas.js` (StructuredClaim·FinancialFact·RawSourceRecord·Evidence·NumericEvidence) | 필드 존재만 검사하던 것을 타입·enum·날짜 형식·comparator 중첩 구조까지 검증하도록 강화 | **pre-release 보정, 버전 유지(1.0.0)**. 아직 어떤 실제 provider·DB row·저장된 snapshot도 이 schema로 생성되지 않았다(T02 이후 착수). 소급 적용될 기존 데이터가 없으므로 이번 강화는 "breaking 변경"이 아니라 최초 명세의 누락을 메우는 보정이다. T02에서 실제 데이터가 쌓이기 시작한 뒤 같은 종류의 강화가 필요하면 그때는 MAJOR를 올린다. |
 | 2026-07-12 | Envelope `started_at`/`completed_at` | RFC3339 timestamp에 offset(`Z`/`±HH:MM`) 필수 조건을 명시하고 JS/Python 양쪽에 강제 | **pre-release 보정, 버전 유지(1.0.0)**. 위와 동일 사유 — 저장된 실제 응답이 없다. |
+| 2026-07-14 | `contracts/schemas.js` `STRUCTURED_CLAIM_SPEC`(`claim_type`·`comparator.op`·`comparator.comparison_operator`) | 자유 문자열이던 `claim_type`·`comparator.op`을 6종/6종 `Literal` enum으로 강제하고 `comparator.comparison_operator`(관계 연산자)·`continuity_direction`을 신설, `validateShape`에 `strict` allowlist 모드 추가(Python `model_config=ConfigDict(extra="forbid")`와 동일 계약) | **pre-release 보정, 버전 유지(1.0.0)**. T03에서 S14 입력 계약을 위해 typed 계약만 먼저 도입했을 뿐 S7(T06) 구현 전이라 이 필드로 생성된 실제 StructuredClaim이 아직 없다(S14 COLLECT는 `claim.metric`/`claim.current_period`만 읽고 이 두 필드는 쓰지 않아 영향 없음). T06에서 S7이 이 필드를 처음 채우므로 지금 강화가 최초 명세를 완성하는 것이지 기존 데이터를 깨는 breaking 변경이 아니다. |
 
 ## 금융 데이터 정합성 계약
 

@@ -21,7 +21,7 @@
 | T03 | 시세·외부 근거 수집 | S13·S14, 시세·거래일·기업행위, 뉴스·공식 외부 근거 provider와 라이선스 | T02 | C3 통과 | BLOCKED(좁혀짐) |
 | T04 | Temporal Integrity·재무 계산 | S15·S3, as_of·정정·잠정/확정·CFS/OFS·누적/단일·단위·기업행위, 파생 지표 | T02·T03 | C4 통과 | 완료 |
 | T05 | I9 평가 기반 | versioned golden set, record/replay fixture, unit·contract·integration scorer, threshold registry, CI report | T00·T01 | C12-A 통과 | BLOCKED(좁혀짐) |
-| T06 | 기능 C 숫자 검증 | S7·S16·S17, Structured Claim, 5 verdict, evidence plan, 결정론 검산, Claim 편집 | T04·T05 | C7·C8 통과 | 대기 |
+| T06 | 기능 C 숫자 검증 | S7·S16·S17, Structured Claim, 5 verdict, evidence plan, 결정론 검산, Claim 편집 | T04·T05 | C7·C8 통과 | 완료 |
 | T07 | 기능 C RAG·반증·인용 | S18·S19·S20·S23·S8·S9·S11, hybrid RAG, counter evidence, citation gate, injection defense, 3회 제한 루프·체크리스트·결과 UI | T02·T03·T06 | C9·C10 통과 | 대기 |
 | T08 | 기능 A 종목 공부 | S4·S11, 기업개요·공시·지표·용어·확인 포인트·원문 viewer | T04·T07 | C5 통과 | 대기 |
 | T09 | 기능 B 가치·가격 위치 | S5·S6·S21, 복수 valuation, 비교군, 민감도, 중립 가격 위치 | T03·T04·T05 | C6 통과 | 대기 |
@@ -119,6 +119,14 @@
 - 뉴스·테마·공시 이벤트 Claim은 허용 provider와 S18 RAG로 검증한다.
 - S17의 필수 근거 충족률이 재검색·종료 기준이며 LLM 자기확신도는 사용하지 않는다.
 - 지지 검색과 반증 검색을 모두 수행하고 S20 인용 gate를 통과한 근거만 판정에 쓴다.
+
+**T06 착수 판단 (2026-07-14)**: 형식적 선행조건은 `T04·T05`이고 T05는 `완료`가 아니라 `BLOCKED(좁혀짐)`다. 그러나 T05의 남은 BLOCKED 항목은 C12-A 9개 중 "LLM(Solar)용 record/replay fixture" 1개뿐이며, 이는 T06이 S7을 구현하며 처음 만드는 Solar 호출 경로에 대한 fixture다 — T06이 그 산출물 자체이므로 선행조건이 될 수 없다(순환 의존이 아니라 "아직 존재하지 않는 것을 fixture로 요구할 수 없다"는 논리적 선후 관계). T05의 나머지 8개 항목(golden dataset·threshold registry·scorer·report·harness gate)은 이미 완료 상태이고 T06이 실제로 그 인프라를 소비하지도 않는다(T06은 checklist.md C7·C8만 충족하면 되고 I9 평가 harness와 직접 연동하지 않는다 — 연동은 T12). 사용자가 이 판단으로 T06 진행을 직접 지시했다(T04의 유사 판단·T05 backlog 기록의 "대안 경로"와 동일 논리).
+- **구현**: S16(`app/services/deterministic_verifier.py`)·S17(`app/services/evidence_planner.py`)·`app/services/verdict_aggregator.py`(`contracts/verdict.js` Python 미러)는 LLM 의존이 전혀 없어 완전히 구현·테스트했다(C8 11개 항목 전부, 51+25=76개 관련 backend pytest). S23(`app/services/llm_security_gateway.py`)·S7(`app/services/structured_claim_extractor.py`, `app/providers/solar.py`)은 실제 Solar HTTP 계약(엔드포인트·에러 status·Structured Outputs shape)을 2026-07-14 WebSearch로 공식 문서(console.upstage.ai/api/chat, console.upstage.ai/api/docs/for-agents/raw) 조사 후 구현했고, httpx `MockTransport`/주입 가능한 `complete_structured` 콜백으로 스키마 검증·grounding·injection 방어·malformed output·timeout·retry를 전부 실제로 검증했다(라이브 호출만 미검증, checklist.md C7 "한계" 참고). `POST /api/v1/claims/extract`·`POST /api/v1/claims/verify`(`app/routers/claims.py`) FastAPI 라우터와 e2e 테스트(mocked Solar 전체 파이프라인, 1.38배 REFUTED API 레벨 재현, 그룹 PARTIALLY_SUPPORTED, 모호 항목 미확인 시 UNVERIFIABLE, 모호 근거 후보 422 포함) 10건. F9 progressive disclosure는 Python(`claim_disclosure.py`)·JS(`contracts/disclosure.js`) 양쪽에 동일 계약으로 구현하고 `src/components/ClaimDisclosure.jsx`(React, 요약 카드/객관식 확인 질문) + 테스트로 마무리했다. `StructuredClaim`/`Comparator`를 `claim_type`(6종)·`comparator.op`(6종)·`comparison_operator`(5종) `Literal` enum + `extra="forbid"`로 강화(JS `contracts/schemas.js`도 `strict` allowlist 모드 신설, 양쪽 동일 계약 테스트) — `docs/skills.md` "Structured Claim" 절과 migration 기록에 문서 먼저 원칙으로 반영.
+- **부수 수정**: `src/test/setup.js`에 `afterEach(cleanup)`이 없어 vitest `globals:false` 환경에서 파일 내 여러 테스트의 render() 출력이 DOM에 누적되던 결함을 새 컴포넌트 테스트 작성 중 발견·수정(다른 모든 프론트엔드 테스트에도 영향, 회귀 없음을 전체 스위트 재실행으로 확인). `test_external_evidence_api.py`/`test_external_evidence_collector.py`의 `_claim_json`/`_claim` fixture가 구 `comparator.op`("`>`") 형식이라 새 enum 강화로 깨진 것을 발견·수정.
+- **검증**: `./scripts/verify.sh` 전체(frontend 178 tests + backend 324 tests + I9 eval 16개 metric 전부 PASS + npm/pip audit 0건 + gitleaks 30 commits clean) green. checklist.md C7 9개·C8 11개 항목 전부 체크.
+- **범위 판단**: backlog.md 표의 T06 설명에 있는 "Claim 편집"은 checklist.md C7·C8에 별도 체크박스로 없다 — instructions.md 우선순위(skills.md·checklist.md > backlog.md)에 따라 C7의 F9 확인 질문 UI(모호 항목에 한해 객관식으로 확인/거부)를 그 요구의 실제 충족으로 판단했다. 자유 편집 텍스트박스 형태의 전체 Claim 편집기는 만들지 않았다 — 필요하면 T08·T11(전체 UI 통합)에서 확장한다.
+- **여전히 BLOCKED인 부분**: 없음(C7·C8 전부 완료). checklist.md C7에 문서화된 "한계"(Solar 라이브 호출 미검증)는 BLOCKED가 아니라 후속 검증 필요 항목으로 분류했다 — 판단 근거는 checklist.md C7 하단 노트 참고.
+- **GPT 리뷰 요청**: (1) C7을 "완료"로 체크하면서 Solar 라이브 호출을 BLOCKED가 아닌 "한계"로 분류한 판단이 타당한지(checklist item 1이 "provider mock"을 명시했다는 근거로), 아니면 T03·T05 선례처럼 BLOCKED로 더 보수적으로 분류해야 하는지. (2) T05가 완료가 아닌 상태에서 T06에 착수한 판단(위 "T06 착수 판단" 문단)이 타당한지. (3) `deterministic_verifier.py`의 부호 전환 처리 범위가 MULTIPLE뿐 아니라 INCREASE/DECREASE까지 동일 규칙(`RATIO_UNDEFINED_SIGN_CHANGE`)을 적용한 것이 checklist.md C8 "부호 전환 배수" 문구의 의도(배수만 언급)를 벗어난 확대 해석인지.
 
 ### T08·T09. 기능 A·B
 

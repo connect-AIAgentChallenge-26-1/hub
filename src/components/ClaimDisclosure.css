@@ -1,0 +1,65 @@
+.claim-disclosure {
+  --cd-paper: #f5f2e9;
+  --cd-line: #c7bfa9;
+  --cd-ink: #1e1b16;
+  --cd-ink-soft: #5b5546;
+  --cd-accent: #3e6b54;
+
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-family: 'IBM Plex Sans KR', system-ui, -apple-system, sans-serif;
+  color: var(--cd-ink);
+}
+
+@media (prefers-color-scheme: dark) {
+  .claim-disclosure {
+    --cd-paper: #211d15;
+    --cd-line: #3b3527;
+    --cd-ink: #ece6d6;
+    --cd-ink-soft: #a79c82;
+    --cd-accent: #6fae8b;
+  }
+}
+
+.claim-disclosure-card {
+  background: var(--cd-paper);
+  border: 1px solid var(--cd-line);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+}
+
+.claim-disclosure-card--confirm {
+  border-left: 3px solid var(--cd-accent);
+}
+
+.claim-disclosure-span {
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.claim-disclosure-hint {
+  color: var(--cd-ink-soft);
+  font-size: 0.875rem;
+  margin: 0.5rem 0 0;
+}
+
+.claim-disclosure-question {
+  border: none;
+  padding: 0.5rem 0 0;
+  margin: 0.5rem 0 0;
+}
+
+.claim-disclosure-question legend {
+  font-size: 0.9rem;
+  padding: 0;
+  margin: 0 0 0.35rem;
+}
+
+.claim-disclosure-question label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-right: 1rem;
+  font-size: 0.9rem;
+}

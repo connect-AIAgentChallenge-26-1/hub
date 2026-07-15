@@ -5,6 +5,7 @@ from app.middleware import RequestContextMiddleware
 from app.observability import configure_logging, latest_metrics
 from app.routers import (
     auth,
+    claims,
     companies,
     disclosures,
     external_evidence,
@@ -28,6 +29,7 @@ def create_app() -> FastAPI:
     app.include_router(external_evidence.router)
     app.include_router(temporal_integrity.router)
     app.include_router(financial_facts.router)
+    app.include_router(claims.router)
 
     @app.get("/api/v1/health", response_model=Envelope[dict[str, bool]])
     def health(request: Request) -> Envelope[dict[str, bool]]:

@@ -22,10 +22,12 @@ def _claim(**overrides: object) -> StructuredClaim:
         original_span="삼성전자 영업이익이 전분기 대비 늘었다",
         corp_code="00126380",
         stock_code="005930",
-        claim_type="NUMERIC_COMPARISON",
+        claim_type="COMPARISON",
         metric="영업이익",
         evidence_domain="financial",
-        comparator=Comparator(op=">", target_value=0, target_unit="KRW"),
+        comparator=Comparator(
+            op="THRESHOLD", comparison_operator="GT", target_value=0, target_unit="KRW"
+        ),
         direction="INCREASE",
         current_period="2026Q2",
         comparison_period="2026Q1",
@@ -73,6 +75,19 @@ def test_collect_news_stores_query_and_raw_record(db_session):
     assert record.query == "삼성전자 영업이익 2026Q2"
     assert record.claim_id == "claim-1"
     assert record.checksum
+
+
+def test_collect_news_cannot_run_without_a_structured_claim(db_session):
+    # docs/checklist.md C7 "S14 외부 근거 수집이 S7 StructuredClaim 이후에만
+    # 실행되는 contract test" — S14.collect_news는 StructuredClaim이 없으면
+    # 검색어 자체를 만들 수 없다(build_news_query가 claim.metric/current_period
+    # 속성 접근에 의존). S7이 아직 유효한 Claim을 만들지 못한 상태(예: dict를
+    # 그대로 넘김)를 흉내내면 즉시 AttributeError로 막힌다 — 조용히 빈 검색어로
+    # 진행하지 않는다.
+    collector, _ = _collector(db_session, [])
+    not_a_claim = {"metric": "영업이익", "current_period": "2026Q2"}
+    with pytest.raises(AttributeError):
+        collector.collect_news(not_a_claim, "삼성전자")  # type: ignore[arg-type]
 
 
 def _stored_raw_record(db_session: Session, payload: dict[str, Any]) -> RawExternalRecord:

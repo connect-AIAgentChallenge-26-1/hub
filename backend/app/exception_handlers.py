@@ -14,6 +14,8 @@ from app.dependencies import NotAuthenticatedError
 from app.providers.base import ProviderError, map_provider_error
 from app.repositories.user_repository import EmailAlreadyRegisteredError
 from app.schemas.envelope import Envelope, Status, now_utc
+from app.services.deterministic_verifier import AmbiguousEvidenceError
+from app.services.structured_claim_extractor import ExtractionFailedError
 
 logger = logging.getLogger("app.error")
 
@@ -95,6 +97,36 @@ def register_exception_handlers(app: FastAPI) -> None:
             status.HTTP_401_UNAUTHORIZED,
             Status.AUTHENTICATION_ERROR,
             "AUTHENTICATION_REQUIRED",
+        )
+
+    @app.exception_handler(ExtractionFailedError)
+    async def extraction_failed_handler(
+        request: Request, exc: ExtractionFailedError
+    ) -> JSONResponse:
+        # S7 LLM 출력이 schema를 벗어났다 — 우리 구현 결함이 아니라 LLM
+        # 응답이 계약을 지키지 않은 것이므로 500이 아니라 422로 구분한다
+        # (docs/skills.md S23 "차단 실패 시 판정 경로를 중단한다").
+        return _envelope_response(
+            request,
+            status.HTTP_422_UNPROCESSABLE_CONTENT,
+            Status.VALIDATION_ERROR,
+            "EXTRACTION_SCHEMA_VIOLATION",
+            warnings=[str(exc)],
+        )
+
+    @app.exception_handler(AmbiguousEvidenceError)
+    async def ambiguous_evidence_handler(
+        request: Request, exc: AmbiguousEvidenceError
+    ) -> JSONResponse:
+        # 근거 후보가 여러 개면 임의로 하나를 고르지 않는다(docs/skills.md S3
+        # 원칙과 동일) — 호출자가 준 evidence 목록 자체가 모호하다는 뜻이라
+        # 우리 구현 결함(500)이 아니라 요청 검증 실패(422)로 구분한다.
+        return _envelope_response(
+            request,
+            status.HTTP_422_UNPROCESSABLE_CONTENT,
+            Status.VALIDATION_ERROR,
+            "AMBIGUOUS_EVIDENCE_CANDIDATES",
+            warnings=[str(exc)],
         )
 
     @app.exception_handler(ProviderError)

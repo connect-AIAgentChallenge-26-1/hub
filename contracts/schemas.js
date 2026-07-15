@@ -23,6 +23,28 @@ export const EVIDENCE_DOMAIN = Object.freeze([
   'peer',
 ])
 
+// docs/skills.md "Structured Claim" — S7(T06)이 분류하는 6종 claim_type과
+// S16(T06)이 판정하는 5종 comparator op + 관계 연산자.
+export const CLAIM_TYPE = Object.freeze([
+  'OPINION',
+  'FUTURE_PREDICTION',
+  'NUMERIC',
+  'COMPARISON',
+  'NEGATION',
+  'CONDITIONAL',
+])
+
+export const COMPARATOR_OP = Object.freeze([
+  'THRESHOLD',
+  'INCREASE',
+  'DECREASE',
+  'MULTIPLE',
+  'RATIO',
+  'CONTINUITY',
+])
+
+export const COMPARISON_OPERATOR = Object.freeze(['GTE', 'LTE', 'GT', 'LT', 'EQ'])
+
 export const EVIDENCE_RELATION = Object.freeze([
   'SUPPORTS',
   'REFUTES',
@@ -36,27 +58,28 @@ export const FS_DIV = Object.freeze(['CFS', 'OFS'])
 // type ∈ string | number | boolean | array | object | any
 
 // docs/skills.md "Structured Claim" — comparator는 중첩 구조까지 강제한다.
+export const COMPARATOR_SPEC = Object.freeze({
+  op: { type: 'string', enum: COMPARATOR_OP },
+  comparison_operator: { type: 'string', enum: COMPARISON_OPERATOR },
+  target_value: { type: 'number' },
+  target_unit: { type: 'string' },
+  continuity_direction: { type: 'string', enum: ['INCREASE', 'DECREASE'], optional: true },
+  tolerance_value: { type: 'number', optional: true },
+  tolerance_unit: { type: 'string', optional: true },
+})
+
 export const STRUCTURED_CLAIM_SPEC = Object.freeze({
   claim_id: { type: 'string' },
   claim_group_id: { type: 'string', optional: true },
   original_span: { type: 'string' },
   corp_code: { type: 'string' },
   stock_code: { type: 'string' },
-  claim_type: { type: 'string' },
+  claim_type: { type: 'string', enum: CLAIM_TYPE },
   metric: { type: 'string' },
   evidence_domain: { type: 'string', enum: EVIDENCE_DOMAIN },
   comparison_entity_ref: { type: 'string', optional: true },
   peer_universe_ref: { type: 'string', optional: true },
-  comparator: {
-    type: 'object',
-    fields: {
-      op: { type: 'string' },
-      target_value: { type: 'number' },
-      target_unit: { type: 'string' },
-      tolerance_value: { type: 'number', optional: true },
-      tolerance_unit: { type: 'string', optional: true },
-    },
-  },
+  comparator: { type: 'object', fields: COMPARATOR_SPEC },
   direction: { type: 'string' },
   current_period: { type: 'string' },
   comparison_period: { type: 'string' },
@@ -163,7 +186,7 @@ function typeOf(value) {
   return typeof value
 }
 
-function checkField(path, entry, value, errors) {
+function checkField(path, entry, value, errors, strict) {
   if (entry.type !== 'any' && typeOf(value) !== entry.type) {
     errors.push(`${path} must be a ${entry.type}`)
     return
@@ -182,18 +205,29 @@ function checkField(path, entry, value, errors) {
     }
   }
   if (entry.fields) {
-    validateInto(path, entry.fields, value, errors)
+    validateInto(path, entry.fields, value, errors, strict)
   }
 }
 
-function validateInto(prefix, spec, obj, errors) {
+function validateInto(prefix, spec, obj, errors, strict) {
   for (const [field, entry] of Object.entries(spec)) {
     const path = prefix ? `${prefix}.${field}` : field
     if (!(field in obj) || obj[field] === undefined) {
       if (!entry.optional) errors.push(`missing required field: ${path}`)
       continue
     }
-    checkField(path, entry, obj[field], errors)
+    checkField(path, entry, obj[field], errors, strict)
+  }
+  // strict(allowlist) 모드 — docs/checklist.md C7 "schema allowlist, 허용
+  // 필드 밖 출력 차단". LLM 출력처럼 신뢰할 수 없는 원천을 검증할 때만 켠다;
+  // 기존 소비자(다른 provider record 등)는 기본값(false)으로 영향받지 않는다.
+  if (strict) {
+    for (const field of Object.keys(obj)) {
+      if (!(field in spec)) {
+        const path = prefix ? `${prefix}.${field}` : field
+        errors.push(`unexpected field not in schema allowlist: ${path}`)
+      }
+    }
   }
 }
 
@@ -201,13 +235,15 @@ function validateInto(prefix, spec, obj, errors) {
  * Validates a value against a typed spec (required fields, types, enums,
  * date patterns, nested shapes). Returns { valid, errors[] } instead of
  * throwing so tests can assert on the full error set at once.
+ * `strict: true` additionally rejects any field not declared in the spec
+ * (allowlist mode, C7 "허용 필드 밖 출력 차단") — off by default.
  */
-export function validateShape(spec, obj) {
+export function validateShape(spec, obj, { strict = false } = {}) {
   if (obj === null || typeOf(obj) !== 'object') {
     return { valid: false, errors: ['value must be an object'] }
   }
   const errors = []
-  validateInto('', spec, obj, errors)
+  validateInto('', spec, obj, errors, strict)
   return { valid: errors.length === 0, errors }
 }
 

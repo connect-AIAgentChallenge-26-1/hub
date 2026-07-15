@@ -97,29 +97,31 @@
 
 ## C7. Structured Claim [R07][S7·S23][I1·I11][T06]
 
-- [ ] Solar Structured Outputs schema와 provider mock
-- [ ] 복합 문장 → 원자 Claim + `claim_group_id`
-- [ ] 원문 span, 기업, 유형, evidence domain, metric, comparator, 비교 대상·peer ref, 기간, 방향, 조건 구조화
-- [ ] 의견·미래 예측·수치·비교·부정·조건문 분류
-- [ ] 모호어·기간·비교대상 `ambiguity_flags` 기반 확인 질문 UI — 비어 있으면 요약 카드로 자동 진행, 있으면 해당 항목만 객관식 질문으로 확인(F9 progressive disclosure)
-- [ ] 원문에 없는 span·기업·숫자 생성 0건
-- [ ] S14 외부 근거 수집이 S7 `StructuredClaim` 이후에만 실행되는 contract test
-- [ ] schema allowlist, 허용 필드 밖 출력 차단
-- [ ] 사용자 입력 인젝션·malformed output·timeout 안전 처리
+- [x] Solar Structured Outputs schema와 provider mock — `app/providers/solar.py`(OpenAI 호환 `chat/completions`, 엔드포인트·에러 status는 2026-07-14 WebSearch로 공식 문서 확인 후 구현, 임의 추정 아님) + `backend/tests/test_solar_provider.py`(httpx `MockTransport`, 실 키 불필요)
+- [x] 복합 문장 → 원자 Claim + `claim_group_id` — `app/services/structured_claim_extractor.py` `extract()`, `test_compound_sentence_splits_into_multiple_claims_sharing_claim_group_id`
+- [x] 원문 span, 기업, 유형, evidence domain, metric, comparator, 비교 대상·peer ref, 기간, 방향, 조건 구조화 — `app/schemas/structured_claim.py` `StructuredClaim`(T03에서 typed 계약만 먼저 도입한 것을 T06에서 실제로 채움)
+- [x] 의견·미래 예측·수치·비교·부정·조건문 분류 — `ClaimType` 6종 Literal enum(`docs/skills.md` "Structured Claim" 절), `evidence_planner.py`·`deterministic_verifier.py`가 `OPINION`/`FUTURE_PREDICTION`은 근거 없이 `UNVERIFIABLE`, `CONDITIONAL`은 `INSUFFICIENT_EVIDENCE`(조건 평가 스킬 없음, 임의 추정 아님)로 분기
+- [x] 모호어·기간·비교대상 `ambiguity_flags` 기반 확인 질문 UI — `app/services/claim_disclosure.py`(F9 규칙) + `contracts/disclosure.js`(JS 미러) + `src/components/ClaimDisclosure.jsx`(React, 빈 배열이면 요약 카드 자동 진행·있으면 해당 항목만 객관식 확인 질문, 미답변 시 검증 불가 안내). `src/test/setup.js`에 누락돼 있던 `afterEach(cleanup)`을 이번에 추가해 vitest `globals:false`에서 테스트 간 DOM이 누적되던 결함도 함께 수정(다른 컴포넌트 테스트에도 영향)
+- [x] 원문에 없는 span·기업·숫자 생성 0건 — `structured_claim_extractor.py`의 `_is_grounded_span`/`_is_grounded_number`가 원문에 없는 span·숫자를 가진 후보를 드롭하고, `corp_code`/`stock_code`/`as_of`는 LLM 출력을 신뢰하지 않고 S1 `resolved_company`·요청 `as_of`로 강제 덮어쓴다(검증이 아니라 애초에 LLM이 정하지 못하게 함). GPT 리뷰(2026-07-15 10:07) 반영: `_is_grounded_number`가 부분 문자열 검색이라 "2025년"의 "2"가 target_value=2와 우연히 일치해 원문에 없는 comparator 임계값이 통과하던 결함을 재현으로 확인 — 정규식으로 원문의 숫자 '토큰'(연속 자릿수, 천단위 콤마·소수점 포함)만 추출해 정확히 일치하는지 검사하도록 강화(`_extract_number_tokens`), 연도 숫자가 더 이상 임계값의 근거가 되지 않는다. GPT 리뷰(2026-07-15 10:19) 후속 반영: 토큰화 이후에도 "2분기"·"Q2" 같은 분기 designator의 숫자는 여전히 유효 토큰으로 뽑혀 target_value와 일치하던 결함을 재현으로 확인 — 토큰화 전에 `_PERIOD_DESIGNATOR_PATTERN`(`\d+분기`, `Q\d+`)으로 분기 표기 전체를 먼저 제거해 그 안의 숫자가 애초에 토큰 후보에 들어오지 않게 함. GPT 리뷰(2026-07-15 10:44) 후속 반영: `op=MULTIPLE`(배수 주장) claim이 배수 표기("N배") 없이 같은 숫자의 금액 표기("2조원")만으로 접지된 것으로 오판되던 결함(단위를 보지 않고 숫자 값만 비교)을 재현으로 확인 — `_is_grounded_number`가 `Comparator` 전체를 받도록 바꾸고, `op=MULTIPLE`에서는 `_MULTIPLE_NOTATION_PATTERN`(`N배`/`Nx`/`N×`)에 매치되는 숫자만 근거로 인정하도록 강화. GPT 리뷰(2026-07-15 11:21) 후속 반영: `_MULTIPLE_NOTATION_PATTERN`에 좌우 경계가 없어 "S2X"(제품명)·"2X200"(식별자) 내부의 숫자도 배수 표기로 오인되던 결함을 재현으로 확인 — 숫자 앞과 x/X/× 뒤에 영문자·숫자가 바로 붙어 있으면 매치하지 않도록 lookbehind/lookahead 경계를 추가. GPT 리뷰(2026-07-15 11:40) 후속 반영: 경계 문자 집합이 하이픈·밑줄을 놓쳐 "S-2X" 같은 하이픈 코드명이 여전히 통과했고, "배" 표기는 뒤에 오는 한글 음절을 전혀 걸러내지 않아 "2배럴"(barrel)의 "배"도 배수로 오인되던 결함을 재현으로 확인 — x/X/×는 좌우에 `[A-Za-z0-9_-]`가 붙으면 제외. GPT 리뷰(2026-07-15 13:05) 후속 반영: "배" 뒤 조사 화이트리스트(가/이/는/…)가 너무 좁아 "2배보다"·"2배까지"·"2배로써" 같은 정상 배수 표현을 잘못 드롭(extraction recall 저하)하던 결함을 재현으로 확인 — 조사·어미는 열린 부류라 열거가 불완전하므로, 반대로 배수가 아님이 명확한 명사 시작 음절만 블록(`_BAE_NON_MULTIPLIER_HEADS`, 현재 "럴"=배럴)하고 나머지는 배수로 허용하도록 방향을 뒤집음. **한계(문서화)**: MULTIPLE 외 op(RATIO의 "%", 금액 단위 등)는 아직 단위별 표기를 구분하지 않고 원문 숫자 토큰 전체와 비교하는 이전 방식을 유지한다. 배 명사 블록리스트도 배-로 시작하는 명사가 열린 집합이라 태생적으로 불완전하다 — 완전한 판별은 형태소 분리가 필요하며 후속 과제. 정규식 기반 grounding은 구조적으로 반례가 계속 나올 수 있음(이번까지 6차 수정)을 알려진 한계로 남긴다
+- [x] S14 외부 근거 수집이 S7 `StructuredClaim` 이후에만 실행되는 contract test — `external_evidence_collector.collect_news(claim: StructuredClaim, ...)`가 타입 자체로 이미 강제하고 있었음을 `test_collect_news_cannot_run_without_a_structured_claim`(dict를 넘기면 `AttributeError`)로 명시적 검증
+- [x] schema allowlist, 허용 필드 밖 출력 차단 — Python `StructuredClaim`/`Comparator` `model_config=ConfigDict(extra="forbid")` + `claim_type`/`comparator.op`/`comparator.comparison_operator` `Literal` enum, JS `contracts/schemas.js` `validateShape(..., {strict:true})` 동일 계약(양쪽 테스트, `docs/skills.md` 2026-07-14 migration 기록에 pre-release 보정으로 문서화)
+- [x] 사용자 입력 인젝션·malformed output·timeout 안전 처리 — S23(`llm_security_gateway.py`)이 지시·데이터 분리(delimiter 이스케이프 포함)·secret redaction·injection 패턴 trace·schema allowlist 검증을 수행하고, `SolarProvider`가 timeout 2회 후 성공/3회 연속 실패를 재현(OpenDART와 동일 tenacity 패턴), `structured_claim_extractor.extract()`가 malformed output을 `ExtractionFailedError`로 명시적으로 올려 라우터가 422 `VALIDATION_ERROR`로 매핑(삼키지 않음)
+
+**한계(BLOCKED 아님, 문서화)**: 이 절의 9개 항목은 모두 코드+테스트로 완료했지만, `UPSTAGE_API_KEY`가 아직 발급되지 않아(`docs/prerequisites.md` T06·T07) 실제 Upstage Solar API 라이브 호출은 검증하지 못했다. 항목 1(provider mock)이 명시적으로 mock을 완료 조건으로 인정하고 있고 나머지 항목도 httpx `MockTransport`/주입된 fake completion 함수로 실제 동작을 증명 가능해 BLOCKED로 분류하지 않았다 — T02~T05의 "실 provider 자격증명 필요 = BLOCKED" 선례(체크리스트 문구가 실 캡처를 직접 요구한 경우)와는 다른 경우로 판단했다(체크리스트 문구가 mock을 명시 허용). 키가 발급되면 `backend/tests/fixtures/solar/`에 실 라이브 호출을 캡처해 회귀 테스트로 추가한다.
 
 ## C8. 필수 근거·결정론 검산 [R08][S16·S17][I2·I3·I5][T06]
 
-- [ ] Claim 유형별 required evidence rule registry와 버전
-- [ ] 필수 근거 충족률 계산과 missing fields 반환
-- [ ] 증가·감소·배수·비율·연속성 comparator 구현
-- [ ] `SUPPORTED/REFUTED/INSUFFICIENT/UNVERIFIABLE` 원자 판정
-- [ ] 그룹 `PARTIALLY_SUPPORTED` 집계
-- [ ] `배수 >= 2`, 실제 1.38배 → `REFUTED` 테스트
-- [ ] 부호 전환 배수 `RATIO_UNDEFINED_SIGN_CHANGE` 처리
-- [ ] financial·market·flow·valuation·peer `NumericEvidence` adapter와 S15 `POST_DERIVED` gate
-- [ ] 계산식·사용값·기간·기업·출처·reason code 출력
-- [ ] 동일 Claim·Fact 반복 verdict 일치 100%
-- [ ] LLM이 수치·verdict를 변경할 수 없는 계약 테스트
+- [x] Claim 유형별 required evidence rule registry와 버전 — `app/services/evidence_planner.py`(`EVIDENCE_PLANNER_VERSION`, comparator.op 기준 single-value/two-period/continuity 3종 registry)
+- [x] 필수 근거 충족률 계산과 missing fields 반환 — `coverage()`(`satisfied`/`missing`/`coverage_rate`)
+- [x] 증가·감소·배수·비율·연속성 comparator 구현 — `app/services/deterministic_verifier.py`(`INCREASE`/`DECREASE`/`MULTIPLE`/`RATIO`/`CONTINUITY`, `THRESHOLD` 포함 6종 op 전부)
+- [x] `SUPPORTED`/`REFUTED`/`INSUFFICIENT`/`UNVERIFIABLE` 원자 판정 — `verify_atomic()`
+- [x] 그룹 `PARTIALLY_SUPPORTED` 집계 — `app/services/verdict_aggregator.py`(`contracts/verdict.js` Python 미러) + `verify_group()`
+- [x] `배수 >= 2`, 실제 1.38배 → `REFUTED` 테스트 — `test_multiple_2x_threshold_with_actual_1_38x_is_refuted`(단위) + `test_verify_returns_refuted_for_1_38x_against_2x_threshold`(API e2e) 그대로 재현
+- [x] 부호 전환 배수 `RATIO_UNDEFINED_SIGN_CHANGE` 처리 — 적자→흑자(`comparison<0<current`) MULTIPLE/INCREASE/DECREASE 모두 `INSUFFICIENT_EVIDENCE`+해당 reason_code로 처리, REFUTED로 단정하지 않음
+- [x] financial·market·flow·valuation·peer `NumericEvidence` adapter와 S15 `POST_DERIVED` gate — 도메인별 `select_*_evidence()` 5종 + `integrity_status=="VERIFIED"` 방어 gate. **한계**: `NumericEvidence`는 원본 Fact의 corp_code·unit·period를 다시 담지 않아(`docs/skills.md` 필드 정의) 사후 재검증이 불가능하므로 실제 `S15.post_derived()` 재호출은 생성 시점(S3 `financial_facts.py` 라우터, 이미 C4에서 완료)이 책임진다 — 이 모듈은 그 결과(`integrity_status`)를 신뢰 경계에서 강제하는 하위 gate다. valuation·peer는 S5·S21 미구현(T09)이라 근거 자체가 없어 항상 `INSUFFICIENT_EVIDENCE`(크래시·임의 대입 없음, C4의 S5·S21 선례와 동일 판단)
+- [x] 계산식·사용값·기간·기업·출처·reason code 출력 — `Calculation`(formula/inputs/computed_value/formula_version) + `AtomicVerdictResult`(reason_code/used_evidence_ids/missing_fields), `/api/v1/claims/verify` 응답에 그대로 노출
+- [x] 동일 Claim·Fact 반복 verdict 일치 100% — `test_same_claim_and_facts_always_yield_the_same_verdict`
+- [x] LLM이 수치·verdict를 변경할 수 없는 계약 테스트 — `test_module_has_no_llm_or_network_dependency`(소스에 solar/llm/httpx 등 토큰 부재 정적 검사) + `test_verify_atomic_signature_has_no_llm_supplied_verdict_backdoor`(임의 kwarg 주입 시 `TypeError`)
 
 ## C9. RAG·반증·인용·보안 [R09][S18·S19·S20·S23][I6·I7·I11][T07]
 

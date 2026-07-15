@@ -11,6 +11,7 @@ from app.models.user import User
 from app.providers.kis import KisProvider
 from app.providers.naver_news import NaverNewsProvider
 from app.providers.opendart import OpenDartProvider
+from app.providers.solar import SolarProvider
 from app.repositories.user_repository import UserRepository
 from app.security.tokens import InvalidTokenError, decode_access_token
 
@@ -49,6 +50,14 @@ def get_naver_provider() -> Generator[NaverNewsProvider, None, None]:
         client_id=settings.naver_client_id or "",
         client_secret=settings.naver_client_secret or "",
     ) as provider:
+        yield provider
+
+
+def get_solar_provider() -> Generator[SolarProvider, None, None]:
+    # docs/prerequisites.md T06·T07 — UPSTAGE_API_KEY 미발급 상태에서도 backend가
+    # 시작은 되도록(다른 provider와 동일 패턴) 빈 문자열 fallback을 쓴다. 실제
+    # 호출 시에는 401(ProviderAuthError)로 안전하게 실패한다.
+    with SolarProvider(api_key=get_settings().upstage_api_key or "") as provider:
         yield provider
 
 
