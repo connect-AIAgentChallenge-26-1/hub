@@ -115,6 +115,29 @@ class EliceConditionExtractionClientIntegrationTest {
     }
 
     @ParameterizedTest
+    @CsvSource(value = {
+        "\"placeTypeDetail\":null|\"placeTypeDetail\":\"디저트\"|CONDITION_TYPE_DETAIL_UNEXPECTED",
+        "\"budgetPerPersonMin\":10000|\"budgetPerPersonMin\":30000|CONDITION_BUDGET_ORDER_INVALID"
+    }, delimiter = '|')
+    void classifiesCrossFieldViolationsWithoutReturningProviderValues(
+        String target,
+        String replacement,
+        String expectedCode
+    ) {
+        String content = validContent().replace(target, replacement);
+        WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH))
+            .willReturn(jsonResponse(200, validChatResponse(content))));
+
+        var diagnostic = client.extractForDiagnostics(command());
+
+        assertThat(diagnostic.outcome().errorCode())
+            .isEqualTo(ConditionExtractionErrorCode.PROVIDER_INVALID_RESPONSE);
+        assertThat(diagnostic.boundaryCode()).isEqualTo(expectedCode)
+            .doesNotContain("디저트", "30000");
+        verifyOneRequest();
+    }
+
+    @ParameterizedTest
     @CsvSource({
         "400, PROVIDER_INVALID_REQUEST",
         "401, PROVIDER_AUTHENTICATION_FAILED",

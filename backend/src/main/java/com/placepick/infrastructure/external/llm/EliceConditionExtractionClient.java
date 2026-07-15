@@ -472,20 +472,46 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
     }
 
     private DraftRecommendationCondition parseCondition(JsonNode node, int httpStatus) {
+        String location = nullableText(node.get("locationQuery"), httpStatus);
+        PlaceType placeType = nullablePlaceType(node.get("placeType"), httpStatus);
+        String placeTypeDetail = nullableText(node.get("placeTypeDetail"), httpStatus);
+        Integer partySize = nullableInteger(node.get("partySize"), httpStatus);
+        Integer budgetMinimum = nullableInteger(node.get("budgetPerPersonMin"), httpStatus);
+        Integer budgetMaximum = nullableInteger(node.get("budgetPerPersonMax"), httpStatus);
+        List<Preference> preferences = parsePreferences(node.get("preferences"), httpStatus);
+        List<String> exclusions = parseExclusions(node.get("exclusions"), httpStatus);
+        if (placeType == PlaceType.OTHER && placeTypeDetail == null) {
+            throw conditionBoundary(httpStatus, "CONDITION_OTHER_DETAIL_MISSING");
+        }
+        if (placeType != null && placeType != PlaceType.OTHER && placeTypeDetail != null) {
+            throw conditionBoundary(httpStatus, "CONDITION_TYPE_DETAIL_UNEXPECTED");
+        }
+        if (budgetMinimum != null && budgetMaximum != null && budgetMinimum > budgetMaximum) {
+            throw conditionBoundary(httpStatus, "CONDITION_BUDGET_ORDER_INVALID");
+        }
         try {
             return new DraftRecommendationCondition(
-                nullableText(node.get("locationQuery"), httpStatus),
-                nullablePlaceType(node.get("placeType"), httpStatus),
-                nullableText(node.get("placeTypeDetail"), httpStatus),
-                nullableInteger(node.get("partySize"), httpStatus),
-                nullableInteger(node.get("budgetPerPersonMin"), httpStatus),
-                nullableInteger(node.get("budgetPerPersonMax"), httpStatus),
-                parsePreferences(node.get("preferences"), httpStatus),
-                parseExclusions(node.get("exclusions"), httpStatus)
+                location,
+                placeType,
+                placeTypeDetail,
+                partySize,
+                budgetMinimum,
+                budgetMaximum,
+                preferences,
+                exclusions
             );
         } catch (IllegalArgumentException | NullPointerException exception) {
-            throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_CONDITION);
+            throw conditionBoundary(httpStatus, "CONDITION_DOMAIN_CONSTRAINT_INVALID");
         }
+    }
+
+    private static LlmProviderException conditionBoundary(int httpStatus, String code) {
+        return failure(
+            LlmProviderFailure.INVALID_RESPONSE,
+            httpStatus,
+            LlmProviderFailureStage.CHAT_CONTENT_CONDITION,
+            code
+        );
     }
 
     private List<Preference> parsePreferences(JsonNode node, int httpStatus) {
