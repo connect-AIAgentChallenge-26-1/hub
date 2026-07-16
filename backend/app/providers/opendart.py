@@ -191,6 +191,17 @@ class OpenDartProvider(RawSourceProvider):
         content = self._get_file("document.xml", {"rcept_no": rcept_no})
         return RawFetch(raw_payload=content, checksum=checksum_of(content))
 
+    def fetch_company_overview(self, corp_code: str) -> RawFetch:
+        """기업개황(company.json) — T08 종목 공부 리포트용 기업 개요(대표자·
+        설립일·주소·업종코드 등). 2026-07-15 실제 API 라이브 호출로 확인한
+        JSON 응답 필드(corp_name/corp_name_eng/stock_name/stock_code/ceo_nm/
+        corp_cls/jurir_no/bizr_no/adres/hm_url/ir_url/phn_no/fax_no/
+        induty_code/est_dt/acc_mt)를 그대로 raw_payload에 보존한다(임의 추정
+        아님, backend/tests/fixtures/opendart/company_overview_samsung.json)."""
+        data = self._get_json("company.json", {"corp_code": corp_code})
+        payload_bytes = stable_json_bytes(data)
+        return RawFetch(raw_payload=data, checksum=checksum_of(payload_bytes))
+
     def collect(self, **query: Any) -> list[dict[str, Any]]:
         """RawSourceProvider ABC entry point — not used directly; the typed
         fetch_* methods above are used instead since each OpenDART operation

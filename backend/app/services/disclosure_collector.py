@@ -306,11 +306,30 @@ class DisclosureCollector:
         trace.extend(pre_normalize_result.integrity_log)
 
         results = []
+        # DB round-trip 체크(existing = select(...))만으로는 같은 배치(같은
+        # raw_payload) 안의 중복을 못 잡는다 — 이 세션은 autoflush=False라
+        # 방금 self._db.add()한 행이 아직 flush되지 않아 select에 보이지
+        # 않는다(T08에서 실제 삼성전자 2023년 CF 데이터로 재현: 같은 응답
+        # 안에 동일 키의 행이 여러 개 있으면 두 번째부터 UniqueViolation).
+        # 세션 설정에 의존하지 않도록 이번 호출에서 이미 만든 키를 별도로
+        # 추적한다.
+        seen_in_batch: set[tuple[str, str, str, str, str | None, str | None]] = set()
         for candidate in pre_normalize_result.eligible:
             row = items_by_id[candidate.record_id]
             rcept_no = row["rcept_no"]
             filed_at = candidate.effective_date
             is_eligible = True
+            batch_key = (
+                rcept_no,
+                fs_div,
+                row["account_id"],
+                row["sj_div"],
+                row.get("account_detail"),
+                row.get("ord"),
+            )
+            if batch_key in seen_in_batch:
+                continue
+            seen_in_batch.add(batch_key)
             existing = self._db.execute(
                 select(FinancialFactRow).where(
                     FinancialFactRow.rcept_no == rcept_no,
@@ -318,6 +337,7 @@ class DisclosureCollector:
                     FinancialFactRow.account_id == row["account_id"],
                     FinancialFactRow.sj_div == row["sj_div"],
                     FinancialFactRow.account_detail == row.get("account_detail"),
+                    FinancialFactRow.ord == row.get("ord"),
                 )
             ).scalar_one_or_none()
             if existing is not None:
@@ -391,6 +411,20 @@ class DisclosureCollector:
             chunks.append(chunk)
         self._db.commit()
         return chunks
+
+    def reconstruct_document_text(self, record: RawDisclosureRecord) -> str:
+        """DOCUMENT_FILE raw record의 zip 원문을 다시 평문으로 복원한다(T08
+        S20 인용 검사용 — chunk의 `quote`가 실제로 전체 원문의 부분 문자열인지
+        검사하려면 chunk 자체가 아닌 독립된 원문 소스가 필요하다). `_normalize_document`
+        내부에서 쓰는 것과 동일한 결정론 flatten 함수를 재사용한다."""
+        import base64
+        import io
+        import zipfile
+
+        zip_bytes = base64.b64decode(record.raw_payload["zip_base64"])
+        with zipfile.ZipFile(io.BytesIO(zip_bytes)) as zf:
+            xml_bytes = zf.read(zf.namelist()[0])
+        return _flatten_document_text(xml_bytes)
 
     def _chunk_as_evidence(self, chunk: DocumentChunk) -> dict[str, object]:
         # docs/skills.md Evidence: 기능 A는 presentation_item_id + relation=NEUTRAL.

@@ -44,6 +44,23 @@ def test_fetch_financial_statements_success_returns_real_fixture():
     assert fetch.raw_payload["list"][0]["account_nm"] == "자산총계"
 
 
+def test_fetch_company_overview_success_returns_real_fixture():
+    fixture = load_json("company_overview_samsung.json")
+    provider, _ = _provider([json_response(fixture)])
+    fetch = provider.fetch_company_overview("00126380")
+    assert fetch.raw_payload["corp_name"] == "삼성전자(주)"
+    assert fetch.raw_payload["stock_code"] == "005930"
+    assert fetch.raw_payload["corp_cls"] == "Y"
+    assert fetch.checksum
+
+
+def test_fetch_company_overview_invalid_corp_code_maps_to_not_found():
+    error = load_error("013_no_data")
+    provider, _ = _provider([json_response(error)])
+    with pytest.raises(ProviderNotFoundError):
+        provider.fetch_company_overview("99999999")
+
+
 def test_fetch_corp_code_master_success_returns_zip_bytes():
     zip_bytes = load_bytes("corp_code_sample.zip")
     provider, _ = _provider([zip_response(zip_bytes)])

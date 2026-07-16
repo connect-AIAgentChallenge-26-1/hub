@@ -1,0 +1,80 @@
+/* 기능 A 종목 공부 리포트 화면 (docs/checklist.md C5). 검증 톤의 중립 색만
+   쓴다 — 상승/하락·고평가/저평가를 암시하는 색을 쓰지 않는다. */
+
+.company-report {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 760px;
+}
+
+.company-report__section {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.company-report__section h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.company-overview__grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  font-size: 0.9rem;
+}
+.company-overview__grid dt { color: #6b7280; }
+.company-overview__grid dd { margin: 0; }
+.company-overview__as-of { font-size: 0.75rem; color: #9ca3af; }
+
+.disclosure-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.disclosure-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.correction-badge {
+  font-size: 0.75rem;
+  color: #7c3aed;
+  border: 1px solid #7c3aed;
+  border-radius: 999px;
+  padding: 0 8px;
+  align-self: flex-start;
+}
+.disclosure-item a { color: #1d4ed8; font-size: 0.8rem; }
+
+.metric-trend { border: 1px solid #e5e7eb; border-radius: 6px; padding: 10px; }
+.metric-trend__name { font-weight: 600; margin: 0 0 6px; }
+.metric-trend table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+.metric-trend td, .metric-trend th { text-align: left; padding: 2px 8px 2px 0; }
+.metric-trend__change { color: #4b5563; font-size: 0.8rem; margin-top: 6px; }
+
+.glossary-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.glossary-item { font-size: 0.85rem; }
+.glossary-term { font-weight: 600; }
+.glossary-source { color: #9ca3af; font-size: 0.7rem; }
+
+.checkpoint-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.checkpoint-item {
+  font-size: 0.85rem;
+  border-radius: 6px;
+  padding: 8px 10px;
+  border-left: 3px solid #9ca3af;
+}
+.checkpoint-item--ERROR { border-color: #b45309; background: #fffbeb; }
+.checkpoint-item--WARNING { border-color: #d97706; background: #fffdf5; }
+.checkpoint-item--INFO { border-color: #6b7280; background: #f9fafb; }
+
+.citation-viewer { border: 1px solid #e5e7eb; border-radius: 6px; padding: 10px; font-size: 0.85rem; }
+.citation-viewer__quote { margin: 0 0 6px; background: #f9fafb; padding: 6px 8px; border-radius: 4px; }
+.citation-viewer__meta { color: #6b7280; display: flex; gap: 12px; flex-wrap: wrap; }
+.citation-viewer__meta a { color: #1d4ed8; }

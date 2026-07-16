@@ -7,6 +7,7 @@ from app.dependencies import get_current_user, get_db
 from app.models.disclosure import FinancialFactRow
 from app.models.financial_fact import FinancialFact
 from app.models.user import User
+from app.repositories.financial_fact_repository import persist_facts_idempotently
 from app.schemas.envelope import Envelope, Status, now_utc
 from app.schemas.financial_fact import (
     CalculateFinancialFactsPayload,
@@ -103,11 +104,11 @@ def calculate(
     normalize_result = calculator.normalize(rows, stock_code=body.stock_code)
     warnings.extend(normalize_result.warnings)
 
-    for fact in normalize_result.facts:
-        db.add(fact)
-    db.commit()
-    for fact in normalize_result.facts:
-        db.refresh(fact)
+    # normalize()는 순수 함수라 매 호출마다 새 FinancialFact 객체를 만든다 —
+    # 같은 financial_fact_row_ids로 재호출하면 그대로 db.add()할 경우
+    # uq_financial_fact 위반이 난다(GPT 리뷰 2026-07-15 22:14 발견, S11
+    # CompanyReportGenerator와 동일한 idempotent 저장 경로를 공유한다).
+    persisted_facts = persist_facts_idempotently(db, normalize_result.facts)
 
     numeric_evidence: list[dict[str, object]] = []
     formulas: list[FormulaPayload] = []
@@ -127,7 +128,7 @@ def calculate(
     if body.price and not body.price_as_of:
         warnings.append("price_as_of 없음 — price 미사용")
 
-    mapped_facts = [f for f in normalize_result.facts if f.metric_key is not None]
+    mapped_facts = [f for f in persisted_facts if f.metric_key is not None]
     facts_by_period: dict[str, list[FinancialFact]] = {}
     for fact in mapped_facts:
         facts_by_period.setdefault(fact.fiscal_period, []).append(fact)
@@ -202,7 +203,7 @@ def calculate(
         )
 
     payload = CalculateFinancialFactsPayload(
-        facts=[_fact_payload(f) for f in normalize_result.facts],
+        facts=[_fact_payload(f) for f in persisted_facts],
         numeric_evidence=numeric_evidence,
         formulas=formulas,
         warnings=warnings,

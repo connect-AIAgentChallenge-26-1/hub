@@ -28,12 +28,19 @@ class FinancialFact(Base):
 
     __tablename__ = "financial_facts"
     __table_args__ = (
-        # account_detail도 키에 포함한다 — FinancialFactRow와 같은 이유(SCE는 같은
-        # account_id 아래 자본 구성요소별로 여러 행을 내고 account_detail로만
-        # 구분된다, app/models/disclosure.py uq_financial_fact_row 주석 참고).
+        # account_detail·ord도 키에 포함한다 — FinancialFactRow와 같은 이유(SCE는
+        # 같은 account_id 아래 자본 구성요소별로 여러 행을 내고 account_detail로만
+        # 구분되며, CF의 "표준계정코드 미사용" 계정은 account_detail까지 같아도
+        # ord로만 구분된다. app/models/disclosure.py uq_financial_fact_row 주석,
+        # docs/skills.md migration 기록 2026-07-15 참고).
+        # account_detail·ord는 nullable이라 Postgres 기본 동작(NULL은 서로 다른
+        # 값으로 취급)에서는 둘 다 NULL인 행이 중복 삽입돼도 이 제약이 막지 못한다
+        # (GPT 리뷰 2026-07-15 22:14 발견) — NULLS NOT DISTINCT로 NULL도 같은 값으로
+        # 취급해 실제 DB 불변식이 되게 한다.
         UniqueConstraint(
-            "rcept_no", "fs_div", "account_id", "sj_div", "is_cumulative", "account_detail",
+            "rcept_no", "fs_div", "account_id", "sj_div", "is_cumulative", "account_detail", "ord",
             name="uq_financial_fact",
+            postgresql_nulls_not_distinct=True,
         ),
     )
 
@@ -66,6 +73,7 @@ class FinancialFact(Base):
     rcept_no: Mapped[str] = mapped_column(String(20), nullable=False, index=True)
     filed_at: Mapped[date] = mapped_column(Date, nullable=False)
     source_url: Mapped[str] = mapped_column(String(255), nullable=False)
+    ord: Mapped[str | None] = mapped_column(String(10), nullable=True)
     collected_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), server_default=func.now(), nullable=False
     )

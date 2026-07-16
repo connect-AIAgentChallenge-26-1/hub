@@ -138,6 +138,33 @@ def test_calculate_returns_facts_and_ratios_from_real_annual_data(client, db_ses
     assert body["post_derived_rejected"] == []
 
 
+def test_calculate_can_be_called_twice_with_the_same_row_ids_without_error(client, db_session):
+    # FinancialCalculator.normalize()는 순수 함수라 매 호출마다 새 FinancialFact
+    # 객체를 만든다 — 같은 financial_fact_row_ids로 재호출(새로고침, 재시도 등)
+    # 하면 그대로 db.add()할 경우 uq_financial_fact 위반이 난다(GPT 리뷰
+    # 2026-07-15 22:14 발견). 두 번째 호출도 200이고 같은 facts를 재사용해야 한다.
+    token = _register_and_get_token(client)
+    row_ids = _seed_financial_fact_rows(db_session, {"ifrs-full_Revenue"})
+    body = {
+        "financial_fact_row_ids": [str(rid) for rid in row_ids],
+        "corp_code": "00126380",
+        "stock_code": "005930",
+        "as_of": "2026-07-13",
+        "normalization_policy_ref": "s3-financial-calculator-1.0.0",
+    }
+    headers = {"Authorization": f"Bearer {token}"}
+
+    first = client.post("/api/v1/financial-facts/calculate", headers=headers, json=body)
+    second = client.post("/api/v1/financial-facts/calculate", headers=headers, json=body)
+
+    assert first.status_code == 200
+    assert second.status_code == 200
+    first_facts = first.json()["data"]["facts"]
+    second_facts = second.json()["data"]["facts"]
+    assert first_facts
+    assert first_facts == second_facts
+
+
 def test_calculate_ignores_price_without_matching_as_of(client, db_session):
     # price는 있지만 price_as_of가 없으면 기준일을 검증할 수 없으므로 PER/PBR
     # 계산에 그 price를 쓰지 않는다(docs/checklist.md C4 "시세 기준일 일치").

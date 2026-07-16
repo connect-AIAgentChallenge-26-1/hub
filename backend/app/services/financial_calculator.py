@@ -226,6 +226,7 @@ class FinancialCalculator:
                             f"https://opendart.fss.or.kr/api/fnlttSinglAcntAll.json"
                             f"?rcept_no={row.rcept_no}"
                         ),
+                        ord=row.ord,
                     )
                 )
 

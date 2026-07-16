@@ -7,7 +7,7 @@
 
 export const SCHEMA_VERSIONS = Object.freeze({
   structured_claim: '1.0.0',
-  financial_fact: '1.0.0',
+  financial_fact: '1.1.0',
   raw_source_record: '1.0.0',
   evidence: '1.0.0',
   numeric_evidence: '1.0.0',
@@ -109,6 +109,9 @@ export const FINANCIAL_FACT_SPEC = Object.freeze({
   filed_at: { type: 'string' },
   source_url: { type: 'string' },
   collected_at: { type: 'string' },
+  // T08(2026-07-15): DART 표시 순서 — account_id/account_detail이 placeholder로
+  // 겹치는 계정을 구분한다(docs/skills.md migration 기록, additive optional).
+  ord: { type: 'string', optional: true },
 })
 
 // docs/skills.md "Raw Source Record" — provider 원문은 raw_payload에 그대로.

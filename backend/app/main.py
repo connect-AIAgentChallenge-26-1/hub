@@ -7,6 +7,7 @@ from app.routers import (
     auth,
     claims,
     companies,
+    company_report,
     disclosures,
     evidence,
     external_evidence,
@@ -32,6 +33,7 @@ def create_app() -> FastAPI:
     app.include_router(financial_facts.router)
     app.include_router(claims.router)
     app.include_router(evidence.router)
+    app.include_router(company_report.router)
 
     @app.get("/api/v1/health", response_model=Envelope[dict[str, bool]])
     def health(request: Request) -> Envelope[dict[str, bool]]:

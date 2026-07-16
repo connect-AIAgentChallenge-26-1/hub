@@ -133,9 +133,19 @@ class FinancialFactRow(Base):
         # 등 서로 다른 구성요소를 account_detail로만 구분해 여러 행으로 낸다(T04에서
         # 실제 삼성전자 SCE 데이터로 발견 — account_detail을 빼면 이 행들이 "이미
         # 존재"로 오인되어 조용히 유실된다).
+        # ord도 키에 포함해야 한다 — 현금흐름표(CF)는 표준계정코드가 없는 항목이
+        # account_id="-표준계정코드 미사용-"·account_detail="-"로 여러 행 동일하게
+        # 나오지만 실제로는 서로 다른 계정이다(T08에서 실제 삼성전자 2023년 CF
+        # 데이터로 발견 — 매각예정분류·비지배지분의 증감 등 5개 서로 다른 계정이
+        # 같은 placeholder id를 공유). DART가 제공하는 표시 순서 ord로 구분한다.
+        # account_detail·ord는 nullable이라 Postgres 기본 동작(NULL은 서로 다른
+        # 값으로 취급)에서는 둘 다 NULL인 행이 중복 삽입돼도 이 제약이 막지 못한다
+        # (GPT 리뷰 2026-07-15 22:14 발견) — NULLS NOT DISTINCT로 NULL도 같은 값으로
+        # 취급해 실제 DB 불변식이 되게 한다.
         UniqueConstraint(
-            "rcept_no", "fs_div", "account_id", "sj_div", "account_detail",
+            "rcept_no", "fs_div", "account_id", "sj_div", "account_detail", "ord",
             name="uq_financial_fact_row",
+            postgresql_nulls_not_distinct=True,
         ),
     )
 
