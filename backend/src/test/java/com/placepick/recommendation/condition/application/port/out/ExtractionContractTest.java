@@ -3,6 +3,7 @@ package com.placepick.recommendation.condition.application.port.out;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import com.placepick.recommendation.application.port.out.LlmFailureStage;
 import com.placepick.recommendation.condition.domain.DraftRecommendationCondition;
 import com.placepick.recommendation.condition.domain.PlaceType;
 import java.util.List;
@@ -47,7 +48,37 @@ class ExtractionContractTest {
         assertThatThrownBy(() -> new ExtractionOutcome(
             ConditionExtractionErrorCode.PROVIDER_INVALID_RESPONSE,
             missingLocation,
-            List.of()
+            List.of(),
+            ConditionExtractionDiagnosticCode.NONE,
+            LlmFailureStage.UNSPECIFIED
         )).hasMessage("Failed extraction must not expose a condition.");
+    }
+
+    @Test
+    void acceptsOnlyClosedUnprocessableDiagnosticsWithoutAProviderFailureStage() {
+        ExtractionOutcome outcome = ExtractionOutcome.unprocessable(
+            List.of(),
+            ConditionExtractionDiagnosticCode.UNPROCESSABLE_DOMAIN_CONSTRAINT
+        );
+
+        assertThat(outcome.errorCode())
+            .isEqualTo(ConditionExtractionErrorCode.UNPROCESSABLE_CONDITION);
+        assertThat(outcome.failureStage()).isEqualTo(LlmFailureStage.NONE);
+        assertThat(outcome.condition()).isNull();
+    }
+
+    @Test
+    void rejectsImpossibleProviderDiagnosticCombinations() {
+        assertThatThrownBy(() -> ExtractionOutcome.providerFailure(
+            ConditionExtractionErrorCode.PROVIDER_INVALID_RESPONSE,
+            ConditionExtractionDiagnosticCode.UNPROCESSABLE_LOCATION_MISSING,
+            LlmFailureStage.UNSPECIFIED
+        )).hasMessage("Unprocessable diagnostics cannot describe a provider failure.");
+
+        assertThatThrownBy(() -> ExtractionOutcome.providerFailure(
+            ConditionExtractionErrorCode.PROVIDER_INVALID_RESPONSE,
+            ConditionExtractionDiagnosticCode.CONDITION_BUDGET_ORDER_INVALID,
+            LlmFailureStage.HTTP_STATUS
+        )).hasMessage("Condition diagnostic and failure stage are inconsistent.");
     }
 }

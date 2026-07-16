@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.placepick.recommendation.application.candidate.CandidateNormalizer;
+import com.placepick.recommendation.application.candidate.CandidateFunnel;
 import com.placepick.recommendation.application.candidate.CandidateQueryPlanner;
 import com.placepick.recommendation.application.candidate.CategoryTaxonomy;
 import com.placepick.recommendation.application.candidate.LocationMatcher;
@@ -18,6 +19,7 @@ import com.placepick.recommendation.application.port.out.PlaceSearchResult;
 import com.placepick.recommendation.application.port.out.SearchProviderException;
 import com.placepick.recommendation.application.port.out.SearchProviderFailure;
 import com.placepick.recommendation.application.port.out.SearchProviderFailureStage;
+import com.placepick.recommendation.application.trace.RecommendationTraceSink;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
 import com.placepick.recommendation.condition.domain.PlaceType;
 import com.placepick.recommendation.condition.domain.Preference;
@@ -32,6 +34,44 @@ import java.util.function.Supplier;
 import org.junit.jupiter.api.Test;
 
 class CandidateRankingServiceTest {
+
+    @Test
+    void tracesCountOnlyCandidateFunnelsBeforeAndAfterRelaxation() {
+        RecordingPlacePort placePort = new RecordingPlacePort(List.of(
+            List.of(place(1), new PlaceSearchItem(
+                "식별 불가",
+                "",
+                "카페",
+                "",
+                "서울 강남구",
+                "서울 강남구",
+                "",
+                ""
+            )),
+            List.of(place(1), place(2), place(3))
+        ));
+        RecordingCandidateTrace trace = new RecordingCandidateTrace();
+        CandidateRankingService service = service(
+            placePort,
+            new RecordingBlogPort(-1),
+            trace
+        );
+
+        service.rank(condition(false));
+
+        assertThat(trace.funnels).hasSize(2);
+        assertThat(trace.funnels.get(0)).satisfies(funnel -> {
+            assertThat(funnel.receivedCount()).isEqualTo(2);
+            assertThat(funnel.eligibleCount()).isEqualTo(1);
+            assertThat(funnel.rejectedCount()).isEqualTo(1);
+        });
+        assertThat(trace.funnels.get(1)).satisfies(funnel -> {
+            assertThat(funnel.receivedCount()).isEqualTo(5);
+            assertThat(funnel.eligibleCount()).isEqualTo(3);
+            assertThat(funnel.rejectedCount()).isEqualTo(2);
+        });
+        assertThat(trace.completedFunnel).isEqualTo(trace.funnels.get(1));
+    }
 
     @Test
     void usesAFiveCandidatePreliminaryPoolAndAssignsUuidV4OnlyToTopThree() {
@@ -128,6 +168,14 @@ class CandidateRankingServiceTest {
         PlaceSearchPort placePort,
         BlogSearchPort blogPort
     ) {
+        return service(placePort, blogPort, RecommendationTraceSink.none());
+    }
+
+    private CandidateRankingService service(
+        PlaceSearchPort placePort,
+        BlogSearchPort blogPort,
+        RecommendationTraceSink traceSink
+    ) {
         CategoryTaxonomy taxonomy = new CategoryTaxonomy();
         return new CandidateRankingService(
             placePort,
@@ -135,7 +183,8 @@ class CandidateRankingServiceTest {
             new CandidateQueryPlanner(taxonomy),
             new CandidateNormalizer(taxonomy, new LocationMatcher()),
             new CandidateRanker(new CandidateScoringPolicy()),
-            uuidSupplier()
+            uuidSupplier(),
+            traceSink
         );
     }
 
@@ -233,6 +282,25 @@ class CandidateRankingServiceTest {
                 "20260715"
             );
             return new BlogSearchResult(1, List.of(item));
+        }
+    }
+
+    private static final class RecordingCandidateTrace implements RecommendationTraceSink {
+        private final List<CandidateFunnel> funnels = new ArrayList<>();
+        private CandidateFunnel completedFunnel;
+
+        @Override
+        public void candidatesNormalized(
+            List<com.placepick.recommendation.domain.candidate.NormalizedCandidate> candidates,
+            CandidateFunnel funnel,
+            boolean relaxed
+        ) {
+            funnels.add(funnel);
+        }
+
+        @Override
+        public void candidateFunnelCompleted(CandidateFunnel funnel, boolean relaxed) {
+            completedFunnel = funnel;
         }
     }
 }

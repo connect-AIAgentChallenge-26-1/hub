@@ -60,11 +60,9 @@ public class RecommendationDraftService {
             requestText,
             tokenCodec.safetyIdentifier(sessionId)
         );
-        ExtractionOutcome outcome;
-        try {
-            outcome = extractionPort.extract(command);
-        } catch (RuntimeException exception) {
-            throw providerUnavailable();
+        ExtractionOutcome outcome = extractionPort.extract(command);
+        if (outcome == null) {
+            throw new IllegalStateException("Condition extraction port returned no outcome.");
         }
         if (!outcome.extracted()) {
             throw extractionFailure(outcome.errorCode());

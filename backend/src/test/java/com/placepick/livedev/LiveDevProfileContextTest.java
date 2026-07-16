@@ -2,9 +2,12 @@ package com.placepick.livedev;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.placepick.infrastructure.observability.CandidateFunnelMetrics;
+import com.placepick.infrastructure.observability.LlmProviderDiagnosticMetrics;
+import com.placepick.infrastructure.observability.ProviderCallMetrics;
 import com.placepick.livedev.LiveDevApiDto.DraftView;
 import com.placepick.livedev.LiveDevApiDto.RunView;
-import com.placepick.infrastructure.observability.ProviderCallMetrics;
+import com.placepick.recommendation.application.candidate.CandidateRejectionReason;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
 import com.placepick.recommendation.condition.domain.PlaceType;
 import com.placepick.recommendation.condition.domain.Preference;
@@ -68,6 +71,26 @@ class LiveDevProfileContextTest {
                         "ELICE_REASON_COMPLETED",
                         "RECOMMENDATION_WORKFLOW_COMPLETED"
                     );
+                LiveDevApiDto.TraceEventView normalized = completed.trace().stream()
+                    .filter(event -> event.stage().equals("CANDIDATES_NORMALIZED"))
+                    .findFirst()
+                    .orElseThrow();
+                assertThat(normalized.data())
+                    .containsKeys(
+                        "receivedCount",
+                        "eligibleCount",
+                        "rejectedCount",
+                        "rejectionCounts"
+                    )
+                    .doesNotContainKeys("query", "providerPayload", "credentials");
+                java.util.Map<?, ?> rejectionCounts = (java.util.Map<?, ?>)
+                    normalized.data().get("rejectionCounts");
+                assertThat(rejectionCounts.keySet().stream().map(Object::toString))
+                    .containsExactlyInAnyOrder(
+                        java.util.Arrays.stream(CandidateRejectionReason.values())
+                            .map(Enum::name)
+                            .toArray(String[]::new)
+                    );
             });
     }
 
@@ -116,12 +139,29 @@ class LiveDevProfileContextTest {
     static class TestMetricsConfiguration {
 
         @Bean
-        ProviderCallMetrics providerCallMetrics() {
+        SimpleMeterRegistry meterRegistry() {
+            return new SimpleMeterRegistry();
+        }
+
+        @Bean
+        ProviderCallMetrics providerCallMetrics(SimpleMeterRegistry registry) {
             return new ProviderCallMetrics(
-                new SimpleMeterRegistry(),
+                registry,
                 2,
                 Duration.ofMillis(100)
             );
+        }
+
+        @Bean
+        CandidateFunnelMetrics candidateFunnelMetrics(SimpleMeterRegistry registry) {
+            return new CandidateFunnelMetrics(registry);
+        }
+
+        @Bean
+        LlmProviderDiagnosticMetrics llmProviderDiagnosticMetrics(
+            SimpleMeterRegistry registry
+        ) {
+            return new LlmProviderDiagnosticMetrics(registry);
         }
     }
 

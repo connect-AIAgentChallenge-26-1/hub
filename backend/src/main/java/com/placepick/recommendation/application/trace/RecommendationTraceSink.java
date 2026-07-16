@@ -1,5 +1,6 @@
 package com.placepick.recommendation.application.trace;
 
+import com.placepick.recommendation.application.candidate.CandidateFunnel;
 import com.placepick.recommendation.application.candidate.CandidateQueryPlan;
 import com.placepick.recommendation.application.port.out.BlogSearchQuery;
 import com.placepick.recommendation.application.port.out.BlogSearchResult;
@@ -10,6 +11,7 @@ import com.placepick.recommendation.domain.scoring.RankedPlace;
 import com.placepick.recommendation.domain.scoring.ScoredCandidate;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationCommand;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationOutcome;
+import com.placepick.recommendation.reason.application.ReasonBatchValidationCode;
 import java.util.List;
 
 /**
@@ -43,6 +45,22 @@ public interface RecommendationTraceSink {
     ) {
     }
 
+    /**
+     * Observes count-only normalization diagnostics while preserving compatibility with sinks that
+     * only need the eligible candidates.
+     */
+    default void candidatesNormalized(
+        List<NormalizedCandidate> candidates,
+        CandidateFunnel funnel,
+        boolean relaxed
+    ) {
+        candidatesNormalized(candidates, relaxed);
+    }
+
+    /** Observes the final cumulative funnel exactly once for one ranking execution. */
+    default void candidateFunnelCompleted(CandidateFunnel funnel, boolean relaxed) {
+    }
+
     default void preliminaryRankingCompleted(List<ScoredCandidate> candidates) {
     }
 
@@ -66,5 +84,8 @@ public interface RecommendationTraceSink {
         ReasonGenerationOutcome outcome,
         boolean fallbackUsed
     ) {
+    }
+
+    default void reasonValidationFailed(ReasonBatchValidationCode code) {
     }
 }

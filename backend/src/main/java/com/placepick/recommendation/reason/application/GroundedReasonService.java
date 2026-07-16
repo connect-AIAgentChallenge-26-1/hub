@@ -55,12 +55,15 @@ public final class GroundedReasonService {
         ReasonGenerationCommand command = new ReasonGenerationCommand(condition, contexts);
         traceSink.reasonGenerationRequested(command);
 
+        ReasonGenerationOutcome outcome = generationPort.generate(command);
+        if (outcome == null) {
+            throw new IllegalStateException("Reason generation port returned no outcome.");
+        }
+        if (!outcome.generated()) {
+            traceSink.reasonGenerationCompleted(outcome, true);
+            return fallback(ranking, contexts);
+        }
         try {
-            ReasonGenerationOutcome outcome = generationPort.generate(command);
-            if (outcome == null || !outcome.generated()) {
-                traceSink.reasonGenerationCompleted(outcome, true);
-                return fallback(ranking, contexts);
-            }
             List<PlaceReasonStatements> ordered = validator.validateAndOrder(
                 command,
                 outcome.batch()
@@ -71,8 +74,9 @@ public final class GroundedReasonService {
             );
             traceSink.reasonGenerationCompleted(outcome, false);
             return result;
-        } catch (RuntimeException exception) {
-            traceSink.reasonGenerationCompleted(null, true);
+        } catch (ReasonBatchValidationException exception) {
+            traceSink.reasonValidationFailed(exception.code());
+            traceSink.reasonGenerationCompleted(outcome, true);
             return fallback(ranking, contexts);
         }
     }

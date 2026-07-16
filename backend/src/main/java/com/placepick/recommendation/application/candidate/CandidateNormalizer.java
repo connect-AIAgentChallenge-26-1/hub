@@ -8,6 +8,7 @@ import com.placepick.recommendation.domain.candidate.CandidateKey;
 import com.placepick.recommendation.domain.candidate.NormalizedCandidate;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,21 +30,46 @@ public final class CandidateNormalizer {
         List<PlaceSearchItem> source,
         ConfirmedRecommendationCondition condition
     ) {
-        List<RawCandidate> normalized = source.stream()
-            .map(this::normalize)
-            .flatMap(Optional::stream)
-            .filter(candidate -> locationMatcher.matches(
-                condition.locationQuery(), candidate.address(), candidate.roadAddress()
-            ))
-            .filter(candidate -> taxonomy.matches(
+        return normalizeEligibleWithFunnel(source, condition).candidates();
+    }
+
+    public CandidateNormalizationResult normalizeEligibleWithFunnel(
+        List<PlaceSearchItem> source,
+        ConfirmedRecommendationCondition condition
+    ) {
+        List<PlaceSearchItem> items = List.copyOf(source);
+        EnumMap<CandidateRejectionReason, Integer> rejectionCounts =
+            emptyRejectionCounts();
+        List<RawCandidate> normalized = new ArrayList<>();
+        for (PlaceSearchItem item : items) {
+            Optional<RawCandidate> candidate = normalize(item);
+            if (candidate.isEmpty()) {
+                increment(rejectionCounts, CandidateRejectionReason.MISSING_IDENTITY);
+                continue;
+            }
+            RawCandidate value = candidate.orElseThrow();
+            if (!locationMatcher.matches(
+                condition.locationQuery(), value.address(), value.roadAddress()
+            )) {
+                increment(rejectionCounts, CandidateRejectionReason.LOCATION);
+                continue;
+            }
+            if (!taxonomy.matches(
                 condition.placeType(),
                 condition.placeTypeDetail(),
-                candidate.name(),
-                candidate.category()
-            ))
-            .filter(candidate -> doesNotContainExclusion(candidate, condition))
-            .sorted(RawCandidate.STABLE_ORDER)
-            .toList();
+                value.name(),
+                value.category()
+            )) {
+                increment(rejectionCounts, CandidateRejectionReason.TYPE);
+                continue;
+            }
+            if (!doesNotContainExclusion(value, condition)) {
+                increment(rejectionCounts, CandidateRejectionReason.EXCLUSION);
+                continue;
+            }
+            normalized.add(value);
+        }
+        normalized.sort(RawCandidate.STABLE_ORDER);
 
         Map<String, List<RawCandidate>> byCanonicalLink = new TreeMap<>();
         for (RawCandidate candidate : normalized) {
@@ -95,10 +121,18 @@ public final class CandidateNormalizer {
             }
         }
 
-        return clusters.stream()
+        List<NormalizedCandidate> candidates = clusters.stream()
             .map(cluster -> merge(cluster.candidates(), cluster.identity()))
             .sorted(Comparator.comparing(NormalizedCandidate::candidateKey))
             .toList();
+        rejectionCounts.put(
+            CandidateRejectionReason.DUPLICATE,
+            normalized.size() - candidates.size()
+        );
+        return new CandidateNormalizationResult(
+            candidates,
+            new CandidateFunnel(items.size(), candidates.size(), rejectionCounts)
+        );
     }
 
     public List<CandidateEvidence> normalizeEvidence(
@@ -187,6 +221,22 @@ public final class CandidateNormalizer {
             .map(SearchTextNormalizer::comparison)
             .filter(value -> !value.isBlank())
             .noneMatch(candidate.searchableText()::contains);
+    }
+
+    private static EnumMap<CandidateRejectionReason, Integer> emptyRejectionCounts() {
+        EnumMap<CandidateRejectionReason, Integer> counts =
+            new EnumMap<>(CandidateRejectionReason.class);
+        for (CandidateRejectionReason reason : CandidateRejectionReason.values()) {
+            counts.put(reason, 0);
+        }
+        return counts;
+    }
+
+    private static void increment(
+        EnumMap<CandidateRejectionReason, Integer> counts,
+        CandidateRejectionReason reason
+    ) {
+        counts.compute(reason, (ignored, value) -> value == null ? 1 : value + 1);
     }
 
     private NormalizedCandidate merge(List<RawCandidate> cluster, String identity) {

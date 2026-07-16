@@ -32,6 +32,8 @@ flowchart LR
   P40 --> P41["PP-041 / Issue 55\n저장소·검증·문서 단순화"]
   P41 --> P42["PP-042 / Issue 56\nLive Playground"]
   P42 --> P43["PP-043 / Issue 57\n무료 Cloud Demo"]
+  P42 --> P44["PP-044 / Issue 59\n추천 품질 v2·운영 진단"]
+  P44 --> P43
   M3 --> P43
   M4 --> P43
   M5 --> P43
@@ -92,6 +94,7 @@ PP-037의 Approval Gate·Provider Gateway 기반은 MVP에 사용하지 않는 �
 | [PP-041](https://github.com/gdh0730/hub/issues/55) | 저장소·검증·문서 단순화 | PP-040 |
 | [PP-042](https://github.com/gdh0730/hub/issues/56) | 실제 값이 보이는 Live Playground | PP-041 |
 | [PP-043](https://github.com/gdh0730/hub/issues/57) | 무료 Cloud Demo 배포 | PP-042, 제품 경로 PP-007~035 |
+| [PP-044](https://github.com/gdh0730/hub/issues/59) | 추천 품질 v2와 운영 진단 기반 | PP-042, PP-028, PP-031 |
 
 Task를 시작할 때 GitHub Issue를 `in progress`로 바꾸고 필요한 경우에만 Work Record를
 만든다. 완료할 때 Issue의 성공 기준, PR과 검증 증거를 대조한다. 현재 실행 순서나 완료

@@ -81,6 +81,8 @@ HTTP adapter의 retry와 redirect는 계속 0회다.
 | Provider 결과 | `placepick_provider_calls_total` | `provider`, `operation`, `outcome` |
 | Provider 평균 지연 | `placepick_provider_latency_seconds_*` | `provider`, `operation` |
 | Provider 활성 호출 | `placepick_provider_active` | 없음 |
+| Provider permit 대기 | `placepick_provider_permit_wait_seconds_*` | `provider`, `operation` |
+| Provider permit 거부 | `placepick_provider_permit_rejected_total` | `provider`, `operation` |
 | 429/quota 보호 | `placepick_provider_quota_protected_total` | `provider` |
 | timeout budget 초과 | `placepick_provider_timeout_budget_exhausted_total` | `provider`, `operation` |
 
@@ -88,6 +90,29 @@ HTTP adapter의 retry와 redirect는 계속 0회다.
 호출을 늘리지 않는다. credential·request/response body·query는 로그나 metric에 넣지 않는다.
 Provider 콘솔 quota와 비교한 뒤 동시성 감소, 사용자 429, 기능의 명시적 degraded 처리를
 선택한다. 인증 실패는 재시도하지 않고 RUN-0005의 rotation 절차로 이동한다.
+
+permit 거부는 실제 Provider 호출 지연이 아니므로 `placepick_provider_latency_seconds_*`에
+0초 표본으로 넣지 않는다. permit wait p95와 거부 수를 함께 보고 외부 Provider 지연인지
+로컬 bulkhead 포화인지 구분한다.
+
+## 추천 품질 진단
+
+후보가 부족하거나 이유가 대체되면 응답 원문을 찾지 말고 다음 안전 지표를 먼저 확인한다.
+
+| 목적 | Prometheus metric | 고정 label |
+| --- | --- | --- |
+| 최종 후보 funnel | `placepick_recommendation_candidate_funnel_*` | `result`, `reason`, `relaxed` |
+| LLM Provider 진단 | `placepick_provider_llm_outcomes_total` | `provider`, `operation`, `error`, `stage`, `diagnostic` |
+| 서버 이유 검증 거부 | `placepick_provider_llm_validation_failures_total` | `operation`, `code` |
+
+후보 funnel은 한 추천 실행의 최종 누적 snapshot을 정확히 한 번 기록한다. 완화 전·후 수를
+합산하지 않는다. `missing_identity`, `location`, `type`, `exclusion`, `duplicate` 중 큰 값으로
+후보 부족의 경계를 분류한다. `relaxed=true`는 완화 검색 뒤 최종 snapshot이라는 뜻이다.
+
+LLM 진단은 envelope·usage·schema·place/evidence 소유권 같은 폐쇄형 코드만 기록한다.
+`diagnostic=none`이 아닌 값과 서버 validation failure를 함께 확인한다. prompt, completion,
+장소·주소·URL은 metric·로그·trace에서 찾거나 추가하지 않는다. 예상하지 못한 내부 예외는
+fallback 성공으로 간주하지 않고 Job 실패·retry·DLQ 경로를 조사한다.
 
 ## 추천·Streams·SSE·투표 진단
 

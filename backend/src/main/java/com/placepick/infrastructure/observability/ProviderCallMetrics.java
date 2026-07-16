@@ -57,8 +57,8 @@ public final class ProviderCallMetrics {
             || timeoutBudget.compareTo(Duration.ofMinutes(2)) > 0) {
             throw new IllegalArgumentException("Provider timeout budget is invalid.");
         }
-        if (!acquire()) {
-            record(provider, operation, "concurrency_rejected", Duration.ZERO, timeoutBudget);
+        if (!acquire(provider, operation)) {
+            recordRejected(provider, operation);
             return rejectedResult.get();
         }
 
@@ -80,13 +80,52 @@ public final class ProviderCallMetrics {
         }
     }
 
-    private boolean acquire() {
+    private boolean acquire(String provider, String operation) {
+        long started = System.nanoTime();
         try {
             return permits.tryAcquire(acquireTimeout.toMillis(), TimeUnit.MILLISECONDS);
         } catch (InterruptedException exception) {
             Thread.currentThread().interrupt();
             return false;
+        } finally {
+            recordPermitWait(
+                provider,
+                operation,
+                Duration.ofNanos(System.nanoTime() - started)
+            );
         }
+    }
+
+    private void recordPermitWait(
+        String provider,
+        String operation,
+        Duration elapsed
+    ) {
+        Timer.builder("placepick.provider.permit.wait")
+            .description("Time spent waiting for a local provider concurrency permit")
+            .tags(
+                "provider", closedProvider(provider),
+                "operation", closedOperation(operation)
+            )
+            .publishPercentileHistogram()
+            .register(registry)
+            .record(elapsed);
+    }
+
+    private void recordRejected(String provider, String operation) {
+        String safeProvider = closedProvider(provider);
+        String safeOperation = closedOperation(operation);
+        registry.counter(
+            "placepick.provider.calls",
+            "provider", safeProvider,
+            "operation", safeOperation,
+            "outcome", "concurrency_rejected"
+        ).increment();
+        registry.counter(
+            "placepick.provider.permit.rejected",
+            "provider", safeProvider,
+            "operation", safeOperation
+        ).increment();
     }
 
     private void record(

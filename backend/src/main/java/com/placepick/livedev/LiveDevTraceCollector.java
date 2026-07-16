@@ -1,5 +1,6 @@
 package com.placepick.livedev;
 
+import com.placepick.recommendation.application.candidate.CandidateFunnel;
 import com.placepick.recommendation.application.candidate.CandidateQueryPlan;
 import com.placepick.recommendation.application.port.out.BlogSearchQuery;
 import com.placepick.recommendation.application.port.out.BlogSearchResult;
@@ -11,6 +12,7 @@ import com.placepick.recommendation.domain.scoring.RankedPlace;
 import com.placepick.recommendation.domain.scoring.ScoredCandidate;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationCommand;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationOutcome;
+import com.placepick.recommendation.reason.application.ReasonBatchValidationCode;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,11 +61,16 @@ final class LiveDevTraceCollector implements RecommendationTraceSink {
     @Override
     public void candidatesNormalized(
         List<NormalizedCandidate> candidates,
+        CandidateFunnel funnel,
         boolean relaxed
     ) {
         publisher.accept("CANDIDATES_NORMALIZED", Map.of(
             "relaxed", relaxed,
             "count", candidates.size(),
+            "receivedCount", funnel.receivedCount(),
+            "eligibleCount", funnel.eligibleCount(),
+            "rejectedCount", funnel.rejectedCount(),
+            "rejectionCounts", funnel.rejectionCounts(),
             "candidates", candidates.stream().map(LiveDevApiDto.CandidateView::from).toList()
         ));
     }
@@ -127,6 +134,8 @@ final class LiveDevTraceCollector implements RecommendationTraceSink {
             data.put("errorCode", "UNEXPECTED_PROVIDER_FAILURE");
         } else {
             data.put("errorCode", outcome.errorCode().name());
+            data.put("diagnosticCode", outcome.diagnosticCode().name());
+            data.put("failureStage", outcome.failureStage().name());
             if (outcome.generated()) {
                 data.put(
                     "places",
@@ -137,5 +146,12 @@ final class LiveDevTraceCollector implements RecommendationTraceSink {
             }
         }
         publisher.accept("ELICE_REASON_COMPLETED", data);
+    }
+
+    @Override
+    public void reasonValidationFailed(ReasonBatchValidationCode code) {
+        publisher.accept("ELICE_REASON_VALIDATION_FAILED", Map.of(
+            "diagnosticCode", Objects.requireNonNull(code, "code").name()
+        ));
     }
 }

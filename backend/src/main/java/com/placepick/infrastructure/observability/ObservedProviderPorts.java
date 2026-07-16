@@ -22,6 +22,7 @@ public final class ObservedProviderPorts {
     public static ConditionExtractionPort condition(
         ConditionExtractionPort delegate,
         ProviderCallMetrics metrics,
+        LlmProviderDiagnosticMetrics diagnosticMetrics,
         String provider,
         Duration timeout
     ) {
@@ -30,10 +31,11 @@ public final class ObservedProviderPorts {
             "condition",
             timeout,
             () -> delegate.extract(command),
-            outcome -> extractionOutcome(outcome.errorCode()),
-            () -> ExtractionOutcome.providerFailure(
-                ConditionExtractionErrorCode.PROVIDER_RATE_LIMITED
-            )
+            outcome -> {
+                diagnosticMetrics.recordCondition(provider, outcome);
+                return extractionOutcome(outcome.errorCode());
+            },
+            () -> rejectedExtraction(diagnosticMetrics, provider)
         );
     }
 
@@ -72,6 +74,7 @@ public final class ObservedProviderPorts {
     public static GroundedReasonGenerationPort reasons(
         GroundedReasonGenerationPort delegate,
         ProviderCallMetrics metrics,
+        LlmProviderDiagnosticMetrics diagnosticMetrics,
         String provider,
         Duration timeout
     ) {
@@ -80,11 +83,34 @@ public final class ObservedProviderPorts {
             "reason",
             timeout,
             () -> delegate.generate(command),
-            outcome -> reasonOutcome(outcome.errorCode()),
-            () -> ReasonGenerationOutcome.providerFailure(
-                ReasonGenerationErrorCode.PROVIDER_RATE_LIMITED
-            )
+            outcome -> {
+                diagnosticMetrics.recordReason(provider, outcome);
+                return reasonOutcome(outcome.errorCode());
+            },
+            () -> rejectedReason(diagnosticMetrics, provider)
         );
+    }
+
+    private static ExtractionOutcome rejectedExtraction(
+        LlmProviderDiagnosticMetrics metrics,
+        String provider
+    ) {
+        ExtractionOutcome outcome = ExtractionOutcome.providerFailure(
+            ConditionExtractionErrorCode.PROVIDER_RATE_LIMITED
+        );
+        metrics.recordCondition(provider, outcome);
+        return outcome;
+    }
+
+    private static ReasonGenerationOutcome rejectedReason(
+        LlmProviderDiagnosticMetrics metrics,
+        String provider
+    ) {
+        ReasonGenerationOutcome outcome = ReasonGenerationOutcome.providerFailure(
+            ReasonGenerationErrorCode.PROVIDER_RATE_LIMITED
+        );
+        metrics.recordReason(provider, outcome);
+        return outcome;
     }
 
     private static <T> T searchRejected() {

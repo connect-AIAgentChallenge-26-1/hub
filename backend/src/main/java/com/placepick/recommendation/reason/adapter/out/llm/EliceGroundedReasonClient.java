@@ -7,10 +7,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.placepick.infrastructure.external.http.DirectProviderRestClientFactory;
+import com.placepick.recommendation.application.port.out.LlmFailureStage;
 import com.placepick.recommendation.condition.domain.Preference;
 import com.placepick.recommendation.reason.application.ReasonStatementPolicy;
 import com.placepick.recommendation.reason.application.port.out.GroundedReasonGenerationPort;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationCommand;
+import com.placepick.recommendation.reason.application.port.out.ReasonGenerationDiagnosticCode;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationErrorCode;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationOutcome;
 import com.placepick.recommendation.reason.domain.GeneratedReasonBatch;
@@ -189,13 +191,15 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
             return new ReasonDiagnostic(
                 ReasonGenerationOutcome.generated(
                     parseContent(content, response.httpStatus(), command)
-                ),
-                null
+                )
             );
         } catch (ProviderFailureException exception) {
             return new ReasonDiagnostic(
-                ReasonGenerationOutcome.providerFailure(exception.errorCode()),
-                exception.boundaryCode()
+                ReasonGenerationOutcome.providerFailure(
+                    exception.errorCode(),
+                    exception.diagnosticCode(),
+                    exception.failureStage()
+                )
             );
         }
     }
@@ -295,7 +299,11 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
         try {
             return objectMapper.writeValueAsString(data);
         } catch (JsonProcessingException exception) {
-            throw failure(ReasonGenerationErrorCode.PROVIDER_INVALID_REQUEST);
+            throw failure(
+                ReasonGenerationErrorCode.PROVIDER_INVALID_REQUEST,
+                ReasonGenerationDiagnosticCode.REASON_REQUEST_SERIALIZATION,
+                LlmFailureStage.CLIENT
+            );
         }
     }
 
@@ -327,9 +335,17 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
         } catch (ProviderFailureException exception) {
             throw exception;
         } catch (ResourceAccessException exception) {
-            throw failure(ReasonGenerationErrorCode.PROVIDER_UNAVAILABLE);
+            throw failure(
+                ReasonGenerationErrorCode.PROVIDER_UNAVAILABLE,
+                ReasonGenerationDiagnosticCode.NONE,
+                LlmFailureStage.TRANSPORT
+            );
         } catch (RestClientException exception) {
-            throw invalidResponse("REASON_TRANSPORT");
+            throw failure(
+                ReasonGenerationErrorCode.PROVIDER_INVALID_RESPONSE,
+                ReasonGenerationDiagnosticCode.REASON_TRANSPORT,
+                LlmFailureStage.TRANSPORT
+            );
         }
     }
 
@@ -342,7 +358,12 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
                     response.getHeaders().getFirst(LINKED_GATEWAY_ERROR_HEADER)
                 )
                 : null;
-            throw failure(classifyStatus(status, boundaryCode), boundaryCode);
+            ReasonGenerationErrorCode errorCode = classifyStatus(status, boundaryCode);
+            throw failure(
+                errorCode,
+                diagnosticCode(boundaryCode, errorCode),
+                LlmFailureStage.HTTP_STATUS
+            );
         }
         MediaType contentType = response.getHeaders().getContentType();
         if (contentType == null || !MediaType.APPLICATION_JSON.isCompatibleWith(contentType)) {
@@ -572,30 +593,103 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
         };
     }
 
-    private static ProviderFailureException invalidResponse() {
-        return failure(ReasonGenerationErrorCode.PROVIDER_INVALID_RESPONSE);
-    }
-
     private static ProviderFailureException invalidResponse(String boundaryCode) {
-        return failure(ReasonGenerationErrorCode.PROVIDER_INVALID_RESPONSE, boundaryCode);
-    }
-
-    private static ProviderFailureException failure(ReasonGenerationErrorCode errorCode) {
-        return failure(errorCode, null);
+        ReasonGenerationDiagnosticCode diagnosticCode = diagnosticCode(
+            boundaryCode,
+            ReasonGenerationErrorCode.PROVIDER_INVALID_RESPONSE
+        );
+        return failure(
+            ReasonGenerationErrorCode.PROVIDER_INVALID_RESPONSE,
+            diagnosticCode,
+            failureStage(diagnosticCode)
+        );
     }
 
     private static ProviderFailureException failure(
         ReasonGenerationErrorCode errorCode,
-        String boundaryCode
+        ReasonGenerationDiagnosticCode diagnosticCode,
+        LlmFailureStage failureStage
     ) {
-        return new ProviderFailureException(errorCode, boundaryCode);
+        return new ProviderFailureException(errorCode, diagnosticCode, failureStage);
     }
 
     private static int requiredNonNegativeInteger(JsonNode node) {
         if (!nonNegativeInteger(node)) {
-            throw invalidResponse();
+            throw invalidResponse("REASON_ENVELOPE_USAGE");
         }
         return node.intValue();
+    }
+
+    private static ReasonGenerationDiagnosticCode diagnosticCode(
+        String boundaryCode,
+        ReasonGenerationErrorCode errorCode
+    ) {
+        if (boundaryCode == null) {
+            return switch (errorCode) {
+                case PROVIDER_INVALID_REQUEST ->
+                    ReasonGenerationDiagnosticCode.UPSTREAM_INVALID_REQUEST;
+                case PROVIDER_AUTHENTICATION_FAILED ->
+                    ReasonGenerationDiagnosticCode.UPSTREAM_AUTHENTICATION_FAILED;
+                case PROVIDER_RATE_LIMITED ->
+                    ReasonGenerationDiagnosticCode.UPSTREAM_RATE_LIMITED;
+                case PROVIDER_INVALID_RESPONSE ->
+                    ReasonGenerationDiagnosticCode.UPSTREAM_INVALID_RESPONSE;
+                case PROVIDER_UNAVAILABLE ->
+                    ReasonGenerationDiagnosticCode.UPSTREAM_UNAVAILABLE;
+                case NONE -> ReasonGenerationDiagnosticCode.NONE;
+            };
+        }
+        return switch (boundaryCode) {
+            case "INVALID_RESPONSE" ->
+                ReasonGenerationDiagnosticCode.UPSTREAM_INVALID_RESPONSE;
+            case "PROVIDER_RESPONSE_TOO_LARGE" ->
+                ReasonGenerationDiagnosticCode.UPSTREAM_RESPONSE_TOO_LARGE;
+            case "AUTHENTICATION_FAILED" ->
+                ReasonGenerationDiagnosticCode.UPSTREAM_AUTHENTICATION_FAILED;
+            case "RATE_LIMITED" -> ReasonGenerationDiagnosticCode.UPSTREAM_RATE_LIMITED;
+            case "INVALID_REQUEST" -> ReasonGenerationDiagnosticCode.UPSTREAM_INVALID_REQUEST;
+            case "PROVIDER_UNAVAILABLE", "LINKED_PROVIDER_UNAVAILABLE" ->
+                ReasonGenerationDiagnosticCode.UPSTREAM_UNAVAILABLE;
+            default -> {
+                try {
+                    yield ReasonGenerationDiagnosticCode.valueOf(boundaryCode);
+                } catch (IllegalArgumentException exception) {
+                    yield ReasonGenerationDiagnosticCode.NONE;
+                }
+            }
+        };
+    }
+
+    private static LlmFailureStage failureStage(
+        ReasonGenerationDiagnosticCode diagnosticCode
+    ) {
+        return switch (diagnosticCode) {
+            case NONE -> LlmFailureStage.UNSPECIFIED;
+            case UPSTREAM_INVALID_RESPONSE, UPSTREAM_RESPONSE_TOO_LARGE,
+                 UPSTREAM_AUTHENTICATION_FAILED, UPSTREAM_RATE_LIMITED,
+                 UPSTREAM_INVALID_REQUEST, UPSTREAM_UNAVAILABLE ->
+                LlmFailureStage.HTTP_STATUS;
+            case REASON_REQUEST_SERIALIZATION -> LlmFailureStage.CLIENT;
+            case REASON_TRANSPORT -> LlmFailureStage.TRANSPORT;
+            case REASON_HTTP_CONTENT_TYPE -> LlmFailureStage.MEDIA_TYPE;
+            case REASON_HTTP_RESPONSE_TOO_LARGE -> LlmFailureStage.RESPONSE_SIZE;
+            case REASON_ENVELOPE_JSON -> LlmFailureStage.JSON;
+            case REASON_ENVELOPE_METADATA -> LlmFailureStage.CHAT_METADATA;
+            case REASON_ENVELOPE_CHOICES -> LlmFailureStage.CHAT_CHOICES;
+            case REASON_ENVELOPE_MESSAGE -> LlmFailureStage.CHAT_MESSAGE;
+            case REASON_ENVELOPE_CONTENT -> LlmFailureStage.CHAT_CONTENT;
+            case REASON_ENVELOPE_USAGE -> LlmFailureStage.CHAT_USAGE;
+            case REASON_CONTENT_ROOT_SCHEMA, REASON_CONTENT_PLACES_SCHEMA,
+                 REASON_CONTENT_SCHEMA, REASON_CONTENT_PLACE_REFERENCE,
+                 REASON_CONTENT_EVIDENCE_OWNERSHIP, REASON_CONTENT_PLACE_SET,
+                 REASON_CONTENT_PLACE_SCHEMA, REASON_CONTENT_STATEMENTS_SCHEMA,
+                 REASON_CONTENT_STATEMENT_SCHEMA, REASON_CONTENT_EVIDENCE_SCHEMA,
+                 REASON_CONTENT_STATEMENT_CONSTRAINT, REASON_CONTENT_UNKNOWN_EVIDENCE,
+                 REASON_CONTENT_TEMPLATE_EVIDENCE_TYPE_MISMATCH,
+                 REASON_CONTENT_FORBIDDEN_CLAIM,
+                 REASON_CONTENT_NO_LEXICAL_GROUNDING ->
+                LlmFailureStage.CHAT_CONTENT_SCHEMA;
+        };
     }
 
     private static boolean nonNegativeInteger(JsonNode node) {
@@ -685,9 +779,15 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
     private record ProviderResponse(int httpStatus, byte[] body) {
     }
 
-    record ReasonDiagnostic(ReasonGenerationOutcome outcome, String boundaryCode) {
+    record ReasonDiagnostic(ReasonGenerationOutcome outcome) {
         ReasonDiagnostic {
             Objects.requireNonNull(outcome, "outcome");
+        }
+
+        String boundaryCode() {
+            return outcome.diagnosticCode() == ReasonGenerationDiagnosticCode.NONE
+                ? null
+                : outcome.diagnosticCode().name();
         }
     }
 
@@ -696,23 +796,30 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
         private static final long serialVersionUID = 1L;
 
         private final ReasonGenerationErrorCode errorCode;
-        private final String boundaryCode;
+        private final ReasonGenerationDiagnosticCode diagnosticCode;
+        private final LlmFailureStage failureStage;
 
         private ProviderFailureException(
             ReasonGenerationErrorCode errorCode,
-            String boundaryCode
+            ReasonGenerationDiagnosticCode diagnosticCode,
+            LlmFailureStage failureStage
         ) {
             super("LLM grounded reason request failed.", null, false, false);
             this.errorCode = Objects.requireNonNull(errorCode, "errorCode");
-            this.boundaryCode = boundaryCode;
+            this.diagnosticCode = Objects.requireNonNull(diagnosticCode, "diagnosticCode");
+            this.failureStage = Objects.requireNonNull(failureStage, "failureStage");
         }
 
         private ReasonGenerationErrorCode errorCode() {
             return errorCode;
         }
 
-        private String boundaryCode() {
-            return boundaryCode;
+        private ReasonGenerationDiagnosticCode diagnosticCode() {
+            return diagnosticCode;
+        }
+
+        private LlmFailureStage failureStage() {
+            return failureStage;
         }
     }
 }

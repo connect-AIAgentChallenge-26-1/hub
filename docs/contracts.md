@@ -369,6 +369,14 @@ Embedding `openai/text-embedding-3-small`은 과거 capability만 확인했으�
 다시 검증한다. LLM 결과 일부만 섞지 않으며 한 문장이라도 실패하면 Top 3 전체를 서버
 template으로 교체한다.
 
+조건·이유 Provider 경계는 원문 없이 `errorCode`, 폐쇄형 `diagnosticCode`와
+`failureStage`를 보존한다. HTTP envelope·usage·content schema·place/evidence 소유권처럼
+예상 가능한 Provider 또는 검증 실패만 안전한 오류·template 경로로 바꾼다. null outcome,
+예상하지 못한 RuntimeException과 내부 계약 위반은 정상 fallback으로 숨기지 않고 Job
+실패·retry·DLQ 진단 경계로 전파한다. 세부 진단은 공개 API 응답이 아니라 low-cardinality
+metric과 로컬 Live Playground trace에만 사용하며 prompt·completion·장소·URL을 포함하지
+않는다.
+
 2026-07-16 직접 Live Evidence는 알려진 유형의 불필요한 detail 정규화, 서버 warning
 생성, v2 자연 문장과 동일 후보 evidence 검증을 적용한 세 시나리오에서
 `reasonFallback=false`를 확인했다. 실행 과정과 safe summary는

@@ -1,8 +1,10 @@
 package com.placepick.recommendation.reason.application;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.placepick.recommendation.application.scoring.CandidateRankingResult;
+import com.placepick.recommendation.application.trace.RecommendationTraceSink;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
 import com.placepick.recommendation.condition.domain.PlaceType;
 import com.placepick.recommendation.condition.domain.Preference;
@@ -52,27 +54,32 @@ class GroundedReasonServiceTest {
     @Test
     void oneCrossPlaceEvidenceReferenceFallsBackForAllThree() {
         CandidateRankingResult ranking = ranking(false, true);
-        GroundedReasonService service = new GroundedReasonService(command -> generated(
-            command,
-            index -> index == 0
-                ? statement(
-                    command,
-                    index,
-                    command.places().get(1).evidence().get(0).evidenceId(),
-                    ReasonStatementPolicy.LOCAL_STATEMENT_TEXT
-                )
-                : statement(
-                    command,
-                    index,
-                    command.places().get(index).evidence().get(0).evidenceId(),
-                    ReasonStatementPolicy.LOCAL_STATEMENT_TEXT
-                ),
-            List.of(0, 1, 2)
-        ));
+        RecordingTraceSink trace = new RecordingTraceSink();
+        GroundedReasonService service = new GroundedReasonService(
+            command -> generated(
+                command,
+                index -> index == 0
+                    ? statement(
+                        command,
+                        index,
+                        command.places().get(1).evidence().get(0).evidenceId(),
+                        ReasonStatementPolicy.LOCAL_STATEMENT_TEXT
+                    )
+                    : statement(
+                        command,
+                        index,
+                        command.places().get(index).evidence().get(0).evidenceId(),
+                        ReasonStatementPolicy.LOCAL_STATEMENT_TEXT
+                    ),
+                List.of(0, 1, 2)
+            ),
+            trace
+        );
 
         ReasonEnrichmentResult result = service.enrich(condition(), ranking);
 
         assertAllFallback(result);
+        assertThat(trace.validationCode).isEqualTo(ReasonBatchValidationCode.UNKNOWN_EVIDENCE);
     }
 
     @Test
@@ -115,12 +122,23 @@ class GroundedReasonServiceTest {
     }
 
     @Test
-    void thrownAdapterFailureCannotCreateAPartiallyGeneratedResult() {
+    void unexpectedAdapterFailureIsNotHiddenByFallback() {
         GroundedReasonService service = new GroundedReasonService(command -> {
-            throw new IllegalStateException("synthetic provider failure");
+            throw new IllegalStateException("synthetic internal failure");
         });
 
-        assertAllFallback(service.enrich(condition(), ranking(false, true)));
+        assertThatThrownBy(() -> service.enrich(condition(), ranking(false, true)))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessage("synthetic internal failure");
+    }
+
+    @Test
+    void nullPortOutcomeIsAnInternalContractFailure() {
+        GroundedReasonService service = new GroundedReasonService(command -> null);
+
+        assertThatThrownBy(() -> service.enrich(condition(), ranking(false, true)))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessage("Reason generation port returned no outcome.");
     }
 
     private void assertAllFallback(ReasonEnrichmentResult result) {
@@ -214,5 +232,15 @@ class GroundedReasonServiceTest {
             List.of(new Preference("조용한", 8)),
             List.of("흡연")
         );
+    }
+
+    private static final class RecordingTraceSink implements RecommendationTraceSink {
+
+        private ReasonBatchValidationCode validationCode;
+
+        @Override
+        public void reasonValidationFailed(ReasonBatchValidationCode code) {
+            validationCode = code;
+        }
     }
 }

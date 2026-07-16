@@ -13,6 +13,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import com.placepick.recommendation.application.port.out.LlmFailureStage;
+import com.placepick.recommendation.condition.application.port.out.ConditionExtractionDiagnosticCode;
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionErrorCode;
 import com.placepick.recommendation.condition.application.port.out.ConditionWarning;
 import com.placepick.recommendation.condition.application.port.out.ExtractionCommand;
@@ -111,6 +113,9 @@ class EliceConditionExtractionClientIntegrationTest {
             ConditionWarning.BUDGET_NOT_PROVIDED
         );
         assertThat(diagnostic.boundaryCode()).isEqualTo("UNPROCESSABLE_LOCATION_MISSING");
+        assertThat(outcome.diagnosticCode())
+            .isEqualTo(ConditionExtractionDiagnosticCode.UNPROCESSABLE_LOCATION_MISSING);
+        assertThat(outcome.failureStage()).isEqualTo(LlmFailureStage.NONE);
         verifyOneRequest();
     }
 
@@ -133,6 +138,9 @@ class EliceConditionExtractionClientIntegrationTest {
             .isEqualTo(ConditionExtractionErrorCode.PROVIDER_INVALID_RESPONSE);
         assertThat(diagnostic.boundaryCode()).isEqualTo(expectedCode)
             .doesNotContain("디저트", "30000");
+        assertThat(diagnostic.outcome().diagnosticCode().name()).isEqualTo(expectedCode);
+        assertThat(diagnostic.outcome().failureStage())
+            .isEqualTo(LlmFailureStage.CHAT_CONTENT_CONDITION);
         verifyOneRequest();
     }
 
@@ -172,15 +180,16 @@ class EliceConditionExtractionClientIntegrationTest {
 
     @ParameterizedTest
     @CsvSource({
-        "400, PROVIDER_INVALID_REQUEST",
-        "401, PROVIDER_AUTHENTICATION_FAILED",
-        "403, PROVIDER_AUTHENTICATION_FAILED",
-        "429, PROVIDER_RATE_LIMITED",
-        "503, PROVIDER_UNAVAILABLE"
+        "400, PROVIDER_INVALID_REQUEST, UPSTREAM_INVALID_REQUEST",
+        "401, PROVIDER_AUTHENTICATION_FAILED, UPSTREAM_AUTHENTICATION_FAILED",
+        "403, PROVIDER_AUTHENTICATION_FAILED, UPSTREAM_AUTHENTICATION_FAILED",
+        "429, PROVIDER_RATE_LIMITED, UPSTREAM_RATE_LIMITED",
+        "503, PROVIDER_UNAVAILABLE, UPSTREAM_UNAVAILABLE"
     })
     void normalizesHttpFailuresAndNeverRetries(
         int status,
-        ConditionExtractionErrorCode expected
+        ConditionExtractionErrorCode expected,
+        ConditionExtractionDiagnosticCode expectedDiagnostic
     ) {
         WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH)).willReturn(aResponse()
             .withStatus(status)
@@ -191,6 +200,8 @@ class EliceConditionExtractionClientIntegrationTest {
 
         assertThat(outcome.errorCode()).isEqualTo(expected);
         assertThat(outcome.condition()).isNull();
+        assertThat(outcome.diagnosticCode()).isEqualTo(expectedDiagnostic);
+        assertThat(outcome.failureStage()).isEqualTo(LlmFailureStage.HTTP_STATUS);
         verifyOneRequest();
     }
 
@@ -272,8 +283,10 @@ class EliceConditionExtractionClientIntegrationTest {
             .withHeader("Content-Type", "application/json")
             .withBody("x".repeat(129))));
 
-        assertThat(smallClient.extract(command()).errorCode())
+        var oversized = smallClient.extract(command());
+        assertThat(oversized.errorCode())
             .isEqualTo(ConditionExtractionErrorCode.PROVIDER_INVALID_RESPONSE);
+        assertThat(oversized.failureStage()).isEqualTo(LlmFailureStage.RESPONSE_SIZE);
         verifyOneRequest();
 
         WIRE_MOCK.resetAll();
@@ -283,8 +296,10 @@ class EliceConditionExtractionClientIntegrationTest {
             .withHeader("Content-Type", "application/json")
             .withBody(validChatResponse(validContent()))));
 
-        assertThat(smallClient.extract(command()).errorCode())
+        var timedOut = smallClient.extract(command());
+        assertThat(timedOut.errorCode())
             .isEqualTo(ConditionExtractionErrorCode.PROVIDER_UNAVAILABLE);
+        assertThat(timedOut.failureStage()).isEqualTo(LlmFailureStage.TRANSPORT);
         verifyOneRequest();
     }
 

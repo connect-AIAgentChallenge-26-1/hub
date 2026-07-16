@@ -23,6 +23,44 @@ class CandidateNormalizerTest {
     );
 
     @Test
+    void accountsForEveryReceivedItemWithOneClosedFunnelReason() {
+        PlaceSearchItem eligible = place(
+            "카페 하나",
+            "https://example.test/one",
+            "카페",
+            "서울 강남구",
+            "조용한 좌석"
+        );
+        CandidateNormalizationResult result = normalizer.normalizeEligibleWithFunnel(
+            List.of(
+                eligible,
+                place("식별 불가", "", "카페", "서울 강남구", ""),
+                place("다른 지역 식당", "https://example.test/location", "한식", "부산 해운대구", ""),
+                place("다른 유형", "https://example.test/type", "한식", "서울 강남구", ""),
+                place("제외 후보", "https://example.test/exclusion", "카페", "서울 강남구", "흡연실"),
+                eligible
+            ),
+            condition(PlaceType.CAFE, null, List.of("흡연"))
+        );
+
+        assertThat(result.candidates()).singleElement();
+        assertThat(result.funnel()).satisfies(funnel -> {
+            assertThat(funnel.receivedCount()).isEqualTo(6);
+            assertThat(funnel.eligibleCount()).isEqualTo(1);
+            assertThat(funnel.rejectedCount()).isEqualTo(5);
+            assertThat(funnel.rejectionCounts()).containsExactlyInAnyOrderEntriesOf(
+                java.util.Map.of(
+                    CandidateRejectionReason.MISSING_IDENTITY, 1,
+                    CandidateRejectionReason.LOCATION, 1,
+                    CandidateRejectionReason.TYPE, 1,
+                    CandidateRejectionReason.EXCLUSION, 1,
+                    CandidateRejectionReason.DUPLICATE, 1
+                )
+            );
+        });
+    }
+
+    @Test
     void preservesDisplayGlyphsWhileNormalizingComparisonHtmlAndWhitespace() {
         List<PlaceSearchItem> items = List.of(
             place("<b>카페　Ａ</b>", "https://example.test/one", "카페>디저트", "서울특별시 강남구", "조용한 좌석"),

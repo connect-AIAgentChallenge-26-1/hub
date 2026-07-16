@@ -1,7 +1,10 @@
 import {
+  LLM_FAILURE_STAGES,
   PLACE_TYPES,
+  SAFE_DIAGNOSTIC_CODES,
   type CreateDraftRequest,
   type DraftSnapshot,
+  type LlmFailureStage,
   type PlaygroundApi,
   type ProblemDetails,
   type RecommendationCondition,
@@ -12,6 +15,7 @@ import {
   type RunFailure,
   type RunSnapshot,
   type RunStatus,
+  type SafeDiagnosticCode,
   type RunStreamListener,
   type ScoreBreakdown,
   type TraceCandidate,
@@ -45,11 +49,14 @@ const TRACE_STAGES = new Set<TraceStage>([
   "NAVER_BLOG_FAILED",
   "FINAL_RANKING_COMPLETED",
   "ELICE_REASON_REQUESTED",
+  "ELICE_REASON_VALIDATION_FAILED",
   "ELICE_REASON_COMPLETED",
   "RECOMMENDATION_WORKFLOW_COMPLETED",
   "RECOMMENDATION_WORKFLOW_FAILED",
   "RECOMMENDATION_WORKFLOW_CANCELLED",
 ]);
+const SAFE_DIAGNOSTIC_CODE_SET = new Set<string>(SAFE_DIAGNOSTIC_CODES);
+const LLM_FAILURE_STAGE_SET = new Set<string>(LLM_FAILURE_STAGES);
 
 export class PlaygroundApiError extends Error {
   constructor(
@@ -233,6 +240,7 @@ async function readProblem(response: Response): Promise<ProblemDetails> {
       status: response.status,
       detail: optionalNonBlankString(value.detail) ?? "안전한 오류 정보가 없습니다.",
       errorCode: optionalNonBlankString(value.errorCode),
+      diagnosticCode: optionalSafeDiagnosticCode(value.diagnosticCode),
       traceId: optionalNonBlankString(value.traceId),
     };
   } catch {
@@ -408,11 +416,31 @@ function tracePresentation(
       const candidates = array(data.candidates, "data.candidates").map((item) =>
         candidateTrace(parseCandidate(item), "KEPT", "정규화·필수 조건·중복 검사 통과"),
       );
+      const rejectionCounts = candidateRejectionCounts(data.rejectionCounts);
+      const eligible = requiredInteger(
+        data.eligibleCount ?? data.count,
+        "data.eligibleCount",
+      );
+      const received = requiredInteger(
+        data.receivedCount ?? eligible,
+        "data.receivedCount",
+      );
+      const filtered = requiredInteger(
+        data.rejectedCount ?? Math.max(0, received - eligible),
+        "data.rejectedCount",
+      );
       return traceView(
         "후보를 정규화하고 필터링했습니다",
-        "HTML과 공백을 정리하고 위치·유형·제외 조건 및 중복 규칙을 통과한 후보만 유지했습니다.",
+        "후보 원문을 저장하지 않고 위치·유형·제외 조건·identity·중복 단계의 수량을 구분했습니다.",
         {
-          eligible: requiredInteger(data.count, "data.count"),
+          received,
+          eligible,
+          filtered,
+          missingIdentity: rejectionCounts.MISSING_IDENTITY,
+          locationFiltered: rejectionCounts.LOCATION,
+          typeFiltered: rejectionCounts.TYPE,
+          exclusionFiltered: rejectionCounts.EXCLUSION,
+          duplicates: rejectionCounts.DUPLICATE,
           relaxed: requiredBoolean(data.relaxed, "data.relaxed"),
         },
         candidates,
@@ -491,6 +519,17 @@ function tracePresentation(
         { placeCount: places.length, evidenceCount },
       );
     }
+    case "ELICE_REASON_VALIDATION_FAILED":
+      return traceView(
+        "서버가 Elice 이유의 근거 계약 위반을 감지했습니다",
+        "응답 원문을 기록하지 않고 폐쇄형 진단 코드만 남긴 뒤 안전한 대체 이유를 사용합니다.",
+        {
+          diagnosticCode: requiredSafeDiagnosticCode(
+            data.diagnosticCode,
+            "data.diagnosticCode",
+          ),
+        },
+      );
     case "ELICE_REASON_COMPLETED": {
       const places = data.places == null ? [] : array(data.places, "data.places");
       const fallback = requiredBoolean(data.fallbackUsed, "data.fallbackUsed");
@@ -503,6 +542,8 @@ function tracePresentation(
           placeCount: places.length,
           fallback,
           errorCode: requiredNonBlankString(data.errorCode, "data.errorCode"),
+          diagnosticCode: optionalSafeDiagnosticCode(data.diagnosticCode) ?? "NONE",
+          failureStage: optionalLlmFailureStage(data.failureStage) ?? "NONE",
         },
       );
     }
@@ -694,6 +735,7 @@ function parseFailure(source: unknown): RunFailure {
   const value = asRecord(source);
   return {
     errorCode: requiredNonBlankString(value.errorCode, "errorCode"),
+    diagnosticCode: optionalSafeDiagnosticCode(value.diagnosticCode),
     title: optionalNonBlankString(value.title) ?? "추천 워크플로 실행 실패",
     detail:
       optionalNonBlankString(value.message) ??
@@ -780,6 +822,46 @@ function requiredBoolean(source: unknown, field: string): boolean {
     throw new PlaygroundContractError(`${field} boolean이 필요합니다.`);
   }
   return source;
+}
+
+function candidateRejectionCounts(source: unknown): Record<
+  "MISSING_IDENTITY" | "LOCATION" | "TYPE" | "EXCLUSION" | "DUPLICATE",
+  number
+> {
+  if (source == null) {
+    return {
+      MISSING_IDENTITY: 0,
+      LOCATION: 0,
+      TYPE: 0,
+      EXCLUSION: 0,
+      DUPLICATE: 0,
+    };
+  }
+  const value = asRecord(source);
+  return {
+    MISSING_IDENTITY: requiredInteger(value.MISSING_IDENTITY ?? 0, "rejectionCounts.MISSING_IDENTITY"),
+    LOCATION: requiredInteger(value.LOCATION ?? 0, "rejectionCounts.LOCATION"),
+    TYPE: requiredInteger(value.TYPE ?? 0, "rejectionCounts.TYPE"),
+    EXCLUSION: requiredInteger(value.EXCLUSION ?? 0, "rejectionCounts.EXCLUSION"),
+    DUPLICATE: requiredInteger(value.DUPLICATE ?? 0, "rejectionCounts.DUPLICATE"),
+  };
+}
+
+function requiredSafeDiagnosticCode(source: unknown, field: string): SafeDiagnosticCode {
+  const value = requiredNonBlankString(source, field);
+  return SAFE_DIAGNOSTIC_CODE_SET.has(value) ? value as SafeDiagnosticCode : "UNKNOWN";
+}
+
+function optionalSafeDiagnosticCode(source: unknown): SafeDiagnosticCode | undefined {
+  const value = optionalNonBlankString(source);
+  if (value == null) return undefined;
+  return SAFE_DIAGNOSTIC_CODE_SET.has(value) ? value as SafeDiagnosticCode : "UNKNOWN";
+}
+
+function optionalLlmFailureStage(source: unknown): LlmFailureStage | undefined {
+  const value = optionalNonBlankString(source);
+  if (value == null) return undefined;
+  return LLM_FAILURE_STAGE_SET.has(value) ? value as LlmFailureStage : "UNEXPECTED";
 }
 
 function parseHttpUrl(source: unknown, field: string): string {

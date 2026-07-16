@@ -96,6 +96,7 @@ function stageLabel(stage: WorkflowTraceEvent["stage"]): string {
     NAVER_BLOG_FAILED: "Blog 저하",
     FINAL_RANKING_COMPLETED: "Top 3",
     ELICE_REASON_REQUESTED: "Elice 요청",
+    ELICE_REASON_VALIDATION_FAILED: "이유 진단",
     ELICE_REASON_COMPLETED: "이유 검증",
     RECOMMENDATION_WORKFLOW_COMPLETED: "완료",
     RECOMMENDATION_WORKFLOW_FAILED: "실패",
@@ -118,6 +119,10 @@ function metricLabel(key: string): string {
     eligible: "유효",
     filtered: "제외",
     duplicates: "중복",
+    missingIdentity: "식별 불가",
+    locationFiltered: "위치 제외",
+    typeFiltered: "유형 제외",
+    exclusionFiltered: "제외 조건",
     relaxed: "완화",
     evidence: "근거",
     scoreCeiling: "점수 상한",
@@ -145,6 +150,8 @@ function metricLabel(key: string): string {
     reasonCalls: "이유 호출",
     failureCode: "실패 코드",
     errorCode: "결과 코드",
+    diagnosticCode: "진단 코드",
+    failureStage: "실패 단계",
   };
   return labels[key] ?? key;
 }

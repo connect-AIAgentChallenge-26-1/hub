@@ -21,6 +21,7 @@ Work Record에 같은 상태표를 복제하지 않는다. Work Record는 실제
 - [WI-0043 저장소·검증·문서 단순화](work-records/WI-0043-repository-validation-documentation-simplification.md)
 - [WI-0044 실제 값 Live Playground](work-records/WI-0044-live-playground.md)
 - [WI-0045 무료 클라우드 데모 배포](work-records/WI-0045-free-cloud-demo-deployment.md)
+- [WI-0046 추천 품질 v2와 운영 진단 기반](work-records/WI-0046-recommendation-quality-v2.md)
 
 ## 유효한 결정
 
@@ -38,6 +39,9 @@ Work Record에 같은 상태표를 복제하지 않는다. Work Record는 실제
 - [ADR-0012 동기 추천 Core 검증 경계](adr/ADR-0012-recommendation-core-and-split-live-boundary.md)
 - [ADR-0013 종료된 Linked Live Gateway 경계](adr/ADR-0013-naver-elice-linked-live-boundary.md)
 - [ADR-0014 MVP 직접 Provider와 단순화한 신뢰 경계](adr/ADR-0014-mvp-direct-provider-and-simplified-trust-boundary.md)
+- [ADR-0015 적응형 검색·점수 v2와 부분 결과·다른 추천](adr/ADR-0015-retrieval-ranking-v2.md)
+- [ADR-0016 후보별 claim 기반 이유 v3와 제한된 복구](adr/ADR-0016-grounded-reason-v3.md)
+- [ADR-0017 Grafana Cloud OTLP 운영 관측과 민감정보 경계](adr/ADR-0017-production-otlp-observability.md)
 
 `superseded` ADR은 과거 결정의 이유를 보존하기 위해 인덱스에 남긴다. 현재 선택은
 가장 최근의 대체 ADR을 따른다.

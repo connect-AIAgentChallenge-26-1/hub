@@ -30,6 +30,21 @@ describe("HttpPlaygroundApi", () => {
     );
   });
 
+  it("dev Problem Details의 폐쇄형 condition 진단 코드를 보존한다", async () => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValue(jsonResponse({
+      title: "조건 추출 실패",
+      status: 502,
+      detail: "조건을 추출하지 못했습니다.",
+      errorCode: "CONDITION_PROVIDER_INVALID_RESPONSE",
+      diagnosticCode: "CONDITION_BUDGET_ORDER_INVALID",
+    }, 502));
+    const api = new HttpPlaygroundApi(fetcher);
+
+    await expect(api.createDraft({ requestText: "합성 요청" })).rejects.toMatchObject({
+      problem: { diagnosticCode: "CONDITION_BUDGET_ORDER_INVALID" },
+    });
+  });
+
   it("202 RunView를 실제 /runs/{runId}/events SSE 경로와 연결한다", async () => {
     const fetcher = vi.fn<typeof fetch>().mockResolvedValue(
       jsonResponse({
@@ -82,6 +97,114 @@ describe("HttpPlaygroundApi", () => {
     expect(result.stage).toBe("SEARCH_QUERY_PLANNED");
     expect(result.status).toBe("COMPLETED");
     expect(result.metrics).toMatchObject({ query: "서울 카페 조용한", relaxed: false });
+  });
+
+  it("후보 정규화 trace의 안전한 funnel 사유를 표시 모델로 보존한다", () => {
+    const result = __testing.parseTrace({
+      id: 7,
+      stage: "CANDIDATES_NORMALIZED",
+      status: "completed",
+      occurredAt: "2026-07-16T02:00:02Z",
+      data: {
+        relaxed: false,
+        count: 2,
+        receivedCount: 5,
+        eligibleCount: 2,
+        rejectedCount: 3,
+        rejectionCounts: {
+          MISSING_IDENTITY: 1,
+          LOCATION: 1,
+          TYPE: 0,
+          EXCLUSION: 0,
+          DUPLICATE: 1,
+        },
+        candidates: [
+          {
+            name: "후보 A",
+            category: "카페",
+            description: "",
+            address: "서울",
+            roadAddress: "서울",
+            sourceUrl: "https://example.com/a",
+          },
+          {
+            name: "후보 B",
+            category: "카페",
+            description: "",
+            address: "서울",
+            roadAddress: "서울",
+            sourceUrl: "https://example.com/b",
+          },
+        ],
+      },
+    });
+
+    expect(result.metrics).toMatchObject({
+      received: 5,
+      eligible: 2,
+      filtered: 3,
+      missingIdentity: 1,
+      locationFiltered: 1,
+      duplicates: 1,
+    });
+  });
+
+  it("이유 검증 실패의 폐쇄형 진단 코드를 원문 없이 표시한다", () => {
+    const result = __testing.parseTrace({
+      id: 12,
+      stage: "ELICE_REASON_VALIDATION_FAILED",
+      status: "completed",
+      occurredAt: "2026-07-16T02:00:03Z",
+      data: { diagnosticCode: "UNKNOWN_EVIDENCE" },
+    });
+
+    expect(result.metrics).toEqual({ diagnosticCode: "UNKNOWN_EVIDENCE" });
+    expect(result.description).not.toContain("prompt");
+  });
+
+  it("이유 Provider fallback의 진단 코드와 실패 단계를 표시한다", () => {
+    const result = __testing.parseTrace({
+      id: 13,
+      stage: "ELICE_REASON_COMPLETED",
+      status: "completed",
+      occurredAt: "2026-07-16T02:00:04Z",
+      data: {
+        fallbackUsed: true,
+        errorCode: "PROVIDER_INVALID_RESPONSE",
+        diagnosticCode: "REASON_CONTENT_EVIDENCE_OWNERSHIP",
+        failureStage: "CHAT_CONTENT_SCHEMA",
+      },
+    });
+
+    expect(result.metrics).toMatchObject({
+      fallback: true,
+      diagnosticCode: "REASON_CONTENT_EVIDENCE_OWNERSHIP",
+      failureStage: "CHAT_CONTENT_SCHEMA",
+    });
+  });
+
+  it("구 후보 trace는 호환하고 미등록 진단 문자열은 UNKNOWN으로 축소한다", () => {
+    const oldFunnel = __testing.parseTrace({
+      id: 7,
+      stage: "CANDIDATES_NORMALIZED",
+      status: "completed",
+      occurredAt: "2026-07-16T02:00:02Z",
+      data: {
+        relaxed: false,
+        count: 0,
+        candidates: [],
+      },
+    });
+    const unknownDiagnostic = __testing.parseTrace({
+      id: 12,
+      stage: "ELICE_REASON_VALIDATION_FAILED",
+      status: "completed",
+      occurredAt: "2026-07-16T02:00:03Z",
+      data: { diagnosticCode: "raw provider response must not pass" },
+    });
+
+    expect(oldFunnel.metrics).toMatchObject({ received: 0, eligible: 0, filtered: 0 });
+    expect(unknownDiagnostic.metrics).toEqual({ diagnosticCode: "UNKNOWN" });
   });
 
   it("중첩된 백엔드 ResultView를 순위·점수·Local/Blog 근거가 있는 Top 3로 변환한다", () => {

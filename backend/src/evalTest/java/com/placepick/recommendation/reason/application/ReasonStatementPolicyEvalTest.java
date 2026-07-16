@@ -44,13 +44,19 @@ class ReasonStatementPolicyEvalTest {
             );
             List<String> evidenceIds = new ArrayList<>();
             fixture.path("evidenceIds").forEach(value -> evidenceIds.add(value.asText()));
-            boolean actual = policy.isSupported(
+            ReasonStatementPolicy.ValidationResult validation = policy.validate(
                 new ReasonStatement(fixture.path("text").asText(), evidenceIds),
                 place
             );
+            boolean actual = validation == ReasonStatementPolicy.ValidationResult.SUPPORTED;
             assertThat(actual)
                 .as(fixture.path("id").asText())
                 .isEqualTo(fixture.path("expectedValid").asBoolean());
+            if (!actual) {
+                assertThat(ReasonBatchValidator.validationCode(validation).name())
+                    .as(fixture.path("id").asText() + " diagnostic")
+                    .isEqualTo(validation.name());
+            }
         }
     }
 

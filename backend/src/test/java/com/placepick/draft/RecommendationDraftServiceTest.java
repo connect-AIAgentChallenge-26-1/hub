@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
+import com.placepick.recommendation.condition.application.port.out.ConditionExtractionDiagnosticCode;
 import com.placepick.recommendation.condition.application.port.out.ConditionWarning;
 import com.placepick.recommendation.condition.application.port.out.ExtractionOutcome;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
@@ -64,7 +65,10 @@ class RecommendationDraftServiceTest {
     @Test
     void rejectsUnprocessableExtractionWithoutPersistingDraft() {
         RecommendationDraftService service = service(command ->
-            ExtractionOutcome.unprocessable(List.of())
+            ExtractionOutcome.unprocessable(
+                List.of(),
+                ConditionExtractionDiagnosticCode.UNPROCESSABLE_LOCATION_AND_TYPE_MISSING
+            )
         );
 
         assertThatThrownBy(() -> service.create(OWNER, "조건 없음"))
@@ -72,6 +76,22 @@ class RecommendationDraftServiceTest {
                 assertThat(exception.status()).isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
                 assertThat(exception.errorCode()).isEqualTo(ApiErrorCode.UNPROCESSABLE_CONDITION);
             });
+        assertThat(repository.drafts).isEmpty();
+    }
+
+    @Test
+    void doesNotHideUnexpectedExtractionFailuresAsProviderOutcomes() {
+        RecommendationDraftService throwing = service(command -> {
+            throw new IllegalStateException("synthetic internal failure");
+        });
+        RecommendationDraftService nullOutcome = service(command -> null);
+
+        assertThatThrownBy(() -> throwing.create(OWNER, "서울 카페"))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessage("synthetic internal failure");
+        assertThatThrownBy(() -> nullOutcome.create(OWNER, "서울 카페"))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessage("Condition extraction port returned no outcome.");
         assertThat(repository.drafts).isEmpty();
     }
 

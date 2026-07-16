@@ -2,6 +2,7 @@ package com.placepick.infrastructure.external;
 
 import com.placepick.infrastructure.external.llm.EliceConditionExtractionClient;
 import com.placepick.infrastructure.observability.ObservedProviderPorts;
+import com.placepick.infrastructure.observability.LlmProviderDiagnosticMetrics;
 import com.placepick.infrastructure.observability.ProviderCallMetrics;
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
 import java.net.URI;
@@ -27,11 +28,13 @@ public class ProductionConditionProviderConfiguration {
         @Value("${CHAT_PROXY_URL}") URI chatBaseUrl,
         @Value("${PROXY_TOKEN}") String token,
         @Value("${OPENAI_MODEL:openai/gpt-4.1-mini}") String model,
-        ProviderCallMetrics metrics
+        ProviderCallMetrics metrics,
+        LlmProviderDiagnosticMetrics diagnosticMetrics
     ) {
         return ObservedProviderPorts.condition(
             EliceConditionExtractionClient.create(chatBaseUrl, token, model),
             metrics,
+            diagnosticMetrics,
             "elice",
             Duration.ofSeconds(30)
         );
