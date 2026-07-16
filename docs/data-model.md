@@ -10,9 +10,32 @@
 | name | text | 필수 | 과목명 |
 | exam_date | date | 필수 | 시험 날짜 |
 | understanding | integer | 필수 | 현재 이해도 1~5 |
-| importance | integer | 필수 | 과목 중요도 1~5 |
-| priority_score | numeric | 필수 | 계산된 우선순위 점수 |
+| difficulty | integer | 필수 | 과목 난이도 1~5 |
 | created_at | timestamptz | 필수 | 과목 정보 생성 시각 |
+
+> `priority_score`(우선순위 점수)는 저장하지 않는다. 이해도·난이도·시험까지 남은 날짜와
+> 사용자가 선택한 우선순위 성향(가중치)으로 화면에서 매번 계산한다.
+
+## 우선순위 점수 계산
+
+각 요소를 0~100 점수로 환산한 뒤 성향별 가중치로 합산한다.
+
+- 이해도: 낮을수록 높은 점수 `(5 - understanding) / 4 * 100`
+- 난이도: 높을수록 높은 점수 `(difficulty - 1) / 4 * 100`
+- 급함: 시험이 가까울수록 높은 점수 (30일 기준, 지났으면 100)
+
+| 성향 | 이해도 | 난이도 | 급함 |
+|---|---|---|---|
+| 균형 | 0.4 | 0.3 | 0.3 |
+| 난이도 중시 | 0.3 | 0.5 | 0.2 |
+| 임박도 중시 | 0.3 | 0.2 | 0.5 |
+
+## 저장 방식
+
+MVP 단계에서는 DB 대신 브라우저 `localStorage`에 과목 목록과 선택한 성향을 저장한다.
+
+- `exam-priority:subjects` — 과목 배열
+- `exam-priority:weight` — 우선순위 성향 키
 
 ## 데이터 예시
 
@@ -22,7 +45,7 @@
   "name": "한방병리학",
   "exam_date": "2026-07-25",
   "understanding": 2,
-  "importance": 5,
-  "priority_score": 90,
+  "difficulty": 5,
   "created_at": "2026-07-15T10:00:00+09:00"
 }
+```
