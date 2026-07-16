@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.placepick.infrastructure.external.http.DirectProviderRestClientFactory;
+import com.placepick.recommendation.application.port.out.LlmFailureStage;
+import com.placepick.recommendation.condition.application.port.out.ConditionExtractionDiagnosticCode;
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionErrorCode;
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
 import com.placepick.recommendation.condition.application.port.out.ConditionWarning;
@@ -194,16 +196,18 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
             JsonNode root = parseJson(response.body(), response.httpStatus());
             String content = validateEnvelopeAndReadContent(root, response.httpStatus());
             ParsedContent parsed = parseContent(content, response.httpStatus());
-            return new ExtractionDiagnostic(
-                parsed.outcome(),
-                parsed.boundaryCode(),
-                null
-            );
+            return new ExtractionDiagnostic(parsed.outcome());
         } catch (LlmProviderException exception) {
             return new ExtractionDiagnostic(
-                ExtractionOutcome.providerFailure(toErrorCode(exception.failure())),
-                exception.boundaryCode(),
-                exception.stage()
+                ExtractionOutcome.providerFailure(
+                    toErrorCode(exception.failure()),
+                    diagnosticCode(
+                        exception.boundaryCode(),
+                        exception.failure(),
+                        exception.stage()
+                    ),
+                    failureStage(exception.stage())
+                )
             );
         }
     }
@@ -448,27 +452,29 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
             parseWarnings(root.get("warnings"), httpStatus);
             List<ConditionWarning> warnings = derivedWarnings(condition);
             if (condition.isProcessable()) {
-                return new ParsedContent(
-                    ExtractionOutcome.extracted(condition, warnings),
-                    null
-                );
+                return new ParsedContent(ExtractionOutcome.extracted(condition, warnings));
             }
             return new ParsedContent(
-                ExtractionOutcome.unprocessable(warnings),
-                unprocessableBoundaryCode(condition)
+                ExtractionOutcome.unprocessable(
+                    warnings,
+                    unprocessableDiagnosticCode(condition)
+                )
             );
         } catch (JsonProcessingException exception) {
             throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT_SCHEMA);
         }
     }
 
-    private static String unprocessableBoundaryCode(DraftRecommendationCondition condition) {
+    private static ConditionExtractionDiagnosticCode unprocessableDiagnosticCode(
+        DraftRecommendationCondition condition
+    ) {
         if (condition.locationQuery() == null && condition.placeType() == null) {
-            return "UNPROCESSABLE_LOCATION_AND_TYPE_MISSING";
+            return ConditionExtractionDiagnosticCode
+                .UNPROCESSABLE_LOCATION_AND_TYPE_MISSING;
         }
         return condition.locationQuery() == null
-            ? "UNPROCESSABLE_LOCATION_MISSING"
-            : "UNPROCESSABLE_PLACE_TYPE_MISSING";
+            ? ConditionExtractionDiagnosticCode.UNPROCESSABLE_LOCATION_MISSING
+            : ConditionExtractionDiagnosticCode.UNPROCESSABLE_PLACE_TYPE_MISSING;
     }
 
     private DraftRecommendationCondition parseCondition(JsonNode node, int httpStatus) {
@@ -739,6 +745,81 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         };
     }
 
+    private static ConditionExtractionDiagnosticCode diagnosticCode(
+        String boundaryCode,
+        LlmProviderFailure failure,
+        LlmProviderFailureStage stage
+    ) {
+        if (boundaryCode == null) {
+            if (stage != LlmProviderFailureStage.HTTP_STATUS) {
+                return ConditionExtractionDiagnosticCode.NONE;
+            }
+            return switch (failure) {
+                case INVALID_REQUEST -> ConditionExtractionDiagnosticCode.UPSTREAM_INVALID_REQUEST;
+                case AUTHENTICATION_FAILED ->
+                    ConditionExtractionDiagnosticCode.UPSTREAM_AUTHENTICATION_FAILED;
+                case RATE_LIMITED -> ConditionExtractionDiagnosticCode.UPSTREAM_RATE_LIMITED;
+                case INVALID_RESPONSE ->
+                    ConditionExtractionDiagnosticCode.UPSTREAM_INVALID_RESPONSE;
+                case PROVIDER_UNAVAILABLE ->
+                    ConditionExtractionDiagnosticCode.UPSTREAM_UNAVAILABLE;
+            };
+        }
+        return switch (boundaryCode) {
+            case "UNPROCESSABLE_LOCATION_AND_TYPE_MISSING" ->
+                ConditionExtractionDiagnosticCode.UNPROCESSABLE_LOCATION_AND_TYPE_MISSING;
+            case "UNPROCESSABLE_LOCATION_MISSING" ->
+                ConditionExtractionDiagnosticCode.UNPROCESSABLE_LOCATION_MISSING;
+            case "UNPROCESSABLE_PLACE_TYPE_MISSING" ->
+                ConditionExtractionDiagnosticCode.UNPROCESSABLE_PLACE_TYPE_MISSING;
+            case "CONDITION_OTHER_DETAIL_MISSING" ->
+                ConditionExtractionDiagnosticCode.CONDITION_OTHER_DETAIL_MISSING;
+            case "CONDITION_BUDGET_ORDER_INVALID" ->
+                ConditionExtractionDiagnosticCode.CONDITION_BUDGET_ORDER_INVALID;
+            case "CONDITION_DOMAIN_CONSTRAINT_INVALID" ->
+                ConditionExtractionDiagnosticCode.CONDITION_DOMAIN_CONSTRAINT_INVALID;
+            case "INVALID_RESPONSE" ->
+                ConditionExtractionDiagnosticCode.UPSTREAM_INVALID_RESPONSE;
+            case "PROVIDER_RESPONSE_TOO_LARGE" ->
+                ConditionExtractionDiagnosticCode.UPSTREAM_RESPONSE_TOO_LARGE;
+            case "AUTHENTICATION_FAILED" ->
+                ConditionExtractionDiagnosticCode.UPSTREAM_AUTHENTICATION_FAILED;
+            case "RATE_LIMITED" ->
+                ConditionExtractionDiagnosticCode.UPSTREAM_RATE_LIMITED;
+            case "INVALID_REQUEST" ->
+                ConditionExtractionDiagnosticCode.UPSTREAM_INVALID_REQUEST;
+            case "PROVIDER_UNAVAILABLE", "LINKED_PROVIDER_UNAVAILABLE" ->
+                ConditionExtractionDiagnosticCode.UPSTREAM_UNAVAILABLE;
+            default -> ConditionExtractionDiagnosticCode.NONE;
+        };
+    }
+
+    private static LlmFailureStage failureStage(LlmProviderFailureStage stage) {
+        if (stage == null) {
+            return LlmFailureStage.UNSPECIFIED;
+        }
+        return switch (stage) {
+            case HTTP_STATUS -> LlmFailureStage.HTTP_STATUS;
+            case TRANSPORT -> LlmFailureStage.TRANSPORT;
+            case CLIENT -> LlmFailureStage.CLIENT;
+            case MEDIA_TYPE -> LlmFailureStage.MEDIA_TYPE;
+            case RESPONSE_SIZE -> LlmFailureStage.RESPONSE_SIZE;
+            case JSON -> LlmFailureStage.JSON;
+            case CHAT_METADATA -> LlmFailureStage.CHAT_METADATA;
+            case CHAT_MODEL -> LlmFailureStage.CHAT_MODEL;
+            case CHAT_CHOICES -> LlmFailureStage.CHAT_CHOICES;
+            case CHAT_MESSAGE -> LlmFailureStage.CHAT_MESSAGE;
+            case CHAT_CONTENT -> LlmFailureStage.CHAT_CONTENT;
+            case CHAT_CONTENT_SCHEMA -> LlmFailureStage.CHAT_CONTENT_SCHEMA;
+            case CHAT_CONTENT_CONDITION -> LlmFailureStage.CHAT_CONTENT_CONDITION;
+            case CHAT_CONTENT_WARNINGS -> LlmFailureStage.CHAT_CONTENT_WARNINGS;
+            case CHAT_USAGE -> LlmFailureStage.CHAT_USAGE;
+            case UNEXPECTED -> LlmFailureStage.UNEXPECTED;
+            case EMBEDDING_METADATA, EMBEDDING_MODEL, EMBEDDING_DATA,
+                 EMBEDDING_VECTOR, EMBEDDING_USAGE -> LlmFailureStage.UNEXPECTED;
+        };
+    }
+
     private static LlmProviderException invalidResponse(
         Integer httpStatus,
         LlmProviderFailureStage stage
@@ -769,17 +850,23 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         );
     }
 
-    record ExtractionDiagnostic(
-        ExtractionOutcome outcome,
-        String boundaryCode,
-        LlmProviderFailureStage failureStage
-    ) {
+    record ExtractionDiagnostic(ExtractionOutcome outcome) {
         ExtractionDiagnostic {
             Objects.requireNonNull(outcome, "outcome");
         }
+
+        String boundaryCode() {
+            return outcome.diagnosticCode() == ConditionExtractionDiagnosticCode.NONE
+                ? null
+                : outcome.diagnosticCode().name();
+        }
+
+        LlmFailureStage failureStage() {
+            return outcome.failureStage();
+        }
     }
 
-    private record ParsedContent(ExtractionOutcome outcome, String boundaryCode) {
+    private record ParsedContent(ExtractionOutcome outcome) {
         private ParsedContent {
             Objects.requireNonNull(outcome, "outcome");
         }

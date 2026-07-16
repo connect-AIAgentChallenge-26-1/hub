@@ -2,7 +2,9 @@ package com.placepick.livedev;
 
 import com.placepick.infrastructure.external.llm.EliceConditionExtractionClient;
 import com.placepick.infrastructure.external.naver.NaverApiHubAdapter;
+import com.placepick.infrastructure.observability.CandidateFunnelMetrics;
 import com.placepick.infrastructure.observability.ObservedProviderPorts;
+import com.placepick.infrastructure.observability.LlmProviderDiagnosticMetrics;
 import com.placepick.infrastructure.observability.ProviderCallMetrics;
 import com.placepick.recommendation.application.candidate.CandidateNormalizer;
 import com.placepick.recommendation.application.candidate.CandidateQueryPlanner;
@@ -13,6 +15,7 @@ import com.placepick.recommendation.application.port.out.PlaceSearchPort;
 import com.placepick.recommendation.application.scoring.CandidateRanker;
 import com.placepick.recommendation.application.scoring.CandidateRankingService;
 import com.placepick.recommendation.application.scoring.CandidateScoringPolicy;
+import com.placepick.recommendation.application.trace.RecommendationTraceSinks;
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
 import com.placepick.recommendation.job.infrastructure.DeterministicRecommendationProvider;
 import com.placepick.recommendation.reason.adapter.out.llm.EliceGroundedReasonClient;
@@ -58,11 +61,13 @@ public class LiveDevConfiguration {
         @Value("${CHAT_PROXY_URL}") URI chatBaseUrl,
         @Value("${PROXY_TOKEN}") String token,
         @Value("${OPENAI_MODEL:openai/gpt-4.1-mini}") String model,
-        ProviderCallMetrics metrics
+        ProviderCallMetrics metrics,
+        LlmProviderDiagnosticMetrics diagnosticMetrics
     ) {
         return ObservedProviderPorts.condition(
             EliceConditionExtractionClient.create(chatBaseUrl, token, model),
             metrics,
+            diagnosticMetrics,
             "elice",
             Duration.ofSeconds(30)
         );
@@ -84,13 +89,17 @@ public class LiveDevConfiguration {
         PlaceSearchPort placeSearchPort,
         BlogSearchPort blogSearchPort,
         GroundedReasonGenerationPort reasonGenerationPort,
-        ProviderCallMetrics metrics
+        ProviderCallMetrics metrics,
+        LlmProviderDiagnosticMetrics diagnosticMetrics,
+        CandidateFunnelMetrics candidateFunnelMetrics
     ) {
         return observedCore(
             placeSearchPort,
             blogSearchPort,
             reasonGenerationPort,
             metrics,
+            diagnosticMetrics,
+            candidateFunnelMetrics,
             "naver",
             "elice"
         );
@@ -101,6 +110,8 @@ public class LiveDevConfiguration {
         BlogSearchPort blogSearchPort,
         GroundedReasonGenerationPort reasonGenerationPort,
         ProviderCallMetrics metrics,
+        LlmProviderDiagnosticMetrics diagnosticMetrics,
+        CandidateFunnelMetrics candidateFunnelMetrics,
         String searchProvider,
         String reasonProvider
     ) {
@@ -119,6 +130,7 @@ public class LiveDevConfiguration {
         GroundedReasonGenerationPort observedReasons = ObservedProviderPorts.reasons(
             reasonGenerationPort,
             metrics,
+            diagnosticMetrics,
             reasonProvider,
             Duration.ofSeconds(30)
         );
@@ -129,17 +141,23 @@ public class LiveDevConfiguration {
             new LocationMatcher()
         );
         CandidateRanker ranker = new CandidateRanker(new CandidateScoringPolicy());
-        return traceSink -> new RecommendationCoreUseCase(
-            new CandidateRankingService(
-                observedPlaces,
-                observedBlogs,
-                queryPlanner,
-                normalizer,
-                ranker,
-                traceSink
-            ),
-            new GroundedReasonService(observedReasons, traceSink)
-        );
+        return traceSink -> {
+            var observedTrace = RecommendationTraceSinks.compose(
+                RecommendationTraceSinks.compose(traceSink, candidateFunnelMetrics),
+                diagnosticMetrics
+            );
+            return new RecommendationCoreUseCase(
+                new CandidateRankingService(
+                    observedPlaces,
+                    observedBlogs,
+                    queryPlanner,
+                    normalizer,
+                    ranker,
+                    observedTrace
+                ),
+                new GroundedReasonService(observedReasons, observedTrace)
+            );
+        };
     }
 
     @Bean
@@ -151,9 +169,20 @@ public class LiveDevConfiguration {
     )
     LiveDevCoreFactory liveDevMockCoreFactory(
         DeterministicRecommendationProvider provider,
-        ProviderCallMetrics metrics
+        ProviderCallMetrics metrics,
+        LlmProviderDiagnosticMetrics diagnosticMetrics,
+        CandidateFunnelMetrics candidateFunnelMetrics
     ) {
-        return observedCore(provider, provider, provider, metrics, "mock", "mock");
+        return observedCore(
+            provider,
+            provider,
+            provider,
+            metrics,
+            diagnosticMetrics,
+            candidateFunnelMetrics,
+            "mock",
+            "mock"
+        );
     }
 
     @Bean

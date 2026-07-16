@@ -21,4 +21,9 @@ public class ObservabilityConfiguration {
             Duration.parse(acquireTimeout)
         );
     }
+
+    @Bean
+    LlmProviderDiagnosticMetrics llmProviderDiagnosticMetrics(MeterRegistry registry) {
+        return new LlmProviderDiagnosticMetrics(registry);
+    }
 }

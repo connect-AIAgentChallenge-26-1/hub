@@ -13,12 +13,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
 import com.github.tomakehurst.wiremock.client.ResponseDefinitionBuilder;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+import com.placepick.recommendation.application.port.out.LlmFailureStage;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
 import com.placepick.recommendation.condition.domain.PlaceType;
 import com.placepick.recommendation.condition.domain.Preference;
 import com.placepick.recommendation.reason.application.ReasonStatementPolicy;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationCommand;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationErrorCode;
+import com.placepick.recommendation.reason.application.port.out.ReasonGenerationDiagnosticCode;
 import com.placepick.recommendation.reason.domain.ReasonEvidence;
 import com.placepick.recommendation.reason.domain.ReasonEvidenceType;
 import com.placepick.recommendation.reason.domain.ReasonPlaceContext;
@@ -105,15 +107,16 @@ class EliceGroundedReasonClientIntegrationTest {
 
     @ParameterizedTest
     @CsvSource({
-        "400, PROVIDER_INVALID_REQUEST",
-        "401, PROVIDER_AUTHENTICATION_FAILED",
-        "403, PROVIDER_AUTHENTICATION_FAILED",
-        "429, PROVIDER_RATE_LIMITED",
-        "503, PROVIDER_UNAVAILABLE"
+        "400, PROVIDER_INVALID_REQUEST, UPSTREAM_INVALID_REQUEST",
+        "401, PROVIDER_AUTHENTICATION_FAILED, UPSTREAM_AUTHENTICATION_FAILED",
+        "403, PROVIDER_AUTHENTICATION_FAILED, UPSTREAM_AUTHENTICATION_FAILED",
+        "429, PROVIDER_RATE_LIMITED, UPSTREAM_RATE_LIMITED",
+        "503, PROVIDER_UNAVAILABLE, UPSTREAM_UNAVAILABLE"
     })
     void normalizesHttpFailuresWithoutRetry(
         int status,
-        ReasonGenerationErrorCode expected
+        ReasonGenerationErrorCode expected,
+        ReasonGenerationDiagnosticCode expectedDiagnostic
     ) {
         WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH)).willReturn(aResponse()
             .withStatus(status)
@@ -124,6 +127,25 @@ class EliceGroundedReasonClientIntegrationTest {
 
         assertThat(outcome.errorCode()).isEqualTo(expected);
         assertThat(outcome.batch()).isNull();
+        assertThat(outcome.diagnosticCode()).isEqualTo(expectedDiagnostic);
+        assertThat(outcome.failureStage()).isEqualTo(LlmFailureStage.HTTP_STATUS);
+        verifyOneRequest();
+    }
+
+    @Test
+    void preservesAClosedGroundingDiagnosticWithoutProviderValues() {
+        String content = validContent().replaceFirst("e-blog-1", "e-blog-2");
+        WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH))
+            .willReturn(jsonResponse(200, validChatResponse(content))));
+
+        var outcome = client.generate(command());
+
+        assertThat(outcome.errorCode())
+            .isEqualTo(ReasonGenerationErrorCode.PROVIDER_INVALID_RESPONSE);
+        assertThat(outcome.diagnosticCode())
+            .isEqualTo(ReasonGenerationDiagnosticCode.REASON_CONTENT_EVIDENCE_OWNERSHIP);
+        assertThat(outcome.failureStage()).isEqualTo(LlmFailureStage.CHAT_CONTENT_SCHEMA);
+        assertThat(outcome.toString()).doesNotContain("e-blog-1", "e-blog-2", "카페");
         verifyOneRequest();
     }
 
@@ -165,8 +187,12 @@ class EliceGroundedReasonClientIntegrationTest {
             .withHeader("Content-Type", "application/json")
             .withBody("x".repeat(129))));
 
-        assertThat(smallClient.generate(command()).errorCode())
+        var oversized = smallClient.generate(command());
+        assertThat(oversized.errorCode())
             .isEqualTo(ReasonGenerationErrorCode.PROVIDER_INVALID_RESPONSE);
+        assertThat(oversized.diagnosticCode())
+            .isEqualTo(ReasonGenerationDiagnosticCode.REASON_HTTP_RESPONSE_TOO_LARGE);
+        assertThat(oversized.failureStage()).isEqualTo(LlmFailureStage.RESPONSE_SIZE);
         verifyOneRequest();
 
         WIRE_MOCK.resetAll();
@@ -176,8 +202,10 @@ class EliceGroundedReasonClientIntegrationTest {
             .withHeader("Content-Type", "application/json")
             .withBody(validChatResponse(validContent()))));
 
-        assertThat(smallClient.generate(command()).errorCode())
+        var timedOut = smallClient.generate(command());
+        assertThat(timedOut.errorCode())
             .isEqualTo(ReasonGenerationErrorCode.PROVIDER_UNAVAILABLE);
+        assertThat(timedOut.failureStage()).isEqualTo(LlmFailureStage.TRANSPORT);
         verifyOneRequest();
     }
 

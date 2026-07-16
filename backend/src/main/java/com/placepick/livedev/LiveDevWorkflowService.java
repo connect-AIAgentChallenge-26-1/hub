@@ -83,18 +83,12 @@ public final class LiveDevWorkflowService {
             throw failure(HttpStatus.BAD_REQUEST, "INVALID_REQUEST_TEXT", "요청 문장을 확인해 주세요.");
         }
 
-        ExtractionOutcome outcome;
-        try {
-            outcome = extractionPort.extract(command);
-        } catch (RuntimeException exception) {
-            throw failure(
-                HttpStatus.BAD_GATEWAY,
-                "CONDITION_PROVIDER_UNAVAILABLE",
-                "조건 추출 Provider를 사용할 수 없습니다."
-            );
+        ExtractionOutcome outcome = extractionPort.extract(command);
+        if (outcome == null) {
+            throw new IllegalStateException("Condition extraction port returned no outcome.");
         }
         if (!outcome.extracted()) {
-            throw extractionFailure(outcome.errorCode());
+            throw extractionFailure(outcome);
         }
 
         Instant createdAt = clock.instant();
@@ -254,19 +248,21 @@ public final class LiveDevWorkflowService {
         return value;
     }
 
-    private static LiveDevWorkflowException extractionFailure(
-        ConditionExtractionErrorCode errorCode
-    ) {
+    private static LiveDevWorkflowException extractionFailure(ExtractionOutcome outcome) {
+        ConditionExtractionErrorCode errorCode = outcome.errorCode();
+        String diagnosticCode = outcome.diagnosticCode().name();
         if (errorCode == ConditionExtractionErrorCode.UNPROCESSABLE_CONDITION) {
-            return failure(
+            return new LiveDevWorkflowException(
                 HttpStatus.UNPROCESSABLE_ENTITY,
                 errorCode.name(),
+                diagnosticCode,
                 "위치와 장소 유형을 포함해 요청해 주세요."
             );
         }
-        return failure(
+        return new LiveDevWorkflowException(
             HttpStatus.BAD_GATEWAY,
             "CONDITION_" + errorCode.name(),
+            diagnosticCode,
             "조건 추출 Provider 응답을 처리하지 못했습니다."
         );
     }

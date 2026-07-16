@@ -1,6 +1,7 @@
 package com.placepick.recommendation.application.scoring;
 
 import com.placepick.recommendation.application.candidate.CandidateNormalizer;
+import com.placepick.recommendation.application.candidate.CandidateNormalizationResult;
 import com.placepick.recommendation.application.candidate.CandidateQueryPlan;
 import com.placepick.recommendation.application.candidate.CandidateQueryPlanner;
 import com.placepick.recommendation.application.port.out.BlogSearchPort;
@@ -126,18 +127,27 @@ public final class CandidateRankingService {
         int placeSearchCalls = 1;
         boolean relaxed = false;
 
-        List<NormalizedCandidate> eligible = normalizer.normalizeEligible(localItems, condition);
-        traceSink.candidatesNormalized(eligible, false);
+        CandidateNormalizationResult normalization = normalizer.normalizeEligibleWithFunnel(
+            localItems,
+            condition
+        );
+        List<NormalizedCandidate> eligible = normalization.candidates();
+        traceSink.candidatesNormalized(eligible, normalization.funnel(), false);
         if (eligible.size() < REQUIRED_RESULT_SIZE) {
-            CandidateQueryPlan relaxedPlan = queryPlanner.relax(initialPlan)
-                .orElseThrow(InsufficientCandidatesException::new);
+            CandidateQueryPlan relaxedPlan = queryPlanner.relax(initialPlan).orElse(null);
+            if (relaxedPlan == null) {
+                traceSink.candidateFunnelCompleted(normalization.funnel(), false);
+                throw new InsufficientCandidatesException();
+            }
             traceSink.queryPlanned(relaxedPlan, true);
             localItems.addAll(searchPlaces(relaxedPlan, true));
             placeSearchCalls++;
             relaxed = true;
-            eligible = normalizer.normalizeEligible(localItems, condition);
-            traceSink.candidatesNormalized(eligible, true);
+            normalization = normalizer.normalizeEligibleWithFunnel(localItems, condition);
+            eligible = normalization.candidates();
+            traceSink.candidatesNormalized(eligible, normalization.funnel(), true);
         }
+        traceSink.candidateFunnelCompleted(normalization.funnel(), relaxed);
         if (eligible.size() < REQUIRED_RESULT_SIZE) {
             throw new InsufficientCandidatesException();
         }

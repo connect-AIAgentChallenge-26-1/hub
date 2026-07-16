@@ -1,6 +1,7 @@
 package com.placepick.recommendation.condition.infrastructure.mock;
 
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
+import com.placepick.recommendation.condition.application.port.out.ConditionExtractionDiagnosticCode;
 import com.placepick.recommendation.condition.application.port.out.ConditionWarning;
 import com.placepick.recommendation.condition.application.port.out.ExtractionCommand;
 import com.placepick.recommendation.condition.application.port.out.ExtractionOutcome;
@@ -64,7 +65,10 @@ public final class DeterministicConditionExtractionAdapter implements ConditionE
         List<ConditionWarning> warnings = warnings(partySize, budget);
 
         if (location == null || typeMatch.placeType() == null) {
-            return ExtractionOutcome.unprocessable(warnings);
+            return ExtractionOutcome.unprocessable(
+                warnings,
+                missingRequiredDiagnostic(location, typeMatch.placeType())
+            );
         }
 
         try {
@@ -82,8 +86,24 @@ public final class DeterministicConditionExtractionAdapter implements ConditionE
                 warnings
             );
         } catch (IllegalArgumentException exception) {
-            return ExtractionOutcome.unprocessable(warnings);
+            return ExtractionOutcome.unprocessable(
+                warnings,
+                ConditionExtractionDiagnosticCode.UNPROCESSABLE_DOMAIN_CONSTRAINT
+            );
         }
+    }
+
+    private static ConditionExtractionDiagnosticCode missingRequiredDiagnostic(
+        String location,
+        PlaceType placeType
+    ) {
+        if (location == null && placeType == null) {
+            return ConditionExtractionDiagnosticCode
+                .UNPROCESSABLE_LOCATION_AND_TYPE_MISSING;
+        }
+        return location == null
+            ? ConditionExtractionDiagnosticCode.UNPROCESSABLE_LOCATION_MISSING
+            : ConditionExtractionDiagnosticCode.UNPROCESSABLE_PLACE_TYPE_MISSING;
     }
 
     private static TypeMatch findPlaceType(String value) {

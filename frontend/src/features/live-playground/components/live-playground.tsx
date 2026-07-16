@@ -246,13 +246,29 @@ function RunningPanel({ traceCount, onCancel }: { traceCount: number; onCancel()
   );
 }
 
-function FailurePanel({ failure, onReset }: { failure: RunFailure; onReset(): void }) {
+export function FailurePanel({ failure, onReset }: { failure: RunFailure; onReset(): void }) {
   return (
     <section className="surface-card border-rose-200 p-6" aria-labelledby="failure-title" role="alert">
       <AlertIcon className="h-8 w-8 text-rose-700" />
       <p className="mt-4 text-xs font-bold uppercase tracking-[0.14em] text-rose-700">{failure.errorCode}</p>
+      {failure.diagnosticCode && (
+        <p className="mt-1 text-xs font-semibold text-slate-500">진단: {failure.diagnosticCode}</p>
+      )}
       <h2 id="failure-title" className="mt-1 text-xl font-black text-slate-950">{failure.title}</h2>
       <p className="mt-2 text-sm leading-6 text-slate-600">{failure.detail}</p>
+      {failure.traceId && (
+        <div className="mt-4 rounded-xl border border-slate-200 bg-slate-50 p-3 text-xs text-slate-600">
+          <span className="font-semibold">Trace ID </span>
+          <code className="break-all">{failure.traceId}</code>
+          <button
+            type="button"
+            className="ml-2 font-semibold text-teal-700 underline underline-offset-2"
+            onClick={() => void navigator.clipboard?.writeText(failure.traceId!)}
+          >
+            복사
+          </button>
+        </div>
+      )}
       <button type="button" className="secondary-button mt-5" onClick={onReset}>입력으로 돌아가기</button>
     </section>
   );
@@ -262,6 +278,7 @@ function failureFrom(error: unknown, fallbackCode: string): RunFailure {
   if (error instanceof PlaygroundApiError) {
     return {
       errorCode: error.problem.errorCode ?? fallbackCode,
+      diagnosticCode: error.problem.diagnosticCode,
       title: error.problem.title,
       detail: error.problem.detail,
       traceId: error.problem.traceId,

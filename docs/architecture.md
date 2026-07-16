@@ -163,6 +163,13 @@ PP-043에서 실제 image, migration, secret scope, 배포 SHA, 대표 E2E, cold
 - 단위 테스트는 Docker 없이 순수 규칙을 검증한다.
 - 통합 테스트는 Testcontainers PostgreSQL·Redis와 Mock HTTP 계약을 사용한다.
 - Eval은 schema, 근거 연결, 금지 주장과 fallback을 검증한다.
+- 후보 정규화는 수신·유효·식별 불가·위치·유형·제외·중복 수를 폐쇄형 funnel로 남기고
+  검색어·장소·주소·URL은 metric label에 사용하지 않는다.
+- 조건 추출과 이유 생성은 coarse Provider 결과 외에도 안전한 diagnostic code와 failure
+  stage를 보존한다. application validator의 예상 거부와 내부 결함을 같은 fallback으로
+  합치지 않는다.
+- Provider permit 대기·거부와 실제 호출 latency를 분리해 동시성 거부의 0초 표본이
+  Provider 지연 분포를 왜곡하지 않게 한다.
 - `make check`는 실제 Provider를 호출하지 않고 문서·secret·정책까지 한 번 검증한다.
 - 직접 실제 Provider 세 시나리오와 로컬 정식 제품 사용자 여정은 CASE-0002로 검증했고,
   cloud 배포 사용자 여정은 PP-043에서 별도 증거를 만든다.

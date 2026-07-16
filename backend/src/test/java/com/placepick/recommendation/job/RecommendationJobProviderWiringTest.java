@@ -5,6 +5,8 @@ import static org.mockito.Mockito.mock;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.placepick.infrastructure.external.naver.NaverApiHubAdapter;
+import com.placepick.infrastructure.observability.CandidateFunnelMetrics;
+import com.placepick.infrastructure.observability.LlmProviderDiagnosticMetrics;
 import com.placepick.infrastructure.observability.PlacePickMetrics;
 import com.placepick.infrastructure.observability.ProviderCallMetrics;
 import com.placepick.livedev.LiveDevConfiguration;
@@ -106,6 +108,11 @@ class RecommendationJobProviderWiringTest {
             .withBean(StringRedisTemplate.class, () -> mock(StringRedisTemplate.class))
             .withBean(OutboxRepository.class, () -> mock(OutboxRepository.class))
             .withBean(PlacePickMetrics.class, () -> mock(PlacePickMetrics.class))
+            .withBean(CandidateFunnelMetrics.class, () -> mock(CandidateFunnelMetrics.class))
+            .withBean(
+                LlmProviderDiagnosticMetrics.class,
+                () -> mock(LlmProviderDiagnosticMetrics.class)
+            )
             .withBean(ProviderCallMetrics.class, () -> mock(ProviderCallMetrics.class))
             .withBean(
                 RecommendationJobTransactionCoordinator.class,

@@ -7,6 +7,7 @@ import com.placepick.recommendation.application.candidate.CandidateNormalizer;
 import com.placepick.recommendation.application.candidate.CandidateQueryPlanner;
 import com.placepick.recommendation.application.candidate.CategoryTaxonomy;
 import com.placepick.recommendation.application.candidate.LocationMatcher;
+import com.placepick.recommendation.application.port.out.LlmFailureStage;
 import com.placepick.recommendation.application.port.out.PlaceSearchPort;
 import com.placepick.recommendation.application.scoring.CandidateRanker;
 import com.placepick.recommendation.application.scoring.CandidateRankingService;
@@ -15,6 +16,10 @@ import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCond
 import com.placepick.recommendation.condition.domain.PlaceType;
 import com.placepick.recommendation.condition.domain.Preference;
 import com.placepick.recommendation.condition.infrastructure.mock.DeterministicConditionExtractionAdapter;
+import com.placepick.recommendation.condition.application.port.out.ConditionExtractionDiagnosticCode;
+import com.placepick.recommendation.condition.application.port.out.ConditionExtractionErrorCode;
+import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
+import com.placepick.recommendation.condition.application.port.out.ExtractionOutcome;
 import com.placepick.recommendation.reason.application.GroundedReasonService;
 import com.placepick.recommendation.workflow.application.RecommendationCoreUseCase;
 import java.time.Clock;
@@ -30,6 +35,53 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 
 class LiveDevWorkflowServiceTest {
+
+    @Test
+    void preservesOnlyTheClosedConditionDiagnosticInDeveloperFailures() {
+        LiveDevWorkflowService service = new LiveDevWorkflowService(
+            command -> ExtractionOutcome.providerFailure(
+                ConditionExtractionErrorCode.PROVIDER_INVALID_RESPONSE,
+                ConditionExtractionDiagnosticCode.CONDITION_BUDGET_ORDER_INVALID,
+                LlmFailureStage.CHAT_CONTENT_CONDITION
+            ),
+            trace -> {
+                throw new AssertionError("Recommendation core must not be created.");
+            },
+            Clock.systemUTC(),
+            Duration.ofMinutes(30),
+            2
+        );
+        try {
+            assertThatThrownBy(() -> service.createDraft("합성 조건"))
+                .isInstanceOfSatisfying(LiveDevWorkflowException.class, exception -> {
+                    assertThat(exception.errorCode())
+                        .isEqualTo("CONDITION_PROVIDER_INVALID_RESPONSE");
+                    assertThat(exception.diagnosticCode())
+                        .isEqualTo("CONDITION_BUDGET_ORDER_INVALID");
+                });
+        } finally {
+            service.close();
+        }
+    }
+
+    @Test
+    void doesNotHideUnexpectedConditionExtractionFailures() {
+        LiveDevWorkflowService throwing = serviceWithExtraction(command -> {
+            throw new IllegalStateException("synthetic internal failure");
+        });
+        LiveDevWorkflowService nullOutcome = serviceWithExtraction(command -> null);
+        try {
+            assertThatThrownBy(() -> throwing.createDraft("서울 카페"))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("synthetic internal failure");
+            assertThatThrownBy(() -> nullOutcome.createDraft("서울 카페"))
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessage("Condition extraction port returned no outcome.");
+        } finally {
+            throwing.close();
+            nullOutcome.close();
+        }
+    }
 
     @Test
     void expiresDraftsAfterTheConfiguredThirtyMinuteBoundary() {
@@ -148,6 +200,20 @@ class LiveDevWorkflowServiceTest {
             clock,
             Duration.ofMinutes(30),
             concurrency
+        );
+    }
+
+    private static LiveDevWorkflowService serviceWithExtraction(
+        ConditionExtractionPort port
+    ) {
+        return new LiveDevWorkflowService(
+            port,
+            trace -> {
+                throw new AssertionError("Recommendation core must not be created.");
+            },
+            Clock.systemUTC(),
+            Duration.ofMinutes(30),
+            2
         );
     }
 

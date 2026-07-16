@@ -2,7 +2,9 @@ package com.placepick.recommendation.job.infrastructure;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.placepick.infrastructure.external.naver.NaverApiHubAdapter;
+import com.placepick.infrastructure.observability.CandidateFunnelMetrics;
 import com.placepick.infrastructure.observability.ObservedProviderPorts;
+import com.placepick.infrastructure.observability.LlmProviderDiagnosticMetrics;
 import com.placepick.infrastructure.observability.PlacePickMetrics;
 import com.placepick.infrastructure.observability.ProviderCallMetrics;
 import com.placepick.outbox.OutboxRelay;
@@ -16,6 +18,7 @@ import com.placepick.recommendation.application.port.out.PlaceSearchPort;
 import com.placepick.recommendation.application.scoring.CandidateRanker;
 import com.placepick.recommendation.application.scoring.CandidateRankingService;
 import com.placepick.recommendation.application.scoring.CandidateScoringPolicy;
+import com.placepick.recommendation.application.trace.RecommendationTraceSinks;
 import com.placepick.recommendation.job.RecommendationJobTransactionCoordinator;
 import com.placepick.recommendation.job.RecommendationJobWorker;
 import com.placepick.recommendation.job.RecommendationWorkerCoreFactory;
@@ -101,6 +104,8 @@ public class RecommendationJobInfrastructureConfiguration {
         BlogSearchPort blogSearchPort,
         GroundedReasonGenerationPort reasonGenerationPort,
         ProviderCallMetrics metrics,
+        LlmProviderDiagnosticMetrics diagnosticMetrics,
+        CandidateFunnelMetrics candidateFunnelMetrics,
         @Value("${placepick.external.mode:mock}") String externalMode
     ) {
         boolean directProvider = Set.of("production", "live-dev").contains(externalMode);
@@ -121,6 +126,7 @@ public class RecommendationJobInfrastructureConfiguration {
         GroundedReasonGenerationPort observedReasons = ObservedProviderPorts.reasons(
             reasonGenerationPort,
             metrics,
+            diagnosticMetrics,
             reasonProvider,
             Duration.ofSeconds(30)
         );
@@ -128,17 +134,23 @@ public class RecommendationJobInfrastructureConfiguration {
         CandidateQueryPlanner planner = new CandidateQueryPlanner(taxonomy);
         CandidateNormalizer normalizer = new CandidateNormalizer(taxonomy, new LocationMatcher());
         CandidateRanker ranker = new CandidateRanker(new CandidateScoringPolicy());
-        return trace -> new RecommendationCoreUseCase(
-            new CandidateRankingService(
-                observedPlaces,
-                observedBlogs,
-                planner,
-                normalizer,
-                ranker,
-                trace
-            ),
-            new GroundedReasonService(observedReasons, trace)
-        );
+        return trace -> {
+            var observedTrace = RecommendationTraceSinks.compose(
+                RecommendationTraceSinks.compose(trace, candidateFunnelMetrics),
+                diagnosticMetrics
+            );
+            return new RecommendationCoreUseCase(
+                new CandidateRankingService(
+                    observedPlaces,
+                    observedBlogs,
+                    planner,
+                    normalizer,
+                    ranker,
+                    observedTrace
+                ),
+                new GroundedReasonService(observedReasons, observedTrace)
+            );
+        };
     }
 
     @Bean

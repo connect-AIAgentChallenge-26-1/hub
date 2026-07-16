@@ -25,27 +25,57 @@ final class ReasonBatchValidator {
     ) {
         if (!GeneratedReasonBatch.SCHEMA_VERSION.equals(batch.schemaVersion()) ||
             batch.places().size() != 3) {
-            throw new IllegalArgumentException("Reason batch schema or size is invalid.");
+            throw invalid(ReasonBatchValidationCode.SCHEMA_OR_SIZE);
         }
 
         Map<UUID, ReasonPlaceContext> expected = new HashMap<>();
         command.places().forEach(value -> expected.put(value.placeId(), value));
         Map<UUID, PlaceReasonStatements> actual = new HashMap<>();
         for (PlaceReasonStatements place : batch.places()) {
-            if (!expected.containsKey(place.placeId()) || actual.put(place.placeId(), place) != null) {
-                throw new IllegalArgumentException("Reason batch place IDs are invalid.");
+            if (!expected.containsKey(place.placeId())) {
+                throw invalid(ReasonBatchValidationCode.PLACE_REFERENCE);
+            }
+            if (actual.put(place.placeId(), place) != null) {
+                throw invalid(ReasonBatchValidationCode.DUPLICATE_PLACE);
             }
             Set<String> statementTexts = new HashSet<>();
             for (var statement : place.statements()) {
-                if (!statementTexts.add(statement.text()) ||
-                    !statementPolicy.isSupported(statement, expected.get(place.placeId()))) {
-                    throw new IllegalArgumentException("Reason statement is not grounded.");
+                if (!statementTexts.add(statement.text())) {
+                    throw invalid(ReasonBatchValidationCode.DUPLICATE_STATEMENT);
+                }
+                ReasonStatementPolicy.ValidationResult validation = statementPolicy.validate(
+                    statement,
+                    expected.get(place.placeId())
+                );
+                if (validation != ReasonStatementPolicy.ValidationResult.SUPPORTED) {
+                    throw invalid(validationCode(validation));
                 }
             }
         }
         if (!actual.keySet().equals(expected.keySet())) {
-            throw new IllegalArgumentException("Reason batch place set is incomplete.");
+            throw invalid(ReasonBatchValidationCode.INCOMPLETE_PLACE_SET);
         }
         return command.places().stream().map(value -> actual.get(value.placeId())).toList();
+    }
+
+    static ReasonBatchValidationCode validationCode(
+        ReasonStatementPolicy.ValidationResult result
+    ) {
+        return switch (result) {
+            case UNKNOWN_EVIDENCE -> ReasonBatchValidationCode.UNKNOWN_EVIDENCE;
+            case TEMPLATE_EVIDENCE_TYPE_MISMATCH ->
+                ReasonBatchValidationCode.TEMPLATE_EVIDENCE_TYPE_MISMATCH;
+            case FORBIDDEN_CLAIM -> ReasonBatchValidationCode.FORBIDDEN_CLAIM;
+            case NO_LEXICAL_GROUNDING -> ReasonBatchValidationCode.NO_LEXICAL_GROUNDING;
+            case SUPPORTED -> throw new IllegalArgumentException(
+                "Supported statements do not have a validation failure code."
+            );
+        };
+    }
+
+    private static ReasonBatchValidationException invalid(
+        ReasonBatchValidationCode code
+    ) {
+        return new ReasonBatchValidationException(code);
     }
 }

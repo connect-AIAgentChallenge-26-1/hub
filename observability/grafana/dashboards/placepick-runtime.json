@@ -361,6 +361,77 @@
       ],
       "title": "Provider protection (15m)",
       "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
+      "gridPos": {"h": 7, "w": 8, "x": 0, "y": 26},
+      "id": 15,
+      "options": {
+        "legend": {"displayMode": "table", "placement": "bottom", "showLegend": true},
+        "tooltip": {"mode": "multi", "sort": "desc"}
+      },
+      "targets": [{
+        "expr": "sum by (result, reason, relaxed) (rate(placepick_recommendation_candidate_funnel_sum{application=\"placepick-backend\"}[5m])) / clamp_min(sum by (result, reason, relaxed) (rate(placepick_recommendation_candidate_funnel_count{application=\"placepick-backend\"}[5m])), 0.000001)",
+        "legendFormat": "{{result}}/{{reason}} relaxed={{relaxed}}",
+        "refId": "A"
+      }],
+      "title": "Candidate funnel mean per run",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
+      "gridPos": {"h": 7, "w": 8, "x": 8, "y": 26},
+      "id": 16,
+      "options": {
+        "legend": {"displayMode": "table", "placement": "bottom", "showLegend": true},
+        "tooltip": {"mode": "multi", "sort": "desc"}
+      },
+      "targets": [
+        {
+          "expr": "sum by (operation, diagnostic) (increase(placepick_provider_llm_outcomes_total{application=\"placepick-backend\", diagnostic!=\"none\"}[15m]))",
+          "legendFormat": "{{operation}}/{{diagnostic}}",
+          "refId": "A"
+        },
+        {
+          "expr": "sum by (code) (increase(placepick_provider_llm_validation_failures_total{application=\"placepick-backend\"}[15m]))",
+          "legendFormat": "server/{{code}}",
+          "refId": "B"
+        }
+      ],
+      "title": "LLM safe diagnostics (15m)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "fieldConfig": {
+        "defaults": {"unit": "s"},
+        "overrides": [{
+          "matcher": {"id": "byFrameRefID", "options": "B"},
+          "properties": [{"id": "unit", "value": "short"}]
+        }]
+      },
+      "gridPos": {"h": 7, "w": 8, "x": 16, "y": 26},
+      "id": 17,
+      "options": {
+        "legend": {"displayMode": "table", "placement": "bottom", "showLegend": true},
+        "tooltip": {"mode": "multi", "sort": "desc"}
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (le, provider, operation) (rate(placepick_provider_permit_wait_seconds_bucket{application=\"placepick-backend\"}[5m])))",
+          "legendFormat": "p95 {{provider}}/{{operation}}",
+          "refId": "A"
+        },
+        {
+          "expr": "sum by (provider, operation) (increase(placepick_provider_permit_rejected_total{application=\"placepick-backend\"}[15m]))",
+          "legendFormat": "reject {{provider}}/{{operation}}",
+          "refId": "B"
+        }
+      ],
+      "title": "Provider permit wait and rejects",
+      "type": "timeseries"
     }
   ],
   "refresh": "10s",
@@ -377,6 +448,6 @@
   "timezone": "browser",
   "title": "PlacePick MVP Runtime",
   "uid": "placepick-runtime",
-  "version": 2,
+  "version": 3,
   "weekStart": ""
 }

@@ -164,7 +164,17 @@ export const mockTrace: WorkflowTraceEvent[] = [
     "CANDIDATES_NORMALIZED",
     "후보를 정규화하고 필터링했습니다",
     "HTML·공백·URL을 정리하고 위치·유형·제외 조건과 중복을 검사했습니다.",
-    { eligible: 4, relaxed: false },
+    {
+      received: 6,
+      eligible: 4,
+      filtered: 2,
+      missingIdentity: 0,
+      locationFiltered: 0,
+      typeFiltered: 1,
+      exclusionFiltered: 1,
+      duplicates: 0,
+      relaxed: false,
+    },
     [
       { label: "후보 A", category: "카페", status: "KEPT", explanation: "필수 조건 일치" },
       { label: "후보 B", category: "카페", status: "KEPT", explanation: "필수 조건 일치" },

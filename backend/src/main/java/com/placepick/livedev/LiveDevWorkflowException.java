@@ -10,11 +10,22 @@ public final class LiveDevWorkflowException extends RuntimeException {
 
     private final HttpStatus status;
     private final String errorCode;
+    private final String diagnosticCode;
 
     LiveDevWorkflowException(HttpStatus status, String errorCode, String message) {
+        this(status, errorCode, null, message);
+    }
+
+    LiveDevWorkflowException(
+        HttpStatus status,
+        String errorCode,
+        String diagnosticCode,
+        String message
+    ) {
         super(message, null, false, false);
         this.status = status;
         this.errorCode = errorCode;
+        this.diagnosticCode = diagnosticCode;
     }
 
     HttpStatus status() {
@@ -23,5 +34,9 @@ public final class LiveDevWorkflowException extends RuntimeException {
 
     String errorCode() {
         return errorCode;
+    }
+
+    String diagnosticCode() {
+        return diagnosticCode;
     }
 }
