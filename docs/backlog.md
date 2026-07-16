@@ -23,8 +23,8 @@
 | T05 | I9 평가 기반 | versioned golden set, record/replay fixture, unit·contract·integration scorer, threshold registry, CI report | T00·T01 | C12-A 통과 | BLOCKED(좁혀짐) |
 | T06 | 기능 C 숫자 검증 | S7·S16·S17, Structured Claim, 5 verdict, evidence plan, 결정론 검산, Claim 편집 | T04·T05 | C7·C8 통과 | 완료 |
 | T07 | 기능 C RAG·반증·인용 | S18·S19·S20·S23·S8·S9·S11, hybrid RAG, counter evidence, citation gate, injection defense, 3회 제한 루프·체크리스트·결과 UI | T02·T03·T06 | C9·C10 통과 | 완료 |
-| T08 | 기능 A 종목 공부 | S4·S11, 기업개요·공시·지표·용어·확인 포인트·원문 viewer | T04·T07 | C5 통과 | 대기 |
-| T09 | 기능 B 가치·가격 위치 | S5·S6·S21, 복수 valuation, 비교군, 민감도, 중립 가격 위치 | T03·T04·T05 | C6 통과 | 대기 |
+| T08 | 기능 A 종목 공부 | S4·S11, 기업개요·공시·지표·용어·확인 포인트·원문 viewer | T04·T07 | C5 통과 | 완료 |
+| T09 | 기능 B 가치·가격 위치 | S5·S6·S21, 복수 valuation, 비교군, 민감도, 중립 가격 위치 | T03·T04·T05 | C6 통과 | 완료 |
 | T10 | 복기·가설 추적 | T01 인증 주체 기반 격리·삭제/내보내기, S10·S22, 신규 공시 scheduler와 역사 replay | T06·T07 | C11 통과 | 대기 |
 | T11 | FastAPI·React 전체 통합 | A/B/C API, 비동기 job, 인증·권한, 모든 UI 상태, 접근성·모바일 | T08·T09·T10 | C13 통과 | 대기 |
 | T12 | I9 전체 평가·회귀 차단 | extraction·verdict·temporal·retrieval·citation·peer·safety·performance·cost E2E | T06~T11 | C12-B 통과 | 대기 |
@@ -140,7 +140,29 @@
 
 - 기능 A는 데이터 한계와 staleness를 숨기지 않고 원문으로 이동할 수 있어야 한다.
 - 기능 B는 복수 모델·가정·민감도·peer 구성 내역을 공개한다.
+
+**T08 완료 (2026-07-15)**: `docs/checklist.md` C5 8개 항목 전부 체크. 착수 전 report_gpt.md 미체크 1건(2026-07-15 16:18 승인, 발견 없음)을 review.md B절로 확인·반영했다. 선행조건 T04·T07 둘 다 완료 상태라 즉시 착수.
+- **S1 확장**: OpenDART 기업개황(`company.json`)이 실제로 존재·응답하는지 2026-07-15 라이브 호출로 먼저 확인(임의 추정 아님) — `fetch_company_overview()`(`app/providers/opendart.py`), `RawCompanyOverviewRecord`(immutable, `app/models/company.py`), `CompanyOverviewCollector`(`app/services/company_overview.py`, corp_cls Y/K/N/E→상장 구분 라벨). 이미 완료된 C1(`company_resolver.py`)과 분리된 새 모듈로 구현해 기존 검증 코드를 건드리지 않았다. `docs/skills.md` migration 기록에 S1 확장으로 문서화(계약 변경은 문서 먼저).
+- **S4**: `app/services/term_explainer.py` — 승인된 금융 용어 사전 20개 우선, 미등재 용어는 S23 게이트(`run_structured`)를 거친 주입 가능 콜백으로 문맥 설명(미주입 시 `unexplained_terms`로 남기고 지어내지 않음), 반환 직전 금지 문구(매수/매도/관망/분할매수/보류/목표가/고평가/저평가) 재검사.
+- **S11**: `app/services/company_report_generator.py`(`CompanyReportGenerator`) — 파이프라인 A(S1→S2.collect→S15.PRE_NORMALIZE→S2.normalize→S3→S15.POST_DERIVED→S4/S20→S11)를 오케스트레이션. 이미 완성된 S2(`disclosure_collector.py`)·S3(`financial_calculator.py`)·S20(T07 `citation_integrity.py`)을 그대로 재사용하고 로직을 재구현하지 않았다. 공시 목록은 DART 링크만 붙이고(원문 미다운로드), 재무 수치는 그 수치가 실제로 나온 공시(`FinancialFact.rcept_no`)로 범위를 좁혀 원문을 내려받아 인용 검증 — 목록 전체를 무차별 다운로드하지 않도록 설계해 테스트도 가볍게 유지했다. `POST /api/v1/company-report`(`app/routers/company_report.py`), 결과 UI `src/components/CompanyReport.jsx`(기업개요·최근 공시·정정 배지·재무지표 추세·용어 glossary·확인 포인트·원문 인용 viewer).
+- **실 데이터로 발견·수정한 T02·T04 결함 2건(T08 범위 밖, 실 fixture 테스트로 노출)**: (1) `FinancialFactRow`/`FinancialFact`의 unique 제약이 DART 현금흐름표 "표준계정코드 미사용" placeholder 계정(서로 다른 계정 5개가 같은 `account_id`+`account_detail` 공유)을 구분 못 해 실제 삼성전자 2023년 CF 데이터로 `UniqueViolation` 재현 — DART 제공 표시 순서 `ord`를 두 unique 제약에 추가해 해결(T04 `account_detail` 추가 선례와 동일 원칙, 새 Alembic migration 2건, `docs/skills.md`·`contracts/schemas.js` FINANCIAL_FACT_SPEC에 additive `ord?:string` MINOR 반영). `_normalize_financial_rows`의 배치 내 dedup도 세션 `autoflush=False`에서는 DB round-trip 체크만으로 부족함을 발견해 로컬 set 기반 dedup 추가. (2) `FinancialCalculator.normalize()`가 매 호출마다 새 `FinancialFact`를 만들어 같은 회사·기간 리포트 재생성 시 `UniqueViolation` 재현 — `company_report_generator.py`에 `_persist_facts_idempotently()`(저장 전 존재 확인) 추가로 해결. 두 결함 모두 공유 라우터(`financial_facts.py`, T04 이미 완료)에도 잠재하지만 이번엔 내 새 코드 경로에서만 국소 수정 — 공유 라우터 자체 변경은 범위 밖으로 보고 GPT 리뷰에 판단을 요청한다.
+- **검증**: `./scripts/verify.sh` 전체(frontend 190 tests + backend 434 tests + I9 eval 16개 metric 전부 PASS + npm/pip audit 0건 + gitleaks 32 commits clean) green. mypy strict(backend 전체 134 source files, `app/`뿐 아니라 `tests/`까지) 통과. 신규 backend pytest 43개(provider 2·overview service 4·term_explainer 10·report_generator 12·report API 4 + 기존 파일 확장), frontend 8개(`CompanyReport.test.jsx`). 삼성전자·SK하이닉스 실제 기업개황, 실제 정정 공시 쌍, 실제 2023·2024 연간 CFS 재무제표로 검증.
+- **여전히 BLOCKED인 부분**: 없음(C5 전부 완료). 외부 자격증명 대기 항목도 없음 — `DART_API_KEY`는 T02부터 이미 발급·사용 중이었다.
+- **GPT 리뷰 요청**: (1) 기업개황을 S1의 "확장"으로 분류하고 새 모듈로 분리해 C1을 건드리지 않은 판단이 타당한지, 아니면 skills.md S1 계약 자체를 더 명시적으로 다시 쓰거나 S11 소관으로 재분류해야 하는지. (2) `FinancialFactRow`/`FinancialFact` unique 제약에 `ord`를 추가한 fix가 올바른지(placeholder 계정을 진짜로 구분하는 필드가 맞는지, 아니면 다른 접근이 더 안전한지). (3) `FinancialCalculator.normalize()`의 비idempotent 저장 패턴을 `financial_facts.py` 라우터(T04, 공유 코드) 자체에도 지금 적용해야 하는지, 아니면 실제 프로덕션에서 문제가 될 때(T11 통합) 고치는 것으로 미뤄도 되는지.
+- plan.md R05 상태를 `미구현` → `IMPLEMENTED`로 갱신(C5 전체 통과 확인 후).
 - 기능 B UI는 행동 권고가 아니라 모델 범위 대비 가격 위치만 표시한다.
+
+**T09 완료 (2026-07-16)**: `docs/checklist.md` C6 9개 항목 전부 체크. 착수 전 report_gpt.md 미체크 1건(2026-07-15 22:32 승인, 발견 없음)을 review.md B절로 확인·반영했다. 형식적 선행조건은 T03·T04·T05이고 T03·T05 둘 다 `완료`가 아니라 `BLOCKED(좁혀짐)`다 — T04의 유사 판단과 동일하게, S5·S6는 LLM 의존이 전혀 없어 T05의 남은 BLOCKED 항목(I9 LLM/Solar fixture)과 무관하고, T03의 남은 BLOCKED 항목("공식 provider의 구조화 수급·계약 수치를 NumericEvidence로 변환")은 수급·계약 데이터를 다루지 실제 S21이 쓰는 업종 분류(T08에서 이미 구현한 DART 기업개황 `induty_code`)와는 다른 데이터라고 판단해 즉시 착수했다.
+- **실 데이터 확보**: 삼성전자(target)와 동일 KSIC 대분류("26", 전자부품·컴퓨터·영상·음향 및 통신장비 제조업) peer 3사(SK하이닉스·DB하이텍·삼성전기)의 실제 KIS 현재가·발행주식 수(`backend/tests/fixtures/kis/current_price_{skhynix,dbhitek,samsung_electro}_*.json`, 2026-07-15 모의투자 라이브 호출로 캡처)와 실제 DART 2024년 연간 CFS 재무제표·기업개황(`backend/tests/fixtures/opendart/`)을 이번 세션에 직접 라이브 캡처했다 — 4자리 업종코드 전체 일치가 지나치게 좁다는 것도 이 라이브 데이터로 실측해 확인(삼성전자 264·SK하이닉스 2612·DB하이텍 2611·삼성전기 2622, 전부 다름 → KSIC 대분류 2자리로 완화).
+- **S21**: `app/services/peer_universe.py`(`build_peer_universe`) — 업종 일치(KSIC 대분류)·자기 자신 제외·기준일 일치·PER/PBR 유효성 4가지 포함·제외 규칙, P25/중앙값/P75 통계, `MIN_PEER_SAMPLE_SIZE=3` 미만이면 `sufficient=False`. peer universe 구성·통계의 유일한 소유자(S5는 결과만 소비, 정적 AST 검사로 강제).
+- **S5**: `app/services/valuation_scenarios.py`(`compute_valuation_scenarios`) — PER 상대가치·PBR 상대가치·ROE 조정 PBR 상대가치 3가지 방법, 각 peer P25/중앙값/P75 기반 저·중·고 3점 range(단일 값 금지), 명시적 formula·rule version.
+- **S6**: `app/services/price_position.py`(`compute_price_position`) — 방법별 위치 + 방법 범위를 합친 종합 위치, `BELOW/WITHIN/ABOVE_MODEL_RANGE/INSUFFICIENT`, 방법 간 불일치를 숨기지 않고 표시.
+- **오케스트레이터**: `app/services/valuation_report_generator.py`(`ValuationReportGenerator`) — 파이프라인 B(S1→S2/S13.collect→S15.PRE_NORMALIZE→S2/S13.normalize→S3→S15.POST_DERIVED→S21→S5→S6)를 오케스트레이션. 이미 완성된 S1 확장(T08 `company_overview.py`)·S2(`disclosure_collector.py`)·S3(`financial_calculator.py`)·S13(`market_collector.py`)를 그대로 재사용. `POST /api/v1/valuation-report`(`app/routers/valuation_report.py`), 결과 UI `src/components/ValuationReport.jsx`.
+- **실 데이터로 발견·수정한 T04 결함 1건(T09 범위 밖, 실 fixture 테스트로 노출)**: `select_canonical_facts()`의 `METRIC_CANONICAL_SJ_DIV`가 손익계산서 지표를 `sj_div="IS"`로만 신뢰하는데, 실제 SK하이닉스·삼성전기의 2024년 연간 CFS는 IS 구획 없이 CIS에만 손익계산서를 낸다(raw fixture로 IS 행 0개 확인) — canonical pool이 비어 `NET_INCOME`/`EPS`/`PER`/`ROE`가 경고 없이 조용히 `None`이 되는 결함을 실 라이브 데이터로 재현·발견했다. IS 후보가 없을 때만 CIS로 fallback하도록 수정(Samsung Electronics·DB하이텍처럼 IS·CIS 모두 있으면 기존과 동일하게 IS 우선), `docs/skills.md` migration 기록에 반영.
+- **검증**: `./scripts/verify.sh` 전체(frontend 197 tests + backend 475 tests + I9 eval 16개 metric 전부 PASS + npm/pip audit 0건 + gitleaks 32 commits clean) green. mypy strict(backend 전체 148 source files) 통과. 신규 backend pytest 41개(peer_universe 9·valuation_scenarios 8·price_position 7·orchestrator 6·API 5·financial_calculator 회귀 2 + 기존 파일 확장), frontend 7개(`ValuationReport.test.jsx`).
+- **여전히 BLOCKED인 부분**: 없음(C6 전부 완료). 외부 자격증명 대기 항목도 없음 — `KIS_APP_KEY`/`DART_API_KEY`는 T03·T02부터 이미 발급·사용 중이었다.
+- **GPT 리뷰 요청**: (1) KRX 업종 분류 대신 OpenDART 기업개황 `induty_code`를 쓰고 4자리 전체 일치 대신 KSIC 대분류(2자리) 일치로 완화한 판단이 타당한지, 아니면 더 세분화된 매칭이나 다른 접근이 필요한지. (2) peer 후보 목록을 호출자가 공급하는 설계(전체 시장 자동 discovery 없음)가 S21 계약("가용 사업·재무 metadata")의 올바른 해석인지. (3) `select_canonical_facts()`의 IS→CIS fallback 수정이 올바른지 — 다른 IS-canonical 지표(REVENUE·OPERATING_INCOME 등)에도 동일하게 적용한 것이 과도하게 넓은지.
+- plan.md R06 상태를 `미구현` → `IMPLEMENTED`로 갱신(C6 전체 통과 확인 후).
 
 ### T10. 복기·가설
 

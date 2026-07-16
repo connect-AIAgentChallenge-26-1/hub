@@ -67,8 +67,8 @@ B는 특정 매수 가격이나 행동 지시가 아니라 **지금 가격이 �
 | R02 | OpenDART 공시·재무·원문 수집 | REQUIRED | R01 | S2 | C2 | IMPLEMENTED |
 | R03 | 시세·기업행위·외부 뉴스 근거 | REQUIRED | R01 | S13·S14 | C3 | 미구현 |
 | R04 | 시점·정정·단위 정합성·재무 계산 core | REQUIRED | R02·R03 | S3·S15 | C4 | IMPLEMENTED |
-| R05 | 종목 공부 리포트 A | REQUIRED | R04·R09 | S4·S11·S20 | C5 | 미구현 |
-| R06 | 가치 범위·가격 위치 B | REQUIRED | R03·R04 | S5·S6·S21 | C6 | 미구현 |
+| R05 | 종목 공부 리포트 A | REQUIRED | R04·R09 | S4·S11·S20 | C5 | IMPLEMENTED |
+| R06 | 가치 범위·가격 위치 B | REQUIRED | R03·R04 | S5·S6·S21 | C6 | IMPLEMENTED |
 | R07 | Structured Claim | REQUIRED | R01 | S7·S23 | C7 | IMPLEMENTED |
 | R08 | 필수 근거 계획·결정론 검산 | REQUIRED | R04·R07 | S16·S17 | C8 | IMPLEMENTED |
 | R09 | RAG·반증·인용 무결성 | REQUIRED | R02·R03·R07·R08 | S18·S19·S20·S23 | C9 | IMPLEMENTED |

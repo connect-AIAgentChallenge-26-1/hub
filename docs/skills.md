@@ -108,8 +108,13 @@ corp_code:string, stock_code:string, account_id:string, account_name:string,
 raw_value:number, raw_unit:string, normalized_value:number, normalized_unit:string,
 fiscal_period:string, reprt_code:string, report_type:string,
 fs_div:string(CFS/OFS), is_cumulative:boolean, is_provisional:boolean,
-rcept_no:string, filed_at:string, source_url:string, collected_at:string
+rcept_no:string, filed_at:string, source_url:string, collected_at:string, ord?:string
 ```
+
+`ord`는 DART가 원문에 부여하는 계정 표시 순서다(선택 필드). `account_id`가
+"-표준계정코드 미사용-"처럼 placeholder로 여러 계정에 겹쳐 나오는 경우(T08에서
+실제 삼성전자 현금흐름표 데이터로 발견) `account_id`·`account_detail`만으로는
+서로 다른 계정을 구분할 수 없어 `ord`로 구분한다.
 
 ### Raw Source Record
 
@@ -165,6 +170,8 @@ Envelope는 `schema_version`, Claim·Fact·Evidence·Numeric Evidence 등 개별
 | 2026-07-12 | `contracts/schemas.js` (StructuredClaim·FinancialFact·RawSourceRecord·Evidence·NumericEvidence) | 필드 존재만 검사하던 것을 타입·enum·날짜 형식·comparator 중첩 구조까지 검증하도록 강화 | **pre-release 보정, 버전 유지(1.0.0)**. 아직 어떤 실제 provider·DB row·저장된 snapshot도 이 schema로 생성되지 않았다(T02 이후 착수). 소급 적용될 기존 데이터가 없으므로 이번 강화는 "breaking 변경"이 아니라 최초 명세의 누락을 메우는 보정이다. T02에서 실제 데이터가 쌓이기 시작한 뒤 같은 종류의 강화가 필요하면 그때는 MAJOR를 올린다. |
 | 2026-07-12 | Envelope `started_at`/`completed_at` | RFC3339 timestamp에 offset(`Z`/`±HH:MM`) 필수 조건을 명시하고 JS/Python 양쪽에 강제 | **pre-release 보정, 버전 유지(1.0.0)**. 위와 동일 사유 — 저장된 실제 응답이 없다. |
 | 2026-07-14 | `contracts/schemas.js` `STRUCTURED_CLAIM_SPEC`(`claim_type`·`comparator.op`·`comparator.comparison_operator`) | 자유 문자열이던 `claim_type`·`comparator.op`을 6종/6종 `Literal` enum으로 강제하고 `comparator.comparison_operator`(관계 연산자)·`continuity_direction`을 신설, `validateShape`에 `strict` allowlist 모드 추가(Python `model_config=ConfigDict(extra="forbid")`와 동일 계약) | **pre-release 보정, 버전 유지(1.0.0)**. T03에서 S14 입력 계약을 위해 typed 계약만 먼저 도입했을 뿐 S7(T06) 구현 전이라 이 필드로 생성된 실제 StructuredClaim이 아직 없다(S14 COLLECT는 `claim.metric`/`claim.current_period`만 읽고 이 두 필드는 쓰지 않아 영향 없음). T06에서 S7이 이 필드를 처음 채우므로 지금 강화가 최초 명세를 완성하는 것이지 기존 데이터를 깨는 breaking 변경이 아니다. |
+| 2026-07-15 | `contracts/schemas.js` `FINANCIAL_FACT_SPEC` + `app/models/disclosure.py` `FinancialFactRow`·`app/models/financial_fact.py` `FinancialFact`의 `uq_financial_fact_row`/`uq_financial_fact` unique 제약 | 선택 필드 `ord?:string` 추가, 두 unique 제약에 `ord`를 포함하도록 확장 | **additive, MINOR(1.0.0→1.1.0)**. T08에서 실제 삼성전자 2023년 현금흐름표(CF) 데이터로 발견 — DART가 표준계정코드를 매핑하지 않은 계정은 `account_id="-표준계정코드 미사용-"`·`account_detail="-"`로 서로 다른 계정 5개가 동일 키를 공유해, `rcept_no+fs_div+account_id+sj_div+account_detail`만으로는 구분이 안 되고 실제 DB unique 제약 위반(데이터 유실 위험)으로 이어졌다. DART가 제공하는 표시 순서 `ord`를 키에 추가해 구분한다(T04의 `account_detail` 추가 선례와 동일 원칙 — 필드를 넓혀 데이터를 보존하지 실 데이터를 버리지 않는다). 기존 필수 필드는 그대로이고 새 필드는 선택이라 기존 소비자(financial_facts.py 라우터 등)는 변경 없이 계속 동작한다. |
+| 2026-07-15 | `app/models/disclosure.py` `FinancialFactRow`·`app/models/financial_fact.py` `FinancialFact`의 `uq_financial_fact_row`/`uq_financial_fact` unique 제약(migration `ff931b51a413`) | `postgresql_nulls_not_distinct=True` 추가 — 필드 구성은 그대로, NULL 값 취급 의미론만 변경 | **버그 수정, 버전 유지(1.1.0)**. 바로 위 항목에서 `ord`를 키에 추가했지만 `account_detail`·`ord`가 둘 다 nullable이라 Postgres 기본 동작(NULL은 서로 distinct)에서는 두 값이 동시에 NULL인 진짜 중복 행을 이 제약이 막지 못했다(GPT 리뷰 2026-07-15 22:14 발견). 컬럼 구성을 넓히는 것이 아니라 이미 선언된 키의 NULL 처리 방식을 의도(같은 키는 하나만 허용)에 맞게 고치는 것이라 필드 계약 변경이 아니다 — 새 스키마 버전이 아니라 기존 1.1.0의 구현 결함 수정으로 기록한다. 정상적으로 서로 다른 계정은 `account_id`가 다르므로 이 강화로 거부되지 않는다. |
 
 ## 금융 데이터 정합성 계약
 
