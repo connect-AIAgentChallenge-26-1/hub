@@ -122,7 +122,7 @@ export function ConditionReview({ draft, pending, onConfirm }: ConditionReviewPr
 
         <fieldset>
           <legend className="field-label">선호 조건과 우선순위</legend>
-          <p className="mt-1 text-xs text-slate-500">후보가 부족하면 가장 낮은 우선순위 선호 하나만 완화할 수 있습니다.</p>
+          <p className="mt-1 text-xs text-slate-500">우선순위는 독립 검색 variant와 선호 근거 점수에 반영되며 필수 위치·유형은 완화하지 않습니다.</p>
           <div className="mt-3 space-y-3">
             {condition.preferences.length === 0 && <p className="rounded-xl bg-slate-50 px-4 py-3 text-sm text-slate-500">입력된 선호가 없습니다.</p>}
             {condition.preferences.map((preference, index) => (

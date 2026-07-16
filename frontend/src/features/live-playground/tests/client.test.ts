@@ -207,20 +207,47 @@ describe("HttpPlaygroundApi", () => {
     expect(unknownDiagnostic.metrics).toEqual({ diagnosticCode: "UNKNOWN" });
   });
 
-  it("중첩된 백엔드 ResultView를 순위·점수·Local/Blog 근거가 있는 Top 3로 변환한다", () => {
+  it("중첩된 백엔드 ResultView를 0~100 순위·Local/Blog 근거가 있는 추천으로 변환한다", () => {
     const raw = backendResultFixture();
 
     const result = __testing.parseResult(raw);
 
     expect(result.places).toHaveLength(3);
     expect(result.places[0]?.rank).toBe(1);
-    expect(result.places[0]?.score).toBe(80);
+    expect(result.places[0]?.score).toBe(100);
     expect(result.places[0]?.evidence.map((value) => value.type)).toEqual(["LOCAL", "BLOG"]);
     expect(result).toMatchObject({
       placeSearchCalls: 1,
       blogSearchCalls: 4,
       reasonGenerationCalls: 1,
     });
+  });
+
+  it("후보 두 곳의 부분 결과와 nullable 원문 링크를 허용한다", () => {
+    const raw = backendResultFixture();
+    raw.places = (raw.places as unknown[]).slice(0, 2);
+    raw.resultCount = 2;
+    raw.partial = true;
+    const first = (raw.places as Array<Record<string, unknown>>)[0]!;
+    const ranked = first.rankedPlace as Record<string, unknown>;
+    (ranked.candidate as Record<string, unknown>).sourceUrl = null;
+
+    const result = __testing.parseResult(raw);
+
+    expect(result).toMatchObject({ partial: true, resultCount: 2 });
+    expect(result.places[0]?.sourceUrl).toBeNull();
+  });
+
+  it("0개 결과와 결과 수·partial 불일치를 거부한다", () => {
+    const empty = backendResultFixture();
+    empty.places = [];
+    empty.resultCount = 0;
+    empty.partial = true;
+    expect(() => __testing.parseResult(empty)).toThrow("1~3개");
+
+    const mismatch = backendResultFixture();
+    mismatch.resultCount = 2;
+    expect(() => __testing.parseResult(mismatch)).toThrow("부분 결과 수");
   });
 
   it("다른 후보에 속한 evidence ID를 이유가 인용하면 결과 계약을 거부한다", () => {
@@ -235,6 +262,9 @@ describe("HttpPlaygroundApi", () => {
 function backendResultFixture(): Record<string, unknown> {
   return {
     degraded: mockResult.degraded,
+    partial: mockResult.partial,
+    resultCount: mockResult.resultCount,
+    explorationRound: mockResult.explorationRound,
     warnings: mockResult.warnings,
     reasonFallback: mockResult.reasonFallback,
     relaxed: mockResult.relaxed,
@@ -261,6 +291,7 @@ function backendResultFixture(): Record<string, unknown> {
         score: { ...place.scoreBreakdown, total: place.score },
       },
       reasons: place.reasonStatements,
+      reasonSource: place.reasonSource,
       cautions: place.cautions,
       shareText: "합성 공유 문구",
       evidenceLevel: place.evidenceLevel,

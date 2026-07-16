@@ -50,7 +50,13 @@ public class RecommendationJobTransactionCoordinator {
             Instant now = clock.instant();
             repository.markProcessing(jobId, now);
             appendEvent(jobId, "progress", current(jobId), now);
-            return JobProcessingClaim.ready(jobId, snapshot.condition());
+            return JobProcessingClaim.ready(
+                jobId,
+                snapshot.condition(),
+                snapshot.explorationRound(),
+                snapshot.excludedCandidateKeys(),
+                snapshot.usedVariantIds()
+            );
         }));
     }
 

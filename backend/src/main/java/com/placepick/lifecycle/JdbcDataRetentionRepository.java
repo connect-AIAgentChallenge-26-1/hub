@@ -37,7 +37,16 @@ public class JdbcDataRetentionRepository implements DataRetentionRepository {
                     WHERE job.expires_at <= :now
                       AND NOT EXISTS (
                           SELECT 1 FROM voting_room AS room
-                          WHERE room.recommendation_job_id = job.id
+                          JOIN recommendation_job AS protected_job
+                            ON protected_job.id = room.recommendation_job_id
+                          WHERE protected_job.root_job_id = job.root_job_id
+                      )
+                      AND NOT EXISTS (
+                          SELECT 1 FROM idempotency_record AS record
+                          JOIN recommendation_job AS protected_job
+                            ON record.response_json ->> 'jobId' = protected_job.id::text
+                          WHERE protected_job.root_job_id = job.root_job_id
+                            AND record.expires_at > :now
                       )
                 )
                 """)
@@ -49,7 +58,16 @@ public class JdbcDataRetentionRepository implements DataRetentionRepository {
                 WHERE job.expires_at <= :now
                   AND NOT EXISTS (
                       SELECT 1 FROM voting_room AS room
-                      WHERE room.recommendation_job_id = job.id
+                      JOIN recommendation_job AS protected_job
+                        ON protected_job.id = room.recommendation_job_id
+                      WHERE protected_job.root_job_id = job.root_job_id
+                  )
+                  AND NOT EXISTS (
+                      SELECT 1 FROM idempotency_record AS record
+                      JOIN recommendation_job AS protected_job
+                        ON record.response_json ->> 'jobId' = protected_job.id::text
+                      WHERE protected_job.root_job_id = job.root_job_id
+                        AND record.expires_at > :now
                   )
                 """)
             .param("now", current)

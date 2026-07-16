@@ -58,6 +58,55 @@ describe("ProductApi", () => {
       .rejects.toBeInstanceOf(ProductContractError);
   });
 
+  it("다른 추천은 CSRF·멱등 key와 정확한 202 Location으로 생성한다", async () => {
+    const nextJobId = "00000000-0000-4000-8000-000000000099";
+    const fetcher = vi.fn<typeof fetch>()
+      .mockResolvedValueOnce(json({ csrfToken: "csrf-test", expiresAt: now }, 201))
+      .mockResolvedValueOnce(json(
+        { jobId: nextJobId, status: "ACCEPTED" },
+        202,
+        { Location: `/mock-api/v1/recommendations/${nextJobId}` },
+      ));
+
+    const result = await new ProductApi(fetcher).startAlternative("job-original");
+
+    expect(result.jobId).toBe(nextJobId);
+    expect(fetcher).toHaveBeenNthCalledWith(
+      2,
+      "/mock-api/v1/recommendations/job-original/alternatives",
+      expect.objectContaining({ method: "POST" }),
+    );
+    const headers = new Headers(fetcher.mock.calls[1]?.[1]?.headers);
+    expect(headers.get("X-CSRF-Token")).toBe("csrf-test");
+    expect(headers.get("Idempotency-Key")).toMatch(/^[0-9a-f-]{36}$/);
+  });
+
+  it("다른 추천의 세션 복구 재시도에서도 최초 멱등 key를 유지한다", async () => {
+    const nextJobId = "00000000-0000-4000-8000-000000000098";
+    const fetcher = vi.fn<typeof fetch>()
+      .mockResolvedValueOnce(json({ csrfToken: "csrf-old", expiresAt: now }, 201))
+      .mockResolvedValueOnce(json({
+        title: "Session required",
+        status: 401,
+        detail: "세션이 필요합니다.",
+        errorCode: "SESSION_REQUIRED",
+      }, 401, { "content-type": "application/problem+json" }))
+      .mockResolvedValueOnce(json({ csrfToken: "csrf-new", expiresAt: now }, 201))
+      .mockResolvedValueOnce(json(
+        { jobId: nextJobId, status: "ACCEPTED" },
+        202,
+        { Location: `/mock-api/v1/recommendations/${nextJobId}` },
+      ));
+
+    await expect(new ProductApi(fetcher).startAlternative("job-original")).resolves
+      .toMatchObject({ jobId: nextJobId });
+
+    const first = new Headers(fetcher.mock.calls[1]?.[1]?.headers);
+    const retried = new Headers(fetcher.mock.calls[3]?.[1]?.headers);
+    expect(retried.get("Idempotency-Key")).toBe(first.get("Idempotency-Key"));
+    expect(retried.get("X-CSRF-Token")).toBe("csrf-new");
+  });
+
   it("application/problem+json의 안전한 errorCode와 detail을 보존한다", async () => {
     const fetcher = vi.fn<typeof fetch>()
       .mockResolvedValueOnce(json({ csrfToken: "csrf-test", expiresAt: now }, 201))
@@ -154,6 +203,37 @@ describe("ProductApi", () => {
       .rejects.toMatchObject({ problem: { errorCode: "CSRF_INVALID" } });
     expect(fetcher).toHaveBeenCalledTimes(4);
   });
+
+  it("부분 결과 1~2개와 nullable 원문 링크를 파싱한다", () => {
+    const job = jobFixture(2);
+    job.partial = true;
+    job.places[0]!.sourceUrl = null;
+
+    const parsed = __productTesting.parseJob(job);
+
+    expect(parsed).toMatchObject({ partial: true, resultCount: 2, explorationRound: 1 });
+    expect(parsed.places[0]?.sourceUrl).toBeNull();
+  });
+
+  it("0개 완료 결과·결과 수 불일치·잘못된 점수와 이유 출처를 거부한다", () => {
+    const empty = jobFixture(0);
+    expect(() => __productTesting.parseJob(empty)).toThrow("부분 결과 계약");
+
+    const mismatch = jobFixture(2);
+    mismatch.partial = true;
+    mismatch.resultCount = 1;
+    expect(() => __productTesting.parseJob(mismatch)).toThrow("resultCount");
+
+    const invalidScore = jobFixture(1);
+    invalidScore.partial = true;
+    invalidScore.places[0]!.scoreBreakdown.total = 99;
+    expect(() => __productTesting.parseJob(invalidScore)).toThrow("합계");
+
+    const invalidReason = jobFixture(1);
+    invalidReason.partial = true;
+    invalidReason.places[0]!.reasonSource = "UNSAFE";
+    expect(() => __productTesting.parseJob(invalidReason)).toThrow("reasonSource");
+  });
 });
 
 describe("withColdStartRetry", () => {
@@ -212,6 +292,55 @@ function draftFixture() {
       exclusions: [],
     },
     warnings: ["PARTY_SIZE_NOT_PROVIDED"],
+    expiresAt: now,
+  };
+}
+
+function jobFixture(count: number): any {
+  const places = Array.from({ length: count }, (_, index) => {
+    const locationConfidence = 15;
+    const searchRelevance = 30 - index;
+    const preferenceEvidence = 25 - index;
+    const evidenceQuality = 20 - index;
+    const total = locationConfidence + searchRelevance + preferenceEvidence + evidenceQuality;
+    return {
+      placeId: `00000000-0000-4000-8000-00000000000${index + 1}`,
+      name: `후보 ${index + 1}`,
+      category: "카페",
+      roadAddress: "서울 성동구 도로 1",
+      address: "서울 성동구 지번 1",
+      sourceUrl: `https://example.com/${index + 1}`,
+      score: total,
+      scoreBreakdown: {
+        locationConfidence,
+        searchRelevance,
+        preferenceEvidence,
+        evidenceQuality,
+        total,
+      },
+      reasonSource: "GENERATED",
+      reasonStatements: [{ text: "검증된 이유", evidenceIds: [`local:${index + 1}`] }],
+      cautions: [],
+      shareText: "공유 문구",
+      evidenceLevel: "LOCAL_AND_BLOG",
+      warnings: [],
+    };
+  });
+  return {
+    jobId: "00000000-0000-4000-8000-000000000010",
+    status: "COMPLETED",
+    stage: "FINISHED",
+    progress: 100,
+    degraded: false,
+    partial: count > 0 && count < 3,
+    resultCount: count,
+    explorationRound: 1,
+    warnings: count < 3 ? ["PARTIAL_RECOMMENDATION"] : [],
+    condition: draftFixture().extractedCondition,
+    places,
+    failure: null,
+    createdAt: now,
+    updatedAt: now,
     expiresAt: now,
   };
 }

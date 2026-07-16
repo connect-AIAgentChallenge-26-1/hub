@@ -141,6 +141,26 @@ class GroundedReasonServiceTest {
             .hasMessage("Reason generation port returned no outcome.");
     }
 
+    @Test
+    void supportsTheTemporaryOneToThreePlaceReasonContractForPartialResults() {
+        CandidateRankingResult ranking = ranking(false, true, 1);
+        GroundedReasonService service = new GroundedReasonService(command -> generated(
+            command,
+            index -> statement(
+                command,
+                index,
+                command.places().get(index).evidence().get(0).evidenceId(),
+                ReasonStatementPolicy.LOCAL_STATEMENT_TEXT
+            ),
+            List.of(0)
+        ));
+
+        ReasonEnrichmentResult result = service.enrich(condition(), ranking);
+
+        assertThat(result.fallbackUsed()).isFalse();
+        assertThat(result.places()).singleElement();
+    }
+
     private void assertAllFallback(ReasonEnrichmentResult result) {
         assertThat(result.fallbackUsed()).isTrue();
         assertThat(result.places()).hasSize(3).allSatisfy(place -> {
@@ -178,8 +198,12 @@ class GroundedReasonServiceTest {
     }
 
     private CandidateRankingResult ranking(boolean degraded, boolean withBlog) {
+        return ranking(degraded, withBlog, 3);
+    }
+
+    private CandidateRankingResult ranking(boolean degraded, boolean withBlog, int count) {
         List<RankedPlace> places = new ArrayList<>();
-        for (int index = 1; index <= 3; index++) {
+        for (int index = 1; index <= count; index++) {
             List<CandidateEvidence> evidence = withBlog
                 ? List.of(new CandidateEvidence(
                     "e-blog-" + index,

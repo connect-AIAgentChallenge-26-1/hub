@@ -10,11 +10,13 @@ import com.placepick.draft.RecommendationDraftRepository;
 import com.placepick.outbox.OutboxEvent;
 import com.placepick.outbox.OutboxRelay;
 import com.placepick.outbox.OutboxRepository;
+import com.placepick.outbox.RecommendationRequestedEnvelope;
 import com.placepick.recommendation.application.candidate.CandidateNormalizer;
 import com.placepick.recommendation.application.candidate.CandidateQueryPlanner;
 import com.placepick.recommendation.application.candidate.CategoryTaxonomy;
 import com.placepick.recommendation.application.candidate.LocationMatcher;
 import com.placepick.recommendation.application.port.out.PlaceSearchPort;
+import com.placepick.recommendation.application.port.out.PlaceSearchResult;
 import com.placepick.recommendation.application.port.out.SearchProviderException;
 import com.placepick.recommendation.application.port.out.SearchProviderFailure;
 import com.placepick.recommendation.application.port.out.SearchProviderFailureStage;
@@ -31,15 +33,19 @@ import com.placepick.session.AnonymousSession;
 import com.placepick.session.AnonymousSessionRepository;
 import com.placepick.stream.RecommendationStreamConsumer;
 import com.placepick.stream.RecommendationStreamGateway;
+import com.placepick.stream.RecommendationStreamRecord;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.connection.stream.MapRecord;
+import org.springframework.data.redis.connection.stream.ReadOffset;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.jdbc.core.simple.JdbcClient;
 import org.springframework.test.context.ActiveProfiles;
@@ -132,6 +138,15 @@ class RecommendationJobPipelineIntegrationTest {
         try (var connection = connectionFactory.getConnection()) {
             connection.serverCommands().flushAll();
         }
+        redisTemplate.opsForStream().add(MapRecord.create(
+            RecommendationStreamGateway.STREAM,
+            Map.of("_bootstrap", "1")
+        ));
+        redisTemplate.opsForStream().createGroup(
+            RecommendationStreamGateway.STREAM,
+            ReadOffset.from("0-0"),
+            RecommendationStreamGateway.GROUP
+        );
     }
 
     @Test
@@ -278,6 +293,132 @@ class RecommendationJobPipelineIntegrationTest {
         assertThat(count("processed_event")).isEqualTo(1);
     }
 
+    @Test
+    void recreatesAConsumerGroupAndReplaysSafelyWhenRedisLosesRuntimeState() {
+        UUID sessionId = insertSession();
+        RecommendationJobSubmission submission = createJob(
+            sessionId,
+            "runtime-group-recovery-key"
+        );
+        RecommendationStreamGateway gateway = new RecommendationStreamGateway(
+            redisTemplate,
+            objectMapper
+        );
+        OutboxRelay relay = new OutboxRelay(outboxRepository, gateway, clock, 10);
+
+        assertThat(relay.relayBatch()).isEqualTo(1);
+        gateway.ensureGroup();
+        assertThat(redisTemplate.opsForStream().destroyGroup(
+            RecommendationStreamGateway.STREAM,
+            RecommendationStreamGateway.GROUP
+        )).isTrue();
+
+        var recovered = gateway.readNew(
+            "runtime-recovery-worker",
+            10,
+            Duration.ofMillis(50)
+        );
+
+        assertThat(recovered)
+            .extracting(record -> record.envelope().aggregateId())
+            .contains(submission.jobId());
+    }
+
+    @Test
+    void createsLinearAlternativeFromCompletedSnapshotWithoutConsumingDraftAgain() {
+        UUID sessionId = insertSession();
+        RecommendationJobSubmission sourceSubmission = createJob(
+            sessionId,
+            "alternative-pipeline-source"
+        );
+        RecommendationStreamGateway gateway = new RecommendationStreamGateway(
+            redisTemplate,
+            objectMapper
+        );
+        OutboxRelay relay = new OutboxRelay(outboxRepository, gateway, clock, 10);
+        RecommendationJobWorker worker = new RecommendationJobWorker(
+            coordinator,
+            deterministicCoreFactory()
+        );
+        RecommendationStreamConsumer consumer = new RecommendationStreamConsumer(
+            gateway,
+            worker,
+            "alternative-source-worker",
+            10,
+            3,
+            Duration.ZERO
+        );
+        assertThat(relay.relayBatch()).isEqualTo(1);
+        assertThat(consumer.pollOnce()).isGreaterThanOrEqualTo(1);
+
+        RecommendationJobSnapshot source = jobService.get(
+            sourceSubmission.jobId(),
+            sessionId
+        );
+        assertThat(source.status()).isEqualTo(RecommendationJobStatus.COMPLETED);
+        assertThat(source.excludedCandidateKeys()).hasSize(3);
+        assertThat(source.usedVariantIds()).isNotEmpty();
+
+        var command = new CreateAlternativeRecommendationCommand(
+            sessionId,
+            source.jobId(),
+            "alternative-pipeline-key",
+            "alternative-pipeline-trace"
+        );
+        RecommendationJobSubmission created = jobService.createAlternative(command);
+        RecommendationJobSubmission replayed = jobService.createAlternative(command);
+        RecommendationJobSnapshot alternative = jobService.get(created.jobId(), sessionId);
+
+        assertThat(replayed.jobId()).isEqualTo(created.jobId());
+        assertThat(replayed.replayed()).isTrue();
+        assertThat(alternative.rootJobId()).isEqualTo(source.rootJobId());
+        assertThat(alternative.parentJobId()).isEqualTo(source.jobId());
+        assertThat(alternative.explorationRound()).isEqualTo(1);
+        assertThat(alternative.condition()).isEqualTo(source.condition());
+        assertThat(alternative.draftId()).isEqualTo(source.draftId());
+        assertThat(alternative.expiresAt()).isEqualTo(source.expiresAt());
+        assertThat(alternative.excludedCandidateKeys())
+            .containsExactlyElementsOf(source.excludedCandidateKeys());
+        assertThat(alternative.usedVariantIds())
+            .containsExactlyElementsOf(source.usedVariantIds());
+        assertThat(count("recommendation_job")).isEqualTo(2);
+        assertThat(count("outbox_event")).isEqualTo(2);
+        assertThat(count("idempotency_record")).isEqualTo(2);
+        assertThat(draftRepository.findOwned(source.draftId(), sessionId).orElseThrow()
+            .consumedJobId()).isEqualTo(source.jobId());
+
+        RecommendationJobWorker emptyAlternativeWorker = new RecommendationJobWorker(
+            coordinator,
+            emptyCoreFactory()
+        );
+        WorkerProcessingResult emptyResult = emptyAlternativeWorker.process(streamRecord(
+            storedOutbox(alternative.jobId())
+        ));
+        assertThat(emptyResult.disposition()).isEqualTo(
+            WorkerProcessingResult.Disposition.ACKNOWLEDGE
+        );
+        RecommendationJobSnapshot failedAlternative = jobService.get(
+            alternative.jobId(),
+            sessionId
+        );
+        assertThat(failedAlternative.status()).isEqualTo(RecommendationJobStatus.FAILED);
+        assertThat(failedAlternative.failure().errorCode())
+            .isEqualTo("NO_ALTERNATIVE_CANDIDATES");
+
+        assertThatThrownBy(() -> jobService.createAlternative(
+            new CreateAlternativeRecommendationCommand(
+                sessionId,
+                source.jobId(),
+                "different-alternative-key",
+                "alternative-pipeline-trace"
+            )
+        )).isInstanceOfSatisfying(RecommendationJobException.class, exception ->
+            assertThat(exception.errorCode()).isEqualTo(
+                RecommendationJobErrorCode.NO_ALTERNATIVE_CANDIDATES
+            )
+        );
+    }
+
     private RecommendationWorkerCoreFactory failingCoreFactory() {
         DeterministicRecommendationProvider provider = new DeterministicRecommendationProvider();
         PlaceSearchPort unavailable = query -> {
@@ -293,6 +434,23 @@ class RecommendationJobPipelineIntegrationTest {
         return trace -> new RecommendationCoreUseCase(
             new CandidateRankingService(
                 unavailable,
+                provider,
+                new CandidateQueryPlanner(taxonomy),
+                new CandidateNormalizer(taxonomy, new LocationMatcher()),
+                new CandidateRanker(new CandidateScoringPolicy()),
+                trace
+            ),
+            new GroundedReasonService(provider, trace)
+        );
+    }
+
+    private RecommendationWorkerCoreFactory emptyCoreFactory() {
+        DeterministicRecommendationProvider provider = new DeterministicRecommendationProvider();
+        PlaceSearchPort empty = query -> new PlaceSearchResult(0, List.of());
+        CategoryTaxonomy taxonomy = new CategoryTaxonomy();
+        return trace -> new RecommendationCoreUseCase(
+            new CandidateRankingService(
+                empty,
                 provider,
                 new CandidateQueryPlanner(taxonomy),
                 new CandidateNormalizer(taxonomy, new LocationMatcher()),
@@ -397,6 +555,21 @@ class RecommendationJobPipelineIntegrationTest {
                 resultSet.getInt("attempt_count")
             ))
             .single();
+    }
+
+    private RecommendationStreamRecord streamRecord(OutboxEvent event) {
+        try {
+            return new RecommendationStreamRecord(
+                "synthetic-" + event.id(),
+                objectMapper.readValue(
+                    event.payloadJson(),
+                    RecommendationRequestedEnvelope.class
+                ),
+                0
+            );
+        } catch (com.fasterxml.jackson.core.JsonProcessingException exception) {
+            throw new AssertionError("Stored outbox envelope is invalid.", exception);
+        }
     }
 
     private RecommendationJobStreamPayload readPayload(RecommendationJobEvent event) {

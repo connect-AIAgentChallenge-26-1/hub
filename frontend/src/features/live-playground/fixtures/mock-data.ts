@@ -35,8 +35,10 @@ const place = (
   name: string,
   category: string,
   roadAddress: string,
-  preference: number,
-  blogEvidence: number,
+  locationConfidence: number,
+  searchRelevance: number,
+  preferenceEvidence: number,
+  evidenceQuality: number,
 ): RecommendationPlace => ({
   placeId: `00000000-0000-4000-8000-00000000000${suffix}`,
   rank,
@@ -45,14 +47,15 @@ const place = (
   address: roadAddress.replace("도로", "지번"),
   roadAddress,
   sourceUrl: `https://example.com/mock-place-${suffix}`,
-  score: 55 + preference + blogEvidence,
+  score: locationConfidence + searchRelevance + preferenceEvidence + evidenceQuality,
   scoreBreakdown: {
-    location: 30,
-    placeType: 25,
-    budget: 0,
-    preference,
-    blogEvidence,
+    locationConfidence,
+    searchRelevance,
+    preferenceEvidence,
+    evidenceQuality,
+    total: locationConfidence + searchRelevance + preferenceEvidence + evidenceQuality,
   },
+  reasonSource: "GENERATED",
   reasonStatements: [
     {
       text: "검증된 장소 정보에 따라 이 후보를 제안합니다.",
@@ -85,11 +88,14 @@ const place = (
 
 export const mockResult: RecommendationResult = {
   places: [
-    place(1, "1", "모의 고요서재", "카페, 디저트", "서울특별시 종로구 도로 11", 15, 10),
-    place(2, "2", "모의 초록창가", "카페", "서울특별시 마포구 도로 22", 12, 10),
-    place(3, "3", "모의 느린오후", "카페, 베이커리", "서울특별시 성동구 도로 33", 10, 7),
+    place(1, "1", "모의 고요서재", "카페, 디저트", "서울특별시 종로구 도로 11", 15, 30, 30, 25),
+    place(2, "2", "모의 초록창가", "카페", "서울특별시 마포구 도로 22", 15, 28, 25, 22),
+    place(3, "3", "모의 느린오후", "카페, 베이커리", "서울특별시 성동구 도로 33", 15, 25, 22, 20),
   ],
   degraded: false,
+  partial: false,
+  resultCount: 3,
+  explorationRound: 0,
   reasonFallback: false,
   relaxed: false,
   warnings: ["BUDGET_EVIDENCE_UNAVAILABLE"],
@@ -185,7 +191,7 @@ export const mockTrace: WorkflowTraceEvent[] = [
     8,
     "PRELIMINARY_RANKING_COMPLETED",
     "Blog 검색 대상을 예비 점수로 제한했습니다",
-    "외부 근거 호출 전에 결정론적 예비 점수로 최대 다섯 후보를 선택했습니다.",
+    "외부 근거 호출 전에 결정론적 예비 점수로 최대 여덟 후보를 선택했습니다.",
     { candidatePool: 4 },
   ),
   trace(
@@ -198,15 +204,15 @@ export const mockTrace: WorkflowTraceEvent[] = [
   trace(
     10,
     "FINAL_RANKING_COMPLETED",
-    "서버가 결정론적 Top 3를 확정했습니다",
-    "점수, 필수 조건 일치율, 근거 수와 안정적 후보 키 순으로 정렬했습니다.",
+    "서버가 결정론적 추천 3곳을 확정했습니다",
+    "위치 신뢰도, 검색 관련성, 선호 근거와 근거 품질 순으로 정렬했습니다.",
     { resultCount: 3, degraded: false },
   ),
   trace(
     11,
     "ELICE_REASON_REQUESTED",
     "Elice에 근거 기반 이유 생성을 요청했습니다",
-    "Top 3와 허용된 근거만 전달하고 점수와 순위는 전달하지 않았습니다.",
+    "추천 후보와 허용된 근거만 전달하고 점수와 순위는 전달하지 않았습니다.",
     { placeCount: 3, evidenceCount: 6 },
   ),
   trace(
@@ -223,6 +229,8 @@ export const mockTrace: WorkflowTraceEvent[] = [
     "저하나 이유 대체 없이 검증된 세 후보를 반환했습니다.",
     {
       resultCount: 3,
+      partial: false,
+      explorationRound: 0,
       localCalls: 1,
       blogCalls: 4,
       reasonCalls: 1,

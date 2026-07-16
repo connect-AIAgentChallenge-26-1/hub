@@ -64,11 +64,13 @@ public class RecommendationStreamGateway {
         Duration block
     ) {
         ensureGroup();
-        List<MapRecord<String, Object, Object>> records = operations().read(
-            Consumer.from(GROUP, consumerName),
-            StreamReadOptions.empty().count(count).block(block),
-            StreamOffset.create(STREAM, ReadOffset.lastConsumed())
-        );
+        List<MapRecord<String, Object, Object>> records;
+        try {
+            records = readNewRecords(consumerName, count, block);
+        } catch (DataAccessException exception) {
+            recoverMissingGroup(exception);
+            records = readNewRecords(consumerName, count, block);
+        }
         return decode(records, consumerName);
     }
 
@@ -78,7 +80,7 @@ public class RecommendationStreamGateway {
         Duration minimumIdle
     ) {
         ensureGroup();
-        var pending = operations().pending(STREAM, GROUP, Range.unbounded(), count);
+        var pending = pending(count);
         List<RecordId> stale = new ArrayList<>();
         pending.forEach(message -> {
             if (message.getElapsedTimeSinceLastDelivery().compareTo(minimumIdle) >= 0) {
@@ -143,6 +145,36 @@ public class RecommendationStreamGateway {
             }
             groupReady.set(true);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    private List<MapRecord<String, Object, Object>> readNewRecords(
+        String consumerName,
+        int count,
+        Duration block
+    ) {
+        return operations().read(
+            Consumer.from(GROUP, consumerName),
+            StreamReadOptions.empty().count(count).block(block),
+            StreamOffset.create(STREAM, ReadOffset.lastConsumed())
+        );
+    }
+
+    private org.springframework.data.redis.connection.stream.PendingMessages pending(int count) {
+        try {
+            return operations().pending(STREAM, GROUP, Range.unbounded(), count);
+        } catch (DataAccessException exception) {
+            recoverMissingGroup(exception);
+            return operations().pending(STREAM, GROUP, Range.unbounded(), count);
+        }
+    }
+
+    private void recoverMissingGroup(DataAccessException exception) {
+        if (!isNoGroup(exception)) {
+            throw exception;
+        }
+        groupReady.set(false);
+        ensureGroup();
     }
 
     private RecordId add(String stream, String eventJson, int attempt) {
@@ -221,4 +253,16 @@ public class RecommendationStreamGateway {
         }
         return false;
     }
+
+    private static boolean isNoGroup(DataAccessException exception) {
+        Throwable current = exception;
+        while (current != null) {
+            if (current.getMessage() != null && current.getMessage().contains("NOGROUP")) {
+                return true;
+            }
+            current = current.getCause();
+        }
+        return false;
+    }
+
 }

@@ -51,6 +51,13 @@ placepick:
   provider:
     maximum-concurrency: ${PLACEPICK_PROVIDER_MAXIMUM_CONCURRENCY:2}
     acquire-timeout: ${PLACEPICK_PROVIDER_ACQUIRE_TIMEOUT:PT0.1S}
+  recommendation:
+    retrieval:
+      default-maximum-local-calls: ${PLACEPICK_RETRIEVAL_DEFAULT_MAXIMUM_LOCAL_CALLS:6}
+      alternative-maximum-local-calls: ${PLACEPICK_RETRIEVAL_ALTERNATIVE_MAXIMUM_LOCAL_CALLS:8}
+      target-candidate-pool-size: ${PLACEPICK_RETRIEVAL_TARGET_CANDIDATE_POOL_SIZE:10}
+      preliminary-blog-pool-size: ${PLACEPICK_RETRIEVAL_PRELIMINARY_BLOG_POOL_SIZE:8}
+      blog-display-limit: ${PLACEPICK_RETRIEVAL_BLOG_DISPLAY_LIMIT:10}
   metrics:
     vote-contention-threshold: ${PLACEPICK_VOTE_CONTENTION_THRESHOLD:PT0.1S}
   retention:

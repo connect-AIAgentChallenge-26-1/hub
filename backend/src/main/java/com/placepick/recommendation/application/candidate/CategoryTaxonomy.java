@@ -39,6 +39,15 @@ public final class CategoryTaxonomy {
         };
     }
 
+    public List<String> queryTokens(PlaceType placeType, String placeTypeDetail) {
+        return switch (placeType) {
+            case RESTAURANT -> List.of("음식점", "식당", "맛집");
+            case CAFE -> List.of("카페", "커피", "디저트");
+            case BAR -> List.of("술집", "주점", "바");
+            case OTHER -> List.of(SearchTextNormalizer.display(placeTypeDetail));
+        };
+    }
+
     private boolean containsAny(String name, String category, List<String> terms) {
         List<String> categorySegments = List.of(category.split("[>\\s,/|]+"));
         List<String> nameTokens = List.of(name.split("\\s+"));

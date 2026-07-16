@@ -24,7 +24,7 @@ final class ReasonBatchValidator {
         GeneratedReasonBatch batch
     ) {
         if (!GeneratedReasonBatch.SCHEMA_VERSION.equals(batch.schemaVersion()) ||
-            batch.places().size() != 3) {
+            batch.places().size() != command.places().size()) {
             throw invalid(ReasonBatchValidationCode.SCHEMA_OR_SIZE);
         }
 

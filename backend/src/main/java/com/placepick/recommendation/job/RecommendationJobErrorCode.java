@@ -8,5 +8,6 @@ public enum RecommendationJobErrorCode {
     IDEMPOTENCY_KEY_REUSED,
     JOB_NOT_FOUND,
     JOB_EXPIRED,
+    NO_ALTERNATIVE_CANDIDATES,
     INVALID_STATE
 }

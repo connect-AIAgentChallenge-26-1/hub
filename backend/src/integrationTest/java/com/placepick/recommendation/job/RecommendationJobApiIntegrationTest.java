@@ -14,9 +14,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.placepick.recommendation.job.infrastructure.RecommendationWorkerSchedules;
 import com.placepick.session.SessionAuthenticator;
+import com.placepick.stream.RecommendationStreamGateway;
 import jakarta.servlet.http.Cookie;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.Map;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -25,6 +27,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.connection.stream.MapRecord;
+import org.springframework.data.redis.connection.stream.ReadOffset;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
 import org.springframework.jdbc.core.simple.JdbcClient;
@@ -106,6 +110,15 @@ class RecommendationJobApiIntegrationTest {
         try (var connection = connectionFactory.getConnection()) {
             connection.serverCommands().flushAll();
         }
+        redisTemplate.opsForStream().add(MapRecord.create(
+            RecommendationStreamGateway.STREAM,
+            Map.of("_bootstrap", "1")
+        ));
+        redisTemplate.opsForStream().createGroup(
+            RecommendationStreamGateway.STREAM,
+            ReadOffset.from("0-0"),
+            RecommendationStreamGateway.GROUP
+        );
     }
 
     @Test
@@ -139,6 +152,9 @@ class RecommendationJobApiIntegrationTest {
         assertThat(completed.path("stage").asText()).isEqualTo("FINISHED");
         assertThat(completed.path("progress").asInt()).isEqualTo(100);
         assertThat(completed.path("places")).hasSize(3);
+        assertThat(completed.path("partial").asBoolean()).isFalse();
+        assertThat(completed.path("resultCount").asInt()).isEqualTo(3);
+        assertThat(completed.path("explorationRound").asInt()).isZero();
 
         MvcResult subscription = mockMvc.perform(get(
                 "/api/v1/recommendations/{jobId}/events",
@@ -158,6 +174,133 @@ class RecommendationJobApiIntegrationTest {
         assertThat(id.find()).isTrue();
         assertThat(sse).contains("\"eventId\":\"" + id.group(1) + "\"");
         assertThat(sse).contains("\"status\":\"COMPLETED\"");
+    }
+
+    @Test
+    void completedOwnerCanCreateOneIdempotentAlternativeWith202Location() throws Exception {
+        SessionClient owner = createSession();
+        UUID draftId = createAndConfirmDraft(owner);
+        UUID sourceJobId = createJob(owner, draftId, "alternative-source-key");
+        awaitCompleted(sourceJobId, owner);
+
+        MvcResult accepted = mockMvc.perform(post(
+                "/api/v1/recommendations/{jobId}/alternatives",
+                sourceJobId
+            )
+                .cookie(owner.cookie())
+                .header(SessionAuthenticator.CSRF_HEADER, owner.csrfToken())
+                .header("Idempotency-Key", "alternative-create-key")
+                .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isAccepted())
+            .andExpect(header().string(
+                "Location",
+                org.hamcrest.Matchers.startsWith("/api/v1/recommendations/")
+            ))
+            .andExpect(jsonPath("$.status").value("ACCEPTED"))
+            .andReturn();
+        JsonNode body = objectMapper.readTree(accepted.getResponse().getContentAsByteArray());
+        UUID alternativeJobId = UUID.fromString(body.path("jobId").asText());
+
+        mockMvc.perform(post(
+                "/api/v1/recommendations/{jobId}/alternatives",
+                sourceJobId
+            )
+                .cookie(owner.cookie())
+                .header(SessionAuthenticator.CSRF_HEADER, owner.csrfToken())
+                .header("Idempotency-Key", "alternative-create-key")
+                .contentType(MediaType.APPLICATION_JSON))
+            .andExpect(status().isAccepted())
+            .andExpect(jsonPath("$.jobId").value(alternativeJobId.toString()));
+
+        mockMvc.perform(get("/api/v1/recommendations/{jobId}", alternativeJobId)
+                .cookie(owner.cookie()))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.explorationRound").value(1))
+            .andExpect(jsonPath("$.partial").value(false))
+            .andExpect(jsonPath("$.resultCount").value(0));
+        assertThat(jdbcClient.sql("SELECT COUNT(*) FROM recommendation_job")
+            .query(Long.class).single()).isEqualTo(2L);
+        assertThat(jdbcClient.sql("SELECT COUNT(*) FROM outbox_event")
+            .query(Long.class).single()).isEqualTo(2L);
+    }
+
+    @Test
+    void alternativeHidesOwnershipAndRejectsExhaustedSearch() throws Exception {
+        SessionClient owner = createSession();
+        SessionClient other = createSession();
+        UUID sourceJobId = createJob(
+            owner,
+            createAndConfirmDraft(owner),
+            "alternative-guard-source"
+        );
+        awaitCompleted(sourceJobId, owner);
+
+        mockMvc.perform(post(
+                "/api/v1/recommendations/{jobId}/alternatives",
+                sourceJobId
+            )
+                .cookie(other.cookie())
+                .header(SessionAuthenticator.CSRF_HEADER, other.csrfToken())
+                .header("Idempotency-Key", "alternative-other-owner"))
+            .andExpect(status().isNotFound())
+            .andExpect(jsonPath("$.errorCode").value("RESOURCE_NOT_FOUND"));
+
+        jdbcClient.sql("""
+                UPDATE recommendation_job
+                SET search_exhausted = TRUE
+                WHERE id = :jobId
+                """)
+            .param("jobId", sourceJobId)
+            .update();
+        mockMvc.perform(post(
+                "/api/v1/recommendations/{jobId}/alternatives",
+                sourceJobId
+            )
+                .cookie(owner.cookie())
+                .header(SessionAuthenticator.CSRF_HEADER, owner.csrfToken())
+                .header("Idempotency-Key", "alternative-exhausted"))
+            .andExpect(status().isConflict())
+            .andExpect(jsonPath("$.errorCode").value("NO_ALTERNATIVE_CANDIDATES"));
+    }
+
+    @Test
+    void alternativeRequiresACompletedUnexpiredSource() throws Exception {
+        SessionClient owner = createSession();
+        UUID sourceJobId = createJob(
+            owner,
+            createAndConfirmDraft(owner),
+            "alternative-state-source"
+        );
+
+        mockMvc.perform(post(
+                "/api/v1/recommendations/{jobId}/alternatives",
+                sourceJobId
+            )
+                .cookie(owner.cookie())
+                .header(SessionAuthenticator.CSRF_HEADER, owner.csrfToken())
+                .header("Idempotency-Key", "alternative-before-complete"))
+            .andExpect(status().isConflict())
+            .andExpect(jsonPath("$.errorCode").value("INVALID_STATE"));
+
+        jdbcClient.sql("""
+                UPDATE recommendation_job
+                SET status = 'COMPLETED',
+                    stage = 'FINISHED',
+                    progress = 100,
+                    expires_at = NOW() + INTERVAL '4 minutes'
+                WHERE id = :jobId
+                """)
+            .param("jobId", sourceJobId)
+            .update();
+        mockMvc.perform(post(
+                "/api/v1/recommendations/{jobId}/alternatives",
+                sourceJobId
+            )
+                .cookie(owner.cookie())
+                .header(SessionAuthenticator.CSRF_HEADER, owner.csrfToken())
+                .header("Idempotency-Key", "alternative-near-expiry"))
+            .andExpect(status().isGone())
+            .andExpect(jsonPath("$.errorCode").value("JOB_EXPIRED"));
     }
 
     private SessionClient createSession() throws Exception {
@@ -210,6 +353,20 @@ class RecommendationJobApiIntegrationTest {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.status").value("CONFIRMED"));
         return draftId;
+    }
+
+    private UUID createJob(SessionClient session, UUID draftId, String key) throws Exception {
+        MvcResult accepted = mockMvc.perform(post("/api/v1/recommendations")
+                .cookie(session.cookie())
+                .header(SessionAuthenticator.CSRF_HEADER, session.csrfToken())
+                .header("Idempotency-Key", key)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"draftId\":\"" + draftId + "\"}"))
+            .andExpect(status().isAccepted())
+            .andReturn();
+        return UUID.fromString(objectMapper.readTree(
+            accepted.getResponse().getContentAsByteArray()
+        ).path("jobId").asText());
     }
 
     private JsonNode awaitCompleted(UUID jobId, SessionClient session) throws Exception {

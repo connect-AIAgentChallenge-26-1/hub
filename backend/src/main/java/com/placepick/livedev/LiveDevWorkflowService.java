@@ -217,7 +217,7 @@ public final class LiveDevWorkflowService {
             RecommendationCoreResult result = coreFactory.create(trace).recommend(condition);
             run.complete(result);
         } catch (InsufficientCandidatesException exception) {
-            run.fail("INSUFFICIENT_CANDIDATES", "조건에 맞는 후보가 3개보다 적습니다.");
+            run.fail("INSUFFICIENT_CANDIDATES", "조건에 맞는 유효 후보를 찾지 못했습니다.");
         } catch (SearchProviderException exception) {
             run.fail("NAVER_" + exception.failure().name(), "장소 검색 Provider 요청에 실패했습니다.");
         } catch (RuntimeException exception) {

@@ -2,10 +2,11 @@ import { describe, expect, it } from "vitest";
 import { mockResult, mockTrace } from "../fixtures/mock-data";
 
 describe("Live Playground mock fixture", () => {
-  it("결정론적 Top 3와 0~80 점수 계약을 만족한다", () => {
+  it("결정론적 추천과 0~100 점수 계약을 만족한다", () => {
     expect(mockResult.places).toHaveLength(3);
     expect(mockResult.places.map((place) => place.rank)).toEqual([1, 2, 3]);
-    expect(mockResult.places.every((place) => place.score >= 0 && place.score <= 80)).toBe(true);
+    expect(mockResult.places.every((place) => place.score >= 0 && place.score <= 100)).toBe(true);
+    expect(mockResult).toMatchObject({ partial: false, resultCount: 3, explorationRound: 0 });
     expect(mockResult.places.map((place) => place.score)).toEqual(
       [...mockResult.places].map((place) => place.score).sort((a, b) => b - a),
     );

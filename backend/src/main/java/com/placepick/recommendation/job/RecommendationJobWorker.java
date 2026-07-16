@@ -3,9 +3,13 @@ package com.placepick.recommendation.job;
 import com.placepick.recommendation.application.port.out.SearchProviderException;
 import com.placepick.recommendation.application.port.out.SearchProviderFailure;
 import com.placepick.recommendation.application.scoring.InsufficientCandidatesException;
+import com.placepick.recommendation.domain.candidate.CandidateKey;
+import com.placepick.recommendation.workflow.application.RecommendationExecutionContext;
 import com.placepick.recommendation.workflow.application.RecommendationCoreResult;
 import com.placepick.stream.RecommendationStreamRecord;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class RecommendationJobWorker {
 
@@ -35,15 +39,27 @@ public class RecommendationJobWorker {
         try {
             RecommendationCoreResult result = coreFactory.create(
                 new RecommendationJobProgressTrace(claim.jobId(), coordinator)
-            ).recommend(claim.condition());
+            ).recommend(
+                claim.condition(),
+                new RecommendationExecutionContext(
+                    claim.explorationRound(),
+                    claim.excludedCandidateKeys().stream()
+                        .map(CandidateKey::new)
+                        .collect(Collectors.toUnmodifiableSet()),
+                    Set.copyOf(claim.usedVariantIds())
+                )
+            );
             coordinator.complete(envelope.eventId(), claim.jobId(), result);
             return WorkerProcessingResult.acknowledge();
         } catch (InsufficientCandidatesException exception) {
+            boolean alternative = claim.explorationRound() > 0;
             coordinator.fail(
                 envelope.eventId(),
                 claim.jobId(),
-                "INSUFFICIENT_CANDIDATES",
-                "조건에 맞는 추천 후보가 충분하지 않습니다."
+                alternative ? "NO_ALTERNATIVE_CANDIDATES" : "INSUFFICIENT_CANDIDATES",
+                alternative
+                    ? "새롭게 제시할 추천 후보를 찾지 못했습니다."
+                    : "조건에 맞는 추천 후보가 충분하지 않습니다."
             );
             return WorkerProcessingResult.acknowledge();
         } catch (SearchProviderException exception) {

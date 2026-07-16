@@ -9,6 +9,7 @@ import com.placepick.infrastructure.observability.CandidateFunnelMetrics;
 import com.placepick.infrastructure.observability.LlmProviderDiagnosticMetrics;
 import com.placepick.infrastructure.observability.PlacePickMetrics;
 import com.placepick.infrastructure.observability.ProviderCallMetrics;
+import com.placepick.infrastructure.observability.RecommendationRetrievalMetrics;
 import com.placepick.livedev.LiveDevConfiguration;
 import com.placepick.livedev.LiveDevCoreFactory;
 import com.placepick.outbox.OutboxRepository;
@@ -114,6 +115,10 @@ class RecommendationJobProviderWiringTest {
                 () -> mock(LlmProviderDiagnosticMetrics.class)
             )
             .withBean(ProviderCallMetrics.class, () -> mock(ProviderCallMetrics.class))
+            .withBean(
+                RecommendationRetrievalMetrics.class,
+                () -> mock(RecommendationRetrievalMetrics.class)
+            )
             .withBean(
                 RecommendationJobTransactionCoordinator.class,
                 () -> mock(RecommendationJobTransactionCoordinator.class)

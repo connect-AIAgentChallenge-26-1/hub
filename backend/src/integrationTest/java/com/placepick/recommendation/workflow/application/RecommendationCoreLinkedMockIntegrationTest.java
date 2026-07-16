@@ -50,8 +50,8 @@ import org.junit.jupiter.api.Test;
 class RecommendationCoreLinkedMockIntegrationTest {
 
     @Test
-    void linksTheSyntheticWorkflowInEightCallsOnlyAfterExplicitConfirmation() throws Exception {
-        WorkflowFixture fixture = fixture(List.of(places(1, 5)));
+    void linksTheAdaptiveSyntheticWorkflowOnlyAfterExplicitConfirmation() throws Exception {
+        WorkflowFixture fixture = fixture(List.of(places(1, 5), places(6, 10)));
 
         ExtractionOutcome extracted = fixture.extractionPort.extract(extractionCommand());
         assertThat(extracted.extracted()).isTrue();
@@ -63,16 +63,16 @@ class RecommendationCoreLinkedMockIntegrationTest {
         assertThat(result.places()).hasSize(3);
         assertThat(result.reasonFallback()).isFalse();
         assertThat(result.degraded()).isFalse();
-        assertThat(result.providerCalls()).isEqualTo(7);
-        assertThat(fixture.extractionCalls.get() + result.providerCalls()).isEqualTo(8);
-        assertThat(fixture.placePort.queries).hasSize(1);
-        assertThat(fixture.blogPort.queries).hasSize(5);
+        assertThat(result.providerCalls()).isEqualTo(11);
+        assertThat(fixture.extractionCalls.get() + result.providerCalls()).isEqualTo(12);
+        assertThat(fixture.placePort.queries).hasSize(2);
+        assertThat(fixture.blogPort.queries).hasSize(8);
         assertThat(fixture.reasonPort.calls.get()).isEqualTo(1);
         assertConfirmedOnlyBoundary();
     }
 
     @Test
-    void onePreferenceRelaxationRaisesTheLinkedCallCeilingToNine() {
+    void expandedVariantsStayWithinTheConfiguredCallBudget() {
         WorkflowFixture fixture = fixture(List.of(
             places(1, 2),
             places(3, 5)
@@ -82,60 +82,66 @@ class RecommendationCoreLinkedMockIntegrationTest {
         RecommendationCoreResult result = fixture.core.recommend(confirm(extracted.condition()));
 
         assertThat(result.relaxed()).isTrue();
-        assertThat(result.placeSearchCalls()).isEqualTo(2);
+        assertThat(result.placeSearchCalls()).isEqualTo(6);
         assertThat(result.blogSearchCalls()).isEqualTo(5);
-        assertThat(result.providerCalls()).isEqualTo(8);
-        assertThat(fixture.extractionCalls.get() + result.providerCalls()).isEqualTo(9);
-        assertThat(fixture.placePort.queries).hasSize(2);
+        assertThat(result.providerCalls()).isEqualTo(12);
+        assertThat(fixture.extractionCalls.get() + result.providerCalls()).isEqualTo(13);
+        assertThat(fixture.placePort.queries).hasSize(6);
         assertThat(fixture.reasonPort.calls.get()).isEqualTo(1);
     }
 
     @Test
     void insufficientCandidatesStopTheFullWorkflowBeforeBlogAndReasonGeneration() {
-        WorkflowFixture fixture = fixture(List.of(
-            places(1, 2),
-            places(1, 2)
-        ));
+        WorkflowFixture fixture = fixture(List.of(List.of()));
         ExtractionOutcome extracted = fixture.extractionPort.extract(extractionCommand());
 
         assertThatThrownBy(() -> fixture.core.recommend(confirm(extracted.condition())))
             .isInstanceOf(InsufficientCandidatesException.class)
             .hasMessage("INSUFFICIENT_CANDIDATES");
 
-        assertThat(fixture.placePort.queries).hasSize(2);
+        assertThat(fixture.placePort.queries).hasSize(6);
         assertThat(fixture.blogPort.queries).isEmpty();
         assertThat(fixture.reasonPort.calls.get()).isZero();
     }
 
     @Test
     void blogProviderFailureCompletesLocalOnlyWithoutReasonFallback() {
-        WorkflowFixture fixture = fixture(List.of(places(1, 5)), 2, false);
+        WorkflowFixture fixture = fixture(
+            List.of(places(1, 5), places(6, 10)),
+            2,
+            false
+        );
         ExtractionOutcome extracted = fixture.extractionPort.extract(extractionCommand());
 
         RecommendationCoreResult result = fixture.core.recommend(confirm(extracted.condition()));
 
-        assertThat(result.places()).hasSize(3).allSatisfy(place -> {
-            assertThat(place.evidenceLevel()).isEqualTo(EvidenceLevel.LOCAL_ONLY);
-            assertThat(place.rankedPlace().evidence()).isEmpty();
-            assertThat(place.rankedPlace().scoreBreakdown().blogEvidence()).isZero();
-            assertThat(place.cautions()).contains(GroundedReasonService.BLOG_CAUTION)
-                .doesNotContain(GroundedReasonService.FALLBACK_CAUTION);
-        });
+        assertThat(result.places()).hasSize(3);
+        assertThat(result.places()).anySatisfy(place ->
+            assertThat(place.evidenceLevel()).isEqualTo(EvidenceLevel.LOCAL_AND_BLOG)
+        );
+        assertThat(result.places()).allSatisfy(place ->
+            assertThat(place.cautions()).doesNotContain(GroundedReasonService.FALLBACK_CAUTION)
+        );
         assertThat(result.degraded()).isTrue();
         assertThat(result.reasonFallback()).isFalse();
         assertThat(result.warnings()).containsExactly(
             "BUDGET_EVIDENCE_UNAVAILABLE",
-            "BLOG_EVIDENCE_UNAVAILABLE"
+            "BLOG_EVIDENCE_UNAVAILABLE",
+            "EXCLUSION_UNVERIFIED"
         );
-        assertThat(result.blogSearchCalls()).isEqualTo(2);
-        assertThat(fixture.blogPort.queries).hasSize(2);
+        assertThat(result.blogSearchCalls()).isEqualTo(8);
+        assertThat(fixture.blogPort.queries).hasSize(8);
         assertThat(fixture.reasonPort.calls.get()).isEqualTo(1);
     }
 
     @Test
     void reasonProviderFailureFallsBackForAllThreeWithoutChangingScoreOrOrder() {
-        WorkflowFixture successfulFixture = fixture(List.of(places(1, 5)));
-        WorkflowFixture failedFixture = fixture(List.of(places(1, 5)), -1, true);
+        WorkflowFixture successfulFixture = fixture(List.of(places(1, 5), places(6, 10)));
+        WorkflowFixture failedFixture = fixture(
+            List.of(places(1, 5), places(6, 10)),
+            -1,
+            true
+        );
         ConfirmedRecommendationCondition confirmed = confirm(
             successfulFixture.extractionPort.extract(extractionCommand()).condition()
         );
@@ -167,6 +173,7 @@ class RecommendationCoreLinkedMockIntegrationTest {
         assertThat(failed.reasonFallback()).isTrue();
         assertThat(failed.warnings()).containsExactly(
             "BUDGET_EVIDENCE_UNAVAILABLE",
+            "EXCLUSION_UNVERIFIED",
             RecommendationCoreUseCase.LLM_REASON_FALLBACK
         );
         assertThat(failedFixture.reasonPort.calls.get()).isEqualTo(1);
@@ -180,8 +187,9 @@ class RecommendationCoreLinkedMockIntegrationTest {
         assertThat(method.getParameterTypes()).containsExactly(ConfirmedRecommendationCondition.class);
         assertThat(java.util.Arrays.stream(RecommendationCoreUseCase.class.getMethods())
             .filter(value -> value.getName().equals("recommend")))
-            .singleElement()
-            .satisfies(value -> assertThat(value.getParameterTypes())
+            .hasSize(2)
+            .allSatisfy(value -> assertThat(value.getParameterTypes())
+                .contains(ConfirmedRecommendationCondition.class)
                 .doesNotContain(DraftRecommendationCondition.class));
     }
 
@@ -283,7 +291,7 @@ class RecommendationCoreLinkedMockIntegrationTest {
         public PlaceSearchResult searchPlaces(PlaceSearchQuery query) {
             int index = queries.size();
             queries.add(query);
-            List<PlaceSearchItem> items = responses.get(index);
+            List<PlaceSearchItem> items = responses.get(Math.min(index, responses.size() - 1));
             return new PlaceSearchResult(items.size(), items);
         }
     }
@@ -312,7 +320,7 @@ class RecommendationCoreLinkedMockIntegrationTest {
             return new BlogSearchResult(1, List.of(new BlogSearchItem(
                 name + " 방문 기록",
                 "https://blog.test/" + queries.size(),
-                name + " 조용한 공간",
+                name + " 서울 강남구 조용한 공간",
                 "작성자",
                 "",
                 "20260715"

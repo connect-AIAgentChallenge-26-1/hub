@@ -102,12 +102,28 @@ permit 거부는 실제 Provider 호출 지연이 아니므로 `placepick_provid
 | 목적 | Prometheus metric | 고정 label |
 | --- | --- | --- |
 | 최종 후보 funnel | `placepick_recommendation_candidate_funnel_*` | `result`, `reason`, `relaxed` |
+| Local variant 호출·수신 | `placepick_recommendation_retrieval_local_*` | `sort`, `expanded`, `outcome` |
+| 대체 추천의 기존 후보 제외 | `placepick_recommendation_retrieval_previously_exposed_*` | 없음 |
+| Blog 호출 결과 | `placepick_recommendation_retrieval_blog_*` | `outcome` |
+| 정상·부분·저하 결과 | `placepick_recommendation_results_total` | `partial`, `degraded` |
+| 최종 결과 수·점수 | `placepick_recommendation_result_count_*`, `placepick_recommendation_result_score_*` | `partial` |
 | LLM Provider 진단 | `placepick_provider_llm_outcomes_total` | `provider`, `operation`, `error`, `stage`, `diagnostic` |
 | 서버 이유 검증 거부 | `placepick_provider_llm_validation_failures_total` | `operation`, `code` |
 
-후보 funnel은 한 추천 실행의 최종 누적 snapshot을 정확히 한 번 기록한다. 완화 전·후 수를
-합산하지 않는다. `missing_identity`, `location`, `type`, `exclusion`, `duplicate` 중 큰 값으로
-후보 부족의 경계를 분류한다. `relaxed=true`는 완화 검색 뒤 최종 snapshot이라는 뜻이다.
+후보 funnel은 한 추천 실행의 최종 누적 snapshot을 정확히 한 번 기록한다. variant별 중간
+수를 최종 수와 합산하지 않는다. `missing_identity`, `location`, `type`, `exclusion`,
+`duplicate` 중 큰 값으로 후보 부족의 경계를 분류한다. 기존 호환 label인
+`relaxed=true`는 v2에서 기본 두 검색 이후 추가 variant까지 실행한 최종 snapshot이라는
+뜻이다. 실제 선호 조건을 제거했다는 의미로 해석하지 않는다.
+
+Local `calls`는 성공뿐 아니라 timeout·Provider 실패도 `outcome=failure`로 집계한다. 대체
+추천에서 정규화 후보가 많지만 실제 결과가 0개면 `previously_exposed` 분포를 함께 확인해
+Provider 후보 부족과 이미 노출한 후보 제외를 구분한다. `results`, 결과 수와 점수는 랭킹
+중간값이 아니라 DB 저장과 SSE `completed` event가 끝난 Job snapshot에서만 기록한다.
+
+`Adaptive Local retrieval`에서 정확도·인기 호출과 평균 수신 수를 비교하고,
+`Result quality and partial outcomes`에서 부분 결과·저하와 평균 근거 점수를 함께 본다.
+검색어, 장소와 candidate fingerprint를 label로 추가하지 않는다.
 
 LLM 진단은 envelope·usage·schema·place/evidence 소유권 같은 폐쇄형 코드만 기록한다.
 `diagnostic=none`이 아닌 값과 서버 validation failure를 함께 확인한다. prompt, completion,

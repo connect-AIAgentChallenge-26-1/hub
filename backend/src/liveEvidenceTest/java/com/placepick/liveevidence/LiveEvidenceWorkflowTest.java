@@ -96,9 +96,9 @@ class LiveEvidenceWorkflowTest {
             assertThat(result.reasonFallback())
                 .as("scenario %s used the reason fallback", scenario.id())
                 .isFalse();
-            assertThat(result.blogSearchCalls()).isBetween(3, 5);
+            assertThat(result.blogSearchCalls()).isBetween(3, 8);
             int scenarioCalls = 1 + result.providerCalls();
-            assertThat(scenarioCalls).isBetween(6, 9);
+            assertThat(scenarioCalls).isBetween(6, 16);
             totalCalls += scenarioCalls;
 
             System.out.printf(

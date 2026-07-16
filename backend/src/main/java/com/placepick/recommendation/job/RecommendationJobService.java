@@ -17,6 +17,7 @@ import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.HexFormat;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ import org.springframework.transaction.support.TransactionTemplate;
 public class RecommendationJobService {
 
     private static final Duration MINIMUM_IDEMPOTENCY_TTL = Duration.ofHours(24);
+    private static final Duration MINIMUM_ALTERNATIVE_PROCESSING_TTL =
+        Duration.ofMinutes(5);
+    private static final String CREATE_RESOURCE_PATH = "/api/v1/recommendations";
 
     private final RecommendationDraftRepository draftRepository;
     private final RecommendationJobRepository jobRepository;
@@ -89,6 +93,15 @@ public class RecommendationJobService {
         return Objects.requireNonNull(transactions.execute(status -> createInTransaction(command)));
     }
 
+    public RecommendationJobSubmission createAlternative(
+        CreateAlternativeRecommendationCommand command
+    ) {
+        Objects.requireNonNull(command, "command");
+        return Objects.requireNonNull(transactions.execute(
+            status -> createAlternativeInTransaction(command)
+        ));
+    }
+
     public RecommendationJobSnapshot get(UUID jobId, UUID sessionId) {
         Instant now = clock.instant();
         RecommendationJobSnapshot snapshot = jobRepository.findOwned(jobId, sessionId)
@@ -129,8 +142,16 @@ public class RecommendationJobService {
     ) {
         String keyHash = sha256(command.idempotencyKey());
         String requestHash = sha256("{\"draftId\":\"" + command.draftId() + "\"}");
-        jobRepository.lockIdempotencyScope(command.sessionId(), keyHash);
-        var existing = jobRepository.findIdempotency(command.sessionId(), keyHash);
+        jobRepository.lockIdempotencyScope(
+            command.sessionId(),
+            CREATE_RESOURCE_PATH,
+            keyHash
+        );
+        var existing = jobRepository.findIdempotency(
+            command.sessionId(),
+            CREATE_RESOURCE_PATH,
+            keyHash
+        );
         if (existing.isPresent()) {
             IdempotencyReplay replay = existing.orElseThrow();
             if (!requestHash.equals(replay.requestHash())) {
@@ -162,13 +183,17 @@ public class RecommendationJobService {
         validateDraft(draft, now);
         ConfirmedRecommendationCondition condition = confirmed(draft.condition());
         UUID jobId = UUID.randomUUID();
-        UUID eventId = UUID.randomUUID();
         Instant jobExpiresAt = now.plus(jobTtl);
 
         jobRepository.insertJob(
             jobId,
             command.sessionId(),
             draft.id(),
+            jobId,
+            null,
+            0,
+            List.of(),
+            List.of(),
             condition,
             now,
             jobExpiresAt
@@ -180,6 +205,142 @@ public class RecommendationJobService {
             );
         }
 
+        return enqueue(
+            jobId,
+            command.sessionId(),
+            CREATE_RESOURCE_PATH,
+            keyHash,
+            requestHash,
+            command.traceId(),
+            now,
+            jobExpiresAt
+        );
+    }
+
+    private RecommendationJobSubmission createAlternativeInTransaction(
+        CreateAlternativeRecommendationCommand command
+    ) {
+        String resourcePath = CREATE_RESOURCE_PATH + "/" + command.sourceJobId() +
+            "/alternatives";
+        String keyHash = sha256(command.idempotencyKey());
+        String requestHash = sha256(
+            "{\"sourceJobId\":\"" + command.sourceJobId() + "\"}"
+        );
+        jobRepository.lockIdempotencyScope(command.sessionId(), resourcePath, keyHash);
+        var existing = jobRepository.findIdempotency(
+            command.sessionId(),
+            resourcePath,
+            keyHash
+        );
+        if (existing.isPresent()) {
+            IdempotencyReplay replay = existing.orElseThrow();
+            if (!requestHash.equals(replay.requestHash())) {
+                throw failure(
+                    RecommendationJobErrorCode.IDEMPOTENCY_KEY_REUSED,
+                    "The idempotency key was already used for a different request."
+                );
+            }
+            RecommendationJobSnapshot snapshot = jobRepository
+                .findOwned(replay.jobId(), command.sessionId())
+                .orElseThrow(() -> failure(
+                    RecommendationJobErrorCode.INVALID_STATE,
+                    "The idempotent recommendation response is unavailable."
+                ));
+            return new RecommendationJobSubmission(
+                snapshot.jobId(),
+                RecommendationJobStatus.ACCEPTED,
+                true
+            );
+        }
+
+        Instant now = clock.instant();
+        RecommendationJobSnapshot source = jobRepository.findOwnedForUpdate(
+                command.sourceJobId(),
+                command.sessionId()
+            )
+            .orElseThrow(() -> failure(
+                RecommendationJobErrorCode.JOB_NOT_FOUND,
+                "The requested recommendation job was not found."
+            ));
+        if (!source.expiresAt().isAfter(now)) {
+            throw failure(
+                RecommendationJobErrorCode.JOB_EXPIRED,
+                "The recommendation job has expired."
+            );
+        }
+        if (source.status() != RecommendationJobStatus.COMPLETED) {
+            throw failure(
+                RecommendationJobErrorCode.INVALID_STATE,
+                "Only a completed recommendation job can request alternatives."
+            );
+        }
+        if (!source.expiresAt().isAfter(now.plus(MINIMUM_ALTERNATIVE_PROCESSING_TTL))) {
+            throw failure(
+                RecommendationJobErrorCode.JOB_EXPIRED,
+                "The recommendation job does not have enough lifetime for another search."
+            );
+        }
+        if (source.searchExhausted()) {
+            throw failure(
+                RecommendationJobErrorCode.NO_ALTERNATIVE_CANDIDATES,
+                "No additional recommendation search variants remain."
+            );
+        }
+        var existingChild = jobRepository.findByParent(source.jobId());
+        if (existingChild.isPresent()) {
+            RecommendationJobSnapshot child = existingChild.orElseThrow();
+            if (child.status() == RecommendationJobStatus.FAILED &&
+                child.failure() != null &&
+                RecommendationJobErrorCode.NO_ALTERNATIVE_CANDIDATES.name()
+                    .equals(child.failure().errorCode())) {
+                throw failure(
+                    RecommendationJobErrorCode.NO_ALTERNATIVE_CANDIDATES,
+                    "No additional recommendation candidates remain."
+                );
+            }
+            throw failure(
+                RecommendationJobErrorCode.INVALID_STATE,
+                "An alternative recommendation already exists for this job."
+            );
+        }
+
+        UUID jobId = UUID.randomUUID();
+        jobRepository.insertJob(
+            jobId,
+            command.sessionId(),
+            source.draftId(),
+            source.rootJobId(),
+            source.jobId(),
+            source.explorationRound() + 1,
+            source.excludedCandidateKeys(),
+            source.usedVariantIds(),
+            source.condition(),
+            now,
+            source.expiresAt()
+        );
+        return enqueue(
+            jobId,
+            command.sessionId(),
+            resourcePath,
+            keyHash,
+            requestHash,
+            command.traceId(),
+            now,
+            source.expiresAt()
+        );
+    }
+
+    private RecommendationJobSubmission enqueue(
+        UUID jobId,
+        UUID sessionId,
+        String resourcePath,
+        String keyHash,
+        String requestHash,
+        String traceId,
+        Instant now,
+        Instant jobExpiresAt
+    ) {
+        UUID eventId = UUID.randomUUID();
         RecommendationRequestedEnvelope envelope = new RecommendationRequestedEnvelope(
             eventId,
             RecommendationRequestedEnvelope.EVENT_TYPE,
@@ -187,7 +348,7 @@ public class RecommendationJobService {
             jobId,
             keyHash,
             now,
-            command.traceId(),
+            traceId,
             new RecommendationRequestedEnvelope.Payload(jobId)
         );
         outboxRepository.insert(new OutboxEvent(
@@ -201,12 +362,13 @@ public class RecommendationJobService {
         ));
         jobRepository.insertIdempotency(
             UUID.randomUUID(),
-            command.sessionId(),
+            sessionId,
+            resourcePath,
             keyHash,
             requestHash,
             jobId,
             now,
-            now.plus(maximum(jobTtl, MINIMUM_IDEMPOTENCY_TTL))
+            latest(jobExpiresAt, now.plus(MINIMUM_IDEMPOTENCY_TTL))
         );
         UUID snapshotEventId = UUID.randomUUID();
         RecommendationJobSnapshot snapshot = jobRepository.lockJob(jobId)
@@ -284,8 +446,8 @@ public class RecommendationJobService {
         }
     }
 
-    private static Duration maximum(Duration first, Duration second) {
-        return first.compareTo(second) >= 0 ? first : second;
+    private static Instant latest(Instant first, Instant second) {
+        return first.isAfter(second) ? first : second;
     }
 
     private static RecommendationJobException failure(

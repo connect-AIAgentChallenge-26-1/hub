@@ -32,6 +32,13 @@ final class SourceUrlPolicy {
         }
     }
 
+    static String nullableValid(String value) {
+        if (value == null || value.isBlank()) {
+            return null;
+        }
+        return requireValid(value);
+    }
+
     private static IllegalArgumentException invalid() {
         return new IllegalArgumentException("sourceUrl must be a valid HTTP(S) URL.");
     }

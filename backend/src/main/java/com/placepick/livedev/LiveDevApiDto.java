@@ -176,20 +176,18 @@ public final class LiveDevApiDto {
     }
 
     public record ScoreView(
-        int location,
-        int placeType,
-        int budget,
-        int preference,
-        int blogEvidence,
+        int locationConfidence,
+        int searchRelevance,
+        int preferenceEvidence,
+        int evidenceQuality,
         int total
     ) {
         static ScoreView from(ScoreBreakdown source) {
             return new ScoreView(
-                source.location(),
-                source.placeType(),
-                source.budget(),
-                source.preference(),
-                source.blogEvidence(),
+                source.locationConfidence(),
+                source.searchRelevance(),
+                source.preferenceEvidence(),
+                source.evidenceQuality(),
                 source.total()
             );
         }
@@ -328,7 +326,8 @@ public final class LiveDevApiDto {
         List<ReasonStatementView> reasons,
         List<String> cautions,
         String shareText,
-        String evidenceLevel
+        String evidenceLevel,
+        String reasonSource
     ) {
         public ResultPlaceView {
             reasons = List.copyOf(reasons);
@@ -341,7 +340,8 @@ public final class LiveDevApiDto {
                 source.reasonStatements().stream().map(ReasonStatementView::from).toList(),
                 source.cautions(),
                 source.shareText(),
-                source.evidenceLevel().name()
+                source.evidenceLevel().name(),
+                source.reasonSource().name()
             );
         }
     }
@@ -349,6 +349,9 @@ public final class LiveDevApiDto {
     public record ResultView(
         List<ResultPlaceView> places,
         boolean degraded,
+        boolean partial,
+        int resultCount,
+        int explorationRound,
         List<String> warnings,
         boolean reasonFallback,
         boolean relaxed,
@@ -365,6 +368,9 @@ public final class LiveDevApiDto {
             return new ResultView(
                 source.places().stream().map(ResultPlaceView::from).toList(),
                 source.degraded(),
+                source.partial(),
+                source.resultCount(),
+                source.explorationRound(),
                 source.warnings(),
                 source.reasonFallback(),
                 source.relaxed(),

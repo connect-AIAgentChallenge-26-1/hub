@@ -87,6 +87,104 @@ class JdbcDataRetentionRepositoryIntegrationTest {
         assertThat(count("voting_room", "id", fixture.roomId())).isOne();
     }
 
+    @Test
+    void preservesTheWholeExpiredExplorationChainWhenALiveRoomReferencesAChild() {
+        Fixture fixture = insertExpiredAggregate(false);
+        UUID childJobId = insertExpiredChild(fixture);
+        jdbcClient.sql("""
+                UPDATE voting_room
+                SET recommendation_job_id = :childJobId
+                WHERE id = :roomId
+                """)
+            .param("childJobId", childJobId)
+            .param("roomId", fixture.roomId())
+            .update();
+
+        RetentionCleanupReport report = repository.deleteExpired(
+            NOW,
+            NOW.minusSeconds(86_400),
+            NOW.minusSeconds(86_400)
+        );
+
+        assertThat(report.jobs()).isZero();
+        assertThat(count("recommendation_job", "id", fixture.jobId())).isOne();
+        assertThat(count("recommendation_job", "id", childJobId)).isOne();
+        assertThat(count("voting_room", "id", fixture.roomId())).isOne();
+    }
+
+    @Test
+    void deletesAnExpiredExplorationChainInOneForeignKeySafeCleanup() {
+        Fixture fixture = insertExpiredAggregate(true);
+        UUID childJobId = insertExpiredChild(fixture);
+
+        RetentionCleanupReport report = repository.deleteExpired(
+            NOW,
+            NOW.minusSeconds(86_400),
+            NOW.minusSeconds(86_400)
+        );
+
+        assertThat(report).isEqualTo(new RetentionCleanupReport(1, 2, 1, 1, 1, 1, 1));
+        assertThat(count("recommendation_job", "id", fixture.jobId())).isZero();
+        assertThat(count("recommendation_job", "id", childJobId)).isZero();
+    }
+
+    @Test
+    void preservesExpiredJobUntilItsIdempotentResponseWindowEnds() {
+        Fixture fixture = insertExpiredAggregate(true);
+        jdbcClient.sql("""
+                UPDATE idempotency_record
+                SET response_json = jsonb_build_object('jobId', CAST(:jobId AS text)),
+                    expires_at = :expiresAt
+                WHERE session_id = :sessionId
+                """)
+            .param("jobId", fixture.jobId())
+            .param("sessionId", fixture.sessionId())
+            .param("expiresAt", timestamp(NOW.plusSeconds(3_600)))
+            .update();
+
+        RetentionCleanupReport report = repository.deleteExpired(
+            NOW,
+            NOW.minusSeconds(86_400),
+            NOW.minusSeconds(86_400)
+        );
+
+        assertThat(report.rooms()).isOne();
+        assertThat(report.jobs()).isZero();
+        assertThat(report.idempotencyRecords()).isZero();
+        assertThat(count("recommendation_job", "id", fixture.jobId())).isOne();
+        assertThat(count("recommendation_draft", "id", fixture.draftId())).isOne();
+        assertThat(count("anonymous_session", "id", fixture.sessionId())).isOne();
+    }
+
+    private UUID insertExpiredChild(Fixture fixture) {
+        UUID childJobId = UUID.randomUUID();
+        OffsetDateTime expired = timestamp(NOW.minusSeconds(60));
+        OffsetDateTime oldOperational = timestamp(NOW.minusSeconds(172_800));
+        jdbcClient.sql("""
+                INSERT INTO recommendation_job (
+                    id, session_id, draft_id, root_job_id, parent_job_id,
+                    exploration_round, status, stage, progress, degraded,
+                    condition_json, warnings_json, places_json,
+                    created_at, updated_at, expires_at
+                ) VALUES (
+                    :id, :sessionId, :draftId, :rootJobId, :parentJobId,
+                    1, 'COMPLETED', 'FINISHED', 100, FALSE,
+                    '{}'::jsonb, '[]'::jsonb, '[]'::jsonb,
+                    :createdAt, :updatedAt, :expiresAt
+                )
+                """)
+            .param("id", childJobId)
+            .param("sessionId", fixture.sessionId())
+            .param("draftId", fixture.draftId())
+            .param("rootJobId", fixture.jobId())
+            .param("parentJobId", fixture.jobId())
+            .param("createdAt", oldOperational)
+            .param("updatedAt", oldOperational)
+            .param("expiresAt", expired)
+            .update();
+        return childJobId;
+    }
+
     private Fixture insertExpiredAggregate(boolean expiredRoom) {
         UUID sessionId = UUID.randomUUID();
         UUID draftId = UUID.randomUUID();
@@ -125,11 +223,13 @@ class JdbcDataRetentionRepositoryIntegrationTest {
             .update();
         jdbcClient.sql("""
                 INSERT INTO recommendation_job (
-                    id, session_id, draft_id, status, stage, progress, degraded,
+                    id, session_id, draft_id, root_job_id,
+                    status, stage, progress, degraded,
                     condition_json, warnings_json, places_json,
                     created_at, updated_at, expires_at
                 ) VALUES (
-                    :id, :sessionId, :draftId, 'COMPLETED', 'FINISHED', 100, FALSE,
+                    :id, :sessionId, :draftId, :id,
+                    'COMPLETED', 'FINISHED', 100, FALSE,
                     '{}'::jsonb, '[]'::jsonb, '[]'::jsonb,
                     :createdAt, :updatedAt, :expiresAt
                 )
@@ -149,11 +249,16 @@ class JdbcDataRetentionRepositoryIntegrationTest {
             .update();
         jdbcClient.sql("""
                 INSERT INTO recommendation_candidate (
-                    job_id, place_id, ordinal, snapshot_json, score, evidence_level
-                ) VALUES (:jobId, :placeId, 1, '{}'::jsonb, 60, 'LOCAL_AND_BLOG')
+                    job_id, place_id, ordinal, snapshot_json, score, evidence_level,
+                    candidate_fingerprint
+                ) VALUES (
+                    :jobId, :placeId, 1, '{}'::jsonb, 60, 'LOCAL_AND_BLOG',
+                    :candidateFingerprint
+                )
                 """)
             .param("jobId", jobId)
             .param("placeId", placeId)
+            .param("candidateFingerprint", "1".repeat(64))
             .update();
         jdbcClient.sql("""
                 INSERT INTO recommendation_evidence (

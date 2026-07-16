@@ -3,7 +3,8 @@
 ## 현재 구현 경계
 
 현재 저장소에는 Java 17 Spring Boot 기반, PostgreSQL·Redis 개발 인프라, Flyway 검증,
-Mock 외부 계약, 조건 추출·후보 처리·점수·Top 3·근거 이유의 동기 추천 Core가 있다.
+Mock 외부 계약, 조건 추출·적응형 후보 검색·0~100 점수·최대 3개 결과·근거 이유의 동기
+추천 Core가 있다.
 정식 익명 Session·Draft·202 Job·Outbox·Redis Worker·결과 조회, 추천·방 SSE,
 Room·Vote·최종 확정과 비식별 이벤트 수집 API도 구현돼 있으며 PostgreSQL·Redis
 Testcontainers 통합 테스트가 핵심 계약을 검증한다. Next.js 제품 route와 개발 전용 Live
@@ -25,8 +26,8 @@ Provider Core 검증을 cloud 배포 완료로 표현하지 않는다. 추천·�
 backend
   domain/application
     - 조건 모델과 확인 경계
-    - 후보 정규화·hard filter·중복 제거
-    - 결정론적 점수·Top 3·fallback
+    - 후보 정규화·hard filter·지점 안전 중복 제거
+    - 검색 provenance·결정론적 0~100 점수·부분 결과·fallback
     - Session·Draft·Job·Room·Vote·이벤트 application service
   adapter
     - Naver Local·Blog HTTP
@@ -60,18 +61,19 @@ domain과 application은 Naver·Elice DTO, HTTP, JPA와 Redis에 의존하지 �
   -> ConditionExtractionPort
   -> 사용자가 조건을 검토·수정·확정
   -> RecommendationCoreUseCase(ConfirmedRecommendationCondition)
-     -> Naver Local 후보
-     -> 정규화·위치/유형/제외 filter·dedup
-     -> 부족하면 최저 priority 선호 한 번 완화
-     -> 최대 5개 후보의 Naver Blog 근거
-     -> 서버의 0~80 결정론적 점수·Top 3
-     -> Elice 근거 문장 batch
+     -> Naver Local 정확도·인기·선호·유형·위치 variant
+     -> 정규화·위치 신뢰도/유형/제외 filter·지점 안전 dedup
+     -> Provider rank와 variant weight를 보존한 후보 pool
+     -> 최대 8개 후보의 Naver Blog 근거·후보별 장애 격리
+     -> 서버의 0~100 결정론적 점수·최대 3개
+     -> Elice의 1~3개 후보 근거 문장 batch
      -> 서버의 place/evidence 검증 또는 전체 template fallback
 ```
 
 LLM은 점수와 순위를 결정하지 않는다. 예산 근거가 없으면 추정하지 않고 warning을
-남긴다. `CandidateKey`는 내부 안정 정렬에만 쓰고 UUID v4는 Top 3 선정 뒤 발급한다.
-추출 Draft를 자동 확정하지 않는다.
+남긴다. `CandidateKey`는 내부 안정 정렬과 다른 추천의 기존 후보 제외에만 쓰고 UUID v4는
+최종 후보 선정 뒤 발급한다. 최종 후보가 1~2개면 실패가 아니라 부분 결과로 완료하고 0개만
+실패한다. 추출 Draft를 자동 확정하지 않는다.
 
 ## 현재 정식 서비스 흐름
 
@@ -92,6 +94,11 @@ Browser
 Job과 outbox는 같은 PostgreSQL transaction에 저장하고, Worker는 at-least-once 전달,
 멱등 처리, commit 후 ACK와 DLQ를 사용한다. Redis Streams는 추천 작업 queue이며 SSE
 fan-out 용도가 아니다.
+
+다른 추천 요청도 같은 Job·Outbox·Worker 흐름을 재사용한다. 원 Job의 확정 조건과 내부
+탐색 회차·candidate fingerprint·variant ID만 복사하고 원 결과는 변경하지 않는다. 검색은
+Worker에서 실행하므로 POST는 실행 가능한 탐색에 202를 반환하며, 이후 후보가 0개면 새
+Job의 terminal failure로 수렴한다.
 
 추천 SSE는 `recommendation_job_event`를 저장한 뒤 같은 JVM emitter에 전달하고, 분리된
 API·Worker role에서는 API가 DB event를 polling해 수렴한다. 방 SSE는

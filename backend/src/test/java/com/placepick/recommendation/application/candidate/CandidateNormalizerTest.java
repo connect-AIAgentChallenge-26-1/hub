@@ -8,7 +8,6 @@ import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCond
 import com.placepick.recommendation.condition.domain.PlaceType;
 import com.placepick.recommendation.condition.domain.Preference;
 import com.placepick.recommendation.domain.candidate.CandidateEvidence;
-import com.placepick.recommendation.domain.candidate.CandidateKey;
 import com.placepick.recommendation.domain.candidate.NormalizedCandidate;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,7 +33,7 @@ class CandidateNormalizerTest {
         CandidateNormalizationResult result = normalizer.normalizeEligibleWithFunnel(
             List.of(
                 eligible,
-                place("식별 불가", "", "카페", "서울 강남구", ""),
+                place("식별 불가", "", "카페", "", ""),
                 place("다른 지역 식당", "https://example.test/location", "한식", "부산 해운대구", ""),
                 place("다른 유형", "https://example.test/type", "한식", "서울 강남구", ""),
                 place("제외 후보", "https://example.test/exclusion", "카페", "서울 강남구", "흡연실"),
@@ -64,7 +63,7 @@ class CandidateNormalizerTest {
     void preservesDisplayGlyphsWhileNormalizingComparisonHtmlAndWhitespace() {
         List<PlaceSearchItem> items = List.of(
             place("<b>카페　Ａ</b>", "https://example.test/one", "카페>디저트", "서울특별시 강남구", "조용한 좌석"),
-            place("링크 없음", "", "카페", "서울 강남구", ""),
+            place("식별 정보 없음", "", "카페", "", ""),
             place("다른 지역", "https://example.test/two", "카페", "부산광역시 해운대구", ""),
             place("다른 유형", "https://example.test/three", "한식", "서울 강남구", ""),
             place("제외 후보", "https://example.test/four", "카페", "서울 강남구", "흡연실")
@@ -170,9 +169,12 @@ class CandidateNormalizerTest {
         );
 
         assertThat(result).singleElement().satisfies(candidate ->
-            assertThat(candidate.candidateKey()).isEqualTo(CandidateKey.fromIdentity(
-                "composite|카페 하나|서울 강남구 테헤란로 1"
-            ))
+            assertThat(candidate.candidateKey()).isEqualTo(
+                normalizer.normalizeEligible(
+                    List.of(alternate, first),
+                    condition(PlaceType.CAFE, null, List.of())
+                ).get(0).candidateKey()
+            )
         );
     }
 
@@ -331,6 +333,27 @@ class CandidateNormalizerTest {
     }
 
     @Test
+    void rejectsABlogPostForANameMatchInADifferentBranchLocation() {
+        NormalizedCandidate candidate = normalizer.normalizeEligible(
+            List.of(place("커피빈", "https://example.test/gangnam", "카페", "서울 강남구", "")),
+            condition(PlaceType.CAFE, null, List.of())
+        ).get(0);
+
+        assertThat(normalizer.normalizeEvidence(
+            candidate,
+            List.of(new BlogSearchItem(
+                "커피빈 홍대점 후기",
+                "https://blog.test/wrong-branch",
+                "홍대에서 방문한 카페 기록",
+                "작성자",
+                "",
+                "20260715"
+            )),
+            "서울 강남구"
+        )).isEmpty();
+    }
+
+    @Test
     void preservesPercentEncodedCanonicalBlogPathsAcrossJavaAndGateway() {
         NormalizedCandidate candidate = normalizer.normalizeEligible(
             List.of(place("카페 알파", "https://example.test/place", "카페", "서울 강남구", "")),
@@ -367,6 +390,33 @@ class CandidateNormalizerTest {
         )).isEmpty();
     }
 
+    @Test
+    void keepsALinklessCandidateWhenNameAndAddressProvideStableIdentity() {
+        List<NormalizedCandidate> result = normalizer.normalizeEligible(
+            List.of(place("링크 없는 카페", "", "카페", "서울 강남구", "조용함")),
+            condition(PlaceType.CAFE, null, List.of())
+        );
+
+        assertThat(result).singleElement().satisfies(candidate -> {
+            assertThat(candidate.sourceUrl()).isNull();
+            assertThat(candidate.address()).isEqualTo("서울 강남구");
+        });
+    }
+
+    @Test
+    void doesNotMergeBranchesThatShareAHomepageButHaveDifferentAddresses() {
+        List<NormalizedCandidate> result = normalizer.normalizeEligible(
+            List.of(
+                place("공유 카페", "https://brand.test", "카페", "서울 강남구 1", ""),
+                place("공유 카페", "https://brand.test", "카페", "서울 강남구 2", "")
+            ),
+            condition(PlaceType.CAFE, null, List.of())
+        );
+
+        assertThat(result).hasSize(2);
+        assertThat(result).extracting(NormalizedCandidate::candidateKey).doesNotHaveDuplicates();
+    }
+
     private ConfirmedRecommendationCondition condition(
         PlaceType placeType,
         String detail,
@@ -395,6 +445,6 @@ class CandidateNormalizerTest {
     }
 
     private BlogSearchItem blog(String title, String link) {
-        return new BlogSearchItem(title, link, "카페 하나 방문 기록", "작성자", "", "20260715");
+        return new BlogSearchItem(title, link, "서울 강남구 카페 하나 방문 기록", "작성자", "", "20260715");
     }
 }

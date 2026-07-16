@@ -9,8 +9,8 @@ public record ReasonEnrichmentResult(
 
     public ReasonEnrichmentResult {
         places = List.copyOf(places);
-        if (places.size() != 3) {
-            throw new IllegalArgumentException("Reason enrichment requires exactly three places.");
+        if (places.isEmpty() || places.size() > 3) {
+            throw new IllegalArgumentException("Reason enrichment requires one to three places.");
         }
     }
 }

@@ -83,6 +83,63 @@ class RecommendationJobControllerTest {
     }
 
     @Test
+    void createsAlternativeWithTheSameAcceptedLocationContract() {
+        SessionAuthenticator authenticator = mock(SessionAuthenticator.class);
+        RecommendationJobService jobService = mock(RecommendationJobService.class);
+        RecommendationJobEventStreamService streamService = mock(
+            RecommendationJobEventStreamService.class
+        );
+        HttpServletRequest request = mock(HttpServletRequest.class);
+        UUID sessionId = UUID.randomUUID();
+        UUID sourceJobId = UUID.randomUUID();
+        UUID alternativeJobId = UUID.randomUUID();
+        when(authenticator.require(request, true)).thenReturn(new AuthenticatedSession(
+            sessionId,
+            Instant.parse("2026-07-17T00:00:00Z")
+        ));
+        when(request.getAttribute(TraceIdFilter.REQUEST_ATTRIBUTE)).thenReturn("trace-2");
+        when(jobService.createAlternative(new CreateAlternativeRecommendationCommand(
+            sessionId,
+            sourceJobId,
+            "alternative-key-1",
+            "trace-2"
+        ))).thenReturn(new RecommendationJobSubmission(
+            alternativeJobId,
+            RecommendationJobStatus.ACCEPTED,
+            false
+        ));
+        RecommendationJobController controller = new RecommendationJobController(
+            authenticator,
+            jobService,
+            streamService
+        );
+
+        var response = controller.createAlternative(
+            sourceJobId,
+            "alternative-key-1",
+            request
+        );
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
+        assertThat(response.getHeaders().getLocation()).hasToString(
+            "/api/v1/recommendations/" + alternativeJobId
+        );
+        assertThat(response.getBody()).isEqualTo(
+            new RecommendationJobController.AcceptedJobView(
+                alternativeJobId,
+                RecommendationJobStatus.ACCEPTED
+            )
+        );
+        verify(authenticator).require(request, true);
+        verify(jobService).createAlternative(new CreateAlternativeRecommendationCommand(
+            sessionId,
+            sourceJobId,
+            "alternative-key-1",
+            "trace-2"
+        ));
+    }
+
+    @Test
     void mapsSseConnectionLimitTo429WithRetryAfter() throws Exception {
         SessionAuthenticator authenticator = mock(SessionAuthenticator.class);
         RecommendationJobService jobService = mock(RecommendationJobService.class);

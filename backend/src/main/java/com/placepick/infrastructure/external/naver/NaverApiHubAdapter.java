@@ -105,6 +105,7 @@ public final class NaverApiHubAdapter implements PlaceSearchPort, BlogSearchPort
                 .path(LOCAL_PATH)
                 .queryParam("query", query.query())
                 .queryParam("display", query.limit())
+                .queryParam("sort", query.sort().providerValue())
                 .build())
             .exchange((request, response) ->
                 readResponse(response, NaverLocalResponse.class)));
@@ -126,6 +127,7 @@ public final class NaverApiHubAdapter implements PlaceSearchPort, BlogSearchPort
                 .path(BLOG_PATH)
                 .queryParam("query", query.query())
                 .queryParam("display", query.limit())
+                .queryParam("sort", query.sort().providerValue())
                 .build())
             .exchange((request, response) ->
                 readResponse(response, NaverBlogResponse.class)));

@@ -38,8 +38,16 @@ public final class RecommendationCoreUseCase {
     }
 
     public RecommendationCoreResult recommend(ConfirmedRecommendationCondition condition) {
+        return recommend(condition, RecommendationExecutionContext.initial());
+    }
+
+    public RecommendationCoreResult recommend(
+        ConfirmedRecommendationCondition condition,
+        RecommendationExecutionContext context
+    ) {
         Objects.requireNonNull(condition, "condition");
-        CandidateRankingResult ranking = rankingService.rank(condition);
+        Objects.requireNonNull(context, "context");
+        CandidateRankingResult ranking = rankingService.rank(condition, context);
         ReasonEnrichmentResult reasons = reasonService.enrich(condition, ranking);
         Map<UUID, EnrichedPlaceReason> reasonsByPlace = reasons.places().stream()
             .collect(Collectors.toUnmodifiableMap(
@@ -59,7 +67,8 @@ public final class RecommendationCoreUseCase {
                 reason.shareText(),
                 place.evidence().isEmpty()
                     ? EvidenceLevel.LOCAL_ONLY
-                    : EvidenceLevel.LOCAL_AND_BLOG
+                    : EvidenceLevel.LOCAL_AND_BLOG,
+                reasons.fallbackUsed() ? ReasonSource.TEMPLATE : ReasonSource.GENERATED
             );
         }).toList();
 
@@ -77,7 +86,10 @@ public final class RecommendationCoreUseCase {
             ranking.relaxed(),
             ranking.placeSearchCalls(),
             ranking.blogSearchCalls(),
-            1
+            1,
+            ranking.explorationRound(),
+            ranking.usedVariantIds(),
+            ranking.searchExhausted()
         );
     }
 }

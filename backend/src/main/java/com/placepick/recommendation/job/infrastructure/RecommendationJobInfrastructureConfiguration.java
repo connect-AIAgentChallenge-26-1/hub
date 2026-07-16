@@ -7,6 +7,7 @@ import com.placepick.infrastructure.observability.ObservedProviderPorts;
 import com.placepick.infrastructure.observability.LlmProviderDiagnosticMetrics;
 import com.placepick.infrastructure.observability.PlacePickMetrics;
 import com.placepick.infrastructure.observability.ProviderCallMetrics;
+import com.placepick.infrastructure.observability.RecommendationRetrievalMetrics;
 import com.placepick.outbox.OutboxRelay;
 import com.placepick.outbox.OutboxRepository;
 import com.placepick.recommendation.application.candidate.CandidateNormalizer;
@@ -18,6 +19,7 @@ import com.placepick.recommendation.application.port.out.PlaceSearchPort;
 import com.placepick.recommendation.application.scoring.CandidateRanker;
 import com.placepick.recommendation.application.scoring.CandidateRankingService;
 import com.placepick.recommendation.application.scoring.CandidateScoringPolicy;
+import com.placepick.recommendation.application.scoring.RetrievalPolicy;
 import com.placepick.recommendation.application.trace.RecommendationTraceSinks;
 import com.placepick.recommendation.job.RecommendationJobTransactionCoordinator;
 import com.placepick.recommendation.job.RecommendationJobWorker;
@@ -32,6 +34,7 @@ import java.net.URI;
 import java.time.Clock;
 import java.time.Duration;
 import java.util.Set;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -98,6 +101,28 @@ public class RecommendationJobInfrastructureConfiguration {
     }
 
     @Bean
+    RetrievalPolicy recommendationRetrievalPolicy(
+        @Value("${placepick.recommendation.retrieval.default-maximum-local-calls:6}")
+        int defaultMaximumLocalCalls,
+        @Value("${placepick.recommendation.retrieval.alternative-maximum-local-calls:8}")
+        int alternativeMaximumLocalCalls,
+        @Value("${placepick.recommendation.retrieval.target-candidate-pool-size:10}")
+        int targetCandidatePoolSize,
+        @Value("${placepick.recommendation.retrieval.preliminary-blog-pool-size:8}")
+        int preliminaryBlogPoolSize,
+        @Value("${placepick.recommendation.retrieval.blog-display-limit:10}")
+        int blogDisplayLimit
+    ) {
+        return new RetrievalPolicy(
+            defaultMaximumLocalCalls,
+            alternativeMaximumLocalCalls,
+            targetCandidatePoolSize,
+            preliminaryBlogPoolSize,
+            blogDisplayLimit
+        );
+    }
+
+    @Bean
     @Conditional(PlacePickRoleCondition.Worker.class)
     RecommendationWorkerCoreFactory recommendationWorkerCoreFactory(
         PlaceSearchPort placeSearchPort,
@@ -106,6 +131,8 @@ public class RecommendationJobInfrastructureConfiguration {
         ProviderCallMetrics metrics,
         LlmProviderDiagnosticMetrics diagnosticMetrics,
         CandidateFunnelMetrics candidateFunnelMetrics,
+        RecommendationRetrievalMetrics retrievalMetrics,
+        RetrievalPolicy retrievalPolicy,
         @Value("${placepick.external.mode:mock}") String externalMode
     ) {
         boolean directProvider = Set.of("production", "live-dev").contains(externalMode);
@@ -136,7 +163,10 @@ public class RecommendationJobInfrastructureConfiguration {
         CandidateRanker ranker = new CandidateRanker(new CandidateScoringPolicy());
         return trace -> {
             var observedTrace = RecommendationTraceSinks.compose(
-                RecommendationTraceSinks.compose(trace, candidateFunnelMetrics),
+                RecommendationTraceSinks.compose(
+                    RecommendationTraceSinks.compose(trace, candidateFunnelMetrics),
+                    retrievalMetrics
+                ),
                 diagnosticMetrics
             );
             return new RecommendationCoreUseCase(
@@ -146,7 +176,9 @@ public class RecommendationJobInfrastructureConfiguration {
                     planner,
                     normalizer,
                     ranker,
-                    observedTrace
+                    UUID::randomUUID,
+                    observedTrace,
+                    retrievalPolicy
                 ),
                 new GroundedReasonService(observedReasons, observedTrace)
             );

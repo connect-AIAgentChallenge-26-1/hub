@@ -87,6 +87,31 @@ public class RecommendationJobController {
             .body(RecommendationJobView.from(jobService.get(jobId, session.id())));
     }
 
+    @PostMapping("/{jobId}/alternatives")
+    public ResponseEntity<AcceptedJobView> createAlternative(
+        @PathVariable UUID jobId,
+        @RequestHeader(IDEMPOTENCY_HEADER)
+        @NotBlank
+        @Size(max = 128)
+        String idempotencyKey,
+        HttpServletRequest request
+    ) {
+        AuthenticatedSession session = authenticator.require(request, true);
+        RecommendationJobSubmission submission = jobService.createAlternative(
+            new CreateAlternativeRecommendationCommand(
+                session.id(),
+                jobId,
+                idempotencyKey,
+                traceId(request)
+            )
+        );
+        URI location = URI.create("/api/v1/recommendations/" + submission.jobId());
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+            .location(location)
+            .cacheControl(CacheControl.noStore())
+            .body(new AcceptedJobView(submission.jobId(), RecommendationJobStatus.ACCEPTED));
+    }
+
     @GetMapping(value = "/{jobId}/events", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public ResponseEntity<SseEmitter> events(
         @PathVariable UUID jobId,
