@@ -1,0 +1,14 @@
+{
+  "name": "exam-priority-calculator",
+  "private": true,
+  "version": "0.0.0",
+  "description": "시험 우선순위 계산기 - 프론트엔드와 API 서버 통합 실행",
+  "scripts": {
+    "dev": "concurrently -n server,client -c blue,green \"npm --prefix server run dev\" \"npm --prefix frontend run dev\"",
+    "server": "npm --prefix server run dev",
+    "client": "npm --prefix frontend run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
