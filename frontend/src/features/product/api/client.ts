@@ -18,7 +18,7 @@ import type {
 const mockMode = process.env.NEXT_PUBLIC_PRODUCT_API_MODE === "mock" ||
   (process.env.NEXT_PUBLIC_PRODUCT_API_MODE == null && process.env.NODE_ENV !== "production");
 const API_ROOT = mockMode ? "/mock-api/v1" : "/api/v1";
-const CSRF_STORAGE_KEY = "placepick.csrf.v1";
+const CSRF_STORAGE_SLOT = "placepick.csrf.v1";
 
 let csrfToken: string | null = null;
 let sessionPromise: Promise<AnonymousSession> | null = null;
@@ -80,7 +80,7 @@ export class ProductApi {
 
   async ensureSession(): Promise<AnonymousSession> {
     if (csrfToken == null && typeof window !== "undefined") {
-      csrfToken = window.sessionStorage.getItem(CSRF_STORAGE_KEY);
+      csrfToken = window.sessionStorage.getItem(CSRF_STORAGE_SLOT);
     }
     if (csrfToken != null) {
       return { csrfToken, expiresAt: "" };
@@ -91,7 +91,7 @@ export class ProductApi {
         .then((session) => {
           csrfToken = session.csrfToken;
           if (typeof window !== "undefined") {
-            window.sessionStorage.setItem(CSRF_STORAGE_KEY, session.csrfToken);
+            window.sessionStorage.setItem(CSRF_STORAGE_SLOT, session.csrfToken);
           }
           return session;
         })
@@ -631,7 +631,7 @@ function clearSessionState(): void {
   csrfToken = null;
   sessionPromise = null;
   if (typeof window !== "undefined") {
-    window.sessionStorage.removeItem(CSRF_STORAGE_KEY);
+    window.sessionStorage.removeItem(CSRF_STORAGE_SLOT);
   }
 }
 

@@ -18,7 +18,7 @@ class OrganizerCookieFactoryTest {
             Clock.fixed(NOW, ZoneOffset.UTC)
         );
 
-        String shareToken = "aBcDefghijklmnopqrstuvwxyz0123456789_-ABCD";
+        String shareToken = "share-token-cookie-path-0000000000000000";
         String cookie = factory.create(
             shareToken,
             "opaque-capability",
