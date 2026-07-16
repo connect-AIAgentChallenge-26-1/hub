@@ -14,6 +14,7 @@ from app.routers import (
     financial_facts,
     market,
     temporal_integrity,
+    valuation_report,
 )
 from app.schemas.envelope import Envelope, Status, now_utc
 
@@ -34,6 +35,7 @@ def create_app() -> FastAPI:
     app.include_router(claims.router)
     app.include_router(evidence.router)
     app.include_router(company_report.router)
+    app.include_router(valuation_report.router)
 
     @app.get("/api/v1/health", response_model=Envelope[dict[str, bool]])
     def health(request: Request) -> Envelope[dict[str, bool]]:

@@ -106,6 +106,27 @@ METRIC_CANONICAL_SJ_DIV: dict[str, str] = {
     "DIVIDENDS_PAID": "CF",
 }
 
+# T09에서 실제 SK하이닉스·삼성전기 2024년 연간 CFS로 발견: 일부 기업은 손익계산서
+# 항목을 별도 "IS" 구획 없이 포괄손익계산서("CIS")에만 낸다(DART가 기업마다 재무
+# 제표 구획을 다르게 tagging함, 임의 추정 아님 — 두 회사 모두 IS 행이 0개, CIS
+# 행만 존재함을 raw fixture로 확인). canonical sj_div가 "IS"인데 그 구획에 후보가
+# 전혀 없으면(즉 그 기업 자체가 IS 구획을 내지 않으면) "IS 없음"과 "그 지표
+# 자체가 없음"을 구분하지 못하고 조용히 지표를 드롭하던 결함 — CIS로 fallback
+# 한다(Samsung Electronics·DB하이텍처럼 IS·CIS 모두 있는 경우 동일 값이 중복
+# 확인됨, 서로 다른 지표가 아니다).
+_IS_TO_CIS_FALLBACK_METRICS: frozenset[str] = frozenset(
+    {
+        "REVENUE",
+        "COST_OF_SALES",
+        "GROSS_PROFIT",
+        "OPERATING_INCOME",
+        "PROFIT_BEFORE_TAX",
+        "NET_INCOME",
+        "EPS_BASIC",
+        "EPS_DILUTED",
+    }
+)
+
 # BS(재무상태표)는 시점 스냅샷이라 누적 개념이 없다. CF는 중간기간 보고서에서
 # 처음부터 누적으로만 온다(add_amount 필드 자체가 없음). IS/CIS/SCE만 add_amount
 # 유무로 단일/누적을 구분한다.
@@ -285,6 +306,12 @@ def select_canonical_facts(facts: list[FinancialFact]) -> dict[str, FinancialFac
             if canonical_sj_div is not None
             else candidates
         )
+        if (
+            not pool
+            and canonical_sj_div == "IS"
+            and metric_key in _IS_TO_CIS_FALLBACK_METRICS
+        ):
+            pool = [f for f in candidates if f.sj_div == "CIS"]
         if not pool:
             continue
         best = pool[0]

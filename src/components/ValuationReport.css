@@ -1,0 +1,65 @@
+/* 기능 B 가치 범위·가격 위치 화면 (docs/checklist.md C6). 검증 톤의 중립
+   색만 쓴다 — 상승/하락·고평가/저평가를 암시하는 색을 쓰지 않는다. */
+
+.valuation-report {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 760px;
+}
+
+.valuation-report__section {
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.valuation-report__section h3 { margin: 0; font-size: 1rem; }
+
+.target-overview__grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  font-size: 0.9rem;
+}
+.target-overview__grid dt { color: #6b7280; }
+.target-overview__grid dd { margin: 0; }
+
+.position-badge {
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+}
+.position-badge--BELOW_MODEL_RANGE { color: #1d4ed8; }
+.position-badge--WITHIN_MODEL_RANGE { color: #4b5563; }
+.position-badge--ABOVE_MODEL_RANGE { color: #7c3aed; }
+.position-badge--INSUFFICIENT { color: #b45309; }
+
+.value-range { border: 1px solid #e5e7eb; border-radius: 6px; padding: 10px; font-size: 0.85rem; }
+.value-range__method { font-weight: 600; margin: 0 0 6px; }
+.value-range__bounds { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.value-range__note { color: #6b7280; font-size: 0.8rem; margin-top: 4px; }
+
+.method-position-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.method-position-item { display: flex; gap: 8px; align-items: center; font-size: 0.85rem; }
+
+.peer-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.peer-item { font-size: 0.85rem; border: 1px solid #e5e7eb; border-radius: 6px; padding: 6px 10px; }
+.peer-exclusion { color: #9ca3af; font-size: 0.8rem; }
+
+.checkpoint-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.checkpoint-item {
+  font-size: 0.85rem;
+  border-radius: 6px;
+  padding: 8px 10px;
+  border-left: 3px solid #9ca3af;
+}
+.checkpoint-item--ERROR { border-color: #b45309; background: #fffbeb; }
+.checkpoint-item--WARNING { border-color: #d97706; background: #fffdf5; }
+.checkpoint-item--INFO { border-color: #6b7280; background: #f9fafb; }
+
+.valuation-report__version { color: #9ca3af; font-size: 0.75rem; }

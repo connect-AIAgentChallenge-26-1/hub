@@ -346,6 +346,34 @@ def test_select_canonical_facts_prefers_is_net_income_over_sce_zero_rows(db_sess
     assert chosen.normalized_value != 0
 
 
+def test_select_canonical_facts_falls_back_to_cis_when_company_has_no_is_section(db_session):
+    # T09에서 실제 SK하이닉스 2024년 연간 CFS로 발견한 결함: 이 기업의 필터링은
+    # 손익계산서 항목을 "IS" 구획 없이 "CIS"에만 낸다(fixture에 IS 행이 0개).
+    # 수정 전에는 canonical_sj_div="IS"인 pool이 항상 비어 NET_INCOME이 조용히
+    # 드롭되고 EPS/PER/ROE가 전부 None이 됐다 — 크래시도 경고도 없어 발견하기
+    # 어려웠다(재무 리포트에 "지표 없음"으로만 보임).
+    rows = _rows_for(db_session, "peer_2024_CFS_skhynix", {"ifrs-full_ProfitLoss"})
+    facts = FinancialCalculator().normalize(rows, stock_code="000660").facts
+    assert facts, "fixture must contain ProfitLoss rows"
+    assert not any(f.sj_div == "IS" for f in facts), "sanity: 이 기업은 IS 구획이 없다"
+    assert any(f.sj_div == "CIS" for f in facts)
+
+    canonical = select_canonical_facts(facts)
+    chosen = canonical["NET_INCOME"]
+    assert chosen.sj_div == "CIS"
+    assert chosen.normalized_value == Decimal("19796902000000")
+
+
+def test_select_canonical_facts_prefers_is_over_cis_when_both_present(db_session):
+    # IS·CIS 둘 다 있으면(대부분의 기업) 여전히 IS를 우선한다 — CIS fallback은
+    # IS가 아예 없을 때만 적용된다.
+    rows = _rows_for(db_session, "annual_2024_CFS", {"ifrs-full_ProfitLoss"})
+    facts = FinancialCalculator().normalize(rows, stock_code="005930").facts
+    assert any(f.sj_div == "IS" for f in facts)
+    canonical = select_canonical_facts(facts)
+    assert canonical["NET_INCOME"].sj_div == "IS"
+
+
 # --------------------------------------------------------------- 지표 계산
 
 
