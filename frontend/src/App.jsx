@@ -1,30 +1,81 @@
-import { useState } from "react";
-import SubjectForm from "./components/SubjectForm";
+import { useEffect, useRef, useState } from "react";
+import SubjectInputPage from "./components/SubjectInputPage";
 import ResultScreen from "./components/ResultScreen";
+import { WEIGHT_PRESETS, DEFAULT_WEIGHT_KEY } from "./utils/priorityCalculator";
+import { fetchPriorityScores, scoreSubjectsLocally } from "./utils/priorityApi";
 import "./App.css";
 
-const mockSubjects = [
-  {
-    id: 1,
-    name: "한방병리학",
-    priorityScore: 90,
-  },
-  {
-    id: 2,
-    name: "본초방제학",
-    priorityScore: 75,
-  },
-];
+const SUBJECTS_STORAGE_KEY = "exam-priority:subjects";
+const WEIGHT_STORAGE_KEY = "exam-priority:weight";
+
+function loadSubjects() {
+  try {
+    const raw = localStorage.getItem(SUBJECTS_STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function loadWeightKey() {
+  const saved = localStorage.getItem(WEIGHT_STORAGE_KEY);
+  return saved && WEIGHT_PRESETS[saved] ? saved : DEFAULT_WEIGHT_KEY;
+}
 
 function App() {
-  const [currentScreen, setCurrentScreen] = useState("form");
+  const [currentScreen, setCurrentScreen] = useState("input");
+  const [subjects, setSubjects] = useState(loadSubjects);
+  const [weightKey, setWeightKey] = useState(loadWeightKey);
+  // 우선순위 점수는 서버에서 계산해 받는다. 초기값과 폴백은 로컬 계산을 쓴다.
+  const [scoredSubjects, setScoredSubjects] = useState(() =>
+    scoreSubjectsLocally(subjects, weightKey)
+  );
+  const nextIdRef = useRef(
+    subjects.reduce((max, subject) => Math.max(max, subject.id), 0) + 1
+  );
 
-  function showResultScreen() {
-    setCurrentScreen("result");
+  useEffect(() => {
+    localStorage.setItem(SUBJECTS_STORAGE_KEY, JSON.stringify(subjects));
+  }, [subjects]);
+
+  useEffect(() => {
+    localStorage.setItem(WEIGHT_STORAGE_KEY, weightKey);
+  }, [weightKey]);
+
+  // 과목이나 성향이 바뀌면 즉시 로컬 계산으로 채우고, 서버 응답이 오면 교체한다.
+  useEffect(() => {
+    let ignore = false;
+
+    setScoredSubjects(scoreSubjectsLocally(subjects, weightKey));
+
+    fetchPriorityScores(subjects, weightKey).then((result) => {
+      if (!ignore) {
+        setScoredSubjects(result.subjects);
+      }
+    });
+
+    return () => {
+      ignore = true;
+    };
+  }, [subjects, weightKey]);
+
+  function handleAddSubject(subjectInput) {
+    const newSubject = { id: nextIdRef.current, ...subjectInput };
+    nextIdRef.current += 1;
+    setSubjects((prev) => [...prev, newSubject]);
   }
 
-  function showFormScreen() {
-    setCurrentScreen("form");
+  function handleUpdateSubject(id, subjectInput) {
+    setSubjects((prev) =>
+      prev.map((subject) =>
+        subject.id === id ? { ...subject, ...subjectInput } : subject
+      )
+    );
+  }
+
+  function handleRemoveSubject(id) {
+    setSubjects((prev) => prev.filter((subject) => subject.id !== id));
   }
 
   return (
@@ -36,12 +87,20 @@ function App() {
         </p>
       </header>
 
-      {currentScreen === "form" ? (
-        <SubjectForm onShowResult={showResultScreen} />
+      {currentScreen === "input" ? (
+        <SubjectInputPage
+          subjects={subjects}
+          onAddSubject={handleAddSubject}
+          onUpdateSubject={handleUpdateSubject}
+          onRemoveSubject={handleRemoveSubject}
+          onShowResult={() => setCurrentScreen("result")}
+        />
       ) : (
         <ResultScreen
-          subjects={mockSubjects}
-          onBack={showFormScreen}
+          subjects={scoredSubjects}
+          weightKey={weightKey}
+          onChangeWeight={setWeightKey}
+          onBack={() => setCurrentScreen("input")}
         />
       )}
     </main>
