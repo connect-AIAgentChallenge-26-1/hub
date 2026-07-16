@@ -1,5 +1,13 @@
 # 진행상황 일지
 
+## Day 9 (7/16)
+
+- 완료: 계획·검증 서브에이전트를 실행 가능한 형태로 전환(`.claude/agents/task-planner.md`, `feature-verifier.md` — docs/agents/의 산문 설계를 frontmatter+시스템 프롬프트로 변환, 검증용은 Edit/Write 제외로 읽기 전용), feature-verifier로 2주차 수직슬라이스 11개 체크리스트 실검증(curl 실호출 + npm test 4/4 — 전 항목 통과, 근거 포함 보고서), 수직슬라이스 재확인(health/checkins 조회 정상), 루트 handoff-context.md 구버전 표시
+
+- 다음: 새 세션에서 feature-verifier가 에이전트 목록에 뜨는지 확인 후 직접 호출해보기. Supabase env 누락·연결 실패 케이스는 코드상 안전하지만 실동작 미검증(⚠️) — 시간 나면 재현. 검증 중 생긴 `[검증테스트]` 행 1건은 삭제 기능(Week 3) 만들 때 지우기
+
+- 막힌 것/배울 것: 서브에이전트 = 직무기술서(md 파일)를 넘겨 spawn하는 워커 — 세션 시작 시 로드되므로 만든 직후엔 인식 안 됨(이번엔 general-purpose에 지침을 읽혀 대체 실행). 검증 에이전트에 도구를 읽기 전용으로만 주는 이유: 검증자가 코드를 고치기 시작하면 심판이 선수를 겸하게 됨
+
 ## Day 8 (7/15)
 
 - 완료: 결과 카드·기록 카드 컴포넌트 분리(SummaryCard/RecordCard, formatDate는 utils로), 기록 상세 화면(pages/RecordDetail — screen state에 'detail' 추가, selectedCheckin으로 전달), 화면·데이터 흐름도(docs/screen-flow.md), 데이터 모델 초안(docs/data-model.md — 논의 후 확정), 백로그 Week 2 갱신
