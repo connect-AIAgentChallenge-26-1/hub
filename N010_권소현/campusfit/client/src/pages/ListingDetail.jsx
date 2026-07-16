@@ -1,11 +1,10 @@
 import { Link, useOutletContext, useParams } from "react-router-dom";
-import { categories, listings } from "../data/mockListings";
 import CardNewsThumb from "../components/CardNewsThumb";
 import BookmarkStar from "../components/BookmarkStar";
 
 export default function ListingDetail() {
   const { listingId } = useParams();
-  const { bookmarks, toggleBookmark } = useOutletContext();
+  const { bookmarks, toggleBookmark, categories, listings } = useOutletContext();
   const listing = listings.find((l) => l.id === listingId);
   const category = categories.find((c) => c.id === listing.categoryId);
 

@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { useOutletContext } from "react-router-dom";
-import { categories, listings } from "../data/mockListings";
 import BookmarkStar from "../components/BookmarkStar";
 
 export default function Main() {
-  const { region, grade, openFilter, bookmarks, toggleBookmark } = useOutletContext();
+  const { region, grade, openFilter, bookmarks, toggleBookmark, categories, listings } =
+    useOutletContext();
 
   const deadlineSoon = listings
     .filter((l) => l.dDay <= 7)

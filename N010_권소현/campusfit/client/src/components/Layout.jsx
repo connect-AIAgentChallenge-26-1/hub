@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { categories, univOptions, regionOptions, gradeOptions } from "../data/mockListings";
-import { boardPosts as initialBoardPosts } from "../data/mockBoardPosts";
+import { univOptions, regionOptions, gradeOptions } from "../data/mockListings";
+import { api } from "../api/client";
 
 const BOOKMARKS_KEY = "campusfit-bookmarks";
 
@@ -19,14 +19,36 @@ export default function Layout() {
   const [univ, setUniv] = useState("all");
   const [region, setRegion] = useState("all");
   const [grade, setGrade] = useState("all");
-  const [boardPosts, setBoardPosts] = useState(initialBoardPosts);
+  const [categories, setCategories] = useState([]);
+  const [listings, setListings] = useState([]);
+  const [boardPosts, setBoardPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(null);
   const [bookmarks, setBookmarks] = useState(loadBookmarks);
 
-  const addBoardPost = (post) => setBoardPosts((prev) => [...prev, post]);
-  const addComment = (postId, comment) =>
+  useEffect(() => {
+    Promise.all([api.getCategories(), api.getListings(), api.getBoardPosts()])
+      .then(([cats, ls, posts]) => {
+        setCategories(cats);
+        setListings(ls);
+        setBoardPosts(posts);
+      })
+      .catch((err) => setLoadError(err.message))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const addBoardPost = async (post) => {
+    const created = await api.addBoardPost(post);
+    setBoardPosts((prev) => [...prev, created]);
+    return created;
+  };
+
+  const addComment = async (postId, comment) => {
+    const saved = await api.addComment(postId, comment);
     setBoardPosts((prev) =>
-      prev.map((p) => (p.id === postId ? { ...p, comments: [...p.comments, comment] } : p))
+      prev.map((p) => (p.id === postId ? { ...p, comments: [...p.comments, saved] } : p))
     );
+  };
 
   useEffect(() => {
     localStorage.setItem(BOOKMARKS_KEY, JSON.stringify(bookmarks));
@@ -129,21 +151,33 @@ export default function Layout() {
         </div>
       </header>
 
-      <Outlet
-        context={{
-          univLabel,
-          regionLabel,
-          gradeLabel,
-          region,
-          grade,
-          openFilter: () => setIsFilterOpen(true),
-          boardPosts,
-          addBoardPost,
-          addComment,
-          bookmarks,
-          toggleBookmark,
-        }}
-      />
+      {loading ? (
+        <p className="cat-sub" style={{ textAlign: "center", padding: "96px 24px" }}>
+          불러오는 중...
+        </p>
+      ) : loadError ? (
+        <p className="cat-sub" style={{ textAlign: "center", padding: "96px 24px" }}>
+          서버에 연결할 수 없어요 — server가 켜져 있는지 확인해주세요. ({loadError})
+        </p>
+      ) : (
+        <Outlet
+          context={{
+            univLabel,
+            regionLabel,
+            gradeLabel,
+            region,
+            grade,
+            openFilter: () => setIsFilterOpen(true),
+            categories,
+            listings,
+            boardPosts,
+            addBoardPost,
+            addComment,
+            bookmarks,
+            toggleBookmark,
+          }}
+        />
+      )}
 
       <footer>
         <div className="inner">

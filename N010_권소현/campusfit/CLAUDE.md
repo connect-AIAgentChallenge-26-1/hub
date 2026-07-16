@@ -47,8 +47,10 @@ campusfit/
   server/                 Express 백엔드
     src/
       index.js              앱 진입점
-      routes/                /api/listings, /api/board
-      data/seed.js           더미 시드 데이터 (DB 붙기 전까지)
+      routes/                /api/listings, /api/board (SQLite 조회)
+      db/
+        client.js              better-sqlite3 연결 + 테이블 생성
+        seed.js                client/src/data의 mock 데이터를 DB로 옮기는 시드 스크립트 (npm run db:seed)
   .claude/skills/
     campusfit-design/       디자인 검수용 개인 skill
     pr/                     과제 PR 생성 절차 skill
@@ -63,9 +65,21 @@ campusfit/
 - **디자인 토큰을 CSS 변수로**: Tailwind나 CSS-in-JS 대신 순수 CSS 변수를 쓰는 이유는, 프로토타입을
   그대로 만든 방식(HTML/CSS)과 결과물 사이에 변환 손실이 없게 하기 위함. `design/design-tokens.css`가
   원본이고 `client/src/styles/tokens.css`는 그걸 복사한 사본이다.
-- **더미 시드 데이터**: DB를 아직 정하지 않았기 때문에 `server/src/data/seed.js`의 배열로 임시 대체.
-  라우트(`routes/listings.js`, `routes/board.js`)는 이미 실제 API 모양으로 짜여 있어서, DB가 정해지면
-  데이터 소스만 바꾸면 된다.
+- **SQLite (better-sqlite3)**: 2026-07-16 결정. 별도 DB 서버 설치 없이 파일 하나로 동작해서 로컬
+  개발에 적합하고, 동기 API라 Express 라우트 코드가 async/await 없이 단순하게 유지된다. `eligibleRegions`/
+  `eligibleGrades`처럼 값이 여러 개인 필드는 정규화된 조인 테이블 대신 JSON 문자열 컬럼으로 저장했다 —
+  이 단계에서는 조회 성능보다 스키마 단순함이 더 중요하다고 판단. `dDay`는 DB에 저장하면 날짜가 지날수록
+  틀어지므로, 실제 마감일(`deadline_date`)만 저장하고 라우트에서 요청 시점 기준으로 계산해 응답한다.
+  `client/src/data/`의 mock 데이터가 여전히 소스이고, `server/src/db/seed.js`가 그걸 DB로 옮긴다
+  (`npm run db:seed`) — 화면 쪽 mock 데이터를 고치면 재시드해야 반영된다.
+- **화면(React) ↔ 서버(API) 연결**: 2026-07-16, `Layout.jsx`가 마운트 시 `api.getCategories()` ·
+  `api.getListings()` · `api.getBoardPosts()`를 한 번에 불러와서 `categories`/`listings`/`boardPosts`를
+  Outlet context로 하위 페이지에 내려준다 — 페이지들이 더 이상 `mockListings.js`/`mockBoardPosts.js`를
+  직접 import하지 않는다 (단, `univOptions`/`regionOptions`/`gradeOptions`/`interestOptionsByCategory`처럼
+  DB에 넣지 않은 고정 옵션 목록은 여전히 정적 import). 글쓰기(`addBoardPost`)·댓글(`addComment`)도
+  서버에 POST하고 응답으로 상태를 갱신 — 새로고침해도 남아있다. 로딩 중엔 `Layout`이 "불러오는 중..."을
+  보여주고, 서버가 꺼져 있으면 에러 메시지를 보여준다. 실행 순서: `server`(`npm run dev`, 4000번) →
+  `client`(`npm run dev`, 5173/5175번) 둘 다 켜져 있어야 화면이 뜬다.
 
 ## 작업 절차 스킬
 
@@ -96,12 +110,15 @@ campusfit/
 
 ## 아직 결정 안 된 것 (2주차 전에 정할 것)
 
-- **DB**: 지금은 `seed.js` 더미 배열. SQLite로 갈지 다른 걸 쓸지 미정.
 - **로그인/계정**: 기획서엔 온보딩(조건 선택)만 있고 회원가입 언급이 없다. 댓글 지원에 "누가" 썼는지
-  구분하려면 최소한의 세션/닉네임 정도는 필요한지 정해야 한다.
-- **배포**: 로컬 개발만 세팅된 상태, 배포 플랫폼 미정.
+  구분하려면 최소한의 세션/닉네임 정도는 필요한지 정해야 한다. (북마크는 2026-07-15에 로그인 없이
+  `localStorage`로 먼저 반영함 — 댓글 작성자 식별처럼 "다른 사람도 봐야 하는" 기능은 여전히 로그인이
+  필요한 채로 남아있음)
+- **배포**: 로컬 개발만 세팅된 상태, 배포 플랫폼 미정. SQLite 파일 기반 DB라 배포 플랫폼에 따라
+  파일시스템 유지가 안 되는 곳(서버리스 등)이면 이 결정도 다시 봐야 함.
 - **팀원모집 상태 변화**: 모집 완료된 글을 어떻게 표시할지 (design-system.md에도 동일하게 남겨둠).
-- **공고 자동 수집**: 지금은 사람이 안 올리고, 한국장학재단·청년정책(공공데이터포털 API 있는 곳)부터
-  자동 연동하고 공모전처럼 API 없는 곳은 크롤링/수동으로 시작하는 걸 검토 중 (2026-07-09). 원문
-  상세페이지로 바로 연결하려면 소스 데이터에 링크 필드가 있어야 하고, DB 스키마(출처/원문링크/
-  최종수집일시)도 이 결정에 달려있음.
+- **공고 자동 수집**: 지금은 사람이 안 올리고, 한국장학재단·온통청년(청년정책, 공공데이터포털 오픈
+  API 있음, 2026-07-16 확인)부터 자동 연동하고 공모전처럼 API 없는 곳은 크롤링/수동으로 시작하는 걸
+  검토 중. 두 곳 다 회원가입 + API 키 신청(심사 필요)이 있어서 사용자가 직접 계정을 만들어야 진행
+  가능함. 원문 상세페이지로 바로 연결하려면 DB에 출처/원문링크/최종수집일시 컬럼을 추가해야 하는데,
+  지금 `listings` 테이블에는 아직 없음.

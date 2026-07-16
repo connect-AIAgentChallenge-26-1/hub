@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { Link, useOutletContext, useParams } from "react-router-dom";
-import { listings } from "../data/mockListings";
 
 export default function PostDetail() {
   const { postId } = useParams();
-  const { boardPosts, addComment } = useOutletContext();
+  const { boardPosts, addComment, listings } = useOutletContext();
   const post = boardPosts.find((p) => p.id === postId);
   const listing = listings.find((l) => l.id === post.listingId);
 

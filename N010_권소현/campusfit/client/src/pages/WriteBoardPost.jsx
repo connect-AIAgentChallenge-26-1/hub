@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate, useOutletContext, useParams } from "react-router-dom";
-import { listings } from "../data/mockListings";
 
 export default function WriteBoardPost() {
   const { listingId } = useParams();
   const navigate = useNavigate();
-  const { addBoardPost } = useOutletContext();
+  const { addBoardPost, listings } = useOutletContext();
   const listing = listings.find((l) => l.id === listingId);
 
   const [title, setTitle] = useState("");
@@ -14,19 +13,15 @@ export default function WriteBoardPost() {
 
   const canSubmit = title.trim() && meta.trim() && body.trim();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (!canSubmit) return;
-    const post = {
-      id: `p-${Date.now()}`,
+    const created = await addBoardPost({
       listingId: listing.id,
       title: title.trim(),
       meta: meta.trim(),
-      dDay: listing.dDay,
       body: body.trim(),
-      comments: [],
-    };
-    addBoardPost(post);
-    navigate(`/board/post/${post.id}`);
+    });
+    navigate(`/board/post/${created.id}`);
   };
 
   return (

@@ -1,13 +1,23 @@
 import { useEffect, useState } from "react";
 import { Link, useOutletContext, useParams } from "react-router-dom";
-import { categories, listings, interestOptionsByCategory } from "../data/mockListings";
+import { interestOptionsByCategory } from "../data/mockListings";
 import BookmarkStar from "../components/BookmarkStar";
 
 const GRADE_GUIDE_CATEGORIES = ["contest", "activity", "internship"];
 
 export default function CategoryList() {
   const { categoryId } = useParams();
-  const { univLabel, regionLabel, gradeLabel, region, grade, bookmarks, toggleBookmark } = useOutletContext();
+  const {
+    univLabel,
+    regionLabel,
+    gradeLabel,
+    region,
+    grade,
+    bookmarks,
+    toggleBookmark,
+    categories,
+    listings,
+  } = useOutletContext();
   const [interest, setInterest] = useState("all");
 
   useEffect(() => {

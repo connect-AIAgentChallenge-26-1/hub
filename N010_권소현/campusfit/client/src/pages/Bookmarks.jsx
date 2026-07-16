@@ -1,9 +1,8 @@
 import { Link, useOutletContext } from "react-router-dom";
-import { categories, listings } from "../data/mockListings";
 import BookmarkStar from "../components/BookmarkStar";
 
 export default function Bookmarks() {
-  const { bookmarks, toggleBookmark } = useOutletContext();
+  const { bookmarks, toggleBookmark, categories, listings } = useOutletContext();
 
   const bookmarkedListings = listings
     .filter((l) => bookmarks.includes(l.id))
