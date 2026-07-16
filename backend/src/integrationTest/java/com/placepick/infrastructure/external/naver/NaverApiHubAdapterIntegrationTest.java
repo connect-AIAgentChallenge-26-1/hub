@@ -121,6 +121,33 @@ class NaverApiHubAdapterIntegrationTest {
         WIRE_MOCK.verify(0, getRequestedFor(urlPathEqualTo("/v1/search/blog.json")));
     }
 
+    @Test
+    void dropsOnlyIncompleteItemsAndKeepsUsableProviderResults() {
+        WIRE_MOCK.stubFor(get(urlPathEqualTo(NaverApiHubAdapter.LOCAL_PATH))
+            .willReturn(jsonResponse(200, """
+                {
+                  "total": 2,
+                  "items": [
+                    {"title":"", "link":"https://example.invalid/ignored"},
+                    {
+                      "title":"검증 가능한 카페",
+                      "link":"https://example.invalid/places/usable",
+                      "category":"카페",
+                      "address":"서울특별시 테스트구"
+                    }
+                  ]
+                }
+                """)));
+
+        var result = adapter.searchPlaces(new PlaceSearchQuery("합성 검색", 2));
+
+        assertThat(result.total()).isEqualTo(2);
+        assertThat(result.items())
+            .extracting(PlaceSearchItem::name)
+            .containsExactly("검증 가능한 카페");
+        WIRE_MOCK.verify(exactly(1), getRequestedFor(urlPathEqualTo(NaverApiHubAdapter.LOCAL_PATH)));
+    }
+
     @ParameterizedTest
     @CsvSource({
         "local, 400, INVALID_REQUEST",
@@ -316,7 +343,7 @@ class NaverApiHubAdapterIntegrationTest {
     }
 
     @Test
-    void rejectsAnItemWithoutTheMinimumUsableTitle() {
+    void dropsAnItemWithoutTheMinimumUsableTitle() {
         WIRE_MOCK.stubFor(get(urlPathEqualTo(NaverApiHubAdapter.LOCAL_PATH))
             .willReturn(jsonResponse(200, """
                 {
@@ -328,13 +355,10 @@ class NaverApiHubAdapterIntegrationTest {
                 }
                 """)));
 
-        assertThatThrownBy(() -> adapter.searchPlaces(new PlaceSearchQuery("schema 검증", 1)))
-            .isInstanceOfSatisfying(SearchProviderException.class, exception -> {
-                assertThat(exception.failure()).isEqualTo(SearchProviderFailure.INVALID_RESPONSE);
-                assertThat(exception.httpStatus()).isEqualTo(200);
-                assertThat(exception.stage()).isEqualTo(SearchProviderFailureStage.ITEM);
-                assertThat(exception.getMessage()).doesNotContain("schema 검증", KEY_ID, KEY);
-            });
+        var result = adapter.searchPlaces(new PlaceSearchQuery("schema 검증", 1));
+
+        assertThat(result.items()).isEmpty();
+        assertThat(result.total()).isOne();
 
         WIRE_MOCK.verify(exactly(1), getRequestedFor(urlPathEqualTo(NaverApiHubAdapter.LOCAL_PATH)));
     }

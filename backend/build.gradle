@@ -15,19 +15,7 @@ sourceSets {
         compileClasspath += sourceSets.main.output
         runtimeClasspath += output + compileClasspath
     }
-    naverLiveContractTest {
-        compileClasspath += sourceSets.main.output
-        runtimeClasspath += output + compileClasspath
-    }
-    llmLiveContractTest {
-        compileClasspath += sourceSets.main.output
-        runtimeClasspath += output + compileClasspath
-    }
-    workflowLiveProbeTest {
-        compileClasspath += sourceSets.main.output
-        runtimeClasspath += output + compileClasspath
-    }
-    workflowLiveLinkedTest {
+    liveEvidenceTest {
         compileClasspath += sourceSets.main.output
         runtimeClasspath += output + compileClasspath
     }
@@ -38,14 +26,8 @@ configurations {
     integrationTestRuntimeOnly.extendsFrom testRuntimeOnly
     evalTestImplementation.extendsFrom testImplementation
     evalTestRuntimeOnly.extendsFrom testRuntimeOnly
-    naverLiveContractTestImplementation.extendsFrom testImplementation
-    naverLiveContractTestRuntimeOnly.extendsFrom testRuntimeOnly
-    llmLiveContractTestImplementation.extendsFrom testImplementation
-    llmLiveContractTestRuntimeOnly.extendsFrom testRuntimeOnly
-    workflowLiveProbeTestImplementation.extendsFrom testImplementation
-    workflowLiveProbeTestRuntimeOnly.extendsFrom testRuntimeOnly
-    workflowLiveLinkedTestImplementation.extendsFrom testImplementation
-    workflowLiveLinkedTestRuntimeOnly.extendsFrom testRuntimeOnly
+    liveEvidenceTestImplementation.extendsFrom testImplementation
+    liveEvidenceTestRuntimeOnly.extendsFrom testRuntimeOnly
 }
 
 dependencies {
@@ -72,6 +54,9 @@ dependencies {
 // Test evidence must be regenerated even though non-Test tasks retain normal up-to-date checks.
 tasks.withType(Test).configureEach {
     outputs.upToDateWhen { false }
+    // Test suites drive worker/cleanup behavior explicitly so cached Spring contexts cannot keep
+    // background schedulers racing another class's database cleanup.
+    systemProperty 'placepick.scheduling.enabled', 'false'
 }
 
 tasks.named('test') {
@@ -94,73 +79,24 @@ tasks.register('evalTest', Test) {
     shouldRunAfter tasks.named('integrationTest')
 }
 
-tasks.register('naverLiveContractTest', Test) {
+tasks.register('liveEvidenceTest', Test) {
     group = 'verification'
-    description = 'Runs the explicitly enabled, budget-limited NAVER API HUB live contract canary.'
-    testClassesDirs = sourceSets.naverLiveContractTest.output.classesDirs
-    classpath = sourceSets.naverLiveContractTest.runtimeClasspath
-    shouldRunAfter tasks.named('evalTest')
+    description = 'Runs three explicit direct-provider evidence scenarios outside CI.'
+    testClassesDirs = sourceSets.liveEvidenceTest.output.classesDirs
+    classpath = sourceSets.liveEvidenceTest.runtimeClasspath
     maxParallelForks = 1
     outputs.upToDateWhen { false }
     outputs.cacheIf { false }
-}
-
-tasks.register('llmLiveContractTest', Test) {
-    group = 'verification'
-    description = 'Runs the explicitly enabled, budget-limited Elice LLM live contract canary.'
-    testClassesDirs = sourceSets.llmLiveContractTest.output.classesDirs
-    classpath = sourceSets.llmLiveContractTest.runtimeClasspath
-    shouldRunAfter tasks.named('evalTest')
-    maxParallelForks = 1
-    outputs.upToDateWhen { false }
-    outputs.cacheIf { false }
-}
-
-tasks.register('workflowLiveProbeTest', Test) {
-    group = 'verification'
-    description = 'Runs the approved four-call split-provider workflow live probe through loopback.'
-    testClassesDirs = sourceSets.workflowLiveProbeTest.output.classesDirs
-    classpath = sourceSets.workflowLiveProbeTest.runtimeClasspath
-    shouldRunAfter tasks.named('evalTest')
-    maxParallelForks = 1
-    outputs.upToDateWhen { false }
-    outputs.cacheIf { false }
-}
-
-tasks.register('workflowLiveLinkedTest', Test) {
-    group = 'verification'
-    description = 'Runs the approved Naver-to-Elice linked workflow through the product core.'
-    testClassesDirs = sourceSets.workflowLiveLinkedTest.output.classesDirs
-    classpath = sourceSets.workflowLiveLinkedTest.runtimeClasspath
-    shouldRunAfter tasks.named('evalTest')
-    maxParallelForks = 1
-    outputs.upToDateWhen { false }
-    outputs.cacheIf { false }
-    useJUnitPlatform {
-        includeTags 'live'
-    }
-}
-
-tasks.register('workflowLiveLinkedContractTest', Test) {
-    group = 'verification'
-    description = 'Runs secret-free linked workflow scenario and semantic boundary tests.'
-    testClassesDirs = sourceSets.workflowLiveLinkedTest.output.classesDirs
-    classpath = sourceSets.workflowLiveLinkedTest.runtimeClasspath
-    shouldRunAfter tasks.named('evalTest')
-    maxParallelForks = 1
-    useJUnitPlatform {
-        includeTags 'offline'
-    }
+    systemProperty(
+        'placepick.live-evidence.enabled',
+        providers.systemProperty('placepick.live-evidence.enabled').orElse('false').get()
+    )
 }
 
 tasks.named('check') {
     dependsOn tasks.named('integrationTest')
     dependsOn tasks.named('evalTest')
-    dependsOn tasks.named('naverLiveContractTestClasses')
-    dependsOn tasks.named('llmLiveContractTestClasses')
-    dependsOn tasks.named('workflowLiveProbeTestClasses')
-    dependsOn tasks.named('workflowLiveLinkedTestClasses')
-    dependsOn tasks.named('workflowLiveLinkedContractTest')
+    dependsOn tasks.named('liveEvidenceTestClasses')
     dependsOn tasks.named('bootJar')
 }
 

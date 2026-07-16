@@ -7,7 +7,7 @@ date: 2026-07-13
 owners:
   - placepick-backend
 related:
-  - ../work-records/WI-0001-agentic-development-environment.md
+  - ../archive/work-records/WI-0001-agentic-development-environment.md
 ---
 
 # ADR-0003 GitHub Flow와 저장소 중심 문서 추적성을 사용
@@ -33,15 +33,19 @@ related:
 ## 결정
 
 `main`과 짧은 feature/fix/docs/chore 브랜치를 사용한다. 필수 CI와 리뷰 후 사람이
-squash merge하고 예약 자동 병합을 사용하지 않는다. Issue와 PR은 작업 상태와 리뷰를,
-Work Record·ADR·전문 문서는 문제 해결 지식을 보존하며 상호 링크한다. 변경 경로는
-같은 PR에서 갱신한 Work Record의 `paths`와 자동으로 대조한다.
+squash merge하고 예약 자동 병합을 사용하지 않는다. GitHub Issue를 Task 상태·담당자·
+완료 기준의 유일한 정본으로 사용한다. Roadmap은 DAG만, PR은 현재 diff와 검증만,
+Work Record·ADR·전문 문서는 실제로 생긴 문제 해결 지식만 보존한다.
+
+Work Record는 중요한 Task가 시작될 때만 만들고 시작 전 `planned` 문서를 선생성하지
+않는다. 활성 Work Record의 `paths`는 같은 작업의 변경 경로와 자동으로 대조한다.
+완료 기록은 archive로 이동하고 검증된 포트폴리오 서사는 Case Study에서 관리한다.
 
 ## 결과와 트레이드오프
 
 작은 PR과 일관된 main을 유지하고 결정·검증 증거를 코드 버전과 함께 보존한다.
-문서 작성 비용과 중복 링크 관리가 추가되므로 템플릿과 자동검사를 제공한다. 전체
-프롬프트나 내부 추론은 저장하지 않아 보안과 가독성을 지킨다.
+필요한 판단과 증거는 장기 보존하면서 Issue·Roadmap·WI 사이 상태 중복을 피한다.
+문서 생성 기준과 자동검사를 유지하고 전체 프롬프트나 내부 추론은 저장하지 않는다.
 
 ## 검증과 재검토 조건
 

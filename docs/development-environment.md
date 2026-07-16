@@ -1,115 +1,84 @@
 # 개발 환경 정본
 
-## 목적과 성공 기준
+## 기준
 
-개발자의 호스트 상태와 무관하게 같은 코드가 같은 Java·Gradle·인프라에서
-빌드되고, Agent가 표준 명령으로 실패를 재현하고 수정 결과를 검증할 수 있어야
-한다. Docker Desktop이 실행 중인 깨끗한 clone에서 Dev Container를 열고
-`make setup`, `make up`, `make run`, `make check`를 순서대로 실행하는 것이
-기준 시나리오다.
+- Java 17, Spring Boot 3.5.16, Gradle Wrapper 8.14.4
+- Node 24는 프런트와 문서 검증에만 사용
+- Docker Desktop + Dev Container
+- PostgreSQL 16, Redis 7.4
+- Windows host에서도 shell과 `gradlew`는 LF를 유지
 
-## 고정 기준
+호스트에 JDK·Gradle을 별도로 설치하지 않고 Dev Container에서 루트 `./gradlew`와
+`make` 명령을 사용한다. Java daemon, toolchain, compile release와 test runtime이 17이
+아니면 setup·검증을 실패시킨다.
 
-| 항목 | 기준 | 의도 |
-| --- | --- | --- |
-| Java | 17 | 호스트·컨테이너·CI의 런타임 차이 제거 |
-| Spring Boot | 3.5.16 | Java 17과 JUnit 5 기반 유지보수 라인 |
-| Gradle | Wrapper 8.14.4 | 호스트 Gradle 비의존과 배포 검증 |
-| Node | Dev Container 24 | 문서 검증 도구만 실행 |
-| Docker CLI | Dev Container 28.3.3 | Docker Desktop 엔진을 socket으로 재사용 |
-| Docker Compose | v2 | Dev Container feature가 제공하는 v2 채널 사용 |
-| 외부 연동 | mock 고정 | 비용·쿼터·데이터 유출 방지 |
+## 실행 명령
 
-Gradle toolchain과 compiler release, 테스트 JVM은 모두 17이어야 한다. 활성
-설정에서 Java 21을 지정하면 정책 검사가 실패한다.
-
-## 실행 인터페이스
-
-| 명령 | 결과 |
+| 명령 | 책임 |
 | --- | --- |
-| `make setup` | Docker·도구·Java 17·환경 파일 사전 조건 확인 |
-| `make up` / `make down` | PostgreSQL·Redis·Mock API 시작/종료 |
-| `make run` | `local` 프로필로 애플리케이션 실행 |
-| `make test` | Docker가 필요 없는 단위 테스트 |
-| `make integration` | Testcontainers·WireMock 통합/계약 테스트 |
-| `make eval` | Eval fixture와 정책 검증 |
-| `make edge-check` | 비밀 없는 Approval Gate·Provider Gateway 자동 검증 |
-| `make actionlint` | GitHub Actions workflow 정적 검증 |
-| `make check` | 중복 실행 없이 저장소 전체 검증 |
-| `make naver-live-contract` | 승인된 로컬에서 Naver Local·Blog 실제 계약을 각 1회 검증 |
-| `make llm-live-contract` | 승인된 로컬에서 Elice 합성 Chat·Embedding 계약을 각 1회 검증 |
-| `make observe` | Prometheus·Grafana 오버레이 실행 |
-| `make load-smoke` | mock 모드에서 health 부하 smoke 실행 |
-| `make reset` | 사용자 확인 후 로컬 볼륨 초기화 |
+| `make setup` | 필수 도구, Docker, Java 17과 환경 파일 검사 |
+| `make dev` | Mock Provider를 사용하는 로컬 개발 서비스 실행 |
+| `make dev-live` | `.env.live.local`의 실제 Provider를 사용하는 명시적 개발 실행 |
+| `make test` | Docker 없는 단위 테스트 |
+| `make integration` | Testcontainers·Mock HTTP 통합/계약 테스트 |
+| `make eval` | schema·근거·금지 주장 Eval |
+| `make check` | 단위·통합·Eval·문서·정책·secret 검증 |
+| `make live-evidence` | 실제 Provider 경로의 안전한 증거 요약 생성 |
+| `make build-images` | Java 17 backend와 frontend 운영 image build |
+| `make observe` | Prometheus·Grafana 포함 개발 환경 실행 |
+| `make down` | 로컬 서비스 종료 |
+| `make reset` | 명시적 확인 뒤 로컬 container·volume 초기화 |
 
-GitHub Actions workflow는 공식 `rhysd/actionlint` v1.7.12 multi-architecture image를
-index digest
-`sha256:b1934ee5f1c509618f2508e6eb47ee0d3520686341fec936f3b79331f9315667`로
-고정해 검사한다. 실행 전 image digest와 binary version을 모두 대조한다. 검사
-container에는 `.github/workflows`만 tar stream으로 전달하고 repository mount, host
-환경 변수와 network를 제공하지 않으므로 로컬 provider credential을 읽거나 실제 API를
-호출할 수 없다. 버전과 digest 근거는
-[actionlint v1.7.12 release](https://github.com/rhysd/actionlint/releases/tag/v1.7.12)와
-[공식 image tag](https://hub.docker.com/r/rhysd/actionlint/tags?name=1.7.12)다.
+기존 `edge-check`, Provider별 canary, Split/Linked workflow와 `load-smoke` 명령은 PP-041에서
+제거한다. Mock 회귀는 `make check`, 실제 호환성은 제품 adapter를 사용하는 명시적 Live
+경로에서 검증한다.
+
+## 환경 파일
+
+`.env`는 Mock 개발의 비밀이 아닌 로컬 설정, `.env.live.local`은 실제 Naver·Elice
+자격과 endpoint 설정에 사용한다. 둘 다 Git에서 제외하고 기존 파일을 setup이 덮어쓰지
+않는다. 예시는 변수 이름과 설명만 제공하며 실제 값을 넣지 않는다.
+
+`make check`, 일반 CI와 `make dev`는 `.env.live.local`을 읽지 않는다. `make dev-live`와
+`make live-evidence`만 명시적으로 읽으며 알 수 없는 변수, placeholder, 잘못된 HTTPS
+host와 누락 값을 fail-fast한다.
+
+로컬 실제 값은 다음 원칙을 따른다.
+
+- Naver key, Elice token과 전체 routing URL을 shell history·대화·Issue·PR에 출력하지 않는다.
+- Provider 응답 원문, 장소명·주소·링크, prompt·completion을 기본 로그·JUnit report에
+  남기지 않는다.
+- 노출이 의심되면 즉시 Provider console에서 폐기·교체하고 사용량과 Git history를
+  점검한다.
+
+배포에서는 Provider 자격을 Render runtime secret store에만 둔다. GitHub Actions에는
+Provider 자격을 넣지 않고 배포에 필요한 최소 scope credential만 둔다. 브라우저 bundle과
+Vercel 프런트에는 backend secret을 전달하지 않는다.
 
 ## 서비스와 포트
 
-모든 호스트 포트는 `127.0.0.1`에 바인딩하고 서비스 간 통신은 Compose DNS를
-사용한다. 고정 `container_name`은 사용하지 않는다.
+| 서비스 | 기본 포트 |
+| --- | ---: |
+| Backend | 8080 |
+| Frontend 개발 | 3000 |
+| PostgreSQL | 5432 |
+| Redis | 6379 |
+| Prometheus | 9090 |
+| Grafana | 3001 |
 
-| 서비스 | 호스트 포트 | 컨테이너 소비자 |
-| --- | ---: | --- |
-| Backend | 8080 | k6에서 `http://dev:8080` |
-| PostgreSQL | 5432 | `postgres:5432` |
-| Redis | 6379 | `redis:6379` |
-| Mock Naver | 8089 | `mock-naver:8080` |
-| Mock LLM | 8090 | `mock-llm:8080` |
-| Prometheus | 9090 | 관측성 오버레이 |
-| Grafana | 3001 | 관측성 오버레이 |
+호스트 포트는 `127.0.0.1`에만 bind하고 Compose service에 고정 `container_name`을 사용하지
+않는다. 현재 backend에는 Actuator와 정식 `/api/v1/**`가 구현돼 있다. 개발 전용
+`/__dev/api/**`는 `live-dev` profile에서만 등록하고 production에는 노출하지 않는다.
 
-## 프로필과 비밀 관리
+## 검증 경계
 
-`local`, `test`, `load`는 `PLACEPICK_EXTERNAL_MODE=mock`을 요구한다. Naver나
-LLM base URL이 실제 인터넷 endpoint를 가리키면 시작과 부하 테스트를 중단한다.
-`.env.example`에는 비밀이 아닌 예시만 두고 `.env`, API key, token은 커밋하지
-않는다. 부하 테스트는 실제 외부 API를 호출하지 않는다.
+- 단위 테스트는 Docker와 외부 네트워크 없이 통과한다.
+- 통합 테스트는 Testcontainers와 Mock endpoint만 사용한다.
+- `make check` 중 실제 외부 DNS·HTTP가 발생하면 실패한다.
+- 실제 값이 보이는 수동 확인은 PP-042 Live Playground에서 별도로 검증한다.
+- 실제 Provider를 쓰는 정식 API 로컬 smoke는 RUN-0005의 명시적 수동 절차로만 실행한다.
+- 운영 image builder JDK와 runtime JRE도 Java 17로 고정한다.
 
-실제 provider 계약 검증은 표준 앱 profile과 분리한다. Git에서 제외한
-`.env.live.local`은 `make naver-live-contract`와 `make llm-live-contract`의 공용 입력이며
-`make run`, `make test`, `make integration`, `make eval`, `make edge-check`와
-`make check`는 읽지 않는다. parser는 파일을 source·eval하지 않고 allowlist만 읽는다.
-Naver와 Elice 명령은 자기 credential·URL·model만 하위 JVM에 전달한다.
-
-Naver task는 CI, 잘못된 mode와 누락 credential을 요청 전에 거부하고 공식 HTTPS
-origin을 코드에 고정한다. Local·Blog 각 한 번의 safe summary만 허용한다. 2026-07-14
-응답 `Content-Type`을 보조 신호로 취급하되 엄격한 JSON·schema 검증을 유지하도록
-보강한 SHA `128692bdcaa8ef4e5e00a06362c02f25da223a4b`에서 Local·Blog가 각각 한 번의
-2xx·schema 검증을 통과했다. provider console의 wire 사용량은 별도 사람이 대조한다.
-
-Elice task는 서로 다른 exact HTTPS `mlapi.run/{canonical-uuid}/v1` base, exact Chat·
-Embedding model과 합성 입력만 허용한다. Chat·Embedding 각 한 번의 safe summary만
-출력하고 token, 전체 URL, prompt·응답 body와 vector를 출력하지 않는다. Elice 정책
-검토 전 제품 데이터 전송과 Embedding runtime은 금지한다.
-
-2026-07-14 capability별 transport와 승인된 model response alias를 분리한 SHA
-`e6190662c2382304f21c39bdb29375d1b1324733`에서 Chat strict schema·usage와 Embedding
-1,536차원 finite vector 계약이 각각 한 번의 2xx 호출로 통과했다. 실제 사용자·Naver
-데이터 전송은 여전히 정책 검토 전 차단하며, 반복 검증은
-[RUN-0002](runbooks/RUN-0002-elice-llm-local-live-and-token-rotation.md)를 따른다.
-
-배포 Live는 향후 외부 Approval Gate·Provider Gateway를 사용한다. 공유 Fork,
-GitHub Actions와 Vercel·Render에는 원본 provider key를 저장하지 않는다. Gate·Gateway
-프로그램의 자동 검증 기반은 구현됐지만, cloud resource가 배포됐거나 실제 provider
-호출이 성공했다는 의미는 아니다.
-
-## 포함하지 않는 선택 사항
-
-프로젝트 로컬 `.codex/config.toml`, `PLANS.md`, MCP 연결, 저장소 고유 Codex
-프로필·승인 설정, 작업 프롬프트 템플릿은 이 환경의 필수 구성에 포함하지 않는다.
-Agent 작업 맥락은 `AGENTS.md`, Issue, Work Record와 ADR로 전달한다.
-
-## 알려진 수동 전제
-
-Docker Desktop 엔진 시작과 프로젝트 hook 신뢰는 사용자 동작이다. Codex hook은
-`/hooks`에서 내용을 검토하고 신뢰한 뒤 사용한다. 원격 branch protection은
-관리자 권한이 필요한 별도 작업이며 저장소 파일만으로 적용하지 않는다.
+VS Code 확장, Codex 설정과 추가 MCP는 개발자가 선택할 수 있지만 저장소 필수 실행
+경로에는 포함하지 않는다. 저장소 Stop hook으로 매 작업마다 검증을 강제하지 않으며,
+완료 전에 변경 범위에 맞는 명령을 사람이 선택해 실행한다.

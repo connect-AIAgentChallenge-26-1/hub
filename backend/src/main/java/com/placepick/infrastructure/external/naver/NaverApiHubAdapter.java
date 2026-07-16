@@ -6,7 +6,7 @@ import com.fasterxml.jackson.core.StreamReadFeature;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.placepick.infrastructure.external.http.NoRetryHttpRequestFactory;
+import com.placepick.infrastructure.external.http.DirectProviderRestClientFactory;
 import com.placepick.recommendation.application.port.out.BlogSearchItem;
 import com.placepick.recommendation.application.port.out.BlogSearchPort;
 import com.placepick.recommendation.application.port.out.BlogSearchQuery;
@@ -88,10 +88,9 @@ public final class NaverApiHubAdapter implements PlaceSearchPort, BlogSearchPort
         requirePositiveTimeout("connect timeout", connectTimeout);
         requirePositiveTimeout("read timeout", readTimeout);
 
-        RestClient client = RestClient.builder()
+        RestClient client = DirectProviderRestClientFactory
+            .jsonBuilder(connectTimeout, readTimeout)
             .baseUrl(baseUrl.toString())
-            .requestFactory(NoRetryHttpRequestFactory.create(connectTimeout, readTimeout))
-            .defaultHeader("Accept", MediaType.APPLICATION_JSON_VALUE)
             .defaultHeader(KEY_ID_HEADER, keyId)
             .defaultHeader(KEY_HEADER, key)
             .build();
@@ -113,6 +112,7 @@ public final class NaverApiHubAdapter implements PlaceSearchPort, BlogSearchPort
         NaverLocalResponse response = providerResponse.body();
         validateLocalResponse(response, query.limit(), providerResponse.httpStatus());
         List<PlaceSearchItem> items = response.items().stream()
+            .filter(NaverApiHubAdapter::hasUsableTitle)
             .map(item -> toPlaceItem(item, providerResponse.httpStatus()))
             .toList();
         return new PlaceSearchResult(response.total(), items);
@@ -133,6 +133,7 @@ public final class NaverApiHubAdapter implements PlaceSearchPort, BlogSearchPort
         NaverBlogResponse response = providerResponse.body();
         validateBlogResponse(response, query.limit(), providerResponse.httpStatus());
         List<BlogSearchItem> items = response.items().stream()
+            .filter(NaverApiHubAdapter::hasUsableTitle)
             .map(item -> toBlogItem(item, providerResponse.httpStatus()))
             .toList();
         return new BlogSearchResult(response.total(), items);
@@ -290,13 +291,6 @@ public final class NaverApiHubAdapter implements PlaceSearchPort, BlogSearchPort
                 SearchProviderFailureStage.ENVELOPE
             );
         }
-        if (response.items().stream().anyMatch(item -> !hasUsableTitle(item))) {
-            throw invalidResponse(
-                "NAVER API HUB local response contains an unusable item.",
-                httpStatus,
-                SearchProviderFailureStage.ITEM
-            );
-        }
     }
 
     private static void validateBlogResponse(
@@ -316,13 +310,6 @@ public final class NaverApiHubAdapter implements PlaceSearchPort, BlogSearchPort
                 "NAVER API HUB blog response envelope is invalid.",
                 httpStatus,
                 SearchProviderFailureStage.ENVELOPE
-            );
-        }
-        if (response.items().stream().anyMatch(item -> !hasUsableTitle(item))) {
-            throw invalidResponse(
-                "NAVER API HUB blog response contains an unusable item.",
-                httpStatus,
-                SearchProviderFailureStage.ITEM
             );
         }
     }

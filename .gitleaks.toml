@@ -1,0 +1,11 @@
+title = "PlacePick AI secret scanning"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Exact non-secret browser storage and deterministic test literals"
+regexes = [
+  '''^placepick\.csrf\.v1$''',
+  '''^aBcDefghijklmnopqrstuvwxyz0123456789_-ABCD$''',
+]

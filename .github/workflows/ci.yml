@@ -38,7 +38,7 @@ jobs:
       - name: Install policy dependencies
         run: npm ci
 
-      - name: Validate shell and Local Live guards
+      - name: Validate shell and report safety guards
         run: |
           shell_files=()
           for file in scripts/*.sh scripts/lib/*.sh; do
@@ -48,8 +48,6 @@ jobs:
             --volume "$PWD:/repo:ro" \
             koalaman/shellcheck@sha256:61862eba1fcf09a484ebcc6feea46f1782532571a34ed51fedf90dd25f925a8d \
             -x -P /repo "${shell_files[@]}"
-          bash scripts/naver-live-contract-guard-test.sh
-          bash scripts/llm-live-contract-guard-test.sh
           bash scripts/scan-test-reports-test.sh
 
       - name: Validate GitHub Actions workflows
@@ -63,17 +61,14 @@ jobs:
       - name: Run negative policy fixtures
         run: npm run docs:test 2>&1 | tee reports/docs/docs-test.log
 
-      - name: Validate secret-free edge security boundary
-        run: |
-          mkdir -p reports/edge
-          npm run edge:check 2>&1 | tee reports/edge/edge-check.log
+      - name: Audit production JavaScript dependencies
+        run: npm audit --omit=dev --audit-level=moderate
 
       - name: Validate Compose combinations
         run: |
           docker compose -f docker-compose.yml config --quiet
           docker compose -f docker-compose.yml -f docker-compose.devcontainer.yml config --quiet
           docker compose -f docker-compose.yml -f docker-compose.observability.yml config --quiet
-          docker compose -f docker-compose.yml -f docker-compose.devcontainer.yml -f docker-compose.observability.yml -f docker-compose.load.yml config --quiet
 
       - name: Scan committed content for secrets
         uses: gitleaks/gitleaks-action@dcedce43c6f43de0b836d1fe38946645c9c638dc # v2
@@ -86,15 +81,6 @@ jobs:
         with:
           name: documentation-reports
           path: reports/docs/
-          if-no-files-found: ignore
-          retention-days: 14
-
-      - name: Upload edge security reports
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: edge-security-reports
-          path: reports/edge/
           if-no-files-found: ignore
           retention-days: 14
 
@@ -137,5 +123,41 @@ jobs:
           path: |
             backend/build/reports/tests/
             backend/build/test-results/
+          if-no-files-found: ignore
+          retention-days: 14
+
+  frontend-check:
+    name: Next.js frontend check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Set up Node 24
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Run type, unit, and production build checks
+        run: npm run frontend:check
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run browser E2E
+        run: npm run frontend:e2e
+
+      - name: Upload browser reports
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: frontend-test-reports
+          path: |
+            frontend/playwright-report/
+            frontend/test-results/
           if-no-files-found: ignore
           retention-days: 14

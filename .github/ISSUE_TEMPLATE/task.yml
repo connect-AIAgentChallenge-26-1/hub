@@ -1,0 +1,49 @@
+name: 작업
+description: 사용자 기능, 엔지니어링과 문서 작업을 하나의 검증 가능한 형식으로 정의합니다.
+title: "feat: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 문제와 근거
+      description: 누구의 어떤 문제를 해결하며 어떤 관찰·증거가 있는지 적어주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: 목적과 완료 기준
+      description: 구현 항목 나열보다 사용자가 확인할 결과와 검증 방법을 적어주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: 범위와 비범위
+      description: 이번 Task에 포함하는 것과 후속 Task로 남기는 것을 구분해 주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: 선행 Task와 계약 영향
+      description: 선행 Issue와 API·DB·이벤트·LLM·보안·배포 계약 영향을 적어주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: 검증 계획과 위험
+      description: 자동·수동 검증, 실패·경계 조건, rollback과 남은 위험을 적어주세요.
+    validations:
+      required: true
+  - type: textarea
+    id: related
+    attributes:
+      label: 관련 문서
+      description: 이미 존재하는 ADR·WI·Case Study가 있으면 링크합니다. Task 시작 전 WI를 만들 필요는 없습니다.
+      placeholder: "ADR-0001, WI-0001, 문서 URL"
+    validations:
+      required: false

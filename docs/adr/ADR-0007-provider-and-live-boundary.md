@@ -8,7 +8,7 @@ owners:
   - placepick-team
 related:
   - ../roadmap.md
-  - ../work-records/WI-0002-service-completion-backlog.md
+  - ../archive/work-records/WI-0002-service-completion-backlog.md
   - ADR-0009-mock-local-live-gateway-boundary.md
   - ADR-0011-elice-chat-completions-provider-boundary.md
 ---

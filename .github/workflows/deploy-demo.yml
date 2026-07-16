@@ -1,0 +1,250 @@
+name: Deploy portfolio demo
+
+on:
+  workflow_dispatch:
+    inputs:
+      approved_sha:
+        description: Exact 40-character commit SHA from main
+        required: true
+        type: string
+
+concurrency:
+  group: production-demo
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify approved main revision
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    outputs:
+      approved_sha: ${{ steps.revision.outputs.approved_sha }}
+    steps:
+      - name: Check out repository history
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify and check out the approved main revision
+        id: revision
+        env:
+          APPROVED_SHA: ${{ inputs.approved_sha }}
+        run: |
+          set -Eeuo pipefail
+          [[ "${GITHUB_REF}" == 'refs/heads/main' ]] || {
+            echo 'The deployment workflow itself must be dispatched from main' >&2
+            exit 1
+          }
+          [[ "${APPROVED_SHA}" =~ ^[0-9a-f]{40}$ ]] || {
+            echo 'approved_sha must be an exact lowercase 40-character SHA' >&2
+            exit 1
+          }
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          workflow_sha="$(git rev-parse HEAD)"
+          remote_main_sha="$(git rev-parse origin/main)"
+          [[ "${workflow_sha}" == "${GITHUB_SHA}" && "${workflow_sha}" == "${remote_main_sha}" ]] || {
+            echo 'main advanced or the workflow revision is not the current origin/main; dispatch again' >&2
+            exit 1
+          }
+          git cat-file -e "${APPROVED_SHA}^{commit}"
+          git merge-base --is-ancestor "${APPROVED_SHA}" origin/main || {
+            echo 'approved_sha is not contained in origin/main' >&2
+            exit 1
+          }
+          git checkout --detach "${APPROVED_SHA}"
+          echo "approved_sha=${APPROVED_SHA}" >> "${GITHUB_OUTPUT}"
+
+      - name: Set up Node 24
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Set up Java 17
+        uses: actions/setup-java@c1e323688fd81a25caa38c78aa6df2d33d3e20d9 # v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/actions/wrapper-validation@0b6dd653ba04f4f93bf581ec31e66cbd7dcb644d # v4
+
+      - name: Install locked Node dependencies
+        run: npm ci
+
+      - name: Run the canonical verification gate
+        run: make check
+
+      - name: Build the Java 17 production image
+        run: docker build --tag placepick-backend:${{ steps.revision.outputs.approved_sha }} .
+
+  deploy:
+    name: Deploy the approved revision
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment:
+      name: production
+      url: ${{ vars.VERCEL_PRODUCTION_URL }}
+    env:
+      APPROVED_SHA: ${{ needs.verify.outputs.approved_sha }}
+    steps:
+      - name: Check out approved revision
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+        with:
+          ref: ${{ needs.verify.outputs.approved_sha }}
+
+      - name: Set up Node 24
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install locked deployment tooling
+        run: npm ci
+
+      - name: Validate deployment configuration
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+          VERCEL_PRODUCTION_URL: ${{ vars.VERCEL_PRODUCTION_URL }}
+          RENDER_PUBLIC_URL: ${{ vars.RENDER_PUBLIC_URL }}
+        run: |
+          set -Eeuo pipefail
+          for variable in VERCEL_TOKEN VERCEL_ORG_ID VERCEL_PROJECT_ID \
+            RENDER_DEPLOY_HOOK_URL VERCEL_PRODUCTION_URL RENDER_PUBLIC_URL; do
+            [[ -n "${!variable:-}" ]] || {
+              echo "Required production setting is missing: ${variable}" >&2
+              exit 1
+            }
+          done
+          node <<'NODE'
+          const parseUrl = (name) => {
+            try {
+              return new URL(process.env[name]);
+            } catch {
+              throw new Error(`${name} must be a valid URL`);
+            }
+          };
+          const canonicalOrigin = (name) => {
+            const value = parseUrl(name);
+            if (value.protocol !== "https:" || value.username || value.password ||
+                value.port || !["", "/"].includes(value.pathname) || value.search || value.hash) {
+              throw new Error(`${name} must be one canonical credential-free HTTPS origin`);
+            }
+          };
+          canonicalOrigin("VERCEL_PRODUCTION_URL");
+          canonicalOrigin("RENDER_PUBLIC_URL");
+          const hook = parseUrl("RENDER_DEPLOY_HOOK_URL");
+          if (hook.protocol !== "https:" || hook.hostname !== "api.render.com" ||
+              hook.username || hook.password || hook.hash ||
+              !/^\/deploy\/srv-[a-z0-9]+$/.test(hook.pathname) ||
+              hook.searchParams.has("ref") || hook.searchParams.has("imgURL")) {
+            throw new Error("RENDER_DEPLOY_HOOK_URL must be an unambiguous Render service hook");
+          }
+          NODE
+
+      - name: Build Vercel production output
+        working-directory: frontend
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          BACKEND_ORIGIN: ${{ vars.RENDER_PUBLIC_URL }}
+          NEXT_PUBLIC_BUILD_SHA: ${{ env.APPROVED_SHA }}
+          NEXT_PUBLIC_PRODUCT_API_MODE: api
+          NEXT_PUBLIC_PLAYGROUND_API_MODE: disabled
+        run: |
+          ../node_modules/.bin/vercel pull --yes --environment=production --token="${VERCEL_TOKEN}"
+          ../node_modules/.bin/vercel build --prod --token="${VERCEL_TOKEN}"
+
+      - name: Deploy Vercel production output
+        id: vercel
+        working-directory: frontend
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          deployment_url="$(../node_modules/.bin/vercel deploy --prebuilt --prod --token="${VERCEL_TOKEN}")"
+          DEPLOYMENT_URL="${deployment_url}" node <<'NODE'
+          const value = new URL(process.env.DEPLOYMENT_URL);
+          if (value.protocol !== "https:" || value.username || value.password || value.port ||
+              !["", "/"].includes(value.pathname) || value.search || value.hash) {
+            throw new Error("Vercel did not return one canonical HTTPS deployment origin");
+          }
+          NODE
+          echo "deployment_url=${deployment_url}" >> "${GITHUB_OUTPUT}"
+
+      - name: Verify immutable Vercel deployment revision
+        env:
+          DEPLOYMENT_URL: ${{ steps.vercel.outputs.deployment_url }}
+        run: |
+          set -Eeuo pipefail
+          build_info="$(curl --fail --silent --show-error --connect-timeout 5 --max-time 30 \
+            "${DEPLOYMENT_URL%/}/api/build-info")"
+          jq -e --arg sha "${APPROVED_SHA}" '.gitSha == $sha' <<<"${build_info}" >/dev/null
+
+      - name: Trigger exact Render revision
+        env:
+          RENDER_DEPLOY_HOOK_URL: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          set -Eeuo pipefail
+          separator='?'
+          [[ "${RENDER_DEPLOY_HOOK_URL}" == *'?'* ]] && separator='&'
+          curl --fail --silent --show-error --connect-timeout 5 --max-time 30 \
+            --request POST --output /dev/null \
+            "${RENDER_DEPLOY_HOOK_URL}${separator}ref=${APPROVED_SHA}"
+
+      - name: Verify Render health and revision
+        env:
+          RENDER_PUBLIC_URL: ${{ vars.RENDER_PUBLIC_URL }}
+        run: |
+          set -Eeuo pipefail
+          deadline=$((SECONDS + 1200))
+          while (( SECONDS < deadline )); do
+            health="$(curl --silent --show-error --connect-timeout 5 --max-time 10 \
+              --write-out '%{http_code}' --output /tmp/health.json \
+              "${RENDER_PUBLIC_URL%/}/actuator/health" || true)"
+            info=''
+            if [[ "${health}" == '200' ]]; then
+              info="$(curl --silent --show-error --connect-timeout 5 --max-time 10 \
+                "${RENDER_PUBLIC_URL%/}/actuator/info" || true)"
+            fi
+            if [[ "${health}" == '200' ]] \
+              && jq -e --arg sha "${APPROVED_SHA}" '.git.commit.id == $sha' <<<"${info}" >/dev/null 2>&1; then
+              exit 0
+            fi
+            sleep 15
+          done
+          echo 'Render did not expose the approved healthy revision within 20 minutes' >&2
+          exit 1
+
+      - name: Verify Vercel deployment and production alias revisions
+        env:
+          VERCEL_PRODUCTION_URL: ${{ vars.VERCEL_PRODUCTION_URL }}
+        run: |
+          set -Eeuo pipefail
+          deadline=$((SECONDS + 180))
+          while (( SECONDS < deadline )); do
+            build_info="$(curl --fail --silent --show-error --connect-timeout 5 --max-time 10 \
+              "${VERCEL_PRODUCTION_URL%/}/api/build-info" || true)"
+            if jq -e --arg sha "${APPROVED_SHA}" '.gitSha == $sha' \
+              <<<"${build_info}" >/dev/null 2>&1; then
+              exit 0
+            fi
+            sleep 5
+          done
+          echo 'Vercel production alias did not expose the approved revision' >&2
+          exit 1
+
+      - name: Verify the deployed user flow
+        env:
+          PLACEPICK_PUBLIC_ORIGIN: ${{ vars.VERCEL_PRODUCTION_URL }}
+        run: node scripts/deployment-smoke.mjs

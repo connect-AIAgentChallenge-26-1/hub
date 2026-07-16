@@ -16,13 +16,18 @@ class ReasonStatementPolicyTest {
     private final ReasonStatementPolicy policy = new ReasonStatementPolicy();
 
     @Test
-    void acceptsOnlyTheExactTextMatchingTheSingleEvidenceType() {
+    void acceptsTemplateAndNaturalGroundedStatements() {
         assertThat(policy.isSupported(
             new ReasonStatement(ReasonStatementPolicy.LOCAL_STATEMENT_TEXT, List.of("local:1")),
             place()
         )).isTrue();
         assertThat(policy.isSupported(
             new ReasonStatement(ReasonStatementPolicy.BLOG_STATEMENT_TEXT, List.of("blog:1")),
+            place()
+        )).isTrue();
+        assertThat(policy.isSupported(
+            new ReasonStatement("성수 카페의 조용한 공간 기록을 근거로 추천합니다.",
+                List.of("local:1", "blog:1")),
             place()
         )).isTrue();
     }
@@ -47,7 +52,6 @@ class ReasonStatementPolicyTest {
     void rejectsFreeClaimsEvenWhenTheyShareThePlaceNameOrEvidenceWords() {
         for (String text : List.of(
             "성수 카페에는 루프탑이 있습니다",
-            "성수 카페의 조용한 공간 기록입니다",
             "성수 카페 가격은 10000원입니다",
             "성수 카페 영업 시간은 깁니다",
             "성수 카페는 도보 5분입니다",
@@ -62,14 +66,22 @@ class ReasonStatementPolicyTest {
     }
 
     @Test
-    void reasonStatementRequiresExactlyOneEvidenceId() {
+    void reasonStatementRequiresOneToThreeUniqueEvidenceIds() {
         assertThatThrownBy(() -> new ReasonStatement(
             ReasonStatementPolicy.LOCAL_STATEMENT_TEXT,
             List.of()
         )).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(() -> new ReasonStatement(
+        assertThat(new ReasonStatement(
             ReasonStatementPolicy.LOCAL_STATEMENT_TEXT,
             List.of("local:1", "blog:1")
+        ).evidenceIds()).containsExactly("local:1", "blog:1");
+        assertThatThrownBy(() -> new ReasonStatement(
+            ReasonStatementPolicy.LOCAL_STATEMENT_TEXT,
+            List.of("local:1", "blog:1", "local:2", "blog:2")
+        )).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new ReasonStatement(
+            ReasonStatementPolicy.LOCAL_STATEMENT_TEXT,
+            List.of("local:1", "local:1")
         )).isInstanceOf(IllegalArgumentException.class);
     }
 

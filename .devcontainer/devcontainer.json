@@ -28,6 +28,17 @@
     "PLACEPICK_EXTERNAL_MODE": "mock"
   },
   "postCreateCommand": "bash scripts/devcontainer-post-create.sh",
+  "forwardPorts": [3000, 8080],
+  "portsAttributes": {
+    "3000": {
+      "label": "PlacePick web",
+      "onAutoForward": "notify"
+    },
+    "8080": {
+      "label": "PlacePick backend",
+      "onAutoForward": "silent"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [

@@ -12,6 +12,11 @@ require_command docker
 require_command tar
 docker info >/dev/null 2>&1 || die 'Docker engine is required to run the pinned actionlint image'
 
+# A clean runner prints its implicit image-pull notice before `actionlint -version`. Pull the
+# digest-pinned image first so transport diagnostics cannot be mistaken for the tool version.
+docker pull "${ACTIONLINT_IMAGE}" >/dev/null 2>&1 \
+  || die "failed to pull the pinned actionlint image ${ACTIONLINT_DIGEST}"
+
 version_output="$(
   docker run \
     --rm \
@@ -21,10 +26,10 @@ version_output="$(
     --security-opt no-new-privileges \
     --entrypoint /usr/local/bin/actionlint \
     "${ACTIONLINT_IMAGE}" \
-    -version
+    -version 2>&1
 )"
 
-detected_version="$(printf '%s\n' "${version_output}" | sed -n '1p')"
+detected_version="$(printf '%s\n' "${version_output}" | sed -n "/^${ACTIONLINT_VERSION}$/ { p; q; }")"
 [[ "${detected_version}" == "${ACTIONLINT_VERSION}" ]] || {
   die "actionlint version mismatch: expected ${ACTIONLINT_VERSION}, detected ${detected_version:-unknown}"
 }

@@ -7,18 +7,18 @@ date: 2026-07-13
 owners:
   - placepick-backend
 related:
-  - ../work-records/WI-0001-agentic-development-environment.md
+  - ../archive/work-records/WI-0001-agentic-development-environment.md
   - ../adr/ADR-0001-java17-baseline.md
   - ../adr/ADR-0002-compose-testcontainers-boundary.md
   - ../adr/ADR-0003-github-flow-documentation-traceability.md
-  - ../troubleshooting/TS-0001-wiremock-dependency-conflict.md
-  - ../troubleshooting/TS-0002-testcontainers-digest-compatibility.md
-  - ../troubleshooting/TS-0003-devcontainer-yarn-apt-key.md
-  - ../troubleshooting/TS-0004-devcontainer-gradle-cache-permission.md
-  - ../troubleshooting/TS-0005-gradle-cross-platform-verification-metadata.md
-  - ../troubleshooting/TS-0006-spring-boot-actuator-access.md
-  - ../troubleshooting/TS-0007-k6-non-root-script-permission.md
-  - ../troubleshooting/TS-0008-gitleaks-pr-token-permission.md
+  - ../archive/troubleshooting/TS-0001-wiremock-dependency-conflict.md
+  - ../archive/troubleshooting/TS-0002-testcontainers-digest-compatibility.md
+  - ../archive/troubleshooting/TS-0003-devcontainer-yarn-apt-key.md
+  - ../archive/troubleshooting/TS-0004-devcontainer-gradle-cache-permission.md
+  - ../archive/troubleshooting/TS-0005-gradle-cross-platform-verification-metadata.md
+  - ../archive/troubleshooting/TS-0006-spring-boot-actuator-access.md
+  - ../archive/troubleshooting/TS-0007-k6-non-root-script-permission.md
+  - ../archive/troubleshooting/TS-0008-gitleaks-pr-token-permission.md
 ---
 
 # CASE-0001 Java 17 기반 재현 가능한 Agentic 개발 환경 구축
@@ -61,8 +61,8 @@ verification metadata, image tag·digest를 함께 고정해 선언과 실제 �
 그 과정에서 기반 이미지의 무효 Yarn APT source, root 소유 Gradle volume, Linux에서만
 필요한 검증 metadata, Spring Boot 테스트의 observability 안전 기본값, 비대화형 k6의
 TTY·디렉터리 권한 문제가 차례로 드러났다. 각 문제는 관찰 → 가설 → 독립 검증 → 최소
-수정 → 회귀 검증 순서로 해결했고 [TS-0003](../troubleshooting/TS-0003-devcontainer-yarn-apt-key.md)부터
-[TS-0007](../troubleshooting/TS-0007-k6-non-root-script-permission.md)까지 재현 조건과
+수정 → 회귀 검증 순서로 해결했고 [TS-0003](../archive/troubleshooting/TS-0003-devcontainer-yarn-apt-key.md)부터
+[TS-0007](../archive/troubleshooting/TS-0007-k6-non-root-script-permission.md)까지 재현 조건과
 제외한 대안을 분리해 기록했다.
 
 ## 결과와 증거
@@ -85,7 +85,7 @@ TTY·디렉터리 권한 문제가 차례로 드러났다. 각 문제는 관찰 
 k6의 단일 요청 시간은 하네스 실행 증거일 뿐 처리량이나 추천 API 성능 성과가 아니다.
 도메인 계약이 아직 없으므로 추천 API 부하 시나리오와 목표 수치를 만들지 않았다.
 전체 명령과 상세 문제 해결 로그는
-[WI-0001](../work-records/WI-0001-agentic-development-environment.md)에서 추적할 수 있다.
+[WI-0001](../archive/work-records/WI-0001-agentic-development-environment.md)에서 추적할 수 있다.
 
 ## 개인 기여와 학습
 

@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public record GeneratedReasonBatch(String schemaVersion, List<PlaceReasonStatements> places) {
 
-    public static final String SCHEMA_VERSION = "placepick.reason-statements.v1";
+    public static final String SCHEMA_VERSION = "placepick.reason-statements.v2";
 
     public GeneratedReasonBatch {
         schemaVersion = Objects.requireNonNull(schemaVersion, "schemaVersion");

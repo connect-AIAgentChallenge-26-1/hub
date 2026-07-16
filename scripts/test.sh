@@ -14,7 +14,9 @@ case "${test_kind}" in
     ;;
   integration)
     assert_docker_engine
-    export TESTCONTAINERS_HOST_OVERRIDE="${TESTCONTAINERS_HOST_OVERRIDE:-host.docker.internal}"
+    if [[ -z "${TESTCONTAINERS_HOST_OVERRIDE:-}" && -f '/.dockerenv' ]]; then
+      export TESTCONTAINERS_HOST_OVERRIDE='host.docker.internal'
+    fi
     log 'running Testcontainers and WireMock integration/contract tests'
     gradlew :backend:integrationTest
     ;;

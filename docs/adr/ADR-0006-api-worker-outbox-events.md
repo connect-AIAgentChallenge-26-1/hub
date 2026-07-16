@@ -8,7 +8,7 @@ owners:
   - placepick-team
 related:
   - ../roadmap.md
-  - ../work-records/WI-0002-service-completion-backlog.md
+  - ../archive/work-records/WI-0002-service-completion-backlog.md
 ---
 
 # ADR-0006 API·Worker 역할과 transactional outbox 이벤트 전달

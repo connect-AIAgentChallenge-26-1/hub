@@ -21,16 +21,41 @@ management:
       discovery:
         enabled: false
       exposure:
-        include: health,prometheus
+        include: health,info,prometheus
   endpoint:
     health:
       access: read-only
       probes:
         enabled: true
       show-details: never
+    info:
+      access: read-only
     prometheus:
       access: read-only
 
 server:
   port: ${SERVER_PORT:8080}
   shutdown: graceful
+
+placepick:
+  analytics:
+    retention: ${PLACEPICK_PRODUCT_EVENT_RETENTION:P30D}
+    cleanup-delay: ${PLACEPICK_PRODUCT_EVENT_CLEANUP_DELAY:PT1H}
+  rate-limit:
+    window: ${PLACEPICK_RATE_LIMIT_WINDOW:PT1M}
+    session-requests: ${PLACEPICK_RATE_LIMIT_SESSION_REQUESTS:60}
+    ip-requests: ${PLACEPICK_RATE_LIMIT_IP_REQUESTS:120}
+    maximum-buckets: ${PLACEPICK_RATE_LIMIT_MAXIMUM_BUCKETS:20000}
+    idle-retention: ${PLACEPICK_RATE_LIMIT_IDLE_RETENTION:PT10M}
+    cleanup-delay: ${PLACEPICK_RATE_LIMIT_CLEANUP_DELAY:PT1M}
+  provider:
+    maximum-concurrency: ${PLACEPICK_PROVIDER_MAXIMUM_CONCURRENCY:2}
+    acquire-timeout: ${PLACEPICK_PROVIDER_ACQUIRE_TIMEOUT:PT0.1S}
+  metrics:
+    vote-contention-threshold: ${PLACEPICK_VOTE_CONTENTION_THRESHOLD:PT0.1S}
+  retention:
+    processed-event: ${PLACEPICK_PROCESSED_EVENT_RETENTION:PT24H}
+    published-outbox: ${PLACEPICK_PUBLISHED_OUTBOX_RETENTION:PT24H}
+    cleanup-delay: ${PLACEPICK_RETENTION_CLEANUP_DELAY:PT1H}
+
+spring.lifecycle.timeout-per-shutdown-phase: 25s

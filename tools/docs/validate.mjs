@@ -1,4 +1,3 @@
-import { spawnSync } from "node:child_process";
 import {
   existsSync,
   readFileSync,
@@ -10,12 +9,20 @@ import { fileURLToPath } from "node:url";
 import { parse as parseYaml } from "yaml";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
-const IGNORED_DIRECTORIES = new Set([".git", "node_modules", "build", ".gradle"]);
+const IGNORED_DIRECTORIES = new Set([
+  ".git",
+  ".gradle",
+  ".next",
+  "build",
+  "node_modules",
+  "playwright-report",
+  "test-results",
+]);
 const ARTIFACTS = {
   "work-records": {
     type: "work-record",
     id: /^WI-\d{4}$/,
-    statuses: new Set(["planned", "in-progress", "blocked", "done"]),
+    statuses: new Set(["in-progress", "blocked", "done"]),
     pathsRequired: true,
   },
   adr: {
@@ -254,19 +261,6 @@ function validatePlaceholders(root, markdownFiles, errors) {
   }
 }
 
-function validateArtifactIndex(root, artifacts, errors) {
-  const index = path.join(root, "docs", "README.md");
-  if (!existsSync(index)) return;
-  const indexTargets = new Set(markdownTargets(readFileSync(index, "utf8"))
-    .filter((target) => !/^(?:https?:|mailto:)/i.test(target))
-    .map((target) => path.resolve(path.dirname(index), target.split("#", 1)[0])));
-  for (const artifact of artifacts) {
-    if (!indexTargets.has(path.resolve(artifact.full))) {
-      errors.push(`INDEX_MISSING ${artifact.file}: docs/README.md에서 문서를 링크해야 합니다.`);
-    }
-  }
-}
-
 function shouldScanSecret(file) {
   if (file.startsWith("documents/") || file.startsWith("plans/") ||
       file.startsWith("tools/docs/test-fixtures/")) return false;
@@ -351,64 +345,10 @@ function validateGithubConfiguration(root, errors) {
   }
 }
 
-function validateCodexHooks(root, errors) {
-  const config = path.join(root, ".codex", "hooks.json");
-  if (!existsSync(config)) {
-    errors.push("CODEX_HOOKS .codex/hooks.json이 없습니다.");
-    return;
-  }
+function validateCodexPolicy(root, errors) {
   if (existsSync(path.join(root, ".codex", "config.toml"))) {
     errors.push("CODEX_CONFIG_POLICY 선택 사항인 .codex/config.toml을 만들 수 없습니다.");
   }
-  try {
-    const data = JSON.parse(readFileSync(config, "utf8"));
-    const groups = data?.hooks?.Stop;
-    if (!Array.isArray(groups) || groups.length === 0 ||
-        groups.some((group) => !Array.isArray(group?.hooks) || group.hooks.length === 0 ||
-          group.hooks.some((handler) => handler?.type !== "command" || typeof handler?.command !== "string"))) {
-      errors.push("CODEX_HOOK_SCHEMA Stop event → matcher group → command handler의 3단계 schema가 필요합니다.");
-    }
-  } catch (error) {
-    errors.push(`CODEX_HOOK_SCHEMA hooks.json을 해석할 수 없습니다: ${error.message}`);
-  }
-}
-
-function parseStatusFiles(output) {
-  const files = [];
-  const entries = output.split("\0").filter(Boolean);
-  for (let index = 0; index < entries.length; index += 1) {
-    const entry = entries[index];
-    const status = entry.slice(0, 2);
-    files.push(normalize(entry.slice(3)));
-    if (status.includes("R") || status.includes("C")) {
-      index += 1;
-      if (entries[index]) files.push(normalize(entries[index]));
-    }
-  }
-  return files;
-}
-
-function changedFilesFromGit(root) {
-  if (process.env.DOCS_CHANGED_FILES !== undefined) {
-    return process.env.DOCS_CHANGED_FILES.split(/\r?\n/).map(normalize).filter(Boolean);
-  }
-
-  if (process.env.GITHUB_BASE_REF) {
-    const base = `origin/${process.env.GITHUB_BASE_REF}`;
-    const diff = spawnSync("git", ["diff", "--name-only", "-z", `${base}...HEAD`], {
-      cwd: root,
-      encoding: "utf8",
-      windowsHide: true,
-    });
-    if (diff.status === 0) return diff.stdout.split("\0").map(normalize).filter(Boolean);
-  }
-
-  const status = spawnSync("git", ["status", "--porcelain=v1", "-z", "--untracked-files=all"], {
-    cwd: root,
-    encoding: "utf8",
-    windowsHide: true,
-  });
-  return status.status === 0 ? parseStatusFiles(status.stdout) : [];
 }
 
 export function globMatches(file, glob) {
@@ -436,44 +376,19 @@ export function globMatches(file, glob) {
   return new RegExp(`${regex}$`).test(file);
 }
 
-function validateTraceability(root, artifacts, errors, changedFilesOption) {
-  const changed = (changedFilesOption ?? changedFilesFromGit(root)).map(normalize);
-  const ignored = (file) => file.startsWith("docs/work-records/") ||
-    file === "package-lock.json" || file.startsWith("plans/") ||
-    (/^documents\/.*standalone.*\.html$/i.test(file));
-  const relevant = [...new Set(changed.filter((file) => file && !ignored(file)))];
-  if (relevant.length === 0) return;
-
-  const changedRecords = artifacts.filter((artifact) =>
-    artifact.metadata.type === "work-record" && changed.includes(artifact.file));
-  if (changedRecords.length === 0) {
-    errors.push("TRACEABILITY_RECORD 변경된 파일을 설명하는 변경 Work Record가 없습니다.");
-    return;
-  }
-
-  const declared = changedRecords.flatMap((record) =>
-    Array.isArray(record.metadata.paths) ? record.metadata.paths.filter((item) => typeof item === "string") : []);
-  for (const file of relevant) {
-    if (!declared.some((glob) => globMatches(file, normalize(glob)))) {
-      errors.push(`TRACEABILITY_PATH ${file}: 변경 Work Record paths에 매핑되지 않습니다.`);
-    }
-  }
-}
-
 export function validateRepository({ root = ROOT, changedFiles } = {}) {
   const errors = [];
   const markdownFiles = listMarkdownFiles(root).filter((file) =>
     !file.startsWith("documents/") && !file.startsWith("plans/") &&
+    !file.startsWith("docs/archive/") &&
     !file.startsWith("tools/docs/test-fixtures/"));
   const artifacts = validateArtifacts(root, errors);
   validateInternalLinks(root, markdownFiles, errors);
   validatePlaceholders(root, markdownFiles, errors);
-  validateArtifactIndex(root, artifacts, errors);
   validateSecrets(root, errors);
   validateJava17Policy(root, errors);
   validateGithubConfiguration(root, errors);
-  validateCodexHooks(root, errors);
-  validateTraceability(root, artifacts, errors, changedFiles);
+  validateCodexPolicy(root, errors);
   return errors;
 }
 

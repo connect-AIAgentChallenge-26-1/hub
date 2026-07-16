@@ -10,4 +10,4 @@ assert_docker_engine
 log 'stopping and removing non-development PlacePick services; named data volumes are preserved'
 # Keep the current Dev Container alive so this command is safe from its terminal.
 compose_full rm --stop --force \
-  postgres redis mock-naver mock-llm prometheus grafana k6
+  postgres redis prometheus grafana

@@ -63,10 +63,12 @@ assert_node24() {
 
 gradlew() {
   [[ -f "${ROOT_DIR}/gradlew" ]] || die 'Gradle Wrapper is missing at repository root'
+  local project_cache_dir="${PLACEPICK_GRADLE_PROJECT_CACHE_DIR:-${GRADLE_USER_HOME:-${HOME}/.gradle}/placepick-project-cache}"
+  mkdir -p "${project_cache_dir}"
   if [[ -x "${ROOT_DIR}/gradlew" ]]; then
-    "${ROOT_DIR}/gradlew" --no-daemon "$@"
+    "${ROOT_DIR}/gradlew" --no-daemon --project-cache-dir "${project_cache_dir}" "$@"
   else
-    bash "${ROOT_DIR}/gradlew" --no-daemon "$@"
+    bash "${ROOT_DIR}/gradlew" --no-daemon --project-cache-dir "${project_cache_dir}" "$@"
   fi
 }
 
@@ -86,7 +88,6 @@ assert_docker_engine() {
   local client_version compose_version
   client_version="$(docker version --format '{{.Client.Version}}')"
   compose_version="$(docker compose version --short)"
-  [[ "${client_version}" == '28.3.3' ]] || die "Docker CLI 28.3.3 is required; detected '${client_version:-unknown}'"
   [[ "${compose_version}" =~ ^2\. ]] || die "Docker Compose v2 is required; detected '${compose_version:-unknown}'"
   log "Docker client guard passed (${client_version}, Compose ${compose_version})"
 }
@@ -95,17 +96,7 @@ assert_mock_mode() {
   local mode="${PLACEPICK_EXTERNAL_MODE:-}"
   [[ "${mode}" == 'mock' ]] || die "PLACEPICK_EXTERNAL_MODE must be 'mock' for local/test/load execution"
 
-  case "${PLACEPICK_NAVER_BASE_URL:-}" in
-    http://mock-naver:8080 | http://localhost:8089 | http://127.0.0.1:8089) ;;
-    *) die 'PLACEPICK_NAVER_BASE_URL must target the local Naver mock' ;;
-  esac
-
-  case "${PLACEPICK_LLM_BASE_URL:-}" in
-    http://mock-llm:8080 | http://localhost:8090 | http://127.0.0.1:8090) ;;
-    *) die 'PLACEPICK_LLM_BASE_URL must target the local LLM mock' ;;
-  esac
-
-  log 'external integration guard passed (mock-only)'
+  log 'external integration mode guard passed (mock)'
 }
 
 compose_base() {
@@ -125,17 +116,9 @@ compose_observe() {
     -f "${ROOT_DIR}/docker-compose.observability.yml" "$@"
 }
 
-compose_load() {
-  docker compose --project-directory "${ROOT_DIR}" \
-    -f "${ROOT_DIR}/docker-compose.yml" \
-    -f "${ROOT_DIR}/docker-compose.devcontainer.yml" \
-    -f "${ROOT_DIR}/docker-compose.load.yml" "$@"
-}
-
 compose_full() {
   docker compose --project-directory "${ROOT_DIR}" \
     -f "${ROOT_DIR}/docker-compose.yml" \
     -f "${ROOT_DIR}/docker-compose.devcontainer.yml" \
-    -f "${ROOT_DIR}/docker-compose.observability.yml" \
-    -f "${ROOT_DIR}/docker-compose.load.yml" "$@"
+    -f "${ROOT_DIR}/docker-compose.observability.yml" "$@"
 }

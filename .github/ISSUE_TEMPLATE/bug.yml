@@ -1,5 +1,5 @@
-name: Bug
-description: 재현 증거와 영향 범위가 있는 결함을 보고합니다.
+name: 버그
+description: 재현 가능한 결함과 사용자 영향을 보고합니다.
 title: "fix: "
 labels:
   - bug
@@ -15,7 +15,7 @@ body:
     id: reproduction
     attributes:
       label: 재현 방법과 환경
-      description: 명령, 입력, 프로필, 버전과 최소 재현 단계를 적어주세요. 비밀값은 제거하세요.
+      description: 명령, 입력, profile, 버전과 최소 재현 단계를 적어주세요. 비밀값은 제거하세요.
     validations:
       required: true
   - type: textarea
@@ -28,14 +28,22 @@ body:
   - type: textarea
     id: risk
     attributes:
-      label: 잠정 위험과 회귀 기준
+      label: 위험과 회귀 기준
       description: 영향 범위와 수정 후 반드시 검증할 시나리오를 적어주세요.
     validations:
       required: true
-  - type: input
-    id: work_record
+  - type: textarea
+    id: related
     attributes:
-      label: Work Record 또는 Troubleshooting
-      placeholder: WI-0001 / TS-0001
+      label: 관련 Issue·문서
+      description: 관련 Issue, PR, WI 또는 TS가 이미 있으면 링크합니다. 새 문서를 먼저 만들 필요는 없습니다.
+      placeholder: "#123, PR URL, WI-0001"
     validations:
-      required: true
+      required: false
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: 안전 확인
+      options:
+        - label: 로그와 첨부 파일에서 비밀값·개인정보를 제거했습니다.
+          required: true

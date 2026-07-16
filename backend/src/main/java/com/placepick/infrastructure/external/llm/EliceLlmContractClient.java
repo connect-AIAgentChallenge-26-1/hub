@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.placepick.infrastructure.external.http.NoRetryHttpRequestFactory;
+import com.placepick.infrastructure.external.http.DirectProviderRestClientFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -19,7 +19,6 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.Set;
 import java.util.UUID;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpResponse;
@@ -238,11 +237,11 @@ public final class EliceLlmContractClient {
         Duration connectTimeout,
         Duration responseTimeout
     ) {
-        return RestClient.builder()
-            .requestFactory(NoRetryHttpRequestFactory.create(connectTimeout, responseTimeout))
-            .defaultHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token)
-            .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
-            .build();
+        return DirectProviderRestClientFactory.bearerJson(
+            token,
+            connectTimeout,
+            responseTimeout
+        );
     }
 
     private ProviderResponse readResponse(
