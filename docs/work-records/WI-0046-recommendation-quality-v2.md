@@ -48,8 +48,9 @@ Naver Local은 공식 계약상 한 번에 최대 다섯 항목만 반환하지�
 - 동시성 permit 거부가 Provider latency에 0초 표본으로 섞이지 않는다.
 - 검색어·장소·주소·URL·prompt·응답·비밀은 일반 telemetry와 test report에 남지 않는다.
 
-두 번째 단계에서는 다중 검색·부분 결과·다른 추천과 점수 v2를 구현한다. 후보별 이유 생성과
-OTLP 운영 관측은 각각 다음 독립 변경으로 남겨 회귀 원인과 검증 증거를 분리한다.
+두 번째 단계에서는 다중 검색·부분 결과·다른 추천과 점수 v2를 구현했다. 세 번째 단계에서는
+후보별 이유 v3를 독립 변경으로 구현한다. 조건 추출 복구, Embedding shadow와 OTLP 운영
+관측은 이후 변경으로 남겨 회귀 원인과 검증 증거를 분리한다.
 
 ## 판단 기준과 선택
 
@@ -133,6 +134,38 @@ Live Playground와 정식 제품 흐름 4개를 통과했다. 제품 흐름은 �
 409, 두 세션 투표·확정을 검증했다. 이 자동 검증은 Mock만 사용해 실제 Naver·Elice 호출은
 0건이었다.
 
+세 번째 PR은 Top 3 batch와 전체 fallback 경계를 후보별 이유 v3로 교체한다.
+
+- 최종 후보마다 `placepick.reason-statements.v3` 요청을 독립 생성한다. 요청에는 확정 조건
+  allowlist, 한 후보의 이름·category, `p1`~`p3` slot과 `pN-cM` claim만 포함한다.
+  DB UUID, 내부 evidence ID, 점수·순위와 다른 후보 문맥은 Elice에 보내지 않는다.
+- 후보 요청은 최대 세 개를 병렬 실행한다. HTTP adapter retry는 0회이고, 후보당 호출은
+  최대 두 번이다. 400·401·403은 재시도하지 않으며 429·5xx·timeout과 후보 단위
+  schema·claim·grounding 거부만 한 번 재생성한다.
+- 두 번째 실패는 해당 후보만 검증된 Local·Blog claim 기반 문장으로 바꾸고 다른 후보의
+  생성 결과는 보존한다. envelope·root schema 실패는 결과 전체를 template으로 바꾸며,
+  null outcome과 예상하지 못한 내부 예외는 Job 실패 경계로 전파한다.
+- 결과는 후보별 `reasonSource=GENERATED|TEMPLATE`를 보존한다. 후보 수가 `N`이면 실제 이유
+  호출 수는 `N..2N`이며 시도 횟수·재시도 회복·최종 source를 폐쇄형 metric으로 기록한다.
+- Naver와 Elice permit을 기본 6·4의 독립 bulkhead로 분리해 한 Provider 포화가 다른
+  Provider를 막지 않게 하고, 후보별 이유 병렬도는 한 추천 안에서 최대 3으로 제한한다.
+- 단위·WireMock 통합 fixture는 후보 독립성, 최대 병렬도, 재시도·무재시도 분류,
+  `Retry-After`, 부분·전체 fallback, slot/claim 소유권, Blog 출처 귀속, 일반 단어만
+  공유한 근거와 금지 속성 거부, redirect·Responses fallback·과대 응답·timeout 차단을
+  검증하도록 구성한다.
+- v3 claim 정책 Eval은 27개 기준 시나리오에 8개 안전한 문장 변형을 적용해 216개
+  결정적 사례를 검증한다. 출처가 다른 claim, 일반 단어만 겹친 문장, 근거 없는 민감
+  속성·점수·순위·prompt injection은 허용하지 않는다.
+
+세 번째 단계의 전체 검증에서는 Java 단위 201개, Testcontainers·WireMock 통합 173개,
+Eval suite 7개와 프런트 Vitest 42개가 실패 없이 통과했다. 문서 lint·정책·음성 fixture,
+Compose, ShellCheck, actionlint, production 프런트 build와 207개 생성 test report의
+비밀·payload scan도 통과했다. 일반 `make check` 경로의 실제 Provider 호출은 0건이다.
+
+2026-07-16 CASE-0002의 실제 Provider 실행은 당시 v2 batch를 통과한 역사적 증거다. 이번
+v3의 자동 검증과 혼동하지 않으며, v3 실제 Provider 품질은 별도 `live-quality-eval`
+campaign을 실행하기 전까지 완료로 주장하지 않는다.
+
 ## AI 사용과 사람의 검증
 
 AI에는 코드 경로 감사, 진단 taxonomy와 테스트 초안을 위임한다. 사람은 진단 코드의 공개
@@ -140,8 +173,9 @@ AI에는 코드 경로 감사, 진단 taxonomy와 테스트 초안을 위임한�
 
 ## 남은 위험과 재검토 조건
 
-검색·랭킹 v2와 부분·대체 추천의 자동 계약은 완료됐지만 PP-044 전체가 끝난 것은 아니다.
-후보별 이유 v3의 독립 retry/fallback, Embedding shadow 평가, production OTLP와 Grafana Cloud,
-실제 비개인성 시나리오 품질 campaign은 후속 변경으로 남는다. 실제 campaign 전에는 이번
-변경이 실제 후보 성공률·이유 생성률 목표를 달성했다고 주장하지 않는다. Provider 계약,
-데이터 이용 조건 또는 무료 관측 한도가 바뀌면 호출 예산·telemetry 수집 범위를 재검토한다.
+검색·랭킹 v2와 부분·대체 추천, 후보별 이유 v3 자동 계약을 구현했지만 PP-044 전체가 끝난
+것은 아니다. 조건 추출의 schema·일시 장애 1회 복구와 manual Draft 경계, Embedding shadow
+평가, production OTLP와 Grafana Cloud, 실제 비개인성 시나리오 품질 campaign은 후속
+변경으로 남는다. 실제 campaign 전에는 이번 변경이 실제 후보 성공률·이유 생성률 목표를
+달성했다고 주장하지 않는다. Provider 계약, 데이터 이용 조건 또는 무료 관측 한도가
+바뀌면 호출 예산·telemetry 수집 범위를 재검토한다.

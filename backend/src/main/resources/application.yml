@@ -49,7 +49,9 @@ placepick:
     idle-retention: ${PLACEPICK_RATE_LIMIT_IDLE_RETENTION:PT10M}
     cleanup-delay: ${PLACEPICK_RATE_LIMIT_CLEANUP_DELAY:PT1M}
   provider:
-    maximum-concurrency: ${PLACEPICK_PROVIDER_MAXIMUM_CONCURRENCY:2}
+    naver-maximum-concurrency: ${PLACEPICK_PROVIDER_NAVER_MAXIMUM_CONCURRENCY:6}
+    elice-maximum-concurrency: ${PLACEPICK_PROVIDER_ELICE_MAXIMUM_CONCURRENCY:4}
+    mock-maximum-concurrency: ${PLACEPICK_PROVIDER_MOCK_MAXIMUM_CONCURRENCY:8}
     acquire-timeout: ${PLACEPICK_PROVIDER_ACQUIRE_TIMEOUT:PT0.1S}
   recommendation:
     retrieval:

@@ -12,12 +12,19 @@ public class ObservabilityConfiguration {
     @Bean
     ProviderCallMetrics providerCallMetrics(
         MeterRegistry registry,
-        @Value("${placepick.provider.maximum-concurrency:2}") int maximumConcurrency,
+        @Value("${placepick.provider.naver-maximum-concurrency:6}")
+        int naverMaximumConcurrency,
+        @Value("${placepick.provider.elice-maximum-concurrency:4}")
+        int eliceMaximumConcurrency,
+        @Value("${placepick.provider.mock-maximum-concurrency:8}")
+        int mockMaximumConcurrency,
         @Value("${placepick.provider.acquire-timeout:PT0.1S}") String acquireTimeout
     ) {
         return new ProviderCallMetrics(
             registry,
-            maximumConcurrency,
+            naverMaximumConcurrency,
+            eliceMaximumConcurrency,
+            mockMaximumConcurrency,
             Duration.parse(acquireTimeout)
         );
     }

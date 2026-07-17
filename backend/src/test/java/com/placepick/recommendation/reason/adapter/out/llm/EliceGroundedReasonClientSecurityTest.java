@@ -7,7 +7,8 @@ import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCond
 import com.placepick.recommendation.condition.domain.PlaceType;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationCommand;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationOutcome;
-import com.placepick.recommendation.reason.domain.GeneratedReasonBatch;
+import com.placepick.recommendation.reason.domain.GeneratedReasonResult;
+import com.placepick.recommendation.reason.domain.GeneratedReasonStatement;
 import com.placepick.recommendation.reason.domain.ReasonEvidence;
 import com.placepick.recommendation.reason.domain.ReasonEvidenceType;
 import com.placepick.recommendation.reason.domain.ReasonPlaceContext;
@@ -61,92 +62,78 @@ class EliceGroundedReasonClientSecurityTest {
     }
 
     @Test
-    void strictSchemaClosesEveryObjectAndPinsTheCurrentPlaceAndEvidenceIds() {
+    void strictSchemaClosesEveryObjectAndPinsOnlyTheCurrentSlotAndClaimIds() {
         Map<String, Object> schema = EliceGroundedReasonClient.strictReasonSchema(command());
 
         assertThat(schema).containsEntry("additionalProperties", false);
         @SuppressWarnings("unchecked")
         Map<String, Object> properties = (Map<String, Object>) schema.get("properties");
+        assertThat(properties).containsOnlyKeys("schemaVersion", "slot", "statements");
         @SuppressWarnings("unchecked")
-        Map<String, Object> places = (Map<String, Object>) properties.get("places");
+        Map<String, Object> slot = (Map<String, Object>) properties.get("slot");
+        assertThat(slot.get("enum")).isEqualTo(List.of("p1"));
+
         @SuppressWarnings("unchecked")
-        Map<String, Object> place = (Map<String, Object>) places.get("items");
-        assertThat(place).containsEntry("additionalProperties", false);
-        @SuppressWarnings("unchecked")
-        Map<String, Object> placeProperties = (Map<String, Object>) place.get("properties");
-        @SuppressWarnings("unchecked")
-        Map<String, Object> placeId = (Map<String, Object>) placeProperties.get("placeId");
-        List<String> actualPlaceIds = ((List<?>) placeId.get("enum")).stream()
-            .map(Object::toString)
-            .toList();
-        assertThat(actualPlaceIds).containsExactly(
-            "00000000-0000-4000-8000-000000000001",
-            "00000000-0000-4000-8000-000000000002",
-            "00000000-0000-4000-8000-000000000003"
-        );
-        @SuppressWarnings("unchecked")
-        Map<String, Object> statements = (Map<String, Object>) placeProperties.get("statements");
+        Map<String, Object> statements = (Map<String, Object>) properties.get("statements");
         @SuppressWarnings("unchecked")
         Map<String, Object> statement = (Map<String, Object>) statements.get("items");
+        assertThat(statement).containsEntry("additionalProperties", false);
         @SuppressWarnings("unchecked")
         Map<String, Object> statementProperties =
             (Map<String, Object>) statement.get("properties");
+        assertThat(statementProperties).containsOnlyKeys("text", "claimIds");
         @SuppressWarnings("unchecked")
-        Map<String, Object> text = (Map<String, Object>) statementProperties.get("text");
-        assertThat(text).containsOnlyKeys("type").containsEntry("type", "string");
+        Map<String, Object> claimIds =
+            (Map<String, Object>) statementProperties.get("claimIds");
         @SuppressWarnings("unchecked")
-        Map<String, Object> evidenceIds =
-            (Map<String, Object>) statementProperties.get("evidenceIds");
-        assertThat(evidenceIds).containsEntry("minItems", 1).containsEntry("maxItems", 3);
-        assertThat(evidenceIds).doesNotContainKey("uniqueItems");
+        Map<String, Object> claimItem = (Map<String, Object>) claimIds.get("items");
+        assertThat(claimItem.get("enum")).isEqualTo(List.of("p1-c1", "p1-c2"));
+        assertThat(claimIds).containsEntry("minItems", 1).containsEntry("maxItems", 3);
+        assertThat(schema.toString())
+            .doesNotContain("placeId", "evidenceId", "score", "rank");
     }
 
     @Test
-    void commandAndOutcomeToStringDoNotExposePromptOrCompletionData() {
+    void commandAndOutcomeToStringDoNotExposeCandidateOrClaimData() {
         ReasonGenerationCommand command = command();
-        GeneratedReasonBatch batch = new GeneratedReasonBatch(
-            GeneratedReasonBatch.SCHEMA_VERSION,
-            List.of()
-        );
-
-        assertThat(command.toString()).doesNotContain("서울", "카페", "local:1");
-        assertThat(batch.toString()).doesNotContain("places=[]");
-        assertThat(ReasonGenerationOutcome.generated(batch).toString())
-            .doesNotContain("places", "서울", "카페");
-    }
-
-    @Test
-    void strictSchemaUsesTheExactPartialPlaceCount() {
-        ReasonGenerationCommand full = command();
-        ReasonGenerationCommand partial = new ReasonGenerationCommand(
-            full.condition(),
-            List.of(full.places().get(0))
-        );
-
-        Map<String, Object> schema = EliceGroundedReasonClient.strictReasonSchema(partial);
-        @SuppressWarnings("unchecked")
-        Map<String, Object> properties = (Map<String, Object>) schema.get("properties");
-        @SuppressWarnings("unchecked")
-        Map<String, Object> places = (Map<String, Object>) properties.get("places");
-
-        assertThat(places).containsEntry("minItems", 1).containsEntry("maxItems", 1);
-    }
-
-    private ReasonGenerationCommand command() {
-        List<ReasonPlaceContext> places = java.util.stream.IntStream.rangeClosed(1, 3)
-            .mapToObj(index -> new ReasonPlaceContext(
-                UUID.fromString("00000000-0000-4000-8000-00000000000" + index),
-                "카페 " + index,
-                "카페",
-                List.of(new ReasonEvidence(
-                    "local:" + index,
-                    ReasonEvidenceType.LOCAL,
-                    "카페 " + index,
-                    "서울 카페"
-                ))
+        GeneratedReasonResult result = new GeneratedReasonResult(
+            GeneratedReasonResult.SCHEMA_VERSION,
+            "p1",
+            List.of(new GeneratedReasonStatement(
+                "블로그 검색 결과에서 조용한 공간으로 소개되었습니다.",
+                List.of("p1-c2")
             ))
-            .toList();
-        return new ReasonGenerationCommand(
+        );
+
+        assertThat(command.toString())
+            .doesNotContain("서울", "카페 1", "local-sensitive", "blog-sensitive");
+        assertThat(result.toString())
+            .doesNotContain("블로그 검색 결과", "p1-c2");
+        assertThat(ReasonGenerationOutcome.generated(result).toString())
+            .doesNotContain("블로그 검색 결과", "p1-c2", "카페 1");
+    }
+
+    private static ReasonGenerationCommand command() {
+        ReasonPlaceContext place = new ReasonPlaceContext(
+            UUID.fromString("00000000-0000-4000-8000-000000000001"),
+            "카페 1",
+            "카페>디저트",
+            List.of(
+                new ReasonEvidence(
+                    "local-sensitive",
+                    ReasonEvidenceType.LOCAL,
+                    "카페 1",
+                    "서울 강남구 카페"
+                ),
+                new ReasonEvidence(
+                    "blog-sensitive",
+                    ReasonEvidenceType.BLOG,
+                    "카페 1 방문 기록",
+                    "카페 1 조용한 공간"
+                )
+            )
+        );
+        return ReasonGenerationCommand.forPlace(
             new ConfirmedRecommendationCondition(
                 "서울",
                 PlaceType.CAFE,
@@ -157,7 +144,8 @@ class EliceGroundedReasonClientSecurityTest {
                 List.of(),
                 List.of()
             ),
-            places
+            1,
+            place
         );
     }
 }

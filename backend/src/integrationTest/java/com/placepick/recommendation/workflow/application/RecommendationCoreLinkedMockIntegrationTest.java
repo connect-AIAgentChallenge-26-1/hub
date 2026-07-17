@@ -30,14 +30,14 @@ import com.placepick.recommendation.condition.domain.DraftRecommendationConditio
 import com.placepick.recommendation.condition.infrastructure.mock.DeterministicConditionExtractionAdapter;
 import com.placepick.recommendation.domain.scoring.EvidenceLevel;
 import com.placepick.recommendation.reason.application.GroundedReasonService;
-import com.placepick.recommendation.reason.application.ReasonStatementPolicy;
 import com.placepick.recommendation.reason.application.port.out.GroundedReasonGenerationPort;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationCommand;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationErrorCode;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationOutcome;
-import com.placepick.recommendation.reason.domain.GeneratedReasonBatch;
-import com.placepick.recommendation.reason.domain.PlaceReasonStatements;
-import com.placepick.recommendation.reason.domain.ReasonStatement;
+import com.placepick.recommendation.reason.domain.GeneratedReasonResult;
+import com.placepick.recommendation.reason.domain.GeneratedReasonStatement;
+import com.placepick.recommendation.reason.domain.ReasonClaim;
+import com.placepick.recommendation.reason.domain.ReasonEvidenceType;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -63,11 +63,11 @@ class RecommendationCoreLinkedMockIntegrationTest {
         assertThat(result.places()).hasSize(3);
         assertThat(result.reasonFallback()).isFalse();
         assertThat(result.degraded()).isFalse();
-        assertThat(result.providerCalls()).isEqualTo(11);
-        assertThat(fixture.extractionCalls.get() + result.providerCalls()).isEqualTo(12);
+        assertThat(result.providerCalls()).isEqualTo(13);
+        assertThat(fixture.extractionCalls.get() + result.providerCalls()).isEqualTo(14);
         assertThat(fixture.placePort.queries).hasSize(2);
         assertThat(fixture.blogPort.queries).hasSize(8);
-        assertThat(fixture.reasonPort.calls.get()).isEqualTo(1);
+        assertThat(fixture.reasonPort.calls.get()).isEqualTo(3);
         assertConfirmedOnlyBoundary();
     }
 
@@ -84,10 +84,10 @@ class RecommendationCoreLinkedMockIntegrationTest {
         assertThat(result.relaxed()).isTrue();
         assertThat(result.placeSearchCalls()).isEqualTo(6);
         assertThat(result.blogSearchCalls()).isEqualTo(5);
-        assertThat(result.providerCalls()).isEqualTo(12);
-        assertThat(fixture.extractionCalls.get() + result.providerCalls()).isEqualTo(13);
+        assertThat(result.providerCalls()).isEqualTo(14);
+        assertThat(fixture.extractionCalls.get() + result.providerCalls()).isEqualTo(15);
         assertThat(fixture.placePort.queries).hasSize(6);
-        assertThat(fixture.reasonPort.calls.get()).isEqualTo(1);
+        assertThat(fixture.reasonPort.calls.get()).isEqualTo(3);
     }
 
     @Test
@@ -131,7 +131,7 @@ class RecommendationCoreLinkedMockIntegrationTest {
         );
         assertThat(result.blogSearchCalls()).isEqualTo(8);
         assertThat(fixture.blogPort.queries).hasSize(8);
-        assertThat(fixture.reasonPort.calls.get()).isEqualTo(1);
+        assertThat(fixture.reasonPort.calls.get()).isEqualTo(3);
     }
 
     @Test
@@ -160,11 +160,13 @@ class RecommendationCoreLinkedMockIntegrationTest {
                 .map(place -> place.rankedPlace().score())
                 .toList());
         assertThat(failed.places()).hasSize(3).allSatisfy(place -> {
-            assertThat(place.reasonStatements()).singleElement().satisfies(statement -> {
-                assertThat(statement.text()).startsWith("검색 후보:");
-                assertThat(statement.evidenceIds()).singleElement()
-                    .asString().startsWith("local:");
-            });
+            assertThat(place.reasonStatements()).hasSize(2);
+            assertThat(place.reasonStatements().get(0).text()).contains("장소 검색에서");
+            assertThat(place.reasonStatements().get(0).evidenceIds()).singleElement()
+                .asString().startsWith("local:");
+            assertThat(place.reasonStatements().get(1).text()).contains("블로그 검색 결과에서");
+            assertThat(place.reasonStatements().get(1).evidenceIds()).singleElement()
+                .asString().startsWith("e-");
             assertThat(place.cautions()).contains(GroundedReasonService.FALLBACK_CAUTION)
                 .doesNotContain(GroundedReasonService.BLOG_CAUTION);
             assertThat(place.evidenceLevel()).isEqualTo(EvidenceLevel.LOCAL_AND_BLOG);
@@ -176,7 +178,7 @@ class RecommendationCoreLinkedMockIntegrationTest {
             "EXCLUSION_UNVERIFIED",
             RecommendationCoreUseCase.LLM_REASON_FALLBACK
         );
-        assertThat(failedFixture.reasonPort.calls.get()).isEqualTo(1);
+        assertThat(failedFixture.reasonPort.calls.get()).isEqualTo(6);
     }
 
     private static void assertConfirmedOnlyBoundary() throws Exception {
@@ -344,15 +346,17 @@ class RecommendationCoreLinkedMockIntegrationTest {
                     ReasonGenerationErrorCode.PROVIDER_UNAVAILABLE
                 );
             }
-            return ReasonGenerationOutcome.generated(new GeneratedReasonBatch(
-                GeneratedReasonBatch.SCHEMA_VERSION,
-                command.places().stream().map(place -> new PlaceReasonStatements(
-                    place.placeId(),
-                    List.of(new ReasonStatement(
-                        ReasonStatementPolicy.expectedText(place.evidence().get(0).type()),
-                        List.of(place.evidence().get(0).evidenceId())
-                    ))
-                )).toList()
+            ReasonClaim claim = command.claims().stream()
+                .filter(value -> value.type() == ReasonEvidenceType.BLOG)
+                .findFirst()
+                .orElse(command.claims().get(0));
+            String text = claim.type() == ReasonEvidenceType.BLOG
+                ? "블로그 검색 결과에서 서울 강남구의 조용한 공간이 언급되었습니다."
+                : "장소 검색 정보에서 서울 강남구의 조용한 공간을 확인했습니다.";
+            return ReasonGenerationOutcome.generated(new GeneratedReasonResult(
+                GeneratedReasonResult.SCHEMA_VERSION,
+                command.slot(),
+                List.of(new GeneratedReasonStatement(text, List.of(claim.claimId())))
             ));
         }
     }

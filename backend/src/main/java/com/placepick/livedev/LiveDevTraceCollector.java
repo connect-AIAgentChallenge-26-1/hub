@@ -143,10 +143,8 @@ final class LiveDevTraceCollector implements RecommendationTraceSink {
             data.put("failureStage", outcome.failureStage().name());
             if (outcome.generated()) {
                 data.put(
-                    "places",
-                    outcome.batch().places().stream()
-                        .map(LiveDevApiDto.GeneratedReasonView::from)
-                        .toList()
+                    "result",
+                    LiveDevApiDto.GeneratedReasonView.from(outcome.result())
                 );
             }
         }
@@ -157,6 +155,19 @@ final class LiveDevTraceCollector implements RecommendationTraceSink {
     public void reasonValidationFailed(ReasonBatchValidationCode code) {
         publisher.accept("ELICE_REASON_VALIDATION_FAILED", Map.of(
             "diagnosticCode", Objects.requireNonNull(code, "code").name()
+        ));
+    }
+
+    @Override
+    public void reasonPlaceCompleted(
+        boolean fallbackUsed,
+        int attempts,
+        boolean recovered
+    ) {
+        publisher.accept("ELICE_REASON_PLACE_COMPLETED", Map.of(
+            "fallbackUsed", fallbackUsed,
+            "attempts", attempts,
+            "recovered", recovered
         ));
     }
 }

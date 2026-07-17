@@ -5,6 +5,7 @@ import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
 import java.time.Duration;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.TimeUnit;
@@ -12,12 +13,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-/** Shared per-process provider concurrency boundary and redacted latency/quota telemetry. */
+/** Per-provider process concurrency boundaries and redacted latency/quota telemetry. */
 public final class ProviderCallMetrics {
 
     private final MeterRegistry registry;
-    private final Semaphore permits;
-    private final AtomicInteger active = new AtomicInteger();
+    private final Map<String, PermitPool> permitPools;
     private final Duration acquireTimeout;
 
     public ProviderCallMetrics(
@@ -25,21 +25,43 @@ public final class ProviderCallMetrics {
         int maximumConcurrency,
         Duration acquireTimeout
     ) {
+        this(
+            registry,
+            maximumConcurrency,
+            maximumConcurrency,
+            maximumConcurrency,
+            acquireTimeout
+        );
+    }
+
+    public ProviderCallMetrics(
+        MeterRegistry registry,
+        int naverMaximumConcurrency,
+        int eliceMaximumConcurrency,
+        int mockMaximumConcurrency,
+        Duration acquireTimeout
+    ) {
         this.registry = Objects.requireNonNull(registry, "registry");
-        if (maximumConcurrency < 1 || maximumConcurrency > 64) {
-            throw new IllegalArgumentException(
-                "Provider concurrency must be between 1 and 64."
-            );
-        }
+        requireConcurrency(naverMaximumConcurrency);
+        requireConcurrency(eliceMaximumConcurrency);
+        requireConcurrency(mockMaximumConcurrency);
         if (acquireTimeout == null || acquireTimeout.isNegative()
             || acquireTimeout.compareTo(Duration.ofSeconds(10)) > 0) {
             throw new IllegalArgumentException("Provider acquire timeout is invalid.");
         }
-        this.permits = new Semaphore(maximumConcurrency, true);
+        this.permitPools = Map.of(
+            "naver", new PermitPool(naverMaximumConcurrency),
+            "elice", new PermitPool(eliceMaximumConcurrency),
+            "mock", new PermitPool(mockMaximumConcurrency),
+            "unknown", new PermitPool(1)
+        );
         this.acquireTimeout = acquireTimeout;
-        Gauge.builder("placepick.provider.active", active, AtomicInteger::get)
-            .description("Current provider calls in this process")
-            .register(registry);
+        permitPools.forEach((provider, pool) ->
+            Gauge.builder("placepick.provider.active", pool.active(), AtomicInteger::get)
+                .description("Current provider calls in this process")
+                .tag("provider", provider)
+                .register(registry)
+        );
     }
 
     public <T> T observe(
@@ -57,13 +79,15 @@ public final class ProviderCallMetrics {
             || timeoutBudget.compareTo(Duration.ofMinutes(2)) > 0) {
             throw new IllegalArgumentException("Provider timeout budget is invalid.");
         }
-        if (!acquire(provider, operation)) {
-            recordRejected(provider, operation);
+        String safeProvider = closedProvider(provider);
+        PermitPool pool = permitPools.get(safeProvider);
+        if (!acquire(pool, safeProvider, operation)) {
+            recordRejected(safeProvider, operation);
             return rejectedResult.get();
         }
 
         long started = System.nanoTime();
-        active.incrementAndGet();
+        pool.active().incrementAndGet();
         String outcome = "unexpected_error";
         try {
             T result = invocation.get();
@@ -74,16 +98,19 @@ public final class ProviderCallMetrics {
             throw exception;
         } finally {
             Duration elapsed = Duration.ofNanos(System.nanoTime() - started);
-            active.decrementAndGet();
-            permits.release();
-            record(provider, operation, outcome, elapsed, timeoutBudget);
+            pool.active().decrementAndGet();
+            pool.permits().release();
+            record(safeProvider, operation, outcome, elapsed, timeoutBudget);
         }
     }
 
-    private boolean acquire(String provider, String operation) {
+    private boolean acquire(PermitPool pool, String provider, String operation) {
         long started = System.nanoTime();
         try {
-            return permits.tryAcquire(acquireTimeout.toMillis(), TimeUnit.MILLISECONDS);
+            return pool.permits().tryAcquire(
+                acquireTimeout.toMillis(),
+                TimeUnit.MILLISECONDS
+            );
         } catch (InterruptedException exception) {
             Thread.currentThread().interrupt();
             return false;
@@ -207,5 +234,20 @@ public final class ProviderCallMetrics {
             case "condition", "local", "blog", "reason" -> value;
             default -> "unknown";
         };
+    }
+
+    private static void requireConcurrency(int value) {
+        if (value < 1 || value > 64) {
+            throw new IllegalArgumentException(
+                "Provider concurrency must be between 1 and 64."
+            );
+        }
+    }
+
+    private record PermitPool(Semaphore permits, AtomicInteger active) {
+
+        private PermitPool(int maximumConcurrency) {
+            this(new Semaphore(maximumConcurrency, true), new AtomicInteger());
+        }
     }
 }

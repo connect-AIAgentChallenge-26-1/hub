@@ -22,6 +22,7 @@
 - Mock 개발: `make dev`
 - 실제 Provider 개발: `make dev-live`
 - 단위·통합·Eval: `make test`, `make integration`, `make eval`
+- 추천 이유 품질 corpus: `make quality-eval`
 - 전체 검증: `make check`
 - 실제 고정 증거: `make live-evidence`
 - 운영 빌드: `make build-images`

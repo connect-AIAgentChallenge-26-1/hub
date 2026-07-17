@@ -48,6 +48,25 @@ public final class LlmProviderDiagnosticMetrics implements RecommendationTraceSi
         ).increment();
     }
 
+    @Override
+    public void reasonPlaceCompleted(
+        boolean fallbackUsed,
+        int attempts,
+        boolean recovered
+    ) {
+        String safeAttempts = switch (attempts) {
+            case 1 -> "1";
+            case 2 -> "2";
+            default -> "invalid";
+        };
+        registry.counter(
+            "placepick.recommendation.reason.candidates",
+            "source", fallbackUsed ? "template" : "generated",
+            "attempts", safeAttempts,
+            "recovered", Boolean.toString(recovered)
+        ).increment();
+    }
+
     private void record(
         String provider,
         String operation,

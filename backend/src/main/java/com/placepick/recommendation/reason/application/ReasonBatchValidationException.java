@@ -12,7 +12,7 @@ public final class ReasonBatchValidationException extends RuntimeException {
     private final ReasonBatchValidationCode code;
 
     ReasonBatchValidationException(ReasonBatchValidationCode code) {
-        super("Generated reason batch failed server validation.", null, false, false);
+        super("Generated reason result failed server validation.", null, false, false);
         this.code = Objects.requireNonNull(code, "code");
     }
 

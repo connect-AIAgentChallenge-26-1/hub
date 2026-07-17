@@ -80,6 +80,7 @@ npm run test:e2e:live --workspace @placepick/frontend
 | `make test` | Docker 없는 Java·프런트 단위 테스트 |
 | `make integration` | Testcontainers·WireMock 통합/계약 테스트 |
 | `make eval` | 결정론적 추천·LLM 정책 Eval |
+| `make quality-eval` | 후보별 claim 기반 추천 이유 200개 이상 결정적 품질 corpus |
 | `make check` | 문서·Compose·프런트·Java 전체 자동 검증 |
 | `make live-evidence` | 고정 합성 시나리오의 실제 Naver→Elice 직접 검증 |
 | `make build-images` | Java 17 운영 이미지와 Next.js production build |

@@ -385,31 +385,62 @@ Schema, `additionalProperties=false`, bounded output, timeout, retry 0과 tool �
 Embedding `openai/text-embedding-3-small`은 과거 capability만 확인했으며 추천·검색·
 점수·중복 제거 runtime에는 사용하지 않는다.
 
-이유 생성에는 최종 1~3개의 허용된 장소·근거만 전달한다. 출력 place ID 집합은 입력과
-정확히 같고, 모든 evidence ID는 같은 후보의 입력 근거에 속해야 한다. 가격, 영업 상태,
-도보 시간, 출구처럼 제공되지 않은 속성은 금지한다. 한 후보라도 schema·근거 검증에
-실패하면 batch 전체를 버리고 서버 template fallback을 사용한다. 점수·순위·주의점·
-공유 문구는 서버가 결정한다.
+이유 생성은 최종 후보마다 독립된 요청으로 실행한다. 각 요청에는 서버가 허용한 확정 조건
+`locationQuery`, `placeType`, `placeTypeDetail`, `preferences`, `exclusions`와 한 후보의
+이름·category, 요청 로컬 slot `p1`~`p3`, 그 후보의 claim만 전달한다. DB UUID, 내부
+evidence ID, 점수, 순위, 다른 후보, Naver URL·좌표와 Provider 자격·원문은 Elice에
+전달하지 않는다. 서버는 `pN-cM` claim ID를 내부 evidence ID에 매핑하며 LLM은 이 매핑을
+알 수 없다.
 
-이유 출력은 `placepick.reason-statements.v2`다. 장소마다 1~3개의 자연스러운 한국어
-문장을 허용하고 각 문장은 1~160자, 같은 장소에 속한 1~3개의 고유 evidence ID를
-인용한다. 서버는 place/evidence 소유 관계, 금지 속성, 입력 근거와의 최소 어휘 연결을
-다시 검증한다. 이번 v2 batch 경계에서는 LLM 결과 일부만 섞지 않으며 한 문장이라도
-실패하면 해당 결과의 모든 후보를 서버 template으로 교체한다. 후보별 독립 생성과 부분
-fallback은 ADR-0016의 후속 reason v3에서 적용한다.
+이유 출력은 `placepick.reason-statements.v3`다.
+
+```json
+{
+  "schemaVersion": "placepick.reason-statements.v3",
+  "slot": "p1",
+  "statements": [
+    {
+      "text": "검증 가능한 추천 문장",
+      "claimIds": ["p1-c1"]
+    }
+  ]
+}
+```
+
+후보마다 1~3개의 자연스러운 한국어 문장을 허용하고 각 문장은 1~160자, 같은 요청의
+claim ID 1~3개만 인용한다. 서버는 slot·claim 소유 관계, 금지 속성, Blog 출처 귀속과
+입력 근거의 실질적 어휘 연결을 다시 검증한다. 장소명이나 `카페` 같은 일반 단어만 같다는
+이유로 근거가 있다고 판정하지 않는다. 가격, 영업 상태, 도보 시간, 지하철 출구, 주차처럼
+claim에 없는 속성은 금지한다. 점수·순위·주의점·공유 문구는 계속 서버가 결정한다.
+
+후보 요청은 최대 세 개를 병렬 실행하고 후보당 실제 Elice 호출은 1~2회다. HTTP adapter
+자체 retry는 0회다. 400·401·403은 재시도하지 않는다. 429·5xx·timeout과 후보 단위
+schema·slot·claim·grounding 검증 실패는 application 경계에서 한 번만 재생성한다. 두 번째
+실패는 해당 후보만 검증된 Local·Blog claim 기반 서버 문장으로 바꾸며 다른 후보의 유효한
+생성 결과는 유지한다. HTTP envelope 또는 응답 root schema 전체가 깨지면 후보 간 결과를
+혼합하지 않고 전체 후보를 template으로 바꾼다. null outcome, 예상하지 못한
+`RuntimeException`과 내부 계약 위반은 fallback으로 숨기지 않고 Job 실패·retry·DLQ 진단
+경계로 전파한다.
+
+후보별 공개 결과는 `reasonSource=GENERATED|TEMPLATE`로 실제 출처를 나타낸다. 한 후보라도
+template이면 추천 결과의 `reasonFallback=true`와 `LLM_REASON_FALLBACK` warning을
+사용한다. 후보 수를 `N`이라 할 때 정상적인 이유 Provider 호출 수는 `N..2N`이며, 부분
+결과 1~2개에도 같은 규칙을 적용한다.
 
 조건·이유 Provider 경계는 원문 없이 `errorCode`, 폐쇄형 `diagnosticCode`와
-`failureStage`를 보존한다. HTTP envelope·usage·content schema·place/evidence 소유권처럼
+`failureStage`를 보존한다. HTTP envelope·usage·content schema·slot/claim 소유권처럼
 예상 가능한 Provider 또는 검증 실패만 안전한 오류·template 경로로 바꾼다. null outcome,
 예상하지 못한 RuntimeException과 내부 계약 위반은 정상 fallback으로 숨기지 않고 Job
 실패·retry·DLQ 진단 경계로 전파한다. 세부 진단은 공개 API 응답이 아니라 low-cardinality
 metric과 로컬 Live Playground trace에만 사용하며 prompt·completion·장소·URL을 포함하지
 않는다.
 
-2026-07-16 직접 Live Evidence는 알려진 유형의 불필요한 detail 정규화, 서버 warning
-생성, v2 자연 문장과 동일 후보 evidence 검증을 적용한 세 시나리오에서
+2026-07-16 직접 Live Evidence는 당시의 v2 batch 계약으로 알려진 유형의 불필요한 detail
+정규화, 서버 warning 생성, 자연 문장과 동일 후보 evidence 검증을 적용한 세 시나리오에서
 `reasonFallback=false`를 확인했다. 실행 과정과 safe summary는
 [CASE-0002](case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)를 정본으로 삼는다.
+이 과거 증거는 현재 v3 후보별 요청의 실제 Provider 품질을 증명하지 않는다. v3의 Mock
+계약·회귀 검증과 향후 `live-quality-eval` 실제 campaign을 별도 증거로 구분한다.
 
 ### 실행과 비밀 경계
 

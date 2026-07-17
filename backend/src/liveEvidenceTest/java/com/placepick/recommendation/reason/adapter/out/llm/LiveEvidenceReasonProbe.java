@@ -9,7 +9,7 @@ public final class LiveEvidenceReasonProbe implements GroundedReasonGenerationPo
 
     private final EliceGroundedReasonClient client;
     private volatile ReasonGenerationOutcome lastOutcome;
-    private volatile String lastBoundaryCode;
+    private volatile String lastDiagnosticCode;
 
     public LiveEvidenceReasonProbe(EliceGroundedReasonClient client) {
         this.client = client;
@@ -20,7 +20,7 @@ public final class LiveEvidenceReasonProbe implements GroundedReasonGenerationPo
         EliceGroundedReasonClient.ReasonDiagnostic diagnostic =
             client.generateForDiagnostics(command);
         lastOutcome = diagnostic.outcome();
-        lastBoundaryCode = diagnostic.boundaryCode();
+        lastDiagnosticCode = diagnostic.outcome().diagnosticCode().name();
         return diagnostic.outcome();
     }
 
@@ -28,7 +28,7 @@ public final class LiveEvidenceReasonProbe implements GroundedReasonGenerationPo
         return lastOutcome == null ? null : lastOutcome.errorCode().name();
     }
 
-    public String lastBoundaryCode() {
-        return lastBoundaryCode;
+    public String lastDiagnosticCode() {
+        return lastDiagnosticCode;
     }
 }

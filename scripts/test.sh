@@ -24,7 +24,12 @@ case "${test_kind}" in
     log 'running deterministic evaluation fixture validation'
     gradlew :backend:evalTest
     ;;
+  quality-eval)
+    log 'running the deterministic recommendation reason quality corpus'
+    gradlew :backend:evalTest \
+      --tests com.placepick.recommendation.reason.application.ReasonStatementPolicyEvalTest
+    ;;
   *)
-    die 'usage: scripts/test.sh {unit|integration|eval}'
+    die 'usage: scripts/test.sh {unit|integration|eval|quality-eval}'
     ;;
 esac

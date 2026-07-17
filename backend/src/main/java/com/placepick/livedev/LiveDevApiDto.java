@@ -11,7 +11,9 @@ import com.placepick.recommendation.domain.scoring.RankedPlace;
 import com.placepick.recommendation.domain.scoring.ScoreBreakdown;
 import com.placepick.recommendation.domain.scoring.ScoredCandidate;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationCommand;
-import com.placepick.recommendation.reason.domain.PlaceReasonStatements;
+import com.placepick.recommendation.reason.domain.GeneratedReasonResult;
+import com.placepick.recommendation.reason.domain.GeneratedReasonStatement;
+import com.placepick.recommendation.reason.domain.ReasonClaim;
 import com.placepick.recommendation.reason.domain.ReasonEvidence;
 import com.placepick.recommendation.reason.domain.ReasonPlaceContext;
 import com.placepick.recommendation.reason.domain.ReasonStatement;
@@ -281,16 +283,48 @@ public final class LiveDevApiDto {
 
     public record ReasonRequestView(
         ConditionView condition,
-        List<ReasonPlaceView> places
+        ReasonRequestPlaceView place
     ) {
-        public ReasonRequestView {
-            places = List.copyOf(places);
-        }
-
         static ReasonRequestView from(ReasonGenerationCommand source) {
             return new ReasonRequestView(
                 ConditionView.from(source.condition()),
-                source.places().stream().map(ReasonPlaceView::from).toList()
+                ReasonRequestPlaceView.from(source)
+            );
+        }
+    }
+
+    public record ReasonClaimView(
+        String claimId,
+        String type,
+        String title,
+        String summary
+    ) {
+        static ReasonClaimView from(ReasonClaim source) {
+            return new ReasonClaimView(
+                source.claimId(),
+                source.type().name(),
+                source.title(),
+                source.summary()
+            );
+        }
+    }
+
+    public record ReasonRequestPlaceView(
+        String slot,
+        String name,
+        String category,
+        List<ReasonClaimView> claims
+    ) {
+        public ReasonRequestPlaceView {
+            claims = List.copyOf(claims);
+        }
+
+        static ReasonRequestPlaceView from(ReasonGenerationCommand source) {
+            return new ReasonRequestPlaceView(
+                source.slot(),
+                source.place().name(),
+                source.place().category(),
+                source.claims().stream().map(ReasonClaimView::from).toList()
             );
         }
     }
@@ -305,18 +339,33 @@ public final class LiveDevApiDto {
         }
     }
 
+    public record GeneratedReasonStatementView(
+        String text,
+        List<String> claimIds
+    ) {
+        public GeneratedReasonStatementView {
+            claimIds = List.copyOf(claimIds);
+        }
+
+        static GeneratedReasonStatementView from(GeneratedReasonStatement source) {
+            return new GeneratedReasonStatementView(source.text(), source.claimIds());
+        }
+    }
+
     public record GeneratedReasonView(
-        UUID placeId,
-        List<ReasonStatementView> statements
+        String slot,
+        List<GeneratedReasonStatementView> statements
     ) {
         public GeneratedReasonView {
             statements = List.copyOf(statements);
         }
 
-        static GeneratedReasonView from(PlaceReasonStatements source) {
+        static GeneratedReasonView from(GeneratedReasonResult source) {
             return new GeneratedReasonView(
-                source.placeId(),
-                source.statements().stream().map(ReasonStatementView::from).toList()
+                source.slot(),
+                source.statements().stream()
+                    .map(GeneratedReasonStatementView::from)
+                    .toList()
             );
         }
     }

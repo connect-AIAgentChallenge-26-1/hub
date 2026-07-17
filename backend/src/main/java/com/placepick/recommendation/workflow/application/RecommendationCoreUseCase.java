@@ -68,7 +68,7 @@ public final class RecommendationCoreUseCase {
                 place.evidence().isEmpty()
                     ? EvidenceLevel.LOCAL_ONLY
                     : EvidenceLevel.LOCAL_AND_BLOG,
-                reasons.fallbackUsed() ? ReasonSource.TEMPLATE : ReasonSource.GENERATED
+                reason.fallbackUsed() ? ReasonSource.TEMPLATE : ReasonSource.GENERATED
             );
         }).toList();
 
@@ -86,7 +86,7 @@ public final class RecommendationCoreUseCase {
             ranking.relaxed(),
             ranking.placeSearchCalls(),
             ranking.blogSearchCalls(),
-            1,
+            reasons.generationCalls(),
             ranking.explorationRound(),
             ranking.usedVariantIds(),
             ranking.searchExhausted()

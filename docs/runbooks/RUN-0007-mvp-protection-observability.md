@@ -69,10 +69,11 @@ Redis 장애 시 무제한 fail-open이나 전면 fail-closed를 암묵적으로
 
 ## Provider 동시성·quota·timeout 보호
 
-Naver Local/Blog와 Elice condition/reason 호출은 JVM 전체의 공정한 semaphore를 공유한다.
-기본 동시성은 2, permit 대기는 100ms다. 구성 범위는 1~64로 제한하며 측정 없이 값을 올리지
-않는다. permit을 얻지 못하면 Provider를 실제 호출하지 않고 안전한 실패 결과로 바꾼다.
-HTTP adapter의 retry와 redirect는 계속 0회다.
+Naver Local/Blog와 Elice condition/reason은 서로 독립된 공정한 semaphore를 사용한다.
+기본 동시성은 Naver 6, Elice 4이고 Mock은 8이며 permit 대기는 100ms다. 한 Provider의
+포화가 다른 Provider 호출을 차단하지 않는다. 구성 범위는 각각 1~64로 제한하며 Provider
+콘솔 quota와 실측 없이 값을 올리지 않는다. permit을 얻지 못하면 Provider를 실제 호출하지
+않고 안전한 실패 결과로 바꾼다. HTTP adapter의 retry와 redirect는 계속 0회다.
 
 주요 metric은 다음과 같다.
 
@@ -80,7 +81,7 @@ HTTP adapter의 retry와 redirect는 계속 0회다.
 | --- | --- | --- |
 | Provider 결과 | `placepick_provider_calls_total` | `provider`, `operation`, `outcome` |
 | Provider 평균 지연 | `placepick_provider_latency_seconds_*` | `provider`, `operation` |
-| Provider 활성 호출 | `placepick_provider_active` | 없음 |
+| Provider 활성 호출 | `placepick_provider_active` | `provider` |
 | Provider permit 대기 | `placepick_provider_permit_wait_seconds_*` | `provider`, `operation` |
 | Provider permit 거부 | `placepick_provider_permit_rejected_total` | `provider`, `operation` |
 | 429/quota 보호 | `placepick_provider_quota_protected_total` | `provider` |
@@ -109,6 +110,11 @@ permit 거부는 실제 Provider 호출 지연이 아니므로 `placepick_provid
 | 최종 결과 수·점수 | `placepick_recommendation_result_count_*`, `placepick_recommendation_result_score_*` | `partial` |
 | LLM Provider 진단 | `placepick_provider_llm_outcomes_total` | `provider`, `operation`, `error`, `stage`, `diagnostic` |
 | 서버 이유 검증 거부 | `placepick_provider_llm_validation_failures_total` | `operation`, `code` |
+| 후보별 이유 결과·복구 | `placepick_recommendation_reason_candidates_total` | `source`, `attempts`, `recovered` |
+
+Grafana의 `Per-candidate reason outcomes (15m)` 패널은 후보별 generated/template,
+1·2회 시도와 재시도 회복 여부를 함께 보여 준다. 한 추천 전체의 `reasonFallback`만으로
+부분 fallback과 전체 fallback을 혼동하지 않는다.
 
 후보 funnel은 한 추천 실행의 최종 누적 snapshot을 정확히 한 번 기록한다. variant별 중간
 수를 최종 수와 합산하지 않는다. `missing_identity`, `location`, `type`, `exclusion`,
@@ -125,10 +131,14 @@ Provider 후보 부족과 이미 노출한 후보 제외를 구분한다. `resul
 `Result quality and partial outcomes`에서 부분 결과·저하와 평균 근거 점수를 함께 본다.
 검색어, 장소와 candidate fingerprint를 label로 추가하지 않는다.
 
-LLM 진단은 envelope·usage·schema·place/evidence 소유권 같은 폐쇄형 코드만 기록한다.
-`diagnostic=none`이 아닌 값과 서버 validation failure를 함께 확인한다. prompt, completion,
-장소·주소·URL은 metric·로그·trace에서 찾거나 추가하지 않는다. 예상하지 못한 내부 예외는
-fallback 성공으로 간주하지 않고 Job 실패·retry·DLQ 경로를 조사한다.
+LLM 진단은 envelope·usage·schema·slot/claim 소유권 같은 폐쇄형 코드만 기록한다.
+`diagnostic=none`이 아닌 값과 서버 validation failure를 함께 확인한다. 후보별
+`source=generated|template`, `attempts=1|2`, `recovered=true|false`를 함께 보면 첫 실패 뒤
+회복과 최종 template 대체를 구분할 수 있다. 후보별 작업은 최대 세 개를 병렬로 제출하지만
+실제 HTTP 호출은 위 Provider semaphore 보호도 적용받는다. 후보당 호출은 최대 두 번이며
+400·인증 실패는 재시도하지 않는다. prompt, completion, 장소·주소·URL은 metric·로그·trace에서
+찾거나 추가하지 않는다. 예상하지 못한 내부 예외는 fallback 성공으로 간주하지 않고 Job
+실패·retry·DLQ 경로를 조사한다.
 
 ## 추천·Streams·SSE·투표 진단
 

@@ -42,9 +42,10 @@ MVP LLM Provider는 Elice OpenAI-compatible Chat Completions와 exact model
 강제한다. 자유 text, schema 완화나 직접 OpenAI로 자동 fallback하지 않는다.
 
 조건 추출 결과는 사용자가 확인하기 전 추천에 투입하지 않는다. 이유 생성에는 서버가
-선정한 Top 3와 후보별 allowlisted evidence만 전달한다. LLM은 점수·순위·주의점·공유
-문구를 결정하지 않으며 출력 place/evidence 집합은 서버가 다시 검증한다. 실패하면 batch
-전체를 버리고 서버 template을 사용한다.
+선정한 최종 후보의 allowlisted claim만 전달한다. LLM은 점수·순위·주의점·공유 문구를
+결정하지 않으며 서버가 slot/claim 소유 관계와 grounding을 다시 검증한다. 후보별 독립
+요청·재생성과 부분 fallback의 현재 계약은
+[ADR-0016](ADR-0016-grounded-reason-v3.md)을 따른다.
 
 Embedding `openai/text-embedding-3-small`은 과거 capability만 확인했으며 현재 추천·검색·
 중복 제거·점수 runtime에는 사용하지 않는다. 직접 OpenAI Responses API는 자동 fallback이
@@ -69,6 +70,7 @@ strict schema와 서버 사후 검증으로 환각이 결과 순위나 근거 �
 Mock은 정상, refusal, incomplete, malformed, schema 위반, 4xx·429·5xx·timeout,
 oversized response와 근거 교차 참조를 자동 검증한다. 과거 실제 Provider 연결 결과의
 범위는 [CASE-0002](../case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)를 따른다.
+CASE-0002의 이유 증거는 당시 v2 batch이며 현재 v3의 실제 Provider 품질을 대신하지 않는다.
 
 Elice가 strict output을 안정적으로 제공하지 못하거나 보관·비용·지역 정책이 요구와 맞지
 않으면 직접 OpenAI 또는 다른 Provider adapter를 비교한다. Embedding을 제품 기능에

@@ -1,15 +1,16 @@
 package com.placepick.recommendation.reason.application;
 
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationCommand;
-import com.placepick.recommendation.reason.domain.GeneratedReasonBatch;
+import com.placepick.recommendation.reason.domain.GeneratedReasonResult;
 import com.placepick.recommendation.reason.domain.PlaceReasonStatements;
-import com.placepick.recommendation.reason.domain.ReasonPlaceContext;
+import com.placepick.recommendation.reason.domain.ReasonClaim;
+import com.placepick.recommendation.reason.domain.ReasonStatement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.UUID;
 
 final class ReasonBatchValidator {
 
@@ -19,49 +20,52 @@ final class ReasonBatchValidator {
         this.statementPolicy = statementPolicy;
     }
 
-    List<PlaceReasonStatements> validateAndOrder(
+    PlaceReasonStatements validate(
         ReasonGenerationCommand command,
-        GeneratedReasonBatch batch
+        GeneratedReasonResult result
     ) {
-        if (!GeneratedReasonBatch.SCHEMA_VERSION.equals(batch.schemaVersion()) ||
-            batch.places().size() != command.places().size()) {
+        if (!GeneratedReasonResult.SCHEMA_VERSION.equals(result.schemaVersion())) {
             throw invalid(ReasonBatchValidationCode.SCHEMA_OR_SIZE);
         }
+        if (!command.slot().equals(result.slot())) {
+            throw invalid(ReasonBatchValidationCode.SLOT_REFERENCE);
+        }
 
-        Map<UUID, ReasonPlaceContext> expected = new HashMap<>();
-        command.places().forEach(value -> expected.put(value.placeId(), value));
-        Map<UUID, PlaceReasonStatements> actual = new HashMap<>();
-        for (PlaceReasonStatements place : batch.places()) {
-            if (!expected.containsKey(place.placeId())) {
-                throw invalid(ReasonBatchValidationCode.PLACE_REFERENCE);
+        Map<String, ReasonClaim> claimsById = new HashMap<>();
+        command.claims().forEach(claim -> claimsById.put(claim.claimId(), claim));
+        Set<String> statementTexts = new HashSet<>();
+        List<ReasonStatement> restored = new ArrayList<>();
+        for (var statement : result.statements()) {
+            if (!statementTexts.add(statement.text())) {
+                throw invalid(ReasonBatchValidationCode.DUPLICATE_STATEMENT);
             }
-            if (actual.put(place.placeId(), place) != null) {
-                throw invalid(ReasonBatchValidationCode.DUPLICATE_PLACE);
+            ReasonStatementPolicy.ValidationResult validation =
+                statementPolicy.validate(statement, command);
+            if (validation != ReasonStatementPolicy.ValidationResult.SUPPORTED) {
+                throw invalid(validationCode(validation));
             }
-            Set<String> statementTexts = new HashSet<>();
-            for (var statement : place.statements()) {
-                if (!statementTexts.add(statement.text())) {
-                    throw invalid(ReasonBatchValidationCode.DUPLICATE_STATEMENT);
-                }
-                ReasonStatementPolicy.ValidationResult validation = statementPolicy.validate(
-                    statement,
-                    expected.get(place.placeId())
-                );
-                if (validation != ReasonStatementPolicy.ValidationResult.SUPPORTED) {
-                    throw invalid(validationCode(validation));
-                }
-            }
+            restored.add(new ReasonStatement(
+                statement.text(),
+                statement.claimIds().stream()
+                    .map(claimsById::get)
+                    .map(ReasonClaim::evidenceId)
+                    .toList()
+            ));
         }
-        if (!actual.keySet().equals(expected.keySet())) {
-            throw invalid(ReasonBatchValidationCode.INCOMPLETE_PLACE_SET);
-        }
-        return command.places().stream().map(value -> actual.get(value.placeId())).toList();
+        return new PlaceReasonStatements(command.place().placeId(), restored);
     }
 
     static ReasonBatchValidationCode validationCode(
         ReasonStatementPolicy.ValidationResult result
     ) {
         return switch (result) {
+            case UNKNOWN_CLAIM -> ReasonBatchValidationCode.UNKNOWN_CLAIM;
+            case BLOG_ATTRIBUTION_MISSING ->
+                ReasonBatchValidationCode.BLOG_ATTRIBUTION_MISSING;
+            case BLOG_ATTRIBUTION_MISMATCH ->
+                ReasonBatchValidationCode.BLOG_ATTRIBUTION_MISMATCH;
+            case UNSUPPORTED_GROUNDING ->
+                ReasonBatchValidationCode.UNSUPPORTED_GROUNDING;
             case UNKNOWN_EVIDENCE -> ReasonBatchValidationCode.UNKNOWN_EVIDENCE;
             case TEMPLATE_EVIDENCE_TYPE_MISMATCH ->
                 ReasonBatchValidationCode.TEMPLATE_EVIDENCE_TYPE_MISMATCH;

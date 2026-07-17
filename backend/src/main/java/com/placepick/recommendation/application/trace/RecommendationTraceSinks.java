@@ -141,5 +141,15 @@ public final class RecommendationTraceSinks {
             first.reasonValidationFailed(code);
             second.reasonValidationFailed(code);
         }
+
+        @Override
+        public void reasonPlaceCompleted(
+            boolean fallbackUsed,
+            int attempts,
+            boolean recovered
+        ) {
+            first.reasonPlaceCompleted(fallbackUsed, attempts, recovered);
+            second.reasonPlaceCompleted(fallbackUsed, attempts, recovered);
+        }
     }
 }

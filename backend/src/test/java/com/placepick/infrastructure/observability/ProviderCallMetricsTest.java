@@ -106,6 +106,61 @@ class ProviderCallMetricsTest {
     }
 
     @Test
+    void isolatesNaverAndEliceConcurrencyBudgets() throws Exception {
+        SimpleMeterRegistry registry = new SimpleMeterRegistry();
+        ProviderCallMetrics metrics = new ProviderCallMetrics(
+            registry,
+            1,
+            1,
+            1,
+            Duration.ZERO
+        );
+        CountDownLatch naverEntered = new CountDownLatch(1);
+        CountDownLatch releaseNaver = new CountDownLatch(1);
+        CompletableFuture<String> naver = CompletableFuture.supplyAsync(() ->
+            metrics.observe(
+                "naver",
+                "local",
+                Duration.ofSeconds(1),
+                () -> {
+                    naverEntered.countDown();
+                    await(releaseNaver);
+                    return "naver";
+                },
+                ignored -> "success",
+                () -> "rejected"
+            )
+        );
+        assertThat(naverEntered.await(2, TimeUnit.SECONDS)).isTrue();
+
+        String elice = metrics.observe(
+            "elice",
+            "reason",
+            Duration.ofSeconds(1),
+            () -> "elice",
+            ignored -> "success",
+            () -> "rejected"
+        );
+        String secondNaver = metrics.observe(
+            "naver",
+            "blog",
+            Duration.ofSeconds(1),
+            () -> "must-not-run",
+            ignored -> "success",
+            () -> "rejected"
+        );
+        releaseNaver.countDown();
+
+        assertThat(elice).isEqualTo("elice");
+        assertThat(secondNaver).isEqualTo("rejected");
+        assertThat(naver.get(2, TimeUnit.SECONDS)).isEqualTo("naver");
+        assertThat(registry.get("placepick.provider.active")
+            .tag("provider", "naver").gauge().value()).isZero();
+        assertThat(registry.get("placepick.provider.active")
+            .tag("provider", "elice").gauge().value()).isZero();
+    }
+
+    @Test
     void exposesProviderRateLimitAsAQuotaProtectionSignal() {
         SimpleMeterRegistry registry = new SimpleMeterRegistry();
         ProviderCallMetrics metrics = new ProviderCallMetrics(

@@ -1,26 +1,36 @@
 package com.placepick.recommendation.reason.application.port.out;
 
-import com.placepick.recommendation.reason.domain.GeneratedReasonBatch;
 import com.placepick.recommendation.application.port.out.LlmFailureStage;
+import com.placepick.recommendation.reason.domain.GeneratedReasonResult;
+import java.time.Duration;
 import java.util.Objects;
+import java.util.Optional;
 
 public record ReasonGenerationOutcome(
     ReasonGenerationErrorCode errorCode,
-    GeneratedReasonBatch batch,
+    GeneratedReasonResult result,
     ReasonGenerationDiagnosticCode diagnosticCode,
-    LlmFailureStage failureStage
+    LlmFailureStage failureStage,
+    Optional<Duration> retryAfter
 ) {
 
     public ReasonGenerationOutcome {
         errorCode = Objects.requireNonNull(errorCode, "errorCode");
         diagnosticCode = Objects.requireNonNull(diagnosticCode, "diagnosticCode");
         failureStage = Objects.requireNonNull(failureStage, "failureStage");
-        if ((errorCode == ReasonGenerationErrorCode.NONE) != (batch != null)) {
+        retryAfter = Objects.requireNonNull(retryAfter, "retryAfter");
+        retryAfter.ifPresent(value -> {
+            if (value.isNegative()) {
+                throw new IllegalArgumentException("retryAfter must not be negative.");
+            }
+        });
+        if ((errorCode == ReasonGenerationErrorCode.NONE) != (result != null)) {
             throw new IllegalArgumentException("Reason generation outcome is inconsistent.");
         }
         if (errorCode == ReasonGenerationErrorCode.NONE &&
             (diagnosticCode != ReasonGenerationDiagnosticCode.NONE ||
-                failureStage != LlmFailureStage.NONE)) {
+                failureStage != LlmFailureStage.NONE ||
+                retryAfter.isPresent())) {
             throw new IllegalArgumentException(
                 "Successful reason generation cannot contain diagnostics."
             );
@@ -32,14 +42,22 @@ public record ReasonGenerationOutcome(
         if (errorCode != ReasonGenerationErrorCode.NONE) {
             requireDiagnosticStage(diagnosticCode, failureStage);
         }
+        if (retryAfter.isPresent() &&
+            errorCode != ReasonGenerationErrorCode.PROVIDER_RATE_LIMITED &&
+            errorCode != ReasonGenerationErrorCode.PROVIDER_UNAVAILABLE) {
+            throw new IllegalArgumentException(
+                "retryAfter is only valid for transient provider failures."
+            );
+        }
     }
 
-    public static ReasonGenerationOutcome generated(GeneratedReasonBatch batch) {
+    public static ReasonGenerationOutcome generated(GeneratedReasonResult result) {
         return new ReasonGenerationOutcome(
             ReasonGenerationErrorCode.NONE,
-            Objects.requireNonNull(batch, "batch"),
+            Objects.requireNonNull(result, "result"),
             ReasonGenerationDiagnosticCode.NONE,
-            LlmFailureStage.NONE
+            LlmFailureStage.NONE,
+            Optional.empty()
         );
     }
 
@@ -63,7 +81,40 @@ public record ReasonGenerationOutcome(
             errorCode,
             null,
             diagnosticCode,
-            failureStage
+            failureStage,
+            Optional.empty()
+        );
+    }
+
+    public static ReasonGenerationOutcome providerFailure(
+        ReasonGenerationErrorCode errorCode,
+        ReasonGenerationDiagnosticCode diagnosticCode,
+        LlmFailureStage failureStage,
+        Duration retryAfter
+    ) {
+        return providerFailure(
+            errorCode,
+            diagnosticCode,
+            failureStage,
+            Optional.of(Objects.requireNonNull(retryAfter, "retryAfter"))
+        );
+    }
+
+    public static ReasonGenerationOutcome providerFailure(
+        ReasonGenerationErrorCode errorCode,
+        ReasonGenerationDiagnosticCode diagnosticCode,
+        LlmFailureStage failureStage,
+        Optional<Duration> retryAfter
+    ) {
+        if (errorCode == ReasonGenerationErrorCode.NONE) {
+            throw new IllegalArgumentException("A provider failure code is required.");
+        }
+        return new ReasonGenerationOutcome(
+            errorCode,
+            null,
+            diagnosticCode,
+            failureStage,
+            retryAfter
         );
     }
 
@@ -107,7 +158,11 @@ public record ReasonGenerationOutcome(
                  REASON_CONTENT_UNKNOWN_EVIDENCE,
                  REASON_CONTENT_TEMPLATE_EVIDENCE_TYPE_MISMATCH,
                  REASON_CONTENT_FORBIDDEN_CLAIM,
-                 REASON_CONTENT_NO_LEXICAL_GROUNDING ->
+                 REASON_CONTENT_NO_LEXICAL_GROUNDING,
+                 REASON_CONTENT_SLOT_REFERENCE,
+                 REASON_CONTENT_CLAIM_OWNERSHIP,
+                 REASON_CONTENT_BLOG_ATTRIBUTION,
+                 REASON_CONTENT_UNSUPPORTED_GROUNDING ->
                 LlmFailureStage.CHAT_CONTENT_SCHEMA;
         };
         if (expected != null && failureStage != expected) {
@@ -122,6 +177,7 @@ public record ReasonGenerationOutcome(
         return "ReasonGenerationOutcome[errorCode=" + errorCode +
             ", diagnosticCode=" + diagnosticCode +
             ", failureStage=" + failureStage +
-            ", batch=" + (batch == null ? "absent" : "<redacted>") + "]";
+            ", retryAfter=" + retryAfter.map(Duration::toString).orElse("absent") +
+            ", result=" + (result == null ? "absent" : "<redacted>") + "]";
     }
 }
