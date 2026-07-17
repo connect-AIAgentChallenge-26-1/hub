@@ -57,9 +57,10 @@ PP-042 Live Playground는 실제 입력·조건·후보·Top 3·근거 이유를
 
 Provider 응답을 제품 의미로 받아들이는 마지막 경계는 Java application server다. 이미
 확정된 장소 유형의 불필요한 세부 값은 정규화하고, 누락 조건 warning은 서버가 원본
-조건에서 계산한다. LLM 이유는 자연스러운 v2 문장을 허용하되 place/evidence 소유권과
-지원되지 않은 속성을 서버가 다시 검증한다. 이 정책은 LLM 출력이 제품 상태의 정본이
-되지 않게 한다.
+조건에서 계산한다. LLM 이유는 후보별 v3 slot/claim 문장을 허용하되 claim 소유권,
+Blog 출처 귀속과 지원되지 않은 속성을 서버가 다시 검증한다. 이 정책은 LLM 출력이 제품
+상태의 정본이 되지 않게 한다. 세부 계약은
+[ADR-0016](ADR-0016-grounded-reason-v3.md)을 따른다.
 
 배포에서는 Naver key, Elice token과 routing URL을 Render의 runtime secret store에 둔다.
 Vercel browser bundle, Git repository와 GitHub Actions에는 Provider 자격을 두지 않는다.
@@ -87,7 +88,8 @@ Vercel·Render 배포와 secret scope, rollback, 대표 E2E를 검증한다.
 2026-07-16 직접 Java adapter를 사용한 세 합성 사용자 시나리오가 실제 Naver→Elice
 연결, 서버 Top 3와 v2 근거 검증을 모두 통과했고 report secret scan도 통과했다. 자세한
 과정과 수치는 [CASE-0002](../case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)에만
-기록한다. 이는 이 로컬 신뢰 경계의 실행 가능성을 검증한 것이며 cloud 배포 검증은 아니다.
+기록한다. 이는 이 로컬 신뢰 경계와 당시 v2 계약의 실행 가능성을 검증한 것이며 현재 v3
+실제 품질이나 cloud 배포 검증은 아니다.
 
 실제 자격이 Git diff·Actions log·artifact·browser response에 나타나거나, 배포 권한을
 가진 사람과 Provider 자격 접근자를 반드시 분리해야 하는 요구가 생기면 이 결정을

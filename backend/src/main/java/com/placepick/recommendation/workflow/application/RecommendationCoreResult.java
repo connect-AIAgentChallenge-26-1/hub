@@ -26,7 +26,8 @@ public record RecommendationCoreResult(
         }
         if (placeSearchCalls < 1 || placeSearchCalls > 8 ||
             blogSearchCalls < 0 || blogSearchCalls > 8 ||
-            reasonGenerationCalls != 1) {
+            reasonGenerationCalls < places.size() ||
+            reasonGenerationCalls > places.size() * 2) {
             throw new IllegalArgumentException("Core provider call counts are outside the contract.");
         }
         if (explorationRound < 0) {

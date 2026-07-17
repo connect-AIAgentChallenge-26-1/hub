@@ -98,4 +98,11 @@ public interface RecommendationTraceSink {
 
     default void reasonValidationFailed(ReasonBatchValidationCode code) {
     }
+
+    default void reasonPlaceCompleted(
+        boolean fallbackUsed,
+        int attempts,
+        boolean recovered
+    ) {
+    }
 }

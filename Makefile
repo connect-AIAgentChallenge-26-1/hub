@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
-.PHONY: help setup dev dev-live test integration eval actionlint check live-evidence build-images observe down reset
+.PHONY: help setup dev dev-live test integration eval quality-eval actionlint check live-evidence build-images observe down reset
 
 help: ## Show the canonical development commands.
 	@awk 'BEGIN {FS = ":.*## "} /^[a-zA-Z0-9_-]+:.*## / {printf "\033[36m%-16s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
@@ -24,6 +24,9 @@ integration: ## Run Testcontainers and WireMock integration/contract tests.
 
 eval: ## Validate and run deterministic evaluation fixtures.
 	@bash scripts/test.sh eval
+
+quality-eval: ## Run the deterministic recommendation reason quality corpus.
+	@bash scripts/test.sh quality-eval
 
 actionlint: ## Validate GitHub Actions workflows with the pinned actionlint image.
 	@bash scripts/actionlint.sh

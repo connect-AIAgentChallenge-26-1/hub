@@ -83,14 +83,14 @@ class LiveEvidenceWorkflowTest {
             assertThat(result.places()).hasSize(3);
             assertThat(result.degraded())
                 .as(
-                    "scenario %s degraded warnings=%s localCalls=%d blogCalls=%d reasonFallback=%s reasonError=%s boundary=%s",
+                    "scenario %s degraded warnings=%s localCalls=%d blogCalls=%d reasonFallback=%s reasonError=%s diagnostic=%s",
                     scenario.id(),
                     result.warnings(),
                     result.placeSearchCalls(),
                     result.blogSearchCalls(),
                     result.reasonFallback(),
                     reason.lastErrorCode(),
-                    reason.lastBoundaryCode()
+                    reason.lastDiagnosticCode()
                 )
                 .isFalse();
             assertThat(result.reasonFallback())

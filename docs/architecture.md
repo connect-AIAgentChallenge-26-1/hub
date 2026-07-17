@@ -66,14 +66,23 @@ domain과 application은 Naver·Elice DTO, HTTP, JPA와 Redis에 의존하지 �
      -> Provider rank와 variant weight를 보존한 후보 pool
      -> 최대 8개 후보의 Naver Blog 근거·후보별 장애 격리
      -> 서버의 0~100 결정론적 점수·최대 3개
-     -> Elice의 1~3개 후보 근거 문장 batch
-     -> 서버의 place/evidence 검증 또는 전체 template fallback
+     -> 최종 후보마다 독립된 Elice slot/claim 이유 요청(최대 3개 병렬)
+     -> 서버의 slot/claim·grounding 검증
+     -> 후보 단위 template fallback 또는 envelope/root 실패 시 전체 fallback
 ```
 
 LLM은 점수와 순위를 결정하지 않는다. 예산 근거가 없으면 추정하지 않고 warning을
 남긴다. `CandidateKey`는 내부 안정 정렬과 다른 추천의 기존 후보 제외에만 쓰고 UUID v4는
 최종 후보 선정 뒤 발급한다. 최종 후보가 1~2개면 실패가 아니라 부분 결과로 완료하고 0개만
 실패한다. 추출 Draft를 자동 확정하지 않는다.
+
+이유 생성에는 확정 조건 allowlist와 후보별 표시 identity·claim만 전달한다. DB UUID,
+내부 evidence ID, 점수·순위와 다른 후보 문맥은 Elice 요청에서 제외하고, 요청 로컬
+`p1`~`p3`와 `pN-cM`을 서버가 내부 ID에 다시 연결한다. 후보당 최대 두 번 호출하며
+400·인증 실패는 재시도하지 않고 일시 장애와 후보 단위 schema·claim 검증 실패만 한 번
+재생성한다. 후보 하나의 최종 실패는 그 후보의 `reasonSource=TEMPLATE`로 격리한다.
+HTTP envelope·root schema 실패는 전체 template으로 전환하고 예상하지 못한 내부 예외는
+Job 실패 경계로 전파한다. 따라서 후보 수가 `N`이면 이유 생성 호출 수는 `N..2N`이다.
 
 ## 현재 정식 서비스 흐름
 
@@ -173,11 +182,14 @@ PP-043에서 실제 image, migration, secret scope, 배포 SHA, 대표 E2E, cold
 - 후보 정규화는 수신·유효·식별 불가·위치·유형·제외·중복 수를 폐쇄형 funnel로 남기고
   검색어·장소·주소·URL은 metric label에 사용하지 않는다.
 - 조건 추출과 이유 생성은 coarse Provider 결과 외에도 안전한 diagnostic code와 failure
-  stage를 보존한다. application validator의 예상 거부와 내부 결함을 같은 fallback으로
-  합치지 않는다.
-- Provider permit 대기·거부와 실제 호출 latency를 분리해 동시성 거부의 0초 표본이
-  Provider 지연 분포를 왜곡하지 않게 한다.
+  stage를 보존한다. 이유 생성은 후보별 `source`, 시도 횟수와 재시도 회복 여부를
+  low-cardinality metric으로 구분하고 application validator의 예상 거부와 내부 결함을 같은
+  fallback으로 합치지 않는다.
+- Naver와 Elice는 각각 기본 6·4 permit의 독립 bulkhead를 사용하고 후보별 이유 요청은
+  한 Job에서 최대 3개만 병렬 실행한다. permit 대기·거부와 실제 호출 latency를 분리해
+  동시성 거부의 0초 표본이 Provider 지연 분포를 왜곡하지 않게 한다.
 - `make check`는 실제 Provider를 호출하지 않고 문서·secret·정책까지 한 번 검증한다.
-- 직접 실제 Provider 세 시나리오와 로컬 정식 제품 사용자 여정은 CASE-0002로 검증했고,
-  cloud 배포 사용자 여정은 PP-043에서 별도 증거를 만든다.
+- 직접 실제 Provider 세 시나리오와 로컬 정식 제품 사용자 여정은 CASE-0002로 검증했다.
+  이 증거의 이유 생성 경계는 당시 v2 batch이며, 현재 후보별 v3의 실제 품질 campaign과
+  cloud 배포 사용자 여정은 각각 별도 증거로 만든다.
 - 측정하지 않은 정확도·지연·처리량을 성과로 주장하지 않는다.

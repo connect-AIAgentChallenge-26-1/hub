@@ -491,7 +491,7 @@ class SseWireContractIntegrationTest {
             false,
             1,
             3,
-            1
+            3
         );
     }
 

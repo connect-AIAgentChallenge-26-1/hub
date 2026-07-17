@@ -17,10 +17,9 @@ import com.placepick.recommendation.application.port.out.LlmFailureStage;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
 import com.placepick.recommendation.condition.domain.PlaceType;
 import com.placepick.recommendation.condition.domain.Preference;
-import com.placepick.recommendation.reason.application.ReasonStatementPolicy;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationCommand;
-import com.placepick.recommendation.reason.application.port.out.ReasonGenerationErrorCode;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationDiagnosticCode;
+import com.placepick.recommendation.reason.application.port.out.ReasonGenerationErrorCode;
 import com.placepick.recommendation.reason.domain.ReasonEvidence;
 import com.placepick.recommendation.reason.domain.ReasonEvidenceType;
 import com.placepick.recommendation.reason.domain.ReasonPlaceContext;
@@ -28,6 +27,7 @@ import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Stream;
 import org.junit.jupiter.api.AfterAll;
@@ -68,31 +68,31 @@ class EliceGroundedReasonClientIntegrationTest {
     }
 
     @Test
-    void generatesAnExactTopThreeBatchAndSendsOnlyBoundedGroundingData() throws Exception {
+    void generatesOneCandidateResultAndSendsOnlyOpaqueSlotAndAllowlistedClaims()
+        throws Exception {
         WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH))
             .willReturn(jsonResponse(200, validChatResponse(validContent()))));
 
         var outcome = client.generate(command());
 
         assertThat(outcome.generated()).isTrue();
-        assertThat(outcome.batch().places()).hasSize(3);
-        assertThat(outcome.batch().places()).allSatisfy(place ->
-            assertThat(place.statements()).singleElement().satisfies(statement -> {
-                assertThat(statement.text()).contains("조용한 공간");
-                assertThat(statement.evidenceIds()).singleElement().asString()
-                    .startsWith("e-blog-");
-            })
-        );
+        assertThat(outcome.result().schemaVersion())
+            .isEqualTo("placepick.reason-statements.v3");
+        assertThat(outcome.result().slot()).isEqualTo("p1");
+        assertThat(outcome.result().statements()).singleElement().satisfies(statement -> {
+            assertThat(statement.text()).contains("블로그 검색 결과", "조용한 공간");
+            assertThat(statement.claimIds()).containsExactly("p1-c2");
+        });
         verifyOneRequest();
         verifyRequestBody();
         WIRE_MOCK.verify(0, postRequestedFor(urlPathEqualTo(RESPONSES_PATH)));
     }
 
     @Test
-    void acceptsANaturalStatementGroundedByTwoEvidenceItems() {
+    void acceptsAStatementGroundedByTwoClaimsFromTheSameCandidate() {
         String content = validContent().replace(
-            "\"evidenceIds\":[\"e-blog-1\"]",
-            "\"evidenceIds\":[\"local:1\",\"e-blog-1\"]"
+            "\"claimIds\":[\"p1-c2\"]",
+            "\"claimIds\":[\"p1-c1\",\"p1-c2\"]"
         );
         WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH))
             .willReturn(jsonResponse(200, validChatResponse(content))));
@@ -100,8 +100,8 @@ class EliceGroundedReasonClientIntegrationTest {
         var outcome = client.generate(command());
 
         assertThat(outcome.generated()).isTrue();
-        assertThat(outcome.batch().places().get(0).statements().get(0).evidenceIds())
-            .containsExactly("local:1", "e-blog-1");
+        assertThat(outcome.result().statements().get(0).claimIds())
+            .containsExactly("p1-c1", "p1-c2");
         verifyOneRequest();
     }
 
@@ -126,32 +126,50 @@ class EliceGroundedReasonClientIntegrationTest {
         var outcome = client.generate(command());
 
         assertThat(outcome.errorCode()).isEqualTo(expected);
-        assertThat(outcome.batch()).isNull();
+        assertThat(outcome.result()).isNull();
         assertThat(outcome.diagnosticCode()).isEqualTo(expectedDiagnostic);
         assertThat(outcome.failureStage()).isEqualTo(LlmFailureStage.HTTP_STATUS);
+        assertThat(outcome.retryAfter()).isEmpty();
+        assertThat(outcome.toString()).doesNotContain("must-not-escape");
         verifyOneRequest();
     }
 
-    @Test
-    void preservesAClosedGroundingDiagnosticWithoutProviderValues() {
-        String content = validContent().replaceFirst("e-blog-1", "e-blog-2");
-        WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH))
-            .willReturn(jsonResponse(200, validChatResponse(content))));
+    @ParameterizedTest
+    @CsvSource({"429,7", "503,13"})
+    void preservesSafeRetryAfterForRetryableProviderStatuses(int status, long seconds) {
+        WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH)).willReturn(aResponse()
+            .withStatus(status)
+            .withHeader("Content-Type", "application/json")
+            .withHeader("Retry-After", Long.toString(seconds))));
 
         var outcome = client.generate(command());
 
-        assertThat(outcome.errorCode())
-            .isEqualTo(ReasonGenerationErrorCode.PROVIDER_INVALID_RESPONSE);
-        assertThat(outcome.diagnosticCode())
-            .isEqualTo(ReasonGenerationDiagnosticCode.REASON_CONTENT_EVIDENCE_OWNERSHIP);
-        assertThat(outcome.failureStage()).isEqualTo(LlmFailureStage.CHAT_CONTENT_SCHEMA);
-        assertThat(outcome.toString()).doesNotContain("e-blog-1", "e-blog-2", "카페");
+        assertThat(outcome.retryAfter()).contains(Duration.ofSeconds(seconds));
         verifyOneRequest();
     }
 
-    @ParameterizedTest(name = "[{index}] rejects {0}")
-    @MethodSource("invalidResponses")
-    void rejectsMalformedIncompleteSchemaOrReferenceDrift(String name, String response) {
+    @ParameterizedTest
+    @CsvSource({"400,9", "429,-1", "429,86401", "503,not-a-duration"})
+    void ignoresRetryAfterOnNonRetryableOrUnsafeValues(int status, String value) {
+        WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH)).willReturn(aResponse()
+            .withStatus(status)
+            .withHeader("Content-Type", "application/json")
+            .withHeader("Retry-After", value)));
+
+        var outcome = client.generate(command());
+
+        assertThat(outcome.retryAfter()).isEmpty();
+        verifyOneRequest();
+    }
+
+    @ParameterizedTest(name = "[{index}] {0}")
+    @MethodSource("diagnosticResponses")
+    void distinguishesEnvelopeRootSlotAndCandidateClaimDiagnostics(
+        String name,
+        String response,
+        ReasonGenerationDiagnosticCode expected,
+        LlmFailureStage expectedStage
+    ) {
         WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH))
             .willReturn(jsonResponse(200, response)));
 
@@ -159,7 +177,24 @@ class EliceGroundedReasonClientIntegrationTest {
 
         assertThat(outcome.errorCode()).as(name)
             .isEqualTo(ReasonGenerationErrorCode.PROVIDER_INVALID_RESPONSE);
-        assertThat(outcome.batch()).isNull();
+        assertThat(outcome.diagnosticCode()).as(name).isEqualTo(expected);
+        assertThat(outcome.failureStage()).as(name).isEqualTo(expectedStage);
+        assertThat(outcome.toString())
+            .doesNotContain("p1-c1", "p1-c2", "카페 1", "조용한 공간");
+        verifyOneRequest();
+    }
+
+    @ParameterizedTest(name = "[{index}] rejects {0}")
+    @MethodSource("invalidResponses")
+    void rejectsMalformedIncompleteOrClosedSchemaViolations(String name, String response) {
+        WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH))
+            .willReturn(jsonResponse(200, response)));
+
+        var outcome = client.generate(command());
+
+        assertThat(outcome.errorCode()).as(name)
+            .isEqualTo(ReasonGenerationErrorCode.PROVIDER_INVALID_RESPONSE);
+        assertThat(outcome.result()).isNull();
         verifyOneRequest();
     }
 
@@ -180,7 +215,7 @@ class EliceGroundedReasonClientIntegrationTest {
     }
 
     @Test
-    void enforcesResponseSizeAndTimeout() {
+    void enforcesResponseSizeAndTimeoutWithoutTransportRetry() {
         EliceGroundedReasonClient smallClient = newClient(Duration.ofMillis(100), 128);
         WIRE_MOCK.stubFor(post(urlPathEqualTo(CHAT_PATH)).willReturn(aResponse()
             .withStatus(200)
@@ -216,31 +251,70 @@ class EliceGroundedReasonClientIntegrationTest {
         assertThat(request.path("stream").asBoolean()).isFalse();
         assertThat(request.path("store").asBoolean()).isFalse();
         assertThat(request.path("temperature").asInt()).isZero();
-        assertThat(request.path("max_completion_tokens").asInt()).isEqualTo(800);
+        assertThat(request.path("max_completion_tokens").asInt())
+            .isEqualTo(EliceGroundedReasonClient.MAX_COMPLETION_TOKENS);
         assertThat(request.path("tools").isMissingNode()).isTrue();
         assertThat(request.path("messages")).hasSize(2);
+
         JsonNode data = OBJECT_MAPPER.readTree(
             request.path("messages").get(1).path("content").asText()
         );
-        assertThat(data.path("places")).hasSize(3);
+        assertThat(fieldNames(data))
+            .containsExactlyInAnyOrder("condition", "slot", "name", "category", "claims");
+        assertThat(data.path("slot").asText()).isEqualTo("p1");
+        assertThat(fieldNames(data.path("condition"))).containsExactlyInAnyOrder(
+            "locationQuery",
+            "placeType",
+            "placeTypeDetail",
+            "preferences",
+            "exclusions"
+        );
+        assertThat(data.path("condition").path("locationQuery").asText())
+            .isEqualTo("서울 강남구");
+        assertThat(data.path("condition").path("placeType").asText()).isEqualTo("CAFE");
+        assertThat(data.path("condition").path("preferences")).hasSize(1);
+        assertThat(data.path("claims")).hasSize(2);
+        assertThat(fieldNames(data.path("claims").get(0)))
+            .containsExactlyInAnyOrder("claimId", "type", "title", "summary");
         assertThat(data.toString())
-            .doesNotContain("sourceUrl", "score", "rank", "cautions", "shareText")
-            .doesNotContain(TOKEN);
+            .doesNotContain(
+                "00000000-0000-4000-8000-000000000001",
+                "local-sensitive",
+                "blog-sensitive",
+                "placeId",
+                "evidenceId",
+                "score",
+                "rank",
+                "requestText",
+                "partySize",
+                "budgetPerPersonMin",
+                "budgetPerPersonMax",
+                TOKEN
+            );
+
         JsonNode format = request.path("response_format");
         assertThat(format.path("type").asText()).isEqualTo("json_schema");
         assertThat(format.path("json_schema").path("strict").asBoolean()).isTrue();
-        assertThat(format.path("json_schema").path("schema")
-            .path("additionalProperties").asBoolean()).isFalse();
-        JsonNode statementProperties = format.path("json_schema").path("schema")
-            .path("properties").path("places").path("items")
-            .path("properties").path("statements").path("items").path("properties");
-        assertThat(statementProperties.path("text").path("type").asText())
-            .isEqualTo("string");
-        assertThat(statementProperties.path("text").path("enum").isMissingNode()).isTrue();
-        assertThat(statementProperties.path("evidenceIds").path("minItems").asInt()).isOne();
-        assertThat(statementProperties.path("evidenceIds").path("maxItems").asInt()).isEqualTo(3);
-        assertThat(statementProperties.path("evidenceIds").path("uniqueItems").isMissingNode())
-            .isTrue();
+        assertThat(format.path("json_schema").path("name").asText())
+            .isEqualTo("placepick_reason_statements_v3");
+        JsonNode schema = format.path("json_schema").path("schema");
+        assertThat(schema.path("additionalProperties").asBoolean()).isFalse();
+        assertThat(fieldNames(schema.path("properties")))
+            .containsExactlyInAnyOrder("schemaVersion", "slot", "statements");
+        JsonNode statement = schema.path("properties").path("statements").path("items");
+        assertThat(statement.path("additionalProperties").asBoolean()).isFalse();
+        JsonNode claimIds = statement.path("properties").path("claimIds");
+        assertThat(claimIds.path("items").path("enum"))
+            .extracting(JsonNode::asText)
+            .containsExactly("p1-c1", "p1-c2");
+        assertThat(claimIds.path("minItems").asInt()).isOne();
+        assertThat(claimIds.path("maxItems").asInt()).isEqualTo(3);
+    }
+
+    private static Set<String> fieldNames(JsonNode node) {
+        Set<String> fields = new java.util.LinkedHashSet<>();
+        node.fieldNames().forEachRemaining(fields::add);
+        return fields;
     }
 
     private static void verifyOneRequest() {
@@ -262,27 +336,26 @@ class EliceGroundedReasonClientIntegrationTest {
     }
 
     private static ReasonGenerationCommand command() {
-        List<ReasonPlaceContext> places = java.util.stream.IntStream.rangeClosed(1, 3)
-            .mapToObj(index -> new ReasonPlaceContext(
-                placeId(index),
-                "카페 " + index,
-                "카페>디저트",
-                List.of(
-                    new ReasonEvidence(
-                        "local:" + index,
-                        ReasonEvidenceType.LOCAL,
-                        "카페 " + index,
-                        "서울 강남구 카페"
-                    ),
-                    new ReasonEvidence(
-                        "e-blog-" + index,
-                        ReasonEvidenceType.BLOG,
-                        "카페 " + index + " 방문 기록",
-                        "카페 " + index + " 조용한 공간"
-                    )
+        ReasonPlaceContext place = new ReasonPlaceContext(
+            UUID.fromString("00000000-0000-4000-8000-000000000001"),
+            "카페 1",
+            "카페>디저트",
+            List.of(
+                new ReasonEvidence(
+                    "local-sensitive",
+                    ReasonEvidenceType.LOCAL,
+                    "카페 1",
+                    "서울 강남구 카페"
+                ),
+                new ReasonEvidence(
+                    "blog-sensitive",
+                    ReasonEvidenceType.BLOG,
+                    "카페 1 방문 기록",
+                    "카페 1 조용한 공간"
                 )
-            )).toList();
-        return new ReasonGenerationCommand(
+            )
+        );
+        return ReasonGenerationCommand.forPlace(
             new ConfirmedRecommendationCondition(
                 "서울 강남구",
                 PlaceType.CAFE,
@@ -293,74 +366,80 @@ class EliceGroundedReasonClientIntegrationTest {
                 List.of(new Preference("조용한", 8)),
                 List.of("흡연")
             ),
-            places
+            1,
+            place
+        );
+    }
+
+    private static Stream<Arguments> diagnosticResponses() {
+        return Stream.of(
+            Arguments.of(
+                "malformed envelope",
+                "{not-json",
+                ReasonGenerationDiagnosticCode.REASON_ENVELOPE_JSON,
+                LlmFailureStage.JSON
+            ),
+            Arguments.of(
+                "root schema",
+                validChatResponse(validContent().replace(
+                    "\"slot\":\"p1\"",
+                    "\"extra\":true,\"slot\":\"p1\""
+                )),
+                ReasonGenerationDiagnosticCode.REASON_CONTENT_ROOT_SCHEMA,
+                LlmFailureStage.CHAT_CONTENT_SCHEMA
+            ),
+            Arguments.of(
+                "slot reference",
+                validChatResponse(validContent().replace("\"slot\":\"p1\"", "\"slot\":\"p2\"")),
+                ReasonGenerationDiagnosticCode.REASON_CONTENT_SLOT_REFERENCE,
+                LlmFailureStage.CHAT_CONTENT_SCHEMA
+            ),
+            Arguments.of(
+                "claim ownership",
+                validChatResponse(validContent().replace("p1-c2", "p2-c1")),
+                ReasonGenerationDiagnosticCode.REASON_CONTENT_CLAIM_OWNERSHIP,
+                LlmFailureStage.CHAT_CONTENT_SCHEMA
+            )
         );
     }
 
     private static Stream<Arguments> invalidResponses() {
         String content = validContent();
         return Stream.of(
-            Arguments.of("malformed envelope", "{not-json"),
             Arguments.of("free text", validChatResponse("not-json")),
             Arguments.of(
-                "additional content field",
+                "wrong schema version",
                 validChatResponse(content.replace(
-                    "\"places\":[",
-                    "\"extra\":true,\"places\":["
+                    "placepick.reason-statements.v3",
+                    "placepick.reason-statements.v2"
                 ))
             ),
             Arguments.of(
-                "missing place",
-                validChatResponse(content.replace(placeJson(3), ""))
+                "missing statements",
+                validChatResponse("""
+                    {
+                      "schemaVersion":"placepick.reason-statements.v3",
+                      "slot":"p1",
+                      "statements":[]
+                    }
+                    """)
             ),
             Arguments.of(
-                "duplicate place",
-                validChatResponse(content.replace(placeId(3).toString(), placeId(2).toString()))
-            ),
-            Arguments.of(
-                "cross-place evidence",
-                validChatResponse(content.replaceFirst("e-blog-1", "e-blog-2"))
-            ),
-            Arguments.of(
-                "free claim sharing only the place name",
+                "duplicate claim IDs",
                 validChatResponse(content.replace(
-                    naturalText(1),
-                    "카페 1에는 루프탑이 있습니다"
-                ))
-            ),
-            Arguments.of(
-                "unsupported price claim",
-                validChatResponse(content.replace(
-                    naturalText(1),
-                    "카페 1의 가격은 10000원입니다"
+                    "\"claimIds\":[\"p1-c2\"]",
+                    "\"claimIds\":[\"p1-c2\",\"p1-c2\"]"
                 ))
             ),
             Arguments.of(
                 "oversized statement",
-                validChatResponse(content.replace(
-                    naturalText(1),
-                    "카페 ".repeat(60)
-                ))
-            ),
-            Arguments.of(
-                "local text citing blog evidence",
-                validChatResponse(content.replace(
-                    naturalText(1),
-                    ReasonStatementPolicy.LOCAL_STATEMENT_TEXT
-                ))
-            ),
-            Arguments.of(
-                "duplicate evidence IDs",
-                validChatResponse(content.replace(
-                    "\"evidenceIds\":[\"e-blog-1\"]",
-                    "\"evidenceIds\":[\"e-blog-1\",\"e-blog-1\"]"
-                ))
+                validChatResponse(content.replace(naturalText(), "카페 ".repeat(60)))
             ),
             Arguments.of(
                 "additional statement field",
                 validChatResponse(content.replace(
-                    "\"evidenceIds\":[\"e-blog-1\"]",
-                    "\"evidenceIds\":[\"e-blog-1\"],\"score\":100"
+                    "\"claimIds\":[\"p1-c2\"]",
+                    "\"claimIds\":[\"p1-c2\"],\"score\":100"
                 ))
             ),
             Arguments.of("refusal", chatResponse("stop", content, "blocked")),
@@ -368,8 +447,9 @@ class EliceGroundedReasonClientIntegrationTest {
             Arguments.of(
                 "duplicate key",
                 validChatResponse(content.replace(
-                    "\"schemaVersion\":\"placepick.reason-statements.v2\"",
-                    "\"schemaVersion\":\"wrong\",\"schemaVersion\":\"placepick.reason-statements.v2\""
+                    "\"schemaVersion\":\"placepick.reason-statements.v3\"",
+                    "\"schemaVersion\":\"wrong\"," +
+                        "\"schemaVersion\":\"placepick.reason-statements.v3\""
                 ))
             ),
             Arguments.of("trailing token", validChatResponse(content) + " trailing")
@@ -379,32 +459,18 @@ class EliceGroundedReasonClientIntegrationTest {
     private static String validContent() {
         return """
             {
-              "schemaVersion":"placepick.reason-statements.v2",
-              "places":[
-            %s%s%s  ]
+              "schemaVersion":"placepick.reason-statements.v3",
+              "slot":"p1",
+              "statements":[{
+                "text":"%s",
+                "claimIds":["p1-c2"]
+              }]
             }
-            """.formatted(placeJson(1), placeJson(2), placeJson(3));
+            """.formatted(naturalText());
     }
 
-    private static String placeJson(int index) {
-        String suffix = index < 3 ? ",\n" : "\n";
-        return """
-                {"placeId":"%s","statements":[
-                  {"text":"%s","evidenceIds":["e-blog-%d"]}
-                ]}%s""".formatted(
-            placeId(index),
-            naturalText(index),
-            index,
-            suffix
-        );
-    }
-
-    private static String naturalText(int index) {
-        return "카페 " + index + "은 블로그에서 조용한 공간으로 소개되었습니다.";
-    }
-
-    private static UUID placeId(int index) {
-        return UUID.fromString("00000000-0000-4000-8000-00000000000" + index);
+    private static String naturalText() {
+        return "블로그 검색 결과에서 카페 1은 조용한 공간으로 소개되었습니다.";
     }
 
     private static String validChatResponse(String content) {
@@ -412,7 +478,9 @@ class EliceGroundedReasonClientIntegrationTest {
     }
 
     private static String chatResponse(String finishReason, String content, String refusal) {
-        String refusalField = refusal == null ? "null" : OBJECT_MAPPER.valueToTree(refusal).toString();
+        String refusalField = refusal == null
+            ? "null"
+            : OBJECT_MAPPER.valueToTree(refusal).toString();
         String escapedContent = OBJECT_MAPPER.valueToTree(content).toString();
         return """
             {
@@ -425,7 +493,7 @@ class EliceGroundedReasonClientIntegrationTest {
                 "message":{"role":"assistant","content":%s,"refusal":%s},
                 "finish_reason":"%s"
               }],
-              "usage":{"prompt_tokens":160,"completion_tokens":90,"total_tokens":250}
+              "usage":{"prompt_tokens":90,"completion_tokens":40,"total_tokens":130}
             }
             """.formatted(escapedContent, refusalField, finishReason);
     }

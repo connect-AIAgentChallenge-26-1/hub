@@ -485,6 +485,25 @@
       ],
       "title": "Result quality and partial outcomes",
       "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
+      "gridPos": {"h": 7, "w": 24, "x": 0, "y": 40},
+      "id": 20,
+      "options": {
+        "legend": {"displayMode": "table", "placement": "bottom", "showLegend": true},
+        "tooltip": {"mode": "multi", "sort": "desc"}
+      },
+      "targets": [
+        {
+          "expr": "sum by (source, attempts, recovered) (increase(placepick_recommendation_reason_candidates_total{application=\"placepick-backend\"}[15m]))",
+          "legendFormat": "{{source}} attempts={{attempts}} recovered={{recovered}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Per-candidate reason outcomes (15m)",
+      "type": "timeseries"
     }
   ],
   "refresh": "10s",
@@ -501,6 +520,6 @@
   "timezone": "browser",
   "title": "PlacePick MVP Runtime",
   "uid": "placepick-runtime",
-  "version": 4,
+  "version": 5,
   "weekStart": ""
 }

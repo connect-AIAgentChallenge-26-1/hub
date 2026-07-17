@@ -3,6 +3,7 @@ package com.placepick.recommendation.reason.application;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
+import com.placepick.recommendation.application.port.out.LlmFailureStage;
 import com.placepick.recommendation.application.scoring.CandidateRankingResult;
 import com.placepick.recommendation.application.trace.RecommendationTraceSink;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
@@ -15,186 +16,232 @@ import com.placepick.recommendation.domain.scoring.EvidenceLevel;
 import com.placepick.recommendation.domain.scoring.RankedPlace;
 import com.placepick.recommendation.domain.scoring.RecommendationWarning;
 import com.placepick.recommendation.domain.scoring.ScoreBreakdown;
-import com.placepick.recommendation.reason.application.port.out.GroundedReasonGenerationPort;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationCommand;
+import com.placepick.recommendation.reason.application.port.out.ReasonGenerationDiagnosticCode;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationErrorCode;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationOutcome;
-import com.placepick.recommendation.reason.domain.GeneratedReasonBatch;
-import com.placepick.recommendation.reason.domain.PlaceReasonStatements;
-import com.placepick.recommendation.reason.domain.ReasonStatement;
+import com.placepick.recommendation.reason.domain.GeneratedReasonResult;
+import com.placepick.recommendation.reason.domain.GeneratedReasonStatement;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
-import java.util.function.Function;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
 class GroundedReasonServiceTest {
 
     @Test
-    void validatesTheExactBatchAndRestoresRankingOrder() {
-        CandidateRankingResult ranking = ranking(false, true);
-        GroundedReasonService service = new GroundedReasonService(command -> generated(
-            command,
-            index -> statement(command, index, command.places().get(index)
-                .evidence().get(1).evidenceId(), ReasonStatementPolicy.BLOG_STATEMENT_TEXT),
-            List.of(2, 0, 1)
-        ));
+    void generatesEachPlaceIndependentlyAndPreservesRankingOrder() {
+        List<String> slots = java.util.Collections.synchronizedList(new ArrayList<>());
+        GroundedReasonService service = service(command -> {
+            slots.add(command.slot());
+            return generated(command);
+        });
 
-        ReasonEnrichmentResult result = service.enrich(condition(), ranking);
+        ReasonEnrichmentResult result = service.enrich(condition(), ranking(false, true));
 
+        assertThat(result.generationCalls()).isEqualTo(3);
         assertThat(result.fallbackUsed()).isFalse();
         assertThat(result.places()).extracting(EnrichedPlaceReason::placeId)
-            .containsExactlyElementsOf(ranking.places().stream().map(RankedPlace::placeId).toList());
+            .containsExactlyElementsOf(
+                ranking(false, true).places().stream().map(RankedPlace::placeId).toList()
+            );
         assertThat(result.places()).allSatisfy(place -> {
+            assertThat(place.fallbackUsed()).isFalse();
             assertThat(place.cautions()).containsExactly(GroundedReasonService.BUDGET_CAUTION);
-            assertThat(place.shareText()).startsWith("추천 후보:");
         });
+        assertThat(slots).containsExactlyInAnyOrder("p1", "p2", "p3");
     }
 
     @Test
-    void oneCrossPlaceEvidenceReferenceFallsBackForAllThree() {
-        CandidateRankingResult ranking = ranking(false, true);
+    void retriesOneInvalidCandidateThenFallsBackOnlyThatCandidate() {
+        Map<String, AtomicInteger> calls = new ConcurrentHashMap<>();
         RecordingTraceSink trace = new RecordingTraceSink();
         GroundedReasonService service = new GroundedReasonService(
-            command -> generated(
-                command,
-                index -> index == 0
-                    ? statement(
-                        command,
-                        index,
-                        command.places().get(1).evidence().get(0).evidenceId(),
-                        ReasonStatementPolicy.LOCAL_STATEMENT_TEXT
-                    )
-                    : statement(
-                        command,
-                        index,
-                        command.places().get(index).evidence().get(0).evidenceId(),
-                        ReasonStatementPolicy.LOCAL_STATEMENT_TEXT
-                    ),
-                List.of(0, 1, 2)
-            ),
-            trace
+            command -> {
+                int attempt = calls.computeIfAbsent(
+                    command.slot(),
+                    ignored -> new AtomicInteger()
+                ).incrementAndGet();
+                if ("p2".equals(command.slot())) {
+                    return invalidClaim(command);
+                }
+                return generated(command);
+            },
+            trace,
+            ignored -> {
+            }
         );
 
-        ReasonEnrichmentResult result = service.enrich(condition(), ranking);
+        ReasonEnrichmentResult result = service.enrich(condition(), ranking(false, true));
 
-        assertAllFallback(result);
-        assertThat(trace.validationCode).isEqualTo(ReasonBatchValidationCode.UNKNOWN_EVIDENCE);
+        assertThat(result.generationCalls()).isEqualTo(4);
+        assertThat(result.fallbackUsed()).isTrue();
+        assertThat(result.places()).extracting(EnrichedPlaceReason::fallbackUsed)
+            .containsExactly(false, true, false);
+        assertThat(result.places().get(1).cautions())
+            .contains(GroundedReasonService.FALLBACK_CAUTION);
+        assertThat(result.places().get(1).statements()).hasSize(2);
+        assertThat(result.places().get(1).statements().get(1).text())
+            .contains("블로그 검색 결과");
+        assertThat(calls.get("p2")).hasValue(2);
+        assertThat(trace.validationFailures).hasValue(2);
     }
 
     @Test
-    void placeNameOverlapCannotGroundAnInventedRooftopClaim() {
-        CandidateRankingResult ranking = ranking(false, true);
-        GroundedReasonService service = new GroundedReasonService(command -> generated(
-            command,
-            index -> statement(
-                command,
-                index,
-                command.places().get(index).evidence().get(0).evidenceId(),
-                index == 1
-                    ? "카페 2에는 루프탑이 있습니다"
-                    : ReasonStatementPolicy.LOCAL_STATEMENT_TEXT
-            ),
-            List.of(0, 1, 2)
-        ));
+    void retriesTransientFailureAndHonorsBoundedRetryAfter() {
+        Map<String, AtomicInteger> calls = new ConcurrentHashMap<>();
+        List<Duration> waits = java.util.Collections.synchronizedList(new ArrayList<>());
+        GroundedReasonService service = new GroundedReasonService(
+            command -> {
+                int attempt = calls.computeIfAbsent(
+                    command.slot(),
+                    ignored -> new AtomicInteger()
+                ).incrementAndGet();
+                if ("p1".equals(command.slot()) && attempt == 1) {
+                    return ReasonGenerationOutcome.providerFailure(
+                        ReasonGenerationErrorCode.PROVIDER_RATE_LIMITED,
+                        ReasonGenerationDiagnosticCode.UPSTREAM_RATE_LIMITED,
+                        LlmFailureStage.HTTP_STATUS,
+                        Duration.ofSeconds(9)
+                    );
+                }
+                return generated(command);
+            },
+            RecommendationTraceSink.none(),
+            waits::add
+        );
 
-        assertAllFallback(service.enrich(condition(), ranking));
+        ReasonEnrichmentResult result = service.enrich(condition(), ranking(false, true));
+
+        assertThat(result.generationCalls()).isEqualTo(4);
+        assertThat(result.fallbackUsed()).isFalse();
+        assertThat(waits).containsExactly(Duration.ofSeconds(5));
     }
 
     @Test
-    void providerFailureUsesLocalEvidenceForAnAllThreeFallback() {
-        CandidateRankingResult ranking = ranking(true, false);
-        GroundedReasonService service = new GroundedReasonService(command ->
-            ReasonGenerationOutcome.providerFailure(
-                ReasonGenerationErrorCode.PROVIDER_UNAVAILABLE
-            )
-        );
-
-        ReasonEnrichmentResult result = service.enrich(condition(), ranking);
-
-        assertAllFallback(result);
-        assertThat(result.places()).allSatisfy(place ->
-            assertThat(place.cautions()).contains(
-                GroundedReasonService.BLOG_CAUTION,
-                GroundedReasonService.FALLBACK_CAUTION
-            )
-        );
-    }
-
-    @Test
-    void unexpectedAdapterFailureIsNotHiddenByFallback() {
-        GroundedReasonService service = new GroundedReasonService(command -> {
-            throw new IllegalStateException("synthetic internal failure");
+    void invalidRequestAndAuthenticationFailuresAreNotRetried() {
+        AtomicInteger calls = new AtomicInteger();
+        GroundedReasonService service = service(command -> {
+            calls.incrementAndGet();
+            return "p1".equals(command.slot())
+                ? ReasonGenerationOutcome.providerFailure(
+                    ReasonGenerationErrorCode.PROVIDER_INVALID_REQUEST
+                )
+                : ReasonGenerationOutcome.providerFailure(
+                    ReasonGenerationErrorCode.PROVIDER_AUTHENTICATION_FAILED
+                );
         });
 
-        assertThatThrownBy(() -> service.enrich(condition(), ranking(false, true)))
-            .isInstanceOf(IllegalStateException.class)
-            .hasMessage("synthetic internal failure");
+        ReasonEnrichmentResult result = service.enrich(condition(), ranking(false, true, 2));
+
+        assertThat(calls).hasValue(2);
+        assertThat(result.generationCalls()).isEqualTo(2);
+        assertThat(result.places()).allMatch(EnrichedPlaceReason::fallbackUsed);
     }
 
     @Test
-    void nullPortOutcomeIsAnInternalContractFailure() {
-        GroundedReasonService service = new GroundedReasonService(command -> null);
+    void rootFailureTurnsOtherwiseGeneratedCandidatesIntoAllPlaceFallback() {
+        GroundedReasonService service = service(command ->
+            "p2".equals(command.slot())
+                ? ReasonGenerationOutcome.providerFailure(
+                    ReasonGenerationErrorCode.PROVIDER_INVALID_RESPONSE,
+                    ReasonGenerationDiagnosticCode.REASON_CONTENT_ROOT_SCHEMA,
+                    LlmFailureStage.CHAT_CONTENT_SCHEMA
+                )
+                : generated(command)
+        );
 
-        assertThatThrownBy(() -> service.enrich(condition(), ranking(false, true)))
+        ReasonEnrichmentResult result = service.enrich(condition(), ranking(false, true));
+
+        assertThat(result.generationCalls()).isEqualTo(3);
+        assertThat(result.places()).allMatch(EnrichedPlaceReason::fallbackUsed);
+    }
+
+    @Test
+    void runsAtMostThreePlaceRequestsInParallel() {
+        CountDownLatch entered = new CountDownLatch(3);
+        CountDownLatch release = new CountDownLatch(1);
+        AtomicInteger active = new AtomicInteger();
+        AtomicInteger maximum = new AtomicInteger();
+        GroundedReasonService service = service(command -> {
+            int current = active.incrementAndGet();
+            maximum.accumulateAndGet(current, Math::max);
+            entered.countDown();
+            try {
+                if (!entered.await(2, TimeUnit.SECONDS)) {
+                    throw new IllegalStateException("all three requests did not enter");
+                }
+                release.countDown();
+                if (!release.await(2, TimeUnit.SECONDS)) {
+                    throw new IllegalStateException("parallel release timed out");
+                }
+                return generated(command);
+            } catch (InterruptedException exception) {
+                Thread.currentThread().interrupt();
+                throw new IllegalStateException(exception);
+            } finally {
+                active.decrementAndGet();
+            }
+        });
+
+        ReasonEnrichmentResult result = service.enrich(condition(), ranking(false, true));
+
+        assertThat(result.fallbackUsed()).isFalse();
+        assertThat(maximum).hasValue(3);
+    }
+
+    @Test
+    void unexpectedRuntimeAndNullOutcomeAreNotHiddenByFallback() {
+        GroundedReasonService unexpected = service(command -> {
+            throw new IllegalStateException("synthetic internal failure");
+        });
+        GroundedReasonService nullOutcome = service(command -> null);
+
+        assertThatThrownBy(() -> unexpected.enrich(condition(), ranking(false, true, 1)))
+            .isInstanceOf(IllegalStateException.class)
+            .hasMessage("synthetic internal failure");
+        assertThatThrownBy(() -> nullOutcome.enrich(condition(), ranking(false, true, 1)))
             .isInstanceOf(IllegalStateException.class)
             .hasMessage("Reason generation port returned no outcome.");
     }
 
-    @Test
-    void supportsTheTemporaryOneToThreePlaceReasonContractForPartialResults() {
-        CandidateRankingResult ranking = ranking(false, true, 1);
-        GroundedReasonService service = new GroundedReasonService(command -> generated(
-            command,
-            index -> statement(
-                command,
-                index,
-                command.places().get(index).evidence().get(0).evidenceId(),
-                ReasonStatementPolicy.LOCAL_STATEMENT_TEXT
-            ),
-            List.of(0)
-        ));
-
-        ReasonEnrichmentResult result = service.enrich(condition(), ranking);
-
-        assertThat(result.fallbackUsed()).isFalse();
-        assertThat(result.places()).singleElement();
-    }
-
-    private void assertAllFallback(ReasonEnrichmentResult result) {
-        assertThat(result.fallbackUsed()).isTrue();
-        assertThat(result.places()).hasSize(3).allSatisfy(place -> {
-            assertThat(place.statements()).singleElement()
-                .satisfies(statement -> {
-                    assertThat(statement.text()).startsWith("검색 후보:");
-                    assertThat(statement.evidenceIds()).singleElement()
-                        .asString().startsWith("local:");
-                });
-            assertThat(place.cautions()).contains(GroundedReasonService.FALLBACK_CAUTION);
-        });
-    }
-
-    private ReasonGenerationOutcome generated(
-        ReasonGenerationCommand command,
-        Function<Integer, PlaceReasonStatements> factory,
-        List<Integer> order
+    private GroundedReasonService service(
+        com.placepick.recommendation.reason.application.port.out.GroundedReasonGenerationPort port
     ) {
-        return ReasonGenerationOutcome.generated(new GeneratedReasonBatch(
-            GeneratedReasonBatch.SCHEMA_VERSION,
-            order.stream().map(factory).toList()
-        ));
-    }
-
-    private PlaceReasonStatements statement(
-        ReasonGenerationCommand command,
-        int index,
-        String evidenceId,
-        String text
-    ) {
-        return new PlaceReasonStatements(
-            command.places().get(index).placeId(),
-            List.of(new ReasonStatement(text, List.of(evidenceId)))
+        return new GroundedReasonService(
+            port,
+            RecommendationTraceSink.none(),
+            ignored -> {
+            }
         );
+    }
+
+    private ReasonGenerationOutcome generated(ReasonGenerationCommand command) {
+        return ReasonGenerationOutcome.generated(new GeneratedReasonResult(
+            GeneratedReasonResult.SCHEMA_VERSION,
+            command.slot(),
+            List.of(new GeneratedReasonStatement(
+                "장소 검색 정보에서 조용한 공간을 확인했습니다.",
+                List.of(command.claims().get(0).claimId())
+            ))
+        ));
+    }
+
+    private ReasonGenerationOutcome invalidClaim(ReasonGenerationCommand command) {
+        return ReasonGenerationOutcome.generated(new GeneratedReasonResult(
+            GeneratedReasonResult.SCHEMA_VERSION,
+            command.slot(),
+            List.of(new GeneratedReasonStatement(
+                "장소 검색 정보에서 조용한 공간을 확인했습니다.",
+                List.of(command.slot() + "-c4")
+            ))
+        ));
     }
 
     private CandidateRankingResult ranking(boolean degraded, boolean withBlog) {
@@ -260,11 +307,11 @@ class GroundedReasonServiceTest {
 
     private static final class RecordingTraceSink implements RecommendationTraceSink {
 
-        private ReasonBatchValidationCode validationCode;
+        private final AtomicInteger validationFailures = new AtomicInteger();
 
         @Override
         public void reasonValidationFailed(ReasonBatchValidationCode code) {
-            validationCode = code;
+            validationFailures.incrementAndGet();
         }
     }
 }

@@ -11,10 +11,8 @@ import com.placepick.recommendation.application.port.out.PlaceSearchResult;
 import com.placepick.recommendation.reason.application.port.out.GroundedReasonGenerationPort;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationCommand;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationOutcome;
-import com.placepick.recommendation.reason.application.ReasonStatementPolicy;
-import com.placepick.recommendation.reason.domain.GeneratedReasonBatch;
-import com.placepick.recommendation.reason.domain.PlaceReasonStatements;
-import com.placepick.recommendation.reason.domain.ReasonStatement;
+import com.placepick.recommendation.reason.domain.GeneratedReasonResult;
+import com.placepick.recommendation.reason.domain.GeneratedReasonStatement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -65,19 +63,26 @@ final class InProcessLiveDevProvider
 
     @Override
     public ReasonGenerationOutcome generate(ReasonGenerationCommand command) {
-        List<PlaceReasonStatements> places = command.places().stream()
-            .map(place -> new PlaceReasonStatements(
-                place.placeId(),
-                List.of(new ReasonStatement(
-                    ReasonStatementPolicy.expectedText(place.evidence().get(0).type()),
-                    List.of(place.evidence().get(0).evidenceId())
-                ))
+        String text = bounded(
+            "장소 검색 정보에서 " + command.claims().get(0).summary() +
+                " 내용을 확인했습니다.",
+            160
+        );
+        return ReasonGenerationOutcome.generated(new GeneratedReasonResult(
+            GeneratedReasonResult.SCHEMA_VERSION,
+            command.slot(),
+            List.of(new GeneratedReasonStatement(
+                text,
+                List.of(command.claims().get(0).claimId())
             ))
-            .toList();
-        return ReasonGenerationOutcome.generated(new GeneratedReasonBatch(
-            GeneratedReasonBatch.SCHEMA_VERSION,
-            places
         ));
+    }
+
+    private static String bounded(String value, int maximum) {
+        int length = value.codePointCount(0, value.length());
+        return length <= maximum
+            ? value
+            : value.substring(0, value.offsetByCodePoints(0, maximum));
     }
 
     private static String candidateName(String blogQuery) {

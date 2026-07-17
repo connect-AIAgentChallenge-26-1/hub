@@ -85,6 +85,13 @@ class LlmProviderDiagnosticMetricsTest {
             .tag("operation", "reason")
             .tag("code", "unknown_evidence")
             .counter().count()).isEqualTo(1.0);
+
+        metrics.reasonPlaceCompleted(false, 2, true);
+        assertThat(registry.get("placepick.recommendation.reason.candidates")
+            .tag("source", "generated")
+            .tag("attempts", "2")
+            .tag("recovered", "true")
+            .counter().count()).isEqualTo(1.0);
     }
 
     @Test
@@ -103,9 +110,11 @@ class LlmProviderDiagnosticMetricsTest {
             )
         );
         metrics.reasonValidationFailed(ReasonBatchValidationCode.SCHEMA_OR_SIZE);
+        metrics.reasonPlaceCompleted(true, 2, false);
 
         assertThat(registry.scrape())
             .contains("placepick_provider_llm_outcomes_total")
-            .contains("placepick_provider_llm_validation_failures_total");
+            .contains("placepick_provider_llm_validation_failures_total")
+            .contains("placepick_recommendation_reason_candidates_total");
     }
 }

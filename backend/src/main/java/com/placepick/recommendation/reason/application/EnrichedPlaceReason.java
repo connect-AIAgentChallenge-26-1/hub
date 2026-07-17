@@ -9,7 +9,8 @@ public record EnrichedPlaceReason(
     UUID placeId,
     List<ReasonStatement> statements,
     List<String> cautions,
-    String shareText
+    String shareText,
+    boolean fallbackUsed
 ) {
 
     public EnrichedPlaceReason {

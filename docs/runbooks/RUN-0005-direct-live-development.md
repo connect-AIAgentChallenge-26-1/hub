@@ -89,21 +89,26 @@ make live-evidence
 이 명령은 고정 합성 시나리오만 사용하고 실제 값 대신 단계·호출 수·후보 수·검증 상태를
 safe summary로 남긴다. 성공 판정은 각 시나리오가 `linked=true`, 장소 3개,
 `degraded=false`, `reasonFallback=false`이고 종료 뒤 report secret scan이 통과하는 것이다.
-2026-07-16 검증에서는 세 시나리오가 각각 7·6·6회 호출로 통과했다. 사용자 여정별 해석은
-[CASE-0002](../case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)를 확인한다.
+2026-07-16 검증에서는 당시 v2 batch 계약으로 세 시나리오가 각각 7·6·6회 호출로 통과했다.
+이는 현재 후보별 v3 호출 수의 합격 기준이 아니다. 사용자 여정별 역사적 해석은
+[CASE-0002](../case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)를 확인하고,
+v3 실제 품질은 별도 `live-quality-eval` campaign으로 확인한다.
 
 ## 중단과 복구
 
 - 401·403: 자동 재시도하지 않고 해당 Provider console에서 자격 상태를 확인한다.
-- 429: 호출을 중단하고 quota·비용 한도를 확인한다.
-- 5xx·timeout: Mock 회귀가 통과하는지 확인한 뒤 Provider 상태를 분리 진단한다.
-- schema·evidence 실패: 응답 원문을 문서나 Issue에 붙이지 말고 안정적인 오류 코드만 남긴다.
+- 429·5xx·timeout: 후보별 application 재시도 한 번이 소진된 뒤에는 추가 호출을 중단하고
+  quota·비용 한도와 Provider 상태를 분리 진단한다.
+- schema·slot·claim 실패: 응답 원문을 문서나 Issue에 붙이지 말고 안정적인 오류 코드와
+  후보별 시도 횟수만 남긴다.
 - 알려진 유형에 불필요한 `placeTypeDetail`이 있으면 서버 정규화가 적용되는지 확인한다.
   `OTHER` 세부 유형 누락은 정상 실패다.
 - 누락 조건 warning은 Provider 문구가 아니라 서버가 조건에서 계산한 code를 기준으로
   판단한다.
-- 이유 v2가 자연스러워도 같은 후보의 evidence만 인용하는지와 금지 속성이 없는지를
-  서버 검증 결과로 판단한다. 하나라도 실패하면 batch 전체 fallback이 정상 동작이다.
+- 이유 v3가 자연스러워도 같은 후보 slot의 claim만 인용하는지, Blog 출처를 귀속하는지와
+  금지 속성이 없는지를 서버 검증 결과로 판단한다. 후보 단위 검증이 두 번 실패하면 해당
+  후보만 template이 정상이고, HTTP envelope·root schema 실패일 때만 전체 fallback이
+  정상이다. null outcome이나 예상하지 못한 내부 예외는 fallback으로 처리하지 않는다.
 - 자격 노출 의심: 즉시 Provider console에서 폐기·교체하고 `.env.live.local`과 브라우저
   session을 정리한다.
 

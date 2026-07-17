@@ -3,10 +3,15 @@ package com.placepick.recommendation.reason.application;
 /** Closed, payload-free reason validation result safe for diagnostics. */
 public enum ReasonBatchValidationCode {
     SCHEMA_OR_SIZE,
+    SLOT_REFERENCE,
     PLACE_REFERENCE,
     DUPLICATE_PLACE,
     DUPLICATE_STATEMENT,
     INCOMPLETE_PLACE_SET,
+    UNKNOWN_CLAIM,
+    BLOG_ATTRIBUTION_MISSING,
+    BLOG_ATTRIBUTION_MISMATCH,
+    UNSUPPORTED_GROUNDING,
     UNKNOWN_EVIDENCE,
     TEMPLATE_EVIDENCE_TYPE_MISMATCH,
     FORBIDDEN_CLAIM,
