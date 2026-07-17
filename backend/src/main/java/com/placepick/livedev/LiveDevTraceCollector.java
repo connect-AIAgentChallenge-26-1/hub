@@ -32,6 +32,9 @@ final class LiveDevTraceCollector implements RecommendationTraceSink {
     public void queryPlanned(CandidateQueryPlan plan, boolean relaxed) {
         publisher.accept("SEARCH_QUERY_PLANNED", Map.of(
             "query", plan.query(),
+            "variantId", plan.variantId(),
+            "sort", plan.sort().name(),
+            "weightBasisPoints", plan.weightBasisPoints(),
             "relaxed", relaxed,
             "includedPreferences", plan.includedPreferences().stream()
                 .map(value -> Map.of(
@@ -52,6 +55,7 @@ final class LiveDevTraceCollector implements RecommendationTraceSink {
         publisher.accept("NAVER_LOCAL_COMPLETED", Map.of(
             "query", query.query(),
             "limit", query.limit(),
+            "sort", query.sort().name(),
             "relaxed", relaxed,
             "total", result.total(),
             "items", result.items().stream().map(LiveDevApiDto.PlaceSearchItemView::from).toList()
@@ -95,6 +99,7 @@ final class LiveDevTraceCollector implements RecommendationTraceSink {
             "candidate", LiveDevApiDto.CandidateView.from(candidate),
             "query", query.query(),
             "limit", query.limit(),
+            "sort", query.sort().name(),
             "total", result.total(),
             "items", result.items().stream().map(LiveDevApiDto.BlogSearchItemView::from).toList()
         ));

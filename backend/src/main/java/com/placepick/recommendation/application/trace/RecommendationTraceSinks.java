@@ -53,6 +53,16 @@ public final class RecommendationTraceSinks {
         }
 
         @Override
+        public void localSearchFailed(
+            PlaceSearchQuery query,
+            String failureCode,
+            boolean relaxed
+        ) {
+            first.localSearchFailed(query, failureCode, relaxed);
+            second.localSearchFailed(query, failureCode, relaxed);
+        }
+
+        @Override
         public void candidatesNormalized(
             List<NormalizedCandidate> candidates,
             boolean relaxed
@@ -75,6 +85,12 @@ public final class RecommendationTraceSinks {
         public void candidateFunnelCompleted(CandidateFunnel funnel, boolean relaxed) {
             first.candidateFunnelCompleted(funnel, relaxed);
             second.candidateFunnelCompleted(funnel, relaxed);
+        }
+
+        @Override
+        public void previouslyExposedCandidatesExcluded(int count) {
+            first.previouslyExposedCandidatesExcluded(count);
+            second.previouslyExposedCandidatesExcluded(count);
         }
 
         @Override

@@ -14,6 +14,13 @@ class SearchPortContractTest {
         assertThat(new PlaceSearchQuery("  서울 카페  ", 5).query()).isEqualTo("서울 카페");
         assertThat(new BlogSearchQuery("  서울 카페 후기  ", 10).query())
             .isEqualTo("서울 카페 후기");
+        assertThat(new PlaceSearchQuery("서울 카페", 5).sort())
+            .isEqualTo(PlaceSearchSort.ACCURACY);
+        assertThat(new BlogSearchQuery("서울 카페", 10).sort())
+            .isEqualTo(BlogSearchSort.SIMILARITY);
+        assertThat(PlaceSearchSort.ACCURACY.providerValue()).isEqualTo("random");
+        assertThat(PlaceSearchSort.POPULARITY.providerValue()).isEqualTo("comment");
+        assertThat(BlogSearchSort.SIMILARITY.providerValue()).isEqualTo("sim");
 
         assertThatThrownBy(() -> new PlaceSearchQuery("서울 카페", 6))
             .isInstanceOf(IllegalArgumentException.class)

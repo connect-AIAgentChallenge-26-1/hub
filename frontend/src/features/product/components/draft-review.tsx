@@ -92,7 +92,7 @@ export function DraftReview({ draftId }: { draftId: string }) {
         </fieldset>
         <fieldset>
           <legend className="field-label">선호와 우선순위</legend>
-          <p className="mt-1 text-xs text-slate-500">후보가 부족하면 가장 낮은 우선순위 하나만 완화할 수 있습니다.</p>
+          <p className="mt-1 text-xs text-slate-500">우선순위는 독립 검색 variant와 선호 근거 점수에 반영되며 필수 위치·유형은 완화하지 않습니다.</p>
           <div className="mt-3 space-y-3">
             {condition.preferences.map((item, index) => <div key={`${index}-${item.value}`} className="grid grid-cols-[1fr_6rem_auto] gap-2 rounded-xl bg-slate-50 p-3">
               <input aria-label={`선호 ${index + 1}`} className="field-control" maxLength={50} value={item.value} onChange={(event) => update("preferences", condition.preferences.map((value, current) => current === index ? { ...value, value: event.target.value } : value))} />

@@ -115,6 +115,23 @@ class EliceGroundedReasonClientSecurityTest {
             .doesNotContain("places", "서울", "카페");
     }
 
+    @Test
+    void strictSchemaUsesTheExactPartialPlaceCount() {
+        ReasonGenerationCommand full = command();
+        ReasonGenerationCommand partial = new ReasonGenerationCommand(
+            full.condition(),
+            List.of(full.places().get(0))
+        );
+
+        Map<String, Object> schema = EliceGroundedReasonClient.strictReasonSchema(partial);
+        @SuppressWarnings("unchecked")
+        Map<String, Object> properties = (Map<String, Object>) schema.get("properties");
+        @SuppressWarnings("unchecked")
+        Map<String, Object> places = (Map<String, Object>) properties.get("places");
+
+        assertThat(places).containsEntry("minItems", 1).containsEntry("maxItems", 1);
+    }
+
     private ReasonGenerationCommand command() {
         List<ReasonPlaceContext> places = java.util.stream.IntStream.rangeClosed(1, 3)
             .mapToObj(index -> new ReasonPlaceContext(

@@ -48,7 +48,7 @@ export function ProductHome() {
             <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300">자연어로 원하는 장소를 말하면 조건 초안을 먼저 보여 드립니다. 확인한 조건으로만 후보를 찾고, 점수와 근거를 공개합니다.</p>
             <ul className="mt-7 grid gap-3 text-sm text-slate-300 sm:grid-cols-3">
               <li className="rounded-xl border border-white/10 bg-white/5 px-3 py-3">조건 자동 확정 없음</li>
-              <li className="rounded-xl border border-white/10 bg-white/5 px-3 py-3">결정론적 Top 3</li>
+              <li className="rounded-xl border border-white/10 bg-white/5 px-3 py-3">결정론적 추천 순위</li>
               <li className="rounded-xl border border-white/10 bg-white/5 px-3 py-3">공유 투표·최종 확정</li>
             </ul>
           </div>

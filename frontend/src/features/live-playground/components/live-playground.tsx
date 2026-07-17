@@ -187,7 +187,7 @@ function Hero({ mode }: { mode: "api" | "mock" }) {
             추천의 모든 판단을<br /><span className="text-teal-300">눈으로 확인하세요.</span>
           </h1>
           <p className="mt-5 max-w-2xl text-base leading-7 text-slate-300 sm:text-lg">
-            자연어 조건 추출부터 실제 후보 정제, 근거 점수, Top 3와 LLM 사후 검증까지 같은 사용자 흐름에서 확인합니다.
+            자연어 조건 추출부터 실제 후보 정제, 0~100 근거 점수, 추천 순위와 LLM 사후 검증까지 같은 사용자 흐름에서 확인합니다.
           </p>
         </div>
       </div>
@@ -215,7 +215,7 @@ function ProcessPreview({ activePhase }: { activePhase: string }) {
     ["1", "조건 추출", "Elice strict schema와 누락 경고"],
     ["2", "사용자 확인", "수정 가능한 정규화 조건"],
     ["3", "장소·근거 검색", "Naver Local·Blog provenance"],
-    ["4", "결정론적 Top 3", "서버 점수와 안정적 정렬"],
+    ["4", "결정론적 추천 순위", "서버 점수와 안정적 정렬"],
     ["5", "이유 사후 검증", "place·evidence 소유 관계"],
   ];
   return (

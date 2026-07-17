@@ -194,6 +194,28 @@ class VotingRoomApiIntegrationTest {
     }
 
     @Test
+    void createsVotingRoomsFromOneOrTwoPartialRecommendationPlaces() throws Exception {
+        for (int resultCount : List.of(1, 2)) {
+            SessionClient owner = createSession();
+            SeededJob job = seedCompletedJob(owner.sessionId(), resultCount);
+
+            MvcResult created = createRoom(
+                owner,
+                job.jobId(),
+                "partial-room-key-" + resultCount,
+                null
+            );
+            String token = json(created).path("shareToken").asText();
+
+            mockMvc.perform(get("/api/v1/rooms/{shareToken}", token)
+                    .cookie(owner.cookie()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.places", hasSize(resultCount)))
+                .andExpect(jsonPath("$.aggregate", hasSize(resultCount)));
+        }
+    }
+
+    @Test
     void isolatesTwoSessionsAndAtomicallyChangesAndDeletesVotes() throws Exception {
         SessionClient owner = createSession();
         SessionClient participant = createSession();
@@ -550,6 +572,13 @@ class VotingRoomApiIntegrationTest {
     }
 
     private SeededJob seedCompletedJob(UUID sessionId) throws Exception {
+        return seedCompletedJob(sessionId, 3);
+    }
+
+    private SeededJob seedCompletedJob(UUID sessionId, int resultCount) throws Exception {
+        if (resultCount < 1 || resultCount > 3) {
+            throw new IllegalArgumentException("resultCount must be between one and three.");
+        }
         UUID draftId = UUID.randomUUID();
         UUID jobId = UUID.randomUUID();
         Instant now = Instant.now();
@@ -563,11 +592,10 @@ class VotingRoomApiIntegrationTest {
             List.of(),
             List.of()
         );
-        List<RecommendationJobPlace> places = List.of(
-            place(1),
-            place(2),
-            place(3)
-        );
+        List<RecommendationJobPlace> places = java.util.stream.IntStream
+            .rangeClosed(1, resultCount)
+            .mapToObj(this::place)
+            .toList();
         jdbcClient.sql("""
                 INSERT INTO recommendation_draft (
                     id, session_id, status, request_text, condition_json, warnings_json,
@@ -586,11 +614,13 @@ class VotingRoomApiIntegrationTest {
             .update();
         jdbcClient.sql("""
                 INSERT INTO recommendation_job (
-                    id, session_id, draft_id, status, stage, progress, degraded,
+                    id, session_id, draft_id, root_job_id,
+                    status, stage, progress, degraded,
                     condition_json, warnings_json, places_json,
                     created_at, updated_at, expires_at
                 ) VALUES (
-                    :id, :sessionId, :draftId, 'COMPLETED', 'FINISHED', 100, FALSE,
+                    :id, :sessionId, :draftId, :id,
+                    'COMPLETED', 'FINISHED', 100, FALSE,
                     CAST(:condition AS jsonb), '[]'::jsonb, CAST(:places AS jsonb),
                     :now, :now, :expiresAt
                 )
@@ -607,10 +637,11 @@ class VotingRoomApiIntegrationTest {
             RecommendationJobPlace place = places.get(index);
             jdbcClient.sql("""
                     INSERT INTO recommendation_candidate (
-                        job_id, place_id, ordinal, snapshot_json, score, evidence_level
+                        job_id, place_id, ordinal, snapshot_json, score, evidence_level,
+                        candidate_fingerprint
                     ) VALUES (
                         :jobId, :placeId, :ordinal, CAST(:snapshot AS jsonb),
-                        :score, 'LOCAL_AND_BLOG'
+                        :score, 'LOCAL_AND_BLOG', :candidateFingerprint
                     )
                     """)
                 .param("jobId", jobId)
@@ -618,6 +649,7 @@ class VotingRoomApiIntegrationTest {
                 .param("ordinal", index + 1)
                 .param("snapshot", objectMapper.writeValueAsString(place))
                 .param("score", place.score())
+                .param("candidateFingerprint", String.format("%064x", index + 1))
                 .update();
         }
         return new SeededJob(jobId, places);

@@ -16,6 +16,7 @@ import com.placepick.recommendation.application.port.out.BlogSearchItem;
 import com.placepick.recommendation.application.port.out.BlogSearchQuery;
 import com.placepick.recommendation.application.port.out.PlaceSearchItem;
 import com.placepick.recommendation.application.port.out.PlaceSearchQuery;
+import com.placepick.recommendation.application.port.out.PlaceSearchSort;
 import com.placepick.recommendation.application.port.out.SearchProviderException;
 import com.placepick.recommendation.application.port.out.SearchProviderFailure;
 import com.placepick.recommendation.application.port.out.SearchProviderFailureStage;
@@ -146,6 +147,22 @@ class NaverApiHubAdapterIntegrationTest {
             .extracting(PlaceSearchItem::name)
             .containsExactly("검증 가능한 카페");
         WIRE_MOCK.verify(exactly(1), getRequestedFor(urlPathEqualTo(NaverApiHubAdapter.LOCAL_PATH)));
+    }
+
+    @Test
+    void mapsProviderNeutralPopularityToTheCurrentNaverCommentSort() {
+        WIRE_MOCK.stubFor(get(urlPathEqualTo(NaverApiHubAdapter.LOCAL_PATH))
+            .willReturn(jsonResponse(200, "{\"total\":0,\"items\":[]}")));
+
+        adapter.searchPlaces(new PlaceSearchQuery(
+            "합성 인기순 검색",
+            5,
+            PlaceSearchSort.POPULARITY
+        ));
+
+        WIRE_MOCK.verify(exactly(1), getRequestedFor(urlPathEqualTo(
+            NaverApiHubAdapter.LOCAL_PATH
+        )).withQueryParam("sort", equalTo("comment")));
     }
 
     @ParameterizedTest
@@ -391,7 +408,10 @@ class NaverApiHubAdapterIntegrationTest {
             .withQueryParam("query", equalTo(query))
             .withQueryParam("display", equalTo("1"))
             .withoutQueryParam("start")
-            .withoutQueryParam("sort")
+            .withQueryParam(
+                "sort",
+                equalTo(path.endsWith("/local") ? "random" : "sim")
+            )
             .withoutQueryParam("format"));
     }
 

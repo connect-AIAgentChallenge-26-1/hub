@@ -393,7 +393,7 @@ function tracePresentation(
       const preferences = array(data.includedPreferences, "data.includedPreferences");
       const relaxed = requiredBoolean(data.relaxed, "data.relaxed");
       return traceView(
-        relaxed ? "선호 하나를 완화해 검색어를 다시 만들었습니다" : "검색 계획을 만들었습니다",
+        relaxed ? "후보 pool을 넓히기 위한 추가 검색 variant를 계획했습니다" : "기본 검색 variant를 계획했습니다",
         "위치와 장소 유형은 유지하고 완전한 선호 토큰만 검색어에 포함했습니다.",
         { query, queryLength: [...query].length, preferenceTokens: preferences.length, relaxed },
       );
@@ -453,12 +453,12 @@ function tracePresentation(
         return candidateTrace(
           parseCandidate(scored.candidate),
           "RANKED",
-          `예비 점수 ${score.total}/80 · 근거 ${requiredInteger(scored.evidenceCount, "evidenceCount")}개`,
+          `예비 점수 ${score.total}/100 · 근거 ${requiredInteger(scored.evidenceCount, "evidenceCount")}개`,
         );
       });
       return traceView(
         "Blog 검색 대상을 예비 점수로 제한했습니다",
-        "외부 근거 호출 전에 결정론적 예비 점수로 최대 다섯 후보를 선택했습니다.",
+        "외부 근거 호출 전에 결정론적 예비 점수로 최대 여덟 후보를 선택했습니다.",
         { candidatePool: requiredInteger(data.count, "data.count") },
         candidates,
       );
@@ -481,7 +481,7 @@ function tracePresentation(
       const candidate = parseCandidate(data.candidate);
       return traceView(
         "Blog 근거 호출이 안전하게 중단됐습니다",
-        "부분 Blog 근거를 폐기하고 장소 검색 근거만 사용하는 저하 경로로 전환했습니다.",
+        "해당 후보만 장소 검색 근거를 사용하는 저하 경로로 전환하고 다른 후보의 검증 근거는 유지했습니다.",
         { failureCode: requiredNonBlankString(data.failureCode, "data.failureCode") },
         [candidateTrace(candidate, "FILTERED", "Blog 근거를 결과 점수에서 제외")],
       );
@@ -493,12 +493,12 @@ function tracePresentation(
         return candidateTrace(
           parseCandidate(ranked.candidate),
           "RANKED",
-          `${index + 1}위 · 최종 점수 ${score.total}/80`,
+          `${index + 1}위 · 최종 점수 ${score.total}/100`,
         );
       });
       return traceView(
-        "서버가 결정론적 Top 3를 확정했습니다",
-        "LLM 호출 전에 점수·필수 조건·근거 수·안정적 후보 키 순으로 순위를 고정했습니다.",
+        `서버가 결정론적 추천 ${places.length}곳을 확정했습니다`,
+        "LLM 호출 전에 위치 신뢰도·검색 관련성·선호 근거·근거 품질로 순위를 고정했습니다.",
         {
           resultCount: places.length,
           degraded: requiredBoolean(data.degraded, "data.degraded"),
@@ -515,7 +515,7 @@ function tracePresentation(
       }, 0);
       return traceView(
         "Elice에 근거 기반 이유 생성을 요청했습니다",
-        "확정된 Top 3와 후보별 허용 근거만 전달하고 점수·순위는 전달하지 않았습니다.",
+        "확정된 후보와 후보별 허용 근거만 전달하고 점수·순위는 전달하지 않았습니다.",
         { placeCount: places.length, evidenceCount },
       );
     }
@@ -536,7 +536,7 @@ function tracePresentation(
       return traceView(
         fallback ? "서버 템플릿 이유로 안전하게 대체했습니다" : "Elice 이유와 근거 관계를 검증했습니다",
         fallback
-          ? "Provider 결과를 일부 섞지 않고 Top 3 전체를 검증된 서버 문장으로 교체했습니다."
+          ? "Provider 결과를 일부 섞지 않고 검증된 서버 문장으로 교체했습니다."
           : "모든 place ID와 evidence ID가 같은 후보의 입력 근거에 속하는지 확인했습니다.",
         {
           placeCount: places.length,
@@ -551,9 +551,11 @@ function tracePresentation(
       const result = parseResult(data.result);
       return traceView(
         "추천 결과를 완성했습니다",
-        "검증된 세 후보와 점수·이유·주의사항을 최종 결과로 고정했습니다.",
+        `검증된 후보 ${result.resultCount}곳과 점수·이유·주의사항을 최종 결과로 고정했습니다.`,
         {
           resultCount: result.places.length,
+          partial: result.partial,
+          explorationRound: result.explorationRound,
           localCalls: result.placeSearchCalls,
           blogCalls: result.blogSearchCalls,
           reasonCalls: result.reasonGenerationCalls,
@@ -591,11 +593,11 @@ function traceView(
 function parseResult(source: unknown): RecommendationResult {
   const value = asRecord(source);
   const places = array(value.places, "result.places").map(parseResultPlace);
-  if (places.length !== 3) {
-    throw new PlaygroundContractError("완료 결과에는 정확히 Top 3가 필요합니다.");
+  if (places.length < 1 || places.length > 3) {
+    throw new PlaygroundContractError("완료 결과에는 1~3개의 추천 후보가 필요합니다.");
   }
   if (new Set(places.map((place) => place.placeId)).size !== places.length) {
-    throw new PlaygroundContractError("Top 3 placeId는 서로 달라야 합니다.");
+    throw new PlaygroundContractError("추천 placeId는 서로 달라야 합니다.");
   }
   for (const place of places) {
     const evidenceIds = new Set(place.evidence.map((evidence) => evidence.evidenceId));
@@ -604,11 +606,23 @@ function parseResult(source: unknown): RecommendationResult {
       throw new PlaygroundContractError("추천 이유가 후보에 없는 evidence ID를 인용했습니다.");
     }
   }
+  const resultCount = requiredInteger(value.resultCount, "result.resultCount");
+  const partial = requiredBoolean(value.partial, "result.partial");
+  if (resultCount !== places.length || partial !== (resultCount < 3)) {
+    throw new PlaygroundContractError("부분 결과 수와 places 계약이 일치하지 않습니다.");
+  }
+  const reasonFallback = requiredBoolean(value.reasonFallback, "result.reasonFallback");
+  if (reasonFallback !== places.some((place) => place.reasonSource === "TEMPLATE")) {
+    throw new PlaygroundContractError("reasonFallback이 후보별 reasonSource와 일치하지 않습니다.");
+  }
   return {
     places,
     degraded: requiredBoolean(value.degraded, "result.degraded"),
+    partial,
+    resultCount,
+    explorationRound: requiredInteger(value.explorationRound, "result.explorationRound"),
     warnings: stringArray(value.warnings, "result.warnings"),
-    reasonFallback: requiredBoolean(value.reasonFallback, "result.reasonFallback"),
+    reasonFallback,
     relaxed: requiredBoolean(value.relaxed, "result.relaxed"),
     placeSearchCalls: requiredInteger(value.placeSearchCalls, "result.placeSearchCalls"),
     blogSearchCalls: requiredInteger(value.blogSearchCalls, "result.blogSearchCalls"),
@@ -639,6 +653,10 @@ function parseResultPlace(source: unknown, index: number): RecommendationPlace {
   if (evidenceLevel !== "LOCAL_AND_BLOG" && evidenceLevel !== "LOCAL_ONLY") {
     throw new PlaygroundContractError("evidenceLevel 값이 계약과 다릅니다.");
   }
+  const reasonSource = requiredNonBlankString(value.reasonSource, "reasonSource");
+  if (reasonSource !== "GENERATED" && reasonSource !== "TEMPLATE") {
+    throw new PlaygroundContractError("reasonSource 값이 계약과 다릅니다.");
+  }
   return {
     placeId,
     rank: index + 1,
@@ -649,6 +667,7 @@ function parseResultPlace(source: unknown, index: number): RecommendationPlace {
     sourceUrl: candidate.sourceUrl,
     score: score.total,
     scoreBreakdown: score,
+    reasonSource,
     reasonStatements: array(value.reasons, "reasons").map((item) => {
       const reason = asRecord(item);
       return {
@@ -662,19 +681,18 @@ function parseResultPlace(source: unknown, index: number): RecommendationPlace {
   };
 }
 
-function parseScore(source: unknown): ScoreBreakdown & { total: number } {
+function parseScore(source: unknown): ScoreBreakdown {
   const value = asRecord(source);
   const score = {
-    location: requiredInteger(value.location, "score.location"),
-    placeType: requiredInteger(value.placeType, "score.placeType"),
-    budget: requiredInteger(value.budget, "score.budget"),
-    preference: requiredInteger(value.preference, "score.preference"),
-    blogEvidence: requiredInteger(value.blogEvidence, "score.blogEvidence"),
-    total: requiredInteger(value.total, "score.total"),
+    locationConfidence: boundedInteger(value.locationConfidence, "score.locationConfidence", 15),
+    searchRelevance: boundedInteger(value.searchRelevance, "score.searchRelevance", 30),
+    preferenceEvidence: boundedInteger(value.preferenceEvidence, "score.preferenceEvidence", 30),
+    evidenceQuality: boundedInteger(value.evidenceQuality, "score.evidenceQuality", 25),
+    total: boundedInteger(value.total, "score.total", 100),
   };
-  if (score.total > 80 || score.total !==
-      score.location + score.placeType + score.budget + score.preference + score.blogEvidence) {
-    throw new PlaygroundContractError("score 합계 또는 0~80 범위가 계약과 다릅니다.");
+  if (score.total !== score.locationConfidence + score.searchRelevance +
+      score.preferenceEvidence + score.evidenceQuality) {
+    throw new PlaygroundContractError("score 합계 또는 0~100 범위가 계약과 다릅니다.");
   }
   return score;
 }
@@ -686,7 +704,7 @@ function parseEvidence(source: unknown): RecommendationEvidence {
     type: "BLOG",
     title: requiredString(value.title, "evidence.title"),
     summary: requiredString(value.summary, "evidence.summary"),
-    sourceUrl: parseHttpUrl(value.sourceUrl, "evidence.sourceUrl"),
+    sourceUrl: parseNullableHttpUrl(value.sourceUrl, "evidence.sourceUrl"),
   };
 }
 
@@ -696,7 +714,7 @@ interface CandidateValue {
   description: string;
   address: string;
   roadAddress: string;
-  sourceUrl: string;
+  sourceUrl: string | null;
 }
 
 function parseCandidate(source: unknown): CandidateValue {
@@ -707,7 +725,7 @@ function parseCandidate(source: unknown): CandidateValue {
     description: requiredString(value.description, "candidate.description"),
     address: requiredString(value.address, "candidate.address"),
     roadAddress: requiredString(value.roadAddress, "candidate.roadAddress"),
-    sourceUrl: parseHttpUrl(value.sourceUrl, "candidate.sourceUrl"),
+    sourceUrl: parseNullableHttpUrl(value.sourceUrl, "candidate.sourceUrl"),
   };
 }
 
@@ -812,6 +830,14 @@ function requiredInteger(source: unknown, field: string): number {
   return source;
 }
 
+function boundedInteger(source: unknown, field: string, maximum: number): number {
+  const value = requiredInteger(source, field);
+  if (value > maximum) {
+    throw new PlaygroundContractError(`${field} 값은 0~${maximum}이어야 합니다.`);
+  }
+  return value;
+}
+
 function nullableInteger(source: unknown, field: string): number | null {
   if (source == null) return null;
   return requiredInteger(source, field);
@@ -864,7 +890,8 @@ function optionalLlmFailureStage(source: unknown): LlmFailureStage | undefined {
   return LLM_FAILURE_STAGE_SET.has(value) ? value as LlmFailureStage : "UNEXPECTED";
 }
 
-function parseHttpUrl(source: unknown, field: string): string {
+function parseNullableHttpUrl(source: unknown, field: string): string | null {
+  if (source == null) return null;
   const value = requiredNonBlankString(source, field);
   let parsed: URL;
   try {

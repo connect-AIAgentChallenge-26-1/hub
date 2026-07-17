@@ -158,11 +158,11 @@ export interface WorkflowTraceEvent {
 }
 
 export interface ScoreBreakdown {
-  location: number;
-  placeType: number;
-  budget: number;
-  preference: number;
-  blogEvidence: number;
+  locationConfidence: number;
+  searchRelevance: number;
+  preferenceEvidence: number;
+  evidenceQuality: number;
+  total: number;
 }
 
 export interface ReasonStatement {
@@ -185,9 +185,10 @@ export interface RecommendationPlace {
   category: string;
   address: string;
   roadAddress: string;
-  sourceUrl: string;
+  sourceUrl: string | null;
   score: number;
   scoreBreakdown: ScoreBreakdown;
+  reasonSource: "GENERATED" | "TEMPLATE";
   reasonStatements: ReasonStatement[];
   cautions: string[];
   evidenceLevel: "LOCAL_AND_BLOG" | "LOCAL_ONLY";
@@ -197,6 +198,9 @@ export interface RecommendationPlace {
 export interface RecommendationResult {
   places: RecommendationPlace[];
   degraded: boolean;
+  partial: boolean;
+  resultCount: number;
+  explorationRound: number;
   reasonFallback: boolean;
   relaxed: boolean;
   warnings: string[];

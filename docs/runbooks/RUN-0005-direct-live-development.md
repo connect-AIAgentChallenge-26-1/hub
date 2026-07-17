@@ -36,8 +36,10 @@ make dev
 make dev-live
 ```
 
-Playground에서 자연어를 입력하고 추출 Draft를 검토·수정한 뒤 실행한다. 조건, Local 후보,
-필터·완화, Blog 근거, 서버 점수·Top 3, Elice 문장과 evidence 검증 결과를 순서대로 확인한다.
+Playground에서 자연어를 입력하고 추출 Draft를 검토·수정한 뒤 실행한다. 조건, 적응형 Local
+검색 variant, 필터·중복 제거, Blog 근거, 서버 0~100 점수·최대 3개 결과, Elice 문장과
+evidence 검증 결과를 순서대로 확인한다. 유효 후보가 한두 개면 실패가 아니라 부분 결과로
+표시되는지 함께 확인한다.
 원하지 않는 실행은 삭제 버튼으로 즉시 메모리에서 제거한다.
 
 실제 동적 값을 출력하지 않고 동일한 화면 계약을 확인하려면 서버가 실행 중인 별도 Dev
@@ -52,7 +54,7 @@ npm run test:e2e:live --workspace @placepick/frontend
 삭제한다.
 
 2026-07-16 실제 브라우저 검증에서는 추출 Draft의 유형 의미는 맞았지만 위치 표현을
-확정 전에 사람이 정규화해야 했다. 보정 뒤 Naver evidence, 서버 Top 3, Elice 이유와
+확정 전에 사람이 정규화해야 했다. 보정 뒤 Naver evidence, 서버 추천 결과, Elice 이유와
 evidence 검증, 즉시 삭제까지 통과했다. 따라서 Draft는 Provider가 반환했다는 이유로 자동
 확정하지 않고 화면에서 반드시 검토한다.
 
@@ -68,7 +70,7 @@ node scripts/deployment-smoke.mjs
 ```
 
 이 로컬 예외는 CI에서는 허용되지 않는다. smoke는 주최자와 참여자의 cookie jar를 분리하고
-익명 세션, 조건 추출·확정, `202 + Location`, 추천 SSE와 Top 3, 방 생성,
+익명 세션, 조건 추출·확정, `202 + Location`, 추천 SSE와 최대 3개 결과, 방 생성,
 `LIKE → DISLIKE → DELETE → LIKE`, 방 SSE, 주최자 확정과 참여자 결과 조회를 검사한다.
 출력은 `DEPLOYMENT_SMOKE stage=<고정 단계> status=passed`와 최종 안전 요약으로 제한된다.
 

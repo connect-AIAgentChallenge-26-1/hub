@@ -40,6 +40,11 @@ public final class RecommendationJobMetricsListener implements RecommendationJob
             metrics.jobStage(payload.snapshot().stage().name().toLowerCase(java.util.Locale.ROOT));
             if ("completed".equals(event.eventType())) {
                 metrics.jobOutcome("success", payload.snapshot().degraded());
+                metrics.jobResult(
+                    payload.snapshot().partial(),
+                    payload.snapshot().degraded(),
+                    payload.snapshot().places().stream().map(place -> place.score()).toList()
+                );
             } else if ("failed".equals(event.eventType())) {
                 metrics.jobOutcome("failure", false);
             }

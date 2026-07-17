@@ -6,6 +6,9 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
 import com.placepick.recommendation.condition.domain.PlaceType;
 import com.placepick.recommendation.condition.domain.Preference;
+import com.placepick.recommendation.application.port.out.PlaceSearchSort;
+import com.placepick.recommendation.application.scoring.RetrievalPolicy;
+import com.placepick.recommendation.workflow.application.RecommendationExecutionContext;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -89,6 +92,51 @@ class CandidateQueryPlannerTest {
         assertThat(relaxed.includedPreferences())
             .extracting(value -> value.preference().value())
             .containsExactly("조용함", "창가");
+    }
+
+    @Test
+    void plansDeterministicUniqueAccuracyPopularityPreferenceTypeAndLocationVariants() {
+        ConfirmedRecommendationCondition condition = condition(
+            "서울 강남구",
+            List.of(
+                new Preference("창가", 3),
+                new Preference("조용함", 8)
+            )
+        );
+
+        List<CandidateQueryPlan> variants = planner.variants(
+            condition,
+            RecommendationExecutionContext.initial(),
+            RetrievalPolicy.qualityDefaults()
+        );
+
+        assertThat(variants).extracting(CandidateQueryPlan::variantId)
+            .startsWith("v2.base.accuracy", "v2.base.popularity", "v2.preference.1");
+        assertThat(variants).extracting(CandidateQueryPlan::sort)
+            .startsWith(PlaceSearchSort.ACCURACY, PlaceSearchSort.POPULARITY);
+        assertThat(variants).extracting(value ->
+            SearchTextNormalizer.comparison(value.query()) + "|" + value.sort()
+        ).doesNotHaveDuplicates();
+        assertThat(variants).allSatisfy(value ->
+            assertThat(value.query().codePointCount(0, value.query().length()))
+                .isLessThanOrEqualTo(100)
+        );
+    }
+
+    @Test
+    void excludesAlreadyUsedVariantsForAnAlternativeRound() {
+        List<CandidateQueryPlan> variants = planner.variants(
+            condition("서울", List.of(new Preference("조용함", 10))),
+            RecommendationExecutionContext.alternative(
+                1,
+                java.util.Set.of(),
+                java.util.Set.of("v2.base.accuracy", "v2.base.popularity")
+            ),
+            RetrievalPolicy.qualityDefaults()
+        );
+
+        assertThat(variants).extracting(CandidateQueryPlan::variantId)
+            .doesNotContain("v2.base.accuracy", "v2.base.popularity");
     }
 
     private ConfirmedRecommendationCondition condition(

@@ -4,7 +4,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "PlacePick AI · 근거 기반 장소 추천",
-  description: "조건을 직접 확인하고 근거가 연결된 Top 3를 함께 투표하는 장소 추천 서비스",
+  description: "조건을 직접 확인하고 근거가 연결된 장소 후보를 함께 투표하는 추천 서비스",
   robots: { index: false, follow: false },
 };
 

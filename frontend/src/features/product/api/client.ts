@@ -135,23 +135,33 @@ export class ProductApi {
   }
 
   async startRecommendation(draftId: string): Promise<JobAccepted> {
+    return this.startJob("/recommendations", { draftId });
+  }
+
+  async startAlternative(jobId: string): Promise<JobAccepted> {
+    return this.startJob(
+      `/recommendations/${encodeURIComponent(jobId)}/alternatives`,
+      undefined,
+    );
+  }
+
+  private async startJob(path: string, requestBody: unknown): Promise<JobAccepted> {
     await this.ensureSession();
     const response = await this.requestWithResponse(
-      "/recommendations",
+      path,
       "POST",
-      { draftId },
+      requestBody,
       202,
       { csrf: true, idempotency: true },
     );
-    const body = asRecord(await response.json());
-    const jobId = requiredString(body.jobId, "jobId");
-    if (body.status !== "ACCEPTED") {
+    const responseBody = asRecord(await response.json());
+    const jobId = requiredString(responseBody.jobId, "jobId");
+    if (responseBody.status !== "ACCEPTED") {
       throw new ProductContractError("추천 생성은 ACCEPTED 상태여야 합니다.");
     }
     const location = response.headers.get("location");
-    const expected = `/api/v1/recommendations/${encodeURIComponent(jobId)}`;
-    const mockExpected = `/mock-api/v1/recommendations/${encodeURIComponent(jobId)}`;
-    if (location !== expected && location !== mockExpected) {
+    const expected = `${API_ROOT}/recommendations/${encodeURIComponent(jobId)}`;
+    if (location !== expected) {
       throw new ProductContractError("202 응답의 Location이 생성된 jobId와 일치하지 않습니다.");
     }
     return { jobId, status: "ACCEPTED", location };
@@ -443,12 +453,31 @@ function parseCondition(source: unknown): ProductCondition {
 function parseJob(source: unknown): ProductJob {
   const value = asRecord(source);
   const places = value.places == null ? [] : array(value.places, "places").map(parsePlace);
+  const status = requiredString(value.status, "status");
+  if (!["ACCEPTED", "PROCESSING", "COMPLETED", "FAILED"].includes(status)) {
+    throw new ProductContractError("job status가 계약과 다릅니다.");
+  }
+  const resultCount = boundedInteger(value.resultCount, "resultCount", 0, 3);
+  const partial = requiredBoolean(value.partial, "partial");
+  if (resultCount !== places.length) {
+    throw new ProductContractError("resultCount가 places 수와 일치하지 않습니다.");
+  }
+  if (status === "COMPLETED" &&
+      (resultCount < 1 || partial !== (resultCount < 3))) {
+    throw new ProductContractError("완료 추천의 부분 결과 계약이 올바르지 않습니다.");
+  }
+  if (status !== "COMPLETED" && (resultCount !== 0 || partial)) {
+    throw new ProductContractError("진행 중인 추천은 결과를 노출할 수 없습니다.");
+  }
   return {
     jobId: requiredString(value.jobId, "jobId"),
-    status: requiredString(value.status, "status") as ProductJob["status"],
+    status: status as ProductJob["status"],
     stage: requiredString(value.stage, "stage") as ProductJob["stage"],
     progress: requiredInteger(value.progress, "progress"),
     degraded: requiredBoolean(value.degraded, "degraded"),
+    partial,
+    resultCount,
+    explorationRound: requiredInteger(value.explorationRound, "explorationRound"),
     warnings: stringArray(value.warnings, "warnings"),
     condition: parseCondition(value.condition),
     places,
@@ -462,21 +491,50 @@ function parseJob(source: unknown): ProductJob {
 function parsePlace(source: unknown) {
   const value = asRecord(source);
   const score = asRecord(value.scoreBreakdown);
+  const scoreBreakdown = {
+    locationConfidence: boundedInteger(
+      score.locationConfidence,
+      "score.locationConfidence",
+      0,
+      15,
+    ),
+    searchRelevance: boundedInteger(score.searchRelevance, "score.searchRelevance", 0, 30),
+    preferenceEvidence: boundedInteger(
+      score.preferenceEvidence,
+      "score.preferenceEvidence",
+      0,
+      30,
+    ),
+    evidenceQuality: boundedInteger(score.evidenceQuality, "score.evidenceQuality", 0, 25),
+    total: boundedInteger(score.total, "score.total", 0, 100),
+  };
+  const calculated = scoreBreakdown.locationConfidence + scoreBreakdown.searchRelevance +
+    scoreBreakdown.preferenceEvidence + scoreBreakdown.evidenceQuality;
+  if (scoreBreakdown.total !== calculated) {
+    throw new ProductContractError("scoreBreakdown 합계가 total과 일치하지 않습니다.");
+  }
+  const placeScore = boundedInteger(value.score, "score", 0, 100);
+  if (placeScore !== scoreBreakdown.total) {
+    throw new ProductContractError("place score가 scoreBreakdown total과 일치하지 않습니다.");
+  }
+  const reasonSource = requiredString(value.reasonSource, "reasonSource");
+  if (reasonSource !== "GENERATED" && reasonSource !== "TEMPLATE") {
+    throw new ProductContractError("reasonSource가 계약과 다릅니다.");
+  }
+  const evidenceLevel = requiredString(value.evidenceLevel, "evidenceLevel");
+  if (evidenceLevel !== "LOCAL_AND_BLOG" && evidenceLevel !== "LOCAL_ONLY") {
+    throw new ProductContractError("evidenceLevel이 계약과 다릅니다.");
+  }
   return {
     placeId: requiredString(value.placeId, "placeId"),
     name: requiredString(value.name, "name"),
     category: requiredString(value.category, "category"),
     roadAddress: stringValue(value.roadAddress, "roadAddress"),
     address: stringValue(value.address, "address"),
-    sourceUrl: requiredString(value.sourceUrl, "sourceUrl"),
-    score: requiredInteger(value.score, "score"),
-    scoreBreakdown: {
-      location: requiredInteger(score.location, "score.location"),
-      placeType: requiredInteger(score.placeType, "score.placeType"),
-      budget: requiredInteger(score.budget, "score.budget"),
-      preference: requiredInteger(score.preference, "score.preference"),
-      blogEvidence: requiredInteger(score.blogEvidence, "score.blogEvidence"),
-    },
+    sourceUrl: nullableHttpUrl(value.sourceUrl, "sourceUrl"),
+    score: placeScore,
+    scoreBreakdown,
+    reasonSource: reasonSource as "GENERATED" | "TEMPLATE",
     reasonStatements: array(value.reasonStatements, "reasonStatements").map((item) => {
       const reason = asRecord(item);
       return {
@@ -486,7 +544,7 @@ function parsePlace(source: unknown) {
     }),
     cautions: stringArray(value.cautions, "cautions"),
     shareText: requiredString(value.shareText, "shareText"),
-    evidenceLevel: requiredString(value.evidenceLevel, "evidenceLevel") as "LOCAL_AND_BLOG" | "LOCAL_ONLY",
+    evidenceLevel: evidenceLevel as "LOCAL_AND_BLOG" | "LOCAL_ONLY",
     warnings: stringArray(value.warnings, "warnings"),
   };
 }
@@ -616,6 +674,34 @@ function requiredInteger(source: unknown, field: string): number {
     throw new ProductContractError(`${field} 0 이상의 정수가 필요합니다.`);
   }
   return source;
+}
+
+function boundedInteger(
+  source: unknown,
+  field: string,
+  minimum: number,
+  maximum: number,
+): number {
+  const value = requiredInteger(source, field);
+  if (value < minimum || value > maximum) {
+    throw new ProductContractError(`${field} 범위가 ${minimum}~${maximum}이어야 합니다.`);
+  }
+  return value;
+}
+
+function nullableHttpUrl(source: unknown, field: string): string | null {
+  if (source == null) return null;
+  const value = requiredString(source, field);
+  let parsed: URL;
+  try {
+    parsed = new URL(value);
+  } catch {
+    throw new ProductContractError(`${field} HTTP(S) URL이 필요합니다.`);
+  }
+  if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+    throw new ProductContractError(`${field} HTTP(S) URL이 필요합니다.`);
+  }
+  return value;
 }
 
 function nullableInteger(source: unknown, field: string): number | null {

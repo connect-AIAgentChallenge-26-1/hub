@@ -61,43 +61,50 @@ priority는 필수다. 추출 결과를 자동으로 추천에 연결하지 않�
 | `preferences` | 최대 10개의 `{value, priority}`; value는 1~50자, Draft priority는 nullable, 확정 priority는 1~10 |
 | `exclusions` | 최대 10개의 1~50자 문자열 |
 
-위치는 필수 조건이며 장소 유형도 검색 확장에서 제거하지 않는다. 후보가 세 개보다
-적으면 `preferences` 중 가장 낮은 priority의 항목만 한 번 제거해 재검색한다. 같은
-priority가 여러 개면 배열의 마지막 항목을 제거해 결과를 결정적으로 만든다.
+위치는 필수 조건이며 장소 유형도 검색 확장에서 제거하지 않는다. 검색은 단일 문장을
+늘리는 대신 `지역+유형` 정확도·인기 정렬, 독립 선호, 유형 동의어와 안전한 위치 alias를
+결정적 순서의 variant로 실행한다. 기본 추천은 최대 6회, 다른 추천은 최대 8회이며 유효
+후보 pool 10개에서 조기 종료한다. 같은 query와 sort 조합은 한 번만 실행한다.
 
 누락된 인원·예산 warning은 LLM이 반환한 warning 문자열을 제품 상태로 채택하지 않고,
 정규화가 끝난 조건에서 서버가 안정적인 code로 결정한다. 같은 조건은 Provider 표현과
 무관하게 같은 warning을 만든다.
 
-검색어는 `locationQuery`, 유형 token과 priority 내림차순·원래 배열 순의 선호를 최대
-100자 안에서 완전한 token 단위로 조합한다. 문자열을 중간에서 자르지 않는다. 최초
-Local은 `display=5`로 호출한다. NFKC·공백·HTML 정리 뒤 위치·유형·제외 hard filter를
-적용하고 유효 후보가 세 개보다 적을 때만 실제 검색어에 포함된 최저 priority 선호 하나를
-제거해 Local을 한 번 더 호출한다. 이후에도 세 개 미만이면 Blog·LLM을 호출하지 않고
+검색어는 `locationQuery`, 유형 token과 선택된 선호를 최대 100자 안에서 완전한 token
+단위로 조합하며 문자열을 중간에서 자르지 않는다. Local은 `display=5`, `start=1`을
+유지하고 sort는 내부 `ACCURACY`와 `POPULARITY`를 Provider의 `random`, `comment`로만
+변환한다. NFKC·공백·HTML 정리 뒤 위치·유형·확인된 제외 조건 hard filter를 적용한다.
+검색 variant를 모두 사용한 뒤 후보가 1~2개면 부분 결과로 완료하고 0개일 때만
 `INSUFFICIENT_CANDIDATES`로 종료한다.
 
 장소 유형은 versioned category taxonomy로 검사한다. 음식점은 음식점·식당·한식·중식·
 일식·양식·분식·뷔페, 카페는 카페·커피·디저트·베이커리, 주점은 술집·주점·바·호프·
 맥주·와인·칵테일·이자카야 segment를 허용한다. `OTHER`는 `placeTypeDetail`이 정규화된
-이름 또는 category segment와 일치해야 한다. 행정구역 접미사를 정리한 location token은
-`address` 또는 `roadAddress` 중 하나에서 확인돼야 한다. 일치하지 않으면 점수화하지
-않고 필수 조건 filter로 제외한다.
+이름 또는 category segment와 일치해야 한다. 행정구역은 versioned exact·alias resolver로
+검사하고 일반 문자열의 접미사를 임의로 제거하지 않는다. 홍대·성수·강남역처럼 등록된
+생활권은 Provider 검색 provenance와 주소 alias가 함께 맞을 때만 근사 위치로 인정하고
+`LOCATION_APPROXIMATE`를 반환한다. 무관한 위치는 점수화하지 않고 제외한다.
 
 ### 후보 identity와 근거
 
 표시용 문자열은 HTML 제거와 공백 정리만 수행하고 NFKC와 URL canonicalization은 내부
-비교에만 사용한다. 유효한 HTTP(S) `sourceUrl`이 없는 Local 항목은 제품 후보에서
-제외한다. canonical URL이 같으면 병합하고, 그렇지 않을 때는 정규화 이름과 비어 있지
-않은 주소가 모두 같을 때만 보수적으로 병합한다. 이름만 또는 좌표만으로 합치지 않는다.
+비교에만 사용한다. `sourceUrl`은 표시용 선택 정보이며 null일 수 있다. 이름과 주소 또는
+이름과 유효 좌표처럼 충분한 identity 조합이 있으면 link가 없어도 후보로 유지한다. 같은
+홈페이지를 공유해도 주소·좌표가 충돌하는 지점은 병합하지 않고, link가 달라도 이름과
+주소·좌표 identity가 같을 때만 보수적으로 병합한다. 이름 하나나 좌표 하나만으로 합치지
+않는다.
 canonical URL은 scheme·host를 소문자로 만들고 기본 port와 fragment를 제거하며 dot
 segment를 정리한다. raw percent-encoded path·query는 이중 인코딩하지 않고 Java와
 TypeScript가 같은 conformance vector를 사용한다. encoded dot segment는 런타임별
 정규화 차이와 경로 우회를 막기 위해 URL 전체를 거부한다.
 
-내부 `CandidateKey`는 identity의 SHA-256 지문이며 중복 제거와 안정적 tie-break에만
-사용한다. 로그·API에는 노출하지 않는다. UUID v4 `placeId`는 최종 Top 3를 고른 뒤에만
-발급하므로 정렬 기준으로 사용하지 않는다. Blog 근거는 Local 예비 점수로 제한한 최대
-다섯 후보에 대해 후보당 `display=3`까지 수집한다.
+내부 `CandidateKey`는 identity의 SHA-256 지문이며 중복 제거·탐색 체인의 기존 후보 제외와
+안정적 tie-break에만 사용한다. 로그·API에는 노출하지 않는다. UUID v4 `placeId`는 최종
+1~3개 후보를 고른 뒤에만 발급하므로 정렬 기준으로 사용하지 않는다. Blog 근거는 Local
+예비 점수로 제한한 최대 8개 후보에 대해 후보당 `display=10`, `sort=sim`으로 수집하고,
+장소·지점·지역·유형 연결 신뢰도와 URL·작성자·출처·작성일을 이용해 후보당 최대 3개의
+고유 근거만 사용한다. 한 후보의 Blog 호출 실패는 해당 후보만 `LOCAL_ONLY`로 낮추고
+다른 후보가 이미 확보한 근거는 유지한다.
 
 ### 추천 후보 `RecommendationPlace`
 
@@ -105,10 +112,11 @@ TypeScript가 같은 conformance vector를 사용한다. encoded dot segment는 
 | --- | --- |
 | `placeId` | 내부 UUID |
 | `name`, `category`, `roadAddress`, `address` | Naver 검색에서 정규화한 최소 장소 정보 |
-| `sourceUrl` | 사용자가 원문을 확인할 수 있는 Naver link |
-| `score` | 현재 근거로 계산한 결정론적 0~80 정수, 100점으로 재정규화하지 않음 |
-| `scoreBreakdown` | 위치 30, 유형 25, 예산 0, 선호 0~15, Blog 근거 0·3·7·10 |
+| `sourceUrl` | nullable, Provider가 제공한 유효한 HTTP(S) 원문 link |
+| `score` | 현재 근거로 계산한 결정론적 0~100 정수 |
+| `scoreBreakdown` | 위치 신뢰도 0/8/12/15, weighted RRF 0~30, 선호 근거 0~30, 근거 품질 0~25 |
 | `reasonStatements` | 각 문장이 허용된 evidence ID에 연결된 검증 완료 이유 목록 |
+| `reasonSource` | 후보별 `GENERATED` 또는 서버 `TEMPLATE` |
 | `cautions` | 근거가 부족하거나 사용자가 확인해야 할 사항 목록 |
 | `shareText` | 서버가 검증된 문장과 warning으로 조합한 공유 문구 |
 | `evidenceLevel` | `LOCAL_AND_BLOG` 또는 `LOCAL_ONLY` |
@@ -120,16 +128,16 @@ TypeScript가 같은 conformance vector를 사용한다. encoded dot segment는 
 제거하는 hard filter다. LLM은 후보, 점수, 순위, 사실 field, 주의점과 공유 문구를
 만들거나 변경할 수 없다.
 
-점수가 같으면 필수 조건 일치율 내림차순, 유효 근거 수 내림차순, 내부 `CandidateKey`
-오름차순으로 정렬한다. 선호 점수는 `roundHalfUp(15 × 일치 priority 합 / 전체 priority
-합)`, Blog 점수는 근거 0·1·2·3개 이상에 각각 0·3·7·10이다. Blog endpoint가 하나라도
-실패하면 이후 Blog 호출을 중단하고 이미 받은 Blog 근거도 모두 폐기한다. 모든 후보를
-`LOCAL_ONLY`, degraded와 `BLOG_EVIDENCE_UNAVAILABLE`로 처리한다. 정상 0건은 provider
-실패가 아니며 해당 후보만 Blog 점수 0이다.
+검색 관련성은 variant weight와 Provider rank를 보존한 `k=60` weighted RRF를 0~30으로
+고정한다. 선호 근거는 versioned 동의어와 Local·검증된 Blog 텍스트에서 확인한 priority
+비율을 0~30으로 계산한다. 근거 품질은 장소 연결 신뢰도, 고유 근거 수, 출처 다양성과
+최신성을 0~25로 계산한다. 점수가 같으면 선호 근거 → 근거 품질 → 검색 관련성 → 내부
+`CandidateKey` 순으로 결정한다. 같은 입력과 Provider fixture에는 같은 기본 순위를
+반환한다.
 
-추천 core의 provider 논리 호출 상한은 정상 8회, Local 선호 완화가 발생하면 9회다.
-조건 추출 Elice 1회, Local 1~2회, 최대 다섯 후보의 Blog 각 1회와 Top 3 batch 이유
-생성 Elice 1회로 계산한다. HTTP adapter의 자동 재시도와 redirect는 0회다.
+추천 core의 검색 호출 상한은 기본 Local 6회, 다른 추천 Local 8회와 후보당 Blog 1회다.
+조건 추출과 이유 생성 호출은 이 검색 예산과 별도로 기록한다. HTTP adapter의 자동
+retry와 redirect는 0회이며 재시도 정책은 Worker 한 계층에서만 적용한다.
 
 ### 추천 Job `RecommendationJobView`
 
@@ -140,9 +148,12 @@ TypeScript가 같은 conformance vector를 사용한다. encoded dot segment는 
 | `stage` | `QUEUED`, `LOCAL_SEARCH`, `BLOG_SEARCH`, `SCORING`, `REASON_GENERATION`, `PERSISTING`, `FINISHED` |
 | `progress` | 0~100 정수이며 같은 Job에서 감소하지 않음 |
 | `degraded` | 일부 근거·생성 fallback으로 완료됐는지 여부 |
+| `partial` | 완료 결과가 1~2개인지 여부 |
+| `resultCount` | 완료 결과 수 1~3, 처리 중·실패는 0 |
+| `explorationRound` | 기본 추천 0, 다른 추천 체인의 증가하는 탐색 차수 |
 | `warnings` | 안정적인 warning code 목록 |
 | `condition` | 사용자가 확정한 `RecommendationCondition` |
-| `places` | 완료 시 정확히 세 개의 `RecommendationPlace` |
+| `places` | 완료 시 1~3개의 `RecommendationPlace` |
 | `failure` | 실패 시 `{errorCode, message}`, 내부 stack과 provider 원문 제외 |
 | `createdAt`, `updatedAt`, `expiresAt` | UTC 시각 |
 
@@ -157,6 +168,7 @@ TypeScript가 같은 conformance vector를 사용한다. encoded dot segment는 
 | `implemented` | `GET /api/v1/recommendation-drafts/{draftId}` | draft 소유 세션 | 200 draft snapshot | PP-010 |
 | `implemented` | `PUT /api/v1/recommendation-drafts/{draftId}` | draft 소유 세션 | 200 확정 조건으로 전체 교체 | PP-010 |
 | `implemented` | `POST /api/v1/recommendations` | 확정 draft 소유 세션 | 반드시 202와 Job locator | PP-011 |
+| `implemented` | `POST /api/v1/recommendations/{jobId}/alternatives` | 완료 Job 소유 세션 | 202와 새 탐색 Job locator | PP-044 |
 | `implemented` | `GET /api/v1/recommendations/{jobId}` | Job 소유 세션 | 200 최신 Job snapshot | PP-018 |
 | `implemented` | `GET /api/v1/recommendations/{jobId}/events` | Job 소유 세션 | snapshot-first·heartbeat·cursor·재연결·terminal close | PP-019 |
 | `implemented` | `POST /api/v1/recommendations/{jobId}/rooms` | 완료 Job 소유 세션 | 201 공유방과 주최자 capability | PP-023 |
@@ -211,11 +223,26 @@ status는 `EXTRACTED`다. 의미 있는 지역이나 장소 유형을 추출할 
 ```
 
 성공 대체값으로 `200 OK`를 허용하지 않는다. Job과 outbox event는 한 DB transaction에
-저장한다. `GET`은 항상 `RecommendationJobView`를 반환한다. 장소 검색 재시도 뒤에도
-후보가 세 개 미만이면 `FAILED`와 `INSUFFICIENT_CANDIDATES`다. Blog 검색만 실패하면
-`COMPLETED`, `degraded=true`, warning `BLOG_EVIDENCE_UNAVAILABLE`과 모든 후보의
-`LOCAL_ONLY` 근거 수준을 반환한다. 이유 생성 실패는 템플릿 fallback으로 완료하고
-warning `LLM_REASON_FALLBACK`을 포함한다.
+저장한다. `GET`은 항상 `RecommendationJobView`를 반환한다. 검색 variant를 충분히
+실행한 뒤 유효 후보가 1~2개면 `COMPLETED`, `partial=true`, warning
+`PARTIAL_RECOMMENDATION`으로 반환하고 후보가 0개일 때만 `FAILED`와
+`INSUFFICIENT_CANDIDATES`다. 후보별 Blog 검색 실패는 해당 후보를 `LOCAL_ONLY`로
+낮추고 전체 Job은 `degraded=true`, `BLOG_EVIDENCE_UNAVAILABLE`로 완료한다. 이유 생성
+실패는 템플릿 fallback으로 완료하고 후보의 `reasonSource=TEMPLATE`과 warning
+`LLM_REASON_FALLBACK`을 포함한다.
+
+`POST /api/v1/recommendations/{jobId}/alternatives`는 body 없이 호출하며 완료된 원 추천과
+같은 세션만 사용할 수 있다. `Idempotency-Key`가 필수이고 성공은 원 추천과 같은
+`202 Accepted + jobId + Location`이다. 새 Job은 원 추천의 확정 조건을 재사용하고 탐색
+체인에서 이미 노출한 내부 candidate fingerprint와 이미 사용한 검색 variant를 제외한다.
+원 Job은 변경하지 않는다. 저장된 상태로 모든 variant가 소진됐음을 요청 전에 확정할 수
+있으면 409 `NO_ALTERNATIVE_CANDIDATES`다. 검색은 Worker에서 실행되므로 202 뒤 실제
+미노출 후보가 0개로 판정되면 새 Job이 `FAILED/NO_ALTERNATIVE_CANDIDATES`로 종료된다.
+Provider 호출을 POST transaction으로 옮겨 동기 409를 만드는 구현은 허용하지 않는다.
+
+V3 이전 완료 Job 중 원래 `CandidateKey`를 복원할 근거가 없는 데이터는 기존 장소의 재노출을
+막기 위해 보수적으로 검색 소진으로 취급한다. 이는 새 v2 Job의 검색 소진 판정과 구분되는
+upgrade 호환 정책이다.
 
 ### 공유방과 투표
 
@@ -268,7 +295,7 @@ SQL을 넣지 않는다.
 | 403 | `CSRF_INVALID`, `ORGANIZER_REQUIRED` | 상태 변경 또는 주최자 권한 거부 |
 | 404 | `RESOURCE_NOT_FOUND` | 소유하지 않거나 존재하지 않는 resource |
 | 405 | `METHOD_NOT_ALLOWED` | 알려진 resource에 허용되지 않은 HTTP method, `Allow` 포함 |
-| 409 | `INVALID_STATE`, `IDEMPOTENCY_KEY_REUSED`, `FINAL_RESULT_CONFLICT` | 상태·멱등성 충돌 |
+| 409 | `INVALID_STATE`, `IDEMPOTENCY_KEY_REUSED`, `FINAL_RESULT_CONFLICT`, `NO_ALTERNATIVE_CANDIDATES` | 상태·멱등성·탐색 소진 충돌 |
 | 410 | `DRAFT_EXPIRED`, `ROOM_EXPIRED`, `JOB_EXPIRED` | 존재했지만 보존 기간 종료 |
 | 422 | `UNPROCESSABLE_CONDITION` | 안전한 추천 조건을 만들 수 없음 |
 | 429 | `RATE_LIMITED`, `PROVIDER_QUOTA_PROTECTED` | 제한 초과, `Retry-After` 포함 |
@@ -318,7 +345,7 @@ claim, commit 전 ACK 금지, 제한 retry와 DLQ를 PostgreSQL·Redis Testconta
 | --- | --- | --- | --- |
 | `implemented` | Naver Local·Blog adapter | API HUB header·schema·오류 정규화와 Mock 계약 검증 | PP-013 |
 | `implemented` | Elice Chat adapter | 조건 추출·근거 이유 strict schema와 Mock·Eval 검증 | PP-009, PP-016 |
-| `implemented` | 동기 추천 Core | 확정 조건부터 후보·근거·점수·Top 3·이유 fallback | PP-039 |
+| `implemented` | 동기 추천 Core | 확정 조건부터 적응형 검색·근거·0~100 점수·최대 3개 결과·이유 fallback | PP-039, PP-044 |
 | `implemented` | 직접 실제 Core 연결 증거 | 직접 Java adapter의 세 합성 Naver→Elice 흐름; CASE-0002가 정본 | PP-040, PP-042 |
 | `implemented` | 제품 runtime wiring | production Elice·Naver bean과 Worker Core 연결; Mock pipeline·wiring 자동 검증 | PP-029 |
 | `implemented` | Live Playground | 개발 profile API·SSE·화면·TTL·삭제와 직접 Provider 실행 | PP-042 |
@@ -337,15 +364,16 @@ NAVER API HUB의 Local·Blog 계약을 사용하고 HTML 제거, Unicode·공백
 오류 분류를 adapter 경계에서 수행한다. 원문 응답은 영구 저장하거나 일반 로그에 남기지
 않는다.
 
-Local 결과는 유효한 HTTP(S) source link, 위치 token과 versioned category taxonomy를
-통과해야 한다. canonical link가 같거나 정규화한 이름과 비어 있지 않은 주소가 모두
-같을 때만 중복으로 병합한다. 후보가 부족하면 검색어에 실제 포함된 최저 priority 선호
-한 개만 제거해 Local을 한 번 더 호출한다. 여전히 세 개 미만이면
-`INSUFFICIENT_CANDIDATES`로 종료한다.
+Local 결과는 안정적인 이름·주소 또는 이름·좌표 identity, versioned 위치 resolver와
+category taxonomy를 통과해야 한다. source link는 nullable 표시 정보다. 정확도·인기,
+독립 선호·유형 동의어·위치 alias variant의 Provider rank를 보존하고 adaptive 호출 예산
+안에서 합친다. 같은 홈페이지라도 주소·좌표가 충돌하는 지점은 분리하고, 탐색 체인에서
+이미 노출한 내부 fingerprint는 Blog·점수화 전에 제외한다.
 
-Blog 근거는 후보별 최대 세 개를 연결한다. 하나의 Blog provider 호출이라도 실패하면
-이미 받은 Blog 근거를 모두 폐기하고 `LOCAL_ONLY`, `degraded=true`,
-`BLOG_EVIDENCE_UNAVAILABLE`로 처리한다.
+Blog 근거는 후보별 최대 세 개를 연결한다. 장소명·지점·지역·유형의 entity confidence와
+URL·작성자·출처·작성일을 사용해 잘못 연결된 지점과 중복·출처 편중을 줄인다. 한 후보의
+Blog provider 호출 실패는 해당 후보만 `LOCAL_ONLY`로 처리하며 다른 후보의 검증 근거는
+폐기하지 않는다.
 
 ### Elice Chat
 
@@ -357,7 +385,7 @@ Schema, `additionalProperties=false`, bounded output, timeout, retry 0과 tool �
 Embedding `openai/text-embedding-3-small`은 과거 capability만 확인했으며 추천·검색·
 점수·중복 제거 runtime에는 사용하지 않는다.
 
-이유 생성에는 Top 3의 허용된 장소·근거만 전달한다. 출력 place ID 집합은 입력 Top 3와
+이유 생성에는 최종 1~3개의 허용된 장소·근거만 전달한다. 출력 place ID 집합은 입력과
 정확히 같고, 모든 evidence ID는 같은 후보의 입력 근거에 속해야 한다. 가격, 영업 상태,
 도보 시간, 출구처럼 제공되지 않은 속성은 금지한다. 한 후보라도 schema·근거 검증에
 실패하면 batch 전체를 버리고 서버 template fallback을 사용한다. 점수·순위·주의점·
@@ -366,8 +394,9 @@ Embedding `openai/text-embedding-3-small`은 과거 capability만 확인했으�
 이유 출력은 `placepick.reason-statements.v2`다. 장소마다 1~3개의 자연스러운 한국어
 문장을 허용하고 각 문장은 1~160자, 같은 장소에 속한 1~3개의 고유 evidence ID를
 인용한다. 서버는 place/evidence 소유 관계, 금지 속성, 입력 근거와의 최소 어휘 연결을
-다시 검증한다. LLM 결과 일부만 섞지 않으며 한 문장이라도 실패하면 Top 3 전체를 서버
-template으로 교체한다.
+다시 검증한다. 이번 v2 batch 경계에서는 LLM 결과 일부만 섞지 않으며 한 문장이라도
+실패하면 해당 결과의 모든 후보를 서버 template으로 교체한다. 후보별 독립 생성과 부분
+fallback은 ADR-0016의 후속 reason v3에서 적용한다.
 
 조건·이유 Provider 경계는 원문 없이 `errorCode`, 폐쇄형 `diagnosticCode`와
 `failureStage`를 보존한다. HTTP envelope·usage·content schema·place/evidence 소유권처럼

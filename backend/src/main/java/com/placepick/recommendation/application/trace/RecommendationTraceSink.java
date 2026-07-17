@@ -39,6 +39,13 @@ public interface RecommendationTraceSink {
     ) {
     }
 
+    default void localSearchFailed(
+        PlaceSearchQuery query,
+        String failureCode,
+        boolean relaxed
+    ) {
+    }
+
     default void candidatesNormalized(
         List<NormalizedCandidate> candidates,
         boolean relaxed
@@ -59,6 +66,9 @@ public interface RecommendationTraceSink {
 
     /** Observes the final cumulative funnel exactly once for one ranking execution. */
     default void candidateFunnelCompleted(CandidateFunnel funnel, boolean relaxed) {
+    }
+
+    default void previouslyExposedCandidatesExcluded(int count) {
     }
 
     default void preliminaryRankingCompleted(List<ScoredCandidate> candidates) {

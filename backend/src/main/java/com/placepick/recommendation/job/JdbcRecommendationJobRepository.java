@@ -34,8 +34,12 @@ public class JdbcRecommendationJobRepository implements RecommendationJobReposit
     }
 
     @Override
-    public void lockIdempotencyScope(UUID sessionId, String keyHash) {
-        String scope = sessionId + ":POST:/api/v1/recommendations:" + keyHash;
+    public void lockIdempotencyScope(
+        UUID sessionId,
+        String resourcePath,
+        String keyHash
+    ) {
+        String scope = sessionId + ":POST:" + resourcePath + ":" + keyHash;
         jdbcClient.sql("""
                 SELECT 1 AS locked
                 FROM (SELECT pg_advisory_xact_lock(hashtextextended(:scope, 0))) lock_scope
@@ -46,17 +50,22 @@ public class JdbcRecommendationJobRepository implements RecommendationJobReposit
     }
 
     @Override
-    public Optional<IdempotencyReplay> findIdempotency(UUID sessionId, String keyHash) {
+    public Optional<IdempotencyReplay> findIdempotency(
+        UUID sessionId,
+        String resourcePath,
+        String keyHash
+    ) {
         return jdbcClient.sql("""
                 SELECT request_hash, response_status,
                        response_json ->> 'jobId' AS job_id
                 FROM idempotency_record
                 WHERE session_id = :sessionId
                   AND method = 'POST'
-                  AND resource_path = '/api/v1/recommendations'
+                  AND resource_path = :resourcePath
                   AND key_hash = :keyHash
                 """)
             .param("sessionId", sessionId)
+            .param("resourcePath", resourcePath)
             .param("keyHash", keyHash)
             .query((resultSet, rowNumber) -> new IdempotencyReplay(
                 resultSet.getString("request_hash"),
@@ -71,16 +80,25 @@ public class JdbcRecommendationJobRepository implements RecommendationJobReposit
         UUID jobId,
         UUID sessionId,
         UUID draftId,
+        UUID rootJobId,
+        UUID parentJobId,
+        int explorationRound,
+        List<String> excludedCandidateKeys,
+        List<String> usedVariantIds,
         ConfirmedRecommendationCondition condition,
         Instant createdAt,
         Instant expiresAt
     ) {
         jdbcClient.sql("""
                 INSERT INTO recommendation_job (
-                    id, session_id, draft_id, status, stage, progress, degraded,
+                    id, session_id, draft_id, root_job_id, parent_job_id,
+                    exploration_round, excluded_candidate_keys_json,
+                    used_variant_ids_json, status, stage, progress, degraded,
                     condition_json, warnings_json, created_at, updated_at, expires_at
                 ) VALUES (
-                    :id, :sessionId, :draftId, 'ACCEPTED', 'QUEUED', 0, FALSE,
+                    :id, :sessionId, :draftId, :rootJobId, :parentJobId,
+                    :explorationRound, CAST(:excludedCandidateKeysJson AS jsonb),
+                    CAST(:usedVariantIdsJson AS jsonb), 'ACCEPTED', 'QUEUED', 0, FALSE,
                     CAST(:conditionJson AS jsonb), '[]'::jsonb,
                     :createdAt, :createdAt, :expiresAt
                 )
@@ -88,6 +106,11 @@ public class JdbcRecommendationJobRepository implements RecommendationJobReposit
             .param("id", jobId)
             .param("sessionId", sessionId)
             .param("draftId", draftId)
+            .param("rootJobId", rootJobId)
+            .param("parentJobId", parentJobId)
+            .param("explorationRound", explorationRound)
+            .param("excludedCandidateKeysJson", writeJson(excludedCandidateKeys))
+            .param("usedVariantIdsJson", writeJson(usedVariantIds))
             .param("conditionJson", writeJson(condition))
             .param("createdAt", timestamp(createdAt))
             .param("expiresAt", timestamp(expiresAt))
@@ -98,6 +121,7 @@ public class JdbcRecommendationJobRepository implements RecommendationJobReposit
     public void insertIdempotency(
         UUID recordId,
         UUID sessionId,
+        String resourcePath,
         String keyHash,
         String requestHash,
         UUID jobId,
@@ -110,13 +134,14 @@ public class JdbcRecommendationJobRepository implements RecommendationJobReposit
                     id, session_id, method, resource_path, key_hash, request_hash,
                     response_status, response_json, response_location, created_at, expires_at
                 ) VALUES (
-                    :id, :sessionId, 'POST', '/api/v1/recommendations', :keyHash,
+                    :id, :sessionId, 'POST', :resourcePath, :keyHash,
                     :requestHash, 202, CAST(:responseJson AS jsonb), :location,
                     :createdAt, :expiresAt
                 )
                 """)
             .param("id", recordId)
             .param("sessionId", sessionId)
+            .param("resourcePath", resourcePath)
             .param("keyHash", keyHash)
             .param("requestHash", requestHash)
             .param("responseJson", responseJson)
@@ -136,12 +161,36 @@ public class JdbcRecommendationJobRepository implements RecommendationJobReposit
     }
 
     @Override
+    public Optional<RecommendationJobSnapshot> findOwnedForUpdate(
+        UUID jobId,
+        UUID sessionId
+    ) {
+        return querySnapshot("WHERE id = :id AND session_id = :sessionId", true)
+            .param("id", jobId)
+            .param("sessionId", sessionId)
+            .query(this::mapSnapshot)
+            .optional();
+    }
+
+    @Override
+    public Optional<RecommendationJobSnapshot> findByParent(UUID parentJobId) {
+        return querySnapshot("WHERE parent_job_id = :parentJobId", false)
+            .param("parentJobId", parentJobId)
+            .query(this::mapSnapshot)
+            .optional();
+    }
+
+    @Override
     public Optional<RecommendationJobSubscriptionState> findSubscriptionState(
         UUID jobId,
         UUID sessionId
     ) {
         return jdbcClient.sql("""
-                SELECT job.id, job.session_id, job.draft_id, job.status, job.stage,
+                SELECT job.id, job.session_id, job.draft_id,
+                       job.root_job_id, job.parent_job_id, job.exploration_round,
+                       job.excluded_candidate_keys_json::text AS excluded_candidate_keys_json,
+                       job.used_variant_ids_json::text AS used_variant_ids_json,
+                       job.search_exhausted, job.status, job.stage,
                        job.progress, job.degraded,
                        job.condition_json::text AS condition_json,
                        job.warnings_json::text AS warnings_json,
@@ -224,6 +273,31 @@ public class JdbcRecommendationJobRepository implements RecommendationJobReposit
                     degraded = :degraded,
                     warnings_json = CAST(:warningsJson AS jsonb),
                     places_json = CAST(:placesJson AS jsonb),
+                    excluded_candidate_keys_json = (
+                        SELECT COALESCE(jsonb_agg(candidate_key ORDER BY candidate_key), '[]'::jsonb)
+                        FROM (
+                            SELECT jsonb_array_elements_text(
+                                recommendation_job.excluded_candidate_keys_json
+                            ) AS candidate_key
+                            UNION
+                            SELECT jsonb_array_elements_text(
+                                CAST(:candidateKeysJson AS jsonb)
+                            ) AS candidate_key
+                        ) candidate_keys
+                    ),
+                    used_variant_ids_json = (
+                        SELECT COALESCE(jsonb_agg(variant_id ORDER BY variant_id), '[]'::jsonb)
+                        FROM (
+                            SELECT jsonb_array_elements_text(
+                                recommendation_job.used_variant_ids_json
+                            ) AS variant_id
+                            UNION
+                            SELECT jsonb_array_elements_text(
+                                CAST(:usedVariantIdsJson AS jsonb)
+                            ) AS variant_id
+                        ) variant_ids
+                    ),
+                    search_exhausted = :searchExhausted,
                     failure_code = NULL,
                     failure_message = NULL,
                     updated_at = :updatedAt,
@@ -233,6 +307,11 @@ public class JdbcRecommendationJobRepository implements RecommendationJobReposit
             .param("id", jobId)
             .param("degraded", result.degraded())
             .param("warningsJson", writeJson(result.warnings()))
+            .param("candidateKeysJson", writeJson(result.places().stream()
+                .map(place -> place.rankedPlace().candidate().candidateKey().value())
+                .toList()))
+            .param("usedVariantIdsJson", writeJson(result.usedVariantIds()))
+            .param("searchExhausted", result.searchExhausted())
             .param(
                 "placesJson",
                 writeJson(result.places().stream()
@@ -356,7 +435,11 @@ public class JdbcRecommendationJobRepository implements RecommendationJobReposit
 
     private JdbcClient.StatementSpec querySnapshot(String where, boolean forUpdate) {
         return jdbcClient.sql("""
-                SELECT id, session_id, draft_id, status, stage, progress, degraded,
+                SELECT id, session_id, draft_id, root_job_id, parent_job_id,
+                       exploration_round,
+                       excluded_candidate_keys_json::text AS excluded_candidate_keys_json,
+                       used_variant_ids_json::text AS used_variant_ids_json,
+                       search_exhausted, status, stage, progress, degraded,
                        condition_json::text AS condition_json,
                        warnings_json::text AS warnings_json,
                        places_json::text AS places_json,
@@ -374,6 +457,12 @@ public class JdbcRecommendationJobRepository implements RecommendationJobReposit
             resultSet.getObject("id", UUID.class),
             resultSet.getObject("session_id", UUID.class),
             resultSet.getObject("draft_id", UUID.class),
+            resultSet.getObject("root_job_id", UUID.class),
+            resultSet.getObject("parent_job_id", UUID.class),
+            resultSet.getInt("exploration_round"),
+            readJson(resultSet.getString("excluded_candidate_keys_json"), STRING_LIST),
+            readJson(resultSet.getString("used_variant_ids_json"), STRING_LIST),
+            resultSet.getBoolean("search_exhausted"),
             RecommendationJobStatus.valueOf(resultSet.getString("status")),
             RecommendationJobStage.valueOf(resultSet.getString("stage")),
             resultSet.getInt("progress"),
@@ -418,10 +507,11 @@ public class JdbcRecommendationJobRepository implements RecommendationJobReposit
             RecommendationCorePlace place = places.get(index);
             jdbcClient.sql("""
                     INSERT INTO recommendation_candidate (
-                        job_id, place_id, ordinal, snapshot_json, score, evidence_level
+                        job_id, place_id, ordinal, snapshot_json, score, evidence_level,
+                        candidate_fingerprint
                     ) VALUES (
                         :jobId, :placeId, :ordinal, CAST(:snapshotJson AS jsonb),
-                        :score, :evidenceLevel
+                        :score, :evidenceLevel, :candidateFingerprint
                     )
                     """)
                 .param("jobId", jobId)
@@ -430,6 +520,10 @@ public class JdbcRecommendationJobRepository implements RecommendationJobReposit
                 .param("snapshotJson", writeJson(RecommendationJobPlace.from(place, warnings)))
                 .param("score", place.rankedPlace().scoreBreakdown().total())
                 .param("evidenceLevel", place.evidenceLevel().name())
+                .param(
+                    "candidateFingerprint",
+                    place.rankedPlace().candidate().candidateKey().value()
+                )
                 .update();
             insertLocalEvidence(jobId, place);
             for (CandidateEvidence evidence : place.rankedPlace().evidence()) {

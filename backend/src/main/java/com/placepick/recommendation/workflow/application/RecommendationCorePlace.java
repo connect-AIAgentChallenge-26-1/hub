@@ -11,7 +11,8 @@ public record RecommendationCorePlace(
     List<ReasonStatement> reasonStatements,
     List<String> cautions,
     String shareText,
-    EvidenceLevel evidenceLevel
+    EvidenceLevel evidenceLevel,
+    ReasonSource reasonSource
 ) {
 
     public RecommendationCorePlace {
@@ -23,5 +24,23 @@ public record RecommendationCorePlace(
         cautions = List.copyOf(cautions);
         shareText = Objects.requireNonNull(shareText, "shareText");
         evidenceLevel = Objects.requireNonNull(evidenceLevel, "evidenceLevel");
+        reasonSource = Objects.requireNonNull(reasonSource, "reasonSource");
+    }
+
+    public RecommendationCorePlace(
+        RankedPlace rankedPlace,
+        List<ReasonStatement> reasonStatements,
+        List<String> cautions,
+        String shareText,
+        EvidenceLevel evidenceLevel
+    ) {
+        this(
+            rankedPlace,
+            reasonStatements,
+            cautions,
+            shareText,
+            evidenceLevel,
+            ReasonSource.GENERATED
+        );
     }
 }

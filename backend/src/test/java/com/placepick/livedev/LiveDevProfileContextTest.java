@@ -5,9 +5,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.placepick.infrastructure.observability.CandidateFunnelMetrics;
 import com.placepick.infrastructure.observability.LlmProviderDiagnosticMetrics;
 import com.placepick.infrastructure.observability.ProviderCallMetrics;
+import com.placepick.infrastructure.observability.RecommendationRetrievalMetrics;
 import com.placepick.livedev.LiveDevApiDto.DraftView;
 import com.placepick.livedev.LiveDevApiDto.RunView;
 import com.placepick.recommendation.application.candidate.CandidateRejectionReason;
+import com.placepick.recommendation.application.scoring.RetrievalPolicy;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
 import com.placepick.recommendation.condition.domain.PlaceType;
 import com.placepick.recommendation.condition.domain.Preference;
@@ -155,6 +157,18 @@ class LiveDevProfileContextTest {
         @Bean
         CandidateFunnelMetrics candidateFunnelMetrics(SimpleMeterRegistry registry) {
             return new CandidateFunnelMetrics(registry);
+        }
+
+        @Bean
+        RecommendationRetrievalMetrics recommendationRetrievalMetrics(
+            SimpleMeterRegistry registry
+        ) {
+            return new RecommendationRetrievalMetrics(registry);
+        }
+
+        @Bean
+        RetrievalPolicy retrievalPolicy() {
+            return RetrievalPolicy.qualityDefaults();
         }
 
         @Bean

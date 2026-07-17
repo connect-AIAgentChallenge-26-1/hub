@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.placepick.recommendation.application.candidate.CandidateNormalizer;
-import com.placepick.recommendation.application.candidate.CandidateFunnel;
 import com.placepick.recommendation.application.candidate.CandidateQueryPlanner;
 import com.placepick.recommendation.application.candidate.CategoryTaxonomy;
 import com.placepick.recommendation.application.candidate.LocationMatcher;
@@ -16,6 +15,7 @@ import com.placepick.recommendation.application.port.out.PlaceSearchItem;
 import com.placepick.recommendation.application.port.out.PlaceSearchPort;
 import com.placepick.recommendation.application.port.out.PlaceSearchQuery;
 import com.placepick.recommendation.application.port.out.PlaceSearchResult;
+import com.placepick.recommendation.application.port.out.PlaceSearchSort;
 import com.placepick.recommendation.application.port.out.SearchProviderException;
 import com.placepick.recommendation.application.port.out.SearchProviderFailure;
 import com.placepick.recommendation.application.port.out.SearchProviderFailureStage;
@@ -23,195 +23,145 @@ import com.placepick.recommendation.application.trace.RecommendationTraceSink;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
 import com.placepick.recommendation.condition.domain.PlaceType;
 import com.placepick.recommendation.condition.domain.Preference;
-import com.placepick.recommendation.domain.scoring.EvidenceLevel;
 import com.placepick.recommendation.domain.scoring.RecommendationWarning;
+import com.placepick.recommendation.workflow.application.RecommendationExecutionContext;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.UUID;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Supplier;
 import org.junit.jupiter.api.Test;
 
 class CandidateRankingServiceTest {
 
     @Test
-    void tracesCountOnlyCandidateFunnelsBeforeAndAfterRelaxation() {
-        RecordingPlacePort placePort = new RecordingPlacePort(List.of(
-            List.of(place(1), new PlaceSearchItem(
-                "식별 불가",
-                "",
-                "카페",
-                "",
-                "서울 강남구",
-                "서울 강남구",
-                "",
-                ""
-            )),
-            List.of(place(1), place(2), place(3))
-        ));
-        RecordingCandidateTrace trace = new RecordingCandidateTrace();
-        CandidateRankingService service = service(
-            placePort,
-            new RecordingBlogPort(-1),
-            trace
-        );
+    void executesAccuracyAndPopularityFirstAndStopsAtTheTenCandidateTarget() {
+        UniquePlacePort places = new UniquePlacePort();
+        RecordingBlogPort blogs = new RecordingBlogPort(-1);
 
-        service.rank(condition(false));
+        CandidateRankingResult result = service(places, blogs).rank(condition());
 
-        assertThat(trace.funnels).hasSize(2);
-        assertThat(trace.funnels.get(0)).satisfies(funnel -> {
-            assertThat(funnel.receivedCount()).isEqualTo(2);
-            assertThat(funnel.eligibleCount()).isEqualTo(1);
-            assertThat(funnel.rejectedCount()).isEqualTo(1);
-        });
-        assertThat(trace.funnels.get(1)).satisfies(funnel -> {
-            assertThat(funnel.receivedCount()).isEqualTo(5);
-            assertThat(funnel.eligibleCount()).isEqualTo(3);
-            assertThat(funnel.rejectedCount()).isEqualTo(2);
-        });
-        assertThat(trace.completedFunnel).isEqualTo(trace.funnels.get(1));
-    }
-
-    @Test
-    void usesAFiveCandidatePreliminaryPoolAndAssignsUuidV4OnlyToTopThree() {
-        RecordingPlacePort placePort = new RecordingPlacePort(List.of(
-            places(1, 6)
-        ));
-        RecordingBlogPort blogPort = new RecordingBlogPort(-1);
-        CandidateRankingService service = service(placePort, blogPort);
-
-        CandidateRankingResult result = service.rank(condition(true));
-
-        assertThat(placePort.queries).singleElement().satisfies(query -> {
-            assertThat(query.limit()).isEqualTo(5);
-            assertThat(query.query()).startsWith("서울 강남구 카페");
-        });
-        assertThat(blogPort.queries).hasSize(5).allSatisfy(query -> assertThat(query.limit()).isEqualTo(3));
-        assertThat(result.places()).hasSize(3)
-            .allSatisfy(place -> assertThat(place.placeId().version()).isEqualTo(4));
-        assertThat(result.blogSearchCalls()).isEqualTo(5);
-        assertThat(result.placeSearchCalls()).isEqualTo(1);
-        assertThat(result.relaxed()).isFalse();
-        assertThat(result.degraded()).isFalse();
-        assertThat(result.evidenceLevel()).isEqualTo(EvidenceLevel.LOCAL_AND_BLOG);
-        assertThat(result.warnings()).containsExactly(
-            RecommendationWarning.BUDGET_EVIDENCE_UNAVAILABLE
-        );
-        assertThat(result.places()).allSatisfy(place -> {
-            assertThat(place.evidence()).hasSize(1);
-            assertThat(place.score()).isBetween(55, 80);
-        });
-    }
-
-    @Test
-    void searchesOnceMoreAfterRemovingOnlyTheLowestLastPreference() {
-        RecordingPlacePort placePort = new RecordingPlacePort(List.of(
-            places(1, 2),
-            List.of(place(2), place(3), place(4))
-        ));
-        RecordingBlogPort blogPort = new RecordingBlogPort(-1);
-        CandidateRankingService service = service(placePort, blogPort);
-
-        CandidateRankingResult result = service.rank(condition(false));
-
-        assertThat(placePort.queries).hasSize(2);
-        assertThat(placePort.queries.get(0).query()).endsWith("조용함 창가 주차");
-        assertThat(placePort.queries.get(1).query()).endsWith("조용함 창가");
-        assertThat(placePort.queries.get(1).query()).startsWith("서울 강남구 카페");
-        assertThat(result.relaxed()).isTrue();
+        assertThat(places.queries).hasSize(2);
+        assertThat(places.queries).extracting(PlaceSearchQuery::sort)
+            .containsExactly(PlaceSearchSort.ACCURACY, PlaceSearchSort.POPULARITY);
         assertThat(result.placeSearchCalls()).isEqualTo(2);
+        assertThat(result.blogSearchCalls()).isEqualTo(8);
+        assertThat(blogs.queries).hasSize(8).allSatisfy(query -> {
+            assertThat(query.limit()).isEqualTo(10);
+            assertThat(query.sort().providerValue()).isEqualTo("sim");
+        });
         assertThat(result.places()).hasSize(3);
+        assertThat(result.places()).allSatisfy(place -> {
+            assertThat(place.placeId().version()).isEqualTo(4);
+            assertThat(place.score()).isBetween(0, 100);
+            assertThat(place.candidate().searchObservations()).isNotEmpty();
+        });
+        assertThat(result.searchExhausted()).isFalse();
     }
 
     @Test
-    void failsWithoutBlogCallsWhenOneRelaxationStillCannotProduceThreeCandidates() {
-        RecordingPlacePort placePort = new RecordingPlacePort(List.of(
-            places(1, 2),
-            List.of(place(1), place(2))
-        ));
-        RecordingBlogPort blogPort = new RecordingBlogPort(-1);
-        CandidateRankingService service = service(placePort, blogPort);
+    void exhaustsTheSixCallBudgetAndReturnsOneCandidateAsAPartialResult() {
+        RepeatedPlacePort places = new RepeatedPlacePort(false);
+        RecordingBlogPort blogs = new RecordingBlogPort(-1);
 
-        assertThatThrownBy(() -> service.rank(condition(false)))
+        CandidateRankingResult result = service(places, blogs).rank(condition());
+
+        assertThat(places.queries).hasSize(6);
+        assertThat(result.places()).hasSize(1);
+        assertThat(result.partial()).isTrue();
+        assertThat(result.resultCount()).isEqualTo(1);
+        assertThat(result.warnings()).contains(
+            RecommendationWarning.PARTIAL_RECOMMENDATION,
+            RecommendationWarning.EXCLUSION_UNVERIFIED
+        );
+        assertThat(result.usedVariantIds()).hasSize(6);
+        assertThat(result.searchExhausted()).isFalse();
+    }
+
+    @Test
+    void failsOnlyWhenNoEligibleCandidateExistsAfterTheSearchBudget() {
+        RepeatedPlacePort places = new RepeatedPlacePort(true);
+        RecordingBlogPort blogs = new RecordingBlogPort(-1);
+
+        assertThatThrownBy(() -> service(places, blogs).rank(condition()))
             .isInstanceOf(InsufficientCandidatesException.class)
             .hasMessage("INSUFFICIENT_CANDIDATES");
-        assertThat(placePort.queries).hasSize(2);
-        assertThat(blogPort.queries).isEmpty();
+        assertThat(places.queries).hasSize(6);
+        assertThat(blogs.queries).isEmpty();
     }
 
     @Test
-    void discardsAllBlogEvidenceAndStopsAfterTheFirstProviderFailure() {
-        RecordingPlacePort placePort = new RecordingPlacePort(List.of(
-            places(1, 4)
-        ));
-        RecordingBlogPort blogPort = new RecordingBlogPort(2);
-        CandidateRankingService service = service(placePort, blogPort);
+    void isolatesOneBlogFailureAndKeepsEvidenceForTheOtherCandidates() {
+        ThreePlacePort places = new ThreePlacePort();
+        RecordingBlogPort blogs = new RecordingBlogPort(2);
 
-        CandidateRankingResult result = service.rank(condition(true));
+        CandidateRankingResult result = service(places, blogs).rank(condition());
 
-        assertThat(blogPort.queries).hasSize(2);
-        assertThat(result.blogSearchCalls()).isEqualTo(2);
+        assertThat(blogs.queries).hasSize(3);
         assertThat(result.degraded()).isTrue();
-        assertThat(result.evidenceLevel()).isEqualTo(EvidenceLevel.LOCAL_ONLY);
-        assertThat(result.warnings()).containsExactly(
-            RecommendationWarning.BUDGET_EVIDENCE_UNAVAILABLE,
-            RecommendationWarning.BLOG_EVIDENCE_UNAVAILABLE
+        assertThat(result.warnings()).contains(RecommendationWarning.BLOG_EVIDENCE_UNAVAILABLE);
+        assertThat(result.places()).anySatisfy(place -> assertThat(place.evidence()).isEmpty());
+        assertThat(result.places()).anySatisfy(place -> assertThat(place.evidence()).isNotEmpty());
+    }
+
+    @Test
+    void alternativeSkipsUsedVariantsAndPreviouslyShownFingerprints() {
+        UniquePlacePort places = new UniquePlacePort();
+        CandidateRankingService service = service(places, new RecordingBlogPort(-1));
+        CandidateRankingResult initial = service.rank(condition());
+        var excluded = initial.places().stream()
+            .map(value -> value.candidate().candidateKey())
+            .collect(java.util.stream.Collectors.toSet());
+
+        CandidateRankingResult alternative = service.rank(
+            condition(),
+            RecommendationExecutionContext.alternative(
+                1,
+                excluded,
+                Set.of("v2.base.accuracy", "v2.base.popularity")
+            )
         );
-        assertThat(result.places()).allSatisfy(place -> {
-            assertThat(place.evidence()).isEmpty();
-            assertThat(place.scoreBreakdown().blogEvidence()).isZero();
-        });
+
+        assertThat(alternative.explorationRound()).isEqualTo(1);
+        assertThat(alternative.usedVariantIds()).contains(
+            "v2.base.accuracy", "v2.base.popularity"
+        );
+        assertThat(alternative.places()).noneMatch(value ->
+            excluded.contains(value.candidate().candidateKey())
+        );
     }
 
-    private CandidateRankingService service(
-        PlaceSearchPort placePort,
-        BlogSearchPort blogPort
-    ) {
-        return service(placePort, blogPort, RecommendationTraceSink.none());
-    }
-
-    private CandidateRankingService service(
-        PlaceSearchPort placePort,
-        BlogSearchPort blogPort,
-        RecommendationTraceSink traceSink
-    ) {
+    private CandidateRankingService service(PlaceSearchPort places, BlogSearchPort blogs) {
         CategoryTaxonomy taxonomy = new CategoryTaxonomy();
         return new CandidateRankingService(
-            placePort,
-            blogPort,
+            places,
+            blogs,
             new CandidateQueryPlanner(taxonomy),
             new CandidateNormalizer(taxonomy, new LocationMatcher()),
             new CandidateRanker(new CandidateScoringPolicy()),
-            uuidSupplier(),
-            traceSink
+            java.util.UUID::randomUUID,
+            RecommendationTraceSink.none(),
+            RetrievalPolicy.qualityDefaults()
         );
     }
 
-    private ConfirmedRecommendationCondition condition(boolean withBudget) {
+    private ConfirmedRecommendationCondition condition() {
         return new ConfirmedRecommendationCondition(
             "서울 강남구",
             PlaceType.CAFE,
             null,
             4,
-            withBudget ? 10_000 : null,
-            withBudget ? 30_000 : null,
+            10_000,
+            30_000,
             List.of(
-                new Preference("창가", 3),
                 new Preference("조용함", 8),
+                new Preference("창가", 3),
                 new Preference("주차", 3)
             ),
             List.of("흡연")
         );
     }
 
-    private List<PlaceSearchItem> places(int startInclusive, int endInclusive) {
-        return java.util.stream.IntStream.rangeClosed(startInclusive, endInclusive)
-            .mapToObj(this::place)
-            .toList();
-    }
-
-    private PlaceSearchItem place(int index) {
+    private static PlaceSearchItem place(int index) {
         return new PlaceSearchItem(
             "카페 " + index,
             "https://place.test/" + index,
@@ -219,34 +169,46 @@ class CandidateRankingServiceTest {
             index % 2 == 0 ? "조용함 창가" : "주차",
             "서울특별시 강남구 테헤란로 " + index,
             "서울특별시 강남구 테헤란로 " + index,
-            "",
-            ""
+            Integer.toString(1000 + index),
+            Integer.toString(2000 + index)
         );
     }
 
-    private Supplier<UUID> uuidSupplier() {
-        Iterator<UUID> values = List.of(
-            UUID.fromString("00000000-0000-4000-8000-000000000001"),
-            UUID.fromString("00000000-0000-4000-8000-000000000002"),
-            UUID.fromString("00000000-0000-4000-8000-000000000003")
-        ).iterator();
-        return values::next;
-    }
-
-    private static final class RecordingPlacePort implements PlaceSearchPort {
-        private final List<List<PlaceSearchItem>> responses;
+    private static final class UniquePlacePort implements PlaceSearchPort {
         private final List<PlaceSearchQuery> queries = new ArrayList<>();
 
-        private RecordingPlacePort(List<List<PlaceSearchItem>> responses) {
-            this.responses = responses;
+        @Override
+        public PlaceSearchResult searchPlaces(PlaceSearchQuery query) {
+            int base = queries.size() * 5;
+            queries.add(query);
+            List<PlaceSearchItem> items = java.util.stream.IntStream.rangeClosed(base + 1, base + 5)
+                .mapToObj(CandidateRankingServiceTest::place)
+                .toList();
+            return new PlaceSearchResult(items.size(), items);
+        }
+    }
+
+    private static final class RepeatedPlacePort implements PlaceSearchPort {
+        private final boolean empty;
+        private final List<PlaceSearchQuery> queries = new ArrayList<>();
+
+        private RepeatedPlacePort(boolean empty) {
+            this.empty = empty;
         }
 
         @Override
         public PlaceSearchResult searchPlaces(PlaceSearchQuery query) {
-            int responseIndex = queries.size();
             queries.add(query);
-            List<PlaceSearchItem> response = responses.get(responseIndex);
-            return new PlaceSearchResult(response.size(), response);
+            return empty
+                ? new PlaceSearchResult(0, List.of())
+                : new PlaceSearchResult(1, List.of(place(1)));
+        }
+    }
+
+    private static final class ThreePlacePort implements PlaceSearchPort {
+        @Override
+        public PlaceSearchResult searchPlaces(PlaceSearchQuery query) {
+            return new PlaceSearchResult(3, List.of(place(1), place(2), place(3)));
         }
     }
 
@@ -272,35 +234,15 @@ class CandidateRankingServiceTest {
                     null
                 );
             }
-            String candidateName = query.query().substring(0, query.query().indexOf(" 서울"));
-            BlogSearchItem item = new BlogSearchItem(
-                candidateName + " 후기",
+            String name = query.query().substring(0, query.query().indexOf(" 서울"));
+            return new BlogSearchResult(1, List.of(new BlogSearchItem(
+                name + " 후기",
                 "https://blog.test/" + call,
-                candidateName + " 방문 기록",
-                "작성자",
-                "",
+                name + " 서울 강남구 조용함 방문 기록",
+                "작성자 " + call,
+                "https://blog.test/authors/" + call,
                 "20260715"
-            );
-            return new BlogSearchResult(1, List.of(item));
-        }
-    }
-
-    private static final class RecordingCandidateTrace implements RecommendationTraceSink {
-        private final List<CandidateFunnel> funnels = new ArrayList<>();
-        private CandidateFunnel completedFunnel;
-
-        @Override
-        public void candidatesNormalized(
-            List<com.placepick.recommendation.domain.candidate.NormalizedCandidate> candidates,
-            CandidateFunnel funnel,
-            boolean relaxed
-        ) {
-            funnels.add(funnel);
-        }
-
-        @Override
-        public void candidateFunnelCompleted(CandidateFunnel funnel, boolean relaxed) {
-            completedFunnel = funnel;
+            )));
         }
     }
 }

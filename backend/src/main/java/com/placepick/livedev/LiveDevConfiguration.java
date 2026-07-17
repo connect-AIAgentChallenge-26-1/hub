@@ -6,6 +6,7 @@ import com.placepick.infrastructure.observability.CandidateFunnelMetrics;
 import com.placepick.infrastructure.observability.ObservedProviderPorts;
 import com.placepick.infrastructure.observability.LlmProviderDiagnosticMetrics;
 import com.placepick.infrastructure.observability.ProviderCallMetrics;
+import com.placepick.infrastructure.observability.RecommendationRetrievalMetrics;
 import com.placepick.recommendation.application.candidate.CandidateNormalizer;
 import com.placepick.recommendation.application.candidate.CandidateQueryPlanner;
 import com.placepick.recommendation.application.candidate.CategoryTaxonomy;
@@ -15,6 +16,7 @@ import com.placepick.recommendation.application.port.out.PlaceSearchPort;
 import com.placepick.recommendation.application.scoring.CandidateRanker;
 import com.placepick.recommendation.application.scoring.CandidateRankingService;
 import com.placepick.recommendation.application.scoring.CandidateScoringPolicy;
+import com.placepick.recommendation.application.scoring.RetrievalPolicy;
 import com.placepick.recommendation.application.trace.RecommendationTraceSinks;
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
 import com.placepick.recommendation.job.infrastructure.DeterministicRecommendationProvider;
@@ -25,6 +27,7 @@ import com.placepick.recommendation.workflow.application.RecommendationCoreUseCa
 import java.net.URI;
 import java.time.Clock;
 import java.time.Duration;
+import java.util.UUID;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -91,7 +94,9 @@ public class LiveDevConfiguration {
         GroundedReasonGenerationPort reasonGenerationPort,
         ProviderCallMetrics metrics,
         LlmProviderDiagnosticMetrics diagnosticMetrics,
-        CandidateFunnelMetrics candidateFunnelMetrics
+        CandidateFunnelMetrics candidateFunnelMetrics,
+        RecommendationRetrievalMetrics retrievalMetrics,
+        RetrievalPolicy retrievalPolicy
     ) {
         return observedCore(
             placeSearchPort,
@@ -100,6 +105,8 @@ public class LiveDevConfiguration {
             metrics,
             diagnosticMetrics,
             candidateFunnelMetrics,
+            retrievalMetrics,
+            retrievalPolicy,
             "naver",
             "elice"
         );
@@ -112,6 +119,8 @@ public class LiveDevConfiguration {
         ProviderCallMetrics metrics,
         LlmProviderDiagnosticMetrics diagnosticMetrics,
         CandidateFunnelMetrics candidateFunnelMetrics,
+        RecommendationRetrievalMetrics retrievalMetrics,
+        RetrievalPolicy retrievalPolicy,
         String searchProvider,
         String reasonProvider
     ) {
@@ -143,7 +152,10 @@ public class LiveDevConfiguration {
         CandidateRanker ranker = new CandidateRanker(new CandidateScoringPolicy());
         return traceSink -> {
             var observedTrace = RecommendationTraceSinks.compose(
-                RecommendationTraceSinks.compose(traceSink, candidateFunnelMetrics),
+                RecommendationTraceSinks.compose(
+                    RecommendationTraceSinks.compose(traceSink, candidateFunnelMetrics),
+                    retrievalMetrics
+                ),
                 diagnosticMetrics
             );
             return new RecommendationCoreUseCase(
@@ -153,7 +165,9 @@ public class LiveDevConfiguration {
                     queryPlanner,
                     normalizer,
                     ranker,
-                    observedTrace
+                    UUID::randomUUID,
+                    observedTrace,
+                    retrievalPolicy
                 ),
                 new GroundedReasonService(observedReasons, observedTrace)
             );
@@ -171,7 +185,9 @@ public class LiveDevConfiguration {
         DeterministicRecommendationProvider provider,
         ProviderCallMetrics metrics,
         LlmProviderDiagnosticMetrics diagnosticMetrics,
-        CandidateFunnelMetrics candidateFunnelMetrics
+        CandidateFunnelMetrics candidateFunnelMetrics,
+        RecommendationRetrievalMetrics retrievalMetrics,
+        RetrievalPolicy retrievalPolicy
     ) {
         return observedCore(
             provider,
@@ -180,6 +196,8 @@ public class LiveDevConfiguration {
             metrics,
             diagnosticMetrics,
             candidateFunnelMetrics,
+            retrievalMetrics,
+            retrievalPolicy,
             "mock",
             "mock"
         );

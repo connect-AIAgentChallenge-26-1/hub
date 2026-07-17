@@ -11,13 +11,16 @@ const stages: Array<{ stage: JobStage; label: string; detail: string }> = [
   { stage: "QUEUED", label: "작업 접수", detail: "202 Accepted 작업을 안전한 queue에 등록합니다." },
   { stage: "LOCAL_SEARCH", label: "장소 후보 검색", detail: "필수 위치·유형을 유지해 Naver Local 후보를 찾습니다." },
   { stage: "BLOG_SEARCH", label: "후보별 근거 확인", detail: "후보명과 연결되는 Blog 근거를 수집합니다." },
-  { stage: "SCORING", label: "점수와 Top 3 확정", detail: "LLM 전에 서버가 0~80 점수와 순위를 확정합니다." },
+  { stage: "SCORING", label: "점수와 추천 순위 확정", detail: "LLM 전에 서버가 0~100 근거 점수와 순위를 확정합니다." },
   { stage: "REASON_GENERATION", label: "추천 이유 검증", detail: "Elice 문장이 같은 후보의 근거만 인용하는지 검사합니다." },
   { stage: "PERSISTING", label: "결과 정리", detail: "검증된 이유·주의사항·공유 문구를 최종 snapshot에 반영합니다." },
-  { stage: "FINISHED", label: "완료", detail: "정확히 세 후보를 사용자에게 제공합니다." },
+  { stage: "FINISHED", label: "완료", detail: "검증 가능한 후보를 최대 세 곳까지 제공합니다." },
 ];
 
-export function RecommendationProgress({ jobId }: { jobId: string }) {
+export function RecommendationProgress({ jobId, sourceJobId }: {
+  jobId: string;
+  sourceJobId?: string;
+}) {
   const api = useMemo(() => new ProductApi(), []);
   const router = useRouter();
   const [job, setJob] = useState<ProductJob | null>(null);
@@ -37,7 +40,9 @@ export function RecommendationProgress({ jobId }: { jobId: string }) {
       if (value.status === "COMPLETED") {
         retryTimer = setTimeout(() => router.replace(`/recommendations/${jobId}`), 500);
       } else if (value.status === "FAILED") {
-        setError(new Error(value.failure?.message ?? "추천 작업에 실패했습니다."));
+        if (value.failure?.errorCode !== "NO_ALTERNATIVE_CANDIDATES" || !sourceJobId) {
+          setError(new Error(value.failure?.message ?? "추천 작업에 실패했습니다."));
+        }
       }
     };
 
@@ -81,10 +86,24 @@ export function RecommendationProgress({ jobId }: { jobId: string }) {
       disconnect?.();
       if (retryTimer) clearTimeout(retryTimer);
     };
-  }, [api, jobId, router]);
+  }, [api, jobId, router, sourceJobId]);
 
   if (error) return <ErrorPanel error={error} retry={() => window.location.reload()} />;
   if (!job) return <LoadingPanel title={coldStart ? "무료 데모 서버를 깨우는 중" : "추천 작업을 확인하는 중"} detail={coldStart ? "Cold start를 최대 90초까지 기다립니다. 같은 작업을 중복 생성하지 않습니다." : "202 Accepted로 생성된 작업의 최신 snapshot을 가져옵니다."} />;
+  if (
+    job.status === "FAILED" &&
+    job.failure?.errorCode === "NO_ALTERNATIVE_CANDIDATES" &&
+    sourceJobId
+  ) {
+    return (
+      <section className="surface-card p-6 sm:p-8" role="alert">
+        <p className="eyebrow">다른 추천 검색 완료</p>
+        <h1 className="mt-2 text-2xl font-black">아직 보여 드리지 않은 후보가 없습니다</h1>
+        <p className="mt-3 text-sm leading-6 text-slate-600">원래 추천 결과는 그대로 유지됩니다. 돌아가서 기존 후보로 투표방을 만들 수 있습니다.</p>
+        <button type="button" className="primary-button mt-6" onClick={() => router.replace(`/recommendations/${sourceJobId}`)}>기존 추천으로 돌아가기</button>
+      </section>
+    );
+  }
 
   const activeIndex = stages.findIndex((value) => value.stage === job.stage);
   return (

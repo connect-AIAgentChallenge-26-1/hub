@@ -93,7 +93,7 @@ export function RoomView({ shareToken }: { shareToken: string }) {
       {reconnecting && <p className="mt-4 rounded-xl bg-amber-300/10 p-3 text-xs text-amber-200" role="status">실시간 집계를 다시 연결하고 있습니다. 최신 snapshot으로 복구합니다.</p>}
     </section>
     {error != null && <div className="rounded-xl bg-rose-50 p-3 text-sm text-rose-800" role="alert">{error instanceof Error ? error.message : "투표 요청에 실패했습니다."}</div>}
-    <div className="grid gap-5 lg:grid-cols-3">
+    <div className={`mx-auto grid gap-5 ${room.places.length === 1 ? "max-w-xl" : room.places.length === 2 ? "max-w-4xl md:grid-cols-2" : "max-w-7xl lg:grid-cols-3"}`}>
       {room.places.map((place, index) => {
         const aggregate = room.aggregate.find((value) => value.placeId === place.placeId) ?? { likeCount: 0, dislikeCount: 0 };
         const myVote = room.myVotes[place.placeId];

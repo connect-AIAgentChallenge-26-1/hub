@@ -41,11 +41,11 @@ export type JobStage =
   | "FINISHED";
 
 export interface ProductScoreBreakdown {
-  location: number;
-  placeType: number;
-  budget: number;
-  preference: number;
-  blogEvidence: number;
+  locationConfidence: number;
+  searchRelevance: number;
+  preferenceEvidence: number;
+  evidenceQuality: number;
+  total: number;
 }
 
 export interface ProductReasonStatement {
@@ -59,9 +59,10 @@ export interface ProductPlace {
   category: string;
   roadAddress: string;
   address: string;
-  sourceUrl: string;
+  sourceUrl: string | null;
   score: number;
   scoreBreakdown: ProductScoreBreakdown;
+  reasonSource: "GENERATED" | "TEMPLATE";
   reasonStatements: ProductReasonStatement[];
   cautions: string[];
   shareText: string;
@@ -75,6 +76,9 @@ export interface ProductJob {
   stage: JobStage;
   progress: number;
   degraded: boolean;
+  partial: boolean;
+  resultCount: number;
+  explorationRound: number;
   warnings: string[];
   condition: ProductCondition;
   places: ProductPlace[];

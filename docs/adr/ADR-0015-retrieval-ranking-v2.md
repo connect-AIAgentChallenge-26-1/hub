@@ -38,6 +38,17 @@ fingerprint를 만들고, 공통 홈페이지를 쓰는 지점은 주소·좌표
 후보가 한두 개면 `partial=true`로 완료하고 0개만 실패한다. 완료된 추천은 같은 세션의
 `POST /api/v1/recommendations/{jobId}/alternatives`로 다른 후보를 요청할 수 있다.
 
+검색 variant의 기본 weight는 정확도 1.00, 인기 0.90, 선호 0.80, 유형 동의어 0.70,
+위치 alias 0.70이다. `rawRrf = Σ weight/(60+providerRank)`이며 분모는 조기 종료로 실제
+호출된 수가 아니라 해당 실행 mode가 계획한 전체 variant weight로 고정한다. 따라서 같은
+Provider fixture에서 조기 종료 여부가 한 후보의 관련성 점수를 임의로 높이지 않는다.
+
+다른 추천도 기존 202·Outbox·Worker 경계를 지킨다. 요청 전에 저장된 variant가 모두
+소진됐음을 확정할 수 있을 때만 POST가 409를 반환한다. 실행 가능한 variant가 남아 202를
+반환한 뒤 실제 검색에서 미노출 후보가 0개면 새 Job을
+`FAILED/NO_ALTERNATIVE_CANDIDATES`로 종료한다. 실제 검색을 POST나 DB transaction 안으로
+옮겨 즉시 409를 만드는 대안은 외부 호출·비동기 불변식을 깨뜨리므로 채택하지 않는다.
+
 ## 결과와 재검토
 
 호출 수와 처리 시간은 늘지만 Provider의 공식 pagination 부재 안에서 회수율과 설명 가능성을

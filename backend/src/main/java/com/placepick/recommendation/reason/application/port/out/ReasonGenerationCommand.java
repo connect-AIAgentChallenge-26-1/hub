@@ -14,10 +14,11 @@ public record ReasonGenerationCommand(
     public ReasonGenerationCommand {
         condition = Objects.requireNonNull(condition, "condition");
         places = List.copyOf(places);
-        if (places.size() != 3) {
-            throw new IllegalArgumentException("Reason generation requires exactly three places.");
+        if (places.isEmpty() || places.size() > 3) {
+            throw new IllegalArgumentException("Reason generation requires one to three places.");
         }
-        if (new HashSet<>(places.stream().map(ReasonPlaceContext::placeId).toList()).size() != 3) {
+        if (new HashSet<>(places.stream().map(ReasonPlaceContext::placeId).toList()).size() !=
+            places.size()) {
             throw new IllegalArgumentException("Reason generation place IDs must be unique.");
         }
     }

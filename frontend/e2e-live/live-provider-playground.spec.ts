@@ -30,10 +30,10 @@ test("실제 Provider Playground 사용자 흐름을 화면에서 검증한다",
   await assertVisibleText(page, "NAVER_NORMALIZATION", "후보를 정규화하고 필터링했습니다");
   await assertVisibleText(page, "NAVER_BLOG", "Naver Blog");
   mark("NAVER_EVIDENCE_VERIFIED");
-  await assertVisibleText(page, "SERVER_RANKING", "서버가 결정론적 Top 3를 확정했습니다");
+  await assertVisibleText(page, "SERVER_RANKING", "서버가 결정론적 추천");
   await assertVisibleText(page, "ELICE_CONTEXT", "Elice에 근거 기반 이유 생성을 요청했습니다");
   await assertVisibleText(page, "ELICE_EVIDENCE_VALIDATION", "Elice 이유와 근거 관계를 검증했습니다");
-  await assertVisibleText(page, "TOP_THREE", "근거가 연결된 Top 3");
+  await assertVisibleText(page, "RECOMMENDATION_RESULT", "근거가 연결된 추천");
 
   await assertVerifiedResultStructure(page);
   mark("TOP_THREE_VERIFIED");
@@ -64,19 +64,19 @@ async function assertVerifiedResultStructure(page: Page): Promise<void> {
   await expect.poll(
     () => page.evaluate(() => {
       const cards = [...document.querySelectorAll<HTMLElement>('article[aria-labelledby^="place-"]')];
-      if (cards.length !== 3) return false;
+       if (cards.length < 1 || cards.length > 3) return false;
 
       const summary = [...document.querySelectorAll<HTMLElement>("div")];
       const hasSummary = (label: string, value: string) => summary.some((item) => {
         const values = [...item.querySelectorAll(":scope > p")].map((node) => node.textContent?.trim());
         return values.length === 2 && values[0] === label && values[1] === value;
       });
-      if (!hasSummary("후보", "3") || !hasSummary("저하", "없음") || !hasSummary("대체", "없음")) {
+       if (!hasSummary("후보", String(cards.length)) || !hasSummary("저하", "없음")) {
         return false;
       }
 
       return cards.every((card) => {
-        const scoreIsVisible = /\d+\/80/.test(card.textContent ?? "");
+        const scoreIsVisible = /\d+\/100/.test(card.textContent ?? "");
         const hasReasonHeading = [...card.querySelectorAll("h4")]
           .some((heading) => heading.textContent?.trim() === "검증된 추천 이유");
         const evidenceReferences = [...card.querySelectorAll("li span")]

@@ -236,6 +236,10 @@ public final class ApiExceptionHandler {
                 HttpStatus.CONFLICT,
                 ApiErrorCode.IDEMPOTENCY_KEY_REUSED
             );
+            case NO_ALTERNATIVE_CANDIDATES -> new JobProblemMapping(
+                HttpStatus.CONFLICT,
+                ApiErrorCode.NO_ALTERNATIVE_CANDIDATES
+            );
             case INVALID_STATE -> new JobProblemMapping(
                 HttpStatus.CONFLICT,
                 ApiErrorCode.INVALID_STATE

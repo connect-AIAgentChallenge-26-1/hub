@@ -9,14 +9,23 @@ import java.util.UUID;
 
 public interface RecommendationJobRepository {
 
-    void lockIdempotencyScope(UUID sessionId, String keyHash);
+    void lockIdempotencyScope(UUID sessionId, String resourcePath, String keyHash);
 
-    Optional<IdempotencyReplay> findIdempotency(UUID sessionId, String keyHash);
+    Optional<IdempotencyReplay> findIdempotency(
+        UUID sessionId,
+        String resourcePath,
+        String keyHash
+    );
 
     void insertJob(
         UUID jobId,
         UUID sessionId,
         UUID draftId,
+        UUID rootJobId,
+        UUID parentJobId,
+        int explorationRound,
+        List<String> excludedCandidateKeys,
+        List<String> usedVariantIds,
         ConfirmedRecommendationCondition condition,
         Instant createdAt,
         Instant expiresAt
@@ -25,6 +34,7 @@ public interface RecommendationJobRepository {
     void insertIdempotency(
         UUID recordId,
         UUID sessionId,
+        String resourcePath,
         String keyHash,
         String requestHash,
         UUID jobId,
@@ -33,6 +43,10 @@ public interface RecommendationJobRepository {
     );
 
     Optional<RecommendationJobSnapshot> findOwned(UUID jobId, UUID sessionId);
+
+    Optional<RecommendationJobSnapshot> findOwnedForUpdate(UUID jobId, UUID sessionId);
+
+    Optional<RecommendationJobSnapshot> findByParent(UUID parentJobId);
 
     Optional<RecommendationJobSubscriptionState> findSubscriptionState(
         UUID jobId,

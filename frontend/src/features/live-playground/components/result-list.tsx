@@ -10,7 +10,7 @@ export function ResultList({ result }: { result: RecommendationResult }) {
             <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-teal-300">
               <CheckIcon className="h-4 w-4" /> Verified result
             </div>
-            <h2 id="result-title" className="mt-2 text-2xl font-black tracking-tight sm:text-3xl">근거가 연결된 Top 3</h2>
+            <h2 id="result-title" className="mt-2 text-2xl font-black tracking-tight sm:text-3xl">근거가 연결된 추천 {result.resultCount}곳</h2>
             <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-300">서버가 점수와 순위를 먼저 확정하고, Elice 문장이 같은 후보의 근거를 인용하는지 다시 검증했습니다.</p>
             <p className="mt-3 text-xs font-semibold text-slate-400 tabular-nums">
               이번 실행: Naver Local {result.placeSearchCalls}회 · Naver Blog {result.blogSearchCalls}회 · Elice 이유 {result.reasonGenerationCalls}회
@@ -24,6 +24,12 @@ export function ResultList({ result }: { result: RecommendationResult }) {
         </div>
       </div>
 
+      {result.partial && (
+        <div className="rounded-2xl border border-teal-200 bg-teal-50 px-4 py-4 text-sm text-teal-950" role="status">
+          충분히 검색한 뒤 검증 가능한 후보 {result.resultCount}곳을 부분 결과로 제공합니다.
+        </div>
+      )}
+
       {result.warnings.length > 0 && (
         <div className="flex items-start gap-3 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-4 text-sm text-amber-950" role="note">
           <AlertIcon className="mt-0.5 h-5 w-5 shrink-0" />
@@ -31,7 +37,7 @@ export function ResultList({ result }: { result: RecommendationResult }) {
         </div>
       )}
 
-      <div className="grid gap-5 lg:grid-cols-3">
+      <div className={`mx-auto grid gap-5 ${result.places.length === 1 ? "max-w-xl" : result.places.length === 2 ? "max-w-4xl md:grid-cols-2" : "max-w-7xl lg:grid-cols-3"}`}>
         {result.places.map((place) => <ResultCard key={place.placeId} place={place} />)}
       </div>
     </section>
@@ -47,7 +53,7 @@ export function ResultCard({ place }: { place: RecommendationPlace }) {
           <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-slate-950 text-sm font-black text-white" aria-label={`${place.rank}위`}>{place.rank}</span>
           <div className="text-right">
             <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">Evidence score</p>
-            <p className="mt-0.5 text-3xl font-black tracking-tight text-teal-800 tabular-nums">{place.score}<span className="text-sm font-bold text-slate-400">/80</span></p>
+            <p className="mt-0.5 text-3xl font-black tracking-tight text-teal-800 tabular-nums">{place.score}<span className="text-sm font-bold text-slate-400">/100</span></p>
           </div>
         </div>
         <h3 id={headingId} className="mt-5 text-xl font-black tracking-tight text-slate-950">{place.name}</h3>
@@ -60,7 +66,7 @@ export function ResultCard({ place }: { place: RecommendationPlace }) {
         <div className="mt-5 border-t border-slate-200 pt-5">
           <div className="flex items-center justify-between gap-3">
             <h4 className="text-sm font-bold text-slate-900">검증된 추천 이유</h4>
-            <span className="inline-flex items-center gap-1 rounded-full bg-teal-50 px-2 py-1 text-[11px] font-bold text-teal-800"><ShieldIcon className="h-3.5 w-3.5" /> {place.evidenceLevel === "LOCAL_AND_BLOG" ? "장소+블로그" : "장소 근거"}</span>
+            <span className="inline-flex items-center gap-1 rounded-full bg-teal-50 px-2 py-1 text-[11px] font-bold text-teal-800"><ShieldIcon className="h-3.5 w-3.5" /> {place.evidenceLevel === "LOCAL_AND_BLOG" ? "장소+블로그" : "장소 근거"} · {place.reasonSource === "GENERATED" ? "AI 생성" : "템플릿"}</span>
           </div>
           <ul className="mt-3 space-y-3">
             {place.reasonStatements.map((reason) => (
@@ -79,9 +85,13 @@ export function ResultCard({ place }: { place: RecommendationPlace }) {
         )}
 
         <div className="mt-auto pt-5">
-          <a href={place.sourceUrl} target="_blank" rel="noopener noreferrer" className="secondary-button w-full justify-center">
-            원문 장소 정보 확인 <ExternalIcon className="h-4 w-4" />
-          </a>
+          {place.sourceUrl ? (
+            <a href={place.sourceUrl} target="_blank" rel="noopener noreferrer" className="secondary-button w-full justify-center">
+              원문 장소 정보 확인 <ExternalIcon className="h-4 w-4" />
+            </a>
+          ) : (
+            <p className="rounded-xl bg-slate-100 px-3 py-2 text-center text-xs font-semibold text-slate-500">직접 확인 링크 미제공</p>
+          )}
         </div>
       </div>
     </article>
@@ -90,10 +100,10 @@ export function ResultCard({ place }: { place: RecommendationPlace }) {
 
 function ScoreBreakdown({ place }: { place: RecommendationPlace }) {
   const entries = [
-    ["위치", place.scoreBreakdown.location, 30],
-    ["유형", place.scoreBreakdown.placeType, 25],
-    ["선호", place.scoreBreakdown.preference, 15],
-    ["블로그", place.scoreBreakdown.blogEvidence, 10],
+    ["위치 신뢰", place.scoreBreakdown.locationConfidence, 15],
+    ["검색 관련성", place.scoreBreakdown.searchRelevance, 30],
+    ["선호 근거", place.scoreBreakdown.preferenceEvidence, 30],
+    ["근거 품질", place.scoreBreakdown.evidenceQuality, 25],
   ] as const;
   return (
     <div>

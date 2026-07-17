@@ -25,6 +25,7 @@ interface DraftState extends ProductDraft {
 
 interface JobState extends ProductJob {
   owner: string;
+  chainId: string;
   sequence: number;
   listeners: Set<(event: string, job: JobState) => void>;
 }
@@ -48,18 +49,21 @@ interface MockStore {
   drafts: Map<string, DraftState>;
   jobs: Map<string, JobState>;
   rooms: Map<string, RoomState>;
+  idempotency: Map<string, { requestIdentity: string; jobId: string }>;
 }
 
 declare global {
   var __placepickProductMockStore: MockStore | undefined;
 }
 
-const store = globalThis.__placepickProductMockStore ?? {
+const store: MockStore = globalThis.__placepickProductMockStore ?? {
   sessions: new Map(),
   drafts: new Map(),
   jobs: new Map(),
   rooms: new Map(),
+  idempotency: new Map(),
 };
+store.idempotency ??= new Map();
 globalThis.__placepickProductMockStore = store;
 
 export async function handleProductMock(
@@ -98,29 +102,58 @@ export async function handleProductMock(
     }
 
     if (method === "POST" && match(path, "recommendations")) {
-      requireMutation(request, session, true);
+      const idempotencyKey = requireMutation(request, session, true);
       const body = await jsonBody(request);
-      const draft = ownedDraft(requireText(body.draftId, "draftId", 100), session.id);
+      const draftId = requireText(body.draftId, "draftId", 100);
+      const scope = idempotencyScope(session.id, "recommendations", idempotencyKey);
+      const replay = replayJob(scope, `draft:${draftId}`, session.id);
+      if (replay) return acceptedJobResponse(replay);
+      const draft = ownedDraft(draftId, session.id);
       if (draft.status !== "CONFIRMED") {
         throw apiFailure(409, "DRAFT_NOT_CONFIRMED", "추천 전에 조건을 확정해 주세요.");
       }
       draft.status = "CONSUMED";
       const job = createJobState(session.id, draft.extractedCondition);
       store.jobs.set(job.jobId, job);
+      rememberJob(scope, `draft:${draftId}`, job);
       scheduleJob(job);
-      return NextResponse.json(
-        { jobId: job.jobId, status: "ACCEPTED" },
-        {
-          status: 202,
-          headers: { Location: `/mock-api/v1/recommendations/${job.jobId}` },
-        },
-      );
+      return acceptedJobResponse(job);
     }
 
     if (path[0] === "recommendations" && path.length >= 2) {
       const job = ownedJob(path[1]!, session.id);
       if (method === "GET" && path.length === 2) return NextResponse.json(publicJob(job));
       if (method === "GET" && path[2] === "events") return jobStream(job);
+      if (method === "POST" && path.length === 3 && path[2] === "alternatives") {
+        const idempotencyKey = requireMutation(request, session, true);
+        const resource = `recommendations/${job.jobId}/alternatives`;
+        const scope = idempotencyScope(session.id, resource, idempotencyKey);
+        const replay = replayJob(scope, resource, session.id);
+        if (replay) return acceptedJobResponse(replay);
+        if (job.status !== "COMPLETED") {
+          throw apiFailure(409, "INVALID_STATE", "완료된 추천에서만 다른 후보를 찾을 수 있습니다.");
+        }
+        const latestRound = Math.max(...[...store.jobs.values()]
+          .filter((value) => value.chainId === job.chainId)
+          .map((value) => value.explorationRound));
+        if (latestRound >= 3) {
+          throw apiFailure(
+            409,
+            "NO_ALTERNATIVE_CANDIDATES",
+            "아직 보여 드리지 않은 조건 일치 후보가 없습니다.",
+          );
+        }
+        const alternative = createJobState(
+          session.id,
+          job.condition,
+          latestRound + 1,
+          job.chainId,
+        );
+        store.jobs.set(alternative.jobId, alternative);
+        rememberJob(scope, resource, alternative);
+        scheduleJob(alternative);
+        return acceptedJobResponse(alternative);
+      }
       if (method === "POST" && path[2] === "rooms") {
         requireMutation(request, session, true);
         if (job.status !== "COMPLETED") {
@@ -273,10 +306,16 @@ function createDraftState(owner: string, requestText: string): DraftState {
   };
 }
 
-function createJobState(owner: string, condition: ProductCondition): JobState {
+function createJobState(
+  owner: string,
+  condition: ProductCondition,
+  explorationRound = 0,
+  chainId = crypto.randomUUID(),
+): JobState {
   const now = new Date().toISOString();
   return {
     owner,
+    chainId,
     sequence: 0,
     listeners: new Set(),
     jobId: crypto.randomUUID(),
@@ -284,6 +323,9 @@ function createJobState(owner: string, condition: ProductCondition): JobState {
     stage: "QUEUED",
     progress: 0,
     degraded: false,
+    partial: false,
+    resultCount: 0,
+    explorationRound,
     warnings: ["BUDGET_EVIDENCE_UNAVAILABLE"],
     condition,
     places: [],
@@ -312,20 +354,47 @@ function scheduleJob(job: JobState): void {
     }, 280 * (index + 1));
   });
   setTimeout(() => {
+    if (job.explorationRound >= 3) {
+      job.status = "FAILED";
+      job.stage = "FINISHED";
+      job.progress = 100;
+      job.failure = {
+        errorCode: "NO_ALTERNATIVE_CANDIDATES",
+        message: "아직 보여 드리지 않은 조건 일치 후보가 없습니다.",
+      };
+      job.updatedAt = new Date().toISOString();
+      emitJob(job, "failed");
+      return;
+    }
+    const places = productPlaces(job.explorationRound);
     job.status = "COMPLETED";
     job.stage = "FINISHED";
     job.progress = 100;
-    job.places = productPlaces();
+    job.places = places;
+    job.resultCount = places.length;
+    job.partial = places.length < 3;
+    if (job.partial) job.warnings = [...job.warnings, "PARTIAL_RECOMMENDATION"];
     job.updatedAt = new Date().toISOString();
     emitJob(job, "completed");
   }, 280 * (steps.length + 1));
 }
 
-function productPlaces(): ProductPlace[] {
+function productPlaces(explorationRound: number): ProductPlace[] {
+  if (explorationRound === 1) {
+    return [
+      productPlace("햇살 작업실", "카페", "서울 성동구 왕십리로 44", 15, 24, 18, 18),
+      productPlace("차분한 정원", "카페, 베이커리", "서울 성동구 광나루로 55", 12, 22, 20, 18, true),
+    ];
+  }
+  if (explorationRound === 2) {
+    return [
+      productPlace("작은 온실", "카페", "서울 성동구 뚝섬로 66", 12, 20, 18, 17, true),
+    ];
+  }
   return [
-    productPlace("고요한 서재", "카페, 디저트", "서울 성동구 성수이로 11", 80, 15, 10),
-    productPlace("초록 창가", "카페", "서울 성동구 연무장길 22", 77, 12, 10),
-    productPlace("느린 오후", "카페, 베이커리", "서울 성동구 아차산로 33", 72, 10, 7),
+    productPlace("고요한 서재", "카페, 디저트", "서울 성동구 성수이로 11", 15, 30, 30, 25),
+    productPlace("초록 창가", "카페", "서울 성동구 연무장길 22", 15, 28, 25, 22),
+    productPlace("느린 오후", "카페, 베이커리", "서울 성동구 아차산로 33", 15, 25, 22, 20),
   ];
 }
 
@@ -333,20 +402,30 @@ function productPlace(
   name: string,
   category: string,
   roadAddress: string,
-  score: number,
-  preference: number,
-  blogEvidence: number,
+  locationConfidence: number,
+  searchRelevance: number,
+  preferenceEvidence: number,
+  evidenceQuality: number,
+  templateReason = false,
 ): ProductPlace {
   const placeId = crypto.randomUUID();
+  const score = locationConfidence + searchRelevance + preferenceEvidence + evidenceQuality;
   return {
     placeId,
     name,
     category,
     roadAddress,
     address: roadAddress,
-    sourceUrl: `https://example.com/places/${placeId}`,
+    sourceUrl: templateReason ? null : `https://example.com/places/${placeId}`,
     score,
-    scoreBreakdown: { location: 30, placeType: 25, budget: 0, preference, blogEvidence },
+    scoreBreakdown: {
+      locationConfidence,
+      searchRelevance,
+      preferenceEvidence,
+      evidenceQuality,
+      total: score,
+    },
+    reasonSource: templateReason ? "TEMPLATE" : "GENERATED",
     reasonStatements: [
       { text: "요청한 지역과 장소 유형에 맞고 연결된 검색 근거가 있습니다.", evidenceIds: [`local:${placeId}`] },
       { text: "선호 조건과 관련된 Blog 근거가 후보명에 연결되어 있습니다.", evidenceIds: [`blog:${placeId}`] },
@@ -481,7 +560,13 @@ function publicDraft(draft: DraftState): ProductDraft {
 }
 
 function publicJob(job: JobState): ProductJob {
-  const { owner: _owner, sequence: _sequence, listeners: _listeners, ...view } = job;
+  const {
+    owner: _owner,
+    chainId: _chainId,
+    sequence: _sequence,
+    listeners: _listeners,
+    ...view
+  } = job;
   return structuredClone(view);
 }
 
@@ -530,13 +615,54 @@ function requireSession(request: NextRequest): MockSession {
   return session;
 }
 
-function requireMutation(request: NextRequest, session: MockSession, idempotency: boolean): void {
+function requireMutation(
+  request: NextRequest,
+  session: MockSession,
+  idempotency: boolean,
+): string {
   if (request.headers.get("x-csrf-token") !== session.csrf) {
     throw apiFailure(403, "CSRF_INVALID", "요청 검증 token이 올바르지 않습니다.");
   }
-  if (idempotency && !request.headers.get("idempotency-key")) {
+  const key = request.headers.get("idempotency-key") ?? "";
+  if (idempotency && key.length === 0) {
     throw apiFailure(400, "INVALID_REQUEST", "Idempotency-Key가 필요합니다.");
   }
+  return key;
+}
+
+function idempotencyScope(owner: string, resource: string, key: string): string {
+  return `${owner}:${resource}:${key}`;
+}
+
+function replayJob(
+  scope: string,
+  requestIdentity: string,
+  owner: string,
+): JobState | null {
+  const record = store.idempotency.get(scope);
+  if (!record) return null;
+  if (record.requestIdentity !== requestIdentity) {
+    throw apiFailure(
+      409,
+      "IDEMPOTENCY_KEY_REUSED",
+      "같은 Idempotency-Key를 다른 요청에 사용할 수 없습니다.",
+    );
+  }
+  return ownedJob(record.jobId, owner);
+}
+
+function rememberJob(scope: string, requestIdentity: string, job: JobState): void {
+  store.idempotency.set(scope, { requestIdentity, jobId: job.jobId });
+}
+
+function acceptedJobResponse(job: JobState): Response {
+  return NextResponse.json(
+    { jobId: job.jobId, status: "ACCEPTED" },
+    {
+      status: 202,
+      headers: { Location: `/mock-api/v1/recommendations/${job.jobId}` },
+    },
+  );
 }
 
 function ownedDraft(id: string, owner: string): DraftState {

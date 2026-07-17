@@ -408,10 +408,11 @@ class SseWireContractIntegrationTest {
             RecommendationJobPlace place = places.get(index);
             jdbcClient.sql("""
                     INSERT INTO recommendation_candidate (
-                        job_id, place_id, ordinal, snapshot_json, score, evidence_level
+                        job_id, place_id, ordinal, snapshot_json, score, evidence_level,
+                        candidate_fingerprint
                     ) VALUES (
                         :jobId, :placeId, :ordinal, CAST(:snapshot AS jsonb),
-                        :score, 'LOCAL_AND_BLOG'
+                        :score, 'LOCAL_AND_BLOG', :candidateFingerprint
                     )
                     """)
                 .param("jobId", jobId)
@@ -419,6 +420,7 @@ class SseWireContractIntegrationTest {
                 .param("ordinal", index + 1)
                 .param("snapshot", objectMapper.writeValueAsString(place))
                 .param("score", place.score())
+                .param("candidateFingerprint", String.format("%064x", index + 1))
                 .update();
         }
         return places;

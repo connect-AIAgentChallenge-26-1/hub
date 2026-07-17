@@ -249,8 +249,8 @@ public class VotingRoomService {
         if (job.status() != RecommendationJobStatus.COMPLETED) {
             throw invalidState("Only a completed recommendation job can create a voting room.");
         }
-        if (job.places().size() != 3) {
-            throw invalidState("A completed recommendation must contain exactly three places.");
+        if (job.places().isEmpty() || job.places().size() > 3) {
+            throw invalidState("A completed recommendation must contain one to three places.");
         }
         if (roomRepository.findByJobId(jobId).isPresent()) {
             throw invalidState("A voting room already exists for this recommendation job.");
