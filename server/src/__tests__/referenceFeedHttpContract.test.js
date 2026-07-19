@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { createApp } from '../index.js'
+import { createApp, isReferenceFeedLoopbackHost } from '../index.js'
 import {
   PythonReferenceFeedGateway,
   ReferenceFeedGatewayError,
@@ -45,6 +45,54 @@ function referenceDto() {
   }
 }
 
+test('RF-00 reference mode is restricted to loopback server hosts', () => {
+  for (const host of [
+    '127.0.0.1',
+    '127.0.0.2',
+    '::1',
+    '[::1]',
+    '0:0:0:0:0:0:0:1',
+  ]) {
+    assert.equal(isReferenceFeedLoopbackHost(host), true)
+  }
+
+  for (const host of [
+    '0.0.0.0',
+    '::',
+    '192.168.0.10',
+    'localhost',
+    '',
+    null,
+  ]) {
+    assert.equal(isReferenceFeedLoopbackHost(host), false)
+  }
+
+  let factoryCallCount = 0
+  assert.throws(
+    () =>
+      createApp({
+        referenceFeedEnabled: true,
+        referenceFeedHost: '0.0.0.0',
+        referenceFeedGatewayFactory() {
+          factoryCallCount += 1
+          return {}
+        },
+      }),
+    (error) =>
+      error.code === 'REFERENCE_FEED_LOOPBACK_REQUIRED' &&
+      error.message ===
+        'Reference feed mode requires a loopback-only server host.',
+  )
+  assert.equal(factoryCallCount, 0)
+
+  assert.doesNotThrow(() =>
+    createApp({
+      referenceFeedEnabled: false,
+      referenceFeedHost: '0.0.0.0',
+    }),
+  )
+})
+
 test('RF-01 provisioning is opt-in and accepts only the exact {} JSON body', async (t) => {
   const app = createApp({ referenceFeedEnabled: false })
   const testServer = await startTestServer(app)
@@ -85,6 +133,40 @@ test('RF-01 provisioning is opt-in and accepts only the exact {} JSON body', asy
       },
     })
   }
+
+  const malformedJson = await fetch(
+    `${testServer.baseUrl}/api/subscription-feeds/reference`,
+    {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: '{',
+    },
+  )
+  assert.equal(malformedJson.status, 400)
+  assert.equal(malformedJson.headers.get('cache-control'), 'no-store')
+  assert.deepEqual(await malformedJson.json(), {
+    error: {
+      type: 'invalid_request',
+      message: 'Request body must be exactly {}.',
+    },
+  })
+
+  const wrongContentType = await fetch(
+    `${testServer.baseUrl}/api/subscription-feeds/reference`,
+    {
+      method: 'POST',
+      headers: { 'content-type': 'text/plain' },
+      body: '{}',
+    },
+  )
+  assert.equal(wrongContentType.status, 400)
+  assert.equal(wrongContentType.headers.get('cache-control'), 'no-store')
+  assert.deepEqual(await wrongContentType.json(), {
+    error: {
+      type: 'invalid_request',
+      message: 'Request body must be exactly {}.',
+    },
+  })
 })
 
 test('RF-02 provisioning returns only the approved reference DTO and closes its gateway', async (t) => {
