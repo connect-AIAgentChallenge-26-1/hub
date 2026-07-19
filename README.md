@@ -149,11 +149,18 @@ curl -X POST http://127.0.0.1:3001/api/subscription-feeds/slite \
 `DELETE /api/subscription-feeds/slite`는 feed를 폐기하고, 폐기 후 rotate는 같은
 feed ID로 새 링크를 명시적으로 활성화합니다.
 
-현재 S-Lite는 단일 프로세스·단일 replica 전용입니다. 외부 공개 시 TLS reverse
-proxy에서 관리자 API를 인터넷에 노출하지 않고 접근 제한·rate limit을 적용해야
-합니다. 안정적인 DB volume과 backup/restore도
-필수이며 이 저장소에는 배포 구성이 포함되지 않습니다. 상세 계약은
+현재 S-Lite는 단일 프로세스·단일 replica 전용입니다. 안정적인 DB volume과
+backup/restore도 필수입니다. 상세 계약은
 [S-Lite Durable Feed](docs/architecture/slite-durable-feed.md)를 참고하세요.
+
+단일 Linux host용 HTTPS 배포 kit도 포함되어 있습니다. Node는
+`127.0.0.1:3001`에서만 시작하고 Caddy는 정확한
+`GET/HEAD /calendar/:token.ics`만 외부로 전달합니다. `/api` 전체는 public
+hostname에서 고정 `404`이며 capability URL access log도 활성화하지 않습니다.
+실제 DNS/host에 적용하는 절차는
+[S-Lite HTTPS Deployment with Caddy](docs/deployment/slite-https-caddy.md)를
+따릅니다. 이 kit가 실제 host, DNS, firewall, backup 또는 calendar-client
+검증을 대신하지는 않습니다.
 
 프로덕션 빌드 확인:
 
@@ -205,7 +212,7 @@ Phase 4 이후의 AI 연동 계약, 테스트 corpus, batch calendar export 로�
    - master roadmap, protected CI, upstream workflow guardrail 유지
 
 2. **S-Lite: durable single-feed release boundary**
-   - 공개 HTTPS 배포 경계와 관리자 API 접근 제한 결정
+   - 준비된 Caddy/systemd kit를 실제 DNS·Linux host에 적용
    - SQLite volume backup/restore와 장애 시 fail-closed 동작 검증
    - 실제 calendar client에서 링크 등록·재시작·회전·폐기 lifecycle QA
 

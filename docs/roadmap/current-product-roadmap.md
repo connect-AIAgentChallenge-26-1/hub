@@ -29,7 +29,7 @@ The routes must not be reported or implemented as one undifferentiated phase.
 | Test corpus | 10-entry baseline collected | Verified public entries now cover scholarship, school notice, assignment, competition, job posting, and ambiguous-date cases; deterministic corpus validation is next. |
 | Foundation.25.1 | Implemented, isolated | The exact package, data, persistence, projection, feed, and tests are restored. |
 | Local reference delivery | Opt-in runtime active | One fixed 601-event snapshot is exposed through an in-memory loopback capability that expires on server restart. |
-| S-Lite durable delivery | Implemented, deployment pending | One administrator can issue, inspect, rotate, and revoke one SQLite-backed capability URL that survives restart. |
+| S-Lite durable delivery | Runtime and HTTPS kit implemented; host pending | One administrator can issue, inspect, rotate, and revoke one SQLite-backed capability URL; Caddy exposes only its calendar read path. |
 | Production ingestion and feed | Pending | No live root ingestion, account-owned durable feed, production deployment, or operating service exists. |
 | Calendar-client QA | Automated evidence only | S30-A is complete; S30-B still requires a physical Samsung device. |
 
@@ -178,8 +178,9 @@ Sequence:
 
 1. **S0 S-Lite durable link:** one administrator, one SQLite singleton, one
    fixed Foundation snapshot, hash-only capability persistence, restart
-   recovery, rotation, and revocation. Implementation is complete; HTTPS
-   deployment, backup/restore drill, and real-client lifecycle evidence remain.
+   recovery, rotation, and revocation. Runtime and Caddy/systemd kit are
+   complete; real host/DNS deployment, backup/restore drill, and client
+   lifecycle evidence remain.
 2. **S1 live ingestion:** approved hosts and schemes, redirect and IP
    revalidation, response/attachment limits, scheduler, retries, and failure
    isolation.

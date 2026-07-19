@@ -252,22 +252,55 @@ Implemented capabilities:
 
 This is not a production subscription service. It has no UI, accounts,
 multi-user profile ownership, live ingestion, crawler schedule, dynamic
-snapshot refresh, multi-process coordination, TLS/reverse-proxy deployment,
-rate limiting, observability, or automated backup/restore. See
+snapshot refresh, multi-process coordination, actual host/DNS provisioning,
+rate limiting, observability, or automated backup/restore. A checked-in
+Caddy/systemd kit supplies the loopback-only HTTPS proxy boundary. See
 [`slite-durable-feed.md`](../architecture/slite-durable-feed.md).
+
+### S-Lite HTTPS Reverse Proxy Kit
+
+Status: Implemented and locally validated; actual host deployment pending
+
+- S-Lite startup rejects non-loopback `HOST` values before gateway creation
+- Caddy Automatic HTTPS on a dedicated hostname
+- exact `GET`/`HEAD` capability-path matcher with query rejection
+- all public `/api`, health, analyze, malformed-path, and unsupported-method
+  requests terminate at a fixed non-cacheable `404`
+- credential, cookie, forwarded, and referrer headers are stripped upstream
+- HTTP capability redirects are disabled
+- Caddy access logging remains disabled and runtime request URI fields are
+  redacted
+- upstream connection errors become a fixed non-cacheable `503`
+- non-root hardened systemd unit with a private persistent state directory
+- Docker-backed Caddy validation and root contract tests
+
+The remaining gate is applying the kit to a real DNS name/Linux host, verifying
+the firewall and certificate, and collecting restart/rotation/revocation
+evidence from a real calendar client.
 
 Local hardening verification on 2026-07-19:
 
 - focused frontend API contract: 3/3 passed
 - focused reference-feed HTTP and real bridge contract: 6/6 passed
 - focused S-Lite lifecycle, failure, and restart contract: 7/7 passed
-- root `npm test`, including S-Lite restart contracts: 137/137 passed
+- S-Lite 영속 피드 단계 당시 root `npm test`, including restart contracts: 137/137 passed
 - Foundation.25.1 regression: 462/462 passed
 - production build: passed with 57 modules
 - high-severity dependency audit: passed with 0 vulnerabilities
 - known immutable-package warning: Python 3.14 emits one cleanup
   `ResourceWarning` for the Foundation conditional-304 test; it does not fail
   the suite and the restored subtree remains unchanged
+
+HTTPS deployment-kit verification on 2026-07-19:
+
+- focused Caddy/systemd repository contract: 3/3 passed
+- root `npm test`: 140/140 passed
+- Docker Caddy v2.11.4 configuration validation: passed
+- Docker HTTPS routing smoke: exact raw capability reached the loopback
+  upstream; percent-encoded/query/API/POST variants returned `404`; upstream
+  HTTP `500` and dial failure became fixed `503`; canary capability was absent
+  from logs
+- Debian container `systemd-analyze verify`: passed
 
 ## Current App Schema Baseline
 
