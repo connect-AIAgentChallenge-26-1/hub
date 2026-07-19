@@ -1,13 +1,13 @@
 # Review Points
 
-> Wiki version: 2026-07-13 Subscription Foundation + HTTP-contract baseline
-> Review baseline: current runtime, strict domain schemas, tested adapters, authoritative architecture contracts, and the hardened analyze HTTP boundary
-> Review scope: next decisions for candidate promotion, reconciliation, persistence, ICS, and subscription delivery—not reopening completed behavior
+> Documentation baseline: current default branch after Foundation.25.1 restoration
+> Review baseline: current manual-analysis runtime, exact standalone Foundation package, opt-in local reference-feed bridge, strict schemas, and tests
+> Review scope: production integration and validation decisions—not reopening completed package or local-reference behavior
 > Caution: this document does not automatically approve policy or authorize implementation.
 
 ## 1. Purpose and Use
 
-NoticePilot is not a finished production service. The repository contains both a manual notice-analysis runtime and an isolated domain foundation for subscription ICS delivery.
+NoticePilot is not a finished production service. The repository contains a manual notice-analysis runtime, the exactly restored Foundation.25.1 standalone implementation, and an opt-in local/reference bridge to one fixed Foundation feed.
 
 This document separates three categories:
 
@@ -16,6 +16,7 @@ This document separates three categories:
 3. **Later review items** — do not block the current critical path and belong to a separate stage.
 
 Reviewers must not treat isolated code or schema existence as delivered user-facing behavior.
+They also must not treat the local reference feed as an account-owned, deployed production service.
 
 ## 2. Current Baseline
 
@@ -36,8 +37,22 @@ Currently reachable through the application:
 - browser `localStorage` session persistence
 - separate campus-preference persistence
 - inert `metadata.userPreferencesSnapshot`
+- calendar tab with local reference-feed provisioning and copy states
+- opt-in, loopback-only bridge to the fixed 601-event all-campus student feed
+- capability-authenticated `GET` / `HEAD` delivery and conditional `304`
 - Markdown export
 - selected one-off all-day `.ics` export
+
+#### Manual-analysis edit and evidence behavior
+
+The current manual-analysis UI preserves these compatibility behaviors:
+
+- Editing an extracted value updates the displayed value and sets `edited: true`.
+- Existing source evidence remains attached after an edit.
+- The MVP does not preserve the original generated value or a complete edit history.
+- Evidence is hidden by default in ordinary cards and is available through the card panel and full evidence-review mode.
+
+These behaviors do not define persistent Foundation event revisions or feed audit storage.
 
 #### HTTP contract baseline
 
@@ -68,33 +83,30 @@ Code and tests exist, but normal runtime callers do not use these paths automati
 - `KNU rule candidates → ExtractionResult + CalendarEventCandidate[]`
 - opt-in domain-adapter path in `normalizeAiRawToAppResult`
 
-### 2.3 Foundation implemented, production runtime pending
+### 2.3 Foundation restored, local bridge active, production runtime pending
 
-The contract and restored Foundation implementation are authoritative. The
-root application exercises one fixed reference snapshot, while live ingestion
-and account-owned persistent delivery remain absent:
+The restored Foundation subtree is exactly identical to its promoted source. It contains the crawler data, event registry and revisions, persistence and feed components, and a fixed 601-event student projection. The root application locally exercises provisioning, capability authentication, rendering, and conditional delivery for that snapshot.
 
-- persistent `CalendarEvent.eventId`
-- ICS UID derived from `CalendarEvent.eventId`
-- stable UID across revisions
-- `sequence` increments
-- cancellation publication
-- inclusive core `endDate`
-- exclusive all-day ICS `DTEND`
-- campus and feed-actor defaults
+This proves a local integration boundary only. It does not establish:
+
+- scheduled production ingestion
+- account identity or per-user durable profiles
+- database-backed capability lifetime, rotation, or revocation
+- production deployment and operational observability
+- real-client refresh, update, and cancellation validation
 
 ### 2.4 Pending
 
 - live AI provider
 - runtime PDF/HWP/HWPX/OCR extraction
-- outbound crawler deployment
-- candidate promotion
-- previous/current event reconciliation
-- persistent repositories
-- production root server-side ICS pipeline
+- scheduled production crawler and root-runtime ingestion
+- production integration of promotion, reconciliation, and repositories
+- production root server-side ICS pipeline and deployment
 - account-owned subscription-feed persistence and management endpoint
 - subscription-management UI
 - calendar-client subscription QA
+
+Sections 4–11 are checklists for production root-runtime integration. References there to implementing promotion, reconciliation, persistence, or delivery do not imply that the restored standalone package lacks those components, and they do not reopen package-local decisions without an explicit compatibility reason.
 
 ## 3. Closed Decisions — Do Not Reopen
 
@@ -162,8 +174,9 @@ calendar-event consumer
 
 ### 3.6 Corpus policy
 
-- The repository currently has zero verified real-corpus entries.
-- Templates and synthetic fixtures do not count as real corpus data.
+- The restored Foundation package contains its verified corpus and derived projections, including the fixed 601-event student feed.
+- That Foundation data does not populate the separate Phase 4 manual/AI evaluation corpus.
+- Templates and synthetic fixtures still do not count as real entries in that evaluation corpus.
 - Canonical extracted text and core expected truth are separate.
 - Primary expected truth describes `ExtractionResult` / `CalendarEventCandidate` meaning.
 - AppAnalysis expected truth is an optional compatibility projection.
@@ -179,7 +192,18 @@ calendar-event consumer
 - Current privacy-like patterns use warning and user-confirmation flows.
 - Login, payment, and Google Calendar API are not on the current critical path.
 
-## 4. Highest-Priority Review — Candidate Promotion
+#### Manual-analysis partial-success behavior
+
+The manual-analysis projection may preserve valid sections when another section is missing, invalid, or empty:
+
+- Valid normalized sections remain visible.
+- A valid empty section renders its normal empty state.
+- Section-level absence does not automatically invalidate the whole result.
+- Request parsing failure, unsupported mode, malformed JSON, or a response that fails its required validation boundary may still block the complete response.
+
+Partial rendering must not bypass schema validation or turn invalid core-domain data into valid output.
+
+## 4. Production Integration Review — Candidate Promotion
 
 ### 4.1 Fixed premises
 
@@ -246,7 +270,7 @@ Decide:
 
 ### 4.3 Entry criteria for C2
 
-Before promotion implementation begins, document and approve:
+Before production root-runtime promotion integration begins, document and approve:
 
 ```text
 candidate eligibility
@@ -259,7 +283,7 @@ non-goals
 acceptance tests
 ```
 
-## 5. Event Reconciliation Review
+## 5. Production Event Reconciliation Review
 
 ### 5.1 Fixed premises
 
@@ -308,7 +332,7 @@ cancellation retention
 reappearance policy
 ```
 
-## 6. Persistence and Repository Review
+## 6. Production Persistence and Repository Review
 
 ### 6.1 Required repositories
 
@@ -341,7 +365,7 @@ reappearance policy
 - Cancellation retention.
 - Storage of product-owner decisions and manual approvals.
 
-## 7. Core ICS Serialization Review
+## 7. Production Core ICS Serialization Review
 
 ### 7.1 Fixed premises
 
@@ -381,9 +405,9 @@ Review:
 - Korean text, comma, semicolon, and newline escaping
 - duplicate UID handling
 
-Do not report calendar-client compatibility as complete without real-client QA evidence.
+The restored package includes Samsung QA tooling and fixtures, but production feed compatibility remains unfinished. Do not report real-client compatibility as complete without physical-client QA evidence for the deployed path.
 
-## 8. Subscription Feed Review
+## 8. Production Subscription Feed Review
 
 ### 8.1 Product-owner decisions required
 
@@ -424,7 +448,7 @@ Do not report calendar-client compatibility as complete without real-client QA e
 
 ### 9.1 Current state
 
-KNU fixture-driven adapters and mapping contracts are implemented and isolated. The repository does not contain a scheduled outbound crawler runtime.
+The exact Foundation package contains its crawler implementation, data, and package-local runtime evidence. Root-domain KNU adapters and mapping contracts also remain available, but the root application does not run a scheduled outbound crawler or production ingestion service.
 
 ### 9.2 Later review items
 
@@ -474,7 +498,7 @@ Later decisions:
 - Extraction confidence and review state.
 - Failure isolation between extraction and AI analysis.
 
-These items do not block CalendarEvent-consumer C1–C3 contract work.
+These items are sequenced separately from production CalendarEvent-consumer integration.
 
 ## 11. Frontend — Later Review
 
@@ -492,7 +516,7 @@ Later review:
 - separation of manual review and subscription management
 - browser-preference migration UX
 
-The UI must not present an unimplemented feed as an active feature.
+The UI may present the explicitly enabled local reference feed as such. It must not present account-owned or deployed production subscription management as active.
 
 ## 12. Questions That Are No Longer Open
 
@@ -507,7 +531,8 @@ Do not reopen these questions:
 - Whether existence of `CalendarEvent` schema means reconciliation is implemented.
 - Whether existence of `SubscriptionIcsFeed` schema means feed runtime is implemented.
 - Whether campus preference currently filters notices.
-- Whether subscription ICS is currently active.
+- Whether the opt-in local reference subscription feed is active when enabled.
+- Whether that local proof establishes production subscription delivery.
 - Whether 30 corpus examples are a source-adapter prerequisite.
 - Whether Google Calendar API belongs in the current scope.
 
@@ -515,7 +540,7 @@ These are settled by authoritative contracts or current implementation state.
 
 ## 13. Product-Owner Decision Gates
 
-### Gate 1 — C1 promotion contract
+### Gate 1 — C1 production promotion integration
 
 Approval required:
 
@@ -526,7 +551,7 @@ Approval required:
 - promotion reason codes
 - evidence traceability
 
-### Gate 2 — C3 reconciliation contract
+### Gate 2 — C3 production reconciliation integration
 
 Approval required:
 
@@ -537,7 +562,7 @@ Approval required:
 - cancellation retention
 - event reappearance
 
-### Gate 3 — D1/D2/D3 delivery foundation
+### Gate 3 — D1/D2/D3 production delivery integration
 
 Approval required:
 
@@ -548,7 +573,7 @@ Approval required:
 - timezone/cancellation serialization
 - feed token, caching, refresh, and filtering
 
-### Gate 4 — E1 subscription UI
+### Gate 4 — E1 production subscription UI and validation
 
 Approval required:
 
@@ -558,7 +583,7 @@ Approval required:
 - feed status and error presentation
 - relationship between one-off export and subscription UI
 
-Do not start C2 without Gate 1 approval. Do not freeze persistent-event repository and publication behavior without Gate 2 approval. Do not expose a subscription-feed endpoint as a user-facing feature without Gate 3 approval.
+These gates apply to production root-runtime work; they do not revoke the restored package or the loopback-only reference slice. Do not expose an account-owned or deployed subscription-feed feature without Gate 3 approval.
 
 ## 14. Review Priority
 
