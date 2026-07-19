@@ -40,6 +40,9 @@ jobs:
       - name: Run tests
         run: npm test
 
+      - name: Run Wiki sync tooling tests
+        run: npm run test:wiki-sync
+
       - name: Build frontend
         run: npm run build
 
