@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "noticepilot.s28FeedEligibilityPolicyAudit.v0.2",
+  "auditorVersion": "0.2.0",
+  "result": "pass",
+  "status": "completed",
+  "scope": {
+    "subscriptionProfileContractImplemented": true,
+    "authoritativeEligibilityInputViewImplemented": true,
+    "singleEventEligibilityEvaluatorImplemented": true,
+    "reasonVocabularyImplemented": true,
+    "authoritativeDefaultProfilePoliciesApproved": true,
+    "feedBuilderImplemented": false,
+    "feedSnapshotImplemented": false,
+    "icsMutationPerformed": false,
+    "s27RegistryMutationPerformed": false
+  },
+  "policy": {
+    "path": "configs/noticepilot_feed_eligibility_policy.v0.2.json",
+    "schemaVersion": "noticepilot.feedEligibilityPolicy.v0.2",
+    "policyVersion": "0.2.0",
+    "policyStatus": "approved",
+    "fullyResolved": true,
+    "approvedDecisionCount": 5,
+    "unresolvedDecisionCount": 0,
+    "creatorDecisionCount": 3,
+    "inheritedAuthoritativeContractDecisionCount": 2,
+    "approvedModes": {
+      "sourceLinkMatchMode": "canonical_source_only",
+      "reviewStateAggregationMode": "canonical_candidate_only"
+    },
+    "defaultStudentProfilePolicy": {
+      "includeUnknownCampusEvents": true,
+      "includeReviewRequiredEvents": true,
+      "reviewRequiredInclusionRule": "include_if_valid_normalized_date"
+    },
+    "defaultJobProfilePolicy": {
+      "includeUnknownCampusEvents": true,
+      "includeReviewRequiredEvents": true,
+      "reviewRequiredInclusionRule": "include_if_valid_normalized_date"
+    },
+    "audienceUnscopedDefault": "include"
+  },
+  "counts": {
+    "activeCalendarEventCount": 900,
+    "joinedSourceLinkCount": 909,
+    "singleSourceEventCount": 891,
+    "multiSourceEventCount": 9,
+    "validNormalizedDateEventCount": 900,
+    "invalidNormalizedDateEventCount": 0,
+    "campusScopeCounts": {
+      "all_campuses": 117,
+      "campus_specific": 782,
+      "unknown": 1
+    },
+    "audienceScopeCounts": {
+      "personalization_ready": 12,
+      "unscoped": 888
+    },
+    "reviewStateCounts": {
+      "auto_confirmed": 900
+    },
+    "upstreamReviewQueueCandidateCount": 395
+  },
+  "scenarioDiagnostics": {
+    "approvedContractExamples": {
+      "studentIncluded": 334,
+      "jobIncluded": 299
+    },
+    "jobUnknownCampus": {
+      "approvedUnknownIncluded": 299,
+      "counterfactualUnknownExcluded": 298,
+      "delta": 1
+    },
+    "generalBoardOnly": {
+      "approvedCanonicalSourceOnly": 260,
+      "counterfactualAnyActiveSourceLink": 268,
+      "delta": 8
+    },
+    "studentYear3": {
+      "approvedUnscopedInclude": 600,
+      "counterfactualUnscopedExclude": 11
+    }
+  },
+  "immutability": {
+    "s27cManifestSha256": "47fa8e232254df978575f31e06d555c20cf5f50e99862dc8ae0e772a7e4a03dc",
+    "s27cManifestExpectedSha256": "47fa8e232254df978575f31e06d555c20cf5f50e99862dc8ae0e772a7e4a03dc",
+    "s27dManifestSha256": "922eacc5a270f5119d0e86892d961ed742486b35b6a65d7a0d1642119820481f",
+    "s27dManifestExpectedSha256": "922eacc5a270f5119d0e86892d961ed742486b35b6a65d7a0d1642119820481f"
+  },
+  "errors": []
+}

@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10912",
+  "sourceContentHash": "db636dca0b05cfd0e7a38986ca900525ca7aaca1bce6d12202a428fbd83c649e",
+  "sourceTitle": "제14회 산업통상부 공공데이터 활용 아이디어 공모전 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10912&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "ALL",
+    "campuses": [
+      "all"
+    ],
+    "scopeType": "all_campuses",
+    "confidence": "high",
+    "source": "listMetadata.campus",
+    "labels": {
+      "all": "전체"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10912-37b44a01509eb0",
+      "uidHint": "noticepilot-cand-knu-504-10912-37b44a01509eb0@noticepilot.local",
+      "sourceNoticeId": "knu-504-10912",
+      "sourceTitle": "제14회 산업통상부 공공데이터 활용 아이디어 공모전 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10912&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-e61ed5d53d8a8773",
+        "segmentType": "label_value",
+        "labelText": "접수 기간",
+        "bodyText": "2026년 3월 30일(월) ~ 7월 6일(월) 23:59 까지",
+        "sourceLocation": {
+          "lineIndex": 5,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-30",
+            "start": 8,
+            "end": 23
+          },
+          {
+            "value": "2026-07-06",
+            "start": 26,
+            "end": 34
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "접수 기간",
+          "접수 기간 : 2026년 3월 30일(월) ~ 7월 6일(월) 23:59 까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-6519f2fc49383693",
+        "segmentId": "seg-e61ed5d53d8a8773",
+        "rawText": "2026년 3월 30일(월) ~ 7월 6일(월) 23:59 까지",
+        "normalizedStart": "2026-03-30T00:00:00+09:00",
+        "normalizedEnd": "2026-07-06T23:59:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 8,
+          "end": 34
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-e7a379ede631f2f7",
+        "sourceNoticeId": "knu-504-10912",
+        "segmentId": "seg-e61ed5d53d8a8773",
+        "temporalMentionIds": [
+          "tm-6519f2fc49383693"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "접수 기간",
+        "evidence": "접수 기간 : 2026년 3월 30일(월) ~ 7월 6일(월) 23:59 까지"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "제14회 산업통상부 공공데이터 활용 아이디어 공모전 안내 신청기간",
+      "dateText": "2026년 3월 30일(월) ~ 7월 6일(월) 23:59 까지",
+      "normalizedStart": "2026-03-30T00:00:00+09:00",
+      "normalizedEnd": "2026-07-06T23:59:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "접수 기간 : 2026년 3월 30일(월) ~ 7월 6일(월) 23:59 까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "same_day_precision_candidates_consolidated",
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": "start_of_day_assumed_for_timed_range"
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "same_day_precision_candidates_consolidated",
+          "start_of_day_assumed_for_timed_range",
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

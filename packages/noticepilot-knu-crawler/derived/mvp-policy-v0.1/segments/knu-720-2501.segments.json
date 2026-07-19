@@ -1,0 +1,316 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2501",
+  "sourceContentHash": "c6d6deaf1ef44619ef4f6849f559755819e594f623b79cf6abb5818f69c29a14",
+  "sourceTitle": "2026학년도 2학기 경상국립대학교 교류 수학 안내",
+  "publishedAt": "2026-07-07",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ad6271d39ee34daf",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026학년도 2학기 경상국립대학교 교류 수학 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 2학기 경상국립대학교 교류 수학 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-89015b8f98a932a2",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 2학기 경상국립대학교 교류 수학을 아래와 같이 알려드리니 교류를 희망하는 학생은 기한내 신청하시기 바랍니다.",
+      "bodyText": "2026학년도 2학기 경상국립대학교 교류 수학을 아래와 같이 알려드리니 교류를 희망하는 학생은 기한내 신청하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 2학기 경상국립대학교 교류 수학을 아래와 같이 알려드리니 교류를 희망하는 학생은 기한내 신청하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fdbc76abd369e3a2",
+      "segmentType": "label_value",
+      "labelText": "신청자격",
+      "bodyText": "가. 신청자격 :",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 신청자격 :"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-285f424edf9bb40e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "재학생으로서 징계받은 사실이 없는 자",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "재학생으로서 징계받은 사실이 없는 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7de832d83f277c21",
+      "segmentType": "label_value",
+      "labelText": "휴학생도 신청 가능하나 2026학년도 2학기 복학 후 재학생 신분이어야함.",
+      "bodyText": "- 휴학생도 신청 가능하나 2026학년도 2학기 복학 후 재학생 신분이어야함.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "return_from_leave_application",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled",
+        "enrollment_status:on_leave"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 휴학생도 신청 가능하나 2026학년도 2학기 복학 후 재학생 신분이어야함."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e26edc531c4d258b",
+      "segmentType": "label_value",
+      "labelText": "추천제한",
+      "bodyText": "※ 추천제한 : 졸업마지막학기 및 직전학기에 수학 추천을 받은 후 수학 취소한 사실이 있는 학생은",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 추천제한 : 졸업마지막학기 및 직전학기에 수학 추천을 받은 후 수학 취소한 사실이 있는 학생은"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0765f05a8c9a5581",
+      "segmentType": "label_value",
+      "labelText": "추천을 제한할 수 있음(다른대학 수학지원서 서식의 유의사항 5번 참조)",
+      "bodyText": "추천을 제한할 수 있음(다른대학 수학지원서 서식의 유의사항 5번 참조)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "추천을 제한할 수 있음(다른대학 수학지원서 서식의 유의사항 5번 참조)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-56b0af103a490d40",
+      "segmentType": "label_value",
+      "labelText": "제출서류",
+      "bodyText": "나. 제출서류 : 다른대학 수학지원서(본교서식) 1부, 경상국립대학교 추천자 명단 1부",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 제출서류 : 다른대학 수학지원서(본교서식) 1부, 경상국립대학교 추천자 명단 1부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6f066a27c554a76c",
+      "segmentType": "label_value",
+      "labelText": "제출기한",
+      "bodyText": "다. 제출기한",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 제출기한"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e07ba2cfe2acfd95",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-932051d201f9dfd3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 7. 23.(목) 18:00 까지 소속 학과로 제출",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-23",
+          "start": 5,
+          "end": 20
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "학생 : 2026. 7. 23.(목) 18:00 까지 소속 학과로 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-49df22991c2ab1b2",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026. 7. 24.(금) 16:00 까지 삼척교육지원과로 추천자 교류서류 제출",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-24",
+          "start": 7,
+          "end": 22
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 학과 : 2026. 7. 24.(금) 16:00 까지 삼척교육지원과로 추천자 교류서류 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6db9348f6f82907d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "붙임 1. 경상국립대학교 수학 안내문 1부.",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 1. 경상국립대학교 수학 안내문 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d50293c97bd5966d",
+      "segmentType": "label_value",
+      "labelText": "경상국립대학교 수학추천자 명단 양식 1부.",
+      "bodyText": "2. 경상국립대학교 수학추천자 명단 양식 1부.",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 경상국립대학교 수학추천자 명단 양식 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8197a7aa3b23dece",
+      "segmentType": "label_value",
+      "labelText": "다른대학 수학지원서(본교서식) 각 1부. 끝.",
+      "bodyText": "3. 다른대학 수학지원서(본교서식) 각 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 다른대학 수학지원서(본교서식) 각 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 15,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 9,
+      "paragraph": 3,
+      "list_item": 2
+    }
+  }
+}

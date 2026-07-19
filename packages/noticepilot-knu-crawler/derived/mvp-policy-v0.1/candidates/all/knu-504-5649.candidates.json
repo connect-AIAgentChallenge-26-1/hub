@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-5649",
+  "sourceContentHash": "0de46e32b1ba80672fe3d371ad6e344827cf4629bfa489f804adde1c040a134f",
+  "sourceTitle": "2026학년도 강원대학교 어린이집 원아 추가모집 공고 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5649&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천 삼척",
+    "campuses": [
+      "chuncheon",
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천",
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-5649-6553f2cb7a730d",
+      "uidHint": "noticepilot-cand-knu-504-5649-6553f2cb7a730d@noticepilot.local",
+      "sourceNoticeId": "knu-504-5649",
+      "sourceTitle": "2026학년도 강원대학교 어린이집 원아 추가모집 공고 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5649&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-7be914a8cbdf7455",
+        "segmentType": "label_value",
+        "labelText": "추가모집기간",
+        "bodyText": "2026.1.26.(월) ~",
+        "sourceLocation": {
+          "lineIndex": 1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-01-26",
+            "start": 11,
+            "end": 24
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "추가모집기간",
+          "가. 추가모집기간: 2026.1.26.(월) ~",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-b7e1d59be1cad59a",
+        "segmentId": "seg-7be914a8cbdf7455",
+        "rawText": "2026.1.26.(월)",
+        "normalizedStart": "2026-01-26",
+        "normalizedEnd": "2026-01-26",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 11,
+          "end": 24
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-5fcae854f2851912",
+        "sourceNoticeId": "knu-504-5649",
+        "segmentId": "seg-7be914a8cbdf7455",
+        "temporalMentionIds": [
+          "tm-b7e1d59be1cad59a"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "추가모집기간",
+        "evidence": "가. 추가모집기간: 2026.1.26.(월) ~"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "2026학년도 강원대학교 어린이집 원아 추가모집 공고 안내 신청 마감",
+      "dateText": "2026.1.26.(월)",
+      "normalizedStart": "2026-01-26",
+      "normalizedEnd": "2026-01-26",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "가. 추가모집기간: 2026.1.26.(월) ~",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-716-3170",
+  "sourceContentHash": "6b13fa09faa982b27757d5eec7227eb38365e59dfb2606ba12a2616a660617b1",
+  "sourceTitle": "2026-1학기 강원대학교 강사 공개채용（3차） 공고",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/716/detail.do?pstSn=3170&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천 삼척",
+    "campuses": [
+      "chuncheon",
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천",
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-716-3170-1e961e27515ceb",
+      "uidHint": "noticepilot-cand-knu-716-3170-1e961e27515ceb@noticepilot.local",
+      "sourceNoticeId": "knu-716-3170",
+      "sourceTitle": "2026-1학기 강원대학교 강사 공개채용（3차） 공고",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/716/detail.do?pstSn=3170&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "job_posting",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "job_application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-board716-73d69cc3eebae88e",
+        "segmentType": "label_value",
+        "labelText": "접수기간",
+        "bodyText": "2026-02-05~2026-02-10",
+        "sourceLocation": {
+          "lineIndex": 0,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-05",
+            "start": 14,
+            "end": 24
+          },
+          {
+            "value": "2026-02-10",
+            "start": 25,
+            "end": 35
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "job_application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.board716.exact_application_period",
+        "evidence": [
+          "listMetadata.application_period_start",
+          "listMetadata.application_period_end",
+          "접수기간 2026-02-05~2026-02-10"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-c772240f80c957ca",
+        "segmentId": "seg-board716-73d69cc3eebae88e",
+        "rawText": "접수기간 2026-02-05~2026-02-10",
+        "normalizedStart": "2026-02-05",
+        "normalizedEnd": "2026-02-10",
+        "resolutionKind": "list_application_period",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": null
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-04c115d5f628e039",
+        "sourceNoticeId": "knu-716-3170",
+        "segmentId": "seg-board716-73d69cc3eebae88e",
+        "temporalMentionIds": [
+          "tm-c772240f80c957ca"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.board716.list_metadata.application_period",
+        "locallyGrounded": true,
+        "labelText": "접수기간",
+        "evidence": "채용안내 목록 접수기간: 2026-02-05~2026-02-10"
+      },
+      "targetActor": "job_applicant",
+      "feedScopes": [
+        "job_application"
+      ],
+      "title": "2026-1학기 강원대학교 강사 공개채용（3차） 공고 채용 접수기간",
+      "dateText": "접수기간 2026-02-05~2026-02-10",
+      "normalizedStart": "2026-02-05",
+      "normalizedEnd": "2026-02-10",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "채용안내 목록 접수기간: 2026-02-05~2026-02-10",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "board716_application_period_only",
+        "exact_list_application_period"
+      ],
+      "dateResolution": {
+        "kind": "list_application_period",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "job_applicant",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.job_applicant",
+        "reasonCodes": []
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "board716_application_period_only",
+          "exact_list_application_period"
+        ],
+        "ruleIds": [
+          "publishability.board716.exact_application_period.auto_confirm",
+          "publishability.reason.board716_application_period_only",
+          "publishability.reason.exact_list_application_period",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

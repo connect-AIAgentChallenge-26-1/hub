@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "noticepilot.layeredBaseline.v0.1",
+  "baselineId": "layered-s26-corpus-2059-20260712-v1",
+  "description": "Immutable S26 layered baseline preserving full trace, runtime judgment, reconciliation, decision, and ICS semantics.",
+  "createdAt": "2026-07-12T14:21:49+00:00",
+  "sourceDerivedDirName": "mvp-policy-v0.1",
+  "relationship": {
+    "predecessorBaselineId": "policy15-corpus-2059-20260712",
+    "predecessorDirectory": "../policy15",
+    "policy15Preserved": true,
+    "policy15Replaced": false,
+    "allowlistUsed": false,
+    "decisionRecord": "decision-record.json"
+  },
+  "sourceVersions": {
+    "pipelineVersion": "0.1.18",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1",
+    "candidateSchemaVersion": "noticepilot.calendarCandidates.v0.11",
+    "scheduleSegmentSchemaVersion": "noticepilot.scheduleSegments.v0.3",
+    "applicabilityJudgmentSchemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+    "publishabilityJudgmentSchemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+    "candidateReconcilerVersion": "0.1.0",
+    "s26AuditVersion": "0.1.2"
+  },
+  "counts": {
+    "processedNoticeCount": 2059,
+    "noticeCandidateDocumentCount": 2059,
+    "studentCandidateDocumentCount": 417,
+    "jobCandidateDocumentCount": 300,
+    "canonicalCandidateOccurrenceCount": 1304,
+    "crossArtifactCandidateOccurrenceCount": 2213,
+    "uniqueCandidateCount": 1304,
+    "publishableCandidateCount": 909,
+    "reviewDecisionCount": 796,
+    "reviewQueueCandidateEntryCount": 498,
+    "runtimeApplicabilityJudgmentCount": 1304,
+    "runtimePublishabilityJudgmentCount": 1304,
+    "completeTraceCandidateCount": 1304,
+    "studentIcsEventCount": 609,
+    "jobIcsEventCount": 300
+  },
+  "statusCounts": {
+    "candidateVerdicts": {
+      "auto_confirmed": 909,
+      "needs_review": 395
+    },
+    "applicabilityScopes": {
+      "conditional": 20,
+      "profile_scoped": 12,
+      "unknown": 282,
+      "unrestricted": 990
+    },
+    "temporalRoles": {
+      "conditional_followup": 11,
+      "event_occurrence": 231,
+      "internal_process": 79,
+      "result_announcement": 59,
+      "user_action_period": 924
+    }
+  },
+  "canonicalHashes": {
+    "summary": "d0660065678a897c596e4ed74b69b057d6e7ef30ca0a962f4e6f35445a516094",
+    "integrity": "d68fe194f6ed2fdf0a13ac3ba36bf8bbf64abc8b6b67ebaf919c06b8f6290c04",
+    "noticeDocuments": "8d30c1c9458b185a28a6a8df73823c444c9d33531af87aaeafbb33986350aff7",
+    "studentCandidateDocuments": "53cd8a1af77d31a3a89b9fa0b078f60d813f5f5004487baaadbac0a13ef3f397",
+    "jobCandidateDocuments": "87c6777a3ac52201d4958d1432be1bfe8de9953a2a816937625d2022185f2cd0",
+    "allCandidates": "6d9d86f2b807a202478c44ec360e691171ae59d0ed21897a680fc6ef2f726b6e",
+    "publishableCandidates": "11ce21b6314ea7b62d5d881c0e1f15e32f59dbd4301345656d0757b697248395",
+    "reviewQueue": "67bc789437a43a3774b7cbe811dec4b2a18b95285eccfbce220ca297bc02cc96",
+    "studentIcsReport": "3be95b75199c2a9c96403619dee68e9b6d0b5e99d018106599b6f1f7925839af",
+    "studentIcsEvents": "b466e20cd888fb1881c7ee481344fdb7474eb8a733d58cd838042f2acc6cd677",
+    "jobIcsReport": "61d0dfb2c851c1d8abd1fcddd707e57104f045e0c079be71bde1a2a7797a42a3",
+    "jobIcsEvents": "7c96ce1109eb57ab9e00a8941c98f199ef0764c0141b365d32be2f6e26feb993",
+    "layeredAudit": "e7a832583922da3800f8befdd233a55b6ebf286ce089b5a410f695a597a2abd3",
+    "runtimeWiringAudit": "cbe82ead3c31fc9bc46075cccaa6aae52f51b9b5c0171b9473cd75c5ea53345b",
+    "candidateReconcilerAudit": "3a30adc6298c308565e476f76c3d08ab9b0e6a2267f4aa32d77cb148cf6b493c"
+  },
+  "files": {
+    "README.md": {
+      "sizeBytes": 985,
+      "sha256": "a184198adb968eb9667a5f9390d2858e3cfd77c7348631331f21f442062a9743"
+    },
+    "candidates/job-application-documents.jsonl": {
+      "sizeBytes": 1570965,
+      "sha256": "72d26010bd0ecde6e81bc66b881dfdc482293ad7b078fe8b61581ed3f5fb1390"
+    },
+    "candidates/layered-candidates.jsonl": {
+      "sizeBytes": 5626472,
+      "sha256": "568f46896d9b60bb091b8357b84ab1478ce51c7dc916ffb0f892e51b5f8318ac"
+    },
+    "candidates/notice-candidate-documents.jsonl": {
+      "sizeBytes": 7486303,
+      "sha256": "80430571d2be2629812c55461db2238c11188926126633be864e9fb68e697cf2"
+    },
+    "candidates/student-default-documents.jsonl": {
+      "sizeBytes": 2969865,
+      "sha256": "c69a75ef649197585b907eb6dc423429c7a298cbe4d637881293ffb94dc78b10"
+    },
+    "decision-record.json": {
+      "sizeBytes": 962,
+      "sha256": "bf0ec61606fb86ddcf64ec89c4b89a7405e57531745b801415862727f6a71e90"
+    },
+    "decisions/publishable-candidates.jsonl": {
+      "sizeBytes": 3892343,
+      "sha256": "be5906f136954ff591b8c53395efbfd1b9da412e7bb5561e211c5843f0ba3834"
+    },
+    "decisions/review-queue.jsonl": {
+      "sizeBytes": 3331943,
+      "sha256": "48183575152add406256e44672e4a77b19d6cdcc0c29bcc00bcda8f1e219ed11"
+    },
+    "ics/job_application/ics_export_report.json": {
+      "sizeBytes": 233669,
+      "sha256": "10eec9708383905989a58e7f100f264977b1b0fd7e348a711f3da8b560122629"
+    },
+    "ics/job_application/noticepilot-job-applications.ics": {
+      "sizeBytes": 300704,
+      "sha256": "ac71af30d7c705c8379fe56aabf1c7cc69d82ae4be9b14cdb14fa50db02623b8"
+    },
+    "ics/student_default/ics_export_report.json": {
+      "sizeBytes": 478771,
+      "sha256": "0cfaa7d7a9a64681a9b9ac75db0befe1c50287c33eac37aba9789a1e7262fe3a"
+    },
+    "ics/student_default/noticepilot-student-default.ics": {
+      "sizeBytes": 622766,
+      "sha256": "42c1189cb4ab2c4638cb66199dc0d2b9179ba1a4eae06c8a3fc19f61a7b2767f"
+    },
+    "reports/candidate-integrity.json": {
+      "sizeBytes": 73,
+      "sha256": "677bd42fee8ac4c7e92751bc199d50bd909c6f9f3936c55db0d585e48dfb327a"
+    },
+    "reports/policy-summary.json": {
+      "sizeBytes": 3670,
+      "sha256": "73d66e640d3f3027b41e44e384dcc59f0fb2e463ce2228f9b52337ed04090967"
+    },
+    "reports/s24d-runtime-wiring.json": {
+      "sizeBytes": 1672,
+      "sha256": "9dfd868080bb441cc0250496d023ebbee4882eb317ac4e203fed413665e76d2c"
+    },
+    "reports/s25-candidate-reconciler.json": {
+      "sizeBytes": 1528,
+      "sha256": "6bbbd4d75277f53a165ac3d979453c8c44772166f9faec6d2276df10e4866363"
+    },
+    "reports/s26-layered-full-corpus-audit.json": {
+      "sizeBytes": 3847,
+      "sha256": "1b0816e1da213d1309231d48560756c148d10da8ab3c8b6b2e2e92a4833aae12"
+    }
+  },
+  "comparisonPolicy": {
+    "strictFullCandidateObjects": true,
+    "strictNoticeCandidateDocuments": true,
+    "ignoreNoticeDocumentExtractorCreatedAt": true,
+    "ignoreGeneratedFilesystemPaths": true,
+    "ignoreIcsDtstamp": true,
+    "allowlistSupported": false,
+    "candidateIdentityMustRemainStable": true,
+    "policy15ComparisonRemainsSeparate": true
+  }
+}

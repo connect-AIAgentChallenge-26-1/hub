@@ -1,0 +1,38 @@
+{
+  "schemaVersion": "noticepilot.profileBatchExport.v0.4",
+  "exporterVersion": "0.4.4",
+  "profilesConfig": "configs/knu_feed_profiles.v0.4.4.json",
+  "input": "samples/extracted/candidates",
+  "outputDir": "/tmp/np_profiles_v044",
+  "profileCount": 4,
+  "reports": [
+    {
+      "profileId": "knu-chuncheon",
+      "outputIcsPath": "/tmp/np_profiles_v044/knu-chuncheon/noticepilot.ics",
+      "eventCount": 0,
+      "skippedCount": 3,
+      "campusFilteredCount": 2
+    },
+    {
+      "profileId": "knu-samcheok",
+      "outputIcsPath": "/tmp/np_profiles_v044/knu-samcheok/noticepilot.ics",
+      "eventCount": 1,
+      "skippedCount": 2,
+      "campusFilteredCount": 1
+    },
+    {
+      "profileId": "knu-dogye",
+      "outputIcsPath": "/tmp/np_profiles_v044/knu-dogye/noticepilot.ics",
+      "eventCount": 0,
+      "skippedCount": 3,
+      "campusFilteredCount": 2
+    },
+    {
+      "profileId": "knu-gangneung-wonju",
+      "outputIcsPath": "/tmp/np_profiles_v044/knu-gangneung-wonju/noticepilot.ics",
+      "eventCount": 1,
+      "skippedCount": 2,
+      "campusFilteredCount": 1
+    }
+  ]
+}

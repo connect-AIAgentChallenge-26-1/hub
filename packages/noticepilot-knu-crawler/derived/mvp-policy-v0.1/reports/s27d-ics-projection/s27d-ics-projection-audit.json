@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "noticepilot.s27dIcsProjectionAudit.v0.1",
+  "result": "pass",
+  "projectionId": "s27d-registry-ics-projection-20260713-v1",
+  "projectorVersion": "0.1.0",
+  "migrationMode": "pre_subscription_cutover",
+  "currentDir": "../..",
+  "registryDir": "../../../../registry/s27c-v1",
+  "projectionDir": "../../../../projection/s27d-v1",
+  "pathReferences": {
+    "base": "audit_report_directory",
+    "format": "posix_relative"
+  },
+  "scope": {
+    "persistentCalendarEventUidProjectionExecuted": true,
+    "s27cOutboxConsumedViaImmutableReceiptLedger": true,
+    "legacyCandidateUidCancellationTombstonesEmitted": false,
+    "legacyCandidateUidArtifactsModified": false,
+    "s27cRegistryModified": false,
+    "subscriptionEndpointImplemented": false,
+    "calendarClientPhysicalQaPerformed": false
+  },
+  "checks": {
+    "calendarEventCount": 900,
+    "uniquePersistentUidCount": 900,
+    "legacyCandidateUidMapCount": 909,
+    "legacyUniqueUidCount": 909,
+    "outboxIntentCount": 900,
+    "outboxConsumptionReceiptCount": 900,
+    "legacyCancellationTombstoneCount": 0,
+    "singletonEventCount": 891,
+    "duplicateEventCount": 8,
+    "extensionEventCount": 1,
+    "sequenceOneEventCount": 1,
+    "sourceUrlLineCountAcrossFeeds": 909,
+    "timedWithoutEndExpectedCount": 155,
+    "timedWithoutEndObservedCount": 155,
+    "manifestHashErrorCount": 0,
+    "legacyArtifactHashErrorCount": 0,
+    "sourceRegistryManifestHashMatches": true,
+    "registryValidationErrorCount": 0,
+    "activeProjectionSemanticChangeCount": 0,
+    "uidMapErrorCount": 0,
+    "outboxReceiptErrorCount": 0,
+    "feedErrorCount": 0,
+    "projectionContentDigestMatches": true,
+    "allIcsUidCount": 900,
+    "sequenceOneUids": [
+      "evt_66920cf16e03927d43765d5261bafb0c@noticepilot.local"
+    ],
+    "uidDispositionCounts": {
+      "duplicate_source_collapsed_into_canonical_event": 8,
+      "same_event_uid_rekeyed": 900,
+      "superseded_revision_collapsed_into_active_event": 1
+    },
+    "layeredBaselineResult": "match",
+    "layeredBaselineChangeCount": 0
+  },
+  "feeds": {
+    "student_default": {
+      "eventCount": 601,
+      "expectedEventCount": 601,
+      "uniqueUidCount": 601,
+      "legacyEventCount": 609,
+      "eventCountDelta": -8,
+      "lineOver75OctetCount": 0,
+      "crlfValid": true
+    },
+    "job_application": {
+      "eventCount": 299,
+      "expectedEventCount": 299,
+      "uniqueUidCount": 299,
+      "legacyEventCount": 300,
+      "eventCountDelta": -1,
+      "lineOver75OctetCount": 0,
+      "crlfValid": true
+    }
+  },
+  "artifacts": {
+    "projectionManifest": "../../../../projection/s27d-v1/manifest.json",
+    "activeProjectionSemanticDiff": "s27d-active-projection-semantic-diff.json",
+    "layeredBaselineDiff": "s27d-layered-baseline-diff.json"
+  },
+  "samples": {
+    "manifestHashErrors": [],
+    "legacyArtifactHashErrors": [],
+    "registryErrors": [],
+    "uidMapErrors": [],
+    "receiptErrors": [],
+    "feedErrors": [],
+    "semanticChanges": []
+  }
+}

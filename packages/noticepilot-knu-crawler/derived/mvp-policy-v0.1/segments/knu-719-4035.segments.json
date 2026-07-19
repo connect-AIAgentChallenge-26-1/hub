@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-4035",
+  "sourceContentHash": "0f8e68a1991c64c394ea09e33cf9fced96023d4bf10a39dfb4c21cf584f2abe6",
+  "sourceTitle": "각 군 현역병 모집일정 안내",
+  "publishedAt": "2026-03-25",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-99df4410f90bcb4e",
+      "segmentType": "title",
+      "labelText": "각 군 현역병 모집일정 안내",
+      "bodyText": "각 군 현역병 모집일정 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "각 군 현역병 모집일정 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-be6d3095bac09656",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 033-240-6284,6288,6305",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 033-240-6284,6288,6305"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

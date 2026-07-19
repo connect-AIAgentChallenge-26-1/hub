@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3101",
+  "sourceContentHash": "6a89e069ce36325f555d6be7e438aaaa16379b9f4b8048096c041ec74c87a151",
+  "sourceTitle": "산학협력단 K-하이테크 플랫폼사업 전담직원 채용 1차 전형 합격자 공고",
+  "publishedAt": "2026-01-21",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cb6063811f1fe53b",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "산학협력단 K-하이테크 플랫폼사업 전담직원 채용 1차 전형 합격자 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "산학협력단 K-하이테크 플랫폼사업 전담직원 채용 1차 전형 합격자 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b57a54ffa1cfcf48",
+      "segmentType": "label_value",
+      "labelText": "산학협력단 K-하이테크 플랫폼사업 전담직원 채용 공고와 관련하여 다음과 같이 1차 전형 합격자 및 2차 전형 일정 등을 공고합니다.",
+      "bodyText": "산학협력단 K-하이테크 플랫폼사업 전담직원 채용 공고와 관련하여 다음과 같이 1차 전형 합격자 및 2차 전형 일정 등을 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "산학협력단 K-하이테크 플랫폼사업 전담직원 채용 공고와 관련하여 다음과 같이 1차 전형 합격자 및 2차 전형 일정 등을 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-57a50a0a6d5b4e8b",
+      "segmentType": "continuation",
+      "labelText": "산학협력단 K-하이테크 플랫폼사업 전담직원 채용 공고와 관련하여 다음과 같이 1차 전형 합격자 및 2차 전형 일정 등을 공고합니다.",
+      "bodyText": "2026. 1. 21.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-b57a54ffa1cfcf48"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-21",
+          "start": 74,
+          "end": 85
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "산학협력단 K-하이테크 플랫폼사업 전담직원 채용 공고와 관련하여 다음과 같이 1차 전형 합격자 및 2차 전형 일정 등을 공고합니다. 2026. 1. 21."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9c7be82e1b685351",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 1. 21.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-21",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 1. 21."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-66c2db96776da465",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 산학협력단장",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 산학협력단장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "continuation": 1,
+      "paragraph": 2
+    }
+  }
+}

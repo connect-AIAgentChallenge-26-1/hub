@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10687",
+  "sourceContentHash": "92d126a69ca252ce1da0b73baabd418d33c5f2214c47ce365c85eef9086c01c6",
+  "sourceTitle": "제9회 전국동시지방선거 사이버공정선거지원단 모집 안내",
+  "publishedAt": "2026-03-04",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-74852a39a7049aed",
+      "segmentType": "title",
+      "labelText": "제9회 전국동시지방선거 사이버공정선거지원단 모집 안내",
+      "bodyText": "제9회 전국동시지방선거 사이버공정선거지원단 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "제9회 전국동시지방선거 사이버공정선거지원단 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8dd572854a180ead",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 033-251-4409(강원특별자치도선거관리위원회 지도과)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 033-251-4409(강원특별자치도선거관리위원회 지도과)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

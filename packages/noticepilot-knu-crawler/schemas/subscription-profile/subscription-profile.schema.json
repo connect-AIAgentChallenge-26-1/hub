@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/subscription-profile.schema.json",
+  "title": "NoticePilot SubscriptionProfile",
+  "description": "Explicit user subscription selection contract. It does not contain delivery URLs, tokens, event IDs, or serialized ICS state.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profileId",
+    "profileRevision",
+    "institutionId",
+    "displayName",
+    "calendarName",
+    "timezone",
+    "status",
+    "campusSelection",
+    "sourceSelection",
+    "eventSelection",
+    "audienceFilter",
+    "createdAt",
+    "updatedAt"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.subscriptionProfile.v0.1"},
+    "profileId": {
+      "type": "string",
+      "pattern": "^subprof_[0-9a-f]{32}$",
+      "description": "Opaque registry-issued profile identity. It is not a subscription URL token."
+    },
+    "profileRevision": {"type": "integer", "minimum": 1},
+    "institutionId": {"const": "kangwon"},
+    "displayName": {"type": "string", "minLength": 1, "maxLength": 120},
+    "calendarName": {"type": "string", "minLength": 1, "maxLength": 120},
+    "timezone": {"const": "Asia/Seoul"},
+    "status": {"enum": ["active", "paused", "revoked"]},
+    "campusSelection": {"$ref": "#/$defs/campusSelection"},
+    "sourceSelection": {"$ref": "#/$defs/sourceSelection"},
+    "eventSelection": {"$ref": "#/$defs/eventSelection"},
+    "audienceFilter": {"$ref": "#/$defs/audienceFilter"},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "updatedAt": {"type": "string", "format": "date-time"}
+  },
+  "$defs": {
+    "campusSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selectedCampuses",
+        "includeAllCampusEvents",
+        "includeUnknownCampusEvents",
+        "matchingMode"
+      ],
+      "properties": {
+        "selectedCampuses": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 4,
+          "uniqueItems": true,
+          "items": {"enum": ["chuncheon", "samcheok", "dogye", "gangneung_wonju"]}
+        },
+        "includeAllCampusEvents": {"type": "boolean"},
+        "includeUnknownCampusEvents": {"type": "boolean"},
+        "matchingMode": {"const": "intersects"}
+      }
+    },
+    "sourceSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "selectedBoardIds",
+        "selectedNoticeTypes",
+        "canonicalBoardsOnly",
+        "matchingMode"
+      ],
+      "properties": {
+        "selectedBoardIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"enum": ["504", "715", "716", "717", "719", "720", "721", "722", "723"]}
+        },
+        "selectedNoticeTypes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "general_notice",
+              "event",
+              "job_posting",
+              "career",
+              "competition",
+              "school_notice",
+              "scholarship",
+              "health_notice",
+              "form_archive"
+            ]
+          }
+        },
+        "canonicalBoardsOnly": {"const": true},
+        "matchingMode": {"const": "all_dimensions"}
+      }
+    },
+    "eventSelection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "includedFeedScopes",
+        "includedEventTypes",
+        "includedTargetActors",
+        "includeReviewRequiredEvents",
+        "matchingMode"
+      ],
+      "properties": {
+        "includedFeedScopes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"enum": ["student_default", "job_application"]}
+        },
+        "includedEventTypes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "academic_period",
+              "application_period",
+              "deadline",
+              "event",
+              "exam_or_interview",
+              "job_application_period",
+              "payment_period",
+              "result_announcement",
+              "submission_period"
+            ]
+          }
+        },
+        "includedTargetActors": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"enum": ["student", "job_applicant"]}
+        },
+        "includeReviewRequiredEvents": {"type": "boolean"},
+        "matchingMode": {"const": "all_dimensions"}
+      }
+    },
+    "audienceFilter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "enabled",
+        "degreeLevels",
+        "studentYears",
+        "enrollmentStatuses",
+        "admissionTypes",
+        "matchMode",
+        "unscopedEventPolicy"
+      ],
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "degreeLevels": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["undergraduate", "graduate"]}
+        },
+        "studentYears": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "integer", "minimum": 1, "maximum": 6}
+        },
+        "enrollmentStatuses": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["enrolled", "on_leave", "returning"]}
+        },
+        "admissionTypes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"enum": ["new_student", "transfer_student", "readmitted_student"]}
+        },
+        "matchMode": {"const": "all_dimensions"},
+        "unscopedEventPolicy": {"enum": ["include", "exclude"]}
+      }
+    }
+  }
+}

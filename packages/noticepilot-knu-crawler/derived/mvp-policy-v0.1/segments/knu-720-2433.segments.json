@@ -1,0 +1,295 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2433",
+  "sourceContentHash": "42e5ca7e593c7ec3f02d09bcede175b2baec59c00d9dfc7a4afb9a6637cb3c2a",
+  "sourceTitle": "2026학년도 2학기 다전공(복수전공,부전공,미래융합가상학과) 신청 안내",
+  "publishedAt": "2026-04-27",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9c284c9ae588a359",
+      "segmentType": "title",
+      "labelText": "2026학년도 2학기 다전공(복수전공,부전공,미래융합가상학과) 신청 안내",
+      "bodyText": "2026학년도 2학기 다전공(복수전공,부전공,미래융합가상학과) 신청 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 2학기 다전공(복수전공,부전공,미래융합가상학과) 신청 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-26241471cf0928b8",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 2학기 다전공 신청일정 및 학과별 선발기준을 안내합니다.",
+      "bodyText": "2026학년도 2학기 다전공 신청일정 및 학과별 선발기준을 안내합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 2학기 다전공 신청일정 및 학과별 선발기준을 안내합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cffac54702dff8cf",
+      "segmentType": "label_value",
+      "labelText": "지원자격",
+      "bodyText": "1. 지원자격: 신청마감일 현재 2개이상의 정규학기 이수자 또는 이수 중인 재학생 또는 휴학생",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled",
+        "enrollment_status:on_leave"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 지원자격: 신청마감일 현재 2개이상의 정규학기 이수자 또는 이수 중인 재학생 또는 휴학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fa5bd78780460aad",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 제외대상:",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 제외대상:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2d3d221b1e21ba06",
+      "segmentType": "label_value",
+      "labelText": "신청 마감일이 속한 학기에",
+      "bodyText": "① 신청 마감일이 속한 학기에",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 1,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "① 신청 마감일이 속한 학기에"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e0083a479b436908",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "수료 또는 졸업 예정",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수료 또는 졸업 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-19ec14cd9b8001af",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "인 학생,",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "인 학생,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7b787a03cc5ff2f1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "② 학사학위취득유예 학생",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 1,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "② 학사학위취득유예 학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-62aa4e553d2ffeab",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "2026. 5. 18.(월) ~ 5. 29.(금) 18:00",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-18",
+          "start": 9,
+          "end": 24
+        },
+        {
+          "value": "2026-05-29",
+          "start": 27,
+          "end": 36
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 신청기간: 2026. 5. 18.(월) ~ 5. 29.(금) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-379ae1d2ccb1295c",
+      "segmentType": "label_value",
+      "labelText": "신청제한",
+      "bodyText": "3. 신청제한: 매학기 부전공 또는 복수전공으로 2개까지 신청 가능",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 신청제한: 매학기 부전공 또는 복수전공으로 2개까지 신청 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2f9cd238d95da46a",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "4. 신청방법: 인트라넷, 다전공관리에서 신청 후 소속학과에 알림(수기신청서 제출)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 신청방법: 인트라넷, 다전공관리에서 신청 후 소속학과에 알림(수기신청서 제출)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3335abd59ba936a1",
+      "segmentType": "label_value",
+      "labelText": "붙임 1. 2026학년도 2학기 다전공 신청 안내문 1부.",
+      "bodyText": "붙임 1. 2026학년도 2학기 다전공 신청 안내문 1부.",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 1. 2026학년도 2학기 다전공 신청 안내문 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d69b651641268902",
+      "segmentType": "label_value",
+      "labelText": "학과별 2026학년도 2학기 다전공 선발인원 및 기준 1부.",
+      "bodyText": "2. 학과별 2026학년도 2학기 다전공 선발인원 및 기준 1부.",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 학과별 2026학년도 2학기 다전공 선발인원 및 기준 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8e26814ab3df39d9",
+      "segmentType": "label_value",
+      "labelText": "신청서 및 포기서(서식) 1부. 끝.",
+      "bodyText": "3. 신청서 및 포기서(서식) 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 신청서 및 포기서(서식) 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 14,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 9,
+      "list_item": 2,
+      "paragraph": 2
+    }
+  }
+}

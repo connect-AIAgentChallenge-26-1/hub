@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11185",
+  "sourceContentHash": "836221f0648cb98bffded1756bde6db5ff908f656a35ccfe7ec95a5ea53adc9e",
+  "sourceTitle": "(원주캠퍼스)체력단련실 임시 운영 중지 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11185&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_explicit",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_explicit_override",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11185-56413130995d6d",
+      "uidHint": "noticepilot-cand-knu-504-11185-56413130995d6d@noticepilot.local",
+      "sourceNoticeId": "knu-504-11185",
+      "sourceTitle": "(원주캠퍼스)체력단련실 임시 운영 중지 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11185&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_explicit",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_explicit_override",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "deadline",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-13eed0aacf7ba04a",
+        "segmentType": "continuation",
+        "labelText": "-단수기간",
+        "bodyText": "2026.7.16.(목) 18:00 ~ 7.19.(일)까지",
+        "sourceLocation": {
+          "lineIndex": 1,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-9df2dede77b164eb"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-16",
+            "start": 55,
+            "end": 68
+          },
+          {
+            "value": "2026-07-19",
+            "start": 77,
+            "end": 85
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "deadline",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "-단수기간",
+          "교내 전체 단수로 인해 단수 기간동안 체력단련실 이용을 임시 중지함을 알려드립니다. -단수기간 : 2026.7.16.(목) 18:00 ~ 7.19.(일)까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-c95f2921229370c8",
+        "segmentId": "seg-13eed0aacf7ba04a",
+        "rawText": "2026.7.16.(목) 18:00 ~ 7.19.(일)까지",
+        "normalizedStart": "2026-07-16T18:00:00+09:00",
+        "normalizedEnd": "2026-07-19T23:59:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 55,
+          "end": 85
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-843175afc81723f8",
+        "sourceNoticeId": "knu-504-11185",
+        "segmentId": "seg-13eed0aacf7ba04a",
+        "temporalMentionIds": [
+          "tm-c95f2921229370c8"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "-단수기간",
+        "evidence": "교내 전체 단수로 인해 단수 기간동안 체력단련실 이용을 임시 중지함을 알려드립니다. -단수기간 : 2026.7.16.(목) 18:00 ~ 7.19.(일)까지"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "(원주캠퍼스)체력단련실 임시 운영 중지 안내 마감",
+      "dateText": "2026.7.16.(목) 18:00 ~ 7.19.(일)까지",
+      "normalizedStart": "2026-07-16T18:00:00+09:00",
+      "normalizedEnd": "2026-07-19T23:59:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "교내 전체 단수로 인해 단수 기간동안 체력단련실 이용을 임시 중지함을 알려드립니다. -단수기간 : 2026.7.16.(목) 18:00 ~ 7.19.(일)까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "end_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "end_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": "end_of_day_assumed_for_timed_range"
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "end_of_day_assumed_for_timed_range",
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

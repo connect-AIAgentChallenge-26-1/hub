@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11041",
+  "sourceContentHash": "7f74cecf45ca1caa7d341613d33637df649b53077818f00dac63c1889e153d6b",
+  "sourceTitle": "(수학/영어/과학) 기초학력증진 비교과 학습 프로그램 참여자 모집",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11041&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉 원주",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11041-3bcb89692fb435",
+      "uidHint": "noticepilot-cand-knu-504-11041-3bcb89692fb435@noticepilot.local",
+      "sourceNoticeId": "knu-504-11041",
+      "sourceTitle": "(수학/영어/과학) 기초학력증진 비교과 학습 프로그램 참여자 모집",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11041&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-c3dff2bdef32ffee",
+        "segmentType": "label_value",
+        "labelText": "모집기간",
+        "bodyText": "6월 10일(수) 까지",
+        "sourceLocation": {
+          "lineIndex": 3,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-10",
+            "start": 8,
+            "end": 17
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "모집기간",
+          "모집기간: ~ 6월 10일(수) 까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-ca8c074477d67707",
+        "segmentId": "seg-c3dff2bdef32ffee",
+        "rawText": "6월 10일(수)",
+        "normalizedStart": "2026-06-10",
+        "normalizedEnd": "2026-06-10",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 8,
+          "end": 17
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-473150453e38d4c0",
+        "sourceNoticeId": "knu-504-11041",
+        "segmentId": "seg-c3dff2bdef32ffee",
+        "temporalMentionIds": [
+          "tm-ca8c074477d67707"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "모집기간",
+        "evidence": "모집기간: ~ 6월 10일(수) 까지"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "(수학/영어/과학) 기초학력증진 비교과 학습 프로그램 참여자 모집 신청 마감",
+      "dateText": "6월 10일(수)",
+      "normalizedStart": "2026-06-10",
+      "normalizedEnd": "2026-06-10",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "모집기간: ~ 6월 10일(수) 까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

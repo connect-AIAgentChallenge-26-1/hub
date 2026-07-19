@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/calendar-event-identity-assignment.schema.json",
+  "title": "NoticePilot candidate to CalendarEvent identity assignment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "assignmentId", "registryId", "candidateId",
+    "sourceNoticeId", "calendarEventId", "assignmentRole", "canonical",
+    "assignedAt", "decisionPairIds"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.calendarEventIdentityAssignment.v0.1"},
+    "assignmentId": {"type": "string", "pattern": "^evasn_[0-9a-f]{32}$"},
+    "registryId": {"type": "string"},
+    "candidateId": {"type": "string"},
+    "sourceNoticeId": {"type": "string"},
+    "calendarEventId": {"type": "string", "pattern": "^evt_[0-9a-f]{32}$"},
+    "assignmentRole": {"enum": ["canonical", "duplicate_source", "extension_source"]},
+    "canonical": {"type": "boolean"},
+    "assignedAt": {"type": "string"},
+    "decisionPairIds": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
+  }
+}

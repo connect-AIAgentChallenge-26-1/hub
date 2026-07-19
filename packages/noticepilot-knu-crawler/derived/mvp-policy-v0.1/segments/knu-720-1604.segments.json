@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-1604",
+  "sourceContentHash": "2d43f3701343a4c2cb42ff424cec5ee01f26cd1cb8b6d6ae23e36a234ba8b7fc",
+  "sourceTitle": "2026학년도 편입생 수강신청, 학점인정 등 안내",
+  "publishedAt": "2026-02-09",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6e4cfa85928a3673",
+      "segmentType": "title",
+      "labelText": "2026학년도 편입생 수강신청, 학점인정 등 안내",
+      "bodyText": "2026학년도 편입생 수강신청, 학점인정 등 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "credit_recognition_application",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "admission_type:transfer_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 편입생 수강신청, 학점인정 등 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9847ce40b317afa5",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 편입생 수강신청 및 학점인정 등에 대하여 안내하니 아래 자료를 참고하시기 바랍니다.",
+      "bodyText": "2026학년도 편입생 수강신청 및 학점인정 등에 대하여 안내하니 아래 자료를 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "credit_recognition_application",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "admission_type:transfer_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 편입생 수강신청 및 학점인정 등에 대하여 안내하니 아래 자료를 참고하시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1
+    }
+  }
+}

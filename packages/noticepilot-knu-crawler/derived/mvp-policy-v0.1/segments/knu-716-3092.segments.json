@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3092",
+  "sourceContentHash": "9cd67b572b4d37a950c39e13993df88917771d2c3197449b5e5a47d440ce689c",
+  "sourceTitle": "2026-1학기 강원대학교 강사 공개채용 공고（2차-음악학과）",
+  "publishedAt": "2026-01-19",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d95300ebf1294a1d",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026-1학기 강원대학교 강사 공개채용 공고（2차-음악학과）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026-1학기 강원대학교 강사 공개채용 공고（2차-음악학과）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-23f5c9eff29d338e",
+      "segmentType": "label_value",
+      "labelText": "지원자는 공고 원문에서 모집분야, 심사기준표, 작성매뉴얼 등을 확인한 후",
+      "bodyText": "지원자는 공고 원문에서 모집분야, 심사기준표, 작성매뉴얼 등을 확인한 후",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "지원자는 공고 원문에서 모집분야, 심사기준표, 작성매뉴얼 등을 확인한 후"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ed3bfee7973ef7cd",
+      "segmentType": "label_value",
+      "labelText": "지원하시기 바랍니다.",
+      "bodyText": "지원하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "지원하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9c6c3d48783440e4",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 채용공고 원문(강원대학교 교수초빙 홈페이지)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 채용공고 원문(강원대학교 교수초빙 홈페이지)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-75ae4359567d3512",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://faculty.kangwon.ac.kr/bbs/board.php?bo_table=notice&wr_id=347",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://faculty.kangwon.ac.kr/bbs/board.php?bo_table=notice&wr_id=347"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-677b8fa507de0d58",
+      "segmentType": "label_value",
+      "labelText": "지원서 온라인 접수 기간",
+      "bodyText": "2026. 1. 20.(화) 09:00 ~ 2026. 1. 26.(월) 18:00마감",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-20",
+          "start": 16,
+          "end": 31
+        },
+        {
+          "value": "2026-01-26",
+          "start": 40,
+          "end": 55
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "지원서 온라인 접수 기간 : 2026. 1. 20.(화) 09:00 ~ 2026. 1. 26.(월) 18:00마감"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d7c5cc615cf4e8a0",
+      "segmentType": "label_value",
+      "labelText": "(마감일 18",
+      "bodyText": "(마감일 18:00부터는 지원서 접수가 불가 -작성 중인 경우에도 지원 불가- 하므로",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(마감일 18:00부터는 지원서 접수가 불가 -작성 중인 경우에도 지원 불가- 하므로"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cf047da7be8e7fed",
+      "segmentType": "label_value",
+      "labelText": "시간을 확인하시고 지원하여 주시기 바랍니다. )",
+      "bodyText": "시간을 확인하시고 지원하여 주시기 바랍니다. )",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "시간을 확인하시고 지원하여 주시기 바랍니다. )"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-1b05cdecb627a70e",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-01-20~2026-01-26",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-20",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-01-26",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-01-20~2026-01-26"
+    }
+  ],
+  "summary": {
+    "segmentCount": 9,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 6,
+      "list_item": 1,
+      "paragraph": 1,
+      "title": 1
+    }
+  }
+}

@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-721-1209",
+  "sourceContentHash": "3900db8b8884644b82e008006008e56544f5b9f83ee82c77764442cc01ab9cff",
+  "sourceTitle": "2026년도 한미 첨단분야 청년교류 지원사업 제5기 장학생 선발",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=1209&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천 삼척",
+    "campuses": [
+      "chuncheon",
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천",
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-721-1209-964442ce16b056",
+      "uidHint": "noticepilot-cand-knu-721-1209-964442ce16b056@noticepilot.local",
+      "sourceNoticeId": "knu-721-1209",
+      "sourceTitle": "2026년도 한미 첨단분야 청년교류 지원사업 제5기 장학생 선발",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=1209&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-20ac537822ffe8ed",
+        "segmentType": "label_value",
+        "labelText": "포스터에 안내된 일정은 공고일이며, 강원대 국제교류과에 제출하는 접수 마감일은",
+        "bodyText": "3월 13일 입니다.",
+        "sourceLocation": {
+          "lineIndex": 19,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "submission_period",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-13",
+            "start": 46,
+            "end": 52
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "포스터에 안내된 일정은 공고일이며, 강원대 국제교류과에 제출하는 접수 마감일은",
+          "※ 포스터에 안내된 일정은 공고일이며, 강원대 국제교류과에 제출하는 접수 마감일은 3월 13일 입니다.",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-46e9677c545ee69a",
+        "segmentId": "seg-20ac537822ffe8ed",
+        "rawText": "3월 13일",
+        "normalizedStart": "2026-03-13",
+        "normalizedEnd": "2026-03-13",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 46,
+          "end": 52
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-07d9d76d80b4ca9f",
+        "sourceNoticeId": "knu-721-1209",
+        "segmentId": "seg-20ac537822ffe8ed",
+        "temporalMentionIds": [
+          "tm-46e9677c545ee69a"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "포스터에 안내된 일정은 공고일이며, 강원대 국제교류과에 제출하는 접수 마감일은",
+        "evidence": "※ 포스터에 안내된 일정은 공고일이며, 강원대 국제교류과에 제출하는 접수 마감일은 3월 13일 입니다."
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026년도 한미 첨단분야 청년교류 지원사업 제5기 장학생 선발 신청 마감",
+      "dateText": "3월 13일",
+      "normalizedStart": "2026-03-13",
+      "normalizedEnd": "2026-03-13",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "※ 포스터에 안내된 일정은 공고일이며, 강원대 국제교류과에 제출하는 접수 마감일은 3월 13일 입니다.",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

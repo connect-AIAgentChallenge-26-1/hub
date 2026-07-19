@@ -1,0 +1,515 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10999",
+  "sourceContentHash": "c2635bafe1f5135ae95d8e1762367cf3b68950a3b1adb40db6850b5cc5217cab",
+  "sourceTitle": "[백령스포츠센터] 6월 테니스 1:1 개인 레슨 회원 모집",
+  "publishedAt": "2026-05-14",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a1ac06dea142ea24",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "[백령스포츠센터] 6월 테니스 1:1 개인 레슨 회원 모집",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[백령스포츠센터] 6월 테니스 1:1 개인 레슨 회원 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9b1e3c84cdf031aa",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "안녕하세요. 강원대학교 체육진흥원입니다!",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "안녕하세요. 강원대학교 체육진흥원입니다!"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-444affab35642f06",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "5월 15일(금)부터 6월 테니스 초급 1:1 개인레슨 접수를 시작합니다!",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-15",
+          "start": 0,
+          "end": 9
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "5월 15일(금)부터 6월 테니스 초급 1:1 개인레슨 접수를 시작합니다!"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f4edfc019dcc8a3a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "6월 1일(월)~6월 17일(수)까지 3주 동안 8회, 월, 수, 목, 금 18:30~20:30 사이",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-01",
+          "start": 4,
+          "end": 12
+        },
+        {
+          "value": "2026-06-17",
+          "start": 13,
+          "end": 22
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "강습은 6월 1일(월)~6월 17일(수)까지 3주 동안 8회, 월, 수, 목, 금 18:30~20:30 사이"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-967fdd58c05bf0bc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "20분간 1:1 개인레슨이 제공됩니다. 아래 강습 시간과 일자를 꼭 참고해 주시길 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "20분간 1:1 개인레슨이 제공됩니다. 아래 강습 시간과 일자를 꼭 참고해 주시길 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ddb0230043e06418",
+      "segmentType": "label_value",
+      "labelText": "■ 접수 기간",
+      "bodyText": "■ 접수 기간",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 접수 기간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f6356412ac79b9a3",
+      "segmentType": "continuation",
+      "labelText": "■ 접수 기간 - 재등록 기간",
+      "bodyText": "5월 15일(금) ~ 5월 23일(토)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-ddb0230043e06418"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-15",
+          "start": 19,
+          "end": 28
+        },
+        {
+          "value": "2026-05-23",
+          "start": 31,
+          "end": 40
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "■ 접수 기간 - 재등록 기간 : 5월 15일(금) ~ 5월 23일(토)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3c96768589f1f662",
+      "segmentType": "label_value",
+      "labelText": "재등록 기간",
+      "bodyText": "5월 15일(금) ~ 5월 23일(토)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-15",
+          "start": 11,
+          "end": 20
+        },
+        {
+          "value": "2026-05-23",
+          "start": 23,
+          "end": 32
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 재등록 기간 : 5월 15일(금) ~ 5월 23일(토)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5ffa448c457f12a3",
+      "segmentType": "label_value",
+      "labelText": "신규등록 기간",
+      "bodyText": "5월 25일(월) ~ 5월 30일(토)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-25",
+          "start": 12,
+          "end": 21
+        },
+        {
+          "value": "2026-05-30",
+          "start": 24,
+          "end": 33
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 신규등록 기간 : 5월 25일(월) ~ 5월 30일(토)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-24b7fe1eee42e1ff",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "■ 강습일",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 강습일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fd874f9189f24466",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "6월 1일(월), 4일(목), 5일(금), 8일(월), 10일(수), 11일(목), 15일(월), 17일(수)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-01",
+          "start": 2,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 6월 1일(월), 4일(목), 5일(금), 8일(월), 10일(수), 11일(목), 15일(월), 17일(수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-75911022bc452e61",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "■ 강습 시간",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 강습 시간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-863d33b55b23060c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "① 18:30~18:50(20분), 4명",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "① 18:30~18:50(20분), 4명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fa3bb2dec1f6f6d9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "② 18:50~19:10(20분), 4명",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "② 18:50~19:10(20분), 4명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fa0dae2cbd06730b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "③ 19:10~19:30(20분), 4명",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "③ 19:10~19:30(20분), 4명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-633d7ef17f088962",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "④ 19:30~19:50(20분), 4명",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "④ 19:30~19:50(20분), 4명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5e949696e48c592d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "⑤ 19:50~20:10(20분), 4명",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "⑤ 19:50~20:10(20분), 4명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2572cd70484832f6",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "⑥ 20:10~20:30(20분), 4명",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "⑥ 20:10~20:30(20분), 4명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d497ba4f2d47fa2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강습은 강원대학교 학생 테니스장에서 진행되며, 소프트테니스 감독과 소속 선수가 직접 지도를 맡아",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강습은 강원대학교 학생 테니스장에서 진행되며, 소프트테니스 감독과 소속 선수가 직접 지도를 맡아"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3000cda724f299b5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "기본자세부터 포핸드 · 백핸드 스트로크, 서브, 발리, 간단한 랠리와 게임까지 기초부터 실전 감각까지",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기본자세부터 포핸드 · 백핸드 스트로크, 서브, 발리, 간단한 랠리와 게임까지 기초부터 실전 감각까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f4a0bd3db4b4d6ab",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "초보자도 부담 없이 참여할 수 있는 맞춤형 레슨이 진행됩니다.",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "초보자도 부담 없이 참여할 수 있는 맞춤형 레슨이 진행됩니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8153aa4f9aff99bc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "테니스를 처음 접하는 분들도 라켓과 테니스화만 준비하시면 누구나 참여하실 수 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "테니스를 처음 접하는 분들도 라켓과 테니스화만 준비하시면 누구나 참여하실 수 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7a58c0dc617c5f12",
+      "segmentType": "label_value",
+      "labelText": "많은 관심과 신청 부탁드립니다! 감사합니다!",
+      "bodyText": "많은 관심과 신청 부탁드립니다! 감사합니다!",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "많은 관심과 신청 부탁드립니다! 감사합니다!"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3654248dbf4b19a5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "자세한 사항은 포스터 내용을 참고하시고, 문의 사항은 안내데스크로 연락해 주세요.",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자세한 사항은 포스터 내용을 참고하시고, 문의 사항은 안내데스크로 연락해 주세요."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5871d24cac8aece4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "문의 전화 : 033-250-7185(피트니스 안내데스크)",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "문의 전화 : 033-250-7185(피트니스 안내데스크)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 25,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 12,
+      "label_value": 4,
+      "continuation": 1,
+      "list_item": 7
+    }
+  }
+}

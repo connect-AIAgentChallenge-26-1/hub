@@ -1,0 +1,71 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-5648",
+  "sourceContentHash": "667dbb6a4e6e069441112728d8fdf6b1fc16cf10b6f5ce15c0696deb3cb26c34",
+  "sourceTitle": "생활협동조합 1월 30일（금） 식당 운영 중단 안내",
+  "publishedAt": "2026-01-22",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-989ffd16bb6aad00",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "1월 30일（금） 식당 운영 중단 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-30",
+          "start": 7,
+          "end": 16
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "생활협동조합 1월 30일（금） 식당 운영 중단 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-25cd95222b40e7fc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1월 30일(금) 식당 운영 중단 안내",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-30",
+          "start": 7,
+          "end": 16
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "생활협동조합 1월 30일(금) 식당 운영 중단 안내"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 1
+    }
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-5668",
+  "sourceContentHash": "fd8c0bc0ad4ff085350f16487986118521dce7b403c80d77e57bb3d173b22309",
+  "sourceTitle": "＇26년 예비역 간부 진급 및 예비역 하사 임용 선발계획",
+  "publishedAt": "2026-02-04",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b5e044d6ad6500b1",
+      "segmentType": "title",
+      "labelText": "＇26년 예비역 간부 진급 및 예비역 하사 임용 선발계획",
+      "bodyText": "＇26년 예비역 간부 진급 및 예비역 하사 임용 선발계획",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "＇26년 예비역 간부 진급 및 예비역 하사 임용 선발계획"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9adf453a36e13b72",
+      "segmentType": "label_value",
+      "labelText": "'26년 예비역 간부 진급 및 예비역 하사 임용 선발계획 안내드립니다.",
+      "bodyText": "'26년 예비역 간부 진급 및 예비역 하사 임용 선발계획 안내드립니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "'26년 예비역 간부 진급 및 예비역 하사 임용 선발계획 안내드립니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a2b7d72ea0bd0a1d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "군 복무의 경험과 책임을 공식적으로 정리하고 개인의 명예와 가치관을 확립할 수 있는 제도입니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "군 복무의 경험과 책임을 공식적으로 정리하고 개인의 명예와 가치관을 확립할 수 있는 제도입니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9e400cbb61bbc62e",
+      "segmentType": "label_value",
+      "labelText": "지원 자격, 선발 절차, 제출 서류 및 일정 등 세부 사항은 첨부파일을 충분히 확인하신 후 신청하시기 바랍니다.",
+      "bodyText": "지원 자격, 선발 절차, 제출 서류 및 일정 등 세부 사항은 첨부파일을 충분히 확인하신 후 신청하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "지원 자격, 선발 절차, 제출 서류 및 일정 등 세부 사항은 첨부파일을 충분히 확인하신 후 신청하시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 4,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "paragraph": 1
+    }
+  }
+}

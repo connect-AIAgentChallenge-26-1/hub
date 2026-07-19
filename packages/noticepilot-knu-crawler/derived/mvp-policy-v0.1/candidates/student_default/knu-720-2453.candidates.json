@@ -1,0 +1,700 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-720-2453",
+  "sourceContentHash": "e40ab4e8928171391ab5b3d4ac875256de3dd988cb7241bf13db5904e673e54b",
+  "sourceTitle": "2026학년도 OCU 하계 계절학기 실시 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2453&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉 원주",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-720-2453-88f863ca21ea33",
+      "uidHint": "noticepilot-cand-knu-720-2453-88f863ca21ea33@noticepilot.local",
+      "sourceNoticeId": "knu-720-2453",
+      "sourceTitle": "2026학년도 OCU 하계 계절학기 실시 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2453&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-d104c9026c3a2c24",
+        "segmentType": "label_value",
+        "labelText": "신청기간",
+        "bodyText": "2026. 5. 19.(화) 10:00 ~ 5. 26.(화) 18:00",
+        "sourceLocation": {
+          "lineIndex": 4,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-19",
+            "start": 9,
+            "end": 24
+          },
+          {
+            "value": "2026-05-26",
+            "start": 33,
+            "end": 42
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "신청기간",
+          "나. 신청기간: 2026. 5. 19.(화) 10:00 ~ 5. 26.(화) 18:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-f9849a20f0701d64",
+        "segmentId": "seg-d104c9026c3a2c24",
+        "rawText": "2026. 5. 19.(화) 10:00 ~ 5. 26.(화) 18:00",
+        "normalizedStart": "2026-05-19T10:00:00+09:00",
+        "normalizedEnd": "2026-05-26T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 9,
+          "end": 42
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-55e631ec69798ad5",
+        "sourceNoticeId": "knu-720-2453",
+        "segmentId": "seg-d104c9026c3a2c24",
+        "temporalMentionIds": [
+          "tm-f9849a20f0701d64"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "신청기간",
+        "evidence": "나. 신청기간: 2026. 5. 19.(화) 10:00 ~ 5. 26.(화) 18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 OCU 하계 계절학기 실시 안내 신청기간",
+      "dateText": "2026. 5. 19.(화) 10:00 ~ 5. 26.(화) 18:00",
+      "normalizedStart": "2026-05-19T10:00:00+09:00",
+      "normalizedEnd": "2026-05-26T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "나. 신청기간: 2026. 5. 19.(화) 10:00 ~ 5. 26.(화) 18:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2453-a16aa5dd4f0335",
+      "uidHint": "noticepilot-cand-knu-720-2453-a16aa5dd4f0335@noticepilot.local",
+      "sourceNoticeId": "knu-720-2453",
+      "sourceTitle": "2026학년도 OCU 하계 계절학기 실시 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2453&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "payment_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-2ccd46146a2515ed",
+        "segmentType": "continuation",
+        "labelText": "1차 납부",
+        "bodyText": "6. 15.(월) ~ 6. 26.(금)",
+        "sourceLocation": {
+          "lineIndex": 11,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-9dceab8dcfb71a98"
+        },
+        "actionSignals": [
+          "payment_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-15",
+            "start": 6,
+            "end": 15
+          },
+          {
+            "value": "2026-06-26",
+            "start": 18,
+            "end": 27
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "payment_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "1차 납부",
+          "1차 납부 6. 15.(월) ~ 6. 26.(금)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-4811c75720474a3e",
+        "segmentId": "seg-2ccd46146a2515ed",
+        "rawText": "6. 15.(월) ~ 6. 26.(금)",
+        "normalizedStart": "2026-06-15",
+        "normalizedEnd": "2026-06-26",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 6,
+          "end": 27
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-61bfcb5e6eb7feff",
+        "sourceNoticeId": "knu-720-2453",
+        "segmentId": "seg-2ccd46146a2515ed",
+        "temporalMentionIds": [
+          "tm-4811c75720474a3e"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "1차 납부",
+        "evidence": "1차 납부 6. 15.(월) ~ 6. 26.(금)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 OCU 하계 계절학기 실시 안내 납부기간",
+      "dateText": "6. 15.(월) ~ 6. 26.(금)",
+      "normalizedStart": "2026-06-15",
+      "normalizedEnd": "2026-06-26",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "1차 납부 6. 15.(월) ~ 6. 26.(금)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2453-3c42c8fa677411",
+      "uidHint": "noticepilot-cand-knu-720-2453-3c42c8fa677411@noticepilot.local",
+      "sourceNoticeId": "knu-720-2453",
+      "sourceTitle": "2026학년도 OCU 하계 계절학기 실시 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2453&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-e09c274b1197e94e",
+        "segmentType": "label_value",
+        "labelText": "수업기간",
+        "bodyText": "2026. 6. 23.(화) ~ 2026. 7. 12.(일)",
+        "sourceLocation": {
+          "lineIndex": 3,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-23",
+            "start": 9,
+            "end": 24
+          },
+          {
+            "value": "2026-07-12",
+            "start": 27,
+            "end": 42
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "수업기간",
+          "가. 수업기간: 2026. 6. 23.(화) ~ 2026. 7. 12.(일)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-8398c57a54f8a245",
+        "segmentId": "seg-e09c274b1197e94e",
+        "rawText": "2026. 6. 23.(화) ~ 2026. 7. 12.(일)",
+        "normalizedStart": "2026-06-23",
+        "normalizedEnd": "2026-07-12",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 9,
+          "end": 42
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-00941891ccb0ee69",
+        "sourceNoticeId": "knu-720-2453",
+        "segmentId": "seg-e09c274b1197e94e",
+        "temporalMentionIds": [
+          "tm-8398c57a54f8a245"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "수업기간",
+        "evidence": "가. 수업기간: 2026. 6. 23.(화) ~ 2026. 7. 12.(일)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 OCU 하계 계절학기 실시 안내 행사 기간",
+      "dateText": "2026. 6. 23.(화) ~ 2026. 7. 12.(일)",
+      "normalizedStart": "2026-06-23",
+      "normalizedEnd": "2026-07-12",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "가. 수업기간: 2026. 6. 23.(화) ~ 2026. 7. 12.(일)",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2453-870a3468e4dcac",
+      "uidHint": "noticepilot-cand-knu-720-2453-870a3468e4dcac@noticepilot.local",
+      "sourceNoticeId": "knu-720-2453",
+      "sourceTitle": "2026학년도 OCU 하계 계절학기 실시 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2453&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "payment_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-fee612922620714c",
+        "segmentType": "continuation",
+        "labelText": "2차 납부",
+        "bodyText": "6. 27.(토) ~ 6. 28.(일)",
+        "sourceLocation": {
+          "lineIndex": 13,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-671899fc9b870a25"
+        },
+        "actionSignals": [
+          "payment_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-27",
+            "start": 6,
+            "end": 15
+          },
+          {
+            "value": "2026-06-28",
+            "start": 18,
+            "end": 27
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "payment_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "2차 납부",
+          "2차 납부 6. 27.(토) ~ 6. 28.(일)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-57378788722fddff",
+        "segmentId": "seg-fee612922620714c",
+        "rawText": "6. 27.(토) ~ 6. 28.(일)",
+        "normalizedStart": "2026-06-27",
+        "normalizedEnd": "2026-06-28",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 6,
+          "end": 27
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-5a0cd521245b048e",
+        "sourceNoticeId": "knu-720-2453",
+        "segmentId": "seg-fee612922620714c",
+        "temporalMentionIds": [
+          "tm-57378788722fddff"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "2차 납부",
+        "evidence": "2차 납부 6. 27.(토) ~ 6. 28.(일)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 OCU 하계 계절학기 실시 안내 납부기간",
+      "dateText": "6. 27.(토) ~ 6. 28.(일)",
+      "normalizedStart": "2026-06-27",
+      "normalizedEnd": "2026-06-28",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "2차 납부 6. 27.(토) ~ 6. 28.(일)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 4,
+    "autoConfirmedCount": 4,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 4
+  }
+}

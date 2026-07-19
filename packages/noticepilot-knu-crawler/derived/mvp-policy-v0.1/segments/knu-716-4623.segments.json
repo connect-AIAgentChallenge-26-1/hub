@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4623",
+  "sourceContentHash": "1e43035674865987b5dae4cf2a09c5de2c27bcf4b777d72bd5ea3765f0da3a12",
+  "sourceTitle": "강원대학교 삼척공학교육혁신센터 기간제 사무원 서류전형 결과 및 면접시험 일정 알림",
+  "publishedAt": "2026-03-20",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38a372b36868cde8",
+      "segmentType": "title",
+      "labelText": "강원대학교 삼척공학교육혁신센터 기간제 사무원 서류전형 결과 및 면접시험 일정 알림",
+      "bodyText": "강원대학교 삼척공학교육혁신센터 기간제 사무원 서류전형 결과 및 면접시험 일정 알림",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척공학교육혁신센터 기간제 사무원 서류전형 결과 및 면접시험 일정 알림"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-79e7236088a26148",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 삼척캠퍼스 공고 제2026 - 46호와 관련하여 서류전형 합격자를 안내합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척캠퍼스 공고 제2026 - 46호와 관련하여 서류전형 합격자를 안내합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-058d96a851e18e85",
+      "segmentType": "label_value",
+      "labelText": "서류 전형 합격자 및 면접 일정",
+      "bodyText": "- 서류 전형 합격자 및 면접 일정 : [첨부파일] 참조",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 서류 전형 합격자 및 면접 일정 : [첨부파일] 참조"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a2188a2771ff6895",
+      "segmentType": "continuation",
+      "labelText": "서류 전형 합격자 및 면접 일정",
+      "bodyText": "2026. 3. 20.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-058d96a851e18e85"
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-20",
+          "start": 32,
+          "end": 43
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 서류 전형 합격자 및 면접 일정 : [첨부파일] 참조 2026. 3. 20."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-962e074cc3a797e6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 3. 20.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-20",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 3. 20."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e2d2f07f8de3deae",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 삼척공학교육혁신센터장",
+      "bodyText": "강원대학교 삼척공학교육혁신센터장",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척공학교육혁신센터장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "label_value": 2,
+      "continuation": 1
+    }
+  }
+}

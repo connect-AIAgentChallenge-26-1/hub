@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-716-4632",
+  "sourceContentHash": "dd241eb297fbd415d00a628209c6c58f25adf42310643403c0a6c4032504a585",
+  "sourceTitle": "강원대학교 원주생활관 공무직(단기계약직_관리원,미화원)모집 공고(정정)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/716/detail.do?pstSn=4632&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "원주",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-716-4632-172700c57b9d84",
+      "uidHint": "noticepilot-cand-knu-716-4632-172700c57b9d84@noticepilot.local",
+      "sourceNoticeId": "knu-716-4632",
+      "sourceTitle": "강원대학교 원주생활관 공무직(단기계약직_관리원,미화원)모집 공고(정정)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/716/detail.do?pstSn=4632&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "job_posting",
+      "campusScope": {
+        "sourceLabel": "원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "job_application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-board716-3658b93146f36677",
+        "segmentType": "label_value",
+        "labelText": "접수기간",
+        "bodyText": "2026-03-25~2026-04-06",
+        "sourceLocation": {
+          "lineIndex": 0,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-25",
+            "start": 14,
+            "end": 24
+          },
+          {
+            "value": "2026-04-06",
+            "start": 25,
+            "end": 35
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "job_application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.board716.exact_application_period",
+        "evidence": [
+          "listMetadata.application_period_start",
+          "listMetadata.application_period_end",
+          "접수기간 2026-03-25~2026-04-06"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-0ca44d976cd6bd46",
+        "segmentId": "seg-board716-3658b93146f36677",
+        "rawText": "접수기간 2026-03-25~2026-04-06",
+        "normalizedStart": "2026-03-25",
+        "normalizedEnd": "2026-04-06",
+        "resolutionKind": "list_application_period",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": null
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-2ca6c26efd68324d",
+        "sourceNoticeId": "knu-716-4632",
+        "segmentId": "seg-board716-3658b93146f36677",
+        "temporalMentionIds": [
+          "tm-0ca44d976cd6bd46"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.board716.list_metadata.application_period",
+        "locallyGrounded": true,
+        "labelText": "접수기간",
+        "evidence": "채용안내 목록 접수기간: 2026-03-25~2026-04-06"
+      },
+      "targetActor": "job_applicant",
+      "feedScopes": [
+        "job_application"
+      ],
+      "title": "강원대학교 원주생활관 공무직(단기계약직_관리원,미화원)모집 공고(정정) 채용 접수기간",
+      "dateText": "접수기간 2026-03-25~2026-04-06",
+      "normalizedStart": "2026-03-25",
+      "normalizedEnd": "2026-04-06",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "채용안내 목록 접수기간: 2026-03-25~2026-04-06",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "board716_application_period_only",
+        "exact_list_application_period"
+      ],
+      "dateResolution": {
+        "kind": "list_application_period",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "job_applicant",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.job_applicant",
+        "reasonCodes": []
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "board716_application_period_only",
+          "exact_list_application_period"
+        ],
+        "ruleIds": [
+          "publishability.board716.exact_application_period.auto_confirm",
+          "publishability.reason.board716_application_period_only",
+          "publishability.reason.exact_list_application_period",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

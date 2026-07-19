@@ -1,0 +1,250 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4587",
+  "sourceContentHash": "4a13c3e49f895bf2b33d248e42a8145bd7795b2064e1fbc38bc607426cc500eb",
+  "sourceTitle": "도계생활관 기간제 계약직(단시간근로자 조리원) 채용",
+  "publishedAt": "2026-03-11",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a685994397bcac50",
+      "segmentType": "title",
+      "labelText": "도계생활관 기간제 계약직(단시간근로자 조리원) 채용",
+      "bodyText": "도계생활관 기간제 계약직(단시간근로자 조리원) 채용",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "도계생활관 기간제 계약직(단시간근로자 조리원) 채용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7acc8dd17ac7feba",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "◩ 강원대학교 삼척캠퍼스 공고 제2026-45호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "◩ 강원대학교 삼척캠퍼스 공고 제2026-45호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fa801e06f0d8dd56",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 도계생활관에서 근무할 직원 채용계획을 다음과 같이 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 도계생활관에서 근무할 직원 채용계획을 다음과 같이 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-17871be31b138083",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 채용분야 : 기간제계약직 단시간근로자 조리원",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 채용분야 : 기간제계약직 단시간근로자 조리원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b5fb1adfcdebd013",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 3. 11.(수) ~ 3. 18.(화) 17:00",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-11",
+          "start": 10,
+          "end": 25
+        },
+        {
+          "value": "2026-03-18",
+          "start": 28,
+          "end": 37
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 접수기간 : 2026. 3. 11.(수) ~ 3. 18.(화) 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2c86c76c694e5432",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 근무지 : 도계생활관 (학생회관 식당)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 근무지 : 도계생활관 (학생회관 식당)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cdc735c1c1b7feac",
+      "segmentType": "label_value",
+      "labelText": "선발방법",
+      "bodyText": "4. 선발방법 : 1차 서류전형, 2차 면접",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 선발방법 : 1차 서류전형, 2차 면접"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1e6dfeb7bcdb541d",
+      "segmentType": "label_value",
+      "labelText": "접수방법",
+      "bodyText": "5. 접수방법 : 방문접수 및 우편접수",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 접수방법 : 방문접수 및 우편접수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8cc66a4378b86599",
+      "segmentType": "label_value",
+      "labelText": "접수처",
+      "bodyText": "- 접수처 : （우25947）강원도 삼척시 도계읍 전두안길 66 가온생활관 행정실",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 접수처 : （우25947）강원도 삼척시 도계읍 전두안길 66 가온생활관 행정실"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9e8d136e6ebe416f",
+      "segmentType": "label_value",
+      "labelText": "응시자격 및 제출서류",
+      "bodyText": "6. 응시자격 및 제출서류 : 첨부파일 공고문 참조",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 응시자격 및 제출서류 : 첨부파일 공고문 참조"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b8746e63a54a3d1a",
+      "segmentType": "label_value",
+      "labelText": "접수 및 기타문의",
+      "bodyText": "7. 접수 및 기타문의 : 033-541-0532",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "7. 접수 및 기타문의 : 033-541-0532"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3477831630fb3197",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 자세한 사항은 첨부파일 참고 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 자세한 사항은 첨부파일 참고 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 12,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "list_item": 3,
+      "label_value": 6
+    }
+  }
+}

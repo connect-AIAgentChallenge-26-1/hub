@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2284",
+  "sourceContentHash": "80304b4ca7bbdc24325837f903fb09c0f3c9791899d2a226a66035af5ce5cb37",
+  "sourceTitle": "2025년 하반기분 통영시 대학생 학자금 이자 지원 안내",
+  "publishedAt": "2026-03-06",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8a4c895e0bf1b5be",
+      "segmentType": "title",
+      "labelText": "2025년 하반기분 통영시 대학생 학자금 이자 지원 안내",
+      "bodyText": "2025년 하반기분 통영시 대학생 학자금 이자 지원 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2025년 하반기분 통영시 대학생 학자금 이자 지원 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8ed2c5a467bb6ca6",
+      "segmentType": "label_value",
+      "labelText": "지원자격",
+      "bodyText": "1. 지원자격: 대학(원)생 및 미취업 졸업생 중에서 가, 나 중 어느 하나에 해당하는 사람",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 지원자격: 대학(원)생 및 미취업 졸업생 중에서 가, 나 중 어느 하나에 해당하는 사람"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4af4b957fe251b82",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "가. 공고일 현재 본인이 1년 이상 또는 직계존속이 3년 이상 통영시에 주민등록이 되어 있으면서, 통영시 소재 고등학교를 졸업한 사람",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 공고일 현재 본인이 1년 이상 또는 직계존속이 3년 이상 통영시에 주민등록이 되어 있으면서, 통영시 소재 고등학교를 졸업한 사람"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-42af4bef2bf1feac",
+      "segmentType": "label_value",
+      "labelText": "공고일 현재 통영시 소재 고등교육기관의 대학(원)생 및 미취업 졸업생으로서 1학년의 경우 3개월 이상, 그 외의 경우 1년 이상 통영시에 주민등록이 되어 있는 사람",
+      "bodyText": "나. 공고일 현재 통영시 소재 고등교육기관의 대학(원)생 및 미취업 졸업생으로서 1학년의 경우 3개월 이상, 그 외의 경우 1년 이상 통영시에 주민등록이 되어 있는 사람",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "student_year:1"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 공고일 현재 통영시 소재 고등교육기관의 대학(원)생 및 미취업 졸업생으로서 1학년의 경우 3개월 이상, 그 외의 경우 1년 이상 통영시에 주민등록이 되어 있는 사람"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b72485db8f11d122",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "2026. 3. 4.(수) ~ 3. 25.(수) 17:00",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-04",
+          "start": 9,
+          "end": 23
+        },
+        {
+          "value": "2026-03-25",
+          "start": 26,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 신청기간: 2026. 3. 4.(수) ~ 3. 25.(수) 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-170e6a00b47b77dc",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "3. 신청방법: 전자 우편, 방문, 우편 접수(팩스 불가)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 신청방법: 전자 우편, 방문, 우편 접수(팩스 불가)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-02d0e29803c849f4",
+      "segmentType": "label_value",
+      "labelText": "전자 우편 접수처",
+      "bodyText": "1) 전자 우편 접수처: hjkim0816@korea.kr",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1) 전자 우편 접수처: hjkim0816@korea.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9fab36ff15744b03",
+      "segmentType": "label_value",
+      "labelText": "방문 및 우편 접수처",
+      "bodyText": "2) 방문 및 우편 접수처: 통영시 무전 3길 29(무전동, 통영시립도서관) 4층 교육지원팀",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2) 방문 및 우편 접수처: 통영시 무전 3길 29(무전동, 통영시립도서관) 4층 교육지원팀"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2459f3a4a547aa40",
+      "segmentType": "label_value",
+      "labelText": "우편, 이메일 접수 시 마감일",
+      "bodyText": "2026. 3. 25.(수) 17:00까지 도착분에 한함",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-25",
+          "start": 19,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "※ 우편, 이메일 접수 시 마감일 2026. 3. 25.(수) 17:00까지 도착분에 한함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1801d59b847946fd",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 자세한 사항은 붙임 파일 참조",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 자세한 사항은 붙임 파일 참조"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "list_item": 1,
+      "paragraph": 1
+    }
+  }
+}

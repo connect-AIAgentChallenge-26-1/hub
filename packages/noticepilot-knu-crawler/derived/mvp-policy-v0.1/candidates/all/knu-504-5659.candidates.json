@@ -1,0 +1,199 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-5659",
+  "sourceContentHash": "6faa4cbcc9e284b03072863156a4576bf8cc20cdfc2d5d94cf81a043b044fc50",
+  "sourceTitle": "[도서관] 2월 도서관 이용자 교육 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5659&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "삼척",
+    "campuses": [
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-5659-7510657246ce3d",
+      "uidHint": "noticepilot-cand-knu-504-5659-7510657246ce3d@noticepilot.local",
+      "sourceNoticeId": "knu-504-5659",
+      "sourceTitle": "[도서관] 2월 도서관 이용자 교육 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5659&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-932e3d82ca6ff160",
+        "segmentType": "label_value",
+        "labelText": "수강기간",
+        "bodyText": "2025.12.23.~2026.2.28.",
+        "sourceLocation": {
+          "lineIndex": 2,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2025-12-23",
+            "start": 9,
+            "end": 19
+          },
+          {
+            "value": "2026-02-28",
+            "start": 21,
+            "end": 30
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "수강기간",
+          "1) 수강기간: 2025.12.23.~2026.2.28.",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-3c54bf8b5160aeb2",
+        "segmentId": "seg-932e3d82ca6ff160",
+        "rawText": "2025.12.23.~2026.2.28.",
+        "normalizedStart": "2025-12-23",
+        "normalizedEnd": "2026-02-28",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 9,
+          "end": 30
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-f7a272185f5a51ea",
+        "sourceNoticeId": "knu-504-5659",
+        "segmentId": "seg-932e3d82ca6ff160",
+        "temporalMentionIds": [
+          "tm-3c54bf8b5160aeb2"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "수강기간",
+        "evidence": "1) 수강기간: 2025.12.23.~2026.2.28."
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[도서관] 2월 도서관 이용자 교육 안내 행사 기간",
+      "dateText": "2025.12.23.~2026.2.28.",
+      "normalizedStart": "2025-12-23",
+      "normalizedEnd": "2026-02-28",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "1) 수강기간: 2025.12.23.~2026.2.28.",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

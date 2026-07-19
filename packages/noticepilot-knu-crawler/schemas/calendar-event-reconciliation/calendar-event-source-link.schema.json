@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/calendar-event-source-link.schema.json",
+  "title": "NoticePilot CalendarEventSourceLink",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "sourceLinkId", "calendarEventId", "sourceNoticeId",
+    "sourceCandidateId", "sourceIdentity", "observedSourceUrl",
+    "canonicalSourceUrl", "publishedAt", "relationRole", "canonical",
+    "activeSource", "evidencePairIds", "decisionRuleIds",
+    "firstObservedAt", "lastObservedAt"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.calendarEventSourceLink.v0.1"},
+    "sourceLinkId": {"type": "string", "minLength": 1},
+    "calendarEventId": {"type": "string", "minLength": 1},
+    "sourceNoticeId": {"type": "string", "minLength": 1},
+    "sourceCandidateId": {"type": "string", "minLength": 1},
+    "sourceIdentity": {"type": "object"},
+    "observedSourceUrl": {"type": ["string", "null"]},
+    "canonicalSourceUrl": {"type": "string", "format": "uri"},
+    "publishedAt": {"type": ["string", "null"]},
+    "relationRole": {
+      "enum": ["canonical", "duplicate_source", "extension_source", "revision_source", "replacement_source"]
+    },
+    "canonical": {"type": "boolean"},
+    "activeSource": {"type": "boolean"},
+    "evidencePairIds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "decisionRuleIds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "firstObservedAt": {"type": "string"},
+    "lastObservedAt": {"type": "string"}
+  }
+}

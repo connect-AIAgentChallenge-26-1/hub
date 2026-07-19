@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "noticepilot.s28FeedSnapshotAudit.v0.1",
+  "auditorVersion": "0.1.0",
+  "result": "pass",
+  "status": "completed",
+  "scope": {
+    "snapshotContractImplemented": true,
+    "contentAddressedIdentityImplemented": true,
+    "snapshotManifestImplemented": true,
+    "atomicSnapshotSetWritten": true,
+    "profileMatrixAuditPerformed": false,
+    "subscriptionUrlOrTokenIssued": false,
+    "icsSerializationPerformed": false,
+    "s27RegistryMutationPerformed": false,
+    "s27ProjectionMutationPerformed": false
+  },
+  "contract": {
+    "snapshotSchemaVersion": "noticepilot.subscriptionFeedSnapshot.v0.1",
+    "snapshotBuilderVersion": "0.1.0",
+    "snapshotIdStrategy": "content_addressed_snapshot_hash_v0",
+    "hashContract": "sha256_canonical_json_utf8_sorted_keys_compact_v0",
+    "generatedAtIncludedInIdentity": false
+  },
+  "manifest": {
+    "path": "snapshots/s28-v1/manifest.json",
+    "snapshotSetId": "snapset_874ba65cc0b7e371837e5ab3b9887ee6",
+    "snapshotSetHash": "874ba65cc0b7e371837e5ab3b9887ee63093f43105b34b11281ba95648538018",
+    "snapshotCount": 2,
+    "totalEventCount": 900
+  },
+  "counts": {
+    "inputEventCount": 900,
+    "studentSnapshotEventCount": 601,
+    "jobSnapshotEventCount": 299,
+    "studentJobOverlapCount": 0,
+    "studentJobUnionCount": 900
+  },
+  "snapshots": {
+    "job_application": {
+      "snapshotId": "feedsnap_0503ff13f28784d645e5722ac2e771a8",
+      "snapshotHash": "0503ff13f28784d645e5722ac2e771a825470e350b6efa43de7f52a19eba65b2",
+      "profileId": "subprof_0887a1e133464366af8d870e1950ca53",
+      "profileRevision": 1,
+      "eventCount": 299,
+      "excludedEventCount": 601,
+      "eventMembershipSha256": "0282ac5251dd0b17f5a164f915d7f36cd0fedd1004d43c7e2b6dce7eba947d40",
+      "feedBuildResultSha256": "f9ed24d262063dc0d7f83e92989eb4e43e4aeb8685ccc841f1721a787f4e85f8",
+      "decisionLedgerSha256": "31907cc68721ffa591c8d4ca26602154247a98e357f1ed2651b194df16e8f440"
+    },
+    "student_default": {
+      "snapshotId": "feedsnap_d44c2066a621c9bd81762a9099dd7106",
+      "snapshotHash": "d44c2066a621c9bd81762a9099dd7106ef63bb44058b1f7f7fe9d4421e4ae205",
+      "profileId": "subprof_9baaae14deb3460fa31777d362507cbc",
+      "profileRevision": 1,
+      "eventCount": 601,
+      "excludedEventCount": 299,
+      "eventMembershipSha256": "ef96b68bec69f577aa6fa2c51f57f338de5b202f42538d28759a7d46c3e4d0b2",
+      "feedBuildResultSha256": "feb3304e43b3299a78542e4451abc06d364da42d38c4c84d9fc172f9b17955fb",
+      "decisionLedgerSha256": "3125afe44a3bffcce08951baa3eedcc8a5b2345c2e5459bcb0ac158954727d94"
+    }
+  },
+  "determinism": {
+    "job_application": {
+      "reverseInputSnapshotExactMatch": true,
+      "generatedAtExcludedFromIdentity": true,
+      "eventCount": 299
+    },
+    "student_default": {
+      "reverseInputSnapshotExactMatch": true,
+      "generatedAtExcludedFromIdentity": true,
+      "eventCount": 601
+    }
+  },
+  "immutability": {
+    "s27cManifestSha256": "47fa8e232254df978575f31e06d555c20cf5f50e99862dc8ae0e772a7e4a03dc",
+    "s27cManifestExpectedSha256": "47fa8e232254df978575f31e06d555c20cf5f50e99862dc8ae0e772a7e4a03dc",
+    "s27dManifestSha256": "922eacc5a270f5119d0e86892d961ed742486b35b6a65d7a0d1642119820481f",
+    "s27dManifestExpectedSha256": "922eacc5a270f5119d0e86892d961ed742486b35b6a65d7a0d1642119820481f"
+  },
+  "deferred": {
+    "profileMatrixAndFullCorpusFeedAudit": "S28-5",
+    "snapshotPersistenceAndDelivery": "S29",
+    "subscriptionUrlAndToken": "S29",
+    "calendarClientPhysicalQa": "S30"
+  },
+  "errors": []
+}

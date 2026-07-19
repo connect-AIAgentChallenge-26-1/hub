@@ -1,0 +1,199 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11166",
+  "sourceContentHash": "10dab1454f8ee2acdf12ee0a54ba5eeed48fdbcb5dea4921a5562ea0feb70d60",
+  "sourceTitle": "[창업지원본부] 2026학년도 창업 앰배서더 모집(~7.7.(화) 18:00까지)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11166&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉 원주",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11166-f2b0c3dd29cbff",
+      "uidHint": "noticepilot-cand-knu-504-11166-f2b0c3dd29cbff@noticepilot.local",
+      "sourceNoticeId": "knu-504-11166",
+      "sourceTitle": "[창업지원본부] 2026학년도 창업 앰배서더 모집(~7.7.(화) 18:00까지)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11166&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-6b8b07cd9e24b57f",
+        "segmentType": "title",
+        "labelText": "[창업지원본부] 2026학년도 창업 앰배서더 모집(~",
+        "bodyText": "7.7.(화) 18:00까지)",
+        "sourceLocation": {
+          "lineIndex": -1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-07",
+            "start": 29,
+            "end": 36
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "low",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "[창업지원본부] 2026학년도 창업 앰배서더 모집(~",
+          "[창업지원본부] 2026학년도 창업 앰배서더 모집(~7.7.(화) 18:00까지)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-46411d5b097b5cde",
+        "segmentId": "seg-6b8b07cd9e24b57f",
+        "rawText": "7.7.(화)",
+        "normalizedStart": "2026-07-07T18:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 29,
+          "end": 36
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-58f1889732665956",
+        "sourceNoticeId": "knu-504-11166",
+        "segmentId": "seg-6b8b07cd9e24b57f",
+        "temporalMentionIds": [
+          "tm-46411d5b097b5cde"
+        ],
+        "bindingKind": "title_context",
+        "confidence": "low",
+        "ruleId": "binding.title_context",
+        "locallyGrounded": false,
+        "labelText": "[창업지원본부] 2026학년도 창업 앰배서더 모집(~",
+        "evidence": "[창업지원본부] 2026학년도 창업 앰배서더 모집(~7.7.(화) 18:00까지)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[창업지원본부] 2026학년도 창업 앰배서더 모집(~7.7.(화) 18:00까지) 신청 마감",
+      "dateText": "7.7.(화)",
+      "normalizedStart": "2026-07-07T18:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "[창업지원본부] 2026학년도 창업 앰배서더 모집(~7.7.(화) 18:00까지)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/active-calendar-event-projection.schema.json",
+  "title": "NoticePilot active persistent CalendarEvent ICS projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "projectionId", "calendarEventId", "uid", "feedScopes",
+    "sequence", "status", "revisionNumber", "relationBasis",
+    "canonicalCandidateId", "canonicalSourceNoticeId", "canonicalSourceUrl",
+    "sourceCandidateIds", "sourceNoticeIds", "sourceUrls", "projection"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.activeCalendarEventProjection.v0.1"},
+    "projectionId": {"type": "string"},
+    "calendarEventId": {"type": "string", "pattern": "^evt_[0-9a-f]{32}$"},
+    "uid": {"type": "string", "pattern": "^evt_[0-9a-f]{32}@noticepilot\\.local$"},
+    "feedScopes": {"type": "array", "minItems": 1, "uniqueItems": true},
+    "sequence": {"type": "integer", "minimum": 0},
+    "status": {"enum": ["CONFIRMED", "CANCELLED"]},
+    "revisionNumber": {"type": "integer", "minimum": 1},
+    "relationBasis": {"enum": ["singleton", "duplicate", "extension"]},
+    "canonicalCandidateId": {"type": "string"},
+    "canonicalSourceNoticeId": {"type": "string"},
+    "canonicalSourceUrl": {"type": "string"},
+    "sourceCandidateIds": {"type": "array", "minItems": 1, "uniqueItems": true},
+    "sourceNoticeIds": {"type": "array", "minItems": 1, "uniqueItems": true},
+    "sourceUrls": {"type": "array", "minItems": 1, "uniqueItems": true},
+    "projection": {"type": "object"}
+  }
+}

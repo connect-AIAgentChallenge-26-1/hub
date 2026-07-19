@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noticepilot.semanticScheduleCandidate.v0.1",
+  "title": "NoticePilot Semantic Schedule Candidate",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "candidateId", "sourceNoticeId", "boundFactIds", "normalizedStart", "normalizedEnd", "semantic", "applicability"],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.semanticScheduleCandidate.v0.1"},
+    "candidateId": {"type": "string", "minLength": 1},
+    "sourceNoticeId": {"type": "string", "minLength": 1},
+    "boundFactIds": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "normalizedStart": {"type": ["string", "null"]},
+    "normalizedEnd": {"type": ["string", "null"]},
+    "semantic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["eventType", "actionType", "temporalRole", "confidence", "ruleId", "evidence"],
+      "properties": {
+        "eventType": {"type": ["string", "null"]},
+        "actionType": {"type": ["string", "null"]},
+        "temporalRole": {"type": "string", "enum": ["user_action_period", "event_occurrence", "result_announcement", "reference_date", "internal_process", "conditional_followup", "unknown"]},
+        "confidence": {"type": "string", "enum": ["high", "medium", "low", "none"]},
+        "ruleId": {"type": "string", "minLength": 1},
+        "evidence": {"type": "array", "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "applicability": {"$ref": "applicability-judgment.schema.json"}
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11106",
+  "sourceContentHash": "258763caa2929228cd43666bbdd6ddd80cda08d73c4f2aa4b02310eaa00abd9c",
+  "sourceTitle": "「제3회 대한민국 학생창업주간」 참가자 모집",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11106&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11106-6827509f3a023d",
+      "uidHint": "noticepilot-cand-knu-504-11106-6827509f3a023d@noticepilot.local",
+      "sourceNoticeId": "knu-504-11106",
+      "sourceTitle": "「제3회 대한민국 학생창업주간」 참가자 모집",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11106&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-a02d57cca35beccf",
+        "segmentType": "label_value",
+        "labelText": "□ 신청기한",
+        "bodyText": "2026. 6. 24.(수) 18:00까지",
+        "sourceLocation": {
+          "lineIndex": 6,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-24",
+            "start": 9,
+            "end": 24
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "□ 신청기한",
+          "□ 신청기한 : 2026. 6. 24.(수) 18:00까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-a2f605ed0b84392d",
+        "segmentId": "seg-a02d57cca35beccf",
+        "rawText": "2026. 6. 24.(수)",
+        "normalizedStart": "2026-06-24T18:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 9,
+          "end": 24
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-30ca6433127953fb",
+        "sourceNoticeId": "knu-504-11106",
+        "segmentId": "seg-a02d57cca35beccf",
+        "temporalMentionIds": [
+          "tm-a2f605ed0b84392d"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "□ 신청기한",
+        "evidence": "□ 신청기한 : 2026. 6. 24.(수) 18:00까지"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "「제3회 대한민국 학생창업주간」 참가자 모집 신청 마감",
+      "dateText": "2026. 6. 24.(수)",
+      "normalizedStart": "2026-06-24T18:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "□ 신청기한 : 2026. 6. 24.(수) 18:00까지",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

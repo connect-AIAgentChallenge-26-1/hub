@@ -1,0 +1,248 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3126",
+  "sourceContentHash": "c1427a03502e213b6810912c96f53044abce0f45b68c566bcf23b0e3e7853b85",
+  "sourceTitle": "2026년 겸임교수 공개채용 공고（지질학전공）",
+  "publishedAt": "2026-01-27",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3dd00bd936238485",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026년 겸임교수 공개채용 공고（지질학전공）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 겸임교수 공개채용 공고（지질학전공）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-366e1feb6475a548",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-27호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-27호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-653e9e837d8727b1",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 지질·지구물리학부 지질학전공에서 겸임교수 공개 채용을 실시하오니 전문적인 지식과 경험을 갖춘 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 지질·지구물리학부 지질학전공에서 겸임교수 공개 채용을 실시하오니 전문적인 지식과 경험을 갖춘 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 지질·지구물리학부 지질학전공에서 겸임교수 공개 채용을 실시하오니 전문적인 지식과 경험을 갖춘 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a9844b641d9531d6",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 채용부서: 자연과학대학 지질·지구물리학부 지질학전공",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 채용부서: 자연과학대학 지질·지구물리학부 지질학전공"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38f08f9bf777984e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 채용인원: 1명",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 채용인원: 1명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c59aa5400e9aa1fa",
+      "segmentType": "label_value",
+      "labelText": "접수처",
+      "bodyText": "3. 접수처",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 접수처"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5471d0b3a2019911",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 1. 27.(화) ~ 2026. 2. 2.(월)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-27",
+          "start": 8,
+          "end": 23
+        },
+        {
+          "value": "2026-02-02",
+          "start": 26,
+          "end": 40
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 접수기간: 2026. 1. 27.(화) ~ 2026. 2. 2.(월)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1a85096bbe9cfa25",
+      "segmentType": "label_value",
+      "labelText": "접수방법",
+      "bodyText": "- 접수방법: 이메일(geology@kangwon.ac.kr)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 접수방법: 이메일(geology@kangwon.ac.kr)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-35bbb58545700193",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의사항: 강원대학교 지질·지구물리학부 지질학전공 사무실 (☎033-250-8550)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의사항: 강원대학교 지질·지구물리학부 지질학전공 사무실 (☎033-250-8550)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5fe268725afb4dc2",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 세부내용은 공고문 참고",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 세부내용은 공고문 참고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-04d14110656f798e",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-01-27~2026-02-02",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-27",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-02-02",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-01-27~2026-02-02"
+    }
+  ],
+  "summary": {
+    "segmentCount": 11,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 5,
+      "list_item": 4,
+      "paragraph": 1,
+      "title": 1
+    }
+  }
+}

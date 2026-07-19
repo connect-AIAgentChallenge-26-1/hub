@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2378",
+  "sourceContentHash": "06d98b275a104b3c6ad465caf5151e48e86bb7a49c98f94873e0a3747799fdc7",
+  "sourceTitle": "2025학년도 후기（2026년 8월） 조기졸업 신청 안내",
+  "publishedAt": "2026-03-09",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-957e2575d97bbd08",
+      "segmentType": "title",
+      "labelText": "2025학년도 후기（2026년 8월） 조기졸업 신청 안내",
+      "bodyText": "2025학년도 후기（2026년 8월） 조기졸업 신청 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2025학년도 후기（2026년 8월） 조기졸업 신청 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c273e2dffb4d520d",
+      "segmentType": "label_value",
+      "labelText": "2025학년도 후기(2026.8월) 조기 졸업 신청을 다음과 같이 안내하오니, 조기졸업을 원하는 학생은 기한 내 신청하시기 바랍니다.",
+      "bodyText": "2025학년도 후기(2026.8월) 조기 졸업 신청을 다음과 같이 안내하오니, 조기졸업을 원하는 학생은 기한 내 신청하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2025학년도 후기(2026.8월) 조기 졸업 신청을 다음과 같이 안내하오니, 조기졸업을 원하는 학생은 기한 내 신청하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-699877fcceb3c511",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "2026. 3. 23.(월) 09:00 ~ 3. 27.(금) 18:00",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-23",
+          "start": 9,
+          "end": 24
+        },
+        {
+          "value": "2026-03-27",
+          "start": 33,
+          "end": 42
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 신청기간: 2026. 3. 23.(월) 09:00 ~ 3. 27.(금) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dd46d2c3c743571a",
+      "segmentType": "label_value",
+      "labelText": "신청대상",
+      "bodyText": "2. 신청대상: 6학기 이상 등록하였으며, 재학기간 동안의 성적이 \"평점평균 4.0 이상\"으로 예상되는 학생",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 신청대상: 6학기 이상 등록하였으며, 재학기간 동안의 성적이 \"평점평균 4.0 이상\"으로 예상되는 학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c55b0f5b578a0781",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 2026-1학기, 여름계절학기 성적 포함",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 2026-1학기, 여름계절학기 성적 포함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-192221528228c3e1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 모든 교과목의 성적이 4.0 이상이어야 한다는 뜻이 아님",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 모든 교과목의 성적이 4.0 이상이어야 한다는 뜻이 아님"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ee1594eb970273a6",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 절차: 학생 신청* → 학과 접수 또는 반려",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 절차: 학생 신청* → 학과 접수 또는 반려"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-83c6b7abd62d9358",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 접속 경로: k-cloud → 학부생서비스 → 교과 → 학적 → 조기졸업신청",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 접속 경로: k-cloud → 학부생서비스 → 교과 → 학적 → 조기졸업신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ea7d9412e224d3fa",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 주의사항",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 주의사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-85d9390cb5a06a4b",
+      "segmentType": "label_value",
+      "labelText": "조기졸업 신청자는 조기 수료 또는 학사학위취득유예 불가(반드시 졸업해야 함)",
+      "bodyText": "- 조기졸업 신청자는 조기 수료 또는 학사학위취득유예 불가(반드시 졸업해야 함)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 조기졸업 신청자는 조기 수료 또는 학사학위취득유예 불가(반드시 졸업해야 함)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c35e57d43f58b8f1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 졸업요건 중 단 하나라도 미충족할 경우 졸업 불가(재학생 신분 유지되어 남은 학기 이수해야함)",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 졸업요건 중 단 하나라도 미충족할 경우 졸업 불가(재학생 신분 유지되어 남은 학기 이수해야함)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3400e763ce9cf0a7",
+      "segmentType": "label_value",
+      "labelText": "붙임 조기졸업 신청 안내문 1부. 끝.",
+      "bodyText": "붙임 조기졸업 신청 안내문 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 조기졸업 신청 안내문 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 12,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 5,
+      "list_item": 5,
+      "paragraph": 1
+    }
+  }
+}

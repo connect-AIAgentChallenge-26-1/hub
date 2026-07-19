@@ -1,0 +1,365 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10638",
+  "sourceContentHash": "8117f5d35ec8a1cc7be57b875555a52c916d002fd6b34ca6f360b2bc3856bf4c",
+  "sourceTitle": "[강원대학교RISE사업단] 제 41회 국제의료기기·병원설비전시회（KIMES 2026） 참가기업 모집 공고",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10638&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천 삼척",
+    "campuses": [
+      "chuncheon",
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천",
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10638-1ea4912b3129d6",
+      "uidHint": "noticepilot-cand-knu-504-10638-1ea4912b3129d6@noticepilot.local",
+      "sourceNoticeId": "knu-504-10638",
+      "sourceTitle": "[강원대학교RISE사업단] 제 41회 국제의료기기·병원설비전시회（KIMES 2026） 참가기업 모집 공고",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10638&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-a97836a45c01717b",
+        "segmentType": "continuation",
+        "labelText": "는 도내 의료기기 관련 기업의 판로 개척 및 글로벌 경쟁력 강화를 위해 「제41회 국제의료기기·병원설비전시회（KIMES 2026）」 참가 지원 사업을 다음과 같이 공고하오니, 역량 있는 기업들의 많은 참여 바랍니다.",
+        "bodyText": "2026년 2월 10일",
+        "sourceLocation": {
+          "lineIndex": 1,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-994b9ac2457ff550"
+        },
+        "actionSignals": [
+          "application_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-10",
+            "start": 136,
+            "end": 148
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "는 도내 의료기기 관련 기업의 판로 개척 및 글로벌 경쟁력 강화를 위해 「제41회 국제의료기기·병원설비전시회（KIMES 2026）」 참가 지원 사업을 다음과 같이 공고하오니, 역량 있는 기업들의 많은 참여 바랍니다.",
+          "련 기업의 판로 개척 및 글로벌 경쟁력 강화를 위해 「제41회 국제의료기기·병원설비전시회（KIMES 2026）」 참가 지원 사업을 다음과 같이 공고하오니, 역량 있는 기업들의 많은 참여 바랍니다. 2026년 2월 10일",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-942725e9eb4b7587",
+        "segmentId": "seg-a97836a45c01717b",
+        "rawText": "2026년 2월 10일",
+        "normalizedStart": "2026-02-10",
+        "normalizedEnd": "2026-02-10",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 136,
+          "end": 148
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-1623e8ea63a14868",
+        "sourceNoticeId": "knu-504-10638",
+        "segmentId": "seg-a97836a45c01717b",
+        "temporalMentionIds": [
+          "tm-942725e9eb4b7587"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "는 도내 의료기기 관련 기업의 판로 개척 및 글로벌 경쟁력 강화를 위해 「제41회 국제의료기기·병원설비전시회（KIMES 2026）」 참가 지원 사업을 다음과 같이 공고하오니, 역량 있는 기업들의 많은 참여 바랍니다.",
+        "evidence": "강원대학교 RISE사업단에서는 도내 의료기기 관련 기업의 판로 개척 및 글로벌 경쟁력 강화를 위해 「제41회 국제의료기기·병원설비전시회（KIMES 2026）」 참가 지원 사업을 다음과 같이 공고하오니, 역량 있는 기업들의 많은 참여 바랍니다. 2026년 2월 10일"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[강원대학교RISE사업단] 제 41회 국제의료기기·병원설비전시회（KIMES 2026） 참가기업 모집 공고 신청 마감",
+      "dateText": "2026년 2월 10일",
+      "normalizedStart": "2026-02-10",
+      "normalizedEnd": "2026-02-10",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "강원대학교 RISE사업단에서는 도내 의료기기 관련 기업의 판로 개척 및 글로벌 경쟁력 강화를 위해 「제41회 국제의료기기·병원설비전시회（KIMES 2026）」 참가 지원 사업을 다음과 같이 공고하오니, 역량 있는 기업들의 많은 참여 바랍니다. 2026년 2월 10일",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10638-0166769f7b75cd",
+      "uidHint": "noticepilot-cand-knu-504-10638-0166769f7b75cd@noticepilot.local",
+      "sourceNoticeId": "knu-504-10638",
+      "sourceTitle": "[강원대학교RISE사업단] 제 41회 국제의료기기·병원설비전시회（KIMES 2026） 참가기업 모집 공고",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10638&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-c5e26bac55e36c0a",
+        "segmentType": "label_value",
+        "labelText": "신청기간",
+        "bodyText": "2026. 2. 19.（목）, 17:00까지",
+        "sourceLocation": {
+          "lineIndex": 14,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-19",
+            "start": 15,
+            "end": 30
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "신청기간",
+          "마. 신청기간: 공고일 ~ 2026. 2. 19.（목）, 17:00까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-564a6b78ef8e2764",
+        "segmentId": "seg-c5e26bac55e36c0a",
+        "rawText": "2026. 2. 19.（목）",
+        "normalizedStart": "2026-02-19T17:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 15,
+          "end": 30
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-6d40a37627622120",
+        "sourceNoticeId": "knu-504-10638",
+        "segmentId": "seg-c5e26bac55e36c0a",
+        "temporalMentionIds": [
+          "tm-564a6b78ef8e2764"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "신청기간",
+        "evidence": "마. 신청기간: 공고일 ~ 2026. 2. 19.（목）, 17:00까지"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[강원대학교RISE사업단] 제 41회 국제의료기기·병원설비전시회（KIMES 2026） 참가기업 모집 공고 신청 마감",
+      "dateText": "2026. 2. 19.（목）",
+      "normalizedStart": "2026-02-19T17:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "마. 신청기간: 공고일 ~ 2026. 2. 19.（목）, 17:00까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 2,
+    "calendarFeedIncludedCount": 0
+  }
+}

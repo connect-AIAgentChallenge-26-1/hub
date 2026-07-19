@@ -1,0 +1,313 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-3898",
+  "sourceContentHash": "d3191932f88d45c0174518c18bcb0d42afda3b28aaa05bcb699e15c4eeffd93c",
+  "sourceTitle": "공공기관 취업 면접 마스터 클래스",
+  "publishedAt": "2026-01-14",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1fd3dcda498d7394",
+      "segmentType": "title",
+      "labelText": "공공기관 취업 면접 마스터 클래스",
+      "bodyText": "공공기관 취업 면접 마스터 클래스",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "공공기관 취업 면접 마스터 클래스"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-29e2057c596e5dc9",
+      "segmentType": "label_value",
+      "labelText": "★공공기관 취업 면접 마스터 클래스 1차(강릉)★",
+      "bodyText": "★공공기관 취업 면접 마스터 클래스 1차(강릉)★",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "★공공기관 취업 면접 마스터 클래스 1차(강릉)★"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ab2b82a127d61502",
+      "segmentType": "continuation",
+      "labelText": "★공공기관 취업 면접 마스터 클래스 1차(강릉)★ ❍ 일 시",
+      "bodyText": "2026. 1. 21. (수) 13:00~17:00",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-29e2057c596e5dc9"
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-21",
+          "start": 35,
+          "end": 51
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "★공공기관 취업 면접 마스터 클래스 1차(강릉)★ ❍ 일 시: 2026. 1. 21. (수) 13:00~17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-03adcdc39d7c6d3f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 1. 21. (수) 13:00~17:00",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-21",
+          "start": 7,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "❍ 일 시: 2026. 1. 21. (수) 13:00~17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a3ccdc7311d72315",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "❍ 장 소: 강릉원주대학교내 강의실",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "❍ 장 소: 강릉원주대학교내 강의실"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5760281683ab831f",
+      "segmentType": "label_value",
+      "labelText": "★공공기관 취업 면접 마스터 클래스 2차(춘천)★",
+      "bodyText": "★공공기관 취업 면접 마스터 클래스 2차(춘천)★",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "★공공기관 취업 면접 마스터 클래스 2차(춘천)★"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0cd10f9820ff4c0c",
+      "segmentType": "continuation",
+      "labelText": "★공공기관 취업 면접 마스터 클래스 2차(춘천)★ ❍ 일 시",
+      "bodyText": "2026. 1. 26. (화)13:00~17:00",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-5760281683ab831f"
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-26",
+          "start": 35,
+          "end": 51
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "★공공기관 취업 면접 마스터 클래스 2차(춘천)★ ❍ 일 시: 2026. 1. 26. (화)13:00~17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f4e7a2dec22fea2c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 1. 26. (화)13:00~17:00",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-26",
+          "start": 7,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "❍ 일 시: 2026. 1. 26. (화)13:00~17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-592accfcefed4711",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "❍ 장 소: 한림대학교 사회·경영 2관(담헌관) 13401호",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "❍ 장 소: 한림대학교 사회·경영 2관(담헌관) 13401호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-254e4aea46bb18d7",
+      "segmentType": "label_value",
+      "labelText": "★공공기관 취업 면접 마스터 클래스 3차(원주)★",
+      "bodyText": "★공공기관 취업 면접 마스터 클래스 3차(원주)★",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "★공공기관 취업 면접 마스터 클래스 3차(원주)★"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cccd70226fe94fb1",
+      "segmentType": "continuation",
+      "labelText": "★공공기관 취업 면접 마스터 클래스 3차(원주)★ ❍ 일 시",
+      "bodyText": "2026. 2. 3. (수)13:00~17:00",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-254e4aea46bb18d7"
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-03",
+          "start": 35,
+          "end": 50
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "★공공기관 취업 면접 마스터 클래스 3차(원주)★ ❍ 일 시: 2026. 2. 3. (수)13:00~17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ae17ad3d964247b7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 2. 3. (수)13:00~17:00",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-03",
+          "start": 7,
+          "end": 22
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "❍ 일 시: 2026. 2. 3. (수)13:00~17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0c098d1cb91e7502",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "❍ 장 소: 연세대학교 미래캠퍼스 컨버전스홀 B113",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "❍ 장 소: 연세대학교 미래캠퍼스 컨버전스홀 B113"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aa01ce6904f41a18",
+      "segmentType": "label_value",
+      "labelText": "신청링크: https",
+      "bodyText": "신청링크: https://cloud.gwlrs.ac.kr/ko/exo/6/view/295",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청링크: https://cloud.gwlrs.ac.kr/ko/exo/6/view/295"
+    }
+  ],
+  "summary": {
+    "segmentCount": 14,
+    "locallyGroundedCount": 3,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 4,
+      "continuation": 3,
+      "paragraph": 6
+    }
+  }
+}

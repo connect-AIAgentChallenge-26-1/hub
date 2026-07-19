@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "noticepilot.s24RuntimeJudgmentWiringReport.v0.1",
+  "pipelineVersion": "0.1.18",
+  "candidateSchemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "derivedDir": "/mnt/data/s24d_work/noticepilot-knu-crawler-v0.4.4-observation.3-policy.15-foundation.7/derived/mvp-policy-v0.1",
+  "uniqueDecisionCandidateCount": 1304,
+  "decisionCandidateCount": 1304,
+  "candidateOccurrenceCount": 4924,
+  "wiredCandidateOccurrenceCount": 4924,
+  "changedCandidateOccurrenceCount": 0,
+  "idempotentNoOp": true,
+  "artifactCounts": {
+    "notices.jsonl": {
+      "rowCount": 2059,
+      "candidateCount": 1304,
+      "changedCount": 0
+    },
+    "review-queue.jsonl": {
+      "rowCount": 796,
+      "candidateCount": 498,
+      "changedCount": 0
+    },
+    "not-calendar-relevant.jsonl": {
+      "rowCount": 616,
+      "candidateCount": 0,
+      "changedCount": 0
+    },
+    "publishable-candidates.jsonl": {
+      "rowCount": 909,
+      "candidateCount": 909,
+      "changedCount": 0
+    },
+    "candidateDocuments": {
+      "documentCount": 2776,
+      "candidateCount": 2213,
+      "changedCount": 0
+    }
+  }
+}

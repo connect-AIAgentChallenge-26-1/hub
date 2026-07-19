@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/cross-notice-relation-decision.schema.json",
+  "title": "NoticePilot CrossNotice relation decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "pairId", "candidateIds", "sourceNoticeIds", "relation",
+    "decisionStatus", "mergeAllowed", "canonicalSelection", "ruleIds", "evidence",
+    "runtimeMutationPerformed", "calendarEventIdAssigned", "icsMutationPerformed"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.crossNoticeRelationDecision.v0.1"},
+    "pairId": {"type": "string"},
+    "candidateIds": {"type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true},
+    "sourceNoticeIds": {"type": "array", "minItems": 2, "maxItems": 2, "uniqueItems": true},
+    "relation": {"enum": ["distinct", "duplicate", "revision", "extension", "replacement", "needs_review"]},
+    "decisionStatus": {"enum": ["approved", "needs_review"]},
+    "mergeAllowed": {"type": "boolean"},
+    "canonicalSelection": {"type": "object"},
+    "ruleIds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "evidence": {"type": "object"},
+    "runtimeMutationPerformed": {"const": false},
+    "calendarEventIdAssigned": {"const": false},
+    "icsMutationPerformed": {"const": false}
+  }
+}

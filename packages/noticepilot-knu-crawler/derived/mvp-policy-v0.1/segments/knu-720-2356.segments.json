@@ -1,0 +1,323 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2356",
+  "sourceContentHash": "df3e92881c847c6ab491ff5c195f0e59771687ece50cf4e503034d97b1a14b6f",
+  "sourceTitle": "2026학년도 편입생 오리엔테이션 안내",
+  "publishedAt": "2026-02-11",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-540d8e54f2e65bc0",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026학년도 편입생 오리엔테이션 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "admission_type:transfer_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 편입생 오리엔테이션 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b8388c6826f5887e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026학년도 편입생을 대상으로 학사정보 등 대학 생활에 관한 사항을 안내하기 위해 오리엔테이션을 실시합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "admission_type:transfer_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 편입생을 대상으로 학사정보 등 대학 생활에 관한 사항을 안내하기 위해 오리엔테이션을 실시합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2be470284ab1c225",
+      "segmentType": "continuation",
+      "labelText": "일시",
+      "bodyText": "2026. 2. 23.（월） 14:00 ~ 16:00",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-b8388c6826f5887e"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "admission_type:transfer_student"
+      ],
+      "dateSpans": [
+        {
+          "value": "2026-02-23",
+          "start": 69,
+          "end": 84
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2026학년도 편입생을 대상으로 학사정보 등 대학 생활에 관한 사항을 안내하기 위해 오리엔테이션을 실시합니다. 1. 일시: 2026. 2. 23.（월） 14:00 ~ 16:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8225aa431249fcb8",
+      "segmentType": "label_value",
+      "labelText": "일시",
+      "bodyText": "2026. 2. 23.（월） 14:00 ~ 16:00",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-23",
+          "start": 7,
+          "end": 22
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "1. 일시: 2026. 2. 23.（월） 14:00 ~ 16:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-92e5f9c53123cb71",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 장소: 실사구시관",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 장소: 실사구시관"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a55bcf251f43337a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 참석 대상: 2026학년도 편입생（글로벌융합학부 제외）",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 참석 대상: 2026학년도 편입생（글로벌융합학부 제외）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-10341270c0507279",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 글로벌융합학부는 외국인 대상 학부로 오리엔테이션 별도 시행",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 글로벌융합학부는 외국인 대상 학부로 오리엔테이션 별도 시행"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4e0fdff48f8762f5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 세부 내용",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 세부 내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-88246815bba72758",
+      "segmentType": "label_value",
+      "labelText": "교육과정 이수 방법 등 학사관련 사항 안내",
+      "bodyText": "- 교육과정 이수 방법 등 학사관련 사항 안내",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 교육과정 이수 방법 등 학사관련 사항 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-560a24fcbf8ea2ff",
+      "segmentType": "label_value",
+      "labelText": "학습, 진로,취업지원프로그램 소개",
+      "bodyText": "- 학습, 진로,취업지원프로그램 소개",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 학습, 진로,취업지원프로그램 소개"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c540c8559f7f5ba5",
+      "segmentType": "label_value",
+      "labelText": "도서관 이용 교육",
+      "bodyText": "- 도서관 이용 교육",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 도서관 이용 교육"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fc0e8177dd9ccd0c",
+      "segmentType": "label_value",
+      "labelText": "（학점인정 내역서 배부 및 수강신청 지도는 각 학과별 일정에 따라 진행）",
+      "bodyText": "（학점인정 내역서 배부 및 수강신청 지도는 각 학과별 일정에 따라 진행）",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "credit_recognition_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "（학점인정 내역서 배부 및 수강신청 지도는 각 학과별 일정에 따라 진행）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-117d4bde930c6142",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 문의",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 문의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e1aff0f88c874a7c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 오리엔테이션 관련: 0332506019",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 오리엔테이션 관련: 0332506019"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c5f1ce730c86ebc7",
+      "segmentType": "label_value",
+      "labelText": "학점인정 내역서 배부 및 수강신청 지도 일정",
+      "bodyText": "- 학점인정 내역서 배부 및 수강신청 지도 일정: 각 학과",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "credit_recognition_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 학점인정 내역서 배부 및 수강신청 지도 일정: 각 학과"
+    }
+  ],
+  "summary": {
+    "segmentCount": 15,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "continuation": 1,
+      "label_value": 6,
+      "list_item": 5
+    }
+  }
+}

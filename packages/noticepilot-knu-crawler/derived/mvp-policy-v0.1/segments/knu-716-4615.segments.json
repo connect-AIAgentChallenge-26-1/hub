@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4615",
+  "sourceContentHash": "95fb3fc3a765e3df66ab67f9f91b7d742441d17f758d2db81acec927672c157c",
+  "sourceTitle": "강원대학교 강릉캠퍼스 기간제 계약직(사업단 및 휴직대체) 채용 공고",
+  "publishedAt": "2026-03-19",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-71c2fe4becdd397d",
+      "segmentType": "title",
+      "labelText": "강원대학교 강릉캠퍼스 기간제 계약직(사업단 및 휴직대체) 채용 공고",
+      "bodyText": "강원대학교 강릉캠퍼스 기간제 계약직(사업단 및 휴직대체) 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉캠퍼스 기간제 계약직(사업단 및 휴직대체) 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-56c426a8a711d326",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 강릉캠퍼스에서 근무할 직원을 다음과 같이 채용하고자 하오니 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 강릉캠퍼스에서 근무할 직원을 다음과 같이 채용하고자 하오니 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉캠퍼스에서 근무할 직원을 다음과 같이 채용하고자 하오니 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e04ebce64df91bf0",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 채용분야: 기간제 계약직(글로컬대학30사업, RISE사업, 휴직대체)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 채용분야: 기간제 계약직(글로컬대학30사업, RISE사업, 휴직대체)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a97e463565d30a42",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 채용인원: 총 13명",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 채용인원: 총 13명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ed3f85c1234d95c8",
+      "segmentType": "label_value",
+      "labelText": "원서접수기간",
+      "bodyText": "2026. 3. 19.(목) ~ 3. 25.(수) 18:00까지",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-19",
+          "start": 11,
+          "end": 26
+        },
+        {
+          "value": "2026-03-25",
+          "start": 29,
+          "end": 38
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 원서접수기간: 2026. 3. 19.(목) ~ 3. 25.(수) 18:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-af9ce6081315b8b2",
+      "segmentType": "label_value",
+      "labelText": "원서접수방법",
+      "bodyText": "4. 원서접수방법: e-mail 접수",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 원서접수방법: e-mail 접수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dcdbcfc4c07d33c4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "☞chdanrhk@kangwon.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "☞chdanrhk@kangwon.ac.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c7a730503cd8943f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 기타 자세한 사항은 붙임의 공고문을 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 기타 자세한 사항은 붙임의 공고문을 참고하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9b7c5481b10b746c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-문의사항: 강원대학교 강릉캠퍼스 행정지원과 033-640-2236",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-문의사항: 강원대학교 강릉캠퍼스 행정지원과 033-640-2236"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-a6250b4db6070f74",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-03-19~2026-03-25",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-19",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-03-25",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-03-19~2026-03-25"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 4,
+      "list_item": 4,
+      "paragraph": 1,
+      "title": 1
+    }
+  }
+}

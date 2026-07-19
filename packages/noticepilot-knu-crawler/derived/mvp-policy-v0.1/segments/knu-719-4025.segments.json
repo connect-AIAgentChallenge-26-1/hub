@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-4025",
+  "sourceContentHash": "1eb682b49570dcf9926f0e96e266115d05ba7b12bece18065235faaae2eba003",
+  "sourceTitle": "제2회 마포 서윤복 마라톤대회 참가자 모집 안내",
+  "publishedAt": "2026-03-23",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5a5b21835694f6a5",
+      "segmentType": "title",
+      "labelText": "제2회 마포 서윤복 마라톤대회 참가자 모집 안내",
+      "bodyText": "제2회 마포 서윤복 마라톤대회 참가자 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "제2회 마포 서윤복 마라톤대회 참가자 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a48d1dfbbc8317fe",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 02-2647-4488, 4499",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 02-2647-4488, 4499"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

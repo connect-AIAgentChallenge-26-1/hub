@@ -1,0 +1,365 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-715-3419",
+  "sourceContentHash": "d20aa7386ba13d71fbb3aca95a716d4d1910e11a04872d462bd0f6d922691860",
+  "sourceTitle": "'제2회 강원권 중고교 AI 사이버 보안 챌린지(GAISC)' 개최 안내 및 참가자 모집",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/715/detail.do?pstSn=3419&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "ALL",
+    "campuses": [
+      "all"
+    ],
+    "scopeType": "all_campuses",
+    "confidence": "high",
+    "source": "listMetadata.campus",
+    "labels": {
+      "all": "전체"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-715-3419-bf4c13cc3cf954",
+      "uidHint": "noticepilot-cand-knu-715-3419-bf4c13cc3cf954@noticepilot.local",
+      "sourceNoticeId": "knu-715-3419",
+      "sourceTitle": "'제2회 강원권 중고교 AI 사이버 보안 챌린지(GAISC)' 개최 안내 및 참가자 모집",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/715/detail.do?pstSn=3419&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "event",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-6daa9ec401618aea",
+        "segmentType": "continuation",
+        "labelText": "접수기간",
+        "bodyText": "2026. 6. 10.(수) ~ 7. 13.(월) 23:59까지",
+        "sourceLocation": {
+          "lineIndex": 21,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-1b823d69a59ac9f2"
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-10",
+            "start": 7,
+            "end": 22
+          },
+          {
+            "value": "2026-07-13",
+            "start": 25,
+            "end": 34
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "접수기간",
+          "접수기간 : 2026. 6. 10.(수) ~ 7. 13.(월) 23:59까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-94d7de66f2b5c670",
+        "segmentId": "seg-6daa9ec401618aea",
+        "rawText": "2026. 6. 10.(수) ~ 7. 13.(월) 23:59까지",
+        "normalizedStart": "2026-06-10T00:00:00+09:00",
+        "normalizedEnd": "2026-07-13T23:59:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 7,
+          "end": 34
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-57c82da33433173e",
+        "sourceNoticeId": "knu-715-3419",
+        "segmentId": "seg-6daa9ec401618aea",
+        "temporalMentionIds": [
+          "tm-94d7de66f2b5c670"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "접수기간",
+        "evidence": "접수기간 : 2026. 6. 10.(수) ~ 7. 13.(월) 23:59까지"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "'제2회 강원권 중고교 AI 사이버 보안 챌린지(GAISC)' 개최 안내 및 참가자 모집 신청기간",
+      "dateText": "2026. 6. 10.(수) ~ 7. 13.(월) 23:59까지",
+      "normalizedStart": "2026-06-10T00:00:00+09:00",
+      "normalizedEnd": "2026-07-13T23:59:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "접수기간 : 2026. 6. 10.(수) ~ 7. 13.(월) 23:59까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "same_datetime_candidates_consolidated",
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": "start_of_day_assumed_for_timed_range"
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "same_datetime_candidates_consolidated",
+          "start_of_day_assumed_for_timed_range",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-715-3419-758135a9aeb231",
+      "uidHint": "noticepilot-cand-knu-715-3419-758135a9aeb231@noticepilot.local",
+      "sourceNoticeId": "knu-715-3419",
+      "sourceTitle": "'제2회 강원권 중고교 AI 사이버 보안 챌린지(GAISC)' 개최 안내 및 참가자 모집",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/715/detail.do?pstSn=3419&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "event",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-81bc7ab0ed37a608",
+        "segmentType": "continuation",
+        "labelText": "대회일시",
+        "bodyText": "2026. 8. 29.(토) 10:00 ~ 17:00",
+        "sourceLocation": {
+          "lineIndex": 8,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-6d3d83779085e0dd"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-08-29",
+            "start": 7,
+            "end": 22
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "대회일시",
+          "대회일시 : 2026. 8. 29.(토) 10:00 ~ 17:00",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-bcefac8472ec8366",
+        "segmentId": "seg-81bc7ab0ed37a608",
+        "rawText": "2026. 8. 29.(토) 10:00 ~ 17:00",
+        "normalizedStart": "2026-08-29T10:00:00+09:00",
+        "normalizedEnd": "2026-08-29T17:00:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 7,
+          "end": 22
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-14813d9ee7b15f8e",
+        "sourceNoticeId": "knu-715-3419",
+        "segmentId": "seg-81bc7ab0ed37a608",
+        "temporalMentionIds": [
+          "tm-bcefac8472ec8366"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "대회일시",
+        "evidence": "대회일시 : 2026. 8. 29.(토) 10:00 ~ 17:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "'제2회 강원권 중고교 AI 사이버 보안 챌린지(GAISC)' 개최 안내 및 참가자 모집 행사 기간",
+      "dateText": "2026. 8. 29.(토) 10:00 ~ 17:00",
+      "normalizedStart": "2026-08-29T10:00:00+09:00",
+      "normalizedEnd": "2026-08-29T17:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "대회일시 : 2026. 8. 29.(토) 10:00 ~ 17:00",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10888",
+  "sourceContentHash": "b44b5c1e982967ebc2fbb93a6f7865791eb747633119fb3a914d478e34ab5d9d",
+  "sourceTitle": "아침검도 제91기（5월 4일~6월 30일） 기초 수련자 모집",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10888&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10888-e56beb95de2bcd",
+      "uidHint": "noticepilot-cand-knu-504-10888-e56beb95de2bcd@noticepilot.local",
+      "sourceNoticeId": "knu-504-10888",
+      "sourceTitle": "아침검도 제91기（5월 4일~6월 30일） 기초 수련자 모집",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10888&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-062ff4a96af2344b",
+        "segmentType": "title",
+        "labelText": "",
+        "bodyText": "5월 4일~6월 30일） 기초 수련자 모집",
+        "sourceLocation": {
+          "lineIndex": -1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-04",
+            "start": 10,
+            "end": 15
+          },
+          {
+            "value": "2026-06-30",
+            "start": 16,
+            "end": 22
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "low",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "아침검도 제91기（5월 4일~6월 30일） 기초 수련자 모집",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-d533faa974090107",
+        "segmentId": "seg-062ff4a96af2344b",
+        "rawText": "5월 4일~6월 30일） 기초 수련자 모집",
+        "normalizedStart": "2026-05-04",
+        "normalizedEnd": "2026-06-30",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 10,
+          "end": 22
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-0f4fcfead0fc3ec0",
+        "sourceNoticeId": "knu-504-10888",
+        "segmentId": "seg-062ff4a96af2344b",
+        "temporalMentionIds": [
+          "tm-d533faa974090107"
+        ],
+        "bindingKind": "title_context",
+        "confidence": "low",
+        "ruleId": "binding.title_context",
+        "locallyGrounded": false,
+        "labelText": "",
+        "evidence": "아침검도 제91기（5월 4일~6월 30일） 기초 수련자 모집"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "아침검도 제91기（5월 4일~6월 30일） 기초 수련자 모집 신청기간",
+      "dateText": "5월 4일~6월 30일） 기초 수련자 모집",
+      "normalizedStart": "2026-05-04",
+      "normalizedEnd": "2026-06-30",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "아침검도 제91기（5월 4일~6월 30일） 기초 수련자 모집",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "structured_segment_grounded",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

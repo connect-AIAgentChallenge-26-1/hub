@@ -1,0 +1,364 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-5671",
+  "sourceContentHash": "ae603dc93bf3e0dc54deb4ce478fea0c2f2e2d44a31b36d517c05fcb67b196a9",
+  "sourceTitle": "[KNU 런케이션] 「3Days 인문·교양 클래스 : 삼척에서 배우고 쉬다」 운영 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5671&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-5671-4e0a5cac7ff5c2",
+      "uidHint": "noticepilot-cand-knu-504-5671-4e0a5cac7ff5c2@noticepilot.local",
+      "sourceNoticeId": "knu-504-5671",
+      "sourceTitle": "[KNU 런케이션] 「3Days 인문·교양 클래스 : 삼척에서 배우고 쉬다」 운영 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5671&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-0e6ce9b77a0e62c4",
+        "segmentType": "continuation",
+        "labelText": "ㆍ 운영시간: 13:00 ~ 15:00 / 참여인원",
+        "bodyText": "2.11.): 지역 상권 연계 체험 프로그램",
+        "sourceLocation": {
+          "lineIndex": 7,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-7448289e09da55ae"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-11",
+            "start": 43,
+            "end": 47
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "ㆍ 운영시간: 13:00 ~ 15:00 / 참여인원",
+          "ㆍ 운영시간: 13:00 ~ 15:00 / 참여인원: 100명 - 2 Day(2.11.): 지역 상권 연계 체험 프로그램",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-9ef80b6573e31c6e",
+        "segmentId": "seg-0e6ce9b77a0e62c4",
+        "rawText": "2.11",
+        "normalizedStart": "2026-02-11",
+        "normalizedEnd": "2026-02-11",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 43,
+          "end": 47
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-5dcd48a55a765199",
+        "sourceNoticeId": "knu-504-5671",
+        "segmentId": "seg-0e6ce9b77a0e62c4",
+        "temporalMentionIds": [
+          "tm-9ef80b6573e31c6e"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "ㆍ 운영시간: 13:00 ~ 15:00 / 참여인원",
+        "evidence": "ㆍ 운영시간: 13:00 ~ 15:00 / 참여인원: 100명 - 2 Day(2.11.): 지역 상권 연계 체험 프로그램"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "[KNU 런케이션] 「3Days 인문·교양 클래스 : 삼척에서 배우고 쉬다」 운영 안내 행사 일정",
+      "dateText": "2.11",
+      "normalizedStart": "2026-02-11",
+      "normalizedEnd": "2026-02-11",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "ㆍ 운영시간: 13:00 ~ 15:00 / 참여인원: 100명 - 2 Day(2.11.): 지역 상권 연계 체험 프로그램",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "structured_segment_grounded",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5671-499527f34ea141",
+      "uidHint": "noticepilot-cand-knu-504-5671-499527f34ea141@noticepilot.local",
+      "sourceNoticeId": "knu-504-5671",
+      "sourceTitle": "[KNU 런케이션] 「3Days 인문·교양 클래스 : 삼척에서 배우고 쉬다」 운영 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5671&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-c1693309014ac472",
+        "segmentType": "continuation",
+        "labelText": "ㆍ 운영시간: 13:00 ~ 15:00 / 참여인원",
+        "bodyText": "2.12.): 인문학 강연 프로그램",
+        "sourceLocation": {
+          "lineIndex": 10,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-55c3ba3eb8cebe0b"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-12",
+            "start": 60,
+            "end": 64
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "ㆍ 운영시간: 13:00 ~ 15:00 / 참여인원",
+          "ㆍ 운영시간: 13:00 ~ 15:00 / 참여인원 : 100명(1차·2차 각 50명 운영) - 3 Day(2.12.): 인문학 강연 프로그램",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-2968c01a399afc3a",
+        "segmentId": "seg-c1693309014ac472",
+        "rawText": "2.12",
+        "normalizedStart": "2026-02-12",
+        "normalizedEnd": "2026-02-12",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 60,
+          "end": 64
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-739827b244c50770",
+        "sourceNoticeId": "knu-504-5671",
+        "segmentId": "seg-c1693309014ac472",
+        "temporalMentionIds": [
+          "tm-2968c01a399afc3a"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "ㆍ 운영시간: 13:00 ~ 15:00 / 참여인원",
+        "evidence": "ㆍ 운영시간: 13:00 ~ 15:00 / 참여인원 : 100명(1차·2차 각 50명 운영) - 3 Day(2.12.): 인문학 강연 프로그램"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "[KNU 런케이션] 「3Days 인문·교양 클래스 : 삼척에서 배우고 쉬다」 운영 안내 행사 일정",
+      "dateText": "2.12",
+      "normalizedStart": "2026-02-12",
+      "normalizedEnd": "2026-02-12",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "ㆍ 운영시간: 13:00 ~ 15:00 / 참여인원 : 100명(1차·2차 각 50명 운영) - 3 Day(2.12.): 인문학 강연 프로그램",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "structured_segment_grounded",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 2,
+    "calendarFeedIncludedCount": 0
+  }
+}

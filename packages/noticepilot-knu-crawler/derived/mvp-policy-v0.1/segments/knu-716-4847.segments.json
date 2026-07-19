@@ -1,0 +1,267 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4847",
+  "sourceContentHash": "685a62a1e09fa479af4de967d63b4b8ddbe44506c4c875118696f7a6a6c30164",
+  "sourceTitle": "강원대학교 삼척교수학습개발센터 기간제 계약직(사무원) 서류전형 합격자 발표",
+  "publishedAt": "2026-06-15",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-83badd68d0d91df2",
+      "segmentType": "title",
+      "labelText": "강원대학교 삼척교수학습개발센터 기간제 계약직(사무원) 서류전형 합격자 발표",
+      "bodyText": "강원대학교 삼척교수학습개발센터 기간제 계약직(사무원) 서류전형 합격자 발표",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척교수학습개발센터 기간제 계약직(사무원) 서류전형 합격자 발표"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-feb51d2a840803cd",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교삼척캠퍼스 공고 제 2026-90호 관련",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교삼척캠퍼스 공고 제 2026-90호 관련"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ca662471ffe9d64e",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 삼척교수학습개발센터 기간제 계약직(사무원) 서류전형 합격자 발표 및 면접일정을 아래와 같이 알려드립니다",
+      "bodyText": "강원대학교 삼척교수학습개발센터 기간제 계약직(사무원) 서류전형 합격자 발표 및 면접일정을 아래와 같이 알려드립니다",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척교수학습개발센터 기간제 계약직(사무원) 서류전형 합격자 발표 및 면접일정을 아래와 같이 알려드립니다"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-57ac1f44ab6337ba",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 서류전형 합격자",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 서류전형 합격자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8f07016aadf94008",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 응시번호 1번 염*진",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 응시번호 1번 염*진"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5c9dae42b6d2325d",
+      "segmentType": "label_value",
+      "labelText": "면접일정 공고",
+      "bodyText": "2. 면접일정 공고",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 면접일정 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-20bbf48df6c498e5",
+      "segmentType": "label_value",
+      "labelText": "면접일시",
+      "bodyText": "2026. 6. 17.(수) 10:00",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-17",
+          "start": 9,
+          "end": 24
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 면접일시 : 2026. 6. 17.(수) 10:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3c8baf85a182580f",
+      "segmentType": "label_value",
+      "labelText": "면접장소",
+      "bodyText": "- 면접장소 : 삼척캠퍼스 그린에너지연구관 10층 소회의실",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 면접장소 : 삼척캠퍼스 그린에너지연구관 10층 소회의실"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ecdeec00645b85f1",
+      "segmentType": "label_value",
+      "labelText": "면접대기",
+      "bodyText": "- 면접대기 : 삼척캠퍼스 그린에너지연구관 505호",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 면접대기 : 삼척캠퍼스 그린에너지연구관 505호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9405ff13274fc215",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 안내사항",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 안내사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2c487b7c3b18a315",
+      "segmentType": "label_value",
+      "labelText": "면접당일 09",
+      "bodyText": "- 면접당일 09:40까지 면접대기장소에 입실 완료",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 면접당일 09:40까지 면접대기장소에 입실 완료"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-01c984f5aaabdaa9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 신분증 지참 (주민등록증, 운전면허증, 여권)",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 신분증 지참 (주민등록증, 운전면허증, 여권)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-259c9cb9387de180",
+      "segmentType": "label_value",
+      "labelText": "채용지원에 감사드립니다",
+      "bodyText": "4. 채용지원에 감사드립니다",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 채용지원에 감사드립니다"
+    }
+  ],
+  "summary": {
+    "segmentCount": 13,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 1,
+      "label_value": 7,
+      "list_item": 4
+    }
+  }
+}

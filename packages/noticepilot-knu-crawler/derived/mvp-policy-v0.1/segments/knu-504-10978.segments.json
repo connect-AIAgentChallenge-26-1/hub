@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10978",
+  "sourceContentHash": "d17866c966f0a7436e2a3079e05ac46aa5fe846a78384de180891ffce4d7d1a6",
+  "sourceTitle": "2026 KNU 강릉캠퍼스 전공박람회 <강릉교육지원과 프로그램 안내>",
+  "publishedAt": "2026-05-11",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-846a3b612be4430c",
+      "segmentType": "title",
+      "labelText": "2026 KNU 강릉캠퍼스 전공박람회 <강릉교육지원과 프로그램 안내>",
+      "bodyText": "2026 KNU 강릉캠퍼스 전공박람회 <강릉교육지원과 프로그램 안내>",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026 KNU 강릉캠퍼스 전공박람회 <강릉교육지원과 프로그램 안내>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c2b77adae4a751c3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026 KNU 강릉캠퍼스 전공박람회",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026 KNU 강릉캠퍼스 전공박람회"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b553c8f379aefdc6",
+      "segmentType": "label_value",
+      "labelText": "<강릉교육지원과 프로그램 안내>",
+      "bodyText": "<강릉교육지원과 프로그램 안내>",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<강릉교육지원과 프로그램 안내>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-844a9e5546bfe797",
+      "segmentType": "label_value",
+      "labelText": "강릉교육지원과에서는 강릉캠퍼스 전공박람회 개최에 따른",
+      "bodyText": "강릉교육지원과에서는 강릉캠퍼스 전공박람회 개최에 따른",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강릉교육지원과에서는 강릉캠퍼스 전공박람회 개최에 따른"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2b82fc86137da13b",
+      "segmentType": "label_value",
+      "labelText": "다양한 프로그램을 운영합니다.",
+      "bodyText": "다양한 프로그램을 운영합니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다양한 프로그램을 운영합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0c4728c0f8cf572a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "재학생 여러분의 많은 참여 부탁드립니다.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "재학생 여러분의 많은 참여 부탁드립니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dabcf4521be6a78e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "문의: 033-640-1606",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "문의: 033-640-1606"
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "label_value": 3
+    }
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3164",
+  "sourceContentHash": "062754efc10451df1a75084efdf3df4b4bec8730ac8adf593582351fe389fb4e",
+  "sourceTitle": "조교（대학회계직） 공개 채용 공고",
+  "publishedAt": "2026-02-04",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f446b793603c3704",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "조교（대학회계직） 공개 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "조교（대학회계직） 공개 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d7c8e143a77b3fff",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 응급구조학과 대학회계 조교 채용 공고",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 응급구조학과 대학회계 조교 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8d1f4783230a4c77",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 응급구조학과에서 다음과 같이 대학회계조교 공개채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 응급구조학과에서 다음과 같이 대학회계조교 공개채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 응급구조학과에서 다음과 같이 대학회계조교 공개채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-24216edf35133c07",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 채용부서 : 보건과학대학 응급구조학과(도계캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 채용부서 : 보건과학대학 응급구조학과(도계캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-987fe6a8a429350b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 채용인원 : 1명",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 채용인원 : 1명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f03074f40df2cd75",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 담당예정업무 : 학사관리, 교무관리, 학과 행정 전반업무",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 담당예정업무 : 학사관리, 교무관리, 학과 행정 전반업무"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ee3338f04879c18e",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 2. 4.(수) ~ 2. 10.(화) 18:00까지",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-04",
+          "start": 10,
+          "end": 24
+        },
+        {
+          "value": "2026-02-10",
+          "start": 27,
+          "end": 36
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "4. 접수기간 : 2026. 2. 4.(수) ~ 2. 10.(화) 18:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-68722cb2bd355384",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 기타 자세한 사항은 붙임 공고문 참고",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 기타 자세한 사항은 붙임 공고문 참고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9200028891389707",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 2. 4.강원대학교 총장",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-04",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 2. 4.강원대학교 총장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-280c7d362c4e08fe",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-02-04~2026-02-10",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-04",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-02-10",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-02-04~2026-02-10"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 3,
+      "list_item": 4,
+      "paragraph": 2,
+      "title": 1
+    }
+  }
+}

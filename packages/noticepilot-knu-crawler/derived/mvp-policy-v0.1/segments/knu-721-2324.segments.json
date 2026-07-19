@@ -1,0 +1,314 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2324",
+  "sourceContentHash": "f6eaaeb1a64ad545f5413e5b7c5ef057693343952f90a1b1b3b616c7648fe56d",
+  "sourceTitle": "2026년 푸른등대 삼성기부장학금 신규학생 선발 안내",
+  "publishedAt": "2026-03-26",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ad83c4e99de282cc",
+      "segmentType": "title",
+      "labelText": "2026년 푸른등대 삼성기부장학금 신규학생 선발 안내",
+      "bodyText": "2026년 푸른등대 삼성기부장학금 신규학생 선발 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 푸른등대 삼성기부장학금 신규학생 선발 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0f2b0dc43922c50e",
+      "segmentType": "label_value",
+      "labelText": "*대학위탁 선발로 운영하던 방식을 올해부터",
+      "bodyText": "*대학위탁 선발로 운영하던 방식을 올해부터",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "*대학위탁 선발로 운영하던 방식을 올해부터"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-decaae378d606d2f",
+      "segmentType": "label_value",
+      "labelText": "재단 직접선발",
+      "bodyText": "재단 직접선발",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "재단 직접선발"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-41f2253ee160f4b7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "방식으로 전면 개편 >",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "방식으로 전면 개편 >"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3c178ec3cfc8e51d",
+      "segmentType": "label_value",
+      "labelText": "학생 본인 직접 신청*",
+      "bodyText": "학생 본인 직접 신청*",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학생 본인 직접 신청*"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f2dcf74ba541fa46",
+      "segmentType": "label_value",
+      "labelText": "선발인원",
+      "bodyText": "1. 선발인원: 신규장학생 총 220명(대학생 200명, 대학원생 20명) 선발 예정",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [
+        "degree_level:graduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 선발인원: 신규장학생 총 220명(대학생 200명, 대학원생 20명) 선발 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3d34194035452c7d",
+      "segmentType": "label_value",
+      "labelText": "신청자격",
+      "bodyText": "2. 신청자격",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 신청자격"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4bf077503c609d60",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- (대학생) AI 핵심분야 진로 희망자(전공 제한 없음)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- (대학생) AI 핵심분야 진로 희망자(전공 제한 없음)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-80352c374cc17cd2",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- (대학원생) 인문·사회계열 학과 전공자(일반대학원 석사과정 전일제)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:graduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- (대학원생) 인문·사회계열 학과 전공자(일반대학원 석사과정 전일제)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9ae6e4fad0877390",
+      "segmentType": "label_value",
+      "labelText": "지원금액",
+      "bodyText": "3. 지원금액: (대학생) 학기당 생활비 300만 원, (대학원생) 학기당 생활비 500만 원",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:graduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 지원금액: (대학생) 학기당 생활비 300만 원, (대학원생) 학기당 생활비 500만 원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aa5390a896b8b282",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 푸른등대 삼성기부장학금은 생활비 장학금으로 타 장학금 수혜여부와 무관하게 중복 수혜가능",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 푸른등대 삼성기부장학금은 생활비 장학금으로 타 장학금 수혜여부와 무관하게 중복 수혜가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8f769234fd3ba1b7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(단, 푸른등대 기부장학금과는 동일학기 중복 수혜 불가)",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(단, 푸른등대 기부장학금과는 동일학기 중복 수혜 불가)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-269217ccbbf97b79",
+      "segmentType": "label_value",
+      "labelText": "지원기간",
+      "bodyText": "4. 지원기간: 선발 후 3년 이내, 최대 4개 학기",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 지원기간: 선발 후 3년 이내, 최대 4개 학기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-779af6570f5efb93",
+      "segmentType": "label_value",
+      "labelText": "장학금 신청 및 서류 제출",
+      "bodyText": "2026. 3. 25.(수) 09:00 ~ 4. 7.(화) 18:00",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-25",
+          "start": 19,
+          "end": 34
+        },
+        {
+          "value": "2026-04-07",
+          "start": 43,
+          "end": 51
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "5. 장학금 신청 및 서류 제출: 2026. 3. 25.(수) 09:00 ~ 4. 7.(화) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7ccc5745c99d6fe2",
+      "segmentType": "label_value",
+      "labelText": "신청서류 및 기타자료",
+      "bodyText": "6. 신청서류 및 기타자료: 붙임문서 참고",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 신청서류 및 기타자료: 붙임문서 참고"
+    }
+  ],
+  "summary": {
+    "segmentCount": 15,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 9,
+      "paragraph": 2,
+      "list_item": 3
+    }
+  }
+}

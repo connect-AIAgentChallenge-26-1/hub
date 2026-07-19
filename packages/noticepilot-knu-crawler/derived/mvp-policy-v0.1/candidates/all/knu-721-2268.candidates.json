@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-721-2268",
+  "sourceContentHash": "2224d253fa2567b230dc0430df9c4389732329c848b3416603b8adb53bb28998",
+  "sourceTitle": "2026년 울산연구원 상반기 장학생 선발 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2268&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천 삼척",
+    "campuses": [
+      "chuncheon",
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천",
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-721-2268-a15672d54175e8",
+      "uidHint": "noticepilot-cand-knu-721-2268-a15672d54175e8@noticepilot.local",
+      "sourceNoticeId": "knu-721-2268",
+      "sourceTitle": "2026년 울산연구원 상반기 장학생 선발 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2268&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-1099c08c17974e7b",
+        "segmentType": "label_value",
+        "labelText": "○ 신청기간",
+        "bodyText": "2026. 3. 25.（수） 10:00 ~ 4. 3.（금） 18:00까지",
+        "sourceLocation": {
+          "lineIndex": 0,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-25",
+            "start": 9,
+            "end": 24
+          },
+          {
+            "value": "2026-04-03",
+            "start": 33,
+            "end": 41
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "○ 신청기간",
+          "○ 신청기간 : 2026. 3. 25.（수） 10:00 ~ 4. 3.（금） 18:00까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-740c76be7a531bd6",
+        "segmentId": "seg-1099c08c17974e7b",
+        "rawText": "2026. 3. 25.（수） 10:00 ~ 4. 3.（금） 18:00까지",
+        "normalizedStart": "2026-03-25T10:00:00+09:00",
+        "normalizedEnd": "2026-04-03T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 9,
+          "end": 41
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-be137eba73cce222",
+        "sourceNoticeId": "knu-721-2268",
+        "segmentId": "seg-1099c08c17974e7b",
+        "temporalMentionIds": [
+          "tm-740c76be7a531bd6"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "○ 신청기간",
+        "evidence": "○ 신청기간 : 2026. 3. 25.（수） 10:00 ~ 4. 3.（금） 18:00까지"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026년 울산연구원 상반기 장학생 선발 안내 신청기간",
+      "dateText": "2026. 3. 25.（수） 10:00 ~ 4. 3.（금） 18:00까지",
+      "normalizedStart": "2026-03-25T10:00:00+09:00",
+      "normalizedEnd": "2026-04-03T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "○ 신청기간 : 2026. 3. 25.（수） 10:00 ~ 4. 3.（금） 18:00까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

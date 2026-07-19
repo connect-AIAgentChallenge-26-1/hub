@@ -1,0 +1,24 @@
+{
+  "schemaVersion": "noticepilot.layeredBaselineDecision.v0.1",
+  "decisionId": "s26-separate-layered-baseline-20260712",
+  "decidedAt": "2026-07-12",
+  "decision": "create_separate_layered_baseline",
+  "baselineId": "layered-s26-corpus-2059-20260712-v1",
+  "predecessorBaselineId": "policy15-corpus-2059-20260712",
+  "policy15ReplacementPerformed": false,
+  "allowlistCreated": false,
+  "acceptedPolicy15Differences": {
+    "totalChangeCount": 304,
+    "summaryChanges": 4,
+    "board716TraceEnrichmentCandidateChanges": 300,
+    "candidateIntegrityChanges": 0,
+    "reviewQueueChanges": 0,
+    "icsEventChanges": 0
+  },
+  "rationale": [
+    "Preserve the immutable Policy.15 behavioral baseline as rollback evidence.",
+    "Freeze the complete layered trace, runtime judgments, and reconciliation state independently.",
+    "Avoid a broad allowlist that would weaken future semantic regression detection."
+  ],
+  "approvalSource": "explicit_user_direction"
+}

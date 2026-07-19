@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10841",
+  "sourceContentHash": "67ffc9c2a31c4943ad9d6d18d6c9ab21007b379620c6c5caf31e05c8fb37a666",
+  "sourceTitle": "[강릉RISE사업단] 2026학년도 1학기 캡스톤디자인 및 어드벤처디자인 과제 수행팀 선정 결과 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10841&pageIndex=7&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉 원주",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10841-f3dad8e2ddb295",
+      "uidHint": "noticepilot-cand-knu-504-10841-f3dad8e2ddb295@noticepilot.local",
+      "sourceNoticeId": "knu-504-10841",
+      "sourceTitle": "[강릉RISE사업단] 2026학년도 1학기 캡스톤디자인 및 어드벤처디자인 과제 수행팀 선정 결과 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10841&pageIndex=7&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-e8d4200386234377",
+        "segmentType": "continuation",
+        "labelText": "□ 오리엔테이션 일정 안내 - 일시",
+        "bodyText": "2026. 04. 10. (금) 18:00 (약 30분 소요)",
+        "sourceLocation": {
+          "lineIndex": 8,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-4e7b83037b3171a4"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-10",
+            "start": 21,
+            "end": 38
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "□ 오리엔테이션 일정 안내 - 일시",
+          "□ 오리엔테이션 일정 안내 - 일시: 2026. 04. 10. (금) 18:00 (약 30분 소요)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-c08b612e94f2b0b7",
+        "segmentId": "seg-e8d4200386234377",
+        "rawText": "2026. 04. 10. (금)",
+        "normalizedStart": "2026-04-10T18:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 21,
+          "end": 38
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-870441a39dd71030",
+        "sourceNoticeId": "knu-504-10841",
+        "segmentId": "seg-e8d4200386234377",
+        "temporalMentionIds": [
+          "tm-c08b612e94f2b0b7"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "□ 오리엔테이션 일정 안내 - 일시",
+        "evidence": "□ 오리엔테이션 일정 안내 - 일시: 2026. 04. 10. (금) 18:00 (약 30분 소요)"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "[강릉RISE사업단] 2026학년도 1학기 캡스톤디자인 및 어드벤처디자인 과제 수행팀 선정 결과 안내 행사 일정",
+      "dateText": "2026. 04. 10. (금)",
+      "normalizedStart": "2026-04-10T18:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "□ 오리엔테이션 일정 안내 - 일시: 2026. 04. 10. (금) 18:00 (약 30분 소요)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "post_result_selected_participant_action"
+      ],
+      "reasonCodes": [
+        "completed_result_announcement",
+        "post_result_selected_participant_action",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "conditional",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "medium",
+        "ruleId": "applicability.conditional.selected_participant",
+        "reasonCodes": [
+          "post_result_selected_participant_action",
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "completed_result_announcement",
+          "post_result_selected_participant_action",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.completed_result_announcement",
+          "publishability.reason.post_result_selected_participant_action",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

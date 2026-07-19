@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10677",
+  "sourceContentHash": "fca27455c0c945186505e8ed60c0b951fc27c1ac28095524c4fc0bbff8b69189",
+  "sourceTitle": "[공자아카데미] 봄학기 중국어강좌 수강생 모집",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10677&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10677-407dff93a70ba9",
+      "uidHint": "noticepilot-cand-knu-504-10677-407dff93a70ba9@noticepilot.local",
+      "sourceNoticeId": "knu-504-10677",
+      "sourceTitle": "[공자아카데미] 봄학기 중국어강좌 수강생 모집",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10677&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-7c464f675d2e0f9c",
+        "segmentType": "continuation",
+        "labelText": "접수기간",
+        "bodyText": "2026. 3. 3.(화) ~ 3. 16.(월) 18:00까지",
+        "sourceLocation": {
+          "lineIndex": 2,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-c46579a06277007f"
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-03",
+            "start": 9,
+            "end": 23
+          },
+          {
+            "value": "2026-03-16",
+            "start": 26,
+            "end": 35
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "접수기간",
+          "1. 접수기간: 2026. 3. 3.(화) ~ 3. 16.(월) 18:00까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-d72930fb5beca2ca",
+        "segmentId": "seg-7c464f675d2e0f9c",
+        "rawText": "2026. 3. 3.(화) ~ 3. 16.(월) 18:00까지",
+        "normalizedStart": "2026-03-03T00:00:00+09:00",
+        "normalizedEnd": "2026-03-16T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 9,
+          "end": 35
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-1b4ab49d8a57bbca",
+        "sourceNoticeId": "knu-504-10677",
+        "segmentId": "seg-7c464f675d2e0f9c",
+        "temporalMentionIds": [
+          "tm-d72930fb5beca2ca"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "접수기간",
+        "evidence": "1. 접수기간: 2026. 3. 3.(화) ~ 3. 16.(월) 18:00까지"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "[공자아카데미] 봄학기 중국어강좌 수강생 모집 신청기간",
+      "dateText": "2026. 3. 3.(화) ~ 3. 16.(월) 18:00까지",
+      "normalizedStart": "2026-03-03T00:00:00+09:00",
+      "normalizedEnd": "2026-03-16T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "1. 접수기간: 2026. 3. 3.(화) ~ 3. 16.(월) 18:00까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "same_datetime_candidates_consolidated",
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": "start_of_day_assumed_for_timed_range"
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "same_datetime_candidates_consolidated",
+          "start_of_day_assumed_for_timed_range",
+          "structured_segment_grounded",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

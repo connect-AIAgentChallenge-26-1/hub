@@ -1,0 +1,362 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-719-3892",
+  "sourceContentHash": "4a388e67c85e615a3e4f6df71001e47c6401a5987c893e40f5f560b95dbdb463",
+  "sourceTitle": "★추가 모집중★ 2026년! 새해에 아마존이랑 공부하고 취업하자!",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=3892&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "삼척",
+    "campuses": [
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-719-3892-751dce9ea10d92",
+      "uidHint": "noticepilot-cand-knu-719-3892-751dce9ea10d92@noticepilot.local",
+      "sourceNoticeId": "knu-719-3892",
+      "sourceTitle": "★추가 모집중★ 2026년! 새해에 아마존이랑 공부하고 취업하자!",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=3892&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-e4a886ff823f2992",
+        "segmentType": "continuation",
+        "labelText": "오프라인 숙식 제공, AWS 탐방 프로그램 진행",
+        "bodyText": "26. 1. 19.(월) ~ 26. 1. 30.(금)/오프라인(강원대학교)",
+        "sourceLocation": {
+          "lineIndex": 2,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-45616a8276e48156"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-01-19",
+            "start": 27,
+            "end": 40
+          },
+          {
+            "value": "2026-01-30",
+            "start": 43,
+            "end": 56
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "오프라인 숙식 제공, AWS 탐방 프로그램 진행",
+          "오프라인 숙식 제공, AWS 탐방 프로그램 진행 26. 1. 19.(월) ~ 26. 1. 30.(금)/오프라인(강원대학교)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-b6abc9be5dd3677e",
+        "segmentId": "seg-e4a886ff823f2992",
+        "rawText": "26. 1. 19.(월) ~ 26. 1. 30.(금)/오프라인(강원대학교)",
+        "normalizedStart": "2026-01-19",
+        "normalizedEnd": "2026-01-30",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 27,
+          "end": 56
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-a3e682027637cc21",
+        "sourceNoticeId": "knu-719-3892",
+        "segmentId": "seg-e4a886ff823f2992",
+        "temporalMentionIds": [
+          "tm-b6abc9be5dd3677e"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "오프라인 숙식 제공, AWS 탐방 프로그램 진행",
+        "evidence": "오프라인 숙식 제공, AWS 탐방 프로그램 진행 26. 1. 19.(월) ~ 26. 1. 30.(금)/오프라인(강원대학교)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "★추가 모집중★ 2026년! 새해에 아마존이랑 공부하고 취업하자! 행사 기간",
+      "dateText": "26. 1. 19.(월) ~ 26. 1. 30.(금)/오프라인(강원대학교)",
+      "normalizedStart": "2026-01-19",
+      "normalizedEnd": "2026-01-30",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "오프라인 숙식 제공, AWS 탐방 프로그램 진행 26. 1. 19.(월) ~ 26. 1. 30.(금)/오프라인(강원대학교)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-719-3892-cdac16d7536aa2",
+      "uidHint": "noticepilot-cand-knu-719-3892-cdac16d7536aa2@noticepilot.local",
+      "sourceNoticeId": "knu-719-3892",
+      "sourceTitle": "★추가 모집중★ 2026년! 새해에 아마존이랑 공부하고 취업하자!",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=3892&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-bd9594bb4e64c175",
+        "segmentType": "paragraph",
+        "labelText": "",
+        "bodyText": "2026. 2. 6.(금) AWS 기업탐방",
+        "sourceLocation": {
+          "lineIndex": 4,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-06",
+            "start": 0,
+            "end": 14
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "2026. 2. 6.(금) AWS 기업탐방",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-d34c5e760f74d5e2",
+        "segmentId": "seg-bd9594bb4e64c175",
+        "rawText": "2026. 2. 6.(금)",
+        "normalizedStart": "2026-02-06",
+        "normalizedEnd": "2026-02-06",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 0,
+          "end": 14
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-068257559584439b",
+        "sourceNoticeId": "knu-719-3892",
+        "segmentId": "seg-bd9594bb4e64c175",
+        "temporalMentionIds": [
+          "tm-d34c5e760f74d5e2"
+        ],
+        "bindingKind": "same_paragraph",
+        "confidence": "high",
+        "ruleId": "binding.same_paragraph",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "2026. 2. 6.(금) AWS 기업탐방"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "★추가 모집중★ 2026년! 새해에 아마존이랑 공부하고 취업하자! 행사 일정",
+      "dateText": "2026. 2. 6.(금)",
+      "normalizedStart": "2026-02-06",
+      "normalizedEnd": "2026-02-06",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "2026. 2. 6.(금) AWS 기업탐방",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 2,
+    "calendarFeedIncludedCount": 0
+  }
+}

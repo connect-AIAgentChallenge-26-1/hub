@@ -1,0 +1,221 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4744",
+  "sourceContentHash": "da73ca1775ec188eff3a5f44c4681c93c585b1a7a755476891a53c69ff05a620",
+  "sourceTitle": "기계융합공학부(원주캠퍼스) 임시조교 채용 서류전형 합격자 및 면접일정 안내",
+  "publishedAt": "2026-05-07",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f340b1d3f637a4d7",
+      "segmentType": "title",
+      "labelText": "기계융합공학부(원주캠퍼스) 임시조교 채용 서류전형 합격자 및 면접일정 안내",
+      "bodyText": "기계융합공학부(원주캠퍼스) 임시조교 채용 서류전형 합격자 및 면접일정 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기계융합공학부(원주캠퍼스) 임시조교 채용 서류전형 합격자 및 면접일정 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-08b1804a6b3c1f62",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 기계융합공학부(원주캠퍼스) 임시조교[기간제 계약직] 채용 서류전형 합격자를 다음과 같이 알려드립니다.",
+      "bodyText": "강원대학교 기계융합공학부(원주캠퍼스) 임시조교[기간제 계약직] 채용 서류전형 합격자를 다음과 같이 알려드립니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 기계융합공학부(원주캠퍼스) 임시조교[기간제 계약직] 채용 서류전형 합격자를 다음과 같이 알려드립니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d85ba46bbfe35915",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "서류전형 합격: 김 O 진 (핸드폰 뒷자리 4241)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "서류전형 합격: 김 O 진 (핸드폰 뒷자리 4241)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1608818c51f4a28c",
+      "segmentType": "label_value",
+      "labelText": "서류전형 합격자는 면접일정에 따라 면접전형을 응시하여 주시기 바랍니다.",
+      "bodyText": "서류전형 합격자는 면접일정에 따라 면접전형을 응시하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "서류전형 합격자는 면접일정에 따라 면접전형을 응시하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bad1b660c5b44720",
+      "segmentType": "label_value",
+      "labelText": "[면접일정]",
+      "bodyText": "[면접일정]",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[면접일정]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-44ece86730a93dd0",
+      "segmentType": "continuation",
+      "labelText": "일시",
+      "bodyText": "2026. 5. 12.(화) 14:00",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-bad1b660c5b44720"
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-12",
+          "start": 14,
+          "end": 29
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "[면접일정] 1. 일시: 2026. 5. 12.(화) 14:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-441e6efa162e483c",
+      "segmentType": "label_value",
+      "labelText": "일시",
+      "bodyText": "2026. 5. 12.(화) 14:00",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-12",
+          "start": 7,
+          "end": 22
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "1. 일시: 2026. 5. 12.(화) 14:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-53a03cbfb3eb9b1f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 장소: 강원대학교 원주캠퍼스 본관(W3) 1층 101-5 제11행정실",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 장소: 강원대학교 원주캠퍼스 본관(W3) 1층 101-5 제11행정실"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fa2868990c1151b0",
+      "segmentType": "label_value",
+      "labelText": "면접대상자는 면접시간 30분 전까지 면접대기실로 입실하여 주시기 바랍니다.",
+      "bodyText": "3. 면접대상자는 면접시간 30분 전까지 면접대기실로 입실하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 면접대상자는 면접시간 30분 전까지 면접대기실로 입실하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9ca7fa4f1b3a11e3",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 문의사항: 033-760-8022 제11행정실 채용담당자",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 문의사항: 033-760-8022 제11행정실 채용담당자"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 5,
+      "paragraph": 1,
+      "continuation": 1,
+      "list_item": 2
+    }
+  }
+}

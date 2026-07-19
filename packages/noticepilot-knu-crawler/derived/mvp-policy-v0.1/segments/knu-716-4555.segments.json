@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4555",
+  "sourceContentHash": "aa98930ad27d1c60e4bb3d44915fb4eda6912d36abfa62304bc39835d4da58d9",
+  "sourceTitle": "소비조합 기간제근로자（조리원） 신규채용 서류전형 합격자 발표 및 면접전형 안내",
+  "publishedAt": "2026-02-27",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6d6649ea3eb5a311",
+      "segmentType": "title",
+      "labelText": "소비조합 기간제근로자（조리원） 신규채용 서류전형 합격자 발표 및 면접전형 안내",
+      "bodyText": "소비조합 기간제근로자（조리원） 신규채용 서류전형 합격자 발표 및 면접전형 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "소비조합 기간제근로자（조리원） 신규채용 서류전형 합격자 발표 및 면접전형 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ee695cd626b6bc44",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 서류전형 합격자",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 서류전형 합격자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5a71c82e15f8e244",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 조리원 : 응시번호 1번 허*영",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 조리원 : 응시번호 1번 허*영"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c0ca24ca6076dd70",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "응시번호 2번 이 *자",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "응시번호 2번 이 *자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-800b4380dbc38b75",
+      "segmentType": "label_value",
+      "labelText": "면접전형 일정 공고",
+      "bodyText": "2. 면접전형 일정 공고",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 면접전형 일정 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-895254c244b2a85f",
+      "segmentType": "label_value",
+      "labelText": "면접일시",
+      "bodyText": "2026. 3. 3.（화）, 13:40",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 9,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 면접일시 : 2026. 3. 3.（화）, 13:40"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4fe60192c0df6f66",
+      "segmentType": "label_value",
+      "labelText": "면접장소",
+      "bodyText": "- 면접장소 : 그린에너지연구관 10층 소회의실（1002호）",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 면접장소 : 그린에너지연구관 10층 소회의실（1002호）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8eda609fd0ad8046",
+      "segmentType": "label_value",
+      "labelText": "면접대기",
+      "bodyText": "- 면접대기 : 그린에너지연구관 10층 카페",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 면접대기 : 그린에너지연구관 10층 카페"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f737d52eae2e9135",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 입실시간（13:20）을 엄수하여 면접대기 장소 입실",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 입실시간（13:20）을 엄수하여 면접대기 장소 입실"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6147d413068d4618",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "신분증 지참（주민등록증, 운전면허증）",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신분증 지참（주민등록증, 운전면허증）"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 3,
+      "paragraph": 2,
+      "label_value": 4
+    }
+  }
+}

@@ -1,0 +1,519 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-5638",
+  "sourceContentHash": "bde24859c77c0c002291f054a2b736e7b82b840d9632c3c04a64b872e8069082",
+  "sourceTitle": "2026학년도 KNU SPARK B 멘토링 프로그램 참가자 모집（~1.23）",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5638&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-5638-075c3e6a4b5319",
+      "uidHint": "noticepilot-cand-knu-504-5638-075c3e6a4b5319@noticepilot.local",
+      "sourceNoticeId": "knu-504-5638",
+      "sourceTitle": "2026학년도 KNU SPARK B 멘토링 프로그램 참가자 모집（~1.23）",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5638&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-a603fddc96bab017",
+        "segmentType": "title",
+        "labelText": "2026학년도 KNU SPARK B 멘토링 프로그램 참가자 모집（~",
+        "bodyText": "1.23）",
+        "sourceLocation": {
+          "lineIndex": -1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-01-23",
+            "start": 37,
+            "end": 41
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "low",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "2026학년도 KNU SPARK B 멘토링 프로그램 참가자 모집（~",
+          "2026학년도 KNU SPARK B 멘토링 프로그램 참가자 모집（~1.23）",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-e9d697ab88eb934a",
+        "segmentId": "seg-a603fddc96bab017",
+        "rawText": "1.23",
+        "normalizedStart": "2026-01-23",
+        "normalizedEnd": "2026-01-23",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 37,
+          "end": 41
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-0ca823727f809417",
+        "sourceNoticeId": "knu-504-5638",
+        "segmentId": "seg-a603fddc96bab017",
+        "temporalMentionIds": [
+          "tm-e9d697ab88eb934a"
+        ],
+        "bindingKind": "title_context",
+        "confidence": "low",
+        "ruleId": "binding.title_context",
+        "locallyGrounded": false,
+        "labelText": "2026학년도 KNU SPARK B 멘토링 프로그램 참가자 모집（~",
+        "evidence": "2026학년도 KNU SPARK B 멘토링 프로그램 참가자 모집（~1.23）"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 KNU SPARK B 멘토링 프로그램 참가자 모집（~1.23） 신청 마감",
+      "dateText": "1.23",
+      "normalizedStart": "2026-01-23",
+      "normalizedEnd": "2026-01-23",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "2026학년도 KNU SPARK B 멘토링 프로그램 참가자 모집（~1.23）",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5638-e8a4840b7496a8",
+      "uidHint": "noticepilot-cand-knu-504-5638-e8a4840b7496a8@noticepilot.local",
+      "sourceNoticeId": "knu-504-5638",
+      "sourceTitle": "2026학년도 KNU SPARK B 멘토링 프로그램 참가자 모집（~1.23）",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5638&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-5e8f65df8b22f0ce",
+        "segmentType": "continuation",
+        "labelText": "신청 링크: https://forms.gle/n1s49dw2WReJ6sAG7 선발 결과",
+        "bodyText": "1월 26일(월)까지 이메일 개별 안내",
+        "sourceLocation": {
+          "lineIndex": 33,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-1353268915319144"
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-01-26",
+            "start": 52,
+            "end": 61
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "신청 링크: https://forms.gle/n1s49dw2WReJ6sAG7 선발 결과",
+          "- 신청 링크: https://forms.gle/n1s49dw2WReJ6sAG7 선발 결과: 1월 26일(월)까지 이메일 개별 안내",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-7bb3385b9a88b63a",
+        "segmentId": "seg-5e8f65df8b22f0ce",
+        "rawText": "1월 26일(월)",
+        "normalizedStart": "2026-01-26",
+        "normalizedEnd": "2026-01-26",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 52,
+          "end": 61
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-700435c5c4440ba5",
+        "sourceNoticeId": "knu-504-5638",
+        "segmentId": "seg-5e8f65df8b22f0ce",
+        "temporalMentionIds": [
+          "tm-7bb3385b9a88b63a"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "신청 링크: https://forms.gle/n1s49dw2WReJ6sAG7 선발 결과",
+        "evidence": "- 신청 링크: https://forms.gle/n1s49dw2WReJ6sAG7 선발 결과: 1월 26일(월)까지 이메일 개별 안내"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 KNU SPARK B 멘토링 프로그램 참가자 모집（~1.23） 결과 발표 예정",
+      "dateText": "1월 26일(월)",
+      "normalizedStart": "2026-01-26",
+      "normalizedEnd": "2026-01-26",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "- 신청 링크: https://forms.gle/n1s49dw2WReJ6sAG7 선발 결과: 1월 26일(월)까지 이메일 개별 안내",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5638-99566ca2abeb24",
+      "uidHint": "noticepilot-cand-knu-504-5638-99566ca2abeb24@noticepilot.local",
+      "sourceNoticeId": "knu-504-5638",
+      "sourceTitle": "2026학년도 KNU SPARK B 멘토링 프로그램 참가자 모집（~1.23）",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5638&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-02cdae33417eff07",
+        "segmentType": "paragraph",
+        "labelText": "",
+        "bodyText": "1월 28일(수) 15:00 오리엔테이션 예정 (필참)",
+        "sourceLocation": {
+          "lineIndex": 35,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-01-28",
+            "start": 0,
+            "end": 9
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "1월 28일(수) 15:00 오리엔테이션 예정 (필참)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-3ac264f78331ae34",
+        "segmentId": "seg-02cdae33417eff07",
+        "rawText": "1월 28일(수)",
+        "normalizedStart": "2026-01-28T15:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 0,
+          "end": 9
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-75a5a0860606228c",
+        "sourceNoticeId": "knu-504-5638",
+        "segmentId": "seg-02cdae33417eff07",
+        "temporalMentionIds": [
+          "tm-3ac264f78331ae34"
+        ],
+        "bindingKind": "same_paragraph",
+        "confidence": "high",
+        "ruleId": "binding.same_paragraph",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "1월 28일(수) 15:00 오리엔테이션 예정 (필참)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 KNU SPARK B 멘토링 프로그램 참가자 모집（~1.23） 행사 일정",
+      "dateText": "1월 28일(수)",
+      "normalizedStart": "2026-01-28T15:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "1월 28일(수) 15:00 오리엔테이션 예정 (필참)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 3,
+    "autoConfirmedCount": 3,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 3
+  }
+}

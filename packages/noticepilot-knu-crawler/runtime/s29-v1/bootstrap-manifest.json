@@ -1,0 +1,46 @@
+{
+  "counts": {
+    "calendar_event": 900,
+    "calendar_event_candidate": 1304,
+    "calendar_event_revision": 901,
+    "calendar_event_source_link": 909,
+    "candidate_event_assignment": 909,
+    "cross_notice_relation_decision": 343,
+    "extraction_run": 2059,
+    "feed_snapshot": 2,
+    "feed_snapshot_event": 900,
+    "source_notice": 2059,
+    "subscription_profile_head": 2,
+    "subscription_profile_revision": 2
+  },
+  "generatedAt": "2026-07-13T20:30:00+09:00",
+  "integrity": {
+    "bootstrapBundleSha256": "993cf03aeafed649e67a6bbe5c91353df9494ff1b2207f02234862b337bc2194",
+    "projectionIdSha256": "566b11ab12a14d2911727cb04a3318329cd69f92ec8b770e3acceb50806bdda5",
+    "projectionManifestFileSha256": "922eacc5a270f5119d0e86892d961ed742486b35b6a65d7a0d1642119820481f",
+    "registryIdSha256": "c872c47d33551362364498b1eccee0efe9eb3942be62e6d1498b2cae8888b164",
+    "registryManifestFileSha256": "47fa8e232254df978575f31e06d555c20cf5f50e99862dc8ae0e772a7e4a03dc",
+    "snapshotManifestFileSha256": "975a23a8cb932d5b6f5511f3ef9b15869aba95985a482ce075ee18d351675895",
+    "snapshotSetIdSha256": "4eb5374bc5a10b88ef432c89250e7adf2cf82b7220e6159fe15d6fbda37da844"
+  },
+  "schemaVersion": "noticepilot.postgresBootstrapBundle.v0.1",
+  "sourceContext": {
+    "projectionId": "s27d-registry-ics-projection-20260713-v1",
+    "registryId": "s27c-publishable-corpus-20260713-v1",
+    "snapshotSetId": "snapset_874ba65cc0b7e371837e5ab3b9887ee6"
+  },
+  "tableOrder": [
+    "source_notice",
+    "extraction_run",
+    "calendar_event_candidate",
+    "calendar_event",
+    "calendar_event_revision",
+    "calendar_event_source_link",
+    "candidate_event_assignment",
+    "cross_notice_relation_decision",
+    "subscription_profile_revision",
+    "subscription_profile_head",
+    "feed_snapshot",
+    "feed_snapshot_event"
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3062",
+  "sourceContentHash": "5e8f4356bc6dcb5cb0b2892a8082300feec15dbbf082ef9832eac2313db1e662",
+  "sourceTitle": "강원대학교 학생생활관 기간제 계약직（조교） 채용 공고",
+  "publishedAt": "2026-01-07",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b1a5712f774f0fa5",
+      "segmentType": "title",
+      "labelText": "강원대학교 학생생활관 기간제 계약직（조교） 채용 공고",
+      "bodyText": "강원대학교 학생생활관 기간제 계약직（조교） 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 학생생활관 기간제 계약직（조교） 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3c5115ee89b046e1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-4호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-4호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-91b1193456837c3e",
+      "segmentType": "label_value",
+      "labelText": "<강원대학교 학생생활관 기간제 계약직(조교) 채용 공고>",
+      "bodyText": "<강원대학교 학생생활관 기간제 계약직(조교) 채용 공고>",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<강원대학교 학생생활관 기간제 계약직(조교) 채용 공고>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38a468dfe279ac02",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 학생생활관에서 다음과 같이 기간제 계약직(조교) 채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 학생생활관에서 다음과 같이 기간제 계약직(조교) 채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 학생생활관에서 다음과 같이 기간제 계약직(조교) 채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bfb34697d9b23138",
+      "segmentType": "continuation",
+      "labelText": "강원대학교 학생생활관에서 다음과 같이 기간제 계약직(조교) 채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "2026. 1. 7.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-38a468dfe279ac02"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-07",
+          "start": 68,
+          "end": 78
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "강원대학교 학생생활관에서 다음과 같이 기간제 계약직(조교) 채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다. 2026. 1. 7."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-88eed0c0c8cec76e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 1. 7.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-07",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 1. 7."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-912248c2739236bb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교총장",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교총장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-ddacffa534b63a1e",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-01-08~2026-01-22",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-08",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-01-22",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-01-08~2026-01-22"
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "continuation": 1,
+      "label_value": 3,
+      "paragraph": 3,
+      "title": 1
+    }
+  }
+}

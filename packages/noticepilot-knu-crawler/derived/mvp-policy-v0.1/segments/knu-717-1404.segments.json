@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-717-1404",
+  "sourceContentHash": "3673af6d224a57d2c7d69627618a012c78127b3b88b426ba9ce389f098f618c4",
+  "sourceTitle": "2026 강원지역 기업탐방(만앤휴멜코리아)",
+  "publishedAt": "2026-04-20",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-043d32d165ee98f8",
+      "segmentType": "title",
+      "labelText": "2026 강원지역 기업탐방(만앤휴멜코리아)",
+      "bodyText": "2026 강원지역 기업탐방(만앤휴멜코리아)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026 강원지역 기업탐방(만앤휴멜코리아)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bb91732b5ecc7d1d",
+      "segmentType": "label_value",
+      "labelText": "신청기한",
+      "bodyText": "2026. 4. 24.(금) 18시 마감",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-24",
+          "start": 8,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 신청기한: 2026. 4. 24.(금) 18시 마감"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0bc66e5fe92c50a4",
+      "segmentType": "label_value",
+      "labelText": "신청방법: 네이버폼 응답(https",
+      "bodyText": "- 신청방법: 네이버폼 응답(https://naver.me/F05KSH7f )",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 신청방법: 네이버폼 응답(https://naver.me/F05KSH7f )"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fc0e0babe3146f3d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 참가확인증 및 공결협조 가능",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 참가확인증 및 공결협조 가능"
+    }
+  ],
+  "summary": {
+    "segmentCount": 4,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "list_item": 1
+    }
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-717-1403",
+  "sourceContentHash": "9158adbd606a993df4324c2eda415c4cdbbb305e36fba10fb4934fd63ea91d07",
+  "sourceTitle": "(졸특)2026 취업부트캠프 K-밀크;밀착마크 프로그램 참가자 모집",
+  "publishedAt": "2026-04-20",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-54ff64120be74bca",
+      "segmentType": "title",
+      "labelText": "(졸특)2026 취업부트캠프 K-밀크;밀착마크 프로그램 참가자 모집",
+      "bodyText": "(졸특)2026 취업부트캠프 K-밀크;밀착마크 프로그램 참가자 모집",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(졸특)2026 취업부트캠프 K-밀크;밀착마크 프로그램 참가자 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b8ac2e7f316c1feb",
+      "segmentType": "label_value",
+      "labelText": "신청링크",
+      "bodyText": "신청링크:",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청링크:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-77dcc95ddcd2e28b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://forms.gle/ZpKFn9VAE5dDYyhZ6",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://forms.gle/ZpKFn9VAE5dDYyhZ6"
+    }
+  ],
+  "summary": {
+    "segmentCount": 3,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "paragraph": 1
+    }
+  }
+}

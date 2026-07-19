@@ -1,0 +1,536 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2310",
+  "sourceContentHash": "f79e3469c7b4122e2971ba860896bfd6cda8867a59ce6672d9951dbe730c5172",
+  "sourceTitle": "[강원인재원] 2026년도 주거비 장학생 선발 안내",
+  "publishedAt": "2026-03-16",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-33f53c431330b413",
+      "segmentType": "title",
+      "labelText": "[강원인재원] 2026년도 주거비 장학생 선발 안내",
+      "bodyText": "[강원인재원] 2026년도 주거비 장학생 선발 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[강원인재원] 2026년도 주거비 장학생 선발 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ebe65d2a531e65ac",
+      "segmentType": "label_value",
+      "labelText": "[강원인재원] 2026년도 주거비 장학생 선발 안내",
+      "bodyText": "[강원인재원] 2026년도 주거비 장학생 선발 안내",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[강원인재원] 2026년도 주거비 장학생 선발 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5823f96c08fc1285",
+      "segmentType": "label_value",
+      "labelText": "선발인원",
+      "bodyText": "1. 선발인원: 300명 (도내 고교 출신 230명, 타 시도 출신 70명)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 선발인원: 300명 (도내 고교 출신 230명, 타 시도 출신 70명)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3cb6d9fc073f4224",
+      "segmentType": "label_value",
+      "labelText": "지원금액",
+      "bodyText": "2. 지원금액: 1인 100만원(주거비 장학금)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 지원금액: 1인 100만원(주거비 장학금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-49fc3498ad5f5b8c",
+      "segmentType": "label_value",
+      "labelText": "선발대상",
+      "bodyText": "3. 선발대상",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 선발대상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0dadcf3d1b8945ab",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "가. 도내 고교 출신",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 도내 고교 출신"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-86c8deacdb2503a0",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 강원특별자치도 내 고등학교를 졸업한 도내 대학교 재학생",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 강원특별자치도 내 고등학교를 졸업한 도내 대학교 재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4ea73a2d38d45961",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 본인이 도내 1년 이상 주민등록을 두고 있는 자",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 본인이 도내 1년 이상 주민등록을 두고 있는 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f354a5ce3f50aed3",
+      "segmentType": "label_value",
+      "labelText": "한국장학재단 학자금 지원구간 5구간 이하인자('26.1학기 기준)",
+      "bodyText": "- 한국장학재단 학자금 지원구간 5구간 이하인자('26.1학기 기준)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 한국장학재단 학자금 지원구간 5구간 이하인자('26.1학기 기준)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0ee8bf97907d3d5a",
+      "segmentType": "label_value",
+      "labelText": "장학금 지급 연도에 본인 또는 보호자 명의로 소속 학교 소재 지역에",
+      "bodyText": "- 장학금 지급 연도에 본인 또는 보호자 명의로 소속 학교 소재 지역에",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 장학금 지급 연도에 본인 또는 보호자 명의로 소속 학교 소재 지역에"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4cfdd0ef284a59ab",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "4개월 이상 계약을 체결하고 거주한 자 또는 거중인 자",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4개월 이상 계약을 체결하고 거주한 자 또는 거중인 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-244cebd2e0b1cc32",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "나. 타 시도 출신",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 타 시도 출신"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bd4a34c234a65c28",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 본인이 도내 1년 이상 주민등록을 두고 있는 도내 대학교 재학생",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 본인이 도내 1년 이상 주민등록을 두고 있는 도내 대학교 재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f7ad1cbe304ad95f",
+      "segmentType": "label_value",
+      "labelText": "장학금 지급 연도에 본인 또는 보호자 명의로 소속 학교 소재 지역에",
+      "bodyText": "- 장학금 지급 연도에 본인 또는 보호자 명의로 소속 학교 소재 지역에",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 장학금 지급 연도에 본인 또는 보호자 명의로 소속 학교 소재 지역에"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b5f5a22080dd4a81",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "4개월 이상 계약을 체결하고 거주한 자 또는 거중인 자",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4개월 이상 계약을 체결하고 거주한 자 또는 거중인 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d6f99f6ffbd089f3",
+      "segmentType": "label_value",
+      "labelText": "지원 제외 대상",
+      "bodyText": "※ 지원 제외 대상: 공고일 현재 정부(국토교통부에서 시행하는 '청년월세 한시 특별지원') 및 한국장학재단 주거안정장학금",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 지원 제외 대상: 공고일 현재 정부(국토교통부에서 시행하는 '청년월세 한시 특별지원') 및 한국장학재단 주거안정장학금"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ff4eff8db4997a6a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "도내 18개 시군 장학사업 중 유사 장학금(주거비) 수혜자, 기숙사 거주자",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "도내 18개 시군 장학사업 중 유사 장학금(주거비) 수혜자, 기숙사 거주자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-96062a0b82acb489",
+      "segmentType": "label_value",
+      "labelText": "선발기준",
+      "bodyText": "4. 선발기준",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 선발기준"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a45343c854dd9c31",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "가. 도내 고교 출신: 학자금 지원 구간이 낮은 순 선발, 동점 시 우선순위에 따름 * 1학년은 부모의 건강보험료가 낮은 순",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "student_year:1"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 도내 고교 출신: 학자금 지원 구간이 낮은 순 선발, 동점 시 우선순위에 따름 * 1학년은 부모의 건강보험료가 낮은 순"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-744ba4bd3e0f9250",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "나. 타 시도 출신: 강원특별자치도 거주 기간이 긴 순 선발, 동점 시 우선 순위에 따름",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 타 시도 출신: 강원특별자치도 거주 기간이 긴 순 선발, 동점 시 우선 순위에 따름"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1f379e762bd2159b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 동점 시 우선순위:",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 동점 시 우선순위:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-543f4f83f844ddca",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "① 직전 학기까지 전체 학기의 성적",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 1,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "① 직전 학기까지 전체 학기의 성적"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c79cb3dfb8b0d1d9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "② 다자녀 가구(자녀 2인 이상)",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 2,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "② 다자녀 가구(자녀 2인 이상)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-91d8bf9b58f59a04",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "③ 장애 또는 위탁가정",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 3,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "③ 장애 또는 위탁가정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-01e2f05740cf5deb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "5",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ef7563a10c34b00b",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "3. 19.(목) ~ 4. 9.(목) 18:00까지",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-19",
+          "start": 8,
+          "end": 17
+        },
+        {
+          "value": "2026-04-09",
+          "start": 20,
+          "end": 28
+        }
+      ],
+      "locallyGrounded": true,
+      "text": ". 신청기간: 3. 19.(목) ~ 4. 9.(목) 18:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-783338a407bb5439",
+      "segmentType": "label_value",
+      "labelText": "신청방법: 강원인재원 누리집(http",
+      "bodyText": "6. 신청방법: 강원인재원 누리집(http://injae.gwd.go.kr/injae) 온라인 접수",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 신청방법: 강원인재원 누리집(http://injae.gwd.go.kr/injae) 온라인 접수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0c45bc84fdd8dd8b",
+      "segmentType": "label_value",
+      "labelText": "제출서류 및 기타사항",
+      "bodyText": "7. 제출서류 및 기타사항: 붙임파일 공고문 참고",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "7. 제출서류 및 기타사항: 붙임파일 공고문 참고"
+    }
+  ],
+  "summary": {
+    "segmentCount": 28,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 12,
+      "list_item": 11,
+      "paragraph": 4
+    }
+  }
+}

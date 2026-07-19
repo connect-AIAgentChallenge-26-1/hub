@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-3909",
+  "sourceContentHash": "7b2c41cd0a57c97167cb2454db6fc554c5a69a90a5fef8b427587179c8b981d2",
+  "sourceTitle": "어린이 영어교육 전문가과정[YL TESOL） 모집 안내",
+  "publishedAt": "2026-01-21",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-579221f62f59fdb2",
+      "segmentType": "title",
+      "labelText": "어린이 영어교육 전문가과정[YL TESOL） 모집 안내",
+      "bodyText": "어린이 영어교육 전문가과정[YL TESOL） 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "어린이 영어교육 전문가과정[YL TESOL） 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d60b594b6051d03c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 02-3475-2371(서울교육대학교 국제어학원)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 02-3475-2371(서울교육대학교 국제어학원)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

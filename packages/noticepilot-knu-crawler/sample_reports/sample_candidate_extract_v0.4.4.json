@@ -1,0 +1,67 @@
+{
+  "extractorVersion": "0.4.4",
+  "noticeCount": 2,
+  "candidateCount": 3,
+  "autoConfirmedCount": 2,
+  "needsReviewCount": 1,
+  "campusSummary": {
+    "gangneung_wonju": {
+      "label": "강릉원주",
+      "candidateCount": 1,
+      "autoConfirmedCount": 1,
+      "needsReviewCount": 0,
+      "calendarFeedIncludedCount": 1
+    },
+    "samcheok": {
+      "label": "삼척",
+      "candidateCount": 2,
+      "autoConfirmedCount": 1,
+      "needsReviewCount": 1,
+      "calendarFeedIncludedCount": 1
+    }
+  },
+  "items": [
+    {
+      "noticeId": "knu-720-2511",
+      "path": "samples/extracted/candidates/knu-720-2511.candidates.json",
+      "sourceCampusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "candidateCount": 2,
+      "autoConfirmedCount": 1,
+      "needsReviewCount": 1,
+      "calendarFeedIncludedCount": 1
+    },
+    {
+      "noticeId": "knu-721-2433",
+      "path": "samples/extracted/candidates/knu-721-2433.candidates.json",
+      "sourceCampusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "candidateCount": 1,
+      "autoConfirmedCount": 1,
+      "needsReviewCount": 0,
+      "calendarFeedIncludedCount": 1
+    }
+  ]
+}
+
+Saved: samples/extracted/candidates/candidate_extraction_report.json

@@ -1,0 +1,527 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10704",
+  "sourceContentHash": "94a07fde8c35371298fb63aa7a4c8dd949b075275571d1081e287c6cb2d8fbf8",
+  "sourceTitle": "중국음식 원데이 쿠킹클래스 참가자 모집",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10704&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10704-a6d15dcc957895",
+      "uidHint": "noticepilot-cand-knu-504-10704-a6d15dcc957895@noticepilot.local",
+      "sourceNoticeId": "knu-504-10704",
+      "sourceTitle": "중국음식 원데이 쿠킹클래스 참가자 모집",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10704&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-d1bf67959c4c61d0",
+        "segmentType": "paragraph",
+        "labelText": "",
+        "bodyText": "2026. 4. 6.(월) 10시 ~ 4. 9.(목) 17시, 선착순 모집",
+        "sourceLocation": {
+          "lineIndex": 9,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-06",
+            "start": 0,
+            "end": 14
+          },
+          {
+            "value": "2026-04-09",
+            "start": 21,
+            "end": 29
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "2026. 4. 6.(월) 10시 ~ 4. 9.(목) 17시, 선착순 모집",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-d3e7852b51249d70",
+        "segmentId": "seg-d1bf67959c4c61d0",
+        "rawText": "2026. 4. 6.(월) 10시 ~ 4. 9.(목) 17시, 선착순 모집",
+        "normalizedStart": "2026-04-06T10:00:00+09:00",
+        "normalizedEnd": "2026-04-09T17:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 0,
+          "end": 29
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-913eef368193fd79",
+        "sourceNoticeId": "knu-504-10704",
+        "segmentId": "seg-d1bf67959c4c61d0",
+        "temporalMentionIds": [
+          "tm-d3e7852b51249d70"
+        ],
+        "bindingKind": "same_paragraph",
+        "confidence": "high",
+        "ruleId": "binding.same_paragraph",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "2026. 4. 6.(월) 10시 ~ 4. 9.(목) 17시, 선착순 모집"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "중국음식 원데이 쿠킹클래스 참가자 모집 신청기간",
+      "dateText": "2026. 4. 6.(월) 10시 ~ 4. 9.(목) 17시, 선착순 모집",
+      "normalizedStart": "2026-04-06T10:00:00+09:00",
+      "normalizedEnd": "2026-04-09T17:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "2026. 4. 6.(월) 10시 ~ 4. 9.(목) 17시, 선착순 모집",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10704-b1afc178cec0d7",
+      "uidHint": "noticepilot-cand-knu-504-10704-b1afc178cec0d7@noticepilot.local",
+      "sourceNoticeId": "knu-504-10704",
+      "sourceTitle": "중국음식 원데이 쿠킹클래스 참가자 모집",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10704&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-430057a4a39f1f26",
+        "segmentType": "label_value",
+        "labelText": "선발발표",
+        "bodyText": "2026. 4. 10.(금) 오후, 공자아카데미 홈페이지 공고",
+        "sourceLocation": {
+          "lineIndex": 14,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "result_announcement"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-10",
+            "start": 9,
+            "end": 24
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "선발발표",
+          "9. 선발발표: 2026. 4. 10.(금) 오후, 공자아카데미 홈페이지 공고",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-f920e58e37a5397e",
+        "segmentId": "seg-430057a4a39f1f26",
+        "rawText": "2026. 4. 10.(금)",
+        "normalizedStart": "2026-04-10",
+        "normalizedEnd": "2026-04-10",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 9,
+          "end": 24
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-aea033011d923ccf",
+        "sourceNoticeId": "knu-504-10704",
+        "segmentId": "seg-430057a4a39f1f26",
+        "temporalMentionIds": [
+          "tm-f920e58e37a5397e"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "선발발표",
+        "evidence": "9. 선발발표: 2026. 4. 10.(금) 오후, 공자아카데미 홈페이지 공고"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "중국음식 원데이 쿠킹클래스 참가자 모집 결과 발표 예정",
+      "dateText": "2026. 4. 10.(금)",
+      "normalizedStart": "2026-04-10",
+      "normalizedEnd": "2026-04-10",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "9. 선발발표: 2026. 4. 10.(금) 오후, 공자아카데미 홈페이지 공고",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10704-1111fa1446cf0f",
+      "uidHint": "noticepilot-cand-knu-504-10704-1111fa1446cf0f@noticepilot.local",
+      "sourceNoticeId": "knu-504-10704",
+      "sourceTitle": "중국음식 원데이 쿠킹클래스 참가자 모집",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10704&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-209bfe72bad67e2e",
+        "segmentType": "continuation",
+        "labelText": "행사일시",
+        "bodyText": "2026. 4. 24.(금) 10시 ~ 12시",
+        "sourceLocation": {
+          "lineIndex": 3,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-b0017996d8225317"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-24",
+            "start": 9,
+            "end": 24
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "행사일시",
+          "2. 행사일시: 2026. 4. 24.(금) 10시 ~ 12시",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-98a4538cdc06154a",
+        "segmentId": "seg-209bfe72bad67e2e",
+        "rawText": "2026. 4. 24.(금) 10시 ~ 12시",
+        "normalizedStart": "2026-04-24T10:00:00+09:00",
+        "normalizedEnd": "2026-04-24T12:00:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 9,
+          "end": 24
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-f3e1f7fd0e621255",
+        "sourceNoticeId": "knu-504-10704",
+        "segmentId": "seg-209bfe72bad67e2e",
+        "temporalMentionIds": [
+          "tm-98a4538cdc06154a"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "행사일시",
+        "evidence": "2. 행사일시: 2026. 4. 24.(금) 10시 ~ 12시"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "중국음식 원데이 쿠킹클래스 참가자 모집 행사 기간",
+      "dateText": "2026. 4. 24.(금) 10시 ~ 12시",
+      "normalizedStart": "2026-04-24T10:00:00+09:00",
+      "normalizedEnd": "2026-04-24T12:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "2. 행사일시: 2026. 4. 24.(금) 10시 ~ 12시",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 3,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 3,
+    "calendarFeedIncludedCount": 0
+  }
+}

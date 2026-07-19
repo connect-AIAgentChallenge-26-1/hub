@@ -1,0 +1,317 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2398",
+  "sourceContentHash": "ab5c50da0030903da4c64a1b02830915262594025e3171d047cc296c538db8f7",
+  "sourceTitle": "2026년 2학기 국가장학금 1차 신청 안내",
+  "publishedAt": "2026-05-19",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fc04917025cdf431",
+      "segmentType": "title",
+      "labelText": "2026년 2학기 국가장학금 1차 신청 안내",
+      "bodyText": "2026년 2학기 국가장학금 1차 신청 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 2학기 국가장학금 1차 신청 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6ccbd06fe9b93133",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "[FAQ]",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[FAQ]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6dfa2509bfcdbc99",
+      "segmentType": "label_value",
+      "labelText": "재학중 매학기 국가장학금 신청을 해야 국가장학금 및 기타 교내장학금* 수혜가능함.",
+      "bodyText": "1. 재학중 매학기 국가장학금 신청을 해야 국가장학금 및 기타 교내장학금* 수혜가능함.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 재학중 매학기 국가장학금 신청을 해야 국가장학금 및 기타 교내장학금* 수혜가능함."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eda75af6d1637018",
+      "segmentType": "label_value",
+      "labelText": "* 학자금지원구간 산정이 필요한 교내장학금 한정",
+      "bodyText": "* 학자금지원구간 산정이 필요한 교내장학금 한정",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 학자금지원구간 산정이 필요한 교내장학금 한정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aa38d08ef51dac7c",
+      "segmentType": "label_value",
+      "labelText": "재학생은 1차 신청이 원칙이며, 재학중 2회에 한해 2차 신청으로 수혜 가능",
+      "bodyText": "2. 재학생은 1차 신청이 원칙이며, 재학중 2회에 한해 2차 신청으로 수혜 가능",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 재학생은 1차 신청이 원칙이며, 재학중 2회에 한해 2차 신청으로 수혜 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5c11d0ee7c0ec952",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 1학년 2학기부터는 신입생이 아닌 재학생으로 신청하여야 함. 휴학후 복학생도 재학생으로 신청하여야 함",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "student_year:1",
+        "enrollment_status:enrolled",
+        "enrollment_status:returning"
+      ],
+      "dateSpans": [
+        {
+          "value": "2026-03-01",
+          "start": 0,
+          "end": 4
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 1학년 2학기부터는 신입생이 아닌 재학생으로 신청하여야 함. 휴학후 복학생도 재학생으로 신청하여야 함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bee48eaed8f413b0",
+      "segmentType": "label_value",
+      "labelText": "신입생으로 잘못 신청시 장학담당자가 신청내역을 확인할 수 없음",
+      "bodyText": "- 신입생으로 잘못 신청시 장학담당자가 신청내역을 확인할 수 없음",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 신입생으로 잘못 신청시 장학담당자가 신청내역을 확인할 수 없음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6b6ea36c36c2ea90",
+      "segmentType": "label_value",
+      "labelText": "지급방법(감면or후지급) 임의로 변경 불가",
+      "bodyText": "4. 지급방법(감면or후지급) 임의로 변경 불가",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 지급방법(감면or후지급) 임의로 변경 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-46a2e3cbd4278c4a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 1차 신청자 중 고지서감면 작업기간 이전에 심사완료, 승인완료된 학생에 한하여 고지서 선감면 작업가능",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-01",
+          "start": 0,
+          "end": 4
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "5. 1차 신청자 중 고지서감면 작업기간 이전에 심사완료, 승인완료된 학생에 한하여 고지서 선감면 작업가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-526dea01f6fc7554",
+      "segmentType": "label_value",
+      "labelText": "2차 신청시에는 고지서 선감면 불가",
+      "bodyText": "- 2차 신청시에는 고지서 선감면 불가",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 2차 신청시에는 고지서 선감면 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-30baa2bf5b1594d7",
+      "segmentType": "label_value",
+      "labelText": "지급우선순위",
+      "bodyText": "- 지급우선순위:",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 지급우선순위:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-49594bc489aa5a75",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "①고지서 선감면 -",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 1,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "①고지서 선감면 -"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a2b87b7e4570acd2",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "②학자금대출상환 -",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 2,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "②학자금대출상환 -"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e06382e3a8e072e3",
+      "segmentType": "label_value",
+      "labelText": "한국장학재단에 장학금 신청 시 입력한 학생 개인계좌로 지급",
+      "bodyText": "③한국장학재단에 장학금 신청 시 입력한 학생 개인계좌로 지급",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 3,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "③한국장학재단에 장학금 신청 시 입력한 학생 개인계좌로 지급"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7b5192958732a187",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "6. 기타 문의사항이 있으시다면 한국장학재단(1599-2000) 및 각 캠퍼스 국가장학금 담당자에게 문의 바랍니다",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 기타 문의사항이 있으시다면 한국장학재단(1599-2000) 및 각 캠퍼스 국가장학금 담당자에게 문의 바랍니다"
+    }
+  ],
+  "summary": {
+    "segmentCount": 15,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 1,
+      "label_value": 8,
+      "list_item": 5
+    }
+  }
+}

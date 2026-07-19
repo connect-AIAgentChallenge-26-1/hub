@@ -1,0 +1,162 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3141",
+  "sourceContentHash": "ab415d689098621d6e61eb01c2dd3420ea2a096356eff104c34c8081ec4f6998",
+  "sourceTitle": "제3행정실 기간제 계약직 직원 채용 서류전형 합격자 면접일정 공고",
+  "publishedAt": "2026-01-29",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1f6f74aa814f6d11",
+      "segmentType": "title",
+      "labelText": "제3행정실 기간제 계약직 직원 채용 서류전형 합격자 면접일정 공고",
+      "bodyText": "제3행정실 기간제 계약직 직원 채용 서류전형 합격자 면접일정 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "제3행정실 기간제 계약직 직원 채용 서류전형 합격자 면접일정 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-17e59bf94e0efadd",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-51호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-51호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-048a56ce16a7d6b9",
+      "segmentType": "label_value",
+      "labelText": "<제3행정실 기간제 계약직 직원 채용 서류전형 합격자 면접일정 공고>",
+      "bodyText": "<제3행정실 기간제 계약직 직원 채용 서류전형 합격자 면접일정 공고>",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<제3행정실 기간제 계약직 직원 채용 서류전형 합격자 면접일정 공고>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9fa1001bc2b31321",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 공고 제2026-19호와 관련하여 다음과 같이 서류전형 합격자의 면접일정을 공고합니다.",
+      "bodyText": "강원대학교 공고 제2026-19호와 관련하여 다음과 같이 서류전형 합격자의 면접일정을 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-19호와 관련하여 다음과 같이 서류전형 합격자의 면접일정을 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8a8cf3637fba5f7d",
+      "segmentType": "continuation",
+      "labelText": "강원대학교 공고 제2026-19호와 관련하여 다음과 같이 서류전형 합격자의 면접일정을 공고합니다.",
+      "bodyText": "2026. 1. 29.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-9fa1001bc2b31321"
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-29",
+          "start": 55,
+          "end": 66
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "강원대학교 공고 제2026-19호와 관련하여 다음과 같이 서류전형 합격자의 면접일정을 공고합니다. 2026. 1. 29."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-138ee22f0c920947",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 1. 29.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-29",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 1. 29."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d087e6a482d277ef",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 총장",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 총장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "label_value": 2,
+      "continuation": 1
+    }
+  }
+}

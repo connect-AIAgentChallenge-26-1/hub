@@ -1,0 +1,860 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-719-4162",
+  "sourceContentHash": "e7da7eb9c0f976c7eb85a4209bf7dfa8907b8cd05f45ebdad8be51c477333fb2",
+  "sourceTitle": "2026 제 10회 DFAM 경진대회",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=4162&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "ALL",
+    "campuses": [
+      "all"
+    ],
+    "scopeType": "all_campuses",
+    "confidence": "high",
+    "source": "listMetadata.campus",
+    "labels": {
+      "all": "전체"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-719-4162-77b5aee4f06fc4",
+      "uidHint": "noticepilot-cand-knu-719-4162-77b5aee4f06fc4@noticepilot.local",
+      "sourceNoticeId": "knu-719-4162",
+      "sourceTitle": "2026 제 10회 DFAM 경진대회",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=4162&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-d2bc9906c450d0b7",
+        "segmentType": "label_value",
+        "labelText": "접수기간",
+        "bodyText": "2026. 5. 11.(월) ~ 7. 31.(금)",
+        "sourceLocation": {
+          "lineIndex": 1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-11",
+            "start": 6,
+            "end": 21
+          },
+          {
+            "value": "2026-07-31",
+            "start": 24,
+            "end": 33
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "접수기간",
+          "접수기간: 2026. 5. 11.(월) ~ 7. 31.(금)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-3dd50b76aa076a33",
+        "segmentId": "seg-d2bc9906c450d0b7",
+        "rawText": "2026. 5. 11.(월) ~ 7. 31.(금)",
+        "normalizedStart": "2026-05-11",
+        "normalizedEnd": "2026-07-31",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 6,
+          "end": 33
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-21ab96d8c4d2bc44",
+        "sourceNoticeId": "knu-719-4162",
+        "segmentId": "seg-d2bc9906c450d0b7",
+        "temporalMentionIds": [
+          "tm-3dd50b76aa076a33"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "접수기간",
+        "evidence": "접수기간: 2026. 5. 11.(월) ~ 7. 31.(금)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "2026 제 10회 DFAM 경진대회 신청기간",
+      "dateText": "2026. 5. 11.(월) ~ 7. 31.(금)",
+      "normalizedStart": "2026-05-11",
+      "normalizedEnd": "2026-07-31",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "접수기간: 2026. 5. 11.(월) ~ 7. 31.(금)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-719-4162-a9f80285c62a3d",
+      "uidHint": "noticepilot-cand-knu-719-4162-a9f80285c62a3d@noticepilot.local",
+      "sourceNoticeId": "knu-719-4162",
+      "sourceTitle": "2026 제 10회 DFAM 경진대회",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=4162&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "submission_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-0db700d78a17f8b7",
+        "segmentType": "label_value",
+        "labelText": "제출기한",
+        "bodyText": "'26. 7. 31.(금) 18:00 까지",
+        "sourceLocation": {
+          "lineIndex": 33,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "submission_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-31",
+            "start": 6,
+            "end": 20
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "submission_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "제출기한",
+          "제출기한: '26. 7. 31.(금) 18:00 까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-9cf4dd9405049b95",
+        "segmentId": "seg-0db700d78a17f8b7",
+        "rawText": "'26. 7. 31.(금)",
+        "normalizedStart": "2026-07-31T18:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 6,
+          "end": 20
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-bf8eb52db6d81ab2",
+        "sourceNoticeId": "knu-719-4162",
+        "segmentId": "seg-0db700d78a17f8b7",
+        "temporalMentionIds": [
+          "tm-9cf4dd9405049b95"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "제출기한",
+        "evidence": "제출기한: '26. 7. 31.(금) 18:00 까지"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "2026 제 10회 DFAM 경진대회 제출 마감",
+      "dateText": "'26. 7. 31.(금)",
+      "normalizedStart": "2026-07-31T18:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "제출기한: '26. 7. 31.(금) 18:00 까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-719-4162-899492f11dd9f3",
+      "uidHint": "noticepilot-cand-knu-719-4162-899492f11dd9f3@noticepilot.local",
+      "sourceNoticeId": "knu-719-4162",
+      "sourceTitle": "2026 제 10회 DFAM 경진대회",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=4162&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-da455eca52201e21",
+        "segmentType": "continuation",
+        "labelText": "심사 결과 발표",
+        "bodyText": "'26. 8. 24.(월)",
+        "sourceLocation": {
+          "lineIndex": 14,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-ef5892efb865254b"
+        },
+        "actionSignals": [
+          "result_announcement"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-08-24",
+            "start": 9,
+            "end": 23
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "심사 결과 발표",
+          "심사 결과 발표 '26. 8. 24.(월)",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-df586d69312db0c3",
+        "segmentId": "seg-da455eca52201e21",
+        "rawText": "'26. 8. 24.(월)",
+        "normalizedStart": "2026-08-24",
+        "normalizedEnd": "2026-08-24",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 9,
+          "end": 23
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-ffe101f6e1c1f9f9",
+        "sourceNoticeId": "knu-719-4162",
+        "segmentId": "seg-da455eca52201e21",
+        "temporalMentionIds": [
+          "tm-df586d69312db0c3"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "심사 결과 발표",
+        "evidence": "심사 결과 발표 '26. 8. 24.(월)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "2026 제 10회 DFAM 경진대회 결과 발표 예정",
+      "dateText": "'26. 8. 24.(월)",
+      "normalizedStart": "2026-08-24",
+      "normalizedEnd": "2026-08-24",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "심사 결과 발표 '26. 8. 24.(월)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-719-4162-0f74061d7ce9df",
+      "uidHint": "noticepilot-cand-knu-719-4162-0f74061d7ce9df@noticepilot.local",
+      "sourceNoticeId": "knu-719-4162",
+      "sourceTitle": "2026 제 10회 DFAM 경진대회",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=4162&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-3dfde1ed5da57e83",
+        "segmentType": "continuation",
+        "labelText": "출력물 제작 지원",
+        "bodyText": "'26. 9. 1.(화) ~ 9. 30.(수)",
+        "sourceLocation": {
+          "lineIndex": 17,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-bc2f9622cd79ee63"
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-09-01",
+            "start": 10,
+            "end": 23
+          },
+          {
+            "value": "2026-09-30",
+            "start": 26,
+            "end": 35
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "출력물 제작 지원",
+          "출력물 제작 지원 '26. 9. 1.(화) ~ 9. 30.(수)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-464cf9974c9493e5",
+        "segmentId": "seg-3dfde1ed5da57e83",
+        "rawText": "'26. 9. 1.(화) ~ 9. 30.(수)",
+        "normalizedStart": "2026-09-01",
+        "normalizedEnd": "2026-09-30",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 10,
+          "end": 35
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-59fca776b2ed1e8c",
+        "sourceNoticeId": "knu-719-4162",
+        "segmentId": "seg-3dfde1ed5da57e83",
+        "temporalMentionIds": [
+          "tm-464cf9974c9493e5"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "출력물 제작 지원",
+        "evidence": "출력물 제작 지원 '26. 9. 1.(화) ~ 9. 30.(수)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "2026 제 10회 DFAM 경진대회 신청기간",
+      "dateText": "'26. 9. 1.(화) ~ 9. 30.(수)",
+      "normalizedStart": "2026-09-01",
+      "normalizedEnd": "2026-09-30",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "출력물 제작 지원 '26. 9. 1.(화) ~ 9. 30.(수)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-719-4162-d32f5be9169d9c",
+      "uidHint": "noticepilot-cand-knu-719-4162-d32f5be9169d9c@noticepilot.local",
+      "sourceNoticeId": "knu-719-4162",
+      "sourceTitle": "2026 제 10회 DFAM 경진대회",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=4162&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-037a23024e646063",
+        "segmentType": "continuation",
+        "labelText": "심사 결과 발표",
+        "bodyText": "'26. 10. 26.(월)",
+        "sourceLocation": {
+          "lineIndex": 23,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-5f24c85a63d6fc87"
+        },
+        "actionSignals": [
+          "result_announcement"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-10-26",
+            "start": 9,
+            "end": 24
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "심사 결과 발표",
+          "심사 결과 발표 '26. 10. 26.(월)",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-2ba50fcf817b9322",
+        "segmentId": "seg-037a23024e646063",
+        "rawText": "'26. 10. 26.(월)",
+        "normalizedStart": "2026-10-26",
+        "normalizedEnd": "2026-10-26",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 9,
+          "end": 24
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-3ed26b00e376438f",
+        "sourceNoticeId": "knu-719-4162",
+        "segmentId": "seg-037a23024e646063",
+        "temporalMentionIds": [
+          "tm-2ba50fcf817b9322"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "심사 결과 발표",
+        "evidence": "심사 결과 발표 '26. 10. 26.(월)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "2026 제 10회 DFAM 경진대회 결과 발표 예정",
+      "dateText": "'26. 10. 26.(월)",
+      "normalizedStart": "2026-10-26",
+      "normalizedEnd": "2026-10-26",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "심사 결과 발표 '26. 10. 26.(월)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 5,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 5,
+    "calendarFeedIncludedCount": 0
+  }
+}

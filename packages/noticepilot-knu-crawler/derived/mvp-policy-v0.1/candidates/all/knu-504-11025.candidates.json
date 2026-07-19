@@ -1,0 +1,354 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11025",
+  "sourceContentHash": "22119ab1d4c8f0f3c0e27be79d23ba19c6639d36ed738cc61b2e0f97fc083eb0",
+  "sourceTitle": "📢 제12회 AI·SW 사고력 올림피아드(ASTO) 참가 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11025&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11025-81ce4445f8a3d0",
+      "uidHint": "noticepilot-cand-knu-504-11025-81ce4445f8a3d0@noticepilot.local",
+      "sourceNoticeId": "knu-504-11025",
+      "sourceTitle": "📢 제12회 AI·SW 사고력 올림피아드(ASTO) 참가 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11025&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-19b792f9de18043a",
+        "segmentType": "label_value",
+        "labelText": "○ 모집기간",
+        "bodyText": "2026년 6월 8일(일) 18:00까지",
+        "sourceLocation": {
+          "lineIndex": 10,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-08",
+            "start": 11,
+            "end": 25
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "○ 모집기간",
+          "○ 모집기간 : ~ 2026년 6월 8일(일) 18:00까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-624303952244670a",
+        "segmentId": "seg-19b792f9de18043a",
+        "rawText": "2026년 6월 8일(일)",
+        "normalizedStart": "2026-06-08T18:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 11,
+          "end": 25
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-63d4862f29954685",
+        "sourceNoticeId": "knu-504-11025",
+        "segmentId": "seg-19b792f9de18043a",
+        "temporalMentionIds": [
+          "tm-624303952244670a"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "○ 모집기간",
+        "evidence": "○ 모집기간 : ~ 2026년 6월 8일(일) 18:00까지"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "📢 제12회 AI·SW 사고력 올림피아드(ASTO) 참가 안내 신청 마감",
+      "dateText": "2026년 6월 8일(일)",
+      "normalizedStart": "2026-06-08T18:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "○ 모집기간 : ~ 2026년 6월 8일(일) 18:00까지",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11025-404aa5b4de9240",
+      "uidHint": "noticepilot-cand-knu-504-11025-404aa5b4de9240@noticepilot.local",
+      "sourceNoticeId": "knu-504-11025",
+      "sourceTitle": "📢 제12회 AI·SW 사고력 올림피아드(ASTO) 참가 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11025&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-1ebd23d1946d7987",
+        "segmentType": "label_value",
+        "labelText": "○ 대회일자",
+        "bodyText": "2026. 6. 20 (토) 13시~18:10분 (응시부문별 상이)",
+        "sourceLocation": {
+          "lineIndex": 6,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-20",
+            "start": 8,
+            "end": 23
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "○ 대회일자",
+          "○ 대회일자: 2026. 6. 20 (토) 13시~18:10분 (응시부문별 상이)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-fcdcb075cfaf40ac",
+        "segmentId": "seg-1ebd23d1946d7987",
+        "rawText": "2026. 6. 20 (토) 13시~18:10분 (응시부문별 상이)",
+        "normalizedStart": "2026-06-20T13:00:00+09:00",
+        "normalizedEnd": "2026-06-20T18:10:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 8,
+          "end": 23
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-5c94fc59d6474a39",
+        "sourceNoticeId": "knu-504-11025",
+        "segmentId": "seg-1ebd23d1946d7987",
+        "temporalMentionIds": [
+          "tm-fcdcb075cfaf40ac"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "○ 대회일자",
+        "evidence": "○ 대회일자: 2026. 6. 20 (토) 13시~18:10분 (응시부문별 상이)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "📢 제12회 AI·SW 사고력 올림피아드(ASTO) 참가 안내 행사 기간",
+      "dateText": "2026. 6. 20 (토) 13시~18:10분 (응시부문별 상이)",
+      "normalizedStart": "2026-06-20T13:00:00+09:00",
+      "normalizedEnd": "2026-06-20T18:10:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "○ 대회일자: 2026. 6. 20 (토) 13시~18:10분 (응시부문별 상이)",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

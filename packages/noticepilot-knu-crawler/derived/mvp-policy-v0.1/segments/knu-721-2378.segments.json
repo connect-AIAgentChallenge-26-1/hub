@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2378",
+  "sourceContentHash": "676f6316066581823a97c3d84c9f9e4cbc1be90f807122ae104c9dde5286f51b",
+  "sourceTitle": "2026년 아산시미래장학회 4차사업 인재육성 장학생 선발 안내",
+  "publishedAt": "2026-04-30",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2e279b986fcb7111",
+      "segmentType": "title",
+      "labelText": "2026년 아산시미래장학회 4차사업 인재육성 장학생 선발 안내",
+      "bodyText": "2026년 아산시미래장학회 4차사업 인재육성 장학생 선발 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 아산시미래장학회 4차사업 인재육성 장학생 선발 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ae14c8b58d16f3ad",
+      "segmentType": "label_value",
+      "labelText": "선발인원",
+      "bodyText": "1. 선발인원: 15명",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 선발인원: 15명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-893824910254147c",
+      "segmentType": "label_value",
+      "labelText": "신청자격",
+      "bodyText": "2. 신청자격: 공고일 기준 부모(보호자)가 아산시에 2년 이상 계속하여 거주",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 신청자격: 공고일 기준 부모(보호자)가 아산시에 2년 이상 계속하여 거주"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f5474a98476fff39",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "2026. 5. 11. ~ 5. 15.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-11",
+          "start": 9,
+          "end": 20
+        },
+        {
+          "value": "2026-05-15",
+          "start": 24,
+          "end": 29
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 신청기간: 2026. 5. 11. ~ 5. 15."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9eba4e79dfa7506d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 자세한 사항은 붙임 파일 참조",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 자세한 사항은 붙임 파일 참조"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "paragraph": 1
+    }
+  }
+}

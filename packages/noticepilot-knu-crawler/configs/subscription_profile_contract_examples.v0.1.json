@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "noticepilot.subscriptionProfileExamples.v0.1",
+  "authoritativeDefaults": false,
+  "description": "Contract-shape examples only. They do not establish product defaults or feed counts.",
+  "profiles": [
+    {
+      "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+      "profileId": "subprof_11111111111111111111111111111111",
+      "profileRevision": 1,
+      "institutionId": "kangwon",
+      "displayName": "계약 예시 — 춘천 학생 일정",
+      "calendarName": "NoticePilot 학생 일정 — 춘천",
+      "timezone": "Asia/Seoul",
+      "status": "active",
+      "campusSelection": {
+        "selectedCampuses": ["chuncheon"],
+        "includeAllCampusEvents": true,
+        "includeUnknownCampusEvents": true,
+        "matchingMode": "intersects"
+      },
+      "sourceSelection": {
+        "selectedBoardIds": ["504", "715", "717", "719", "720", "721"],
+        "selectedNoticeTypes": ["general_notice", "event", "career", "competition", "school_notice", "scholarship"],
+        "canonicalBoardsOnly": true,
+        "matchingMode": "all_dimensions"
+      },
+      "eventSelection": {
+        "includedFeedScopes": ["student_default"],
+        "includedEventTypes": ["academic_period", "application_period", "deadline", "event", "exam_or_interview", "payment_period", "result_announcement", "submission_period"],
+        "includedTargetActors": ["student"],
+        "includeReviewRequiredEvents": false,
+        "matchingMode": "all_dimensions"
+      },
+      "audienceFilter": {
+        "enabled": false,
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "unscopedEventPolicy": "include"
+      },
+      "createdAt": "2026-07-13T13:00:00+09:00",
+      "updatedAt": "2026-07-13T13:00:00+09:00"
+    },
+    {
+      "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+      "profileId": "subprof_22222222222222222222222222222222",
+      "profileRevision": 1,
+      "institutionId": "kangwon",
+      "displayName": "계약 예시 — 전체 캠퍼스 채용",
+      "calendarName": "NoticePilot 채용 일정",
+      "timezone": "Asia/Seoul",
+      "status": "paused",
+      "campusSelection": {
+        "selectedCampuses": ["chuncheon", "samcheok", "dogye", "gangneung_wonju"],
+        "includeAllCampusEvents": true,
+        "includeUnknownCampusEvents": false,
+        "matchingMode": "intersects"
+      },
+      "sourceSelection": {
+        "selectedBoardIds": ["716"],
+        "selectedNoticeTypes": ["job_posting"],
+        "canonicalBoardsOnly": true,
+        "matchingMode": "all_dimensions"
+      },
+      "eventSelection": {
+        "includedFeedScopes": ["job_application"],
+        "includedEventTypes": ["job_application_period"],
+        "includedTargetActors": ["job_applicant"],
+        "includeReviewRequiredEvents": false,
+        "matchingMode": "all_dimensions"
+      },
+      "audienceFilter": {
+        "enabled": false,
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "unscopedEventPolicy": "include"
+      },
+      "createdAt": "2026-07-13T13:00:00+09:00",
+      "updatedAt": "2026-07-13T13:00:00+09:00"
+    }
+  ]
+}

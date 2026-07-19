@@ -1,0 +1,340 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2458",
+  "sourceContentHash": "6ec99c32c1518cfa8f13d349886f30777f6bf07d7d2f00992f637ac8064ebcab",
+  "sourceTitle": "2026학년도 하계 계절수업 국립공주대학교 학점교류 수학 안내(삼척캠퍼스)",
+  "publishedAt": "2026-05-27",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-04f1faed621ef6f7",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026학년도 하계 계절수업 국립공주대학교 학점교류 수학 안내(삼척캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 하계 계절수업 국립공주대학교 학점교류 수학 안내(삼척캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2815ebf2a4823f50",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "대학 간 학술교류 협정에 따라 2026학년도 하계 계절수업 국립공주대학교 학점 교류 수학 안내문을 붙임과 같이 안내하오니",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "대학 간 학술교류 협정에 따라 2026학년도 하계 계절수업 국립공주대학교 학점 교류 수학 안내문을 붙임과 같이 안내하오니"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7e901f86e6cf82f4",
+      "segmentType": "label_value",
+      "labelText": "수학을 희망하는 학생은 기한내 신청하여 주시기 바랍니다.",
+      "bodyText": "수학을 희망하는 학생은 기한내 신청하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수학을 희망하는 학생은 기한내 신청하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cc7f984548b26c35",
+      "segmentType": "label_value",
+      "labelText": "신청자격",
+      "bodyText": "가. 신청자격 : 징계받은 사실이 없는 재학생",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 신청자격 : 징계받은 사실이 없는 재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-51978b8e076884a1",
+      "segmentType": "label_value",
+      "labelText": "학사학위취득유예자, 휴학생은 교류 수학 불가",
+      "bodyText": "※ 학사학위취득유예자, 휴학생은 교류 수학 불가",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 학사학위취득유예자, 휴학생은 교류 수학 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bd3efe918978de5d",
+      "segmentType": "label_value",
+      "labelText": "국립공주대학교의 경우 계절수업 성적 송부일이 미정으로 2026년 8월 졸업예정자는 신청 불가",
+      "bodyText": "※ 국립공주대학교의 경우 계절수업 성적 송부일이 미정으로 2026년 8월 졸업예정자는 신청 불가",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 국립공주대학교의 경우 계절수업 성적 송부일이 미정으로 2026년 8월 졸업예정자는 신청 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ce85fc59ad074589",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "나.",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-77696e7b95aa1ad2",
+      "segmentType": "label_value",
+      "labelText": "제출기한(삼척교육지원과 도착기준)",
+      "bodyText": "2026. 5. 29.(금) 10:00까지(기일엄수)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-29",
+          "start": 21,
+          "end": 36
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "제출기한(삼척교육지원과 도착기준) : 2026. 5. 29.(금) 10:00까지(기일엄수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-79455e1c8801af03",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▶",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7e13d07c0c458111",
+      "segmentType": "label_value",
+      "labelText": "학생 ➜ 소속학과 제출기준",
+      "bodyText": "2026. 5. 28.(목) 15:00까지(기일엄수)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-28",
+          "start": 17,
+          "end": 32
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "학생 ➜ 소속학과 제출기준 : 2026. 5. 28.(목) 15:00까지(기일엄수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f87ca294e4e9ff00",
+      "segmentType": "label_value",
+      "labelText": "제출서류",
+      "bodyText": "다. 제출서류 : 수학신청자 명단 및 다른 대학 수학 지원서 각 1부",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 제출서류 : 수학신청자 명단 및 다른 대학 수학 지원서 각 1부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-99d060ce8ceaa387",
+      "segmentType": "label_value",
+      "labelText": "제출방법",
+      "bodyText": "라. 제출방법 : 학생 ➜ 학과 ➜ 삼척교육지원과로 제출",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "라. 제출방법 : 학생 ➜ 학과 ➜ 삼척교육지원과로 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7c5a8f8fdd382f20",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "붙임 1. 2026학년도 하계 계절수업 국립공주대학교 교류수학 안내 1부.",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 1. 2026학년도 하계 계절수업 국립공주대학교 교류수학 안내 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-14a8f8d990fb7e98",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 하계 계절수업 국립공주대학교 학점교류 신청자 명단(양식) 1부.",
+      "bodyText": "2. 2026학년도 하계 계절수업 국립공주대학교 학점교류 신청자 명단(양식) 1부.",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 2026학년도 하계 계절수업 국립공주대학교 학점교류 신청자 명단(양식) 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-209d9b634fab2433",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 2026학년도 하계 계절수업 개설과목 목록 1부.",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 2026학년도 하계 계절수업 개설과목 목록 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-14fdd90d4750d3df",
+      "segmentType": "label_value",
+      "labelText": "다른 대학 수학 지원서(본교) 1부. 끝.",
+      "bodyText": "4. 다른 대학 수학 지원서(본교) 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 다른 대학 수학 지원서(본교) 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 16,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "label_value": 10,
+      "list_item": 3
+    }
+  }
+}

@@ -1,0 +1,255 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-5665",
+  "sourceContentHash": "9283c67eada637e69558785ed68e1310a5b2d85cf1f57fca5f4bc09d23950825",
+  "sourceTitle": "생활협동조합 설 명절 과일 선물세트 판매 예약 신청 안내",
+  "publishedAt": "2026-02-03",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-25021e8493a77672",
+      "segmentType": "title",
+      "labelText": "생활협동조합 설 명절 과일 선물세트 판매 예약 신청 안내",
+      "bodyText": "생활협동조합 설 명절 과일 선물세트 판매 예약 신청 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "생활협동조합 설 명절 과일 선물세트 판매 예약 신청 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f44231e7dc9af52c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "안녕하세요?",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "안녕하세요?"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-95e316a7f6e50805",
+      "segmentType": "label_value",
+      "labelText": "생활협동조합에서는 설 명절을 맞이하여 과일 선물세트 판매 행사를 아래와 같이 진행하오니 대학 구성원들의 많은 이용 부탁 드리겠습니다.",
+      "bodyText": "생활협동조합에서는 설 명절을 맞이하여 과일 선물세트 판매 행사를 아래와 같이 진행하오니 대학 구성원들의 많은 이용 부탁 드리겠습니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "생활협동조합에서는 설 명절을 맞이하여 과일 선물세트 판매 행사를 아래와 같이 진행하오니 대학 구성원들의 많은 이용 부탁 드리겠습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-caee1082bdc9c2d5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "문의전화: 033-250-7354 (생활협동조합 사업3파트 김수진)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "문의전화: 033-250-7354 (생활협동조합 사업3파트 김수진)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0bf5337148a18b9f",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "2026년 2월 3일(화) ~ 2월 13일(금)까지",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-03",
+          "start": 8,
+          "end": 22
+        },
+        {
+          "value": "2026-02-13",
+          "start": 25,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "▶ 신청기간: 2026년 2월 3일(화) ~ 2월 13일(금)까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-911e857d8df09a8c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2월 12일 목요일 오전 11시까지 접수 (택배비 5,500원 별도)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-12",
+          "start": 11,
+          "end": 17
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "▶ 전국 택배 가능 2월 12일 목요일 오전 11시까지 접수 (택배비 5,500원 별도)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4a72d502d0619c82",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2월 13일 금요일까지 접수",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-13",
+          "start": 14,
+          "end": 20
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "▶ 춘천 시내 무료 배송 2월 13일 금요일까지 접수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9add1a7568d800c6",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2월 13일 금요일까지 (천지관 1층 문구점)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-13",
+          "start": 14,
+          "end": 20
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "▶ 매장 방문 수령 가능 2월 13일 금요일까지 (천지관 1층 문구점)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-79455e1c8801af03",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▶",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2f021cc6bdea591c",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "신청방법 : 메일",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 1,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청방법 : 메일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-522b3feba3da88fe",
+      "segmentType": "label_value",
+      "labelText": "신청만 가능 ▶ 메일주소",
+      "bodyText": "신청만 가능 ▶ 메일주소 : knumall@kangwon.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 2,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청만 가능 ▶ 메일주소 : knumall@kangwon.ac.kr"
+    }
+  ],
+  "summary": {
+    "segmentCount": 11,
+    "locallyGroundedCount": 3,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "label_value": 4,
+      "list_item": 4
+    }
+  }
+}

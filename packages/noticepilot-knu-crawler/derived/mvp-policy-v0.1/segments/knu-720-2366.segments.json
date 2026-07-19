@@ -1,0 +1,76 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2366",
+  "sourceContentHash": "c18b5aab1b6b0a15772118f7e6a0f1733b91bcebce6ea201e4ff54b317c9c732",
+  "sourceTitle": "졸업 자가진단 (NEW) 프로그램 안내",
+  "publishedAt": "2026-02-19",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-af964c4d04ff0ad8",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "졸업 자가진단 (NEW) 프로그램 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "졸업 자가진단 (NEW) 프로그램 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c4932938195afc40",
+      "segmentType": "label_value",
+      "labelText": "★ 이수 학점 참고 자료로만 활용하시기 바라며, 최종 판정이 아니므로 반드시 학과와 상담하여 수강지도를 받으시기 바랍니다.",
+      "bodyText": "★ 이수 학점 참고 자료로만 활용하시기 바라며, 최종 판정이 아니므로 반드시 학과와 상담하여 수강지도를 받으시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "★ 이수 학점 참고 자료로만 활용하시기 바라며, 최종 판정이 아니므로 반드시 학과와 상담하여 수강지도를 받으시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2e2367a793986bef",
+      "segmentType": "label_value",
+      "labelText": "★ 졸업을 최종 판정하는 프로그램이 아니므로, 학과별 교육과정 이수 학점을 참고하여 학점을 취득하시기 바랍니다.",
+      "bodyText": "★ 졸업을 최종 판정하는 프로그램이 아니므로, 학과별 교육과정 이수 학점을 참고하여 학점을 취득하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "★ 졸업을 최종 판정하는 프로그램이 아니므로, 학과별 교육과정 이수 학점을 참고하여 학점을 취득하시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 3,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2
+    }
+  }
+}

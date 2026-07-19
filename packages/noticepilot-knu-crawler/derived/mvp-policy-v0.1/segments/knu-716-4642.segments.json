@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4642",
+  "sourceContentHash": "a1c2a5a57741f7e94cdb5a48b594f77b12b9437de2c0bcd0fec0f7c23ee7f9e6",
+  "sourceTitle": "강원대학교 정부재정지원사업 기간제 직원 최종 합격자 공고",
+  "publishedAt": "2026-03-26",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-521d99f2924db609",
+      "segmentType": "title",
+      "labelText": "강원대학교 정부재정지원사업 기간제 직원 최종 합격자 공고",
+      "bodyText": "강원대학교 정부재정지원사업 기간제 직원 최종 합격자 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 정부재정지원사업 기간제 직원 최종 합격자 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-166dd766e7932805",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-154호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-154호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a46af2f7ed91dbda",
+      "segmentType": "label_value",
+      "labelText": "<강원대학교 정부재정지원사업 기간제 직원 최 합격자 공고>",
+      "bodyText": "<강원대학교 정부재정지원사업 기간제 직원 최 합격자 공고>",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<강원대학교 정부재정지원사업 기간제 직원 최 합격자 공고>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eac823b95fe579a2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-134호와 관련하여 최종 합격자를 다음과 같이 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-134호와 관련하여 최종 합격자를 다음과 같이 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e3a23fa84a26885a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 3. 26.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-26",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 3. 26."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-09ffea41e8f7fe3f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 기획혁신처장",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 기획혁신처장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 4,
+      "label_value": 1
+    }
+  }
+}

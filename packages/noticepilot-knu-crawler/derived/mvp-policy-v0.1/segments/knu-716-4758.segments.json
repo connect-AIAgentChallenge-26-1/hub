@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4758",
+  "sourceContentHash": "b82416244c5a32016ae9119eb7cce17d89525b982f1e37f8f3d46d3c3b4fd79b",
+  "sourceTitle": "강원대학교 보건과학대학 식품영양학과(도계캠퍼스) 임시조교 공개채용",
+  "publishedAt": "2026-05-12",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7aa9a2d85073f7db",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "강원대학교 보건과학대학 식품영양학과(도계캠퍼스) 임시조교 공개채용",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 보건과학대학 식품영양학과(도계캠퍼스) 임시조교 공개채용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6819c5383e3c770e",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 보건과학대학 식품영양학과(도계캠퍼스) 임시조교 공개채용을 아래와 같이 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 보건과학대학 식품영양학과(도계캠퍼스) 임시조교 공개채용을 아래와 같이 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 보건과학대학 식품영양학과(도계캠퍼스) 임시조교 공개채용을 아래와 같이 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9636082a4f1143d5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 채용인원 : 1명",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 채용인원 : 1명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1504dc42c8ac405d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 담당예정업무 : 학사관리 및 학생상담, 교무관리, 학과물품관리, 행정업무 전반 등",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 담당예정업무 : 학사관리 및 학생상담, 교무관리, 학과물품관리, 행정업무 전반 등"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9303640230f7a450",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 기타 자세한 사항은 붙임 참조",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 기타 자세한 사항은 붙임 참조"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-806ab7a708997d1b",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-05-12~2026-05-18",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-12",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-05-18",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-05-12~2026-05-18"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "label_value": 2,
+      "list_item": 3,
+      "title": 1
+    }
+  }
+}

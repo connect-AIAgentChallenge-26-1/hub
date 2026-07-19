@@ -1,0 +1,359 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11135",
+  "sourceContentHash": "ea7999658059be1852ba8b6b858f2eb4c05f65c4acf78d2da6b5f15a57ff0b5d",
+  "sourceTitle": "2026 ICEE 창의공학 캡스톤디자인 경진대회 공학계열 참가팀 모집 (~7/31(금)까지 신청)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11135&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉 원주",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11135-6967fea514f9ec",
+      "uidHint": "noticepilot-cand-knu-504-11135-6967fea514f9ec@noticepilot.local",
+      "sourceNoticeId": "knu-504-11135",
+      "sourceTitle": "2026 ICEE 창의공학 캡스톤디자인 경진대회 공학계열 참가팀 모집 (~7/31(금)까지 신청)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11135&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-f79b537a06866bf8",
+        "segmentType": "title",
+        "labelText": "2026 ICEE 창의공학 캡스톤디자인 경진대회 공학계열 참가팀 모집 (~",
+        "bodyText": "7/31(금)까지 신청)",
+        "sourceLocation": {
+          "lineIndex": -1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-31",
+            "start": 41,
+            "end": 48
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "low",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "2026 ICEE 창의공학 캡스톤디자인 경진대회 공학계열 참가팀 모집 (~",
+          "2026 ICEE 창의공학 캡스톤디자인 경진대회 공학계열 참가팀 모집 (~7/31(금)까지 신청)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-866ff9c2765e690b",
+        "segmentId": "seg-f79b537a06866bf8",
+        "rawText": "7/31(금)",
+        "normalizedStart": "2026-07-31",
+        "normalizedEnd": "2026-07-31",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 41,
+          "end": 48
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-7e747c45ec4db078",
+        "sourceNoticeId": "knu-504-11135",
+        "segmentId": "seg-f79b537a06866bf8",
+        "temporalMentionIds": [
+          "tm-866ff9c2765e690b"
+        ],
+        "bindingKind": "title_context",
+        "confidence": "low",
+        "ruleId": "binding.title_context",
+        "locallyGrounded": false,
+        "labelText": "2026 ICEE 창의공학 캡스톤디자인 경진대회 공학계열 참가팀 모집 (~",
+        "evidence": "2026 ICEE 창의공학 캡스톤디자인 경진대회 공학계열 참가팀 모집 (~7/31(금)까지 신청)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026 ICEE 창의공학 캡스톤디자인 경진대회 공학계열 참가팀 모집 (~7/31(금)까지 신청) 신청 마감",
+      "dateText": "7/31(금)",
+      "normalizedStart": "2026-07-31",
+      "normalizedEnd": "2026-07-31",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "2026 ICEE 창의공학 캡스톤디자인 경진대회 공학계열 참가팀 모집 (~7/31(금)까지 신청)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11135-e1ac892de6eeb2",
+      "uidHint": "noticepilot-cand-knu-504-11135-e1ac892de6eeb2@noticepilot.local",
+      "sourceNoticeId": "knu-504-11135",
+      "sourceTitle": "2026 ICEE 창의공학 캡스톤디자인 경진대회 공학계열 참가팀 모집 (~7/31(금)까지 신청)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11135&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-f6132590d500a4ee",
+        "segmentType": "continuation",
+        "labelText": "출품작 접수",
+        "bodyText": "9월 4일",
+        "sourceLocation": {
+          "lineIndex": 12,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-a0dcba609c3f43e2"
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-09-04",
+            "start": 13,
+            "end": 18
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "출품작 접수",
+          "- 출품작 접수 : ~ 9월 4일",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-a72ebc4d05777504",
+        "segmentId": "seg-f6132590d500a4ee",
+        "rawText": "9월 4일",
+        "normalizedStart": "2026-09-04",
+        "normalizedEnd": "2026-09-04",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 13,
+          "end": 18
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-46ba4bcbe0d68e7d",
+        "sourceNoticeId": "knu-504-11135",
+        "segmentId": "seg-f6132590d500a4ee",
+        "temporalMentionIds": [
+          "tm-a72ebc4d05777504"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "출품작 접수",
+        "evidence": "- 출품작 접수 : ~ 9월 4일"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026 ICEE 창의공학 캡스톤디자인 경진대회 공학계열 참가팀 모집 (~7/31(금)까지 신청) 신청 마감",
+      "dateText": "9월 4일",
+      "normalizedStart": "2026-09-04",
+      "normalizedEnd": "2026-09-04",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "- 출품작 접수 : ~ 9월 4일",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

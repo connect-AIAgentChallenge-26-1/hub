@@ -1,0 +1,183 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4592",
+  "sourceContentHash": "c8d7ddc58b84faab1a3006c2ed922c26af969c6189febc544c6ada0f1840bfc9",
+  "sourceTitle": "춘천 교수학습개발센터 기간제 계약직(사무원) 공개채용 서류전형 합격자 공고",
+  "publishedAt": "2026-03-13",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3c0bb2f406faa4c0",
+      "segmentType": "title",
+      "labelText": "춘천 교수학습개발센터 기간제 계약직(사무원) 공개채용 서류전형 합격자 공고",
+      "bodyText": "춘천 교수학습개발센터 기간제 계약직(사무원) 공개채용 서류전형 합격자 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "춘천 교수학습개발센터 기간제 계약직(사무원) 공개채용 서류전형 합격자 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-24e4ebb3764194bd",
+      "segmentType": "label_value",
+      "labelText": "<춘천 교수학습개발센터 기간제 계약직(사무원) 공개채용 서류전형 합격자 공고>",
+      "bodyText": "<춘천 교수학습개발센터 기간제 계약직(사무원) 공개채용 서류전형 합격자 공고>",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<춘천 교수학습개발센터 기간제 계약직(사무원) 공개채용 서류전형 합격자 공고>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-32d793aace68d944",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-120호와 관련하여 붙임과 같이 서류전형 합격자를 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-120호와 관련하여 붙임과 같이 서류전형 합격자를 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-28c2138d6df40c45",
+      "segmentType": "label_value",
+      "labelText": "◎ 면접일시",
+      "bodyText": "2026. 3. 19.(목) 10:00~",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-19",
+          "start": 9,
+          "end": 24
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "◎ 면접일시 : 2026. 3. 19.(목) 10:00~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5450396b1c534e9d",
+      "segmentType": "label_value",
+      "labelText": "◎ 면접대기실",
+      "bodyText": "◎ 면접대기실 : 강원대학교 경영대학 2호관 2107호",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "◎ 면접대기실 : 강원대학교 경영대학 2호관 2107호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a38b3a3422625dda",
+      "segmentType": "continuation",
+      "labelText": "◎ 면접대기실",
+      "bodyText": "2026. 3. 13.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-5450396b1c534e9d"
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-13",
+          "start": 31,
+          "end": 42
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "◎ 면접대기실 : 강원대학교 경영대학 2호관 2107호 2026. 3. 13."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2835fb1b8786e714",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 3. 13.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-13",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 3. 13."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-55e72bc3e7f4e596",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 교수학습개발원장",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 교수학습개발원장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "paragraph": 3,
+      "continuation": 1
+    }
+  }
+}

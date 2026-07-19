@@ -1,0 +1,48 @@
+{
+  "schemaVersion": "noticepilot.s30SamsungCalendarQaManifest.v0.1",
+  "qaVersion": "0.1.0",
+  "createdAt": "2026-07-13T21:30:00+09:00",
+  "status": "automated_pass_physical_pending",
+  "s30Completed": false,
+  "artifacts": {
+    "automated-qa-report.json": {
+      "path": "automated-qa-report.json",
+      "sha256": "86078b8f267544677eedc42fbae905d58e14efd405740d28688bbe3c2f87b7db"
+    },
+    "active-stage.txt": {
+      "path": "active-stage.txt",
+      "sha256": "da68f54607d5f5644954096ce1597c006c5bb9f2497e07441bf064b81003ef8a"
+    },
+    "samsung-physical-qa-result.template.json": {
+      "path": "samsung-physical-qa-result.template.json",
+      "sha256": "bf74f2f503bedb40e3325472baca16ae2005df5de88c6cbd237b4ca9593494e9"
+    },
+    "fixtures/initial.ics": {
+      "path": "fixtures/initial.ics",
+      "sha256": "b7cf303e53c5f80e9e94db11bbb8de5b8cc9430b42b3c6d08fac7b399ac88a2b"
+    },
+    "fixtures/updated.ics": {
+      "path": "fixtures/updated.ics",
+      "sha256": "ed1936fd61b7258d33bba6f19dcb3b8f070a438d4b2e75bf0e05df548d366819"
+    },
+    "fixtures/cancelled.ics": {
+      "path": "fixtures/cancelled.ics",
+      "sha256": "9c66ec463db3a8906a6a8f672efd8a257c5c77811e970e1ea4b360dc61c70417"
+    },
+    "regression-summary.json": {
+      "path": "regression-summary.json",
+      "sha256": "843c6546b101d8fd400db99f6cf63e9c87a284eb9b5ed65e2289bddd8bb5783b"
+    }
+  },
+  "automatedReportSha256": "cf7ff5ca03eca3ed5e210930c31384901258b45bb67d54a9d1beb577f37f9727",
+  "physicalQaRequired": true,
+  "regression": {
+    "status": "pass",
+    "moduleCount": 30,
+    "testCount": 428,
+    "executionMode": "module_isolated_unittest",
+    "layeredBaselineResult": "match",
+    "layeredBaselineChangeCount": 0
+  },
+  "manifestHash": "0bd2ee5bd3e2b8499750a4c96eeb9e4778dc41881a194e45e86f038b932491b0"
+}

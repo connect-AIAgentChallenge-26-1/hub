@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10864",
+  "sourceContentHash": "907595e2506d6984314bfec96d20d34e25442914ebbfb19cf782b2ba3e67fd0f",
+  "sourceTitle": "춘천시 관내 대학(원)생 지원사업 홍보 안내",
+  "publishedAt": "2026-04-13",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bf5584e473d742ec",
+      "segmentType": "title",
+      "labelText": "춘천시 관내 대학(원)생 지원사업 홍보 안내",
+      "bodyText": "춘천시 관내 대학(원)생 지원사업 홍보 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "춘천시 관내 대학(원)생 지원사업 홍보 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6df36c1af95010d5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026.4.13.)호 관련입니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-13",
+          "start": 23,
+          "end": 32
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "1. 관련 : 춘천시 자치행정과-5069(2026.4.13.)호 관련입니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e5c1a87aa2c0baa3",
+      "segmentType": "label_value",
+      "labelText": "대학(원)생을 비롯한 청년들의 안정적인 지역정착 유도 및 지역 소속감 형성을 위해 다양한 청년 지원사업을 추진하고 있으며, 이와 관련된 사업을 붙임과 같이 안내하니, 관심있는 대학(원)생들의 적극적인 참여 바랍니다.",
+      "bodyText": "2. 춘천시에서는 춘천시 관내 대학(원)생을 비롯한 청년들의 안정적인 지역정착 유도 및 지역 소속감 형성을 위해 다양한 청년 지원사업을 추진하고 있으며, 이와 관련된 사업을 붙임과 같이 안내하니, 관심있는 대학(원)생들의 적극적인 참여 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 춘천시에서는 춘천시 관내 대학(원)생을 비롯한 청년들의 안정적인 지역정착 유도 및 지역 소속감 형성을 위해 다양한 청년 지원사업을 추진하고 있으며, 이와 관련된 사업을 붙임과 같이 안내하니, 관심있는 대학(원)생들의 적극적인 참여 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7955b69f764a04ea",
+      "segmentType": "label_value",
+      "labelText": "붙임 춘천시 관내 대학(원)생 지원사업 목록(현황) 1부. 끝.",
+      "bodyText": "붙임 춘천시 관내 대학(원)생 지원사업 목록(현황) 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 춘천시 관내 대학(원)생 지원사업 목록(현황) 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 4,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1,
+      "label_value": 2
+    }
+  }
+}

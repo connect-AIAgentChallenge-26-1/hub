@@ -1,0 +1,373 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-5658",
+  "sourceContentHash": "8756ef45a9e2f09db77df7bdadab56706cde4c06f874493c14340bf2f0892d5d",
+  "sourceTitle": "2026 KNU SPARK L 멘토링 프로그램 참가자 모집（외국인 유학생 멘토）",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5658&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천 삼척",
+    "campuses": [
+      "chuncheon",
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천",
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-5658-d9058fd42f6c48",
+      "uidHint": "noticepilot-cand-knu-504-5658-d9058fd42f6c48@noticepilot.local",
+      "sourceNoticeId": "knu-504-5658",
+      "sourceTitle": "2026 KNU SPARK L 멘토링 프로그램 참가자 모집（외국인 유학생 멘토）",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5658&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-782789f260870be7",
+        "segmentType": "continuation",
+        "labelText": "★ 신청 기간 -",
+        "bodyText": "2026. 1. 28.(수) ~ 2. 11.(수) 까지",
+        "sourceLocation": {
+          "lineIndex": 31,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-725d41459523bf27"
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-01-28",
+            "start": 10,
+            "end": 25
+          },
+          {
+            "value": "2026-02-11",
+            "start": 28,
+            "end": 37
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "★ 신청 기간 -",
+          "★ 신청 기간 - 2026. 1. 28.(수) ~ 2. 11.(수) 까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-875d8ac21e013912",
+        "segmentId": "seg-782789f260870be7",
+        "rawText": "2026. 1. 28.(수) ~ 2. 11.(수) 까지",
+        "normalizedStart": "2026-01-28",
+        "normalizedEnd": "2026-02-11",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 10,
+          "end": 37
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-81e2d825b37b4197",
+        "sourceNoticeId": "knu-504-5658",
+        "segmentId": "seg-782789f260870be7",
+        "temporalMentionIds": [
+          "tm-875d8ac21e013912"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "★ 신청 기간 -",
+        "evidence": "★ 신청 기간 - 2026. 1. 28.(수) ~ 2. 11.(수) 까지"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026 KNU SPARK L 멘토링 프로그램 참가자 모집（외국인 유학생 멘토） 신청기간",
+      "dateText": "2026. 1. 28.(수) ~ 2. 11.(수) 까지",
+      "normalizedStart": "2026-01-28",
+      "normalizedEnd": "2026-02-11",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "★ 신청 기간 - 2026. 1. 28.(수) ~ 2. 11.(수) 까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "same_action_boundary_candidates_consolidated",
+        "same_datetime_candidates_consolidated",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "same_action_boundary_candidates_consolidated",
+          "same_datetime_candidates_consolidated",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5658-0d2e631f484be0",
+      "uidHint": "noticepilot-cand-knu-504-5658-0d2e631f484be0@noticepilot.local",
+      "sourceNoticeId": "knu-504-5658",
+      "sourceTitle": "2026 KNU SPARK L 멘토링 프로그램 참가자 모집（외국인 유학생 멘토）",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5658&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-44d57b6226dd734a",
+        "segmentType": "continuation",
+        "labelText": "서류심사 + 면접 (온라인/오프라인 중 택) ※ 오프라인 권장※ - 최종 선발 결과",
+        "bodyText": "2. 26.(목) 국제교류과 홈페이지 공지",
+        "sourceLocation": {
+          "lineIndex": 39,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-90a633f5c28cf40f"
+        },
+        "actionSignals": [
+          "exam_or_interview"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-26",
+            "start": 50,
+            "end": 59
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "서류심사 + 면접 (온라인/오프라인 중 택) ※ 오프라인 권장※ - 최종 선발 결과",
+          "- 서류심사 + 면접 (온라인/오프라인 중 택) ※ 오프라인 권장※ - 최종 선발 결과: 2. 26.(목) 국제교류과 홈페이지 공지",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-3462c5c27f854e43",
+        "segmentId": "seg-44d57b6226dd734a",
+        "rawText": "2. 26.(목)",
+        "normalizedStart": "2026-02-26",
+        "normalizedEnd": "2026-02-26",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 50,
+          "end": 59
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-4c6f29a84e0abd82",
+        "sourceNoticeId": "knu-504-5658",
+        "segmentId": "seg-44d57b6226dd734a",
+        "temporalMentionIds": [
+          "tm-3462c5c27f854e43"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "서류심사 + 면접 (온라인/오프라인 중 택) ※ 오프라인 권장※ - 최종 선발 결과",
+        "evidence": "- 서류심사 + 면접 (온라인/오프라인 중 택) ※ 오프라인 권장※ - 최종 선발 결과: 2. 26.(목) 국제교류과 홈페이지 공지"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026 KNU SPARK L 멘토링 프로그램 참가자 모집（외국인 유학생 멘토） 결과 발표 예정",
+      "dateText": "2. 26.(목)",
+      "normalizedStart": "2026-02-26",
+      "normalizedEnd": "2026-02-26",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "- 서류심사 + 면접 (온라인/오프라인 중 택) ※ 오프라인 권장※ - 최종 선발 결과: 2. 26.(목) 국제교류과 홈페이지 공지",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

@@ -1,0 +1,717 @@
+{
+  "schemaVersion": "noticepilot.s30SamsungCalendarQa.v0.1",
+  "qaVersion": "0.1.0",
+  "generatedAt": "2026-07-13T21:30:00+09:00",
+  "automatedStatus": "pass",
+  "physicalClientStatus": "pending",
+  "s30Completed": false,
+  "referenceFeedAudits": {
+    "job_application": {
+      "status": "pass",
+      "httpChecks": [
+        {
+          "checkId": "http_status",
+          "status": "pass",
+          "expected": 200,
+          "actual": 200
+        },
+        {
+          "checkId": "content_type",
+          "status": "pass",
+          "expected": "text/calendar; charset=utf-8",
+          "actual": "text/calendar; charset=utf-8"
+        },
+        {
+          "checkId": "content_disposition",
+          "status": "pass",
+          "expected": "inline .ics filename",
+          "actual": "inline; filename=\"feed_22222222222222222222222222222222.ics\""
+        },
+        {
+          "checkId": "etag",
+          "status": "pass",
+          "expected": "quoted SHA-256 ETag",
+          "actual": "\"0503ff13f28784d645e5722ac2e771a825470e350b6efa43de7f52a19eba65b2\""
+        },
+        {
+          "checkId": "cache_control",
+          "status": "pass",
+          "expected": "private, max-age=300, must-revalidate",
+          "actual": "private, max-age=300, must-revalidate"
+        },
+        {
+          "checkId": "last_modified",
+          "status": "pass",
+          "expected": "HTTP date",
+          "actual": "Mon, 13 Jul 2026 08:30:00 GMT"
+        }
+      ],
+      "icsAudit": {
+        "schemaVersion": "noticepilot.s30SamsungCalendarQa.v0.1",
+        "status": "pass",
+        "eventCount": 299,
+        "allDayCount": 299,
+        "timedCount": 0,
+        "cancelledCount": 0,
+        "sha256": "0c7a284d55cd6d8ca168946e63872185b49d1ccb282b66416aa5c800187b7d59",
+        "checks": [
+          {
+            "checkId": "utf8_encoding",
+            "status": "pass",
+            "expected": "valid UTF-8",
+            "actual": "valid"
+          },
+          {
+            "checkId": "crlf_line_endings",
+            "status": "pass",
+            "expected": "CRLF only"
+          },
+          {
+            "checkId": "final_crlf",
+            "status": "pass",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "checkId": "physical_line_octet_limit",
+            "status": "pass",
+            "expected": "<=75 octets",
+            "actual": 75
+          },
+          {
+            "checkId": "folding_continuation_integrity",
+            "status": "pass",
+            "expected": "no orphan continuation"
+          },
+          {
+            "checkId": "ics_parse",
+            "status": "pass",
+            "expected": "parseable",
+            "actual": "parseable"
+          },
+          {
+            "checkId": "vcalendar_envelope",
+            "status": "pass",
+            "expected": [
+              "BEGIN:VCALENDAR",
+              "END:VCALENDAR"
+            ],
+            "actual": [
+              "BEGIN:VCALENDAR",
+              "END:VCALENDAR"
+            ]
+          },
+          {
+            "checkId": "required_calendar_properties",
+            "status": "pass",
+            "expected": {
+              "VERSION": "2.0",
+              "CALSCALE": "GREGORIAN",
+              "METHOD": "PUBLISH",
+              "X-WR-TIMEZONE": "Asia/Seoul"
+            },
+            "actual": {
+              "VERSION": [
+                "2.0"
+              ],
+              "CALSCALE": [
+                "GREGORIAN"
+              ],
+              "METHOD": [
+                "PUBLISH"
+              ],
+              "X-WR-TIMEZONE": [
+                "Asia/Seoul"
+              ]
+            }
+          },
+          {
+            "checkId": "asia_seoul_vtimezone",
+            "status": "pass",
+            "expected": "VTIMEZONE Asia/Seoul +0900"
+          },
+          {
+            "checkId": "event_count",
+            "status": "pass",
+            "expected": 299,
+            "actual": 299
+          },
+          {
+            "checkId": "vevent_required_properties",
+            "status": "pass",
+            "expected": "valid UID/DTSTAMP/DTSTART/SUMMARY/SEQUENCE/STATUS and time form",
+            "actual": []
+          },
+          {
+            "checkId": "unique_uid_per_feed",
+            "status": "pass",
+            "expected": [],
+            "actual": []
+          }
+        ]
+      },
+      "conditionalGet": {
+        "status": "pass",
+        "statusCode": 304,
+        "bodyLength": 0
+      }
+    },
+    "student_default": {
+      "status": "pass",
+      "httpChecks": [
+        {
+          "checkId": "http_status",
+          "status": "pass",
+          "expected": 200,
+          "actual": 200
+        },
+        {
+          "checkId": "content_type",
+          "status": "pass",
+          "expected": "text/calendar; charset=utf-8",
+          "actual": "text/calendar; charset=utf-8"
+        },
+        {
+          "checkId": "content_disposition",
+          "status": "pass",
+          "expected": "inline .ics filename",
+          "actual": "inline; filename=\"feed_11111111111111111111111111111111.ics\""
+        },
+        {
+          "checkId": "etag",
+          "status": "pass",
+          "expected": "quoted SHA-256 ETag",
+          "actual": "\"d44c2066a621c9bd81762a9099dd7106ef63bb44058b1f7f7fe9d4421e4ae205\""
+        },
+        {
+          "checkId": "cache_control",
+          "status": "pass",
+          "expected": "private, max-age=300, must-revalidate",
+          "actual": "private, max-age=300, must-revalidate"
+        },
+        {
+          "checkId": "last_modified",
+          "status": "pass",
+          "expected": "HTTP date",
+          "actual": "Mon, 13 Jul 2026 08:30:00 GMT"
+        }
+      ],
+      "icsAudit": {
+        "schemaVersion": "noticepilot.s30SamsungCalendarQa.v0.1",
+        "status": "pass",
+        "eventCount": 601,
+        "allDayCount": 293,
+        "timedCount": 308,
+        "cancelledCount": 0,
+        "sha256": "725a5f49c73de7e59b3bbf1a68271cdac15262653d812cd816d8b03f966d1be8",
+        "checks": [
+          {
+            "checkId": "utf8_encoding",
+            "status": "pass",
+            "expected": "valid UTF-8",
+            "actual": "valid"
+          },
+          {
+            "checkId": "crlf_line_endings",
+            "status": "pass",
+            "expected": "CRLF only"
+          },
+          {
+            "checkId": "final_crlf",
+            "status": "pass",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "checkId": "physical_line_octet_limit",
+            "status": "pass",
+            "expected": "<=75 octets",
+            "actual": 75
+          },
+          {
+            "checkId": "folding_continuation_integrity",
+            "status": "pass",
+            "expected": "no orphan continuation"
+          },
+          {
+            "checkId": "ics_parse",
+            "status": "pass",
+            "expected": "parseable",
+            "actual": "parseable"
+          },
+          {
+            "checkId": "vcalendar_envelope",
+            "status": "pass",
+            "expected": [
+              "BEGIN:VCALENDAR",
+              "END:VCALENDAR"
+            ],
+            "actual": [
+              "BEGIN:VCALENDAR",
+              "END:VCALENDAR"
+            ]
+          },
+          {
+            "checkId": "required_calendar_properties",
+            "status": "pass",
+            "expected": {
+              "VERSION": "2.0",
+              "CALSCALE": "GREGORIAN",
+              "METHOD": "PUBLISH",
+              "X-WR-TIMEZONE": "Asia/Seoul"
+            },
+            "actual": {
+              "VERSION": [
+                "2.0"
+              ],
+              "CALSCALE": [
+                "GREGORIAN"
+              ],
+              "METHOD": [
+                "PUBLISH"
+              ],
+              "X-WR-TIMEZONE": [
+                "Asia/Seoul"
+              ]
+            }
+          },
+          {
+            "checkId": "asia_seoul_vtimezone",
+            "status": "pass",
+            "expected": "VTIMEZONE Asia/Seoul +0900"
+          },
+          {
+            "checkId": "event_count",
+            "status": "pass",
+            "expected": 601,
+            "actual": 601
+          },
+          {
+            "checkId": "vevent_required_properties",
+            "status": "pass",
+            "expected": "valid UID/DTSTAMP/DTSTART/SUMMARY/SEQUENCE/STATUS and time form",
+            "actual": []
+          },
+          {
+            "checkId": "unique_uid_per_feed",
+            "status": "pass",
+            "expected": [],
+            "actual": []
+          }
+        ]
+      },
+      "conditionalGet": {
+        "status": "pass",
+        "statusCode": 304,
+        "bodyLength": 0
+      }
+    }
+  },
+  "referenceFeeds": {
+    "job_application": {
+      "eventCount": 299,
+      "bodySha256": "0c7a284d55cd6d8ca168946e63872185b49d1ccb282b66416aa5c800187b7d59",
+      "etag": "\"0503ff13f28784d645e5722ac2e771a825470e350b6efa43de7f52a19eba65b2\"",
+      "snapshotId": "feedsnap_0503ff13f28784d645e5722ac2e771a8"
+    },
+    "student_default": {
+      "eventCount": 601,
+      "bodySha256": "725a5f49c73de7e59b3bbf1a68271cdac15262653d812cd816d8b03f966d1be8",
+      "etag": "\"d44c2066a621c9bd81762a9099dd7106ef63bb44058b1f7f7fe9d4421e4ae205\"",
+      "snapshotId": "feedsnap_d44c2066a621c9bd81762a9099dd7106"
+    }
+  },
+  "lifecycleFixtureAudit": {
+    "status": "pass",
+    "checks": [
+      {
+        "checkId": "stage_set",
+        "status": "pass",
+        "expected": [
+          "initial",
+          "updated",
+          "cancelled"
+        ],
+        "actual": [
+          "cancelled",
+          "initial",
+          "updated"
+        ]
+      },
+      {
+        "checkId": "stage_ics_conformance",
+        "status": "pass",
+        "expected": "all pass",
+        "actual": {
+          "initial": "pass",
+          "updated": "pass",
+          "cancelled": "pass"
+        }
+      },
+      {
+        "checkId": "stable_uid_across_update_cancel",
+        "status": "pass",
+        "expected": "evt_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@noticepilot.local"
+      },
+      {
+        "checkId": "monotonic_sequence",
+        "status": "pass",
+        "expected": [
+          0,
+          1,
+          2
+        ],
+        "actual": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "checkId": "new_event_reflected",
+        "status": "pass",
+        "expected": "absent→present→present"
+      },
+      {
+        "checkId": "cancelled_status_same_uid",
+        "status": "pass",
+        "expected": "CANCELLED",
+        "actual": "CANCELLED"
+      },
+      {
+        "checkId": "inclusive_end_extension_projection",
+        "status": "pass",
+        "expected": [
+          "20260804",
+          "20260806"
+        ],
+        "actual": [
+          "20260804",
+          "20260806"
+        ]
+      }
+    ],
+    "stageAudits": {
+      "initial": {
+        "schemaVersion": "noticepilot.s30SamsungCalendarQa.v0.1",
+        "status": "pass",
+        "eventCount": 2,
+        "allDayCount": 1,
+        "timedCount": 1,
+        "cancelledCount": 0,
+        "sha256": "b7cf303e53c5f80e9e94db11bbb8de5b8cc9430b42b3c6d08fac7b399ac88a2b",
+        "checks": [
+          {
+            "checkId": "utf8_encoding",
+            "status": "pass",
+            "expected": "valid UTF-8",
+            "actual": "valid"
+          },
+          {
+            "checkId": "crlf_line_endings",
+            "status": "pass",
+            "expected": "CRLF only"
+          },
+          {
+            "checkId": "final_crlf",
+            "status": "pass",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "checkId": "physical_line_octet_limit",
+            "status": "pass",
+            "expected": "<=75 octets",
+            "actual": 75
+          },
+          {
+            "checkId": "folding_continuation_integrity",
+            "status": "pass",
+            "expected": "no orphan continuation"
+          },
+          {
+            "checkId": "ics_parse",
+            "status": "pass",
+            "expected": "parseable",
+            "actual": "parseable"
+          },
+          {
+            "checkId": "vcalendar_envelope",
+            "status": "pass",
+            "expected": [
+              "BEGIN:VCALENDAR",
+              "END:VCALENDAR"
+            ],
+            "actual": [
+              "BEGIN:VCALENDAR",
+              "END:VCALENDAR"
+            ]
+          },
+          {
+            "checkId": "required_calendar_properties",
+            "status": "pass",
+            "expected": {
+              "VERSION": "2.0",
+              "CALSCALE": "GREGORIAN",
+              "METHOD": "PUBLISH",
+              "X-WR-TIMEZONE": "Asia/Seoul"
+            },
+            "actual": {
+              "VERSION": [
+                "2.0"
+              ],
+              "CALSCALE": [
+                "GREGORIAN"
+              ],
+              "METHOD": [
+                "PUBLISH"
+              ],
+              "X-WR-TIMEZONE": [
+                "Asia/Seoul"
+              ]
+            }
+          },
+          {
+            "checkId": "asia_seoul_vtimezone",
+            "status": "pass",
+            "expected": "VTIMEZONE Asia/Seoul +0900"
+          },
+          {
+            "checkId": "event_count",
+            "status": "pass",
+            "expected": 2,
+            "actual": 2
+          },
+          {
+            "checkId": "vevent_required_properties",
+            "status": "pass",
+            "expected": "valid UID/DTSTAMP/DTSTART/SUMMARY/SEQUENCE/STATUS and time form",
+            "actual": []
+          },
+          {
+            "checkId": "unique_uid_per_feed",
+            "status": "pass",
+            "expected": [],
+            "actual": []
+          }
+        ]
+      },
+      "updated": {
+        "schemaVersion": "noticepilot.s30SamsungCalendarQa.v0.1",
+        "status": "pass",
+        "eventCount": 3,
+        "allDayCount": 1,
+        "timedCount": 2,
+        "cancelledCount": 0,
+        "sha256": "ed1936fd61b7258d33bba6f19dcb3b8f070a438d4b2e75bf0e05df548d366819",
+        "checks": [
+          {
+            "checkId": "utf8_encoding",
+            "status": "pass",
+            "expected": "valid UTF-8",
+            "actual": "valid"
+          },
+          {
+            "checkId": "crlf_line_endings",
+            "status": "pass",
+            "expected": "CRLF only"
+          },
+          {
+            "checkId": "final_crlf",
+            "status": "pass",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "checkId": "physical_line_octet_limit",
+            "status": "pass",
+            "expected": "<=75 octets",
+            "actual": 75
+          },
+          {
+            "checkId": "folding_continuation_integrity",
+            "status": "pass",
+            "expected": "no orphan continuation"
+          },
+          {
+            "checkId": "ics_parse",
+            "status": "pass",
+            "expected": "parseable",
+            "actual": "parseable"
+          },
+          {
+            "checkId": "vcalendar_envelope",
+            "status": "pass",
+            "expected": [
+              "BEGIN:VCALENDAR",
+              "END:VCALENDAR"
+            ],
+            "actual": [
+              "BEGIN:VCALENDAR",
+              "END:VCALENDAR"
+            ]
+          },
+          {
+            "checkId": "required_calendar_properties",
+            "status": "pass",
+            "expected": {
+              "VERSION": "2.0",
+              "CALSCALE": "GREGORIAN",
+              "METHOD": "PUBLISH",
+              "X-WR-TIMEZONE": "Asia/Seoul"
+            },
+            "actual": {
+              "VERSION": [
+                "2.0"
+              ],
+              "CALSCALE": [
+                "GREGORIAN"
+              ],
+              "METHOD": [
+                "PUBLISH"
+              ],
+              "X-WR-TIMEZONE": [
+                "Asia/Seoul"
+              ]
+            }
+          },
+          {
+            "checkId": "asia_seoul_vtimezone",
+            "status": "pass",
+            "expected": "VTIMEZONE Asia/Seoul +0900"
+          },
+          {
+            "checkId": "event_count",
+            "status": "pass",
+            "expected": 3,
+            "actual": 3
+          },
+          {
+            "checkId": "vevent_required_properties",
+            "status": "pass",
+            "expected": "valid UID/DTSTAMP/DTSTART/SUMMARY/SEQUENCE/STATUS and time form",
+            "actual": []
+          },
+          {
+            "checkId": "unique_uid_per_feed",
+            "status": "pass",
+            "expected": [],
+            "actual": []
+          }
+        ]
+      },
+      "cancelled": {
+        "schemaVersion": "noticepilot.s30SamsungCalendarQa.v0.1",
+        "status": "pass",
+        "eventCount": 3,
+        "allDayCount": 1,
+        "timedCount": 2,
+        "cancelledCount": 1,
+        "sha256": "9c66ec463db3a8906a6a8f672efd8a257c5c77811e970e1ea4b360dc61c70417",
+        "checks": [
+          {
+            "checkId": "utf8_encoding",
+            "status": "pass",
+            "expected": "valid UTF-8",
+            "actual": "valid"
+          },
+          {
+            "checkId": "crlf_line_endings",
+            "status": "pass",
+            "expected": "CRLF only"
+          },
+          {
+            "checkId": "final_crlf",
+            "status": "pass",
+            "expected": true,
+            "actual": true
+          },
+          {
+            "checkId": "physical_line_octet_limit",
+            "status": "pass",
+            "expected": "<=75 octets",
+            "actual": 75
+          },
+          {
+            "checkId": "folding_continuation_integrity",
+            "status": "pass",
+            "expected": "no orphan continuation"
+          },
+          {
+            "checkId": "ics_parse",
+            "status": "pass",
+            "expected": "parseable",
+            "actual": "parseable"
+          },
+          {
+            "checkId": "vcalendar_envelope",
+            "status": "pass",
+            "expected": [
+              "BEGIN:VCALENDAR",
+              "END:VCALENDAR"
+            ],
+            "actual": [
+              "BEGIN:VCALENDAR",
+              "END:VCALENDAR"
+            ]
+          },
+          {
+            "checkId": "required_calendar_properties",
+            "status": "pass",
+            "expected": {
+              "VERSION": "2.0",
+              "CALSCALE": "GREGORIAN",
+              "METHOD": "PUBLISH",
+              "X-WR-TIMEZONE": "Asia/Seoul"
+            },
+            "actual": {
+              "VERSION": [
+                "2.0"
+              ],
+              "CALSCALE": [
+                "GREGORIAN"
+              ],
+              "METHOD": [
+                "PUBLISH"
+              ],
+              "X-WR-TIMEZONE": [
+                "Asia/Seoul"
+              ]
+            }
+          },
+          {
+            "checkId": "asia_seoul_vtimezone",
+            "status": "pass",
+            "expected": "VTIMEZONE Asia/Seoul +0900"
+          },
+          {
+            "checkId": "event_count",
+            "status": "pass",
+            "expected": 3,
+            "actual": 3
+          },
+          {
+            "checkId": "vevent_required_properties",
+            "status": "pass",
+            "expected": "valid UID/DTSTAMP/DTSTART/SUMMARY/SEQUENCE/STATUS and time form",
+            "actual": []
+          },
+          {
+            "checkId": "unique_uid_per_feed",
+            "status": "pass",
+            "expected": [],
+            "actual": []
+          }
+        ]
+      }
+    }
+  },
+  "physicalQa": {
+    "required": true,
+    "template": "samsung-physical-qa-result.template.json",
+    "resultPath": "physical-qa/samsung-physical-qa-result.json",
+    "qaPath": "/s30-samsung-calendar/noticepilot-qa.ics",
+    "staticImportAcceptedAsSubscription": false
+  },
+  "reportSha256": "cf7ff5ca03eca3ed5e210930c31384901258b45bb67d54a9d1beb577f37f9727"
+}

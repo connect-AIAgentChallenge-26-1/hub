@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10636",
+  "sourceContentHash": "a003b24a1c246334d34ce351555e5a76c2d58b6a9e601bf9ee6dd9b90049a9b9",
+  "sourceTitle": "강릉원주대학교 과학영재교육원 2026학년도 신입생 추가모집 안내 (2026학년도 기준 초5~중3) 3.2.월~3.12.목까지 접수",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10636&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉 원주",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10636-8e78910279be86",
+      "uidHint": "noticepilot-cand-knu-504-10636-8e78910279be86@noticepilot.local",
+      "sourceNoticeId": "knu-504-10636",
+      "sourceTitle": "강릉원주대학교 과학영재교육원 2026학년도 신입생 추가모집 안내 (2026학년도 기준 초5~중3) 3.2.월~3.12.목까지 접수",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10636&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-de82ce35a6a31f05",
+        "segmentType": "title",
+        "labelText": "강릉원주대학교 과학영재교육원 2026학년도 신입생 추가모집 안내 (2026학년도 기준 초5~중3)",
+        "bodyText": "3.2.월~3.12.목까지 접수",
+        "sourceLocation": {
+          "lineIndex": -1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period",
+          "event"
+        ],
+        "audienceSignals": [
+          "admission_type:new_student"
+        ],
+        "dateSpans": [
+          {
+            "value": "2026-03-02",
+            "start": 55,
+            "end": 58
+          },
+          {
+            "value": "2026-03-12",
+            "start": 61,
+            "end": 65
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "low",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "강릉원주대학교 과학영재교육원 2026학년도 신입생 추가모집 안내 (2026학년도 기준 초5~중3)",
+          "강릉원주대학교 과학영재교육원 2026학년도 신입생 추가모집 안내 (2026학년도 기준 초5~중3) 3.2.월~3.12.목까지 접수",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-98be553bd126a9de",
+        "segmentId": "seg-de82ce35a6a31f05",
+        "rawText": "3.2.월~3.12.목까지 접수",
+        "normalizedStart": "2026-03-02",
+        "normalizedEnd": "2026-03-12",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 55,
+          "end": 65
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-99757f5ff2b3d96e",
+        "sourceNoticeId": "knu-504-10636",
+        "segmentId": "seg-de82ce35a6a31f05",
+        "temporalMentionIds": [
+          "tm-98be553bd126a9de"
+        ],
+        "bindingKind": "title_context",
+        "confidence": "low",
+        "ruleId": "binding.title_context",
+        "locallyGrounded": false,
+        "labelText": "강릉원주대학교 과학영재교육원 2026학년도 신입생 추가모집 안내 (2026학년도 기준 초5~중3)",
+        "evidence": "강릉원주대학교 과학영재교육원 2026학년도 신입생 추가모집 안내 (2026학년도 기준 초5~중3) 3.2.월~3.12.목까지 접수"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "강릉원주대학교 과학영재교육원 2026학년도 신입생 추가모집 안내 (2026학년도 기준 초5~중3) 3.2.월~3.12.목까지 접수 신청기간",
+      "dateText": "3.2.월~3.12.목까지 접수",
+      "normalizedStart": "2026-03-02",
+      "normalizedEnd": "2026-03-12",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "강릉원주대학교 과학영재교육원 2026학년도 신입생 추가모집 안내 (2026학년도 기준 초5~중3) 3.2.월~3.12.목까지 접수",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

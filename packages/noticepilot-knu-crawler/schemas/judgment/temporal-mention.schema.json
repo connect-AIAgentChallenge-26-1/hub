@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noticepilot.temporalMention.v0.1",
+  "title": "NoticePilot Temporal Mention",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "mentionId", "segmentId", "rawText", "normalizedStart", "normalizedEnd", "resolutionKind", "deterministic", "timezone", "inferredYear", "span"],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.temporalMention.v0.1"},
+    "mentionId": {"type": "string", "minLength": 1},
+    "segmentId": {"type": "string", "minLength": 1},
+    "rawText": {"type": "string", "minLength": 1},
+    "normalizedStart": {"type": ["string", "null"]},
+    "normalizedEnd": {"type": ["string", "null"]},
+    "resolutionKind": {"type": "string", "minLength": 1},
+    "deterministic": {"type": "boolean"},
+    "timezone": {"type": ["string", "null"]},
+    "inferredYear": {"type": "boolean"},
+    "span": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["start", "end"],
+          "properties": {
+            "start": {"type": "integer", "minimum": 0},
+            "end": {"type": "integer", "minimum": 0}
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"deterministic": {"const": true}}},
+      "then": {"properties": {"normalizedStart": {"type": "string", "minLength": 1}}}
+    }
+  ]
+}

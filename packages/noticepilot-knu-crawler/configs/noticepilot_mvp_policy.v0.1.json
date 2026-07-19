@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "noticepilot.mvpPolicyConfig.v0.1",
+  "policyVersion": "noticepilot.studentFirstMvp.v0.1",
+  "timezone": "Asia/Seoul",
+  "primaryAudience": "student",
+  "feeds": {
+    "student_default": {
+      "label": "학생 기본 피드",
+      "enabled": true,
+      "description": "학생이 행동해야 하는 일정과 향후 결과 발표 예정일"
+    },
+    "job_application": {
+      "label": "채용 접수 피드",
+      "enabled": true,
+      "description": "MVP에서 716 채용안내 중 지원 가능한 접수 일정만 분리 제공"
+    }
+  },
+  "boardPolicies": {
+    "716": {
+      "mode": "application_period_only",
+      "publicationDateSource": "detail.publishedAt",
+      "applicationPeriodSource": "listMetadata.application_period_start/end"
+    }
+  },
+  "datePolicy": {
+    "requireDeterministicDate": true,
+    "preserveExplicitRanges": true,
+    "coreEndDateInclusive": true,
+    "icsEndDateExclusive": true,
+    "relativeDate": {
+      "publicationDateAliases": [
+        "공고일",
+        "게시일",
+        "등록일"
+      ],
+      "withinDaysCalculation": "publishedAt_plus_n_calendar_days",
+      "forDaysCalculation": "inclusive_window_starting_at_reference",
+      "nextDayForDaysCalculation": "inclusive_window_starting_day_after_reference"
+    }
+  },
+  "keywords": {
+    "studentAudience": [
+      "재학생",
+      "휴학생",
+      "학생",
+      "학부생",
+      "대학원생",
+      "졸업예정자",
+      "신입생",
+      "장학생",
+      "교환학생",
+      "수강생",
+      "학생 대상",
+      "학생지원"
+    ],
+    "internalAudience": [
+      "교직원",
+      "교원",
+      "교수",
+      "직원 대상",
+      "연구원 대상",
+      "부서 담당자",
+      "학과 담당자",
+      "행정실 담당자",
+      "내부 직원",
+      "조교 대상"
+    ],
+    "application": [
+      "신청",
+      "접수",
+      "지원",
+      "모집",
+      "응모"
+    ],
+    "submission": [
+      "제출",
+      "서류 제출",
+      "과제 제출"
+    ],
+    "registration": [
+      "등록",
+      "수강신청",
+      "휴학",
+      "복학",
+      "재입학",
+      "전과",
+      "학점인정"
+    ],
+    "payment": [
+      "납부",
+      "등록금"
+    ],
+    "event": [
+      "행사",
+      "설명회",
+      "교육",
+      "특강",
+      "캠프",
+      "대회",
+      "세미나",
+      "오리엔테이션",
+      "OT",
+      "워크숍"
+    ],
+    "exam": [
+      "시험",
+      "평가",
+      "면접"
+    ],
+    "futureResult": [
+      "발표 예정",
+      "결과 발표 예정",
+      "선정 결과 발표",
+      "합격자 발표 예정",
+      "발표일",
+      "결과 발표일"
+    ],
+    "completedResultTitle": [
+      "최종합격자",
+      "최종 합격자",
+      "합격자 발표",
+      "합격자 공고",
+      "수상자 발표",
+      "선정결과 발표",
+      "선정 결과 발표",
+      "서류전형 합격자",
+      "1차 전형 합격자",
+      "면접 대상자",
+      "채용 결과"
+    ],
+    "jobApplicationTitle": [
+      "채용 공고",
+      "채용공고",
+      "모집 공고",
+      "모집공고",
+      "공개채용",
+      "신규채용",
+      "신규 채용",
+      "채용 재공고",
+      "채용재공고",
+      "초빙 공고",
+      "전입희망자 모집",
+      "직원 모집",
+      "인턴 채용"
+    ],
+    "jobNonApplicationStage": [
+      "최종합격",
+      "최종 합격",
+      "합격자",
+      "서류전형",
+      "서류 전형",
+      "면접",
+      "1차 전형",
+      "시험 일정",
+      "채용 결과",
+      "임용후보자",
+      "합격 공고"
+    ],
+    "ambiguousDate": [
+      "추후 공지",
+      "별도 공지",
+      "7월 중",
+      "8월 중",
+      "9월 중",
+      "상시 모집",
+      "상시모집",
+      "예산 소진 시",
+      "선착순 마감",
+      "변동 가능"
+    ]
+  },
+  "academicActionPolicy": {
+    "leaveReturn": {
+      "preserveAsPeriod": true,
+      "splitSharedPeriodIntoActions": true,
+      "actionTypes": {
+        "leave": "leave_of_absence_application",
+        "return": "return_from_leave_application"
+      }
+    },
+    "courseRegistration": {
+      "preserveCohortSpecificCandidates": true,
+      "supportedActionTypes": [
+        "course_registration",
+        "preliminary_course_registration",
+        "course_registration_change",
+        "course_registration_cancellation"
+      ],
+      "cohortDimensions": [
+        "degreeLevels",
+        "studentYears",
+        "enrollmentStatuses",
+        "admissionTypes"
+      ],
+      "unresolvedMultipleSchedules": "needs_review"
+    }
+  },
+  "subscriptionApplicability": {
+    "candidateField": "audienceRules",
+    "filterStage": "subscription_feed_builder",
+    "matchMode": "all_dimensions",
+    "emptyRuleBehavior": "include_for_all_matching_target_actor",
+    "mvpProfileDimensions": [
+      "campuses",
+      "degreeLevel",
+      "studentYear",
+      "enrollmentStatus"
+    ],
+    "deferredProfileDimensions": [
+      "college",
+      "department",
+      "major"
+    ]
+  },
+  "structuredScheduleSegmentation": {
+    "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+    "enabled": true,
+    "unitTypes": [
+      "title",
+      "paragraph",
+      "list_item",
+      "label_value",
+      "table_row",
+      "continuation"
+    ],
+    "overlappingSlidingWindows": false,
+    "labelOwnership": "nearest local structural unit",
+    "continuation": {
+      "maxAdjacentLines": 1,
+      "requiresActionInFirstUnit": true,
+      "requiresDateInSecondUnit": true,
+      "rejectsCompetingActionInSecondUnit": true
+    },
+    "ungroundedDate": {
+      "disposition": "needs_review",
+      "reasonCode": "action_label_not_locally_grounded"
+    },
+    "audit": {
+      "candidateField": "sourceSegment",
+      "derivedDirectory": "segments"
+    },
+    "semanticAdjudication": {
+      "runtimeEnabled": false,
+      "handoffInput": "structured segment plus deterministic candidate labels",
+      "fallback": "review queue"
+    },
+    "flattenedTableReconstruction": {
+      "enabled": true,
+      "supportedFamilies": [
+        "leave_return_application",
+        "course_registration_by_student_year"
+      ],
+      "requiresLocalSectionHeaders": true,
+      "boundedFragmentJoin": true,
+      "maxDateFragmentLines": 6,
+      "failClosedOnUnresolvedRow": true
+    }
+  }
+}

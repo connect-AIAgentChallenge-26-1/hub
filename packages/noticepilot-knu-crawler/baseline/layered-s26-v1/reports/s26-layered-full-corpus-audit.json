@@ -1,0 +1,135 @@
+{
+  "auditVersion": "0.1.2",
+  "baselineObservation": {
+    "adjudication": "accepted_for_separate_layered_baseline",
+    "allowlist": null,
+    "candidateIntegrityChangeCount": 0,
+    "changeCount": 304,
+    "comparisonSchemaVersion": "noticepilot.policyBaselineDiff.v0.1",
+    "icsEventChanges": {
+      "job_application": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      },
+      "student_default": {
+        "added": 0,
+        "changed": 0,
+        "removed": 0
+      }
+    },
+    "publishableCandidateChanges": {
+      "added": 0,
+      "changed": 300,
+      "removed": 0
+    },
+    "result": "different",
+    "reviewQueueChanges": {
+      "added": 0,
+      "changed": 0,
+      "removed": 0
+    },
+    "summaryChangeCount": 4
+  },
+  "checks": {
+    "allComponentAuditsPass": true,
+    "board716CandidateCount": 300,
+    "board716ContractErrorCount": 0,
+    "candidateCount": 1304,
+    "completeTraceCandidateCount": 1304,
+    "crossArtifactJudgmentMismatchCount": 0,
+    "crossLayerCandidateCounts": {
+      "s24a": 1304,
+      "s24b": 1304,
+      "s24c": 1304,
+      "s24d": 1304,
+      "s25": 1304
+    },
+    "crossLayerCountConsistency": true,
+    "crossLayerUniqueCandidateCounts": {
+      "s24a": 1304,
+      "s24b": 1304,
+      "s24c": 1304,
+      "s24d": 1304,
+      "s25": 1304
+    },
+    "icsMatchesAcrossAllAudits": true,
+    "noticeDecisionCount": 2059,
+    "publishableSemanticsMatch": true,
+    "reconcilerCandidateObjectMismatchCount": 0,
+    "reconcilerSecondPassConflictDetectionCount": 9,
+    "reconcilerSecondPassInputCandidateCount": 1304,
+    "reconcilerSecondPassOutputCandidateCount": 1304,
+    "reconcilerSecondPassRemovedCandidateCount": 0,
+    "reviewQueueMatchesAcrossAllAudits": true,
+    "runtimeApplicabilityJudgmentFieldCount": 1304,
+    "runtimeJudgmentContractErrorCount": 0,
+    "runtimeJudgmentReconstructionMismatchCount": 0,
+    "runtimePublishabilityJudgmentFieldCount": 1304,
+    "scopeCounts": {
+      "conditional": 20,
+      "profile_scoped": 12,
+      "unknown": 282,
+      "unrestricted": 990
+    },
+    "scopeCountsMatchExpected": true,
+    "traceErrorCount": 0,
+    "uniqueCandidateIdCount": 1304,
+    "verdictCounts": {
+      "auto_confirmed": 909,
+      "needs_review": 395
+    },
+    "verdictCountsMatchExpected": true
+  },
+  "componentAudits": {
+    "s24aBoard716Trace": {
+      "result": "pass",
+      "returnCode": 0,
+      "schemaVersion": "noticepilot.s24Board716TraceAudit.v0.1"
+    },
+    "s24bApplicability": {
+      "result": "pass",
+      "returnCode": 0,
+      "schemaVersion": "noticepilot.s24ApplicabilityEvaluatorAudit.v0.2"
+    },
+    "s24cPublishability": {
+      "result": "pass",
+      "returnCode": 0,
+      "schemaVersion": "noticepilot.s24PublishabilityEvaluatorAudit.v0.2"
+    },
+    "s24dRuntimeWiring": {
+      "result": "pass",
+      "returnCode": 0,
+      "schemaVersion": "noticepilot.s24RuntimeJudgmentWiringAudit.v0.1"
+    },
+    "s25CandidateReconciler": {
+      "result": "pass",
+      "returnCode": 0,
+      "schemaVersion": "noticepilot.s25CandidateReconcilerAudit.v0.1"
+    }
+  },
+  "result": "pass",
+  "samples": {
+    "componentExecutionErrors": [],
+    "componentFailures": [],
+    "countInconsistencies": []
+  },
+  "schemaVersion": "noticepilot.s26LayeredFullCorpusAudit.v0.3",
+  "scope": {
+    "allowlistDecisionPerformed": false,
+    "baselinePromotionDecisionPerformed": true,
+    "baselineReplacementPerformed": false,
+    "componentStages": [
+      "S24-A",
+      "S24-B",
+      "S24-C",
+      "S24-D",
+      "S25"
+    ],
+    "decisionRecord": "../../../baseline/layered-s26-v1/decision-record.json",
+    "layeredBaselineDir": "../../../baseline/layered-s26-v1",
+    "layeredBaselineId": "layered-s26-corpus-2059-20260712-v1",
+    "separateLayeredBaselineCreated": true,
+    "unifiedLayeredFullCorpusAuditPerformed": true
+  }
+}

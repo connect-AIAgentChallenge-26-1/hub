@@ -1,0 +1,366 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10832",
+  "sourceContentHash": "3f84dcc37e838f4dda4f5a1f8138c89916ccdb597385349083f335ea94b9f6d3",
+  "sourceTitle": "[춘천바이오산업진흥원] 2026년 강원 바이오기업 성장 촉진 및 고용 활성화 지원사업 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10832&pageIndex=7&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10832-6e5c4a34a69692",
+      "uidHint": "noticepilot-cand-knu-504-10832-6e5c4a34a69692@noticepilot.local",
+      "sourceNoticeId": "knu-504-10832",
+      "sourceTitle": "[춘천바이오산업진흥원] 2026년 강원 바이오기업 성장 촉진 및 고용 활성화 지원사업 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10832&pageIndex=7&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-e472c58c3f01f4de",
+        "segmentType": "label_value",
+        "labelText": "신청기간",
+        "bodyText": "2026. 3. 30.(월)~4.10.(금)",
+        "sourceLocation": {
+          "lineIndex": 9,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-30",
+            "start": 9,
+            "end": 24
+          },
+          {
+            "value": "2026-04-10",
+            "start": 25,
+            "end": 33
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "신청기간",
+          "나. 신청기간: 2026. 3. 30.(월)~4.10.(금)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-eedd65e72a881621",
+        "segmentId": "seg-e472c58c3f01f4de",
+        "rawText": "2026. 3. 30.(월)~4.10.(금)",
+        "normalizedStart": "2026-03-30",
+        "normalizedEnd": "2026-04-10",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 9,
+          "end": 33
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-c1795ba86439c8ea",
+        "sourceNoticeId": "knu-504-10832",
+        "segmentId": "seg-e472c58c3f01f4de",
+        "temporalMentionIds": [
+          "tm-eedd65e72a881621"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "신청기간",
+        "evidence": "나. 신청기간: 2026. 3. 30.(월)~4.10.(금)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[춘천바이오산업진흥원] 2026년 강원 바이오기업 성장 촉진 및 고용 활성화 지원사업 안내 신청기간",
+      "dateText": "2026. 3. 30.(월)~4.10.(금)",
+      "normalizedStart": "2026-03-30",
+      "normalizedEnd": "2026-04-10",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "나. 신청기간: 2026. 3. 30.(월)~4.10.(금)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10832-584c5cda6779f8",
+      "uidHint": "noticepilot-cand-knu-504-10832-584c5cda6779f8@noticepilot.local",
+      "sourceNoticeId": "knu-504-10832",
+      "sourceTitle": "[춘천바이오산업진흥원] 2026년 강원 바이오기업 성장 촉진 및 고용 활성화 지원사업 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10832&pageIndex=7&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-3cbd3745e641fe52",
+        "segmentType": "label_value",
+        "labelText": "사업기간",
+        "bodyText": "2026. 10. 31.",
+        "sourceLocation": {
+          "lineIndex": 3,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-10-31",
+            "start": 17,
+            "end": 29
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "사업기간",
+          "나. 사업기간: 사업 선정 ~ 2026. 10. 31.",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-692dd487dcef7fb7",
+        "segmentId": "seg-3cbd3745e641fe52",
+        "rawText": "2026. 10. 31",
+        "normalizedStart": "2026-10-31",
+        "normalizedEnd": "2026-10-31",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 17,
+          "end": 29
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-66b979da8b64dce1",
+        "sourceNoticeId": "knu-504-10832",
+        "segmentId": "seg-3cbd3745e641fe52",
+        "temporalMentionIds": [
+          "tm-692dd487dcef7fb7"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "사업기간",
+        "evidence": "나. 사업기간: 사업 선정 ~ 2026. 10. 31."
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[춘천바이오산업진흥원] 2026년 강원 바이오기업 성장 촉진 및 고용 활성화 지원사업 안내 행사 일정",
+      "dateText": "2026. 10. 31",
+      "normalizedStart": "2026-10-31",
+      "normalizedEnd": "2026-10-31",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "나. 사업기간: 사업 선정 ~ 2026. 10. 31.",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 2,
+    "calendarFeedIncludedCount": 0
+  }
+}

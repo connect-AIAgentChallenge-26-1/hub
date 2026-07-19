@@ -1,0 +1,869 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-4163",
+  "sourceContentHash": "665aba89d769389a87cf18e316a87f64bad7e69de065c68492e5e21bc1d61fba",
+  "sourceTitle": "2026학년도 대전가원학교 여름계절학교 자원봉사자 모집",
+  "publishedAt": "2026-06-13",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9b95fb9f89aa17eb",
+      "segmentType": "title",
+      "labelText": "2026학년도 대전가원학교 여름계절학교 자원봉사자 모집",
+      "bodyText": "2026학년도 대전가원학교 여름계절학교 자원봉사자 모집",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 대전가원학교 여름계절학교 자원봉사자 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bc2145ae6380ca33",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 대전가원학교 여름계절학교 자원봉사자 모집 공고",
+      "bodyText": "2026학년도 대전가원학교 여름계절학교 자원봉사자 모집 공고",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 대전가원학교 여름계절학교 자원봉사자 모집 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dbd8f791292fbbe3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구분",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구분"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38ff270b960dc218",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "내용",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fbc7b3c9bdf70bb9",
+      "segmentType": "label_value",
+      "labelText": "모집기간",
+      "bodyText": "모집기간",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "모집기간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4c888022674f6d40",
+      "segmentType": "continuation",
+      "labelText": "모집기간",
+      "bodyText": "2026년 6월 9일(화) 10시 ~ 2026년 6월 19일(금) 15시 (※ 모집 인원이 미달될 경우, 7월 3일 금요일 15시까지 연장함)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-fbc7b3c9bdf70bb9"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-09",
+          "start": 5,
+          "end": 19
+        },
+        {
+          "value": "2026-06-19",
+          "start": 26,
+          "end": 41
+        },
+        {
+          "value": "2026-07-03",
+          "start": 64,
+          "end": 69
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "모집기간 2026년 6월 9일(화) 10시 ~ 2026년 6월 19일(금) 15시 (※ 모집 인원이 미달될 경우, 7월 3일 금요일 15시까지 연장함)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-75df3d93f204955b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026년 6월 9일(화) 10시 ~ 2026년 6월 19일(금) 15시 (※ 모집 인원이 미달될 경우, 7월 3일 금요일 15시까지 연장함)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-09",
+          "start": 0,
+          "end": 14
+        },
+        {
+          "value": "2026-06-19",
+          "start": 21,
+          "end": 36
+        },
+        {
+          "value": "2026-07-03",
+          "start": 59,
+          "end": 64
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026년 6월 9일(화) 10시 ~ 2026년 6월 19일(금) 15시 (※ 모집 인원이 미달될 경우, 7월 3일 금요일 15시까지 연장함)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6a88591d1cde2abc",
+      "segmentType": "label_value",
+      "labelText": "모집대상",
+      "bodyText": "모집대상",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "모집대상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eabb165765838315",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "대학생 및 성인",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "대학생 및 성인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4f9162d1e54dea35",
+      "segmentType": "label_value",
+      "labelText": "모집인원",
+      "bodyText": "모집인원",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "모집인원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5fa3d21be2106013",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "00명",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "00명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-90f323aeedc87baf",
+      "segmentType": "label_value",
+      "labelText": "활동기간",
+      "bodyText": "활동기간",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "활동기간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e2c7846fb812aeea",
+      "segmentType": "label_value",
+      "labelText": "다음 세 가지 기간 중 한 가지를 선택하여 신청 (※ 일주일 5일 단위 신청 가능)",
+      "bodyText": "다음 세 가지 기간 중 한 가지를 선택하여 신청 (※ 일주일 5일 단위 신청 가능)",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다음 세 가지 기간 중 한 가지를 선택하여 신청 (※ 일주일 5일 단위 신청 가능)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6363f42d239ee83c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026년 7월 20일(월) ~ 7월 31일(금) /",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 1,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-20",
+          "start": 8,
+          "end": 23
+        },
+        {
+          "value": "2026-07-31",
+          "start": 26,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "① [10일] 2026년 7월 20일(월) ~ 7월 31일(금) /"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ac41ab44a027f2fc",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026년 7월 20일(월) ~ 7월 24일(금) /",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 2,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-20",
+          "start": 7,
+          "end": 22
+        },
+        {
+          "value": "2026-07-24",
+          "start": 25,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "② [5일] 2026년 7월 20일(월) ~ 7월 24일(금) /"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1bc172a820758f16",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026년 7월 27일(월) ~ 7월 31일(금)",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 3,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-27",
+          "start": 7,
+          "end": 22
+        },
+        {
+          "value": "2026-07-31",
+          "start": 25,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "③ [5일] 2026년 7월 27일(월) ~ 7월 31일(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-68e3118cafe7cc96",
+      "segmentType": "label_value",
+      "labelText": "활동장소",
+      "bodyText": "활동장소",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "활동장소"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ffb89ac89fe72d6e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "대전가원학교 (공립특수학교)",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "대전가원학교 (공립특수학교)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7b5fa9394890507e",
+      "segmentType": "label_value",
+      "labelText": "활동시간",
+      "bodyText": "활동시간",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "활동시간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-55dfb510892f8438",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "08시 30분 ~ 14시 30분 (하루 6시간) / 토·일 제외",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "08시 30분 ~ 14시 30분 (하루 6시간) / 토·일 제외"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2c1c1aa4b8bce81e",
+      "segmentType": "label_value",
+      "labelText": "활동내용",
+      "bodyText": "활동내용",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "활동내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bf42bc9f7117f1ed",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학습지도보조, 프로그램보조, 식사지도보조, 신변처리보조, 교실 청소 등",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학습지도보조, 프로그램보조, 식사지도보조, 신변처리보조, 교실 청소 등"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-18c7ba77390e5abf",
+      "segmentType": "label_value",
+      "labelText": "지원내용",
+      "bodyText": "지원내용",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "지원내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-63278e5b98a05156",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "여름계절학교 대학생 자원봉사학생에게 중식 제공",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "여름계절학교 대학생 자원봉사학생에게 중식 제공"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-856e39480c0df250",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "봉사시간인정",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "봉사시간인정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b5d943c5ea065d4c",
+      "segmentType": "label_value",
+      "labelText": "1365 자원봉사포털 교육봉사시간인정, 교육봉사활동 확인서 발급 가능",
+      "bodyText": "1365 자원봉사포털 교육봉사시간인정, 교육봉사활동 확인서 발급 가능",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1365 자원봉사포털 교육봉사시간인정, 교육봉사활동 확인서 발급 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4a6e992c4a496ada",
+      "segmentType": "label_value",
+      "labelText": "* 지원자가 모집인원에 비해 많을 경우 본교 우선순위 규정에 의해 선발합니다.",
+      "bodyText": "* 지원자가 모집인원에 비해 많을 경우 본교 우선순위 규정에 의해 선발합니다.",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 지원자가 모집인원에 비해 많을 경우 본교 우선순위 규정에 의해 선발합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f7100fcf0c1681e1",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "1. 신청방법",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 신청방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4c924a1ab1e25388",
+      "segmentType": "label_value",
+      "labelText": "신청서[붙임1]와 동의서[붙임2]를 작성하여 담당자 이메일(skyseastar2v@naver.com)로 보내주세요.",
+      "bodyText": "신청서[붙임1]와 동의서[붙임2]를 작성하여 담당자 이메일(skyseastar2v@naver.com)로 보내주세요.",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청서[붙임1]와 동의서[붙임2]를 작성하여 담당자 이메일(skyseastar2v@naver.com)로 보내주세요."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-028573308dd4acd7",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 대전가원학교 여름계절학교 자원봉사 신청서[붙임1]",
+      "bodyText": "① 2026학년도 대전가원학교 여름계절학교 자원봉사 신청서[붙임1]: 한글파일",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "① 2026학년도 대전가원학교 여름계절학교 자원봉사 신청서[붙임1]: 한글파일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-39c926ead293f8c2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 빠짐없이 기입해 주시고, 사진 꼭 첨부해 주세요. 반드시 워드로 작성하신 후, 한글 파일(hwp)을 보내주세요.",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 빠짐없이 기입해 주시고, 사진 꼭 첨부해 주세요. 반드시 워드로 작성하신 후, 한글 파일(hwp)을 보내주세요."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c50260f13c147dfb",
+      "segmentType": "label_value",
+      "labelText": "대전가원학교 자원봉사활동을 위한 개인정보 수집·이용 및 제3자 제공 동의서[붙임2]",
+      "bodyText": "② 대전가원학교 자원봉사활동을 위한 개인정보 수집·이용 및 제3자 제공 동의서[붙임2]: pdf, jpg",
+      "sourceLocation": {
+        "lineIndex": 26,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "② 대전가원학교 자원봉사활동을 위한 개인정보 수집·이용 및 제3자 제공 동의서[붙임2]: pdf, jpg"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9d5f3ad82709f210",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 프린트하셔서 반드시 자필로 작성하신 후, 스캔한 파일을 보내주세요. (스캔 어플을 다운받으시면 쉽게 동의서를 스캔할 수 있습니다.)",
+      "sourceLocation": {
+        "lineIndex": 27,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 프린트하셔서 반드시 자필로 작성하신 후, 스캔한 파일을 보내주세요. (스캔 어플을 다운받으시면 쉽게 동의서를 스캔할 수 있습니다.)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8f6039eeaa8bde59",
+      "segmentType": "label_value",
+      "labelText": "대학교 교육봉사활동 확인서 양식이 필요한 경우 신청서, 동의서와 함께 메일로 전송",
+      "bodyText": "③ 대학교 교육봉사활동 확인서 양식이 필요한 경우 신청서, 동의서와 함께 메일로 전송",
+      "sourceLocation": {
+        "lineIndex": 28,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "③ 대학교 교육봉사활동 확인서 양식이 필요한 경우 신청서, 동의서와 함께 메일로 전송"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7505c71e424cf330",
+      "segmentType": "label_value",
+      "labelText": "* 신청서와 동의서 양식은 대전가원학교 홈페이지(www.gawon.sc.kr) 공지사항에 있는 '2026학년도 여름계절학교 자원봉사 모집 안내' 글에서 다운받으실 수 있습니다.",
+      "bodyText": "* 신청서와 동의서 양식은 대전가원학교 홈페이지(www.gawon.sc.kr) 공지사항에 있는 '2026학년도 여름계절학교 자원봉사 모집 안내' 글에서 다운받으실 수 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 29,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 신청서와 동의서 양식은 대전가원학교 홈페이지(www.gawon.sc.kr) 공지사항에 있는 '2026학년도 여름계절학교 자원봉사 모집 안내' 글에서 다운받으실 수 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-62bbf2357fa138ac",
+      "segmentType": "label_value",
+      "labelText": "자원봉사자 사전교육",
+      "bodyText": "2. 자원봉사자 사전교육",
+      "sourceLocation": {
+        "lineIndex": 30,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 자원봉사자 사전교육"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cfb71b87bf6d55cb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "7월 10일(금) 오후 15시에 사전 교육을 실시할 예정이며 의무 참석(참석 필수)입니다. (학교 일정에 따라 사전교육 일정은 변경될 수 있습니다)",
+      "sourceLocation": {
+        "lineIndex": 31,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-10",
+          "start": 0,
+          "end": 9
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "7월 10일(금) 오후 15시에 사전 교육을 실시할 예정이며 의무 참석(참석 필수)입니다. (학교 일정에 따라 사전교육 일정은 변경될 수 있습니다)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0530b0a783f7745b",
+      "segmentType": "label_value",
+      "labelText": "자원봉사자 선정 결과 발표",
+      "bodyText": "3. 자원봉사자 선정 결과 발표",
+      "sourceLocation": {
+        "lineIndex": 32,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 자원봉사자 선정 결과 발표"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b875202785198640",
+      "segmentType": "label_value",
+      "labelText": "메일 확인 후 개별연락 드리겠습니다. (선정 후 취소 불가)",
+      "bodyText": "메일 확인 후 개별연락 드리겠습니다. (선정 후 취소 불가)",
+      "sourceLocation": {
+        "lineIndex": 33,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "메일 확인 후 개별연락 드리겠습니다. (선정 후 취소 불가)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5f475c277d13cfe0",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 문의사항",
+      "sourceLocation": {
+        "lineIndex": 34,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 문의사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-14c0e2fccfb141b5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "대전가원학교 교무실 (042-545-7788) 내선번호 111",
+      "sourceLocation": {
+        "lineIndex": 35,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "대전가원학교 교무실 (042-545-7788) 내선번호 111"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-28821d32eecd2ac7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "자원봉사 담당자 오윤정",
+      "sourceLocation": {
+        "lineIndex": 36,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자원봉사 담당자 오윤정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b11d75df8dfd6662",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "대전가원학교장",
+      "sourceLocation": {
+        "lineIndex": 37,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "대전가원학교장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 43,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 21,
+      "paragraph": 16,
+      "continuation": 1,
+      "list_item": 4
+    }
+  }
+}

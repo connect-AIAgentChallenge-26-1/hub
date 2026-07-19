@@ -1,0 +1,1720 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-720-2422",
+  "sourceContentHash": "768a2c2b3fdd77329d1b5469fedd7f5a0afc1bd9277044b7db45bd13f624bb4d",
+  "sourceTitle": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2422&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_explicit",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_explicit_override",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-720-2422-90f27b5fabac33",
+      "uidHint": "noticepilot-cand-knu-720-2422-90f27b5fabac33@noticepilot.local",
+      "sourceNoticeId": "knu-720-2422",
+      "sourceTitle": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2422&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_explicit",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_explicit_override",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "course_registration",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-ebd8c66c36aaf893",
+        "segmentType": "continuation",
+        "labelText": "(1) 수강신청 일시",
+        "bodyText": "2026. 5. 6.(수) 10:00 ~ 5. 8.(금) 18:00",
+        "sourceLocation": {
+          "lineIndex": 6,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-c0c675fc60354ae3"
+        },
+        "actionSignals": [
+          "course_registration",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-06",
+            "start": 14,
+            "end": 28
+          },
+          {
+            "value": "2026-05-08",
+            "start": 37,
+            "end": 45
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "course_registration",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "(1) 수강신청 일시",
+          "(1) 수강신청 일시 : 2026. 5. 6.(수) 10:00 ~ 5. 8.(금) 18:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-7255ade0065bdfe7",
+        "segmentId": "seg-ebd8c66c36aaf893",
+        "rawText": "2026. 5. 6.(수) 10:00 ~ 5. 8.(금) 18:00",
+        "normalizedStart": "2026-05-06T10:00:00+09:00",
+        "normalizedEnd": "2026-05-08T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 14,
+          "end": 45
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-ee1f0fbb37e049cc",
+        "sourceNoticeId": "knu-720-2422",
+        "segmentId": "seg-ebd8c66c36aaf893",
+        "temporalMentionIds": [
+          "tm-7255ade0065bdfe7"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "(1) 수강신청 일시",
+        "evidence": "(1) 수강신청 일시 : 2026. 5. 6.(수) 10:00 ~ 5. 8.(금) 18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스) 수강신청 기간",
+      "dateText": "2026. 5. 6.(수) 10:00 ~ 5. 8.(금) 18:00",
+      "normalizedStart": "2026-05-06T10:00:00+09:00",
+      "normalizedEnd": "2026-05-08T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "(1) 수강신청 일시 : 2026. 5. 6.(수) 10:00 ~ 5. 8.(금) 18:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "academic_action_type_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "academic_action_type_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2422-d816c8cecee3cb",
+      "uidHint": "noticepilot-cand-knu-720-2422-d816c8cecee3cb@noticepilot.local",
+      "sourceNoticeId": "knu-720-2422",
+      "sourceTitle": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2422&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_explicit",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_explicit_override",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "course_registration_change",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-0de4b355b7bf30f0",
+        "segmentType": "continuation",
+        "labelText": "(2) 수강신청 변경(신청도 가능) 일시",
+        "bodyText": "2026. 5. 12.(화) 10:00 ~ 5. 14.(수) 18:00",
+        "sourceLocation": {
+          "lineIndex": 11,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-78208ebdfc81b246"
+        },
+        "actionSignals": [
+          "course_registration_change",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-12",
+            "start": 25,
+            "end": 40
+          },
+          {
+            "value": "2026-05-14",
+            "start": 49,
+            "end": 58
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "course_registration_change",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "(2) 수강신청 변경(신청도 가능) 일시",
+          "(2) 수강신청 변경(신청도 가능) 일시 : 2026. 5. 12.(화) 10:00 ~ 5. 14.(수) 18:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-84881a4e962a7034",
+        "segmentId": "seg-0de4b355b7bf30f0",
+        "rawText": "2026. 5. 12.(화) 10:00 ~ 5. 14.(수) 18:00",
+        "normalizedStart": "2026-05-12T10:00:00+09:00",
+        "normalizedEnd": "2026-05-14T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 25,
+          "end": 58
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-7bc3ea1162b613cb",
+        "sourceNoticeId": "knu-720-2422",
+        "segmentId": "seg-0de4b355b7bf30f0",
+        "temporalMentionIds": [
+          "tm-84881a4e962a7034"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "(2) 수강신청 변경(신청도 가능) 일시",
+        "evidence": "(2) 수강신청 변경(신청도 가능) 일시 : 2026. 5. 12.(화) 10:00 ~ 5. 14.(수) 18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스) 수강신청 변경기간",
+      "dateText": "2026. 5. 12.(화) 10:00 ~ 5. 14.(수) 18:00",
+      "normalizedStart": "2026-05-12T10:00:00+09:00",
+      "normalizedEnd": "2026-05-14T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "(2) 수강신청 변경(신청도 가능) 일시 : 2026. 5. 12.(화) 10:00 ~ 5. 14.(수) 18:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "academic_action_type_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "academic_action_type_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2422-40e4b857159990",
+      "uidHint": "noticepilot-cand-knu-720-2422-40e4b857159990@noticepilot.local",
+      "sourceNoticeId": "knu-720-2422",
+      "sourceTitle": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2422&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_explicit",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_explicit_override",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "payment_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-2e080c0342b1c6c6",
+        "segmentType": "continuation",
+        "labelText": "(3) 고지서 출력 및 납부기간 일시",
+        "bodyText": "2026. 5. 19.(화) 09:00 ~ 5. 21.(목) 17:00",
+        "sourceLocation": {
+          "lineIndex": 14,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-69bfa9123a13f72b"
+        },
+        "actionSignals": [
+          "payment_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-19",
+            "start": 23,
+            "end": 38
+          },
+          {
+            "value": "2026-05-21",
+            "start": 47,
+            "end": 56
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "payment_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "(3) 고지서 출력 및 납부기간 일시",
+          "(3) 고지서 출력 및 납부기간 일시 : 2026. 5. 19.(화) 09:00 ~ 5. 21.(목) 17:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-69d0b693e483259b",
+        "segmentId": "seg-2e080c0342b1c6c6",
+        "rawText": "2026. 5. 19.(화) 09:00 ~ 5. 21.(목) 17:00",
+        "normalizedStart": "2026-05-19T09:00:00+09:00",
+        "normalizedEnd": "2026-05-21T17:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 23,
+          "end": 56
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-71df0d5e8b6cf5a7",
+        "sourceNoticeId": "knu-720-2422",
+        "segmentId": "seg-2e080c0342b1c6c6",
+        "temporalMentionIds": [
+          "tm-69d0b693e483259b"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "(3) 고지서 출력 및 납부기간 일시",
+        "evidence": "(3) 고지서 출력 및 납부기간 일시 : 2026. 5. 19.(화) 09:00 ~ 5. 21.(목) 17:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스) 납부기간",
+      "dateText": "2026. 5. 19.(화) 09:00 ~ 5. 21.(목) 17:00",
+      "normalizedStart": "2026-05-19T09:00:00+09:00",
+      "normalizedEnd": "2026-05-21T17:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "(3) 고지서 출력 및 납부기간 일시 : 2026. 5. 19.(화) 09:00 ~ 5. 21.(목) 17:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2422-667e3fc43fda5e",
+      "uidHint": "noticepilot-cand-knu-720-2422-667e3fc43fda5e@noticepilot.local",
+      "sourceNoticeId": "knu-720-2422",
+      "sourceTitle": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2422&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_explicit",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_explicit_override",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "course_registration",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-5eade24c77c48008",
+        "segmentType": "continuation",
+        "labelText": "(4) 수강료 미납에 따른 잔여석 수강신청 일시",
+        "bodyText": "2026. 5. 27.(수) 10:00 ~ 5. 28.(목) 18:00",
+        "sourceLocation": {
+          "lineIndex": 19,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-2d0de937db5a2515"
+        },
+        "actionSignals": [
+          "course_registration",
+          "payment_period",
+          "application_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-27",
+            "start": 29,
+            "end": 44
+          },
+          {
+            "value": "2026-05-28",
+            "start": 53,
+            "end": 62
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "course_registration",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "(4) 수강료 미납에 따른 잔여석 수강신청 일시",
+          "(4) 수강료 미납에 따른 잔여석 수강신청 일시 : 2026. 5. 27.(수) 10:00 ~ 5. 28.(목) 18:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-540a99ba3ed75977",
+        "segmentId": "seg-5eade24c77c48008",
+        "rawText": "2026. 5. 27.(수) 10:00 ~ 5. 28.(목) 18:00",
+        "normalizedStart": "2026-05-27T10:00:00+09:00",
+        "normalizedEnd": "2026-05-28T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 29,
+          "end": 62
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-18bd4ef42c3cf30c",
+        "sourceNoticeId": "knu-720-2422",
+        "segmentId": "seg-5eade24c77c48008",
+        "temporalMentionIds": [
+          "tm-540a99ba3ed75977"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "(4) 수강료 미납에 따른 잔여석 수강신청 일시",
+        "evidence": "(4) 수강료 미납에 따른 잔여석 수강신청 일시 : 2026. 5. 27.(수) 10:00 ~ 5. 28.(목) 18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스) 수강신청 기간",
+      "dateText": "2026. 5. 27.(수) 10:00 ~ 5. 28.(목) 18:00",
+      "normalizedStart": "2026-05-27T10:00:00+09:00",
+      "normalizedEnd": "2026-05-28T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "(4) 수강료 미납에 따른 잔여석 수강신청 일시 : 2026. 5. 27.(수) 10:00 ~ 5. 28.(목) 18:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "academic_action_type_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "academic_action_type_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2422-a50b6feb575032",
+      "uidHint": "noticepilot-cand-knu-720-2422-a50b6feb575032@noticepilot.local",
+      "sourceNoticeId": "knu-720-2422",
+      "sourceTitle": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2422&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_explicit",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_explicit_override",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "payment_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-f12d925b0faa39b7",
+        "segmentType": "continuation",
+        "labelText": "(5) 잔여석수강신청자 고지서 출력 및 납부기간 일시",
+        "bodyText": "2026. 6. 4.(목) 09:00 ~ 6. 5.(금) 17:00",
+        "sourceLocation": {
+          "lineIndex": 22,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-930031a1d818c719"
+        },
+        "actionSignals": [
+          "course_registration",
+          "payment_period",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-04",
+            "start": 32,
+            "end": 46
+          },
+          {
+            "value": "2026-06-05",
+            "start": 55,
+            "end": 63
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "payment_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "(5) 잔여석수강신청자 고지서 출력 및 납부기간 일시",
+          "(5) 잔여석수강신청자 고지서 출력 및 납부기간 일시 : 2026. 6. 4.(목) 09:00 ~ 6. 5.(금) 17:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-5dc02a77323b58da",
+        "segmentId": "seg-f12d925b0faa39b7",
+        "rawText": "2026. 6. 4.(목) 09:00 ~ 6. 5.(금) 17:00",
+        "normalizedStart": "2026-06-04T09:00:00+09:00",
+        "normalizedEnd": "2026-06-05T17:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 32,
+          "end": 63
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-abb1d561286123f5",
+        "sourceNoticeId": "knu-720-2422",
+        "segmentId": "seg-f12d925b0faa39b7",
+        "temporalMentionIds": [
+          "tm-5dc02a77323b58da"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "(5) 잔여석수강신청자 고지서 출력 및 납부기간 일시",
+        "evidence": "(5) 잔여석수강신청자 고지서 출력 및 납부기간 일시 : 2026. 6. 4.(목) 09:00 ~ 6. 5.(금) 17:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스) 납부기간",
+      "dateText": "2026. 6. 4.(목) 09:00 ~ 6. 5.(금) 17:00",
+      "normalizedStart": "2026-06-04T09:00:00+09:00",
+      "normalizedEnd": "2026-06-05T17:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "(5) 잔여석수강신청자 고지서 출력 및 납부기간 일시 : 2026. 6. 4.(목) 09:00 ~ 6. 5.(금) 17:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2422-b6a77b2fa5e550",
+      "uidHint": "noticepilot-cand-knu-720-2422-b6a77b2fa5e550@noticepilot.local",
+      "sourceNoticeId": "knu-720-2422",
+      "sourceTitle": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2422&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_explicit",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_explicit_override",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "course_registration",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-1446b6d95a1136f1",
+        "segmentType": "continuation",
+        "labelText": "(6) 폐강과목 대상자 수강신청 일시",
+        "bodyText": "2026. 6. 11.(목) 10:00 ~ 6. 12.(금) 18:00",
+        "sourceLocation": {
+          "lineIndex": 26,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-c45acf8c5c614d4e"
+        },
+        "actionSignals": [
+          "course_registration",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-11",
+            "start": 23,
+            "end": 38
+          },
+          {
+            "value": "2026-06-12",
+            "start": 47,
+            "end": 56
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "course_registration",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "(6) 폐강과목 대상자 수강신청 일시",
+          "(6) 폐강과목 대상자 수강신청 일시 : 2026. 6. 11.(목) 10:00 ~ 6. 12.(금) 18:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-7abe168efbf4a96c",
+        "segmentId": "seg-1446b6d95a1136f1",
+        "rawText": "2026. 6. 11.(목) 10:00 ~ 6. 12.(금) 18:00",
+        "normalizedStart": "2026-06-11T10:00:00+09:00",
+        "normalizedEnd": "2026-06-12T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 23,
+          "end": 56
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-ef932cbc6c1ed640",
+        "sourceNoticeId": "knu-720-2422",
+        "segmentId": "seg-1446b6d95a1136f1",
+        "temporalMentionIds": [
+          "tm-7abe168efbf4a96c"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "(6) 폐강과목 대상자 수강신청 일시",
+        "evidence": "(6) 폐강과목 대상자 수강신청 일시 : 2026. 6. 11.(목) 10:00 ~ 6. 12.(금) 18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스) 수강신청 기간",
+      "dateText": "2026. 6. 11.(목) 10:00 ~ 6. 12.(금) 18:00",
+      "normalizedStart": "2026-06-11T10:00:00+09:00",
+      "normalizedEnd": "2026-06-12T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "(6) 폐강과목 대상자 수강신청 일시 : 2026. 6. 11.(목) 10:00 ~ 6. 12.(금) 18:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "academic_action_type_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "academic_action_type_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2422-15ccc05bda6f2e",
+      "uidHint": "noticepilot-cand-knu-720-2422-15ccc05bda6f2e@noticepilot.local",
+      "sourceNoticeId": "knu-720-2422",
+      "sourceTitle": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2422&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_explicit",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_explicit_override",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "course_registration_cancellation",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-19143f9824249fb7",
+        "segmentType": "continuation",
+        "labelText": "(8) 개강 전 수강취소 일시",
+        "bodyText": "2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00",
+        "sourceLocation": {
+          "lineIndex": 31,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-584c9171b0303596"
+        },
+        "actionSignals": [
+          "course_registration_cancellation",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-17",
+            "start": 19,
+            "end": 34
+          },
+          {
+            "value": "2026-06-22",
+            "start": 43,
+            "end": 52
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "course_registration_cancellation",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "(8) 개강 전 수강취소 일시",
+          "(8) 개강 전 수강취소 일시 : 2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-a022e23f82f237d8",
+        "segmentId": "seg-19143f9824249fb7",
+        "rawText": "2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00",
+        "normalizedStart": "2026-06-17T09:00:00+09:00",
+        "normalizedEnd": "2026-06-22T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 19,
+          "end": 52
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-faaf0e454e53e671",
+        "sourceNoticeId": "knu-720-2422",
+        "segmentId": "seg-19143f9824249fb7",
+        "temporalMentionIds": [
+          "tm-a022e23f82f237d8"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "(8) 개강 전 수강취소 일시",
+        "evidence": "(8) 개강 전 수강취소 일시 : 2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스) 수강신청 취소기간",
+      "dateText": "2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00",
+      "normalizedStart": "2026-06-17T09:00:00+09:00",
+      "normalizedEnd": "2026-06-22T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "(8) 개강 전 수강취소 일시 : 2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "academic_action_type_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "academic_action_type_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2422-6176b93af1fef8",
+      "uidHint": "noticepilot-cand-knu-720-2422-6176b93af1fef8@noticepilot.local",
+      "sourceNoticeId": "knu-720-2422",
+      "sourceTitle": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2422&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_explicit",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_explicit_override",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-27081861b3999224",
+        "segmentType": "continuation",
+        "labelText": "계절수업 기간",
+        "bodyText": "2026. 6. 24.(수) ~ 7. 14.(화) 15일간",
+        "sourceLocation": {
+          "lineIndex": 2,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-eef6bc9d7fddd6bf"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-24",
+            "start": 13,
+            "end": 28
+          },
+          {
+            "value": "2026-07-14",
+            "start": 31,
+            "end": 40
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "계절수업 기간",
+          "1. 계절수업 기간 : 2026. 6. 24.(수) ~ 7. 14.(화) 15일간",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-ad380343a747cf3f",
+        "segmentId": "seg-27081861b3999224",
+        "rawText": "2026. 6. 24.(수) ~ 7. 14.(화) 15일간",
+        "normalizedStart": "2026-06-24",
+        "normalizedEnd": "2026-07-14",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 13,
+          "end": 40
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-304310b8c4140bbc",
+        "sourceNoticeId": "knu-720-2422",
+        "segmentId": "seg-27081861b3999224",
+        "temporalMentionIds": [
+          "tm-ad380343a747cf3f"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "계절수업 기간",
+        "evidence": "1. 계절수업 기간 : 2026. 6. 24.(수) ~ 7. 14.(화) 15일간"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스) 행사 기간",
+      "dateText": "2026. 6. 24.(수) ~ 7. 14.(화) 15일간",
+      "normalizedStart": "2026-06-24",
+      "normalizedEnd": "2026-07-14",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "1. 계절수업 기간 : 2026. 6. 24.(수) ~ 7. 14.(화) 15일간",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2422-9d45f1282cfcc0",
+      "uidHint": "noticepilot-cand-knu-720-2422-9d45f1282cfcc0@noticepilot.local",
+      "sourceNoticeId": "knu-720-2422",
+      "sourceTitle": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2422&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_explicit",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_explicit_override",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "course_evaluation",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-7abbe9edae0cfb95",
+        "segmentType": "continuation",
+        "labelText": "(10) 계절수업 수업평가 일시",
+        "bodyText": "2026. 7. 6.(월) ~ 7. 10.(금)",
+        "sourceLocation": {
+          "lineIndex": 38,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-04438d43d71a2687"
+        },
+        "actionSignals": [
+          "course_evaluation",
+          "exam_or_interview",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-06",
+            "start": 20,
+            "end": 34
+          },
+          {
+            "value": "2026-07-10",
+            "start": 37,
+            "end": 46
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "course_evaluation",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "(10) 계절수업 수업평가 일시",
+          "(10) 계절수업 수업평가 일시 : 2026. 7. 6.(월) ~ 7. 10.(금)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-162544aa5e1fbe25",
+        "segmentId": "seg-7abbe9edae0cfb95",
+        "rawText": "2026. 7. 6.(월) ~ 7. 10.(금)",
+        "normalizedStart": "2026-07-06",
+        "normalizedEnd": "2026-07-10",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 20,
+          "end": 46
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-5657d5d062478f81",
+        "sourceNoticeId": "knu-720-2422",
+        "segmentId": "seg-7abbe9edae0cfb95",
+        "temporalMentionIds": [
+          "tm-162544aa5e1fbe25"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "(10) 계절수업 수업평가 일시",
+        "evidence": "(10) 계절수업 수업평가 일시 : 2026. 7. 6.(월) ~ 7. 10.(금)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스) 수업평가 기간",
+      "dateText": "2026. 7. 6.(월) ~ 7. 10.(금)",
+      "normalizedStart": "2026-07-06",
+      "normalizedEnd": "2026-07-10",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "(10) 계절수업 수업평가 일시 : 2026. 7. 6.(월) ~ 7. 10.(금)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "academic_action_type_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "academic_action_type_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2422-3efc6f9cc12fe8",
+      "uidHint": "noticepilot-cand-knu-720-2422-3efc6f9cc12fe8@noticepilot.local",
+      "sourceNoticeId": "knu-720-2422",
+      "sourceTitle": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2422&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_explicit",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_explicit_override",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-1b6af42b1e3ce328",
+        "segmentType": "continuation",
+        "labelText": "(11) 계절수업 성적확정 일시",
+        "bodyText": "2026. 7. 20.(월)",
+        "sourceLocation": {
+          "lineIndex": 41,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-297a71893be15ec0"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-20",
+            "start": 20,
+            "end": 35
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "(11) 계절수업 성적확정 일시",
+          "(11) 계절수업 성적확정 일시 : 2026. 7. 20.(월)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-9b92915ba8789e15",
+        "segmentId": "seg-1b6af42b1e3ce328",
+        "rawText": "2026. 7. 20.(월)",
+        "normalizedStart": "2026-07-20",
+        "normalizedEnd": "2026-07-20",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 20,
+          "end": 35
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-f3401cb73d450aa8",
+        "sourceNoticeId": "knu-720-2422",
+        "segmentId": "seg-1b6af42b1e3ce328",
+        "temporalMentionIds": [
+          "tm-9b92915ba8789e15"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "(11) 계절수업 성적확정 일시",
+        "evidence": "(11) 계절수업 성적확정 일시 : 2026. 7. 20.(월)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(춘천캠퍼스) 행사 일정",
+      "dateText": "2026. 7. 20.(월)",
+      "normalizedStart": "2026-07-20",
+      "normalizedEnd": "2026-07-20",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "(11) 계절수업 성적확정 일시 : 2026. 7. 20.(월)",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 10,
+    "autoConfirmedCount": 10,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 10
+  }
+}

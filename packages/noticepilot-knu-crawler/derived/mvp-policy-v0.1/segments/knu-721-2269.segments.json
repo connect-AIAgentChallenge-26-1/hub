@@ -1,0 +1,112 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2269",
+  "sourceContentHash": "94f94483a2170dd53bee76b0147c78a7f8d0967f28c8c7aa19d0e404acfa82b2",
+  "sourceTitle": "2026년 선원가족 장학생 모집안내",
+  "publishedAt": "2026-02-26",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e0a726d03d77f55e",
+      "segmentType": "title",
+      "labelText": "2026년 선원가족 장학생 모집안내",
+      "bodyText": "2026년 선원가족 장학생 모집안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 선원가족 장학생 모집안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-95d3160ac3c15359",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 대상: 선원법 제3조 적용선박에 승선 및 하선한 선원 및 가족",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 대상: 선원법 제3조 적용선박에 승선 및 하선한 선원 및 가족"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1e0b35e87308c6c3",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 기준: 직전학기 성적 평점 2.0이상",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 기준: 직전학기 성적 평점 2.0이상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aef474e2d335d9ee",
+      "segmentType": "label_value",
+      "labelText": "지원금액",
+      "bodyText": "3. 지원금액: 최대 350만원",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 지원금액: 최대 350만원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b699c67596b47d52",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 자세한 사항은 붙임 참조",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 자세한 사항은 붙임 참조"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 2,
+      "label_value": 1,
+      "paragraph": 1
+    }
+  }
+}

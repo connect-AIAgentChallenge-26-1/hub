@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11101",
+  "sourceContentHash": "6c1dc8ffe2da7a02fe98e9d3c7ee88aa788ff219273b980d8f97b0b546cd0b8a",
+  "sourceTitle": "강원대 해부실험동(모듈러) 제작·설치 임차용역 제안서 평가결과 공개",
+  "publishedAt": "2026-06-09",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-89486f092b368fa5",
+      "segmentType": "title",
+      "labelText": "강원대 해부실험동(모듈러) 제작·설치 임차용역 제안서 평가결과 공개",
+      "bodyText": "강원대 해부실험동(모듈러) 제작·설치 임차용역 제안서 평가결과 공개",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대 해부실험동(모듈러) 제작·설치 임차용역 제안서 평가결과 공개"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b57b8bb5e38ac157",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 6. 8. 실시한 \"강원대 해부실험동(모듈러) 제작·설치 임차용역 제안서 평가\" 의 평가결과를",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-08",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2026. 6. 8. 실시한 \"강원대 해부실험동(모듈러) 제작·설치 임차용역 제안서 평가\" 의 평가결과를"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7d4b5563419c3fe6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "붙임과 같이 공개합니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임과 같이 공개합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0bd70a5972ab4a18",
+      "segmentType": "label_value",
+      "labelText": "붙임 제안서 평가결과 1부. 끝.",
+      "bodyText": "붙임 제안서 평가결과 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 제안서 평가결과 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 4,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "label_value": 1
+    }
+  }
+}

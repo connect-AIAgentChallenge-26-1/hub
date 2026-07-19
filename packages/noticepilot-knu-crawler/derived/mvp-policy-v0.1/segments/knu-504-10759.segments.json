@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10759",
+  "sourceContentHash": "052e246d46cf700e30eee0cd44891f900f35c9dfa1d245506e3e6905fa2a245c",
+  "sourceTitle": "[정강희망프로젝트](CBS TV) 세상을 바꾸는 시간 15: ONE KNU, 강원대학교와 함께하는 특집 강연회",
+  "publishedAt": "2026-03-19",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ac0540570e889064",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "[정강희망프로젝트](CBS TV) 세상을 바꾸는 시간 15: ONE KNU, 강원대학교와 함께하는 특집 강연회",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[정강희망프로젝트](CBS TV) 세상을 바꾸는 시간 15: ONE KNU, 강원대학교와 함께하는 특집 강연회"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2ca9cc3d9fb13595",
+      "segmentType": "label_value",
+      "labelText": "참가신청 바로가기",
+      "bodyText": "참가신청 바로가기 :",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "참가신청 바로가기 :"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cff506ab403eb210",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://survey.ksdcdb.kr/survey/educationSurvey.do?suId=34476&startIp=&cp=481e89c8",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://survey.ksdcdb.kr/survey/educationSurvey.do?suId=34476&startIp=&cp=481e89c8"
+    }
+  ],
+  "summary": {
+    "segmentCount": 3,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "paragraph": 1
+    }
+  }
+}

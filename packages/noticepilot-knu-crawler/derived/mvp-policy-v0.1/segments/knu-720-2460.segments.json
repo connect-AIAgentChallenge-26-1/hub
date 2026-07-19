@@ -1,0 +1,375 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2460",
+  "sourceContentHash": "3102c121a3cf54f943f07878ad594d3ff69f2967dcdde2120348a764c3fb6a15",
+  "sourceTitle": "2026학년도 1학기 기말 수업평가 안내",
+  "publishedAt": "2026-05-28",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-174e61131366bd7a",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026학년도 1학기 기말 수업평가 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 기말 수업평가 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-55597181388b6a17",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026학년도 1학기 기말 수업평가를 다음과 같이 안내드립니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 기말 수업평가를 다음과 같이 안내드립니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0351a45af2aef105",
+      "segmentType": "label_value",
+      "labelText": "□ 평가방법 및 일정",
+      "bodyText": "□ 평가방법 및 일정",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 평가방법 및 일정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cbceaea8d78dfae9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1) 평가참여자: 학부(과) 수강생 전체(시간제 등록생 및 교류생 제외)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1) 평가참여자: 학부(과) 수강생 전체(시간제 등록생 및 교류생 제외)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8f4503e8a4d2cf11",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-139a4e70d0dba816",
+      "segmentType": "label_value",
+      "labelText": "평가기간",
+      "bodyText": "2026. 6. 26.(금) 09:00 ~ 7. 2.(목) 17:00",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-26",
+          "start": 6,
+          "end": 21
+        },
+        {
+          "value": "2026-07-02",
+          "start": 30,
+          "end": 38
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "평가기간: 2026. 6. 26.(금) 09:00 ~ 7. 2.(목) 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f195567503055ee5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3) 평가과목: 2026학년도 1학기 개설 학부(과) 강좌(꿈-설계 상담 교과목 포함)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3) 평가과목: 2026학년도 1학기 개설 학부(과) 강좌(꿈-설계 상담 교과목 포함)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1925cfe17d9ed6c8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 수업평가 제외: 수강 인원 5인 이하 강좌, 사회봉사·교육봉사활동 등 담당 교수가 직접 강의하지 않는 강좌, 학군단 개설 강좌 및 기타 과목 특성에 따른 제외 강좌",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 수업평가 제외: 수강 인원 5인 이하 강좌, 사회봉사·교육봉사활동 등 담당 교수가 직접 강의하지 않는 강좌, 학군단 개설 강좌 및 기타 과목 특성에 따른 제외 강좌"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bee87edd87a8b3a9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 교수학습개발원 주관 수업평가와 공학인증센터 주관 수업평가는 별개임",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 교수학습개발원 주관 수업평가와 공학인증센터 주관 수업평가는 별개임"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1cbfb7182398231d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4) 평가방법(2개 방법 중 선택)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4) 평가방법(2개 방법 중 선택)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b297311182cde843",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 홈페이지 로그인 : 강원대학교 홈페이지 > K-Cloud > 학부생서비스 > 교과 > 수업 > 수업평가",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 홈페이지 로그인 : 강원대학교 홈페이지 > K-Cloud > 학부생서비스 > 교과 > 수업 > 수업평가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a90f1053f712b5bc",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 빠른 경로 : K-Cloud 메인화면 > One-Stop 서비스 > 수업평가",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 빠른 경로 : K-Cloud 메인화면 > One-Stop 서비스 > 수업평가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1ac943ce1a3351c4",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 모바일 접속 : 강원대학교 앱 > 전체메뉴 > 수업 > 수업평가",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 모바일 접속 : 강원대학교 앱 > 전체메뉴 > 수업 > 수업평가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fd5dff3807e705f9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "□ 유의사항",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 유의사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-430d47ab9b3f27d2",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1)",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6474aff07d647e1f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "수업 평가 완료 후에는 반드시 ‘저장’버튼을 누르고 평가 미실시 과목이 있는지 완료 상태 여부를 확인하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수업 평가 완료 후에는 반드시 ‘저장’버튼을 누르고 평가 미실시 과목이 있는지 완료 상태 여부를 확인하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-464c21be81705b56",
+      "segmentType": "label_value",
+      "labelText": "한 번 평가한 결과는 수정할 수 없으므로 신중히 응답하시기 바라며 수업에 대한 평가 외 인신공격성 글은 삼가 바랍니다.",
+      "bodyText": "2) 한 번 평가한 결과는 수정할 수 없으므로 신중히 응답하시기 바라며 수업에 대한 평가 외 인신공격성 글은 삼가 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2) 한 번 평가한 결과는 수정할 수 없으므로 신중히 응답하시기 바라며 수업에 대한 평가 외 인신공격성 글은 삼가 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 17,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "label_value": 3,
+      "list_item": 10
+    }
+  }
+}

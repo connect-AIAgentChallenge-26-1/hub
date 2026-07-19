@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2317",
+  "sourceContentHash": "5080a3f3a98e8e90144c1d03f09f1ff0c3832d95f9246d541bd119b4861b9db3",
+  "sourceTitle": "2026년 대구광역시 달서구 달서인재육성재단 장학생 선발 안내",
+  "publishedAt": "2026-03-20",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cb75be71eba74ae1",
+      "segmentType": "title",
+      "labelText": "2026년 대구광역시 달서구 달서인재육성재단 장학생 선발 안내",
+      "bodyText": "2026년 대구광역시 달서구 달서인재육성재단 장학생 선발 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 대구광역시 달서구 달서인재육성재단 장학생 선발 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cab90d70a5abdcaa",
+      "segmentType": "label_value",
+      "labelText": "선발인원",
+      "bodyText": "1. 선발인원: 30명",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 선발인원: 30명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-72fe8529992d34b5",
+      "segmentType": "label_value",
+      "labelText": "신청자격",
+      "bodyText": "2. 신청자격: 붙임 참조",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 신청자격: 붙임 참조"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fa14c1748c16185e",
+      "segmentType": "label_value",
+      "labelText": "접수마감",
+      "bodyText": "2026. 4. 16.(목) 18:00",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-16",
+          "start": 9,
+          "end": 24
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 접수마감: 2026. 4. 16.(목) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2d9e5f29d77cbfdf",
+      "segmentType": "label_value",
+      "labelText": "접수방법",
+      "bodyText": "4. 접수방법: 우편",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 접수방법: 우편"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4c3048b1ab8ac1a2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 자세한 사항은 붙임 파일 참조",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 자세한 사항은 붙임 파일 참조"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 4,
+      "paragraph": 1
+    }
+  }
+}

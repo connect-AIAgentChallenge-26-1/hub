@@ -1,0 +1,371 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11049",
+  "sourceContentHash": "32af69a27bc3c20321ed482714b54c7a2379e1aacb9a226c4f0844c670cf409d",
+  "sourceTitle": "강원대학교 2026학년도 여름학기 원어민 외국어 회화（영어, 일어, 독어, 프랑스어） 수강생 모집 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11049&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11049-4aa8c7871cb87c",
+      "uidHint": "noticepilot-cand-knu-504-11049-4aa8c7871cb87c@noticepilot.local",
+      "sourceNoticeId": "knu-504-11049",
+      "sourceTitle": "강원대학교 2026학년도 여름학기 원어민 외국어 회화（영어, 일어, 독어, 프랑스어） 수강생 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11049&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-038d91e711d86e45",
+        "segmentType": "label_value",
+        "labelText": "접수기간",
+        "bodyText": "2026. 5. 27.（수） ~ 6. 16.（화）",
+        "sourceLocation": {
+          "lineIndex": 4,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-27",
+            "start": 8,
+            "end": 23
+          },
+          {
+            "value": "2026-06-16",
+            "start": 26,
+            "end": 35
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "접수기간",
+          "▶ 접수기간: 2026. 5. 27.（수） ~ 6. 16.（화）",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-af06a17046c2ebb7",
+        "segmentId": "seg-038d91e711d86e45",
+        "rawText": "2026. 5. 27.（수） ~ 6. 16.（화）",
+        "normalizedStart": "2026-05-27",
+        "normalizedEnd": "2026-06-16",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 8,
+          "end": 35
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-be62faa97f022b2f",
+        "sourceNoticeId": "knu-504-11049",
+        "segmentId": "seg-038d91e711d86e45",
+        "temporalMentionIds": [
+          "tm-af06a17046c2ebb7"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "접수기간",
+        "evidence": "▶ 접수기간: 2026. 5. 27.（수） ~ 6. 16.（화）"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "강원대학교 2026학년도 여름학기 원어민 외국어 회화（영어, 일어, 독어, 프랑스어） 수강생 모집 안내 신청기간",
+      "dateText": "2026. 5. 27.（수） ~ 6. 16.（화）",
+      "normalizedStart": "2026-05-27",
+      "normalizedEnd": "2026-06-16",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "▶ 접수기간: 2026. 5. 27.（수） ~ 6. 16.（화）",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "structured_segment_grounded",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11049-7432dd3fd8108e",
+      "uidHint": "noticepilot-cand-knu-504-11049-7432dd3fd8108e@noticepilot.local",
+      "sourceNoticeId": "knu-504-11049",
+      "sourceTitle": "강원대학교 2026학년도 여름학기 원어민 외국어 회화（영어, 일어, 독어, 프랑스어） 수강생 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11049&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-656bf50ad8f79006",
+        "segmentType": "label_value",
+        "labelText": "강의운영기간",
+        "bodyText": "2026. 6. 22.（월） ~ 2026. 8. 13.（목）",
+        "sourceLocation": {
+          "lineIndex": 3,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-22",
+            "start": 11,
+            "end": 26
+          },
+          {
+            "value": "2026-08-13",
+            "start": 29,
+            "end": 44
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "강의운영기간",
+          "▶ 강의운영기간 : 2026. 6. 22.（월） ~ 2026. 8. 13.（목）",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-47d32a83af4c5235",
+        "segmentId": "seg-656bf50ad8f79006",
+        "rawText": "2026. 6. 22.（월） ~ 2026. 8. 13.（목）",
+        "normalizedStart": "2026-06-22",
+        "normalizedEnd": "2026-08-13",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 11,
+          "end": 44
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-be4a70e5aef8a161",
+        "sourceNoticeId": "knu-504-11049",
+        "segmentId": "seg-656bf50ad8f79006",
+        "temporalMentionIds": [
+          "tm-47d32a83af4c5235"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "강의운영기간",
+        "evidence": "▶ 강의운영기간 : 2026. 6. 22.（월） ~ 2026. 8. 13.（목）"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "강원대학교 2026학년도 여름학기 원어민 외국어 회화（영어, 일어, 독어, 프랑스어） 수강생 모집 안내 행사 기간",
+      "dateText": "2026. 6. 22.（월） ~ 2026. 8. 13.（목）",
+      "normalizedStart": "2026-06-22",
+      "normalizedEnd": "2026-08-13",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "▶ 강의운영기간 : 2026. 6. 22.（월） ~ 2026. 8. 13.（목）",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "structured_segment_grounded"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "structured_segment_grounded"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "structured_segment_grounded"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 2,
+    "calendarFeedIncludedCount": 0
+  }
+}

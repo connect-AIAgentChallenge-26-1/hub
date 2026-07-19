@@ -1,0 +1,240 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4814",
+  "sourceContentHash": "304ade0e3c3901e8a0ecbce37fd2dea80e53eec231eeaf7db132261af3c7f6c9",
+  "sourceTitle": "강원대학교 강릉캠퍼스 무기계약직(미화원) 채용 공고",
+  "publishedAt": "2026-06-04",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cba1121d095e4799",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "강원대학교 강릉캠퍼스 무기계약직(미화원) 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉캠퍼스 무기계약직(미화원) 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-172a9fd46df43769",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 강릉캠퍼스 무기계약직(미화원) 채용 공고",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉캠퍼스 무기계약직(미화원) 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a0632010114ba143",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 강릉캠퍼스에서 근무할 직원을 다음과 같이 채용하고자 하오니 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 강릉캠퍼스에서 근무할 직원을 다음과 같이 채용하고자 하오니 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉캠퍼스에서 근무할 직원을 다음과 같이 채용하고자 하오니 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-10d6e81b78e4f36c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 채용분야: 무기계약직(미화원)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 채용분야: 무기계약직(미화원)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ba126a7004664b85",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 채용인원: 2명",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 채용인원: 2명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d9b2ea8399402935",
+      "segmentType": "label_value",
+      "labelText": "원서접수기간",
+      "bodyText": "2026.6.4.(목) ~ 6.10.(수) 18:00까지",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-04",
+          "start": 11,
+          "end": 23
+        },
+        {
+          "value": "2026-06-10",
+          "start": 26,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 원서접수기간: 2026.6.4.(목) ~ 6.10.(수) 18:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8236477bc85058e4",
+      "segmentType": "label_value",
+      "labelText": "원서접수방법",
+      "bodyText": "4. 원서접수방법: e-mail 접수 ☞",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 원서접수방법: e-mail 접수 ☞"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-01b95db897186f86",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "chdanrhk@kangwon.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "chdanrhk@kangwon.ac.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eb685cdb38481e21",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 기타 자세한 사항은 붙임의 공고문을 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 기타 자세한 사항은 붙임의 공고문을 참고하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5d560f2e48c0af15",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의사항: 강원대학교 강릉캠퍼스 강릉행정지원과 033-640-2236",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의사항: 강원대학교 강릉캠퍼스 강릉행정지원과 033-640-2236"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-54d6e975fb054c34",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-06-04~2026-06-10",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-04",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-06-10",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-06-04~2026-06-10"
+    }
+  ],
+  "summary": {
+    "segmentCount": 11,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 4,
+      "list_item": 4,
+      "paragraph": 2,
+      "title": 1
+    }
+  }
+}

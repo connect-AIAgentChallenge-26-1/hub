@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2396",
+  "sourceContentHash": "5e75ad3ce7f2538e0ab5848e3f0b79e3678e3a3e4dbdf1c4379f2cfbaad455fa",
+  "sourceTitle": "2026년 하계방학 집중근로(교외기관) 희망근로지 신청기간 안내",
+  "publishedAt": "2026-05-19",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1199f35386513f18",
+      "segmentType": "title",
+      "labelText": "2026년 하계방학 집중근로(교외기관) 희망근로지 신청기간 안내",
+      "bodyText": "2026년 하계방학 집중근로(교외기관) 희망근로지 신청기간 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 하계방학 집중근로(교외기관) 희망근로지 신청기간 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9548ea78ddee4f96",
+      "segmentType": "label_value",
+      "labelText": "2026년 국가근로장학생 하계방학 집중근로(교외근로) 프로그램 희망근로지 신청 기간을 아래와 같이 안내하오니 기간내에 신청하시기 바랍니다.",
+      "bodyText": "2026년 국가근로장학생 하계방학 집중근로(교외근로) 프로그램 희망근로지 신청 기간을 아래와 같이 안내하오니 기간내에 신청하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 국가근로장학생 하계방학 집중근로(교외근로) 프로그램 희망근로지 신청 기간을 아래와 같이 안내하오니 기간내에 신청하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b18af3045d09c7f1",
+      "segmentType": "label_value",
+      "labelText": "희망근로지 학생 신청 기간",
+      "bodyText": "2026. 5. 20.(수) 9시 ~ 5. 29.(금) 18시까지",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-20",
+          "start": 19,
+          "end": 34
+        },
+        {
+          "value": "2026-05-29",
+          "start": 40,
+          "end": 49
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 희망근로지 학생 신청 기간: 2026. 5. 20.(수) 9시 ~ 5. 29.(금) 18시까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-33517f51b8b93032",
+      "segmentType": "label_value",
+      "labelText": "신청 대상자",
+      "bodyText": "2. 신청 대상자: 2026년 1학기 국가근로장학금을 신청한 재학생 중 교외근로 희망자",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 신청 대상자: 2026년 1학기 국가근로장학금을 신청한 재학생 중 교외근로 희망자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2b814af8194d4b4c",
+      "segmentType": "label_value",
+      "labelText": "신청 방법",
+      "bodyText": "3. 신청 방법: [붙임파일] 참고",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 신청 방법: [붙임파일] 참고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-721db9b5ef62617b",
+      "segmentType": "label_value",
+      "labelText": "우선추천대상자 안내",
+      "bodyText": "2026. 6. 9.(화)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-09",
+          "start": 15,
+          "end": 29
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "4. 우선추천대상자 안내: 2026. 6. 9.(화)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e55c0d22f466059f",
+      "segmentType": "label_value",
+      "labelText": "대학 최종 선발 기간",
+      "bodyText": "2026. 6. 10.(수) ~ 6. 15.(월)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-10",
+          "start": 14,
+          "end": 29
+        },
+        {
+          "value": "2026-06-15",
+          "start": 32,
+          "end": 41
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "-대학 최종 선발 기간: 2026. 6. 10.(수) ~ 6. 15.(월)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b07c4873378ce6ba",
+      "segmentType": "label_value",
+      "labelText": "최종 선발 결과 공개",
+      "bodyText": "2026. 6. 16.(화)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-16",
+          "start": 16,
+          "end": 31
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "5. 최종 선발 결과 공개: 2026. 6. 16.(화)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7
+    }
+  }
+}

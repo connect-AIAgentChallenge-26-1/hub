@@ -1,0 +1,367 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-721-2422",
+  "sourceContentHash": "f47e3c554c52a004a18c9d5f785edcc1e965792b773d4f6ade5105468ba134f7",
+  "sourceTitle": "[춘천캠퍼스] 2026년 1학기 국가Ⅱ유형(대학 자체노력 연계지원형) 지급기준 공지",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2422&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-721-2422-9e4f0385af218c",
+      "uidHint": "noticepilot-cand-knu-721-2422-9e4f0385af218c@noticepilot.local",
+      "sourceNoticeId": "knu-721-2422",
+      "sourceTitle": "[춘천캠퍼스] 2026년 1학기 국가Ⅱ유형(대학 자체노력 연계지원형) 지급기준 공지",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2422&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-2b54fca1147684be",
+        "segmentType": "label_value",
+        "labelText": "*지급보류자의 경우",
+        "bodyText": "6.23. 이전에 지급보류사유 해소하여야 국가2유형장학금 지급가능합니다 (대출상환필요자의 경우 대출상환처리 후, 계좌오류자의 경우 올바른 계좌 k-cloud에 등록 후 지급가능합니다)",
+        "sourceLocation": {
+          "lineIndex": 24,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-23",
+            "start": 11,
+            "end": 15
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "conditional_followup",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": null,
+        "temporalRole": "conditional_followup",
+        "confidence": "medium",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "*지급보류자의 경우",
+          "*지급보류자의 경우 6.23. 이전에 지급보류사유 해소하여야 국가2유형장학금 지급가능합니다 (대출상환필요자의 경우 대출상환처리 후, 계좌오류자의 경우 올",
+          "semantic.temporal_role.conditional_followup"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-2950d0b22d9b73bd",
+        "segmentId": "seg-2b54fca1147684be",
+        "rawText": "6.23",
+        "normalizedStart": "2026-06-23",
+        "normalizedEnd": "2026-06-23",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 11,
+          "end": 15
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-80c897b679af910e",
+        "sourceNoticeId": "knu-721-2422",
+        "segmentId": "seg-2b54fca1147684be",
+        "temporalMentionIds": [
+          "tm-2950d0b22d9b73bd"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "medium",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": false,
+        "labelText": "*지급보류자의 경우",
+        "evidence": "*지급보류자의 경우 6.23. 이전에 지급보류사유 해소하여야 국가2유형장학금 지급가능합니다 (대출상환필요자의 경우 대출상환처리 후, 계좌오류자의 경우 올바른 계좌 k-cloud에 등록 후 지급가능합니다)"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "[춘천캠퍼스] 2026년 1학기 국가Ⅱ유형(대학 자체노력 연계지원형) 지급기준 공지 일정",
+      "dateText": "6.23",
+      "normalizedStart": "2026-06-23",
+      "normalizedEnd": "2026-06-23",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "*지급보류자의 경우 6.23. 이전에 지급보류사유 해소하여야 국가2유형장학금 지급가능합니다 (대출상환필요자의 경우 대출상환처리 후, 계좌오류자의 경우 올바른 계좌 k-cloud에 등록 후 지급가능합니다)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "conditional_selected_participant_action",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "conditional_selected_participant_action",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "conditional",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "medium",
+        "ruleId": "applicability.conditional.selected_participant",
+        "reasonCodes": [
+          "conditional_selected_participant_action",
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "conditional_selected_participant_action",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.conditional_selected_participant_action",
+          "publishability.temporal_role.conditional_followup",
+          "publishability.temporal_role.conditional_followup.review",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-721-2422-9f92cb63e3c762",
+      "uidHint": "noticepilot-cand-knu-721-2422-9f92cb63e3c762@noticepilot.local",
+      "sourceNoticeId": "knu-721-2422",
+      "sourceTitle": "[춘천캠퍼스] 2026년 1학기 국가Ⅱ유형(대학 자체노력 연계지원형) 지급기준 공지",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2422&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "deadline",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-961610fce7c8ff61",
+        "segmentType": "label_value",
+        "labelText": "한국장학재단 시스템상 2026-1학기 장학금 지급실행 마감일자가",
+        "bodyText": "6.25.이므로 이번학기 지급 관련 문의는 적어도 6.23. 이전에는 연락을 주셔야 조치 가능합니다.",
+        "sourceLocation": {
+          "lineIndex": 35,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-25",
+            "start": 36,
+            "end": 40
+          },
+          {
+            "value": "2026-06-23",
+            "start": 64,
+            "end": 68
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "deadline",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "medium",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "한국장학재단 시스템상 2026-1학기 장학금 지급실행 마감일자가",
+          "한국장학재단 시스템상 2026-1학기 장학금 지급실행 마감일자가 6.25.이므로 이번학기 지급 관련 문의는 적어도 6.23. 이전에는 연락을 주셔야 조치 가능합니다.",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-3a5c47ef3716d809",
+        "segmentId": "seg-961610fce7c8ff61",
+        "rawText": "6.23",
+        "normalizedStart": "2026-06-23",
+        "normalizedEnd": "2026-06-23",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 36,
+          "end": 68
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-f6fc4bf794175df0",
+        "sourceNoticeId": "knu-721-2422",
+        "segmentId": "seg-961610fce7c8ff61",
+        "temporalMentionIds": [
+          "tm-3a5c47ef3716d809"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "medium",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": false,
+        "labelText": "한국장학재단 시스템상 2026-1학기 장학금 지급실행 마감일자가",
+        "evidence": "한국장학재단 시스템상 2026-1학기 장학금 지급실행 마감일자가 6.25.이므로 이번학기 지급 관련 문의는 적어도 6.23. 이전에는 연락을 주셔야 조치 가능합니다."
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[춘천캠퍼스] 2026년 1학기 국가Ⅱ유형(대학 자체노력 연계지원형) 지급기준 공지 마감",
+      "dateText": "6.23",
+      "normalizedStart": "2026-06-23",
+      "normalizedEnd": "2026-06-23",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "한국장학재단 시스템상 2026-1학기 장학금 지급실행 마감일자가 6.25.이므로 이번학기 지급 관련 문의는 적어도 6.23. 이전에는 연락을 주셔야 조치 가능합니다.",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 1
+  }
+}

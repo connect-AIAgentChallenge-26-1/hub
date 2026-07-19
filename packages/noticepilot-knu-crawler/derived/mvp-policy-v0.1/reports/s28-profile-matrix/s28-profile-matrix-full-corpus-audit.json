@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "noticepilot.s28ProfileMatrixFullCorpusAudit.v0.1",
+  "auditorVersion": "0.1.0",
+  "result": "pass",
+  "status": "completed",
+  "scope": {
+    "profileMatrixImplemented": true,
+    "fullCorpusFeedAuditPerformed": true,
+    "matrixCasesPersisted": true,
+    "everyCaseEvaluatedAgainstAllActiveEvents": true,
+    "newProductPolicyIntroduced": false,
+    "snapshotMutationPerformed": false,
+    "subscriptionUrlOrTokenIssued": false,
+    "icsSerializationPerformed": false,
+    "s27RegistryMutationPerformed": false,
+    "s27ProjectionMutationPerformed": false
+  },
+  "matrix": {
+    "path": "configs/noticepilot_profile_matrix.v0.1.json",
+    "schemaVersion": "noticepilot.profileMatrix.v0.1",
+    "matrixVersion": "0.1.0",
+    "caseCount": 44,
+    "matrixSha256": "3c8e55bf62f061a4932cd35d860352c8edacdcd3011b0a709d5a19b14face4ef",
+    "storedResultExactMatch": true,
+    "storedCaseRowsExactMatch": true
+  },
+  "counts": {
+    "inputEventCount": 900,
+    "profileCaseCount": 44,
+    "decisionCount": 39600,
+    "personalizationReadyEventCount": 12,
+    "audienceUnscopedEventCount": 888,
+    "unknownCampusEventCount": 1
+  },
+  "coverage": {
+    "categoryCounts": {
+      "audience": 8,
+      "campus": 8,
+      "event_type": 9,
+      "policy_toggle": 6,
+      "reference": 2,
+      "source_board": 9,
+      "status": 2
+    },
+    "primaryReasonCodesObserved": [
+      "profile_not_active",
+      "campus_unknown_excluded",
+      "campus_all_excluded",
+      "campus_no_intersection",
+      "source_board_or_notice_type_mismatch",
+      "event_type_mismatch",
+      "audience_unscoped_excluded",
+      "audience_degree_level_mismatch",
+      "audience_student_year_mismatch",
+      "audience_enrollment_status_mismatch",
+      "eligible_all_dimensions_matched"
+    ],
+    "allReasonCodesObserved": [
+      "profile_not_active",
+      "campus_unknown_excluded",
+      "campus_all_excluded",
+      "campus_no_intersection",
+      "source_board_or_notice_type_mismatch",
+      "feed_scope_mismatch",
+      "event_type_mismatch",
+      "target_actor_mismatch",
+      "audience_unscoped_excluded",
+      "audience_degree_level_mismatch",
+      "audience_student_year_mismatch",
+      "audience_enrollment_status_mismatch",
+      "eligible_all_dimensions_matched"
+    ],
+    "corpusUnreachableReasonCodes": [
+      "institution_mismatch",
+      "unsupported_event_status",
+      "invalid_normalized_date",
+      "review_state_unknown",
+      "review_required_excluded",
+      "audience_admission_type_mismatch"
+    ],
+    "personalizationReadyEventCount": 12,
+    "audienceUnscopedEventCount": 888,
+    "unknownCampusEventCount": 1,
+    "canonicalBoardCaseCount": 9,
+    "eventTypeCaseCount": 9
+  },
+  "referenceParity": {
+    "studentSnapshotMembershipMatch": true,
+    "jobSnapshotMembershipMatch": true,
+    "studentEventCount": 601,
+    "jobEventCount": 299,
+    "unionCount": 900,
+    "overlapCount": 0
+  },
+  "invariants": [
+    {
+      "invariantId": "reference_partition",
+      "passed": true,
+      "details": {
+        "student": 601,
+        "job": 299,
+        "overlap": 0,
+        "union": 900
+      }
+    },
+    {
+      "invariantId": "campus_profiles_are_reference_subsets",
+      "passed": true,
+      "details": {
+        "checkedProfiles": 8
+      }
+    },
+    {
+      "invariantId": "unknown_toggle_delta",
+      "passed": true,
+      "details": {
+        "student": 601,
+        "job": 298
+      }
+    },
+    {
+      "invariantId": "review_toggle_current_corpus_no_change",
+      "passed": true,
+      "details": {
+        "student": 601,
+        "job": 299
+      }
+    },
+    {
+      "invariantId": "inactive_profiles_empty",
+      "passed": true,
+      "details": {
+        "pausedStudent": 0,
+        "revokedJob": 0
+      }
+    },
+    {
+      "invariantId": "canonical_board_partition",
+      "passed": true,
+      "details": {
+        "union": 900,
+        "pairwiseOverlapTotal": 0,
+        "caseCount": 9
+      }
+    },
+    {
+      "invariantId": "event_type_partition",
+      "passed": true,
+      "details": {
+        "union": 900,
+        "pairwiseOverlapTotal": 0,
+        "caseCount": 9
+      }
+    },
+    {
+      "invariantId": "audience_unscoped_exclusion_monotonic",
+      "passed": true,
+      "details": {
+        "checkedPairs": 4
+      }
+    },
+    {
+      "invariantId": "reverse_input_determinism",
+      "passed": true,
+      "details": {
+        "caseCount": 44,
+        "decisionCount": 39600
+      }
+    }
+  ],
+  "immutability": {
+    "s27cManifestSha256": "47fa8e232254df978575f31e06d555c20cf5f50e99862dc8ae0e772a7e4a03dc",
+    "s27cManifestExpectedSha256": "47fa8e232254df978575f31e06d555c20cf5f50e99862dc8ae0e772a7e4a03dc",
+    "s27dManifestSha256": "922eacc5a270f5119d0e86892d961ed742486b35b6a65d7a0d1642119820481f",
+    "s27dManifestExpectedSha256": "922eacc5a270f5119d0e86892d961ed742486b35b6a65d7a0d1642119820481f",
+    "s28SnapshotManifestSha256": "975a23a8cb932d5b6f5511f3ef9b15869aba95985a482ce075ee18d351675895",
+    "s28SnapshotManifestExpectedSha256": "975a23a8cb932d5b6f5511f3ef9b15869aba95985a482ce075ee18d351675895",
+    "s28StudentBuildResultSha256": "2247cafae28b8a2ab9897779867f3494c8c2c9a08afe17337e4e3850d0ba893b",
+    "s28StudentBuildResultExpectedSha256": "2247cafae28b8a2ab9897779867f3494c8c2c9a08afe17337e4e3850d0ba893b",
+    "s28JobBuildResultSha256": "0fb2f8fe1656fc9271169917adb4e7cc0312d646fcce5ed2fd389a65bfdcb863",
+    "s28JobBuildResultExpectedSha256": "0fb2f8fe1656fc9271169917adb4e7cc0312d646fcce5ed2fd389a65bfdcb863",
+    "layeredBaselineResult": "match",
+    "layeredBaselineChangeCount": 0,
+    "layeredBaselineMatch": true
+  },
+  "deferred": {
+    "snapshotPersistenceAndDelivery": "S29",
+    "subscriptionUrlAndToken": "S29",
+    "calendarClientPhysicalQa": "S30"
+  },
+  "errors": []
+}

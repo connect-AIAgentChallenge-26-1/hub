@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11054",
+  "sourceContentHash": "d80853f98fe98d04ca8d363e743c89f35021b83fe4fd13020b12583026852d62",
+  "sourceTitle": "[강원대학교 RISE 사업단] 대학 예비창업 성장 지원 패키지 공고",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11054&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천 삼척",
+    "campuses": [
+      "chuncheon",
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천",
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11054-1d975d2be86692",
+      "uidHint": "noticepilot-cand-knu-504-11054-1d975d2be86692@noticepilot.local",
+      "sourceNoticeId": "knu-504-11054",
+      "sourceTitle": "[강원대학교 RISE 사업단] 대학 예비창업 성장 지원 패키지 공고",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11054&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-6580a49a79eb3cff",
+        "segmentType": "label_value",
+        "labelText": "❍ 모집일정",
+        "bodyText": "2026.06.07.(일) 까지",
+        "sourceLocation": {
+          "lineIndex": 22,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-07",
+            "start": 9,
+            "end": 23
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "❍ 모집일정",
+          "❍ 모집일정 : 2026.06.07.(일) 까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-51a2b9dd9ac1c2cf",
+        "segmentId": "seg-6580a49a79eb3cff",
+        "rawText": "2026.06.07.(일)",
+        "normalizedStart": "2026-06-07",
+        "normalizedEnd": "2026-06-07",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 9,
+          "end": 23
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-9064d594eead9ebf",
+        "sourceNoticeId": "knu-504-11054",
+        "segmentId": "seg-6580a49a79eb3cff",
+        "temporalMentionIds": [
+          "tm-51a2b9dd9ac1c2cf"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "❍ 모집일정",
+        "evidence": "❍ 모집일정 : 2026.06.07.(일) 까지"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "[강원대학교 RISE 사업단] 대학 예비창업 성장 지원 패키지 공고 신청 마감",
+      "dateText": "2026.06.07.(일)",
+      "normalizedStart": "2026-06-07",
+      "normalizedEnd": "2026-06-07",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "❍ 모집일정 : 2026.06.07.(일) 까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "structured_segment_grounded"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "structured_segment_grounded"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "structured_segment_grounded"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

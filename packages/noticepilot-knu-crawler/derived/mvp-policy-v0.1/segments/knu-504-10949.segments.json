@@ -1,0 +1,353 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10949",
+  "sourceContentHash": "b3993f0c7fd9a46af81d9d8c99ff7ac3352fde6ce913a4fdea220d8bb4b4820b",
+  "sourceTitle": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 안내",
+  "publishedAt": "2026-04-30",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5848ffdc23e716aa",
+      "segmentType": "title",
+      "labelText": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 안내",
+      "bodyText": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-adef3a3569e0aba7",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 일정을 다음과 같이 안내하오니 지원을 희망하시는 분들은 참고하시기 바랍니다.",
+      "bodyText": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 일정을 다음과 같이 안내하오니 지원을 희망하시는 분들은 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 일정을 다음과 같이 안내하오니 지원을 희망하시는 분들은 참고하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ab41a731c812a9f5",
+      "segmentType": "label_value",
+      "labelText": "인터넷 원서접수 기간",
+      "bodyText": "2026. 5. 12.(화) 09:00부터 ~ 5. 18.(월) 18:00까지",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-12",
+          "start": 16,
+          "end": 31
+        },
+        {
+          "value": "2026-05-18",
+          "start": 42,
+          "end": 51
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "가. 인터넷 원서접수 기간: 2026. 5. 12.(화) 09:00부터 ~ 5. 18.(월) 18:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-01f4b4e671f8cd41",
+      "segmentType": "label_value",
+      "labelText": "( ※ 교원자격증 취득을 희망하는 지원자는",
+      "bodyText": "2026. 5. 4.(월) ~ 5. 8.(금) 18:00까지 해당 전공학과와 상의하여 \"전공 및 교직과정 학점인정원\" 확인 받고 서류를 준비하여, 관련서류를 우편으로 제출하셔야 합니다.)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-04",
+          "start": 24,
+          "end": 38
+        },
+        {
+          "value": "2026-05-08",
+          "start": 41,
+          "end": 49
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "( ※ 교원자격증 취득을 희망하는 지원자는 2026. 5. 4.(월) ~ 5. 8.(금) 18:00까지 해당 전공학과와 상의하여 \"전공 및 교직과정 학점인정원\" 확인 받고 서류를 준비하여, 관련서류를 우편으로 제출하셔야 합니다.)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0bc749b54d934322",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "나. 입학전형일",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 입학전형일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4ae5df910e354606",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026. 6. 13.(토)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-13",
+          "start": 15,
+          "end": 30
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- (특별전형, 일반전형) 2026. 6. 13.(토)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-23d5230f92cfd1e1",
+      "segmentType": "label_value",
+      "labelText": "합격자 발표일",
+      "bodyText": "다. 합격자 발표일",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 합격자 발표일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2782635417ca255d",
+      "segmentType": "continuation",
+      "labelText": "합격자 발표일 - (특별전형, 일반전형)",
+      "bodyText": "2026. 6. 29.(월) 예정",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-23d5230f92cfd1e1"
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-29",
+          "start": 26,
+          "end": 41
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "다. 합격자 발표일 - (특별전형, 일반전형) 2026. 6. 29.(월) 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b9c50313ab1757b5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026. 6. 29.(월) 예정",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-29",
+          "start": 15,
+          "end": 30
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- (특별전형, 일반전형) 2026. 6. 29.(월) 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-62265b86e5ccc784",
+      "segmentType": "label_value",
+      "labelText": "합격자 등록기간",
+      "bodyText": "2026. 7. 27.(월) ~ 7. 29.(수)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-27",
+          "start": 13,
+          "end": 28
+        },
+        {
+          "value": "2026-07-29",
+          "start": 31,
+          "end": 40
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "라. 합격자 등록기간: 2026. 7. 27.(월) ~ 7. 29.(수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9708aa80189cb409",
+      "segmentType": "label_value",
+      "labelText": "온라인 접수",
+      "bodyText": "마. 온라인 접수:",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "마. 온라인 접수:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b0aade62f9fd9443",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "클릭",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "클릭"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eb36c1fc38b5f79c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7b96985ef89767f3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "dwibsi.gwnu.ac.kr/nxui_gyoyuk/index.html",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "dwibsi.gwnu.ac.kr/nxui_gyoyuk/index.html"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9458703f60641743",
+      "segmentType": "label_value",
+      "labelText": "교육대학원 입학문의",
+      "bodyText": "바. 교육대학원 입학문의: 033-640-2087",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "바. 교육대학원 입학문의: 033-640-2087"
+    }
+  ],
+  "summary": {
+    "segmentCount": 15,
+    "locallyGroundedCount": 3,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "list_item": 3,
+      "continuation": 1,
+      "paragraph": 3
+    }
+  }
+}

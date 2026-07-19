@@ -1,0 +1,527 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-721-2412",
+  "sourceContentHash": "eafaa9cf81235bb6add38d38b894d425c8067f22acb52df410dacd2309608fc5",
+  "sourceTitle": "2026학년도 하계 근로장학생 신청 안내(6.11.~6.18.)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2412&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉 원주",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-721-2412-e7d7d17b2f273d",
+      "uidHint": "noticepilot-cand-knu-721-2412-e7d7d17b2f273d@noticepilot.local",
+      "sourceNoticeId": "knu-721-2412",
+      "sourceTitle": "2026학년도 하계 근로장학생 신청 안내(6.11.~6.18.)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2412&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-c6fab80115aa588c",
+        "segmentType": "title",
+        "labelText": "2026학년도 하계 근로장학생 신청 안내(",
+        "bodyText": "6.11.~6.18.)",
+        "sourceLocation": {
+          "lineIndex": -1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-11",
+            "start": 23,
+            "end": 27
+          },
+          {
+            "value": "2026-06-18",
+            "start": 29,
+            "end": 33
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "low",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "2026학년도 하계 근로장학생 신청 안내(",
+          "2026학년도 하계 근로장학생 신청 안내(6.11.~6.18.)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-4f092f50f4a16798",
+        "segmentId": "seg-c6fab80115aa588c",
+        "rawText": "6.11.~6.18.)",
+        "normalizedStart": "2026-06-11",
+        "normalizedEnd": "2026-06-18",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 23,
+          "end": 33
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-aa544d5fc1bdd541",
+        "sourceNoticeId": "knu-721-2412",
+        "segmentId": "seg-c6fab80115aa588c",
+        "temporalMentionIds": [
+          "tm-4f092f50f4a16798"
+        ],
+        "bindingKind": "title_context",
+        "confidence": "low",
+        "ruleId": "binding.title_context",
+        "locallyGrounded": false,
+        "labelText": "2026학년도 하계 근로장학생 신청 안내(",
+        "evidence": "2026학년도 하계 근로장학생 신청 안내(6.11.~6.18.)"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "2026학년도 하계 근로장학생 신청 안내(6.11.~6.18.) 신청기간",
+      "dateText": "6.11.~6.18.)",
+      "normalizedStart": "2026-06-11",
+      "normalizedEnd": "2026-06-18",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "2026학년도 하계 근로장학생 신청 안내(6.11.~6.18.)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "range_boundary_time_requires_review"
+      ],
+      "reasonCodes": [
+        "range_boundary_time_requires_review",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "range_boundary_time_requires_review",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.range_boundary_time_requires_review",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-721-2412-d5b6360257ca97",
+      "uidHint": "noticepilot-cand-knu-721-2412-d5b6360257ca97@noticepilot.local",
+      "sourceNoticeId": "knu-721-2412",
+      "sourceTitle": "2026학년도 하계 근로장학생 신청 안내(6.11.~6.18.)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2412&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-87300df2d2e40d80",
+        "segmentType": "label_value",
+        "labelText": "2026학년도 하계 근로장학생 신청이",
+        "bodyText": "2026. 6. 11.(목) 11시 부터 시작됩니다.",
+        "sourceLocation": {
+          "lineIndex": 0,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-11",
+            "start": 21,
+            "end": 36
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "2026학년도 하계 근로장학생 신청이",
+          "2026학년도 하계 근로장학생 신청이 2026. 6. 11.(목) 11시 부터 시작됩니다.",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-33f74b157c15ee1b",
+        "segmentId": "seg-87300df2d2e40d80",
+        "rawText": "2026. 6. 11.(목)",
+        "normalizedStart": "2026-06-11T11:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 21,
+          "end": 36
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-ecd8984eb0531e0a",
+        "sourceNoticeId": "knu-721-2412",
+        "segmentId": "seg-87300df2d2e40d80",
+        "temporalMentionIds": [
+          "tm-33f74b157c15ee1b"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "2026학년도 하계 근로장학생 신청이",
+        "evidence": "2026학년도 하계 근로장학생 신청이 2026. 6. 11.(목) 11시 부터 시작됩니다."
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "2026학년도 하계 근로장학생 신청 안내(6.11.~6.18.) 신청 마감",
+      "dateText": "2026. 6. 11.(목)",
+      "normalizedStart": "2026-06-11T11:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "2026학년도 하계 근로장학생 신청이 2026. 6. 11.(목) 11시 부터 시작됩니다.",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "range_boundary_time_requires_review"
+      ],
+      "reasonCodes": [
+        "range_boundary_time_requires_review",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "range_boundary_time_requires_review",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.range_boundary_time_requires_review",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-721-2412-a6a1f50655aed1",
+      "uidHint": "noticepilot-cand-knu-721-2412-a6a1f50655aed1@noticepilot.local",
+      "sourceNoticeId": "knu-721-2412",
+      "sourceTitle": "2026학년도 하계 근로장학생 신청 안내(6.11.~6.18.)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2412&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-396c271547bec9c9",
+        "segmentType": "label_value",
+        "labelText": "선발결과 확인",
+        "bodyText": "2026. 6. 29.(월) 예정",
+        "sourceLocation": {
+          "lineIndex": 60,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "result_announcement"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-29",
+            "start": 12,
+            "end": 27
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "선발결과 확인",
+          "8. 선발결과 확인: 2026. 6. 29.(월) 예정",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-fcd7c2ea0e569f33",
+        "segmentId": "seg-396c271547bec9c9",
+        "rawText": "2026. 6. 29.(월)",
+        "normalizedStart": "2026-06-29",
+        "normalizedEnd": "2026-06-29",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 12,
+          "end": 27
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-d5545b2c1785e7a1",
+        "sourceNoticeId": "knu-721-2412",
+        "segmentId": "seg-396c271547bec9c9",
+        "temporalMentionIds": [
+          "tm-fcd7c2ea0e569f33"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "선발결과 확인",
+        "evidence": "8. 선발결과 확인: 2026. 6. 29.(월) 예정"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 하계 근로장학생 신청 안내(6.11.~6.18.) 결과 발표 예정",
+      "dateText": "2026. 6. 29.(월)",
+      "normalizedStart": "2026-06-29",
+      "normalizedEnd": "2026-06-29",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "8. 선발결과 확인: 2026. 6. 29.(월) 예정",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 3,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 2,
+    "calendarFeedIncludedCount": 1
+  }
+}

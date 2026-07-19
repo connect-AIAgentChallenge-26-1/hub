@@ -1,0 +1,372 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-720-2463",
+  "sourceContentHash": "878369d4c659c89cd8a270aaec188d948eb87c9dfd34826a698422e9cea14b39",
+  "sourceTitle": "2026학년도 1학기 성적처리 일정 및 평가방법 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2463&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-720-2463-36d150a473de4c",
+      "uidHint": "noticepilot-cand-knu-720-2463-36d150a473de4c@noticepilot.local",
+      "sourceNoticeId": "knu-720-2463",
+      "sourceTitle": "2026학년도 1학기 성적처리 일정 및 평가방법 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2463&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "course_evaluation",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-2f1d6ef71dd5b5f0",
+        "segmentType": "label_value",
+        "labelText": "▸기말 수업평가 기간",
+        "bodyText": "2026. 6. 26.(금) 09:00 ~ 7. 2.(목) 17:00",
+        "sourceLocation": {
+          "lineIndex": 26,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "course_evaluation",
+          "exam_or_interview",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-26",
+            "start": 13,
+            "end": 28
+          },
+          {
+            "value": "2026-07-02",
+            "start": 37,
+            "end": 45
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "course_evaluation",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "▸기말 수업평가 기간",
+          "▸기말 수업평가 기간: 2026. 6. 26.(금) 09:00 ~ 7. 2.(목) 17:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-d7cf65829208c506",
+        "segmentId": "seg-2f1d6ef71dd5b5f0",
+        "rawText": "2026. 6. 26.(금) 09:00 ~ 7. 2.(목) 17:00",
+        "normalizedStart": "2026-06-26T09:00:00+09:00",
+        "normalizedEnd": "2026-07-02T17:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 13,
+          "end": 45
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-808e630987ff89ce",
+        "sourceNoticeId": "knu-720-2463",
+        "segmentId": "seg-2f1d6ef71dd5b5f0",
+        "temporalMentionIds": [
+          "tm-d7cf65829208c506"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "▸기말 수업평가 기간",
+        "evidence": "▸기말 수업평가 기간: 2026. 6. 26.(금) 09:00 ~ 7. 2.(목) 17:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 1학기 성적처리 일정 및 평가방법 안내 수업평가 기간",
+      "dateText": "2026. 6. 26.(금) 09:00 ~ 7. 2.(목) 17:00",
+      "normalizedStart": "2026-06-26T09:00:00+09:00",
+      "normalizedEnd": "2026-07-02T17:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "▸기말 수업평가 기간: 2026. 6. 26.(금) 09:00 ~ 7. 2.(목) 17:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "academic_action_type_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "academic_action_type_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2463-61319084f1c4d3",
+      "uidHint": "noticepilot-cand-knu-720-2463-61319084f1c4d3@noticepilot.local",
+      "sourceNoticeId": "knu-720-2463",
+      "sourceTitle": "2026학년도 1학기 성적처리 일정 및 평가방법 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2463&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-3b54119e708252d2",
+        "segmentType": "continuation",
+        "labelText": "확정 전 성적조회 및 이의신청",
+        "bodyText": "2026.6.26.(금) 09:00 ~ 7.2.(목) 17:00",
+        "sourceLocation": {
+          "lineIndex": 3,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-f1edc4a203a1ca86"
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-26",
+            "start": 18,
+            "end": 31
+          },
+          {
+            "value": "2026-07-02",
+            "start": 40,
+            "end": 47
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "확정 전 성적조회 및 이의신청",
+          "확정 전 성적조회 및 이의신청: 2026.6.26.(금) 09:00 ~ 7.2.(목) 17:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-8848e1bab589887e",
+        "segmentId": "seg-3b54119e708252d2",
+        "rawText": "2026.6.26.(금) 09:00 ~ 7.2.(목) 17:00",
+        "normalizedStart": "2026-06-26T09:00:00+09:00",
+        "normalizedEnd": "2026-07-02T17:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 18,
+          "end": 47
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-cb3898dd00e63dfe",
+        "sourceNoticeId": "knu-720-2463",
+        "segmentId": "seg-3b54119e708252d2",
+        "temporalMentionIds": [
+          "tm-8848e1bab589887e"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "확정 전 성적조회 및 이의신청",
+        "evidence": "확정 전 성적조회 및 이의신청: 2026.6.26.(금) 09:00 ~ 7.2.(목) 17:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 1학기 성적처리 일정 및 평가방법 안내 신청기간",
+      "dateText": "2026.6.26.(금) 09:00 ~ 7.2.(목) 17:00",
+      "normalizedStart": "2026-06-26T09:00:00+09:00",
+      "normalizedEnd": "2026-07-02T17:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "확정 전 성적조회 및 이의신청: 2026.6.26.(금) 09:00 ~ 7.2.(목) 17:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

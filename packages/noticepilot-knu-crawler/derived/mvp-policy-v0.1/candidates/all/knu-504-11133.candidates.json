@@ -1,0 +1,362 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11133",
+  "sourceContentHash": "c75034d071b240754e2720a50b1e663f154df69dea4772b10067882b872db864",
+  "sourceTitle": "[백령스포츠센터] 7월 테니스 1:1 개인 레슨 회원 모집",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11133&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11133-167e14267ba92f",
+      "uidHint": "noticepilot-cand-knu-504-11133-167e14267ba92f@noticepilot.local",
+      "sourceNoticeId": "knu-504-11133",
+      "sourceTitle": "[백령스포츠센터] 7월 테니스 1:1 개인 레슨 회원 모집",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11133&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-833761c0996723bd",
+        "segmentType": "paragraph",
+        "labelText": "",
+        "bodyText": "6월 22일(월)부터 7월 테니스 초급 1:1 개인레슨 접수를 시작합니다!",
+        "sourceLocation": {
+          "lineIndex": 1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-22",
+            "start": 0,
+            "end": 9
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "6월 22일(월)부터 7월 테니스 초급 1:1 개인레슨 접수를 시작합니다!",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-0785d37b03d6e6ab",
+        "segmentId": "seg-833761c0996723bd",
+        "rawText": "6월 22일(월)",
+        "normalizedStart": "2026-06-22",
+        "normalizedEnd": "2026-06-22",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 0,
+          "end": 9
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-1e70cf13aa1cffa8",
+        "sourceNoticeId": "knu-504-11133",
+        "segmentId": "seg-833761c0996723bd",
+        "temporalMentionIds": [
+          "tm-0785d37b03d6e6ab"
+        ],
+        "bindingKind": "same_paragraph",
+        "confidence": "high",
+        "ruleId": "binding.same_paragraph",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "6월 22일(월)부터 7월 테니스 초급 1:1 개인레슨 접수를 시작합니다!"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[백령스포츠센터] 7월 테니스 1:1 개인 레슨 회원 모집 신청 마감",
+      "dateText": "6월 22일(월)",
+      "normalizedStart": "2026-06-22",
+      "normalizedEnd": "2026-06-22",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "6월 22일(월)부터 7월 테니스 초급 1:1 개인레슨 접수를 시작합니다!",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11133-92e87a3e0a1226",
+      "uidHint": "noticepilot-cand-knu-504-11133-92e87a3e0a1226@noticepilot.local",
+      "sourceNoticeId": "knu-504-11133",
+      "sourceTitle": "[백령스포츠센터] 7월 테니스 1:1 개인 레슨 회원 모집",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11133&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-191070a2ca0d4358",
+        "segmentType": "continuation",
+        "labelText": "■ 접수 기간 - 등록 기간",
+        "bodyText": "6월 22일(월) ~ 6월 30일(화)",
+        "sourceLocation": {
+          "lineIndex": 4,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-ddb0230043e06418"
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-22",
+            "start": 18,
+            "end": 27
+          },
+          {
+            "value": "2026-06-30",
+            "start": 30,
+            "end": 39
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "■ 접수 기간 - 등록 기간",
+          "■ 접수 기간 - 등록 기간 : 6월 22일(월) ~ 6월 30일(화)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-f0c7cfed52083c86",
+        "segmentId": "seg-191070a2ca0d4358",
+        "rawText": "6월 22일(월) ~ 6월 30일(화)",
+        "normalizedStart": "2026-06-22",
+        "normalizedEnd": "2026-06-30",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 18,
+          "end": 39
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-4772b39908c86fbf",
+        "sourceNoticeId": "knu-504-11133",
+        "segmentId": "seg-191070a2ca0d4358",
+        "temporalMentionIds": [
+          "tm-f0c7cfed52083c86"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "■ 접수 기간 - 등록 기간",
+        "evidence": "■ 접수 기간 - 등록 기간 : 6월 22일(월) ~ 6월 30일(화)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[백령스포츠센터] 7월 테니스 1:1 개인 레슨 회원 모집 진행 기간",
+      "dateText": "6월 22일(월) ~ 6월 30일(화)",
+      "normalizedStart": "2026-06-22",
+      "normalizedEnd": "2026-06-30",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "■ 접수 기간 - 등록 기간 : 6월 22일(월) ~ 6월 30일(화)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

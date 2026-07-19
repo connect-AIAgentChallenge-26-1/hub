@@ -1,0 +1,675 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10912",
+  "sourceContentHash": "db636dca0b05cfd0e7a38986ca900525ca7aaca1bce6d12202a428fbd83c649e",
+  "sourceTitle": "제14회 산업통상부 공공데이터 활용 아이디어 공모전 안내",
+  "publishedAt": "2026-04-22",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b568b2212cdb7bbb",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "제14회 산업통상부 공공데이터 활용 아이디어 공모전 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "제14회 산업통상부 공공데이터 활용 아이디어 공모전 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fff66f77f7631f74",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "📌공모 요약",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "📌공모 요약"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2eb55a94b5ab044f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "주최 : 산업통상부",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "주최 : 산업통상부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-654ac3054cd5228e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "대표 주관 : 한국산업기술시험원(KTL)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "대표 주관 : 한국산업기술시험원(KTL)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4c5fc5b5c97068a4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "공모 주제 : 공공데이터로 견인하는 지역 활력, AI 데이터로 도약하는 기업 성장",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "공모 주제 : 공공데이터로 견인하는 지역 활력, AI 데이터로 도약하는 기업 성장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ed77deb538fb1157",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "참가 대상 : 창의적 아이디어를 보유한 전 국민(※5인 이하 팀 구성)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "참가 대상 : 창의적 아이디어를 보유한 전 국민(※5인 이하 팀 구성)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e61ed5d53d8a8773",
+      "segmentType": "label_value",
+      "labelText": "접수 기간",
+      "bodyText": "2026년 3월 30일(월) ~ 7월 6일(월) 23:59 까지",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-30",
+          "start": 8,
+          "end": 23
+        },
+        {
+          "value": "2026-07-06",
+          "start": 26,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "접수 기간 : 2026년 3월 30일(월) ~ 7월 6일(월) 23:59 까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c7b6500d155ef4d7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "총 상금: 5,700만원(총 10팀 시상)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "총 상금: 5,700만원(총 10팀 시상)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9957c9f2fb2d981f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "💡공모 분야",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "💡공모 분야"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-33028bb35ddc8329",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "아이디어 기획",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "아이디어 기획"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8b044171c9572b14",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "제품 및 서비스 개발",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "제품 및 서비스 개발"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d5485157f1f87818",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "✨시상 내역",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "✨시상 내역"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-db40b47dae8bfb94",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "총 상금 5,700만원",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "총 상금 5,700만원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1ace0f45fc7100d1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "대상(분야별1팀) 총 2,700만원",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "대상(분야별1팀) 총 2,700만원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dd48592508814229",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "최우수상(분야별 1팀) 총 1,500만원",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "최우수상(분야별 1팀) 총 1,500만원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2899b9c259ae01a5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "우수상(분야별 3팀) 총 1,500만원",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "우수상(분야별 3팀) 총 1,500만원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ecff1a1d9d0d811c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "✨수상 혜택",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "✨수상 혜택"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1b88d6c43d62fe1f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "청년인턴 채용 우대",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "청년인턴 채용 우대"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a72b8562b506da47",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "무역전문가 컨설팅 제공",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "무역전문가 컨설팅 제공"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-59c72d1a6067050a",
+      "segmentType": "label_value",
+      "labelText": "수출지원 컨설팅 제공",
+      "bodyText": "수출지원 컨설팅 제공",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수출지원 컨설팅 제공"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3a819c386cedf296",
+      "segmentType": "label_value",
+      "labelText": "수상팀 GPU 3개월 지원",
+      "bodyText": "수상팀 GPU 3개월 지원",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수상팀 GPU 3개월 지원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7a9b8a16fd45c840",
+      "segmentType": "label_value",
+      "labelText": "📅 세부 일정",
+      "bodyText": "📅 세부 일정",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "📅 세부 일정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-384d915cb7ad5306",
+      "segmentType": "label_value",
+      "labelText": "공모전 접수",
+      "bodyText": "26.03.30(월) ~ 26.07.06(월)",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-30",
+          "start": 9,
+          "end": 20
+        },
+        {
+          "value": "2026-07-06",
+          "start": 23,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "공모전 접수 : 26.03.30(월) ~ 26.07.06(월)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d33cfa1b96f818eb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "26.07.07 ~ 26.07.09",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-07",
+          "start": 12,
+          "end": 21
+        },
+        {
+          "value": "2026-07-09",
+          "start": 23,
+          "end": 31
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "1차 심사(서류) : 26.07.07 ~ 26.07.09"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1c79df927b6022ff",
+      "segmentType": "label_value",
+      "labelText": "2차 심사(발표)",
+      "bodyText": "26.07.27 ~ 26.07.29",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-27",
+          "start": 12,
+          "end": 21
+        },
+        {
+          "value": "2026-07-29",
+          "start": 23,
+          "end": 31
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2차 심사(발표) : 26.07.27 ~ 26.07.29"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aa2fe37b09858e51",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "시상식 : 26.8월말",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "시상식 : 26.8월말"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-33cb814a2c464076",
+      "segmentType": "label_value",
+      "labelText": "일정은 변경될 수 있습니다.",
+      "bodyText": "※일정은 변경될 수 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※일정은 변경될 수 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-123028688b5b5c95",
+      "segmentType": "label_value",
+      "labelText": "📌접수 방법",
+      "bodyText": "📌접수 방법",
+      "sourceLocation": {
+        "lineIndex": 26,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "📌접수 방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5ea7a7d0abe76f23",
+      "segmentType": "label_value",
+      "labelText": "온라인 접수",
+      "bodyText": "온라인 접수 : 공모전 공식 홈페이지(",
+      "sourceLocation": {
+        "lineIndex": 27,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "온라인 접수 : 공모전 공식 홈페이지("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9af6c93a0bbb4046",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://www.datacontest.kr",
+      "sourceLocation": {
+        "lineIndex": 28,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://www.datacontest.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-75c993f6255a9aae",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 29,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b691cfd6ea7701e6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "📢문의처",
+      "sourceLocation": {
+        "lineIndex": 30,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "📢문의처"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-22de947a7c62195f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "전화 : 070-4786-4086",
+      "sourceLocation": {
+        "lineIndex": 31,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "전화 : 070-4786-4086"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-82be496fc57e7889",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "이메일 :",
+      "sourceLocation": {
+        "lineIndex": 32,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "이메일 :"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3ff4f02d751e421f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "help@datacontest.kr",
+      "sourceLocation": {
+        "lineIndex": 33,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "help@datacontest.kr"
+    }
+  ],
+  "summary": {
+    "segmentCount": 35,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 25,
+      "label_value": 9
+    }
+  }
+}

@@ -1,0 +1,381 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-715-3428",
+  "sourceContentHash": "f17b99c14eb42d5e4bf6e664ead672ec0f86f8ff57d613b6ef756d03a18791a3",
+  "sourceTitle": "2030 청렴 ON 대학 캠퍼스 교육생 모집 안내",
+  "publishedAt": "2026-06-17",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-24eca2942549249f",
+      "segmentType": "title",
+      "labelText": "2030 청렴 ON 대학 캠퍼스 교육생 모집 안내",
+      "bodyText": "2030 청렴 ON 대학 캠퍼스 교육생 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2030 청렴 ON 대학 캠퍼스 교육생 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a5c7eea1fe66673a",
+      "segmentType": "label_value",
+      "labelText": "국민권익위원회 국가청렴권익교육원은 대한민국 청년들의 반부패 문제에 대한 관심을 제고하고, 예비사회인·사회초년생으로서 갖추어야 할 청렴 전문역량을 함양하기 위해 '",
+      "bodyText": "국민권익위원회 국가청렴권익교육원은 대한민국 청년들의 반부패 문제에 대한 관심을 제고하고, 예비사회인·사회초년생으로서 갖추어야 할 청렴 전문역량을 함양하기 위해 '",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국민권익위원회 국가청렴권익교육원은 대한민국 청년들의 반부패 문제에 대한 관심을 제고하고, 예비사회인·사회초년생으로서 갖추어야 할 청렴 전문역량을 함양하기 위해 '"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-00c2e7f6f1bacf8f",
+      "segmentType": "label_value",
+      "labelText": "2030 청렴 on 대학 캠퍼스' 교육과정을 다음과 같이 운영할 예정입니다. 관심있는 재학생(학부/대학원)의 많은 참여 바랍니다.",
+      "bodyText": "2030 청렴 on 대학 캠퍼스' 교육과정을 다음과 같이 운영할 예정입니다. 관심있는 재학생(학부/대학원)의 많은 참여 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate",
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2030 청렴 on 대학 캠퍼스' 교육과정을 다음과 같이 운영할 예정입니다. 관심있는 재학생(학부/대학원)의 많은 참여 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-52e11918af14e784",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 다 음 -",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 다 음 -"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3dc448bb7385bbb9",
+      "segmentType": "label_value",
+      "labelText": "교육기간",
+      "bodyText": "2026. 7. 1.(수)∼7. 3.(금)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-01",
+          "start": 9,
+          "end": 23
+        },
+        {
+          "value": "2026-07-03",
+          "start": 24,
+          "end": 32
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "가. 교육기간: 2026. 7. 1.(수)∼7. 3.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ade830bc9bd8f23a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "나.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-20bf1117a68f1027",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "2026. 5. 20.(수)∼6. 21.(일)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-20",
+          "start": 6,
+          "end": 21
+        },
+        {
+          "value": "2026-06-21",
+          "start": 22,
+          "end": 31
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "신청기간: 2026. 5. 20.(수)∼6. 21.(일)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6f24055458a71fee",
+      "segmentType": "label_value",
+      "labelText": "교육대상",
+      "bodyText": "다. 교육대상: 대학(원)생, 취업준비생, 직장인(만 19세 이상 34세 미만) 등 80명",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 교육대상: 대학(원)생, 취업준비생, 직장인(만 19세 이상 34세 미만) 등 80명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b68e6b0a16af5fa1",
+      "segmentType": "label_value",
+      "labelText": "교육장소",
+      "bodyText": "라. 교육장소: 울산과학기술원 교내 강의실",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "라. 교육장소: 울산과학기술원 교내 강의실"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-072acfca36525a05",
+      "segmentType": "label_value",
+      "labelText": "교육내용",
+      "bodyText": "마. 교육내용: mz세대를 위한 청렴특강, esg 아이디어 챌린지",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "마. 교육내용: mz세대를 위한 청렴특강, esg 아이디어 챌린지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6a2085f223a55520",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "바. 시상(평가 우수팀): 국민권익위원장상(장관급), 소정의 상금 등 수여",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "바. 시상(평가 우수팀): 국민권익위원장상(장관급), 소정의 상금 등 수여"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8325498db5938fac",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "사.",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "사."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e66c0149343aa4a3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "혜택: 상시학습 18시간 인정, 오찬 및 소정의 기념품 제공",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "혜택: 상시학습 18시간 인정, 오찬 및 소정의 기념품 제공"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d242ad2b21952266",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "아.",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "아."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8b5b469ec1c22d85",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "신청방법: 붙임의 포스터 네이버폼(qr코드 신청) 또는 국가청렴권익교육원 홈페이지",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청방법: 붙임의 포스터 네이버폼(qr코드 신청) 또는 국가청렴권익교육원 홈페이지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8419c71f3f6ba1d9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "자. 관련 문의: 2030 청렴 on 대학 캠퍼스 운영사무국(☎ 02-334-7005)",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자. 관련 문의: 2030 청렴 on 대학 캠퍼스 운영사무국(☎ 02-334-7005)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ce47206e3cdc4358",
+      "segmentType": "label_value",
+      "labelText": "붙임 1. 2026년 2030 청렴 on 대학캠퍼스 교육생 모집 안내 1부.",
+      "bodyText": "붙임 1. 2026년 2030 청렴 on 대학캠퍼스 교육생 모집 안내 1부.",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 1. 2026년 2030 청렴 on 대학캠퍼스 교육생 모집 안내 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8f97f790e927651c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 홍보 포스터 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 홍보 포스터 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 18,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 9,
+      "list_item": 7,
+      "paragraph": 1
+    }
+  }
+}

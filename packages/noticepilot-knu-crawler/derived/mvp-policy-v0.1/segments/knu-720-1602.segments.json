@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-1602",
+  "sourceContentHash": "3b0b0dc82b7c18c9e35eaa2074fb4504960485010e85ce6ec1700d124ae20631",
+  "sourceTitle": "2026학년도 KNU 신입생 예비학기 성적 안내",
+  "publishedAt": "2026-02-03",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3863d0b6232abbf3",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026학년도 KNU 신입생 예비학기 성적 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 KNU 신입생 예비학기 성적 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ce69d75a86aa44e6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026학년도 KNU 신입생 예비학기 성적 안내",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 KNU 신입생 예비학기 성적 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8a65078bed8dbb35",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026학년도 KNU 신입생 예비학기 성적 확인 방법을 아래와 같이 안내하오니 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 KNU 신입생 예비학기 성적 확인 방법을 아래와 같이 안내하오니 참고하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-01f4c933ea941dad",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "성적 확인 방법",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "성적 확인 방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b836101ad1c46b7f",
+      "segmentType": "label_value",
+      "labelText": "확인 일시",
+      "bodyText": "2026. 2. 10.(화) 09:00 -",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-10",
+          "start": 8,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "확인 일시 : 2026. 2. 10.(화) 09:00 -"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5ebcca34b4b27f05",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "확인 방법 : 홈페이지 → K-Cloud → 학부생서비스 → 교과 →",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "확인 방법 : 홈페이지 → K-Cloud → 학부생서비스 → 교과 →"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5f55bf6ad7aa00a7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학적 → 학생정보조회 → 성적정보",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학적 → 학생정보조회 → 성적정보"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f030cefc9b340174",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "성적 평가 방법",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "성적 평가 방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f61cb28e2e9a44f9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 교과목별 이수 기준을 충족한 경우 「가」 부여, 이수 기준을 충족하지",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 교과목별 이수 기준을 충족한 경우 「가」 부여, 이수 기준을 충족하지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f61f4f3a01fe5bdb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "돗한 경우 학점 미인정",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "돗한 경우 학점 미인정"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 7,
+      "label_value": 1,
+      "list_item": 1
+    }
+  }
+}

@@ -1,0 +1,389 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10645",
+  "sourceContentHash": "217ace1049f71a46337af30f6f05986c2b23450ac29706a0dc69997894db55f3",
+  "sourceTitle": "2026년 전반기 학군사관（ROTC） 67기·68기 모집 안내",
+  "publishedAt": "2026-02-19",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fb121d4be6b8dd6a",
+      "segmentType": "title",
+      "labelText": "2026년 전반기 학군사관（ROTC） 67기·68기 모집 안내",
+      "bodyText": "2026년 전반기 학군사관（ROTC） 67기·68기 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 전반기 학군사관（ROTC） 67기·68기 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fc9d936eebbc6081",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 127 학군단입니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 127 학군단입니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8faefb69ecedcc46",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "'26년 전반기 1, 2학년을 대상으로",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "student_year:1",
+        "student_year:2"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "'26년 전반기 1, 2학년을 대상으로"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-55549cfa34cc5664",
+      "segmentType": "label_value",
+      "labelText": "학군사관 67·68기 후보생을 모집하고 있습니다.",
+      "bodyText": "학군사관 67·68기 후보생을 모집하고 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학군사관 67·68기 후보생을 모집하고 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e4a044bcb85dd91d",
+      "segmentType": "continuation",
+      "labelText": "",
+      "bodyText": "'26. 3. 3.（화）, 10:00 ~ 4. 26.（일）, 24:00",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-55549cfa34cc5664"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 36,
+          "end": 49
+        },
+        {
+          "value": "2026-04-26",
+          "start": 59,
+          "end": 68
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "학군사관 67·68기 후보생을 모집하고 있습니다. - 기 간 : '26. 3. 3.（화）, 10:00 ~ 4. 26.（일）, 24:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ac0f2bbc46a34c16",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "'26. 3. 3.（화）, 10:00 ~ 4. 26.（일）, 24:00",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 8,
+          "end": 21
+        },
+        {
+          "value": "2026-04-26",
+          "start": 31,
+          "end": 40
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 기 간 : '26. 3. 3.（화）, 10:00 ~ 4. 26.（일）, 24:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3415f9bb7bae9485",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 대 상 : 1, 2학년 재/휴학생",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "student_year:1",
+        "student_year:2",
+        "enrollment_status:on_leave"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 대 상 : 1, 2학년 재/휴학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-732d05341e9ea10b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 방 법 : 육군학생군사학교 홈페이지 인터넷 접수 → 학군단 서류제출",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 방 법 : 육군학생군사학교 홈페이지 인터넷 접수 → 학군단 서류제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1e9c49d12e4e3dc4",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문 의 : 행정실 033-250-7301 / 010-6649-2730",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문 의 : 행정실 033-250-7301 / 010-6649-2730"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4601153d38e18c6f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "오픈카톡",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "오픈카톡"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3df337ea4c3233ff",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://open.kakao.com/o/gmzXWIih",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://open.kakao.com/o/gmzXWIih"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-71b92be78ec348b7",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 자세한 내용은 첨부파일",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 자세한 내용은 첨부파일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a701f05739d76fd8",
+      "segmentType": "label_value",
+      "labelText": "[26년도 전반기 학군사관 67, 68기 선발 공고문]",
+      "bodyText": "[26년도 전반기 학군사관 67, 68기 선발 공고문]",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[26년도 전반기 학군사관 67, 68기 선발 공고문]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-74beb8b9ded7b32a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "참고 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "참고 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b4010965cadc3678",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* '26년 주요 변경사항",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* '26년 주요 변경사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fcc19536e9c21cd4",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 수능/내신 성적 반영 삭제 → 대학성적 배점 상향 조정",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 수능/내신 성적 반영 삭제 → 대학성적 배점 상향 조정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fba4dab320d38de4",
+      "segmentType": "label_value",
+      "labelText": "체력인증평가 유효기간 6개월 → 1년（+6개월）",
+      "bodyText": "- 체력인증평가 유효기간 6개월 → 1년（+6개월）",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 체력인증평가 유효기간 6개월 → 1년（+6개월）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-95db2350ae0c25d3",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 체력인증평가 체력인증 방법 확대",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 체력인증평가 체력인증 방법 확대"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a3f3592b3315aea8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "기존: 국민체력 100 → 확대: 국민체력 100 + 서울체력 9988",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기존: 국민체력 100 → 확대: 국민체력 100 + 서울체력 9988"
+    }
+  ],
+  "summary": {
+    "segmentCount": 19,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 7,
+      "label_value": 3,
+      "continuation": 1,
+      "list_item": 7
+    }
+  }
+}

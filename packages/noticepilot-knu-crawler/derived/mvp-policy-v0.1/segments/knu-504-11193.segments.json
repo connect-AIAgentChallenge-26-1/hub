@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11193",
+  "sourceContentHash": "41dc1fae5db1184e38607cc40a21b609a2f9edf86700fa548b5ca5c26a16b473",
+  "sourceTitle": "제4기 중앙박물관 곰곰이(홍보)서포터즈 (추가) 모집 공고",
+  "publishedAt": "2026-07-07",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a81d9b01ecc1c888",
+      "segmentType": "title",
+      "labelText": "제4기 중앙박물관 곰곰이(홍보)서포터즈 (추가) 모집 공고",
+      "bodyText": "제4기 중앙박물관 곰곰이(홍보)서포터즈 (추가) 모집 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "제4기 중앙박물관 곰곰이(홍보)서포터즈 (추가) 모집 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-97832413831dd4d4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 중앙박물관 발전에 기여할",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 중앙박물관 발전에 기여할"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-02a1a9157718ad7e",
+      "segmentType": "label_value",
+      "labelText": "<곰곰이 홍보 서포터즈 4기>를 다음과 같이 (추가) 모집합니다.",
+      "bodyText": "<곰곰이 홍보 서포터즈 4기>를 다음과 같이 (추가) 모집합니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<곰곰이 홍보 서포터즈 4기>를 다음과 같이 (추가) 모집합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-446641836e6ee9f5",
+      "segmentType": "label_value",
+      "labelText": "□ 모집기간",
+      "bodyText": "2026. 7. 10.(금), 오전 12:00까지",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-10",
+          "start": 9,
+          "end": 24
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "□ 모집기간 : 2026. 7. 10.(금), 오전 12:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2b0c0dbaababc8d3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "세부사항응 붙임 공고문을 참조해주세요.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "세부사항응 붙임 공고문을 참조해주세요."
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "label_value": 2
+    }
+  }
+}

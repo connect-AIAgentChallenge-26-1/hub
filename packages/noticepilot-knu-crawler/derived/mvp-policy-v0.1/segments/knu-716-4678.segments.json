@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4678",
+  "sourceContentHash": "1c8655be78da0bf52c0210d732e502734b8c4f3ae2eb67f61b37d08d05525ac7",
+  "sourceTitle": "강원대학교 스마트인프라연구 연구교수 채용 공고",
+  "publishedAt": "2026-04-08",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1501afe846e7d12d",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "강원대학교 스마트인프라연구 연구교수 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 스마트인프라연구 연구교수 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-15bb7f5f41cef68d",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 강릉캠퍼스 스마트인프라연구소에서는 기후 위기 대응 및 차세대 수자원 관리 기술 위한 역량 있는 수리학 분야 연구교수/연구원을 모집합니다.",
+      "bodyText": "강원대학교 강릉캠퍼스 스마트인프라연구소에서는 기후 위기 대응 및 차세대 수자원 관리 기술 위한 역량 있는 수리학 분야 연구교수/연구원을 모집합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉캠퍼스 스마트인프라연구소에서는 기후 위기 대응 및 차세대 수자원 관리 기술 위한 역량 있는 수리학 분야 연구교수/연구원을 모집합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-99817770f1858489",
+      "segmentType": "label_value",
+      "labelText": "관심 있는 분들의 많은 지원 부탁드립니다.",
+      "bodyText": "관심 있는 분들의 많은 지원 부탁드립니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "관심 있는 분들의 많은 지원 부탁드립니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cb93b441532d5794",
+      "segmentType": "continuation",
+      "labelText": "관심 있는 분들의 많은 지원 부탁드립니다.",
+      "bodyText": "2026. 4. 8.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-99817770f1858489"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-08",
+          "start": 24,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "관심 있는 분들의 많은 지원 부탁드립니다. 2026. 4. 8."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a157f8920ab8cb7f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 4. 8.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-08",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 4. 8."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dbf3614f2d81e43a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "스마트인프라연구소",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "스마트인프라연구소"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "continuation": 1,
+      "paragraph": 2
+    }
+  }
+}

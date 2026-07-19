@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3106",
+  "sourceContentHash": "007b0875f263a9342ade94903667d5d16b1e46bcf21d4045d5d1bc1b53830adf",
+  "sourceTitle": "지역혁신중심 대학지원체계（RISE）사업단 계약직원 채용 최종합격자 공고",
+  "publishedAt": "2026-01-23",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-09f985b17957a77b",
+      "segmentType": "title",
+      "labelText": "지역혁신중심 대학지원체계（RISE）사업단 계약직원 채용 최종합격자 공고",
+      "bodyText": "지역혁신중심 대학지원체계（RISE）사업단 계약직원 채용 최종합격자 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "지역혁신중심 대학지원체계（RISE）사업단 계약직원 채용 최종합격자 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5a9b11756ac574c0",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 지역혁신 대학지원체계(RISE)사업단 계약직원 최종합격자를 공고합니다.",
+      "bodyText": "강원대학교 지역혁신 대학지원체계(RISE)사업단 계약직원 최종합격자를 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 지역혁신 대학지원체계(RISE)사업단 계약직원 최종합격자를 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9a44926083d0029a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "RISE사업단장",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "RISE사업단장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-66482ec5306cf275",
+      "segmentType": "continuation",
+      "labelText": "",
+      "bodyText": "2026. 1. 23.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-9a44926083d0029a"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-23",
+          "start": 9,
+          "end": 20
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "RISE사업단장 2026. 1. 23."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5d160c76e5ba3869",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 1. 23.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-23",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 1. 23."
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "paragraph": 2,
+      "continuation": 1
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noticepilot.s30SamsungPhysicalQaResult.v0.1",
+  "title": "NoticePilot S30 Samsung Calendar physical QA result",
+  "type": "object",
+  "required": ["schemaVersion", "resultStatus", "device", "calendarApp", "subscription", "checks", "completedAt"],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.s30SamsungPhysicalQaResult.v0.1"},
+    "resultStatus": {"enum": ["pending", "pass", "fail"]},
+    "device": {
+      "type": "object",
+      "required": ["manufacturer", "model", "androidVersion", "oneUiVersion"],
+      "properties": {
+        "manufacturer": {"const": "Samsung"},
+        "model": {"type": ["string", "null"]},
+        "androidVersion": {"type": ["string", "null"]},
+        "oneUiVersion": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "calendarApp": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": {"const": "Samsung Calendar"},
+        "version": {"type": ["string", "null"]}
+      },
+      "additionalProperties": false
+    },
+    "subscription": {
+      "type": "object",
+      "required": ["mechanism", "urlAccepted", "staticImportOnly", "observedRefreshLatencySeconds"],
+      "properties": {
+        "mechanism": {"enum": [null, "direct_url", "polling_calendar_account", "static_import", "unsupported"]},
+        "urlAccepted": {"type": ["boolean", "null"]},
+        "staticImportOnly": {"type": ["boolean", "null"]},
+        "observedRefreshLatencySeconds": {"type": ["integer", "null"], "minimum": 0}
+      },
+      "additionalProperties": false
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "required": ["checkId", "status", "evidence"],
+        "properties": {
+          "checkId": {
+            "enum": [
+              "subscription_not_static_import",
+              "initial_all_day_dates",
+              "initial_timed_asia_seoul",
+              "utf8_korean_rendering",
+              "new_event_refresh",
+              "update_same_uid_no_duplicate",
+              "cancellation_same_uid_handling"
+            ]
+          },
+          "status": {"enum": ["pending", "pass", "fail"]},
+          "evidence": {"type": ["string", "null"]}
+        },
+        "additionalProperties": false
+      }
+    },
+    "requestLogPath": {"type": "string"},
+    "notes": {"type": "array", "items": {"type": "string"}},
+    "completedAt": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

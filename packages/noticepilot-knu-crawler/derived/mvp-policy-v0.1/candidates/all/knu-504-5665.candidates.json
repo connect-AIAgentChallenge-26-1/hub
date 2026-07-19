@@ -1,0 +1,378 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-5665",
+  "sourceContentHash": "9283c67eada637e69558785ed68e1310a5b2d85cf1f57fca5f4bc09d23950825",
+  "sourceTitle": "생활협동조합 설 명절 과일 선물세트 판매 예약 신청 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5665&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "삼척",
+    "campuses": [
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-5665-99a8153c4f1fd5",
+      "uidHint": "noticepilot-cand-knu-504-5665-99a8153c4f1fd5@noticepilot.local",
+      "sourceNoticeId": "knu-504-5665",
+      "sourceTitle": "생활협동조합 설 명절 과일 선물세트 판매 예약 신청 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5665&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-0bf5337148a18b9f",
+        "segmentType": "label_value",
+        "labelText": "신청기간",
+        "bodyText": "2026년 2월 3일(화) ~ 2월 13일(금)까지",
+        "sourceLocation": {
+          "lineIndex": 3,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-03",
+            "start": 8,
+            "end": 22
+          },
+          {
+            "value": "2026-02-13",
+            "start": 25,
+            "end": 34
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "신청기간",
+          "▶ 신청기간: 2026년 2월 3일(화) ~ 2월 13일(금)까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-a813dfeece440e51",
+        "segmentId": "seg-0bf5337148a18b9f",
+        "rawText": "2026년 2월 3일(화) ~ 2월 13일(금)까지",
+        "normalizedStart": "2026-02-03",
+        "normalizedEnd": "2026-02-13",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 8,
+          "end": 34
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-21294b58217712af",
+        "sourceNoticeId": "knu-504-5665",
+        "segmentId": "seg-0bf5337148a18b9f",
+        "temporalMentionIds": [
+          "tm-a813dfeece440e51"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "신청기간",
+        "evidence": "▶ 신청기간: 2026년 2월 3일(화) ~ 2월 13일(금)까지"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "생활협동조합 설 명절 과일 선물세트 판매 예약 신청 안내 신청기간",
+      "dateText": "2026년 2월 3일(화) ~ 2월 13일(금)까지",
+      "normalizedStart": "2026-02-03",
+      "normalizedEnd": "2026-02-13",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "▶ 신청기간: 2026년 2월 3일(화) ~ 2월 13일(금)까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "conflicting_same_action_dates",
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "conflicting_same_action_dates",
+        "same_action_boundary_candidates_consolidated",
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "conflicting_same_action_dates",
+          "same_action_boundary_candidates_consolidated",
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.conflicting_same_action_dates",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5665-bff2e430da68d2",
+      "uidHint": "noticepilot-cand-knu-504-5665-bff2e430da68d2@noticepilot.local",
+      "sourceNoticeId": "knu-504-5665",
+      "sourceTitle": "생활협동조합 설 명절 과일 선물세트 판매 예약 신청 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5665&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-911e857d8df09a8c",
+        "segmentType": "list_item",
+        "labelText": "",
+        "bodyText": "2월 12일 목요일 오전 11시까지 접수 (택배비 5,500원 별도)",
+        "sourceLocation": {
+          "lineIndex": 4,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-12",
+            "start": 11,
+            "end": 17
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "▶ 전국 택배 가능 2월 12일 목요일 오전 11시까지 접수 (택배비 5,500원 별도)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-4528810d20fa7d86",
+        "segmentId": "seg-911e857d8df09a8c",
+        "rawText": "2월 12일",
+        "normalizedStart": "2026-02-12T11:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 11,
+          "end": 17
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-36a585b5eb8c6937",
+        "sourceNoticeId": "knu-504-5665",
+        "segmentId": "seg-911e857d8df09a8c",
+        "temporalMentionIds": [
+          "tm-4528810d20fa7d86"
+        ],
+        "bindingKind": "same_list_item",
+        "confidence": "high",
+        "ruleId": "binding.same_list_item",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "▶ 전국 택배 가능 2월 12일 목요일 오전 11시까지 접수 (택배비 5,500원 별도)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "생활협동조합 설 명절 과일 선물세트 판매 예약 신청 안내 신청 마감",
+      "dateText": "2월 12일",
+      "normalizedStart": "2026-02-12T11:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "▶ 전국 택배 가능 2월 12일 목요일 오전 11시까지 접수 (택배비 5,500원 별도)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "conflicting_same_action_dates",
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "conflicting_same_action_dates",
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "conflicting_same_action_dates",
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.conflicting_same_action_dates",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 2,
+    "calendarFeedIncludedCount": 0
+  }
+}

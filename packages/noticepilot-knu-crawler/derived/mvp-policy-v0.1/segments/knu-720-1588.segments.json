@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-1588",
+  "sourceContentHash": "1b4b92ab80db33349cd06f4b2224e55a8bf7def0b011f7aa7109d9b3b2f77e95",
+  "sourceTitle": "2026학년도 1학기 학부생 재입학 추가모집 안내",
+  "publishedAt": "2026-01-19",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d7d4ed7b3bc07465",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 학부생 재입학 추가모집 안내",
+      "bodyText": "2026학년도 1학기 학부생 재입학 추가모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 학부생 재입학 추가모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-73b27dcd834a09ea",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 1학기 학부생 재입학 추가모집을 다음과 같이 안내합니다.",
+      "bodyText": "2026학년도 1학기 학부생 재입학 추가모집을 다음과 같이 안내합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 학부생 재입학 추가모집을 다음과 같이 안내합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e31af3e9780d02f1",
+      "segmentType": "label_value",
+      "labelText": "재입학 대상",
+      "bodyText": "1. 재입학 대상: 제적 및 자퇴 이후 제재기간이 경과한 자(1회에 한함)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 재입학 대상: 제적 및 자퇴 이후 제재기간이 경과한 자(1회에 한함)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bf1dc2f2de6d3f67",
+      "segmentType": "label_value",
+      "labelText": "재입학 전형 일정",
+      "bodyText": "2. 재입학 전형 일정",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 재입학 전형 일정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6970a023e1a5b7dd",
+      "segmentType": "label_value",
+      "labelText": "재입학 희망자 지원서 접수 및 서류심사",
+      "bodyText": "2026. 1. 19.(월) ~ 1. 30.(금)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "readmission_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-19",
+          "start": 27,
+          "end": 42
+        },
+        {
+          "value": "2026-01-30",
+          "start": 45,
+          "end": 54
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "가. 재입학 희망자 지원서 접수 및 서류심사 : 2026. 1. 19.(월) ~ 1. 30.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-158d2149916ff539",
+      "segmentType": "label_value",
+      "labelText": "지원자가 직접 학부(과) 및 전공 사무실로 제출",
+      "bodyText": "- 지원자가 직접 학부(과) 및 전공 사무실로 제출",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 지원자가 직접 학부(과) 및 전공 사무실로 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a58508b539f1679a",
+      "segmentType": "label_value",
+      "labelText": "재입학 허가 통보",
+      "bodyText": "2026. 2. 5.(목) 예정",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-05",
+          "start": 14,
+          "end": 28
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "나. 재입학 허가 통보: 2026. 2. 5.(목) 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-af93f1e171d9935e",
+      "segmentType": "label_value",
+      "labelText": "재입학자 개별 통보",
+      "bodyText": "- 재입학자 개별 통보",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "admission_type:readmitted_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 재입학자 개별 통보"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0a3902f397595ab4",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 자세한 사항은 첨부파일을 참고하여 주시기 바랍니다",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 자세한 사항은 첨부파일을 참고하여 주시기 바랍니다"
+    }
+  ],
+  "summary": {
+    "segmentCount": 9,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "list_item": 1
+    }
+  }
+}

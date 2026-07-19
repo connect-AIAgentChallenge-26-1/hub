@@ -1,0 +1,294 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2387",
+  "sourceContentHash": "6c4e5769bfa5ff6449354c8b33f6f5a44e2338a2c8b8a487e2e902719fba5e8c",
+  "sourceTitle": "'2026년도 1학기 주거안정장학금 지급요청서(4월분)' 제출기한 안내",
+  "publishedAt": "2026-05-08",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8dfab8e8fe072138",
+      "segmentType": "title",
+      "labelText": "'2026년도 1학기 주거안정장학금 지급요청서(4월분)' 제출기한 안내",
+      "bodyText": "'2026년도 1학기 주거안정장학금 지급요청서(4월분)' 제출기한 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "'2026년도 1학기 주거안정장학금 지급요청서(4월분)' 제출기한 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-05598969971004c5",
+      "segmentType": "label_value",
+      "labelText": "'2026년도 1학기 주거안정장학금' 지원 대상자분들께서는",
+      "bodyText": "'2026년도 1학기 주거안정장학금' 지원 대상자분들께서는",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "'2026년도 1학기 주거안정장학금' 지원 대상자분들께서는"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-24a371260ffa80b6",
+      "segmentType": "label_value",
+      "labelText": "4월분 지급요청서를 오는",
+      "bodyText": "5월 17일(일)까지 제출",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-17",
+          "start": 14,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "4월분 지급요청서를 오는 5월 17일(일)까지 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a3278c0fbab567d6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6ec8331fde92457f",
+      "segmentType": "label_value",
+      "labelText": "(제출기한 이후 요청 건은 지급 불가)",
+      "bodyText": "(제출기한 이후 요청 건은 지급 불가)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(제출기한 이후 요청 건은 지급 불가)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-123d9bece86b93f0",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 기숙사비 입력 방법: (대분류) 임차비용 -> (상세분류) 임차료 선급금 -> (개월) 4 -> (지출처) 강원대 학생생활관 ->",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 기숙사비 입력 방법: (대분류) 임차비용 -> (상세분류) 임차료 선급금 -> (개월) 4 -> (지출처) 강원대 학생생활관 ->"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-10dd3e6a6e516b25",
+      "segmentType": "label_value",
+      "labelText": "(지출일시) 증빙자료 상 실제 지출일시 -> (지출방법) 실제 지출방법 -> (지출금액) 선납 총 금액 -> (인정금액) 자동 산출",
+      "bodyText": "(지출일시) 증빙자료 상 실제 지출일시 -> (지출방법) 실제 지출방법 -> (지출금액) 선납 총 금액 -> (인정금액) 자동 산출",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(지출일시) 증빙자료 상 실제 지출일시 -> (지출방법) 실제 지출방법 -> (지출금액) 선납 총 금액 -> (인정금액) 자동 산출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5209e60847ba7069",
+      "segmentType": "label_value",
+      "labelText": "아울러, '지급요청서 작성 매뉴얼'을 첨부하오니 참고 및 반드시 숙지하여 주시고,",
+      "bodyText": "아울러, '지급요청서 작성 매뉴얼'을 첨부하오니 참고 및 반드시 숙지하여 주시고,",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "아울러, '지급요청서 작성 매뉴얼'을 첨부하오니 참고 및 반드시 숙지하여 주시고,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-024f4968cbcf1d0b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "향후 반환 및 환수사례가 발생하지 않도록 각별히 유의하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "향후 반환 및 환수사례가 발생하지 않도록 각별히 유의하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-657f71e322a5fe75",
+      "segmentType": "label_value",
+      "labelText": "특히, 지급요청서에 작성하신 지출 건을 입증할 수 있는",
+      "bodyText": "특히, 지급요청서에 작성하신 지출 건을 입증할 수 있는",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "특히, 지급요청서에 작성하신 지출 건을 입증할 수 있는"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ba6d066fb840ab08",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "각종 증빙서류는 5년간 필히 보관",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "각종 증빙서류는 5년간 필히 보관"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bb92b36d7c23eb66",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "하셔야 하며,",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "하셔야 하며,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c3776310300f00bc",
+      "segmentType": "label_value",
+      "labelText": "대학의 요청 시 즉시 해당 서류를 제출해 주셔야 하니 함께 참고하여 주시기 바랍니다.",
+      "bodyText": "대학의 요청 시 즉시 해당 서류를 제출해 주셔야 하니 함께 참고하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "대학의 요청 시 즉시 해당 서류를 제출해 주셔야 하니 함께 참고하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8eb7b265cde7898f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "감사합니다.",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "감사합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ab5338eb86c64803",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "첨부: 주거안정장학금 지급요청서 작성 매뉴얼",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "첨부: 주거안정장학금 지급요청서 작성 매뉴얼"
+    }
+  ],
+  "summary": {
+    "segmentCount": 15,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "paragraph": 6,
+      "list_item": 1
+    }
+  }
+}

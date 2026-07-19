@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-715-3386",
+  "sourceContentHash": "a64e11cd5fabc9935a8e138a161bf9e6dc23d8e748939e8fd03ba2fb00377ced",
+  "sourceTitle": "강원특별자치도 반려동물지원센터, 이웅종 교수 특강(4월 18일 토요일 14:00)",
+  "publishedAt": "2026-04-09",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c0ae90d3d9baca80",
+      "segmentType": "title",
+      "labelText": "강원특별자치도 반려동물지원센터, 이웅종 교수 특강(",
+      "bodyText": "4월 18일 토요일 14:00)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-18",
+          "start": 28,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "강원특별자치도 반려동물지원센터, 이웅종 교수 특강(4월 18일 토요일 14:00)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0e22ebdc22b9be63",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "arrow_left_alt",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "arrow_left_alt"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1cd00bb7b7762fd8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "목록으로 돌아가기",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "목록으로 돌아가기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-de51e18dfa36ab55",
+      "segmentType": "label_value",
+      "labelText": "강원특별자치도 반려동물지원센터, 이웅종 교수 특강(",
+      "bodyText": "4월 18일 토요일 14:00)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-18",
+          "start": 28,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "강원특별자치도 반려동물지원센터, 이웅종 교수 특강(4월 18일 토요일 14:00)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-53fe55b0cdaf01a1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "내용",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "내용"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "label_value": 1
+    }
+  }
+}

@@ -1,0 +1,536 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2443",
+  "sourceContentHash": "f6e54c93e02f6ffef0a8744ca2ba3eb621c3099005afb607815a7d8bade08a05",
+  "sourceTitle": "2025학년도 후기(`26.8.) 졸업예비사정 결과 학생 확인 안내",
+  "publishedAt": "2026-04-30",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-535f8155a4da42be",
+      "segmentType": "title",
+      "labelText": "2025학년도 후기(`26.8.) 졸업예비사정 결과 학생 확인 안내",
+      "bodyText": "2025학년도 후기(`26.8.) 졸업예비사정 결과 학생 확인 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2025학년도 후기(`26.8.) 졸업예비사정 결과 학생 확인 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bafe04d524af0d1b",
+      "segmentType": "label_value",
+      "labelText": "졸업 예비사정 결과 학생 확인 방법을 다음과 같이 안내하오니, 정해진 기한 내에 결과를 확인하여 주시기 바랍니다.",
+      "bodyText": "졸업 예비사정 결과 학생 확인 방법을 다음과 같이 안내하오니, 정해진 기한 내에 결과를 확인하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "졸업 예비사정 결과 학생 확인 방법을 다음과 같이 안내하오니, 정해진 기한 내에 결과를 확인하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1ae510fe1bdd10df",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 확인대상: 2025학년도 후기(`26.8.) 졸업 대상자(재학생, 조기졸업 신청자) ※수료생은 학점취득이 완료된 상태이므로 미대상",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 확인대상: 2025학년도 후기(`26.8.) 졸업 대상자(재학생, 조기졸업 신청자) ※수료생은 학점취득이 완료된 상태이므로 미대상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5d03ca747fd6a509",
+      "segmentType": "label_value",
+      "labelText": "확인기간",
+      "bodyText": "2. 확인기간:",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 확인기간:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-55b5f8a702150fdb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 5. 11.(월) 09:00~ 5.15. (금) 18:00",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-11",
+          "start": 0,
+          "end": 15
+        },
+        {
+          "value": "2026-05-15",
+          "start": 23,
+          "end": 32
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 5. 11.(월) 09:00~ 5.15. (금) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6a434710a0a2839c",
+      "segmentType": "label_value",
+      "labelText": "(기간 경과시 결과 확인 불가)",
+      "bodyText": "(기간 경과시 결과 확인 불가)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(기간 경과시 결과 확인 불가)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7b4743c1b95c359a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 확인방법: 학사정보통합시스템에 접속하여 예비사정결과 확인 후 오른쪽 상단 본인확인 클릭(졸업가능자, 불가자 전원)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 확인방법: 학사정보통합시스템에 접속하여 예비사정결과 확인 후 오른쪽 상단 본인확인 클릭(졸업가능자, 불가자 전원)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-461f0602ca44b914",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 확인경로:",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 확인경로:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d71efc0735e990fb",
+      "segmentType": "label_value",
+      "labelText": "학사정보통합시스템 → 학생인트라넷 → 학사관리 → 졸업관리 → 졸업예비사정결과확인(학생)",
+      "bodyText": "학사정보통합시스템 → 학생인트라넷 → 학사관리 → 졸업관리 → 졸업예비사정결과확인(학생)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학사정보통합시스템 → 학생인트라넷 → 학사관리 → 졸업관리 → 졸업예비사정결과확인(학생)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1eef4153fe639761",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 붙임 파일 확인",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 붙임 파일 확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5e6538468f45440a",
+      "segmentType": "label_value",
+      "labelText": "결과문의",
+      "bodyText": "5. 결과문의: 졸업에 불이익이 없도록 사정결과에 이상이 있는경우 반드시 소속학과로 최종확인",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 결과문의: 졸업에 불이익이 없도록 사정결과에 이상이 있는경우 반드시 소속학과로 최종확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5ccef458975e85c2",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 다전공 및 복수전공: 해당 전공학과/융합전공: 강릉교육지원과(1606)",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 다전공 및 복수전공: 해당 전공학과/융합전공: 강릉교육지원과(1606)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9f975a0007d30ee8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "6. 유의사항",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 유의사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cd07303f6c5423d4",
+      "segmentType": "label_value",
+      "labelText": "현재 수강중인 과목은 학점 미취득 상태이므로 미반영",
+      "bodyText": "- 현재 수강중인 과목은 학점 미취득 상태이므로 미반영",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 현재 수강중인 과목은 학점 미취득 상태이므로 미반영"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4d232f2187da3a68",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 주전공 외에",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 주전공 외에"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-24b2bfb1846b449e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "다전공, 복수(융합)전공,전공",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다전공, 복수(융합)전공,전공"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-72e32d1f4894973b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "은 교과구분정정등의 절차가 필요하므로",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "은 교과구분정정등의 절차가 필요하므로"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-51c0ec264ec9f812",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "졸업예비사정시 확인 불가.",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "졸업예비사정시 확인 불가."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6cea1b47e63ee030",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "해당 학과에 문의",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "해당 학과에 문의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b897a35793379531",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 편입생의 경우, 교양 인정 방법이 다르므로 합격이 표시되더라도 반드시 소속학과에 재확인하여야 함",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "admission_type:transfer_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 편입생의 경우, 교양 인정 방법이 다르므로 합격이 표시되더라도 반드시 소속학과에 재확인하여야 함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f2aecc853eb92d3b",
+      "segmentType": "label_value",
+      "labelText": "논문, 비교과, TOPIK 등 아직 시기가 되지 않은 부분은 졸업예비사정 결과에 없거나 상이한 부분이 있으므로 유의",
+      "bodyText": "- 논문, 비교과, TOPIK 등 아직 시기가 되지 않은 부분은 졸업예비사정 결과에 없거나 상이한 부분이 있으므로 유의",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 논문, 비교과, TOPIK 등 아직 시기가 되지 않은 부분은 졸업예비사정 결과에 없거나 상이한 부분이 있으므로 유의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-456a52b3241fce6c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bc274f13656352cb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학번별 교양 총학점만 이수하면 합격",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학번별 교양 총학점만 이수하면 합격"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-995957156ba25b69",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(영역구분 없음. 현재 시스템 개선 작업중으로 불합격이 뜰수 있으니 학과에 문의)",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(영역구분 없음. 현재 시스템 개선 작업중으로 불합격이 뜰수 있으니 학과에 문의)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7fa51abbd2368625",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 대상자에 해당하나 누락됐을 경우 소속학과에 문의",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 대상자에 해당하나 누락됐을 경우 소속학과에 문의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d7fd048a0eafe57",
+      "segmentType": "label_value",
+      "labelText": "학생 본인의 졸업과 관련하여 정해진 확인 기간의 미준수, 예비졸업사정 결과 미확인에 따른 불이익은 학생 본인에게 있음",
+      "bodyText": "※ 학생 본인의 졸업과 관련하여 정해진 확인 기간의 미준수, 예비졸업사정 결과 미확인에 따른 불이익은 학생 본인에게 있음",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 학생 본인의 졸업과 관련하여 정해진 확인 기간의 미준수, 예비졸업사정 결과 미확인에 따른 불이익은 학생 본인에게 있음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-915734576b44ce01",
+      "segmentType": "label_value",
+      "labelText": "전산시스템은 확정된 자료가 아니며 최종 졸업학점 이수에 관한 책임은 학생 본인에게 있으니 본인의 교육과정을 확인하여 졸업가능 여부를 확인 바랍니다.",
+      "bodyText": "※ 전산시스템은 확정된 자료가 아니며 최종 졸업학점 이수에 관한 책임은 학생 본인에게 있으니 본인의 교육과정을 확인하여 졸업가능 여부를 확인 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 전산시스템은 확정된 자료가 아니며 최종 졸업학점 이수에 관한 책임은 학생 본인에게 있으니 본인의 교육과정을 확인하여 졸업가능 여부를 확인 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dadb9d337480a869",
+      "segmentType": "label_value",
+      "labelText": "그 외 시스템적인 문의사항은 강릉교육지원과(2026)로 연락주시기 바랍니다.",
+      "bodyText": "그 외 시스템적인 문의사항은 강릉교육지원과(2026)로 연락주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 26,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "그 외 시스템적인 문의사항은 강릉교육지원과(2026)로 연락주시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 28,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 10,
+      "list_item": 10,
+      "paragraph": 7
+    }
+  }
+}

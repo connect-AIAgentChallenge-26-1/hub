@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11147",
+  "sourceContentHash": "536fd391c8adbec1d16a7d5b6d361a6ea431b162b06c95a756931c8b2a9d9c74",
+  "sourceTitle": "여름방학 아침검도 제92기(7월 1일~8월 30일) 기초 수련자 모집",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11147&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11147-2a10c2d007d9dd",
+      "uidHint": "noticepilot-cand-knu-504-11147-2a10c2d007d9dd@noticepilot.local",
+      "sourceNoticeId": "knu-504-11147",
+      "sourceTitle": "여름방학 아침검도 제92기(7월 1일~8월 30일) 기초 수련자 모집",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11147&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-eecaa0f08b02fb8a",
+        "segmentType": "title",
+        "labelText": "",
+        "bodyText": "7월 1일~8월 30일) 기초 수련자 모집",
+        "sourceLocation": {
+          "lineIndex": -1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-01",
+            "start": 15,
+            "end": 20
+          },
+          {
+            "value": "2026-08-30",
+            "start": 21,
+            "end": 27
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "low",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "여름방학 아침검도 제92기(7월 1일~8월 30일) 기초 수련자 모집",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-85298aa875de7b0b",
+        "segmentId": "seg-eecaa0f08b02fb8a",
+        "rawText": "7월 1일~8월 30일) 기초 수련자 모집",
+        "normalizedStart": "2026-07-01",
+        "normalizedEnd": "2026-08-30",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 15,
+          "end": 27
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-040ffc8fbcea35de",
+        "sourceNoticeId": "knu-504-11147",
+        "segmentId": "seg-eecaa0f08b02fb8a",
+        "temporalMentionIds": [
+          "tm-85298aa875de7b0b"
+        ],
+        "bindingKind": "title_context",
+        "confidence": "low",
+        "ruleId": "binding.title_context",
+        "locallyGrounded": false,
+        "labelText": "",
+        "evidence": "여름방학 아침검도 제92기(7월 1일~8월 30일) 기초 수련자 모집"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "여름방학 아침검도 제92기(7월 1일~8월 30일) 기초 수련자 모집 신청기간",
+      "dateText": "7월 1일~8월 30일) 기초 수련자 모집",
+      "normalizedStart": "2026-07-01",
+      "normalizedEnd": "2026-08-30",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "여름방학 아침검도 제92기(7월 1일~8월 30일) 기초 수련자 모집",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "structured_segment_grounded",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

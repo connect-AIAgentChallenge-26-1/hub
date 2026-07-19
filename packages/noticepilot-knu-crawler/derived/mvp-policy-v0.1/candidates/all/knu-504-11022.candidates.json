@@ -1,0 +1,1533 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11022",
+  "sourceContentHash": "3cfcc1207257cecc8e747fdf197ecc9f20e5158c8506a2b90b2a83fb0b8d80e0",
+  "sourceTitle": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11022&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "ALL",
+    "campuses": [
+      "all"
+    ],
+    "scopeType": "all_campuses",
+    "confidence": "high",
+    "source": "listMetadata.campus",
+    "labels": {
+      "all": "전체"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11022-3fe3627d7ba767",
+      "uidHint": "noticepilot-cand-knu-504-11022-3fe3627d7ba767@noticepilot.local",
+      "sourceNoticeId": "knu-504-11022",
+      "sourceTitle": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11022&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-97afc5e747bc5893",
+        "segmentType": "continuation",
+        "labelText": "모집공고 및 지원서 접수",
+        "bodyText": "2026.05.15.(금) ~ 2026.05.26.(화) 16:00",
+        "sourceLocation": {
+          "lineIndex": 18,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-9e3d9db8c866b5cc"
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-15",
+            "start": 14,
+            "end": 28
+          },
+          {
+            "value": "2026-05-26",
+            "start": 31,
+            "end": 45
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "모집공고 및 지원서 접수",
+          "모집공고 및 지원서 접수 2026.05.15.(금) ~ 2026.05.26.(화) 16:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-89a30fe6bf88a731",
+        "segmentId": "seg-97afc5e747bc5893",
+        "rawText": "2026.05.15.(금) ~ 2026.05.26.(화) 16:00",
+        "normalizedStart": "2026-05-15T00:00:00+09:00",
+        "normalizedEnd": "2026-05-26T16:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 14,
+          "end": 45
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-02598205b806d307",
+        "sourceNoticeId": "knu-504-11022",
+        "segmentId": "seg-97afc5e747bc5893",
+        "temporalMentionIds": [
+          "tm-89a30fe6bf88a731"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "모집공고 및 지원서 접수",
+        "evidence": "모집공고 및 지원서 접수 2026.05.15.(금) ~ 2026.05.26.(화) 16:00"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26) 신청기간",
+      "dateText": "2026.05.15.(금) ~ 2026.05.26.(화) 16:00",
+      "normalizedStart": "2026-05-15T00:00:00+09:00",
+      "normalizedEnd": "2026-05-26T16:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "모집공고 및 지원서 접수 2026.05.15.(금) ~ 2026.05.26.(화) 16:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "conflicting_same_action_dates",
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "conflicting_same_action_dates",
+        "same_action_boundary_candidates_consolidated",
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": "start_of_day_assumed_for_timed_range"
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "conflicting_same_action_dates",
+          "same_action_boundary_candidates_consolidated",
+          "start_of_day_assumed_for_timed_range",
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.conflicting_same_action_dates",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11022-43174e97a54a72",
+      "uidHint": "noticepilot-cand-knu-504-11022-43174e97a54a72@noticepilot.local",
+      "sourceNoticeId": "knu-504-11022",
+      "sourceTitle": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11022&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-2123c00fc987a780",
+        "segmentType": "continuation",
+        "labelText": "모집 설명회",
+        "bodyText": "2026.05.20.(수)",
+        "sourceLocation": {
+          "lineIndex": 20,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-366eda43dcd497a3"
+        },
+        "actionSignals": [
+          "application_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-20",
+            "start": 7,
+            "end": 21
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "모집 설명회",
+          "모집 설명회 2026.05.20.(수)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-5553ce605d9143e0",
+        "segmentId": "seg-2123c00fc987a780",
+        "rawText": "2026.05.20.(수)",
+        "normalizedStart": "2026-05-20",
+        "normalizedEnd": "2026-05-20",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 7,
+          "end": 21
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-2fbf331e14229c68",
+        "sourceNoticeId": "knu-504-11022",
+        "segmentId": "seg-2123c00fc987a780",
+        "temporalMentionIds": [
+          "tm-5553ce605d9143e0"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "모집 설명회",
+        "evidence": "모집 설명회 2026.05.20.(수)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26) 행사 일정",
+      "dateText": "2026.05.20.(수)",
+      "normalizedStart": "2026-05-20",
+      "normalizedEnd": "2026-05-20",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "모집 설명회 2026.05.20.(수)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11022-611ff272a75594",
+      "uidHint": "noticepilot-cand-knu-504-11022-611ff272a75594@noticepilot.local",
+      "sourceNoticeId": "knu-504-11022",
+      "sourceTitle": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11022&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-bfb1933e5b6d7c0d",
+        "segmentType": "continuation",
+        "labelText": "■ 파라과이 프로젝트 봉사단 온라인 모집설명회 (실시간): ㅇ 일시",
+        "bodyText": "2026.05.21.(목) 오후 3시 (1시간 가량 진행 예정)",
+        "sourceLocation": {
+          "lineIndex": 62,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-dfa61adf12a429a6"
+        },
+        "actionSignals": [
+          "application_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-21",
+            "start": 39,
+            "end": 53
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "■ 파라과이 프로젝트 봉사단 온라인 모집설명회 (실시간): ㅇ 일시",
+          "■ 파라과이 프로젝트 봉사단 온라인 모집설명회 (실시간): ㅇ 일시: 2026.05.21.(목) 오후 3시 (1시간 가량 진행 예정)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-419a087135a8f3c4",
+        "segmentId": "seg-bfb1933e5b6d7c0d",
+        "rawText": "2026.05.21.(목)",
+        "normalizedStart": "2026-05-21T15:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 39,
+          "end": 53
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-0a2c910e5c246d92",
+        "sourceNoticeId": "knu-504-11022",
+        "segmentId": "seg-bfb1933e5b6d7c0d",
+        "temporalMentionIds": [
+          "tm-419a087135a8f3c4"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "■ 파라과이 프로젝트 봉사단 온라인 모집설명회 (실시간): ㅇ 일시",
+        "evidence": "■ 파라과이 프로젝트 봉사단 온라인 모집설명회 (실시간): ㅇ 일시: 2026.05.21.(목) 오후 3시 (1시간 가량 진행 예정)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26) 신청 마감",
+      "dateText": "2026.05.21.(목)",
+      "normalizedStart": "2026-05-21T15:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "■ 파라과이 프로젝트 봉사단 온라인 모집설명회 (실시간): ㅇ 일시: 2026.05.21.(목) 오후 3시 (1시간 가량 진행 예정)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "conflicting_same_action_dates",
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "conflicting_same_action_dates",
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "conflicting_same_action_dates",
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.conflicting_same_action_dates",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11022-99d27fbce70c69",
+      "uidHint": "noticepilot-cand-knu-504-11022-99d27fbce70c69@noticepilot.local",
+      "sourceNoticeId": "knu-504-11022",
+      "sourceTitle": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11022&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "deadline",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-56d477b17cb4f0f0",
+        "segmentType": "paragraph",
+        "labelText": "",
+        "bodyText": "2026.05.27.(수) ~ 05.29.(금) 16:00까지",
+        "sourceLocation": {
+          "lineIndex": 23,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-27",
+            "start": 0,
+            "end": 14
+          },
+          {
+            "value": "2026-05-29",
+            "start": 17,
+            "end": 26
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "deadline",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "none",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "2026.05.27.(수) ~ 05.29.(금) 16:00까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-db2da8cdebce33d5",
+        "segmentId": "seg-56d477b17cb4f0f0",
+        "rawText": "2026.05.27.(수) ~ 05.29.(금) 16:00까지",
+        "normalizedStart": "2026-05-27T00:00:00+09:00",
+        "normalizedEnd": "2026-05-29T16:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 0,
+          "end": 26
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-43d983f9f7b12b71",
+        "sourceNoticeId": "knu-504-11022",
+        "segmentId": "seg-56d477b17cb4f0f0",
+        "temporalMentionIds": [
+          "tm-db2da8cdebce33d5"
+        ],
+        "bindingKind": "unresolved",
+        "confidence": "none",
+        "ruleId": "binding.unresolved",
+        "locallyGrounded": false,
+        "labelText": "",
+        "evidence": "2026.05.27.(수) ~ 05.29.(금) 16:00까지"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26) 마감",
+      "dateText": "2026.05.27.(수) ~ 05.29.(금) 16:00까지",
+      "normalizedStart": "2026-05-27T00:00:00+09:00",
+      "normalizedEnd": "2026-05-29T16:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "2026.05.27.(수) ~ 05.29.(금) 16:00까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "start_of_day_assumed_for_timed_range",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "start_of_day_assumed_for_timed_range",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": "start_of_day_assumed_for_timed_range"
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "start_of_day_assumed_for_timed_range",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11022-375770870cb632",
+      "uidHint": "noticepilot-cand-knu-504-11022-375770870cb632@noticepilot.local",
+      "sourceNoticeId": "knu-504-11022",
+      "sourceTitle": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11022&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-a29ed90ce398295e",
+        "segmentType": "continuation",
+        "labelText": "1차 전형 합격자 발표",
+        "bodyText": "2026.06.16.(화)",
+        "sourceLocation": {
+          "lineIndex": 24,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-95879d0f68861afe"
+        },
+        "actionSignals": [
+          "result_announcement"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-16",
+            "start": 13,
+            "end": 27
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "1차 전형 합격자 발표",
+          "1차 전형 합격자 발표 2026.06.16.(화)",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-be944df3931e34e5",
+        "segmentId": "seg-a29ed90ce398295e",
+        "rawText": "2026.06.16.(화)",
+        "normalizedStart": "2026-06-16",
+        "normalizedEnd": "2026-06-16",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 13,
+          "end": 27
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-0cdc26494ff71920",
+        "sourceNoticeId": "knu-504-11022",
+        "segmentId": "seg-a29ed90ce398295e",
+        "temporalMentionIds": [
+          "tm-be944df3931e34e5"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "1차 전형 합격자 발표",
+        "evidence": "1차 전형 합격자 발표 2026.06.16.(화)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26) 결과 발표 예정",
+      "dateText": "2026.06.16.(화)",
+      "normalizedStart": "2026-06-16",
+      "normalizedEnd": "2026-06-16",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "1차 전형 합격자 발표 2026.06.16.(화)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11022-ccd2dc75fc75ac",
+      "uidHint": "noticepilot-cand-knu-504-11022-ccd2dc75fc75ac@noticepilot.local",
+      "sourceNoticeId": "knu-504-11022",
+      "sourceTitle": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11022&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "exam_or_interview",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-29a8971dbaa15cd8",
+        "segmentType": "continuation",
+        "labelText": "면접심사",
+        "bodyText": "2026.06.26.(금), ~ 06.27.(토)",
+        "sourceLocation": {
+          "lineIndex": 27,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-0187d823a051d1f9"
+        },
+        "actionSignals": [
+          "exam_or_interview"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-26",
+            "start": 5,
+            "end": 19
+          },
+          {
+            "value": "2026-06-27",
+            "start": 23,
+            "end": 32
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "exam_or_interview",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "면접심사",
+          "면접심사 2026.06.26.(금), ~ 06.27.(토)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-98f264a54128f553",
+        "segmentId": "seg-29a8971dbaa15cd8",
+        "rawText": "2026.06.26.(금), ~ 06.27.(토)",
+        "normalizedStart": "2026-06-26",
+        "normalizedEnd": "2026-06-27",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 5,
+          "end": 32
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-7dbba8a69a4d4078",
+        "sourceNoticeId": "knu-504-11022",
+        "segmentId": "seg-29a8971dbaa15cd8",
+        "temporalMentionIds": [
+          "tm-98f264a54128f553"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "면접심사",
+        "evidence": "면접심사 2026.06.26.(금), ~ 06.27.(토)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26) 시험·면접 일정",
+      "dateText": "2026.06.26.(금), ~ 06.27.(토)",
+      "normalizedStart": "2026-06-26",
+      "normalizedEnd": "2026-06-27",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "면접심사 2026.06.26.(금), ~ 06.27.(토)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11022-c687177f6fe8d7",
+      "uidHint": "noticepilot-cand-knu-504-11022-c687177f6fe8d7@noticepilot.local",
+      "sourceNoticeId": "knu-504-11022",
+      "sourceTitle": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11022&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-e7aedae0cc59dd10",
+        "segmentType": "continuation",
+        "labelText": "2차 전형 합격자 발표",
+        "bodyText": "2026.07.07.(화)",
+        "sourceLocation": {
+          "lineIndex": 29,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-0e6b94007d794dc4"
+        },
+        "actionSignals": [
+          "result_announcement"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-07",
+            "start": 13,
+            "end": 27
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "2차 전형 합격자 발표",
+          "2차 전형 합격자 발표 2026.07.07.(화)",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-398af6eb84c23784",
+        "segmentId": "seg-e7aedae0cc59dd10",
+        "rawText": "2026.07.07.(화)",
+        "normalizedStart": "2026-07-07",
+        "normalizedEnd": "2026-07-07",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 13,
+          "end": 27
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-d8c0d72cfb38a6fb",
+        "sourceNoticeId": "knu-504-11022",
+        "segmentId": "seg-e7aedae0cc59dd10",
+        "temporalMentionIds": [
+          "tm-398af6eb84c23784"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "2차 전형 합격자 발표",
+        "evidence": "2차 전형 합격자 발표 2026.07.07.(화)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26) 결과 발표 예정",
+      "dateText": "2026.07.07.(화)",
+      "normalizedStart": "2026-07-07",
+      "normalizedEnd": "2026-07-07",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "2차 전형 합격자 발표 2026.07.07.(화)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11022-5763513d5988ab",
+      "uidHint": "noticepilot-cand-knu-504-11022-5763513d5988ab@noticepilot.local",
+      "sourceNoticeId": "knu-504-11022",
+      "sourceTitle": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11022&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-6925101a5c86ac32",
+        "segmentType": "continuation",
+        "labelText": "국내교육 대상자 발표",
+        "bodyText": "2026.08.12.(수)",
+        "sourceLocation": {
+          "lineIndex": 41,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-366ca3f67a634589"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-08-12",
+            "start": 12,
+            "end": 26
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "국내교육 대상자 발표",
+          "국내교육 대상자 발표 2026.08.12.(수)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-983924a61f36310d",
+        "segmentId": "seg-6925101a5c86ac32",
+        "rawText": "2026.08.12.(수)",
+        "normalizedStart": "2026-08-12",
+        "normalizedEnd": "2026-08-12",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 12,
+          "end": 26
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-a8fb67ec4225660d",
+        "sourceNoticeId": "knu-504-11022",
+        "segmentId": "seg-6925101a5c86ac32",
+        "temporalMentionIds": [
+          "tm-983924a61f36310d"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "국내교육 대상자 발표",
+        "evidence": "국내교육 대상자 발표 2026.08.12.(수)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26) 행사 일정",
+      "dateText": "2026.08.12.(수)",
+      "normalizedStart": "2026-08-12",
+      "normalizedEnd": "2026-08-12",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "국내교육 대상자 발표 2026.08.12.(수)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11022-01e860a4f41bf5",
+      "uidHint": "noticepilot-cand-knu-504-11022-01e860a4f41bf5@noticepilot.local",
+      "sourceNoticeId": "knu-504-11022",
+      "sourceTitle": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11022&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-ba431ffdf3f40074",
+        "segmentType": "continuation",
+        "labelText": "국내교육(대면)",
+        "bodyText": "2026.09.07.(월) ~ 09.23.(수) 예정",
+        "sourceLocation": {
+          "lineIndex": 46,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-e2f53cf944f7d742"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-09-07",
+            "start": 9,
+            "end": 23
+          },
+          {
+            "value": "2026-09-23",
+            "start": 26,
+            "end": 35
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "국내교육(대면)",
+          "국내교육(대면) 2026.09.07.(월) ~ 09.23.(수) 예정",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-b40802a81e180248",
+        "segmentId": "seg-ba431ffdf3f40074",
+        "rawText": "2026.09.07.(월) ~ 09.23.(수) 예정",
+        "normalizedStart": "2026-09-07",
+        "normalizedEnd": "2026-09-23",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 9,
+          "end": 35
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-9356b3d44a7ef435",
+        "sourceNoticeId": "knu-504-11022",
+        "segmentId": "seg-ba431ffdf3f40074",
+        "temporalMentionIds": [
+          "tm-b40802a81e180248"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "국내교육(대면)",
+        "evidence": "국내교육(대면) 2026.09.07.(월) ~ 09.23.(수) 예정"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[KIDC] KOICA 파라과이 산토도밍고 노인복지센터 운영 역량강화 프로젝트 봉사단 8기 모집(~5/26) 행사 기간",
+      "dateText": "2026.09.07.(월) ~ 09.23.(수) 예정",
+      "normalizedStart": "2026-09-07",
+      "normalizedEnd": "2026-09-23",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "국내교육(대면) 2026.09.07.(월) ~ 09.23.(수) 예정",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 9,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 9,
+    "calendarFeedIncludedCount": 0
+  }
+}

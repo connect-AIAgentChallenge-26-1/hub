@@ -1,0 +1,1375 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2423",
+  "sourceContentHash": "fb28f768123f31f7cb9522281596f16a043edad5c8a0064f0c86750a8a1b64d6",
+  "sourceTitle": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(삼척캠퍼스)",
+  "publishedAt": "2026-04-23",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b05d0bf2fe686eb0",
+      "segmentType": "title",
+      "labelText": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(삼척캠퍼스)",
+      "bodyText": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(삼척캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 여름 계절수업 수업시간표 및 수강신청 안내(삼척캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e9d068dc1eedab82",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 강원대학교 여름 계절수업 운영 계획을 안내드립니다. 자세한 내용은 첨부파일을 반드시 확인해 주시기 바랍니다.",
+      "bodyText": "2026학년도 강원대학교 여름 계절수업 운영 계획을 안내드립니다. 자세한 내용은 첨부파일을 반드시 확인해 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 강원대학교 여름 계절수업 운영 계획을 안내드립니다. 자세한 내용은 첨부파일을 반드시 확인해 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4b533cc32c1adca4",
+      "segmentType": "label_value",
+      "labelText": "계절수업 기간",
+      "bodyText": "계절수업 기간",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "계절수업 기간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ca5705efcf0f2845",
+      "segmentType": "continuation",
+      "labelText": "계절수업 기간",
+      "bodyText": "2026. 6. 24.(수) ~ 7. 14.(화) / 15일간 (매주 월~금, 주5회, 3주 / 토요일 및 공휴일 제외)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-4b533cc32c1adca4"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-24",
+          "start": 8,
+          "end": 23
+        },
+        {
+          "value": "2026-07-14",
+          "start": 26,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "계절수업 기간 2026. 6. 24.(수) ~ 7. 14.(화) / 15일간 (매주 월~금, 주5회, 3주 / 토요일 및 공휴일 제외)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6a6c338506dc0153",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 6. 24.(수) ~ 7. 14.(화) / 15일간 (매주 월~금, 주5회, 3주 / 토요일 및 공휴일 제외)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-24",
+          "start": 0,
+          "end": 15
+        },
+        {
+          "value": "2026-07-14",
+          "start": 18,
+          "end": 27
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 6. 24.(수) ~ 7. 14.(화) / 15일간 (매주 월~금, 주5회, 3주 / 토요일 및 공휴일 제외)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-66a002fe0e911b26",
+      "segmentType": "label_value",
+      "labelText": "주요 일정",
+      "bodyText": "주요 일정",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "주요 일정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f09dcf93d0ed32d0",
+      "segmentType": "label_value",
+      "labelText": "수강신청",
+      "bodyText": "2026. 5. 6.(수) 10:00 ~ 5. 8.(금) 18:00",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-06",
+          "start": 6,
+          "end": 20
+        },
+        {
+          "value": "2026-05-08",
+          "start": 29,
+          "end": 37
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "수강신청: 2026. 5. 6.(수) 10:00 ~ 5. 8.(금) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-731957b3ba97c0b2",
+      "segmentType": "label_value",
+      "labelText": "수강신청 변경",
+      "bodyText": "2026. 5. 12.(화) 10:00 ~ 5. 14.(수) 18:00",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_change",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-12",
+          "start": 9,
+          "end": 24
+        },
+        {
+          "value": "2026-05-14",
+          "start": 33,
+          "end": 42
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "수강신청 변경: 2026. 5. 12.(화) 10:00 ~ 5. 14.(수) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-083e530090e5dc68",
+      "segmentType": "label_value",
+      "labelText": "고지서 출력 및 납부",
+      "bodyText": "2026. 5. 19.(화) 09:00 ~ 5. 21.(목) 17:00",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-19",
+          "start": 13,
+          "end": 28
+        },
+        {
+          "value": "2026-05-21",
+          "start": 37,
+          "end": 46
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "고지서 출력 및 납부: 2026. 5. 19.(화) 09:00 ~ 5. 21.(목) 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-931ac627d1578cfe",
+      "segmentType": "label_value",
+      "labelText": "잔여석 수강신청",
+      "bodyText": "2026. 5. 27.(수) 10:00 ~ 5. 28.(목) 18:00",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-27",
+          "start": 10,
+          "end": 25
+        },
+        {
+          "value": "2026-05-28",
+          "start": 34,
+          "end": 43
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "잔여석 수강신청: 2026. 5. 27.(수) 10:00 ~ 5. 28.(목) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e19427d0eb3e2cbf",
+      "segmentType": "label_value",
+      "labelText": "잔여석 수강신청자 납부",
+      "bodyText": "2026. 6. 4.(목) 09:00 ~ 6. 5.(금) 17:00",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-04",
+          "start": 14,
+          "end": 28
+        },
+        {
+          "value": "2026-06-05",
+          "start": 37,
+          "end": 45
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "잔여석 수강신청자 납부: 2026. 6. 4.(목) 09:00 ~ 6. 5.(금) 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1b3b40a7d02e985e",
+      "segmentType": "label_value",
+      "labelText": "폐강과목 수강신청",
+      "bodyText": "2026. 6. 11.(목) 10:00 ~ 6. 12.(금) 18:00",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-11",
+          "start": 11,
+          "end": 26
+        },
+        {
+          "value": "2026-06-12",
+          "start": 35,
+          "end": 44
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "폐강과목 수강신청: 2026. 6. 11.(목) 10:00 ~ 6. 12.(금) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b7f9afbd97ff58bc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 6. 17.(수)",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-17",
+          "start": 11,
+          "end": 26
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "최종 시간표 공고: 2026. 6. 17.(수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e8371b1bd3974ce1",
+      "segmentType": "label_value",
+      "labelText": "개강 전 수강취소",
+      "bodyText": "2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00 (수강료 전액 반환)",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-17",
+          "start": 11,
+          "end": 26
+        },
+        {
+          "value": "2026-06-22",
+          "start": 35,
+          "end": 44
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "개강 전 수강취소: 2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00 (수강료 전액 반환)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2208c1f6acd75083",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 7. 6.(월) ~ 7. 10.(금)",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-06",
+          "start": 11,
+          "end": 25
+        },
+        {
+          "value": "2026-07-10",
+          "start": 28,
+          "end": 37
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "계절수업 수업평가: 2026. 7. 6.(월) ~ 7. 10.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f42ffdd21ca20cb4",
+      "segmentType": "label_value",
+      "labelText": "계절수업 성적확정",
+      "bodyText": "2026. 7. 20.(월)",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-20",
+          "start": 11,
+          "end": 26
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "계절수업 성적확정: 2026. 7. 20.(월)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-876ab8a190ffe702",
+      "segmentType": "label_value",
+      "labelText": "수강신청 가능학점",
+      "bodyText": "수강신청 가능학점",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강신청 가능학점"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e09e8110121df1dd",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1인당 최대 6학점 (춘천·삼척(도계)캠퍼스 합산 기준)",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1인당 최대 6학점 (춘천·삼척(도계)캠퍼스 합산 기준)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f22fed6004144fca",
+      "segmentType": "label_value",
+      "labelText": "수강신청 방법",
+      "bodyText": "수강신청 방법",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강신청 방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-625234362640a45d",
+      "segmentType": "label_value",
+      "labelText": "온라인 수강신청 (https",
+      "bodyText": "온라인 수강신청 (https://sugang.kangwon.ac.kr)",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "온라인 수강신청 (https://sugang.kangwon.ac.kr)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a6ae7ba6a69efcd9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "PC: 학교 홈페이지 > 통합인트로 > KNU-SERVICE > 수강신청(춘천·삼척)",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "PC: 학교 홈페이지 > 통합인트로 > KNU-SERVICE > 수강신청(춘천·삼척)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-507fe878d9d0f807",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "스마트폰: 강원대학교 앱 > 전체메뉴 > 수업 > 수강신청",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "스마트폰: 강원대학교 앱 > 전체메뉴 > 수업 > 수강신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a0e4ec7eda5e6dc4",
+      "segmentType": "label_value",
+      "labelText": "수강신청 유의사항",
+      "bodyText": "수강신청 유의사항",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강신청 유의사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ed6228966b5ef4a4",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 1학기 수강 중인 교과목은 재이수 불가",
+      "bodyText": "2026학년도 1학기 수강 중인 교과목은 재이수 불가",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 수강 중인 교과목은 재이수 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-114b2d9a97b10ce0",
+      "segmentType": "label_value",
+      "labelText": "기 이수 과목과 동일과목(과목명 동일 포함) 수강신청 시 재수강 처리",
+      "bodyText": "기 이수 과목과 동일과목(과목명 동일 포함) 수강신청 시 재수강 처리",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기 이수 과목과 동일과목(과목명 동일 포함) 수강신청 시 재수강 처리"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-39f51298eddce87d",
+      "segmentType": "label_value",
+      "labelText": "최초 로그인 시 수강료 반환용 계좌번호(본인 통장)와 연락처 정확히 기입",
+      "bodyText": "최초 로그인 시 수강료 반환용 계좌번호(본인 통장)와 연락처 정확히 기입",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "최초 로그인 시 수강료 반환용 계좌번호(본인 통장)와 연락처 정확히 기입"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-55cc9dd48616c1de",
+      "segmentType": "label_value",
+      "labelText": "수강료 미납 시 수강신청 내역 자동 삭제",
+      "bodyText": "수강료 미납 시 수강신청 내역 자동 삭제",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "payment_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강료 미납 시 수강신청 내역 자동 삭제"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6bf4a5a6d911b3bf",
+      "segmentType": "label_value",
+      "labelText": "수강료 납부기간 이후에는 수강과목 변경 일체 불가",
+      "bodyText": "수강료 납부기간 이후에는 수강과목 변경 일체 불가",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강료 납부기간 이후에는 수강과목 변경 일체 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f3fc51adf2226a3f",
+      "segmentType": "label_value",
+      "labelText": "수강료",
+      "bodyText": "수강료",
+      "sourceLocation": {
+        "lineIndex": 26,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강료"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c72257ec23af958e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강의과목: 1학점당 23,000원",
+      "sourceLocation": {
+        "lineIndex": 27,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강의과목: 1학점당 23,000원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6fd0d5c3719ba55c",
+      "segmentType": "label_value",
+      "labelText": "실험·실습과목",
+      "bodyText": "실험·실습과목: 1학점당 26,000원",
+      "sourceLocation": {
+        "lineIndex": 28,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "실험·실습과목: 1학점당 26,000원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1a8dea453bd4592f",
+      "segmentType": "label_value",
+      "labelText": "사회봉사, 해외어학연수, 현장실습, 사업단 주관 교과목은 수강료 미납부",
+      "bodyText": "※ 사회봉사, 해외어학연수, 현장실습, 사업단 주관 교과목은 수강료 미납부",
+      "sourceLocation": {
+        "lineIndex": 29,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 사회봉사, 해외어학연수, 현장실습, 사업단 주관 교과목은 수강료 미납부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5ad9050cfd2d137d",
+      "segmentType": "label_value",
+      "labelText": "납부방법(삼척/도계캠퍼스)",
+      "bodyText": "납부방법(삼척/도계캠퍼스): 농협은행 전국지점, 전자금융서비스, 가상계좌 납부",
+      "sourceLocation": {
+        "lineIndex": 30,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "납부방법(삼척/도계캠퍼스): 농협은행 전국지점, 전자금융서비스, 가상계좌 납부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0c82efd63e813ab0",
+      "segmentType": "label_value",
+      "labelText": "폐강 기준",
+      "bodyText": "폐강 기준",
+      "sourceLocation": {
+        "lineIndex": 31,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "폐강 기준"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2b4e45420d8ef394",
+      "segmentType": "label_value",
+      "labelText": "수강료 납부 학생 기준 / 전공 20명, 기초교양 25명, 균형교양·글로컬교양·교직·자선 30명 미만 시 폐강",
+      "bodyText": "수강료 납부 학생 기준 / 전공 20명, 기초교양 25명, 균형교양·글로컬교양·교직·자선 30명 미만 시 폐강",
+      "sourceLocation": {
+        "lineIndex": 32,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강료 납부 학생 기준 / 전공 20명, 기초교양 25명, 균형교양·글로컬교양·교직·자선 30명 미만 시 폐강"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1232f016c81769f4",
+      "segmentType": "label_value",
+      "labelText": "폐강과목 확정",
+      "bodyText": "2026. 6. 10.(수)",
+      "sourceLocation": {
+        "lineIndex": 33,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-10",
+          "start": 9,
+          "end": 24
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "폐강과목 확정: 2026. 6. 10.(수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5149a0a5d28f09dd",
+      "segmentType": "label_value",
+      "labelText": "폐강과목 수강신청",
+      "bodyText": "2026. 6. 11.(목) 10:00 ~ 6. 12.(금) 18:00",
+      "sourceLocation": {
+        "lineIndex": 34,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-11",
+          "start": 11,
+          "end": 26
+        },
+        {
+          "value": "2026-06-12",
+          "start": 35,
+          "end": 44
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "폐강과목 수강신청: 2026. 6. 11.(목) 10:00 ~ 6. 12.(금) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8f84faadabc06bf1",
+      "segmentType": "label_value",
+      "labelText": "수강신청 취소 및 수강료 반환",
+      "bodyText": "수강신청 취소 및 수강료 반환",
+      "sourceLocation": {
+        "lineIndex": 35,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "payment_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강신청 취소 및 수강료 반환"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-28c264377b5a35fd",
+      "segmentType": "continuation",
+      "labelText": "수강신청 취소 및 수강료 반환 개강 전 취소",
+      "bodyText": "2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00 / 전액 반환 (온라인)",
+      "sourceLocation": {
+        "lineIndex": 35,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-8f84faadabc06bf1"
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "payment_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-17",
+          "start": 26,
+          "end": 41
+        },
+        {
+          "value": "2026-06-22",
+          "start": 50,
+          "end": 59
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "수강신청 취소 및 수강료 반환 개강 전 취소: 2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00 / 전액 반환 (온라인)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d6ca6c506378e441",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00 / 전액 반환 (온라인)",
+      "sourceLocation": {
+        "lineIndex": 36,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-17",
+          "start": 9,
+          "end": 24
+        },
+        {
+          "value": "2026-06-22",
+          "start": 33,
+          "end": 42
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "개강 전 취소: 2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00 / 전액 반환 (온라인)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9c6532f00c2655a4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "개강 후 취소: 지침에서 정한 사유에 한해 가능 / 계절수업 운영지침 【서식2】 작성, 담당교수 확인·서명 후 삼척교육지원과 직접 제출(그린에너지연구관 506호)",
+      "sourceLocation": {
+        "lineIndex": 37,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "개강 후 취소: 지침에서 정한 사유에 한해 가능 / 계절수업 운영지침 【서식2】 작성, 담당교수 확인·서명 후 삼척교육지원과 직접 제출(그린에너지연구관 506호)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ad124e654cc04123",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "개강 후 환불 기준:",
+      "sourceLocation": {
+        "lineIndex": 38,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "개강 후 환불 기준:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b9df248349ddaaf2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1/3 경과 전 (6. 24.(수) ~ 6. 30.(화)): 수강료의 2/3 환불",
+      "sourceLocation": {
+        "lineIndex": 39,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-03",
+          "start": 5,
+          "end": 9
+        },
+        {
+          "value": "2026-06-24",
+          "start": 15,
+          "end": 24
+        },
+        {
+          "value": "2026-06-30",
+          "start": 27,
+          "end": 36
+        },
+        {
+          "value": "2026-02-03",
+          "start": 44,
+          "end": 48
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "수업일수 1/3 경과 전 (6. 24.(수) ~ 6. 30.(화)): 수강료의 2/3 환불"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4c4e0fb5f4eb09c9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1/3 경과 후 ~ 1/2 경과 전 (7. 1.(수) ~ 7. 2.(목)): 수강료의 1/2 환불",
+      "sourceLocation": {
+        "lineIndex": 40,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-03",
+          "start": 5,
+          "end": 9
+        },
+        {
+          "value": "2026-01-02",
+          "start": 16,
+          "end": 20
+        },
+        {
+          "value": "2026-07-01",
+          "start": 26,
+          "end": 34
+        },
+        {
+          "value": "2026-07-02",
+          "start": 37,
+          "end": 45
+        },
+        {
+          "value": "2026-01-02",
+          "start": 53,
+          "end": 57
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "수업일수 1/3 경과 후 ~ 1/2 경과 전 (7. 1.(수) ~ 7. 2.(목)): 수강료의 1/2 환불"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f64e0e26486e5d38",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1/2 경과 후: 수강취소 불가 / 환불 불가",
+      "sourceLocation": {
+        "lineIndex": 41,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-02",
+          "start": 5,
+          "end": 9
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "수업일수 1/2 경과 후: 수강취소 불가 / 환불 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d3ed0c1e3f89ecea",
+      "segmentType": "label_value",
+      "labelText": "시험 및 성적",
+      "bodyText": "시험 및 성적",
+      "sourceLocation": {
+        "lineIndex": 42,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "시험 및 성적"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-725246b5ede27d3e",
+      "segmentType": "label_value",
+      "labelText": "시험은 「강원대학교 학칙」 제90조 준용(추가시험 없음)",
+      "bodyText": "시험은 「강원대학교 학칙」 제90조 준용(추가시험 없음)",
+      "sourceLocation": {
+        "lineIndex": 43,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "시험은 「강원대학교 학칙」 제90조 준용(추가시험 없음)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-997011ad93eb4741",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "성적은 정규학기와 별도 관리하나 졸업 및 수료학점에는 포함",
+      "sourceLocation": {
+        "lineIndex": 44,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "성적은 정규학기와 별도 관리하나 졸업 및 수료학점에는 포함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5b8a74162bb5d897",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "수업평가",
+      "sourceLocation": {
+        "lineIndex": 45,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수업평가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b55ce43d751089f3",
+      "segmentType": "continuation",
+      "labelText": "수업평가 기간",
+      "bodyText": "2026. 7. 6.(월) ~ 7. 10.(금)",
+      "sourceLocation": {
+        "lineIndex": 45,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-5b8a74162bb5d897"
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-06",
+          "start": 9,
+          "end": 23
+        },
+        {
+          "value": "2026-07-10",
+          "start": 26,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "수업평가 기간: 2026. 7. 6.(월) ~ 7. 10.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d51040888cf266e",
+      "segmentType": "label_value",
+      "labelText": "기간",
+      "bodyText": "2026. 7. 6.(월) ~ 7. 10.(금)",
+      "sourceLocation": {
+        "lineIndex": 46,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-06",
+          "start": 4,
+          "end": 18
+        },
+        {
+          "value": "2026-07-10",
+          "start": 21,
+          "end": 30
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "기간: 2026. 7. 6.(월) ~ 7. 10.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-074e3fe3ddbe820e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "방법: K-Cloud 로그인 > 학부생서비스 > 교과 > 수업 > 수업평가",
+      "sourceLocation": {
+        "lineIndex": 47,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "방법: K-Cloud 로그인 > 학부생서비스 > 교과 > 수업 > 수업평가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8619298a05af1569",
+      "segmentType": "label_value",
+      "labelText": "수업평가 미실시자는 확정 전 성적조회 불가",
+      "bodyText": "※ 수업평가 미실시자는 확정 전 성적조회 불가",
+      "sourceLocation": {
+        "lineIndex": 48,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 수업평가 미실시자는 확정 전 성적조회 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fb753ea997edc228",
+      "segmentType": "label_value",
+      "labelText": "자세한 사항은 첨부된 운영 계획 공고문을 반드시 확인해 주시기 바랍니다.",
+      "bodyText": "자세한 사항은 첨부된 운영 계획 공고문을 반드시 확인해 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 49,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자세한 사항은 첨부된 운영 계획 공고문을 반드시 확인해 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dc885110102bd205",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "<시간표 변경사항>",
+      "sourceLocation": {
+        "lineIndex": 50,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<시간표 변경사항>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5ebe91bbe7822ac2",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026.4.29.)",
+      "sourceLocation": {
+        "lineIndex": 51,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-29",
+          "start": 26,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 빅데이터개론(81230005) 교과목 개설(2026.4.29.)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-295a91bede9e0c0d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 생체전자소재및융합소자(82020009) 대상인원 변경(2026.4.30.)",
+      "sourceLocation": {
+        "lineIndex": 52,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 생체전자소재및융합소자(82020009) 대상인원 변경(2026.4.30.)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 57,
+    "locallyGroundedCount": 17,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 34,
+      "continuation": 3,
+      "paragraph": 17,
+      "list_item": 2
+    }
+  }
+}

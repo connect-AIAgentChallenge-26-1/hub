@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10838",
+  "sourceContentHash": "6d7af2fa22baa91ab5d938d9b9d628b59b68a647805ae59f30208552b0ca1b0a",
+  "sourceTitle": "(모집)2026년도 자연기술 연구회 모집 공고(~4/14)",
+  "publishedAt": "2026-04-07",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bcd3d32ee4360f9b",
+      "segmentType": "title",
+      "labelText": "(모집)2026년도 자연기술 연구회 모집 공고(~",
+      "bodyText": "4/14)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-14",
+          "start": 27,
+          "end": 31
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "(모집)2026년도 자연기술 연구회 모집 공고(~4/14)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0e22ebdc22b9be63",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "arrow_left_alt",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "arrow_left_alt"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1cd00bb7b7762fd8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "목록으로 돌아가기",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "목록으로 돌아가기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0a3504ad2dc163e0",
+      "segmentType": "label_value",
+      "labelText": "(모집)2026년도 자연기술 연구회 모집 공고(~",
+      "bodyText": "4/14)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-14",
+          "start": 27,
+          "end": 31
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "(모집)2026년도 자연기술 연구회 모집 공고(~4/14)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-53fe55b0cdaf01a1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "내용",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "내용"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "label_value": 1
+    }
+  }
+}

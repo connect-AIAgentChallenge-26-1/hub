@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-719-3913",
+  "sourceContentHash": "f2c67337bbec94daad710238d83da6def1f5ad1bc6490be6b5678cc7cc024493",
+  "sourceTitle": "[IBM 연계 교육 프로그램 안내]",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=3913&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천 삼척",
+    "campuses": [
+      "chuncheon",
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천",
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-719-3913-eb68aa3104472b",
+      "uidHint": "noticepilot-cand-knu-719-3913-eb68aa3104472b@noticepilot.local",
+      "sourceNoticeId": "knu-719-3913",
+      "sourceTitle": "[IBM 연계 교육 프로그램 안내]",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=3913&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-2778e6979b2385ea",
+        "segmentType": "label_value",
+        "labelText": "IBM 연계 데이터 기반 사고력과 실무 적용 역량 강화를 위한 AI 기술 활용 실습 중심 교육 운영을 안내드리오니, 참여를 희망하는 분들은 첨부된 포스터의 내용과 QR 코드를 참고하셔서",
+        "bodyText": "2월 2일 월요일까지 신청 부탁드리며, 많은 관심과 참여 부탁드립니다.",
+        "sourceLocation": {
+          "lineIndex": 2,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-02",
+            "start": 104,
+            "end": 109
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "IBM 연계 데이터 기반 사고력과 실무 적용 역량 강화를 위한 AI 기술 활용 실습 중심 교육 운영을 안내드리오니, 참여를 희망하는 분들은 첨부된 포스터의 내용과 QR 코드를 참고하셔서",
+          "IBM 연계 데이터 기반 사고력과 실무 적용 역량 강화를 위한 AI 기술 활용 실습 중심 교육 운영을 안내드리오니, 참여를 희망하는 분들은 첨부된 포스터의 내용과 QR 코드를 참고하셔서 2월 2일 월요일까지 신청 부탁드리며, 많은 관심과 참여 부탁드립니다.",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-2593fa80e3104a92",
+        "segmentId": "seg-2778e6979b2385ea",
+        "rawText": "2월 2일",
+        "normalizedStart": "2026-02-02",
+        "normalizedEnd": "2026-02-02",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 104,
+          "end": 109
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-d6e5feda1e958d3b",
+        "sourceNoticeId": "knu-719-3913",
+        "segmentId": "seg-2778e6979b2385ea",
+        "temporalMentionIds": [
+          "tm-2593fa80e3104a92"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "IBM 연계 데이터 기반 사고력과 실무 적용 역량 강화를 위한 AI 기술 활용 실습 중심 교육 운영을 안내드리오니, 참여를 희망하는 분들은 첨부된 포스터의 내용과 QR 코드를 참고하셔서",
+        "evidence": "IBM 연계 데이터 기반 사고력과 실무 적용 역량 강화를 위한 AI 기술 활용 실습 중심 교육 운영을 안내드리오니, 참여를 희망하는 분들은 첨부된 포스터의 내용과 QR 코드를 참고하셔서 2월 2일 월요일까지 신청 부탁드리며, 많은 관심과 참여 부탁드립니다."
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[IBM 연계 교육 프로그램 안내] 신청 마감",
+      "dateText": "2월 2일",
+      "normalizedStart": "2026-02-02",
+      "normalizedEnd": "2026-02-02",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "IBM 연계 데이터 기반 사고력과 실무 적용 역량 강화를 위한 AI 기술 활용 실습 중심 교육 운영을 안내드리오니, 참여를 희망하는 분들은 첨부된 포스터의 내용과 QR 코드를 참고하셔서 2월 2일 월요일까지 신청 부탁드리며, 많은 관심과 참여 부탁드립니다.",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

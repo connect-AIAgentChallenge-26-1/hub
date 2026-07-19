@@ -1,0 +1,77 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10814",
+  "sourceContentHash": "8edbb34250720944e070078fedaea5f228c5aefa07765173f853d1e86869aece",
+  "sourceTitle": "폐토너 매입 희망자 모집 안내",
+  "publishedAt": "2026-04-01",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b2bc976ca75075d3",
+      "segmentType": "title",
+      "labelText": "폐토너 매입 희망자 모집 안내",
+      "bodyText": "폐토너 매입 희망자 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "폐토너 매입 희망자 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6bad68a8686a9946",
+      "segmentType": "label_value",
+      "labelText": "붙임의 폐토너를 매입 희망하시는 분(사업자 포함)은 기한내 아래의 연락처로 연락하여 주시기 바랍니다.",
+      "bodyText": "붙임의 폐토너를 매입 희망하시는 분(사업자 포함)은 기한내 아래의 연락처로 연락하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임의 폐토너를 매입 희망하시는 분(사업자 포함)은 기한내 아래의 연락처로 연락하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4ab514db21f77577",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "연락처: 033-570-6240(담당: 엄*수)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "연락처: 033-570-6240(담당: 엄*수)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 3,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "paragraph": 1
+    }
+  }
+}

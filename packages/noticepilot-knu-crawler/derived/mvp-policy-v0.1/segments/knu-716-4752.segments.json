@@ -1,0 +1,97 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4752",
+  "sourceContentHash": "db83c2bf7af663332a405c402408c5aa061fb0198a8d31b731828f5d1c1b7996",
+  "sourceTitle": "강원대학교 삼척교육지원과 기간제 계약직(사무원) 서류심사 합격자 공고",
+  "publishedAt": "2026-05-08",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-94f125e0968af9fe",
+      "segmentType": "title",
+      "labelText": "강원대학교 삼척교육지원과 기간제 계약직(사무원) 서류심사 합격자 공고",
+      "bodyText": "강원대학교 삼척교육지원과 기간제 계약직(사무원) 서류심사 합격자 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척교육지원과 기간제 계약직(사무원) 서류심사 합격자 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a62e2570dc6ef0a5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-65호와 관련하여 다음과 같이 서류전형 합격자를 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-65호와 관련하여 다음과 같이 서류전형 합격자를 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f5f93975908f1699",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 5. 8.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-08",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 5. 8."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-09cebd990cb5a63e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 삼척교학처장",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척교학처장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 4,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3
+    }
+  }
+}

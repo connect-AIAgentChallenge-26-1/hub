@@ -1,0 +1,532 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-5655",
+  "sourceContentHash": "f3624b91eef30c7ce9226ae7663d423f1244eda4b1af43db970f44cd02d9c9b0",
+  "sourceTitle": "2026-1학기 「사회봉사교과목」 운영 계획 및 봉사기관 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5655&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "삼척",
+    "campuses": [
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-5655-b41f280e835f4b",
+      "uidHint": "noticepilot-cand-knu-504-5655-b41f280e835f4b@noticepilot.local",
+      "sourceNoticeId": "knu-504-5655",
+      "sourceTitle": "2026-1학기 「사회봉사교과목」 운영 계획 및 봉사기관 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5655&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "course_registration",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-095840db34ea659f",
+        "segmentType": "label_value",
+        "labelText": "▣ 수강신청 및 봉사기관 신청기간",
+        "bodyText": "2026. 2. 23.(월) 10:00 ~ 2. 25.(수) 17:00",
+        "sourceLocation": {
+          "lineIndex": 1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "course_registration",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-23",
+            "start": 20,
+            "end": 35
+          },
+          {
+            "value": "2026-02-25",
+            "start": 44,
+            "end": 53
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "course_registration",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "▣ 수강신청 및 봉사기관 신청기간",
+          "▣ 수강신청 및 봉사기관 신청기간: 2026. 2. 23.(월) 10:00 ~ 2. 25.(수) 17:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-516be05eed23df43",
+        "segmentId": "seg-095840db34ea659f",
+        "rawText": "2026. 2. 23.(월) 10:00 ~ 2. 25.(수) 17:00",
+        "normalizedStart": "2026-02-23T10:00:00+09:00",
+        "normalizedEnd": "2026-02-25T17:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 20,
+          "end": 53
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-6f13893796910588",
+        "sourceNoticeId": "knu-504-5655",
+        "segmentId": "seg-095840db34ea659f",
+        "temporalMentionIds": [
+          "tm-516be05eed23df43"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "▣ 수강신청 및 봉사기관 신청기간",
+        "evidence": "▣ 수강신청 및 봉사기관 신청기간: 2026. 2. 23.(월) 10:00 ~ 2. 25.(수) 17:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026-1학기 「사회봉사교과목」 운영 계획 및 봉사기관 안내 수강신청 기간",
+      "dateText": "2026. 2. 23.(월) 10:00 ~ 2. 25.(수) 17:00",
+      "normalizedStart": "2026-02-23T10:00:00+09:00",
+      "normalizedEnd": "2026-02-25T17:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "▣ 수강신청 및 봉사기관 신청기간: 2026. 2. 23.(월) 10:00 ~ 2. 25.(수) 17:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "academic_action_type_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "academic_action_type_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5655-37c5deacc75454",
+      "uidHint": "noticepilot-cand-knu-504-5655-37c5deacc75454@noticepilot.local",
+      "sourceNoticeId": "knu-504-5655",
+      "sourceTitle": "2026-1학기 「사회봉사교과목」 운영 계획 및 봉사기관 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5655&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "course_registration_change",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-8aaae32c21cfcf50",
+        "segmentType": "label_value",
+        "labelText": "▣ 수강신청 변경 및 추가 신청기간",
+        "bodyText": "2026. 3. 3.(월) 10:00 ~ 3. 9.(월) 17:00",
+        "sourceLocation": {
+          "lineIndex": 2,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "course_registration_change",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-03",
+            "start": 21,
+            "end": 35
+          },
+          {
+            "value": "2026-03-09",
+            "start": 44,
+            "end": 52
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "course_registration_change",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "▣ 수강신청 변경 및 추가 신청기간",
+          "▣ 수강신청 변경 및 추가 신청기간: 2026. 3. 3.(월) 10:00 ~ 3. 9.(월) 17:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-6480aceb4d4d7889",
+        "segmentId": "seg-8aaae32c21cfcf50",
+        "rawText": "2026. 3. 3.(월) 10:00 ~ 3. 9.(월) 17:00",
+        "normalizedStart": "2026-03-03T10:00:00+09:00",
+        "normalizedEnd": "2026-03-09T17:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 21,
+          "end": 52
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-86f0b8e4c00a1533",
+        "sourceNoticeId": "knu-504-5655",
+        "segmentId": "seg-8aaae32c21cfcf50",
+        "temporalMentionIds": [
+          "tm-6480aceb4d4d7889"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "▣ 수강신청 변경 및 추가 신청기간",
+        "evidence": "▣ 수강신청 변경 및 추가 신청기간: 2026. 3. 3.(월) 10:00 ~ 3. 9.(월) 17:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026-1학기 「사회봉사교과목」 운영 계획 및 봉사기관 안내 수강신청 변경기간",
+      "dateText": "2026. 3. 3.(월) 10:00 ~ 3. 9.(월) 17:00",
+      "normalizedStart": "2026-03-03T10:00:00+09:00",
+      "normalizedEnd": "2026-03-09T17:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "▣ 수강신청 변경 및 추가 신청기간: 2026. 3. 3.(월) 10:00 ~ 3. 9.(월) 17:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "academic_action_type_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "academic_action_type_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5655-952d8804f2f1cf",
+      "uidHint": "noticepilot-cand-knu-504-5655-952d8804f2f1cf@noticepilot.local",
+      "sourceNoticeId": "knu-504-5655",
+      "sourceTitle": "2026-1학기 「사회봉사교과목」 운영 계획 및 봉사기관 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5655&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "deadline",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-15882248b20b75e4",
+        "segmentType": "label_value",
+        "labelText": "▣ 봉사실적 입력기한",
+        "bodyText": "2026. 6. 18.(목) 17:00까지",
+        "sourceLocation": {
+          "lineIndex": 9,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-18",
+            "start": 13,
+            "end": 28
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "deadline",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "medium",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "▣ 봉사실적 입력기한",
+          "▣ 봉사실적 입력기한: 2026. 6. 18.(목) 17:00까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-ac6922281d02dd65",
+        "segmentId": "seg-15882248b20b75e4",
+        "rawText": "2026. 6. 18.(목)",
+        "normalizedStart": "2026-06-18T17:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 13,
+          "end": 28
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-ef4b17215e393774",
+        "sourceNoticeId": "knu-504-5655",
+        "segmentId": "seg-15882248b20b75e4",
+        "temporalMentionIds": [
+          "tm-ac6922281d02dd65"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "medium",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": false,
+        "labelText": "▣ 봉사실적 입력기한",
+        "evidence": "▣ 봉사실적 입력기한: 2026. 6. 18.(목) 17:00까지"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026-1학기 「사회봉사교과목」 운영 계획 및 봉사기관 안내 마감",
+      "dateText": "2026. 6. 18.(목)",
+      "normalizedStart": "2026-06-18T17:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "▣ 봉사실적 입력기한: 2026. 6. 18.(목) 17:00까지",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 3,
+    "autoConfirmedCount": 3,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 3
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10827",
+  "sourceContentHash": "2dc42d1305d73c42a9cd759cf4a70ca34b231257df3258e0bc2e3ac9f4c59422",
+  "sourceTitle": "[보건] 헌혈버스 운영알림(4.7. 화)",
+  "publishedAt": "2026-04-03",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8cc499754a67b6cb",
+      "segmentType": "title",
+      "labelText": "[보건] 헌혈버스 운영알림(",
+      "bodyText": "4.7. 화)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-07",
+          "start": 15,
+          "end": 18
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "[보건] 헌혈버스 운영알림(4.7. 화)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0e22ebdc22b9be63",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "arrow_left_alt",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "arrow_left_alt"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1cd00bb7b7762fd8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "목록으로 돌아가기",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "목록으로 돌아가기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-67e551adba7f5484",
+      "segmentType": "label_value",
+      "labelText": "[보건] 헌혈버스 운영알림(",
+      "bodyText": "4.7. 화)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-07",
+          "start": 15,
+          "end": 18
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "[보건] 헌혈버스 운영알림(4.7. 화)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-53fe55b0cdaf01a1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "내용",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "내용"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "label_value": 1
+    }
+  }
+}

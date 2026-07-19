@@ -1,0 +1,280 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4789",
+  "sourceContentHash": "03348e3ff325f29df0284d485a290f054352b8ded25a32f438329f700333c579",
+  "sourceTitle": "2026년 연구교수 공개채용 공고(농업생명과학연구원)",
+  "publishedAt": "2026-05-22",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-57702fadfbed866c",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026년 연구교수 공개채용 공고(농업생명과학연구원)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 연구교수 공개채용 공고(농업생명과학연구원)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5261301a04cea965",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-202호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-202호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2bba4ab04c32915c",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 농업생명과학연구원에서 연구교수 공개 채용을 실시하오니 전문적인 지식과 경험을 갖춘 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 농업생명과학연구원에서 연구교수 공개 채용을 실시하오니 전문적인 지식과 경험을 갖춘 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 농업생명과학연구원에서 연구교수 공개 채용을 실시하오니 전문적인 지식과 경험을 갖춘 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f719bed706e5e016",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 채용부서: 농업생명과학연구원",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 채용부서: 농업생명과학연구원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38f08f9bf777984e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 채용인원: 1명",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 채용인원: 1명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-96f239e17fc409b3",
+      "segmentType": "label_value",
+      "labelText": "서류접수",
+      "bodyText": "3. 서류접수",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 서류접수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-30844d3eb0532c8a",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 5. 22.(수) ~ 6. 2.(화), 17:00까지 도착분에 한함",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-22",
+          "start": 8,
+          "end": 23
+        },
+        {
+          "value": "2026-06-02",
+          "start": 26,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 접수기간: 2026. 5. 22.(수) ~ 6. 2.(화), 17:00까지 도착분에 한함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-83ffcf7b3d404fe9",
+      "segmentType": "label_value",
+      "labelText": "접수방법",
+      "bodyText": "- 접수방법",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 접수방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-83e7accd2b9d9480",
+      "segmentType": "label_value",
+      "labelText": "· 이메일 접수",
+      "bodyText": "· 이메일 접수: qkrtndus1456@kangwon.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "· 이메일 접수: qkrtndus1456@kangwon.ac.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f31f976de63ce64d",
+      "segmentType": "label_value",
+      "labelText": "· 방문 및 우편접수",
+      "bodyText": "· 방문 및 우편접수 : 강원도 춘천시 강원대학길1 영상바이오관 101호",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "· 방문 및 우편접수 : 강원도 춘천시 강원대학길1 영상바이오관 101호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-30b56991d353f7dd",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의사항: 강원대학교 농업생명과학연구원 (☎033-250-6408)",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의사항: 강원대학교 농업생명과학연구원 (☎033-250-6408)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-25a948cfbecf7b83",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 상세 사항은 공고문 참고",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 상세 사항은 공고문 참고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-257232dd6b7a9b63",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-05-22~2026-06-02",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-22",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-06-02",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-05-22~2026-06-02"
+    }
+  ],
+  "summary": {
+    "segmentCount": 13,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 7,
+      "list_item": 4,
+      "paragraph": 1,
+      "title": 1
+    }
+  }
+}

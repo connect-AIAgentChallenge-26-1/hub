@@ -13,6 +13,7 @@
     "test:http": "node --test server/src/__tests__/*.test.js",
     "test:schemas": "node --test server/src/domain/schemas/__tests__/*.test.js",
     "test:adapters": "node --test server/src/domain/adapters/__tests__/*.test.js",
+    "test:foundation25": "cd packages/noticepilot-knu-crawler && PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s tests -p 'test_*.py'",
     "security:audit": "npm audit --audit-level=high"
   },
   "dependencies": {

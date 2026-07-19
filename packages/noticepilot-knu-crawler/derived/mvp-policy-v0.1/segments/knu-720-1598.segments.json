@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-1598",
+  "sourceContentHash": "1823fa27f1550b6129e46312444a7d1d300e603d3aff29477b6a8565d60452d5",
+  "sourceTitle": "2026학년도 1학기 신입생 수강신청 일정 및 방법 안내（춘천）",
+  "publishedAt": "2026-02-02",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-48374c969d51dadb",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 신입생 수강신청 일정 및 방법 안내（춘천）",
+      "bodyText": "2026학년도 1학기 신입생 수강신청 일정 및 방법 안내（춘천）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 신입생 수강신청 일정 및 방법 안내（춘천）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d31505e7ec19af26",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ".",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d6252c39449a296",
+      "segmentType": "label_value",
+      "labelText": "2026년 신입생 수강신청 지도에 관하여 붙임 자료를 참고하시기 바랍니다.",
+      "bodyText": "2026년 신입생 수강신청 지도에 관하여 붙임 자료를 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 신입생 수강신청 지도에 관하여 붙임 자료를 참고하시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 3,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 1,
+      "label_value": 1
+    }
+  }
+}

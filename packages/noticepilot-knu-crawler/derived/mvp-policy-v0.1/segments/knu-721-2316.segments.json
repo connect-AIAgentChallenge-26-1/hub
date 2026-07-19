@@ -1,0 +1,162 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2316",
+  "sourceContentHash": "1bc69e3bc12f2651c35481ba18bee6fb129b513d8e6b604e86c6b0911edbd145",
+  "sourceTitle": "(사회복지법인 미래국제재단) [대학교 학업 및 생활비 지원] 사업대상자 선발 안내",
+  "publishedAt": "2026-03-19",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a27ac7623417a9bc",
+      "segmentType": "title",
+      "labelText": "(사회복지법인 미래국제재단) [대학교 학업 및 생활비 지원] 사업대상자 선발 안내",
+      "bodyText": "(사회복지법인 미래국제재단) [대학교 학업 및 생활비 지원] 사업대상자 선발 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "result_announcement",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(사회복지법인 미래국제재단) [대학교 학업 및 생활비 지원] 사업대상자 선발 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9e5ee750373338fc",
+      "segmentType": "label_value",
+      "labelText": "* 미래국제재단의 요청으로 지원 대상을 1학년 신입생으로 변경합니다. (2026.4.2. 수정함)",
+      "bodyText": "* 미래국제재단의 요청으로 지원 대상을 1학년 신입생으로 변경합니다. (2026.4.2. 수정함)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "student_year:1",
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 미래국제재단의 요청으로 지원 대상을 1학년 신입생으로 변경합니다. (2026.4.2. 수정함)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0918007a3c2a9521",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "*",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "*"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9af001c48e39feb9",
+      "segmentType": "label_value",
+      "labelText": "신청서제출",
+      "bodyText": "신청서제출: 학과에서 취합하여 장학팀으로 공문",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 1,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청서제출: 학과에서 취합하여 장학팀으로 공문"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-712334f9d2adcd54",
+      "segmentType": "label_value",
+      "labelText": "제출 * 제출문의",
+      "bodyText": "제출 * 제출문의: 강원대학교 강릉캠퍼스 학생",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 2,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "제출 * 제출문의: 강원대학교 강릉캠퍼스 학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eff9e672f5ee58c8",
+      "segmentType": "label_value",
+      "labelText": "지원과 장학팀 640-1569 * 관련 사업 내용 문의",
+      "bodyText": "지원과 장학팀 640-1569 * 관련 사업 내용 문의: 02-782-2645(미래국제재단 )",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 3,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "지원과 장학팀 640-1569 * 관련 사업 내용 문의: 02-782-2645(미래국제재단 )"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-71f28a4a68675190",
+      "segmentType": "label_value",
+      "labelText": "* 미래국제재단의 요청으로 지원 대상을 1학년 신입생으로 변경합니다. (2026.4.2. 수정함)",
+      "bodyText": "* 미래국제재단의 요청으로 지원 대상을 1학년 신입생으로 변경합니다. (2026.4.2. 수정함)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "student_year:1",
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 미래국제재단의 요청으로 지원 대상을 1학년 신입생으로 변경합니다. (2026.4.2. 수정함)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 5,
+      "paragraph": 1
+    }
+  }
+}

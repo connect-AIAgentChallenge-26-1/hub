@@ -1,0 +1,179 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3211",
+  "sourceContentHash": "a4956d47d991c8a490fa84d6c61cebc28f2be0c4441043e0efce5169b878633a",
+  "sourceTitle": "강원대학교 삼척공학교육혁신센터 기간제 사무원 서류심사 합격자 발표",
+  "publishedAt": "2026-02-20",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2009b5837c4aeede",
+      "segmentType": "title",
+      "labelText": "강원대학교 삼척공학교육혁신센터 기간제 사무원 서류심사 합격자 발표",
+      "bodyText": "강원대학교 삼척공학교육혁신센터 기간제 사무원 서류심사 합격자 발표",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척공학교육혁신센터 기간제 사무원 서류심사 합격자 발표"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2634c2010fdc27cd",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 삼척캠퍼스 공고 제2026 - 27호와 관련하여 삼척공학교육혁신센터 기간제 사무원 서류전형 합격자를 안내합니다.",
+      "bodyText": "강원대학교 삼척캠퍼스 공고 제2026 - 27호와 관련하여 삼척공학교육혁신센터 기간제 사무원 서류전형 합격자를 안내합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척캠퍼스 공고 제2026 - 27호와 관련하여 삼척공학교육혁신센터 기간제 사무원 서류전형 합격자를 안내합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3db5b3ea52e224fc",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 서류전형 합격자",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 서류전형 합격자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c3887f8de8259b5e",
+      "segmentType": "label_value",
+      "labelText": "접수번호 1번 박*희",
+      "bodyText": "▶ 접수번호 1번 박*희",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶ 접수번호 1번 박*희"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4ebfb4a85ca1c3a5",
+      "segmentType": "label_value",
+      "labelText": "면접시험 일시",
+      "bodyText": "2026. 2. 24.（화）, 14:00 ~",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-24",
+          "start": 12,
+          "end": 27
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 면접시험 일시 : 2026. 2. 24.（화）, 14:00 ~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b6938136dc696409",
+      "segmentType": "label_value",
+      "labelText": "면접대기실",
+      "bodyText": "- 면접대기실 : 강원대학교 삼척캠퍼스 제2공학관 102호",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 면접대기실 : 강원대학교 삼척캠퍼스 제2공학관 102호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5ba826ac444865f9",
+      "segmentType": "label_value",
+      "labelText": "○ 면접 참여자는 신분증을 지참해 면접 20분 전 면접대기 장소에 대기",
+      "bodyText": "○ 면접 참여자는 신분증을 지참해 면접 20분 전 면접대기 장소에 대기",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 면접 참여자는 신분증을 지참해 면접 20분 전 면접대기 장소에 대기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-434cf389910117e2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○ 기타 궁금한 사항은 강원대학교 공학대학 행정실（033-570-6302）로 문의",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 기타 궁금한 사항은 강원대학교 공학대학 행정실（033-570-6302）로 문의"
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 5,
+      "list_item": 1,
+      "paragraph": 1
+    }
+  }
+}

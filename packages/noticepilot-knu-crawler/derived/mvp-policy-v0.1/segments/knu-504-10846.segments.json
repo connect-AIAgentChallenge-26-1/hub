@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10846",
+  "sourceContentHash": "f914404447baaccfb8235ea94b21ff31597aadafbf631844ed43483def918e6e",
+  "sourceTitle": "HIGH 시스템 보안 점검에 따른 접속 제한 안내",
+  "publishedAt": "2026-04-07",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6058bb7105934b0b",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "HIGH 시스템 보안 점검에 따른 접속 제한 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "HIGH 시스템 보안 점검에 따른 접속 제한 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d3c7637a96b0c738",
+      "segmentType": "label_value",
+      "labelText": "HIGH 시스템 보안 점검에 따른 서비스 접속 및 이용이 일시적으로 제한되오니 이용자분들의 양해를 부탁드립니다.",
+      "bodyText": "HIGH 시스템 보안 점검에 따른 서비스 접속 및 이용이 일시적으로 제한되오니 이용자분들의 양해를 부탁드립니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "HIGH 시스템 보안 점검에 따른 서비스 접속 및 이용이 일시적으로 제한되오니 이용자분들의 양해를 부탁드립니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-859aece8e26b6597",
+      "segmentType": "continuation",
+      "labelText": "점검일시",
+      "bodyText": "26. 4. 7. ~ 점검 완료 시까지(별도 안내 예정)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-d3c7637a96b0c738"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-07",
+          "start": 72,
+          "end": 80
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "HIGH 시스템 보안 점검에 따른 서비스 접속 및 이용이 일시적으로 제한되오니 이용자분들의 양해를 부탁드립니다. 1. 점검일시: 26. 4. 7. ~ 점검 완료 시까지(별도 안내 예정)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6c60b5d2e0242ff7",
+      "segmentType": "label_value",
+      "labelText": "점검일시",
+      "bodyText": "26. 4. 7. ~ 점검 완료 시까지(별도 안내 예정)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-07",
+          "start": 9,
+          "end": 17
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "1. 점검일시: 26. 4. 7. ~ 점검 완료 시까지(별도 안내 예정)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6d7ff6fd40f5875e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 제한내용: 서비스 접속 및 이용 불가",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 제한내용: 서비스 접속 및 이용 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e4f626e5171a9614",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 점검내용: 시스템 보안 점검",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 점검내용: 시스템 보안 점검"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a590a3406a2b04e9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "추후 점검이 완료되는 대로 시스템을 재개할 예정이오니 참고하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "추후 점검이 완료되는 대로 시스템을 재개할 예정이오니 참고하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-621cd9131428f10f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강릉 교수학습개발센터 담당자 문의전화 033- 640- 3045",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강릉 교수학습개발센터 담당자 문의전화 033- 640- 3045"
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "continuation": 1,
+      "list_item": 2,
+      "paragraph": 2
+    }
+  }
+}

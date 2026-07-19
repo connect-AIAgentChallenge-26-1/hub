@@ -1,0 +1,492 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2480",
+  "sourceContentHash": "4908710a5c30d13653c213deff24619ad4244824cdcd0239be26298aa1a66d39",
+  "sourceTitle": "2026학년도 여름 계절수업 개강 후 취소기간 안내(삼척캠퍼스)",
+  "publishedAt": "2026-06-22",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-60247f7554d58595",
+      "segmentType": "title",
+      "labelText": "2026학년도 여름 계절수업 개강 후 취소기간 안내(삼척캠퍼스)",
+      "bodyText": "2026학년도 여름 계절수업 개강 후 취소기간 안내(삼척캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 여름 계절수업 개강 후 취소기간 안내(삼척캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5861e835ab15685f",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 여름 계절수업 개강 후 취소기간 안내",
+      "bodyText": "2026학년도 여름 계절수업 개강 후 취소기간 안내",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 여름 계절수업 개강 후 취소기간 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-27593ea9b1acda18",
+      "segmentType": "label_value",
+      "labelText": "개강 후 수강신청 취소대상 및 방법",
+      "bodyText": "개강 후 수강신청 취소대상 및 방법",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "개강 후 수강신청 취소대상 및 방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6dac1a88e09083e6",
+      "segmentType": "label_value",
+      "labelText": "본인의 질병, 사망, 천재지변으로 인하여 학업을 계속할 수 없을 때 (해당 증빙서 제출)",
+      "bodyText": "가. 본인의 질병, 사망, 천재지변으로 인하여 학업을 계속할 수 없을 때 (해당 증빙서 제출)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 본인의 질병, 사망, 천재지변으로 인하여 학업을 계속할 수 없을 때 (해당 증빙서 제출)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9a3cddcec2972407",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "나. 교과목에 대한 학생의 수학능력 부족 등으로 계속적으로 이수하기가 곤란하다고 담당교수가 판단될 때",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 교과목에 대한 학생의 수학능력 부족 등으로 계속적으로 이수하기가 곤란하다고 담당교수가 판단될 때"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6f01b673c31c1dcf",
+      "segmentType": "label_value",
+      "labelText": "동일과목 중복수강(과목명 상이) 등 수강신청 착오라고 학부(과)장이 인정할 때",
+      "bodyText": "다. 동일과목 중복수강(과목명 상이) 등 수강신청 착오라고 학부(과)장이 인정할 때",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 동일과목 중복수강(과목명 상이) 등 수강신청 착오라고 학부(과)장이 인정할 때"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-133b17cdb5f0ec77",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "취소방법",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "취소방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2ad7ac609a9be629",
+      "segmentType": "label_value",
+      "labelText": "「강원대학교 계절수업 운영지침」의 별지서식(첨부파일)에 따른 참조작성 및 담당교원 확인(서명) 후 삼척교육지원과로 직접 제출을 원칙으로 함",
+      "bodyText": "가. 「강원대학교 계절수업 운영지침」의 별지서식(첨부파일)에 따른 참조작성 및 담당교원 확인(서명) 후 삼척교육지원과로 직접 제출을 원칙으로 함",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 「강원대학교 계절수업 운영지침」의 별지서식(첨부파일)에 따른 참조작성 및 담당교원 확인(서명) 후 삼척교육지원과로 직접 제출을 원칙으로 함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0fc9e46fd3642326",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "나. 원격수업의 경우, 담당교수 취소 승인회신 메일을 담당교원 확인(서명)으로 대체",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 원격수업의 경우, 담당교수 취소 승인회신 메일을 담당교원 확인(서명)으로 대체"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-db67ed743b0511af",
+      "segmentType": "label_value",
+      "labelText": "반환금액은 교육지원과 접수기점을 기준으로 하며, 접수는 업무시간만 가능함",
+      "bodyText": "※ 반환금액은 교육지원과 접수기점을 기준으로 하며, 접수는 업무시간만 가능함",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 반환금액은 교육지원과 접수기점을 기준으로 하며, 접수는 업무시간만 가능함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9d060e43bb852e37",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "업무시간: 09:00 ~ 18:00, 점심시간 제외: 12:00 ~ 13:00",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "업무시간: 09:00 ~ 18:00, 점심시간 제외: 12:00 ~ 13:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-25ca37ad2e745531",
+      "segmentType": "label_value",
+      "labelText": "취소기간 및 반환금액",
+      "bodyText": "취소기간 및 반환금액",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "취소기간 및 반환금액"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d17d6b0f5c68b823",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1/3 경과 전 → '26. 6. 24.(수) ~ 6. 30.(화) → 수강료의 2/3 환불",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-03",
+          "start": 5,
+          "end": 9
+        },
+        {
+          "value": "2026-06-24",
+          "start": 16,
+          "end": 30
+        },
+        {
+          "value": "2026-06-30",
+          "start": 33,
+          "end": 42
+        },
+        {
+          "value": "2026-02-03",
+          "start": 50,
+          "end": 54
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "수업일수 1/3 경과 전 → '26. 6. 24.(수) ~ 6. 30.(화) → 수강료의 2/3 환불"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-da42b77185f912ac",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1/3 경과 후 ~ 수업일수 1/2 경과 전 → '26. 7. 1.(수) ~ 7. 2.(목) → 수강료의 1/2 환불",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-03",
+          "start": 5,
+          "end": 9
+        },
+        {
+          "value": "2026-01-02",
+          "start": 21,
+          "end": 25
+        },
+        {
+          "value": "2026-07-01",
+          "start": 32,
+          "end": 45
+        },
+        {
+          "value": "2026-07-02",
+          "start": 48,
+          "end": 56
+        },
+        {
+          "value": "2026-01-02",
+          "start": 64,
+          "end": 68
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "수업일수 1/3 경과 후 ~ 수업일수 1/2 경과 전 → '26. 7. 1.(수) ~ 7. 2.(목) → 수강료의 1/2 환불"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-01640f3f4af3c95b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1/2 경과 후 (수강취소 불가) → '26. 7. 3.(금) ~ 7. 14.(화) → 환불 불가",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-02",
+          "start": 5,
+          "end": 9
+        },
+        {
+          "value": "2026-07-03",
+          "start": 26,
+          "end": 39
+        },
+        {
+          "value": "2026-07-14",
+          "start": 42,
+          "end": 51
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "수업일수 1/2 경과 후 (수강취소 불가) → '26. 7. 3.(금) ~ 7. 14.(화) → 환불 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eb4bb42c85ccea71",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "★ 유의사항",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "★ 유의사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-90c15b196a12e3f5",
+      "segmentType": "label_value",
+      "labelText": "수강료를 납부하지 않는 강좌",
+      "bodyText": "수강료를 납부하지 않는 강좌",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강료를 납부하지 않는 강좌"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d0c80b57e19fc285",
+      "segmentType": "label_value",
+      "labelText": "(사회봉사, 현장실습, 사업단 주관 교과목 등)는 수강료를 납부하지 않아도 납부처리가 되어 수강신청 내역에 남아있습니다.",
+      "bodyText": "(사회봉사, 현장실습, 사업단 주관 교과목 등)는 수강료를 납부하지 않아도 납부처리가 되어 수강신청 내역에 남아있습니다.",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "payment_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(사회봉사, 현장실습, 사업단 주관 교과목 등)는 수강료를 납부하지 않아도 납부처리가 되어 수강신청 내역에 남아있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3b6c6055686e82f3",
+      "segmentType": "label_value",
+      "labelText": "수강료를 납부하지 않는 강좌의 수강취소를 원하는 경우 취소원을 작성하여 제출",
+      "bodyText": "수강료를 납부하지 않는 강좌의 수강취소를 원하는 경우 취소원을 작성하여 제출",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "payment_period",
+        "submission_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강료를 납부하지 않는 강좌의 수강취소를 원하는 경우 취소원을 작성하여 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b9faf38ffabf0a82",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "하여야 취소처리 됩니다.",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "하여야 취소처리 됩니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a76f1d7c0785e49d",
+      "segmentType": "label_value",
+      "labelText": "수강료 납부 제외 강좌목록",
+      "bodyText": "※ 수강료 납부 제외 강좌목록: 붙임파일2 참조",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 수강료 납부 제외 강좌목록: 붙임파일2 참조"
+    }
+  ],
+  "summary": {
+    "segmentCount": 21,
+    "locallyGroundedCount": 3,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 11,
+      "list_item": 2,
+      "paragraph": 7
+    }
+  }
+}

@@ -1,0 +1,376 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2461",
+  "sourceContentHash": "2d57a21dcfc7a9cf7d5ef2a096751121054989432d1b736ba05a43ed34ad20c2",
+  "sourceTitle": "2026학년도 하계 계절수업 등록금(수강료) 납부 안내",
+  "publishedAt": "2026-06-01",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ef615e01db1f188c",
+      "segmentType": "title",
+      "labelText": "2026학년도 하계 계절수업 등록금(수강료) 납부 안내",
+      "bodyText": "2026학년도 하계 계절수업 등록금(수강료) 납부 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 하계 계절수업 등록금(수강료) 납부 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-49922f9515824c2e",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 강릉·원주캠퍼스 하계 계절수업 수강신청을 완료한 학생은",
+      "bodyText": "2026학년도 강릉·원주캠퍼스 하계 계절수업 수강신청을 완료한 학생은",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 강릉·원주캠퍼스 하계 계절수업 수강신청을 완료한 학생은"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b4cc7b0306647a59",
+      "segmentType": "label_value",
+      "labelText": "추가 등록기간이 없으므로",
+      "bodyText": "추가 등록기간이 없으므로",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "추가 등록기간이 없으므로"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1bdcfa78c53aef7f",
+      "segmentType": "label_value",
+      "labelText": "기간내 반드시 납부하시기 바라며,",
+      "bodyText": "기간내 반드시 납부하시기 바라며,",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기간내 반드시 납부하시기 바라며,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8d572383d76aa355",
+      "segmentType": "label_value",
+      "labelText": "등록금(수강료) 납부하지 않으면 수강신청이 취소됨을 알려드립니다.",
+      "bodyText": "등록금(수강료) 납부하지 않으면 수강신청이 취소됨을 알려드립니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "payment_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "등록금(수강료) 납부하지 않으면 수강신청이 취소됨을 알려드립니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ed4a573fe49da92b",
+      "segmentType": "label_value",
+      "labelText": "등록기간",
+      "bodyText": "1. 등록기간",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 등록기간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-804da5ab55e8f765",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026. 6. 4.(목) ~ 6. 10.(수) [은행마감시간과 동일]",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-04",
+          "start": 2,
+          "end": 16
+        },
+        {
+          "value": "2026-06-10",
+          "start": 19,
+          "end": 28
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 2026. 6. 4.(목) ~ 6. 10.(수) [은행마감시간과 동일]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-11a445cecd18f09e",
+      "segmentType": "label_value",
+      "labelText": "납부은행",
+      "bodyText": "2. 납부은행",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 납부은행"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-be21e655af8482d8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 농협 전지점(가상계좌 입금 가능)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 농협 전지점(가상계좌 입금 가능)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5036266114ba1a88",
+      "segmentType": "label_value",
+      "labelText": "수강료확인",
+      "bodyText": "3. 수강료확인",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 수강료확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b0ab8fad4d5eea99",
+      "segmentType": "label_value",
+      "labelText": "홈페이지 인트라넷 접속-로그인-학생 인트라넷-학사관리-수업관리-계절수업고지서출력-가상계좌납부 또는 은행창구납부",
+      "bodyText": "- 홈페이지 인트라넷 접속-로그인-학생 인트라넷-학사관리-수업관리-계절수업고지서출력-가상계좌납부 또는 은행창구납부",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 홈페이지 인트라넷 접속-로그인-학생 인트라넷-학사관리-수업관리-계절수업고지서출력-가상계좌납부 또는 은행창구납부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c7fe790382e92f5a",
+      "segmentType": "label_value",
+      "labelText": "납부확인",
+      "bodyText": "4. 납부확인",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 납부확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7e8c1f6c44c3993f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 학생인트라넷>학사관리>등록관리>등록내역조회",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 학생인트라넷>학사관리>등록관리>등록내역조회"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5176426789aa1714",
+      "segmentType": "label_value",
+      "labelText": "OCU 교과목 등록금 납부",
+      "bodyText": "5. OCU 교과목 등록금 납부",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. OCU 교과목 등록금 납부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0a409f47141ec248",
+      "segmentType": "label_value",
+      "labelText": "OCU는 1차 납부는",
+      "bodyText": "6. 15.(월) ~ 6. 26.(금), 2차 납부는 6. 27.(토) ~ 6. 28.(일) 납부 가능",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-15",
+          "start": 14,
+          "end": 23
+        },
+        {
+          "value": "2026-06-26",
+          "start": 26,
+          "end": 35
+        },
+        {
+          "value": "2026-06-27",
+          "start": 44,
+          "end": 53
+        },
+        {
+          "value": "2026-06-28",
+          "start": 56,
+          "end": 65
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- OCU는 1차 납부는 6. 15.(월) ~ 6. 26.(금), 2차 납부는 6. 27.(토) ~ 6. 28.(일) 납부 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bb01d01726214703",
+      "segmentType": "label_value",
+      "labelText": "OCU 컨소시엄 홈페이지 접속 후 납부(신용카드/실시간계좌이체/가상계좌)",
+      "bodyText": "- OCU 컨소시엄 홈페이지 접속 후 납부(신용카드/실시간계좌이체/가상계좌)",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- OCU 컨소시엄 홈페이지 접속 후 납부(신용카드/실시간계좌이체/가상계좌)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-176228e8d0c2c0ab",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 기타 문의사항: 각 학과 사무실 및 강릉교육지원과(033-640-2841)",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 기타 문의사항: 각 학과 사무실 및 강릉교육지원과(033-640-2841)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 17,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 12,
+      "list_item": 3,
+      "paragraph": 1
+    }
+  }
+}

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2376",
+  "sourceContentHash": "60cb57944790223537ee5bb590f1d5beb7ca1b55f8e8a3106263b41c22af37b4",
+  "sourceTitle": "2026년도 상반기 은평구민 장학생 선발 공고",
+  "publishedAt": "2026-04-28",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a767a0e0e7ddf343",
+      "segmentType": "title",
+      "labelText": "2026년도 상반기 은평구민 장학생 선발 공고",
+      "bodyText": "2026년도 상반기 은평구민 장학생 선발 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년도 상반기 은평구민 장학생 선발 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e2fe8aad466c9d1c",
+      "segmentType": "label_value",
+      "labelText": "지원자격",
+      "bodyText": "1. 지원자격: 공고일 현재 주민등록 기준 은평구 2년 이상 계속 거주하고 있는 대학생",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 지원자격: 공고일 현재 주민등록 기준 은평구 2년 이상 계속 거주하고 있는 대학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-28446bb15780842a",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "2. 신청방법: 등기우편 또는 방문접수",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 신청방법: 등기우편 또는 방문접수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d4f02b1c3c51e603",
+      "segmentType": "label_value",
+      "labelText": "신청서식",
+      "bodyText": "3. 신청서식: 재단 홈페이지에서 다운로드 가능",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 신청서식: 재단 홈페이지에서 다운로드 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b699c67596b47d52",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 자세한 사항은 붙임 참조",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 자세한 사항은 붙임 참조"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "paragraph": 1
+    }
+  }
+}

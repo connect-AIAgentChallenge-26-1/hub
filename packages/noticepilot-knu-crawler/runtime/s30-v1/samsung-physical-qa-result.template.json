@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "noticepilot.s30SamsungPhysicalQaResult.v0.1",
+  "resultStatus": "pending",
+  "device": {
+    "manufacturer": "Samsung",
+    "model": null,
+    "androidVersion": null,
+    "oneUiVersion": null
+  },
+  "calendarApp": {
+    "name": "Samsung Calendar",
+    "version": null
+  },
+  "subscription": {
+    "mechanism": null,
+    "urlAccepted": null,
+    "staticImportOnly": null,
+    "observedRefreshLatencySeconds": null
+  },
+  "checks": [
+    {
+      "checkId": "subscription_not_static_import",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "checkId": "initial_all_day_dates",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "checkId": "initial_timed_asia_seoul",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "checkId": "utf8_korean_rendering",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "checkId": "new_event_refresh",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "checkId": "update_same_uid_no_duplicate",
+      "status": "pending",
+      "evidence": null
+    },
+    {
+      "checkId": "cancellation_same_uid_handling",
+      "status": "pending",
+      "evidence": null
+    }
+  ],
+  "requestLogPath": "runtime/s30-v1/physical-qa/request-log.jsonl",
+  "notes": [],
+  "completedAt": null
+}

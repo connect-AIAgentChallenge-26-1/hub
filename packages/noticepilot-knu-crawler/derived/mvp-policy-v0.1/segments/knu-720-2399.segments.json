@@ -1,0 +1,340 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2399",
+  "sourceContentHash": "a742e1255314ecad67161f03c5e0325ca2c740ffe446b0716816a5f4db9f0932",
+  "sourceTitle": "2026학년도 여름 계절학기 숙명여자대학교 학점교류 수학 안내(삼척캠퍼스)",
+  "publishedAt": "2026-04-16",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-44c35625133ef8e6",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026학년도 여름 계절학기 숙명여자대학교 학점교류 수학 안내(삼척캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 여름 계절학기 숙명여자대학교 학점교류 수학 안내(삼척캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8414f5f6f2b0bfaf",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "대학 간 학술교류 협정에 따라 2026학년도 여름 계절학기 숙명여자대학교 학점 교류 수학 안내문을 붙임과 같이 안내하오니",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "대학 간 학술교류 협정에 따라 2026학년도 여름 계절학기 숙명여자대학교 학점 교류 수학 안내문을 붙임과 같이 안내하오니"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7e901f86e6cf82f4",
+      "segmentType": "label_value",
+      "labelText": "수학을 희망하는 학생은 기한내 신청하여 주시기 바랍니다.",
+      "bodyText": "수학을 희망하는 학생은 기한내 신청하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수학을 희망하는 학생은 기한내 신청하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cc7f984548b26c35",
+      "segmentType": "label_value",
+      "labelText": "신청자격",
+      "bodyText": "가. 신청자격 : 징계받은 사실이 없는 재학생",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 신청자격 : 징계받은 사실이 없는 재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-51978b8e076884a1",
+      "segmentType": "label_value",
+      "labelText": "학사학위취득유예자, 휴학생은 교류 수학 불가",
+      "bodyText": "※ 학사학위취득유예자, 휴학생은 교류 수학 불가",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 학사학위취득유예자, 휴학생은 교류 수학 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0970bb223b2040ba",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026. 7. 21.(화) 이후로 2026년 8월 졸업예정자는 신청 불가",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-21",
+          "start": 27,
+          "end": 42
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "※ 숙명여자대학교의 경우 계절수업 성적 송부일이 2026. 7. 21.(화) 이후로 2026년 8월 졸업예정자는 신청 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-707d014510b95410",
+      "segmentType": "label_value",
+      "labelText": "제출기한(삼척교육지원과 도착기준)",
+      "bodyText": "2026. 4. 30.(목) 15:00까지(기일엄수)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-30",
+          "start": 24,
+          "end": 39
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "나. 제출기한(삼척교육지원과 도착기준) : 2026. 4. 30.(목) 15:00까지(기일엄수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b19d6e2556b4c9bf",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▶",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-071a41c9a836e3c0",
+      "segmentType": "label_value",
+      "labelText": "학생 ➜ 소속학과 제출기준",
+      "bodyText": "2026. 4. 29.(수) 18:00까지(기일엄수)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-29",
+          "start": 17,
+          "end": 32
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "학생 ➜ 소속학과 제출기준 : 2026. 4. 29.(수) 18:00까지(기일엄수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-465250f1fabf18b2",
+      "segmentType": "label_value",
+      "labelText": "제출서류",
+      "bodyText": "다. 제출서류 : 수학신청자 명단 및 다른 대학 수학 지원서 각 1부",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 제출서류 : 수학신청자 명단 및 다른 대학 수학 지원서 각 1부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8e5981c99fbd090c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "라.",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "라."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-337dd7548a4832a0",
+      "segmentType": "label_value",
+      "labelText": "제출방법",
+      "bodyText": "제출방법 : 학생 ➜ 학과 ➜ 삼척교육지원과로 제출",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "제출방법 : 학생 ➜ 학과 ➜ 삼척교육지원과로 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ef13b08f023e4148",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "붙임 1. 2026학년도 여름 계절학기 숙명여자대학교 교류수학 안내 1부.",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 1. 2026학년도 여름 계절학기 숙명여자대학교 교류수학 안내 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ddc92efd309335af",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 여름 계절학기 숙명여자대학교 학점교류 신청자 명단(양식) 1부.",
+      "bodyText": "2. 2026학년도 여름 계절학기 숙명여자대학교 학점교류 신청자 명단(양식) 1부.",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 2026학년도 여름 계절학기 숙명여자대학교 학점교류 신청자 명단(양식) 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fccd7cc574ecaca0",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 여름 계절학기 숙명여자대학교 수강신청 매뉴얼 1부.",
+      "bodyText": "3. 2026학년도 여름 계절학기 숙명여자대학교 수강신청 매뉴얼 1부.",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 2026학년도 여름 계절학기 숙명여자대학교 수강신청 매뉴얼 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-14fdd90d4750d3df",
+      "segmentType": "label_value",
+      "labelText": "다른 대학 수학 지원서(본교) 1부. 끝.",
+      "bodyText": "4. 다른 대학 수학 지원서(본교) 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 다른 대학 수학 지원서(본교) 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 16,
+    "locallyGroundedCount": 3,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "label_value": 10,
+      "list_item": 3
+    }
+  }
+}

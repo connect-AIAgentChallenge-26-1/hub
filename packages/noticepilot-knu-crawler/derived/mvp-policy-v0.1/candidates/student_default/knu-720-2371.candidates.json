@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-720-2371",
+  "sourceContentHash": "56dd4956459d93cec1aac32c2e9f3ddd1023763c8433eed9cefcf7a4d2b43d3e",
+  "sourceTitle": "2026학년도 1학기 개설교과목 수강인원 증원 안내(G-Share 영역: 강원-인, 함께 여는 미래), 2026.3.3.(화) 10시",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2371&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉 원주",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-720-2371-3152067adfd1fa",
+      "uidHint": "noticepilot-cand-knu-720-2371-3152067adfd1fa@noticepilot.local",
+      "sourceNoticeId": "knu-720-2371",
+      "sourceTitle": "2026학년도 1학기 개설교과목 수강인원 증원 안내(G-Share 영역: 강원-인, 함께 여는 미래), 2026.3.3.(화) 10시",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2371&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-9acc49518856ad57",
+        "segmentType": "title",
+        "labelText": "2026학년도 1학기 개설교과목 수강인원 증원 안내(G-Share 영역",
+        "bodyText": "2026.3.3.(화) 10시",
+        "sourceLocation": {
+          "lineIndex": -1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-03",
+            "start": 58,
+            "end": 70
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "low",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "2026학년도 1학기 개설교과목 수강인원 증원 안내(G-Share 영역",
+          "2026학년도 1학기 개설교과목 수강인원 증원 안내(G-Share 영역: 강원-인, 함께 여는 미래), 2026.3.3.(화) 10시",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-8739e45f0dc68bbc",
+        "segmentId": "seg-9acc49518856ad57",
+        "rawText": "2026.3.3.(화)",
+        "normalizedStart": "2026-03-03T10:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 58,
+          "end": 70
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-192f77a87dc02827",
+        "sourceNoticeId": "knu-720-2371",
+        "segmentId": "seg-9acc49518856ad57",
+        "temporalMentionIds": [
+          "tm-8739e45f0dc68bbc"
+        ],
+        "bindingKind": "title_context",
+        "confidence": "low",
+        "ruleId": "binding.title_context",
+        "locallyGrounded": false,
+        "labelText": "2026학년도 1학기 개설교과목 수강인원 증원 안내(G-Share 영역",
+        "evidence": "2026학년도 1학기 개설교과목 수강인원 증원 안내(G-Share 영역: 강원-인, 함께 여는 미래), 2026.3.3.(화) 10시"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 1학기 개설교과목 수강인원 증원 안내(G-Share 영역: 강원-인, 함께 여는 미래), 2026.3.3.(화) 10시 행사 일정",
+      "dateText": "2026.3.3.(화)",
+      "normalizedStart": "2026-03-03T10:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "2026학년도 1학기 개설교과목 수강인원 증원 안내(G-Share 영역: 강원-인, 함께 여는 미래), 2026.3.3.(화) 10시",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "schemaVersion": "noticepilot.judgmentTrace.v0.1",
+  "traceId": "trace:cand-knu-504-11200-b5dac80f755193",
+  "sourceNoticeId": "knu-504-11200",
+  "candidateId": "cand-knu-504-11200-b5dac80f755193",
+  "engineVersions": {
+    "pipeline": "0.1.14",
+    "policy": "noticepilot.studentFirstMvp.v0.1",
+    "judgmentContract": "0.1.0"
+  },
+  "judgments": [
+    {
+      "layer": "structure",
+      "verdict": "observed",
+      "ruleId": "legacy.policy15.source-segment",
+      "confidence": "high",
+      "inputRefs": [
+        "knu-504-11200"
+      ],
+      "output": {
+        "segmentId": "seg-4d182a5111bf8de9",
+        "segmentType": "label_value"
+      },
+      "reasonCodes": []
+    },
+    {
+      "layer": "temporal",
+      "verdict": "observed",
+      "ruleId": "legacy.policy15.normalized-interval",
+      "confidence": "high",
+      "inputRefs": [
+        "seg-4d182a5111bf8de9"
+      ],
+      "output": {
+        "normalizedStart": "2026-08-07",
+        "normalizedEnd": "2026-08-07",
+        "isAllDay": true,
+        "endDateInclusive": true
+      },
+      "reasonCodes": []
+    },
+    {
+      "layer": "local_binding",
+      "verdict": "pass",
+      "ruleId": "legacy.policy15.local-binding",
+      "confidence": "high",
+      "inputRefs": [
+        "seg-4d182a5111bf8de9"
+      ],
+      "output": {
+        "locallyGrounded": true
+      },
+      "reasonCodes": []
+    },
+    {
+      "layer": "semantic_classification",
+      "verdict": "classified",
+      "ruleId": "legacy.policy15.semantic-fields",
+      "confidence": "high",
+      "inputRefs": [
+        "cand-knu-504-11200-b5dac80f755193"
+      ],
+      "output": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "unknown"
+      },
+      "reasonCodes": [
+        "temporal_role_not_yet_migrated"
+      ]
+    },
+    {
+      "layer": "applicability",
+      "verdict": "classified",
+      "ruleId": "legacy.policy15.applicability-fields",
+      "confidence": "none",
+      "inputRefs": [
+        "cand-knu-504-11200-b5dac80f755193"
+      ],
+      "output": {
+        "targetActor": "student",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        }
+      },
+      "reasonCodes": []
+    },
+    {
+      "layer": "publishability",
+      "verdict": "auto_confirmed",
+      "ruleId": "legacy.policy15.status",
+      "confidence": "high",
+      "inputRefs": [
+        "cand-knu-504-11200-b5dac80f755193"
+      ],
+      "output": {
+        "includeInCalendarFeed": true,
+        "feedScopes": [
+          "student_default"
+        ]
+      },
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ]
+    }
+  ],
+  "finalDecision": {
+    "status": "auto_confirmed",
+    "includeInCalendarFeed": true,
+    "feedScopes": [
+      "student_default"
+    ]
+  },
+  "metadata": {
+    "compatibilityMode": "policy15_read_only_adapter",
+    "sourceCandidateSchemaVersion": "noticepilot.calendarCandidates.v0.10",
+    "semanticMigrationComplete": false
+  }
+}

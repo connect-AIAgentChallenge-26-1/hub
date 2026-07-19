@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-717-1406",
+  "sourceContentHash": "a3fa3ed082b8a4a41cc7cdf5ff6e709913b6dba1715f524e1ccc7b92a3df14e4",
+  "sourceTitle": "『취업 힐링 프로젝트(숲캠프)』 프로그램 신청 안내(신청 기간 연장~5/7)",
+  "publishedAt": "2026-04-30",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-862e7ba93f0273e5",
+      "segmentType": "title",
+      "labelText": "『취업 힐링 프로젝트(숲캠프)』 프로그램 신청 안내(신청 기간 연장~",
+      "bodyText": "5/7)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-07",
+          "start": 38,
+          "end": 41
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "『취업 힐링 프로젝트(숲캠프)』 프로그램 신청 안내(신청 기간 연장~5/7)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d8c61a76bc9d929b",
+      "segmentType": "label_value",
+      "labelText": "『취업 힐링 프로젝트(숲캠프)』 프로그램 신청 안내 (신청 기간 연장~",
+      "bodyText": "5/7)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-07",
+          "start": 39,
+          "end": 42
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "『취업 힐링 프로젝트(숲캠프)』 프로그램 신청 안내 (신청 기간 연장~5/7)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5ac1dda276f26e13",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "취업을 준비하는 졸업생 및 졸업준비생들의 취업 스트레스 해소 및 취업 동기 부여를 위한",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "취업을 준비하는 졸업생 및 졸업준비생들의 취업 스트레스 해소 및 취업 동기 부여를 위한"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8cfe246e5f01b228",
+      "segmentType": "label_value",
+      "labelText": "『취업 힐링 프로젝트(숲캠프)』 프로그램을 운영합니다. 학생들의 많은 참여 바랍니다.",
+      "bodyText": "『취업 힐링 프로젝트(숲캠프)』 프로그램을 운영합니다. 학생들의 많은 참여 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "『취업 힐링 프로젝트(숲캠프)』 프로그램을 운영합니다. 학생들의 많은 참여 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 4,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "paragraph": 1
+    }
+  }
+}

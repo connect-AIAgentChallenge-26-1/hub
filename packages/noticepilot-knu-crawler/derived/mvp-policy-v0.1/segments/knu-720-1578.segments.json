@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-1578",
+  "sourceContentHash": "6e3dbce5903ea9f10fd7b68fa664a0548f928cd8a8b0949f1081feb3ff86e50e",
+  "sourceTitle": "（국가거점국립대학교） 2026. 1학기 충남대학교 교류 수학 안내",
+  "publishedAt": "2026-01-07",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d1d403140c041df6",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "（국가거점국립대학교） 2026. 1학기 충남대학교 교류 수학 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "（국가거점국립대학교） 2026. 1학기 충남대학교 교류 수학 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-696fe167f004134b",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 1학기 충남대학교 교류 수학을 아래와 같이 알려드리니 교류를 희망하는 학생은 신청하여 주시기 바랍니다.",
+      "bodyText": "2026학년도 1학기 충남대학교 교류 수학을 아래와 같이 알려드리니 교류를 희망하는 학생은 신청하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 충남대학교 교류 수학을 아래와 같이 알려드리니 교류를 희망하는 학생은 신청하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4ec2a6a5cc29f88d",
+      "segmentType": "label_value",
+      "labelText": "신청자격",
+      "bodyText": "가. 신청자격 : 재학생으로서 징계받은 사실이 없는 자",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 신청자격 : 재학생으로서 징계받은 사실이 없는 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-320ebd8ae7ffdffe",
+      "segmentType": "label_value",
+      "labelText": "휴학생도 신청 가능하나 2026학년도 1학기 복학 후 재학생 신분이어야함.",
+      "bodyText": "- 휴학생도 신청 가능하나 2026학년도 1학기 복학 후 재학생 신분이어야함.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "return_from_leave_application",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled",
+        "enrollment_status:on_leave"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 휴학생도 신청 가능하나 2026학년도 1학기 복학 후 재학생 신분이어야함."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ffa29e4476ee03a3",
+      "segmentType": "label_value",
+      "labelText": "추천제한",
+      "bodyText": "※ 추천제한 : 졸업마지막학기 및 직전학기에 수학 추천을 받은 후 수학 취소한 사실이 있는 학생은",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 추천제한 : 졸업마지막학기 및 직전학기에 수학 추천을 받은 후 수학 취소한 사실이 있는 학생은"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2457ba62ebe6028f",
+      "segmentType": "label_value",
+      "labelText": "추천을 제한할 수 있음(다른대학 수학지원서 서식의 유의사항 5번 참조)",
+      "bodyText": "추천을 제한할 수 있음(다른대학 수학지원서 서식의 유의사항 5번 참조)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "추천을 제한할 수 있음(다른대학 수학지원서 서식의 유의사항 5번 참조)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-23b1617fd9a3a6ab",
+      "segmentType": "label_value",
+      "labelText": "제출서류",
+      "bodyText": "나. 제출서류 : 다른대학 수학지원서(본교서식) 1부, 충남대학교 추천자 명단 1부",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 제출서류 : 다른대학 수학지원서(본교서식) 1부, 충남대학교 추천자 명단 1부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ec0fbd42d27ee54b",
+      "segmentType": "label_value",
+      "labelText": "제출기한",
+      "bodyText": "다. 제출기한",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 제출기한"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-468a23ebf36a3e26",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026. 1. 14(수) 18:00 까지 소속 학과로 다른대학 수학지원서 제출",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-14",
+          "start": 7,
+          "end": 21
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 학생 : 2026. 1. 14(수) 18:00 까지 소속 학과로 다른대학 수학지원서 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-74c12a2e326eb3c9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026. 1. 15(목) 16:00 까지 학사지원과(교육지원과)로 추천자 교류서류 제출",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-15",
+          "start": 7,
+          "end": 21
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 학과 : 2026. 1. 15(목) 16:00 까지 학사지원과(교육지원과)로 추천자 교류서류 제출"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "list_item": 2
+    }
+  }
+}

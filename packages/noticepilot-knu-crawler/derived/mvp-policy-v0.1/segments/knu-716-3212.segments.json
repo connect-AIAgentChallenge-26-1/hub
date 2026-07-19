@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3212",
+  "sourceContentHash": "54a65739d00e86eb87537d68e5063eda0cbbd6d45d116d005fa87a3ccacbc489",
+  "sourceTitle": "강원대학교 통일강원연구원 기간제계약직（선임연구원-박사급） 채용 공고",
+  "publishedAt": "2026-02-20",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ece73d6f98ebc5dd",
+      "segmentType": "title",
+      "labelText": "강원대학교 통일강원연구원 기간제계약직（선임연구원-박사급） 채용 공고",
+      "bodyText": "강원대학교 통일강원연구원 기간제계약직（선임연구원-박사급） 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:graduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 통일강원연구원 기간제계약직（선임연구원-박사급） 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0910ad7cd65c9af3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "<강원대학교 통일강원연구원 선임연구원 채용>",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<강원대학교 통일강원연구원 선임연구원 채용>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f3b4df80aa6092d3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 통일강원연구원에서는 붙임과 같이 선임연구원을 채용하오니",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 통일강원연구원에서는 붙임과 같이 선임연구원을 채용하오니"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b6200dbcb5d6b3d7",
+      "segmentType": "label_value",
+      "labelText": "많은 지원 바랍니다.",
+      "bodyText": "많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b9ad2d639a46ea87",
+      "segmentType": "continuation",
+      "labelText": "많은 지원 바랍니다.",
+      "bodyText": "2026. 2. 20.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-b6200dbcb5d6b3d7"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-20",
+          "start": 12,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "많은 지원 바랍니다. 2026. 2. 20."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1575ce01bbca64b0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 2. 20.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-20",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 2. 20."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fcc47d2f9c422adc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 통일강원연구원장",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 통일강원연구원장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-6ec7a6c9c074f534",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-02-20~2026-03-10",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-20",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-03-10",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-02-20~2026-03-10"
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "continuation": 1,
+      "label_value": 2,
+      "paragraph": 4,
+      "title": 1
+    }
+  }
+}

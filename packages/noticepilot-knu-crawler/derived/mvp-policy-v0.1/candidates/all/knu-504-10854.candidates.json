@@ -1,0 +1,344 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10854",
+  "sourceContentHash": "1c0eb49b2c4b72cecb01686db3c9e2698f7e2eef9edd3429d4ce2a5715c10e40",
+  "sourceTitle": "2026 전공교육과정 학생모니터링단 선발 알림",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10854&pageIndex=7&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10854-aafee938307f54",
+      "uidHint": "noticepilot-cand-knu-504-10854-aafee938307f54@noticepilot.local",
+      "sourceNoticeId": "knu-504-10854",
+      "sourceTitle": "2026 전공교육과정 학생모니터링단 선발 알림",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10854&pageIndex=7&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-7a04a9ab4e7afba4",
+        "segmentType": "list_item",
+        "labelText": "",
+        "bodyText": "2026.4.16.(목) 12시",
+        "sourceLocation": {
+          "lineIndex": 64,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-16",
+            "start": 19,
+            "end": 32
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "none",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "- 강릉캠퍼스 위촉식 및 OT : 2026.4.16.(목) 12시",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-872a27c6652c071c",
+        "segmentId": "seg-7a04a9ab4e7afba4",
+        "rawText": "2026.4.16.(목)",
+        "normalizedStart": "2026-04-16T12:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 19,
+          "end": 32
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-62bccdfcd1e20dfd",
+        "sourceNoticeId": "knu-504-10854",
+        "segmentId": "seg-7a04a9ab4e7afba4",
+        "temporalMentionIds": [
+          "tm-872a27c6652c071c"
+        ],
+        "bindingKind": "unresolved",
+        "confidence": "none",
+        "ruleId": "binding.unresolved",
+        "locallyGrounded": false,
+        "labelText": "",
+        "evidence": "- 강릉캠퍼스 위촉식 및 OT : 2026.4.16.(목) 12시"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026 전공교육과정 학생모니터링단 선발 알림 행사 일정",
+      "dateText": "2026.4.16.(목)",
+      "normalizedStart": "2026-04-16T12:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "- 강릉캠퍼스 위촉식 및 OT : 2026.4.16.(목) 12시",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10854-42fe3e951fd72a",
+      "uidHint": "noticepilot-cand-knu-504-10854-42fe3e951fd72a@noticepilot.local",
+      "sourceNoticeId": "knu-504-10854",
+      "sourceTitle": "2026 전공교육과정 학생모니터링단 선발 알림",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10854&pageIndex=7&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-4ad06c0f33ceb38d",
+        "segmentType": "list_item",
+        "labelText": "",
+        "bodyText": "2026.4.17.(금) 12시",
+        "sourceLocation": {
+          "lineIndex": 65,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-17",
+            "start": 19,
+            "end": 32
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "none",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "- 원주캠퍼스 위촉식 및 OT : 2026.4.17.(금) 12시",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-aa5bd1fbb9b2415d",
+        "segmentId": "seg-4ad06c0f33ceb38d",
+        "rawText": "2026.4.17.(금)",
+        "normalizedStart": "2026-04-17T12:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 19,
+          "end": 32
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-164ee44de0a598fb",
+        "sourceNoticeId": "knu-504-10854",
+        "segmentId": "seg-4ad06c0f33ceb38d",
+        "temporalMentionIds": [
+          "tm-aa5bd1fbb9b2415d"
+        ],
+        "bindingKind": "unresolved",
+        "confidence": "none",
+        "ruleId": "binding.unresolved",
+        "locallyGrounded": false,
+        "labelText": "",
+        "evidence": "- 원주캠퍼스 위촉식 및 OT : 2026.4.17.(금) 12시"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026 전공교육과정 학생모니터링단 선발 알림 행사 일정",
+      "dateText": "2026.4.17.(금)",
+      "normalizedStart": "2026-04-17T12:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "- 원주캠퍼스 위촉식 및 OT : 2026.4.17.(금) 12시",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2372",
+  "sourceContentHash": "25aef9d6490aca1b46694c40489a7dd78aed6d0a7226179f65917a7ba20b4c16",
+  "sourceTitle": "2026학년도 1학기 수강신청 변경일정 안내",
+  "publishedAt": "2026-02-27",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7f37b3378ab1ca2e",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 수강신청 변경일정 안내",
+      "bodyText": "2026학년도 1학기 수강신청 변경일정 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_change",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 수강신청 변경일정 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c9a4f7d7462eb088",
+      "segmentType": "label_value",
+      "labelText": "□ 수강신청 경로",
+      "bodyText": "□ 수강신청 경로",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 수강신청 경로"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b8b10c832727bce5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "가. PC 이용할 경우（http://sugang.kangwon.ac.kr）",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. PC 이용할 경우（http://sugang.kangwon.ac.kr）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-283e335a94fede19",
+      "segmentType": "label_value",
+      "labelText": "학교 홈페이지 접속 사용자메뉴 재학생 학부 수강신청",
+      "bodyText": "- 학교 홈페이지 접속 사용자메뉴 재학생 학부 수강신청",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate",
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 학교 홈페이지 접속 사용자메뉴 재학생 학부 수강신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4859b6baaf3d5927",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 인터넷 사용 브라우저 : 크롬（Chrome） 권장",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 인터넷 사용 브라우저 : 크롬（Chrome） 권장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-329fda7eb0f2f72c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "나. 스마트폰 이용할 경우（（http://sugang.kangwon.ac.kr）",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 스마트폰 이용할 경우（（http://sugang.kangwon.ac.kr）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f8108e50252c006c",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 앱（플레이스토어 또는 앱스토어） 다운 설치 수업 수강신청",
+      "bodyText": "- 강원대학교 앱（플레이스토어 또는 앱스토어） 다운 설치 수업 수강신청",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 강원대학교 앱（플레이스토어 또는 앱스토어） 다운 설치 수업 수강신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f249267d146abef6",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "다. 방법 : 수강신청과 동일하게 접속하여 과목신청 삭제",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 방법 : 수강신청과 동일하게 접속하여 과목신청 삭제"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c95a398b72f46441",
+      "segmentType": "label_value",
+      "labelText": "과목 삭제에 신중을 기하여 진행하여야 함（삭제 후 잔여석이 없는 경우 수강신청 불가）",
+      "bodyText": "- 과목 삭제에 신중을 기하여 진행하여야 함（삭제 후 잔여석이 없는 경우 수강신청 불가）",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 과목 삭제에 신중을 기하여 진행하여야 함（삭제 후 잔여석이 없는 경우 수강신청 불가）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1a57b5937f159ca5",
+      "segmentType": "label_value",
+      "labelText": "수강신청 변경 및 취소기간을 구분하지 않고 통합 운영하니 참고하시기 바람",
+      "bodyText": "※ 수강신청 변경 및 취소기간을 구분하지 않고 통합 운영하니 참고하시기 바람",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_change",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 수강신청 변경 및 취소기간을 구분하지 않고 통합 운영하니 참고하시기 바람"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 5,
+      "list_item": 4
+    }
+  }
+}

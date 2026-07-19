@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/calendar-event-registry-manifest.schema.json",
+  "title": "NoticePilot CalendarEvent registry manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "registryId", "registryVersion", "createdAt", "idStrategy",
+    "scope", "counts", "invariants", "artifacts", "contentDigest", "upstream"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.calendarEventRegistryManifest.v0.1"},
+    "registryId": {"type": "string"},
+    "registryVersion": {"type": "string"},
+    "createdAt": {"type": "string"},
+    "idStrategy": {"const": "registry_assigned_opaque_v0"},
+    "scope": {"const": "all_publishable_candidates_with_approved_s27b_merges"},
+    "counts": {"type": "object"},
+    "invariants": {"type": "object"},
+    "artifacts": {"type": "object"},
+    "contentDigest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "upstream": {"type": "object"}
+  }
+}

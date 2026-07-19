@@ -1,0 +1,433 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-715-3412",
+  "sourceContentHash": "56ee1750772cb5fe7596f5e6c9430c579c4b14279dbd838dd1759fa0d3d9eaab",
+  "sourceTitle": "지역 주민과 함께하는 「KNU 하모니」 행사 안내",
+  "publishedAt": "2026-05-22",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3252daac1d2cdcf9",
+      "segmentType": "title",
+      "labelText": "지역 주민과 함께하는 「KNU 하모니」 행사 안내",
+      "bodyText": "지역 주민과 함께하는 「KNU 하모니」 행사 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "지역 주민과 함께하는 「KNU 하모니」 행사 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-85b87e942d1fdf94",
+      "segmentType": "label_value",
+      "labelText": "행사명",
+      "bodyText": "1. 행사명: 지역 주민과 함께하는 「KNU 하모니」",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 행사명: 지역 주민과 함께하는 「KNU 하모니」"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1be863b3f565c571",
+      "segmentType": "continuation",
+      "labelText": "",
+      "bodyText": "2026. 05.31.(일) 17:00",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-85b87e942d1fdf94"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-31",
+          "start": 38,
+          "end": 53
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 행사명: 지역 주민과 함께하는 「KNU 하모니」 2. 일 시: 2026. 05.31.(일) 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3173cf0ce18a30dc",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026. 05.31.(일) 17:00",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-31",
+          "start": 8,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2. 일 시: 2026. 05.31.(일) 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2ef42685e24f4531",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 장 소: 공지천 의암공원 야외무대",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 장 소: 공지천 의암공원 야외무대"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bd5d1422c7fadd60",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 내 용: 클래식 공연 및 한국 무용 공연 등",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 내 용: 클래식 공연 및 한국 무용 공연 등"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-daf69613547163b6",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 대 상: 춘천 지역 주민 누구나",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 대 상: 춘천 지역 주민 누구나"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bb362b239f659f5d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "프로그램 안내 - 구분, 공연, 출연",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "프로그램 안내 - 구분, 공연, 출연"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fbe030f6bb40117c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구분",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구분"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fd8b7b41933ef917",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "공연",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "공연"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e6d11a075d848806",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "출연",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "출연"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a6924eb375a970dd",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "오프닝",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "오프닝"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bb22b20b2c3bb9ef",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "오프닝 공연",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "오프닝 공연"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9b9d065c23b2da1b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "루베 심포니 오케스트라",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "루베 심포니 오케스트라"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0401602535d2142c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1부",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0dad1909bc173eb4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "클래식 공연",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "클래식 공연"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b846022a5992e79d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "루베 심포니 오케스트라",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "루베 심포니 오케스트라"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-42b743edf94c831b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2부",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1bf84fce6ff8a9f7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "영화 & 대중음악 공연",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "영화 & 대중음악 공연"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-30382ed3482d0f09",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "루베 심포니 오케스트라",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "루베 심포니 오케스트라"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-306a8a611c38413f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "3부",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-30a4de9dde44ae8b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "한국무용 공연",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "한국무용 공연"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-da7fb9b88ec0afb9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "KNU DANCE COMPANY",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "KNU DANCE COMPANY"
+    }
+  ],
+  "summary": {
+    "segmentCount": 23,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "continuation": 1,
+      "list_item": 4,
+      "paragraph": 16
+    }
+  }
+}

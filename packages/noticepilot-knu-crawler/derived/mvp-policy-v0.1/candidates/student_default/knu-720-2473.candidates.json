@@ -1,0 +1,729 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-720-2473",
+  "sourceContentHash": "e68d5777cb0c5bc2b730834c320cb7cb6a075a17cf8f2934601651a17072aa5b",
+  "sourceTitle": "2026학년도 2학기 학부생 재입학 모집 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2473&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-720-2473-079f6dd9d5d339",
+      "uidHint": "noticepilot-cand-knu-720-2473-079f6dd9d5d339@noticepilot.local",
+      "sourceNoticeId": "knu-720-2473",
+      "sourceTitle": "2026학년도 2학기 학부생 재입학 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2473&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "readmission_application",
+      "audienceRules": {
+        "degreeLevels": [
+          "undergraduate"
+        ],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": true,
+        "confidence": "high",
+        "evidence": [
+          "degree_level_explicit"
+        ]
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-03de015d7138c9e7",
+        "segmentType": "label_value",
+        "labelText": "재입학 지원서 접수 및 서류심사",
+        "bodyText": "2026. 6. 16.(화) ~ 7. 10.(금)",
+        "sourceLocation": {
+          "lineIndex": 5,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "readmission_application",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-16",
+            "start": 21,
+            "end": 36
+          },
+          {
+            "value": "2026-07-10",
+            "start": 39,
+            "end": 48
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "readmission_application",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "재입학 지원서 접수 및 서류심사",
+          "- 재입학 지원서 접수 및 서류심사: 2026. 6. 16.(화) ~ 7. 10.(금)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-797e2d0749d57587",
+        "segmentId": "seg-03de015d7138c9e7",
+        "rawText": "2026. 6. 16.(화) ~ 7. 10.(금)",
+        "normalizedStart": "2026-06-16",
+        "normalizedEnd": "2026-07-10",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 21,
+          "end": 48
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-89339f748976327b",
+        "sourceNoticeId": "knu-720-2473",
+        "segmentId": "seg-03de015d7138c9e7",
+        "temporalMentionIds": [
+          "tm-797e2d0749d57587"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "재입학 지원서 접수 및 서류심사",
+        "evidence": "- 재입학 지원서 접수 및 서류심사: 2026. 6. 16.(화) ~ 7. 10.(금)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 2학기 학부생 재입학 모집 안내 재입학 신청기간",
+      "dateText": "2026. 6. 16.(화) ~ 7. 10.(금)",
+      "normalizedStart": "2026-06-16",
+      "normalizedEnd": "2026-07-10",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "- 재입학 지원서 접수 및 서류심사: 2026. 6. 16.(화) ~ 7. 10.(금)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "academic_action_type_extracted",
+        "audience_rules_extracted",
+        "degree_level_scope_explicit",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "profile_scoped",
+        "audienceRules": {
+          "degreeLevels": [
+            "undergraduate"
+          ],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": true,
+          "confidence": "high",
+          "evidence": [
+            "degree_level_explicit"
+          ]
+        },
+        "confidence": "high",
+        "ruleId": "applicability.profile.explicit_dimensions",
+        "reasonCodes": [
+          "audience_rules_extracted",
+          "degree_level_scope_explicit",
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "academic_action_type_extracted",
+          "audience_rules_extracted",
+          "degree_level_scope_explicit",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2473-37d961d8eec427",
+      "uidHint": "noticepilot-cand-knu-720-2473-37d961d8eec427@noticepilot.local",
+      "sourceNoticeId": "knu-720-2473",
+      "sourceTitle": "2026학년도 2학기 학부생 재입학 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2473&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-3584b88f1cb56acd",
+        "segmentType": "label_value",
+        "labelText": "재입학 허가 통보",
+        "bodyText": "2026. 7. 21.(화) 예정",
+        "sourceLocation": {
+          "lineIndex": 6,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "result_announcement"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-21",
+            "start": 13,
+            "end": 28
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "재입학 허가 통보",
+          "- 재입학 허가 통보: 2026. 7. 21.(화) 예정",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-08aa1461f8500e6f",
+        "segmentId": "seg-3584b88f1cb56acd",
+        "rawText": "2026. 7. 21.(화)",
+        "normalizedStart": "2026-07-21",
+        "normalizedEnd": "2026-07-21",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 13,
+          "end": 28
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-66733a7e1bc7bf35",
+        "sourceNoticeId": "knu-720-2473",
+        "segmentId": "seg-3584b88f1cb56acd",
+        "temporalMentionIds": [
+          "tm-08aa1461f8500e6f"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "재입학 허가 통보",
+        "evidence": "- 재입학 허가 통보: 2026. 7. 21.(화) 예정"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 2학기 학부생 재입학 모집 안내 결과 발표 예정",
+      "dateText": "2026. 7. 21.(화)",
+      "normalizedStart": "2026-07-21",
+      "normalizedEnd": "2026-07-21",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "- 재입학 허가 통보: 2026. 7. 21.(화) 예정",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2473-b764a3394d51be",
+      "uidHint": "noticepilot-cand-knu-720-2473-b764a3394d51be@noticepilot.local",
+      "sourceNoticeId": "knu-720-2473",
+      "sourceTitle": "2026학년도 2학기 학부생 재입학 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2473&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "preliminary_course_registration",
+      "audienceRules": {
+        "degreeLevels": [
+          "undergraduate"
+        ],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": true,
+        "confidence": "high",
+        "evidence": [
+          "degree_level_explicit"
+        ]
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-9b8bba2414283ada",
+        "segmentType": "label_value",
+        "labelText": "수강신청",
+        "bodyText": "2026. 7. 30.(목) ~ 7. 31.(금)",
+        "sourceLocation": {
+          "lineIndex": 7,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "preliminary_course_registration",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-30",
+            "start": 13,
+            "end": 28
+          },
+          {
+            "value": "2026-07-31",
+            "start": 31,
+            "end": 40
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "preliminary_course_registration",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "수강신청",
+          "- 수강신청: (예비) 2026. 7. 30.(목) ~ 7. 31.(금)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-e05228ae207136e0",
+        "segmentId": "seg-9b8bba2414283ada",
+        "rawText": "2026. 7. 30.(목) ~ 7. 31.(금)",
+        "normalizedStart": "2026-07-30",
+        "normalizedEnd": "2026-07-31",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 13,
+          "end": 40
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-2eb75d0ebdbce1f4",
+        "sourceNoticeId": "knu-720-2473",
+        "segmentId": "seg-9b8bba2414283ada",
+        "temporalMentionIds": [
+          "tm-e05228ae207136e0"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "수강신청",
+        "evidence": "- 수강신청: (예비) 2026. 7. 30.(목) ~ 7. 31.(금)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 2학기 학부생 재입학 모집 안내 예비수강신청 기간",
+      "dateText": "2026. 7. 30.(목) ~ 7. 31.(금)",
+      "normalizedStart": "2026-07-30",
+      "normalizedEnd": "2026-07-31",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "- 수강신청: (예비) 2026. 7. 30.(목) ~ 7. 31.(금)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "academic_action_type_extracted",
+        "audience_rules_extracted",
+        "degree_level_scope_explicit",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "profile_scoped",
+        "audienceRules": {
+          "degreeLevels": [
+            "undergraduate"
+          ],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": true,
+          "confidence": "high",
+          "evidence": [
+            "degree_level_explicit"
+          ]
+        },
+        "confidence": "high",
+        "ruleId": "applicability.profile.explicit_dimensions",
+        "reasonCodes": [
+          "audience_rules_extracted",
+          "degree_level_scope_explicit",
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "academic_action_type_extracted",
+          "audience_rules_extracted",
+          "degree_level_scope_explicit",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2473-b221ba5dd25d81",
+      "uidHint": "noticepilot-cand-knu-720-2473-b221ba5dd25d81@noticepilot.local",
+      "sourceNoticeId": "knu-720-2473",
+      "sourceTitle": "2026학년도 2학기 학부생 재입학 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2473&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "payment_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-9181927688eb95f6",
+        "segmentType": "label_value",
+        "labelText": "등록금 납부",
+        "bodyText": "2026. 8. 25.(화) ~ 8. 28.(금) 등록금 미납 시 재입학 허가 취소",
+        "sourceLocation": {
+          "lineIndex": 9,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "payment_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-08-25",
+            "start": 10,
+            "end": 25
+          },
+          {
+            "value": "2026-08-28",
+            "start": 28,
+            "end": 37
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "payment_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "등록금 납부",
+          "- 등록금 납부: 2026. 8. 25.(화) ~ 8. 28.(금) 등록금 미납 시 재입학 허가 취소",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-4781875d914a7d82",
+        "segmentId": "seg-9181927688eb95f6",
+        "rawText": "2026. 8. 25.(화) ~ 8. 28.(금) 등록금 미납 시 재입학 허가 취소",
+        "normalizedStart": "2026-08-25",
+        "normalizedEnd": "2026-08-28",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 10,
+          "end": 37
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-72d204c0348d1d73",
+        "sourceNoticeId": "knu-720-2473",
+        "segmentId": "seg-9181927688eb95f6",
+        "temporalMentionIds": [
+          "tm-4781875d914a7d82"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "등록금 납부",
+        "evidence": "- 등록금 납부: 2026. 8. 25.(화) ~ 8. 28.(금) 등록금 미납 시 재입학 허가 취소"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 2학기 학부생 재입학 모집 안내 납부기간",
+      "dateText": "2026. 8. 25.(화) ~ 8. 28.(금) 등록금 미납 시 재입학 허가 취소",
+      "normalizedStart": "2026-08-25",
+      "normalizedEnd": "2026-08-28",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "- 등록금 납부: 2026. 8. 25.(화) ~ 8. 28.(금) 등록금 미납 시 재입학 허가 취소",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 4,
+    "autoConfirmedCount": 4,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 4
+  }
+}

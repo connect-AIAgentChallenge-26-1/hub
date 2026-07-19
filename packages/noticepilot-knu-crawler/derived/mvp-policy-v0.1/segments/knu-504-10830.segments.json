@@ -1,0 +1,254 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10830",
+  "sourceContentHash": "f207bc61e98e552d3048a8949dc3c552eac4de2aae1f3e169a8d0923b64a2a81",
+  "sourceTitle": "강원대학교 제14기 학생홍보대사(가온) 서류전형 합격자(면접전형 대상자) 발표 및 안내",
+  "publishedAt": "2026-04-06",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0f31127fc3d51b66",
+      "segmentType": "title",
+      "labelText": "강원대학교 제14기 학생홍보대사(가온) 서류전형 합격자(면접전형 대상자) 발표 및 안내",
+      "bodyText": "강원대학교 제14기 학생홍보대사(가온) 서류전형 합격자(면접전형 대상자) 발표 및 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 제14기 학생홍보대사(가온) 서류전형 합격자(면접전형 대상자) 발표 및 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0fca3f89db451c2e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 대외협력과에서",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 대외협력과에서"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4a1ea95000c079a3",
+      "segmentType": "label_value",
+      "labelText": "제14기 학생홍보대사(가온) 서류전형 합격자(면접전형 대상자)를 발표 합니다.",
+      "bodyText": "제14기 학생홍보대사(가온) 서류전형 합격자(면접전형 대상자)를 발표 합니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "제14기 학생홍보대사(가온) 서류전형 합격자(면접전형 대상자)를 발표 합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a03db17f02b673c7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "■ 대상자 및 상세 안내: 붙임 문서 참조",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 대상자 및 상세 안내: 붙임 문서 참조"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-32de810ea1f5089f",
+      "segmentType": "label_value",
+      "labelText": "■ 면접 일시",
+      "bodyText": "■ 면접 일시:",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 면접 일시:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-80618d8eb63e4d57",
+      "segmentType": "continuation",
+      "labelText": "■ 면접 일시",
+      "bodyText": "2026. 4. 17.(금)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-32de810ea1f5089f"
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-17",
+          "start": 9,
+          "end": 24
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "■ 면접 일시: 2026. 4. 17.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c97469af137046d2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 4. 17.(금)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-17",
+          "start": 0,
+          "end": 15
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 4. 17.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7271f7df4374ca17",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "11:00~",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "11:00~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-12c2cf525ab804fe",
+      "segmentType": "label_value",
+      "labelText": "개인별 상세 면접 시간은 개별 연락을 통해 안내",
+      "bodyText": "※ 개인별 상세 면접 시간은 개별 연락을 통해 안내",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 개인별 상세 면접 시간은 개별 연락을 통해 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-73a10c36f6e2221a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 변동사항 발생 시 개별 연락 예정",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 변동사항 발생 시 개별 연락 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-962681ef7df93950",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "■ 대기 장소: 대학본부 409호 (면접 대기실)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 대기 장소: 대학본부 409호 (면접 대기실)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ac1ccf17366cf2d1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "■ 준비물: 신분증, 재학증명서 1부",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 준비물: 신분증, 재학증명서 1부"
+    }
+  ],
+  "summary": {
+    "segmentCount": 12,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 6,
+      "label_value": 3,
+      "continuation": 1,
+      "list_item": 1
+    }
+  }
+}

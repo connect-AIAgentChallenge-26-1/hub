@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noticepilot.profileMatrix.v0.1",
+  "title": "NoticePilot S28 Profile Matrix",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "matrixVersion", "purpose", "auditOnly", "authoritativeProductDefaults", "userCampusDefaultEstablished", "caseCount", "cases"],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.profileMatrix.v0.1"},
+    "matrixVersion": {"const": "0.1.0"},
+    "purpose": {"const": "full_corpus_feed_audit_only"},
+    "auditOnly": {"const": true},
+    "authoritativeProductDefaults": {"const": false},
+    "userCampusDefaultEstablished": {"const": false},
+    "caseCount": {"const": 44},
+    "cases": {
+      "type": "array",
+      "minItems": 44,
+      "maxItems": 44,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["caseId", "category", "description", "referenceDefault", "profile"],
+        "properties": {
+          "caseId": {"type": "string", "minLength": 1},
+          "category": {"enum": ["reference", "campus", "policy_toggle", "audience", "status", "source_board", "event_type"]},
+          "description": {"type": "string", "minLength": 1},
+          "referenceDefault": {"type": "boolean"},
+          "profile": {"$ref": "../subscription-profile/subscription-profile.schema.json"}
+        }
+      }
+    }
+  }
+}

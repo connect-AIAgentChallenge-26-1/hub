@@ -1,0 +1,251 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4481",
+  "sourceContentHash": "d3f41158dd95732ed2acd95e45c27334b4ded219aa7cdfa9cf1c9f726b3f6d4f",
+  "sourceTitle": "국립강릉원주대학교 사학과 조교 신규 채용 서류 심사 합격자 발표 및 면접일정 안내",
+  "publishedAt": "2026-01-09",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0fcf4b8ac763f71e",
+      "segmentType": "title",
+      "labelText": "국립강릉원주대학교 사학과 조교 신규 채용 서류 심사 합격자 발표 및 면접일정 안내",
+      "bodyText": "국립강릉원주대학교 사학과 조교 신규 채용 서류 심사 합격자 발표 및 면접일정 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국립강릉원주대학교 사학과 조교 신규 채용 서류 심사 합격자 발표 및 면접일정 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b8f9902fb6fb2804",
+      "segmentType": "label_value",
+      "labelText": "국립강릉원주대학교 사학과 조교 신규 채용 서류 심사 합격자 발표 및 면접일정을 아래와 같이 안내합니다.",
+      "bodyText": "국립강릉원주대학교 사학과 조교 신규 채용 서류 심사 합격자 발표 및 면접일정을 아래와 같이 안내합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국립강릉원주대학교 사학과 조교 신규 채용 서류 심사 합격자 발표 및 면접일정을 아래와 같이 안내합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b3982259d07094de",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 서류심사합격자",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 서류심사합격자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6398c4f180fd95f7",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 응시번호 2025-3 김*은(75*7)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 응시번호 2025-3 김*은(75*7)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-60118ce5373dd0f1",
+      "segmentType": "label_value",
+      "labelText": "면접심사 일정",
+      "bodyText": "2. 면접심사 일정",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 면접심사 일정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5e95a9e1f7e3eca6",
+      "segmentType": "continuation",
+      "labelText": "면접심사 일정 - 일시",
+      "bodyText": "2026. 1. 12.(월) 10:00",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-60118ce5373dd0f1"
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-12",
+          "start": 17,
+          "end": 32
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 면접심사 일정 - 일시: 2026. 1. 12.(월) 10:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-69bdff5b1c1e4a47",
+      "segmentType": "label_value",
+      "labelText": "일시",
+      "bodyText": "2026. 1. 12.(월) 10:00",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-12",
+          "start": 6,
+          "end": 21
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 일시: 2026. 1. 12.(월) 10:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0cddb2fd650ae68e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 장소: 국립강릉원주대학교(강릉캠퍼스) 인문대학(C2) 243호",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 장소: 국립강릉원주대학교(강릉캠퍼스) 인문대학(C2) 243호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a72f62aa2dddb998",
+      "segmentType": "label_value",
+      "labelText": "* 면접시작 최소 10분전까지 면접 대기장소 인문대학(C2) 인문대학행정실(202호)에 도착해 주시기 바랍니다.",
+      "bodyText": "* 면접시작 최소 10분전까지 면접 대기장소 인문대학(C2) 인문대학행정실(202호)에 도착해 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 면접시작 최소 10분전까지 면접 대기장소 인문대학(C2) 인문대학행정실(202호)에 도착해 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a2fc3234bf0009ff",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 유의사항",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 유의사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3fff6b86aeee5367",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 본임임을 증명할 수 있는 신분증(주민등록증, 운전면허증, 여권 등)을 지참해 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 본임임을 증명할 수 있는 신분증(주민등록증, 운전면허증, 여권 등)을 지참해 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dbc5376b0d6486ae",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의: 033-640-2099",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의: 033-640-2099"
+    }
+  ],
+  "summary": {
+    "segmentCount": 12,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 4,
+      "list_item": 6,
+      "continuation": 1
+    }
+  }
+}

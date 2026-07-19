@@ -1,0 +1,531 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-5647",
+  "sourceContentHash": "a49a9e7907d367435c614a84e1c2b740c7d58c8d880a1a205e25ec31d4b4af9b",
+  "sourceTitle": "★ 2026 유학생 서포터즈 모집 （~1/30까지） ★",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5647&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천 삼척",
+    "campuses": [
+      "chuncheon",
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천",
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-5647-5a04ecbce88642",
+      "uidHint": "noticepilot-cand-knu-504-5647-5a04ecbce88642@noticepilot.local",
+      "sourceNoticeId": "knu-504-5647",
+      "sourceTitle": "★ 2026 유학생 서포터즈 모집 （~1/30까지） ★",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5647&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-2ea62b453623afd7",
+        "segmentType": "label_value",
+        "labelText": "접수기간",
+        "bodyText": "2026. 1. 30.(금) 오후 5시까지",
+        "sourceLocation": {
+          "lineIndex": 18,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-01-30",
+            "start": 8,
+            "end": 23
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "접수기간",
+          "※ 접수기간: 2026. 1. 30.(금) 오후 5시까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-07f4abaa794d9aee",
+        "segmentId": "seg-2ea62b453623afd7",
+        "rawText": "2026. 1. 30.(금)",
+        "normalizedStart": "2026-01-30T17:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 8,
+          "end": 23
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-72c7892f9db832bb",
+        "sourceNoticeId": "knu-504-5647",
+        "segmentId": "seg-2ea62b453623afd7",
+        "temporalMentionIds": [
+          "tm-07f4abaa794d9aee"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "접수기간",
+        "evidence": "※ 접수기간: 2026. 1. 30.(금) 오후 5시까지"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "★ 2026 유학생 서포터즈 모집 （~1/30까지） ★ 신청 마감",
+      "dateText": "2026. 1. 30.(금)",
+      "normalizedStart": "2026-01-30T17:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "※ 접수기간: 2026. 1. 30.(금) 오후 5시까지",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "same_day_precision_candidates_consolidated",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "same_day_precision_candidates_consolidated",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5647-86c3dd2b87e98c",
+      "uidHint": "noticepilot-cand-knu-504-5647-86c3dd2b87e98c@noticepilot.local",
+      "sourceNoticeId": "knu-504-5647",
+      "sourceTitle": "★ 2026 유학생 서포터즈 모집 （~1/30까지） ★",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5647&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "exam_or_interview",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-f836f8e1828872d0",
+        "segmentType": "label_value",
+        "labelText": "∘ 면접(대면 혹은 Zoom)",
+        "bodyText": "2026. 2. 4.(수) ~ 2. 5.(목)",
+        "sourceLocation": {
+          "lineIndex": 20,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "exam_or_interview"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-04",
+            "start": 18,
+            "end": 32
+          },
+          {
+            "value": "2026-02-05",
+            "start": 35,
+            "end": 43
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "exam_or_interview",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "∘ 면접(대면 혹은 Zoom)",
+          "∘ 면접(대면 혹은 Zoom): 2026. 2. 4.(수) ~ 2. 5.(목)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-4a4f68b956e242ca",
+        "segmentId": "seg-f836f8e1828872d0",
+        "rawText": "2026. 2. 4.(수) ~ 2. 5.(목)",
+        "normalizedStart": "2026-02-04",
+        "normalizedEnd": "2026-02-05",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 18,
+          "end": 43
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-9c209c0c0b81705e",
+        "sourceNoticeId": "knu-504-5647",
+        "segmentId": "seg-f836f8e1828872d0",
+        "temporalMentionIds": [
+          "tm-4a4f68b956e242ca"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "∘ 면접(대면 혹은 Zoom)",
+        "evidence": "∘ 면접(대면 혹은 Zoom): 2026. 2. 4.(수) ~ 2. 5.(목)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "★ 2026 유학생 서포터즈 모집 （~1/30까지） ★ 시험·면접 일정",
+      "dateText": "2026. 2. 4.(수) ~ 2. 5.(목)",
+      "normalizedStart": "2026-02-04",
+      "normalizedEnd": "2026-02-05",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "∘ 면접(대면 혹은 Zoom): 2026. 2. 4.(수) ~ 2. 5.(목)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5647-89c3d8468bc7d9",
+      "uidHint": "noticepilot-cand-knu-504-5647-89c3d8468bc7d9@noticepilot.local",
+      "sourceNoticeId": "knu-504-5647",
+      "sourceTitle": "★ 2026 유학생 서포터즈 모집 （~1/30까지） ★",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5647&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-d51dcb9d5e6d5630",
+        "segmentType": "label_value",
+        "labelText": "∘ 선발 결과 발표",
+        "bodyText": "2026. 2. 6.(금) ※ 개별 안내 예정",
+        "sourceLocation": {
+          "lineIndex": 21,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "result_announcement"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-06",
+            "start": 12,
+            "end": 26
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "∘ 선발 결과 발표",
+          "∘ 선발 결과 발표: 2026. 2. 6.(금) ※ 개별 안내 예정",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-5a5cd7dd3264f8f0",
+        "segmentId": "seg-d51dcb9d5e6d5630",
+        "rawText": "2026. 2. 6.(금)",
+        "normalizedStart": "2026-02-06",
+        "normalizedEnd": "2026-02-06",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 12,
+          "end": 26
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-55a1855ebd8ea137",
+        "sourceNoticeId": "knu-504-5647",
+        "segmentId": "seg-d51dcb9d5e6d5630",
+        "temporalMentionIds": [
+          "tm-5a5cd7dd3264f8f0"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "∘ 선발 결과 발표",
+        "evidence": "∘ 선발 결과 발표: 2026. 2. 6.(금) ※ 개별 안내 예정"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "★ 2026 유학생 서포터즈 모집 （~1/30까지） ★ 결과 발표 예정",
+      "dateText": "2026. 2. 6.(금)",
+      "normalizedStart": "2026-02-06",
+      "normalizedEnd": "2026-02-06",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "∘ 선발 결과 발표: 2026. 2. 6.(금) ※ 개별 안내 예정",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 3,
+    "autoConfirmedCount": 3,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 3
+  }
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2354",
+  "sourceContentHash": "90308c389724494e149d31c36b82fe95c8b4d50762068ac37b14ec4ba980bbc3",
+  "sourceTitle": "2026년도 구미시장장학재단 장학생 선발 홍보",
+  "publishedAt": "2026-04-14",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7b330557968ff2ac",
+      "segmentType": "title",
+      "labelText": "2026년도 구미시장장학재단 장학생 선발 홍보",
+      "bodyText": "2026년도 구미시장장학재단 장학생 선발 홍보",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년도 구미시장장학재단 장학생 선발 홍보"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ab347806a4fae672",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "2026. 5. 8.(금) 18:00",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-08",
+          "start": 9,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 신청기간: 2026. 5. 8.(금) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-05526732e5f0a664",
+      "segmentType": "label_value",
+      "labelText": "선발인원",
+      "bodyText": "2. 선발인원: 265명",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 선발인원: 265명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f00e21a98bfe7699",
+      "segmentType": "label_value",
+      "labelText": "선발유형",
+      "bodyText": "3. 선발유형: 12개 유형",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 선발유형: 12개 유형"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-de9e26f4238d44b0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 자세한 사항은 구미시장학재단 홈페이지 gumigh.or.kr 참조",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 자세한 사항은 구미시장학재단 홈페이지 gumigh.or.kr 참조"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "paragraph": 1
+    }
+  }
+}

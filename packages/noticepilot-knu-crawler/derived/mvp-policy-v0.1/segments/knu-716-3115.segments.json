@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3115",
+  "sourceContentHash": "f90c9ef15e5c73646a0b93c4e4aa9d991aa79db86bf14f7bef72be5f1d052617",
+  "sourceTitle": "강원대학교 소비조합 기간제근로자（조리원） 신규채용 공고",
+  "publishedAt": "2026-01-26",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2fad154f632d49e3",
+      "segmentType": "title",
+      "labelText": "강원대학교 소비조합 기간제근로자（조리원） 신규채용 공고",
+      "bodyText": "강원대학교 소비조합 기간제근로자（조리원） 신규채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 소비조합 기간제근로자（조리원） 신규채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-82bf975227f8b1f8",
+      "segmentType": "label_value",
+      "labelText": "소비조합 기간제근로자(조리원) 신규채용 공고 안내",
+      "bodyText": "소비조합 기간제근로자(조리원) 신규채용 공고 안내",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "소비조합 기간제근로자(조리원) 신규채용 공고 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bceb8f4897005461",
+      "segmentType": "label_value",
+      "labelText": "* 접수기간",
+      "bodyText": "2026. 1. 28.(수) ~ 2. 3.(화), 18:00",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-28",
+          "start": 9,
+          "end": 24
+        },
+        {
+          "value": "2026-02-03",
+          "start": 27,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "* 접수기간 : 2026. 1. 28.(수) ~ 2. 3.(화), 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fd0ce7cf9879e7ba",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 소비조합에서는 붙임과 같이 기간제근로자(조리원)",
+      "bodyText": "강원대학교 소비조합에서는 붙임과 같이 기간제근로자(조리원)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 소비조합에서는 붙임과 같이 기간제근로자(조리원)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f921d2abcf52d646",
+      "segmentType": "label_value",
+      "labelText": "신규채용을 실시하오니 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "신규채용을 실시하오니 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신규채용을 실시하오니 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e791438146629fd6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "자세한 사항은 붙임 공고문을 참조하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자세한 사항은 붙임 공고문을 참조하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-b1d91930a01e8f27",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-01-28~2026-02-03",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-28",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-02-03",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-01-28~2026-02-03"
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 5,
+      "paragraph": 1,
+      "title": 1
+    }
+  }
+}

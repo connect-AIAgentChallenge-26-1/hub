@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-716-4552",
+  "sourceContentHash": "9ebe4354140ab71e3b70411b80e86ab7a91f2af5a1da1f4d4ca41f3e114b2bc8",
+  "sourceTitle": "강원대학교 학생능력개발원 학생상담센터 [심리상담] 기간제 상담원 채용 공고",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/716/detail.do?pstSn=4552&pageIndex=7&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-716-4552-2db801ad77cafc",
+      "uidHint": "noticepilot-cand-knu-716-4552-2db801ad77cafc@noticepilot.local",
+      "sourceNoticeId": "knu-716-4552",
+      "sourceTitle": "강원대학교 학생능력개발원 학생상담센터 [심리상담] 기간제 상담원 채용 공고",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/716/detail.do?pstSn=4552&pageIndex=7&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "job_posting",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "job_application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-board716-d2dc4979c706da36",
+        "segmentType": "label_value",
+        "labelText": "접수기간",
+        "bodyText": "2026-02-27~2026-03-12",
+        "sourceLocation": {
+          "lineIndex": 0,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-27",
+            "start": 14,
+            "end": 24
+          },
+          {
+            "value": "2026-03-12",
+            "start": 25,
+            "end": 35
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "job_application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.board716.exact_application_period",
+        "evidence": [
+          "listMetadata.application_period_start",
+          "listMetadata.application_period_end",
+          "접수기간 2026-02-27~2026-03-12"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-0d8b16556b85bcfc",
+        "segmentId": "seg-board716-d2dc4979c706da36",
+        "rawText": "접수기간 2026-02-27~2026-03-12",
+        "normalizedStart": "2026-02-27",
+        "normalizedEnd": "2026-03-12",
+        "resolutionKind": "list_application_period",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": null
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-2abff87df6c8c87d",
+        "sourceNoticeId": "knu-716-4552",
+        "segmentId": "seg-board716-d2dc4979c706da36",
+        "temporalMentionIds": [
+          "tm-0d8b16556b85bcfc"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.board716.list_metadata.application_period",
+        "locallyGrounded": true,
+        "labelText": "접수기간",
+        "evidence": "채용안내 목록 접수기간: 2026-02-27~2026-03-12"
+      },
+      "targetActor": "job_applicant",
+      "feedScopes": [
+        "job_application"
+      ],
+      "title": "강원대학교 학생능력개발원 학생상담센터 [심리상담] 기간제 상담원 채용 공고 채용 접수기간",
+      "dateText": "접수기간 2026-02-27~2026-03-12",
+      "normalizedStart": "2026-02-27",
+      "normalizedEnd": "2026-03-12",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "채용안내 목록 접수기간: 2026-02-27~2026-03-12",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "board716_application_period_only",
+        "exact_list_application_period"
+      ],
+      "dateResolution": {
+        "kind": "list_application_period",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "job_applicant",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.job_applicant",
+        "reasonCodes": []
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "board716_application_period_only",
+          "exact_list_application_period"
+        ],
+        "ruleIds": [
+          "publishability.board716.exact_application_period.auto_confirm",
+          "publishability.reason.board716_application_period_only",
+          "publishability.reason.exact_list_application_period",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

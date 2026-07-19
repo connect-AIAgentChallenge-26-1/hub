@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2507",
+  "sourceContentHash": "1db1f6acfd7425f9d97870e7bde226e55b2ff4a303bb75e6f035ccaac09a5c74",
+  "sourceTitle": "2026학년도 1학기 전공 마이크로디그리 교육과정 이수 신청 안내",
+  "publishedAt": "2026-07-08",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bd019b39888c75b3",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 전공 마이크로디그리 교육과정 이수 신청 안내",
+      "bodyText": "2026학년도 1학기 전공 마이크로디그리 교육과정 이수 신청 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 전공 마이크로디그리 교육과정 이수 신청 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1f4a8218bafd8584",
+      "segmentType": "label_value",
+      "labelText": "강릉·원주캠퍼스는 특정한 역량, 직무, 자격 등을 위한 최소 단위의 교육과정인 마이크로디그리 교육과정을 도입하여",
+      "bodyText": "강릉·원주캠퍼스는 특정한 역량, 직무, 자격 등을 위한 최소 단위의 교육과정인 마이크로디그리 교육과정을 도입하여",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강릉·원주캠퍼스는 특정한 역량, 직무, 자격 등을 위한 최소 단위의 교육과정인 마이크로디그리 교육과정을 도입하여"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c52307072426fb7c",
+      "segmentType": "label_value",
+      "labelText": "현재 120개 과정을 운영 중에 있습니다.",
+      "bodyText": "현재 120개 과정을 운영 중에 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "현재 120개 과정을 운영 중에 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-15d4cf6c5f8015d8",
+      "segmentType": "label_value",
+      "labelText": "위와 관련하여, 2026학년도 1학기 전공 마이크로디그리 교육과정 이수 신청을 다음과 같이 실시하오니,",
+      "bodyText": "위와 관련하여, 2026학년도 1학기 전공 마이크로디그리 교육과정 이수 신청을 다음과 같이 실시하오니,",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "위와 관련하여, 2026학년도 1학기 전공 마이크로디그리 교육과정 이수 신청을 다음과 같이 실시하오니,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fb99dd6e3c8a81fb",
+      "segmentType": "label_value",
+      "labelText": "전공 마이크로디그리 교육과정을 이수한 재학생들은 신청하여 주시기 바랍니다.",
+      "bodyText": "전공 마이크로디그리 교육과정을 이수한 재학생들은 신청하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "전공 마이크로디그리 교육과정을 이수한 재학생들은 신청하여 주시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 4
+    }
+  }
+}

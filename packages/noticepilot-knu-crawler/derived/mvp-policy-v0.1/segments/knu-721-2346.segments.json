@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2346",
+  "sourceContentHash": "6eecbdf2112315bf470f129ab5a1c04d7c9098783069aa77a59d590cf54c9a80",
+  "sourceTitle": "2026년 대통령과학장학금 사업안내",
+  "publishedAt": "2026-04-09",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-90af706ea98b01c1",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026년 대통령과학장학금 사업안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 대통령과학장학금 사업안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cd10635474760d9a",
+      "segmentType": "label_value",
+      "labelText": "신청마감",
+      "bodyText": "4. 22.(수) 18:00",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-22",
+          "start": 9,
+          "end": 18
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 신청마감: 4. 22.(수) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-75b11ff9558d2eca",
+      "segmentType": "label_value",
+      "labelText": "지원금액",
+      "bodyText": "2. 지원금액: 등록금 전액 및 학업장려비 250만원",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 지원금액: 등록금 전액 및 학업장려비 250만원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5742c22db4f49712",
+      "segmentType": "label_value",
+      "labelText": "선발절차",
+      "bodyText": "3. 선발절차: 서류심사-인적성검사-심층면접",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 선발절차: 서류심사-인적성검사-심층면접"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-40a700eb35c9b411",
+      "segmentType": "label_value",
+      "labelText": "선발규모",
+      "bodyText": "4. 선발규모: 157명(1학년 63명, 3학년 60명, 지역추천 14명, 해외 20명)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "student_year:1",
+        "student_year:3"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 선발규모: 157명(1학년 63명, 3학년 60명, 지역추천 14명, 해외 20명)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-05fb8b36c85472b5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 자세한 사항은 한국장학재단 홈페이지 또는 1599-2290(홈페이지 www.kosaf.go.kr 장학금-국가우수장학금-대통령과학장학금-공지사항",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 자세한 사항은 한국장학재단 홈페이지 또는 1599-2290(홈페이지 www.kosaf.go.kr 장학금-국가우수장학금-대통령과학장학금-공지사항"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 4,
+      "paragraph": 1
+    }
+  }
+}

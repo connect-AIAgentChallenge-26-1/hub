@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/postgres-bootstrap-manifest.schema.json",
+  "title": "NoticePilot PostgreSQL Bootstrap Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "generatedAt", "sourceContext", "counts", "integrity", "tableOrder"],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.postgresBootstrapBundle.v0.1"},
+    "generatedAt": {"type": "string"},
+    "sourceContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registryId", "projectionId", "snapshotSetId"],
+      "properties": {
+        "registryId": {"type": "string", "minLength": 1},
+        "projectionId": {"type": "string", "minLength": 1},
+        "snapshotSetId": {"type": "string", "minLength": 1}
+      }
+    },
+    "counts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "integrity": {"type": "object", "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}},
+    "tableOrder": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+  }
+}

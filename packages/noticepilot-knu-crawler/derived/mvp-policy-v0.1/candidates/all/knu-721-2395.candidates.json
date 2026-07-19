@@ -1,0 +1,380 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-721-2395",
+  "sourceContentHash": "2f99fcb962a59772cf26f71bedede0f11395f8de83b5519d2c88051f27dfb2f9",
+  "sourceTitle": "2026학년도 2학기 1차 주거안정장학금 신청 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2395&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "chuncheon",
+      "samcheok",
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "chuncheon": "춘천",
+      "samcheok": "삼척",
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-721-2395-e0e6cdb342f2ea",
+      "uidHint": "noticepilot-cand-knu-721-2395-e0e6cdb342f2ea@noticepilot.local",
+      "sourceNoticeId": "knu-721-2395",
+      "sourceTitle": "2026학년도 2학기 1차 주거안정장학금 신청 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2395&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon",
+          "samcheok",
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척",
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-14aae32f6fa8aeb9",
+        "segmentType": "label_value",
+        "labelText": "ㅇ (신청기간)",
+        "bodyText": "2026. 5. 22.(금), 09:00 ~ 6. 22.(월), 18:00",
+        "sourceLocation": {
+          "lineIndex": 1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-22",
+            "start": 9,
+            "end": 24
+          },
+          {
+            "value": "2026-06-22",
+            "start": 34,
+            "end": 43
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "ㅇ (신청기간)",
+          "ㅇ (신청기간) 2026. 5. 22.(금), 09:00 ~ 6. 22.(월), 18:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-753e2bc5529c2720",
+        "segmentId": "seg-14aae32f6fa8aeb9",
+        "rawText": "2026. 5. 22.(금), 09:00 ~ 6. 22.(월), 18:00",
+        "normalizedStart": "2026-05-22T09:00:00+09:00",
+        "normalizedEnd": "2026-06-22T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 9,
+          "end": 43
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-0b5956ee0b393d54",
+        "sourceNoticeId": "knu-721-2395",
+        "segmentId": "seg-14aae32f6fa8aeb9",
+        "temporalMentionIds": [
+          "tm-753e2bc5529c2720"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "ㅇ (신청기간)",
+        "evidence": "ㅇ (신청기간) 2026. 5. 22.(금), 09:00 ~ 6. 22.(월), 18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 2학기 1차 주거안정장학금 신청 안내 신청기간",
+      "dateText": "2026. 5. 22.(금), 09:00 ~ 6. 22.(월), 18:00",
+      "normalizedStart": "2026-05-22T09:00:00+09:00",
+      "normalizedEnd": "2026-06-22T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "ㅇ (신청기간) 2026. 5. 22.(금), 09:00 ~ 6. 22.(월), 18:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-721-2395-9ddf36c3a0ffe5",
+      "uidHint": "noticepilot-cand-knu-721-2395-9ddf36c3a0ffe5@noticepilot.local",
+      "sourceNoticeId": "knu-721-2395",
+      "sourceTitle": "2026학년도 2학기 1차 주거안정장학금 신청 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2395&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon",
+          "samcheok",
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척",
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "submission_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-ef0afcb9f7b4d531",
+        "segmentType": "label_value",
+        "labelText": "ㅇ (서류 제출 및 가구원 동의)",
+        "bodyText": "2026. 5. 22.(금), 09:00 ~ 6. 29.(월), 18:00",
+        "sourceLocation": {
+          "lineIndex": 2,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "submission_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-22",
+            "start": 19,
+            "end": 34
+          },
+          {
+            "value": "2026-06-29",
+            "start": 44,
+            "end": 53
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "submission_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "ㅇ (서류 제출 및 가구원 동의)",
+          "ㅇ (서류 제출 및 가구원 동의) 2026. 5. 22.(금), 09:00 ~ 6. 29.(월), 18:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-78bdbd4b18aba907",
+        "segmentId": "seg-ef0afcb9f7b4d531",
+        "rawText": "2026. 5. 22.(금), 09:00 ~ 6. 29.(월), 18:00",
+        "normalizedStart": "2026-05-22T09:00:00+09:00",
+        "normalizedEnd": "2026-06-29T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 19,
+          "end": 53
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-e6a34d5574340b07",
+        "sourceNoticeId": "knu-721-2395",
+        "segmentId": "seg-ef0afcb9f7b4d531",
+        "temporalMentionIds": [
+          "tm-78bdbd4b18aba907"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "ㅇ (서류 제출 및 가구원 동의)",
+        "evidence": "ㅇ (서류 제출 및 가구원 동의) 2026. 5. 22.(금), 09:00 ~ 6. 29.(월), 18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 2학기 1차 주거안정장학금 신청 안내 제출기간",
+      "dateText": "2026. 5. 22.(금), 09:00 ~ 6. 29.(월), 18:00",
+      "normalizedStart": "2026-05-22T09:00:00+09:00",
+      "normalizedEnd": "2026-06-29T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "ㅇ (서류 제출 및 가구원 동의) 2026. 5. 22.(금), 09:00 ~ 6. 29.(월), 18:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

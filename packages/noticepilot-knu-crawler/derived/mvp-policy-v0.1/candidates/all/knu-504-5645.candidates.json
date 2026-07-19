@@ -1,0 +1,530 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-5645",
+  "sourceContentHash": "1efcc5c9d90fc3898b3f97146fd6c25c4e5ff01d21c8102e43491162e5b8a0f9",
+  "sourceTitle": "[첨단소재·나노융합 혁신융합대학사업단] 2025년 취업역량강화 캠프 모집 안내（연장）",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5645&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천 삼척",
+    "campuses": [
+      "chuncheon",
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천",
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-5645-d550b0f3d9cf1d",
+      "uidHint": "noticepilot-cand-knu-504-5645-d550b0f3d9cf1d@noticepilot.local",
+      "sourceNoticeId": "knu-504-5645",
+      "sourceTitle": "[첨단소재·나노융합 혁신융합대학사업단] 2025년 취업역량강화 캠프 모집 안내（연장）",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5645&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-01d1e9bc051e6790",
+        "segmentType": "label_value",
+        "labelText": "사전교육(온라인)",
+        "bodyText": "2026. 1. 23.(금) 14:00 ~ 15:00",
+        "sourceLocation": {
+          "lineIndex": 3,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-01-23",
+            "start": 13,
+            "end": 28
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "사전교육(온라인)",
+          "- 사전교육(온라인): 2026. 1. 23.(금) 14:00 ~ 15:00",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-05deec808344373b",
+        "segmentId": "seg-01d1e9bc051e6790",
+        "rawText": "2026. 1. 23.(금) 14:00 ~ 15:00",
+        "normalizedStart": "2026-01-23T14:00:00+09:00",
+        "normalizedEnd": "2026-01-23T15:00:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 13,
+          "end": 28
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-cf3b0675d8faaaaa",
+        "sourceNoticeId": "knu-504-5645",
+        "segmentId": "seg-01d1e9bc051e6790",
+        "temporalMentionIds": [
+          "tm-05deec808344373b"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "사전교육(온라인)",
+        "evidence": "- 사전교육(온라인): 2026. 1. 23.(금) 14:00 ~ 15:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[첨단소재·나노융합 혁신융합대학사업단] 2025년 취업역량강화 캠프 모집 안내（연장） 행사 기간",
+      "dateText": "2026. 1. 23.(금) 14:00 ~ 15:00",
+      "normalizedStart": "2026-01-23T14:00:00+09:00",
+      "normalizedEnd": "2026-01-23T15:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "- 사전교육(온라인): 2026. 1. 23.(금) 14:00 ~ 15:00",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5645-031cae3f47c1f1",
+      "uidHint": "noticepilot-cand-knu-504-5645-031cae3f47c1f1@noticepilot.local",
+      "sourceNoticeId": "knu-504-5645",
+      "sourceTitle": "[첨단소재·나노융합 혁신융합대학사업단] 2025년 취업역량강화 캠프 모집 안내（연장）",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5645&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-99564c378ce44414",
+        "segmentType": "label_value",
+        "labelText": "모집기간",
+        "bodyText": "2026. 1. 25.(일) ※ 선착순 모집, 4학년 우선 선발",
+        "sourceLocation": {
+          "lineIndex": 11,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [
+          "student_year:4"
+        ],
+        "dateSpans": [
+          {
+            "value": "2026-01-25",
+            "start": 11,
+            "end": 26
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "모집기간",
+          "6. 모집기간: ~ 2026. 1. 25.(일) ※ 선착순 모집, 4학년 우선 선발",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-f9849144509a874f",
+        "segmentId": "seg-99564c378ce44414",
+        "rawText": "2026. 1. 25.(일)",
+        "normalizedStart": "2026-01-25",
+        "normalizedEnd": "2026-01-25",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 11,
+          "end": 26
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-e5129f6018006fdb",
+        "sourceNoticeId": "knu-504-5645",
+        "segmentId": "seg-99564c378ce44414",
+        "temporalMentionIds": [
+          "tm-f9849144509a874f"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "모집기간",
+        "evidence": "6. 모집기간: ~ 2026. 1. 25.(일) ※ 선착순 모집, 4학년 우선 선발"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[첨단소재·나노융합 혁신융합대학사업단] 2025년 취업역량강화 캠프 모집 안내（연장） 신청 마감",
+      "dateText": "2026. 1. 25.(일)",
+      "normalizedStart": "2026-01-25",
+      "normalizedEnd": "2026-01-25",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "6. 모집기간: ~ 2026. 1. 25.(일) ※ 선착순 모집, 4학년 우선 선발",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5645-78db74b5be87bc",
+      "uidHint": "noticepilot-cand-knu-504-5645-78db74b5be87bc@noticepilot.local",
+      "sourceNoticeId": "knu-504-5645",
+      "sourceTitle": "[첨단소재·나노융합 혁신융합대학사업단] 2025년 취업역량강화 캠프 모집 안내（연장）",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5645&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-b1bc7948d81e0fba",
+        "segmentType": "list_item",
+        "labelText": "",
+        "bodyText": "2026. 2. 9.(월) ~ 2. 11.(수)",
+        "sourceLocation": {
+          "lineIndex": 4,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-09",
+            "start": 12,
+            "end": 26
+          },
+          {
+            "value": "2026-02-11",
+            "start": 29,
+            "end": 38
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "- 캠프(오프라인): 2026. 2. 9.(월) ~ 2. 11.(수)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-62829749597f4354",
+        "segmentId": "seg-b1bc7948d81e0fba",
+        "rawText": "2026. 2. 9.(월) ~ 2. 11.(수)",
+        "normalizedStart": "2026-02-09",
+        "normalizedEnd": "2026-02-11",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 12,
+          "end": 38
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-63b90a04d2a6fb61",
+        "sourceNoticeId": "knu-504-5645",
+        "segmentId": "seg-b1bc7948d81e0fba",
+        "temporalMentionIds": [
+          "tm-62829749597f4354"
+        ],
+        "bindingKind": "same_list_item",
+        "confidence": "high",
+        "ruleId": "binding.same_list_item",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "- 캠프(오프라인): 2026. 2. 9.(월) ~ 2. 11.(수)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[첨단소재·나노융합 혁신융합대학사업단] 2025년 취업역량강화 캠프 모집 안내（연장） 행사 기간",
+      "dateText": "2026. 2. 9.(월) ~ 2. 11.(수)",
+      "normalizedStart": "2026-02-09",
+      "normalizedEnd": "2026-02-11",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "- 캠프(오프라인): 2026. 2. 9.(월) ~ 2. 11.(수)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 3,
+    "autoConfirmedCount": 3,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 3
+  }
+}

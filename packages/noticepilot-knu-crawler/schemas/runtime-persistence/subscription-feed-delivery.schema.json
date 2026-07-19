@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/subscription-feed-delivery.schema.json",
+  "title": "NoticePilot Subscription Feed Delivery Record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["feedId", "profileId", "currentSnapshotId", "calendarName", "status", "tokenHashSha256", "tokenPrefix", "tokenRotatedAt", "etag", "createdAt", "updatedAt"],
+  "properties": {
+    "feedId": {"type": "string", "pattern": "^feed_[0-9a-f]{32}$"},
+    "profileId": {"type": "string", "minLength": 1},
+    "currentSnapshotId": {"type": "string", "minLength": 1},
+    "calendarName": {"type": "string", "minLength": 1},
+    "status": {"enum": ["active", "paused", "revoked"]},
+    "tokenHashSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "tokenPrefix": {"type": "string", "minLength": 1, "maxLength": 12},
+    "tokenRotatedAt": {"type": "string"},
+    "etag": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "createdAt": {"type": "string"},
+    "updatedAt": {"type": "string"}
+  }
+}

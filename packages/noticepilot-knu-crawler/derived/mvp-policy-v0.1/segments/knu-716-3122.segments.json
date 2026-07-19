@@ -1,0 +1,125 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3122",
+  "sourceContentHash": "2c944c39f1365d745791ecf708ba296ccd61ea5ce4ca4c2343d58863db40e142",
+  "sourceTitle": "산학협력단 K-하이테크 플랫폼사업 전담직원 채용 최종 합격자 공고",
+  "publishedAt": "2026-01-27",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fe1558bb34f5eb5b",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "산학협력단 K-하이테크 플랫폼사업 전담직원 채용 최종 합격자 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "산학협력단 K-하이테크 플랫폼사업 전담직원 채용 최종 합격자 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-866ff04f94505270",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "산학협력단 K-하이테크 플랫폼사업 전담직원 채용 공고와 관련하여 다음과 같이 최종합격자를 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "산학협력단 K-하이테크 플랫폼사업 전담직원 채용 공고와 관련하여 다음과 같이 최종합격자를 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-18f8b22c9e027917",
+      "segmentType": "continuation",
+      "labelText": "",
+      "bodyText": "2026. 1. 27.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-866ff04f94505270"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-27",
+          "start": 57,
+          "end": 68
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "산학협력단 K-하이테크 플랫폼사업 전담직원 채용 공고와 관련하여 다음과 같이 최종합격자를 공고합니다. 2026. 1. 27."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-73535057193c2167",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 1. 27.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-27",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 1. 27."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-686e80d2f681c71e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 산학협력단장.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 산학협력단장."
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "continuation": 1
+    }
+  }
+}

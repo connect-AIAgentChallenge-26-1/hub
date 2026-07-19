@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4821",
+  "sourceContentHash": "05277d05110c9c232c44f1d5c5b895b233c785f9add29df0c16eb39908cbe23f",
+  "sourceTitle": "강원대학교 글로컬대학사업추진단 기간제 직원 최종 합격자 공고",
+  "publishedAt": "2026-06-05",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c984c0a690ac3f04",
+      "segmentType": "title",
+      "labelText": "강원대학교 글로컬대학사업추진단 기간제 직원 최종 합격자 공고",
+      "bodyText": "강원대학교 글로컬대학사업추진단 기간제 직원 최종 합격자 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 글로컬대학사업추진단 기간제 직원 최종 합격자 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7ca6fbfe232b85e1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-211호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-211호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ad3c1bcb388aaf51",
+      "segmentType": "label_value",
+      "labelText": "<강원대학교 글로컬대학사업추진단 기간제 직원 최종 합격자 공고>",
+      "bodyText": "<강원대학교 글로컬대학사업추진단 기간제 직원 최종 합격자 공고>",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<강원대학교 글로컬대학사업추진단 기간제 직원 최종 합격자 공고>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-be85e922b47711f5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-204호와 관련하여 최종 합격자를 다음과 같이 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-204호와 관련하여 최종 합격자를 다음과 같이 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-df8173b7e0f6926c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 6. 5.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-05",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 6. 5."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-912248c2739236bb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교총장",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교총장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 4,
+      "label_value": 1
+    }
+  }
+}

@@ -1,0 +1,362 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-721-2337",
+  "sourceContentHash": "712595f0428672d8369dd090653fb4a6edd9de06ae0660f1aaca4fd625a9988c",
+  "sourceTitle": "2026년도 국비유학생·국비연수생 선발 공고 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2337&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-721-2337-a7e37e1026475c",
+      "uidHint": "noticepilot-cand-knu-721-2337-a7e37e1026475c@noticepilot.local",
+      "sourceNoticeId": "knu-721-2337",
+      "sourceTitle": "2026년도 국비유학생·국비연수생 선발 공고 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2337&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-9927bc975ef79607",
+        "segmentType": "label_value",
+        "labelText": "접수기간(응시원서 시스템 입력)",
+        "bodyText": "2026.5.7.(목) 10:00 ~ 5.20.(수) 10:00",
+        "sourceLocation": {
+          "lineIndex": 47,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-07",
+            "start": 22,
+            "end": 34
+          },
+          {
+            "value": "2026-05-20",
+            "start": 43,
+            "end": 51
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "접수기간(응시원서 시스템 입력)",
+          "다. 접수기간(응시원서 시스템 입력): 2026.5.7.(목) 10:00 ~ 5.20.(수) 10:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-a420abe48849d1dc",
+        "segmentId": "seg-9927bc975ef79607",
+        "rawText": "2026.5.7.(목) 10:00 ~ 5.20.(수) 10:00",
+        "normalizedStart": "2026-05-07T10:00:00+09:00",
+        "normalizedEnd": "2026-05-20T10:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 22,
+          "end": 51
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-617c3d7d220f6a29",
+        "sourceNoticeId": "knu-721-2337",
+        "segmentId": "seg-9927bc975ef79607",
+        "temporalMentionIds": [
+          "tm-a420abe48849d1dc"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "접수기간(응시원서 시스템 입력)",
+        "evidence": "다. 접수기간(응시원서 시스템 입력): 2026.5.7.(목) 10:00 ~ 5.20.(수) 10:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026년도 국비유학생·국비연수생 선발 공고 안내 신청기간",
+      "dateText": "2026.5.7.(목) 10:00 ~ 5.20.(수) 10:00",
+      "normalizedStart": "2026-05-07T10:00:00+09:00",
+      "normalizedEnd": "2026-05-20T10:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "다. 접수기간(응시원서 시스템 입력): 2026.5.7.(목) 10:00 ~ 5.20.(수) 10:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-721-2337-76dfea2dcfbf3b",
+      "uidHint": "noticepilot-cand-knu-721-2337-76dfea2dcfbf3b@noticepilot.local",
+      "sourceNoticeId": "knu-721-2337",
+      "sourceTitle": "2026년도 국비유학생·국비연수생 선발 공고 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2337&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "submission_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-95f792db35ca1add",
+        "segmentType": "label_value",
+        "labelText": "서류 등기우편 제출은",
+        "bodyText": "2026.5.21.(목) 도착분까지 접수",
+        "sourceLocation": {
+          "lineIndex": 48,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "submission_period",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-21",
+            "start": 14,
+            "end": 27
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "submission_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "서류 등기우편 제출은",
+          "※ 서류 등기우편 제출은 2026.5.21.(목) 도착분까지 접수",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-ae7ac64f29eaf139",
+        "segmentId": "seg-95f792db35ca1add",
+        "rawText": "2026.5.21.(목)",
+        "normalizedStart": "2026-05-21",
+        "normalizedEnd": "2026-05-21",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 14,
+          "end": 27
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-535d83de14233273",
+        "sourceNoticeId": "knu-721-2337",
+        "segmentId": "seg-95f792db35ca1add",
+        "temporalMentionIds": [
+          "tm-ae7ac64f29eaf139"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "서류 등기우편 제출은",
+        "evidence": "※ 서류 등기우편 제출은 2026.5.21.(목) 도착분까지 접수"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026년도 국비유학생·국비연수생 선발 공고 안내 제출 마감",
+      "dateText": "2026.5.21.(목)",
+      "normalizedStart": "2026-05-21",
+      "normalizedEnd": "2026-05-21",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "※ 서류 등기우편 제출은 2026.5.21.(목) 도착분까지 접수",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

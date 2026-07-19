@@ -1,0 +1,258 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11032",
+  "sourceContentHash": "30458929b5b2a13a122f882a435e8f0069df212c21e148ca05ea828a1949e323",
+  "sourceTitle": "2026 홋카이도 하계 계절학기 안내 (3차 접수)",
+  "publishedAt": "2026-05-20",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7c8f544b723550c9",
+      "segmentType": "title",
+      "labelText": "2026 홋카이도 하계 계절학기 안내 (3차 접수)",
+      "bodyText": "2026 홋카이도 하계 계절학기 안내 (3차 접수)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026 홋카이도 하계 계절학기 안내 (3차 접수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2d2491db67367893",
+      "segmentType": "label_value",
+      "labelText": "○ 모집대상",
+      "bodyText": "○ 모집대상: 삼척·도계캠퍼스 재학생",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 모집대상: 삼척·도계캠퍼스 재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d0f83a94a90fc31a",
+      "segmentType": "label_value",
+      "labelText": "○ 파견기간",
+      "bodyText": "○ 파견기간: 2026학년도 여름학기 중 1주일 간, 신청자가 기간 선택",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 파견기간: 2026학년도 여름학기 중 1주일 간, 신청자가 기간 선택"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c8781b5fe0bd7573",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○ 주관기관: Hokkaido University",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 주관기관: Hokkaido University"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c56b4495fe568fff",
+      "segmentType": "label_value",
+      "labelText": "○ 신청접수",
+      "bodyText": "2026. 5. 25.(월) ~ 5. 29.(금)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-25",
+          "start": 9,
+          "end": 24
+        },
+        {
+          "value": "2026-05-29",
+          "start": 27,
+          "end": 36
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "○ 신청접수 : 2026. 5. 25.(월) ~ 5. 29.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f9c1c07e53ddb650",
+      "segmentType": "label_value",
+      "labelText": "○ 지원자격",
+      "bodyText": "○ 지원자격: 영어 공인어학성적 보유 및 영어로 수업 청강이 가능한 자",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 지원자격: 영어 공인어학성적 보유 및 영어로 수업 청강이 가능한 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3d238add35901513",
+      "segmentType": "label_value",
+      "labelText": "○ 신청방법",
+      "bodyText": "○ 신청방법: 홋카이도 여름 프로그램 로그인 및 개별신청(Application) > 접수 성공 이후, 국제교류팀에 연락 및 등록",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 신청방법: 홋카이도 여름 프로그램 로그인 및 개별신청(Application) > 접수 성공 이후, 국제교류팀에 연락 및 등록"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ea910b663a75fd85",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※반드시 Graduate Level(석·박사) 혹은 Undergraduate Level(학사) Course로 등록해야 됨",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:graduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※반드시 Graduate Level(석·박사) 혹은 Undergraduate Level(학사) Course로 등록해야 됨"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a7ca6c05583a2190",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○ 참고사항: 프로그램 등록 성공 및 참가 시 1인당 파견 지원금 100만원 지급, 계절학기 성적 인정",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 참고사항: 프로그램 등록 성공 및 참가 시 1인당 파견 지원금 100만원 지급, 계절학기 성적 인정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5fb5957cf9cd9771",
+      "segmentType": "label_value",
+      "labelText": "[접수 사이트]",
+      "bodyText": "[접수 사이트]",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[접수 사이트]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-170ba6e24626276c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://hokkaidosummerinstitute.oia.hokudai.ac.jp/en/",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://hokkaidosummerinstitute.oia.hokudai.ac.jp/en/"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8703ee014b7cc92c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "Tel.) 033-570-6291",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "Tel.) 033-570-6291"
+    }
+  ],
+  "summary": {
+    "segmentCount": 12,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 6,
+      "paragraph": 4,
+      "list_item": 1
+    }
+  }
+}

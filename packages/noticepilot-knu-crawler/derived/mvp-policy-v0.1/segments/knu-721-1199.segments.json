@@ -1,0 +1,366 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-1199",
+  "sourceContentHash": "2df97e48d75d7f6dd9fa2fe56c9e75a4f9dc2716adcb66e294f1b88ff5e05661",
+  "sourceTitle": "2026년도 춘천중앙교회 장학생 선발 안내",
+  "publishedAt": "2026-01-27",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-209e7a8e3c15f535",
+      "segmentType": "title",
+      "labelText": "2026년도 춘천중앙교회 장학생 선발 안내",
+      "bodyText": "2026년도 춘천중앙교회 장학생 선발 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년도 춘천중앙교회 장학생 선발 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aac268736530c6af",
+      "segmentType": "label_value",
+      "labelText": "선발인원",
+      "bodyText": "1. 선발인원: 1명",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 선발인원: 1명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c182737ec98ae731",
+      "segmentType": "label_value",
+      "labelText": "지원인원이 선발인원을 초과할 경우, 교외장학금 선발기준에 의거 선발 예정",
+      "bodyText": "※ 지원인원이 선발인원을 초과할 경우, 교외장학금 선발기준에 의거 선발 예정",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 지원인원이 선발인원을 초과할 경우, 교외장학금 선발기준에 의거 선발 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-00ecf140a4818b55",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 장학금액: 200만원(생활비)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 장학금액: 200만원(생활비)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1906a411bc949c1e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 자격기준",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 자격기준"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2cd008dd428e1f61",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1) 2026학년도 1학기 기준 학부재학생",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate",
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1) 2026학년도 1학기 기준 학부재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5d3db501cca3465a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2) 직전하기 12학점 이상 이수, 직전학기 B 이상인 자",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2) 직전하기 12학점 이상 이수, 직전학기 B 이상인 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-45f7f7d80449bf3e",
+      "segmentType": "label_value",
+      "labelText": "출석교회 담임목사 추천서를 제출할 수 있는 자",
+      "bodyText": "3) 출석교회 담임목사 추천서를 제출할 수 있는 자",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3) 출석교회 담임목사 추천서를 제출할 수 있는 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cdf4751fe58490a8",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 2. 5.(목)~2.6.(금) 17:00",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-05",
+          "start": 9,
+          "end": 23
+        },
+        {
+          "value": "2026-02-06",
+          "start": 24,
+          "end": 31
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "4. 접수기간: 2026. 2. 5.(목)~2.6.(금) 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b81581c95ff0ea1e",
+      "segmentType": "label_value",
+      "labelText": "제출장소",
+      "bodyText": "5. 제출장소: 나래관 2층 학생과",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 제출장소: 나래관 2층 학생과"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-91455dcb9307d44d",
+      "segmentType": "label_value",
+      "labelText": "제출서류",
+      "bodyText": "6. 제출서류: 담임목사추천서(출석교회 자체양식), 대학추천서(지도교수 또는 학과장),",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 제출서류: 담임목사추천서(출석교회 자체양식), 대학추천서(지도교수 또는 학과장),"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eb339258167b8f41",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "성적증명서, 재학증명서, 자기소개서(자유양식), 개인정보 수집‧이용 및 제3자 제공",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "성적증명서, 재학증명서, 자기소개서(자유양식), 개인정보 수집‧이용 및 제3자 제공"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bb5406374138a886",
+      "segmentType": "label_value",
+      "labelText": "동의서, 학자금지원구간통지서(미소지자는 9분위 이상으로 간주)",
+      "bodyText": "동의서, 학자금지원구간통지서(미소지자는 9분위 이상으로 간주)",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "동의서, 학자금지원구간통지서(미소지자는 9분위 이상으로 간주)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f52e757f0271eb06",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "7. 기타사항",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "7. 기타사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7a421a4782d1853c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1) 장학금 전달은 춘천중앙교회에서 대상자를 초청하여 전달",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1) 장학금 전달은 춘천중앙교회에서 대상자를 초청하여 전달"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0026b0524079bed7",
+      "segmentType": "label_value",
+      "labelText": "일시",
+      "bodyText": "2026년 3월 7일 토요일 오후 2시 춘천중앙교회(기독교대한감리회 춘천중",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-07",
+          "start": 7,
+          "end": 18
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2) 일시: 2026년 3월 7일 토요일 오후 2시 춘천중앙교회(기독교대한감리회 춘천중"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e3f59aba74bda3f2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "앙교회 담임목사 심성수)",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "앙교회 담임목사 심성수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-125b8ab60e7912a8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 장학금 수여식에 참석하지 못하는 경우 장학생 취소",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 장학금 수여식에 참석하지 못하는 경우 장학생 취소"
+    }
+  ],
+  "summary": {
+    "segmentCount": 18,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 8,
+      "list_item": 7,
+      "paragraph": 2
+    }
+  }
+}

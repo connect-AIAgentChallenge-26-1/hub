@@ -1,0 +1,36 @@
+{
+  "pipelineVersion": "0.1.18",
+  "policyConfig": "/Users/chan/Downloads/noticepilot-knu-crawler-v0.4.4-observation.3-policy.15-foundation.3/configs/noticepilot_mvp_policy.v0.1.json",
+  "datasetDir": "/Users/chan/Downloads/noticepilot-knu-crawler-v0.4.4-observation.3/local-observation-data/observation-2026-v2",
+  "outputDir": "/Users/chan/Downloads/noticepilot-knu-crawler-v0.4.4-observation.3-policy.15-foundation.3/derived/mvp-policy-v0.1",
+  "generatedAt": "2026-07-12T07:26:39+00:00",
+  "outputs": {
+    "decisions": "decisions/notices.jsonl",
+    "reviewQueue": "decisions/review-queue.jsonl",
+    "publishableCandidates": "decisions/publishable-candidates.jsonl",
+    "allCandidateDir": "candidates/all",
+    "structuredSegmentDir": "segments",
+    "studentCandidateDir": "candidates/student_default",
+    "jobCandidateDir": "candidates/job_application",
+    "summary": "reports/policy-summary.json",
+    "boardSummary": "reports/board-disposition-summary.tsv",
+    "candidateIntegrity": "reports/candidate-integrity.json"
+  },
+  "postProcessing": {
+    "adapter": "noticepilot_runtime_judgment_wiring",
+    "adapterVersion": "0.1.0",
+    "reason": "S24-D runtime ApplicabilityJudgment/PublishabilityJudgment serialization"
+  },
+  "postProcessingHistory": [
+    {
+      "adapter": "noticepilot_board716_trace_adapter",
+      "adapterVersion": "0.1.0",
+      "reason": "S24-A board 716 list-metadata trace completion"
+    },
+    {
+      "adapter": "noticepilot_runtime_judgment_wiring",
+      "adapterVersion": "0.1.0",
+      "reason": "S24-D runtime ApplicabilityJudgment/PublishabilityJudgment serialization"
+    }
+  ]
+}

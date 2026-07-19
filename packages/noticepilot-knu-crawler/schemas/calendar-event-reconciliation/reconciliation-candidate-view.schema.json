@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/reconciliation-candidate-view.schema.json",
+  "title": "NoticePilot ReconciliationCandidateView",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "candidateId", "sourceNoticeId", "sourceIdentity",
+    "publishedAt", "sourceTitle", "titleAnalysis", "sourceContentHash",
+    "eventProjection", "candidateState"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.reconciliationCandidateView.v0.1"},
+    "candidateId": {"type": "string", "minLength": 1},
+    "sourceNoticeId": {"type": "string", "minLength": 1},
+    "publishedAt": {"type": ["string", "null"]},
+    "sourceTitle": {"type": "string", "minLength": 1},
+    "sourceContentHash": {"type": ["string", "null"]},
+    "sourceIdentity": {"$ref": "#/$defs/sourceIdentity"},
+    "titleAnalysis": {"$ref": "#/$defs/titleAnalysis"},
+    "eventProjection": {"$ref": "#/$defs/eventProjection"},
+    "candidateState": {"$ref": "#/$defs/candidateState"}
+  },
+  "$defs": {
+    "sourceIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schemaVersion", "institutionId", "identityKey", "canonicalBoardCategory",
+        "sourcePostId", "observedBoardId", "canonicalBoardId", "boardCanonical",
+        "aliasBoardIds", "observedSourceUrl", "canonicalSourceUrl"
+      ],
+      "properties": {
+        "schemaVersion": {"const": "noticepilot.canonicalSourceIdentity.v0.1"},
+        "institutionId": {"const": "kangwon"},
+        "identityKey": {"type": "string", "minLength": 1},
+        "canonicalBoardCategory": {"type": "string", "minLength": 1},
+        "sourcePostId": {"type": "string", "minLength": 1},
+        "observedBoardId": {"type": "string", "minLength": 1},
+        "canonicalBoardId": {"type": "string", "minLength": 1},
+        "boardCanonical": {"type": "boolean"},
+        "aliasBoardIds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "observedSourceUrl": {"type": ["string", "null"]},
+        "canonicalSourceUrl": {"type": "string", "format": "uri"}
+      }
+    },
+    "titleAnalysis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["normalizedTitle", "baseTitle", "relationBaseTitle", "temporalStrippedBaseTitle", "leadingMarker", "markers", "decorativeMarkers", "tokens"],
+      "properties": {
+        "normalizedTitle": {"type": "string"},
+        "baseTitle": {"type": "string"},
+        "relationBaseTitle": {"type": "string"},
+        "temporalStrippedBaseTitle": {"type": "string"},
+        "leadingMarker": {"type": ["string", "null"]},
+        "markers": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "decorativeMarkers": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "tokens": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "eventProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title", "eventType", "actionType", "temporalRole", "targetActor",
+        "audienceRules", "campusScope", "normalizedStart", "normalizedEnd",
+        "endDateInclusive", "isAllDay", "timezone", "feedScopes"
+      ]
+    },
+    "candidateState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "includeInCalendarFeed", "confidence", "reasonCodes", "publishabilityVerdict"]
+    }
+  }
+}

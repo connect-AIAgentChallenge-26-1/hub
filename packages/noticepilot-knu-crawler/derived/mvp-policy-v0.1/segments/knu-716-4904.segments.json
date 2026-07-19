@@ -1,0 +1,236 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4904",
+  "sourceContentHash": "ab655b2bf651c31c964496bacce8803af3696283c8d641190d0efd3782f892e9",
+  "sourceTitle": "춘천교육지원과 조교 신규채용 공고",
+  "publishedAt": "2026-07-10",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-63b69534af0a0939",
+      "segmentType": "title",
+      "labelText": "춘천교육지원과 조교 신규채용 공고",
+      "bodyText": "춘천교육지원과 조교 신규채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "춘천교육지원과 조교 신규채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7abf8cf923ec0565",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 춘천교육지원과에서 다음과 같이 조교(교육공무원) 공개경쟁채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 춘천교육지원과에서 다음과 같이 조교(교육공무원) 공개경쟁채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 춘천교육지원과에서 다음과 같이 조교(교육공무원) 공개경쟁채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1553782c437847b6",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 채용부서 : 춘천교육지원과(춘천교학처)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 채용부서 : 춘천교육지원과(춘천교학처)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38bf4e551c2b18d1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 채용인원 : 1명",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 채용인원 : 1명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-95330575706bf8df",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 담당예정업무 : 학부 수강·수업 운영 및 학점 인정 관련 학사 행정 관리 업무",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 담당예정업무 : 학부 수강·수업 운영 및 학점 인정 관련 학사 행정 관리 업무"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e6392b670ea4e9a2",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 7. 10.(금) ~ 2026. 7. 16.(목) 18:00",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-10",
+          "start": 10,
+          "end": 25
+        },
+        {
+          "value": "2026-07-16",
+          "start": 28,
+          "end": 43
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "4. 접수기간 : 2026. 7. 10.(금) ~ 2026. 7. 16.(목) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b5df41836bc0beec",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 기타 자세한 사항은 붙임 공고문 참고",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 기타 자세한 사항은 붙임 공고문 참고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6d42fdf37e69356a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 7. 10.",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-10",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 7. 10."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2edbb9a94d567e1c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 총장",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 총장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-a0e2f3c66103b145",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-07-10~2026-07-16",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-10",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-07-16",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-07-10~2026-07-16"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 3,
+      "list_item": 4,
+      "paragraph": 2,
+      "title": 1
+    }
+  }
+}

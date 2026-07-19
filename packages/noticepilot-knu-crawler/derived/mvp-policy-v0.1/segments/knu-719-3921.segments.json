@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-3921",
+  "sourceContentHash": "180abfb75b0d45858104ac13fc3ce9aaf1461dacdecd73971d581dea0d56aac0",
+  "sourceTitle": "국립중앙과학관 2026 제55회 사이언스데이 과학체험콘텐츠 학생부스 모집 안내",
+  "publishedAt": "2026-01-30",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-da84eb4af02e433b",
+      "segmentType": "title",
+      "labelText": "국립중앙과학관 2026 제55회 사이언스데이 과학체험콘텐츠 학생부스 모집 안내",
+      "bodyText": "국립중앙과학관 2026 제55회 사이언스데이 과학체험콘텐츠 학생부스 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국립중앙과학관 2026 제55회 사이언스데이 과학체험콘텐츠 학생부스 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ad84848c3b200197",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 042-601-8060(과학교육과 사이언스데이 담당 주무관)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 042-601-8060(과학교육과 사이언스데이 담당 주무관)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

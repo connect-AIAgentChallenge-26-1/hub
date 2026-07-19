@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-716-3067",
+  "sourceContentHash": "9aab94111d17c4419199d16141ad07920b1e3e0ef52cbf1cc233e6791f4c0daa",
+  "sourceTitle": "의과대학 의학과（예방의학교실） 조교 신규채용 공고",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/716/detail.do?pstSn=3067&pageIndex=13&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-716-3067-75f221acc3506e",
+      "uidHint": "noticepilot-cand-knu-716-3067-75f221acc3506e@noticepilot.local",
+      "sourceNoticeId": "knu-716-3067",
+      "sourceTitle": "의과대학 의학과（예방의학교실） 조교 신규채용 공고",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/716/detail.do?pstSn=3067&pageIndex=13&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "job_posting",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "job_application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-board716-567d7fe9f057e089",
+        "segmentType": "label_value",
+        "labelText": "접수기간",
+        "bodyText": "2026-01-09~2026-01-15",
+        "sourceLocation": {
+          "lineIndex": 0,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-01-09",
+            "start": 14,
+            "end": 24
+          },
+          {
+            "value": "2026-01-15",
+            "start": 25,
+            "end": 35
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "job_application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.board716.exact_application_period",
+        "evidence": [
+          "listMetadata.application_period_start",
+          "listMetadata.application_period_end",
+          "접수기간 2026-01-09~2026-01-15"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-38e04d3d5aae961e",
+        "segmentId": "seg-board716-567d7fe9f057e089",
+        "rawText": "접수기간 2026-01-09~2026-01-15",
+        "normalizedStart": "2026-01-09",
+        "normalizedEnd": "2026-01-15",
+        "resolutionKind": "list_application_period",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": null
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-e5c45af42773090f",
+        "sourceNoticeId": "knu-716-3067",
+        "segmentId": "seg-board716-567d7fe9f057e089",
+        "temporalMentionIds": [
+          "tm-38e04d3d5aae961e"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.board716.list_metadata.application_period",
+        "locallyGrounded": true,
+        "labelText": "접수기간",
+        "evidence": "채용안내 목록 접수기간: 2026-01-09~2026-01-15"
+      },
+      "targetActor": "job_applicant",
+      "feedScopes": [
+        "job_application"
+      ],
+      "title": "의과대학 의학과（예방의학교실） 조교 신규채용 공고 채용 접수기간",
+      "dateText": "접수기간 2026-01-09~2026-01-15",
+      "normalizedStart": "2026-01-09",
+      "normalizedEnd": "2026-01-15",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "채용안내 목록 접수기간: 2026-01-09~2026-01-15",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "board716_application_period_only",
+        "exact_list_application_period"
+      ],
+      "dateResolution": {
+        "kind": "list_application_period",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "job_applicant",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.job_applicant",
+        "reasonCodes": []
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "board716_application_period_only",
+          "exact_list_application_period"
+        ],
+        "ruleIds": [
+          "publishability.board716.exact_application_period.auto_confirm",
+          "publishability.reason.board716_application_period_only",
+          "publishability.reason.exact_list_application_period",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

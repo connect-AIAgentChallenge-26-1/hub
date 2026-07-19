@@ -1,0 +1,374 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10739",
+  "sourceContentHash": "c4848ba61564af6736e5f1398bf1c7b293bde6269d109c75e8a6464fac185cc3",
+  "sourceTitle": "[창업지원본부]2026학년도 창업동아리 모집(~3/27 18:00까지)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10739&pageIndex=9&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉 원주",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10739-688d244ce8f243",
+      "uidHint": "noticepilot-cand-knu-504-10739-688d244ce8f243@noticepilot.local",
+      "sourceNoticeId": "knu-504-10739",
+      "sourceTitle": "[창업지원본부]2026학년도 창업동아리 모집(~3/27 18:00까지)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10739&pageIndex=9&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-5faacdb68653948f",
+        "segmentType": "label_value",
+        "labelText": "□ 모집기간",
+        "bodyText": "2026. 03. 16.(월) ~ 03. 27.(금) 18:00까지",
+        "sourceLocation": {
+          "lineIndex": 6,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-16",
+            "start": 8,
+            "end": 24
+          },
+          {
+            "value": "2026-03-27",
+            "start": 27,
+            "end": 37
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "□ 모집기간",
+          "□ 모집기간: 2026. 03. 16.(월) ~ 03. 27.(금) 18:00까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-29290959571ad634",
+        "segmentId": "seg-5faacdb68653948f",
+        "rawText": "2026. 03. 16.(월) ~ 03. 27.(금) 18:00까지",
+        "normalizedStart": "2026-03-16T00:00:00+09:00",
+        "normalizedEnd": "2026-03-27T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 8,
+          "end": 37
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-89e73aff0d8380ab",
+        "sourceNoticeId": "knu-504-10739",
+        "segmentId": "seg-5faacdb68653948f",
+        "temporalMentionIds": [
+          "tm-29290959571ad634"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "□ 모집기간",
+        "evidence": "□ 모집기간: 2026. 03. 16.(월) ~ 03. 27.(금) 18:00까지"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[창업지원본부]2026학년도 창업동아리 모집(~3/27 18:00까지) 신청기간",
+      "dateText": "2026. 03. 16.(월) ~ 03. 27.(금) 18:00까지",
+      "normalizedStart": "2026-03-16T00:00:00+09:00",
+      "normalizedEnd": "2026-03-27T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "□ 모집기간: 2026. 03. 16.(월) ~ 03. 27.(금) 18:00까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "same_action_boundary_candidates_consolidated",
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": "start_of_day_assumed_for_timed_range"
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "same_action_boundary_candidates_consolidated",
+          "start_of_day_assumed_for_timed_range",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10739-997cae8d62cad4",
+      "uidHint": "noticepilot-cand-knu-504-10739-997cae8d62cad4@noticepilot.local",
+      "sourceNoticeId": "knu-504-10739",
+      "sourceTitle": "[창업지원본부]2026학년도 창업동아리 모집(~3/27 18:00까지)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10739&pageIndex=9&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-f40081f3a90ba87b",
+        "segmentType": "label_value",
+        "labelText": "접수 팀 별 창업동아리 선정 창업캠프(",
+        "bodyText": "4.9.~4.10./1박2일) 1~2인 필참 > 선정평가 진행",
+        "sourceLocation": {
+          "lineIndex": 9,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period",
+          "exam_or_interview",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-09",
+            "start": 22,
+            "end": 25
+          },
+          {
+            "value": "2026-04-10",
+            "start": 27,
+            "end": 31
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "접수 팀 별 창업동아리 선정 창업캠프(",
+          "※접수 팀 별 창업동아리 선정 창업캠프(4.9.~4.10./1박2일) 1~2인 필참 > 선정평가 진행",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-5c5de81d2439da6f",
+        "segmentId": "seg-f40081f3a90ba87b",
+        "rawText": "4.9.~4.10./1박2일) 1~2인 필참 > 선정평가 진행",
+        "normalizedStart": "2026-04-09",
+        "normalizedEnd": "2026-04-10",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 22,
+          "end": 31
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-164a84f1f011dede",
+        "sourceNoticeId": "knu-504-10739",
+        "segmentId": "seg-f40081f3a90ba87b",
+        "temporalMentionIds": [
+          "tm-5c5de81d2439da6f"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "접수 팀 별 창업동아리 선정 창업캠프(",
+        "evidence": "※접수 팀 별 창업동아리 선정 창업캠프(4.9.~4.10./1박2일) 1~2인 필참 > 선정평가 진행"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[창업지원본부]2026학년도 창업동아리 모집(~3/27 18:00까지) 신청기간",
+      "dateText": "4.9.~4.10./1박2일) 1~2인 필참 > 선정평가 진행",
+      "normalizedStart": "2026-04-09",
+      "normalizedEnd": "2026-04-10",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "※접수 팀 별 창업동아리 선정 창업캠프(4.9.~4.10./1박2일) 1~2인 필참 > 선정평가 진행",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

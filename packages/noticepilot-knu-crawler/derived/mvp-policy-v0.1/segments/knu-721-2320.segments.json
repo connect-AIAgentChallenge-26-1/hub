@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2320",
+  "sourceContentHash": "cdcca73b65a1d0f24908f79db790f736c09a96cefbff37ff531bb54fed7d5291",
+  "sourceTitle": "2026년 맑고 향기롭게 제7기 대학 장학생 선발 안내",
+  "publishedAt": "2026-03-24",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ea9cc1d5976913fa",
+      "segmentType": "title",
+      "labelText": "2026년 맑고 향기롭게 제7기 대학 장학생 선발 안내",
+      "bodyText": "2026년 맑고 향기롭게 제7기 대학 장학생 선발 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 맑고 향기롭게 제7기 대학 장학생 선발 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-565498f3644704b8",
+      "segmentType": "label_value",
+      "labelText": "선발인원",
+      "bodyText": "1. 선발인원: 25명 내외",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 선발인원: 25명 내외"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4303221bc7218b63",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 장학금액: 400만원(생활비)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 장학금액: 400만원(생활비)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6726cdd2fe9d9262",
+      "segmentType": "label_value",
+      "labelText": "접수기한",
+      "bodyText": "2026. 4. 14.(화) 우편소인까지 접수",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-14",
+          "start": 9,
+          "end": 24
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 접수기한: 2026. 4. 14.(화) 우편소인까지 접수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5735ec1b119affa7",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 기타사항",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 기타사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8b1aed184204ff84",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026. 5. 30.(토) 오후 2시 서울 성북구 선잠로5길 68 길상사 내(필수참석)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-30",
+          "start": 13,
+          "end": 28
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "1) 장학증서 수여식: 2026. 5. 30.(토) 오후 2시 서울 성북구 선잠로5길 68 길상사 내(필수참석)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8af6f1a9f0946794",
+      "segmentType": "label_value",
+      "labelText": "장학금 지급일",
+      "bodyText": "2026. 6. 2.(화), (2차)2026. 11. 11.(수) 각 200만원 지급",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-02",
+          "start": 17,
+          "end": 31
+        },
+        {
+          "value": "2026-11-11",
+          "start": 37,
+          "end": 53
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2) 장학금 지급일: (1차) 2026. 6. 2.(화), (2차)2026. 11. 11.(수) 각 200만원 지급"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-07f11b8486fb9174",
+      "segmentType": "label_value",
+      "labelText": "장학금 명목의 타 기관 장학금과 중복하여 지원받을 수 없음",
+      "bodyText": "3) 장학금 명목의 타 기관 장학금과 중복하여 지원받을 수 없음",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3) 장학금 명목의 타 기관 장학금과 중복하여 지원받을 수 없음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6ec87898b6333920",
+      "segmentType": "label_value",
+      "labelText": "(단, 등록금 장학금 및 성적,근로,멘토링 등 대가성 장학금은 중복가능)",
+      "bodyText": "(단, 등록금 장학금 및 성적,근로,멘토링 등 대가성 장학금은 중복가능)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(단, 등록금 장학금 및 성적,근로,멘토링 등 대가성 장학금은 중복가능)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-963016d00e6843fc",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 장학금 수여식에 참석하지 못하는 경우 장학생 취소",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 장학금 수여식에 참석하지 못하는 경우 장학생 취소"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 5,
+      "list_item": 4
+    }
+  }
+}

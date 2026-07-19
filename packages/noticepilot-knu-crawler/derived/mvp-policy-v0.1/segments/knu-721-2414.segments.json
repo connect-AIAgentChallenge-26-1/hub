@@ -1,0 +1,353 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2414",
+  "sourceContentHash": "24347b2d72b550b7363f80066b5beca92d47900fc0af270b622a5afb5e154aae",
+  "sourceTitle": "2026년도 부마민주항쟁기념재단 장학생 모집 안내",
+  "publishedAt": "2026-06-10",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-26624a60f65cc3e6",
+      "segmentType": "title",
+      "labelText": "2026년도 부마민주항쟁기념재단 장학생 모집 안내",
+      "bodyText": "2026년도 부마민주항쟁기념재단 장학생 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년도 부마민주항쟁기념재단 장학생 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d82c40a760e2d298",
+      "segmentType": "label_value",
+      "labelText": "○ 접수기간",
+      "bodyText": "2026. 7. 13.(월) ~ 7. 17.(금)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-13",
+          "start": 9,
+          "end": 24
+        },
+        {
+          "value": "2026-07-17",
+          "start": 27,
+          "end": 36
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "○ 접수기간 : 2026. 7. 13.(월) ~ 7. 17.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c88ff5d5f968e08a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8488cb868ba4dbd5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "대상 :",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "대상 :"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9aca2b15581963c4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "아래 중 하나에 해당되는 자",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "아래 중 하나에 해당되는 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-771b82d86c00c2bb",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "① 부마민주항쟁 피해자 및 관련자의 초등학생 이상 (유)손자녀",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "① 부마민주항쟁 피해자 및 관련자의 초등학생 이상 (유)손자녀"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e04de4072f2e2e2d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "② 민주화운동 관련자의 청소년 이상 (유)자녀",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "② 민주화운동 관련자의 청소년 이상 (유)자녀"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2be4b40a56622855",
+      "segmentType": "label_value",
+      "labelText": "시민사회운동 활동가의 청소년 이상 자녀",
+      "bodyText": "③ 시민사회운동 활동가의 청소년 이상 자녀",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "③ 시민사회운동 활동가의 청소년 이상 자녀"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-296e602d1560a8c4",
+      "segmentType": "label_value",
+      "labelText": "기타 장학금 지급이 합당하다고 인정되는 자",
+      "bodyText": "④ 기타 장학금 지급이 합당하다고 인정되는 자",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "④ 기타 장학금 지급이 합당하다고 인정되는 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d90fdf40552852d7",
+      "segmentType": "label_value",
+      "labelText": "4년제・전문대 무관하며, 입학예정자 또는 휴학생(복학 예정자) 신청 가능",
+      "bodyText": "※ 4년제・전문대 무관하며, 입학예정자 또는 휴학생(복학 예정자) 신청 가능",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "return_from_leave_application",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:on_leave"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 4년제・전문대 무관하며, 입학예정자 또는 휴학생(복학 예정자) 신청 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b7df119a440c11f2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-85b105abfe6c2617",
+      "segmentType": "label_value",
+      "labelText": "선정인원",
+      "bodyText": "선정인원 : 13명 내외 (대상 인원은 변동 가능)",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "선정인원 : 13명 내외 (대상 인원은 변동 가능)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ce7e2d16ae861cd7",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "① 대학생 10명 내외",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "① 대학생 10명 내외"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5cd2b1a4719a68c7",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "② 초등학생~청소년(만13세 ~ 18세) 3명 내외",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "② 초등학생~청소년(만13세 ~ 18세) 3명 내외"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fbb6056329e6fe9f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2d5a78b46ceb3e72",
+      "segmentType": "label_value",
+      "labelText": "지원규모",
+      "bodyText": "지원규모",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "지원규모"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4829d3b9445d7add",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "① 대학생 1인당 150만원",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "① 대학생 1인당 150만원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e766a30843b24e6e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "② 초등학생~청소년(만13세 ~ 18세) 1인당 50만원",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "② 초등학생~청소년(만13세 ~ 18세) 1인당 50만원"
+    }
+  ],
+  "summary": {
+    "segmentCount": 18,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 6,
+      "paragraph": 5,
+      "list_item": 6
+    }
+  }
+}

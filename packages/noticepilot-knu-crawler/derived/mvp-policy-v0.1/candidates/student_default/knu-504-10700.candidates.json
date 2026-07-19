@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10700",
+  "sourceContentHash": "6ffe7c8135b36227cf2cbd7a4b97bfcb124a6a03eca4f3b0e5bfb942cdc577a0",
+  "sourceTitle": "2026학년도 1학기 재학생 등록금 추가 납부기간 안내(2차 추가납부, 수업연한초과생, 학사학위취득유예생, 시간제등록생)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10700&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "chuncheon",
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "chuncheon": "춘천",
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10700-392eec1d4616c9",
+      "uidHint": "noticepilot-cand-knu-504-10700-392eec1d4616c9@noticepilot.local",
+      "sourceNoticeId": "knu-504-10700",
+      "sourceTitle": "2026학년도 1학기 재학생 등록금 추가 납부기간 안내(2차 추가납부, 수업연한초과생, 학사학위취득유예생, 시간제등록생)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10700&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "payment_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-7251c989780b8de1",
+        "segmentType": "label_value",
+        "labelText": "등록금 조회/납부기간",
+        "bodyText": "2026. 3. 12.(목) ~ 3. 13.(금) 16시",
+        "sourceLocation": {
+          "lineIndex": 2,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "payment_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-12",
+            "start": 16,
+            "end": 31
+          },
+          {
+            "value": "2026-03-13",
+            "start": 34,
+            "end": 43
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "payment_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "등록금 조회/납부기간",
+          "2. 등록금 조회/납부기간: 2026. 3. 12.(목) ~ 3. 13.(금) 16시",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-9f38f125239f75fc",
+        "segmentId": "seg-7251c989780b8de1",
+        "rawText": "2026. 3. 12.(목) ~ 3. 13.(금) 16시",
+        "normalizedStart": "2026-03-12T00:00:00+09:00",
+        "normalizedEnd": "2026-03-13T16:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 16,
+          "end": 43
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-ec6b2fff169c3c4d",
+        "sourceNoticeId": "knu-504-10700",
+        "segmentId": "seg-7251c989780b8de1",
+        "temporalMentionIds": [
+          "tm-9f38f125239f75fc"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "등록금 조회/납부기간",
+        "evidence": "2. 등록금 조회/납부기간: 2026. 3. 12.(목) ~ 3. 13.(금) 16시"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 1학기 재학생 등록금 추가 납부기간 안내(2차 추가납부, 수업연한초과생, 학사학위취득유예생, 시간제등록생)",
+      "dateText": "2026. 3. 12.(목) ~ 3. 13.(금) 16시",
+      "normalizedStart": "2026-03-12T00:00:00+09:00",
+      "normalizedEnd": "2026-03-13T16:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "2. 등록금 조회/납부기간: 2026. 3. 12.(목) ~ 3. 13.(금) 16시",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": "start_of_day_assumed_for_timed_range"
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "start_of_day_assumed_for_timed_range",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3205",
+  "sourceContentHash": "3f5620eff2267b9c2f438c8f6aa02095c6572b33a2aa610fcfca41f586c9fa94",
+  "sourceTitle": "강원대학교 행정주사（일반임기제） 경력경쟁채용 서류전형 합격자 및 면접시험 일정 공고",
+  "publishedAt": "2026-02-13",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7e0da1156e31bd5e",
+      "segmentType": "title",
+      "labelText": "강원대학교 행정주사（일반임기제） 경력경쟁채용 서류전형 합격자 및 면접시험 일정 공고",
+      "bodyText": "강원대학교 행정주사（일반임기제） 경력경쟁채용 서류전형 합격자 및 면접시험 일정 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 행정주사（일반임기제） 경력경쟁채용 서류전형 합격자 및 면접시험 일정 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d309042ccbe2f50",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 공고 제2026-52호와 관련하여 다음과 같이 서류전형 합격자 및 면접시험 일정을 공고합니다.",
+      "bodyText": "강원대학교 공고 제2026-52호와 관련하여 다음과 같이 서류전형 합격자 및 면접시험 일정을 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-52호와 관련하여 다음과 같이 서류전형 합격자 및 면접시험 일정을 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9ffd73425a2f16eb",
+      "segmentType": "continuation",
+      "labelText": "강원대학교 공고 제2026-52호와 관련하여 다음과 같이 서류전형 합격자 및 면접시험 일정을 공고합니다.",
+      "bodyText": "2026. 2. 13.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-0d309042ccbe2f50"
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-13",
+          "start": 59,
+          "end": 70
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "강원대학교 공고 제2026-52호와 관련하여 다음과 같이 서류전형 합격자 및 면접시험 일정을 공고합니다. 2026. 2. 13."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1d43bce89b02182c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 2. 13.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-13",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 2. 13."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-42fa09f92a9a551d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 총장",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 총장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ffa57fd4ab745e18",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 자세한 내용은 붙임 파일을 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 자세한 내용은 붙임 파일을 참고하시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "continuation": 1,
+      "paragraph": 2,
+      "list_item": 1
+    }
+  }
+}

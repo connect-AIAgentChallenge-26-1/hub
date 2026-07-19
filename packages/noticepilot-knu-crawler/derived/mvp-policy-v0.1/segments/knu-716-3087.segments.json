@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3087",
+  "sourceContentHash": "dffc3ba51ee4053dda2003f9a909992efd8265cafa2d2397c81b8762d6e2b280",
+  "sourceTitle": "강원대학교 제3행정실 기간제 직원 채용 공고",
+  "publishedAt": "2026-01-19",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7a38a826d6efe9e6",
+      "segmentType": "title",
+      "labelText": "강원대학교 제3행정실 기간제 직원 채용 공고",
+      "bodyText": "강원대학교 제3행정실 기간제 직원 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 제3행정실 기간제 직원 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eb88de887193becc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-19호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-19호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a9878c1e2df82aa4",
+      "segmentType": "label_value",
+      "labelText": "<강원대학교 제3행정실 기간제 직원 채용 공고>",
+      "bodyText": "<강원대학교 제3행정실 기간제 직원 채용 공고>",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<강원대학교 제3행정실 기간제 직원 채용 공고>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bf2443290dddee0b",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 제3행정실(글로벌미래융합대학 담당) 직원을 다음과 같이 공개모집 하오니 성실하고 역량있는 분들의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 제3행정실(글로벌미래융합대학 담당) 직원을 다음과 같이 공개모집 하오니 성실하고 역량있는 분들의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 제3행정실(글로벌미래융합대학 담당) 직원을 다음과 같이 공개모집 하오니 성실하고 역량있는 분들의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d2efee812ce1db36",
+      "segmentType": "continuation",
+      "labelText": "강원대학교 제3행정실(글로벌미래융합대학 담당) 직원을 다음과 같이 공개모집 하오니 성실하고 역량있는 분들의 많은 지원 바랍니다.",
+      "bodyText": "2026. 1. 19.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-bf2443290dddee0b"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-19",
+          "start": 72,
+          "end": 83
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "강원대학교 제3행정실(글로벌미래융합대학 담당) 직원을 다음과 같이 공개모집 하오니 성실하고 역량있는 분들의 많은 지원 바랍니다. 2026. 1. 19."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8a7c21e496692776",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 1. 19.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-19",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 1. 19."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d087e6a482d277ef",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 총장",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 총장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-dedcf057991e8dbf",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-01-20~2026-01-26",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-20",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-01-26",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-01-20~2026-01-26"
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "continuation": 1,
+      "label_value": 3,
+      "paragraph": 3,
+      "title": 1
+    }
+  }
+}

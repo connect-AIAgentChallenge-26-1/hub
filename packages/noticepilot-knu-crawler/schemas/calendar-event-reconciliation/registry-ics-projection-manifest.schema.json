@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/registry-ics-projection-manifest.schema.json",
+  "title": "NoticePilot S27-D registry ICS projection manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "projectionId", "projectorVersion", "createdAt",
+    "migrationMode", "uidPolicy", "sourceRegistry", "legacyArtifacts",
+    "counts", "feeds", "artifacts", "invariants", "contentDigest",
+    "pathReferences"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.registryIcsProjectionManifest.v0.1"},
+    "projectionId": {"const": "s27d-registry-ics-projection-20260713-v1"},
+    "projectorVersion": {"type": "string"},
+    "createdAt": {"type": "string"},
+    "migrationMode": {"const": "pre_subscription_cutover"},
+    "uidPolicy": {"type": "object"},
+    "sourceRegistry": {"type": "object"},
+    "legacyArtifacts": {"type": "object"},
+    "counts": {"type": "object"},
+    "feeds": {"type": "object"},
+    "artifacts": {"type": "object"},
+    "invariants": {"type": "object"},
+    "contentDigest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "pathReferences": {"type": "object"}
+  }
+}

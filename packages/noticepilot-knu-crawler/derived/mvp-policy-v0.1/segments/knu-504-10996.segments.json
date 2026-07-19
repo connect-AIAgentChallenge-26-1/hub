@@ -1,0 +1,381 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10996",
+  "sourceContentHash": "25af710453e36af349697e0b20c632ec9182a19fc08477f494bc4b1f6fb801c1",
+  "sourceTitle": "2026 KNU 전공박람회 「전공탐정단」 개최 안내",
+  "publishedAt": "2026-05-14",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8e97531d67a16822",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026 KNU 전공박람회 「전공탐정단」 개최 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026 KNU 전공박람회 「전공탐정단」 개최 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c4d9bd28b9d9fa38",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026 KNU 전공박람회 「전공탐정단」 개최 안내",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026 KNU 전공박람회 「전공탐정단」 개최 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d1768a8219b2e303",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 강릉캠퍼스 자유전공학부에서는 재학생들의 전공 탐색 및 진로 설계를 지원하기 위하여 「2026 KNU 전공박람회 – 전공탐정단」을 아래와 같이 개최하오니 학생 여러분의 많은 관심과 참여 바랍니다.",
+      "bodyText": "강원대학교 강릉캠퍼스 자유전공학부에서는 재학생들의 전공 탐색 및 진로 설계를 지원하기 위하여 「2026 KNU 전공박람회 – 전공탐정단」을 아래와 같이 개최하오니 학생 여러분의 많은 관심과 참여 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate",
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉캠퍼스 자유전공학부에서는 재학생들의 전공 탐색 및 진로 설계를 지원하기 위하여 「2026 KNU 전공박람회 – 전공탐정단」을 아래와 같이 개최하오니 학생 여러분의 많은 관심과 참여 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-72e54aefc130a574",
+      "segmentType": "label_value",
+      "labelText": "■ 행사 개요",
+      "bodyText": "■ 행사 개요",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 행사 개요"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-908f2555449305a0",
+      "segmentType": "label_value",
+      "labelText": "행사명",
+      "bodyText": "행사명: 2026 KNU 전공박람회 「전공탐정단」",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "행사명: 2026 KNU 전공박람회 「전공탐정단」"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-383aa977ed84372f",
+      "segmentType": "continuation",
+      "labelText": "행사명: 2026 KNU 전공박람회 「전공탐정단」 일시",
+      "bodyText": "2026. 5. 18.(월) 10:00 ~ 17:00",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-908f2555449305a0"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-18",
+          "start": 32,
+          "end": 47
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "행사명: 2026 KNU 전공박람회 「전공탐정단」 일시: 2026. 5. 18.(월) 10:00 ~ 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-10a16314d9678783",
+      "segmentType": "label_value",
+      "labelText": "일시",
+      "bodyText": "2026. 5. 18.(월) 10:00 ~ 17:00",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-18",
+          "start": 4,
+          "end": 19
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "일시: 2026. 5. 18.(월) 10:00 ~ 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-abf44fae24f98fb9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "장소: 강원대학교 강릉캠퍼스 학생회관 앞",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "장소: 강원대학교 강릉캠퍼스 학생회관 앞"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a3d6c811bd56a749",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "대상: 강원대학교 재학생",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "대상: 강원대학교 재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d096a9a78e2dd79f",
+      "segmentType": "label_value",
+      "labelText": "■ 행사 내용",
+      "bodyText": "■ 행사 내용",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 행사 내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-523dc084c9aad7a5",
+      "segmentType": "label_value",
+      "labelText": "단과대학 및 전공별 부스 운영",
+      "bodyText": "단과대학 및 전공별 부스 운영",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "단과대학 및 전공별 부스 운영"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fedd69c702fc4d4a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "전공 정보 및 진로 탐색 프로그램 진행",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "전공 정보 및 진로 탐색 프로그램 진행"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-555a6b3e3489ec27",
+      "segmentType": "label_value",
+      "labelText": "캠퍼스 미션형 스탬프 투어 운영",
+      "bodyText": "캠퍼스 미션형 스탬프 투어 운영",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "캠퍼스 미션형 스탬프 투어 운영"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-24d7d9fa07a0efe5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "전공탐정단 콘셉트 체험 프로그램 진행",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "전공탐정단 콘셉트 체험 프로그램 진행"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2861a2d627b1e96a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "탐정수첩 제공 및 스탬프 투어 참여자 대상 선착순 기념품 증정",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "탐정수첩 제공 및 스탬프 투어 참여자 대상 선착순 기념품 증정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-67130298b91718d3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "■ 참여 안내",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 참여 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1ec46ac3ac4807e0",
+      "segmentType": "label_value",
+      "labelText": "학생들은 각 전공 부스를 자유롭게 방문하며 전공별 특성과 진로 방향에 대한 정보를 얻을 수 있으며, 다양한 미션 활동을 통해 자신의 관심 분야를 탐색해볼 수 있습니다.",
+      "bodyText": "학생들은 각 전공 부스를 자유롭게 방문하며 전공별 특성과 진로 방향에 대한 정보를 얻을 수 있으며, 다양한 미션 활동을 통해 자신의 관심 분야를 탐색해볼 수 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학생들은 각 전공 부스를 자유롭게 방문하며 전공별 특성과 진로 방향에 대한 정보를 얻을 수 있으며, 다양한 미션 활동을 통해 자신의 관심 분야를 탐색해볼 수 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1b000e0d68b36452",
+      "segmentType": "label_value",
+      "labelText": "특히 이번 박람회는 “캠퍼스 미스터리를 풀고, 나만의 전공을 찾아라!”라는 테마로 운영되어 학생들이 흥미롭게 전공 탐색에 참여할 수 있도록 구성하였습니다.",
+      "bodyText": "특히 이번 박람회는 “캠퍼스 미스터리를 풀고, 나만의 전공을 찾아라!”라는 테마로 운영되어 학생들이 흥미롭게 전공 탐색에 참여할 수 있도록 구성하였습니다.",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "특히 이번 박람회는 “캠퍼스 미스터리를 풀고, 나만의 전공을 찾아라!”라는 테마로 운영되어 학생들이 흥미롭게 전공 탐색에 참여할 수 있도록 구성하였습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f684125d34b8e218",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학생 여러분의 많은 참여 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학생 여러분의 많은 참여 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 19,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 8,
+      "label_value": 9,
+      "continuation": 1
+    }
+  }
+}

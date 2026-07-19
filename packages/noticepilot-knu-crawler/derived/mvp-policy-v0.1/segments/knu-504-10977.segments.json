@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10977",
+  "sourceContentHash": "542240c61b081c4b543db2cab70c6f28e4d23debb7e64c2c45f3dde7acf672fe",
+  "sourceTitle": "[보건] 찾아가는 금연서비스 운영알림(2026.5.14.목)",
+  "publishedAt": "2026-05-11",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4f9a76cffe96fca9",
+      "segmentType": "title",
+      "labelText": "[보건] 찾아가는 금연서비스 운영알림(",
+      "bodyText": "2026.5.14.목)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-14",
+          "start": 21,
+          "end": 30
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "[보건] 찾아가는 금연서비스 운영알림(2026.5.14.목)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0e22ebdc22b9be63",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "arrow_left_alt",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "arrow_left_alt"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1cd00bb7b7762fd8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "목록으로 돌아가기",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "목록으로 돌아가기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d424be47bf70d755",
+      "segmentType": "label_value",
+      "labelText": "[보건] 찾아가는 금연서비스 운영알림(",
+      "bodyText": "2026.5.14.목)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-14",
+          "start": 21,
+          "end": 30
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "[보건] 찾아가는 금연서비스 운영알림(2026.5.14.목)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-53fe55b0cdaf01a1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "내용",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "내용"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "label_value": 1
+    }
+  }
+}

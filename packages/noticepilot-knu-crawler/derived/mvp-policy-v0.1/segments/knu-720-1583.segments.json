@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-1583",
+  "sourceContentHash": "122cc0dc34d1054e78a50690b32b93b58e8d92f2d3c9107c721ebda8a6f8e69f",
+  "sourceTitle": "2026년 제1차 평생교육사 자격증 발급 신청 접수 안내",
+  "publishedAt": "2026-01-12",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1a13edcb53fb8436",
+      "segmentType": "title",
+      "labelText": "2026년 제1차 평생교육사 자격증 발급 신청 접수 안내",
+      "bodyText": "2026년 제1차 평생교육사 자격증 발급 신청 접수 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 제1차 평생교육사 자격증 발급 신청 접수 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dd88c92db7301070",
+      "segmentType": "label_value",
+      "labelText": "2026년 제1차 평생교육사 자격증 발급 신청 접수계획을 아래와 같이 안내합니다.",
+      "bodyText": "2026년 제1차 평생교육사 자격증 발급 신청 접수계획을 아래와 같이 안내합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 제1차 평생교육사 자격증 발급 신청 접수계획을 아래와 같이 안내합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-18cb01a8d90442ac",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 1. 30.(금)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-30",
+          "start": 8,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 접수기간: 2026. 1. 30.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1e85bd99c023ec76",
+      "segmentType": "label_value",
+      "labelText": "접수처",
+      "bodyText": "- 접수처: 사범대학 교육학과 사무실(033-250-6650)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 접수처: 사범대학 교육학과 사무실(033-250-6650)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d52c102e1cc3d953",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "상세한 사항은 첨부파일을 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "상세한 사항은 첨부파일을 참고하시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "paragraph": 1
+    }
+  }
+}

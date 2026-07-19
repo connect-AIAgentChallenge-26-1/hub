@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10654",
+  "sourceContentHash": "4d24a3106c5d208153606d8eb288067a84cdc75247ef237b74d92e74e074aa1a",
+  "sourceTitle": "신한카드 나라사랑카드 체크 발급 안내",
+  "publishedAt": "2026-02-23",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b6389605a15b5a3f",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "신한카드 나라사랑카드 체크 발급 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신한카드 나라사랑카드 체크 발급 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-28f08630ace176c3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026년 1월부터 신한은행을 포함한 총 3개의 은행이 군관렵 협약은행으로 선정되어 운영중에 있습니다. 본 카드는 체크카드이나 병역의무자에게 더 많은 혜택이 제공되기에 안내드리니 관심있는 학생의 많은 관심과 참여 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 1월부터 신한은행을 포함한 총 3개의 은행이 군관렵 협약은행으로 선정되어 운영중에 있습니다. 본 카드는 체크카드이나 병역의무자에게 더 많은 혜택이 제공되기에 안내드리니 관심있는 학생의 많은 관심과 참여 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 1
+    }
+  }
+}

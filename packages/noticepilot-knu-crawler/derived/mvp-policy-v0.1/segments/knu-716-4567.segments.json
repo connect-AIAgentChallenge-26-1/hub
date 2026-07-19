@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4567",
+  "sourceContentHash": "4f02ce295661eb59f9305f91cf779412279d524b045438c81ff9fe782ea2044c",
+  "sourceTitle": "강원대학교 강릉산학협력단(창업지원본부) 기간제 계약직 채용 최종 합격자 발표",
+  "publishedAt": "2026-03-05",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fe175041d8a56e4d",
+      "segmentType": "title",
+      "labelText": "강원대학교 강릉산학협력단(창업지원본부) 기간제 계약직 채용 최종 합격자 발표",
+      "bodyText": "강원대학교 강릉산학협력단(창업지원본부) 기간제 계약직 채용 최종 합격자 발표",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉산학협력단(창업지원본부) 기간제 계약직 채용 최종 합격자 발표"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-56075ea0b2303cf7",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 강릉산학협력단(창업지원본부) 기간제 계약직 채용 최종 합격자를 다음과 같이 공고합니다.",
+      "bodyText": "강원대학교 강릉산학협력단(창업지원본부) 기간제 계약직 채용 최종 합격자를 다음과 같이 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉산학협력단(창업지원본부) 기간제 계약직 채용 최종 합격자를 다음과 같이 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7d9f6b30fd29ff2b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○ 합격자 : 없음",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 합격자 : 없음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c71cb0b22fb60bf6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "기타 문의사항은 033-640-2801로 문의주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기타 문의사항은 033-640-2801로 문의주시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 4,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "paragraph": 2
+    }
+  }
+}

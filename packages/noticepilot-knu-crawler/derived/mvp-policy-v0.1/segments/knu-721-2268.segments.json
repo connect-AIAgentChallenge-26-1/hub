@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2268",
+  "sourceContentHash": "2224d253fa2567b230dc0430df9c4389732329c848b3416603b8adb53bb28998",
+  "sourceTitle": "2026년 울산연구원 상반기 장학생 선발 안내",
+  "publishedAt": "2026-02-26",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2c58ee6a91e05c5e",
+      "segmentType": "title",
+      "labelText": "2026년 울산연구원 상반기 장학생 선발 안내",
+      "bodyText": "2026년 울산연구원 상반기 장학생 선발 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 울산연구원 상반기 장학생 선발 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1099c08c17974e7b",
+      "segmentType": "label_value",
+      "labelText": "○ 신청기간",
+      "bodyText": "2026. 3. 25.（수） 10:00 ~ 4. 3.（금） 18:00까지",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-25",
+          "start": 9,
+          "end": 24
+        },
+        {
+          "value": "2026-04-03",
+          "start": 33,
+          "end": 41
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "○ 신청기간 : 2026. 3. 25.（수） 10:00 ~ 4. 3.（금） 18:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c3e22c83afe1c6ac",
+      "segmentType": "label_value",
+      "labelText": "○ 신청방법",
+      "bodyText": "○ 신청방법 : 온라인 신청 후 서류 메일 제출",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 신청방법 : 온라인 신청 후 서류 메일 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0a4beb4d645cd5f5",
+      "segmentType": "label_value",
+      "labelText": "○ 선발분야",
+      "bodyText": "○ 선발분야: 장학금 6종",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 선발분야: 장학금 6종"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1ed4db020adf3006",
+      "segmentType": "label_value",
+      "labelText": "등록금성 장학금",
+      "bodyText": "1. 등록금성 장학금: 울산인재‧우수‧다자녀장학금（3종）",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 등록금성 장학금: 울산인재‧우수‧다자녀장학금（3종）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-144ce4dcbb62f189",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 학업장려 장학금: AI수도울산미래인재·만학도‧생활장학금（3종）",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 학업장려 장학금: AI수도울산미래인재·만학도‧생활장학금（3종）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e9417fc562f0b98f",
+      "segmentType": "label_value",
+      "labelText": "○ 지원대상",
+      "bodyText": "○ 지원대상: 대학교 신입생 및 재학생（※ 휴학생 및 정규 학제 기간 초과자 신청불가）",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled",
+        "enrollment_status:on_leave",
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 지원대상: 대학교 신입생 및 재학생（※ 휴학생 및 정규 학제 기간 초과자 신청불가）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9550440891438088",
+      "segmentType": "label_value",
+      "labelText": "○ 선발 예정인원 및 지급금액",
+      "bodyText": "○ 선발 예정인원 및 지급금액: 369명, 536,000천원 예정",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 선발 예정인원 및 지급금액: 369명, 536,000천원 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2d07f4d8ab06fd35",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 자세한 사항은 붙임 참조",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 자세한 사항은 붙임 참조"
+    }
+  ],
+  "summary": {
+    "segmentCount": 9,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 6,
+      "list_item": 1,
+      "paragraph": 1
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-4026",
+  "sourceContentHash": "37492e41dabeb612d7a620bf494ebe10d5de3c070bbea2a8b5d3114573daaf98",
+  "sourceTitle": "제48차 세계유산위원회 안내단 모집 안내",
+  "publishedAt": "2026-03-23",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c78bc8011529bf88",
+      "segmentType": "title",
+      "labelText": "제48차 세계유산위원회 안내단 모집 안내",
+      "bodyText": "제48차 세계유산위원회 안내단 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "제48차 세계유산위원회 안내단 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fad2745ae814706b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 044-270-5727(제48차 세계유산위원회 안내단 운영팀)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 044-270-5727(제48차 세계유산위원회 안내단 운영팀)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-3942",
+  "sourceContentHash": "eea3c418364d198dfdfac3f13c2b01c24be5f467e94b1446dd8868273e2fa7ec",
+  "sourceTitle": "각 군 현역병 모집일정 안내",
+  "publishedAt": "2026-02-20",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-99df4410f90bcb4e",
+      "segmentType": "title",
+      "labelText": "각 군 현역병 모집일정 안내",
+      "bodyText": "각 군 현역병 모집일정 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "각 군 현역병 모집일정 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2728300a4cc29feb",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 033-240-6284 / 6288 / 6245（강원지방병무청 병역판정입영과）",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 033-240-6284 / 6288 / 6245（강원지방병무청 병역판정입영과）"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

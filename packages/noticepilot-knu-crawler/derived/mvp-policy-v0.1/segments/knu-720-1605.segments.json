@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-1605",
+  "sourceContentHash": "10b04bf99919310533abfe76b80c8215ea3e66f35fa12a89939ca27e8d66baf6",
+  "sourceTitle": "2026학년도 1학기 교양영역 교과목 일자별 수강인원 조정",
+  "publishedAt": "2026-02-10",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cbb800c04f7ba27f",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 교양영역 교과목 일자별 수강인원 조정",
+      "bodyText": "2026학년도 1학기 교양영역 교과목 일자별 수강인원 조정",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 교양영역 교과목 일자별 수강인원 조정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ea105b663b987650",
+      "segmentType": "label_value",
+      "labelText": "[2026학년도 1학기 교양 교과목 일자별 수강인원 조정]",
+      "bodyText": "[2026학년도 1학기 교양 교과목 일자별 수강인원 조정]",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[2026학년도 1학기 교양 교과목 일자별 수강인원 조정]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d7c230dbdf1bb971",
+      "segmentType": "label_value",
+      "labelText": "수강 대상 학과 및 학년이 특정되지 않은 교과목 및 분반에 대해 학년별 균등한 수강기회 부여하고자 일자별 수강인원 조정을 안내하오니 참고하시기 바랍니다.",
+      "bodyText": "- 수강 대상 학과 및 학년이 특정되지 않은 교과목 및 분반에 대해 학년별 균등한 수강기회 부여하고자 일자별 수강인원 조정을 안내하오니 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 수강 대상 학과 및 학년이 특정되지 않은 교과목 및 분반에 대해 학년별 균등한 수강기회 부여하고자 일자별 수강인원 조정을 안내하오니 참고하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-61fd429e32efb9c2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "26.2.25.(수) 10시에 수강신청이 가능 함.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-25",
+          "start": 56,
+          "end": 67
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "*KNU10 (거점국립대학 원격수업 학점교류) 24개 강좌와 부서요청에 의한 3개 총 27개 강좌는 26.2.25.(수) 10시에 수강신청이 가능 함."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9ceebc4cccd0d851",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "붙임 파일 참조",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 파일 참조"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "paragraph": 2
+    }
+  }
+}

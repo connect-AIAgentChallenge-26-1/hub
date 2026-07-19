@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10973",
+  "sourceContentHash": "e8cd78214740db75bc632ec124f931b5839e057e68831bb6d43545959d8d94c0",
+  "sourceTitle": "제20회 강원대교육상 수상 후보자 공개",
+  "publishedAt": "2026-05-11",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9371bdf90926d597",
+      "segmentType": "title",
+      "labelText": "제20회 강원대교육상 수상 후보자 공개",
+      "bodyText": "제20회 강원대교육상 수상 후보자 공개",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "제20회 강원대교육상 수상 후보자 공개"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2ddcac696f33108b",
+      "segmentType": "label_value",
+      "labelText": "제20회 강원대교육상 수상 후보자를 붙임과 같이 공고합니다.",
+      "bodyText": "제20회 강원대교육상 수상 후보자를 붙임과 같이 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "제20회 강원대교육상 수상 후보자를 붙임과 같이 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-72a411cc5e4ec632",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "□ 후보자 명단 : 붙임 참조 (후보자 공고문)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 후보자 명단 : 붙임 참조 (후보자 공고문)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6735b0e321d1544f",
+      "segmentType": "label_value",
+      "labelText": "□ 이의신청 접수",
+      "bodyText": "2026. 5. 15.(금) 18:00까지",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-15",
+          "start": 12,
+          "end": 27
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "□ 이의신청 접수 : 2026. 5. 15.(금) 18:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-017bc9723293dc05",
+      "segmentType": "label_value",
+      "labelText": "□ 교육활동 포트폴리오 접수",
+      "bodyText": "2026. 5. 15.(금) 18:00까지",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-15",
+          "start": 18,
+          "end": 33
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "□ 교육활동 포트폴리오 접수 : 2026. 5. 15.(금) 18:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-58be24fa6ef5fe18",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 개인정보 보호를 위하여 수상 후보자 성명은 일부 비실명 처리하여 공고",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 개인정보 보호를 위하여 수상 후보자 성명은 일부 비실명 처리하여 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c3537c582226f8b9",
+      "segmentType": "label_value",
+      "labelText": "* 교육활동 포트폴리오 서식은 후보자 개별 이메일 발송",
+      "bodyText": "* 교육활동 포트폴리오 서식은 후보자 개별 이메일 발송",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 교육활동 포트폴리오 서식은 후보자 개별 이메일 발송"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8bf22e69ae127c8e",
+      "segmentType": "label_value",
+      "labelText": "붙임 1. 제20회 강원대교육상 수상 후보자 공고문 1부",
+      "bodyText": "붙임 1. 제20회 강원대교육상 수상 후보자 공고문 1부",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 1. 제20회 강원대교육상 수상 후보자 공고문 1부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9cc0d3aa4eca1e8c",
+      "segmentType": "label_value",
+      "labelText": "이의신청서 서식 1부",
+      "bodyText": "2. 이의신청서 서식 1부",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 이의신청서 서식 1부"
+    }
+  ],
+  "summary": {
+    "segmentCount": 9,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 6,
+      "paragraph": 2
+    }
+  }
+}

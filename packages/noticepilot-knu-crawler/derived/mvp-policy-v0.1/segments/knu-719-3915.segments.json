@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-3915",
+  "sourceContentHash": "26ee848ba11cb3b4c6a206a1efab18c8bae2a40620fed6a2e49bf03359ae784c",
+  "sourceTitle": "2026년도 국회 대학（원）생 아카데미（1기） 과정 참여자 모집 안내",
+  "publishedAt": "2026-01-28",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2b224c1ac34b181b",
+      "segmentType": "title",
+      "labelText": "2026년도 국회 대학（원）생 아카데미（1기） 과정 참여자 모집 안내",
+      "bodyText": "2026년도 국회 대학（원）생 아카데미（1기） 과정 참여자 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년도 국회 대학（원）생 아카데미（1기） 과정 참여자 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c6a7690be09c5993",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 02-6788-3683(국회사무처 교육연수기획과)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 02-6788-3683(국회사무처 교육연수기획과)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

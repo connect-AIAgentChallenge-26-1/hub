@@ -1,0 +1,136 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2355",
+  "sourceContentHash": "51331ad155e33fee6f9bfc5b5bf39327a4f5de042200739d83d6da5dc16c1ac9",
+  "sourceTitle": "2026학년도 1학기 교육과정 수강편람 안내",
+  "publishedAt": "2026-02-10",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-afbad31df1008fd0",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 교육과정 수강편람 안내",
+      "bodyText": "2026학년도 1학기 교육과정 수강편람 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 교육과정 수강편람 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c66c6eff9a983173",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026학년도 1학기 개설",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 개설"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aa723cf4be4e1cef",
+      "segmentType": "label_value",
+      "labelText": "교과목의 이수를 위한 교육과정 수강편람을 첨부하오니",
+      "bodyText": "교과목의 이수를 위한 교육과정 수강편람을 첨부하오니",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "교과목의 이수를 위한 교육과정 수강편람을 첨부하오니"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-30c1e5c98084a23b",
+      "segmentType": "label_value",
+      "labelText": "학생들은 반드시 소속 학과의 수강지도를 받고 수강신청 할 수 있도록 하시기 바랍니다.",
+      "bodyText": "학생들은 반드시 소속 학과의 수강지도를 받고 수강신청 할 수 있도록 하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학생들은 반드시 소속 학과의 수강지도를 받고 수강신청 할 수 있도록 하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0f4ba54aea92efd6",
+      "segmentType": "label_value",
+      "labelText": "교양영어회화(원어민강좌) 교육 수정",
+      "bodyText": "- 교양영어회화(원어민강좌) 교육 수정: 별첨",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 교양영어회화(원어민강좌) 교육 수정: 별첨"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-59324fa2cf38f061",
+      "segmentType": "label_value",
+      "labelText": "붙임 2026학년도 1학기 교육과정 수강편람(최종) 1부.",
+      "bodyText": "붙임 2026학년도 1학기 교육과정 수강편람(최종) 1부.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 2026학년도 1학기 교육과정 수강편람(최종) 1부."
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 1,
+      "label_value": 4
+    }
+  }
+}

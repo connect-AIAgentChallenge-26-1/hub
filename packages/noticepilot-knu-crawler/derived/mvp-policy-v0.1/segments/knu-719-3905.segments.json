@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-3905",
+  "sourceContentHash": "60a6db430ee506e31788236851b0842b07604a4773dc47e95bbdae0946807710",
+  "sourceTitle": "2026년도 제16기 우체국예금 대학생 서포터즈 모집 안내",
+  "publishedAt": "2026-01-20",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1a4e1508f2244272",
+      "segmentType": "title",
+      "labelText": "2026년도 제16기 우체국예금 대학생 서포터즈 모집 안내",
+      "bodyText": "2026년도 제16기 우체국예금 대학생 서포터즈 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년도 제16기 우체국예금 대학생 서포터즈 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-50ac45a9ea18596b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 033-749-2064(강원지방우정청 예금영업과)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 033-749-2064(강원지방우정청 예금영업과)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

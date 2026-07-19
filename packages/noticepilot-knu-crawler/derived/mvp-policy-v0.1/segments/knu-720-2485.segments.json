@@ -1,0 +1,491 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2485",
+  "sourceContentHash": "ff7dd13f5f49dd5662b90f5b202dabd805e365a03b578a8d31eb7f59fc5470f9",
+  "sourceTitle": "2025학년도 후기(‘26.8.) 졸업대상자 부·복수전공 이수인정원 제출 안내",
+  "publishedAt": "2026-06-23",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8da3ba91de760280",
+      "segmentType": "title",
+      "labelText": "2025학년도 후기(‘26.8.) 졸업대상자 부·복수전공 이수인정원 제출 안내",
+      "bodyText": "2025학년도 후기(‘26.8.) 졸업대상자 부·복수전공 이수인정원 제출 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2025학년도 후기(‘26.8.) 졸업대상자 부·복수전공 이수인정원 제출 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6007dc50b5103f2e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2025학년도 후기('26.8.) 졸업대상자 중 부복수전공을 이수중인 학생은",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2025학년도 후기('26.8.) 졸업대상자 중 부복수전공을 이수중인 학생은"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-668a23b568116fa8",
+      "segmentType": "label_value",
+      "labelText": "붙임의 매뉴얼을 참고하여 기한 내에 이수인정원을 제출하시기 바랍니다.",
+      "bodyText": "붙임의 매뉴얼을 참고하여 기한 내에 이수인정원을 제출하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임의 매뉴얼을 참고하여 기한 내에 이수인정원을 제출하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8aeb1d774261961b",
+      "segmentType": "label_value",
+      "labelText": "제출대상",
+      "bodyText": "1. 제출대상",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 제출대상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a880161358b355ff",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 졸업대상자* 중 부·복수전공 신청자",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 졸업대상자* 중 부·복수전공 신청자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-04f581ec05482063",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* ¹졸업가능한 재학생",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* ¹졸업가능한 재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e4ed4fd2390b36cc",
+      "segmentType": "label_value",
+      "labelText": "²학사학위취득유예생(①신규신청자,",
+      "bodyText": "²학사학위취득유예생(①신규신청자,",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "²학사학위취득유예생(①신규신청자,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3de7825d7e2c2fb3",
+      "segmentType": "label_value",
+      "labelText": "재수강 성적 미취득으로 사정결과가 변경된 경우)",
+      "bodyText": "②재수강 성적 미취득으로 사정결과가 변경된 경우)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 1,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "②재수강 성적 미취득으로 사정결과가 변경된 경우)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aadeed8dd1fda360",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "³수료생(①재학생이 수료하는 경우,",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "³수료생(①재학생이 수료하는 경우,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a543d8b89eb6c076",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "②기수료생이 논문 등 통과로 졸업하는 경우)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 1,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "②기수료생이 논문 등 통과로 졸업하는 경우)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8cf767bcb0d2ecaa",
+      "segmentType": "label_value",
+      "labelText": "지난 학기에 이미 이수인정원을 제출하여 최종승인까지 마친 경우 재제출 불요",
+      "bodyText": "※ 지난 학기에 이미 이수인정원을 제출하여 최종승인까지 마친 경우 재제출 불요",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 지난 학기에 이미 이수인정원을 제출하여 최종승인까지 마친 경우 재제출 불요"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7e7fc640b8d796e5",
+      "segmentType": "label_value",
+      "labelText": "다만, 재이수하여 학점취득 여부가 변경된 경우 재제출 필요",
+      "bodyText": "다만, 재이수하여 학점취득 여부가 변경된 경우 재제출 필요",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다만, 재이수하여 학점취득 여부가 변경된 경우 재제출 필요"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-11e715fe34162a29",
+      "segmentType": "label_value",
+      "labelText": "제출기간",
+      "bodyText": "2026. 7. 6.(월) ~ 7. 20.(월)",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-06",
+          "start": 9,
+          "end": 23
+        },
+        {
+          "value": "2026-07-20",
+          "start": 26,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 제출기간: 2026. 7. 6.(월) ~ 7. 20.(월)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3873048daff5a9d4",
+      "segmentType": "label_value",
+      "labelText": "제출내용",
+      "bodyText": "3. 제출내용",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 제출내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-911b1b794f1930ea",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 부·복수전공 이수인정원",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 부·복수전공 이수인정원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-54178b64dcc36a2d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 다수의 부전공 및 복수전공을 이수한 경우",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 다수의 부전공 및 복수전공을 이수한 경우"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-176599aae7278231",
+      "segmentType": "label_value",
+      "labelText": "학과(전공)별 각각 제출",
+      "bodyText": "학과(전공)별 각각 제출",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학과(전공)별 각각 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d4b74968769a0437",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "해야함",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "해야함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f63fea0e47a85ccc",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 처리절차",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 처리절차"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5a178d857a6c9611",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 학생 → 부·복수전공 이수학과",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 학생 → 부·복수전공 이수학과"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dc690ae597353991",
+      "segmentType": "label_value",
+      "labelText": "제출방법",
+      "bodyText": "5. 제출방법",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 제출방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a90d679e20245c39",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ":",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ":"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-68f3b26d313c4d79",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "K-CLOUD",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "K-CLOUD"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-127935f69da94c19",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "→ 학부생서비스 → 교과 → 졸업 →",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "→ 학부생서비스 → 교과 → 졸업 →"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9d8a9ccd2e6acd3e",
+      "segmentType": "label_value",
+      "labelText": "부복수전공 이수인정원 제출 ※ 첨부파일 매뉴얼 참고",
+      "bodyText": "부복수전공 이수인정원 제출 ※ 첨부파일 매뉴얼 참고",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "부복수전공 이수인정원 제출 ※ 첨부파일 매뉴얼 참고"
+    }
+  ],
+  "summary": {
+    "segmentCount": 25,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 10,
+      "label_value": 11,
+      "list_item": 3
+    }
+  }
+}

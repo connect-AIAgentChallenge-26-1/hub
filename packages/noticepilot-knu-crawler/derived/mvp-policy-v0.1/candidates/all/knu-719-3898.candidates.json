@@ -1,0 +1,520 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-719-3898",
+  "sourceContentHash": "d3191932f88d45c0174518c18bcb0d42afda3b28aaa05bcb699e15c4eeffd93c",
+  "sourceTitle": "공공기관 취업 면접 마스터 클래스",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=3898&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-719-3898-5ae281a86cd0fb",
+      "uidHint": "noticepilot-cand-knu-719-3898-5ae281a86cd0fb@noticepilot.local",
+      "sourceNoticeId": "knu-719-3898",
+      "sourceTitle": "공공기관 취업 면접 마스터 클래스",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=3898&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "exam_or_interview",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-ab2b82a127d61502",
+        "segmentType": "continuation",
+        "labelText": "★공공기관 취업 면접 마스터 클래스 1차(강릉)★ ❍ 일 시",
+        "bodyText": "2026. 1. 21. (수) 13:00~17:00",
+        "sourceLocation": {
+          "lineIndex": 0,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-29e2057c596e5dc9"
+        },
+        "actionSignals": [
+          "exam_or_interview"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-01-21",
+            "start": 35,
+            "end": 51
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "exam_or_interview",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "★공공기관 취업 면접 마스터 클래스 1차(강릉)★ ❍ 일 시",
+          "★공공기관 취업 면접 마스터 클래스 1차(강릉)★ ❍ 일 시: 2026. 1. 21. (수) 13:00~17:00",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-dea4dd3e098ef405",
+        "segmentId": "seg-ab2b82a127d61502",
+        "rawText": "2026. 1. 21. (수) 13:00~17:00",
+        "normalizedStart": "2026-01-21T13:00:00+09:00",
+        "normalizedEnd": "2026-01-21T17:00:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 35,
+          "end": 51
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-66a1dd484901efb9",
+        "sourceNoticeId": "knu-719-3898",
+        "segmentId": "seg-ab2b82a127d61502",
+        "temporalMentionIds": [
+          "tm-dea4dd3e098ef405"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "★공공기관 취업 면접 마스터 클래스 1차(강릉)★ ❍ 일 시",
+        "evidence": "★공공기관 취업 면접 마스터 클래스 1차(강릉)★ ❍ 일 시: 2026. 1. 21. (수) 13:00~17:00"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "공공기관 취업 면접 마스터 클래스 시험·면접 일정",
+      "dateText": "2026. 1. 21. (수) 13:00~17:00",
+      "normalizedStart": "2026-01-21T13:00:00+09:00",
+      "normalizedEnd": "2026-01-21T17:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "★공공기관 취업 면접 마스터 클래스 1차(강릉)★ ❍ 일 시: 2026. 1. 21. (수) 13:00~17:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-719-3898-81dbc4f499738d",
+      "uidHint": "noticepilot-cand-knu-719-3898-81dbc4f499738d@noticepilot.local",
+      "sourceNoticeId": "knu-719-3898",
+      "sourceTitle": "공공기관 취업 면접 마스터 클래스",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=3898&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "exam_or_interview",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-0cd10f9820ff4c0c",
+        "segmentType": "continuation",
+        "labelText": "★공공기관 취업 면접 마스터 클래스 2차(춘천)★ ❍ 일 시",
+        "bodyText": "2026. 1. 26. (화)13:00~17:00",
+        "sourceLocation": {
+          "lineIndex": 3,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-5760281683ab831f"
+        },
+        "actionSignals": [
+          "exam_or_interview"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-01-26",
+            "start": 35,
+            "end": 51
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "exam_or_interview",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "★공공기관 취업 면접 마스터 클래스 2차(춘천)★ ❍ 일 시",
+          "★공공기관 취업 면접 마스터 클래스 2차(춘천)★ ❍ 일 시: 2026. 1. 26. (화)13:00~17:00",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-a55994b6722f982d",
+        "segmentId": "seg-0cd10f9820ff4c0c",
+        "rawText": "2026. 1. 26. (화)13:00~17:00",
+        "normalizedStart": "2026-01-26T13:00:00+09:00",
+        "normalizedEnd": "2026-01-26T17:00:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 35,
+          "end": 51
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-da5ced96fede6760",
+        "sourceNoticeId": "knu-719-3898",
+        "segmentId": "seg-0cd10f9820ff4c0c",
+        "temporalMentionIds": [
+          "tm-a55994b6722f982d"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "★공공기관 취업 면접 마스터 클래스 2차(춘천)★ ❍ 일 시",
+        "evidence": "★공공기관 취업 면접 마스터 클래스 2차(춘천)★ ❍ 일 시: 2026. 1. 26. (화)13:00~17:00"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "공공기관 취업 면접 마스터 클래스 시험·면접 일정",
+      "dateText": "2026. 1. 26. (화)13:00~17:00",
+      "normalizedStart": "2026-01-26T13:00:00+09:00",
+      "normalizedEnd": "2026-01-26T17:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "★공공기관 취업 면접 마스터 클래스 2차(춘천)★ ❍ 일 시: 2026. 1. 26. (화)13:00~17:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-719-3898-356a385bc97138",
+      "uidHint": "noticepilot-cand-knu-719-3898-356a385bc97138@noticepilot.local",
+      "sourceNoticeId": "knu-719-3898",
+      "sourceTitle": "공공기관 취업 면접 마스터 클래스",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=3898&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "exam_or_interview",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-cccd70226fe94fb1",
+        "segmentType": "continuation",
+        "labelText": "★공공기관 취업 면접 마스터 클래스 3차(원주)★ ❍ 일 시",
+        "bodyText": "2026. 2. 3. (수)13:00~17:00",
+        "sourceLocation": {
+          "lineIndex": 6,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-254e4aea46bb18d7"
+        },
+        "actionSignals": [
+          "exam_or_interview"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-03",
+            "start": 35,
+            "end": 50
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "exam_or_interview",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "★공공기관 취업 면접 마스터 클래스 3차(원주)★ ❍ 일 시",
+          "★공공기관 취업 면접 마스터 클래스 3차(원주)★ ❍ 일 시: 2026. 2. 3. (수)13:00~17:00",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-d7b8805dd524c02c",
+        "segmentId": "seg-cccd70226fe94fb1",
+        "rawText": "2026. 2. 3. (수)13:00~17:00",
+        "normalizedStart": "2026-02-03T13:00:00+09:00",
+        "normalizedEnd": "2026-02-03T17:00:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 35,
+          "end": 50
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-603fee5ee87463df",
+        "sourceNoticeId": "knu-719-3898",
+        "segmentId": "seg-cccd70226fe94fb1",
+        "temporalMentionIds": [
+          "tm-d7b8805dd524c02c"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "★공공기관 취업 면접 마스터 클래스 3차(원주)★ ❍ 일 시",
+        "evidence": "★공공기관 취업 면접 마스터 클래스 3차(원주)★ ❍ 일 시: 2026. 2. 3. (수)13:00~17:00"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "공공기관 취업 면접 마스터 클래스 시험·면접 일정",
+      "dateText": "2026. 2. 3. (수)13:00~17:00",
+      "normalizedStart": "2026-02-03T13:00:00+09:00",
+      "normalizedEnd": "2026-02-03T17:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "★공공기관 취업 면접 마스터 클래스 3차(원주)★ ❍ 일 시: 2026. 2. 3. (수)13:00~17:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 3,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 3,
+    "calendarFeedIncludedCount": 0
+  }
+}

@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4733",
+  "sourceContentHash": "9ae8fb1a3cbf4b6a5c51fe81c52c2825a361f7b4271b183007f1bb4e50b4091a",
+  "sourceTitle": "2026학년도 2학기 강원대학교 교수 초빙 공고",
+  "publishedAt": "2026-04-30",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c12182d1301b57e2",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026학년도 2학기 강원대학교 교수 초빙 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 2학기 강원대학교 교수 초빙 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-af8aac04a6466164",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026학년도 2학기 강원대학교 교수 초빙 공고",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 2학기 강원대학교 교수 초빙 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9f46854a7aff9010",
+      "segmentType": "label_value",
+      "labelText": "공고 기간",
+      "bodyText": "2026. 4. 30.(목) ~ 2026. 5. 18.(월)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-30",
+          "start": 8,
+          "end": 23
+        },
+        {
+          "value": "2026-05-18",
+          "start": 26,
+          "end": 41
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "공고 기간 : 2026. 4. 30.(목) ~ 2026. 5. 18.(월)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ae6b570da81c0f49",
+      "segmentType": "label_value",
+      "labelText": "온라인 접수기간",
+      "bodyText": "2026. 5. 12.(화) ~ 2026. 5. 18.(월) 18:00 이내",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-12",
+          "start": 10,
+          "end": 25
+        },
+        {
+          "value": "2026-05-18",
+          "start": 28,
+          "end": 43
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "온라인 접수기간: 2026. 5. 12.(화) ~ 2026. 5. 18.(월) 18:00 이내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c2a428f795fa78bd",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "기타 세부사항은 아래 링크에서 공고문 원문을 확인하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기타 세부사항은 아래 링크에서 공고문 원문을 확인하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7ffeed226a1dff4d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "채용공고 원문 확인",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "채용공고 원문 확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-519b1a7d4321d6f5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://faculty.kangwon.ac.kr/bbs/board.php?bo_table=notice&wr_id=383",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://faculty.kangwon.ac.kr/bbs/board.php?bo_table=notice&wr_id=383"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-6ec44c17dc49fbd0",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-05-12~2026-05-18",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-12",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-05-18",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-05-12~2026-05-18"
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 3,
+      "paragraph": 4,
+      "title": 1
+    }
+  }
+}

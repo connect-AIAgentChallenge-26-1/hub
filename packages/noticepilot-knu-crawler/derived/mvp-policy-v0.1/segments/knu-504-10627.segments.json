@@ -1,0 +1,318 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10627",
+  "sourceContentHash": "a121b893aea004459b04fdfff707fc048e4f7bc4be5e7b9a4d23806332810299",
+  "sourceTitle": "과학기술대학장 보직 추가 공모",
+  "publishedAt": "2026-01-28",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5c43c8667745f617",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "과학기술대학장 보직 추가 공모",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "과학기술대학장 보직 추가 공모"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e3943b36490a0e41",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "「국립강릉원주대학교 보직교수 인선지침」제4조에 따라 임기가 만료되는 단과대학장에 대하여 다음과 같이 공모를 실시합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "「국립강릉원주대학교 보직교수 인선지침」제4조에 따라 임기가 만료되는 단과대학장에 대하여 다음과 같이 공모를 실시합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2ee2448d3e5282bf",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 대상 보직명: 과학기술대학장",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 대상 보직명: 과학기술대학장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-50342043b523d75d",
+      "segmentType": "label_value",
+      "labelText": "임용기간",
+      "bodyText": "2. 임용기간: 발령일로부터 2년",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 임용기간: 발령일로부터 2년"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bb203f35b900f222",
+      "segmentType": "label_value",
+      "labelText": "지원자격",
+      "bodyText": "3. 지원자격 : 해당 단과대학 소속의 교수 또는 부교수로서 4년 이상 재직한 전임교원으로 임기가 정년 이내인 자",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 지원자격 : 해당 단과대학 소속의 교수 또는 부교수로서 4년 이상 재직한 전임교원으로 임기가 정년 이내인 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-df62bc05de145e7c",
+      "segmentType": "label_value",
+      "labelText": "제출서류",
+      "bodyText": "4. 제출서류: 학장후보신청서, 단과대학발전(경영)계획서 각 1부 (붙임 서식 활용)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 제출서류: 학장후보신청서, 단과대학발전(경영)계획서 각 1부 (붙임 서식 활용)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5ebc042e74294dd1",
+      "segmentType": "label_value",
+      "labelText": "제출기한",
+      "bodyText": "5. 제출기한:",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 제출기한:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dba854c06628ed08",
+      "segmentType": "continuation",
+      "labelText": "제출기한",
+      "bodyText": "2026. 2. 2.(월) 17:00까지",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-5ebc042e74294dd1"
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-02",
+          "start": 9,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "5. 제출기한: 2026. 2. 2.(월) 17:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5bddedcc7bb048e0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 2. 2.(월) 17:00까지",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-02",
+          "start": 0,
+          "end": 14
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 2. 2.(월) 17:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aafb58cb18ddee61",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "6. 제 출 처: 교무과 교원인사팀에 직접 제출(우편가능)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 제 출 처: 교무과 교원인사팀에 직접 제출(우편가능)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c6b874dc1819761d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "또는 e-mail ryanrhk@gwnun.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "또는 e-mail ryanrhk@gwnun.ac.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0ac4e89691d44b95",
+      "segmentType": "label_value",
+      "labelText": "붙임 단과대학장보직자공모 공고 및 2026학장후보신청서 및 발전(경영)계획서 서식 각 1부",
+      "bodyText": "붙임 단과대학장보직자공모 공고 및 2026학장후보신청서 및 발전(경영)계획서 서식 각 1부",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 단과대학장보직자공모 공고 및 2026학장후보신청서 및 발전(경영)계획서 서식 각 1부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e297d4000af6e2b7",
+      "segmentType": "continuation",
+      "labelText": "붙임 단과대학장보직자공모 공고 및 2026학장후보신청서 및 발전(경영)계획서 서식 각 1부",
+      "bodyText": "2026. 1. 28.",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-0ac4e89691d44b95"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-28",
+          "start": 51,
+          "end": 62
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "붙임 단과대학장보직자공모 공고 및 2026학장후보신청서 및 발전(경영)계획서 서식 각 1부 2026. 1. 28."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5a69cd0bc1e69174",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 1. 28.",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-28",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 1. 28."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-28fef0eb5e9d6039",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "국 립 강 릉 원 주 대 학 교 총 장",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국 립 강 릉 원 주 대 학 교 총 장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 15,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 5,
+      "list_item": 2,
+      "label_value": 5,
+      "continuation": 2
+    }
+  }
+}

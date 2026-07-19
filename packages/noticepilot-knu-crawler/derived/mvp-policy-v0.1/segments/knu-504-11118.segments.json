@@ -1,0 +1,245 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11118",
+  "sourceContentHash": "4befebf16d535026c71d3e77c4508524ec091bdfa9b7698a7130f2880c1b461d",
+  "sourceTitle": "\"하든 안하든 시간은 갑니다.\" [삼척평생교육원 수강신청 OPEN!]",
+  "publishedAt": "2026-06-15",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5c4bb6299935d589",
+      "segmentType": "title",
+      "labelText": "\"하든 안하든 시간은 갑니다.\" [삼척평생교육원 수강신청 OPEN!]",
+      "bodyText": "\"하든 안하든 시간은 갑니다.\" [삼척평생교육원 수강신청 OPEN!]",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "\"하든 안하든 시간은 갑니다.\" [삼척평생교육원 수강신청 OPEN!]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cfe4cc2688cf8c6c",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 삼척평생교육원 2026학년도 여름방학 특강 OPEN~~",
+      "bodyText": "강원대학교 삼척평생교육원 2026학년도 여름방학 특강 OPEN~~",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척평생교육원 2026학년도 여름방학 특강 OPEN~~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ef66c1c9ee8bbc45",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 짧지만 가성비 높은 배움의 가치를 느껴보세요~",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 짧지만 가성비 높은 배움의 가치를 느껴보세요~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1751c346b5e2abb8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 하든 안하든 시간은 갑니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 하든 안하든 시간은 갑니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-176cd010da47f83b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 스스로 바꿀수 없다면 환경을 바꾸면 됩니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 스스로 바꿀수 없다면 환경을 바꾸면 됩니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b847eeda7654cf84",
+      "segmentType": "label_value",
+      "labelText": "~~ 수강신청 안내~~",
+      "bodyText": "~~ 수강신청 안내~~",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "~~ 수강신청 안내~~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ce4b5e1fa56f3372",
+      "segmentType": "continuation",
+      "labelText": "~~ 수강신청 안내~~",
+      "bodyText": "2026.6.15.(월) 09:00~6.17.(수) 24:00",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-b847eeda7654cf84"
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-15",
+          "start": 13,
+          "end": 26
+        },
+        {
+          "value": "2026-06-17",
+          "start": 33,
+          "end": 41
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "~~ 수강신청 안내~~ 2026.6.15.(월) 09:00~6.17.(수) 24:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b497aed6161b7a8f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026.6.15.(월) 09:00~6.17.(수) 24:00",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-15",
+          "start": 0,
+          "end": 13
+        },
+        {
+          "value": "2026-06-17",
+          "start": 20,
+          "end": 28
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026.6.15.(월) 09:00~6.17.(수) 24:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6f55f3ba62c79cf9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "홈페이지(선착순)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "홈페이지(선착순)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-96a2cc2a8e9889cf",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://life.kangwon.ac.kr/",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://life.kangwon.ac.kr/"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0172b1bf5e9d2c98",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "문의 033-570-6733",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "문의 033-570-6733"
+    }
+  ],
+  "summary": {
+    "segmentCount": 11,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "list_item": 3,
+      "continuation": 1,
+      "paragraph": 4
+    }
+  }
+}

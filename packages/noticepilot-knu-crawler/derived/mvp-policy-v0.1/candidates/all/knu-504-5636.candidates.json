@@ -1,0 +1,859 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-5636",
+  "sourceContentHash": "4c01b33b1e5a5effe9da32d41937413e79bfa9d38c48f050c7583ea12f4a286f",
+  "sourceTitle": "2026년도 일본정부（문부과학성） 초청 일한공동 고등교육 유학생 교 류사업（학부 1년 코스） 장학생 선발 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5636&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-5636-1f70db4e2470c3",
+      "uidHint": "noticepilot-cand-knu-504-5636-1f70db4e2470c3@noticepilot.local",
+      "sourceNoticeId": "knu-504-5636",
+      "sourceTitle": "2026년도 일본정부（문부과학성） 초청 일한공동 고등교육 유학생 교 류사업（학부 1년 코스） 장학생 선발 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5636&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "deadline",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-ec032a2743279562",
+        "segmentType": "label_value",
+        "labelText": "추천인원: 각 대학의 추천기관(일본어 관련 학과 또는 학부)별 2명 이내 4) 추천기관 추천 마감일",
+        "bodyText": "2026.1.26.(월) 11:00까지 이메일(yuhak@so.mofa.go.jp)",
+        "sourceLocation": {
+          "lineIndex": 13,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [
+          "degree_level:undergraduate"
+        ],
+        "dateSpans": [
+          {
+            "value": "2026-01-26",
+            "start": 60,
+            "end": 73
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "internal_process",
+      "semanticClassification": {
+        "eventType": "deadline",
+        "actionType": null,
+        "temporalRole": "internal_process",
+        "confidence": "medium",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "추천인원: 각 대학의 추천기관(일본어 관련 학과 또는 학부)별 2명 이내 4) 추천기관 추천 마감일",
+          "3) 추천인원: 각 대학의 추천기관(일본어 관련 학과 또는 학부)별 2명 이내 4) 추천기관 추천 마감일: 2026.1.26.(월) 11:00까지 이메일(yuhak@so.mofa.go.jp)",
+          "semantic.temporal_role.non_student_local_action"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-012e27e9b4410c8e",
+        "segmentId": "seg-ec032a2743279562",
+        "rawText": "2026.1.26.(월)",
+        "normalizedStart": "2026-01-26T11:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 60,
+          "end": 73
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-6715678c89184e91",
+        "sourceNoticeId": "knu-504-5636",
+        "segmentId": "seg-ec032a2743279562",
+        "temporalMentionIds": [
+          "tm-012e27e9b4410c8e"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "medium",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": false,
+        "labelText": "추천인원: 각 대학의 추천기관(일본어 관련 학과 또는 학부)별 2명 이내 4) 추천기관 추천 마감일",
+        "evidence": "3) 추천인원: 각 대학의 추천기관(일본어 관련 학과 또는 학부)별 2명 이내 4) 추천기관 추천 마감일: 2026.1.26.(월) 11:00까지 이메일(yuhak@so.mofa.go.jp)"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "2026년도 일본정부（문부과학성） 초청 일한공동 고등교육 유학생 교 류사업（학부 1년 코스） 장학생 선발 안내 마감",
+      "dateText": "2026.1.26.(월)",
+      "normalizedStart": "2026-01-26T11:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "3) 추천인원: 각 대학의 추천기관(일본어 관련 학과 또는 학부)별 2명 이내 4) 추천기관 추천 마감일: 2026.1.26.(월) 11:00까지 이메일(yuhak@so.mofa.go.jp)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "non_student_local_action",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "reasonCodes": [
+        "non_student_local_action",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "non_student_local_action",
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "non_student_local_action",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.non_student_local_action",
+          "publishability.temporal_role.internal_process",
+          "publishability.temporal_role.internal_process.review",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5636-1acd427541ca16",
+      "uidHint": "noticepilot-cand-knu-504-5636-1acd427541ca16@noticepilot.local",
+      "sourceNoticeId": "knu-504-5636",
+      "sourceTitle": "2026년도 일본정부（문부과학성） 초청 일한공동 고등교육 유학생 교 류사업（학부 1년 코스） 장학생 선발 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5636&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-aafc34bc5dc2fa6f",
+        "segmentType": "label_value",
+        "labelText": "시험 대상자 발표",
+        "bodyText": "2026.1.28.(수) 예정 ※ 필기",
+        "sourceLocation": {
+          "lineIndex": 18,
+          "clauseIndex": 1,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "result_announcement",
+          "exam_or_interview"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-01-28",
+            "start": 11,
+            "end": 24
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "시험 대상자 발표",
+          "시험 대상자 발표: 2026.1.28.(수) 예정 ※ 필기",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-f84d6a94ad15e5b4",
+        "segmentId": "seg-aafc34bc5dc2fa6f",
+        "rawText": "2026.1.28.(수)",
+        "normalizedStart": "2026-01-28",
+        "normalizedEnd": "2026-01-28",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 11,
+          "end": 24
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-b23b04e07be84fbb",
+        "sourceNoticeId": "knu-504-5636",
+        "segmentId": "seg-aafc34bc5dc2fa6f",
+        "temporalMentionIds": [
+          "tm-f84d6a94ad15e5b4"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "시험 대상자 발표",
+        "evidence": "시험 대상자 발표: 2026.1.28.(수) 예정 ※ 필기"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026년도 일본정부（문부과학성） 초청 일한공동 고등교육 유학생 교 류사업（학부 1년 코스） 장학생 선발 안내 결과 발표 예정",
+      "dateText": "2026.1.28.(수)",
+      "normalizedStart": "2026-01-28",
+      "normalizedEnd": "2026-01-28",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "시험 대상자 발표: 2026.1.28.(수) 예정 ※ 필기",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5636-12fc5ba9e96dd3",
+      "uidHint": "noticepilot-cand-knu-504-5636-12fc5ba9e96dd3@noticepilot.local",
+      "sourceNoticeId": "knu-504-5636",
+      "sourceTitle": "2026년도 일본정부（문부과학성） 초청 일한공동 고등교육 유학생 교 류사업（학부 1년 코스） 장학생 선발 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5636&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "submission_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-edf9a6ddebedb4ec",
+        "segmentType": "label_value",
+        "labelText": "추천기관의 추천 대상자로 선정된 지원자는 <붙임 2>에서 요구하는 서류를",
+        "bodyText": "2026.2.5.(목)까지 우편으로 추가 제출",
+        "sourceLocation": {
+          "lineIndex": 15,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "submission_period",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-05",
+            "start": 43,
+            "end": 55
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "conditional_followup",
+      "semanticClassification": {
+        "eventType": "submission_period",
+        "actionType": null,
+        "temporalRole": "conditional_followup",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "추천기관의 추천 대상자로 선정된 지원자는 <붙임 2>에서 요구하는 서류를",
+          "※ 추천기관의 추천 대상자로 선정된 지원자는 <붙임 2>에서 요구하는 서류를 2026.2.5.(목)까지 우편으로 추가 제출",
+          "semantic.temporal_role.conditional_followup"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-bd87215e1a4d0324",
+        "segmentId": "seg-edf9a6ddebedb4ec",
+        "rawText": "2026.2.5.(목)",
+        "normalizedStart": "2026-02-05",
+        "normalizedEnd": "2026-02-05",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 43,
+          "end": 55
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-7b9330b23960eef2",
+        "sourceNoticeId": "knu-504-5636",
+        "segmentId": "seg-edf9a6ddebedb4ec",
+        "temporalMentionIds": [
+          "tm-bd87215e1a4d0324"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "추천기관의 추천 대상자로 선정된 지원자는 <붙임 2>에서 요구하는 서류를",
+        "evidence": "※ 추천기관의 추천 대상자로 선정된 지원자는 <붙임 2>에서 요구하는 서류를 2026.2.5.(목)까지 우편으로 추가 제출"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "2026년도 일본정부（문부과학성） 초청 일한공동 고등교육 유학생 교 류사업（학부 1년 코스） 장학생 선발 안내 제출 마감",
+      "dateText": "2026.2.5.(목)",
+      "normalizedStart": "2026-02-05",
+      "normalizedEnd": "2026-02-05",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "※ 추천기관의 추천 대상자로 선정된 지원자는 <붙임 2>에서 요구하는 서류를 2026.2.5.(목)까지 우편으로 추가 제출",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "conditional_selected_participant_action",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "reasonCodes": [
+        "conditional_selected_participant_action",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "conditional",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "medium",
+        "ruleId": "applicability.conditional.selected_participant",
+        "reasonCodes": [
+          "conditional_selected_participant_action",
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "conditional_selected_participant_action",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.conditional_selected_participant_action",
+          "publishability.temporal_role.conditional_followup",
+          "publishability.temporal_role.conditional_followup.review",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5636-cf6e02664a2f2f",
+      "uidHint": "noticepilot-cand-knu-504-5636-cf6e02664a2f2f@noticepilot.local",
+      "sourceNoticeId": "knu-504-5636",
+      "sourceTitle": "2026년도 일본정부（문부과학성） 초청 일한공동 고등교육 유학생 교 류사업（학부 1년 코스） 장학생 선발 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5636&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "exam_or_interview",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-335eb4825b468599",
+        "segmentType": "label_value",
+        "labelText": "시험",
+        "bodyText": "2.8.(일) 예정",
+        "sourceLocation": {
+          "lineIndex": 18,
+          "clauseIndex": 2,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "exam_or_interview"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-08",
+            "start": 4,
+            "end": 11
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "exam_or_interview",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "시험",
+          "시험: 2.8.(일) 예정",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-e70778e82e3ecfff",
+        "segmentId": "seg-335eb4825b468599",
+        "rawText": "2.8.(일)",
+        "normalizedStart": "2026-02-08",
+        "normalizedEnd": "2026-02-08",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 4,
+          "end": 11
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-202245cfdfb68af8",
+        "sourceNoticeId": "knu-504-5636",
+        "segmentId": "seg-335eb4825b468599",
+        "temporalMentionIds": [
+          "tm-e70778e82e3ecfff"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "시험",
+        "evidence": "시험: 2.8.(일) 예정"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026년도 일본정부（문부과학성） 초청 일한공동 고등교육 유학생 교 류사업（학부 1년 코스） 장학생 선발 안내 시험·면접 일정",
+      "dateText": "2.8.(일)",
+      "normalizedStart": "2026-02-08",
+      "normalizedEnd": "2026-02-08",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "시험: 2.8.(일) 예정",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5636-19a39164abc08d",
+      "uidHint": "noticepilot-cand-knu-504-5636-19a39164abc08d@noticepilot.local",
+      "sourceNoticeId": "knu-504-5636",
+      "sourceTitle": "2026년도 일본정부（문부과학성） 초청 일한공동 고등교육 유학생 교 류사업（학부 1년 코스） 장학생 선발 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5636&pageIndex=12&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "exam_or_interview",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-918dda008cc4c2f5",
+        "segmentType": "label_value",
+        "labelText": "면접시험",
+        "bodyText": "2026.3.5.(목)~3.6.(금) 예정",
+        "sourceLocation": {
+          "lineIndex": 18,
+          "clauseIndex": 3,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "exam_or_interview"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-05",
+            "start": 21,
+            "end": 33
+          },
+          {
+            "value": "2026-03-06",
+            "start": 34,
+            "end": 41
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "exam_or_interview",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "면접시험",
+          "마. 면접시험: 필기시험 합격자 대상 2026.3.5.(목)~3.6.(금) 예정",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-1144355ffbe3c304",
+        "segmentId": "seg-918dda008cc4c2f5",
+        "rawText": "2026.3.5.(목)~3.6.(금) 예정",
+        "normalizedStart": "2026-03-05",
+        "normalizedEnd": "2026-03-06",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 21,
+          "end": 41
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-7fb2b75a11837854",
+        "sourceNoticeId": "knu-504-5636",
+        "segmentId": "seg-918dda008cc4c2f5",
+        "temporalMentionIds": [
+          "tm-1144355ffbe3c304"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "면접시험",
+        "evidence": "마. 면접시험: 필기시험 합격자 대상 2026.3.5.(목)~3.6.(금) 예정"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026년도 일본정부（문부과학성） 초청 일한공동 고등교육 유학생 교 류사업（학부 1년 코스） 장학생 선발 안내 시험·면접 일정",
+      "dateText": "2026.3.5.(목)~3.6.(금) 예정",
+      "normalizedStart": "2026-03-05",
+      "normalizedEnd": "2026-03-06",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "마. 면접시험: 필기시험 합격자 대상 2026.3.5.(목)~3.6.(금) 예정",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 5,
+    "autoConfirmedCount": 3,
+    "needsReviewCount": 2,
+    "calendarFeedIncludedCount": 3
+  }
+}

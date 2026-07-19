@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-717-1399",
+  "sourceContentHash": "8cdcbdc7ac88dc0495ae796c6b6330ed667f0cc542bb0add6daf4179a06586f7",
+  "sourceTitle": "(추천채용) 서린컴퍼니(주) AMD/MD 채용",
+  "publishedAt": "2026-04-07",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-77e4f3b563f931d7",
+      "segmentType": "title",
+      "labelText": "(추천채용) 서린컴퍼니(주) AMD/MD 채용",
+      "bodyText": "(추천채용) 서린컴퍼니(주) AMD/MD 채용",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(추천채용) 서린컴퍼니(주) AMD/MD 채용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fb8ffe0582b09763",
+      "segmentType": "label_value",
+      "labelText": "🍀지원기한",
+      "bodyText": "2026.4.14. 09시까지",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-14",
+          "start": 8,
+          "end": 17
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "🍀지원기한: ~2026.4.14. 09시까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4c180681c919d304",
+      "segmentType": "label_value",
+      "labelText": "🌸지원방법: 네이버폼 응답(https",
+      "bodyText": "🌸지원방법: 네이버폼 응답(https://naver.me/GtJQiCj7) 후 개별연락드립니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "🌸지원방법: 네이버폼 응답(https://naver.me/GtJQiCj7) 후 개별연락드립니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 3,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2
+    }
+  }
+}

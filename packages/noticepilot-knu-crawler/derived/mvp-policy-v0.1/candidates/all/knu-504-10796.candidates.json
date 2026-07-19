@@ -1,0 +1,522 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10796",
+  "sourceContentHash": "3aab1a1a1bc54b1f7969acc4845d57fa0ca784c75729577195f935f17b261aa8",
+  "sourceTitle": "[강릉·원주] 2026학년도 1학기 국제도우미 선발 안내(3/29 마감)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10796&pageIndex=8&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉 원주",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10796-8e9228980b9571",
+      "uidHint": "noticepilot-cand-knu-504-10796-8e9228980b9571@noticepilot.local",
+      "sourceNoticeId": "knu-504-10796",
+      "sourceTitle": "[강릉·원주] 2026학년도 1학기 국제도우미 선발 안내(3/29 마감)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10796&pageIndex=8&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-7a34ed0e854b81c9",
+        "segmentType": "label_value",
+        "labelText": "지원 마감",
+        "bodyText": "2026. 3. 29.(일) 23시59분까지 *마감 기한 엄수",
+        "sourceLocation": {
+          "lineIndex": 6,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-29",
+            "start": 9,
+            "end": 24
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "지원 마감",
+          "▶ 지원 마감: 2026. 3. 29.(일) 23시59분까지 *마감 기한 엄수",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-392979da450b362c",
+        "segmentId": "seg-7a34ed0e854b81c9",
+        "rawText": "2026. 3. 29.(일)",
+        "normalizedStart": "2026-03-29T23:59:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 9,
+          "end": 24
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-3e6a9d6f603017f6",
+        "sourceNoticeId": "knu-504-10796",
+        "segmentId": "seg-7a34ed0e854b81c9",
+        "temporalMentionIds": [
+          "tm-392979da450b362c"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "지원 마감",
+        "evidence": "▶ 지원 마감: 2026. 3. 29.(일) 23시59분까지 *마감 기한 엄수"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[강릉·원주] 2026학년도 1학기 국제도우미 선발 안내(3/29 마감) 신청 마감",
+      "dateText": "2026. 3. 29.(일)",
+      "normalizedStart": "2026-03-29T23:59:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "▶ 지원 마감: 2026. 3. 29.(일) 23시59분까지 *마감 기한 엄수",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "same_day_precision_candidates_consolidated",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "same_day_precision_candidates_consolidated",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10796-7e78ec047d5c2a",
+      "uidHint": "noticepilot-cand-knu-504-10796-7e78ec047d5c2a@noticepilot.local",
+      "sourceNoticeId": "knu-504-10796",
+      "sourceTitle": "[강릉·원주] 2026학년도 1학기 국제도우미 선발 안내(3/29 마감)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10796&pageIndex=8&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-6ee6a012e8f210a6",
+        "segmentType": "label_value",
+        "labelText": "합격자 발표",
+        "bodyText": "2026. 4. 1.(수) 국제교류팀 홈페이지 - 공지사항",
+        "sourceLocation": {
+          "lineIndex": 7,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "result_announcement"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-01",
+            "start": 10,
+            "end": 24
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "합격자 발표",
+          "▶ 합격자 발표: 2026. 4. 1.(수) 국제교류팀 홈페이지 - 공지사항",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-a17c4bdbffe30d57",
+        "segmentId": "seg-6ee6a012e8f210a6",
+        "rawText": "2026. 4. 1.(수)",
+        "normalizedStart": "2026-04-01",
+        "normalizedEnd": "2026-04-01",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 10,
+          "end": 24
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-ab24fa7a3bf83b50",
+        "sourceNoticeId": "knu-504-10796",
+        "segmentId": "seg-6ee6a012e8f210a6",
+        "temporalMentionIds": [
+          "tm-a17c4bdbffe30d57"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "합격자 발표",
+        "evidence": "▶ 합격자 발표: 2026. 4. 1.(수) 국제교류팀 홈페이지 - 공지사항"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[강릉·원주] 2026학년도 1학기 국제도우미 선발 안내(3/29 마감) 결과 발표 예정",
+      "dateText": "2026. 4. 1.(수)",
+      "normalizedStart": "2026-04-01",
+      "normalizedEnd": "2026-04-01",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "▶ 합격자 발표: 2026. 4. 1.(수) 국제교류팀 홈페이지 - 공지사항",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10796-c511c86b453e4f",
+      "uidHint": "noticepilot-cand-knu-504-10796-c511c86b453e4f@noticepilot.local",
+      "sourceNoticeId": "knu-504-10796",
+      "sourceTitle": "[강릉·원주] 2026학년도 1학기 국제도우미 선발 안내(3/29 마감)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10796&pageIndex=8&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-4e8e0c2a4cd0a626",
+        "segmentType": "list_item",
+        "labelText": "",
+        "bodyText": "2026. 4. 2. (목) 18:00 ~ 19:00",
+        "sourceLocation": {
+          "lineIndex": 8,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-02",
+            "start": 14,
+            "end": 29
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "conditional_followup",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "conditional_followup",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "▶ 합격자 오리엔테이션: 2026. 4. 2. (목) 18:00 ~ 19:00",
+          "semantic.temporal_role.conditional_followup"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-9af6807391646f4f",
+        "segmentId": "seg-4e8e0c2a4cd0a626",
+        "rawText": "2026. 4. 2. (목) 18:00 ~ 19:00",
+        "normalizedStart": "2026-04-02T18:00:00+09:00",
+        "normalizedEnd": "2026-04-02T19:00:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 14,
+          "end": 29
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-58beca0a4253726f",
+        "sourceNoticeId": "knu-504-10796",
+        "segmentId": "seg-4e8e0c2a4cd0a626",
+        "temporalMentionIds": [
+          "tm-9af6807391646f4f"
+        ],
+        "bindingKind": "same_list_item",
+        "confidence": "high",
+        "ruleId": "binding.same_list_item",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "▶ 합격자 오리엔테이션: 2026. 4. 2. (목) 18:00 ~ 19:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "[강릉·원주] 2026학년도 1학기 국제도우미 선발 안내(3/29 마감) 행사 기간",
+      "dateText": "2026. 4. 2. (목) 18:00 ~ 19:00",
+      "normalizedStart": "2026-04-02T18:00:00+09:00",
+      "normalizedEnd": "2026-04-02T19:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "▶ 합격자 오리엔테이션: 2026. 4. 2. (목) 18:00 ~ 19:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "conditional_selected_participant_action",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "reasonCodes": [
+        "conditional_selected_participant_action",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "conditional",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "medium",
+        "ruleId": "applicability.conditional.selected_participant",
+        "reasonCodes": [
+          "conditional_selected_participant_action",
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "conditional_selected_participant_action",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.conditional_selected_participant_action",
+          "publishability.temporal_role.conditional_followup",
+          "publishability.temporal_role.conditional_followup.review",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 3,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 2
+  }
+}

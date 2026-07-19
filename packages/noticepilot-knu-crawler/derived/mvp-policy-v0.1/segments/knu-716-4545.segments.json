@@ -1,0 +1,271 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4545",
+  "sourceContentHash": "4f13c1a3837299419cded2eaa82501d2177d8e7440726584f4b1b066b76a7a15",
+  "sourceTitle": "국립강릉원주대학교 공학교육혁신센터 연구원(계약직) 모집 공고",
+  "publishedAt": "2026-02-24",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4965224791618039",
+      "segmentType": "title",
+      "labelText": "국립강릉원주대학교 공학교육혁신센터 연구원(계약직) 모집 공고",
+      "bodyText": "국립강릉원주대학교 공학교육혁신센터 연구원(계약직) 모집 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국립강릉원주대학교 공학교육혁신센터 연구원(계약직) 모집 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7199bf38602a018f",
+      "segmentType": "label_value",
+      "labelText": "공학교육혁신센터에서 근무할 직원을 다음과 같이 채용하고자 하오니 관심있는 분들의 많은 지원바랍니다.",
+      "bodyText": "공학교육혁신센터에서 근무할 직원을 다음과 같이 채용하고자 하오니 관심있는 분들의 많은 지원바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "공학교육혁신센터에서 근무할 직원을 다음과 같이 채용하고자 하오니 관심있는 분들의 많은 지원바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9da479d7bb3f8c43",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 채용분야 및 인원",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 채용분야 및 인원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2dacfd0c0aef2027",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 연구원(계약직), 1명",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 연구원(계약직), 1명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fb77967a6d917a4e",
+      "segmentType": "label_value",
+      "labelText": "계약기간",
+      "bodyText": "2027.2.28",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2027-02-28",
+          "start": 11,
+          "end": 20
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 계약기간 : ~ 2027.2.28"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-798af642126bf7d4",
+      "segmentType": "label_value",
+      "labelText": "모집일정",
+      "bodyText": "2. 모집일정 : 원서접수 2026",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 모집일정 : 원서접수 2026"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-640f4022bd56f441",
+      "segmentType": "continuation",
+      "labelText": "모집일정",
+      "bodyText": "2026 .2.23.(월)~2026.3.6.(금) 18시까지",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-798af642126bf7d4"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-23",
+          "start": 15,
+          "end": 29
+        },
+        {
+          "value": "2026-03-06",
+          "start": 30,
+          "end": 42
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 모집일정 : 원서접수 2026 .2.23.(월)~2026.3.6.(금) 18시까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-53c0bdb206ab7b96",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2.23.(월)~2026.3.6.(금) 18시까지",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-23",
+          "start": 1,
+          "end": 9
+        },
+        {
+          "value": "2026-03-06",
+          "start": 10,
+          "end": 22
+        }
+      ],
+      "locallyGrounded": false,
+      "text": ".2.23.(월)~2026.3.6.(금) 18시까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-325c5172b5a7ef88",
+      "segmentType": "label_value",
+      "labelText": "제출처",
+      "bodyText": "3. 제출처 : 우편) 강원특별자치도 죽헌길 7, 강릉원주대학교 공학1호관 102호(공학교육혁신센터)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 제출처 : 우편) 강원특별자치도 죽헌길 7, 강릉원주대학교 공학1호관 102호(공학교육혁신센터)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8e44a6dc942313ef",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "이메일) mowgli24@gwnu.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "이메일) mowgli24@gwnu.ac.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-437959ed3a7589d4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "기타 자세한 사항은 공고문을 확인하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기타 자세한 사항은 공고문을 확인하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3b57f8624008efc5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 문의 : 033-640-2648 공학교육혁신센터",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 문의 : 033-640-2648 공학교육혁신센터"
+    }
+  ],
+  "summary": {
+    "segmentCount": 12,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 4,
+      "list_item": 2,
+      "paragraph": 4,
+      "continuation": 1
+    }
+  }
+}

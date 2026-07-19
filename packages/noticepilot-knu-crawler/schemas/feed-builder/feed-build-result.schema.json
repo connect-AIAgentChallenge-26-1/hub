@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/feed-builder/feed-build-result.schema.json",
+  "title": "NoticePilot deterministic feed build result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "builderVersion",
+    "profileId",
+    "profileRevision",
+    "policySchemaVersion",
+    "policyVersion",
+    "sourceContext",
+    "sortContract",
+    "inputEventCount",
+    "includedEventCount",
+    "excludedEventCount",
+    "includedEventIds",
+    "excludedEventIds",
+    "primaryReasonCounts"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.feedBuildResult.v0.1"},
+    "builderVersion": {"const": "0.1.0"},
+    "profileId": {"type": "string", "pattern": "^subprof_[0-9a-f]{32}$"},
+    "profileRevision": {"type": "integer", "minimum": 1},
+    "policySchemaVersion": {"const": "noticepilot.feedEligibilityPolicy.v0.2"},
+    "policyVersion": {"const": "0.2.0"},
+    "sourceContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registryId", "projectionId"],
+      "properties": {
+        "registryId": {"type": "string", "minLength": 1},
+        "projectionId": {"type": "string", "minLength": 1}
+      }
+    },
+    "sortContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["included", "excluded", "decisionLedger"],
+      "properties": {
+        "included": {
+          "const": ["normalizedStart_ascending", "calendarEventId_ascending"]
+        },
+        "excluded": {
+          "const": ["primaryReasonPrecedence_ascending", "calendarEventId_ascending"]
+        },
+        "decisionLedger": {"const": ["calendarEventId_ascending"]}
+      }
+    },
+    "inputEventCount": {"type": "integer", "minimum": 0},
+    "includedEventCount": {"type": "integer", "minimum": 0},
+    "excludedEventCount": {"type": "integer", "minimum": 0},
+    "includedEventIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^evt_[0-9a-f]{32}$"}
+    },
+    "excludedEventIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^evt_[0-9a-f]{32}$"}
+    },
+    "primaryReasonCounts": {
+      "type": "object",
+      "additionalProperties": {"type": "integer", "minimum": 1},
+      "propertyNames": {
+        "enum": [
+          "profile_not_active",
+          "institution_mismatch",
+          "unsupported_event_status",
+          "invalid_normalized_date",
+          "review_state_unknown",
+          "campus_unknown_excluded",
+          "campus_all_excluded",
+          "campus_no_intersection",
+          "source_board_or_notice_type_mismatch",
+          "feed_scope_mismatch",
+          "event_type_mismatch",
+          "target_actor_mismatch",
+          "review_required_excluded",
+          "audience_unscoped_excluded",
+          "audience_degree_level_mismatch",
+          "audience_student_year_mismatch",
+          "audience_enrollment_status_mismatch",
+          "audience_admission_type_mismatch",
+          "eligible_all_dimensions_matched"
+        ]
+      }
+    }
+  }
+}

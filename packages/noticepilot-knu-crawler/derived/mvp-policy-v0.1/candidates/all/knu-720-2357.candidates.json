@@ -1,0 +1,364 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-720-2357",
+  "sourceContentHash": "049ba9034dd728c3ec9848178f5cdf90464f641b88ed2c79329416991be362d5",
+  "sourceTitle": "2026학년도 편입생 오리엔테이션 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2357&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "all"
+    ],
+    "scopeType": "all_campuses",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "all": "전체"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-720-2357-cba8ca139855ec",
+      "uidHint": "noticepilot-cand-knu-720-2357-cba8ca139855ec@noticepilot.local",
+      "sourceNoticeId": "knu-720-2357",
+      "sourceTitle": "2026학년도 편입생 오리엔테이션 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2357&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-6a0ec775f6a303b6",
+        "segmentType": "continuation",
+        "labelText": "일시",
+        "bodyText": "2026. 2. 12.（목） 09:00 ~ 2. 27.（금） 18:00",
+        "sourceLocation": {
+          "lineIndex": 0,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-1ee456e5caaf2be3"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [
+          "admission_type:transfer_student"
+        ],
+        "dateSpans": [
+          {
+            "value": "2026-02-12",
+            "start": 77,
+            "end": 92
+          },
+          {
+            "value": "2026-02-27",
+            "start": 101,
+            "end": 110
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "일시",
+          "2026학년도 편입생 여러분을 진심으로 환영하며 2026학년도 편입생 오리엔테이션에 대해서 안내드리니 참고하시기 바랍니다. 1. 일시 : 2026. 2. 12.（목） 09:00 ~ 2. 27.（금） 18:00",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-dc0f8ff8fefd8bdf",
+        "segmentId": "seg-6a0ec775f6a303b6",
+        "rawText": "2026. 2. 12.（목） 09:00 ~ 2. 27.（금） 18:00",
+        "normalizedStart": "2026-02-12T09:00:00+09:00",
+        "normalizedEnd": "2026-02-27T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 77,
+          "end": 110
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-0050ed90d4f2bd75",
+        "sourceNoticeId": "knu-720-2357",
+        "segmentId": "seg-6a0ec775f6a303b6",
+        "temporalMentionIds": [
+          "tm-dc0f8ff8fefd8bdf"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "일시",
+        "evidence": "2026학년도 편입생 여러분을 진심으로 환영하며 2026학년도 편입생 오리엔테이션에 대해서 안내드리니 참고하시기 바랍니다. 1. 일시 : 2026. 2. 12.（목） 09:00 ~ 2. 27.（금） 18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 편입생 오리엔테이션 안내 행사 기간",
+      "dateText": "2026. 2. 12.（목） 09:00 ~ 2. 27.（금） 18:00",
+      "normalizedStart": "2026-02-12T09:00:00+09:00",
+      "normalizedEnd": "2026-02-27T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "2026학년도 편입생 여러분을 진심으로 환영하며 2026학년도 편입생 오리엔테이션에 대해서 안내드리니 참고하시기 바랍니다. 1. 일시 : 2026. 2. 12.（목） 09:00 ~ 2. 27.（금） 18:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2357-fcdbcfb43e542a",
+      "uidHint": "noticepilot-cand-knu-720-2357-fcdbcfb43e542a@noticepilot.local",
+      "sourceNoticeId": "knu-720-2357",
+      "sourceTitle": "2026학년도 편입생 오리엔테이션 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2357&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-7f8d0057edca4799",
+        "segmentType": "list_item",
+        "labelText": "",
+        "bodyText": "2026. 2. 21.（토） 9시 이후 : 충원등록생",
+        "sourceLocation": {
+          "lineIndex": 12,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-21",
+            "start": 2,
+            "end": 17
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "conditional_followup",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": null,
+        "temporalRole": "conditional_followup",
+        "confidence": "none",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "- 2026. 2. 21.（토） 9시 이후 : 충원등록생",
+          "semantic.temporal_role.conditional_followup"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-0dfc526b4af02755",
+        "segmentId": "seg-7f8d0057edca4799",
+        "rawText": "2026. 2. 21.（토）",
+        "normalizedStart": "2026-02-21T09:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 2,
+          "end": 17
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-9f4be9da6f0db1b9",
+        "sourceNoticeId": "knu-720-2357",
+        "segmentId": "seg-7f8d0057edca4799",
+        "temporalMentionIds": [
+          "tm-0dfc526b4af02755"
+        ],
+        "bindingKind": "unresolved",
+        "confidence": "none",
+        "ruleId": "binding.unresolved",
+        "locallyGrounded": false,
+        "labelText": "",
+        "evidence": "- 2026. 2. 21.（토） 9시 이후 : 충원등록생"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "2026학년도 편입생 오리엔테이션 안내 일정",
+      "dateText": "2026. 2. 21.（토）",
+      "normalizedStart": "2026-02-21T09:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "- 2026. 2. 21.（토） 9시 이후 : 충원등록생",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "conditional_selected_participant_action",
+        "student_audience"
+      ],
+      "reasonCodes": [
+        "conditional_selected_participant_action",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "conditional",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "medium",
+        "ruleId": "applicability.conditional.selected_participant",
+        "reasonCodes": [
+          "conditional_selected_participant_action",
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "conditional_selected_participant_action",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.conditional_selected_participant_action",
+          "publishability.temporal_role.conditional_followup",
+          "publishability.temporal_role.conditional_followup.review",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 1
+  }
+}

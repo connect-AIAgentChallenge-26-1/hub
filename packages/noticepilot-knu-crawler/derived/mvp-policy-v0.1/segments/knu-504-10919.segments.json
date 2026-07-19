@@ -1,0 +1,103 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10919",
+  "sourceContentHash": "feb8b7430b448269e4d12b56177fef5bba7e6d8f00772af2cdee478519d46331",
+  "sourceTitle": "삼척캠퍼스 통학버스 정류장 변경 안내(5/6 부터)",
+  "publishedAt": "2026-04-23",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bcc0c3f30e48cbd1",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "5/6 부터)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-06",
+          "start": 21,
+          "end": 25
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "삼척캠퍼스 통학버스 정류장 변경 안내(5/6 부터)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b091a3136bb511f8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "삼척캠퍼스 통학버스 승강장 변경 안내해드리니 참고바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "삼척캠퍼스 통학버스 승강장 변경 안내해드리니 참고바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-21b730188a9dad3d",
+      "segmentType": "label_value",
+      "labelText": "변경일자",
+      "bodyText": "2026. 5. 6(수) 운행부터(도계캠퍼스 교직원 통근차량은 기존위치 출발)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-06",
+          "start": 10,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "1. 변경일자 : 2026. 5. 6(수) 운행부터(도계캠퍼스 교직원 통근차량은 기존위치 출발)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9ed80df2c18ad159",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 변경위치 : 학생회관 건너편 => 학생회관 앞",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 변경위치 : 학생회관 건너편 => 학생회관 앞"
+    }
+  ],
+  "summary": {
+    "segmentCount": 4,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 1,
+      "label_value": 1,
+      "list_item": 1
+    }
+  }
+}

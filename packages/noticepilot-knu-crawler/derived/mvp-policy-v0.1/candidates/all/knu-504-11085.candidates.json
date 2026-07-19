@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11085",
+  "sourceContentHash": "b6e3e6f81829b9fb6b78d55617f07d645f86cc0623cd949f5a01a0f8382516a7",
+  "sourceTitle": "제2회 원주시 공공데이터·AI 활용 아이디어 공모전 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11085&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11085-6912c1db17d083",
+      "uidHint": "noticepilot-cand-knu-504-11085-6912c1db17d083@noticepilot.local",
+      "sourceNoticeId": "knu-504-11085",
+      "sourceTitle": "제2회 원주시 공공데이터·AI 활용 아이디어 공모전 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11085&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-ac673b2f97875bdc",
+        "segmentType": "continuation",
+        "labelText": "접수기간",
+        "bodyText": "2026. 6. 8.(월) 09:00 ∼ 7. 8.(수) 18:00",
+        "sourceLocation": {
+          "lineIndex": 8,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-ea8f2c9669246cec"
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-08",
+            "start": 5,
+            "end": 19
+          },
+          {
+            "value": "2026-07-08",
+            "start": 28,
+            "end": 36
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "접수기간",
+          "접수기간 2026. 6. 8.(월) 09:00 ∼ 7. 8.(수) 18:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-16f32b16ce59ad8a",
+        "segmentId": "seg-ac673b2f97875bdc",
+        "rawText": "2026. 6. 8.(월) 09:00 ∼ 7. 8.(수) 18:00",
+        "normalizedStart": "2026-06-08T09:00:00+09:00",
+        "normalizedEnd": "2026-07-08T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 5,
+          "end": 36
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-a5244914c63197f0",
+        "sourceNoticeId": "knu-504-11085",
+        "segmentId": "seg-ac673b2f97875bdc",
+        "temporalMentionIds": [
+          "tm-16f32b16ce59ad8a"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "접수기간",
+        "evidence": "접수기간 2026. 6. 8.(월) 09:00 ∼ 7. 8.(수) 18:00"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "제2회 원주시 공공데이터·AI 활용 아이디어 공모전 안내 신청기간",
+      "dateText": "2026. 6. 8.(월) 09:00 ∼ 7. 8.(수) 18:00",
+      "normalizedStart": "2026-06-08T09:00:00+09:00",
+      "normalizedEnd": "2026-07-08T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "접수기간 2026. 6. 8.(월) 09:00 ∼ 7. 8.(수) 18:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

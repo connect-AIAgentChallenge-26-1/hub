@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3068",
+  "sourceContentHash": "8d19df08406869f734bec9e7972dfa94601e279780770a5a4332cef133fa660e",
+  "sourceTitle": "삼척자유전공학부 응용국어학 분야 초빙교수（외국인） 채용 공고",
+  "publishedAt": "2026-01-09",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-293da4281b826562",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "삼척자유전공학부 응용국어학 분야 초빙교수（외국인） 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "삼척자유전공학부 응용국어학 분야 초빙교수（외국인） 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b6b24b1365830ea7",
+      "segmentType": "label_value",
+      "labelText": "삼척자유전공학부 응용국어학 분야 초빙교수(외국인)를 아래와 같이 초빙하오니 많은 지원 바랍니다.",
+      "bodyText": "삼척자유전공학부 응용국어학 분야 초빙교수(외국인)를 아래와 같이 초빙하오니 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "삼척자유전공학부 응용국어학 분야 초빙교수(외국인)를 아래와 같이 초빙하오니 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aebeb6339ab4bf66",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 채용분야: 응용국어학",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 채용분야: 응용국어학"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2fd59cbd7816f53b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 채용인원: 1명",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 채용인원: 1명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-802275c7761acef8",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 1. 9.(금)~1. 15.(목) 18:00까지",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-09",
+          "start": 9,
+          "end": 23
+        },
+        {
+          "value": "2026-01-15",
+          "start": 24,
+          "end": 33
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 접수기간: 2026. 1. 9.(금)~1. 15.(목) 18:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-32ee0179472990bc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "*기타 자세한 내용은 공고문을 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "*기타 자세한 내용은 공고문을 참고하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-d34d12f3e27c85ac",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-01-09~2026-01-15",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-09",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-01-15",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-01-09~2026-01-15"
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 3,
+      "list_item": 2,
+      "paragraph": 1,
+      "title": 1
+    }
+  }
+}

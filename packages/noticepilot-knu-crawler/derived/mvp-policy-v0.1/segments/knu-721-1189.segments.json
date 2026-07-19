@@ -1,0 +1,245 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-1189",
+  "sourceContentHash": "d4698e3e86cd03dc686e43541ecf92c5ff79f7e2e4de9c3d28af085a8f595293",
+  "sourceTitle": "2026년도 제34기 세아해암 장학생 모집 안내",
+  "publishedAt": "2026-01-08",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a6aa54be8dbc9699",
+      "segmentType": "title",
+      "labelText": "2026년도 제34기 세아해암 장학생 모집 안내",
+      "bodyText": "2026년도 제34기 세아해암 장학생 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년도 제34기 세아해암 장학생 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e20409fc0ef3f0fd",
+      "segmentType": "label_value",
+      "labelText": "모집대상",
+      "bodyText": "1. 모집대상: 3학년 재학생 및 진학예정자(전공제한은 없으나 선발인원의 70％이상",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "student_year:3",
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 모집대상: 3학년 재학생 및 진학예정자(전공제한은 없으나 선발인원의 70％이상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-daeb2ab3ea2a8dd1",
+      "segmentType": "label_value",
+      "labelText": "이공계 전공자 선발)",
+      "bodyText": "이공계 전공자 선발)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "이공계 전공자 선발)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-36e5e714027ab0e1",
+      "segmentType": "label_value",
+      "labelText": "모집기간",
+      "bodyText": "2026. 1. 15. ~ 1. 21.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-15",
+          "start": 9,
+          "end": 20
+        },
+        {
+          "value": "2026-01-21",
+          "start": 24,
+          "end": 29
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 모집기간: 2026. 1. 15. ~ 1. 21."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9529e64ce93b44df",
+      "segmentType": "label_value",
+      "labelText": "신청자격",
+      "bodyText": "3. 신청자격: 한국장학재단 산정 소득분위 6분위 이하",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 신청자격: 한국장학재단 산정 소득분위 6분위 이하"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-41d6b36c9e55123c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학업성적 전체 평균 3.0이상",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학업성적 전체 평균 3.0이상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a5fb0945565fa593",
+      "segmentType": "label_value",
+      "labelText": "2026년도 1학기 12학점 이상 수강 계획인 자",
+      "bodyText": "2026년도 1학기 12학점 이상 수강 계획인 자",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년도 1학기 12학점 이상 수강 계획인 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-64755f0c7131a443",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 장학금액: 300만원",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 장학금액: 300만원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f7958cb19ea8d57c",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "5. 신청방법: 홈페이지 신청(haiam.seah.co.kr)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 신청방법: 홈페이지 신청(haiam.seah.co.kr)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b373a4bde333111f",
+      "segmentType": "label_value",
+      "labelText": "* 장학생 모집 설명회는",
+      "bodyText": "2026. 1. 12.(월) 오전 10시 30분/ZOOM비대면참가",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-12",
+          "start": 14,
+          "end": 29
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "* 장학생 모집 설명회는 2026. 1. 12.(월) 오전 10시 30분/ZOOM비대면참가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aea4e0a3cc5695f6",
+      "segmentType": "label_value",
+      "labelText": "참가신청은 재단 홈페이지 공지사항 참조",
+      "bodyText": "참가신청은 재단 홈페이지 공지사항 참조",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "참가신청은 재단 홈페이지 공지사항 참조"
+    }
+  ],
+  "summary": {
+    "segmentCount": 11,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 8,
+      "paragraph": 1,
+      "list_item": 1
+    }
+  }
+}

@@ -1,0 +1,514 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-719-4052",
+  "sourceContentHash": "7e13c0a9bd3b8e47e3df28a55cb8f37296d42224926672da5ec058db1e4ddd11",
+  "sourceTitle": "2026 제4회 한중 청년 미래 우호증진단 모집 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=4052&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "ALL",
+    "campuses": [
+      "all"
+    ],
+    "scopeType": "all_campuses",
+    "confidence": "high",
+    "source": "listMetadata.campus",
+    "labels": {
+      "all": "전체"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-719-4052-16f49ef25bb5e5",
+      "uidHint": "noticepilot-cand-knu-719-4052-16f49ef25bb5e5@noticepilot.local",
+      "sourceNoticeId": "knu-719-4052",
+      "sourceTitle": "2026 제4회 한중 청년 미래 우호증진단 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=4052&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "deadline",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-835a27b107036aae",
+        "segmentType": "paragraph",
+        "labelText": "",
+        "bodyText": "4월 12일 24시까지 도착분에 한함",
+        "sourceLocation": {
+          "lineIndex": 19,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-12",
+            "start": 0,
+            "end": 6
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "deadline",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "none",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "4월 12일 24시까지 도착분에 한함",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-39c82379c268f99e",
+        "segmentId": "seg-835a27b107036aae",
+        "rawText": "4월 12일 24시까지 도착분에 한함",
+        "normalizedStart": "2026-04-12T23:59:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 0,
+          "end": 6
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-babcc778eec0d3bb",
+        "sourceNoticeId": "knu-719-4052",
+        "segmentId": "seg-835a27b107036aae",
+        "temporalMentionIds": [
+          "tm-39c82379c268f99e"
+        ],
+        "bindingKind": "unresolved",
+        "confidence": "none",
+        "ruleId": "binding.unresolved",
+        "locallyGrounded": false,
+        "labelText": "",
+        "evidence": "4월 12일 24시까지 도착분에 한함"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026 제4회 한중 청년 미래 우호증진단 모집 안내 마감",
+      "dateText": "4월 12일 24시까지 도착분에 한함",
+      "normalizedStart": "2026-04-12T23:59:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "4월 12일 24시까지 도착분에 한함",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "end_of_day_24_normalized",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": "end_of_day_24_normalized"
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "end_of_day_24_normalized",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-719-4052-72c412ac82be08",
+      "uidHint": "noticepilot-cand-knu-719-4052-72c412ac82be08@noticepilot.local",
+      "sourceNoticeId": "knu-719-4052",
+      "sourceTitle": "2026 제4회 한중 청년 미래 우호증진단 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=4052&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "submission_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-2b370a620963a5d7",
+        "segmentType": "label_value",
+        "labelText": "제출 마감일",
+        "bodyText": "2026년 4월 21일 오전 10시까지",
+        "sourceLocation": {
+          "lineIndex": 30,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "submission_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-21",
+            "start": 10,
+            "end": 22
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "submission_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "제출 마감일",
+          "- 제출 마감일: 2026년 4월 21일 오전 10시까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-d741dd2acc796a05",
+        "segmentId": "seg-2b370a620963a5d7",
+        "rawText": "2026년 4월 21일",
+        "normalizedStart": "2026-04-21T10:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 10,
+          "end": 22
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-d641b67bf711b63a",
+        "sourceNoticeId": "knu-719-4052",
+        "segmentId": "seg-2b370a620963a5d7",
+        "temporalMentionIds": [
+          "tm-d741dd2acc796a05"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "제출 마감일",
+        "evidence": "- 제출 마감일: 2026년 4월 21일 오전 10시까지"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026 제4회 한중 청년 미래 우호증진단 모집 안내 제출 마감",
+      "dateText": "2026년 4월 21일",
+      "normalizedStart": "2026-04-21T10:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "- 제출 마감일: 2026년 4월 21일 오전 10시까지",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-719-4052-4267c92809f544",
+      "uidHint": "noticepilot-cand-knu-719-4052-4267c92809f544@noticepilot.local",
+      "sourceNoticeId": "knu-719-4052",
+      "sourceTitle": "2026 제4회 한중 청년 미래 우호증진단 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=4052&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-7dc91850c3710e3d",
+        "segmentType": "continuation",
+        "labelText": "",
+        "bodyText": "5월 25일주, 베이징·광저우",
+        "sourceLocation": {
+          "lineIndex": 55,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-9a7a9f448abb5049"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-25",
+            "start": 18,
+            "end": 24
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "- 20명: 국내 현장 탐방 등 5월 25일주, 베이징·광저우",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-6697e6fd6b1ba559",
+        "segmentId": "seg-7dc91850c3710e3d",
+        "rawText": "5월 25일",
+        "normalizedStart": "2026-05-25",
+        "normalizedEnd": "2026-05-25",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 18,
+          "end": 24
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-00001e4ac4af1e8c",
+        "sourceNoticeId": "knu-719-4052",
+        "segmentId": "seg-7dc91850c3710e3d",
+        "temporalMentionIds": [
+          "tm-6697e6fd6b1ba559"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "- 20명: 국내 현장 탐방 등 5월 25일주, 베이징·광저우"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026 제4회 한중 청년 미래 우호증진단 모집 안내 행사 일정",
+      "dateText": "5월 25일",
+      "normalizedStart": "2026-05-25",
+      "normalizedEnd": "2026-05-25",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "- 20명: 국내 현장 탐방 등 5월 25일주, 베이징·광저우",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 3,
+    "autoConfirmedCount": 3,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 3
+  }
+}

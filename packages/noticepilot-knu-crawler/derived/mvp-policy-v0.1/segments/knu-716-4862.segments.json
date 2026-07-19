@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4862",
+  "sourceContentHash": "0640a52237cce80dee60c237355bf7f5c95d78133e073d7f34a9c8a154ecc2cf",
+  "sourceTitle": "강원대학교 강릉산학협력단 강원ICT융합연구원(원주분원) 직원 채용 공고",
+  "publishedAt": "2026-06-19",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-edcfe628252946c1",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "강원대학교 강릉산학협력단 강원ICT융합연구원(원주분원) 직원 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉산학협력단 강원ICT융합연구원(원주분원) 직원 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-089631eb47f04a1b",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 강릉산학협력단 부설 강원ICT융합연구원(원주분원)에서 근무할 직원을 다음과 같이 채용하고자 하오니 유능한 인재들의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 강릉산학협력단 부설 강원ICT융합연구원(원주분원)에서 근무할 직원을 다음과 같이 채용하고자 하오니 유능한 인재들의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉산학협력단 부설 강원ICT융합연구원(원주분원)에서 근무할 직원을 다음과 같이 채용하고자 하오니 유능한 인재들의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-43b479313e9d6c66",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 채용분야: 연구운영 · 기획",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 채용분야: 연구운영 · 기획"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2fd59cbd7816f53b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 채용인원: 1명",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 채용인원: 1명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-754ef3fb8cde2c79",
+      "segmentType": "label_value",
+      "labelText": "원서접수기간",
+      "bodyText": "2026. 6. 18.(목) ~ 7. 3.(금) 18시까지",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-18",
+          "start": 11,
+          "end": 26
+        },
+        {
+          "value": "2026-07-03",
+          "start": 29,
+          "end": 37
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 원서접수기간: 2026. 6. 18.(목) ~ 7. 3.(금) 18시까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4a856809cc7919b1",
+      "segmentType": "label_value",
+      "labelText": "원서접수방법",
+      "bodyText": "4. 원서접수방법: 방문 접수, 등기 우편, 메일(itcrc@kangwon.ac.kr)접수",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 원서접수방법: 방문 접수, 등기 우편, 메일(itcrc@kangwon.ac.kr)접수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-96c2ab6caf333ef6",
+      "segmentType": "label_value",
+      "labelText": "방문 접수 및 등기 우편 제출처",
+      "bodyText": "※ 방문 접수 및 등기 우편 제출처: 강원특별자치도 강릉시 죽헌길 7, 공동실험실습관(N18) 503호(인사담당자)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 방문 접수 및 등기 우편 제출처: 강원특별자치도 강릉시 죽헌길 7, 공동실험실습관(N18) 503호(인사담당자)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c7a730503cd8943f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 기타 자세한 사항은 붙임의 공고문을 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 기타 자세한 사항은 붙임의 공고문을 참고하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-929b8b7048580889",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의사항: 강원대학교 강릉산학협력단 부설 강원ICT융합연구원 전략기획실 033-640-2870",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의사항: 강원대학교 강릉산학협력단 부설 강원ICT융합연구원 전략기획실 033-640-2870"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-fc1a91633555a775",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-06-18~2026-07-03",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-18",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-07-03",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-06-18~2026-07-03"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 5,
+      "list_item": 4,
+      "title": 1
+    }
+  }
+}

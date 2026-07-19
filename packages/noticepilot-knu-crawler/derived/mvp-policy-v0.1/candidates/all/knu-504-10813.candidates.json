@@ -1,0 +1,522 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10813",
+  "sourceContentHash": "1e4b8dd2117b071fdd5a5567944477d6a46a62793e2422b5dae233dea4150b8a",
+  "sourceTitle": "★모두의 창업 프로젝트★ 통합 모집 공고(~5/15)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10813&pageIndex=8&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10813-fb895d314fd7d4",
+      "uidHint": "noticepilot-cand-knu-504-10813-fb895d314fd7d4@noticepilot.local",
+      "sourceNoticeId": "knu-504-10813",
+      "sourceTitle": "★모두의 창업 프로젝트★ 통합 모집 공고(~5/15)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10813&pageIndex=8&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-2870b888922c834f",
+        "segmentType": "continuation",
+        "labelText": "에브리타임과 함께하는 대학 방문 홍보트럭 운영",
+        "bodyText": "2026년 4월 6일(월) 12:00",
+        "sourceLocation": {
+          "lineIndex": 23,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-f17346242b14a7b2"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-06",
+            "start": 29,
+            "end": 43
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "에브리타임과 함께하는 대학 방문 홍보트럭 운영",
+          "- 에브리타임과 함께하는 대학 방문 홍보트럭 운영: 2026년 4월 6일(월) 12:00",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-35985f0925ec302c",
+        "segmentId": "seg-2870b888922c834f",
+        "rawText": "2026년 4월 6일(월)",
+        "normalizedStart": "2026-04-06T12:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 29,
+          "end": 43
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-25b3f982fb665447",
+        "sourceNoticeId": "knu-504-10813",
+        "segmentId": "seg-2870b888922c834f",
+        "temporalMentionIds": [
+          "tm-35985f0925ec302c"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "에브리타임과 함께하는 대학 방문 홍보트럭 운영",
+        "evidence": "- 에브리타임과 함께하는 대학 방문 홍보트럭 운영: 2026년 4월 6일(월) 12:00"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "★모두의 창업 프로젝트★ 통합 모집 공고(~5/15) 행사 일정",
+      "dateText": "2026년 4월 6일(월)",
+      "normalizedStart": "2026-04-06T12:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "- 에브리타임과 함께하는 대학 방문 홍보트럭 운영: 2026년 4월 6일(월) 12:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10813-0c3e9c29d4c9eb",
+      "uidHint": "noticepilot-cand-knu-504-10813-0c3e9c29d4c9eb@noticepilot.local",
+      "sourceNoticeId": "knu-504-10813",
+      "sourceTitle": "★모두의 창업 프로젝트★ 통합 모집 공고(~5/15)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10813&pageIndex=8&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-598b6041773a334a",
+        "segmentType": "continuation",
+        "labelText": "",
+        "bodyText": "2026년 4월 24일(금) 14:00 ~ 16:00",
+        "sourceLocation": {
+          "lineIndex": 27,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-ed9774fcbff0a234"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-24",
+            "start": 18,
+            "end": 33
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "- 오프라인 설명회(강원편) : 2026년 4월 24일(금) 14:00 ~ 16:00",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-1bc1440a6952175c",
+        "segmentId": "seg-598b6041773a334a",
+        "rawText": "2026년 4월 24일(금) 14:00 ~ 16:00",
+        "normalizedStart": "2026-04-24T14:00:00+09:00",
+        "normalizedEnd": "2026-04-24T16:00:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 18,
+          "end": 33
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-e37f8d5104d824b2",
+        "sourceNoticeId": "knu-504-10813",
+        "segmentId": "seg-598b6041773a334a",
+        "temporalMentionIds": [
+          "tm-1bc1440a6952175c"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "- 오프라인 설명회(강원편) : 2026년 4월 24일(금) 14:00 ~ 16:00"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "★모두의 창업 프로젝트★ 통합 모집 공고(~5/15) 행사 기간",
+      "dateText": "2026년 4월 24일(금) 14:00 ~ 16:00",
+      "normalizedStart": "2026-04-24T14:00:00+09:00",
+      "normalizedEnd": "2026-04-24T16:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "- 오프라인 설명회(강원편) : 2026년 4월 24일(금) 14:00 ~ 16:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10813-1353313df98e03",
+      "uidHint": "noticepilot-cand-knu-504-10813-1353313df98e03@noticepilot.local",
+      "sourceNoticeId": "knu-504-10813",
+      "sourceTitle": "★모두의 창업 프로젝트★ 통합 모집 공고(~5/15)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10813&pageIndex=8&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-273964d48875ad80",
+        "segmentType": "title",
+        "labelText": "★모두의 창업 프로젝트★ 통합 모집 공고(~",
+        "bodyText": "5/15)",
+        "sourceLocation": {
+          "lineIndex": -1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-15",
+            "start": 24,
+            "end": 28
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "low",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "★모두의 창업 프로젝트★ 통합 모집 공고(~",
+          "★모두의 창업 프로젝트★ 통합 모집 공고(~5/15)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-1229053ef0fa622c",
+        "segmentId": "seg-273964d48875ad80",
+        "rawText": "5/15",
+        "normalizedStart": "2026-05-15",
+        "normalizedEnd": "2026-05-15",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 24,
+          "end": 28
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-cfcdc0bf2118feec",
+        "sourceNoticeId": "knu-504-10813",
+        "segmentId": "seg-273964d48875ad80",
+        "temporalMentionIds": [
+          "tm-1229053ef0fa622c"
+        ],
+        "bindingKind": "title_context",
+        "confidence": "low",
+        "ruleId": "binding.title_context",
+        "locallyGrounded": false,
+        "labelText": "★모두의 창업 프로젝트★ 통합 모집 공고(~",
+        "evidence": "★모두의 창업 프로젝트★ 통합 모집 공고(~5/15)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "★모두의 창업 프로젝트★ 통합 모집 공고(~5/15) 신청 마감",
+      "dateText": "5/15",
+      "normalizedStart": "2026-05-15",
+      "normalizedEnd": "2026-05-15",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "★모두의 창업 프로젝트★ 통합 모집 공고(~5/15)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 3,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 3,
+    "calendarFeedIncludedCount": 0
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/calendar-event-reconciliation.schema.json",
+  "title": "NoticePilot CalendarEvent reconciliation contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "calendarEventId",
+    "idStrategy",
+    "canonicalCandidateId",
+    "sourceCandidateIds",
+    "sourceNoticeIds",
+    "sourceLinks",
+    "relation",
+    "revision",
+    "decisionStatus",
+    "activeIcsProjectionCount"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.calendarEventRecord.v0.2-draft"},
+    "calendarEventId": {"type": ["string", "null"]},
+    "idStrategy": {"const": "registry_assigned_opaque_v0"},
+    "canonicalCandidateId": {"type": ["string", "null"]},
+    "sourceCandidateIds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "sourceNoticeIds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "sourceLinks": {"type": "array", "items": {"type": "string", "format": "uri"}, "uniqueItems": true},
+    "relation": {
+      "type": ["string", "null"],
+      "enum": ["distinct", "duplicate", "revision", "extension", "replacement", "needs_review", null]
+    },
+    "revision": {"type": ["integer", "null"], "minimum": 1},
+    "previousRevisionId": {"type": ["string", "null"]},
+    "decisionStatus": {
+      "enum": ["policy_approved_execution_deferred", "approved", "rejected", "needs_review"]
+    },
+    "confidence": {"type": ["string", "null"], "enum": ["high", "medium", "low", null]},
+    "ruleIds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "evidencePairIds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "active": {"type": ["boolean", "null"]},
+    "activeIcsProjectionCount": {"type": "integer", "minimum": 0, "maximum": 1}
+  }
+}

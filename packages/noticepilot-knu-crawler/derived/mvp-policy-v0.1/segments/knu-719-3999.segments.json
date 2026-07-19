@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-3999",
+  "sourceContentHash": "a3923375bc97ba76d27a48f363891e60c4aa228ab3165f2778a8ac96eb19996e",
+  "sourceTitle": "생활 속 목재이용 국민참여 공모전 참가자 모집 안내",
+  "publishedAt": "2026-03-12",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-efaef033747ff074",
+      "segmentType": "title",
+      "labelText": "생활 속 목재이용 국민참여 공모전 참가자 모집 안내",
+      "bodyText": "생활 속 목재이용 국민참여 공모전 참가자 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "생활 속 목재이용 국민참여 공모전 참가자 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bfb686a22d25b91b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 02-3463-9635(목재문화진흥회 기획홍보실)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 02-3463-9635(목재문화진흥회 기획홍보실)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

@@ -1,0 +1,523 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11057",
+  "sourceContentHash": "54460d1d1cd6c44edfd899014ff1f0a13d742ada8a2cc2c334efcd0ee122930f",
+  "sourceTitle": "2026 태양광 데이터를 활용한 빅데이터 분석 기초교육(온라인) 참가학생 모집~5/30(토)까지",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11057&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉 원주",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11057-7d8323ecc927a6",
+      "uidHint": "noticepilot-cand-knu-504-11057-7d8323ecc927a6@noticepilot.local",
+      "sourceNoticeId": "knu-504-11057",
+      "sourceTitle": "2026 태양광 데이터를 활용한 빅데이터 분석 기초교육(온라인) 참가학생 모집~5/30(토)까지",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11057&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-dbc78ae0f8388861",
+        "segmentType": "label_value",
+        "labelText": "신청기한",
+        "bodyText": "2026. 5. 30.(토) 17:00까지 (시간엄수)",
+        "sourceLocation": {
+          "lineIndex": 20,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-30",
+            "start": 6,
+            "end": 21
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "신청기한",
+          "신청기한: 2026. 5. 30.(토) 17:00까지 (시간엄수)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-381d3135197c6f86",
+        "segmentId": "seg-dbc78ae0f8388861",
+        "rawText": "2026. 5. 30.(토)",
+        "normalizedStart": "2026-05-30T17:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 6,
+          "end": 21
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-9a12ab35feb38770",
+        "sourceNoticeId": "knu-504-11057",
+        "segmentId": "seg-dbc78ae0f8388861",
+        "temporalMentionIds": [
+          "tm-381d3135197c6f86"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "신청기한",
+        "evidence": "신청기한: 2026. 5. 30.(토) 17:00까지 (시간엄수)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026 태양광 데이터를 활용한 빅데이터 분석 기초교육(온라인) 참가학생 모집~5/30(토)까지 신청 마감",
+      "dateText": "2026. 5. 30.(토)",
+      "normalizedStart": "2026-05-30T17:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "신청기한: 2026. 5. 30.(토) 17:00까지 (시간엄수)",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "same_day_precision_candidates_consolidated",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "same_day_precision_candidates_consolidated",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11057-bc5108cce4519f",
+      "uidHint": "noticepilot-cand-knu-504-11057-bc5108cce4519f@noticepilot.local",
+      "sourceNoticeId": "knu-504-11057",
+      "sourceTitle": "2026 태양광 데이터를 활용한 빅데이터 분석 기초교육(온라인) 참가학생 모집~5/30(토)까지",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11057&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-e197809cdfac9060",
+        "segmentType": "label_value",
+        "labelText": "ㅁ 선정여부",
+        "bodyText": "2026.06.01.(월) 선정학생에게 개별 문자안내",
+        "sourceLocation": {
+          "lineIndex": 29,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "result_announcement"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-01",
+            "start": 8,
+            "end": 22
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "ㅁ 선정여부",
+          "ㅁ 선정여부: 2026.06.01.(월) 선정학생에게 개별 문자안내",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-bf7ff12f0666737d",
+        "segmentId": "seg-e197809cdfac9060",
+        "rawText": "2026.06.01.(월)",
+        "normalizedStart": "2026-06-01",
+        "normalizedEnd": "2026-06-01",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 8,
+          "end": 22
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-23553a97356b92ec",
+        "sourceNoticeId": "knu-504-11057",
+        "segmentId": "seg-e197809cdfac9060",
+        "temporalMentionIds": [
+          "tm-bf7ff12f0666737d"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "ㅁ 선정여부",
+        "evidence": "ㅁ 선정여부: 2026.06.01.(월) 선정학생에게 개별 문자안내"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026 태양광 데이터를 활용한 빅데이터 분석 기초교육(온라인) 참가학생 모집~5/30(토)까지 결과 발표 예정",
+      "dateText": "2026.06.01.(월)",
+      "normalizedStart": "2026-06-01",
+      "normalizedEnd": "2026-06-01",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "ㅁ 선정여부: 2026.06.01.(월) 선정학생에게 개별 문자안내",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11057-586389dcd9d807",
+      "uidHint": "noticepilot-cand-knu-504-11057-586389dcd9d807@noticepilot.local",
+      "sourceNoticeId": "knu-504-11057",
+      "sourceTitle": "2026 태양광 데이터를 활용한 빅데이터 분석 기초교육(온라인) 참가학생 모집~5/30(토)까지",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11057&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-17a6b0b02f26be71",
+        "segmentType": "continuation",
+        "labelText": "교육일정",
+        "bodyText": "2026. 6. 24.(수) ~ 2026. 6. 26.(금) (총 17시간)",
+        "sourceLocation": {
+          "lineIndex": 7,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-120677a188af35e4"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-24",
+            "start": 6,
+            "end": 21
+          },
+          {
+            "value": "2026-06-26",
+            "start": 24,
+            "end": 39
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "교육일정",
+          "교육일정: 2026. 6. 24.(수) ~ 2026. 6. 26.(금) (총 17시간)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-a248a2eca439065c",
+        "segmentId": "seg-17a6b0b02f26be71",
+        "rawText": "2026. 6. 24.(수) ~ 2026. 6. 26.(금) (총 17시간)",
+        "normalizedStart": "2026-06-24T00:00:00+09:00",
+        "normalizedEnd": "2026-06-26T17:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 6,
+          "end": 39
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-1cd02d3f47a35b32",
+        "sourceNoticeId": "knu-504-11057",
+        "segmentId": "seg-17a6b0b02f26be71",
+        "temporalMentionIds": [
+          "tm-a248a2eca439065c"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "교육일정",
+        "evidence": "교육일정: 2026. 6. 24.(수) ~ 2026. 6. 26.(금) (총 17시간)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026 태양광 데이터를 활용한 빅데이터 분석 기초교육(온라인) 참가학생 모집~5/30(토)까지 행사 기간",
+      "dateText": "2026. 6. 24.(수) ~ 2026. 6. 26.(금) (총 17시간)",
+      "normalizedStart": "2026-06-24T00:00:00+09:00",
+      "normalizedEnd": "2026-06-26T17:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "교육일정: 2026. 6. 24.(수) ~ 2026. 6. 26.(금) (총 17시간)",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": "start_of_day_assumed_for_timed_range"
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "start_of_day_assumed_for_timed_range",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 3,
+    "autoConfirmedCount": 3,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 3
+  }
+}

@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3159",
+  "sourceContentHash": "eaac01a054f877277d77e8edf611d4a34b57b4eec500db0bc30a588b9e7791ea",
+  "sourceTitle": "2026년 연구교수 공개채용 공고（생명과학연구소）",
+  "publishedAt": "2026-02-02",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-022d714115a01f32",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026년 연구교수 공개채용 공고（생명과학연구소）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 연구교수 공개채용 공고（생명과학연구소）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-64d8a4c3b023f5f9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-48호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-48호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-92eb3162e48d9df0",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 생명과학연구소에서 연구교수 공개 채용을 실시하오니 전문적인 지식과 경험을 갖춘 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 생명과학연구소에서 연구교수 공개 채용을 실시하오니 전문적인 지식과 경험을 갖춘 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 생명과학연구소에서 연구교수 공개 채용을 실시하오니 전문적인 지식과 경험을 갖춘 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7d6319dc41a3bc85",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 채용부서: 생명과학연구소",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 채용부서: 생명과학연구소"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38ed686e2f981976",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 채용인원: 3명",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 채용인원: 3명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c59aa5400e9aa1fa",
+      "segmentType": "label_value",
+      "labelText": "접수처",
+      "bodyText": "3. 접수처",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 접수처"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-73775969cfad81dd",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 2. 2.(월) ~ 2026. 2. 8.(일)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-02",
+          "start": 8,
+          "end": 22
+        },
+        {
+          "value": "2026-02-08",
+          "start": 25,
+          "end": 39
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 접수기간: 2026. 2. 2.(월) ~ 2026. 2. 8.(일)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e519d6cd37074993",
+      "segmentType": "label_value",
+      "labelText": "접수방법",
+      "bodyText": "- 접수방법: 이메일(sungjin.moon@kangwon.ac.kr)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 접수방법: 이메일(sungjin.moon@kangwon.ac.kr)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c93d38b86c2700de",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의사항: 강원대학교 생명과학연구소 (☎033-250-8536)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의사항: 강원대학교 생명과학연구소 (☎033-250-8536)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5fe268725afb4dc2",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 세부내용은 공고문 참고",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 세부내용은 공고문 참고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-d5f384486c00f15a",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-02-02~2026-02-08",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-02",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-02-08",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-02-02~2026-02-08"
+    }
+  ],
+  "summary": {
+    "segmentCount": 11,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 5,
+      "list_item": 4,
+      "paragraph": 1,
+      "title": 1
+    }
+  }
+}

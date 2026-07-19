@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3147",
+  "sourceContentHash": "4a47a5450e6297ba7937cdc2aac04b7baf03f32584d279df08260c69f753909c",
+  "sourceTitle": "강원대학교 전입희망자（행정） 서류전형 합격자 및 면접일정 공고",
+  "publishedAt": "2026-01-30",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8b4b4cf4dccf2355",
+      "segmentType": "title",
+      "labelText": "강원대학교 전입희망자（행정） 서류전형 합격자 및 면접일정 공고",
+      "bodyText": "강원대학교 전입희망자（행정） 서류전형 합격자 및 면접일정 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 전입희망자（행정） 서류전형 합격자 및 면접일정 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cceb40afc0493418",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 공고 제2026-13호와 관련하여 다음과 같이 서류전형 합격자 및 면접일정을 공고합니다.",
+      "bodyText": "강원대학교 공고 제2026-13호와 관련하여 다음과 같이 서류전형 합격자 및 면접일정을 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-13호와 관련하여 다음과 같이 서류전형 합격자 및 면접일정을 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-27df947d7494b94b",
+      "segmentType": "continuation",
+      "labelText": "강원대학교 공고 제2026-13호와 관련하여 다음과 같이 서류전형 합격자 및 면접일정을 공고합니다.",
+      "bodyText": "2026. 1. 30.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-cceb40afc0493418"
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-30",
+          "start": 56,
+          "end": 67
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "강원대학교 공고 제2026-13호와 관련하여 다음과 같이 서류전형 합격자 및 면접일정을 공고합니다. 2026. 1. 30."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-472afefc6816aa9d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 1. 30.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-30",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 1. 30."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d1ab36da6c2e66f3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교총장",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교총장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "continuation": 1,
+      "paragraph": 2
+    }
+  }
+}

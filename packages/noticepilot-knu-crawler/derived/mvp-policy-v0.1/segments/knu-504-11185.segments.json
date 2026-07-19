@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11185",
+  "sourceContentHash": "836221f0648cb98bffded1756bde6db5ff908f656a35ccfe7ec95a5ea53adc9e",
+  "sourceTitle": "(원주캠퍼스)체력단련실 임시 운영 중지 안내",
+  "publishedAt": "2026-07-03",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e0873e18739b5f92",
+      "segmentType": "title",
+      "labelText": "(원주캠퍼스)체력단련실 임시 운영 중지 안내",
+      "bodyText": "(원주캠퍼스)체력단련실 임시 운영 중지 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(원주캠퍼스)체력단련실 임시 운영 중지 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-13803a9ab5002cbd",
+      "segmentType": "label_value",
+      "labelText": "체력단련실 임시 운영 중지 안내",
+      "bodyText": "체력단련실 임시 운영 중지 안내",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "체력단련실 임시 운영 중지 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9df2dede77b164eb",
+      "segmentType": "label_value",
+      "labelText": "교내 전체 단수로 인해 단수 기간동안 체력단련실 이용을 임시 중지함을 알려드립니다.",
+      "bodyText": "교내 전체 단수로 인해 단수 기간동안 체력단련실 이용을 임시 중지함을 알려드립니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "교내 전체 단수로 인해 단수 기간동안 체력단련실 이용을 임시 중지함을 알려드립니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-13eed0aacf7ba04a",
+      "segmentType": "continuation",
+      "labelText": "-단수기간",
+      "bodyText": "2026.7.16.(목) 18:00 ~ 7.19.(일)까지",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-9df2dede77b164eb"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-16",
+          "start": 55,
+          "end": 68
+        },
+        {
+          "value": "2026-07-19",
+          "start": 77,
+          "end": 85
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "교내 전체 단수로 인해 단수 기간동안 체력단련실 이용을 임시 중지함을 알려드립니다. -단수기간 : 2026.7.16.(목) 18:00 ~ 7.19.(일)까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7352418fa32f3bda",
+      "segmentType": "label_value",
+      "labelText": "단수기간",
+      "bodyText": "2026.7.16.(목) 18:00 ~ 7.19.(일)까지",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-16",
+          "start": 8,
+          "end": 21
+        },
+        {
+          "value": "2026-07-19",
+          "start": 30,
+          "end": 38
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "-단수기간 : 2026.7.16.(목) 18:00 ~ 7.19.(일)까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e99be6e296d4791f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-중지사유 : 단수로 인해 샤워실 및 화장실 이용 불가",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-중지사유 : 단수로 인해 샤워실 및 화장실 이용 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d4f1e40ad638b591",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "기타 자세한 사항은 033-760-8324 으로 문의 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기타 자세한 사항은 033-760-8324 으로 문의 주시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "continuation": 1,
+      "list_item": 1,
+      "paragraph": 1
+    }
+  }
+}

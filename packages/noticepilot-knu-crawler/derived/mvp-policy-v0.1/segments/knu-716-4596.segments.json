@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4596",
+  "sourceContentHash": "f91ce6f51b33add5f31c541bf768e6590dbb0e7d807dd41183a346fe9d7f281c",
+  "sourceTitle": "강원대학교 춘천캠퍼스 조경관리 일용직 채용 공고",
+  "publishedAt": "2026-03-16",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bd5e0f70e645f452",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "강원대학교 춘천캠퍼스 조경관리 일용직 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 춘천캠퍼스 조경관리 일용직 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c29e80eb024bd7a6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "[공고] 강원대학교 춘천캠퍼스 조경관리 일용직 채용 공고",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[공고] 강원대학교 춘천캠퍼스 조경관리 일용직 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8f6e5a016f5e435e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 시설과에서는 춘천캠퍼스 조경관리를 위한",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 시설과에서는 춘천캠퍼스 조경관리를 위한"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-812344ed1f6b8294",
+      "segmentType": "label_value",
+      "labelText": "일용직 채용(여성)을 다음과 같이 공고하오니 많은 지원 바랍니다.",
+      "bodyText": "일용직 채용(여성)을 다음과 같이 공고하오니 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "일용직 채용(여성)을 다음과 같이 공고하오니 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2c6f0174a6045c38",
+      "segmentType": "continuation",
+      "labelText": "일용직 채용(여성)을 다음과 같이 공고하오니 많은 지원 바랍니다.",
+      "bodyText": "2026년 3월 16일",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-812344ed1f6b8294"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-16",
+          "start": 37,
+          "end": 49
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "일용직 채용(여성)을 다음과 같이 공고하오니 많은 지원 바랍니다. 2026년 3월 16일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3c3f810ddec72233",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026년 3월 16일",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-16",
+          "start": 0,
+          "end": 12
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026년 3월 16일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-619c7e1f731cf97d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 시설과장",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 시설과장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 4,
+      "label_value": 1,
+      "continuation": 1
+    }
+  }
+}

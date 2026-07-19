@@ -1,0 +1,244 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-715-3387",
+  "sourceContentHash": "951d251795104a41ba58a9cf9481ec0fe75cc646833ca8253ac5bca19107e9fc",
+  "sourceTitle": "2026년 도서관의 날 도서관 주간 기념 행사 안내",
+  "publishedAt": "2026-04-10",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d2b76322de12e26e",
+      "segmentType": "title",
+      "labelText": "2026년 도서관의 날 도서관 주간 기념 행사 안내",
+      "bodyText": "2026년 도서관의 날 도서관 주간 기념 행사 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 도서관의 날 도서관 주간 기념 행사 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f00f125fa442e8d1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026년 도서관의 날·도서관 주간",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 도서관의 날·도서관 주간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b297897eb4c7c81a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "「도서관 속 작은 펼침, 세상을 여는 큰 열림」",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "「도서관 속 작은 펼침, 세상을 여는 큰 열림」"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9d921290acf9722c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 도서 대출 이벤트",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 도서 대출 이벤트"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f23d96802b165ddb",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "• 신입생(편입생) 첫대출, 재학생 도서 2권 이상 또대출",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled",
+        "admission_type:new_student",
+        "admission_type:transfer_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "• 신입생(편입생) 첫대출, 재학생 도서 2권 이상 또대출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5c17958721e836e4",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 참여 혜택: 기념품 증정 및 경품(스타벅스 카드 2만원권 5명, 문화상품권 1만원권) 추첨 참여 1인 1회 선착순(1일 60명, 총 300명)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 참여 혜택: 기념품 증정 및 경품(스타벅스 카드 2만원권 5명, 문화상품권 1만원권) 추첨 참여 1인 1회 선착순(1일 60명, 총 300명)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4c10b90304599b48",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 연체 해제 이벤트",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 연체 해제 이벤트"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-716b45570a616490",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "• 도서관 회원 및 학내 구성원 연체도서 반납",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "• 도서관 회원 및 학내 구성원 연체도서 반납"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-42049979c466af77",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 참여 혜택: 대출제재 해제(모든 연체 도서 반납 시 즉시 대출 가능)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 참여 혜택: 대출제재 해제(모든 연체 도서 반납 시 즉시 대출 가능)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5606908839b7bfb4",
+      "segmentType": "label_value",
+      "labelText": "일시",
+      "bodyText": "2026. 4. 13.(월) 09:00 ~ 4. 17.(금) 18:00",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-13",
+          "start": 5,
+          "end": 20
+        },
+        {
+          "value": "2026-04-17",
+          "start": 29,
+          "end": 38
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "일시 : 2026. 4. 13.(월) 09:00 ~ 4. 17.(금) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e13e72abbfdc600b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "장소 : 강릉캠퍼스도서관 1층 안내데스크",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "장소 : 강릉캠퍼스도서관 1층 안내데스크"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-36dadc323959bc81",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "문의 : 강원대학교 강릉캠퍼스도서관 033-640-2587",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "문의 : 강원대학교 강릉캠퍼스도서관 033-640-2587"
+    }
+  ],
+  "summary": {
+    "segmentCount": 12,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 4,
+      "list_item": 6,
+      "label_value": 1
+    }
+  }
+}

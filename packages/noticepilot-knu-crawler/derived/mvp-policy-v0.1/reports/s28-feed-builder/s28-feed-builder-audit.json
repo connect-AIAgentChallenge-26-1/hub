@@ -1,0 +1,98 @@
+{
+  "schemaVersion": "noticepilot.s28DeterministicFeedBuilderAudit.v0.1",
+  "auditorVersion": "0.1.0",
+  "result": "pass",
+  "status": "completed",
+  "scope": {
+    "defaultProfileFactoryImplemented": true,
+    "deterministicFeedBuilderImplemented": true,
+    "fullActiveCorpusIterationPerformed": true,
+    "eligibilityDecisionLedgerProduced": true,
+    "feedSnapshotImplemented": false,
+    "snapshotIdentityOrHashIssued": false,
+    "subscriptionUrlOrTokenIssued": false,
+    "icsSerializationPerformed": false,
+    "s27RegistryMutationPerformed": false,
+    "s27ProjectionMutationPerformed": false
+  },
+  "builder": {
+    "module": "noticepilot_feed_builder.py",
+    "version": "0.1.0",
+    "policySchemaVersion": "noticepilot.feedEligibilityPolicy.v0.2",
+    "policyVersion": "0.2.0",
+    "sourceContext": {
+      "registryId": "s27c-publishable-corpus-20260713-v1",
+      "projectionId": "s27d-registry-ics-projection-20260713-v1"
+    },
+    "sortContract": {
+      "included": [
+        "normalizedStart_ascending",
+        "calendarEventId_ascending"
+      ],
+      "excluded": [
+        "primaryReasonPrecedence_ascending",
+        "calendarEventId_ascending"
+      ],
+      "decisionLedger": [
+        "calendarEventId_ascending"
+      ]
+    }
+  },
+  "profiles": {
+    "collectionPath": "configs/noticepilot_default_subscription_profiles.v0.1.json",
+    "collectionSchemaVersion": "noticepilot.defaultSubscriptionProfiles.v0.1",
+    "authoritativePolicyDefaults": true,
+    "userCampusDefaultEstablished": false,
+    "profileCount": 2
+  },
+  "counts": {
+    "inputEventCount": 900,
+    "studentIncludedEventCount": 601,
+    "studentExcludedEventCount": 299,
+    "jobIncludedEventCount": 299,
+    "jobExcludedEventCount": 601,
+    "studentDecisionCount": 900,
+    "jobDecisionCount": 900,
+    "studentJobOverlapCount": 0,
+    "studentJobUnionCount": 900,
+    "persistentIcsStudentEventCount": 601,
+    "persistentIcsJobEventCount": 299
+  },
+  "reasonCounts": {
+    "student": {
+      "source_board_or_notice_type_mismatch": 299,
+      "eligible_all_dimensions_matched": 601
+    },
+    "job": {
+      "source_board_or_notice_type_mismatch": 601,
+      "eligible_all_dimensions_matched": 299
+    }
+  },
+  "determinism": {
+    "studentResultStableUnderReverseInput": true,
+    "studentDecisionLedgerStableUnderReverseInput": true,
+    "jobResultStableUnderReverseInput": true,
+    "jobDecisionLedgerStableUnderReverseInput": true
+  },
+  "immutability": {
+    "s27cManifestSha256": "47fa8e232254df978575f31e06d555c20cf5f50e99862dc8ae0e772a7e4a03dc",
+    "s27cManifestExpectedSha256": "47fa8e232254df978575f31e06d555c20cf5f50e99862dc8ae0e772a7e4a03dc",
+    "s27dManifestSha256": "922eacc5a270f5119d0e86892d961ed742486b35b6a65d7a0d1642119820481f",
+    "s27dManifestExpectedSha256": "922eacc5a270f5119d0e86892d961ed742486b35b6a65d7a0d1642119820481f"
+  },
+  "deferred": {
+    "feedSnapshotContract": "S28-4",
+    "snapshotIdentityAndHash": "S28-4",
+    "profileMatrixFullCorpusAudit": "S28-5",
+    "subscriptionUrlTokenPersistenceAndDelivery": "S29",
+    "calendarClientPhysicalQa": "S30"
+  },
+  "errors": [],
+  "artifacts": {
+    "defaultProfiles": "default-subscription-profiles.json",
+    "studentBuildResult": "student_default-feed-build-result.json",
+    "studentDecisionLedger": "student_default-feed-build-decisions.jsonl",
+    "jobBuildResult": "job_application-feed-build-result.json",
+    "jobDecisionLedger": "job_application-feed-build-decisions.jsonl"
+  }
+}

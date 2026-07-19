@@ -1,0 +1,537 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-5662",
+  "sourceContentHash": "0a1f33df8cd7748c45e27cacced26b308687f6b419e8f9ddfa1110b933f61953",
+  "sourceTitle": "[백령스포츠센터] 3월 단체 강습 회원 모집 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5662&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "삼척",
+    "campuses": [
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-5662-a1b7bbfc0b3757",
+      "uidHint": "noticepilot-cand-knu-504-5662-a1b7bbfc0b3757@noticepilot.local",
+      "sourceNoticeId": "knu-504-5662",
+      "sourceTitle": "[백령스포츠센터] 3월 단체 강습 회원 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5662&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-6541a3ba556eb052",
+        "segmentType": "label_value",
+        "labelText": "기존 회원 접수 기간",
+        "bodyText": "26.02.09.(월)~26.02.21.(토)",
+        "sourceLocation": {
+          "lineIndex": 6,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-09",
+            "start": 14,
+            "end": 26
+          },
+          {
+            "value": "2026-02-21",
+            "start": 27,
+            "end": 39
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "기존 회원 접수 기간",
+          "기존 회원 접수 기간 : 26.02.09.(월)~26.02.21.(토)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-7d3db09df9e1ae20",
+        "segmentId": "seg-6541a3ba556eb052",
+        "rawText": "26.02.09.(월)~26.02.21.(토)",
+        "normalizedStart": "2026-02-09",
+        "normalizedEnd": "2026-02-21",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 14,
+          "end": 39
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-da880bd1b96b69b3",
+        "sourceNoticeId": "knu-504-5662",
+        "segmentId": "seg-6541a3ba556eb052",
+        "temporalMentionIds": [
+          "tm-7d3db09df9e1ae20"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "기존 회원 접수 기간",
+        "evidence": "기존 회원 접수 기간 : 26.02.09.(월)~26.02.21.(토)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[백령스포츠센터] 3월 단체 강습 회원 모집 안내 신청기간",
+      "dateText": "26.02.09.(월)~26.02.21.(토)",
+      "normalizedStart": "2026-02-09",
+      "normalizedEnd": "2026-02-21",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "기존 회원 접수 기간 : 26.02.09.(월)~26.02.21.(토)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "same_action_boundary_candidates_consolidated",
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "same_action_boundary_candidates_consolidated",
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5662-9a52a5bb69bbf4",
+      "uidHint": "noticepilot-cand-knu-504-5662-9a52a5bb69bbf4@noticepilot.local",
+      "sourceNoticeId": "knu-504-5662",
+      "sourceTitle": "[백령스포츠센터] 3월 단체 강습 회원 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5662&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-79fb61a50c39339b",
+        "segmentType": "label_value",
+        "labelText": "기존 회원 접수 기간",
+        "bodyText": "26.02.09.(월)~26.02.28.(토)",
+        "sourceLocation": {
+          "lineIndex": 3,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-09",
+            "start": 14,
+            "end": 26
+          },
+          {
+            "value": "2026-02-28",
+            "start": 27,
+            "end": 39
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "기존 회원 접수 기간",
+          "기존 회원 접수 기간 : 26.02.09.(월)~26.02.28.(토)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-b38d9a52cc7bc53e",
+        "segmentId": "seg-79fb61a50c39339b",
+        "rawText": "26.02.09.(월)~26.02.28.(토)",
+        "normalizedStart": "2026-02-09",
+        "normalizedEnd": "2026-02-28",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 14,
+          "end": 39
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-0745fbefed0dca8c",
+        "sourceNoticeId": "knu-504-5662",
+        "segmentId": "seg-79fb61a50c39339b",
+        "temporalMentionIds": [
+          "tm-b38d9a52cc7bc53e"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "기존 회원 접수 기간",
+        "evidence": "기존 회원 접수 기간 : 26.02.09.(월)~26.02.28.(토)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[백령스포츠센터] 3월 단체 강습 회원 모집 안내 신청기간",
+      "dateText": "26.02.09.(월)~26.02.28.(토)",
+      "normalizedStart": "2026-02-09",
+      "normalizedEnd": "2026-02-28",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "기존 회원 접수 기간 : 26.02.09.(월)~26.02.28.(토)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-5662-7f79b599a22de6",
+      "uidHint": "noticepilot-cand-knu-504-5662-7f79b599a22de6@noticepilot.local",
+      "sourceNoticeId": "knu-504-5662",
+      "sourceTitle": "[백령스포츠센터] 3월 단체 강습 회원 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5662&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-5cdebfea160369f2",
+        "segmentType": "label_value",
+        "labelText": "신규 회원 접수 기간",
+        "bodyText": "26.02.23.(월)~26.02.28.(토)",
+        "sourceLocation": {
+          "lineIndex": 4,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-23",
+            "start": 14,
+            "end": 26
+          },
+          {
+            "value": "2026-02-28",
+            "start": 27,
+            "end": 39
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "신규 회원 접수 기간",
+          "신규 회원 접수 기간 : 26.02.23.(월)~26.02.28.(토)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-bd494d1e364f2edd",
+        "segmentId": "seg-5cdebfea160369f2",
+        "rawText": "26.02.23.(월)~26.02.28.(토)",
+        "normalizedStart": "2026-02-23",
+        "normalizedEnd": "2026-02-28",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 14,
+          "end": 39
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-e718a5adc90163d0",
+        "sourceNoticeId": "knu-504-5662",
+        "segmentId": "seg-5cdebfea160369f2",
+        "temporalMentionIds": [
+          "tm-bd494d1e364f2edd"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "신규 회원 접수 기간",
+        "evidence": "신규 회원 접수 기간 : 26.02.23.(월)~26.02.28.(토)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[백령스포츠센터] 3월 단체 강습 회원 모집 안내 신청기간",
+      "dateText": "26.02.23.(월)~26.02.28.(토)",
+      "normalizedStart": "2026-02-23",
+      "normalizedEnd": "2026-02-28",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "신규 회원 접수 기간 : 26.02.23.(월)~26.02.28.(토)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 3,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 3,
+    "calendarFeedIncludedCount": 0
+  }
+}

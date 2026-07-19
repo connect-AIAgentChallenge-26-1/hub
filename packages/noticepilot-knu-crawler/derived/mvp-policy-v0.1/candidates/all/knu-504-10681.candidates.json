@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10681",
+  "sourceContentHash": "b1caa3a0bef99657d5e78d46ab9755fcdedf462a155b771d283911b9dcf99594",
+  "sourceTitle": "2026학년도 1학기 통학버스 운행노선 시간표 안내（삼척캠퍼스）",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10681&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_explicit",
+    "campuses": [
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_explicit_override",
+    "labels": {
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10681-1c0d1be5fc86a9",
+      "uidHint": "noticepilot-cand-knu-504-10681-1c0d1be5fc86a9@noticepilot.local",
+      "sourceNoticeId": "knu-504-10681",
+      "sourceTitle": "2026학년도 1학기 통학버스 운행노선 시간표 안내（삼척캠퍼스）",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10681&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_explicit",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_explicit_override",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "deadline",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-0445ef7dec3e9a89",
+        "segmentType": "label_value",
+        "labelText": "○ 운행기간",
+        "bodyText": "2026. 3. 3.(화) ~ 6. 19.(금) / 1학기 종강시까지",
+        "sourceLocation": {
+          "lineIndex": 1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-03",
+            "start": 9,
+            "end": 23
+          },
+          {
+            "value": "2026-06-19",
+            "start": 26,
+            "end": 35
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "deadline",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "medium",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "○ 운행기간",
+          "○ 운행기간 : 2026. 3. 3.(화) ~ 6. 19.(금) / 1학기 종강시까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-6fe91ac75a2344a6",
+        "segmentId": "seg-0445ef7dec3e9a89",
+        "rawText": "2026. 3. 3.(화) ~ 6. 19.(금) / 1학기 종강시까지",
+        "normalizedStart": "2026-03-03",
+        "normalizedEnd": "2026-06-19",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 9,
+          "end": 35
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-e47d7c04c254ae19",
+        "sourceNoticeId": "knu-504-10681",
+        "segmentId": "seg-0445ef7dec3e9a89",
+        "temporalMentionIds": [
+          "tm-6fe91ac75a2344a6"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "medium",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": false,
+        "labelText": "○ 운행기간",
+        "evidence": "○ 운행기간 : 2026. 3. 3.(화) ~ 6. 19.(금) / 1학기 종강시까지"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "2026학년도 1학기 통학버스 운행노선 시간표 안내（삼척캠퍼스） 마감",
+      "dateText": "2026. 3. 3.(화) ~ 6. 19.(금) / 1학기 종강시까지",
+      "normalizedStart": "2026-03-03",
+      "normalizedEnd": "2026-06-19",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "○ 운행기간 : 2026. 3. 3.(화) ~ 6. 19.(금) / 1학기 종강시까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

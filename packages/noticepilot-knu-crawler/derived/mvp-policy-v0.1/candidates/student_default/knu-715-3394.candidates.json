@@ -1,0 +1,354 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-715-3394",
+  "sourceContentHash": "01a5094532b7d82e61f148cbaf965890d50d269d39c04b44d227bcf362bcc089",
+  "sourceTitle": "첨단소재·나노융합 혁신융합대학사업단 MEET-UP 특강 일정 변경 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/715/detail.do?pstSn=3394&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-715-3394-cb35958a963708",
+      "uidHint": "noticepilot-cand-knu-715-3394-cb35958a963708@noticepilot.local",
+      "sourceNoticeId": "knu-715-3394",
+      "sourceTitle": "첨단소재·나노융합 혁신융합대학사업단 MEET-UP 특강 일정 변경 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/715/detail.do?pstSn=3394&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "event",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-58945c0d3cc5e1c2",
+        "segmentType": "label_value",
+        "labelText": "사전 참여신청 기간",
+        "bodyText": "2026. 6. 1.(월)까지",
+        "sourceLocation": {
+          "lineIndex": 11,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-01",
+            "start": 15,
+            "end": 29
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "사전 참여신청 기간",
+          "6. 사전 참여신청 기간: 2026. 6. 1.(월)까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-79d4484c37bb2430",
+        "segmentId": "seg-58945c0d3cc5e1c2",
+        "rawText": "2026. 6. 1.(월)",
+        "normalizedStart": "2026-06-01",
+        "normalizedEnd": "2026-06-01",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 15,
+          "end": 29
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-8e8204bf40d6840a",
+        "sourceNoticeId": "knu-715-3394",
+        "segmentId": "seg-58945c0d3cc5e1c2",
+        "temporalMentionIds": [
+          "tm-79d4484c37bb2430"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "사전 참여신청 기간",
+        "evidence": "6. 사전 참여신청 기간: 2026. 6. 1.(월)까지"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "첨단소재·나노융합 혁신융합대학사업단 MEET-UP 특강 일정 변경 안내 신청 마감",
+      "dateText": "2026. 6. 1.(월)",
+      "normalizedStart": "2026-06-01",
+      "normalizedEnd": "2026-06-01",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "6. 사전 참여신청 기간: 2026. 6. 1.(월)까지",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-715-3394-b81dd88e98b1a3",
+      "uidHint": "noticepilot-cand-knu-715-3394-b81dd88e98b1a3@noticepilot.local",
+      "sourceNoticeId": "knu-715-3394",
+      "sourceTitle": "첨단소재·나노융합 혁신융합대학사업단 MEET-UP 특강 일정 변경 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/715/detail.do?pstSn=3394&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "event",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-039000c439881a32",
+        "segmentType": "label_value",
+        "labelText": "특강일정",
+        "bodyText": "2026. 6. 4.(목) 16:00~18:00",
+        "sourceLocation": {
+          "lineIndex": 7,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-04",
+            "start": 9,
+            "end": 23
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "특강일정",
+          "2. 특강일정: 2026. 6. 4.(목) 16:00~18:00",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-837f1d1e3f6d2f28",
+        "segmentId": "seg-039000c439881a32",
+        "rawText": "2026. 6. 4.(목) 16:00~18:00",
+        "normalizedStart": "2026-06-04T16:00:00+09:00",
+        "normalizedEnd": "2026-06-04T18:00:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 9,
+          "end": 23
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-d8bb443cb672f00b",
+        "sourceNoticeId": "knu-715-3394",
+        "segmentId": "seg-039000c439881a32",
+        "temporalMentionIds": [
+          "tm-837f1d1e3f6d2f28"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "특강일정",
+        "evidence": "2. 특강일정: 2026. 6. 4.(목) 16:00~18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "첨단소재·나노융합 혁신융합대학사업단 MEET-UP 특강 일정 변경 안내 행사 기간",
+      "dateText": "2026. 6. 4.(목) 16:00~18:00",
+      "normalizedStart": "2026-06-04T16:00:00+09:00",
+      "normalizedEnd": "2026-06-04T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "2. 특강일정: 2026. 6. 4.(목) 16:00~18:00",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

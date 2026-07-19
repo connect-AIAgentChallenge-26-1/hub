@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/feed-builder/default-subscription-profiles.schema.json",
+  "title": "NoticePilot S28-3 reference default profiles",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "authoritativePolicyDefaults",
+    "userCampusDefaultEstablished",
+    "purpose",
+    "profiles"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.defaultSubscriptionProfiles.v0.1"},
+    "authoritativePolicyDefaults": {"const": true},
+    "userCampusDefaultEstablished": {"const": false},
+    "purpose": {
+      "const": "all_campus_reference_profiles_for_deterministic_feed_builder_audit"
+    },
+    "profiles": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {"$ref": "../subscription-profile/subscription-profile.schema.json"}
+    }
+  }
+}

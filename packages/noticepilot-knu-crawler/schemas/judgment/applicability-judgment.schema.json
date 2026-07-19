@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noticepilot.applicabilityJudgment.v0.1",
+  "title": "NoticePilot Applicability Judgment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "targetActor", "scope", "audienceRules", "confidence", "ruleId", "reasonCodes"],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.applicabilityJudgment.v0.1"},
+    "targetActor": {"type": "string", "minLength": 1},
+    "scope": {"type": "string", "enum": ["unrestricted", "profile_scoped", "conditional", "unknown"]},
+    "audienceRules": {"type": "object"},
+    "confidence": {"type": "string", "enum": ["high", "medium", "low", "none"]},
+    "ruleId": {"type": "string", "minLength": 1},
+    "reasonCodes": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+  }
+}

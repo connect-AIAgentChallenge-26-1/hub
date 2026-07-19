@@ -1,0 +1,360 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-720-1570",
+  "sourceContentHash": "2f3e2f5487d94eba281132c0e553b03c24c598d2976a1ea243f88539898da4b4",
+  "sourceTitle": "（국가거점국립대학교） 2026. 1학기 경북대학교 교류 수학 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=1570&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-720-1570-632d43b587eae0",
+      "uidHint": "noticepilot-cand-knu-720-1570-632d43b587eae0@noticepilot.local",
+      "sourceNoticeId": "knu-720-1570",
+      "sourceTitle": "（국가거점국립대학교） 2026. 1학기 경북대학교 교류 수학 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=1570&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "submission_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-468a23ebf36a3e26",
+        "segmentType": "list_item",
+        "labelText": "",
+        "bodyText": "2026. 1. 14(수) 18:00 까지 소속 학과로 다른대학 수학지원서 제출",
+        "sourceLocation": {
+          "lineIndex": 7,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "submission_period",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-01-14",
+            "start": 7,
+            "end": 21
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "submission_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "- 학생 : 2026. 1. 14(수) 18:00 까지 소속 학과로 다른대학 수학지원서 제출",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-13b52b4238704797",
+        "segmentId": "seg-468a23ebf36a3e26",
+        "rawText": "2026. 1. 14(수)",
+        "normalizedStart": "2026-01-14T18:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 7,
+          "end": 21
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-ee6e2286275db862",
+        "sourceNoticeId": "knu-720-1570",
+        "segmentId": "seg-468a23ebf36a3e26",
+        "temporalMentionIds": [
+          "tm-13b52b4238704797"
+        ],
+        "bindingKind": "same_list_item",
+        "confidence": "high",
+        "ruleId": "binding.same_list_item",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "- 학생 : 2026. 1. 14(수) 18:00 까지 소속 학과로 다른대학 수학지원서 제출"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "（국가거점국립대학교） 2026. 1학기 경북대학교 교류 수학 안내 제출 마감",
+      "dateText": "2026. 1. 14(수)",
+      "normalizedStart": "2026-01-14T18:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "- 학생 : 2026. 1. 14(수) 18:00 까지 소속 학과로 다른대학 수학지원서 제출",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-1570-17011e77da64b9",
+      "uidHint": "noticepilot-cand-knu-720-1570-17011e77da64b9@noticepilot.local",
+      "sourceNoticeId": "knu-720-1570",
+      "sourceTitle": "（국가거점국립대학교） 2026. 1학기 경북대학교 교류 수학 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=1570&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "submission_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-74c12a2e326eb3c9",
+        "segmentType": "list_item",
+        "labelText": "",
+        "bodyText": "2026. 1. 15(목) 16:00 까지 학사지원과(교육지원과)로 추천자 교류서류 제출",
+        "sourceLocation": {
+          "lineIndex": 8,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "submission_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-01-15",
+            "start": 7,
+            "end": 21
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "internal_process",
+      "semanticClassification": {
+        "eventType": "submission_period",
+        "actionType": null,
+        "temporalRole": "internal_process",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "- 학과 : 2026. 1. 15(목) 16:00 까지 학사지원과(교육지원과)로 추천자 교류서류 제출",
+          "semantic.temporal_role.internal_workflow"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-c57c4ac44d8a752b",
+        "segmentId": "seg-74c12a2e326eb3c9",
+        "rawText": "2026. 1. 15(목)",
+        "normalizedStart": "2026-01-15T16:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 7,
+          "end": 21
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-0d9298d5395032cb",
+        "sourceNoticeId": "knu-720-1570",
+        "segmentId": "seg-74c12a2e326eb3c9",
+        "temporalMentionIds": [
+          "tm-c57c4ac44d8a752b"
+        ],
+        "bindingKind": "same_list_item",
+        "confidence": "high",
+        "ruleId": "binding.same_list_item",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "- 학과 : 2026. 1. 15(목) 16:00 까지 학사지원과(교육지원과)로 추천자 교류서류 제출"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "（국가거점국립대학교） 2026. 1학기 경북대학교 교류 수학 안내 제출 마감",
+      "dateText": "2026. 1. 15(목)",
+      "normalizedStart": "2026-01-15T16:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "- 학과 : 2026. 1. 15(목) 16:00 까지 학사지원과(교육지원과)로 추천자 교류서류 제출",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "internal_workflow_deadline",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "reasonCodes": [
+        "internal_workflow_deadline",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "internal_workflow_deadline",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.internal_workflow_deadline",
+          "publishability.temporal_role.internal_process",
+          "publishability.temporal_role.internal_process.review",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 1
+  }
+}

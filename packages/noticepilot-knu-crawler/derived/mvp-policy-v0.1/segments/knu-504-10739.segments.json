@@ -1,0 +1,411 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10739",
+  "sourceContentHash": "c4848ba61564af6736e5f1398bf1c7b293bde6269d109c75e8a6464fac185cc3",
+  "sourceTitle": "[창업지원본부]2026학년도 창업동아리 모집(~3/27 18:00까지)",
+  "publishedAt": "2026-03-16",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aca29cd9d3459ed4",
+      "segmentType": "title",
+      "labelText": "[창업지원본부]2026학년도 창업동아리 모집(~",
+      "bodyText": "3/27 18:00까지)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-27",
+          "start": 26,
+          "end": 31
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "[창업지원본부]2026학년도 창업동아리 모집(~3/27 18:00까지)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c038e17b24334755",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 창업동아리 모집(강릉·원주)",
+      "bodyText": "2026학년도 창업동아리 모집(강릉·원주)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 창업동아리 모집(강릉·원주)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-42411828416a9986",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "□ 건 명: 2026학년도 창업동아리",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 건 명: 2026학년도 창업동아리"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0296977795d2db71",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "□ 내 용: 창업에 관심 있는 재학생을 대상으로 창업동아리 활동 지원금 지급, 동아리실 제공, 창업 전문가 멘토링 등 다양한 지원을 통해 실제 창업을 위한 준비 과정을 체계적으로 교육·지원",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 내 용: 창업에 관심 있는 재학생을 대상으로 창업동아리 활동 지원금 지급, 동아리실 제공, 창업 전문가 멘토링 등 다양한 지원을 통해 실제 창업을 위한 준비 과정을 체계적으로 교육·지원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ea4a9a1bef9bb732",
+      "segmentType": "label_value",
+      "labelText": "□ 모집대상",
+      "bodyText": "□ 모집대상",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 모집대상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-194b90522046b068",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": " - 강원대학교 강릉·원주 캠퍼스 재(휴)학생(대학원생 포함)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:graduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": " - 강원대학교 강릉·원주 캠퍼스 재(휴)학생(대학원생 포함)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1be9e30fafb11ff9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": " - 2인 이상으로 구성된 팀(대표는 재학생만 가능)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": " - 2인 이상으로 구성된 팀(대표는 재학생만 가능)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5faacdb68653948f",
+      "segmentType": "label_value",
+      "labelText": "□ 모집기간",
+      "bodyText": "2026. 03. 16.(월) ~ 03. 27.(금) 18:00까지",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-16",
+          "start": 8,
+          "end": 24
+        },
+        {
+          "value": "2026-03-27",
+          "start": 27,
+          "end": 37
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "□ 모집기간: 2026. 03. 16.(월) ~ 03. 27.(금) 18:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8a36c824f4b223b6",
+      "segmentType": "label_value",
+      "labelText": "□ 모집규모",
+      "bodyText": "□ 모집규모: 총 25개팀 내외",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 모집규모: 총 25개팀 내외"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-56387bae653d2e4f",
+      "segmentType": "label_value",
+      "labelText": "□ 모집방법",
+      "bodyText": "□ 모집방법: 신청서류 구글폼 접수 후 발표평가를 통해 최종 선정",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 모집방법: 신청서류 구글폼 접수 후 발표평가를 통해 최종 선정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f40081f3a90ba87b",
+      "segmentType": "label_value",
+      "labelText": "접수 팀 별 창업동아리 선정 창업캠프(",
+      "bodyText": "4.9.~4.10./1박2일) 1~2인 필참 > 선정평가 진행",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-09",
+          "start": 22,
+          "end": 25
+        },
+        {
+          "value": "2026-04-10",
+          "start": 27,
+          "end": 31
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "※접수 팀 별 창업동아리 선정 창업캠프(4.9.~4.10./1박2일) 1~2인 필참 > 선정평가 진행"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9ba0a4afc05da8b1",
+      "segmentType": "label_value",
+      "labelText": "강릉 창업지원본부에서 위와 같이 2026학년도 창업동아리를 모집합니다.",
+      "bodyText": "강릉 창업지원본부에서 위와 같이 2026학년도 창업동아리를 모집합니다.",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강릉 창업지원본부에서 위와 같이 2026학년도 창업동아리를 모집합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fbc58e12a842ebcc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "자세한 내용은",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자세한 내용은"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-191aa9c6ddff8711",
+      "segmentType": "label_value",
+      "labelText": "첨부된 모집 공고문",
+      "bodyText": "첨부된 모집 공고문",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "첨부된 모집 공고문"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b790bf61afe8222d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "반드시 참고 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "반드시 참고 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fe8e66a63821ab38",
+      "segmentType": "label_value",
+      "labelText": "□ 접수처",
+      "bodyText": "□ 접수처:",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 접수처:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7291298250a153c1",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 창업동아리 참가 신청",
+      "bodyText": "2026학년도 창업동아리 참가 신청",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 창업동아리 참가 신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-87f45c454aaed443",
+      "segmentType": "label_value",
+      "labelText": "(※구글폼 외 제출 건 접수 불가)",
+      "bodyText": "(※구글폼 외 제출 건 접수 불가)",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(※구글폼 외 제출 건 접수 불가)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f1e9ed9bc99d0790",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "□ 문의처: 강원대학교 강릉 창업지원본부 창업교육센터 / 033-640-2727",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 문의처: 강원대학교 강릉 창업지원본부 창업교육센터 / 033-640-2727"
+    }
+  ],
+  "summary": {
+    "segmentCount": 19,
+    "locallyGroundedCount": 3,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 11,
+      "paragraph": 7
+    }
+  }
+}

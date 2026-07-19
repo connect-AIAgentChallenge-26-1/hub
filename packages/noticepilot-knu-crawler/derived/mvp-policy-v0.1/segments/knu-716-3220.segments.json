@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3220",
+  "sourceContentHash": "f2766be9cef96c0fe051d44954b51c32819459777f2e0c08980cbd7b501cf580",
+  "sourceTitle": "강원대학교 전입희망자 모집 재공고（행정）",
+  "publishedAt": "2026-02-25",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6353795abf2662e8",
+      "segmentType": "title",
+      "labelText": "강원대학교 전입희망자 모집 재공고（행정）",
+      "bodyText": "강원대학교 전입희망자 모집 재공고（행정）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 전입희망자 모집 재공고（행정）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ee10670af3f96d1c",
+      "segmentType": "label_value",
+      "labelText": "강원대학교에서는 다음과 같이 전입희망자를 공개 모집하오니 역량 있고 창의적인 인재들의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교에서는 다음과 같이 전입희망자를 공개 모집하오니 역량 있고 창의적인 인재들의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교에서는 다음과 같이 전입희망자를 공개 모집하오니 역량 있고 창의적인 인재들의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dd0de4b0aca83aab",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "ㅇ 채용분야: 행정9급（4명）",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ 채용분야: 행정9급（4명）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e8f43d5511183b50",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "ㅇ 근무지역: 춘천, 삼척",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ 근무지역: 춘천, 삼척"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-893aea4bf5bbc3b9",
+      "segmentType": "label_value",
+      "labelText": "ㅇ 접수기간",
+      "bodyText": "2026. 2. 27.（금） ~ 3. 9.（월）",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-27",
+          "start": 8,
+          "end": 23
+        },
+        {
+          "value": "2026-03-09",
+          "start": 26,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "ㅇ 접수기간: 2026. 2. 27.（금） ~ 3. 9.（월）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c28ab63c87b5b54a",
+      "segmentType": "label_value",
+      "labelText": "ㅇ 선발방법",
+      "bodyText": "ㅇ 선발방법: 서류, 면접",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ 선발방법: 서류, 면접"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a9e85686b2de3eb7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "ㅇ 응시방법: 등기우편 접수 및 방문접수",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ 응시방법: 등기우편 접수 및 방문접수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-861f0e509379915c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "ㅇ 문 의 처: 강원대학교 총무과（033-250-7015）",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ 문 의 처: 강원대학교 총무과（033-250-7015）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e09279e3a61bd0f1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 2. 25.",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-25",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 2. 25."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-95dfc3360373bf19",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교총장",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교총장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "paragraph": 6
+    }
+  }
+}

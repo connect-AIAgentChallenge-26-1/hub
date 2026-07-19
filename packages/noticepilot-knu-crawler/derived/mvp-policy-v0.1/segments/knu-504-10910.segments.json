@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10910",
+  "sourceContentHash": "ad7807f49e38873407995ef70ac5ad41276783fdca4c85f82ea0291790f72811",
+  "sourceTitle": "자연기술 특강(ECO Day) 개최 알림 (장소: 강릉캠퍼스)",
+  "publishedAt": "2026-04-22",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aa1a0879f4aa25c1",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "자연기술 특강(ECO Day) 개최 알림 (장소: 강릉캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자연기술 특강(ECO Day) 개최 알림 (장소: 강릉캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0e22ebdc22b9be63",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "arrow_left_alt",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "arrow_left_alt"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1cd00bb7b7762fd8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "목록으로 돌아가기",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "목록으로 돌아가기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fa9cb58844934db7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "자연기술 특강(ECO Day) 개최 알림 (장소: 강릉캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자연기술 특강(ECO Day) 개최 알림 (장소: 강릉캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-53fe55b0cdaf01a1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "내용",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3345530fb94a8b33",
+      "segmentType": "label_value",
+      "labelText": "수강신청 바로가기",
+      "bodyText": "수강신청 바로가기",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강신청 바로가기"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 4,
+      "label_value": 1
+    }
+  }
+}

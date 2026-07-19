@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-715-3407",
+  "sourceContentHash": "655b2d8b796ef98131ff9e9f0dd34ba300cd2f42dc1ec80d16b3cfeeb7a145aa",
+  "sourceTitle": "2026 강릉단오제 AR 웹 체험 프로그램 운영 보조 대학생 자원봉사자 모집",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/715/detail.do?pstSn=3407&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-715-3407-28231784b4bc3e",
+      "uidHint": "noticepilot-cand-knu-715-3407-28231784b4bc3e@noticepilot.local",
+      "sourceNoticeId": "knu-715-3407",
+      "sourceTitle": "2026 강릉단오제 AR 웹 체험 프로그램 운영 보조 대학생 자원봉사자 모집",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/715/detail.do?pstSn=3407&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "event",
+      "campusScope": {
+        "sourceLabel": "강릉",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-891885d0ebabceaf",
+        "segmentType": "label_value",
+        "labelText": "활동기간",
+        "bodyText": "2026. 6. 15.(월) ~ 6. 22.(월)",
+        "sourceLocation": {
+          "lineIndex": 5,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-15",
+            "start": 6,
+            "end": 21
+          },
+          {
+            "value": "2026-06-22",
+            "start": 24,
+            "end": 33
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "활동기간",
+          "활동기간: 2026. 6. 15.(월) ~ 6. 22.(월)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-b313f7b760703a16",
+        "segmentId": "seg-891885d0ebabceaf",
+        "rawText": "2026. 6. 15.(월) ~ 6. 22.(월)",
+        "normalizedStart": "2026-06-15",
+        "normalizedEnd": "2026-06-22",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 6,
+          "end": 33
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-106d31596a5f11a2",
+        "sourceNoticeId": "knu-715-3407",
+        "segmentId": "seg-891885d0ebabceaf",
+        "temporalMentionIds": [
+          "tm-b313f7b760703a16"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "활동기간",
+        "evidence": "활동기간: 2026. 6. 15.(월) ~ 6. 22.(월)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026 강릉단오제 AR 웹 체험 프로그램 운영 보조 대학생 자원봉사자 모집 행사 기간",
+      "dateText": "2026. 6. 15.(월) ~ 6. 22.(월)",
+      "normalizedStart": "2026-06-15",
+      "normalizedEnd": "2026-06-22",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "활동기간: 2026. 6. 15.(월) ~ 6. 22.(월)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

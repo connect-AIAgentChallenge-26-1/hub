@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/feed-eligibility-decision.schema.json",
+  "title": "NoticePilot FeedEligibilityDecision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "profileId",
+    "calendarEventId",
+    "eligible",
+    "primaryReasonCode",
+    "reasonCodes",
+    "matchedSourceLinkIds",
+    "effectiveReviewRequired"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "noticepilot.feedEligibilityDecision.v0.2"
+    },
+    "profileId": {
+      "type": "string",
+      "pattern": "^subprof_[0-9a-f]{32}$"
+    },
+    "calendarEventId": {
+      "type": "string",
+      "pattern": "^evt_[0-9a-f]{32}$"
+    },
+    "eligible": {
+      "type": "boolean"
+    },
+    "primaryReasonCode": {
+      "type": "string"
+    },
+    "reasonCodes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "matchedSourceLinkIds": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "effectiveReviewRequired": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    }
+  }
+}

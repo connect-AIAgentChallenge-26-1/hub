@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noticepilot.s29LivePostgresVerification.v0.1",
+  "title": "NoticePilot S29 Live PostgreSQL Verification",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "verifierVersion",
+    "status",
+    "livePostgresVerified",
+    "database",
+    "migration",
+    "bootstrap",
+    "checks",
+    "probeResidue",
+    "mutationsCommitted",
+    "generatedAt",
+    "reportSha256"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.s29LivePostgresVerification.v0.1"},
+    "verifierVersion": {"type": "string", "minLength": 1},
+    "status": {"enum": ["pass", "fail"]},
+    "livePostgresVerified": {"type": "boolean"},
+    "database": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "user", "serverVersion"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "user": {"type": "string", "minLength": 1},
+        "serverVersion": {"type": "string", "minLength": 1}
+      }
+    },
+    "migration": {"type": "object"},
+    "bootstrap": {"type": "object"},
+    "checks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["checkId", "status", "expected", "actual", "detail"],
+        "properties": {
+          "checkId": {"type": "string", "minLength": 1},
+          "status": {"enum": ["pass", "fail"]},
+          "expected": {},
+          "actual": {},
+          "detail": {"type": "string"}
+        }
+      }
+    },
+    "probeResidue": {"type": "array"},
+    "mutationsCommitted": {"const": false},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "reportSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

@@ -1,0 +1,321 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10821",
+  "sourceContentHash": "eb1a1590165e7dd91356b01d9b0633aac9271fd28db27d759cb8a682faff9d39",
+  "sourceTitle": "2026학년도 강원대학교 재학생(1~4학년) 핵심역량 진단(KCCA) 안내",
+  "publishedAt": "2026-04-02",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-809141c25e2c88d2",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026학년도 강원대학교 재학생(1~4학년) 핵심역량 진단(KCCA) 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "student_year:1",
+        "student_year:2",
+        "student_year:3",
+        "student_year:4",
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 강원대학교 재학생(1~4학년) 핵심역량 진단(KCCA) 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2af87ac7eb588356",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 조사명 : 2026학년도 강원대학교 핵심역량 진단(KCCA)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 조사명 : 2026학년도 강원대학교 핵심역량 진단(KCCA)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2ddf84fa4240e27e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 조사목적 : 재학생 핵심역량 수준파악 및 결과분석",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 조사목적 : 재학생 핵심역량 수준파악 및 결과분석"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f819459bfe341fe0",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 조사대상",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 조사대상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3ab97d73b632af9b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 1~4학년 학부생(재학생)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "student_year:1",
+        "student_year:2",
+        "student_year:3",
+        "student_year:4",
+        "degree_level:undergraduate",
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 1~4학년 학부생(재학생)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ce43b3c6795dd7fe",
+      "segmentType": "label_value",
+      "labelText": "단, 학적상태가 휴학, 수료, 졸업, 학사학위취득유예 상태인 학생 제외",
+      "bodyText": "- 단, 학적상태가 휴학, 수료, 졸업, 학사학위취득유예 상태인 학생 제외",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 단, 학적상태가 휴학, 수료, 졸업, 학사학위취득유예 상태인 학생 제외"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c32dd5f8fa42a7ff",
+      "segmentType": "label_value",
+      "labelText": "조사기간",
+      "bodyText": "2026년 4월 1일(수) ~ 2026년 12월 31일(목) 까지",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-01",
+          "start": 10,
+          "end": 24
+        },
+        {
+          "value": "2026-12-31",
+          "start": 27,
+          "end": 43
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "4. 조사기간 : 2026년 4월 1일(수) ~ 2026년 12월 31일(목) 까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f2e9aa9fd0183d23",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 참여방법",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 참여방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-276e7599fe01076e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- K-Cloud > One-stop 서비스 > 핵심역량 설문조사 > 설문참여",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- K-Cloud > One-stop 서비스 > 핵심역량 설문조사 > 설문참여"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-654389c513d6b3a2",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 강원대학교 APP > 전체메뉴 > 공통서비스 > 설문참여",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 강원대학교 APP > 전체메뉴 > 공통서비스 > 설문참여"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d447ffbf8aff251f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "6. 설문내용",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 설문내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1a9cf4bc426099dd",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 강원대학교 5대 핵심역량(융합, 창의, 인성, 협동, 실천)에 대한 자가진단",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 강원대학교 5대 핵심역량(융합, 창의, 인성, 협동, 실천)에 대한 자가진단"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b25782e9a02c9c61",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "7. 비교과마일리지 관련사항",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "7. 비교과마일리지 관련사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-170bd713190146ac",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 비교과마일리지 점수 연계를 위해서 연 1회 역량진단 참여 필수",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 비교과마일리지 점수 연계를 위해서 연 1회 역량진단 참여 필수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cc596151292cf635",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 진단에 참여하지 않은 해의 마일리지 점수는 합산되지 않음",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 진단에 참여하지 않은 해의 마일리지 점수는 합산되지 않음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3d4b485cef6608ea",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "문의 : 교수학습개발원 033) 250-7382",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "문의 : 교수학습개발원 033) 250-7382"
+    }
+  ],
+  "summary": {
+    "segmentCount": 16,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 12,
+      "label_value": 2,
+      "paragraph": 1
+    }
+  }
+}

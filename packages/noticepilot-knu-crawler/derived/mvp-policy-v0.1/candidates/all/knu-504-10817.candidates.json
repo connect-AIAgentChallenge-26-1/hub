@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10817",
+  "sourceContentHash": "2685030f03d10bd571e511c80b7fcfa400ff21d273825624b0d1d2d12010e7c1",
+  "sourceTitle": "2026학년도 중앙동아리 등록기준 및 제출서류 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10817&pageIndex=8&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "삼척",
+    "campuses": [
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10817-5fa72dafade701",
+      "uidHint": "noticepilot-cand-knu-504-10817-5fa72dafade701@noticepilot.local",
+      "sourceNoticeId": "knu-504-10817",
+      "sourceTitle": "2026학년도 중앙동아리 등록기준 및 제출서류 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10817&pageIndex=8&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-ea844b93769b638e",
+        "segmentType": "label_value",
+        "labelText": "등록기간",
+        "bodyText": "2026.3.30.(월) ~ 2026.4.2.(목) 18:00까지",
+        "sourceLocation": {
+          "lineIndex": 2,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-30",
+            "start": 10,
+            "end": 23
+          },
+          {
+            "value": "2026-04-02",
+            "start": 26,
+            "end": 38
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "medium",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "등록기간",
+          "2. 등록기간 : 2026.3.30.(월) ~ 2026.4.2.(목) 18:00까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-7a762443bdf4b639",
+        "segmentId": "seg-ea844b93769b638e",
+        "rawText": "2026.3.30.(월) ~ 2026.4.2.(목) 18:00까지",
+        "normalizedStart": "2026-03-30T00:00:00+09:00",
+        "normalizedEnd": "2026-04-02T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 10,
+          "end": 38
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-f606bd7a2f26032a",
+        "sourceNoticeId": "knu-504-10817",
+        "segmentId": "seg-ea844b93769b638e",
+        "temporalMentionIds": [
+          "tm-7a762443bdf4b639"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "medium",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": false,
+        "labelText": "등록기간",
+        "evidence": "2. 등록기간 : 2026.3.30.(월) ~ 2026.4.2.(목) 18:00까지"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "2026학년도 중앙동아리 등록기준 및 제출서류 안내 진행 기간",
+      "dateText": "2026.3.30.(월) ~ 2026.4.2.(목) 18:00까지",
+      "normalizedStart": "2026-03-30T00:00:00+09:00",
+      "normalizedEnd": "2026-04-02T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "2. 등록기간 : 2026.3.30.(월) ~ 2026.4.2.(목) 18:00까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": "start_of_day_assumed_for_timed_range"
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "start_of_day_assumed_for_timed_range",
+          "structured_segment_grounded"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

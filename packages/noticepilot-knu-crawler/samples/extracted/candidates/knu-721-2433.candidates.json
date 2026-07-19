@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.4",
+  "sourceNoticeId": "knu-721-2433",
+  "sourceContentHash": "0f046f8ce2a46952bd9fbe274199cc20d9da1bd8bdabc3ea56317685bad5f096",
+  "sourceTitle": "2026학년도 2학기 특별면제장학금 신청 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2433&pageIndex=1&pageItm=10&searchOrderSort=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉 원주",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.4.4",
+    "createdAt": "2026-07-09T03:24:57+00:00",
+    "mode": "rule_based_v1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-721-2433-3605f09e64da",
+      "uidHint": "noticepilot-knu-721-2433-3605f09e64da@noticepilot.local",
+      "sourceNoticeId": "knu-721-2433",
+      "sourceTitle": "2026학년도 2학기 특별면제장학금 신청 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2433&pageIndex=1&pageItm=10&searchOrderSort=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_deadline",
+      "targetActor": "student",
+      "title": "특별면제장학금 신청 마감",
+      "dateText": "2026. 7. 15.(수 )",
+      "normalizedStart": "2026-07-15",
+      "normalizedEnd": null,
+      "isAllDay": true,
+      "evidence": "2. 신청기간: ~ 2026. 7. 15.(수 )까지",
+      "evidenceLineIndex": 39,
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "rule",
+      "reviewedByUser": false
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

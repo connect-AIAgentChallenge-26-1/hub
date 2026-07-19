@@ -1,0 +1,118 @@
+{
+  "offlineIcsExportCheck": {
+    "schemaVersion": "noticepilot.icsExport.v0.4",
+    "exporterVersion": "0.4.4",
+    "calendarName": "NoticePilot 마감 일정 - 삼척",
+    "feedProfile": {
+      "profileId": "knu-samcheok",
+      "label": "삼척",
+      "calendarName": "NoticePilot 마감 일정 - 삼척",
+      "campuses": [
+        "samcheok"
+      ],
+      "campusLabels": {
+        "samcheok": "삼척"
+      },
+      "includeAllCampus": true,
+      "includeUnknownCampus": false
+    },
+    "timezone": "Asia/Seoul",
+    "timedEventMode": "TZID",
+    "availability": "transparent",
+    "campusFilterActive": true,
+    "feedCampuses": [
+      "samcheok"
+    ],
+    "feedCampusLabels": {
+      "samcheok": "삼척"
+    },
+    "includeAllCampus": true,
+    "includeUnknownCampus": false,
+    "campusFilteredCount": 1,
+    "input": "samples/extracted/candidates",
+    "outputIcsPath": "/tmp/offline_export_sam_v044/noticepilot.ics",
+    "inputCandidateFileCount": 2,
+    "inputCandidateFiles": [
+      "samples/extracted/candidates/knu-720-2511.candidates.json",
+      "samples/extracted/candidates/knu-721-2433.candidates.json"
+    ],
+    "eventCount": 1,
+    "skippedCount": 2,
+    "exportedEvents": [
+      {
+        "uid": "noticepilot-knu-720-2511-7b7b6ce8ae36@noticepilot.local",
+        "candidateId": "cand-knu-720-2511-7b7b6ce8ae36",
+        "sourceNoticeId": "knu-720-2511",
+        "title": "숙명여자대학교 교류 수학 학생 제출 마감",
+        "normalizedStart": "2026-08-03T18:00:00+09:00",
+        "isAllDay": false,
+        "status": "auto_confirmed",
+        "campusScope": {
+          "sourceLabel": "삼척",
+          "campuses": [
+            "samcheok"
+          ],
+          "scopeType": "campus_specific",
+          "confidence": "medium",
+          "source": "listMetadata.campus",
+          "labels": {
+            "samcheok": "삼척"
+          }
+        },
+        "campusMatch": {
+          "matched": true,
+          "reason": "campus_matched",
+          "feedCampuses": [
+            "samcheok"
+          ]
+        }
+      }
+    ],
+    "skippedCandidates": [
+      {
+        "sourceFile": "samples/extracted/candidates/knu-720-2511.candidates.json",
+        "candidateId": "cand-knu-720-2511-a05532dc6fb0",
+        "sourceNoticeId": "knu-720-2511",
+        "title": "숙명여자대학교 교류 수학 학과 제출 마감",
+        "status": "needs_review",
+        "includeInCalendarFeed": false,
+        "campusScope": {
+          "sourceLabel": "삼척",
+          "campuses": [
+            "samcheok"
+          ],
+          "scopeType": "campus_specific",
+          "confidence": "medium",
+          "source": "listMetadata.campus",
+          "labels": {
+            "samcheok": "삼척"
+          }
+        },
+        "skipReason": "not_calendar_feed_eligible"
+      },
+      {
+        "sourceFile": "samples/extracted/candidates/knu-721-2433.candidates.json",
+        "candidateId": "cand-knu-721-2433-3605f09e64da",
+        "sourceNoticeId": "knu-721-2433",
+        "title": "특별면제장학금 신청 마감",
+        "status": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "campusScope": {
+          "sourceLabel": "강릉 원주",
+          "campuses": [
+            "gangneung_wonju"
+          ],
+          "scopeType": "campus_specific",
+          "confidence": "medium",
+          "source": "listMetadata.campus",
+          "labels": {
+            "gangneung_wonju": "강릉원주"
+          }
+        },
+        "skipReason": "campus_mismatch"
+      }
+    ],
+    "failureCount": 0,
+    "failures": []
+  }
+}

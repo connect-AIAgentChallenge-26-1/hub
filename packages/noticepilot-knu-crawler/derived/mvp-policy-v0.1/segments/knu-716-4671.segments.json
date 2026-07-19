@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4671",
+  "sourceContentHash": "b75628a503d659529da0f11a1824f608765a9f91c9d0bead7315f3c4b0353f42",
+  "sourceTitle": "수의과대학 부속동물병원 응급센터 기간제 계약직(사무원) 공개채용 재공고",
+  "publishedAt": "2026-04-07",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-db764e34d9203de2",
+      "segmentType": "title",
+      "labelText": "수의과대학 부속동물병원 응급센터 기간제 계약직(사무원) 공개채용 재공고",
+      "bodyText": "수의과대학 부속동물병원 응급센터 기간제 계약직(사무원) 공개채용 재공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수의과대학 부속동물병원 응급센터 기간제 계약직(사무원) 공개채용 재공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2b593cc89bfb79a9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-170호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-170호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1ff6c74b0b58f4b8",
+      "segmentType": "label_value",
+      "labelText": "<수의과대학 부속동물병원 응급센터 기간제 계약직 공개채용 재공고>",
+      "bodyText": "<수의과대학 부속동물병원 응급센터 기간제 계약직 공개채용 재공고>",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<수의과대학 부속동물병원 응급센터 기간제 계약직 공개채용 재공고>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2ee119b425bb6ff3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교에서 다음과 같이",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교에서 다음과 같이"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ab12363e42a2cdb7",
+      "segmentType": "label_value",
+      "labelText": "기간제 계약직(사무직)",
+      "bodyText": "기간제 계약직(사무직)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기간제 계약직(사무직)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8f164b61ceb990a6",
+      "segmentType": "label_value",
+      "labelText": "공개채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "공개채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "공개채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cf18c47e6998e531",
+      "segmentType": "continuation",
+      "labelText": "공개채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "2026. 4. 7.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-8f164b61ceb990a6"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-07",
+          "start": 37,
+          "end": 47
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "공개채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다. 2026. 4. 7."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d1db0015d188ca10",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 4. 7.",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-07",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 4. 7."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6c9466c304cddd96",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교총장",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교총장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-757f3d5f5870aa22",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-04-06~2026-04-10",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-06",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-04-10",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-04-06~2026-04-10"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "continuation": 1,
+      "label_value": 4,
+      "paragraph": 4,
+      "title": 1
+    }
+  }
+}

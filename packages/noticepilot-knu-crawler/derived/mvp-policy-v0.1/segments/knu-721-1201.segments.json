@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-1201",
+  "sourceContentHash": "0945f3a66a20aee5fa534683cebb11fd855d3cc05a863dfa645a02cbb4f9ae00",
+  "sourceTitle": "2026학년도 1학기 국가근로장학생（학기중） 선발 및 희망근로지 신청 안내",
+  "publishedAt": "2026-01-28",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a5421970ed3a7491",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 국가근로장학생（학기중） 선발 및 희망근로지 신청 안내",
+      "bodyText": "2026학년도 1학기 국가근로장학생（학기중） 선발 및 희망근로지 신청 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 국가근로장학생（학기중） 선발 및 희망근로지 신청 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d1d7a85f6228ff0d",
+      "segmentType": "label_value",
+      "labelText": "<2026학년도 1학기 학기중 국가근로장학생 선발 및 희망근로지 신청 안내>",
+      "bodyText": "<2026학년도 1학기 학기중 국가근로장학생 선발 및 희망근로지 신청 안내>",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<2026학년도 1학기 학기중 국가근로장학생 선발 및 희망근로지 신청 안내>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a4ac2a8779770b50",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "2026. 2. 2.(월) ~ 2. 6.(금)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-02",
+          "start": 10,
+          "end": 24
+        },
+        {
+          "value": "2026-02-06",
+          "start": 27,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 신청기간 : 2026. 2. 2.(월) ~ 2. 6.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2319e9344bf161b3",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "2. 신청방법 : 한국장학재단 홈페이지 및 어플리케이션(신청메뉴얼 참조)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 신청방법 : 한국장학재단 홈페이지 및 어플리케이션(신청메뉴얼 참조)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ea2e1f4b0b8ef97e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 기본요건 : 26-1학기 국가근로 신청한 학생 중,",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 기본요건 : 26-1학기 국가근로 신청한 학생 중,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-48a0f49eb70dd0e9",
+      "segmentType": "label_value",
+      "labelText": "학자금 지원구간 9구간 이하, 직전학기 평점평균(백분율) 70점 이상인 학부 재학생",
+      "bodyText": "학자금 지원구간 9구간 이하, 직전학기 평점평균(백분율) 70점 이상인 학부 재학생",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate",
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학자금 지원구간 9구간 이하, 직전학기 평점평균(백분율) 70점 이상인 학부 재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-91cd03612e3e6698",
+      "segmentType": "label_value",
+      "labelText": "선발방법",
+      "bodyText": "4. 선발방법 : 소득분위(100) + 직전학기 성적(50) + 면접(100)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 선발방법 : 소득분위(100) + 직전학기 성적(50) + 면접(100)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f48497d4836d5bbe",
+      "segmentType": "label_value",
+      "labelText": "선발절차 및 추진일정",
+      "bodyText": "5. 선발절차 및 추진일정 : 첨부파일 참조",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 선발절차 및 추진일정 : 첨부파일 참조"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-92b92a69d692043f",
+      "segmentType": "label_value",
+      "labelText": "희망근로지 신청자 우선면접실시로 근로지별 근로정보(첨부파일) 확인 후 기간 내 꼭 신청하시기 바랍니다.",
+      "bodyText": "6. 희망근로지 신청자 우선면접실시로 근로지별 근로정보(첨부파일) 확인 후 기간 내 꼭 신청하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 희망근로지 신청자 우선면접실시로 근로지별 근로정보(첨부파일) 확인 후 기간 내 꼭 신청하시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 9,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "list_item": 1
+    }
+  }
+}

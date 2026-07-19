@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4721",
+  "sourceContentHash": "9f7ae5c9a1a035c9f40b3a88d28e2a72760fa0bd90478449b625ecb9c926245c",
+  "sourceTitle": "강원대학교 삼척교육지원과 기간제 계약직(사무원) 채용 공고",
+  "publishedAt": "2026-04-24",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-96e5d274e86b73c5",
+      "segmentType": "title",
+      "labelText": "강원대학교 삼척교육지원과 기간제 계약직(사무원) 채용 공고",
+      "bodyText": "강원대학교 삼척교육지원과 기간제 계약직(사무원) 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척교육지원과 기간제 계약직(사무원) 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a0fcb415511e6137",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 삼척캠퍼스 공고 제2026-65호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척캠퍼스 공고 제2026-65호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1c039b8653bb4936",
+      "segmentType": "label_value",
+      "labelText": "강원대학교에서는 삼척교육지원과에서는 기간제계약직(사무원)의 공개 채용을 실시하오니 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교에서는 삼척교육지원과에서는 기간제계약직(사무원)의 공개 채용을 실시하오니 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교에서는 삼척교육지원과에서는 기간제계약직(사무원)의 공개 채용을 실시하오니 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-992a6a50bff83cd3",
+      "segmentType": "continuation",
+      "labelText": "강원대학교에서는 삼척교육지원과에서는 기간제계약직(사무원)의 공개 채용을 실시하오니 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "2026. 4. 27.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-1c039b8653bb4936"
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-27",
+          "start": 66,
+          "end": 77
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "강원대학교에서는 삼척교육지원과에서는 기간제계약직(사무원)의 공개 채용을 실시하오니 유능한 인재의 많은 지원 바랍니다. 2026. 4. 27."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fab51ad74e79fe81",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 4. 27.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-27",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 4. 27."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-444d1c52d78ba04d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 삼척교학처장",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척교학처장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-e9c765d15733bf5e",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-04-27~2026-05-06",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-27",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-05-06",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-04-27~2026-05-06"
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "continuation": 1,
+      "label_value": 2,
+      "paragraph": 3,
+      "title": 1
+    }
+  }
+}

@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10881",
+  "sourceContentHash": "445cd5b1f3696146a58a9a987b23e684d281e5da670576ec72f8c3aa164b1bc1",
+  "sourceTitle": "[긴급]삼척캠퍼스 통학버스 임시 미운행 노선 안내(4.24）",
+  "publishedAt": "2026-04-15",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dc3072b53d086b78",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "4.24）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-24",
+          "start": 28,
+          "end": 32
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "[긴급]삼척캠퍼스 통학버스 임시 미운행 노선 안내(4.24）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0c360fce831157ea",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "삼척캠퍼스 통학버스 임시 미운행 노선을 안내하오니 참고바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "삼척캠퍼스 통학버스 임시 미운행 노선을 안내하오니 참고바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b0123152fa449a94",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○사유 : 학내행사 지원",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○사유 : 학내행사 지원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bb46bb59cecb173d",
+      "segmentType": "continuation",
+      "labelText": "○사유 : 학내행사 지원 ○임시 미운행 기간",
+      "bodyText": "2026.4.24.(금)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-b0123152fa449a94"
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-24",
+          "start": 26,
+          "end": 39
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "○사유 : 학내행사 지원 ○임시 미운행 기간: 2026.4.24.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dd3b6fb92bc6be7c",
+      "segmentType": "label_value",
+      "labelText": "○임시 미운행 기간",
+      "bodyText": "2026.4.24.(금)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-24",
+          "start": 12,
+          "end": 25
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "○임시 미운행 기간: 2026.4.24.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fe7868d87e3fd0bb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○미운행 노선",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○미운행 노선"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d0f93119f27f690",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-시내순환 2회(8:30) / 3회(09:25)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-시내순환 2회(8:30) / 3회(09:25)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dbd792291a995672",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-삼척8회(16:00) / 도계9회(18:05)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-삼척8회(16:00) / 도계9회(18:05)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0b38af9c597e7171",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※도계 18:05(9회)버스 이용자는 교직원 퇴근(18:10)버스 이용 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※도계 18:05(9회)버스 이용자는 교직원 퇴근(18:10)버스 이용 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 9,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "continuation": 1,
+      "label_value": 1,
+      "list_item": 3
+    }
+  }
+}

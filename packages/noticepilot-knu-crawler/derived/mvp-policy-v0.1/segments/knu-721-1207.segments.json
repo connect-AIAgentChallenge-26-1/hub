@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-1207",
+  "sourceContentHash": "348de72dbe91057e7bdde19ef243a5b21c33d8e377d9a21d43f1291629ad54f1",
+  "sourceTitle": "2026년 1학기 국가장학금 2차 신청 안내",
+  "publishedAt": "2026-02-03",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-847c4cedcd692086",
+      "segmentType": "title",
+      "labelText": "2026년 1학기 국가장학금 2차 신청 안내",
+      "bodyText": "2026년 1학기 국가장학금 2차 신청 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 1학기 국가장학금 2차 신청 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6fde21d53ebdb4a1",
+      "segmentType": "label_value",
+      "labelText": "*재학생은 1차 신청이 원칙이며, 재학 중 2회에 한해 2차 신청으로 수혜 가능합니다",
+      "bodyText": "*재학생은 1차 신청이 원칙이며, 재학 중 2회에 한해 2차 신청으로 수혜 가능합니다",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "*재학생은 1차 신청이 원칙이며, 재학 중 2회에 한해 2차 신청으로 수혜 가능합니다"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1
+    }
+  }
+}

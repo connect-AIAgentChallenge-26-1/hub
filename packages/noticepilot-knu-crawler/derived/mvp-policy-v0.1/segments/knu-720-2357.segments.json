@@ -1,0 +1,352 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2357",
+  "sourceContentHash": "049ba9034dd728c3ec9848178f5cdf90464f641b88ed2c79329416991be362d5",
+  "sourceTitle": "2026학년도 편입생 오리엔테이션 안내",
+  "publishedAt": "2026-02-12",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-540d8e54f2e65bc0",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026학년도 편입생 오리엔테이션 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "admission_type:transfer_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 편입생 오리엔테이션 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1ee456e5caaf2be3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026학년도 편입생 여러분을 진심으로 환영하며 2026학년도 편입생 오리엔테이션에 대해서 안내드리니 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "admission_type:transfer_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 편입생 여러분을 진심으로 환영하며 2026학년도 편입생 오리엔테이션에 대해서 안내드리니 참고하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6a0ec775f6a303b6",
+      "segmentType": "continuation",
+      "labelText": "일시",
+      "bodyText": "2026. 2. 12.（목） 09:00 ~ 2. 27.（금） 18:00",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-1ee456e5caaf2be3"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "admission_type:transfer_student"
+      ],
+      "dateSpans": [
+        {
+          "value": "2026-02-12",
+          "start": 77,
+          "end": 92
+        },
+        {
+          "value": "2026-02-27",
+          "start": 101,
+          "end": 110
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2026학년도 편입생 여러분을 진심으로 환영하며 2026학년도 편입생 오리엔테이션에 대해서 안내드리니 참고하시기 바랍니다. 1. 일시 : 2026. 2. 12.（목） 09:00 ~ 2. 27.（금） 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e1e89ab93dd8cfab",
+      "segmentType": "label_value",
+      "labelText": "일시",
+      "bodyText": "2026. 2. 12.（목） 09:00 ~ 2. 27.（금） 18:00",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-12",
+          "start": 8,
+          "end": 23
+        },
+        {
+          "value": "2026-02-27",
+          "start": 32,
+          "end": 41
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "1. 일시 : 2026. 2. 12.（목） 09:00 ~ 2. 27.（금） 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e6b0b7e16d772334",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 대상 : 삼척캠퍼스 및 도계캠퍼스 편입생",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "admission_type:transfer_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 대상 : 삼척캠퍼스 및 도계캠퍼스 편입생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a8e2f15700996ba0",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 내용 : 학점인정, 교육과정, 학사관리, 학습역량강화 프로그램 소개 등",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 내용 : 학점인정, 교육과정, 학사관리, 학습역량강화 프로그램 소개 등"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6942fc86f27c67fc",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 참여방법",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 참여방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-01b2d77fb910b334",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1） 강원대학교 홈페이지 - K-cloud - 하단의 아이디（학번, 사번） 찾기",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1） 강원대학교 홈페이지 - K-cloud - 하단의 아이디（학번, 사번） 찾기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e25fd3d807a25bf5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2） 이루리 접속（https://pasteruri.kangwon.ac.kr/login.php）",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2） 이루리 접속（https://pasteruri.kangwon.ac.kr/login.php）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4ef4986819d9fba2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "3） 학번으로 로그인",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3） 학번으로 로그인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-31bc455299f5b0e1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "4） 강좌 전체보기 – 2026학년도 편입생 오리엔테이션",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "admission_type:transfer_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4） 강좌 전체보기 – 2026학년도 편입생 오리엔테이션"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-34ef2fb1db9b7d6a",
+      "segmentType": "label_value",
+      "labelText": "5） 기간 내 자유롭게 수강 및 질의（각 담당자가 답변예정）",
+      "bodyText": "5） 기간 내 자유롭게 수강 및 질의（각 담당자가 답변예정）",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5） 기간 내 자유롭게 수강 및 질의（각 담당자가 답변예정）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-735bce9ff55fa241",
+      "segmentType": "label_value",
+      "labelText": "학번조회일정（예정）",
+      "bodyText": "5. 학번조회일정（예정）",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 학번조회일정（예정）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6518c7c612f99185",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026. 2. 11.（수） 9시 이후 : 최초등록생",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-11",
+          "start": 2,
+          "end": 17
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 2026. 2. 11.（수） 9시 이후 : 최초등록생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7f8d0057edca4799",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026. 2. 21.（토） 9시 이후 : 충원등록생",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-21",
+          "start": 2,
+          "end": 17
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 2026. 2. 21.（토） 9시 이후 : 충원등록생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1feeccedefa0da57",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "6. 문의사항이 있으신 경우 0335706425로 연락바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 문의사항이 있으신 경우 0335706425로 연락바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 16,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 5,
+      "continuation": 1,
+      "label_value": 3,
+      "list_item": 6
+    }
+  }
+}

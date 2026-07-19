@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-3881",
+  "sourceContentHash": "69b73839012245b9e5a2172ce37066cb1489f58edea89507ddececf2aef6f175",
+  "sourceTitle": "「2026학년도 예비 신입생 윈터 런케이션 WITH 강원대」 참가자 모집 안내",
+  "publishedAt": "2026-01-02",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ecf6e8bc936e2061",
+      "segmentType": "title",
+      "labelText": "「2026학년도 예비 신입생 윈터 런케이션 WITH 강원대」 참가자 모집 안내",
+      "bodyText": "「2026학년도 예비 신입생 윈터 런케이션 WITH 강원대」 참가자 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "「2026학년도 예비 신입생 윈터 런케이션 WITH 강원대」 참가자 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b02587eb860098fd",
+      "segmentType": "label_value",
+      "labelText": "「2026학년도 예비 신입생 윈터 런케이션 WITH 강원대」 참가자 모집을 안내하오니 많은 관심 부탁드립니다.",
+      "bodyText": "「2026학년도 예비 신입생 윈터 런케이션 WITH 강원대」 참가자 모집을 안내하오니 많은 관심 부탁드립니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "「2026학년도 예비 신입생 윈터 런케이션 WITH 강원대」 참가자 모집을 안내하오니 많은 관심 부탁드립니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1
+    }
+  }
+}

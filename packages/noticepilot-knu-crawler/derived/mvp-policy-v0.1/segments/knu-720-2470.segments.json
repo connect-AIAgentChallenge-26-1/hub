@@ -1,0 +1,379 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2470",
+  "sourceContentHash": "b5f0de7a6af38dffdf5f5617541db447c0b2d1b0f9a1df2d5790f48dab368cec",
+  "sourceTitle": "2026학년도 여름 계절수업 개강 전 수강신청 취소 안내(삼척캠퍼스)",
+  "publishedAt": "2026-06-15",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-56d77c06c2fe2328",
+      "segmentType": "title",
+      "labelText": "2026학년도 여름 계절수업 개강 전 수강신청 취소 안내(삼척캠퍼스)",
+      "bodyText": "2026학년도 여름 계절수업 개강 전 수강신청 취소 안내(삼척캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 여름 계절수업 개강 전 수강신청 취소 안내(삼척캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-29620294aa7e93c8",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 여름 계절수업 개강 전 수강신청 취소 안내",
+      "bodyText": "2026학년도 여름 계절수업 개강 전 수강신청 취소 안내",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 여름 계절수업 개강 전 수강신청 취소 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9137fd23f1e27e9c",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 여름 계절수업 개강 전 수강신청 취소와 관련하여 일정 및 주요 내용을 다음과 같이 안내합니다.",
+      "bodyText": "2026학년도 여름 계절수업 개강 전 수강신청 취소와 관련하여 일정 및 주요 내용을 다음과 같이 안내합니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 여름 계절수업 개강 전 수강신청 취소와 관련하여 일정 및 주요 내용을 다음과 같이 안내합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cc19f3fb667cd580",
+      "segmentType": "continuation",
+      "labelText": "취소기간",
+      "bodyText": "2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00까지",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-9137fd23f1e27e9c"
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-17",
+          "start": 67,
+          "end": 82
+        },
+        {
+          "value": "2026-06-22",
+          "start": 91,
+          "end": 100
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2026학년도 여름 계절수업 개강 전 수강신청 취소와 관련하여 일정 및 주요 내용을 다음과 같이 안내합니다. 취소기간: 2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-684a173fb702b7d6",
+      "segmentType": "label_value",
+      "labelText": "취소기간",
+      "bodyText": "2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00까지",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-17",
+          "start": 6,
+          "end": 21
+        },
+        {
+          "value": "2026-06-22",
+          "start": 30,
+          "end": 39
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "취소기간: 2026. 6. 17.(수) 09:00 ~ 6. 22.(월) 18:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-71dc557a2dc065e4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "취소방법: 수강신청 방법과 동일한 방법으로 접속하여 취소(온라인)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "취소방법: 수강신청 방법과 동일한 방법으로 접속하여 취소(온라인)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9fbd6b545a1d853e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "PC 접속경로: 홈페이지 → 통합인트로 → 수강신청(춘천·삼척)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "PC 접속경로: 홈페이지 → 통합인트로 → 수강신청(춘천·삼척)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-81c4e4f730c307ef",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "모바일 접속경로: 강원대학교 앱(App) → 전체메뉴 → 수업 → 수강신청",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "모바일 접속경로: 강원대학교 앱(App) → 전체메뉴 → 수업 → 수강신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d4a40295f8a23fd",
+      "segmentType": "label_value",
+      "labelText": "수강료 반환",
+      "bodyText": "수강료 반환: 기간 내 취소 시 전액 반환",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강료 반환: 기간 내 취소 시 전액 반환"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-76791f32d047e9bf",
+      "segmentType": "continuation",
+      "labelText": "수강료 반환: 기간 내 취소 시 전액 반환 반환일정",
+      "bodyText": "2026. 6. 30.(화)(예정) ※ K-Cloud → 학부생서비스 → 교과 → 학적 → 학생정보조회 → 신상정보변경 → 은행정보에서 본인의 계좌번호, 은행명, 예금주를 입력한 후 저장",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-0d4a40295f8a23fd"
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [
+        {
+          "value": "2026-06-30",
+          "start": 30,
+          "end": 45
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "수강료 반환: 기간 내 취소 시 전액 반환 반환일정: 2026. 6. 30.(화)(예정) ※ K-Cloud → 학부생서비스 → 교과 → 학적 → 학생정보조회 → 신상정보변경 → 은행정보에서 본인의 계좌번호, 은행명, 예금주를 입력한 후 저장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d10aa3570000f86d",
+      "segmentType": "label_value",
+      "labelText": "반환일정",
+      "bodyText": "2026. 6. 30.(화)(예정) ※ K-Cloud → 학부생서비스 → 교과 → 학적 → 학생정보조회 → 신상정보변경 → 은행정보에서 본인의 계좌번호, 은행명, 예금주를 입력한 후 저장",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [
+        {
+          "value": "2026-06-30",
+          "start": 6,
+          "end": 21
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "반환일정: 2026. 6. 30.(화)(예정) ※ K-Cloud → 학부생서비스 → 교과 → 학적 → 학생정보조회 → 신상정보변경 → 은행정보에서 본인의 계좌번호, 은행명, 예금주를 입력한 후 저장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-75832f1f099ce910",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "유의사항",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "유의사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e6696de534db247c",
+      "segmentType": "label_value",
+      "labelText": "한번 취소된 교과목은 재신청이 불가하오니 취소를 신중히 결정하시기 바랍니다.",
+      "bodyText": "한번 취소된 교과목은 재신청이 불가하오니 취소를 신중히 결정하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "한번 취소된 교과목은 재신청이 불가하오니 취소를 신중히 결정하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-19508dfb9a70593e",
+      "segmentType": "label_value",
+      "labelText": "수강료를 납부하지 않는 강좌(사회봉사, 현장실습, 사업단 개설과목 등)도 취소를 원할 경우, 반드시 수강신청 취소하시기 바랍니다.",
+      "bodyText": "수강료를 납부하지 않는 강좌(사회봉사, 현장실습, 사업단 개설과목 등)도 취소를 원할 경우, 반드시 수강신청 취소하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "payment_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강료를 납부하지 않는 강좌(사회봉사, 현장실습, 사업단 개설과목 등)도 취소를 원할 경우, 반드시 수강신청 취소하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c51afafaea70a3db",
+      "segmentType": "label_value",
+      "labelText": "이 기간 중에는 취소만 가능하며, 변경 및 신규 신청은 불가합니다.",
+      "bodyText": "이 기간 중에는 취소만 가능하며, 변경 및 신규 신청은 불가합니다.",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "이 기간 중에는 취소만 가능하며, 변경 및 신규 신청은 불가합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-930384f2b5beada9",
+      "segmentType": "label_value",
+      "labelText": "이 기간 이후 수강신청 취소는 계절수업운영지침 제7조 제7항에 의거 취소 및 환불이 제한됩니다.",
+      "bodyText": "이 기간 이후 수강신청 취소는 계절수업운영지침 제7조 제7항에 의거 취소 및 환불이 제한됩니다.",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "payment_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "이 기간 이후 수강신청 취소는 계절수업운영지침 제7조 제7항에 의거 취소 및 환불이 제한됩니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 16,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 9,
+      "continuation": 2,
+      "paragraph": 4
+    }
+  }
+}

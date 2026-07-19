@@ -1,0 +1,81 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10932",
+  "sourceContentHash": "cd2c7f31a88c9f0dd3e9411632662cb078374a0a47b82ead4d4d670dca1dddf1",
+  "sourceTitle": "2026학년도 상반기 교양교육과정 워크숍 및 교수법 특강 안내",
+  "publishedAt": "2026-04-28",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a17a4845f3e3b7f5",
+      "segmentType": "title",
+      "labelText": "2026학년도 상반기 교양교육과정 워크숍 및 교수법 특강 안내",
+      "bodyText": "2026학년도 상반기 교양교육과정 워크숍 및 교수법 특강 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 상반기 교양교육과정 워크숍 및 교수법 특강 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-184695b23c9702a6",
+      "segmentType": "label_value",
+      "labelText": "<수강신청 이용 경로 안내>",
+      "bodyText": "<수강신청 이용 경로 안내>",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<수강신청 이용 경로 안내>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d013e902cf48bf22",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※Tip: 3번 이후 강좌명 → 자율강좌명 → 키워드 \"상반기\" or \"워크숍\" 으로 강좌 검색 가능",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※Tip: 3번 이후 강좌명 → 자율강좌명 → 키워드 \"상반기\" or \"워크숍\" 으로 강좌 검색 가능"
+    }
+  ],
+  "summary": {
+    "segmentCount": 3,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "list_item": 1
+    }
+  }
+}

@@ -1,0 +1,374 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10886",
+  "sourceContentHash": "47f71f1266a09d68d5d1ef334f9be204b4d615f72ffbdd4c622c04afd5956fe6",
+  "sourceTitle": "2026학년도 하계 글로벌 문화탐방 선발 안내(5/8, 18시마감)",
+  "publishedAt": "2026-04-17",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b6022d12062bab4a",
+      "segmentType": "title",
+      "labelText": "2026학년도 하계 글로벌 문화탐방 선발 안내(",
+      "bodyText": "5/8, 18시마감)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-08",
+          "start": 26,
+          "end": 29
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2026학년도 하계 글로벌 문화탐방 선발 안내(5/8, 18시마감)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c9c305d37540bbc9",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 하계 글로벌 문화탐방 참가자를 붙임과 같이 선발하오니",
+      "bodyText": "2026학년도 하계 글로벌 문화탐방 참가자를 붙임과 같이 선발하오니",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 하계 글로벌 문화탐방 참가자를 붙임과 같이 선발하오니"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-49b9536a37945ac8",
+      "segmentType": "label_value",
+      "labelText": "관심 있는 학생들의 많은 지원 바랍니다.",
+      "bodyText": "관심 있는 학생들의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "관심 있는 학생들의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-705f4eec90dfd3af",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "세부 내용은 붙임 파일을 확인하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "세부 내용은 붙임 파일을 확인하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-74a867f77cef0e37",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "감사합니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "감사합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-82089679d7d7a33d",
+      "segmentType": "label_value",
+      "labelText": "파견기간",
+      "bodyText": "1. 파견기간: 2026학년도 하계 방학 중 7일 ~ 20일 이내",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 파견기간: 2026학년도 하계 방학 중 7일 ~ 20일 이내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-22387733513ecf2f",
+      "segmentType": "label_value",
+      "labelText": "지원자격",
+      "bodyText": "2. 지원자격: 강릉·원주캠퍼스에 재학중인 학부 및 대학원생",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate",
+        "degree_level:graduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 지원자격: 강릉·원주캠퍼스에 재학중인 학부 및 대학원생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-49f91d08452d167f",
+      "segmentType": "label_value",
+      "labelText": "선발인원",
+      "bodyText": "2. 선발인원: 총 3팀(유럽·미주·오세아니아 1팀, 아시아 2팀) ※ 1팀당 3~5명 (최소인원 3명)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 선발인원: 총 3팀(유럽·미주·오세아니아 1팀, 아시아 2팀) ※ 1팀당 3~5명 (최소인원 3명)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8e29ad85cb939ec4",
+      "segmentType": "label_value",
+      "labelText": "지원내용",
+      "bodyText": "3. 지원내용: 유럽·미주·오세아니아(각 팀당 300만원), 아시아 (각 팀당 150만원)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 지원내용: 유럽·미주·오세아니아(각 팀당 300만원), 아시아 (각 팀당 150만원)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a5fe6812689b521d",
+      "segmentType": "label_value",
+      "labelText": "지원마감",
+      "bodyText": "4. 지원마감:",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 지원마감:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-20947d46daeda0ab",
+      "segmentType": "continuation",
+      "labelText": "지원마감",
+      "bodyText": "2026. 5. 8.(금",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-a5fe6812689b521d"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-08",
+          "start": 9,
+          "end": 19
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "4. 지원마감: 2026. 5. 8.(금"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-82c4d5c4cd3af29c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 5. 8.(금",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-08",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 5. 8.(금"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-921ca0d14e2feb47",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ") 18:00",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ") 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fc3995d7ac9b5db8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "까지",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b8e4faa114e02d7e",
+      "segmentType": "label_value",
+      "labelText": "지원방법",
+      "bodyText": "5. 지원방법: 선발 안내문 참조",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 지원방법: 선발 안내문 참조"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fdea7857cdc21ec0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "붙임",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-22b8da5a24fc2523",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 하계 글로벌 문화탐방 선발 안내문 및 지원서 1부.",
+      "bodyText": "1. 2026학년도 하계 글로벌 문화탐방 선발 안내문 및 지원서 1부.",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "result_announcement",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 2026학년도 하계 글로벌 문화탐방 선발 안내문 및 지원서 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ef1f5353f53d6de6",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 하계 글로벌 문화탐방 참가자 명단 1부. 끝.",
+      "bodyText": "2. 2026학년도 하계 글로벌 문화탐방 참가자 명단 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 2026학년도 하계 글로벌 문화탐방 참가자 명단 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 18,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 10,
+      "paragraph": 6,
+      "continuation": 1
+    }
+  }
+}

@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-721-1210",
+  "sourceContentHash": "b624a1fe268f6d68fefb2bbabe79b32bcf3abc6f6d8cd2d637cb01f0a5ed047c",
+  "sourceTitle": "＇2025년도 2학기 주거안정장학금＇ 지급요청서（2026.1월분） 제출 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=1210&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-721-1210-9a85b06945c63c",
+      "uidHint": "noticepilot-cand-knu-721-1210-9a85b06945c63c@noticepilot.local",
+      "sourceNoticeId": "knu-721-1210",
+      "sourceTitle": "＇2025년도 2학기 주거안정장학금＇ 지급요청서（2026.1월분） 제출 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=1210&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "submission_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-25aa8f7d4d5d77c8",
+        "segmentType": "label_value",
+        "labelText": "'2025년도 2학기 주거안정장학금' 지원대상자분들 중 동계 계절학기를 수강하신 분들께서는 1월분 지급요청서를 오는",
+        "bodyText": "2월 13일(금)까지 한국장학재단 홈페이지를 통해 반드시 제출하여 주시기 바랍니다.",
+        "sourceLocation": {
+          "lineIndex": 0,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "submission_period",
+          "application_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-13",
+            "start": 65,
+            "end": 74
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "submission_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "'2025년도 2학기 주거안정장학금' 지원대상자분들 중 동계 계절학기를 수강하신 분들께서는 1월분 지급요청서를 오는",
+          "'2025년도 2학기 주거안정장학금' 지원대상자분들 중 동계 계절학기를 수강하신 분들께서는 1월분 지급요청서를 오는 2월 13일(금)까지 한국장학재단 홈페이지를 통해 반드시 제출하여 주시기 바랍니다.",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-110d8799cb651851",
+        "segmentId": "seg-25aa8f7d4d5d77c8",
+        "rawText": "2월 13일(금)",
+        "normalizedStart": "2026-02-13",
+        "normalizedEnd": "2026-02-13",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 65,
+          "end": 74
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-822a1928bacbcae9",
+        "sourceNoticeId": "knu-721-1210",
+        "segmentId": "seg-25aa8f7d4d5d77c8",
+        "temporalMentionIds": [
+          "tm-110d8799cb651851"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "'2025년도 2학기 주거안정장학금' 지원대상자분들 중 동계 계절학기를 수강하신 분들께서는 1월분 지급요청서를 오는",
+        "evidence": "'2025년도 2학기 주거안정장학금' 지원대상자분들 중 동계 계절학기를 수강하신 분들께서는 1월분 지급요청서를 오는 2월 13일(금)까지 한국장학재단 홈페이지를 통해 반드시 제출하여 주시기 바랍니다."
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "＇2025년도 2학기 주거안정장학금＇ 지급요청서（2026.1월분） 제출 안내 제출 마감",
+      "dateText": "2월 13일(금)",
+      "normalizedStart": "2026-02-13",
+      "normalizedEnd": "2026-02-13",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "'2025년도 2학기 주거안정장학금' 지원대상자분들 중 동계 계절학기를 수강하신 분들께서는 1월분 지급요청서를 오는 2월 13일(금)까지 한국장학재단 홈페이지를 통해 반드시 제출하여 주시기 바랍니다.",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

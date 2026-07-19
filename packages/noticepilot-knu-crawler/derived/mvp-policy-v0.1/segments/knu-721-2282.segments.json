@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2282",
+  "sourceContentHash": "aaf7232d4d43628041a14f27f44e00a759d7270fa72ad4b10064cf43510c66d0",
+  "sourceTitle": "예비 건설엔지니어 장학사업 안내",
+  "publishedAt": "2026-03-05",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-336ac97537164aa2",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "예비 건설엔지니어 장학사업 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "예비 건설엔지니어 장학사업 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b1fa123d517a1f55",
+      "segmentType": "label_value",
+      "labelText": "지원대상",
+      "bodyText": "1. 지원대상: 건설기술관련 학과 학부 재학생",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate",
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 지원대상: 건설기술관련 학과 학부 재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f26289afa1459f15",
+      "segmentType": "label_value",
+      "labelText": "지원규모",
+      "bodyText": "2. 지원규모: 총 200명 인당 100만원",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 지원규모: 총 200명 인당 100만원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-43c334d30f406dbb",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "2026. 3. 16. ~ 4. 17.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-16",
+          "start": 9,
+          "end": 20
+        },
+        {
+          "value": "2026-04-17",
+          "start": 24,
+          "end": 29
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 신청기간: 2026. 3. 16. ~ 4. 17."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e6956242f980e59d",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "4. 신청방법: 한국건설기술인협회 홈페이지",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 신청방법: 한국건설기술인협회 홈페이지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4c3048b1ab8ac1a2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 자세한 사항은 붙임 파일 참조",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 자세한 사항은 붙임 파일 참조"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 4,
+      "paragraph": 1
+    }
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11028",
+  "sourceContentHash": "bf712289e595802c775758b53b8682d9c1c7f4e00a9e9d29b7d67be896fc338e",
+  "sourceTitle": "대동제 기간 중 삼척캠퍼스 통학버스 임시승강장 운영 알림",
+  "publishedAt": "2026-05-19",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c01a3fdeff61e0d0",
+      "segmentType": "title",
+      "labelText": "대동제 기간 중 삼척캠퍼스 통학버스 임시승강장 운영 알림",
+      "bodyText": "대동제 기간 중 삼척캠퍼스 통학버스 임시승강장 운영 알림",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "대동제 기간 중 삼척캠퍼스 통학버스 임시승강장 운영 알림"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-19b992ed1dd54041",
+      "segmentType": "label_value",
+      "labelText": "2026년도 대동제 기간 중 삼척캠퍼스 통학버스 승강장(학생회관 앞)을 임시 승강장으로 변경하여 운영하오니 참고하시기 바랍니다.",
+      "bodyText": "2026년도 대동제 기간 중 삼척캠퍼스 통학버스 승강장(학생회관 앞)을 임시 승강장으로 변경하여 운영하오니 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년도 대동제 기간 중 삼척캠퍼스 통학버스 승강장(학생회관 앞)을 임시 승강장으로 변경하여 운영하오니 참고하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2db2f84c2d2f630c",
+      "segmentType": "label_value",
+      "labelText": "임시 승강장 이용기간",
+      "bodyText": "2026. 5. 26.(화) ~ 5. 29.(금) 13:00까지",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-26",
+          "start": 17,
+          "end": 32
+        },
+        {
+          "value": "2026-05-29",
+          "start": 35,
+          "end": 44
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 임시 승강장 이용기간 : 2026. 5. 26.(화) ~ 5. 29.(금) 13:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aeae313378af46bf",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 07:50 직원 출근버스는 당초대로 대학본관 앞 출발",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 07:50 직원 출근버스는 당초대로 대학본관 앞 출발"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b7cb13b7d3192a0e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 임시 승강장 위치 : 삼척캠퍼스 정문 로터리 부근(그린에너지연구관 옆)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 임시 승강장 위치 : 삼척캠퍼스 정문 로터리 부근(그린에너지연구관 옆)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-39445e982773e4c6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "첨부 : 임시 승강장 안내도 1부.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "첨부 : 임시 승강장 안내도 1부."
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "paragraph": 2,
+      "list_item": 1
+    }
+  }
+}

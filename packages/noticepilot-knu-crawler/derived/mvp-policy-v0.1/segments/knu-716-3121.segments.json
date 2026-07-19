@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3121",
+  "sourceContentHash": "3b6fcbac865ffaf6815ffe49b7fa2eff45e2553886fbc358c6edd26d43e18b6a",
+  "sourceTitle": "환경분야 특성화 선도대학 행정직원 채용 공고",
+  "publishedAt": "2026-01-27",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dbad6968676dd380",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "환경분야 특성화 선도대학 행정직원 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "환경분야 특성화 선도대학 행정직원 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-95a4815edc45877c",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 환경분야 특성화 선도대학에서는 유능한 인재를 채용하고자 다음과 같이 직원 채용을 공고하오니 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 환경분야 특성화 선도대학에서는 유능한 인재를 채용하고자 다음과 같이 직원 채용을 공고하오니 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 환경분야 특성화 선도대학에서는 유능한 인재를 채용하고자 다음과 같이 직원 채용을 공고하오니 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a21b38125f8a950f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 채용분야 : 행정사무원",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 채용분야 : 행정사무원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38bf4e551c2b18d1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 채용인원 : 1명",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 채용인원 : 1명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4e8177d901fec0c1",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 01. 28.(수) ~ 02. 03.(화) 18:00",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-28",
+          "start": 10,
+          "end": 26
+        },
+        {
+          "value": "2026-02-03",
+          "start": 29,
+          "end": 39
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 접수기간 : 2026. 01. 28.(수) ~ 02. 03.(화) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-73908366efe5ef9d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 문의전화 : 033-250-7680",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 문의전화 : 033-250-7680"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-099d219113a74ed6",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-01-28~2026-02-03",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-28",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-02-03",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-01-28~2026-02-03"
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 3,
+      "list_item": 3,
+      "title": 1
+    }
+  }
+}

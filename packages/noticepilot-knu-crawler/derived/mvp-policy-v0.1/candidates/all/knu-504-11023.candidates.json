@@ -1,0 +1,1339 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11023",
+  "sourceContentHash": "f7c1b3ca00f52ba96d00320971fe94b6fe24442030de7735f5f87424ee5ba168",
+  "sourceTitle": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11023&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "ALL",
+    "campuses": [
+      "all"
+    ],
+    "scopeType": "all_campuses",
+    "confidence": "high",
+    "source": "listMetadata.campus",
+    "labels": {
+      "all": "전체"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11023-656d89d5ac72fc",
+      "uidHint": "noticepilot-cand-knu-504-11023-656d89d5ac72fc@noticepilot.local",
+      "sourceNoticeId": "knu-504-11023",
+      "sourceTitle": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11023&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-6173e9894bc61058",
+        "segmentType": "continuation",
+        "labelText": "모집공고 및 지원서 접수",
+        "bodyText": "2026.05.15.(금) ~ 05.26.(화) 16:00",
+        "sourceLocation": {
+          "lineIndex": 18,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-9e3d9db8c866b5cc"
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-15",
+            "start": 14,
+            "end": 28
+          },
+          {
+            "value": "2026-05-26",
+            "start": 31,
+            "end": 40
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "모집공고 및 지원서 접수",
+          "모집공고 및 지원서 접수 2026.05.15.(금) ~ 05.26.(화) 16:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-b10914b3b506e458",
+        "segmentId": "seg-6173e9894bc61058",
+        "rawText": "2026.05.15.(금) ~ 05.26.(화) 16:00",
+        "normalizedStart": "2026-05-15T00:00:00+09:00",
+        "normalizedEnd": "2026-05-26T16:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 14,
+          "end": 40
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-91449c16c0aab192",
+        "sourceNoticeId": "knu-504-11023",
+        "segmentId": "seg-6173e9894bc61058",
+        "temporalMentionIds": [
+          "tm-b10914b3b506e458"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "모집공고 및 지원서 접수",
+        "evidence": "모집공고 및 지원서 접수 2026.05.15.(금) ~ 05.26.(화) 16:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26) 신청기간",
+      "dateText": "2026.05.15.(금) ~ 05.26.(화) 16:00",
+      "normalizedStart": "2026-05-15T00:00:00+09:00",
+      "normalizedEnd": "2026-05-26T16:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "모집공고 및 지원서 접수 2026.05.15.(금) ~ 05.26.(화) 16:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "conflicting_same_action_dates"
+      ],
+      "reasonCodes": [
+        "conflicting_same_action_dates",
+        "same_action_boundary_candidates_consolidated",
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": "start_of_day_assumed_for_timed_range"
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "conflicting_same_action_dates",
+          "same_action_boundary_candidates_consolidated",
+          "start_of_day_assumed_for_timed_range",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.conflicting_same_action_dates",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11023-417fd3497410e9",
+      "uidHint": "noticepilot-cand-knu-504-11023-417fd3497410e9@noticepilot.local",
+      "sourceNoticeId": "knu-504-11023",
+      "sourceTitle": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11023&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-0581f344fd31dd43",
+        "segmentType": "continuation",
+        "labelText": "■ 르완다 프로젝트 봉사단 온라인 모집설명회 (유튜브 게시): ㅇ 업로드",
+        "bodyText": "2026.05.20.(수)",
+        "sourceLocation": {
+          "lineIndex": 60,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-a325c582c353a64c"
+        },
+        "actionSignals": [
+          "application_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-20",
+            "start": 42,
+            "end": 56
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "■ 르완다 프로젝트 봉사단 온라인 모집설명회 (유튜브 게시): ㅇ 업로드",
+          "■ 르완다 프로젝트 봉사단 온라인 모집설명회 (유튜브 게시): ㅇ 업로드: 2026.05.20.(수)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-38572dd2d3aaccb9",
+        "segmentId": "seg-0581f344fd31dd43",
+        "rawText": "2026.05.20.(수)",
+        "normalizedStart": "2026-05-20",
+        "normalizedEnd": "2026-05-20",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 42,
+          "end": 56
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-4c0a9229fd9368a4",
+        "sourceNoticeId": "knu-504-11023",
+        "segmentId": "seg-0581f344fd31dd43",
+        "temporalMentionIds": [
+          "tm-38572dd2d3aaccb9"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "■ 르완다 프로젝트 봉사단 온라인 모집설명회 (유튜브 게시): ㅇ 업로드",
+        "evidence": "■ 르완다 프로젝트 봉사단 온라인 모집설명회 (유튜브 게시): ㅇ 업로드: 2026.05.20.(수)"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26) 신청 마감",
+      "dateText": "2026.05.20.(수)",
+      "normalizedStart": "2026-05-20",
+      "normalizedEnd": "2026-05-20",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "■ 르완다 프로젝트 봉사단 온라인 모집설명회 (유튜브 게시): ㅇ 업로드: 2026.05.20.(수)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "conflicting_same_action_dates"
+      ],
+      "reasonCodes": [
+        "conflicting_same_action_dates",
+        "same_datetime_candidates_consolidated",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "conflicting_same_action_dates",
+          "same_datetime_candidates_consolidated",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.conflicting_same_action_dates",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11023-15f9d6d960d48d",
+      "uidHint": "noticepilot-cand-knu-504-11023-15f9d6d960d48d@noticepilot.local",
+      "sourceNoticeId": "knu-504-11023",
+      "sourceTitle": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11023&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "deadline",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-52cb5fecdbbfbfac",
+        "segmentType": "list_item",
+        "labelText": "",
+        "bodyText": "2026.05.23.(토)까지 작성 가능",
+        "sourceLocation": {
+          "lineIndex": 66,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-23",
+            "start": 2,
+            "end": 16
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "deadline",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "none",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "※ 2026.05.23.(토)까지 작성 가능",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-afa4ed4d1142faa8",
+        "segmentId": "seg-52cb5fecdbbfbfac",
+        "rawText": "2026.05.23.(토)",
+        "normalizedStart": "2026-05-23",
+        "normalizedEnd": "2026-05-23",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 2,
+          "end": 16
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-41ed59601bfd75ca",
+        "sourceNoticeId": "knu-504-11023",
+        "segmentId": "seg-52cb5fecdbbfbfac",
+        "temporalMentionIds": [
+          "tm-afa4ed4d1142faa8"
+        ],
+        "bindingKind": "unresolved",
+        "confidence": "none",
+        "ruleId": "binding.unresolved",
+        "locallyGrounded": false,
+        "labelText": "",
+        "evidence": "※ 2026.05.23.(토)까지 작성 가능"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26) 마감",
+      "dateText": "2026.05.23.(토)",
+      "normalizedStart": "2026-05-23",
+      "normalizedEnd": "2026-05-23",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "※ 2026.05.23.(토)까지 작성 가능",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "conflicting_same_action_dates"
+      ],
+      "reasonCodes": [
+        "conflicting_same_action_dates",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "conflicting_same_action_dates",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.conflicting_same_action_dates",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11023-7398689cbf7c21",
+      "uidHint": "noticepilot-cand-knu-504-11023-7398689cbf7c21@noticepilot.local",
+      "sourceNoticeId": "knu-504-11023",
+      "sourceTitle": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11023&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-a29ed90ce398295e",
+        "segmentType": "continuation",
+        "labelText": "1차 전형 합격자 발표",
+        "bodyText": "2026.06.16.(화)",
+        "sourceLocation": {
+          "lineIndex": 24,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-95879d0f68861afe"
+        },
+        "actionSignals": [
+          "result_announcement"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-16",
+            "start": 13,
+            "end": 27
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "1차 전형 합격자 발표",
+          "1차 전형 합격자 발표 2026.06.16.(화)",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-be944df3931e34e5",
+        "segmentId": "seg-a29ed90ce398295e",
+        "rawText": "2026.06.16.(화)",
+        "normalizedStart": "2026-06-16",
+        "normalizedEnd": "2026-06-16",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 13,
+          "end": 27
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-489224c67af4c56e",
+        "sourceNoticeId": "knu-504-11023",
+        "segmentId": "seg-a29ed90ce398295e",
+        "temporalMentionIds": [
+          "tm-be944df3931e34e5"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "1차 전형 합격자 발표",
+        "evidence": "1차 전형 합격자 발표 2026.06.16.(화)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26) 결과 발표 예정",
+      "dateText": "2026.06.16.(화)",
+      "normalizedStart": "2026-06-16",
+      "normalizedEnd": "2026-06-16",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "1차 전형 합격자 발표 2026.06.16.(화)",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11023-d9842b56195b3d",
+      "uidHint": "noticepilot-cand-knu-504-11023-d9842b56195b3d@noticepilot.local",
+      "sourceNoticeId": "knu-504-11023",
+      "sourceTitle": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11023&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "exam_or_interview",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-c3a846d609b645c2",
+        "segmentType": "continuation",
+        "labelText": "면접심사",
+        "bodyText": "2026.06.27.(토)",
+        "sourceLocation": {
+          "lineIndex": 27,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-0187d823a051d1f9"
+        },
+        "actionSignals": [
+          "exam_or_interview"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-27",
+            "start": 5,
+            "end": 19
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "exam_or_interview",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "면접심사",
+          "면접심사 2026.06.27.(토)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-e88824025b1e0732",
+        "segmentId": "seg-c3a846d609b645c2",
+        "rawText": "2026.06.27.(토)",
+        "normalizedStart": "2026-06-27",
+        "normalizedEnd": "2026-06-27",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 5,
+          "end": 19
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-e08bf5e63fa11b3f",
+        "sourceNoticeId": "knu-504-11023",
+        "segmentId": "seg-c3a846d609b645c2",
+        "temporalMentionIds": [
+          "tm-e88824025b1e0732"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "면접심사",
+        "evidence": "면접심사 2026.06.27.(토)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26) 시험·면접 일정",
+      "dateText": "2026.06.27.(토)",
+      "normalizedStart": "2026-06-27",
+      "normalizedEnd": "2026-06-27",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "면접심사 2026.06.27.(토)",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11023-a50809d25db426",
+      "uidHint": "noticepilot-cand-knu-504-11023-a50809d25db426@noticepilot.local",
+      "sourceNoticeId": "knu-504-11023",
+      "sourceTitle": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11023&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-e7aedae0cc59dd10",
+        "segmentType": "continuation",
+        "labelText": "2차 전형 합격자 발표",
+        "bodyText": "2026.07.07.(화)",
+        "sourceLocation": {
+          "lineIndex": 29,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-0e6b94007d794dc4"
+        },
+        "actionSignals": [
+          "result_announcement"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-07",
+            "start": 13,
+            "end": 27
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "2차 전형 합격자 발표",
+          "2차 전형 합격자 발표 2026.07.07.(화)",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-398af6eb84c23784",
+        "segmentId": "seg-e7aedae0cc59dd10",
+        "rawText": "2026.07.07.(화)",
+        "normalizedStart": "2026-07-07",
+        "normalizedEnd": "2026-07-07",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 13,
+          "end": 27
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-700ff18a673d9b54",
+        "sourceNoticeId": "knu-504-11023",
+        "segmentId": "seg-e7aedae0cc59dd10",
+        "temporalMentionIds": [
+          "tm-398af6eb84c23784"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "2차 전형 합격자 발표",
+        "evidence": "2차 전형 합격자 발표 2026.07.07.(화)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26) 결과 발표 예정",
+      "dateText": "2026.07.07.(화)",
+      "normalizedStart": "2026-07-07",
+      "normalizedEnd": "2026-07-07",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "2차 전형 합격자 발표 2026.07.07.(화)",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11023-6aee4f17dff8dc",
+      "uidHint": "noticepilot-cand-knu-504-11023-6aee4f17dff8dc@noticepilot.local",
+      "sourceNoticeId": "knu-504-11023",
+      "sourceTitle": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11023&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-3d318cce8d7397a9",
+        "segmentType": "continuation",
+        "labelText": "최종 합격자 발표",
+        "bodyText": "2026.08.12.(수)",
+        "sourceLocation": {
+          "lineIndex": 41,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-23e7e47e3845731a"
+        },
+        "actionSignals": [
+          "result_announcement"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-08-12",
+            "start": 10,
+            "end": 24
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "최종 합격자 발표",
+          "최종 합격자 발표 2026.08.12.(수)",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-2761dba8f13f82c4",
+        "segmentId": "seg-3d318cce8d7397a9",
+        "rawText": "2026.08.12.(수)",
+        "normalizedStart": "2026-08-12",
+        "normalizedEnd": "2026-08-12",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 10,
+          "end": 24
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-2aaccda112c4c0b0",
+        "sourceNoticeId": "knu-504-11023",
+        "segmentId": "seg-3d318cce8d7397a9",
+        "temporalMentionIds": [
+          "tm-2761dba8f13f82c4"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "최종 합격자 발표",
+        "evidence": "최종 합격자 발표 2026.08.12.(수)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26) 결과 발표 예정",
+      "dateText": "2026.08.12.(수)",
+      "normalizedStart": "2026-08-12",
+      "normalizedEnd": "2026-08-12",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "최종 합격자 발표 2026.08.12.(수)",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11023-dcda501ec8a013",
+      "uidHint": "noticepilot-cand-knu-504-11023-dcda501ec8a013@noticepilot.local",
+      "sourceNoticeId": "knu-504-11023",
+      "sourceTitle": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11023&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-ba431ffdf3f40074",
+        "segmentType": "continuation",
+        "labelText": "국내교육(대면)",
+        "bodyText": "2026.09.07.(월) ~ 09.23.(수) 예정",
+        "sourceLocation": {
+          "lineIndex": 46,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-e2f53cf944f7d742"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-09-07",
+            "start": 9,
+            "end": 23
+          },
+          {
+            "value": "2026-09-23",
+            "start": 26,
+            "end": 35
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "국내교육(대면)",
+          "국내교육(대면) 2026.09.07.(월) ~ 09.23.(수) 예정",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-b40802a81e180248",
+        "segmentId": "seg-ba431ffdf3f40074",
+        "rawText": "2026.09.07.(월) ~ 09.23.(수) 예정",
+        "normalizedStart": "2026-09-07",
+        "normalizedEnd": "2026-09-23",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 9,
+          "end": 35
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-eb4c6c46e866a550",
+        "sourceNoticeId": "knu-504-11023",
+        "segmentId": "seg-ba431ffdf3f40074",
+        "temporalMentionIds": [
+          "tm-b40802a81e180248"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "국내교육(대면)",
+        "evidence": "국내교육(대면) 2026.09.07.(월) ~ 09.23.(수) 예정"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[KIDC] KOICA 르완다 중등학교 ICT 역량강화 프로젝트 봉사단 8기 모집(~5/26) 행사 기간",
+      "dateText": "2026.09.07.(월) ~ 09.23.(수) 예정",
+      "normalizedStart": "2026-09-07",
+      "normalizedEnd": "2026-09-23",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "국내교육(대면) 2026.09.07.(월) ~ 09.23.(수) 예정",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 8,
+    "autoConfirmedCount": 5,
+    "needsReviewCount": 3,
+    "calendarFeedIncludedCount": 5
+  }
+}

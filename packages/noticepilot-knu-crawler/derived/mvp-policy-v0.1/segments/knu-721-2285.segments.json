@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2285",
+  "sourceContentHash": "623f12b196aac29fdd8412a8b6cdcf9cf0795dada92c5c89be72c98cd2c68d1d",
+  "sourceTitle": "2026년도 우수학생 국가장학사업(인문100년 및 예술체육비젼) 신규장학생 신청 안내",
+  "publishedAt": "2026-03-06",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0ff7838da6febde5",
+      "segmentType": "title",
+      "labelText": "2026년도 우수학생 국가장학사업(인문100년 및 예술체육비젼) 신규장학생 신청 안내",
+      "bodyText": "2026년도 우수학생 국가장학사업(인문100년 및 예술체육비젼) 신규장학생 신청 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년도 우수학생 국가장학사업(인문100년 및 예술체육비젼) 신규장학생 신청 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2266e479cf85fd55",
+      "segmentType": "label_value",
+      "labelText": "신청마감",
+      "bodyText": "2026. 3.25.(수) 18:00",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-25",
+          "start": 9,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 신청마감: 2026. 3.25.(수) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-481ff57f2be5f80b",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "2. 신청방법: 한국장학재단 홈페이지",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 신청방법: 한국장학재단 홈페이지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-575cb617850ede18",
+      "segmentType": "label_value",
+      "labelText": "* 장학금 신청시 학업계획서는 필수 제출 사항임(춘천캠퍼스는 향후 평가항목에 포함되며 미제출시 미신청으로 간주됨)",
+      "bodyText": "* 장학금 신청시 학업계획서는 필수 제출 사항임(춘천캠퍼스는 향후 평가항목에 포함되며 미제출시 미신청으로 간주됨)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 장학금 신청시 학업계획서는 필수 제출 사항임(춘천캠퍼스는 향후 평가항목에 포함되며 미제출시 미신청으로 간주됨)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7df1869314dd6b3b",
+      "segmentType": "label_value",
+      "labelText": "지원내용",
+      "bodyText": "3. 지원내용: 등록금 전액(및 생활비 지원도 가능)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 지원내용: 등록금 전액(및 생활비 지원도 가능)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4955b5fffbeeb255",
+      "segmentType": "continuation",
+      "labelText": "지원내용",
+      "bodyText": "'26.3.9.)인 선발기준 참고 바람)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-7df1869314dd6b3b"
+      },
+      "actionSignals": [
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-09",
+          "start": 71,
+          "end": 78
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 지원내용: 등록금 전액(및 생활비 지원도 가능) * 선발기준은 캠퍼스 별로 상이함(춘천캠퍼스의 경우 각 학과에 배포 예정('26.3.9.)인 선발기준 참고 바람)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1d55015065c5d9ef",
+      "segmentType": "label_value",
+      "labelText": "* 선발기준은 캠퍼스 별로 상이함(춘천캠퍼스의 경우 각 학과에 배포 예정(",
+      "bodyText": "'26.3.9.)인 선발기준 참고 바람)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-09",
+          "start": 41,
+          "end": 48
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "* 선발기준은 캠퍼스 별로 상이함(춘천캠퍼스의 경우 각 학과에 배포 예정('26.3.9.)인 선발기준 참고 바람)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 5,
+      "continuation": 1
+    }
+  }
+}

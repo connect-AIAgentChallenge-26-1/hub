@@ -1,0 +1,296 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4704",
+  "sourceContentHash": "495a7507116296c094eb7cf58827b1cc1659a33509bdc568fe32486d0d438fb0",
+  "sourceTitle": "강원후평스마트제조 고급인력양성사업단 행정 직원 채용 공고",
+  "publishedAt": "2026-04-20",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-592247f75c1b30b8",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "강원후평스마트제조 고급인력양성사업단 행정 직원 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원후평스마트제조 고급인력양성사업단 행정 직원 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-25d524a8eb01d4ba",
+      "segmentType": "label_value",
+      "labelText": "강원후평스마트제조 고급인력양성사업단에서는 정부재정지원사업 자체 직원을 다음과 같이 공개모집하오니 성실하고 역량있는 분들의 많은 지원 바랍니다.",
+      "bodyText": "강원후평스마트제조 고급인력양성사업단에서는 정부재정지원사업 자체 직원을 다음과 같이 공개모집하오니 성실하고 역량있는 분들의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원후평스마트제조 고급인력양성사업단에서는 정부재정지원사업 자체 직원을 다음과 같이 공개모집하오니 성실하고 역량있는 분들의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dd7d3cfca896e9bd",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 채용인원: 1명",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 채용인원: 1명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-18e36a06b388921f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 채용분야: 강원후평스마트제조 고급인력양성사업단 (행정)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 채용분야: 강원후평스마트제조 고급인력양성사업단 (행정)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-30dd35f2b51653d5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 근무장소: 강원대학교 춘천캠퍼스",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 근무장소: 강원대학교 춘천캠퍼스"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-916e8ea63a07be06",
+      "segmentType": "label_value",
+      "labelText": "임용기간",
+      "bodyText": "2026. 12. 31.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-12-31",
+          "start": 8,
+          "end": 20
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 임용기간: 2026. 12. 31."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3eb48ce46198d4bc",
+      "segmentType": "label_value",
+      "labelText": "추후 근무 성과(성과평가 실시)에 따라 총 사업기간(",
+      "bodyText": "2027.12.31.까지) 내에서 1년 단위로 재계약이 가능하나 동 사업 종료 시 재계약이 불가함",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2027-12-31",
+          "start": 31,
+          "end": 41
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "※ 추후 근무 성과(성과평가 실시)에 따라 총 사업기간(2027.12.31.까지) 내에서 1년 단위로 재계약이 가능하나 동 사업 종료 시 재계약이 불가함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e27c9e0e2dc7a80e",
+      "segmentType": "label_value",
+      "labelText": "지원서 접수기간",
+      "bodyText": "2026. 04. 20. (월) ~ 2026.05.01.(금) 23:59까지",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-20",
+          "start": 12,
+          "end": 29
+        },
+        {
+          "value": "2026-05-01",
+          "start": 32,
+          "end": 46
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 지원서 접수기간: 2026. 04. 20. (월) ~ 2026.05.01.(금) 23:59까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bd1445a3b4536d1a",
+      "segmentType": "label_value",
+      "labelText": "접수방법",
+      "bodyText": "- 접수방법: 이메일접수(sykwon@kangwon.ac.kr)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 접수방법: 이메일접수(sykwon@kangwon.ac.kr)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d6bc7c57b20abc44",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※기타 자세한 사항은 첨부파일을 참고하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※기타 자세한 사항은 첨부파일을 참고하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b3c7dc468c309988",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026.04.20",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-20",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026.04.20"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-331ea5573f1337c7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원후평스마트제조 고급인력양성사업단장",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원후평스마트제조 고급인력양성사업단장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-4ee8230c5f919863",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-04-20~2026-05-01",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-20",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-05-01",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-04-20~2026-05-01"
+    }
+  ],
+  "summary": {
+    "segmentCount": 13,
+    "locallyGroundedCount": 3,
+    "typeCounts": {
+      "label_value": 6,
+      "list_item": 4,
+      "paragraph": 2,
+      "title": 1
+    }
+  }
+}

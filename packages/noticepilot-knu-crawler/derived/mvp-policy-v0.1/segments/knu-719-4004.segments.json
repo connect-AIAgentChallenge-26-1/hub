@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-4004",
+  "sourceContentHash": "442d93125dd3f45381d230716ef2e942001ae049be12eee8f9ad9a74e4125e5c",
+  "sourceTitle": "국가기록원 <제19회 기록사랑 공모전> 참가자 모집 안내",
+  "publishedAt": "2026-03-13",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e10efd6740e562df",
+      "segmentType": "title",
+      "labelText": "국가기록원 <제19회 기록사랑 공모전> 참가자 모집 안내",
+      "bodyText": "국가기록원 <제19회 기록사랑 공모전> 참가자 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국가기록원 <제19회 기록사랑 공모전> 참가자 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-86a1ba8ecbbaf29a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 031-750-2059(행정안전부 국가기록원 서비스정책과 공모전 담당자)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 031-750-2059(행정안전부 국가기록원 서비스정책과 공모전 담당자)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

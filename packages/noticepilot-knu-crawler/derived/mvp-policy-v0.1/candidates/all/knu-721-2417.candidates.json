@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-721-2417",
+  "sourceContentHash": "d04786559d3e26cba7ac5063631636207267d434bf0a47a117a5a5b7ab25a878",
+  "sourceTitle": "2026학년도 하계방학 집중근로(교외) 장학생 선발 결과 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2417&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-721-2417-9197319915b80f",
+      "uidHint": "noticepilot-cand-knu-721-2417-9197319915b80f@noticepilot.local",
+      "sourceNoticeId": "knu-721-2417",
+      "sourceTitle": "2026학년도 하계방학 집중근로(교외) 장학생 선발 결과 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2417&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "deadline",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-a592f36e3c76fbaa",
+        "segmentType": "label_value",
+        "labelText": "하계방학 집중근로프로그램 선발자 중 1학기 교내/외 국가근로를 진행하고 있는 학생은 반드시",
+        "bodyText": "6.30.(화)까지 근로 종료.",
+        "sourceLocation": {
+          "lineIndex": 18,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-30",
+            "start": 53,
+            "end": 61
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "deadline",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "medium",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "하계방학 집중근로프로그램 선발자 중 1학기 교내/외 국가근로를 진행하고 있는 학생은 반드시",
+          "- 하계방학 집중근로프로그램 선발자 중 1학기 교내/외 국가근로를 진행하고 있는 학생은 반드시 6.30.(화)까지 근로 종료.",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-54bf9e252ceba04c",
+        "segmentId": "seg-a592f36e3c76fbaa",
+        "rawText": "6.30.(화)",
+        "normalizedStart": "2026-06-30",
+        "normalizedEnd": "2026-06-30",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 53,
+          "end": 61
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-63c363418dcb8484",
+        "sourceNoticeId": "knu-721-2417",
+        "segmentId": "seg-a592f36e3c76fbaa",
+        "temporalMentionIds": [
+          "tm-54bf9e252ceba04c"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "medium",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": false,
+        "labelText": "하계방학 집중근로프로그램 선발자 중 1학기 교내/외 국가근로를 진행하고 있는 학생은 반드시",
+        "evidence": "- 하계방학 집중근로프로그램 선발자 중 1학기 교내/외 국가근로를 진행하고 있는 학생은 반드시 6.30.(화)까지 근로 종료."
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "2026학년도 하계방학 집중근로(교외) 장학생 선발 결과 안내 마감",
+      "dateText": "6.30.(화)",
+      "normalizedStart": "2026-06-30",
+      "normalizedEnd": "2026-06-30",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "- 하계방학 집중근로프로그램 선발자 중 1학기 교내/외 국가근로를 진행하고 있는 학생은 반드시 6.30.(화)까지 근로 종료.",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "post_result_selected_participant_action"
+      ],
+      "reasonCodes": [
+        "completed_result_announcement",
+        "post_result_selected_participant_action",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "conditional",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "medium",
+        "ruleId": "applicability.conditional.selected_participant",
+        "reasonCodes": [
+          "post_result_selected_participant_action",
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "completed_result_announcement",
+          "post_result_selected_participant_action",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.completed_result_announcement",
+          "publishability.reason.post_result_selected_participant_action",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}
