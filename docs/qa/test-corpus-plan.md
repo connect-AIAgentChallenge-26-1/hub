@@ -224,16 +224,21 @@ The expected result does not need to mirror every frontend field. It should capt
 
 ## Initial Corpus Target
 
-Start with 10 to 12 examples:
+Start with a 10-example baseline:
 
 ```text
 scholarship: 3
 school/course notice: 3
-assignment: 1-2
-competition: 2
-job/internship: 1-2
-ambiguous date: 1-2
+assignment: 1
+competition: 1
+job/internship: 1
+ambiguous date: 1
 ```
+
+This baseline was collected on 2026-07-19 from public Kangwon National
+University notice pages and cross-checked against the restored Foundation.25.1
+evidence. The next gate is deterministic corpus validation. Later expansion
+should prioritize new failure modes and source diversity.
 
 ## 30-example Threshold
 

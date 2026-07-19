@@ -11,15 +11,27 @@ The corpus supports later:
 - future school-level parsing
 - future batch `.ics` export evaluation
 
-## Current Scaffold State
+## Current Baseline State
 
-This scaffold does not contain real corpus entries yet.
+The corpus contains 10 verified real public-notice entries as of 2026-07-19:
 
-Templates are examples only and are not counted as real corpus entries.
+- scholarship: 3
+- school_notice: 3
+- assignment: 1
+- competition: 1
+- job_posting: 1
+- ambiguous_date: 1
 
-Do not fabricate corpus entries.
+Each entry has a reachable public source URL, a privacy/copyright review, manually
+curated extraction text, and a human-written expected result. The source facts
+were cross-checked against the restored Foundation.25.1 corpus evidence. Raw
+attachments are intentionally not copied into this repository.
 
-Phase 4-B is fully closed only when at least 10 verified real corpus entries are indexed with manually extracted text, expected result JSON, and privacy/copyright review fields.
+Templates are examples only and are not counted as real corpus entries. Do not
+fabricate corpus entries.
+
+The 10-entry collection gate is complete. Deterministic structure, path, JSON,
+evidence, and category-distribution validation remains the next Phase 4-B gate.
 
 ## Folder Structure
 
@@ -196,16 +208,18 @@ For ambiguous or vague dates, preserve the ambiguity:
 
 ## Initial Target
 
-The initial target is 10 to 12 verified real examples:
+The initial baseline target is 10 verified real examples:
 
 - scholarship: 3
 - school_notice: 3
-- assignment: 1-2
-- competition: 2
-- job_posting: 1-2
-- ambiguous_date: 1-2
+- assignment: 1
+- competition: 1
+- job_posting: 1
+- ambiguous_date: 1
 
-This target must be met only with real, verified materials.
+Expansion beyond the baseline should add failure modes and institutional variety,
+not duplicate easy date formats. Every added entry must still use real, verified
+material.
 
 ## School-level Parsing Threshold
 
@@ -224,4 +238,3 @@ This corpus scaffold does not implement:
 - subscription calendar feed
 - database/auth/payment/Google Calendar API
 - runtime frontend or backend behavior changes
-
