@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/calendar-event-projection-outbox-receipt.schema.json",
+  "title": "NoticePilot S27-D projection outbox consumption receipt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "projectionId", "receiptId", "outboxId", "registryId",
+    "calendarEventId", "status", "consumedAt", "icsSerialized"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.calendarEventProjectionOutboxReceipt.v0.1"},
+    "projectionId": {"type": "string"},
+    "receiptId": {"type": "string", "pattern": "^outreceipt_[0-9a-f]{32}$"},
+    "outboxId": {"type": "string", "pattern": "^outbox_[0-9a-f]{32}$"},
+    "registryId": {"type": "string"},
+    "calendarEventId": {"type": "string", "pattern": "^evt_[0-9a-f]{32}$"},
+    "status": {"const": "consumed"},
+    "consumedAt": {"type": "string"},
+    "icsSerialized": {"const": true}
+  }
+}

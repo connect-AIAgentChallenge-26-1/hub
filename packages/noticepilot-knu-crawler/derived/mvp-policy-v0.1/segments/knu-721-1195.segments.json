@@ -1,0 +1,353 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-1195",
+  "sourceContentHash": "12545064c58a7d73cc60dd6ffcab4a83e54184cf3bab23e0dbd7298de5a2e12d",
+  "sourceTitle": "현대차그룹 대학생 교육봉사단 현대점프스쿨 13기 모집",
+  "publishedAt": "2026-01-20",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-57602d6a45c6e334",
+      "segmentType": "title",
+      "labelText": "현대차그룹 대학생 교육봉사단 현대점프스쿨 13기 모집",
+      "bodyText": "현대차그룹 대학생 교육봉사단 현대점프스쿨 13기 모집",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "현대차그룹 대학생 교육봉사단 현대점프스쿨 13기 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ad776ace4480df3d",
+      "segmentType": "label_value",
+      "labelText": "�현대차그룹 대학생 교육봉사단 현대점프스쿨 13기 모집(~",
+      "bodyText": "1/26)�",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-26",
+          "start": 32,
+          "end": 36
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "�현대차그룹 대학생 교육봉사단 현대점프스쿨 13기 모집(~1/26)�"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e56f02507d840914",
+      "segmentType": "label_value",
+      "labelText": "모집 대상",
+      "bodyText": "- 모집 대상 : 서울, 용인(경기), 인천, 춘천(강원), 대전, 광주, 대구, 울산, 부산 및 인근 지역 소재의 4년제 대학교 재학생 및 휴학생",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled",
+        "enrollment_status:on_leave"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 모집 대상 : 서울, 용인(경기), 인천, 춘천(강원), 대전, 광주, 대구, 울산, 부산 및 인근 지역 소재의 4년제 대학교 재학생 및 휴학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7f3fc89d5cc9e73f",
+      "segmentType": "label_value",
+      "labelText": "모집 기간",
+      "bodyText": "2026.01.15(목) ~ 2026.01.26(월) 23:59까지",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-15",
+          "start": 10,
+          "end": 23
+        },
+        {
+          "value": "2026-01-26",
+          "start": 26,
+          "end": 39
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 모집 기간 : 2026.01.15(목) ~ 2026.01.26(월) 23:59까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4c112b46aa2aa563",
+      "segmentType": "label_value",
+      "labelText": "활동 기간",
+      "bodyText": "- 활동 기간 : 2026년 3월 ~ 12월 (총 10개월)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 활동 기간 : 2026년 3월 ~ 12월 (총 10개월)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-05c89ccc7e37a389",
+      "segmentType": "label_value",
+      "labelText": "활동 내용",
+      "bodyText": "- 활동 내용 : 주 2회 4시간 / 지역아동센터에서 청소년 대상 맞춤형 학습지도 및 정서지원 활동",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 활동 내용 : 주 2회 4시간 / 지역아동센터에서 청소년 대상 맞춤형 학습지도 및 정서지원 활동"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e5e19728a8872643",
+      "segmentType": "label_value",
+      "labelText": "활동 특전",
+      "bodyText": "- 활동 특전",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 활동 특전"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f348eb8302b79b86",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "✅ 장학금 300만원",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "✅ 장학금 300만원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e86a12c550e04403",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "✅ 사회인 멘토의 취업/진로 멘토링",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "✅ 사회인 멘토의 취업/진로 멘토링"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3c9b584441a7cc29",
+      "segmentType": "label_value",
+      "labelText": "✅ 우수 활동자 대상",
+      "bodyText": "✅ 우수 활동자 대상 : 해외탐방 및 글로벌 멘토링",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "✅ 우수 활동자 대상 : 해외탐방 및 글로벌 멘토링"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3838ba3ee4dc3419",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 주최/주관 : 현대자동차그룹 / 사단법인 점프",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 주최/주관 : 현대자동차그룹 / 사단법인 점프"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f859f7290a93c923",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "�",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "�"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-de75eb9e35fb0298",
+      "segmentType": "label_value",
+      "labelText": "지원 방법",
+      "bodyText": "지원 방법 : 온라인",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 1,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "지원 방법 : 온라인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c02c9df3a61fb421",
+      "segmentType": "label_value",
+      "labelText": "접수 (https",
+      "bodyText": "접수 (https://h-jumpschoolrecruit.kr/)",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 2,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "접수 (https://h-jumpschoolrecruit.kr/)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5b51c5dd5c1414b3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "�문의처",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "�문의처"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4b93463f14929354",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 이메일 : info@h-jumpschool.kr",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 이메일 : info@h-jumpschool.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6f1cd94446fd1331",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 전화번호 : 02-2088-2278(서울 사무국) , 070-8839-8687(영남 사무국)",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 전화번호 : 02-2088-2278(서울 사무국) , 070-8839-8687(영남 사무국)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 17,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 9,
+      "paragraph": 4,
+      "list_item": 3
+    }
+  }
+}

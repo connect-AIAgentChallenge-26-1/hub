@@ -1,0 +1,285 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4881",
+  "sourceContentHash": "cf58f99dbbdeab59ec59d2a1d39b044bb2ff95743b5060ee39f8d00fa02c254f",
+  "sourceTitle": "2026년 연구교수 공개채용 공고(교육연구소)",
+  "publishedAt": "2026-06-29",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6f7094539adb49b1",
+      "segmentType": "title",
+      "labelText": "2026년 연구교수 공개채용 공고(교육연구소)",
+      "bodyText": "2026년 연구교수 공개채용 공고(교육연구소)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 연구교수 공개채용 공고(교육연구소)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c88589b866fd6990",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-230호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-230호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5e7e1b3b7ba894ff",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 교육연구소에서 인문사회연구소지원사업 추진을 위해 연구교수 공개 채용을 실시하오니 전문적인 지식과 경험을 갖춘 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 교육연구소에서 인문사회연구소지원사업 추진을 위해 연구교수 공개 채용을 실시하오니 전문적인 지식과 경험을 갖춘 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 교육연구소에서 인문사회연구소지원사업 추진을 위해 연구교수 공개 채용을 실시하오니 전문적인 지식과 경험을 갖춘 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4eb7e8d5d40c8a21",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 채용부서: 교육연구소",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 채용부서: 교육연구소"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38f08f9bf777984e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 채용인원: 1명",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 채용인원: 1명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c59aa5400e9aa1fa",
+      "segmentType": "label_value",
+      "labelText": "접수처",
+      "bodyText": "3. 접수처",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 접수처"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2f506a007e3b6f00",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 6. 29.(월) ~ 2026. 7. 10.(금), 18:00까지 도착분에 한함",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-29",
+          "start": 8,
+          "end": 23
+        },
+        {
+          "value": "2026-07-10",
+          "start": 26,
+          "end": 41
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 접수기간: 2026. 6. 29.(월) ~ 2026. 7. 10.(금), 18:00까지 도착분에 한함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ca1709a1544e5c8c",
+      "segmentType": "label_value",
+      "labelText": "접수방법",
+      "bodyText": "- 접수방법: 이메일(",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 접수방법: 이메일("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0fcbe9acffe91e80",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "ier@kangwon.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ier@kangwon.ac.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bc1ed125a24e4573",
+      "segmentType": "label_value",
+      "labelText": ") 제출",
+      "bodyText": ") 제출",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ") 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7b9cf19b453c3aee",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의사항: 강원대학교 교육연구소(☎033-250-7365)",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의사항: 강원대학교 교육연구소(☎033-250-7365)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f08f9b1b46f47996",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 세부내용은 공고문 참고",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 세부내용은 공고문 참고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-430ed01dbd401be0",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-06-29~2026-07-10",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-29",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-07-10",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-06-29~2026-07-10"
+    }
+  ],
+  "summary": {
+    "segmentCount": 13,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 6,
+      "list_item": 4,
+      "paragraph": 2,
+      "title": 1
+    }
+  }
+}

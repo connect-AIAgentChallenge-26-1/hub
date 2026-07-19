@@ -1,0 +1,53 @@
+{
+  "checks": {
+    "candidateCount": 1304,
+    "candidateIdOrderMismatchCount": 0,
+    "candidateObjectMismatchCount": 0,
+    "icsMatches": {
+      "job_application": true,
+      "student_default": true
+    },
+    "noticeDecisionCount": 2059,
+    "publishableSemanticsMatch": true,
+    "reconciliationReasonCounts": {
+      "conflicting_same_action_dates": {
+        "candidate": 15,
+        "notice": 9
+      },
+      "range_boundary_time_requires_review": {
+        "candidate": 3,
+        "notice": 0
+      },
+      "same_action_boundary_candidates_consolidated": {
+        "candidate": 43,
+        "notice": 43
+      },
+      "same_datetime_candidates_consolidated": {
+        "candidate": 45,
+        "notice": 49
+      },
+      "same_day_precision_candidates_consolidated": {
+        "candidate": 15,
+        "notice": 14
+      }
+    },
+    "reconciliationReasonCountsMatchExpected": true,
+    "reconciliationReportContractErrorCount": 0,
+    "reviewQueueMatches": true,
+    "secondPassConflictDetectionCount": 9,
+    "secondPassInputCandidateCount": 1304,
+    "secondPassOutputCandidateCount": 1304,
+    "secondPassRemovedCandidateCount": 0,
+    "stableProjectionMismatchCount": 0,
+    "uniqueCandidateIdCount": 1304
+  },
+  "reconcilerVersion": "0.1.0",
+  "result": "pass",
+  "samples": {
+    "candidateIdOrderMismatches": [],
+    "candidateObjectMismatches": [],
+    "reconciliationReportContractErrors": [],
+    "stableProjectionMismatches": []
+  },
+  "schemaVersion": "noticepilot.s25CandidateReconcilerAudit.v0.1"
+}

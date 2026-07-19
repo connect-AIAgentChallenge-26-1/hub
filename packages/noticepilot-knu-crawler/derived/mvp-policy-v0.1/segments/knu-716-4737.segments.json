@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4737",
+  "sourceContentHash": "6afa2e19c9221d7a4bff76469b4b4cd17ce3a9120cc102339cbd38bcd0451ab4",
+  "sourceTitle": "2026년 강원대학교 원주캠퍼스 청년인턴 채용(재공고) 서류전형 합격자 및 면접일정 공고",
+  "publishedAt": "2026-05-07",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9845c1712b384794",
+      "segmentType": "title",
+      "labelText": "2026년 강원대학교 원주캠퍼스 청년인턴 채용(재공고) 서류전형 합격자 및 면접일정 공고",
+      "bodyText": "2026년 강원대학교 원주캠퍼스 청년인턴 채용(재공고) 서류전형 합격자 및 면접일정 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 강원대학교 원주캠퍼스 청년인턴 채용(재공고) 서류전형 합격자 및 면접일정 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-89d68b3ef56f7d17",
+      "segmentType": "label_value",
+      "labelText": "2026년 강원대학교 원주캠퍼스 청년인턴 채용(재공고) 서류전형 합격자 및 면접일정을 붙임과 같이 공고합니다.",
+      "bodyText": "2026년 강원대학교 원주캠퍼스 청년인턴 채용(재공고) 서류전형 합격자 및 면접일정을 붙임과 같이 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 강원대학교 원주캠퍼스 청년인턴 채용(재공고) 서류전형 합격자 및 면접일정을 붙임과 같이 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-acd3f768cebff16b",
+      "segmentType": "continuation",
+      "labelText": "2026년 강원대학교 원주캠퍼스 청년인턴 채용(재공고) 서류전형 합격자 및 면접일정을 붙임과 같이 공고합니다.",
+      "bodyText": "2026. 5. 7.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-89d68b3ef56f7d17"
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-07",
+          "start": 62,
+          "end": 72
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2026년 강원대학교 원주캠퍼스 청년인턴 채용(재공고) 서류전형 합격자 및 면접일정을 붙임과 같이 공고합니다. 2026. 5. 7."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-287ca266a985a765",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 5. 7.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-07",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 5. 7."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a6f43e2efc83b5da",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교원주캠퍼스총장",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교원주캠퍼스총장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "continuation": 1,
+      "paragraph": 2
+    }
+  }
+}

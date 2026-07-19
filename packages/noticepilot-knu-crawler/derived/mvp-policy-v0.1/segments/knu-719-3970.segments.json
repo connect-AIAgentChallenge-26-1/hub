@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-3970",
+  "sourceContentHash": "0757a0c7682a9f91291e744d07b76e55a59a63713534c89df4c252ba9f526980",
+  "sourceTitle": "<제6회 여주 오곡으로 빚은 가양주 품평회> 학생부 참가자 모집 안내",
+  "publishedAt": "2026-03-03",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e489c7b36dd44b8c",
+      "segmentType": "title",
+      "labelText": "<제6회 여주 오곡으로 빚은 가양주 품평회> 학생부 참가자 모집 안내",
+      "bodyText": "<제6회 여주 오곡으로 빚은 가양주 품평회> 학생부 참가자 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<제6회 여주 오곡으로 빚은 가양주 품평회> 학생부 참가자 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d4d624e4120cbe12",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 031-881-9695(여수세종문화관광재단 축제운영팀)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 031-881-9695(여수세종문화관광재단 축제운영팀)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

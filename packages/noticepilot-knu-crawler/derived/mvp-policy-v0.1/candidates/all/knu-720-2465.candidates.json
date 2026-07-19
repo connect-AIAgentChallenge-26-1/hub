@@ -1,0 +1,758 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-720-2465",
+  "sourceContentHash": "457baa9898df6d0a1ad3332f0f6a09e0b2f87b80afccd128ce3f57b2aba5f111",
+  "sourceTitle": "2026학년도 2학기 휴학 및 복학 신청 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2465&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "삼척",
+    "campuses": [
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-720-2465-2ceb850852cd1b",
+      "uidHint": "noticepilot-cand-knu-720-2465-2ceb850852cd1b@noticepilot.local",
+      "sourceNoticeId": "knu-720-2465",
+      "sourceTitle": "2026학년도 2학기 휴학 및 복학 신청 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2465&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "return_from_leave_application",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [
+          "on_leave"
+        ],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": true,
+        "confidence": "high",
+        "evidence": [
+          "status_from_action_semantics"
+        ]
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-c36037521263a2b7",
+        "segmentType": "table_row",
+        "labelText": "복학 《1차》 신청기간",
+        "bodyText": "2026. 7. 13.(월) 09:00 ~ 8. 31.(월) 18:00",
+        "sourceLocation": {
+          "lineIndex": 15,
+          "clauseIndex": 2,
+          "parentSegmentId": "seg-26aaaaca3c9550e4"
+        },
+        "actionSignals": [
+          "return_from_leave_application",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-13",
+            "start": 14,
+            "end": 29
+          },
+          {
+            "value": "2026-08-31",
+            "start": 38,
+            "end": 47
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "return_from_leave_application",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "복학 《1차》 신청기간",
+          "복학 《1차》 신청기간: 2026. 7. 13.(월) 09:00 ~ 8. 31.(월) 18:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-1359bdf880f90042",
+        "segmentId": "seg-c36037521263a2b7",
+        "rawText": "2026. 7. 13.(월) 09:00 ~ 8. 31.(월) 18:00",
+        "normalizedStart": "2026-07-13T09:00:00+09:00",
+        "normalizedEnd": "2026-08-31T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 14,
+          "end": 47
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-b03183568f291af2",
+        "sourceNoticeId": "knu-720-2465",
+        "segmentId": "seg-c36037521263a2b7",
+        "temporalMentionIds": [
+          "tm-1359bdf880f90042"
+        ],
+        "bindingKind": "same_table_row",
+        "confidence": "high",
+        "ruleId": "binding.same_table_row",
+        "locallyGrounded": true,
+        "labelText": "복학 《1차》 신청기간",
+        "evidence": "복학 《1차》 신청기간: 2026. 7. 13.(월) 09:00 ~ 8. 31.(월) 18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 2학기 휴학 및 복학 신청 안내 복학 신청기간",
+      "dateText": "2026. 7. 13.(월) 09:00 ~ 8. 31.(월) 18:00",
+      "normalizedStart": "2026-07-13T09:00:00+09:00",
+      "normalizedEnd": "2026-08-31T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "복학 《1차》 신청기간: 2026. 7. 13.(월) 09:00 ~ 8. 31.(월) 18:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "academic_action_type_extracted",
+        "audience_rules_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "profile_scoped",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [
+            "on_leave"
+          ],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": true,
+          "confidence": "high",
+          "evidence": [
+            "status_from_action_semantics"
+          ]
+        },
+        "confidence": "high",
+        "ruleId": "applicability.profile.explicit_dimensions",
+        "reasonCodes": [
+          "audience_rules_extracted",
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "academic_action_type_extracted",
+          "audience_rules_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2465-f0976e90e41f71",
+      "uidHint": "noticepilot-cand-knu-720-2465-f0976e90e41f71@noticepilot.local",
+      "sourceNoticeId": "knu-720-2465",
+      "sourceTitle": "2026학년도 2학기 휴학 및 복학 신청 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2465&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "leave_of_absence_application",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [
+          "enrolled"
+        ],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": true,
+        "confidence": "high",
+        "evidence": [
+          "status_from_action_semantics"
+        ]
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-552794bd74c9fa02",
+        "segmentType": "table_row",
+        "labelText": "휴학 신청기간",
+        "bodyText": "2026. 8. 13.(목) 09:00 ~ 8. 31.(월) 18:00",
+        "sourceLocation": {
+          "lineIndex": 6,
+          "clauseIndex": 2,
+          "parentSegmentId": "seg-970b97c4621bfa11"
+        },
+        "actionSignals": [
+          "leave_of_absence_application",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-08-13",
+            "start": 9,
+            "end": 24
+          },
+          {
+            "value": "2026-08-31",
+            "start": 33,
+            "end": 42
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "leave_of_absence_application",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "휴학 신청기간",
+          "휴학 신청기간: 2026. 8. 13.(목) 09:00 ~ 8. 31.(월) 18:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-346ca033bfd0e57e",
+        "segmentId": "seg-552794bd74c9fa02",
+        "rawText": "2026. 8. 13.(목) 09:00 ~ 8. 31.(월) 18:00",
+        "normalizedStart": "2026-08-13T09:00:00+09:00",
+        "normalizedEnd": "2026-08-31T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 9,
+          "end": 42
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-2aa4091b5b66c575",
+        "sourceNoticeId": "knu-720-2465",
+        "segmentId": "seg-552794bd74c9fa02",
+        "temporalMentionIds": [
+          "tm-346ca033bfd0e57e"
+        ],
+        "bindingKind": "same_table_row",
+        "confidence": "high",
+        "ruleId": "binding.same_table_row",
+        "locallyGrounded": true,
+        "labelText": "휴학 신청기간",
+        "evidence": "휴학 신청기간: 2026. 8. 13.(목) 09:00 ~ 8. 31.(월) 18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 2학기 휴학 및 복학 신청 안내 휴학 신청기간",
+      "dateText": "2026. 8. 13.(목) 09:00 ~ 8. 31.(월) 18:00",
+      "normalizedStart": "2026-08-13T09:00:00+09:00",
+      "normalizedEnd": "2026-08-31T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "휴학 신청기간: 2026. 8. 13.(목) 09:00 ~ 8. 31.(월) 18:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "academic_action_type_extracted",
+        "audience_rules_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "profile_scoped",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [
+            "enrolled"
+          ],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": true,
+          "confidence": "high",
+          "evidence": [
+            "status_from_action_semantics"
+          ]
+        },
+        "confidence": "high",
+        "ruleId": "applicability.profile.explicit_dimensions",
+        "reasonCodes": [
+          "audience_rules_extracted",
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "academic_action_type_extracted",
+          "audience_rules_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2465-bb4b58093ac000",
+      "uidHint": "noticepilot-cand-knu-720-2465-bb4b58093ac000@noticepilot.local",
+      "sourceNoticeId": "knu-720-2465",
+      "sourceTitle": "2026학년도 2학기 휴학 및 복학 신청 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2465&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "return_from_leave_application",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [
+          "on_leave"
+        ],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": true,
+        "confidence": "high",
+        "evidence": [
+          "status_from_action_semantics"
+        ]
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-4fef640a74eba078",
+        "segmentType": "table_row",
+        "labelText": "복학 《2차》 신청기간",
+        "bodyText": "2026. 9. 1.(화) 09:00 ~ 9. 28.(월) 18:00",
+        "sourceLocation": {
+          "lineIndex": 15,
+          "clauseIndex": 4,
+          "parentSegmentId": "seg-26aaaaca3c9550e4"
+        },
+        "actionSignals": [
+          "return_from_leave_application",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-09-01",
+            "start": 14,
+            "end": 28
+          },
+          {
+            "value": "2026-09-28",
+            "start": 37,
+            "end": 46
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "return_from_leave_application",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "복학 《2차》 신청기간",
+          "복학 《2차》 신청기간: 2026. 9. 1.(화) 09:00 ~ 9. 28.(월) 18:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-f4e7a016e6befef2",
+        "segmentId": "seg-4fef640a74eba078",
+        "rawText": "2026. 9. 1.(화) 09:00 ~ 9. 28.(월) 18:00",
+        "normalizedStart": "2026-09-01T09:00:00+09:00",
+        "normalizedEnd": "2026-09-28T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 14,
+          "end": 46
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-a37a8af902c4752a",
+        "sourceNoticeId": "knu-720-2465",
+        "segmentId": "seg-4fef640a74eba078",
+        "temporalMentionIds": [
+          "tm-f4e7a016e6befef2"
+        ],
+        "bindingKind": "same_table_row",
+        "confidence": "high",
+        "ruleId": "binding.same_table_row",
+        "locallyGrounded": true,
+        "labelText": "복학 《2차》 신청기간",
+        "evidence": "복학 《2차》 신청기간: 2026. 9. 1.(화) 09:00 ~ 9. 28.(월) 18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 2학기 휴학 및 복학 신청 안내 복학 신청기간",
+      "dateText": "2026. 9. 1.(화) 09:00 ~ 9. 28.(월) 18:00",
+      "normalizedStart": "2026-09-01T09:00:00+09:00",
+      "normalizedEnd": "2026-09-28T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "복학 《2차》 신청기간: 2026. 9. 1.(화) 09:00 ~ 9. 28.(월) 18:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "academic_action_type_extracted",
+        "audience_rules_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "profile_scoped",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [
+            "on_leave"
+          ],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": true,
+          "confidence": "high",
+          "evidence": [
+            "status_from_action_semantics"
+          ]
+        },
+        "confidence": "high",
+        "ruleId": "applicability.profile.explicit_dimensions",
+        "reasonCodes": [
+          "audience_rules_extracted",
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "academic_action_type_extracted",
+          "audience_rules_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2465-80544abc51db3f",
+      "uidHint": "noticepilot-cand-knu-720-2465-80544abc51db3f@noticepilot.local",
+      "sourceNoticeId": "knu-720-2465",
+      "sourceTitle": "2026학년도 2학기 휴학 및 복학 신청 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2465&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "삼척",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "leave_of_absence_application",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [
+          "enrolled"
+        ],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": true,
+        "confidence": "high",
+        "evidence": [
+          "status_from_action_semantics"
+        ]
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-81b0cbf3dee23ad4",
+        "segmentType": "table_row",
+        "labelText": "휴학 신청기간",
+        "bodyText": "2026. 9. 1.(화) 09:00 ~ 10. 8.(목) 18:00",
+        "sourceLocation": {
+          "lineIndex": 6,
+          "clauseIndex": 4,
+          "parentSegmentId": "seg-970b97c4621bfa11"
+        },
+        "actionSignals": [
+          "leave_of_absence_application",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-09-01",
+            "start": 9,
+            "end": 23
+          },
+          {
+            "value": "2026-10-08",
+            "start": 32,
+            "end": 41
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "leave_of_absence_application",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "휴학 신청기간",
+          "휴학 신청기간: 2026. 9. 1.(화) 09:00 ~ 10. 8.(목) 18:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-e548c14b071f27c4",
+        "segmentId": "seg-81b0cbf3dee23ad4",
+        "rawText": "2026. 9. 1.(화) 09:00 ~ 10. 8.(목) 18:00",
+        "normalizedStart": "2026-09-01T09:00:00+09:00",
+        "normalizedEnd": "2026-10-08T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 9,
+          "end": 41
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-749b18c963ea58b3",
+        "sourceNoticeId": "knu-720-2465",
+        "segmentId": "seg-81b0cbf3dee23ad4",
+        "temporalMentionIds": [
+          "tm-e548c14b071f27c4"
+        ],
+        "bindingKind": "same_table_row",
+        "confidence": "high",
+        "ruleId": "binding.same_table_row",
+        "locallyGrounded": true,
+        "labelText": "휴학 신청기간",
+        "evidence": "휴학 신청기간: 2026. 9. 1.(화) 09:00 ~ 10. 8.(목) 18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 2학기 휴학 및 복학 신청 안내 휴학 신청기간",
+      "dateText": "2026. 9. 1.(화) 09:00 ~ 10. 8.(목) 18:00",
+      "normalizedStart": "2026-09-01T09:00:00+09:00",
+      "normalizedEnd": "2026-10-08T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "휴학 신청기간: 2026. 9. 1.(화) 09:00 ~ 10. 8.(목) 18:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "academic_action_type_extracted",
+        "audience_rules_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "profile_scoped",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [
+            "enrolled"
+          ],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": true,
+          "confidence": "high",
+          "evidence": [
+            "status_from_action_semantics"
+          ]
+        },
+        "confidence": "high",
+        "ruleId": "applicability.profile.explicit_dimensions",
+        "reasonCodes": [
+          "audience_rules_extracted",
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "academic_action_type_extracted",
+          "audience_rules_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 4,
+    "autoConfirmedCount": 4,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 4
+  }
+}

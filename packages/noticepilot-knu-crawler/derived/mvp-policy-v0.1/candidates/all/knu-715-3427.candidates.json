@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-715-3427",
+  "sourceContentHash": "e1e95d873462e0f70bc208b05a2ece5cbef0eee7c31090b2d11a0d3ac330083a",
+  "sourceTitle": "(한국토지주택공사) 청년전세임대사업 안내 및 전세사기 예방 설명회 개최",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/715/detail.do?pstSn=3427&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "ALL",
+    "campuses": [
+      "all"
+    ],
+    "scopeType": "all_campuses",
+    "confidence": "high",
+    "source": "listMetadata.campus",
+    "labels": {
+      "all": "전체"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-715-3427-32a68c4e8f6186",
+      "uidHint": "noticepilot-cand-knu-715-3427-32a68c4e8f6186@noticepilot.local",
+      "sourceNoticeId": "knu-715-3427",
+      "sourceTitle": "(한국토지주택공사) 청년전세임대사업 안내 및 전세사기 예방 설명회 개최",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/715/detail.do?pstSn=3427&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "event",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-b9ffda1f06e3e1a3",
+        "segmentType": "continuation",
+        "labelText": "개최일시",
+        "bodyText": "2026.7.2.(목), 10:00 ~ 16:00",
+        "sourceLocation": {
+          "lineIndex": 0,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-d12c5709c82d18ed"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-02",
+            "start": 43,
+            "end": 55
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "개최일시",
+          "'청년전세임대사업 안내 및 전세사기 예방 설명회' 개최 안내 1. 개최일시: 2026.7.2.(목), 10:00 ~ 16:00",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-486e4747570be633",
+        "segmentId": "seg-b9ffda1f06e3e1a3",
+        "rawText": "2026.7.2.(목), 10:00 ~ 16:00",
+        "normalizedStart": "2026-07-02T10:00:00+09:00",
+        "normalizedEnd": "2026-07-02T16:00:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 43,
+          "end": 55
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-fd81044e5940565e",
+        "sourceNoticeId": "knu-715-3427",
+        "segmentId": "seg-b9ffda1f06e3e1a3",
+        "temporalMentionIds": [
+          "tm-486e4747570be633"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "개최일시",
+        "evidence": "'청년전세임대사업 안내 및 전세사기 예방 설명회' 개최 안내 1. 개최일시: 2026.7.2.(목), 10:00 ~ 16:00"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "(한국토지주택공사) 청년전세임대사업 안내 및 전세사기 예방 설명회 개최 행사 기간",
+      "dateText": "2026.7.2.(목), 10:00 ~ 16:00",
+      "normalizedStart": "2026-07-02T10:00:00+09:00",
+      "normalizedEnd": "2026-07-02T16:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "'청년전세임대사업 안내 및 전세사기 예방 설명회' 개최 안내 1. 개최일시: 2026.7.2.(목), 10:00 ~ 16:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

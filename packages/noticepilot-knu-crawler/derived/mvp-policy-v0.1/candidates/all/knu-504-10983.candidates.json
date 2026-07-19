@@ -1,0 +1,525 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10983",
+  "sourceContentHash": "5a235f56922dc3946018e76f3b428b574db5e7f376bd127f6eaac9146e752cbd",
+  "sourceTitle": "(춘천) 2026년 5월 민방위훈련 관련 홍보 및 교육자료 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10983&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10983-e66a124b3e9994",
+      "uidHint": "noticepilot-cand-knu-504-10983-e66a124b3e9994@noticepilot.local",
+      "sourceNoticeId": "knu-504-10983",
+      "sourceTitle": "(춘천) 2026년 5월 민방위훈련 관련 홍보 및 교육자료 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10983&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-8020de524670df74",
+        "segmentType": "paragraph",
+        "labelText": "",
+        "bodyText": "5.12.) 관련 홍보 및 교육자료를 안내하오니 참고하시기 바랍니다.",
+        "sourceLocation": {
+          "lineIndex": 0,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-12",
+            "start": 15,
+            "end": 19
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "2026년 5월 민방위훈련(5.12.) 관련 홍보 및 교육자료를 안내하오니 참고하시기 바랍니다.",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-576b235ee35329e0",
+        "segmentId": "seg-8020de524670df74",
+        "rawText": "5.12",
+        "normalizedStart": "2026-05-12",
+        "normalizedEnd": "2026-05-12",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 15,
+          "end": 19
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-8e74f90860f89153",
+        "sourceNoticeId": "knu-504-10983",
+        "segmentId": "seg-8020de524670df74",
+        "temporalMentionIds": [
+          "tm-576b235ee35329e0"
+        ],
+        "bindingKind": "same_paragraph",
+        "confidence": "high",
+        "ruleId": "binding.same_paragraph",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "2026년 5월 민방위훈련(5.12.) 관련 홍보 및 교육자료를 안내하오니 참고하시기 바랍니다."
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "(춘천) 2026년 5월 민방위훈련 관련 홍보 및 교육자료 안내 행사 일정",
+      "dateText": "5.12",
+      "normalizedStart": "2026-05-12",
+      "normalizedEnd": "2026-05-12",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "2026년 5월 민방위훈련(5.12.) 관련 홍보 및 교육자료를 안내하오니 참고하시기 바랍니다.",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10983-f102dc96d756ba",
+      "uidHint": "noticepilot-cand-knu-504-10983-f102dc96d756ba@noticepilot.local",
+      "sourceNoticeId": "knu-504-10983",
+      "sourceTitle": "(춘천) 2026년 5월 민방위훈련 관련 홍보 및 교육자료 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10983&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "deadline",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-7708aa393341855e",
+        "segmentType": "label_value",
+        "labelText": "* 상기일정 제한시 ~",
+        "bodyText": "5.15.까지 자체 가용일정 선정하여 실시",
+        "sourceLocation": {
+          "lineIndex": 2,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-15",
+            "start": 12,
+            "end": 16
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "deadline",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "medium",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "* 상기일정 제한시 ~",
+          "* 상기일정 제한시 ~5.15.까지 자체 가용일정 선정하여 실시",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-50c4dbf22ec1d46e",
+        "segmentId": "seg-7708aa393341855e",
+        "rawText": "5.15",
+        "normalizedStart": "2026-05-15",
+        "normalizedEnd": "2026-05-15",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 12,
+          "end": 16
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-d482017e5b667882",
+        "sourceNoticeId": "knu-504-10983",
+        "segmentId": "seg-7708aa393341855e",
+        "temporalMentionIds": [
+          "tm-50c4dbf22ec1d46e"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "medium",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": false,
+        "labelText": "* 상기일정 제한시 ~",
+        "evidence": "* 상기일정 제한시 ~5.15.까지 자체 가용일정 선정하여 실시"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "(춘천) 2026년 5월 민방위훈련 관련 홍보 및 교육자료 안내 마감",
+      "dateText": "5.15",
+      "normalizedStart": "2026-05-15",
+      "normalizedEnd": "2026-05-15",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "* 상기일정 제한시 ~5.15.까지 자체 가용일정 선정하여 실시",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10983-fccb8d99e0f9e2",
+      "uidHint": "noticepilot-cand-knu-504-10983-fccb8d99e0f9e2@noticepilot.local",
+      "sourceNoticeId": "knu-504-10983",
+      "sourceTitle": "(춘천) 2026년 5월 민방위훈련 관련 홍보 및 교육자료 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10983&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-f88da4c5fdfcb77d",
+        "segmentType": "continuation",
+        "labelText": "",
+        "bodyText": "8월 20일 전 국민 참여 을지연습 연계 민방위훈련 사전 대비훈련임",
+        "sourceLocation": {
+          "lineIndex": 4,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-8659cfd5eb31f613"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-08-20",
+            "start": 63,
+            "end": 69
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "3. 내용: 각 대학 및 부서별 자체 서면교육 및 대피소 확인(경보미발령, 실제 대피훈련 미실시) * 금번훈련은 8월 20일 전 국민 참여 을지연습 연계 민방위훈련 사전 대비훈련임",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-a197ba71c76010cd",
+        "segmentId": "seg-f88da4c5fdfcb77d",
+        "rawText": "8월 20일",
+        "normalizedStart": "2026-08-20",
+        "normalizedEnd": "2026-08-20",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 63,
+          "end": 69
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-d24b7648c783b7e2",
+        "sourceNoticeId": "knu-504-10983",
+        "segmentId": "seg-f88da4c5fdfcb77d",
+        "temporalMentionIds": [
+          "tm-a197ba71c76010cd"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "3. 내용: 각 대학 및 부서별 자체 서면교육 및 대피소 확인(경보미발령, 실제 대피훈련 미실시) * 금번훈련은 8월 20일 전 국민 참여 을지연습 연계 민방위훈련 사전 대비훈련임"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "(춘천) 2026년 5월 민방위훈련 관련 홍보 및 교육자료 안내 행사 일정",
+      "dateText": "8월 20일",
+      "normalizedStart": "2026-08-20",
+      "normalizedEnd": "2026-08-20",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "3. 내용: 각 대학 및 부서별 자체 서면교육 및 대피소 확인(경보미발령, 실제 대피훈련 미실시) * 금번훈련은 8월 20일 전 국민 참여 을지연습 연계 민방위훈련 사전 대비훈련임",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 3,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 3,
+    "calendarFeedIncludedCount": 0
+  }
+}

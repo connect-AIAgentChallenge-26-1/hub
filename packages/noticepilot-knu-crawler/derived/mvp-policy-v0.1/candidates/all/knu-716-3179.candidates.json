@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-716-3179",
+  "sourceContentHash": "679dc12fb178d46cefdda0ace4b8e3d3abcdff870136dc15731fb352ef0abfff",
+  "sourceTitle": "강원대학교 제3행정실 （농업생명과학대학） 외국인 유학생 특성화학과 전담인력 신규채용 공고문",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/716/detail.do?pstSn=3179&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-716-3179-484540d2f197f3",
+      "uidHint": "noticepilot-cand-knu-716-3179-484540d2f197f3@noticepilot.local",
+      "sourceNoticeId": "knu-716-3179",
+      "sourceTitle": "강원대학교 제3행정실 （농업생명과학대학） 외국인 유학생 특성화학과 전담인력 신규채용 공고문",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/716/detail.do?pstSn=3179&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "job_posting",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "job_application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-board716-6d2376a5f71a6585",
+        "segmentType": "label_value",
+        "labelText": "접수기간",
+        "bodyText": "2026-02-05~2026-02-12",
+        "sourceLocation": {
+          "lineIndex": 0,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-05",
+            "start": 14,
+            "end": 24
+          },
+          {
+            "value": "2026-02-12",
+            "start": 25,
+            "end": 35
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "job_application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.board716.exact_application_period",
+        "evidence": [
+          "listMetadata.application_period_start",
+          "listMetadata.application_period_end",
+          "접수기간 2026-02-05~2026-02-12"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-8a155e5ec518a07e",
+        "segmentId": "seg-board716-6d2376a5f71a6585",
+        "rawText": "접수기간 2026-02-05~2026-02-12",
+        "normalizedStart": "2026-02-05",
+        "normalizedEnd": "2026-02-12",
+        "resolutionKind": "list_application_period",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": null
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-5905fcce694417d1",
+        "sourceNoticeId": "knu-716-3179",
+        "segmentId": "seg-board716-6d2376a5f71a6585",
+        "temporalMentionIds": [
+          "tm-8a155e5ec518a07e"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.board716.list_metadata.application_period",
+        "locallyGrounded": true,
+        "labelText": "접수기간",
+        "evidence": "채용안내 목록 접수기간: 2026-02-05~2026-02-12"
+      },
+      "targetActor": "job_applicant",
+      "feedScopes": [
+        "job_application"
+      ],
+      "title": "강원대학교 제3행정실 （농업생명과학대학） 외국인 유학생 특성화학과 전담인력 신규채용 공고문 채용 접수기간",
+      "dateText": "접수기간 2026-02-05~2026-02-12",
+      "normalizedStart": "2026-02-05",
+      "normalizedEnd": "2026-02-12",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "채용안내 목록 접수기간: 2026-02-05~2026-02-12",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "board716_application_period_only",
+        "exact_list_application_period"
+      ],
+      "dateResolution": {
+        "kind": "list_application_period",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "job_applicant",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.job_applicant",
+        "reasonCodes": []
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "board716_application_period_only",
+          "exact_list_application_period"
+        ],
+        "ruleIds": [
+          "publishability.board716.exact_application_period.auto_confirm",
+          "publishability.reason.board716_application_period_only",
+          "publishability.reason.exact_list_application_period",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

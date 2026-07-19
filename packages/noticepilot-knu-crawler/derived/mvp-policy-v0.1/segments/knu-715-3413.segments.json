@@ -1,0 +1,123 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-715-3413",
+  "sourceContentHash": "27f32b06566745fa870ae367587957b2e8069d9702fbcea31a6ec8cd3fe1d6ce",
+  "sourceTitle": "2026 KNU BATTERY DAY 행사 안내",
+  "publishedAt": "2026-05-26",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e22384571214b5e6",
+      "segmentType": "title",
+      "labelText": "2026 KNU BATTERY DAY 행사 안내",
+      "bodyText": "2026 KNU BATTERY DAY 행사 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026 KNU BATTERY DAY 행사 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8aa606c0d68e3432",
+      "segmentType": "label_value",
+      "labelText": "행사일시",
+      "bodyText": "2026.5.28(목) ~ 29(금) 13시~",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-28",
+          "start": 7,
+          "end": 19
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "행사일시 : 2026.5.28(목) ~ 29(금) 13시~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a2e25eb0e8e631d9",
+      "segmentType": "label_value",
+      "labelText": "행사장소",
+      "bodyText": "행사장소 : 60주년기념관 국제회의실 및 로비 1층, ORA 춘천베어스호텔",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "행사장소 : 60주년기념관 국제회의실 및 로비 1층, ORA 춘천베어스호텔"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-45f99ceb6d8f1237",
+      "segmentType": "label_value",
+      "labelText": "행사내용",
+      "bodyText": "행사내용: 기업취업상담, 산학프로젝트 챌린지(구두, 포스터 발표), 이차전지관련 기관 소개 및 홍보 등",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "행사내용: 기업취업상담, 산학프로젝트 챌린지(구두, 포스터 발표), 이차전지관련 기관 소개 및 홍보 등"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0df20db65aeedf40",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "주 최 : 강원대학교 이차전지소재 ·셀제조산업 전문인력양성사업단",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "주 최 : 강원대학교 이차전지소재 ·셀제조산업 전문인력양성사업단"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "paragraph": 1
+    }
+  }
+}

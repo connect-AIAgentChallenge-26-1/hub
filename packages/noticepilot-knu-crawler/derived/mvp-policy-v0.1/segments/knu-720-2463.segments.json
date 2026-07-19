@@ -1,0 +1,634 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2463",
+  "sourceContentHash": "878369d4c659c89cd8a270aaec188d948eb87c9dfd34826a698422e9cea14b39",
+  "sourceTitle": "2026학년도 1학기 성적처리 일정 및 평가방법 안내",
+  "publishedAt": "2026-06-08",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fd25f3a921fc0428",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 성적처리 일정 및 평가방법 안내",
+      "bodyText": "2026학년도 1학기 성적처리 일정 및 평가방법 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 성적처리 일정 및 평가방법 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-33a4f2a71380f496",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 1학기 학부 성적 처리 일정 안내",
+      "bodyText": "2026학년도 1학기 학부 성적 처리 일정 안내",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 학부 성적 처리 일정 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eade9f9021b22c20",
+      "segmentType": "label_value",
+      "labelText": "성적처리 일정",
+      "bodyText": "1. 성적처리 일정",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 성적처리 일정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c31da454394078c0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026.6.15.(월) ~ 6.25.(목)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-15",
+          "start": 7,
+          "end": 20
+        },
+        {
+          "value": "2026-06-25",
+          "start": 23,
+          "end": 31
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "성적 입력: 2026.6.15.(월) ~ 6.25.(목)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f1edc4a203a1ca86",
+      "segmentType": "label_value",
+      "labelText": "확정 전 성적조회 및 이의신청",
+      "bodyText": "확정 전 성적조회 및 이의신청:",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "확정 전 성적조회 및 이의신청:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3b54119e708252d2",
+      "segmentType": "continuation",
+      "labelText": "확정 전 성적조회 및 이의신청",
+      "bodyText": "2026.6.26.(금) 09:00 ~ 7.2.(목) 17:00",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-f1edc4a203a1ca86"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-26",
+          "start": 18,
+          "end": 31
+        },
+        {
+          "value": "2026-07-02",
+          "start": 40,
+          "end": 47
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "확정 전 성적조회 및 이의신청: 2026.6.26.(금) 09:00 ~ 7.2.(목) 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-24a9c7bee27a8e8a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026.6.26.(금) 09:00 ~ 7.2.(목) 17:00",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-26",
+          "start": 0,
+          "end": 13
+        },
+        {
+          "value": "2026-07-02",
+          "start": 22,
+          "end": 29
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026.6.26.(금) 09:00 ~ 7.2.(목) 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9b11914cf637ac6a",
+      "segmentType": "label_value",
+      "labelText": "성적 확정",
+      "bodyText": "성적 확정:",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "성적 확정:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ffe736dd759ff8ec",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 7. 6.(월)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-06",
+          "start": 0,
+          "end": 14
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 7. 6.(월)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38faf83fc4150c1c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 기말 수업평가를 실시한경우에만 성적 조회 가능",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 기말 수업평가를 실시한경우에만 성적 조회 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-345420d01138f7a0",
+      "segmentType": "label_value",
+      "labelText": "성적에 이의가 있는 경우교과목 담당 교수에게 직접 이의신청",
+      "bodyText": "- 성적에 이의가 있는 경우교과목 담당 교수에게 직접 이의신청",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 성적에 이의가 있는 경우교과목 담당 교수에게 직접 이의신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e8b988f525a551fc",
+      "segmentType": "label_value",
+      "labelText": "단, 일부 집중 수업 강좌의 경우 강의 종료 일정에 따라 성적처리 일정을 별도로 정함.",
+      "bodyText": "단, 일부 집중 수업 강좌의 경우 강의 종료 일정에 따라 성적처리 일정을 별도로 정함.",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "단, 일부 집중 수업 강좌의 경우 강의 종료 일정에 따라 성적처리 일정을 별도로 정함."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-585389e477df7b20",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "춘천캠퍼스: 스포츠와레저-3,4,5,6,분반, 미디어현장실습1-1분반, 의학과 개설 전공 교과목-> 상세사항 첨부파일 확인",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "춘천캠퍼스: 스포츠와레저-3,4,5,6,분반, 미디어현장실습1-1분반, 의학과 개설 전공 교과목-> 상세사항 첨부파일 확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-831388d1a994bb42",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 성적 평가방법",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 성적 평가방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1fb1c631dad4acb5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 상대평가(강원대학교 학업성적 처리지침 제4조)",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 상대평가(강원대학교 학업성적 처리지침 제4조)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c061d3e6b2feab54",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ A+∼A0 등급: 35% 이하, A+∼B0 등급: 75% 이하, C+이하 등급: 25% 이상",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ A+∼A0 등급: 35% 이하, A+∼B0 등급: 75% 이하, C+이하 등급: 25% 이상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fdd3b3c6a9da602c",
+      "segmentType": "label_value",
+      "labelText": "확정 전 성적 조회방법",
+      "bodyText": "3. 확정 전 성적 조회방법",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 확정 전 성적 조회방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-336e8471ddb45483",
+      "segmentType": "label_value",
+      "labelText": "홈페이지 ➜ K-Cloud ➜ 학부생서비스 ➜ 교과 ➜ 수업 ➜ 확정전성적조회",
+      "bodyText": "- 홈페이지 ➜ K-Cloud ➜ 학부생서비스 ➜ 교과 ➜ 수업 ➜ 확정전성적조회",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 홈페이지 ➜ K-Cloud ➜ 학부생서비스 ➜ 교과 ➜ 수업 ➜ 확정전성적조회"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3ebd894a5c5af60a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 빠른경로: K-Cloud ➜ One-Stop서비스 ➜ 수업 ➜ 확정전성적조회(학부)",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 빠른경로: K-Cloud ➜ One-Stop서비스 ➜ 수업 ➜ 확정전성적조회(학부)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b1bb9b22841906ee",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-66a46967e1aa5640",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(평가항목별 점수)",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(평가항목별 점수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1b84ca989808a3cf",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강의 담당 교원이 공개를 선택한 경우에만 평가항목별 점수 확인 가능",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강의 담당 교원이 공개를 선택한 경우에만 평가항목별 점수 확인 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b5faee3e3bda9c48",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "❶ 공 개: 평가 항목별 점수, 순위, 등급 점수 공개",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "❶ 공 개: 평가 항목별 점수, 순위, 등급 점수 공개"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f3efed64a4155d00",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "❷ 미공개: 등급 점수만 공개",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "❷ 미공개: 등급 점수만 공개"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-185fdc7fbe9bde8b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 유의사항",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 유의사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5f931c8b0e6be6e0",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 1학기 본인이 수강한 모든 교과목(꿈-설계 상담 교과목 포함)의",
+      "bodyText": "- 2026학년도 1학기 본인이 수강한 모든 교과목(꿈-설계 상담 교과목 포함)의",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 2026학년도 1학기 본인이 수강한 모든 교과목(꿈-설계 상담 교과목 포함)의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e47263fd4fc9d25e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "기말 수업평가를 실시하지 않은 학생의 경우 성적조회가 제한",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기말 수업평가를 실시하지 않은 학생의 경우 성적조회가 제한"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c914f72ff1513845",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "됩니다.",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "됩니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2f1d6ef71dd5b5f0",
+      "segmentType": "label_value",
+      "labelText": "▸기말 수업평가 기간",
+      "bodyText": "2026. 6. 26.(금) 09:00 ~ 7. 2.(목) 17:00",
+      "sourceLocation": {
+        "lineIndex": 26,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-26",
+          "start": 13,
+          "end": 28
+        },
+        {
+          "value": "2026-07-02",
+          "start": 37,
+          "end": 45
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "▸기말 수업평가 기간: 2026. 6. 26.(금) 09:00 ~ 7. 2.(목) 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-50e4c42679fcf837",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "기말 수업평가 관련 문의: 교수학습개발원(033-250-7166)",
+      "sourceLocation": {
+        "lineIndex": 27,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_evaluation",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기말 수업평가 관련 문의: 교수학습개발원(033-250-7166)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 30,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 10,
+      "paragraph": 11,
+      "continuation": 1,
+      "list_item": 7
+    }
+  }
+}

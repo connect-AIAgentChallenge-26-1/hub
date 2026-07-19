@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/calendar-event-revision.schema.json",
+  "title": "NoticePilot CalendarEvent revision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "revisionId", "calendarEventId", "revisionNumber",
+    "sequence", "kind", "sourceCandidateId", "previousRevisionId",
+    "projection", "active", "recordedAt", "evidencePairIds"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.calendarEventRevision.v0.1"},
+    "revisionId": {"type": "string", "pattern": "^evrev_[0-9a-f]{32}$"},
+    "calendarEventId": {"type": "string", "pattern": "^evt_[0-9a-f]{32}$"},
+    "revisionNumber": {"type": "integer", "minimum": 1},
+    "sequence": {"type": "integer", "minimum": 0},
+    "kind": {"enum": ["created", "created_from_duplicate_sources", "extension"]},
+    "sourceCandidateId": {"type": "string", "minLength": 1},
+    "previousRevisionId": {"type": ["string", "null"]},
+    "projection": {"type": "object"},
+    "active": {"type": "boolean"},
+    "recordedAt": {"type": "string"},
+    "evidencePairIds": {"type": "array", "uniqueItems": true, "items": {"type": "string"}}
+  }
+}

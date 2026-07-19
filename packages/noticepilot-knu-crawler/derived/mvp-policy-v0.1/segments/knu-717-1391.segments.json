@@ -1,0 +1,117 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-717-1391",
+  "sourceContentHash": "838bd821a8b7ab845e5acac32089018fe72cea1f4b600ce2282430900cc314ac",
+  "sourceTitle": "강원지역 기업탐방 「KGC인삼공사」 참여 안내",
+  "publishedAt": "2026-03-18",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2d9897e4eac458b8",
+      "segmentType": "title",
+      "labelText": "강원지역 기업탐방 「KGC인삼공사」 참여 안내",
+      "bodyText": "강원지역 기업탐방 「KGC인삼공사」 참여 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원지역 기업탐방 「KGC인삼공사」 참여 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-afc7b443360074fe",
+      "segmentType": "label_value",
+      "labelText": "* 신청방법",
+      "bodyText": "* 신청방법: 네이버 폼 온라인 모집",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 신청방법: 네이버 폼 온라인 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4ef928f97ebdabc6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1dcb19b78ca99707",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://naver.me/GDQTjkC6",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://naver.me/GDQTjkC6"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e81b786af76a85cf",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "26. 3. 27.(금) 10:00까지",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-27",
+          "start": 5,
+          "end": 18
+        }
+      ],
+      "locallyGrounded": false,
+      "text": ") / ~26. 3. 27.(금) 10:00까지"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "paragraph": 3
+    }
+  }
+}

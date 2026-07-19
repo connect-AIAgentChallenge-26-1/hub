@@ -1,0 +1,156 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3118",
+  "sourceContentHash": "4c5b96e86b4f4efe6aec0c5f7f3e4cd54152955b6d4d6374646dd155be543380",
+  "sourceTitle": "강원대학교 삼척생활관 기간제계약직（조리원） 신규채용 공고（2차）",
+  "publishedAt": "2026-01-27",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d87add1f9564ee1b",
+      "segmentType": "title",
+      "labelText": "강원대학교 삼척생활관 기간제계약직（조리원） 신규채용 공고（2차）",
+      "bodyText": "강원대학교 삼척생활관 기간제계약직（조리원） 신규채용 공고（2차）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척생활관 기간제계약직（조리원） 신규채용 공고（2차）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-672f657abad2beb7",
+      "segmentType": "label_value",
+      "labelText": "=기간제계약직(조리원) 신규채용 공고 (2차) 안내 =",
+      "bodyText": "=기간제계약직(조리원) 신규채용 공고 (2차) 안내 =",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "=기간제계약직(조리원) 신규채용 공고 (2차) 안내 ="
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-31e766677b436fe3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 삼척생활관에서는 붙임과 같이",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척생활관에서는 붙임과 같이"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b2e43e98062fab16",
+      "segmentType": "label_value",
+      "labelText": "기간제계약직(조리원) 신규채용을",
+      "bodyText": "기간제계약직(조리원) 신규채용을",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기간제계약직(조리원) 신규채용을"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7ea53b6fc7df650f",
+      "segmentType": "label_value",
+      "labelText": "실시하오니 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "실시하오니 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "실시하오니 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5e16585792b421fc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "자세한 사항은 붙임을 참조하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자세한 사항은 붙임을 참조하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-3077eb2708e060dd",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-01-28~2026-02-06",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-28",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-02-06",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-01-28~2026-02-06"
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "label_value": 4,
+      "paragraph": 2,
+      "title": 1
+    }
+  }
+}

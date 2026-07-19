@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3097",
+  "sourceContentHash": "db8a231c775dfbf9bada940021c321519c44113253ebd267b9ba2505c48e4c16",
+  "sourceTitle": "강원대학교 RISE 사업단 계약직원 채용 서류전형 합격자 발표",
+  "publishedAt": "2026-01-20",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fd83f5ae71a47666",
+      "segmentType": "title",
+      "labelText": "강원대학교 RISE 사업단 계약직원 채용 서류전형 합격자 발표",
+      "bodyText": "강원대학교 RISE 사업단 계약직원 채용 서류전형 합격자 발표",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 RISE 사업단 계약직원 채용 서류전형 합격자 발표"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c8bfae4100be0195",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 지역혁신중심 대학지원체계(RISE)사업단에서는 계약직원 채용 서류전형 합격자를 공고합니다.",
+      "bodyText": "강원대학교 지역혁신중심 대학지원체계(RISE)사업단에서는 계약직원 채용 서류전형 합격자를 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 지역혁신중심 대학지원체계(RISE)사업단에서는 계약직원 채용 서류전형 합격자를 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-24f9d83f4629d13c",
+      "segmentType": "continuation",
+      "labelText": "강원대학교 지역혁신중심 대학지원체계(RISE)사업단에서는 계약직원 채용 서류전형 합격자를 공고합니다.",
+      "bodyText": "2026. 1. 20.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-c8bfae4100be0195"
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-20",
+          "start": 57,
+          "end": 68
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "강원대학교 지역혁신중심 대학지원체계(RISE)사업단에서는 계약직원 채용 서류전형 합격자를 공고합니다. 2026. 1. 20."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-caaefdc784123566",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 1. 20.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-20",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 1. 20."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f1354926c079d100",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 RISE 사업단장",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 RISE 사업단장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f059535e53f683ff",
+      "segmentType": "label_value",
+      "labelText": "◎ 면접일시",
+      "bodyText": "2026. 1. 21.(수) 10:00~",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-21",
+          "start": 8,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "◎ 면접일시: 2026. 1. 21.(수) 10:00~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2d289725383ec8d8",
+      "segmentType": "label_value",
+      "labelText": "◎ 면접장소",
+      "bodyText": "◎ 면접장소: 강원대학교 집현관5층 RISE사업단",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "◎ 면접장소: 강원대학교 집현관5층 RISE사업단"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ee008168c43dd520",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 자세한 내용은 개인메일 및 첨부자료를 확인하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 자세한 내용은 개인메일 및 첨부자료를 확인하여 주시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "continuation": 1,
+      "paragraph": 2,
+      "list_item": 1
+    }
+  }
+}

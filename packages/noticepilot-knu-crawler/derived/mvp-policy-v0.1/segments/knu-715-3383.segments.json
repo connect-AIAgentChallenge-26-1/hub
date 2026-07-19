@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-715-3383",
+  "sourceContentHash": "af8de3f5d2208be3fdb47c3ea66a38775954efde21c5ed45065540528a7ad2bc",
+  "sourceTitle": "2026년 강대인 테니스대회",
+  "publishedAt": "2026-03-23",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-abdfe62f73029148",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026년 강대인 테니스대회",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 강대인 테니스대회"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8c04284a5d2fa8ad",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "5월 30일(토)에",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-30",
+          "start": 0,
+          "end": 9
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "5월 30일(토)에"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-45e9d1bd260feb19",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026년 강대인 테니스 대회를",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 강대인 테니스 대회를"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-62fcbc02b9b9d36b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "개최합니다",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "개최합니다"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4f4a06612e5abc9a",
+      "segmentType": "label_value",
+      "labelText": "선착순 마감이오니",
+      "bodyText": "선착순 마감이오니",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "선착순 마감이오니"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6046566e36364d51",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "아래 사이트에 게재된 대회 요강을 참고하시어",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "아래 사이트에 게재된 대회 요강을 참고하시어"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d9d8369381066868",
+      "segmentType": "label_value",
+      "labelText": "서둘러 신청해 주시기 바랍니다.",
+      "bodyText": "서둘러 신청해 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "서둘러 신청해 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3be6a0c98cd12872",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "http://www.tennisgame.co.kr/board/compedetail/whole/1/407",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "http://www.tennisgame.co.kr/board/compedetail/whole/1/407"
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 5,
+      "label_value": 2
+    }
+  }
+}

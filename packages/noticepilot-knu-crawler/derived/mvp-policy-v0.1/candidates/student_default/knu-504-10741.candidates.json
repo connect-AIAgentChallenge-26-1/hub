@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10741",
+  "sourceContentHash": "eebf1e2e90f8acf1ccdca0d4eb65b82fbe9b891e6243f335d0a060c223364c88",
+  "sourceTitle": "★ 2026년 제54기(하계) WFK PAS 청년봉사단 해외봉사 단원(학교추천지원자) 모집(~ 2026. 4. 3.(금) 17시까지) ★",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10741&pageIndex=9&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10741-418e58e864fa46",
+      "uidHint": "noticepilot-cand-knu-504-10741-418e58e864fa46@noticepilot.local",
+      "sourceNoticeId": "knu-504-10741",
+      "sourceTitle": "★ 2026년 제54기(하계) WFK PAS 청년봉사단 해외봉사 단원(학교추천지원자) 모집(~ 2026. 4. 3.(금) 17시까지) ★",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10741&pageIndex=9&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-fa161a66040778ce",
+        "segmentType": "title",
+        "labelText": "★ 2026년 제54기(하계) WFK PAS 청년봉사단 해외봉사 단원(학교추천지원자) 모집(~",
+        "bodyText": "2026. 4. 3.(금) 17시까지) ★",
+        "sourceLocation": {
+          "lineIndex": -1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-03",
+            "start": 53,
+            "end": 67
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "low",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "★ 2026년 제54기(하계) WFK PAS 청년봉사단 해외봉사 단원(학교추천지원자) 모집(~",
+          "★ 2026년 제54기(하계) WFK PAS 청년봉사단 해외봉사 단원(학교추천지원자) 모집(~ 2026. 4. 3.(금) 17시까지) ★",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-b4a2feb63974eea9",
+        "segmentId": "seg-fa161a66040778ce",
+        "rawText": "2026. 4. 3.(금)",
+        "normalizedStart": "2026-04-03T17:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 53,
+          "end": 67
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-b87fa89e9ccadbd2",
+        "sourceNoticeId": "knu-504-10741",
+        "segmentId": "seg-fa161a66040778ce",
+        "temporalMentionIds": [
+          "tm-b4a2feb63974eea9"
+        ],
+        "bindingKind": "title_context",
+        "confidence": "low",
+        "ruleId": "binding.title_context",
+        "locallyGrounded": false,
+        "labelText": "★ 2026년 제54기(하계) WFK PAS 청년봉사단 해외봉사 단원(학교추천지원자) 모집(~",
+        "evidence": "★ 2026년 제54기(하계) WFK PAS 청년봉사단 해외봉사 단원(학교추천지원자) 모집(~ 2026. 4. 3.(금) 17시까지) ★"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "★ 2026년 제54기(하계) WFK PAS 청년봉사단 해외봉사 단원(학교추천지원자) 모집(~ 2026. 4. 3.(금) 17시까지) ★ 신청 마감",
+      "dateText": "2026. 4. 3.(금)",
+      "normalizedStart": "2026-04-03T17:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "★ 2026년 제54기(하계) WFK PAS 청년봉사단 해외봉사 단원(학교추천지원자) 모집(~ 2026. 4. 3.(금) 17시까지) ★",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "same_datetime_candidates_consolidated",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "same_datetime_candidates_consolidated",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

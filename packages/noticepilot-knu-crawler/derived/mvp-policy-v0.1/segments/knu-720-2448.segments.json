@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2448",
+  "sourceContentHash": "5940c15fe4260698b9ef45b615b5ed0f3f26ec85c1204d560b76cf81a38cbe99",
+  "sourceTitle": "2026학년도 여름 계절수업 수강료 납부 기간 안내(춘천캠퍼스)",
+  "publishedAt": "2026-05-12",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9612880ca8d2f673",
+      "segmentType": "title",
+      "labelText": "2026학년도 여름 계절수업 수강료 납부 기간 안내(춘천캠퍼스)",
+      "bodyText": "2026학년도 여름 계절수업 수강료 납부 기간 안내(춘천캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 여름 계절수업 수강료 납부 기간 안내(춘천캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f498ddc0df5b032c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "<공지사항>",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<공지사항>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8ede345b6793ccbf",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 수강료가 없는 교과목은 붙임파일을 참고 바라며 수강료를 납부하지 않는 교과목은 수강료를 납부하지 않았다고 취소처리 되지 않으니, 수강을 원하지 않을 경우 반드시 '개강 전 수강신청 취소기간'에 취소하여야 합니다. 또한 개강 후 수강신청 취소를 원할 경우에도 계절수업 수강신청 취소원을 직접 제출하여야 합니다. (학사공지 2316번 참조)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "payment_period",
+        "submission_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 수강료가 없는 교과목은 붙임파일을 참고 바라며 수강료를 납부하지 않는 교과목은 수강료를 납부하지 않았다고 취소처리 되지 않으니, 수강을 원하지 않을 경우 반드시 '개강 전 수강신청 취소기간'에 취소하여야 합니다. 또한 개강 후 수강신청 취소를 원할 경우에도 계절수업 수강신청 취소원을 직접 제출하여야 합니다. (학사공지 2316번 참조)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 3,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 1,
+      "list_item": 1
+    }
+  }
+}

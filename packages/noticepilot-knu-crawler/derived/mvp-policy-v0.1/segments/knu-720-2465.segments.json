@@ -1,0 +1,757 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2465",
+  "sourceContentHash": "457baa9898df6d0a1ad3332f0f6a09e0b2f87b80afccd128ce3f57b2aba5f111",
+  "sourceTitle": "2026학년도 2학기 휴학 및 복학 신청 안내",
+  "publishedAt": "2026-06-09",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-77d8ef7574fee2a5",
+      "segmentType": "title",
+      "labelText": "2026학년도 2학기 휴학 및 복학 신청 안내",
+      "bodyText": "2026학년도 2학기 휴학 및 복학 신청 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "return_from_leave_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 2학기 휴학 및 복학 신청 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-19cae15cde35383e",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 2학기 휴학 및 복학 신청 일정 및 방법을 안내하오니, 첨부하는 파일을 숙지하여 휴학 및 복학 신청을 해 주시기 바랍니다.",
+      "bodyText": "2026학년도 2학기 휴학 및 복학 신청 일정 및 방법을 안내하오니, 첨부하는 파일을 숙지하여 휴학 및 복학 신청을 해 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "return_from_leave_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 2학기 휴학 및 복학 신청 일정 및 방법을 안내하오니, 첨부하는 파일을 숙지하여 휴학 및 복학 신청을 해 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d0515f90ccb6fa8d",
+      "segmentType": "label_value",
+      "labelText": "휴학 및 복학 신청 일정",
+      "bodyText": "※ 휴학 및 복학 신청 일정",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "return_from_leave_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 휴학 및 복학 신청 일정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eac19dcf3602cf1d",
+      "segmentType": "label_value",
+      "labelText": "휴학 및 복학신청 일정 - 구분, 기간, 신청 대상자",
+      "bodyText": "휴학 및 복학신청 일정 - 구분, 기간, 신청 대상자",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "return_from_leave_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "휴학 및 복학신청 일정 - 구분, 기간, 신청 대상자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6d4f07e62b836182",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구분",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구분"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-456c63bf808ae69b",
+      "segmentType": "label_value",
+      "labelText": "기간",
+      "bodyText": "기간",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2c5702bec35ec10f",
+      "segmentType": "label_value",
+      "labelText": "신청 대상자",
+      "bodyText": "신청 대상자",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청 대상자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-970b97c4621bfa11",
+      "segmentType": "label_value",
+      "labelText": "휴학",
+      "bodyText": "휴학",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "휴학"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-552794bd74c9fa02",
+      "segmentType": "table_row",
+      "labelText": "휴학 신청기간",
+      "bodyText": "2026. 8. 13.(목) 09:00 ~ 8. 31.(월) 18:00",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 2,
+        "parentSegmentId": "seg-970b97c4621bfa11"
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-08-13",
+          "start": 9,
+          "end": 24
+        },
+        {
+          "value": "2026-08-31",
+          "start": 33,
+          "end": 42
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "휴학 신청기간: 2026. 8. 13.(목) 09:00 ~ 8. 31.(월) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-81b0cbf3dee23ad4",
+      "segmentType": "table_row",
+      "labelText": "휴학 신청기간",
+      "bodyText": "2026. 9. 1.(화) 09:00 ~ 10. 8.(목) 18:00",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 4,
+        "parentSegmentId": "seg-970b97c4621bfa11"
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-09-01",
+          "start": 9,
+          "end": 23
+        },
+        {
+          "value": "2026-10-08",
+          "start": 32,
+          "end": 41
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "휴학 신청기간: 2026. 9. 1.(화) 09:00 ~ 10. 8.(목) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-770e39c98504ff25",
+      "segmentType": "label_value",
+      "labelText": "《1차 - 등록금 납부 관계없이 휴학 신청 가능》",
+      "bodyText": "《1차 - 등록금 납부 관계없이 휴학 신청 가능》",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "《1차 - 등록금 납부 관계없이 휴학 신청 가능》"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-80ed39e5acbe9197",
+      "segmentType": "continuation",
+      "labelText": "《1차 - 등록금 납부 관계없이 휴학 신청 가능》",
+      "bodyText": "2026. 8. 13.(목) 09:00 ~ 8. 31.(월) 18:00",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-770e39c98504ff25"
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-08-13",
+          "start": 28,
+          "end": 43
+        },
+        {
+          "value": "2026-08-31",
+          "start": 52,
+          "end": 61
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "《1차 - 등록금 납부 관계없이 휴학 신청 가능》 2026. 8. 13.(목) 09:00 ~ 8. 31.(월) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d1a4118232c46023",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 8. 13.(목) 09:00 ~ 8. 31.(월) 18:00",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-08-13",
+          "start": 0,
+          "end": 15
+        },
+        {
+          "value": "2026-08-31",
+          "start": 24,
+          "end": 33
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 8. 13.(목) 09:00 ~ 8. 31.(월) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ed5257e93c6a7691",
+      "segmentType": "label_value",
+      "labelText": "《2차 - 등록금 전액 납부자만 휴학 신청 가능》",
+      "bodyText": "《2차 - 등록금 전액 납부자만 휴학 신청 가능》",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "《2차 - 등록금 전액 납부자만 휴학 신청 가능》"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-80dfcf38dd461144",
+      "segmentType": "continuation",
+      "labelText": "《2차 - 등록금 전액 납부자만 휴학 신청 가능》",
+      "bodyText": "2026. 9. 1.(화) 09:00 ~ 10. 8.(목) 18:00",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-ed5257e93c6a7691"
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-09-01",
+          "start": 28,
+          "end": 42
+        },
+        {
+          "value": "2026-10-08",
+          "start": 51,
+          "end": 60
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "《2차 - 등록금 전액 납부자만 휴학 신청 가능》 2026. 9. 1.(화) 09:00 ~ 10. 8.(목) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a82fe789119a721f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 9. 1.(화) 09:00 ~ 10. 8.(목) 18:00",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-09-01",
+          "start": 0,
+          "end": 14
+        },
+        {
+          "value": "2026-10-08",
+          "start": 23,
+          "end": 32
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 9. 1.(화) 09:00 ~ 10. 8.(목) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6784997dd1f1f67e",
+      "segmentType": "label_value",
+      "labelText": "휴학 또는 휴학연장 희망자",
+      "bodyText": "휴학 또는 휴학연장 희망자",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "휴학 또는 휴학연장 희망자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-96018ba826f123a7",
+      "segmentType": "label_value",
+      "labelText": "등록금 전액 납부자 중",
+      "bodyText": "등록금 전액 납부자 중",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "등록금 전액 납부자 중"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-22a6e6f888bb1b55",
+      "segmentType": "label_value",
+      "labelText": "휴학 희망자",
+      "bodyText": "휴학 희망자",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "휴학 희망자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-10a47fe44f59727e",
+      "segmentType": "label_value",
+      "labelText": "일반휴학, 질병휴학, 휴학연장 등 신청도 등록금 납부 필수",
+      "bodyText": "※ 일반휴학, 질병휴학, 휴학연장 등 신청도 등록금 납부 필수",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 일반휴학, 질병휴학, 휴학연장 등 신청도 등록금 납부 필수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-26aaaaca3c9550e4",
+      "segmentType": "label_value",
+      "labelText": "복학",
+      "bodyText": "복학",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "return_from_leave_application"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "복학"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c36037521263a2b7",
+      "segmentType": "table_row",
+      "labelText": "복학 《1차》 신청기간",
+      "bodyText": "2026. 7. 13.(월) 09:00 ~ 8. 31.(월) 18:00",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 2,
+        "parentSegmentId": "seg-26aaaaca3c9550e4"
+      },
+      "actionSignals": [
+        "return_from_leave_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-13",
+          "start": 14,
+          "end": 29
+        },
+        {
+          "value": "2026-08-31",
+          "start": 38,
+          "end": 47
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "복학 《1차》 신청기간: 2026. 7. 13.(월) 09:00 ~ 8. 31.(월) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4fef640a74eba078",
+      "segmentType": "table_row",
+      "labelText": "복학 《2차》 신청기간",
+      "bodyText": "2026. 9. 1.(화) 09:00 ~ 9. 28.(월) 18:00",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 4,
+        "parentSegmentId": "seg-26aaaaca3c9550e4"
+      },
+      "actionSignals": [
+        "return_from_leave_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-09-01",
+          "start": 14,
+          "end": 28
+        },
+        {
+          "value": "2026-09-28",
+          "start": 37,
+          "end": 46
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "복학 《2차》 신청기간: 2026. 9. 1.(화) 09:00 ~ 9. 28.(월) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7cf11050702f8627",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "《1차》",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "《1차》"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-18f3ca505c14b284",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 7. 13.(월) 09:00 ~ 8. 31.(월) 18:00",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-13",
+          "start": 0,
+          "end": 15
+        },
+        {
+          "value": "2026-08-31",
+          "start": 24,
+          "end": 33
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 7. 13.(월) 09:00 ~ 8. 31.(월) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-91d8f6f2461cc8a2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "《2차》",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "《2차》"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-960aa550e5ea4e35",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 9. 1.(화) 09:00 ~ 9. 28.(월) 18:00",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-09-01",
+          "start": 0,
+          "end": 14
+        },
+        {
+          "value": "2026-09-28",
+          "start": 23,
+          "end": 32
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 9. 1.(화) 09:00 ~ 9. 28.(월) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-49cf2b3588aca3e2",
+      "segmentType": "label_value",
+      "labelText": "복학 희망자",
+      "bodyText": "복학 희망자",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "return_from_leave_application"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "복학 희망자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-90631bdaed530427",
+      "segmentType": "label_value",
+      "labelText": "2차 기간 중 복학자는 복학 승인완료 이전 기간 결석 처리 유의",
+      "bodyText": "※ 2차 기간 중 복학자는 복학 승인완료 이전 기간 결석 처리 유의",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "return_from_leave_application"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 2차 기간 중 복학자는 복학 승인완료 이전 기간 결석 처리 유의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9b3253d8fe398588",
+      "segmentType": "label_value",
+      "labelText": "일반휴학 및 일반휴학연장 신청자는 학부(과)장 상담 후 승인이 가능하므로 반드시 학부(과) 또는 전공 사무실로 문의하시기 바랍니다.",
+      "bodyText": "- 일반휴학 및 일반휴학연장 신청자는 학부(과)장 상담 후 승인이 가능하므로 반드시 학부(과) 또는 전공 사무실로 문의하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 일반휴학 및 일반휴학연장 신청자는 학부(과)장 상담 후 승인이 가능하므로 반드시 학부(과) 또는 전공 사무실로 문의하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6d2ca703022351e8",
+      "segmentType": "label_value",
+      "labelText": "휴학 및 복학 신청 승인은 해당 학부(과)장 승인을 거쳐 소속 단과대학장 승인 후 학적변경이 되오니 학적상태가 변경되지 않을 경우 소속 학부(과)사무실 또는 단과대학 행정실로 문의해 주시기 바랍니다.",
+      "bodyText": "- 휴학 및 복학 신청 승인은 해당 학부(과)장 승인을 거쳐 소속 단과대학장 승인 후 학적변경이 되오니 학적상태가 변경되지 않을 경우 소속 학부(과)사무실 또는 단과대학 행정실로 문의해 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "return_from_leave_application",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 휴학 및 복학 신청 승인은 해당 학부(과)장 승인을 거쳐 소속 단과대학장 승인 후 학적변경이 되오니 학적상태가 변경되지 않을 경우 소속 학부(과)사무실 또는 단과대학 행정실로 문의해 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3b2560b128696a30",
+      "segmentType": "label_value",
+      "labelText": "수강신청 및 등록금 납부 방법은 추후 담당부서에서 공지하는 내용을 확인하시기 바랍니다.",
+      "bodyText": "- 수강신청 및 등록금 납부 방법은 추후 담당부서에서 공지하는 내용을 확인하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 수강신청 및 등록금 납부 방법은 추후 담당부서에서 공지하는 내용을 확인하시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 32,
+    "locallyGroundedCount": 6,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 18,
+      "paragraph": 7,
+      "table_row": 4,
+      "continuation": 2
+    }
+  }
+}

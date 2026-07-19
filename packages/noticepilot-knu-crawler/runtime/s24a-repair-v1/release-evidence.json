@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "noticepilot.s24aRepairReleaseEvidence.v0.1",
+  "releaseVersion": "foundation.25.1",
+  "releaseTimestamp": "2026-07-14T00:00:00Z",
+  "stages": {
+    "s7PreventiveFix": "completed",
+    "s8SummaryRepair": "completed",
+    "s9bReproduciblePackager": "completed"
+  },
+  "summaryRepair": {
+    "scannedDocumentCount": 2059,
+    "beforeMismatchCount": 300,
+    "afterMismatchCount": 0,
+    "modifiedDocumentCount": 300,
+    "changedFields": {
+      "typeCounts": 300,
+      "segmentCount": 0,
+      "locallyGroundedCount": 0,
+      "other": 0
+    },
+    "secondApplyModifiedCount": 0
+  },
+  "semanticInvarianceEvidenceBasis": "verified_in_s9c",
+  "semanticInvariance": {
+    "segmentsChanged": 0,
+    "nonDerivedFieldsChanged": 0,
+    "candidateChanges": 0,
+    "reviewQueueChanges": 0,
+    "calendarEventChanges": 0,
+    "icsChanges": 0,
+    "feedChanges": 0,
+    "databaseSemanticChanges": 0
+  },
+  "databaseVerificationScope": "in_memory_postgres_reference_store",
+  "liveDatabaseExecutionPerformed": false,
+  "packaging": {
+    "reproducibilityScope": "identical_pinned_python_zlib_toolchain",
+    "officialPromotionPerformed": false
+  },
+  "layeredBaseline": {
+    "result": "match",
+    "segmentSummaryCoverage": "outside_comparator_scope"
+  }
+}

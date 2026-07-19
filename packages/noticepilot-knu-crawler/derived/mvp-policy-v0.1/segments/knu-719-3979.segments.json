@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-3979",
+  "sourceContentHash": "608d36e0858c92b1e67000ed4c14bf752499ada8297169ee5b9bfb0df4f1131d",
+  "sourceTitle": "국립중앙과학과 별의별 과학특강 참여자 모집 안내",
+  "publishedAt": "2026-03-05",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a39590427714249a",
+      "segmentType": "title",
+      "labelText": "국립중앙과학과 별의별 과학특강 참여자 모집 안내",
+      "bodyText": "국립중앙과학과 별의별 과학특강 참여자 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국립중앙과학과 별의별 과학특강 참여자 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-da2768cc535061d0",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 042-601-7861(기초과학과 담당자)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 042-601-7861(기초과학과 담당자)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

@@ -1,0 +1,359 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2312",
+  "sourceContentHash": "3037aa17ae56ef21de77bdd7398511930901e36f9e0013386695ba03c5a19309",
+  "sourceTitle": "2026년 은평구민 대학생 해외연수 장학생 모집 안내",
+  "publishedAt": "2026-03-17",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6df700f5b7ccdff7",
+      "segmentType": "title",
+      "labelText": "2026년 은평구민 대학생 해외연수 장학생 모집 안내",
+      "bodyText": "2026년 은평구민 대학생 해외연수 장학생 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 은평구민 대학생 해외연수 장학생 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-83f170f320510783",
+      "segmentType": "label_value",
+      "labelText": "선발 분야",
+      "bodyText": "가. 선발 분야 : 대학생 해외연수장학생",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 선발 분야 : 대학생 해외연수장학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9a57a2934b14bd0b",
+      "segmentType": "label_value",
+      "labelText": "선발 인원",
+      "bodyText": "나. 선발 인원 : 6명 내외 ※ 2명 내외의 예비 합격자 선발 가능",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 선발 인원 : 6명 내외 ※ 2명 내외의 예비 합격자 선발 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-92050b82569dc708",
+      "segmentType": "label_value",
+      "labelText": "신청 기간",
+      "bodyText": "2026년 3월 16일(월) ~ 3월 30일(월) 16:00",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-16",
+          "start": 11,
+          "end": 26
+        },
+        {
+          "value": "2026-03-30",
+          "start": 29,
+          "end": 38
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "다. 신청 기간 : 2026년 3월 16일(월) ~ 3월 30일(월) 16:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0ba208d3f351dccd",
+      "segmentType": "label_value",
+      "labelText": "신청 자격",
+      "bodyText": "라. 신청 자격",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "라. 신청 자격"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a239e99f69d647da",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1) 공고일 현재 주민등록 기준 은평구 2년 이상 계속 거주 대학생",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1) 공고일 현재 주민등록 기준 은평구 2년 이상 계속 거주 대학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eed1ad4484e160cf",
+      "segmentType": "label_value",
+      "labelText": "2026년 1학기 휴학생, 2026년 2학기 전 졸업 예정자, 학점은행제, 사이버·원격대학, 방송통신대학생 제외",
+      "bodyText": "※ 2026년 1학기 휴학생, 2026년 2학기 전 졸업 예정자, 학점은행제, 사이버·원격대학, 방송통신대학생 제외",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:on_leave"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 2026년 1학기 휴학생, 2026년 2학기 전 졸업 예정자, 학점은행제, 사이버·원격대학, 방송통신대학생 제외"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2417bd5b5f34cd32",
+      "segmentType": "label_value",
+      "labelText": "2026년 1학기 학자금 지원 소득구간 8구간 이내",
+      "bodyText": "2) 2026년 1학기 학자금 지원 소득구간 8구간 이내",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2) 2026년 1학기 학자금 지원 소득구간 8구간 이내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bb31029dbd41509e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3) 비자 발급, 건강 사정 등 해외여행에 결격 사유가 없는 자",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3) 비자 발급, 건강 사정 등 해외여행에 결격 사유가 없는 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6f5a98489604f503",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4) ESTA 발급에 결격 사유가 없는 자",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4) ESTA 발급에 결격 사유가 없는 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-95440b9464dd6b43",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5) 기본 영어 가능자로 원활한 해외 연수 참여 가능한 자",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5) 기본 영어 가능자로 원활한 해외 연수 참여 가능한 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fa3c3c70b4ff300d",
+      "segmentType": "label_value",
+      "labelText": "학업 사유로 타 지역 거주 또는 계속 거주 기간 미충족 시 아래 조건 충족 시 신청 가능",
+      "bodyText": "6) 학업 사유로 타 지역 거주 또는 계속 거주 기간 미충족 시 아래 조건 충족 시 신청 가능",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6) 학업 사유로 타 지역 거주 또는 계속 거주 기간 미충족 시 아래 조건 충족 시 신청 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3b19357fb0439c73",
+      "segmentType": "label_value",
+      "labelText": "은평구 2년 이상 거주 확인 가능한 주민등록초본과 사유가 된 입학일을 확인할 수 있는 서류 추가 제출",
+      "bodyText": "※ 은평구 2년 이상 거주 확인 가능한 주민등록초본과 사유가 된 입학일을 확인할 수 있는 서류 추가 제출",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 은평구 2년 이상 거주 확인 가능한 주민등록초본과 사유가 된 입학일을 확인할 수 있는 서류 추가 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f41d7b1c2b886c72",
+      "segmentType": "label_value",
+      "labelText": "신청 방법",
+      "bodyText": "마. 신청 방법 : 이메일 제출(",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "마. 신청 방법 : 이메일 제출("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4043a5b2a60c7854",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "jws1701@ep.go.kr",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "jws1701@ep.go.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3e276b9b3f4f67a5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b19a4968017ce1ed",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 방문‧팩스‧등기우편 미인정",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 방문‧팩스‧등기우편 미인정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-63848fe249288113",
+      "segmentType": "label_value",
+      "labelText": "선발 방법",
+      "bodyText": "바. 선발 방법 : 서류 심사 및 면접 심사",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "바. 선발 방법 : 서류 심사 및 면접 심사"
+    }
+  ],
+  "summary": {
+    "segmentCount": 18,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 10,
+      "list_item": 5,
+      "paragraph": 2
+    }
+  }
+}

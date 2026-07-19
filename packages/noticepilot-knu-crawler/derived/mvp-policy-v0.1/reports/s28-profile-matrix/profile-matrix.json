@@ -1,0 +1,3112 @@
+{
+  "schemaVersion": "noticepilot.profileMatrix.v0.1",
+  "matrixVersion": "0.1.0",
+  "purpose": "full_corpus_feed_audit_only",
+  "auditOnly": true,
+  "authoritativeProductDefaults": false,
+  "userCampusDefaultEstablished": false,
+  "caseCount": 44,
+  "cases": [
+    {
+      "caseId": "reference.student_all",
+      "category": "reference",
+      "description": "전체 캠퍼스 학생 기준 프로필",
+      "referenceDefault": true,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_9baaae14deb3460fa31777d362507cbc",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "기준 프로필 — 전체 캠퍼스 학생 일정",
+        "calendarName": "NoticePilot 학생 일정",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "reference.job_all",
+      "category": "reference",
+      "description": "전체 캠퍼스 채용 기준 프로필",
+      "referenceDefault": true,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_0887a1e133464366af8d870e1950ca53",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "기준 프로필 — 전체 캠퍼스 채용 일정",
+        "calendarName": "NoticePilot 채용 접수 일정",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "716"
+          ],
+          "selectedNoticeTypes": [
+            "job_posting"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "job_application"
+          ],
+          "includedEventTypes": [
+            "job_application_period"
+          ],
+          "includedTargetActors": [
+            "job_applicant"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "campus.student.chuncheon",
+      "category": "campus",
+      "description": "student 단일 캠퍼스 교집합",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_cee11b0ba94ab235cbc58aa1ea615852",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student chuncheon",
+        "calendarName": "NoticePilot S28-5 student chuncheon",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "campus.student.samcheok",
+      "category": "campus",
+      "description": "student 단일 캠퍼스 교집합",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_09a89ec1b5823c1440060c17f01b12a0",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student samcheok",
+        "calendarName": "NoticePilot S28-5 student samcheok",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "samcheok"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "campus.student.dogye",
+      "category": "campus",
+      "description": "student 단일 캠퍼스 교집합",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_41252cb3c3016bb9aa016d04a89aac11",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student dogye",
+        "calendarName": "NoticePilot S28-5 student dogye",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "dogye"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "campus.student.gangneung_wonju",
+      "category": "campus",
+      "description": "student 단일 캠퍼스 교집합",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_eeb9313dbcb043e516ca73f3cc7bea4b",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student gangneung_wonju",
+        "calendarName": "NoticePilot S28-5 student gangneung_wonju",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "policy.student.exclude_common",
+      "category": "policy_toggle",
+      "description": "student includeAllCampusEvents=false",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_e12730413f64048e163c14d1fcde5d60",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student exclude_common",
+        "calendarName": "NoticePilot S28-5 student exclude_common",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": false,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "policy.student.exclude_unknown",
+      "category": "policy_toggle",
+      "description": "student includeUnknownCampusEvents=false",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_a7961b3a4adc1099811a60e36d109ea0",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student exclude_unknown",
+        "calendarName": "NoticePilot S28-5 student exclude_unknown",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": false,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "policy.student.exclude_review",
+      "category": "policy_toggle",
+      "description": "student includeReviewRequiredEvents=false",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_365bff5aaf4547f80179dbe531f8b9d9",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student exclude_review",
+        "calendarName": "NoticePilot S28-5 student exclude_review",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": false,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "campus.job.chuncheon",
+      "category": "campus",
+      "description": "job 단일 캠퍼스 교집합",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_1b999c38af0d4e3ba9213fb8a24fd2ca",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — job chuncheon",
+        "calendarName": "NoticePilot S28-5 job chuncheon",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "716"
+          ],
+          "selectedNoticeTypes": [
+            "job_posting"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "job_application"
+          ],
+          "includedEventTypes": [
+            "job_application_period"
+          ],
+          "includedTargetActors": [
+            "job_applicant"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "campus.job.samcheok",
+      "category": "campus",
+      "description": "job 단일 캠퍼스 교집합",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_c70264a1239f0193cc8173572bd2d43f",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — job samcheok",
+        "calendarName": "NoticePilot S28-5 job samcheok",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "samcheok"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "716"
+          ],
+          "selectedNoticeTypes": [
+            "job_posting"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "job_application"
+          ],
+          "includedEventTypes": [
+            "job_application_period"
+          ],
+          "includedTargetActors": [
+            "job_applicant"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "campus.job.dogye",
+      "category": "campus",
+      "description": "job 단일 캠퍼스 교집합",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_b249ae2cdc3cb462fb8e8a97e8f7750d",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — job dogye",
+        "calendarName": "NoticePilot S28-5 job dogye",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "dogye"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "716"
+          ],
+          "selectedNoticeTypes": [
+            "job_posting"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "job_application"
+          ],
+          "includedEventTypes": [
+            "job_application_period"
+          ],
+          "includedTargetActors": [
+            "job_applicant"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "campus.job.gangneung_wonju",
+      "category": "campus",
+      "description": "job 단일 캠퍼스 교집합",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_7e6976e72832512e2fe33a210be82942",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — job gangneung_wonju",
+        "calendarName": "NoticePilot S28-5 job gangneung_wonju",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "716"
+          ],
+          "selectedNoticeTypes": [
+            "job_posting"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "job_application"
+          ],
+          "includedEventTypes": [
+            "job_application_period"
+          ],
+          "includedTargetActors": [
+            "job_applicant"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "policy.job.exclude_common",
+      "category": "policy_toggle",
+      "description": "job includeAllCampusEvents=false",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_4121e187e4f39fb2e20913e58fdfad15",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — job exclude_common",
+        "calendarName": "NoticePilot S28-5 job exclude_common",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": false,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "716"
+          ],
+          "selectedNoticeTypes": [
+            "job_posting"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "job_application"
+          ],
+          "includedEventTypes": [
+            "job_application_period"
+          ],
+          "includedTargetActors": [
+            "job_applicant"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "policy.job.exclude_unknown",
+      "category": "policy_toggle",
+      "description": "job includeUnknownCampusEvents=false",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_2d85a3366b5cc3d8cdd3c0329ab9645a",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — job exclude_unknown",
+        "calendarName": "NoticePilot S28-5 job exclude_unknown",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": false,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "716"
+          ],
+          "selectedNoticeTypes": [
+            "job_posting"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "job_application"
+          ],
+          "includedEventTypes": [
+            "job_application_period"
+          ],
+          "includedTargetActors": [
+            "job_applicant"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "policy.job.exclude_review",
+      "category": "policy_toggle",
+      "description": "job includeReviewRequiredEvents=false",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_6a2d81c8f521727dcbd3318e53c46d78",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — job exclude_review",
+        "calendarName": "NoticePilot S28-5 job exclude_review",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "716"
+          ],
+          "selectedNoticeTypes": [
+            "job_posting"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "job_application"
+          ],
+          "includedEventTypes": [
+            "job_application_period"
+          ],
+          "includedTargetActors": [
+            "job_applicant"
+          ],
+          "includeReviewRequiredEvents": false,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "audience.student.graduate.include_unscoped",
+      "category": "audience",
+      "description": "student degreeLevels=['graduate'], unscoped=include",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_28af3ce1a052cc17ed5f0e534061a29d",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student audience graduate include",
+        "calendarName": "NoticePilot S28-5 student audience graduate include",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": true,
+          "degreeLevels": [
+            "graduate"
+          ],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "audience.student.graduate.exclude_unscoped",
+      "category": "audience",
+      "description": "student degreeLevels=['graduate'], unscoped=exclude",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_5d70cfda8b21e4e8ecf5b105e2286a3a",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student audience graduate exclude",
+        "calendarName": "NoticePilot S28-5 student audience graduate exclude",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": true,
+          "degreeLevels": [
+            "graduate"
+          ],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "exclude"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "audience.student.year3.include_unscoped",
+      "category": "audience",
+      "description": "student studentYears=[3], unscoped=include",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_ad1017107b7f9c70cef0318794296b37",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student audience year3 include",
+        "calendarName": "NoticePilot S28-5 student audience year3 include",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": true,
+          "degreeLevels": [],
+          "studentYears": [
+            3
+          ],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "audience.student.year3.exclude_unscoped",
+      "category": "audience",
+      "description": "student studentYears=[3], unscoped=exclude",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_8b74ef58ea059e236d12e8995ea14cfc",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student audience year3 exclude",
+        "calendarName": "NoticePilot S28-5 student audience year3 exclude",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": true,
+          "degreeLevels": [],
+          "studentYears": [
+            3
+          ],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "exclude"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "audience.student.enrolled.include_unscoped",
+      "category": "audience",
+      "description": "student enrollmentStatuses=['enrolled'], unscoped=include",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_e15cf935ba0924a8609252275ab4d1fd",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student audience enrolled include",
+        "calendarName": "NoticePilot S28-5 student audience enrolled include",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": true,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [
+            "enrolled"
+          ],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "audience.student.enrolled.exclude_unscoped",
+      "category": "audience",
+      "description": "student enrollmentStatuses=['enrolled'], unscoped=exclude",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_31803d07b688b1d1b233b98a3c66b8c1",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student audience enrolled exclude",
+        "calendarName": "NoticePilot S28-5 student audience enrolled exclude",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": true,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [
+            "enrolled"
+          ],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "exclude"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "audience.student.new_student.include_unscoped",
+      "category": "audience",
+      "description": "student admissionTypes=['new_student'], unscoped=include",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_b07893e6e9f3e5f780b41a8f66c68eff",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student audience new_student include",
+        "calendarName": "NoticePilot S28-5 student audience new_student include",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": true,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [
+            "new_student"
+          ],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "audience.student.new_student.exclude_unscoped",
+      "category": "audience",
+      "description": "student admissionTypes=['new_student'], unscoped=exclude",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_5502de72f1a49a97339cb920a6d35d94",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student audience new_student exclude",
+        "calendarName": "NoticePilot S28-5 student audience new_student exclude",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": true,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [
+            "new_student"
+          ],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "exclude"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "status.student.paused",
+      "category": "status",
+      "description": "student profile status=paused",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_29f98efba7a18fc4be6c79f150f93310",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student paused",
+        "calendarName": "NoticePilot S28-5 student paused",
+        "timezone": "Asia/Seoul",
+        "status": "paused",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "status.job.revoked",
+      "category": "status",
+      "description": "job profile status=revoked",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_b9b8ac94c207fae08c96d9603685a021",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — job revoked",
+        "calendarName": "NoticePilot S28-5 job revoked",
+        "timezone": "Asia/Seoul",
+        "status": "revoked",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "716"
+          ],
+          "selectedNoticeTypes": [
+            "job_posting"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "job_application"
+          ],
+          "includedEventTypes": [
+            "job_application_period"
+          ],
+          "includedTargetActors": [
+            "job_applicant"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "source.board.504",
+      "category": "source_board",
+      "description": "canonical board 504 only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_5e6c7aad2fbfca566b3887eaab9c05be",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — canonical board 504",
+        "calendarName": "NoticePilot S28-5 canonical board 504",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504"
+          ],
+          "selectedNoticeTypes": [
+            "general_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "source.board.715",
+      "category": "source_board",
+      "description": "canonical board 715 only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_86e41af07e39fc261078d137318943f5",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — canonical board 715",
+        "calendarName": "NoticePilot S28-5 canonical board 715",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "715"
+          ],
+          "selectedNoticeTypes": [
+            "event"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "source.board.716",
+      "category": "source_board",
+      "description": "canonical board 716 only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_b92b2beb03f188d8553a59797d81eed2",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — canonical board 716",
+        "calendarName": "NoticePilot S28-5 canonical board 716",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "716"
+          ],
+          "selectedNoticeTypes": [
+            "job_posting"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "job_application"
+          ],
+          "includedEventTypes": [
+            "job_application_period"
+          ],
+          "includedTargetActors": [
+            "job_applicant"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "source.board.717",
+      "category": "source_board",
+      "description": "canonical board 717 only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_75c725c0d30710ccc2017c519c076c3d",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — canonical board 717",
+        "calendarName": "NoticePilot S28-5 canonical board 717",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "717"
+          ],
+          "selectedNoticeTypes": [
+            "career"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "source.board.719",
+      "category": "source_board",
+      "description": "canonical board 719 only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_2d5d2a8c92f8e50691ee0d42f0e24a01",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — canonical board 719",
+        "calendarName": "NoticePilot S28-5 canonical board 719",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "719"
+          ],
+          "selectedNoticeTypes": [
+            "competition"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "source.board.720",
+      "category": "source_board",
+      "description": "canonical board 720 only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_cb30c7f6a97f33b0ccd0b108e2681e6d",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — canonical board 720",
+        "calendarName": "NoticePilot S28-5 canonical board 720",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "720"
+          ],
+          "selectedNoticeTypes": [
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "source.board.721",
+      "category": "source_board",
+      "description": "canonical board 721 only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_5d02b6f0bc205e6f39e02f58ec748d48",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — canonical board 721",
+        "calendarName": "NoticePilot S28-5 canonical board 721",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "scholarship"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "source.board.722",
+      "category": "source_board",
+      "description": "canonical board 722 only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_c3dff8167eae65d53e628edae6119ffe",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — canonical board 722",
+        "calendarName": "NoticePilot S28-5 canonical board 722",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "722"
+          ],
+          "selectedNoticeTypes": [
+            "health_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "source.board.723",
+      "category": "source_board",
+      "description": "canonical board 723 only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_92f28f51b17d96793d4f7056fc34b216",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — canonical board 723",
+        "calendarName": "NoticePilot S28-5 canonical board 723",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "723"
+          ],
+          "selectedNoticeTypes": [
+            "form_archive"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period",
+            "application_period",
+            "deadline",
+            "event",
+            "exam_or_interview",
+            "payment_period",
+            "result_announcement",
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "event_type.student.academic_period",
+      "category": "event_type",
+      "description": "student event type academic_period only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_4a5b80fe2689d4a6a0fe0b2fac522551",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student event type academic_period",
+        "calendarName": "NoticePilot S28-5 student event type academic_period",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "academic_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "event_type.student.application_period",
+      "category": "event_type",
+      "description": "student event type application_period only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_20f03716273166f595bb9d229c307449",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student event type application_period",
+        "calendarName": "NoticePilot S28-5 student event type application_period",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "application_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "event_type.student.deadline",
+      "category": "event_type",
+      "description": "student event type deadline only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_ae43117d505002dcf87abaf31c6b5f39",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student event type deadline",
+        "calendarName": "NoticePilot S28-5 student event type deadline",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "deadline"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "event_type.student.event",
+      "category": "event_type",
+      "description": "student event type event only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_e7c2e2d8cf08f6fc901d433ef9f2b4cc",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student event type event",
+        "calendarName": "NoticePilot S28-5 student event type event",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "event"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "event_type.student.exam_or_interview",
+      "category": "event_type",
+      "description": "student event type exam_or_interview only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_0f91e45227a8c65dfeb321bf6868b623",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student event type exam_or_interview",
+        "calendarName": "NoticePilot S28-5 student event type exam_or_interview",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "exam_or_interview"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "event_type.student.payment_period",
+      "category": "event_type",
+      "description": "student event type payment_period only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_c3260d82a76029adca34c60feca8ba1e",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student event type payment_period",
+        "calendarName": "NoticePilot S28-5 student event type payment_period",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "payment_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "event_type.student.result_announcement",
+      "category": "event_type",
+      "description": "student event type result_announcement only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_c8d4f89d5b62458d94a6ed8a3f99f49e",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student event type result_announcement",
+        "calendarName": "NoticePilot S28-5 student event type result_announcement",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "result_announcement"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "event_type.student.submission_period",
+      "category": "event_type",
+      "description": "student event type submission_period only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_085ca69a9b7bb37e1ae317e60d4bc442",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — student event type submission_period",
+        "calendarName": "NoticePilot S28-5 student event type submission_period",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "504",
+            "715",
+            "717",
+            "719",
+            "720",
+            "721"
+          ],
+          "selectedNoticeTypes": [
+            "career",
+            "competition",
+            "event",
+            "general_notice",
+            "scholarship",
+            "school_notice"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "student_default"
+          ],
+          "includedEventTypes": [
+            "submission_period"
+          ],
+          "includedTargetActors": [
+            "student"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    },
+    {
+      "caseId": "event_type.job.job_application_period",
+      "category": "event_type",
+      "description": "job event type job_application_period only",
+      "referenceDefault": false,
+      "profile": {
+        "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+        "profileId": "subprof_18b4eb2ce1331db9ab60f7c2faf0dcb4",
+        "profileRevision": 1,
+        "institutionId": "kangwon",
+        "displayName": "S28-5 감사 — job event type job_application_period",
+        "calendarName": "NoticePilot S28-5 job event type job_application_period",
+        "timezone": "Asia/Seoul",
+        "status": "active",
+        "campusSelection": {
+          "selectedCampuses": [
+            "chuncheon",
+            "samcheok",
+            "dogye",
+            "gangneung_wonju"
+          ],
+          "includeAllCampusEvents": true,
+          "includeUnknownCampusEvents": true,
+          "matchingMode": "intersects"
+        },
+        "sourceSelection": {
+          "selectedBoardIds": [
+            "716"
+          ],
+          "selectedNoticeTypes": [
+            "job_posting"
+          ],
+          "canonicalBoardsOnly": true,
+          "matchingMode": "all_dimensions"
+        },
+        "eventSelection": {
+          "includedFeedScopes": [
+            "job_application"
+          ],
+          "includedEventTypes": [
+            "job_application_period"
+          ],
+          "includedTargetActors": [
+            "job_applicant"
+          ],
+          "includeReviewRequiredEvents": true,
+          "matchingMode": "all_dimensions"
+        },
+        "audienceFilter": {
+          "enabled": false,
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "unscopedEventPolicy": "include"
+        },
+        "createdAt": "2026-07-13T16:30:00+09:00",
+        "updatedAt": "2026-07-13T16:30:00+09:00"
+      }
+    }
+  ]
+}

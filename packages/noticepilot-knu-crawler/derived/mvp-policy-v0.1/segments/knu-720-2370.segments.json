@@ -1,0 +1,884 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2370",
+  "sourceContentHash": "22a6e7d2c093b67cdfb812df53a7fa1a8b2d0ba91dc925deb6c51043a7138fb1",
+  "sourceTitle": "2026학년도 1학기 수강신청 변경 기간 및 방법 안내",
+  "publishedAt": "2026-02-27",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3ba873c776e0a678",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 수강신청 변경 기간 및 방법 안내",
+      "bodyText": "2026학년도 1학기 수강신청 변경 기간 및 방법 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_change",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 수강신청 변경 기간 및 방법 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a4b3020b0a690476",
+      "segmentType": "label_value",
+      "labelText": "<수강신청 변경 기간 및 방법 안내>",
+      "bodyText": "<수강신청 변경 기간 및 방법 안내>",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_change",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<수강신청 변경 기간 및 방법 안내>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b941843dc562c157",
+      "segmentType": "label_value",
+      "labelText": "수강신청 변경기간",
+      "bodyText": "1. 수강신청 변경기간: 2",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_change",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 수강신청 변경기간: 2"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1fd6b5e049e6beb6",
+      "segmentType": "continuation",
+      "labelText": "수강신청 변경기간",
+      "bodyText": "3. 3.(화) 10:00 ~ 3. 9.(월) 18:00 까지",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-b941843dc562c157"
+      },
+      "actionSignals": [
+        "course_registration_change",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 21,
+          "end": 29
+        },
+        {
+          "value": "2026-03-09",
+          "start": 38,
+          "end": 46
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 수강신청 변경기간: 2 026. 3. 3.(화) 10:00 ~ 3. 9.(월) 18:00 까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e4781f192c665ce3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "3. 3.(화) 10:00 ~ 3. 9.(월) 18:00 까지",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 5,
+          "end": 13
+        },
+        {
+          "value": "2026-03-09",
+          "start": 22,
+          "end": 30
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "026. 3. 3.(화) 10:00 ~ 3. 9.(월) 18:00 까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2e8e1dc23e9d8670",
+      "segmentType": "label_value",
+      "labelText": "수강신청 취소마감",
+      "bodyText": "2. 수강신청 취소마감:",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 수강신청 취소마감:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-12375ed5734d04ee",
+      "segmentType": "continuation",
+      "labelText": "수강신청 취소마감",
+      "bodyText": "3. 9(월) 18:00 까지",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-2e8e1dc23e9d8670"
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-09",
+          "start": 16,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 수강신청 취소마감: ~ 3. 9(월) 18:00 까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d1ec3cbfb1c0f0c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "3. 9(월) 18:00 까지",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-09",
+          "start": 2,
+          "end": 9
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "~ 3. 9(월) 18:00 까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c8723277fe43a55e",
+      "segmentType": "label_value",
+      "labelText": "수강신청 취소는 수강신청 사이트에서 수강학생 본인이 직접 취소",
+      "bodyText": "※ 수강신청 취소는 수강신청 사이트에서 수강학생 본인이 직접 취소",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 수강신청 취소는 수강신청 사이트에서 수강학생 본인이 직접 취소"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1fe2c87bfc6b9663",
+      "segmentType": "label_value",
+      "labelText": "수강신청 변경기간 이후 수강 교과목을 취소할 경우",
+      "bodyText": "※ 수강신청 변경기간 이후 수강 교과목을 취소할 경우",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_change",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 수강신청 변경기간 이후 수강 교과목을 취소할 경우"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6f4e893596ab7692",
+      "segmentType": "label_value",
+      "labelText": "재신청이 불가하니 신중히 처리",
+      "bodyText": "재신청이 불가하니 신중히 처리",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "재신청이 불가하니 신중히 처리"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-98820cc19f73ef1d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "요함.",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "요함."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a622cf8f7bdd8ac8",
+      "segmentType": "label_value",
+      "labelText": "수강 희망 교과목 담당교수 확인 및 수강 신청 변경 방법",
+      "bodyText": "3. 수강 희망 교과목 담당교수 확인 및 수강 신청 변경 방법",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_change",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 수강 희망 교과목 담당교수 확인 및 수강 신청 변경 방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-00018280d2c8e3a7",
+      "segmentType": "label_value",
+      "labelText": "수강인원이 초과된 교과목을 수강하고자 하는 학생은 수강희망 교과목 담당교수에게 다음과 같은 방법으로 수강을 허락 받고 학과는 이를 인정하여 수강신청을 변경할 수 있도록 함.",
+      "bodyText": "수강인원이 초과된 교과목을 수강하고자 하는 학생은 수강희망 교과목 담당교수에게 다음과 같은 방법으로 수강을 허락 받고 학과는 이를 인정하여 수강신청을 변경할 수 있도록 함.",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강인원이 초과된 교과목을 수강하고자 하는 학생은 수강희망 교과목 담당교수에게 다음과 같은 방법으로 수강을 허락 받고 학과는 이를 인정하여 수강신청을 변경할 수 있도록 함."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-02bc4c9c8c3bd3ae",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-【학생",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-【학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-641e70cb38ae4d05",
+      "segmentType": "label_value",
+      "labelText": "】교과목개설학과(부서)로 연락 또는 담당교수 이메일, 문자 등 허락을 받은 근거를 “수강(변경)신청서”에 첨부하여 학과 사무실로 제출",
+      "bodyText": "】교과목개설학과(부서)로 연락 또는 담당교수 이메일, 문자 등 허락을 받은 근거를 “수강(변경)신청서”에 첨부하여 학과 사무실로 제출",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "】교과목개설학과(부서)로 연락 또는 담당교수 이메일, 문자 등 허락을 받은 근거를 “수강(변경)신청서”에 첨부하여 학과 사무실로 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ace22cb2e887195b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-【학과사무실】",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-【학과사무실】"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-267886f37bf61f33",
+      "segmentType": "label_value",
+      "labelText": "수강 허락",
+      "bodyText": "수강 허락",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강 허락"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-73711ad49ca9cf68",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "근거자료 확인 후",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근거자료 확인 후"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4eaa262d20d85bc5",
+      "segmentType": "label_value",
+      "labelText": "“수강(변경) 처리”",
+      "bodyText": "“수강(변경) 처리”",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "“수강(변경) 처리”"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8e763c2a302051ae",
+      "segmentType": "label_value",
+      "labelText": "복수전공 학생의 복수전공학과 전공 수강신청은 교육혁신과로 제출",
+      "bodyText": "※ 복수전공 학생의 복수전공학과 전공 수강신청은 교육혁신과로 제출",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "submission_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 복수전공 학생의 복수전공학과 전공 수강신청은 교육혁신과로 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bb0dcf571389fb1b",
+      "segmentType": "label_value",
+      "labelText": "수강(변경) 신청서는 학과 사무실에서 교부",
+      "bodyText": "※ 수강(변경) 신청서는 학과 사무실에서 교부",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 수강(변경) 신청서는 학과 사무실에서 교부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cc3a4a96d3392de4",
+      "segmentType": "label_value",
+      "labelText": "\"수강권 매매 방지 시스템\" 운영일시",
+      "bodyText": "4. \"수강권 매매 방지 시스템\" 운영일시",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. \"수강권 매매 방지 시스템\" 운영일시"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3f2513a26d995f66",
+      "segmentType": "label_value",
+      "labelText": "(수강변경기간)",
+      "bodyText": "2026.3.3.(화) 10:00~3.9.(화) 18:00",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_change",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 9,
+          "end": 21
+        },
+        {
+          "value": "2026-03-09",
+          "start": 28,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "(수강변경기간) 2026.3.3.(화) 10:00~3.9.(화) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-39994ae6c53faa1e",
+      "segmentType": "label_value",
+      "labelText": "수강 잔여석이 없을때 수강 취소 시 매매방지 발동(실시간 수강신청 불가능)",
+      "bodyText": "▶ 수강 잔여석이 없을때 수강 취소 시 매매방지 발동(실시간 수강신청 불가능)",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶ 수강 잔여석이 없을때 수강 취소 시 매매방지 발동(실시간 수강신청 불가능)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-17a6e0ed624d3268",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-15f3c857d1f99cd8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "주간 시간대(당일09:00~당일21:00)",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "주간 시간대(당일09:00~당일21:00)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8ee91fe3df6422fd",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "취소 시: 일정시간",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "취소 시: 일정시간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a130b9d1b70fce20",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(5~10분 랜덤)이후 발생",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(5~10분 랜덤)이후 발생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7616b7ca1fb49b07",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 26,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5fa0387c9810140b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "야간 시간대(당일21:00~익일09:00)",
+      "sourceLocation": {
+        "lineIndex": 27,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "야간 시간대(당일21:00~익일09:00)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-db4ab2216442c53b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "취소 시: 익일",
+      "sourceLocation": {
+        "lineIndex": 28,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "취소 시: 익일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9e0e0ab468a912bf",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "09:00 이후 발생",
+      "sourceLocation": {
+        "lineIndex": 29,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "09:00 이후 발생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f8e60d448d2d14e8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "개설 교과목을 타인에게",
+      "sourceLocation": {
+        "lineIndex": 30,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "개설 교과목을 타인에게"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-68ee1602fdf9615b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "불법적인 방법으로 양도하거나 거래하는 행위는 “학업과 관련한 부정행위자”",
+      "sourceLocation": {
+        "lineIndex": 31,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "불법적인 방법으로 양도하거나 거래하는 행위는 “학업과 관련한 부정행위자”"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a07b7331f28e8240",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "에 해당되며,",
+      "sourceLocation": {
+        "lineIndex": 32,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "에 해당되며,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-94dffc8ba934d746",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "엄중한 징계 대상",
+      "sourceLocation": {
+        "lineIndex": 33,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "엄중한 징계 대상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-39075181a68181e6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "이 될 수 있으므로 각별한 주의가 요구됩니다.",
+      "sourceLocation": {
+        "lineIndex": 34,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "이 될 수 있으므로 각별한 주의가 요구됩니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b4d64211fced9102",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "또한, 인터넷 앱 및 커뮤니티에 대한 실시간 모니터링을 통해 불법 행위가 확인될 경우 선처 없이 단호히 조치할 예정입니다.",
+      "sourceLocation": {
+        "lineIndex": 35,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "또한, 인터넷 앱 및 커뮤니티에 대한 실시간 모니터링을 통해 불법 행위가 확인될 경우 선처 없이 단호히 조치할 예정입니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-639ab420e7bdf19a",
+      "segmentType": "label_value",
+      "labelText": "☞ 아울러, 수강신청 시",
+      "bodyText": "☞ 아울러, 수강신청 시",
+      "sourceLocation": {
+        "lineIndex": 36,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "☞ 아울러, 수강신청 시"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6096bce297a1b8d1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "매크로 사용 등 동일 행동의 반복 행위가 확인",
+      "sourceLocation": {
+        "lineIndex": 37,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "매크로 사용 등 동일 행동의 반복 행위가 확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ac0b21e7c0274122",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "될 경우,",
+      "sourceLocation": {
+        "lineIndex": 38,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "될 경우,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b47bc83e78fae4c3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "계정 로그인 제한",
+      "sourceLocation": {
+        "lineIndex": 39,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "계정 로그인 제한"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0ea6fa99ed2e2b77",
+      "segmentType": "label_value",
+      "labelText": "등의 제재가 적용되어 수강신청이 제한될 수 있으니 유의해 주시기 바랍니다.",
+      "bodyText": "등의 제재가 적용되어 수강신청이 제한될 수 있으니 유의해 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 40,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "등의 제재가 적용되어 수강신청이 제한될 수 있으니 유의해 주시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 44,
+    "locallyGroundedCount": 3,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 18,
+      "continuation": 2,
+      "paragraph": 19,
+      "list_item": 4
+    }
+  }
+}

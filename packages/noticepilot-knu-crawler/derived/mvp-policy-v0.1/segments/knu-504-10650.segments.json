@@ -1,0 +1,603 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10650",
+  "sourceContentHash": "c92407102de1e1e5093730eacb26a843669d0a18a09e7af32f8040f4b4da0b0f",
+  "sourceTitle": "2026학년도 신입생 학생증 발급 안내",
+  "publishedAt": "2026-02-23",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bfb064d2f46ddbad",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026학년도 신입생 학생증 발급 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 신입생 학생증 발급 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-352d4a2d0bb6a3cc",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 학부․대학원 신입생（복학생, 편입생 포함）에 대한 학생증 발급을 아래와 같이 알려 드리니 해당 학과（학부, 전공） 학생들에게 안내하여 주시기 바랍니다.",
+      "bodyText": "2026학년도 학부․대학원 신입생（복학생, 편입생 포함）에 대한 학생증 발급을 아래와 같이 알려 드리니 해당 학과（학부, 전공） 학생들에게 안내하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate",
+        "degree_level:graduate",
+        "enrollment_status:returning",
+        "admission_type:new_student",
+        "admission_type:transfer_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 학부․대학원 신입생（복학생, 편입생 포함）에 대한 학생증 발급을 아래와 같이 알려 드리니 해당 학과（학부, 전공） 학생들에게 안내하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4f9a43cf5edb6994",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 발급대상 : 학부, 대학원 신입생（복학생, 편입생）, 기존 재학생도 가능",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate",
+        "degree_level:graduate",
+        "enrollment_status:enrolled",
+        "enrollment_status:returning",
+        "admission_type:new_student",
+        "admission_type:transfer_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 발급대상 : 학부, 대학원 신입생（복학생, 편입생）, 기존 재학생도 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ed1ec4826a039214",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 사용용도 : 도서관 이용, 금융 IC서비스, 건물 출입, 교통카드 등",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 사용용도 : 도서관 이용, 금융 IC서비스, 건물 출입, 교통카드 등"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e39d71f0e45a7bc8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 건물출입 : 개강 초 학생증 발급기간（2∼3주） 소요 예정에 따라 신입생 및 재학생의 원활한 건물 출입을 위해〔붙임 3〕모바일 K-Cloud앱 전자출입 안내에 따라 등록 후 활용",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled",
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 건물출입 : 개강 초 학생증 발급기간（2∼3주） 소요 예정에 따라 신입생 및 재학생의 원활한 건물 출입을 위해〔붙임 3〕모바일 K-Cloud앱 전자출입 안내에 따라 등록 후 활용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-23f283294ebdd295",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026. 2. 27.（금）부터 （※ 신입생 학적 생성 이후부터 신청 가능함）",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [
+        {
+          "value": "2026-02-27",
+          "start": 11,
+          "end": 26
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 신 청 일 : 2026. 2. 27.（금）부터 （※ 신입생 학적 생성 이후부터 신청 가능함）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-115fac412044eddb",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 학생증 발급",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 학생증 발급"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-def42e63ed4c114d",
+      "segmentType": "label_value",
+      "labelText": "1） 스마트폰 어플（신한 SOL）을 이용한 학생증 체크카드 신청",
+      "bodyText": "1） 스마트폰 어플（신한 SOL）을 이용한 학생증 체크카드 신청",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1） 스마트폰 어플（신한 SOL）을 이용한 학생증 체크카드 신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2914d99e8ba351c8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2） 학생증 정보입력（계좌 개설, 사진 등록 등）",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2） 학생증 정보입력（계좌 개설, 사진 등록 등）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-65a1b13a234ac983",
+      "segmentType": "label_value",
+      "labelText": "3） 신청완료",
+      "bodyText": "3） 신청완료",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3） 신청완료"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-21b1f9ca1c7ff0e9",
+      "segmentType": "continuation",
+      "labelText": "3） 신청완료 4） 학생증 수령（신한은행 강원대학교 지점 방문） /",
+      "bodyText": "3.9.（월） 이후 부터 가능",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-65a1b13a234ac983"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-09",
+          "start": 38,
+          "end": 45
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3） 신청완료 4） 학생증 수령（신한은행 강원대학교 지점 방문） / 3.9.（월） 이후 부터 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5fac3bf297c093fd",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "3.9.（월） 이후 부터 가능",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-09",
+          "start": 30,
+          "end": 37
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "4） 학생증 수령（신한은행 강원대학교 지점 방문） / 3.9.（월） 이후 부터 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3c89e00e8b0583c5",
+      "segmentType": "label_value",
+      "labelText": "자세한 신청방법은〔붙임 1〕의 이용가이드 참고",
+      "bodyText": "※ 자세한 신청방법은〔붙임 1〕의 이용가이드 참고",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 자세한 신청방법은〔붙임 1〕의 이용가이드 참고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-891829dc685bbb0b",
+      "segmentType": "label_value",
+      "labelText": "외국인 유학생의 경우 온라인 웹페이지 신청만 가능（학교 홈페이지-학사안내-증명서발급-학생증발급）하며, 세부사항은 국제교류과에서 별도 안내",
+      "bodyText": "※ 외국인 유학생의 경우 온라인 웹페이지 신청만 가능（학교 홈페이지-학사안내-증명서발급-학생증발급）하며, 세부사항은 국제교류과에서 별도 안내",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 외국인 유학생의 경우 온라인 웹페이지 신청만 가능（학교 홈페이지-학사안내-증명서발급-학생증발급）하며, 세부사항은 국제교류과에서 별도 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-978b885836a0cbb7",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 학생증 수령 : 은행의 혼잡예방을 위해 단과대학별로 지정된 요일에 수령（2주간）",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 학생증 수령 : 은행의 혼잡예방을 위해 단과대학별로 지정된 요일에 수령（2주간）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-96687847c547aaf6",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3.9. / 3.16（월） : 문화예술공과대학, IT대학",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-09",
+          "start": 2,
+          "end": 5
+        },
+        {
+          "value": "2026-03-16",
+          "start": 9,
+          "end": 16
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 3.9. / 3.16（월） : 문화예술공과대학, IT대학"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-be979c23b8f693c0",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3.10. / 3.17.（화） : 사범대학, 자연과학대학",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-10",
+          "start": 2,
+          "end": 6
+        },
+        {
+          "value": "2026-03-17",
+          "start": 10,
+          "end": 18
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 3.10. / 3.17.（화） : 사범대학, 자연과학대학"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-df0eba96bc33e83c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3.11. / 3. 18.（수） : 경영대학, 농업생명과학대학",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-11",
+          "start": 2,
+          "end": 6
+        },
+        {
+          "value": "2026-03-18",
+          "start": 10,
+          "end": 19
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 3.11. / 3. 18.（수） : 경영대학, 농업생명과학대학"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3a0124abe4082394",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3.12. / 3.19.（목） : 간호대학, 의과대학, 약학대학, 수의과대학, 산림환경과학대학, 동물생명과학대학, 의생명과학대학",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-12",
+          "start": 2,
+          "end": 6
+        },
+        {
+          "value": "2026-03-19",
+          "start": 10,
+          "end": 18
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 3.12. / 3.19.（목） : 간호대학, 의과대학, 약학대학, 수의과대학, 산림환경과학대학, 동물생명과학대학, 의생명과학대학"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8ade8cd7a0efef10",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3.13. / 3.20.（금） : 인문대학, 사회과학대학, 글로벌미래융합대학",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-13",
+          "start": 2,
+          "end": 6
+        },
+        {
+          "value": "2026-03-20",
+          "start": 10,
+          "end": 18
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 3.13. / 3.20.（금） : 인문대학, 사회과학대학, 글로벌미래융합대학"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-12f5087c02d9de25",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "6. 기타 안내 및 협조사항",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 기타 안내 및 협조사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a8d183b95b5d1cc4",
+      "segmentType": "label_value",
+      "labelText": "개강 초 학생증 발급 소요기간（2~3주）을 고려 원활한 건물 출입을 위해 （붙임 3） 모바일 K-Cloud앱 전자출입안내에 따라 등록 후 활용",
+      "bodyText": "가. 개강 초 학생증 발급 소요기간（2~3주）을 고려 원활한 건물 출입을 위해 （붙임 3） 모바일 K-Cloud앱 전자출입안내에 따라 등록 후 활용",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 개강 초 학생증 발급 소요기간（2~3주）을 고려 원활한 건물 출입을 위해 （붙임 3） 모바일 K-Cloud앱 전자출입안내에 따라 등록 후 활용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-71dc0f93191245ad",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3.9.（월）부터 소속 단과대학 지정 날짜/요일에 신한은행 강원대학교지점 방문 수령",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-09",
+          "start": 8,
+          "end": 15
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "나. 학생증은 3.9.（월）부터 소속 단과대학 지정 날짜/요일에 신한은행 강원대학교지점 방문 수령"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fe719cf7d4826c76",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "다. 학생증 발급 후 1개월 이내 찾아가지 않을 경우 자동 폐기",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 학생증 발급 후 1개월 이내 찾아가지 않을 경우 자동 폐기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9f74ee73f24fa7c9",
+      "segmentType": "label_value",
+      "labelText": "붙임 1. 학생증 신청 이용 가이드 1부.",
+      "bodyText": "붙임 1. 학생증 신청 이용 가이드 1부.",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 1. 학생증 신청 이용 가이드 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d46acdb250d40f31",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 학생증 S20 체크카드 안내문 1부.",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 학생증 S20 체크카드 안내문 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-42c8842d19d7f799",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 모바일 K-Cloud 전자출입 이용 방법 안내자료 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 모바일 K-Cloud 전자출입 이용 방법 안내자료 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 27,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "list_item": 16,
+      "paragraph": 2,
+      "continuation": 1
+    }
+  }
+}

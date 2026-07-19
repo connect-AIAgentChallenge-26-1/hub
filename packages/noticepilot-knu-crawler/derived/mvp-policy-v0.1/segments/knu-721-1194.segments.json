@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-1194",
+  "sourceContentHash": "b20841d9bf02e944ab281b301747b120717eb1bb3c921b5a5ba53d8075a44d12",
+  "sourceTitle": "2026년도 신라문화장학재단 장학생 공개선발 안내",
+  "publishedAt": "2026-01-15",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4c220a2b1e65d3e4",
+      "segmentType": "title",
+      "labelText": "2026년도 신라문화장학재단 장학생 공개선발 안내",
+      "bodyText": "2026년도 신라문화장학재단 장학생 공개선발 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년도 신라문화장학재단 장학생 공개선발 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d34980e51968455b",
+      "segmentType": "label_value",
+      "labelText": "지원자격",
+      "bodyText": "1. 지원자격: 붙임 참조",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 지원자격: 붙임 참조"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-df6a53f66248572f",
+      "segmentType": "label_value",
+      "labelText": "선발방법",
+      "bodyText": "2. 선발방법: 서류전형",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 선발방법: 서류전형"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-09800bd2245ce905",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 1. 16. ~ 1. 29.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-16",
+          "start": 9,
+          "end": 20
+        },
+        {
+          "value": "2026-01-29",
+          "start": 24,
+          "end": 29
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 접수기간: 2026. 1. 16. ~ 1. 29."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-32184082db9ab724",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 자세한 사항은 붙임 파일 참고",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 자세한 사항은 붙임 파일 참고"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "paragraph": 1
+    }
+  }
+}

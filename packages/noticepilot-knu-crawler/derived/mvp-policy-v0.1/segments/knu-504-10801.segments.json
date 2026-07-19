@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10801",
+  "sourceContentHash": "0b69c7bd3ae5b0bf8551e000fb7c310fbcded5b8fbf3d4066f061b0ca21b44b3",
+  "sourceTitle": "[보안공지] 국세청 홈택스 사칭 피싱메일 주의 권고",
+  "publishedAt": "2026-03-30",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d2510d8d27cd873e",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "[보안공지] 국세청 홈택스 사칭 피싱메일 주의 권고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[보안공지] 국세청 홈택스 사칭 피싱메일 주의 권고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a0e06cb973e49502",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "최근 국세청 홈택스를 사칭한 피싱 메일이 다수 발견되고 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "최근 국세청 홈택스를 사칭한 피싱 메일이 다수 발견되고 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4ad379dde6aa36dc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "이와 관련하여 사전 피해 예방을 위한 주의 강화 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "이와 관련하여 사전 피해 예방을 위한 주의 강화 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e6996fb1ebc8f81d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "[보안 주의 사항]",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[보안 주의 사항]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d8bc65b857fde220",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 이메일 발송자를 정확히 확인하고 출처 불분명 이메일 및 첨부파일은 열람 금지",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 이메일 발송자를 정확히 확인하고 출처 불분명 이메일 및 첨부파일은 열람 금지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b75886511579ec22",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 이메일 본문에 불분명한 사이트 주소는 클릭을 자제",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 이메일 본문에 불분명한 사이트 주소는 클릭을 자제"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fe934215f95180e8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 이메일을 통해 연결된 사이트의 경우, 일단 의심하고 연결된 사이트 주소와 정상 사이트와의 일치여부를 반드시 확인",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 이메일을 통해 연결된 사이트의 경우, 일단 의심하고 연결된 사이트 주소와 정상 사이트와의 일치여부를 반드시 확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-75fe81e4c32bfd3a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 바이러스 백신 업데이트 및 수시 검사",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 바이러스 백신 업데이트 및 수시 검사"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6fc3121ce1abd8f0",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 보안사고 발생시 즉시 신고: 정보화본부 정보보호팀(250-7726)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 보안사고 발생시 즉시 신고: 정보화본부 정보보호팀(250-7726)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 9,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "list_item": 5
+    }
+  }
+}

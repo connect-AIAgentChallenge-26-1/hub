@@ -1,0 +1,279 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-1210",
+  "sourceContentHash": "b624a1fe268f6d68fefb2bbabe79b32bcf3abc6f6d8cd2d637cb01f0a5ed047c",
+  "sourceTitle": "＇2025년도 2학기 주거안정장학금＇ 지급요청서（2026.1월분） 제출 안내",
+  "publishedAt": "2026-02-09",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b2f3462961ee15d6",
+      "segmentType": "title",
+      "labelText": "＇2025년도 2학기 주거안정장학금＇ 지급요청서（2026.1월분） 제출 안내",
+      "bodyText": "＇2025년도 2학기 주거안정장학금＇ 지급요청서（2026.1월분） 제출 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "＇2025년도 2학기 주거안정장학금＇ 지급요청서（2026.1월분） 제출 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-25aa8f7d4d5d77c8",
+      "segmentType": "label_value",
+      "labelText": "'2025년도 2학기 주거안정장학금' 지원대상자분들 중 동계 계절학기를 수강하신 분들께서는 1월분 지급요청서를 오는",
+      "bodyText": "2월 13일(금)까지 한국장학재단 홈페이지를 통해 반드시 제출하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-13",
+          "start": 65,
+          "end": 74
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "'2025년도 2학기 주거안정장학금' 지원대상자분들 중 동계 계절학기를 수강하신 분들께서는 1월분 지급요청서를 오는 2월 13일(금)까지 한국장학재단 홈페이지를 통해 반드시 제출하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3d227cd8236b601a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2월 13일(금)까지 제출",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-13",
+          "start": 31,
+          "end": 40
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 2025년도 사업종료에 따른 후속조치를 위해 반드시 2월 13일(금)까지 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6c312d40b82164b9",
+      "segmentType": "label_value",
+      "labelText": "이러닝 강좌로만 진행된 계절학기 수업은 장학금 지급 제외(한국장학재단 지침)",
+      "bodyText": "- 이러닝 강좌로만 진행된 계절학기 수업은 장학금 지급 제외(한국장학재단 지침)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 이러닝 강좌로만 진행된 계절학기 수업은 장학금 지급 제외(한국장학재단 지침)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5d088be383582cc2",
+      "segmentType": "label_value",
+      "labelText": "1월분 지급요청서 제출 대상자에게는 개별 문자메시지 발송 완료",
+      "bodyText": "- 1월분 지급요청서 제출 대상자에게는 개별 문자메시지 발송 완료",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 1월분 지급요청서 제출 대상자에게는 개별 문자메시지 발송 완료"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e770d4636b00dd39",
+      "segmentType": "label_value",
+      "labelText": "제출기한(",
+      "bodyText": "2.13.) 이후 추가 제출 불가능",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-13",
+          "start": 7,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 제출기한(2.13.) 이후 추가 제출 불가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1ee23ff0a5b1805b",
+      "segmentType": "label_value",
+      "labelText": "아울러, '지급요청서 작성 매뉴얼'을 첨부해드리니 참고 및 숙지하여 주시고,",
+      "bodyText": "아울러, '지급요청서 작성 매뉴얼'을 첨부해드리니 참고 및 숙지하여 주시고,",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "아울러, '지급요청서 작성 매뉴얼'을 첨부해드리니 참고 및 숙지하여 주시고,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b7405fc39a46ef73",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "향후 반환 및 환수사례가 발생하지 않도록 각별히 유의하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "향후 반환 및 환수사례가 발생하지 않도록 각별히 유의하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-865027ee11a26a43",
+      "segmentType": "label_value",
+      "labelText": "특히, 지급요청서에 작성하신 금액을 입증할 수 있는 각종 증빙서류는",
+      "bodyText": "특히, 지급요청서에 작성하신 금액을 입증할 수 있는 각종 증빙서류는",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "특히, 지급요청서에 작성하신 금액을 입증할 수 있는 각종 증빙서류는"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d20d5d3fce66fcda",
+      "segmentType": "label_value",
+      "labelText": "5년간 필히 보관하셔야 하며, 대학의 요청 시 즉시 해당 서류를 제출해 주셔야 하니",
+      "bodyText": "5년간 필히 보관하셔야 하며, 대학의 요청 시 즉시 해당 서류를 제출해 주셔야 하니",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5년간 필히 보관하셔야 하며, 대학의 요청 시 즉시 해당 서류를 제출해 주셔야 하니"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3e8628a859a1e7cf",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "함께 참고하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "함께 참고하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0c7faffec973a11b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "감사합니다.",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "감사합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c54712e4e6c517e8",
+      "segmentType": "label_value",
+      "labelText": "(첨부) 주거안정장학금 지급요청서 작성 매뉴얼",
+      "bodyText": "(첨부) 주거안정장학금 지급요청서 작성 매뉴얼",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(첨부) 주거안정장학금 지급요청서 작성 매뉴얼"
+    }
+  ],
+  "summary": {
+    "segmentCount": 13,
+    "locallyGroundedCount": 3,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 8,
+      "list_item": 1,
+      "paragraph": 3
+    }
+  }
+}

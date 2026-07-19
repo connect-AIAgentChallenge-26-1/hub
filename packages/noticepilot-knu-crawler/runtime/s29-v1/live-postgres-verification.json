@@ -1,0 +1,195 @@
+{
+  "schemaVersion": "noticepilot.s29LivePostgresVerification.v0.1",
+  "verifierVersion": "0.1.0",
+  "status": "pass",
+  "livePostgresVerified": true,
+  "database": {
+    "name": "noticepilot_s29_test",
+    "user": "chan",
+    "serverVersion": "PostgreSQL 16.14 (Homebrew) on aarch64-apple-darwin25.4.0, compiled by Apple clang version 21.0.0 (clang-2100.0.123.102), 64-bit"
+  },
+  "migration": {
+    "version": "0001_s29_initial",
+    "path": "migrations/postgresql/0001_s29_initial.sql",
+    "sha256": "a542301b0630c17a27169b4412f439f54f133c2d95b08a01d39e188b9ce8c759"
+  },
+  "bootstrap": {
+    "expectedCounts": {
+      "calendar_event": 900,
+      "calendar_event_candidate": 1304,
+      "calendar_event_revision": 901,
+      "calendar_event_source_link": 909,
+      "candidate_event_assignment": 909,
+      "cross_notice_relation_decision": 343,
+      "extraction_run": 2059,
+      "feed_snapshot": 2,
+      "feed_snapshot_event": 900,
+      "source_notice": 2059,
+      "subscription_profile_head": 2,
+      "subscription_profile_revision": 2
+    },
+    "actualCounts": {
+      "calendar_event": 900,
+      "calendar_event_candidate": 1304,
+      "calendar_event_revision": 901,
+      "calendar_event_source_link": 909,
+      "candidate_event_assignment": 909,
+      "cross_notice_relation_decision": 343,
+      "extraction_run": 2059,
+      "feed_snapshot": 2,
+      "feed_snapshot_event": 900,
+      "source_notice": 2059,
+      "subscription_profile_head": 2,
+      "subscription_profile_revision": 2
+    }
+  },
+  "checks": [
+    {
+      "checkId": "migration_checksum",
+      "status": "pass",
+      "expected": "a542301b0630c17a27169b4412f439f54f133c2d95b08a01d39e188b9ce8c759",
+      "actual": "a542301b0630c17a27169b4412f439f54f133c2d95b08a01d39e188b9ce8c759",
+      "detail": "tracked migration 0001_s29_initial"
+    },
+    {
+      "checkId": "bootstrap_row_counts",
+      "status": "pass",
+      "expected": {
+        "calendar_event": 900,
+        "calendar_event_candidate": 1304,
+        "calendar_event_revision": 901,
+        "calendar_event_source_link": 909,
+        "candidate_event_assignment": 909,
+        "cross_notice_relation_decision": 343,
+        "extraction_run": 2059,
+        "feed_snapshot": 2,
+        "feed_snapshot_event": 900,
+        "source_notice": 2059,
+        "subscription_profile_head": 2,
+        "subscription_profile_revision": 2
+      },
+      "actual": {
+        "calendar_event": 900,
+        "calendar_event_candidate": 1304,
+        "calendar_event_revision": 901,
+        "calendar_event_source_link": 909,
+        "candidate_event_assignment": 909,
+        "cross_notice_relation_decision": 343,
+        "extraction_run": 2059,
+        "feed_snapshot": 2,
+        "feed_snapshot_event": 900,
+        "source_notice": 2059,
+        "subscription_profile_head": 2,
+        "subscription_profile_revision": 2
+      },
+      "detail": "all bootstrap table counts match"
+    },
+    {
+      "checkId": "token_hash_only_schema",
+      "status": "pass",
+      "expected": "hash and prefix columns only; no raw token column",
+      "actual": [
+        "calendar_name",
+        "created_at",
+        "current_snapshot_id",
+        "etag",
+        "feed_id",
+        "profile_id",
+        "status",
+        "token_hash_sha256",
+        "token_prefix",
+        "token_rotated_at",
+        "updated_at"
+      ],
+      "detail": "information_schema inspection"
+    },
+    {
+      "checkId": "migration_identical_rerun",
+      "status": "pass",
+      "expected": "a542301b0630c17a27169b4412f439f54f133c2d95b08a01d39e188b9ce8c759",
+      "actual": "a542301b0630c17a27169b4412f439f54f133c2d95b08a01d39e188b9ce8c759",
+      "detail": "execute_migration returned without reapplying DDL"
+    },
+    {
+      "checkId": "check_constraint_source_notice_status",
+      "status": "pass",
+      "expected": "23514",
+      "actual": "23514",
+      "detail": "observed CheckViolation; probe transaction rolled back"
+    },
+    {
+      "checkId": "unique_constraint_source_identity",
+      "status": "pass",
+      "expected": "23505",
+      "actual": "23505",
+      "detail": "observed UniqueViolation; probe transaction rolled back"
+    },
+    {
+      "checkId": "foreign_key_extraction_source_notice",
+      "status": "pass",
+      "expected": "23503",
+      "actual": "23503",
+      "detail": "observed ForeignKeyViolation; probe transaction rolled back"
+    },
+    {
+      "checkId": "partial_unique_active_revision",
+      "status": "pass",
+      "expected": "23505",
+      "actual": "23505",
+      "detail": "observed UniqueViolation; probe transaction rolled back"
+    },
+    {
+      "checkId": "partial_unique_canonical_source",
+      "status": "pass",
+      "expected": "23505",
+      "actual": "23505",
+      "detail": "observed UniqueViolation; probe transaction rolled back"
+    },
+    {
+      "checkId": "check_constraint_subscription_feed_token_state",
+      "status": "pass",
+      "expected": "23514",
+      "actual": "23514",
+      "detail": "observed CheckViolation; probe transaction rolled back"
+    },
+    {
+      "checkId": "transaction_atomic_rollback",
+      "status": "pass",
+      "expected": {
+        "failureSqlstate": "23503",
+        "sourceResidue": 0,
+        "outboxResidue": 0
+      },
+      "actual": {
+        "failureSqlstate": "23503",
+        "sourceResidue": 0,
+        "outboxResidue": 0
+      },
+      "detail": "source row and outbox row were inserted before forced FK failure"
+    },
+    {
+      "checkId": "migration_advisory_lock",
+      "status": "pass",
+      "expected": {
+        "whileHeld": false,
+        "afterRelease": true
+      },
+      "actual": {
+        "whileHeld": false,
+        "afterRelease": true
+      },
+      "detail": "transaction-scoped advisory lock contention probe"
+    },
+    {
+      "checkId": "verification_probe_residue",
+      "status": "pass",
+      "expected": [],
+      "actual": [],
+      "detail": "all live verification writes must be rolled back"
+    }
+  ],
+  "probeResidue": [],
+  "mutationsCommitted": false,
+  "generatedAt": "2026-07-13T08:59:22.658255Z",
+  "reportSha256": "eb66e820ac8885296a4389889519fe78a53a22d7eb814625dafe391f1a3dddbf"
+}

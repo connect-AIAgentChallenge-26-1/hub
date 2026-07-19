@@ -1,0 +1,287 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10688",
+  "sourceContentHash": "df4706d6a66ca715041d4c473cc141646b4980c44e6b8ab1d52c9ceddcd7b997",
+  "sourceTitle": "2026학년도 1학기 재학생 등록금 1차 추가 납부 안내",
+  "publishedAt": "2026-03-04",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e0c76bd3702bebd8",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 재학생 등록금 1차 추가 납부 안내",
+      "bodyText": "2026학년도 1학기 재학생 등록금 1차 추가 납부 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 재학생 등록금 1차 추가 납부 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e85f55f823f76799",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 1학기 강릉·원주 캠퍼스 재학생 등록금 1차 추가 납부 기간을 아래와 같이 안내합니다.",
+      "bodyText": "2026학년도 1학기 강릉·원주 캠퍼스 재학생 등록금 1차 추가 납부 기간을 아래와 같이 안내합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 강릉·원주 캠퍼스 재학생 등록금 1차 추가 납부 기간을 아래와 같이 안내합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-27f7894bd2f5317b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 대상: 재학생 중 등록금 미납자 및 수업연한초과자",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 대상: 재학생 중 등록금 미납자 및 수업연한초과자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-55a603229842fbfd",
+      "segmentType": "label_value",
+      "labelText": "등록금 조회/납부기간",
+      "bodyText": "2026. 3. 12.（목） 09시 ~ 3. 13.（금） 16시",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-12",
+          "start": 16,
+          "end": 31
+        },
+        {
+          "value": "2026-03-13",
+          "start": 38,
+          "end": 47
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 등록금 조회/납부기간: 2026. 3. 12.（목） 09시 ~ 3. 13.（금） 16시"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fcd9d78aea933489",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 조회방법: [학교홈페이지]→통합인트로→강릉·원주 탭 선택→인트라넷 바로가기→로그인→등록관리→등록금고지서출력→고지서출력",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 조회방법: [학교홈페이지]→통합인트로→강릉·원주 탭 선택→인트라넷 바로가기→로그인→등록관리→등록금고지서출력→고지서출력"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3b4c33b613a4038c",
+      "segmentType": "label_value",
+      "labelText": "실 납부금액이 0원인 경우",
+      "bodyText": "3. 실 납부금액이 0원인 경우",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 실 납부금액이 0원인 경우"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-755d5c1504b26bc4",
+      "segmentType": "label_value",
+      "labelText": "[학교홈페이지]→통합인트로→강릉·원주 탭 선택→인트라넷바로가기→로그인→등록관리→ 0원등록신청→조회→해당항목 체크 → 수납처리 버튼 클릭",
+      "bodyText": "[학교홈페이지]→통합인트로→강릉·원주 탭 선택→인트라넷바로가기→로그인→등록관리→ 0원등록신청→조회→해당항목 체크 → 수납처리 버튼 클릭",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[학교홈페이지]→통합인트로→강릉·원주 탭 선택→인트라넷바로가기→로그인→등록관리→ 0원등록신청→조회→해당항목 체크 → 수납처리 버튼 클릭"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-49e47b78763393e0",
+      "segmentType": "label_value",
+      "labelText": "실 납부금액이 있는 경우",
+      "bodyText": "4. 실 납부금액이 있는 경우",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 실 납부금액이 있는 경우"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9841c2da8b0bc94f",
+      "segmentType": "label_value",
+      "labelText": "은행창구 방문 납부 또는 가상계좌로 실 납부금액 계좌입금",
+      "bodyText": "- 은행창구 방문 납부 또는 가상계좌로 실 납부금액 계좌입금",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 은행창구 방문 납부 또는 가상계좌로 실 납부금액 계좌입금"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-da0dbac2e84da34b",
+      "segmentType": "label_value",
+      "labelText": "카드납부",
+      "bodyText": "- 카드납부 : 신한카드, 삼성카드 현대카드, 국민카드, 하나카드사 홈페이지 대학등록금 메뉴에서 납부 가능",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 카드납부 : 신한카드, 삼성카드 현대카드, 국민카드, 하나카드사 홈페이지 대학등록금 메뉴에서 납부 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7f6d9d8c27c24b51",
+      "segmentType": "label_value",
+      "labelText": "납부확인",
+      "bodyText": "4. 납부확인",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 납부확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f2ff206df0ce9f5b",
+      "segmentType": "label_value",
+      "labelText": "은행납부 또는 가상계좌 납부 직후 인트라넷→등록관리→등록내역조회(학생)에서 확인가능",
+      "bodyText": "- 은행납부 또는 가상계좌 납부 직후 인트라넷→등록관리→등록내역조회(학생)에서 확인가능",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 은행납부 또는 가상계좌 납부 직후 인트라넷→등록관리→등록내역조회(학생)에서 확인가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2d9c7c862cc27c78",
+      "segmentType": "label_value",
+      "labelText": "카드납부는 납부 다음날 부터 인트라넷→등록관리→등록내역조회(학생))에서 확인 가능",
+      "bodyText": "- 카드납부는 납부 다음날 부터 인트라넷→등록관리→등록내역조회(학생))에서 확인 가능",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 카드납부는 납부 다음날 부터 인트라넷→등록관리→등록내역조회(학생))에서 확인 가능"
+    }
+  ],
+  "summary": {
+    "segmentCount": 13,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 10,
+      "list_item": 2
+    }
+  }
+}

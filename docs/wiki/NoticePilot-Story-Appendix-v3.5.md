@@ -22,7 +22,7 @@
 
 NoticePilot의 핵심 흐름은 긴 공지를 구조화된 분석 결과로 바꾸고, 사용자가 검토/수정한 뒤 체크리스트와 캘린더 후보로 export하는 것이다.
 
-현재 workspace는 `공지 캘린더`와 `단건 공지 분석` 탭으로 나뉜다. 공지 캘린더 탭은 관심 캠퍼스 설정과 구독형 ICS 준비 중 상태를 보여주며, 캠퍼스 설정은 현재 분석/내보내기 결과를 바꾸지 않는 inert metadata로만 저장된다.
+현재 workspace는 `공지 캘린더`와 `단건 공지 분석` 탭으로 나뉜다. 공지 캘린더 탭은 관심 캠퍼스 설정과 로컬 reference 구독형 ICS 생성·복사 상태를 보여준다. 이 구독 경계는 환경변수로 명시적으로 활성화할 때만 복원된 Foundation.25.1의 고정 all-campus reference feed를 사용하며, 캠퍼스 설정은 현재 분석·내보내기·reference feed 결과를 바꾸지 않는 inert metadata로만 저장된다.
 
 ![NoticePilot overview map](../assets/wiki/noticepilot-story-appendix-v3-5/noticepilot_story_00_overview_v3_5.png)
 

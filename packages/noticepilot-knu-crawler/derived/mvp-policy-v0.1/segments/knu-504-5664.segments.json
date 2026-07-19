@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-5664",
+  "sourceContentHash": "4dcbd57214b291aadb6ee158ec849374bf94391b25b9c883cd599389a17bcf50",
+  "sourceTitle": "외국인 유학생 안전한 등록금 납부방법 안내",
+  "publishedAt": "2026-02-02",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4c6be2541d54d06a",
+      "segmentType": "title",
+      "labelText": "외국인 유학생 안전한 등록금 납부방법 안내",
+      "bodyText": "외국인 유학생 안전한 등록금 납부방법 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "외국인 유학생 안전한 등록금 납부방법 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a8fd927d09d111db",
+      "segmentType": "label_value",
+      "labelText": "전기통신금융사기 관련 외국인 유학생의 금전적, 민․형사적 피해 예방을 위해 안전한 등록금 납부 방법을 안내드립니다.",
+      "bodyText": "전기통신금융사기 관련 외국인 유학생의 금전적, 민․형사적 피해 예방을 위해 안전한 등록금 납부 방법을 안내드립니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "전기통신금융사기 관련 외국인 유학생의 금전적, 민․형사적 피해 예방을 위해 안전한 등록금 납부 방법을 안내드립니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1
+    }
+  }
+}

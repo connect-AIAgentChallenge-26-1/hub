@@ -1,0 +1,237 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-4054",
+  "sourceContentHash": "6b1778a327c0e7ec6984ab3ebd199ecf33ab093424d7c8c08a256f57bd68b4d5",
+  "sourceTitle": "강원권 통일+센터 대학생 SNS 서포터즈 모집 안내",
+  "publishedAt": "2026-04-02",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-05b74578ed715fdb",
+      "segmentType": "title",
+      "labelText": "강원권 통일+센터 대학생 SNS 서포터즈 모집 안내",
+      "bodyText": "강원권 통일+센터 대학생 SNS 서포터즈 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원권 통일+센터 대학생 SNS 서포터즈 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-af307b01c2a48215",
+      "segmentType": "label_value",
+      "labelText": "《 강원권 통일+센터 서포터즈 모집 개요 》",
+      "bodyText": "《 강원권 통일+센터 서포터즈 모집 개요 》",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "《 강원권 통일+센터 서포터즈 모집 개요 》"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-02fe5f6c1b8a5563",
+      "segmentType": "label_value",
+      "labelText": "모집대상",
+      "bodyText": "모집대상: 강원권 소재 대학(원)생 10명 *휴학생 포함",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:on_leave"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "모집대상: 강원권 소재 대학(원)생 10명 *휴학생 포함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-47fe4416368cd093",
+      "segmentType": "label_value",
+      "labelText": "모집기간",
+      "bodyText": "2026. 4. 1.(수)~4. 17.(금)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-01",
+          "start": 6,
+          "end": 20
+        },
+        {
+          "value": "2026-04-17",
+          "start": 21,
+          "end": 30
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "모집기간: 2026. 4. 1.(수)~4. 17.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38fba078362ee5ac",
+      "segmentType": "label_value",
+      "labelText": "활동기간",
+      "bodyText": "활동기간: 2026. 5월~10월(6개월 간)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "활동기간: 2026. 5월~10월(6개월 간)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b0dc98548330bd7e",
+      "segmentType": "label_value",
+      "labelText": "활동내용",
+      "bodyText": "활동내용: 센터 내 프로그램 참여, 취재 및 홍보콘텐츠제작 등",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "활동내용: 센터 내 프로그램 참여, 취재 및 홍보콘텐츠제작 등"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a13bc4d0776ea4ff",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "서포터즈 혜택",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "서포터즈 혜택"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7e1956b4396fb83a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 강원권 통일+센터 서포터즈 위촉장 및 수료증 발급",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 강원권 통일+센터 서포터즈 위촉장 및 수료증 발급"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-985ecbbcd9d13d16",
+      "segmentType": "label_value",
+      "labelText": "매월 활동 실적에 따라 소정의 활동비 지급(월 최대 6만원)",
+      "bodyText": "- 매월 활동 실적에 따라 소정의 활동비 지급(월 최대 6만원)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 매월 활동 실적에 따라 소정의 활동비 지급(월 최대 6만원)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2b760804689bd155",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 취재를 위한 센터 주요 프로그램 우선 참여 기회 제공",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 취재를 위한 센터 주요 프로그램 우선 참여 기회 제공"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2c912af6d9edad58",
+      "segmentType": "label_value",
+      "labelText": "우수 서포터즈 활동자 3인 대상 강원도지사상 표창 수여",
+      "bodyText": "- 우수 서포터즈 활동자 3인 대상 강원도지사상 표창 수여",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 우수 서포터즈 활동자 3인 대상 강원도지사상 표창 수여"
+    }
+  ],
+  "summary": {
+    "segmentCount": 11,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "paragraph": 1,
+      "list_item": 2
+    }
+  }
+}

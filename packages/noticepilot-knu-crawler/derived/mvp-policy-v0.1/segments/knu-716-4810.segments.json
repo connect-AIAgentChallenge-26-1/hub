@@ -1,0 +1,356 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4810",
+  "sourceContentHash": "2e724acf35f06b6d3bf15952f5d11d23f375bde86be3bc7220e40e0d0acebe49",
+  "sourceTitle": "강원대학교 음악교육지원센터 강사[기간제 계약직] 긴급 채용 서류전형 합격자 발표",
+  "publishedAt": "2026-06-02",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0510527216bccd7a",
+      "segmentType": "title",
+      "labelText": "강원대학교 음악교육지원센터 강사[기간제 계약직] 긴급 채용 서류전형 합격자 발표",
+      "bodyText": "강원대학교 음악교육지원센터 강사[기간제 계약직] 긴급 채용 서류전형 합격자 발표",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 음악교육지원센터 강사[기간제 계약직] 긴급 채용 서류전형 합격자 발표"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bc4eb3b959b87574",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 음악교육지원센터에서는 강사(기간제 계약직) 긴급채용 서류전형 합격자를 공고합니다.",
+      "bodyText": "강원대학교 음악교육지원센터에서는 강사(기간제 계약직) 긴급채용 서류전형 합격자를 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 음악교육지원센터에서는 강사(기간제 계약직) 긴급채용 서류전형 합격자를 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-01e0c634aff9bd15",
+      "segmentType": "label_value",
+      "labelText": "■ 서류전형 합격자(면접시험 대상자)",
+      "bodyText": "■ 서류전형 합격자(면접시험 대상자)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 서류전형 합격자(면접시험 대상자)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-34ce804383958de9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "응시번호 1번 : 심ㅇ경(1368)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "응시번호 1번 : 심ㅇ경(1368)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-795ddefb8ea13a6b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ ( ) 휴대폰번호 뒷자리",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ ( ) 휴대폰번호 뒷자리"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e7f3ad227d028bd0",
+      "segmentType": "label_value",
+      "labelText": "■ 면접시험 일정",
+      "bodyText": "■ 면접시험 일정",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 면접시험 일정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aa5499fd415fee42",
+      "segmentType": "continuation",
+      "labelText": "■ 면접시험 일정 ○ 일시",
+      "bodyText": "2026. 6. 4.(화) 14:00~",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-e7f3ad227d028bd0"
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-04",
+          "start": 17,
+          "end": 31
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "■ 면접시험 일정 ○ 일시 : 2026. 6. 4.(화) 14:00~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-df3fa93ec69b4af1",
+      "segmentType": "label_value",
+      "labelText": "○ 일시",
+      "bodyText": "2026. 6. 4.(화) 14:00~",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-04",
+          "start": 7,
+          "end": 21
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "○ 일시 : 2026. 6. 4.(화) 14:00~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9f8def17ba15e461",
+      "segmentType": "label_value",
+      "labelText": "○ 면접장소 : 강원대학교 강릉캠퍼스 예술1호관(건물번호",
+      "bodyText": "○ 면접장소 : 강원대학교 강릉캠퍼스 예술1호관(건물번호:C10) 220호",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 면접장소 : 강원대학교 강릉캠퍼스 예술1호관(건물번호:C10) 220호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5042f60ff1673ee9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 13시 40분까지 강원대학교 강릉캠퍼스 예술1호관 223호 강의실에서 대기",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 13시 40분까지 강원대학교 강릉캠퍼스 예술1호관 223호 강의실에서 대기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-df8ed8c365fcc9fd",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "■ 지참서류",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 지참서류"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d160a4aa7b6dea50",
+      "segmentType": "label_value",
+      "labelText": "○ 신분증(주민등록증, 운전면허증, 기간만료 전 여권 중 1개)",
+      "bodyText": "○ 신분증(주민등록증, 운전면허증, 기간만료 전 여권 중 1개)",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 신분증(주민등록증, 운전면허증, 기간만료 전 여권 중 1개)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-03b13b412aebc8fc",
+      "segmentType": "label_value",
+      "labelText": "■ 최종합격자 발표",
+      "bodyText": "■ 최종합격자 발표",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 최종합격자 발표"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9108747e15b637be",
+      "segmentType": "continuation",
+      "labelText": "■ 최종합격자 발표 ○",
+      "bodyText": "2026. 6. 5.(금) (예정)",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-03b13b412aebc8fc"
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-05",
+          "start": 13,
+          "end": 27
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "■ 최종합격자 발표 ○ 2026. 6. 5.(금) (예정)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-28e094c3124b5306",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 6. 5.(금) (예정)",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-05",
+          "start": 2,
+          "end": 16
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "○ 2026. 6. 5.(금) (예정)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-85fbb06decf64bdd",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 홈페이지 공고 및 합격자 개별 문자 발송 예정",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 홈페이지 공고 및 합격자 개별 문자 발송 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3e014e6db5af0596",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 문의사항 : 033-640-2525",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 문의사항 : 033-640-2525"
+    }
+  ],
+  "summary": {
+    "segmentCount": 17,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "paragraph": 3,
+      "list_item": 4,
+      "continuation": 2
+    }
+  }
+}

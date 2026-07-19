@@ -1,0 +1,263 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-715-3425",
+  "sourceContentHash": "02d22f1ff3ebfec7293de4eb7c3aaf92ae717cd03be0b1b9da7d8f38b9e2d5f7",
+  "sourceTitle": "< “달그락 맹그락”3기 모집 안내>",
+  "publishedAt": "2026-06-16",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eeb6855331971770",
+      "segmentType": "title",
+      "labelText": "< “달그락 맹그락”3기 모집 안내>",
+      "bodyText": "< “달그락 맹그락”3기 모집 안내>",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "< “달그락 맹그락”3기 모집 안내>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-849f84eecfdd3193",
+      "segmentType": "label_value",
+      "labelText": "< “달그락 맹그락”3기 모집 개요 >",
+      "bodyText": "< “달그락 맹그락”3기 모집 개요 >",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "< “달그락 맹그락”3기 모집 개요 >"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f7c9af8f6572358e",
+      "segmentType": "label_value",
+      "labelText": "○ 모집기간",
+      "bodyText": "2026. 6. 15.(월) ~ 6. 28.(일)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-15",
+          "start": 8,
+          "end": 23
+        },
+        {
+          "value": "2026-06-28",
+          "start": 26,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "○ 모집기간: 2026. 6. 15.(월) ~ 6. 28.(일)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-945a60bdb8a83817",
+      "segmentType": "label_value",
+      "labelText": "○ 모집대상",
+      "bodyText": "○ 모집대상: 광양시 외 지역 18~45세 청년",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 모집대상: 광양시 외 지역 18~45세 청년"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f9023ecedee1cc58",
+      "segmentType": "label_value",
+      "labelText": "○ 활동기간",
+      "bodyText": "2026. 7. 1.(수) ~ 7. 22.(수)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-01",
+          "start": 8,
+          "end": 22
+        },
+        {
+          "value": "2026-07-22",
+          "start": 25,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "○ 활동기간: 2026. 7. 1.(수) ~ 7. 22.(수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7dfdd0768e48bfd1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○ 프로그램: 관광 자원을 활용한 로컬 관광 브랜딩 콘텐츠 제작",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 프로그램: 관광 자원을 활용한 로컬 관광 브랜딩 콘텐츠 제작"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aac4f988bc2ce079",
+      "segmentType": "label_value",
+      "labelText": "○ 지원내용",
+      "bodyText": "○ 지원내용: 교육·실습·주거(1인 1실) 제공 및 활동비·재료비 각 20만원 지급",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 지원내용: 교육·실습·주거(1인 1실) 제공 및 활동비·재료비 각 20만원 지급"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-10aafd2ae0a01333",
+      "segmentType": "label_value",
+      "labelText": "○ 신청방법",
+      "bodyText": "○ 신청방법: 구글 폼(",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 신청방법: 구글 폼("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a9c13521a3165fca",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://docs.google.com/forms/d/e/1FAIpQLSfIaMGmAhOBWIyANEgtvKdu0KsxIgsyzK7Gxh_GTEHgAOVNPA/viewform",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://docs.google.com/forms/d/e/1FAIpQLSfIaMGmAhOBWIyANEgtvKdu0KsxIgsyzK7Gxh_GTEHgAOVNPA/viewform"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9055d0aaa4b27cae",
+      "segmentType": "label_value",
+      "labelText": ")을 통한 온라인 접수",
+      "bodyText": ")을 통한 온라인 접수",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")을 통한 온라인 접수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2ad3b5560abeba9b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○ 문 의 처:",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 문 의 처:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b1bc29624b20d619",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "come2gy@naver.com",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "come2gy@naver.com"
+    }
+  ],
+  "summary": {
+    "segmentCount": 12,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "paragraph": 4
+    }
+  }
+}

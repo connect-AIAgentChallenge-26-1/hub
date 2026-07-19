@@ -1,0 +1,753 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11093",
+  "sourceContentHash": "a8d7fcaf116625e93f7a9db33f2ff223119c9543a7a79947a45c23d36c13bb41",
+  "sourceTitle": "[도서관 이벤트] 2026 하계방학 도서대출 권수·기간 확대 이벤트(방학특별대출)",
+  "publishedAt": "2026-06-08",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7c0bf6f5f89a18f3",
+      "segmentType": "title",
+      "labelText": "[도서관 이벤트] 2026 하계방학 도서대출 권수·기간 확대 이벤트(방학특별대출)",
+      "bodyText": "[도서관 이벤트] 2026 하계방학 도서대출 권수·기간 확대 이벤트(방학특별대출)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[도서관 이벤트] 2026 하계방학 도서대출 권수·기간 확대 이벤트(방학특별대출)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-daf9f55833987500",
+      "segmentType": "label_value",
+      "labelText": "[춘천·삼척·도계 동시 운영]",
+      "bodyText": "[춘천·삼척·도계 동시 운영]",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[춘천·삼척·도계 동시 운영]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-508534cc63175dad",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "¶ 대상:",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "¶ 대상:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cd50f0e3d4b7c99c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "재학생",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e72d422c3e88c1b9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(학부 및 대학원)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(학부 및 대학원)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-51a5ae71ea0b85c2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "¶ 장소: 중앙·미래·법학 및 전자도서관",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "¶ 장소: 중앙·미래·법학 및 전자도서관"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-79c37b17966fd965",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "[EVENT 1] \"종이책 방학특별대출\"",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[EVENT 1] \"종이책 방학특별대출\""
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-47ff8a2f9dea549c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "☞ 대출권수",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "☞ 대출권수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-511626bb993601f0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 학부생",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 학부생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5ff2f836e3611ea8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "30권",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "30권"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-63c8b1ca4d9609b4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ", 대학원생",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:graduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ", 대학원생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9d400930a5fdb947",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "40권",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "40권"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ae60e86a5a5901ba",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "까지 ※ 일반 대출권수와 합산",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "까지 ※ 일반 대출권수와 합산"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f0d581710b5476c6",
+      "segmentType": "label_value",
+      "labelText": "☞ 운영기간",
+      "bodyText": "☞ 운영기간",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "☞ 운영기간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b75be2f5fb54ecd9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 2026.",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 2026."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cb486634285a50c4",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "6. 8.(월) ~ 7. 31",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-08",
+          "start": 0,
+          "end": 8
+        },
+        {
+          "value": "2026-07-31",
+          "start": 11,
+          "end": 16
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "6. 8.(월) ~ 7. 31"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-090cacaaba69f78e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "까지",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5e51bc85d38fa1da",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "☞ 대출방법",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "☞ 대출방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-44a7dc88523d9bff",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "①",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "①"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-083fe3b5c0768db6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "자료실 대출데스크 방문",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자료실 대출데스크 방문"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b330d6aa8e5d985f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(·대출할 도서와 함께 모바일이용증or학생증or신분증 지참)",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(·대출할 도서와 함께 모바일이용증or학생증or신분증 지참)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9b4e256bb9c3304c",
+      "segmentType": "label_value",
+      "labelText": "'방학특별대출' 신청",
+      "bodyText": "② '방학특별대출' 신청",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "② '방학특별대출' 신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6128b7150e91f198",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(·예약/전시/타캠퍼스 도서는 제외, ·2월 졸업/수료 예정자는 특별대출 불가)",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(·예약/전시/타캠퍼스 도서는 제외, ·2월 졸업/수료 예정자는 특별대출 불가)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2051d6c7fc9f19e7",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "③",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "③"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-660e9ec834fbdc08",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "9월 4일까지 반납",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-09-04",
+          "start": 0,
+          "end": 5
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "9월 4일까지 반납"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2276c856313ebc57",
+      "segmentType": "label_value",
+      "labelText": "(·특별대출한 도서는 대출기간 추가 연장 불가, ·무인반납기 반납 가능)",
+      "bodyText": "(·특별대출한 도서는 대출기간 추가 연장 불가, ·무인반납기 반납 가능)",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(·특별대출한 도서는 대출기간 추가 연장 불가, ·무인반납기 반납 가능)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3abc71ac2f6c476f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "☞ 유의사항",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "☞ 유의사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7114fd3638b55c50",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 대출데스크를 통한 별도 신청 없이 대출 시, 일반 대출규정 적용(학부생 15권 15일, 대학원생 30권 30일)",
+      "sourceLocation": {
+        "lineIndex": 26,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate",
+        "degree_level:graduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 대출데스크를 통한 별도 신청 없이 대출 시, 일반 대출규정 적용(학부생 15권 15일, 대학원생 30권 30일)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3afe0f90b0a98c7e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "[EVENT 2] \"전자책 방학특별대출\"",
+      "sourceLocation": {
+        "lineIndex": 27,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[EVENT 2] \"전자책 방학특별대출\""
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a15a234784e955b4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "☞ 내용",
+      "sourceLocation": {
+        "lineIndex": 28,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "☞ 내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6498f93e3c9ff880",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 학부생·대학원생 7일 →",
+      "sourceLocation": {
+        "lineIndex": 29,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate",
+        "degree_level:graduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 학부생·대학원생 7일 →"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a8c2dfa2593f924c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "14일",
+      "sourceLocation": {
+        "lineIndex": 30,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "14일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2069a04d9e432eb8",
+      "segmentType": "label_value",
+      "labelText": "로 확대 ※ 전자책 대출 책수 확대 운영(",
+      "bodyText": "2024.10.10., 학부생 10권 ·대학원생 15권)에 따라 권수는 현행 유지",
+      "sourceLocation": {
+        "lineIndex": 31,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate",
+        "degree_level:graduate"
+      ],
+      "dateSpans": [
+        {
+          "value": "2024-10-10",
+          "start": 23,
+          "end": 33
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "로 확대 ※ 전자책 대출 책수 확대 운영(2024.10.10., 학부생 10권 ·대학원생 15권)에 따라 권수는 현행 유지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ddb2604497066272",
+      "segmentType": "label_value",
+      "labelText": "☞ 운영기간",
+      "bodyText": "☞ 운영기간",
+      "sourceLocation": {
+        "lineIndex": 32,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "☞ 운영기간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0b92c3274d329b0f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 2026.",
+      "sourceLocation": {
+        "lineIndex": 33,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 2026."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fef7bfb55eacf9f3",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "6. 8.(월) 09:00 ~ 8.28.(금) 18:00",
+      "sourceLocation": {
+        "lineIndex": 34,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-08",
+          "start": 0,
+          "end": 8
+        },
+        {
+          "value": "2026-08-28",
+          "start": 17,
+          "end": 25
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "6. 8.(월) 09:00 ~ 8.28.(금) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-370eb5c80cea0cbf",
+      "segmentType": "label_value",
+      "labelText": "해당기간 동안 일괄 확대 적용",
+      "bodyText": "※ 해당기간 동안 일괄 확대 적용",
+      "sourceLocation": {
+        "lineIndex": 35,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 해당기간 동안 일괄 확대 적용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-54f6c8efa431f855",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의",
+      "sourceLocation": {
+        "lineIndex": 36,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5e27d552371e6f0b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 도서관 학술정보운영과 자료운영팀 033-250-8009(중앙), 7622(미래), 6505(법학)",
+      "sourceLocation": {
+        "lineIndex": 37,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 도서관 학술정보운영과 자료운영팀 033-250-8009(중앙), 7622(미래), 6505(법학)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 39,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "paragraph": 26,
+      "list_item": 5
+    }
+  }
+}

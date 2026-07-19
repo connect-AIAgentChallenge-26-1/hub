@@ -1,0 +1,730 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2369",
+  "sourceContentHash": "26b9d8e4d22a3dd204999025cdabf310c85a83e11515eb35198112e734889f58",
+  "sourceTitle": "'2026학년도 다문화·탈북학생 멘토링장학금 사업' 멘토 모집 안내(춘천캠퍼스)",
+  "publishedAt": "2026-04-23",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-537f316c869cfda7",
+      "segmentType": "title",
+      "labelText": "'2026학년도 다문화·탈북학생 멘토링장학금 사업' 멘토 모집 안내(춘천캠퍼스)",
+      "bodyText": "'2026학년도 다문화·탈북학생 멘토링장학금 사업' 멘토 모집 안내(춘천캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "'2026학년도 다문화·탈북학생 멘토링장학금 사업' 멘토 모집 안내(춘천캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ce86014018f70bf1",
+      "segmentType": "label_value",
+      "labelText": "'2026학년도 다문화·탈북학생 멘토링장학금 사업' 대학생 멘토를 다음과 같이 모집하니, 관심 있는 재학생들의 많은 참여 바랍니다.",
+      "bodyText": "'2026학년도 다문화·탈북학생 멘토링장학금 사업' 대학생 멘토를 다음과 같이 모집하니, 관심 있는 재학생들의 많은 참여 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "'2026학년도 다문화·탈북학생 멘토링장학금 사업' 대학생 멘토를 다음과 같이 모집하니, 관심 있는 재학생들의 많은 참여 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a55b397af8119c29",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 사 업 명: 2026학년도 다문화·탈북(이주·북한배경)학생 멘토링장학금 사업",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 사 업 명: 2026학년도 다문화·탈북(이주·북한배경)학생 멘토링장학금 사업"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b4fff7ca5ffe0785",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "2. 신청기간:",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 신청기간:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0dc0c5d178250c0f",
+      "segmentType": "continuation",
+      "labelText": "신청기간",
+      "bodyText": "2026. 4. 23.(목) ~ 4. 28.(화)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-b4fff7ca5ffe0785"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-23",
+          "start": 9,
+          "end": 24
+        },
+        {
+          "value": "2026-04-28",
+          "start": 27,
+          "end": 36
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 신청기간: 2026. 4. 23.(목) ~ 4. 28.(화)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2311165d294462c1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 4. 23.(목) ~ 4. 28.(화)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-23",
+          "start": 0,
+          "end": 15
+        },
+        {
+          "value": "2026-04-28",
+          "start": 18,
+          "end": 27
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 4. 23.(목) ~ 4. 28.(화)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d19bf7ec5fa86022",
+      "segmentType": "label_value",
+      "labelText": "신청 기본요건",
+      "bodyText": "3. 신청 기본요건",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 신청 기본요건"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-29ff5bd8a9b28934",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 대한민국 국적을 가진 자로서 춘천캠퍼스에 재학 중인 학부생",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 대한민국 국적을 가진 자로서 춘천캠퍼스에 재학 중인 학부생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8c0adb7a8034a6ed",
+      "segmentType": "label_value",
+      "labelText": "한국장학재단 홈페이지에서 사업참여를 신청한 자(온라인)",
+      "bodyText": "- 한국장학재단 홈페이지에서 사업참여를 신청한 자(온라인)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 한국장학재단 홈페이지에서 사업참여를 신청한 자(온라인)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2b1ca678ea9bcf3b",
+      "segmentType": "label_value",
+      "labelText": "신청서, 자기소개서, 신청인 동의서, 지도교수 추천서를 제출한 자(온라인)",
+      "bodyText": "- 신청서, 자기소개서, 신청인 동의서, 지도교수 추천서를 제출한 자(온라인)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 신청서, 자기소개서, 신청인 동의서, 지도교수 추천서를 제출한 자(온라인)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5ff0ccf117597659",
+      "segmentType": "label_value",
+      "labelText": "‘국가근로장학사업’, ‘대학생 청소년교육지원사업’, '학부연구생 장학금', '기타 근로성 장학사업'에 미참여 중인 학생(중복참여 불가)",
+      "bodyText": "- ‘국가근로장학사업’, ‘대학생 청소년교육지원사업’, '학부연구생 장학금', '기타 근로성 장학사업'에 미참여 중인 학생(중복참여 불가)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- ‘국가근로장학사업’, ‘대학생 청소년교육지원사업’, '학부연구생 장학금', '기타 근로성 장학사업'에 미참여 중인 학생(중복참여 불가)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bbc63e5707a6fdb2",
+      "segmentType": "label_value",
+      "labelText": "기본 요건을 모두 충족한 자에 한해 선발",
+      "bodyText": "※ 기본 요건을 모두 충족한 자에 한해 선발",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 기본 요건을 모두 충족한 자에 한해 선발"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-91fcd5651afb8695",
+      "segmentType": "label_value",
+      "labelText": "<지원 제외 대상>",
+      "bodyText": "<지원 제외 대상>",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<지원 제외 대상>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6cf0b456f9fa2efd",
+      "segmentType": "label_value",
+      "labelText": "휴학생, 졸업생, 자퇴생, 대학원생, 조기취업자, 산업체 위탁생, 시간제 등록생, 평생교육시설 등록생, 졸업유예자, 2025학년도 후기 졸업예정자",
+      "bodyText": "- 휴학생, 졸업생, 자퇴생, 대학원생, 조기취업자, 산업체 위탁생, 시간제 등록생, 평생교육시설 등록생, 졸업유예자, 2025학년도 후기 졸업예정자",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:graduate",
+        "enrollment_status:on_leave"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 휴학생, 졸업생, 자퇴생, 대학원생, 조기취업자, 산업체 위탁생, 시간제 등록생, 평생교육시설 등록생, 졸업유예자, 2025학년도 후기 졸업예정자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6ab6b82c6a42185c",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "4. 신청방법 :",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 신청방법 :"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fdac2ba77db30082",
+      "segmentType": "label_value",
+      "labelText": "한국장학재단 온라인 신청",
+      "bodyText": "한국장학재단 온라인 신청",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "한국장학재단 온라인 신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7d099d8026408260",
+      "segmentType": "label_value",
+      "labelText": "신청서류 제출(한국장학재단 온라인 신청 시 업로드 필수!)",
+      "bodyText": "가. 신청서류 제출(한국장학재단 온라인 신청 시 업로드 필수!)",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 신청서류 제출(한국장학재단 온라인 신청 시 업로드 필수!)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-48cd47c3bd4da53a",
+      "segmentType": "label_value",
+      "labelText": "신청서 1부, 자기소개서 1부, 신청인 동의서, (지도)교수 추천서 1부(첨부파일 참조)",
+      "bodyText": "- 신청서 1부, 자기소개서 1부, 신청인 동의서, (지도)교수 추천서 1부(첨부파일 참조)",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 신청서 1부, 자기소개서 1부, 신청인 동의서, (지도)교수 추천서 1부(첨부파일 참조)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-55d0955b419d9507",
+      "segmentType": "label_value",
+      "labelText": "온라인 신청경로(한국장학재단)",
+      "bodyText": "나. 온라인 신청경로(한국장학재단)",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 온라인 신청경로(한국장학재단)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5bedada3b20ed91f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 재단 홈페이지(https://www.kosaf.go.kr) 로그인 > 장학금 > 장학금 신청 > 신청서 작성 > 다문화·탈북학생멘토링장학금 신청",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 재단 홈페이지(https://www.kosaf.go.kr) 로그인 > 장학금 > 장학금 신청 > 신청서 작성 > 다문화·탈북학생멘토링장학금 신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-848805fa397c0d88",
+      "segmentType": "label_value",
+      "labelText": "(제출서류 필수 첨부!)",
+      "bodyText": "(제출서류 필수 첨부!)",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(제출서류 필수 첨부!)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-998bf48b0b136cd1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "다. 유의사항",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 유의사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-41137573d3a6420a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 온라인 화상멘토링에 필요한 기기(PC, 노트북, 태블릿 등)을 소지하거나 활용이 가능해야 함",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 온라인 화상멘토링에 필요한 기기(PC, 노트북, 태블릿 등)을 소지하거나 활용이 가능해야 함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8b83ada4726d0d74",
+      "segmentType": "label_value",
+      "labelText": "선발된 멘토는 실제 활동 여부 및 시간을 증빙할 수 있는 자료(시작 및 종료시간, 멘토 및 멘티 얼굴을 포함한 화면 캡쳐본 등)를",
+      "bodyText": "- 선발된 멘토는 실제 활동 여부 및 시간을 증빙할 수 있는 자료(시작 및 종료시간, 멘토 및 멘티 얼굴을 포함한 화면 캡쳐본 등)를",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 선발된 멘토는 실제 활동 여부 및 시간을 증빙할 수 있는 자료(시작 및 종료시간, 멘토 및 멘티 얼굴을 포함한 화면 캡쳐본 등)를"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dd4ff24c18260e86",
+      "segmentType": "label_value",
+      "labelText": "출근부 등록 시 증빙자료로 업로드 필요(미준수 시 활동인정 불가)",
+      "bodyText": "출근부 등록 시 증빙자료로 업로드 필요(미준수 시 활동인정 불가)",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "출근부 등록 시 증빙자료로 업로드 필요(미준수 시 활동인정 불가)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fd3648eb877f3155",
+      "segmentType": "label_value",
+      "labelText": "선발인원",
+      "bodyText": "5. 선발인원 : 8명",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 선발인원 : 8명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-35ec24f4c54cbfd2",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 대학 발굴형(A형) : 선발된 학생을 활동기관(춘천시 가족센터)에 배정",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 대학 발굴형(A형) : 선발된 학생을 활동기관(춘천시 가족센터)에 배정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-83bd104d674108e8",
+      "segmentType": "label_value",
+      "labelText": "활동내용",
+      "bodyText": "6. 활동내용",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 활동내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b2545c7b34807e1c",
+      "segmentType": "label_value",
+      "labelText": "초‧중‧고 다문화·탈북학생을 대상으로 교과목·놀이·예체능 학습지도, 진로·고민상담, 자기주도 학습법, 학습 동기부여 등 멘토링 활동 실시",
+      "bodyText": "- 초‧중‧고 다문화·탈북학생을 대상으로 교과목·놀이·예체능 학습지도, 진로·고민상담, 자기주도 학습법, 학습 동기부여 등 멘토링 활동 실시",
+      "sourceLocation": {
+        "lineIndex": 26,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 초‧중‧고 다문화·탈북학생을 대상으로 교과목·놀이·예체능 학습지도, 진로·고민상담, 자기주도 학습법, 학습 동기부여 등 멘토링 활동 실시"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3593bf501fb60e46",
+      "segmentType": "label_value",
+      "labelText": "단, 멘티 소속기관 업무보조(단순노무) 등의 활동은 인정하지 않음",
+      "bodyText": "단, 멘티 소속기관 업무보조(단순노무) 등의 활동은 인정하지 않음",
+      "sourceLocation": {
+        "lineIndex": 27,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "단, 멘티 소속기관 업무보조(단순노무) 등의 활동은 인정하지 않음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b6a4b6d3db4e6b5f",
+      "segmentType": "label_value",
+      "labelText": "활동기관",
+      "bodyText": "- 활동기관 : 춘천시 가족센터(온라인 화상멘토링)",
+      "sourceLocation": {
+        "lineIndex": 28,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 활동기관 : 춘천시 가족센터(온라인 화상멘토링)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-26d4523e2d2ec408",
+      "segmentType": "label_value",
+      "labelText": "세부 활동스케쥴은 활동기관 및 멘토와 멘티 간 협의에 따라 확정",
+      "bodyText": "※ 세부 활동스케쥴은 활동기관 및 멘토와 멘티 간 협의에 따라 확정",
+      "sourceLocation": {
+        "lineIndex": 29,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 세부 활동스케쥴은 활동기관 및 멘토와 멘티 간 협의에 따라 확정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2024e335200c3a83",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "7. 근로장학금 : (시간당) 14,000원",
+      "sourceLocation": {
+        "lineIndex": 30,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "7. 근로장학금 : (시간당) 14,000원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-256c780d9123604f",
+      "segmentType": "label_value",
+      "labelText": "* (1일) 최대 8시간 이내, (학기중) 주당 최대 20시간, (방학중) 주당 최대 40시간 활동가능하나 예산 상황에 따라 변동될 수 있음",
+      "bodyText": "* (1일) 최대 8시간 이내, (학기중) 주당 최대 20시간, (방학중) 주당 최대 40시간 활동가능하나 예산 상황에 따라 변동될 수 있음",
+      "sourceLocation": {
+        "lineIndex": 31,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* (1일) 최대 8시간 이내, (학기중) 주당 최대 20시간, (방학중) 주당 최대 40시간 활동가능하나 예산 상황에 따라 변동될 수 있음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-21744fcbf03e8d73",
+      "segmentType": "label_value",
+      "labelText": "* 장학금 외 별도의 교재비, 특별활동비 등은 지원되지 않음",
+      "bodyText": "* 장학금 외 별도의 교재비, 특별활동비 등은 지원되지 않음",
+      "sourceLocation": {
+        "lineIndex": 32,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 장학금 외 별도의 교재비, 특별활동비 등은 지원되지 않음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4424e37ebb18e3fa",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "기타 자세한 사항은 첨부파일을 참고하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 33,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기타 자세한 사항은 첨부파일을 참고하여 주시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 36,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 25,
+      "list_item": 7,
+      "continuation": 1,
+      "paragraph": 2
+    }
+  }
+}

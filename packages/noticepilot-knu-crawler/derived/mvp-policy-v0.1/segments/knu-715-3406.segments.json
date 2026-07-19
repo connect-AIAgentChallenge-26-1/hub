@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-715-3406",
+  "sourceContentHash": "978ba3b3f8a1697638403e75c0fd15d783068687b9db3ae4c85fe359240a1a7b",
+  "sourceTitle": "2026 KNU 전공박람회 행사 안내",
+  "publishedAt": "2026-05-13",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a3b3cc561cd0d36e",
+      "segmentType": "title",
+      "labelText": "2026 KNU 전공박람회 행사 안내",
+      "bodyText": "2026 KNU 전공박람회 행사 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026 KNU 전공박람회 행사 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a01c45343877bae6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "지금 전공을 탐색 중이거나 진로를 고민중인 탐정들 모두 즐길 수 있는 ‘전공 탐험’",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "지금 전공을 탐색 중이거나 진로를 고민중인 탐정들 모두 즐길 수 있는 ‘전공 탐험’"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3e0364ce5c9aa06b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "다전공, 융복합전공, 마이크로디그리 과정 등 다양한 전공 선택에 대한 정보도 얻을 수 있어요",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다전공, 융복합전공, 마이크로디그리 과정 등 다양한 전공 선택에 대한 정보도 얻을 수 있어요"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3dfb77e41f61b14f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026 KNU 전공박람회 전공탐정단",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026 KNU 전공박람회 전공탐정단"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9fb09389d7211f5b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026.05.18.(월) 10:00 ~ 17:00",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-18",
+          "start": 7,
+          "end": 21
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "▪ 시간 : 2026.05.18.(월) 10:00 ~ 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6c4a43f6a766af45",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▪ 장소 : 강릉캠퍼스 학생회관 앞",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▪ 장소 : 강릉캠퍼스 학생회관 앞"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d8b714381affa8ae",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▪ 대상 : 강원대학교 재학생",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▪ 대상 : 강원대학교 재학생"
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "list_item": 3
+    }
+  }
+}

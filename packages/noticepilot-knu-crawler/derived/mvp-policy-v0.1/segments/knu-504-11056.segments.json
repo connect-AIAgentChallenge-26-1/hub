@@ -1,0 +1,243 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11056",
+  "sourceContentHash": "925cede668dfce625b781534a8e832fd956f22b226fc6d781e8fd6ad59d0f918",
+  "sourceTitle": "가성비 높은 가치를 경험하세요(삼척평생교육원 원데이클래스 OPEN )",
+  "publishedAt": "2026-05-27",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b1b8d8b1a79a9e9b",
+      "segmentType": "title",
+      "labelText": "가성비 높은 가치를 경험하세요(삼척평생교육원 원데이클래스 OPEN )",
+      "bodyText": "가성비 높은 가치를 경험하세요(삼척평생교육원 원데이클래스 OPEN )",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가성비 높은 가치를 경험하세요(삼척평생교육원 원데이클래스 OPEN )"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d24ec8d45516756",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 삼척평생교육원 원데이클래스 OPEN~~",
+      "bodyText": "강원대학교 삼척평생교육원 원데이클래스 OPEN~~",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척평생교육원 원데이클래스 OPEN~~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a8d933536a04941a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 오~천원의 행복 !! 평생학습 경험학교",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 오~천원의 행복 !! 평생학습 경험학교"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c598ed01dc6f6ba7",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 모든강좌가 5,000원입니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 모든강좌가 5,000원입니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8bd8db92ed44cce5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 가성비 높은 가치를 경험하세요.~~",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 가성비 높은 가치를 경험하세요.~~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b847eeda7654cf84",
+      "segmentType": "label_value",
+      "labelText": "~~ 수강신청 안내~~",
+      "bodyText": "~~ 수강신청 안내~~",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "~~ 수강신청 안내~~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5192ad114b406ad8",
+      "segmentType": "continuation",
+      "labelText": "~~ 수강신청 안내~~",
+      "bodyText": "2026.5.27.(수) 09:00~5.28.(목) 24:00",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-b847eeda7654cf84"
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-27",
+          "start": 13,
+          "end": 26
+        },
+        {
+          "value": "2026-05-28",
+          "start": 33,
+          "end": 41
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "~~ 수강신청 안내~~ 2026.5.27.(수) 09:00~5.28.(목) 24:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cbeffd5fa73729bc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026.5.27.(수) 09:00~5.28.(목) 24:00",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-27",
+          "start": 0,
+          "end": 13
+        },
+        {
+          "value": "2026-05-28",
+          "start": 20,
+          "end": 28
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026.5.27.(수) 09:00~5.28.(목) 24:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6f55f3ba62c79cf9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "홈페이지(선착순)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "홈페이지(선착순)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-96a2cc2a8e9889cf",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://life.kangwon.ac.kr/",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://life.kangwon.ac.kr/"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0172b1bf5e9d2c98",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "문의 033-570-6733",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "문의 033-570-6733"
+    }
+  ],
+  "summary": {
+    "segmentCount": 11,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "list_item": 3,
+      "continuation": 1,
+      "paragraph": 4
+    }
+  }
+}

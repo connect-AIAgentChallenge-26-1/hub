@@ -1,0 +1,735 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10892",
+  "sourceContentHash": "72bc14ab5dcdc4d6f8141c1ade9c5f70eecd944c6243ac2ae0c634bca4544b56",
+  "sourceTitle": "👉(변경)200만원 장학금 + 학점 인정✨창업미네르바스쿨 창업순회실습 참가자 모집 (~6/5, 16시)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10892&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "chuncheon",
+      "dogye",
+      "samcheok",
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "chuncheon": "춘천",
+      "dogye": "도계",
+      "samcheok": "삼척",
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10892-6e6ef34a4f590a",
+      "uidHint": "noticepilot-cand-knu-504-10892-6e6ef34a4f590a@noticepilot.local",
+      "sourceNoticeId": "knu-504-10892",
+      "sourceTitle": "👉(변경)200만원 장학금 + 학점 인정✨창업미네르바스쿨 창업순회실습 참가자 모집 (~6/5, 16시)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10892&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon",
+          "dogye",
+          "samcheok",
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천",
+          "dogye": "도계",
+          "samcheok": "삼척",
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-2a952fc7ff715bdc",
+        "segmentType": "label_value",
+        "labelText": "모집기간",
+        "bodyText": "2026. 4. 20.(월) ~ 6. 5.(금) 16:00까지 ⏰",
+        "sourceLocation": {
+          "lineIndex": 11,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-20",
+            "start": 10,
+            "end": 25
+          },
+          {
+            "value": "2026-06-05",
+            "start": 28,
+            "end": 36
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "모집기간",
+          "다. 모집기간 : 2026. 4. 20.(월) ~ 6. 5.(금) 16:00까지 ⏰",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-10f812dd9660e8ea",
+        "segmentId": "seg-2a952fc7ff715bdc",
+        "rawText": "2026. 4. 20.(월) ~ 6. 5.(금) 16:00까지 ⏰",
+        "normalizedStart": "2026-04-20T00:00:00+09:00",
+        "normalizedEnd": "2026-06-05T16:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 10,
+          "end": 36
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-54e695f99f543a9b",
+        "sourceNoticeId": "knu-504-10892",
+        "segmentId": "seg-2a952fc7ff715bdc",
+        "temporalMentionIds": [
+          "tm-10f812dd9660e8ea"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "모집기간",
+        "evidence": "다. 모집기간 : 2026. 4. 20.(월) ~ 6. 5.(금) 16:00까지 ⏰"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "👉(변경)200만원 장학금 + 학점 인정✨창업미네르바스쿨 창업순회실습 참가자 모집 (~6/5, 16시) 신청기간",
+      "dateText": "2026. 4. 20.(월) ~ 6. 5.(금) 16:00까지 ⏰",
+      "normalizedStart": "2026-04-20T00:00:00+09:00",
+      "normalizedEnd": "2026-06-05T16:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "다. 모집기간 : 2026. 4. 20.(월) ~ 6. 5.(금) 16:00까지 ⏰",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "same_action_boundary_candidates_consolidated",
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": "start_of_day_assumed_for_timed_range"
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "same_action_boundary_candidates_consolidated",
+          "start_of_day_assumed_for_timed_range",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10892-f4c4111e073303",
+      "uidHint": "noticepilot-cand-knu-504-10892-f4c4111e073303@noticepilot.local",
+      "sourceNoticeId": "knu-504-10892",
+      "sourceTitle": "👉(변경)200만원 장학금 + 학점 인정✨창업미네르바스쿨 창업순회실습 참가자 모집 (~6/5, 16시)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10892&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon",
+          "dogye",
+          "samcheok",
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천",
+          "dogye": "도계",
+          "samcheok": "삼척",
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-29e3ad84f4ad355d",
+        "segmentType": "label_value",
+        "labelText": "창업순회실습",
+        "bodyText": "2026. 7. 6.(월) ~ 7. 24.(금) / 우수 산업·기업체 현장실습",
+        "sourceLocation": {
+          "lineIndex": 7,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-06",
+            "start": 10,
+            "end": 24
+          },
+          {
+            "value": "2026-07-24",
+            "start": 27,
+            "end": 36
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "창업순회실습",
+          "-창업순회실습 : 2026. 7. 6.(월) ~ 7. 24.(금) / 우수 산업·기업체 현장실습",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-630470428d7be567",
+        "segmentId": "seg-29e3ad84f4ad355d",
+        "rawText": "2026. 7. 6.(월) ~ 7. 24.(금) / 우수 산업·기업체 현장실습",
+        "normalizedStart": "2026-07-06",
+        "normalizedEnd": "2026-07-24",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 10,
+          "end": 36
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-bcecb359a2864751",
+        "sourceNoticeId": "knu-504-10892",
+        "segmentId": "seg-29e3ad84f4ad355d",
+        "temporalMentionIds": [
+          "tm-630470428d7be567"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "창업순회실습",
+        "evidence": "-창업순회실습 : 2026. 7. 6.(월) ~ 7. 24.(금) / 우수 산업·기업체 현장실습"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "👉(변경)200만원 장학금 + 학점 인정✨창업미네르바스쿨 창업순회실습 참가자 모집 (~6/5, 16시) 행사 기간",
+      "dateText": "2026. 7. 6.(월) ~ 7. 24.(금) / 우수 산업·기업체 현장실습",
+      "normalizedStart": "2026-07-06",
+      "normalizedEnd": "2026-07-24",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "-창업순회실습 : 2026. 7. 6.(월) ~ 7. 24.(금) / 우수 산업·기업체 현장실습",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10892-5e67111e84483e",
+      "uidHint": "noticepilot-cand-knu-504-10892-5e67111e84483e@noticepilot.local",
+      "sourceNoticeId": "knu-504-10892",
+      "sourceTitle": "👉(변경)200만원 장학금 + 학점 인정✨창업미네르바스쿨 창업순회실습 참가자 모집 (~6/5, 16시)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10892&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon",
+          "dogye",
+          "samcheok",
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천",
+          "dogye": "도계",
+          "samcheok": "삼척",
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-2ac2629c04ace819",
+        "segmentType": "label_value",
+        "labelText": "운영기간",
+        "bodyText": "2026. 7. 6.(월) ~ 7. 31.(금)",
+        "sourceLocation": {
+          "lineIndex": 6,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-06",
+            "start": 10,
+            "end": 24
+          },
+          {
+            "value": "2026-07-31",
+            "start": 27,
+            "end": 36
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "운영기간",
+          "나. 운영기간 : 2026. 7. 6.(월) ~ 7. 31.(금)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-60845e052b667585",
+        "segmentId": "seg-2ac2629c04ace819",
+        "rawText": "2026. 7. 6.(월) ~ 7. 31.(금)",
+        "normalizedStart": "2026-07-06",
+        "normalizedEnd": "2026-07-31",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 10,
+          "end": 36
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-07653ed2ba678690",
+        "sourceNoticeId": "knu-504-10892",
+        "segmentId": "seg-2ac2629c04ace819",
+        "temporalMentionIds": [
+          "tm-60845e052b667585"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "운영기간",
+        "evidence": "나. 운영기간 : 2026. 7. 6.(월) ~ 7. 31.(금)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "👉(변경)200만원 장학금 + 학점 인정✨창업미네르바스쿨 창업순회실습 참가자 모집 (~6/5, 16시) 행사 기간",
+      "dateText": "2026. 7. 6.(월) ~ 7. 31.(금)",
+      "normalizedStart": "2026-07-06",
+      "normalizedEnd": "2026-07-31",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "나. 운영기간 : 2026. 7. 6.(월) ~ 7. 31.(금)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10892-85c595b959a20d",
+      "uidHint": "noticepilot-cand-knu-504-10892-85c595b959a20d@noticepilot.local",
+      "sourceNoticeId": "knu-504-10892",
+      "sourceTitle": "👉(변경)200만원 장학금 + 학점 인정✨창업미네르바스쿨 창업순회실습 참가자 모집 (~6/5, 16시)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10892&pageIndex=6&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon",
+          "dogye",
+          "samcheok",
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천",
+          "dogye": "도계",
+          "samcheok": "삼척",
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-3aaab6d8f1ea3a1f",
+        "segmentType": "list_item",
+        "labelText": "",
+        "bodyText": "2026. 7. 27.(월) ~ 7. 31.(금) / 숙식형 창업캠프(필수참여)",
+        "sourceLocation": {
+          "lineIndex": 8,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-27",
+            "start": 10,
+            "end": 25
+          },
+          {
+            "value": "2026-07-31",
+            "start": 28,
+            "end": 37
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "-창업사관학교 : 2026. 7. 27.(월) ~ 7. 31.(금) / 숙식형 창업캠프(필수참여)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-87c50b54eca67acc",
+        "segmentId": "seg-3aaab6d8f1ea3a1f",
+        "rawText": "2026. 7. 27.(월) ~ 7. 31.(금) / 숙식형 창업캠프(필수참여)",
+        "normalizedStart": "2026-07-27",
+        "normalizedEnd": "2026-07-31",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 10,
+          "end": 37
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-010849959c45f6a6",
+        "sourceNoticeId": "knu-504-10892",
+        "segmentId": "seg-3aaab6d8f1ea3a1f",
+        "temporalMentionIds": [
+          "tm-87c50b54eca67acc"
+        ],
+        "bindingKind": "same_list_item",
+        "confidence": "high",
+        "ruleId": "binding.same_list_item",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "-창업사관학교 : 2026. 7. 27.(월) ~ 7. 31.(금) / 숙식형 창업캠프(필수참여)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "👉(변경)200만원 장학금 + 학점 인정✨창업미네르바스쿨 창업순회실습 참가자 모집 (~6/5, 16시) 행사 기간",
+      "dateText": "2026. 7. 27.(월) ~ 7. 31.(금) / 숙식형 창업캠프(필수참여)",
+      "normalizedStart": "2026-07-27",
+      "normalizedEnd": "2026-07-31",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "-창업사관학교 : 2026. 7. 27.(월) ~ 7. 31.(금) / 숙식형 창업캠프(필수참여)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 4,
+    "autoConfirmedCount": 4,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 4
+  }
+}

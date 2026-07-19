@@ -1,0 +1,328 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10982",
+  "sourceContentHash": "4ffdc634ebb3556f023ed256ebd08aae1102b4cc33d2c4d085d840c940a3011f",
+  "sourceTitle": "2026학년도 하계 현장실습학기제 실습기관 모집 안내",
+  "publishedAt": "2026-05-11",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-53eb299bf1fe28d6",
+      "segmentType": "title",
+      "labelText": "2026학년도 하계 현장실습학기제 실습기관 모집 안내",
+      "bodyText": "2026학년도 하계 현장실습학기제 실습기관 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 하계 현장실습학기제 실습기관 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-18b0dae326e36105",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 강릉캠퍼스 현장실습지원센터에서는 재학생들의 전공 실무 능력 향상 및 진로 탐색 기회를 제공하기 위하여",
+      "bodyText": "강원대학교 강릉캠퍼스 현장실습지원센터에서는 재학생들의 전공 실무 능력 향상 및 진로 탐색 기회를 제공하기 위하여",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉캠퍼스 현장실습지원센터에서는 재학생들의 전공 실무 능력 향상 및 진로 탐색 기회를 제공하기 위하여"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bbe6d7973bc0b72a",
+      "segmentType": "label_value",
+      "labelText": "「2026학년도 하계 현장실습학기제」를 진행하오니",
+      "bodyText": "「2026학년도 하계 현장실습학기제」를 진행하오니",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "「2026학년도 하계 현장실습학기제」를 진행하오니"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c1e4b387621aa519",
+      "segmentType": "label_value",
+      "labelText": "모집대상",
+      "bodyText": "1. 모집대상 : 2026학년도 하계 현장실습학기제 참여를 희망하는 기업",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 모집대상 : 2026학년도 하계 현장실습학기제 참여를 희망하는 기업"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3e19fb551ce8e3b7",
+      "segmentType": "label_value",
+      "labelText": "실습기간",
+      "bodyText": "2026. 6. 22.(월) ~ 8. 31.(월) ※ 기간 내 1개월 / 2개월 운영",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-22",
+          "start": 10,
+          "end": 25
+        },
+        {
+          "value": "2026-08-31",
+          "start": 28,
+          "end": 37
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 실습기간 : 2026. 6. 22.(월) ~ 8. 31.(월) ※ 기간 내 1개월 / 2개월 운영"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ad9441f2b2390bd4",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "2026. 5. 11.(월) ~ 5. 29.(금)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-11",
+          "start": 10,
+          "end": 25
+        },
+        {
+          "value": "2026-05-29",
+          "start": 28,
+          "end": 37
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 신청기간 : 2026. 5. 11.(월) ~ 5. 29.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8e3c0650cdf8c522",
+      "segmentType": "label_value",
+      "labelText": "제출서류",
+      "bodyText": "4. 제출서류",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 제출서류"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0fdb33951b47050c",
+      "segmentType": "label_value",
+      "labelText": "[붙임2] 표준 현장실습학기제(Co-op) 계획서 및 직무기술서 1부",
+      "bodyText": "가. [붙임2] 표준 현장실습학기제(Co-op) 계획서 및 직무기술서 1부",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. [붙임2] 표준 현장실습학기제(Co-op) 계획서 및 직무기술서 1부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f5bf39686d9b889d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "나. 사업자등록증 사본 1부",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 사업자등록증 사본 1부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-72659b1d31c9a517",
+      "segmentType": "label_value",
+      "labelText": "제출방법",
+      "bodyText": "5. 제출방법 : 강릉캠퍼스 현장실습지원센터 이메일 제출 (internship_gn@kangwon.ac.kr)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 제출방법 : 강릉캠퍼스 현장실습지원센터 이메일 제출 (internship_gn@kangwon.ac.kr)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7638919bf0862264",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "6. 기타사항",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 기타사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e93f41fce9058a9c",
+      "segmentType": "label_value",
+      "labelText": "[붙임1] '2026학년도 하계 현장실습학기제 운영 계획' 파일을 참고하여 주시기를 바랍니다.",
+      "bodyText": "가. [붙임1] '2026학년도 하계 현장실습학기제 운영 계획' 파일을 참고하여 주시기를 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. [붙임1] '2026학년도 하계 현장실습학기제 운영 계획' 파일을 참고하여 주시기를 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3e2bcd3fc7859016",
+      "segmentType": "label_value",
+      "labelText": "운영계획서 검토 후 현장실습학기제 취지에 적합하지 않을 시 실습 진행이 어려울 수 있습니다.",
+      "bodyText": "나. 운영계획서 검토 후 현장실습학기제 취지에 적합하지 않을 시 실습 진행이 어려울 수 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 운영계획서 검토 후 현장실습학기제 취지에 적합하지 않을 시 실습 진행이 어려울 수 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d6bca24ae8ef528d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "7. 관련문의 : T. 033-640-1618 . / E.",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "7. 관련문의 : T. 033-640-1618 . / E."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8df8e3522a8a3744",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "internship_gn@kangwon.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "internship_gn@kangwon.ac.kr"
+    }
+  ],
+  "summary": {
+    "segmentCount": 15,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 10,
+      "list_item": 3,
+      "paragraph": 1
+    }
+  }
+}

@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2418",
+  "sourceContentHash": "8073bac3d3a21a2189073d81c93eab83198ddddeb0a1a02591f3fe9064aee7d3",
+  "sourceTitle": "2026-1학기 학업장려 장학금 지급 안내",
+  "publishedAt": "2026-06-17",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-af3e27e586856901",
+      "segmentType": "title",
+      "labelText": "2026-1학기 학업장려 장학금 지급 안내",
+      "bodyText": "2026-1학기 학업장려 장학금 지급 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026-1학기 학업장려 장학금 지급 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5a2824711949fb75",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "안녕하세요. 강원대학교 장학팀입니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "안녕하세요. 강원대학교 장학팀입니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-151e424a3288b664",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "'2026-1학기 학업장려장학금'과 관련하여 안내드립니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "'2026-1학기 학업장려장학금'과 관련하여 안내드립니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f6426f674ada1327",
+      "segmentType": "label_value",
+      "labelText": "6학년도 1학기 학자금 지원구간이 산정된 학생(0~9구간) 중 등록금 본인부담액이 있는 학생을 대상으로, 학생지원과에서 학자금 지원구간 및 직전학기 성적 등을 반영하여 선발한 장학금입니다.(신입생은 성적기준 미적용)",
+      "bodyText": "학업장려 장학금은 2026학년도 1학기 학자금 지원구간이 산정된 학생(0~9구간) 중 등록금 본인부담액이 있는 학생을 대상으로, 학생지원과에서 학자금 지원구간 및 직전학기 성적 등을 반영하여 선발한 장학금입니다.(신입생은 성적기준 미적용)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학업장려 장학금은 2026학년도 1학기 학자금 지원구간이 산정된 학생(0~9구간) 중 등록금 본인부담액이 있는 학생을 대상으로, 학생지원과에서 학자금 지원구간 및 직전학기 성적 등을 반영하여 선발한 장학금입니다.(신입생은 성적기준 미적용)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5bfa80ed4d7dcf82",
+      "segmentType": "label_value",
+      "labelText": "이미 국가장학금 또는 교내장학금으로 등록금 전액을 감면받은 학생은 지급대상에서 제외",
+      "bodyText": "※ 이미 국가장학금 또는 교내장학금으로 등록금 전액을 감면받은 학생은 지급대상에서 제외",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 이미 국가장학금 또는 교내장학금으로 등록금 전액을 감면받은 학생은 지급대상에서 제외"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-07d52d9ffafbc2cf",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 해당 장학금은 1학기 장학금으로 2학기 장학금과 관련 없음",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 해당 장학금은 1학기 장학금으로 2학기 장학금과 관련 없음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9e85935bc1b5ecef",
+      "segmentType": "label_value",
+      "labelText": "현재 장학금 지급 절차가 진행중이며, K-cloud에 장학내역이 입력된 상태로 선발 여부는 본인이 직접 확인하실 수 있습니다.",
+      "bodyText": "현재 장학금 지급 절차가 진행중이며, K-cloud에 장학내역이 입력된 상태로 선발 여부는 본인이 직접 확인하실 수 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "현재 장학금 지급 절차가 진행중이며, K-cloud에 장학내역이 입력된 상태로 선발 여부는 본인이 직접 확인하실 수 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-54ce1ea5c7def277",
+      "segmentType": "label_value",
+      "labelText": "장학금은 k-cloud에 등록된 학생 본인 명의 계좌로 지급되며, 한국장학재단 또는 공무원연금공단에 학자금 대출이 있는 경우 대출금으로 상환됩니다.",
+      "bodyText": "장학금은 k-cloud에 등록된 학생 본인 명의 계좌로 지급되며, 한국장학재단 또는 공무원연금공단에 학자금 대출이 있는 경우 대출금으로 상환됩니다.",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "장학금은 k-cloud에 등록된 학생 본인 명의 계좌로 지급되며, 한국장학재단 또는 공무원연금공단에 학자금 대출이 있는 경우 대출금으로 상환됩니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f1424724b327268a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 6. 19.(금)이내 지급될 예정이니 일정 참고해 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-19",
+          "start": 5,
+          "end": 20
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "장학금은 2026. 6. 19.(금)이내 지급될 예정이니 일정 참고해 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-be91eb5f84f34c4e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "감사합니다.",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "감사합니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 4,
+      "label_value": 4,
+      "list_item": 1
+    }
+  }
+}

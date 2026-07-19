@@ -1,0 +1,187 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4801",
+  "sourceContentHash": "5d8efc091818de2134191a3ca5d0c42fc0e59a71d3bc6f5ed36a9e3144b96e84",
+  "sourceTitle": "강원권 미세먼지연구관리센터 사무국장 채용 공고",
+  "publishedAt": "2026-05-28",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5b77596e2759dd8f",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "강원권 미세먼지연구관리센터 사무국장 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원권 미세먼지연구관리센터 사무국장 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a01fc1f01bb72773",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "[강원권 미세먼지연구관리센터 사무국장 채용 공고]",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[강원권 미세먼지연구관리센터 사무국장 채용 공고]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9b3c146f3b120fd6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원권 미세먼지연구관리센터에서는 의욕적이고 진취적으로 근무할 우수한 인재를 채용하고자",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원권 미세먼지연구관리센터에서는 의욕적이고 진취적으로 근무할 우수한 인재를 채용하고자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6a3993e855a31b4c",
+      "segmentType": "label_value",
+      "labelText": "다음과 같이 센터의 사무국장을 공개 모집하오니 많은 지원 바랍니다.",
+      "bodyText": "다음과 같이 센터의 사무국장을 공개 모집하오니 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다음과 같이 센터의 사무국장을 공개 모집하오니 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-377d8f622b89017a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원권 미세먼지연구관리센터장",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원권 미세먼지연구관리센터장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e2fc2cdd8d6afdc4",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 5. 28.(목) ~ 2026. 6. 5.(금) 17:00 (기간 엄수)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-28",
+          "start": 8,
+          "end": 23
+        },
+        {
+          "value": "2026-06-05",
+          "start": 26,
+          "end": 40
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 접수기간: 2026. 5. 28.(목) ~ 2026. 6. 5.(금) 17:00 (기간 엄수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d634b7f3e19279d8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 자세한 채용 공고 내용은 첨부파일을 참고하시길 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 자세한 채용 공고 내용은 첨부파일을 참고하시길 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-01d061702c516181",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-05-28~2026-06-05",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-28",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-06-05",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-05-28~2026-06-05"
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 3,
+      "list_item": 1,
+      "paragraph": 3,
+      "title": 1
+    }
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-721-2351",
+  "sourceContentHash": "8957615b00a7bda9f9fb5717505ff1cbd99ef1a183e427a058b9e2e6d1f90218",
+  "sourceTitle": "2026학년도 대학생 청소년교육지원사업 멘토 선발 결과 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2351&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-721-2351-48f1240a51e354",
+      "uidHint": "noticepilot-cand-knu-721-2351-48f1240a51e354@noticepilot.local",
+      "sourceNoticeId": "knu-721-2351",
+      "sourceTitle": "2026학년도 대학생 청소년교육지원사업 멘토 선발 결과 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=2351&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-298c95c0f59cec49",
+        "segmentType": "label_value",
+        "labelText": "선발자 사전교육",
+        "bodyText": "2026. 4. 13. (월) 18:00 비대면 실시",
+        "sourceLocation": {
+          "lineIndex": 8,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-13",
+            "start": 13,
+            "end": 29
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "conditional_followup",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "conditional_followup",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "선발자 사전교육",
+          "5. 선발자 사전교육: 2026. 4. 13. (월) 18:00 비대면 실시",
+          "semantic.temporal_role.conditional_followup"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-bd5c43dd12e6277b",
+        "segmentId": "seg-298c95c0f59cec49",
+        "rawText": "2026. 4. 13. (월)",
+        "normalizedStart": "2026-04-13T18:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 13,
+          "end": 29
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-938388f7c006fb4a",
+        "sourceNoticeId": "knu-721-2351",
+        "segmentId": "seg-298c95c0f59cec49",
+        "temporalMentionIds": [
+          "tm-bd5c43dd12e6277b"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "선발자 사전교육",
+        "evidence": "5. 선발자 사전교육: 2026. 4. 13. (월) 18:00 비대면 실시"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "2026학년도 대학생 청소년교육지원사업 멘토 선발 결과 안내 행사 일정",
+      "dateText": "2026. 4. 13. (월)",
+      "normalizedStart": "2026-04-13T18:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "5. 선발자 사전교육: 2026. 4. 13. (월) 18:00 비대면 실시",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "conditional_selected_participant_action",
+        "post_result_selected_participant_action",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "reasonCodes": [
+        "completed_result_announcement",
+        "conditional_selected_participant_action",
+        "post_result_selected_participant_action",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "conditional",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "medium",
+        "ruleId": "applicability.conditional.selected_participant",
+        "reasonCodes": [
+          "conditional_selected_participant_action",
+          "post_result_selected_participant_action",
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "completed_result_announcement",
+          "conditional_selected_participant_action",
+          "post_result_selected_participant_action",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.completed_result_announcement",
+          "publishability.reason.conditional_selected_participant_action",
+          "publishability.reason.post_result_selected_participant_action",
+          "publishability.temporal_role.conditional_followup",
+          "publishability.temporal_role.conditional_followup.review",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

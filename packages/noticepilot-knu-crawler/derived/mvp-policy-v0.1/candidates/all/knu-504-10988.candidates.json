@@ -1,0 +1,358 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10988",
+  "sourceContentHash": "443764db6f1e4e695a1d051d5935570dd3f741aa4bc16718ea446c302ef66833",
+  "sourceTitle": "[KOICA 개발협력커리어센터] 2026 상반기 KOICA 해외봉사단 모집설명회",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10988&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "ALL",
+    "campuses": [
+      "all"
+    ],
+    "scopeType": "all_campuses",
+    "confidence": "high",
+    "source": "listMetadata.campus",
+    "labels": {
+      "all": "전체"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10988-216e22e96b721b",
+      "uidHint": "noticepilot-cand-knu-504-10988-216e22e96b721b@noticepilot.local",
+      "sourceNoticeId": "knu-504-10988",
+      "sourceTitle": "[KOICA 개발협력커리어센터] 2026 상반기 KOICA 해외봉사단 모집설명회",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10988&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-9f890427f45e9461",
+        "segmentType": "label_value",
+        "labelText": "ㅇ 신청기간",
+        "bodyText": "2026. 6. 3.(수)까지",
+        "sourceLocation": {
+          "lineIndex": 9,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-03",
+            "start": 8,
+            "end": 22
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "ㅇ 신청기간",
+          "ㅇ 신청기간: 2026. 6. 3.(수)까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-43f58050f0be35d4",
+        "segmentId": "seg-9f890427f45e9461",
+        "rawText": "2026. 6. 3.(수)",
+        "normalizedStart": "2026-06-03",
+        "normalizedEnd": "2026-06-03",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 8,
+          "end": 22
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-4b1615426e453c1f",
+        "sourceNoticeId": "knu-504-10988",
+        "segmentId": "seg-9f890427f45e9461",
+        "temporalMentionIds": [
+          "tm-43f58050f0be35d4"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "ㅇ 신청기간",
+        "evidence": "ㅇ 신청기간: 2026. 6. 3.(수)까지"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[KOICA 개발협력커리어센터] 2026 상반기 KOICA 해외봉사단 모집설명회 신청 마감",
+      "dateText": "2026. 6. 3.(수)",
+      "normalizedStart": "2026-06-03",
+      "normalizedEnd": "2026-06-03",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "ㅇ 신청기간: 2026. 6. 3.(수)까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10988-2dc770d66c6fc1",
+      "uidHint": "noticepilot-cand-knu-504-10988-2dc770d66c6fc1@noticepilot.local",
+      "sourceNoticeId": "knu-504-10988",
+      "sourceTitle": "[KOICA 개발협력커리어센터] 2026 상반기 KOICA 해외봉사단 모집설명회",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10988&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-17df9a5636720f4d",
+        "segmentType": "continuation",
+        "labelText": "ㅇ 행사명: 2026 상반기 KOICA 해외봉사단 정기설명회 ㅇ 일 시",
+        "bodyText": "2026. 6. 5.(금), 11:00~20:00",
+        "sourceLocation": {
+          "lineIndex": 0,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-d130df6dd12e9589"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-05",
+            "start": 41,
+            "end": 55
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "ㅇ 행사명: 2026 상반기 KOICA 해외봉사단 정기설명회 ㅇ 일 시",
+          "ㅇ 행사명: 2026 상반기 KOICA 해외봉사단 정기설명회 ㅇ 일 시: 2026. 6. 5.(금), 11:00~20:00",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-de0d6944d9c7a01d",
+        "segmentId": "seg-17df9a5636720f4d",
+        "rawText": "2026. 6. 5.(금), 11:00~20:00",
+        "normalizedStart": "2026-06-05T11:00:00+09:00",
+        "normalizedEnd": "2026-06-05T20:00:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 41,
+          "end": 55
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-415472ad3e7eca61",
+        "sourceNoticeId": "knu-504-10988",
+        "segmentId": "seg-17df9a5636720f4d",
+        "temporalMentionIds": [
+          "tm-de0d6944d9c7a01d"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "ㅇ 행사명: 2026 상반기 KOICA 해외봉사단 정기설명회 ㅇ 일 시",
+        "evidence": "ㅇ 행사명: 2026 상반기 KOICA 해외봉사단 정기설명회 ㅇ 일 시: 2026. 6. 5.(금), 11:00~20:00"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "[KOICA 개발협력커리어센터] 2026 상반기 KOICA 해외봉사단 모집설명회 행사 기간",
+      "dateText": "2026. 6. 5.(금), 11:00~20:00",
+      "normalizedStart": "2026-06-05T11:00:00+09:00",
+      "normalizedEnd": "2026-06-05T20:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "ㅇ 행사명: 2026 상반기 KOICA 해외봉사단 정기설명회 ㅇ 일 시: 2026. 6. 5.(금), 11:00~20:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 2,
+    "calendarFeedIncludedCount": 0
+  }
+}

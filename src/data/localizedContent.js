@@ -36,9 +36,44 @@ export const localizedContent = {
           'Common notices for all campuses are included automatically.',
       },
       subscriptionIcs: {
-        title: 'Subscription ICS',
-        badge: 'Coming soon',
-        body: 'This will be available after school notice collection is connected.',
+        title: 'Reference subscription calendar',
+        description:
+          'Create a temporary capability URL for the fixed all-campus reference feed.',
+        badges: {
+          idle: 'Not created',
+          provisioning: 'Creating',
+          ready: 'Ready',
+          unavailable: 'Unavailable / disabled',
+        },
+        idleBody:
+          'The URL is created only for this page session and is not saved in your browser.',
+        provisionButton: 'Create reference subscription URL',
+        provisioningButton: 'Creating reference URL…',
+        provisioningStatus: 'Provisioning the reference subscription feed…',
+        retryButton: 'Try again',
+        unavailableTitle: 'Reference feed unavailable.',
+        unavailableBody:
+          'The server may have this feature disabled or may be temporarily unavailable.',
+        details: {
+          calendarName: 'Calendar name',
+          eventCount: 'Reference events',
+          tokenPrefix: 'Token prefix',
+          subscriptionUrl: 'Subscription URL',
+          subscriptionPath: 'Server path',
+        },
+        eventCount: (count) => `${count.toLocaleString('en-US')} events`,
+        copyButton: 'Copy subscription URL',
+        createNewButton: 'Create a new URL',
+        copyUnavailable: 'Clipboard unavailable',
+        copySuccess: 'Subscription URL copied.',
+        copyFailure:
+          'The URL could not be copied. Select the URL above and copy it manually.',
+        expirationWarningTitle: 'Temporary access:',
+        expirationWarning:
+          'This capability URL and token expire when the server restarts. Create a new URL after a restart.',
+        referenceScopeTitle: 'Reference scope:',
+        referenceScope:
+          'This fixed all-campus reference feed ignores the campus preferences saved in this browser.',
       },
     },
     collectionLabels: {
@@ -363,9 +398,44 @@ export const localizedContent = {
           '모든 캠퍼스에 해당하는 공통 공지는 자동 포함됩니다.',
       },
       subscriptionIcs: {
-        title: '구독형 ICS',
-        badge: '준비 중',
-        body: '학교 공지 수집 기능이 연결된 뒤 사용할 수 있습니다.',
+        title: '참조용 구독 캘린더',
+        description:
+          '모든 캠퍼스를 포함하는 고정 참조 피드의 임시 기능 URL을 만듭니다.',
+        badges: {
+          idle: '생성 전',
+          provisioning: '생성 중',
+          ready: '사용 가능',
+          unavailable: '사용 불가 / 비활성화',
+        },
+        idleBody:
+          'URL은 현재 페이지 세션에서만 생성되며 브라우저에 저장되지 않습니다.',
+        provisionButton: '참조용 구독 URL 생성',
+        provisioningButton: '참조 URL 생성 중…',
+        provisioningStatus: '참조용 구독 피드를 준비하고 있습니다…',
+        retryButton: '다시 시도',
+        unavailableTitle: '참조 피드를 사용할 수 없습니다.',
+        unavailableBody:
+          '서버에서 이 기능을 비활성화했거나 일시적으로 사용할 수 없을 수 있습니다.',
+        details: {
+          calendarName: '캘린더 이름',
+          eventCount: '참조 일정',
+          tokenPrefix: '토큰 앞부분',
+          subscriptionUrl: '구독 URL',
+          subscriptionPath: '서버 경로',
+        },
+        eventCount: (count) => `${count.toLocaleString('ko-KR')}개 일정`,
+        copyButton: '구독 URL 복사',
+        createNewButton: '새 URL 생성',
+        copyUnavailable: '클립보드 사용 불가',
+        copySuccess: '구독 URL을 복사했습니다.',
+        copyFailure:
+          'URL을 복사하지 못했습니다. 위 URL을 선택해 직접 복사해 주세요.',
+        expirationWarningTitle: '임시 접근:',
+        expirationWarning:
+          '이 기능 URL과 토큰은 서버가 재시작되면 만료됩니다. 재시작 후 새 URL을 생성하세요.',
+        referenceScopeTitle: '참조 범위:',
+        referenceScope:
+          '이 고정형 전체 캠퍼스 참조 피드는 브라우저에 저장된 관심 캠퍼스 설정을 무시합니다.',
       },
     },
     collectionLabels: {

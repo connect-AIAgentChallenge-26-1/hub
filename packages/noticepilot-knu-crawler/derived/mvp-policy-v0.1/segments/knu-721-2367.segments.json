@@ -1,0 +1,387 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2367",
+  "sourceContentHash": "0a61e34de04c4fa896b5d69cc90453c2283039c4781916fa9b19dbfa06a9381f",
+  "sourceTitle": "2026학년도 1학기 주거안정장학금 장학생 서약서 제출 안내",
+  "publishedAt": "2026-04-22",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2a7347e534e0ef04",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 주거안정장학금 장학생 서약서 제출 안내",
+      "bodyText": "2026학년도 1학기 주거안정장학금 장학생 서약서 제출 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 주거안정장학금 장학생 서약서 제출 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-30a5994105c2d54b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "[강원대학교 강릉캠퍼스, 원주캠퍼스]",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[강원대학교 강릉캠퍼스, 원주캠퍼스]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a419956fc7452e35",
+      "segmentType": "label_value",
+      "labelText": "한국장학재단으로부터 '2026년도 1학기 주거안정장학금' 지원대상자로 안내받으신 학생들은",
+      "bodyText": "한국장학재단으로부터 '2026년도 1학기 주거안정장학금' 지원대상자로 안내받으신 학생들은",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "한국장학재단으로부터 '2026년도 1학기 주거안정장학금' 지원대상자로 안내받으신 학생들은"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b217e5dd20e4a37c",
+      "segmentType": "continuation",
+      "labelText": "한국장학재단으로부터 '2026년도 1학기 주거안정장학금' 지원대상자로 안내받으신 학생들은",
+      "bodyText": "2026.4.26.(일)까지",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-a419956fc7452e35"
+      },
+      "actionSignals": [
+        "application_period",
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-26",
+          "start": 50,
+          "end": 63
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "한국장학재단으로부터 '2026년도 1학기 주거안정장학금' 지원대상자로 안내받으신 학생들은 2026.4.26.(일)까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fb654c7ce8c8070d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026.4.26.(일)까지",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-26",
+          "start": 0,
+          "end": 13
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026.4.26.(일)까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-401194c62ca47495",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "‘공공재정환수법 준수 등 장학생 서약서'",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "‘공공재정환수법 준수 등 장학생 서약서'"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-934ca6640950f5cd",
+      "segmentType": "label_value",
+      "labelText": "를 반드시 제출하여 주시기 바랍니다.",
+      "bodyText": "를 반드시 제출하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "를 반드시 제출하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9716606adca696d6",
+      "segmentType": "label_value",
+      "labelText": "서약서 제출방법(자세한 사항은 붙임 파일 참고)",
+      "bodyText": "- 서약서 제출방법(자세한 사항은 붙임 파일 참고)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 서약서 제출방법(자세한 사항은 붙임 파일 참고)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b6b44f9a097bc2ab",
+      "segmentType": "label_value",
+      "labelText": "* 한국장학재단 홈페이지 로그인 -> 장학금 ->주거안정장학금 -> 교육이수 및 장학생서약서 제출",
+      "bodyText": "* 한국장학재단 홈페이지 로그인 -> 장학금 ->주거안정장학금 -> 교육이수 및 장학생서약서 제출",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 한국장학재단 홈페이지 로그인 -> 장학금 ->주거안정장학금 -> 교육이수 및 장학생서약서 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a556cf3530dc1711",
+      "segmentType": "label_value",
+      "labelText": "선발된 연도 및 학기의",
+      "bodyText": "선발된 연도 및 학기의",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "선발된 연도 및 학기의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-001d1cf402320fd8",
+      "segmentType": "label_value",
+      "labelText": "서약서 제출",
+      "bodyText": "서약서 제출",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "서약서 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f5079a3ed3551498",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "버튼 클릭",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "버튼 클릭"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-797790002c37a04d",
+      "segmentType": "label_value",
+      "labelText": "( 교육이수 완료 후 서약서 제출 가능)",
+      "bodyText": "( 교육이수 완료 후 서약서 제출 가능)",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "( 교육이수 완료 후 서약서 제출 가능)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9a2d80419360378b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-> 장학생서약서 작성하러 가기",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-> 장학생서약서 작성하러 가기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a19b2d45a906d54a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "->서약서 내용 확인 후 동의합니다 버튼 클릭",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "->서약서 내용 확인 후 동의합니다 버튼 클릭"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c0459c82f640ddf3",
+      "segmentType": "label_value",
+      "labelText": "서약서 제출은 장학금 지급을 위한 필수사항이며,",
+      "bodyText": "서약서 제출은 장학금 지급을 위한 필수사항이며,",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "서약서 제출은 장학금 지급을 위한 필수사항이며,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e45fbe254d036b40",
+      "segmentType": "label_value",
+      "labelText": "제출이 모두 완료되는대로 '2026학년도 1학기 주거안정장학금(3월분)'이 지급될 예정이니",
+      "bodyText": "제출이 모두 완료되는대로 '2026학년도 1학기 주거안정장학금(3월분)'이 지급될 예정이니",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "제출이 모두 완료되는대로 '2026학년도 1학기 주거안정장학금(3월분)'이 지급될 예정이니"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dc63d2d90f9e9f23",
+      "segmentType": "label_value",
+      "labelText": "대상자분들께서는 필히 기한 내에 제출해 주시길 각별히 부탁드리겠습니다. 감사합니다.",
+      "bodyText": "대상자분들께서는 필히 기한 내에 제출해 주시길 각별히 부탁드리겠습니다. 감사합니다.",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "대상자분들께서는 필히 기한 내에 제출해 주시길 각별히 부탁드리겠습니다. 감사합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d9152dd357998a6e",
+      "segmentType": "label_value",
+      "labelText": "<장학생 서약서 미 제출시 장학금 지급 불가, 4월분 지급요청서 작성 불가>",
+      "bodyText": "<장학생 서약서 미 제출시 장학금 지급 불가, 4월분 지급요청서 작성 불가>",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<장학생 서약서 미 제출시 장학금 지급 불가, 4월분 지급요청서 작성 불가>"
+    }
+  ],
+  "summary": {
+    "segmentCount": 19,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 4,
+      "label_value": 11,
+      "continuation": 1,
+      "list_item": 2
+    }
+  }
+}

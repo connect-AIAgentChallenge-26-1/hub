@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noticepilot.publishabilityJudgment.v0.1",
+  "title": "NoticePilot Publishability Judgment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "verdict", "includeInCalendarFeed", "reasonCodes", "ruleIds"],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.publishabilityJudgment.v0.1"},
+    "verdict": {"type": "string", "enum": ["auto_confirmed", "needs_review", "not_calendar_relevant"]},
+    "includeInCalendarFeed": {"type": "boolean"},
+    "reasonCodes": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "ruleIds": {"type": "array", "items": {"type": "string", "minLength": 1}}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"verdict": {"const": "auto_confirmed"}}},
+      "then": {"properties": {"includeInCalendarFeed": {"const": true}}},
+      "else": {"properties": {"includeInCalendarFeed": {"const": false}}}
+    }
+  ]
+}

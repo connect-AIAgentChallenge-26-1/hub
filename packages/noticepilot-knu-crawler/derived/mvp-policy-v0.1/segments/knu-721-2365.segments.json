@@ -1,0 +1,543 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2365",
+  "sourceContentHash": "898e7708def4f6592bdef097fe644a57db9d379a6cb5c762156507556d3e5b2b",
+  "sourceTitle": "(인문사회대학) KNU-MVP 장학금 신청안내",
+  "publishedAt": "2026-04-20",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fe25237cfce5192a",
+      "segmentType": "title",
+      "labelText": "(인문사회대학) KNU-MVP 장학금 신청안내",
+      "bodyText": "(인문사회대학) KNU-MVP 장학금 신청안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(인문사회대학) KNU-MVP 장학금 신청안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-867c896f8ec30c4f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. KNU-MVP(어학점프업) 장학금",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. KNU-MVP(어학점프업) 장학금"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-74e1a2d68d372e31",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 참여대상: 인문사회대학(사회복지학과,일본학과 포함) 소속 국내 재학생",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 참여대상: 인문사회대학(사회복지학과,일본학과 포함) 소속 국내 재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e7f74bfe0084a8d2",
+      "segmentType": "label_value",
+      "labelText": "사업기간",
+      "bodyText": "- 사업기간: 1학기, 2학기",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 사업기간: 1학기, 2학기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-51d220acad0746d9",
+      "segmentType": "label_value",
+      "labelText": "신청대상",
+      "bodyText": "- 신청대상: 해당 학기 내 공인어학시험 성적 향상자(어학상승폭 50% + 최종점수 50% 합산점수로 선발)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 신청대상: 해당 학기 내 공인어학시험 성적 향상자(어학상승폭 50% + 최종점수 50% 합산점수로 선발)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4c7fcfaa3d8a4e61",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "- 신청방법: 소속 학과사무실로 신청서 및 증빙서류(성적표 제출)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 신청방법: 소속 학과사무실로 신청서 및 증빙서류(성적표 제출)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a134cdcb355bc01e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-74aa2d300ea29cbf",
+      "segmentType": "label_value",
+      "labelText": "신청기한",
+      "bodyText": "신청기한:",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청기한:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-28729c5ac75f9917",
+      "segmentType": "continuation",
+      "labelText": "신청기한",
+      "bodyText": "2026. 6. 19.(금)까지",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-74aa2d300ea29cbf"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-19",
+          "start": 6,
+          "end": 21
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "신청기한: 2026. 6. 19.(금)까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1f668032f208ed8e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 6. 19.(금)까지",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-19",
+          "start": 0,
+          "end": 15
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 6. 19.(금)까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8416c3db51ff437c",
+      "segmentType": "label_value",
+      "labelText": "(2학기 일정 추후 안내),",
+      "bodyText": "(2학기 일정 추후 안내),",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(2학기 일정 추후 안내),"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-379d3717682c41d7",
+      "segmentType": "label_value",
+      "labelText": "장학금 지급",
+      "bodyText": "장학금 지급: (1학기) 2026. 7월 예정",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "장학금 지급: (1학기) 2026. 7월 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5436a603cef35674",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. KNU-MVP(전공역량 우수인재) 장학금",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. KNU-MVP(전공역량 우수인재) 장학금"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d054c75638542cc8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 참여대상: 인문사회대학(사회복지학과, 일본학과 포함)",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 참여대상: 인문사회대학(사회복지학과, 일본학과 포함)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-557ba50c0e04ffd2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "소속 국내 재학생(팀 구성 최소인원 2명)",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "소속 국내 재학생(팀 구성 최소인원 2명)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-842e25868eb6230a",
+      "segmentType": "label_value",
+      "labelText": "사업기간",
+      "bodyText": "- 사업기간: 2026. 4월~6월",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 사업기간: 2026. 4월~6월"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-82aac050345eb381",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 사업내용: 전공관련 프로젝트 수행 후 결과보고서 제출...(주제는 자유)",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 사업내용: 전공관련 프로젝트 수행 후 결과보고서 제출...(주제는 자유)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-96ab8e756cdd5893",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "① 전공프로젝트 기반 확장: 전공+지역연계, 전공+취업연계, 전공+발표/경진대회 등 (취업을 위한 포트폴리오 활용가능)",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "① 전공프로젝트 기반 확장: 전공+지역연계, 전공+취업연계, 전공+발표/경진대회 등 (취업을 위한 포트폴리오 활용가능)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fd008fe50a16cfa9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "② 성과물: 결과보고서 (자유서식 --전공 관련 산출물(작품, 콘텐츠, 보고서 등)) 제출",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "② 성과물: 결과보고서 (자유서식 --전공 관련 산출물(작품, 콘텐츠, 보고서 등)) 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b1bb9b22841906ee",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9e210f8cdb5e006c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "평가기준: 전공적합성 30%, 완성도 30%, 창의성 20%, 참여도 20%",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "평가기준: 전공적합성 30%, 완성도 30%, 창의성 20%, 참여도 20%"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a9056b7796928975",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "- 신청방법: 소속 학과사무실로 장학금신청서, 결과보고서(산출물) 제출",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 신청방법: 소속 학과사무실로 장학금신청서, 결과보고서(산출물) 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-456a52b3241fce6c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8e34980b4c15f0a8",
+      "segmentType": "label_value",
+      "labelText": "신청기한",
+      "bodyText": "신청기한:",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청기한:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-70c304d2a20e2f67",
+      "segmentType": "continuation",
+      "labelText": "신청기한",
+      "bodyText": "2026. 6. 19.(금)까지. 장학금 지급: 2026. 7월 예정",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-8e34980b4c15f0a8"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-19",
+          "start": 6,
+          "end": 21
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "신청기한: 2026. 6. 19.(금)까지. 장학금 지급: 2026. 7월 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-254dcf1a5b2952d2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 6. 19.(금)까지. 장학금 지급: 2026. 7월 예정",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-19",
+          "start": 0,
+          "end": 15
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 6. 19.(금)까지. 장학금 지급: 2026. 7월 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2444773894da7fea",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* (삼척) 인문사회대학 홈페이지 : https://inmun.kangwon.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* (삼척) 인문사회대학 홈페이지 : https://inmun.kangwon.ac.kr"
+    }
+  ],
+  "summary": {
+    "segmentCount": 27,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 10,
+      "label_value": 9,
+      "continuation": 2,
+      "paragraph": 5
+    }
+  }
+}

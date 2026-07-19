@@ -1,0 +1,264 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-1208",
+  "sourceContentHash": "924e684ddec01dee3dcafb1488dba1b59a6a107e7b40bc894569d05ccdff95dd",
+  "sourceTitle": "2026학년도 1학기 문화예술·공과대학 전산실 운영 근로장학생 선발안내",
+  "publishedAt": "2026-02-04",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ed2e4ca55c18f5ff",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 문화예술·공과대학 전산실 운영 근로장학생 선발안내",
+      "bodyText": "2026학년도 1학기 문화예술·공과대학 전산실 운영 근로장학생 선발안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 문화예술·공과대학 전산실 운영 근로장학생 선발안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-06703045ca52a632",
+      "segmentType": "label_value",
+      "labelText": "문화예술·공과대학에서 2026-1학기 전산실 운영 근로장학생을 선발하고자 하니 많은 지원 바랍니다.",
+      "bodyText": "문화예술·공과대학에서 2026-1학기 전산실 운영 근로장학생을 선발하고자 하니 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "문화예술·공과대학에서 2026-1학기 전산실 운영 근로장학생을 선발하고자 하니 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8dbeef4db7ad23aa",
+      "segmentType": "label_value",
+      "labelText": "선발인원",
+      "bodyText": "1. 선발인원: 2명",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 선발인원: 2명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f2f42386b4a021f2",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 대상: 문화예술·공과대학 및 IT대학 재학생",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 대상: 문화예술·공과대학 및 IT대학 재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-26519d743ca19f77",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 근로지: 공학4호관 102호(Link+ Revolution cafe)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 근로지: 공학4호관 102호(Link+ Revolution cafe)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-52b2e57369b3d9ca",
+      "segmentType": "label_value",
+      "labelText": "근로기간",
+      "bodyText": "2026. 3. 3. ~ 2026. 8. 31.(종료일은 변경될 수 있음.)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 9,
+          "end": 19
+        },
+        {
+          "value": "2026-08-31",
+          "start": 23,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "4. 근로기간: 2026. 3. 3. ~ 2026. 8. 31.(종료일은 변경될 수 있음.)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3046579b07fd8b52",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 근로내역: 전산시설(6실) 시설 및 프로그램 관리",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 근로내역: 전산시설(6실) 시설 및 프로그램 관리"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-68e793b10de2842e",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "6. 신청방법: [붙임2] 지원신청서, [붙임3]개인정보 수집·이용 동의서를 작성하여 행정실 제출",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 신청방법: [붙임2] 지원신청서, [붙임3]개인정보 수집·이용 동의서를 작성하여 행정실 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6b98e3d36baba6d4",
+      "segmentType": "label_value",
+      "labelText": "* 공2-108호 행정실로 직접 제출 혹은 이메일(kimkj@kangwon.ac.kr)로 제출",
+      "bodyText": "* 공2-108호 행정실로 직접 제출 혹은 이메일(kimkj@kangwon.ac.kr)로 제출",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 공2-108호 행정실로 직접 제출 혹은 이메일(kimkj@kangwon.ac.kr)로 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9dc7eda53345f7e2",
+      "segmentType": "label_value",
+      "labelText": "신청기한",
+      "bodyText": "2026. 2. 9.(월) 24:00까지",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-09",
+          "start": 9,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "7. 신청기한: 2026. 2. 9.(월) 24:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b1897266d498268d",
+      "segmentType": "label_value",
+      "labelText": "* 직접 제출의 경우에는 근무시간내(18시까지)",
+      "bodyText": "* 직접 제출의 경우에는 근무시간내(18시까지)",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 직접 제출의 경우에는 근무시간내(18시까지)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-48e1eadbf4137c9d",
+      "segmentType": "label_value",
+      "labelText": "붙임 2026학년도 1학기 문화예술·공과대학 전산실 운영 근로장학생 선발안내 1부. 끝.",
+      "bodyText": "붙임 2026학년도 1학기 문화예술·공과대학 전산실 운영 근로장학생 선발안내 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 2026학년도 1학기 문화예술·공과대학 전산실 운영 근로장학생 선발안내 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 12,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 8,
+      "list_item": 3
+    }
+  }
+}

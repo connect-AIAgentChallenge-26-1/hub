@@ -1,0 +1,781 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2371",
+  "sourceContentHash": "56dd4956459d93cec1aac32c2e9f3ddd1023763c8433eed9cefcf7a4d2b43d3e",
+  "sourceTitle": "2026학년도 1학기 개설교과목 수강인원 증원 안내(G-Share 영역: 강원-인, 함께 여는 미래), 2026.3.3.(화) 10시",
+  "publishedAt": "2026-02-27",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9acc49518856ad57",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 개설교과목 수강인원 증원 안내(G-Share 영역",
+      "bodyText": "2026.3.3.(화) 10시",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 58,
+          "end": 70
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2026학년도 1학기 개설교과목 수강인원 증원 안내(G-Share 영역: 강원-인, 함께 여는 미래), 2026.3.3.(화) 10시"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3f240fe709de42d1",
+      "segmentType": "label_value",
+      "labelText": "<2026학년도 1학기 교양교과목 개설 수강인원 증원 안내>",
+      "bodyText": "<2026학년도 1학기 교양교과목 개설 수강인원 증원 안내>",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<2026학년도 1학기 교양교과목 개설 수강인원 증원 안내>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ba799407e58d8d5f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026학년도 1학기 개설교과목 중 G-Share 영역 <강원-인, 함께 여는 미래> 교과목에 대하여",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 개설교과목 중 G-Share 영역 <강원-인, 함께 여는 미래> 교과목에 대하여"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-638c2cd4de655559",
+      "segmentType": "label_value",
+      "labelText": "아래와 같이 수강인원을 증원하오니, 일정을 확인하여 수강신청하시기 바랍니다.",
+      "bodyText": "아래와 같이 수강인원을 증원하오니, 일정을 확인하여 수강신청하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "아래와 같이 수강인원을 증원하오니, 일정을 확인하여 수강신청하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6b7c6b05c97d765e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-48e5189b6f802bac",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7938fa14a77a73a8",
+      "segmentType": "label_value",
+      "labelText": "학번 신입생만 수강신청 가능",
+      "bodyText": "학번 신입생만 수강신청 가능",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학번 신입생만 수강신청 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f938554d57b5a66e",
+      "segmentType": "label_value",
+      "labelText": "□ 수강인원 증원 내역 *",
+      "bodyText": "□ 수강인원 증원 내역 *",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 수강인원 증원 내역 *"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-141630c4861eba19",
+      "segmentType": "continuation",
+      "labelText": "□ 수강인원 증원 내역 * 증원일시",
+      "bodyText": "2026. 3. 3.(화) 10:00",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-f938554d57b5a66e"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 21,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "□ 수강인원 증원 내역 * 증원일시: 2026. 3. 3.(화) 10:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ed565e60e211f742",
+      "segmentType": "label_value",
+      "labelText": "증원일시",
+      "bodyText": "2026. 3. 3.(화) 10:00",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 6,
+          "end": 20
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "증원일시: 2026. 3. 3.(화) 10:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-89f6641b2b2de503",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "이수구분",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "이수구분"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bc4a67eb3d81fc22",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학수번호",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학수번호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3a9688dee5c69709",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "분반",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "분반"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d911f7cb1307bffd",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "교과목명",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "교과목명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f3e8f2e3326f31ba",
+      "segmentType": "label_value",
+      "labelText": "수강인원 인원(명)",
+      "bodyText": "수강인원 인원(명)",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강인원 인원(명)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7760992f6796a9d7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "비고",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "비고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a87caf469b630449",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "변경인원",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "변경인원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2b7530c327b97887",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "증원",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "증원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9c3ed5208039346b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "G-share",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "G-share"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9906361fb03d78ae",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "11000001",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "11000001"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6f3c68ab2e59ade4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "01",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "01"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3fe0f1dfb627b24c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원-인, 함께 여는 미래",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원-인, 함께 여는 미래"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-721e9d6d0d7b4c5a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "150명 -> 180명",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "150명 -> 180명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cb4605815ec354e5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "30명",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "30명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e30b389e32db718b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "이러닝",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "이러닝"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-95a115a347829111",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "11000001",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "11000001"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0e3d0a453c90ac90",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "02",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "02"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ce2c752b8185eb48",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원-인, 함께 여는 미래",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원-인, 함께 여는 미래"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9c59d3a7a58cfafc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "150명 -> 180명",
+      "sourceLocation": {
+        "lineIndex": 26,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "150명 -> 180명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8d97968b7410cdd3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "30명",
+      "sourceLocation": {
+        "lineIndex": 27,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "30명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3990ddd08bf71e2a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "11000001",
+      "sourceLocation": {
+        "lineIndex": 28,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "11000001"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8eb629a2104043c2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "03",
+      "sourceLocation": {
+        "lineIndex": 29,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "03"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-faa32e77e50b983b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원-인, 함께 여는 미래",
+      "sourceLocation": {
+        "lineIndex": 30,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원-인, 함께 여는 미래"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-57c463b7100c04b5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "150명 -> 180명",
+      "sourceLocation": {
+        "lineIndex": 31,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "150명 -> 180명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b3180cd36aef5964",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "30명",
+      "sourceLocation": {
+        "lineIndex": 32,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "30명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-48f9cdbdea8b0ef7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "11000001",
+      "sourceLocation": {
+        "lineIndex": 33,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "11000001"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a6ebe1023421ee44",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "04",
+      "sourceLocation": {
+        "lineIndex": 34,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "04"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eae44537167b8d0b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원-인, 함께 여는 미래",
+      "sourceLocation": {
+        "lineIndex": 35,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원-인, 함께 여는 미래"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d7b1d16b7bd2a46",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "150명 -> 180",
+      "sourceLocation": {
+        "lineIndex": 36,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "150명 -> 180"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-da9e78a67fd3ea7d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "30명",
+      "sourceLocation": {
+        "lineIndex": 37,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "30명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ea3c6bb21179d3f9",
+      "segmentType": "label_value",
+      "labelText": "해당 교과목은 캠퍼스 구분없이 수강가능하며, 1학기에 수강 신청을 못한 경우, 2학기에 수강하여 이수",
+      "bodyText": "※ 해당 교과목은 캠퍼스 구분없이 수강가능하며, 1학기에 수강 신청을 못한 경우, 2학기에 수강하여 이수",
+      "sourceLocation": {
+        "lineIndex": 38,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 해당 교과목은 캠퍼스 구분없이 수강가능하며, 1학기에 수강 신청을 못한 경우, 2학기에 수강하여 이수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8de78b2b24ba0870",
+      "segmentType": "label_value",
+      "labelText": "☎ 교양기초교육본부 033-640-1725",
+      "bodyText": "☎ 교양기초교육본부 033-640-1725",
+      "sourceLocation": {
+        "lineIndex": 39,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "☎ 교양기초교육본부 033-640-1725"
+    }
+  ],
+  "summary": {
+    "segmentCount": 42,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 8,
+      "paragraph": 31,
+      "list_item": 1,
+      "continuation": 1
+    }
+  }
+}

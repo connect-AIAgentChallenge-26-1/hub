@@ -1,0 +1,408 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10976",
+  "sourceContentHash": "1dc6f796c7460c28874ac1c726fc8e9d299470b64972ff5524d2359a317303dd",
+  "sourceTitle": "2026학년도 하반기 현장실습학기제 (한국생산기술연구원) 참여학생 모집",
+  "publishedAt": "2026-05-11",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b039392aba30f086",
+      "segmentType": "title",
+      "labelText": "2026학년도 하반기 현장실습학기제 (한국생산기술연구원) 참여학생 모집",
+      "bodyText": "2026학년도 하반기 현장실습학기제 (한국생산기술연구원) 참여학생 모집",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 하반기 현장실습학기제 (한국생산기술연구원) 참여학생 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-36aa822506be8e20",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 강릉캠퍼스 현장실습지원센터에서는 2026학년도 하반기 한국생산기술연구원 현장실습 참여 학생을 모집하고 있습니다.",
+      "bodyText": "강원대학교 강릉캠퍼스 현장실습지원센터에서는 2026학년도 하반기 한국생산기술연구원 현장실습 참여 학생을 모집하고 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉캠퍼스 현장실습지원센터에서는 2026학년도 하반기 한국생산기술연구원 현장실습 참여 학생을 모집하고 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-218b050c2d9c4486",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "재학생들의 많은 관심과 참여 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "재학생들의 많은 관심과 참여 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-84f3c978ce688579",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 과 정 명 : 2026학년도 하반기 (하계, 2학기) 현장실습학기제",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 과 정 명 : 2026학년도 하반기 (하계, 2학기) 현장실습학기제"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bfd44736c3cab547",
+      "segmentType": "label_value",
+      "labelText": "모집대상",
+      "bodyText": "2. 모집대상 : 신소재공학, 기계공학, 자동차공학, 컴퓨터공학, 화학공학 관련 전공 3,4학년 재학생",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "student_year:3",
+        "student_year:4",
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 모집대상 : 신소재공학, 기계공학, 자동차공학, 컴퓨터공학, 화학공학 관련 전공 3,4학년 재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6b58fe9a448f159b",
+      "segmentType": "label_value",
+      "labelText": "실습기간",
+      "bodyText": "2026. 7. 1. (수) ~ 12. 31. (일) / 6개월 과정",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-01",
+          "start": 10,
+          "end": 25
+        },
+        {
+          "value": "2026-12-31",
+          "start": 28,
+          "end": 39
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 실습기간 : 2026. 7. 1. (수) ~ 12. 31. (일) / 6개월 과정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9857cc7131c4d75b",
+      "segmentType": "label_value",
+      "labelText": "지원내용",
+      "bodyText": "4. 지원내용",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 지원내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6deac90dffb4fc7e",
+      "segmentType": "label_value",
+      "labelText": "현장실습 교과목 이수 조건 충족 시 학점 부여 (하계 4학점, 2학기 12학점)",
+      "bodyText": "가. 현장실습 교과목 이수 조건 충족 시 학점 부여 (하계 4학점, 2학기 12학점)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 현장실습 교과목 이수 조건 충족 시 학점 부여 (하계 4학점, 2학기 12학점)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e60750e5e752edfe",
+      "segmentType": "label_value",
+      "labelText": "매월 실습지원비 지급 (기관에서 학생에게 지급)",
+      "bodyText": "나. 매월 실습지원비 지급 (기관에서 학생에게 지급)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 매월 실습지원비 지급 (기관에서 학생에게 지급)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e7cbcaa130f58226",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "2026. 5. 11. (월) ~ 5. 15. (금) 15:00까지",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-11",
+          "start": 10,
+          "end": 26
+        },
+        {
+          "value": "2026-05-15",
+          "start": 29,
+          "end": 39
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "4. 신청기간 : 2026. 5. 11. (월) ~ 5. 15. (금) 15:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5f86b52a6d33faa9",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "5. 신청방법 : 강원대학교 강릉캠퍼스 현장실습지원센터 홈페이지(knugnet.kangwon.ac.kr) 로그인 후 신청",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 신청방법 : 강원대학교 강릉캠퍼스 현장실습지원센터 홈페이지(knugnet.kangwon.ac.kr) 로그인 후 신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4783038577c0e28d",
+      "segmentType": "label_value",
+      "labelText": "세부일정 및 유의사항",
+      "bodyText": "6. 세부일정 및 유의사항 : 현장실습지원센터 홈페이지 접속하여 부서별 직무내용 확인",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 세부일정 및 유의사항 : 현장실습지원센터 홈페이지 접속하여 부서별 직무내용 확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cdeaf6b57c5abd95",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "7. 안내사항",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "7. 안내사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-99c0dd1478b8ef9b",
+      "segmentType": "label_value",
+      "labelText": "서류 및 면접 선발 결과에 따라 실습 진행 여부가 결정됩니다.",
+      "bodyText": "가. 서류 및 면접 선발 결과에 따라 실습 진행 여부가 결정됩니다.",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 서류 및 면접 선발 결과에 따라 실습 진행 여부가 결정됩니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-894916c6630da722",
+      "segmentType": "label_value",
+      "labelText": "현장실습학기제 교과목 수강 이력이 있는 학생은 신청이 불가합니다.",
+      "bodyText": "나. 현장실습학기제 교과목 수강 이력이 있는 학생은 신청이 불가합니다.",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 현장실습학기제 교과목 수강 이력이 있는 학생은 신청이 불가합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e505bfde0170bf16",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "8. 관련문의 : T. 033-640-1618 / E.",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "8. 관련문의 : T. 033-640-1618 / E."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-27cce50c2c4e85c2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "internship_gn@kangwon.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "internship_gn@kangwon.ac.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2282ff37f3ff0698",
+      "segmentType": "label_value",
+      "labelText": "붙임 1. 2026학년도 1학기 현장실습학기제 운영계획 1부",
+      "bodyText": "붙임 1. 2026학년도 1학기 현장실습학기제 운영계획 1부",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 1. 2026학년도 1학기 현장실습학기제 운영계획 1부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-23f2fd0f429f59f9",
+      "segmentType": "label_value",
+      "labelText": "현장실습지원센터 홈페이지 온라인 메뉴얼(학생용) 1부",
+      "bodyText": "2. 현장실습지원센터 홈페이지 온라인 메뉴얼(학생용) 1부",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 현장실습지원센터 홈페이지 온라인 메뉴얼(학생용) 1부"
+    }
+  ],
+  "summary": {
+    "segmentCount": 19,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 13,
+      "paragraph": 2,
+      "list_item": 3
+    }
+  }
+}

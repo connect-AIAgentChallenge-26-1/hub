@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2374",
+  "sourceContentHash": "9c864e5d6abfbff68c58ca81b78f36b38385941559b76ef8d57c3ba2b8390fc8",
+  "sourceTitle": "2026학년도 1학기 1차 폐강 강좌 확정 알림（춘천캠퍼스）",
+  "publishedAt": "2026-02-27",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c4461ccbb1c5cdb7",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 1차 폐강 강좌 확정 알림（춘천캠퍼스）",
+      "bodyText": "2026학년도 1학기 1차 폐강 강좌 확정 알림（춘천캠퍼스）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 1차 폐강 강좌 확정 알림（춘천캠퍼스）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-96973b6a8fd6b048",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 1학기 수강신청 결과 1차 폐강 확정된 강좌를 다음과 같이 알려드리니, 폐강 강좌를 신청한 학생은 수강신청 변경 기간을 이용하여 다시 수강 신청하여 주시기 바랍니다.",
+      "bodyText": "2026학년도 1학기 수강신청 결과 1차 폐강 확정된 강좌를 다음과 같이 알려드리니, 폐강 강좌를 신청한 학생은 수강신청 변경 기간을 이용하여 다시 수강 신청하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_change",
+        "application_period",
+        "result_announcement",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 수강신청 결과 1차 폐강 확정된 강좌를 다음과 같이 알려드리니, 폐강 강좌를 신청한 학생은 수강신청 변경 기간을 이용하여 다시 수강 신청하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cf31346eb1535f76",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 1차 폐강 확정 강좌: 40개 강좌（<붙임> 참조）",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-01",
+          "start": 0,
+          "end": 4
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 1차 폐강 확정 강좌: 40개 강좌（<붙임> 참조）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5815bb6636e233de",
+      "segmentType": "label_value",
+      "labelText": "수강신청 변경 기간",
+      "bodyText": "2026. 3.3.（화） ~ 3. 9.（월）",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_change",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 15,
+          "end": 28
+        },
+        {
+          "value": "2026-03-09",
+          "start": 31,
+          "end": 39
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 수강신청 변경 기간: 2026. 3.3.（화） ~ 3. 9.（월）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-45ef728f8224c212",
+      "segmentType": "label_value",
+      "labelText": "붙임 2026학년도 1학기 1차 폐강 확정 강좌목록（춘천캠퍼스） 1부. 끝.",
+      "bodyText": "붙임 2026학년도 1학기 1차 폐강 확정 강좌목록（춘천캠퍼스） 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 2026학년도 1학기 1차 폐강 확정 강좌목록（춘천캠퍼스） 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "list_item": 1
+    }
+  }
+}

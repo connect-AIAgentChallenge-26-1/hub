@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2375",
+  "sourceContentHash": "452085465f413473ecf6e27ef89c0b4e0844b3f776da2dfaecfb54d8b99ed641",
+  "sourceTitle": "2026학년도 1학기 학부 폐강강좌 알림(1차) (삼척캠퍼스)",
+  "publishedAt": "2026-03-04",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-14b54c911485dba4",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 학부 폐강강좌 알림(1차) (삼척캠퍼스)",
+      "bodyText": "2026학년도 1학기 학부 폐강강좌 알림(1차) (삼척캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 학부 폐강강좌 알림(1차) (삼척캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-96973b6a8fd6b048",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 1학기 수강신청 결과 1차 폐강 확정된 강좌를 다음과 같이 알려드리니, 폐강 강좌를 신청한 학생은 수강신청 변경 기간을 이용하여 다시 수강 신청하여 주시기 바랍니다.",
+      "bodyText": "2026학년도 1학기 수강신청 결과 1차 폐강 확정된 강좌를 다음과 같이 알려드리니, 폐강 강좌를 신청한 학생은 수강신청 변경 기간을 이용하여 다시 수강 신청하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_change",
+        "application_period",
+        "result_announcement",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 수강신청 결과 1차 폐강 확정된 강좌를 다음과 같이 알려드리니, 폐강 강좌를 신청한 학생은 수강신청 변경 기간을 이용하여 다시 수강 신청하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7978e1fb9b3bff19",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 1차 폐강 확정 강좌 : 24개 강좌（붙임 참조）",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-01",
+          "start": 0,
+          "end": 4
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 1차 폐강 확정 강좌 : 24개 강좌（붙임 참조）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aeb63e3d16375435",
+      "segmentType": "label_value",
+      "labelText": "수강신청 변경 기간",
+      "bodyText": "2026. 3. 3.(화) ~ 3. 9.(월)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_change",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 16,
+          "end": 30
+        },
+        {
+          "value": "2026-03-09",
+          "start": 33,
+          "end": 41
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 수강신청 변경 기간 : 2026. 3. 3.(화) ~ 3. 9.(월)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4aeffa8a1111a491",
+      "segmentType": "label_value",
+      "labelText": "붙임 2026학년도 1학기 1차 폐강 확정 강좌목록(삼척캠퍼스） 1부. 끝.",
+      "bodyText": "붙임 2026학년도 1학기 1차 폐강 확정 강좌목록(삼척캠퍼스） 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 2026학년도 1학기 1차 폐강 확정 강좌목록(삼척캠퍼스） 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "list_item": 1
+    }
+  }
+}

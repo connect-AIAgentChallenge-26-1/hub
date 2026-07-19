@@ -1,0 +1,359 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2473",
+  "sourceContentHash": "e68d5777cb0c5bc2b730834c320cb7cb6a075a17cf8f2934601651a17072aa5b",
+  "sourceTitle": "2026학년도 2학기 학부생 재입학 모집 안내",
+  "publishedAt": "2026-06-16",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1f6b4e1f1b50ae7b",
+      "segmentType": "title",
+      "labelText": "2026학년도 2학기 학부생 재입학 모집 안내",
+      "bodyText": "2026학년도 2학기 학부생 재입학 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 2학기 학부생 재입학 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-efcc206a91dfd166",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 2학기 학부생 재입학 모집 계획은 안내하오니,",
+      "bodyText": "2026학년도 2학기 학부생 재입학 모집 계획은 안내하오니,",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 2학기 학부생 재입학 모집 계획은 안내하오니,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-961111bef7efa513",
+      "segmentType": "label_value",
+      "labelText": "재입학을 희망하는 학생은 첨부파일을 참고하여 주시기 바랍니다.",
+      "bodyText": "재입학을 희망하는 학생은 첨부파일을 참고하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "재입학을 희망하는 학생은 첨부파일을 참고하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ae2b0262b7d1c19d",
+      "segmentType": "label_value",
+      "labelText": "* 소속 모집단위 명칭 변경, 통합, 분리, 학제 변경된 학과의 경우",
+      "bodyText": "* 소속 모집단위 명칭 변경, 통합, 분리, 학제 변경된 학과의 경우",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 소속 모집단위 명칭 변경, 통합, 분리, 학제 변경된 학과의 경우"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-29a4944d7aa0f838",
+      "segmentType": "label_value",
+      "labelText": "교육과정 이수 가능 여부를 학부 또는 전공에 문의",
+      "bodyText": "교육과정 이수 가능 여부를 학부 또는 전공에 문의",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "교육과정 이수 가능 여부를 학부 또는 전공에 문의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-771f7dbf96942537",
+      "segmentType": "label_value",
+      "labelText": "* 주요일정",
+      "bodyText": "* 주요일정",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 주요일정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-03de015d7138c9e7",
+      "segmentType": "label_value",
+      "labelText": "재입학 지원서 접수 및 서류심사",
+      "bodyText": "2026. 6. 16.(화) ~ 7. 10.(금)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "readmission_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-16",
+          "start": 21,
+          "end": 36
+        },
+        {
+          "value": "2026-07-10",
+          "start": 39,
+          "end": 48
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 재입학 지원서 접수 및 서류심사: 2026. 6. 16.(화) ~ 7. 10.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3584b88f1cb56acd",
+      "segmentType": "label_value",
+      "labelText": "재입학 허가 통보",
+      "bodyText": "2026. 7. 21.(화) 예정",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-21",
+          "start": 13,
+          "end": 28
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 재입학 허가 통보: 2026. 7. 21.(화) 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9b8bba2414283ada",
+      "segmentType": "label_value",
+      "labelText": "수강신청",
+      "bodyText": "2026. 7. 30.(목) ~ 7. 31.(금)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "preliminary_course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-30",
+          "start": 13,
+          "end": 28
+        },
+        {
+          "value": "2026-07-31",
+          "start": 31,
+          "end": 40
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 수강신청: (예비) 2026. 7. 30.(목) ~ 7. 31.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-77a48ba15c0e57cd",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 8. 12.(수) ~ 8. 14.(금)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-08-12",
+          "start": 4,
+          "end": 19
+        },
+        {
+          "value": "2026-08-14",
+          "start": 22,
+          "end": 31
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "(본) 2026. 8. 12.(수) ~ 8. 14.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9181927688eb95f6",
+      "segmentType": "label_value",
+      "labelText": "등록금 납부",
+      "bodyText": "2026. 8. 25.(화) ~ 8. 28.(금) 등록금 미납 시 재입학 허가 취소",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-08-25",
+          "start": 10,
+          "end": 25
+        },
+        {
+          "value": "2026-08-28",
+          "start": 28,
+          "end": 37
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 등록금 납부: 2026. 8. 25.(화) ~ 8. 28.(금) 등록금 미납 시 재입학 허가 취소"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a234d96cf13c83e7",
+      "segmentType": "label_value",
+      "labelText": "붙임 1. 2026학년도 2학기 재입학 모집 안내 1부.",
+      "bodyText": "붙임 1. 2026학년도 2학기 재입학 모집 안내 1부.",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 1. 2026학년도 2학기 재입학 모집 안내 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9333f372eaf10018",
+      "segmentType": "label_value",
+      "labelText": "재입학 신청 양식(재입학 원서, 사유서, 서약서) 각 1부.",
+      "bodyText": "2. 재입학 신청 양식(재입학 원서, 사유서, 서약서) 각 1부.",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "readmission_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 재입학 신청 양식(재입학 원서, 사유서, 서약서) 각 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b039d9d2f19a30c3",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 개인정보 수집이용제공 동의서 1부.",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 개인정보 수집이용제공 동의서 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-64e5e10dae5883fe",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 삼척캠퍼스 학과(전공) 및 주요부서 연락처 1부.",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 삼척캠퍼스 학과(전공) 및 주요부서 연락처 1부."
+    }
+  ],
+  "summary": {
+    "segmentCount": 15,
+    "locallyGroundedCount": 4,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 11,
+      "paragraph": 1,
+      "list_item": 2
+    }
+  }
+}

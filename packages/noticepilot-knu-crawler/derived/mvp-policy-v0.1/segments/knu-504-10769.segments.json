@@ -1,0 +1,592 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10769",
+  "sourceContentHash": "c4e0207e0fc058207afac7002b64a309c66b6fe62e0c2d6356a13770e64e1fe8",
+  "sourceTitle": "카카오테크캠퍼스 4기 모집",
+  "publishedAt": "2026-03-20",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-81442319bafe2159",
+      "segmentType": "title",
+      "labelText": "카카오테크캠퍼스 4기 모집",
+      "bodyText": "카카오테크캠퍼스 4기 모집",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "카카오테크캠퍼스 4기 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a94447a621824020",
+      "segmentType": "label_value",
+      "labelText": "우리 대학은 2024년부터 카카오와의 협력을 통해 「카카오테크캠퍼스」 프로그램을 운영하고 있습니다.",
+      "bodyText": "우리 대학은 2024년부터 카카오와의 협력을 통해 「카카오테크캠퍼스」 프로그램을 운영하고 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "우리 대학은 2024년부터 카카오와의 협력을 통해 「카카오테크캠퍼스」 프로그램을 운영하고 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5332be0e3ef09fe5",
+      "segmentType": "label_value",
+      "labelText": "2026년에도 4기 수강생을 다음과 같이 모집하오니 관심있는 학생들의 많은 지원 바랍니다.",
+      "bodyText": "2026년에도 4기 수강생을 다음과 같이 모집하오니 관심있는 학생들의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년에도 4기 수강생을 다음과 같이 모집하오니 관심있는 학생들의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6e221f110e98d3f1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "◎ 온라인 설명회",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "◎ 온라인 설명회"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1ad1520b5d2a759a",
+      "segmentType": "continuation",
+      "labelText": "",
+      "bodyText": "2026. 04. 03.(금), 19:00 ~ 20:00 (유튜브 라이브)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-6e221f110e98d3f1"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-03",
+          "start": 17,
+          "end": 33
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "◎ 온라인 설명회 - 일 시: 2026. 04. 03.(금), 19:00 ~ 20:00 (유튜브 라이브)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-46b5bafec829cc36",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026. 04. 03.(금), 19:00 ~ 20:00 (유튜브 라이브)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-03",
+          "start": 7,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 일 시: 2026. 04. 03.(금), 19:00 ~ 20:00 (유튜브 라이브)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9f4dc787c9709443",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "2026. 04. 03.(금) 17:00까지",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-03",
+          "start": 8,
+          "end": 24
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 신청기간: 2026. 04. 03.(금) 17:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4415b2fabcbb69f3",
+      "segmentType": "label_value",
+      "labelText": "◎ 신청기간",
+      "bodyText": "2026. 04. 01.(수) ~ 04. 15.(수) / 2주간",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-01",
+          "start": 8,
+          "end": 24
+        },
+        {
+          "value": "2026-04-15",
+          "start": 27,
+          "end": 37
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "◎ 신청기간: 2026. 04. 01.(수) ~ 04. 15.(수) / 2주간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-79815a41bf812b6e",
+      "segmentType": "label_value",
+      "labelText": "◎ 신청대상",
+      "bodyText": "◎ 신청대상",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "◎ 신청대상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7eb0bdaffc186698",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 소속 재학생(전공 무관), 휴학생, 졸업예정자 모두 신청 가능",
+      "bodyText": "- 강원대학교 소속 재학생(전공 무관), 휴학생, 졸업예정자 모두 신청 가능",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled",
+        "enrollment_status:on_leave"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 강원대학교 소속 재학생(전공 무관), 휴학생, 졸업예정자 모두 신청 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fd0f2c3143abc4e8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 프로그래밍 기초 역량 보유자",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 프로그래밍 기초 역량 보유자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-17978ce50a77508b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 6개월 과정(2026년 5월 ~ 11월) 완주 의지 보유자",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 6개월 과정(2026년 5월 ~ 11월) 완주 의지 보유자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7a0fae4ffc201fc1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 춘천 및 삼척 캠퍼스 소속 재학생",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 춘천 및 삼척 캠퍼스 소속 재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ae7d9b4986ab8d70",
+      "segmentType": "label_value",
+      "labelText": "◎ 선발절차",
+      "bodyText": "◎ 선발절차",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "◎ 선발절차"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e9a5a061895c9df2",
+      "segmentType": "label_value",
+      "labelText": "서류접수",
+      "bodyText": "2026. 04. 01.(수) ~ 04. 15.(수)",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-01",
+          "start": 9,
+          "end": 25
+        },
+        {
+          "value": "2026-04-15",
+          "start": 28,
+          "end": 38
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 서류접수: 2026. 04. 01.(수) ~ 04. 15.(수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-29397404683220a2",
+      "segmentType": "label_value",
+      "labelText": "지원서 및 자기소개서 제출",
+      "bodyText": "- 지원서 및 자기소개서 제출",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 지원서 및 자기소개서 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-25dab976c52e825d",
+      "segmentType": "label_value",
+      "labelText": "코딩테스트",
+      "bodyText": "2026. 04. 25.(토) 11:00~13:00 (2시간)",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-25",
+          "start": 10,
+          "end": 26
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 코딩테스트: 2026. 04. 25.(토) 11:00~13:00 (2시간)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5468b71018def050",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 강원대학교 춘천캠퍼스에서 오프라인으로 진행",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 강원대학교 춘천캠퍼스에서 오프라인으로 진행"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b4ed1cfe139c5a09",
+      "segmentType": "label_value",
+      "labelText": "PCCP/PCCE점수 제출시 테스트 면제",
+      "bodyText": "※ PCCP/PCCE점수 제출시 테스트 면제",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ PCCP/PCCE점수 제출시 테스트 면제"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d066b0efdb909f6d",
+      "segmentType": "label_value",
+      "labelText": "최종발표",
+      "bodyText": "2026. 05. 01.(금)",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-01",
+          "start": 9,
+          "end": 25
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 최종발표: 2026. 05. 01.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9982fcd02972a6d0",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 합격자 개별 안내",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 합격자 개별 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c866c76408926580",
+      "segmentType": "label_value",
+      "labelText": "최종 선발 인원",
+      "bodyText": "4. 최종 선발 인원 : 카카오테크캠퍼스 참여 대학 별 30명 내외",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 최종 선발 인원 : 카카오테크캠퍼스 참여 대학 별 30명 내외"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a90ce80c12f6b589",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "◎ 학점연계 *관련사항은 추후 별도 공지 예정",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "◎ 학점연계 *관련사항은 추후 별도 공지 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-be0d9df41f686dea",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "◎ 기타 안내사항",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "◎ 기타 안내사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bb3ea4d08d74718c",
+      "segmentType": "label_value",
+      "labelText": "코딩테스트 및 오프라인 교육은 춘천캠퍼스에서 진행",
+      "bodyText": "- 코딩테스트 및 오프라인 교육은 춘천캠퍼스에서 진행",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 코딩테스트 및 오프라인 교육은 춘천캠퍼스에서 진행"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5ddc896a2359b636",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 자세한 사항 확인 :",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 자세한 사항 확인 :"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3e4370e2145467e4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://www.kakaotechcampus.com",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://www.kakaotechcampus.com"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3a721cd5e540cc4a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "감사합니다.",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "감사합니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 28,
+    "locallyGroundedCount": 6,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 14,
+      "paragraph": 5,
+      "continuation": 1,
+      "list_item": 7
+    }
+  }
+}

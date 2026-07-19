@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11160",
+  "sourceContentHash": "08e6b8004c946160bd3464ec2b013038d7782b419d3dc3abd2ad41f25056aaa3",
+  "sourceTitle": "[국고지원] 대한민국 학생창업주간 참여 학생 선착순모집 (~6.26)",
+  "publishedAt": "2026-06-24",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4a5ce127eb521d97",
+      "segmentType": "title",
+      "labelText": "[국고지원] 대한민국 학생창업주간 참여 학생 선착순모집 (~",
+      "bodyText": "6.26)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-26",
+          "start": 33,
+          "end": 37
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "[국고지원] 대한민국 학생창업주간 참여 학생 선착순모집 (~6.26)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dc1a39f7f658582a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "문의전화 :강원대학교 강릉산학협력단 창업지원본부 (033-640-2843)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "문의전화 :강원대학교 강릉산학협력단 창업지원본부 (033-640-2843)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0c37cd04ac0b285d",
+      "segmentType": "label_value",
+      "labelText": "신청",
+      "bodyText": "신청 : 네이버폼",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청 : 네이버폼"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cf31e1353960c0af",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://naver.me/FkaNMSaZ",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://naver.me/FkaNMSaZ"
+    }
+  ],
+  "summary": {
+    "segmentCount": 4,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "label_value": 1
+    }
+  }
+}

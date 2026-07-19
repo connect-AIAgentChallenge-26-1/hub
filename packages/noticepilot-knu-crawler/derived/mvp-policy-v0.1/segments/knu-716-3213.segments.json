@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3213",
+  "sourceContentHash": "ca93b1e187b57994fb7eb711b68861e50e4dced3c8d20b395ca02147c95a3b81",
+  "sourceTitle": "교육혁신본부 객원교수 공개채용 최종 합격자 공고",
+  "publishedAt": "2026-02-20",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d40834a5269d41a",
+      "segmentType": "title",
+      "labelText": "교육혁신본부 객원교수 공개채용 최종 합격자 공고",
+      "bodyText": "교육혁신본부 객원교수 공개채용 최종 합격자 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "교육혁신본부 객원교수 공개채용 최종 합격자 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-79f20841c574b55e",
+      "segmentType": "label_value",
+      "labelText": "<교육혁신본부 객원교수 공개채용 최종 합격자 공고>",
+      "bodyText": "<교육혁신본부 객원교수 공개채용 최종 합격자 공고>",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<교육혁신본부 객원교수 공개채용 최종 합격자 공고>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0991f3d5cce83a1b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-67호와 관련하여 붙임과 같이 최종 합격자를 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-67호와 관련하여 붙임과 같이 최종 합격자를 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8c0432f933a07e9c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 2. 20.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-20",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 2. 20."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-12502cdcdedc60e8",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 교육혁신본부장",
+      "bodyText": "강원대학교 교육혁신본부장",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 교육혁신본부장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "paragraph": 2
+    }
+  }
+}

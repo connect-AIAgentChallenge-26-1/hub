@@ -1,0 +1,486 @@
+{
+  "schemaVersion": "noticepilot.projectRoadmap.v0.1",
+  "updatedAt": "2026-07-14T00:00:00Z",
+  "packageVersion": "0.4.4-observation.3-policy.15-foundation.25.1",
+  "currentStep": "S30",
+  "repairTrack": {
+    "id": "S24A-repair",
+    "candidateVersion": "foundation.25.1",
+    "releaseStage": "release_candidate",
+    "verificationAuthority": "external_s9c_execution_evidence",
+    "evidence": "runtime/s24a-repair-v1/release-evidence.json",
+    "stages": {
+      "s7PreventiveFix": "completed",
+      "s8SummaryRepair": "completed",
+      "s9bReproduciblePackager": "completed"
+    },
+    "officialPromotionPerformed": false,
+    "gitMigrationPerformed": false
+  },
+  "steps": [
+    {
+      "id": "S20",
+      "title": "Policy.15 baseline fixture",
+      "status": "completed"
+    },
+    {
+      "id": "S21",
+      "title": "Judgment model contract",
+      "status": "completed"
+    },
+    {
+      "id": "S22",
+      "title": "StructureAnalyzer and TemporalParser",
+      "status": "completed"
+    },
+    {
+      "id": "S23",
+      "title": "LocalBinder and SemanticClassifier",
+      "status": "completed"
+    },
+    {
+      "id": "S24",
+      "title": "ApplicabilityEvaluator and PublishabilityEvaluator",
+      "status": "completed",
+      "substeps": [
+        {
+          "id": "S24-A",
+          "title": "Board 716 list-metadata trace adaptation",
+          "status": "completed"
+        },
+        {
+          "id": "S24-B",
+          "title": "ApplicabilityEvaluator extraction",
+          "status": "completed"
+        },
+        {
+          "id": "S24-C",
+          "title": "PublishabilityEvaluator extraction",
+          "status": "completed"
+        },
+        {
+          "id": "S24-D",
+          "title": "Runtime wiring and layer audit",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": "S25",
+      "title": "Intra-notice CandidateReconciler",
+      "status": "completed"
+    },
+    {
+      "id": "S26",
+      "title": "Layered full-corpus validation",
+      "status": "completed",
+      "substeps": [
+        {
+          "id": "S26-A",
+          "title": "Unified layered full-corpus audit",
+          "status": "completed",
+          "reportPathPolicy": "audit_report_directory_relative_posix"
+        },
+        {
+          "id": "S26-B",
+          "title": "Separate layered baseline decision and creation",
+          "status": "completed",
+          "decision": "create_separate_layered_baseline",
+          "baselineId": "layered-s26-corpus-2059-20260712-v1",
+          "baselineDirectory": "baseline/layered-s26-v1",
+          "policy15Preserved": true,
+          "policy15Replaced": false,
+          "allowlistCreated": false,
+          "decisionRecord": "baseline/layered-s26-v1/decision-record.json"
+        }
+      ]
+    },
+    {
+      "id": "S27",
+      "title": "Cross-notice CalendarEvent reconciliation",
+      "status": "completed",
+      "substeps": [
+        {
+          "id": "S27-A",
+          "title": "CalendarEvent reconciliation contract and cross-notice corpus diagnosis",
+          "status": "completed",
+          "completedWork": [
+            "contract_draft",
+            "publishable_pair_and_cluster_diagnosis",
+            "stable_calendar_event_id_strategy_draft",
+            "relation_evidence_and_fail_closed_policy",
+            "runtime_and_ics_no_change_audit"
+          ],
+          "diagnosticResult": "pass",
+          "publishableCandidateCount": 909,
+          "diagnosticPairCount": 343,
+          "diagnosticClusterCount": 110,
+          "creatorDecisionCount": 8,
+          "relationDecisionsPerformed": false,
+          "calendarEventIdAssigned": false,
+          "runtimeMutationPerformed": false,
+          "icsMutationPerformed": false,
+          "report": "derived/mvp-policy-v0.1/reports/s27a-cross-notice/s27a-cross-notice-diagnosis.json",
+          "decisionQueue": "derived/mvp-policy-v0.1/reports/s27a-cross-notice/creator-decision-queue.json",
+          "creatorDecisionsApproved": true,
+          "creatorDecisionPolicy": "configs/noticepilot_cross_notice_reconciliation_policy.v0.3.json",
+          "boardPriorityConfigurationPending": false
+        },
+        {
+          "id": "S27-B",
+          "title": "Approved relation policy and deterministic CrossNoticeReconciler",
+          "status": "completed",
+          "policy": "configs/noticepilot_cross_notice_reconciliation_policy.v0.3.json",
+          "implicitBoardPriorityAllowed": false,
+          "prerequisites": [
+            "D8_canonical_source_identity",
+            "ReconciliationCandidateView",
+            "CalendarEventSourceLink",
+            "atomic_promotion_relation_persistence_boundary",
+            "CrossNoticeReconciler"
+          ],
+          "auditResult": "pass",
+          "publishableCandidateCount": 909,
+          "diagnosticPairCount": 343,
+          "relationCounts": {
+            "distinct": 100,
+            "duplicate": 8,
+            "extension": 1,
+            "needs_review": 234,
+            "revision": 0,
+            "replacement": 0
+          },
+          "automaticMergePlanCount": 9,
+          "unresolvedDuplicateCanonicalSelectionCount": 0,
+          "calendarEventIdAssigned": false,
+          "runtimeMutationPerformed": false,
+          "icsMutationPerformed": false,
+          "report": "derived/mvp-policy-v0.1/reports/s27b-cross-notice/s27b-cross-notice-reconciler-audit.json",
+          "representativePolicy": "specialized_board_partial_precedence",
+          "representativeBoardPrecedence": [
+            {
+              "higherBoardId": "715",
+              "lowerBoardId": "504"
+            },
+            {
+              "higherBoardId": "721",
+              "lowerBoardId": "504"
+            }
+          ]
+        },
+        {
+          "id": "S27-C",
+          "title": "Stable CalendarEventId registry and revision history",
+          "status": "completed",
+          "registryId": "s27c-publishable-corpus-20260713-v1",
+          "registryDirectory": "registry/s27c-v1",
+          "idStrategy": "registry_assigned_opaque_v0",
+          "publishableCandidateCount": 909,
+          "calendarEventCount": 900,
+          "candidateAssignmentCount": 909,
+          "sourceLinkCount": 909,
+          "revisionCount": 901,
+          "activeRevisionCount": 900,
+          "singletonEventCount": 891,
+          "duplicateEventCount": 8,
+          "extensionEventCount": 1,
+          "persistedRelationDecisionCount": 343,
+          "approvedMergeAppliedCount": 9,
+          "needsReviewMergeAppliedCount": 0,
+          "projectionOutboxIntentCount": 900,
+          "icsUidMigrationPerformed": false,
+          "report": "derived/mvp-policy-v0.1/reports/s27c-calendar-event-registry/s27c-calendar-event-registry-audit.json"
+        },
+        {
+          "id": "S27-D",
+          "title": "ICS projection migration and full-corpus audit",
+          "status": "completed",
+          "projectionId": "s27d-registry-ics-projection-20260713-v1",
+          "projectionDirectory": "projection/s27d-v1",
+          "migrationMode": "pre_subscription_cutover",
+          "calendarEventCount": 900,
+          "persistentUidCount": 900,
+          "legacyCandidateUidMapCount": 909,
+          "outboxConsumedCount": 900,
+          "studentFeedEventCount": 601,
+          "jobApplicationFeedEventCount": 299,
+          "legacyCancellationTombstoneCount": 0,
+          "timedWithoutEndDtendOmittedCount": 155,
+          "runtimeCandidateMutationPerformed": false,
+          "s27cRegistryMutationPerformed": false,
+          "subscriptionEndpointImplemented": false,
+          "calendarClientPhysicalQaPerformed": false,
+          "report": "derived/mvp-policy-v0.1/reports/s27d-ics-projection/s27d-ics-projection-audit.json"
+        }
+      ]
+    },
+    {
+      "id": "S28",
+      "title": "SubscriptionProfile and FeedBuilder",
+      "status": "completed",
+      "substeps": [
+        {
+          "id": "S28-1",
+          "title": "SubscriptionProfile strict contract",
+          "status": "completed",
+          "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+          "validator": "noticepilot_subscription_profile.py",
+          "schema": "schemas/subscription-profile/subscription-profile.schema.json",
+          "profileDefaultsApproved": false,
+          "feedEligibilityRulesImplemented": false,
+          "feedBuilderImplemented": false,
+          "s27RegistryMutationPerformed": false,
+          "icsMutationPerformed": false,
+          "report": "derived/mvp-policy-v0.1/reports/s28-subscription-profile/s28-subscription-profile-contract-audit.json"
+        },
+        {
+          "id": "S28-2",
+          "title": "Feed eligibility policy and decision reasons",
+          "status": "completed",
+          "policyVersion": "noticepilot.feedEligibilityPolicy.v0.2",
+          "evaluator": "noticepilot_feed_eligibility.py",
+          "policy": "configs/noticepilot_feed_eligibility_policy.v0.2.json",
+          "eligibilityInputViewCount": 900,
+          "sourceLinkJoinCount": 909,
+          "feedBuilderImplemented": false,
+          "s27RegistryMutationPerformed": false,
+          "icsMutationPerformed": false,
+          "report": "derived/mvp-policy-v0.1/reports/s28-feed-eligibility/s28-feed-eligibility-policy-audit.json",
+          "approvedDecisionCount": 5,
+          "unresolvedDecisionCount": 0,
+          "sourceLinkMatchMode": "canonical_source_only",
+          "reviewStateAggregationMode": "canonical_candidate_only",
+          "defaultUnknownCampusIncluded": true,
+          "defaultReviewRequiredRule": "include_if_valid_normalized_date",
+          "audienceUnscopedDefault": "include",
+          "validNormalizedDateEventCount": 900
+        },
+        {
+          "id": "S28-3",
+          "title": "Deterministic FeedBuilder implementation",
+          "status": "completed",
+          "builder": "noticepilot_feed_builder.py",
+          "builderVersion": "0.1.0",
+          "defaultProfiles": "configs/noticepilot_default_subscription_profiles.v0.1.json",
+          "feedBuildResultSchema": "noticepilot.feedBuildResult.v0.1",
+          "inputEventCount": 900,
+          "studentIncludedEventCount": 601,
+          "jobIncludedEventCount": 299,
+          "studentJobOverlapCount": 0,
+          "studentJobUnionCount": 900,
+          "deterministicReverseInputCheck": true,
+          "persistentIcsMembershipParity": true,
+          "feedSnapshotImplemented": false,
+          "snapshotIdentityOrHashIssued": false,
+          "subscriptionUrlOrTokenIssued": false,
+          "icsMutationPerformed": false,
+          "s27RegistryMutationPerformed": false,
+          "report": "derived/mvp-policy-v0.1/reports/s28-feed-builder/s28-feed-builder-audit.json"
+        },
+        {
+          "id": "S28-4",
+          "title": "Subscription feed snapshot contract",
+          "status": "completed",
+          "snapshotModule": "noticepilot_feed_snapshot.py",
+          "snapshotBuilderVersion": "0.1.0",
+          "snapshotSchemaVersion": "noticepilot.subscriptionFeedSnapshot.v0.1",
+          "snapshotManifestSchemaVersion": "noticepilot.subscriptionFeedSnapshotManifest.v0.1",
+          "snapshotDirectory": "snapshots/s28-v1",
+          "snapshotSetId": "snapset_874ba65cc0b7e371837e5ab3b9887ee6",
+          "snapshotSetHash": "874ba65cc0b7e371837e5ab3b9887ee63093f43105b34b11281ba95648538018",
+          "snapshotIdStrategy": "content_addressed_snapshot_hash_v0",
+          "hashContract": "sha256_canonical_json_utf8_sorted_keys_compact_v0",
+          "snapshotCount": 2,
+          "totalEventCount": 900,
+          "studentSnapshotEventCount": 601,
+          "jobSnapshotEventCount": 299,
+          "generatedAtIncludedInIdentity": false,
+          "atomicSnapshotSetWrite": true,
+          "subscriptionUrlOrTokenIssued": false,
+          "icsSerializationPerformed": false,
+          "s27RegistryMutationPerformed": false,
+          "s27ProjectionMutationPerformed": false,
+          "report": "derived/mvp-policy-v0.1/reports/s28-feed-snapshot/s28-feed-snapshot-audit.json"
+        },
+        {
+          "id": "S28-5",
+          "title": "Profile matrix and full-corpus feed audit",
+          "status": "completed",
+          "matrixModule": "noticepilot_profile_matrix.py",
+          "matrixVersion": "0.1.0",
+          "matrixSchemaVersion": "noticepilot.profileMatrix.v0.1",
+          "matrixResultSchemaVersion": "noticepilot.profileMatrixResult.v0.1",
+          "matrix": "configs/noticepilot_profile_matrix.v0.1.json",
+          "inputEventCount": 900,
+          "profileCaseCount": 44,
+          "decisionCount": 39600,
+          "categoryCounts": {
+            "reference": 2,
+            "campus": 8,
+            "policy_toggle": 6,
+            "audience": 8,
+            "status": 2,
+            "source_board": 9,
+            "event_type": 9
+          },
+          "referenceStudentEventCount": 601,
+          "referenceJobEventCount": 299,
+          "referenceOverlapCount": 0,
+          "referenceUnionCount": 900,
+          "canonicalBoardPartition": true,
+          "eventTypePartition": true,
+          "reverseInputDeterminism": true,
+          "personalizationReadyEventCount": 12,
+          "audienceUnscopedEventCount": 888,
+          "unknownCampusEventCount": 1,
+          "newProductPolicyIntroduced": false,
+          "snapshotMutationPerformed": false,
+          "icsSerializationPerformed": false,
+          "s27RegistryMutationPerformed": false,
+          "s27ProjectionMutationPerformed": false,
+          "report": "derived/mvp-policy-v0.1/reports/s28-profile-matrix/s28-profile-matrix-full-corpus-audit.json"
+        }
+      ]
+    },
+    {
+      "id": "S29",
+      "title": "PostgreSQL and incremental runtime",
+      "status": "completed",
+      "substeps": [
+        {
+          "id": "S29-1",
+          "title": "PostgreSQL schema and migration",
+          "status": "live_migration_and_rerun_verified",
+          "migration": "migrations/postgresql/0001_s29_initial.sql",
+          "migrationVersion": "0001_s29_initial",
+          "livePostgresExecutionPerformed": true,
+          "migrationSha256": "a542301b0630c17a27169b4412f439f54f133c2d95b08a01d39e188b9ce8c759"
+        },
+        {
+          "id": "S29-2",
+          "title": "Foundation bootstrap and repository transaction",
+          "status": "completed_reference",
+          "bootstrapManifest": "runtime/s29-v1/bootstrap-manifest.json",
+          "sourceNoticeCount": 2059,
+          "extractionRunCount": 2059,
+          "candidateCount": 1304,
+          "calendarEventCount": 900,
+          "revisionCount": 901,
+          "sourceLinkCount": 909,
+          "profileCount": 2,
+          "snapshotCount": 2,
+          "snapshotMembershipCount": 900,
+          "atomicRollbackVerified": true,
+          "idempotentReplayVerified": true
+        },
+        {
+          "id": "S29-3",
+          "title": "Content-hash incremental runtime and durable outbox",
+          "status": "completed_reference",
+          "module": "noticepilot_incremental_runtime.py",
+          "fullCorpusReplayNoticeCount": 2059,
+          "fullCorpusReplayOutboxCount": 0,
+          "changedSimulationOutboxCount": 1
+        },
+        {
+          "id": "S29-4",
+          "title": "Opaque subscription feed delivery identity and read endpoint",
+          "status": "completed_reference",
+          "module": "noticepilot_subscription_delivery.py",
+          "subscriptionFeedCount": 2,
+          "studentRenderedEventCount": 601,
+          "jobRenderedEventCount": 299,
+          "rawTokenPersisted": false,
+          "etag304Verified": true,
+          "wsgiReadEndpointImplemented": true
+        },
+        {
+          "id": "S29-5",
+          "title": "Live PostgreSQL migration/bootstrap verification",
+          "status": "completed_live_verified",
+          "applyTool": "tools/apply_s29_postgres.py",
+          "requires": [
+            "PostgreSQL server",
+            "psycopg",
+            "deployment DSN"
+          ],
+          "verifyTool": "tools/verify_s29_live_postgres.py",
+          "verificationContract": "S29_LIVE_POSTGRES_VERIFICATION.md",
+          "bootstrapAndRerunVerified": true,
+          "constraintAndRollbackVerified": true,
+          "actualOutput": "runtime/s29-v1/live-postgres-verification.json",
+          "reportSha256": "eb66e820ac8885296a4389889519fe78a53a22d7eb814625dafe391f1a3dddbf",
+          "fileSha256": "8eecf611b93725372cafd5adfbef05717c0b66c5d9ae3b314233a7222a55d36d",
+          "livePostgresVerified": true,
+          "probeResidue": [],
+          "mutationsCommitted": false
+        }
+      ],
+      "report": "derived/mvp-policy-v0.1/reports/s29-runtime/s29-postgres-runtime-audit.json",
+      "completionEvidence": {
+        "path": "runtime/s29-v1/live-postgres-verification.json",
+        "schemaVersion": "noticepilot.s29LivePostgresVerification.v0.1",
+        "status": "pass",
+        "livePostgresVerified": true,
+        "reportSha256": "eb66e820ac8885296a4389889519fe78a53a22d7eb814625dafe391f1a3dddbf",
+        "fileSha256": "8eecf611b93725372cafd5adfbef05717c0b66c5d9ae3b314233a7222a55d36d",
+        "generatedAt": "2026-07-13T08:59:22.658255Z",
+        "probeResidueCount": 0,
+        "mutationsCommitted": false
+      }
+    },
+    {
+      "id": "S30",
+      "title": "Samsung Calendar subscription QA",
+      "status": "in_progress",
+      "unblockedBy": {
+        "step": "S29-LIVE-POSTGRES-VERIFY",
+        "evidence": "runtime/s29-v1/live-postgres-verification.json",
+        "reportSha256": "eb66e820ac8885296a4389889519fe78a53a22d7eb814625dafe391f1a3dddbf"
+      },
+      "substeps": [
+        {
+          "id": "S30-A",
+          "title": "Automated iCalendar and HTTP subscription conformance",
+          "status": "completed",
+          "module": "noticepilot_samsung_calendar_qa.py",
+          "serverModule": "noticepilot_s30_qa_server.py",
+          "report": "runtime/s30-v1/automated-qa-report.json",
+          "reportSha256": "cf7ff5ca03eca3ed5e210930c31384901258b45bb67d54a9d1beb577f37f9727",
+          "fileSha256": "86078b8f267544677eedc42fbae905d58e14efd405740d28688bbe3c2f87b7db",
+          "manifest": "runtime/s30-v1/manifest.json",
+          "manifestHash": "0bd2ee5bd3e2b8499750a4c96eeb9e4778dc41881a194e45e86f038b932491b0",
+          "studentEventCount": 601,
+          "jobEventCount": 299,
+          "lifecycleStages": [
+            "initial",
+            "updated",
+            "cancelled"
+          ],
+          "staticImportAcceptedAsSubscription": false,
+          "automatedStatus": "pass",
+          "manifestFileSha256": "84e2400ec65123d777341ab9dd7761b148b86439c21417f087ab351b1e787eac",
+          "regressionSummary": "runtime/s30-v1/regression-summary.json",
+          "regressionFileSha256": "843c6546b101d8fd400db99f6cf63e9c87a284eb9b5ed65e2289bddd8bb5783b",
+          "regressionTestCount": 428,
+          "regressionModuleCount": 30
+        },
+        {
+          "id": "S30-B",
+          "title": "Physical Samsung Calendar URL subscription lifecycle QA",
+          "status": "awaiting_physical_device",
+          "required": true,
+          "instructions": "S30_SAMSUNG_CALENDAR_SUBSCRIPTION_QA.md",
+          "decisionPacket": "S30_CREATOR_DECISION_PACKET.md",
+          "template": "runtime/s30-v1/samsung-physical-qa-result.template.json",
+          "expectedResult": "runtime/s30-v1/physical-qa/samsung-physical-qa-result.json",
+          "completionRule": "all seven physical checks pass with evidence; static import is not subscription",
+          "physicalExecutionPerformed": false
+        }
+      ],
+      "s30Completed": false,
+      "completionBlockedBy": "physical Samsung Calendar evidence"
+    }
+  ],
+  "activeSubstep": "S30-B"
+}

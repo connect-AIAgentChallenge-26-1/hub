@@ -1,0 +1,101 @@
+{
+  "schemaVersion": "noticepilot.policyBaseline.v0.1",
+  "baselineId": "policy15-corpus-2059-20260712",
+  "description": "Immutable Policy.15 behavioral baseline for S20/S21 layered-engine refactoring.",
+  "createdAt": "2026-07-12T06:38:22+00:00",
+  "sourceDerivedDirName": "mvp-policy-v0.1",
+  "sourceVersions": {
+    "pipelineVersion": "0.1.14",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1",
+    "summarySchemaVersion": "noticepilot.mvpPolicySummary.v0.5",
+    "candidateSchemaVersion": "noticepilot.calendarCandidates.v0.10",
+    "segmentSchemaVersion": "noticepilot.scheduleSegments.v0.3",
+    "icsExporterVersion": "0.4.5-policy.1"
+  },
+  "counts": {
+    "processedNoticeCount": 2059,
+    "candidateCount": 1304,
+    "publishableCandidateCount": 909,
+    "reviewDecisionCount": 796,
+    "reviewQueueCandidateEntryCount": 498,
+    "reviewQueueNeedsReviewCandidateCount": 395,
+    "reviewQueueAutoConfirmedCandidateCount": 103,
+    "studentIcsEventCount": 609,
+    "jobIcsEventCount": 300,
+    "regressionCaseCount": 11
+  },
+  "statusCounts": {
+    "publishableByEventType": {
+      "academic_period": 46,
+      "application_period": 242,
+      "deadline": 33,
+      "event": 115,
+      "exam_or_interview": 13,
+      "job_application_period": 300,
+      "payment_period": 22,
+      "result_announcement": 40,
+      "submission_period": 98
+    },
+    "publishableByActionType": {
+      "course_evaluation": 3,
+      "course_registration": 17,
+      "course_registration_cancellation": 5,
+      "course_registration_change": 9,
+      "leave_of_absence_application": 2,
+      "preliminary_course_registration": 1,
+      "readmission_application": 2,
+      "return_from_leave_application": 2
+    }
+  },
+  "canonicalHashes": {
+    "summary": "412e8391a0437aaa6b66224a1dd38eefe48329d932f0fe4698c09e9a0eb45201",
+    "integrity": "d68fe194f6ed2fdf0a13ac3ba36bf8bbf64abc8b6b67ebaf919c06b8f6290c04",
+    "publishableCandidates": "8a82dfa06180585b579204eb151fd9c83ffdf8cd98a082b24e95a077f9cf8c1f",
+    "reviewQueue": "29a59277e0b5f67fc093f3a80128edb166ee95b4620b903a07567526d39ead32",
+    "studentIcsReport": "3be95b75199c2a9c96403619dee68e9b6d0b5e99d018106599b6f1f7925839af",
+    "studentIcsEvents": "b466e20cd888fb1881c7ee481344fdb7474eb8a733d58cd838042f2acc6cd677",
+    "jobIcsReport": "61d0dfb2c851c1d8abd1fcddd707e57104f045e0c079be71bde1a2a7797a42a3",
+    "jobIcsEvents": "7c96ce1109eb57ab9e00a8941c98f199ef0764c0141b365d32be2f6e26feb993"
+  },
+  "files": {
+    "reports/policy-summary.json": {
+      "sizeBytes": 3995,
+      "sha256": "7e68d334948ae432c86f71da6be1e99dbc7625868e16ce7e893de31129e97d5c"
+    },
+    "reports/candidate-integrity.json": {
+      "sizeBytes": 72,
+      "sha256": "8b69f8af0053bf85a2f37e20b02f9e73c48787c140ea71fd1635c16b7788225c"
+    },
+    "decisions/publishable-candidates.jsonl": {
+      "sizeBytes": 1703207,
+      "sha256": "93901cd5f468fc6ba6005b5b7ba3bbd3889cda9565c2fd5d02059cc8c3563438"
+    },
+    "decisions/review-queue.jsonl": {
+      "sizeBytes": 2129833,
+      "sha256": "7f3a5a89d4d49fb3002e2cddae802d1f2ac199deb37172e8aafe8457b03381b3"
+    },
+    "ics/student_default/ics_export_report.json": {
+      "sizeBytes": 625802,
+      "sha256": "ecbf34b0488dceecef1dfc6e55ae02eef94eb25acc8a813ccf99a178b000f048"
+    },
+    "ics/student_default/noticepilot-student-default.ics": {
+      "sizeBytes": 622766,
+      "sha256": "e22cae4cc31253a247547430aacffd2909d031ff8da11f063d38519c8aabea6e"
+    },
+    "ics/job_application/ics_export_report.json": {
+      "sizeBytes": 321809,
+      "sha256": "e6ccb17a782e9cb24e959fbc2437bfef337d38959c988dc240f7ff29e6307ab7"
+    },
+    "ics/job_application/noticepilot-job-applications.ics": {
+      "sizeBytes": 300704,
+      "sha256": "421d40b040bff6fd7b9d01a9cdead8995191d1184ca4a7bc71f19709656ac3c9"
+    }
+  },
+  "comparisonPolicy": {
+    "ignoreGeneratedTimestamps": true,
+    "ignoreAbsoluteFilesystemPaths": true,
+    "ignoreIcsDtstamp": true,
+    "candidateIdentityMustRemainStable": true,
+    "defaultAllowlist": "baseline-allowlist.example.json"
+  }
+}

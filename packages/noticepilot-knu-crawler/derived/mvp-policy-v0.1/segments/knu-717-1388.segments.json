@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-717-1388",
+  "sourceContentHash": "969af23048ff768a4ede9d72209ad3e7d4a5f4d624cd872f09dc9de169658ab4",
+  "sourceTitle": "（취업지원과 추천채용）샤오미코리아 매니지먼트 트레이니 채용",
+  "publishedAt": "2026-01-23",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cdcfda4cd7ea6883",
+      "segmentType": "title",
+      "labelText": "（취업지원과 추천채용）샤오미코리아 매니지먼트 트레이니 채용",
+      "bodyText": "（취업지원과 추천채용）샤오미코리아 매니지먼트 트레이니 채용",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "（취업지원과 추천채용）샤오미코리아 매니지먼트 트레이니 채용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-96bc0a96b3835800",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "샤오미코리아에서 Management Trainee 채용을",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "샤오미코리아에서 Management Trainee 채용을"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5c21e385e41c3745",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 추천채용으로 진행합니다.",
+      "bodyText": "강원대학교 추천채용으로 진행합니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 추천채용으로 진행합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3e76a752e9359d9c",
+      "segmentType": "label_value",
+      "labelText": "지원자에게는 서류전형 합격 혜택이 있습니다.",
+      "bodyText": "지원자에게는 서류전형 합격 혜택이 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "지원자에게는 서류전형 합격 혜택이 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b1d527383451045c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "관심있는 분은 문의주세요.^^",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "관심있는 분은 문의주세요.^^"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-215d432afe7f6fc4",
+      "segmentType": "label_value",
+      "labelText": "추천채용 담당자",
+      "bodyText": "추천채용 담당자:033-250-7764",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "추천채용 담당자:033-250-7764"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "label_value": 3
+    }
+  }
+}

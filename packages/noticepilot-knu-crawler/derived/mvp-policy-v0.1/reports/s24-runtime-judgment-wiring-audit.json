@@ -1,0 +1,54 @@
+{
+  "schemaVersion": "noticepilot.s24RuntimeJudgmentWiringAudit.v0.1",
+  "result": "pass",
+  "baselineDir": "/mnt/data/s25_work/noticepilot-knu-crawler-v0.4.4-observation.3-policy.15-foundation.8/baseline/policy15",
+  "currentDir": "/mnt/data/s25_work/noticepilot-knu-crawler-v0.4.4-observation.3-policy.15-foundation.8/derived/mvp-policy-v0.1",
+  "wiringVersion": "0.1.0",
+  "checks": {
+    "candidateCount": 1304,
+    "uniqueCandidateIdCount": 1304,
+    "runtimeApplicabilityJudgmentFieldCount": 1304,
+    "runtimePublishabilityJudgmentFieldCount": 1304,
+    "runtimeJudgmentContractErrorCount": 0,
+    "runtimeJudgmentReconstructionMismatchCount": 0,
+    "scopeCounts": {
+      "conditional": 20,
+      "profile_scoped": 12,
+      "unknown": 282,
+      "unrestricted": 990
+    },
+    "scopeCountsMatchExpected": true,
+    "verdictCounts": {
+      "auto_confirmed": 909,
+      "needs_review": 395
+    },
+    "verdictCountsMatchExpected": true,
+    "applicabilityRuleCounts": {
+      "applicability.actor.job_applicant": 300,
+      "applicability.actor.mixed": 67,
+      "applicability.actor.student": 690,
+      "applicability.actor.unknown": 215,
+      "applicability.conditional.selected_participant": 20,
+      "applicability.profile.explicit_dimensions": 12
+    },
+    "publishabilityRuleCount": 5019,
+    "publishableIdSetsMatch": true,
+    "publishableSemanticsMatch": true,
+    "publishableLegacyProjectionMismatchCount": 0,
+    "reviewQueueMatches": true,
+    "reviewCandidateCount": 498,
+    "candidateDocumentOccurrenceCount": 2213,
+    "candidateDocumentWiredCount": 2213,
+    "crossArtifactJudgmentMismatchCount": 0,
+    "icsMatches": {
+      "student_default": true,
+      "job_application": true
+    }
+  },
+  "samples": {
+    "runtimeJudgmentContractErrors": [],
+    "runtimeJudgmentReconstructionMismatches": [],
+    "publishableLegacyProjectionMismatches": [],
+    "crossArtifactJudgmentMismatches": []
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10952",
+  "sourceContentHash": "df9f7471dae42dfaf6d2c61a8ce3a3fc2b84f453fd7c0e56fd762377efdb1c73",
+  "sourceTitle": "2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 공고",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10952&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "all"
+    ],
+    "scopeType": "all_campuses",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "all": "전체"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10952-4d1f3547331050",
+      "uidHint": "noticepilot-cand-knu-504-10952-4d1f3547331050@noticepilot.local",
+      "sourceNoticeId": "knu-504-10952",
+      "sourceTitle": "2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 공고",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10952&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-2fc4d45f6afa20f2",
+        "segmentType": "label_value",
+        "labelText": "(봉사활동기간)",
+        "bodyText": "2027.1.10.(일) ~ 2027.1.21.(목)/ 10박 12일",
+        "sourceLocation": {
+          "lineIndex": 10,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2027-01-10",
+            "start": 12,
+            "end": 25
+          },
+          {
+            "value": "2027-01-21",
+            "start": 28,
+            "end": 41
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "(봉사활동기간)",
+          "2. (봉사활동기간) 2027.1.10.(일) ~ 2027.1.21.(목)/ 10박 12일",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-084e60d037cc692f",
+        "segmentId": "seg-2fc4d45f6afa20f2",
+        "rawText": "2027.1.10.(일) ~ 2027.1.21.(목)/ 10박 12일",
+        "normalizedStart": "2027-01-10",
+        "normalizedEnd": "2027-01-21",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 12,
+          "end": 41
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-9252686ed1403e5e",
+        "sourceNoticeId": "knu-504-10952",
+        "segmentId": "seg-2fc4d45f6afa20f2",
+        "temporalMentionIds": [
+          "tm-084e60d037cc692f"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "(봉사활동기간)",
+        "evidence": "2. (봉사활동기간) 2027.1.10.(일) ~ 2027.1.21.(목)/ 10박 12일"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 공고 행사 기간",
+      "dateText": "2027.1.10.(일) ~ 2027.1.21.(목)/ 10박 12일",
+      "normalizedStart": "2027-01-10",
+      "normalizedEnd": "2027-01-21",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "2. (봉사활동기간) 2027.1.10.(일) ~ 2027.1.21.(목)/ 10박 12일",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

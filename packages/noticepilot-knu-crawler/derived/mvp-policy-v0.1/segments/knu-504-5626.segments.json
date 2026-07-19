@@ -1,0 +1,134 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-5626",
+  "sourceContentHash": "2abae69b52dff7509a043e40f81f61eeaea6609ff66f64b1c506918347787621",
+  "sourceTitle": "＂환경이 동기를 바꿉니다＂ 수강신청 하세요",
+  "publishedAt": "2026-01-06",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0bf1a35628356ad1",
+      "segmentType": "title",
+      "labelText": "＂환경이 동기를 바꿉니다＂ 수강신청 하세요",
+      "bodyText": "＂환경이 동기를 바꿉니다＂ 수강신청 하세요",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "＂환경이 동기를 바꿉니다＂ 수강신청 하세요"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e8723181649a70ca",
+      "segmentType": "label_value",
+      "labelText": "삼척평생교육원 겨울학기 4주 수강 신청 하세요~~~",
+      "bodyText": "삼척평생교육원 겨울학기 4주 수강 신청 하세요~~~",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "삼척평생교육원 겨울학기 4주 수강 신청 하세요~~~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-94a4a6c75da5cf87",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "\" 스스로 바꿀수 없다면 환경을 바꾸면 됩니다.\"",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "\" 스스로 바꿀수 없다면 환경을 바꾸면 됩니다.\""
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8b6616d3495bd20d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "\" 환경이 동기를 만듭니다. \"",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "\" 환경이 동기를 만듭니다. \""
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a90d1e5e47167bc9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "\" 시간이 없는 게 아니라 ‘ 나를 위한 시간 ’을 버린 것입니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "\" 시간이 없는 게 아니라 ‘ 나를 위한 시간 ’을 버린 것입니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ee0f8e4dd2121c4e",
+      "segmentType": "label_value",
+      "labelText": "홈페이지 수강신청 https",
+      "bodyText": "홈페이지 수강신청 https://life.kangwon.ac.kr/",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "홈페이지 수강신청 https://life.kangwon.ac.kr/"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "paragraph": 3
+    }
+  }
+}

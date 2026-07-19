@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11062",
+  "sourceContentHash": "e5a9128b0207ecb6dce151efce824f790143164bd4887a6a346371f841667405",
+  "sourceTitle": "[긴급]삼척캠퍼스 통학버스 임시 미운행 노선 안내(6.4~6.5）",
+  "publishedAt": "2026-05-29",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5ba37cbd68581777",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "6.4~6.5）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-04",
+          "start": 28,
+          "end": 31
+        },
+        {
+          "value": "2026-06-05",
+          "start": 32,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "[긴급]삼척캠퍼스 통학버스 임시 미운행 노선 안내(6.4~6.5）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0c360fce831157ea",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "삼척캠퍼스 통학버스 임시 미운행 노선을 안내하오니 참고바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "삼척캠퍼스 통학버스 임시 미운행 노선을 안내하오니 참고바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4cc88b02a50db706",
+      "segmentType": "label_value",
+      "labelText": "○임시 미운행 기간",
+      "bodyText": "2026.6.4.(목)~6.5.(금)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-04",
+          "start": 12,
+          "end": 24
+        },
+        {
+          "value": "2026-06-05",
+          "start": 25,
+          "end": 32
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "○임시 미운행 기간: 2026.6.4.(목)~6.5.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d369b2eec26d5601",
+      "segmentType": "label_value",
+      "labelText": "○미운행사유",
+      "bodyText": "○미운행사유 : 학내행사 지원",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○미운행사유 : 학내행사 지원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fe7868d87e3fd0bb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○미운행 노선",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○미운행 노선"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d0f93119f27f690",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-시내순환 2회(8:30) / 3회(09:25)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-시내순환 2회(8:30) / 3회(09:25)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dbd792291a995672",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-삼척8회(16:00) / 도계9회(18:05)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-삼척8회(16:00) / 도계9회(18:05)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-613cd98715fb214e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d55c9adedebb5729",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "삼척 08:50(2회) 버스 이용자는 교직원 출근(07:50) 버스 이용",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "삼척 08:50(2회) 버스 이용자는 교직원 출근(07:50) 버스 이용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-41b5b5913989b938",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 도계 18:05(9회)버스 이용자는 교직원 퇴근(18:10)버스 이용 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 도계 18:05(9회)버스 이용자는 교직원 퇴근(18:10)버스 이용 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "label_value": 2,
+      "list_item": 4
+    }
+  }
+}

@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-717-1408",
+  "sourceContentHash": "e65d79a093d0603bc29d0ea471eac1ce7a0d97158ff6bf0254708d38e9369cf5",
+  "sourceTitle": "KOICA 귀국인재 리크루터 1:N 컨설팅 실시 안내",
+  "publishedAt": "2026-05-21",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-62dc2a6cd919e720",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "KOICA 귀국인재 리크루터 1:N 컨설팅 실시 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "KOICA 귀국인재 리크루터 1:N 컨설팅 실시 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-87c5659530bba550",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "안녕하세요 강원국제개발협력센터입니다. 😆",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "안녕하세요 강원국제개발협력센터입니다. 😆"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fcbffaca1cc2a055",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "저희 센터의 리크루터가 KOICA 글로벌인재사업의 시작을 어려워하고 있는 분들을 위해 ❗️1대N 컨설팅❗️을 진행하고자 합니다!",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "저희 센터의 리크루터가 KOICA 글로벌인재사업의 시작을 어려워하고 있는 분들을 위해 ❗️1대N 컨설팅❗️을 진행하고자 합니다!"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-15c2b257625c1f26",
+      "segmentType": "label_value",
+      "labelText": "지원자분이 작성하신 폼을 토대로 맞춤 컨설팅을 진행하오니 KOICA 글로벌인재사업에 관심있으신 분들은 언제나 신청해주시길 바랍니다.",
+      "bodyText": "지원자분이 작성하신 폼을 토대로 맞춤 컨설팅을 진행하오니 KOICA 글로벌인재사업에 관심있으신 분들은 언제나 신청해주시길 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "지원자분이 작성하신 폼을 토대로 맞춤 컨설팅을 진행하오니 KOICA 글로벌인재사업에 관심있으신 분들은 언제나 신청해주시길 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-42c9e1375d3c12d1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 대상: KOICA 글로벌인재사업(YP, 해외봉사단 등)에 관심있는 누구나",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 대상: KOICA 글로벌인재사업(YP, 해외봉사단 등)에 관심있는 누구나"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f1c88ecabc35fec4",
+      "segmentType": "label_value",
+      "labelText": "접수기한",
+      "bodyText": "- 접수기한: 상시접수",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 접수기한: 상시접수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4ba374a91044ca64",
+      "segmentType": "label_value",
+      "labelText": "운영방법",
+      "bodyText": "- 운영방법: 비대면 또는 대면",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 운영방법: 비대면 또는 대면"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d7a4bd7a624ecab1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 컨설팅 비용: 무료",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 컨설팅 비용: 무료"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-18e4efbe00e46880",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "- 신청방법: 포스터의 QR폼 또는 프로필링크를 통해 신청",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 신청방법: 포스터의 QR폼 또는 프로필링크를 통해 신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5c77c45d50344262",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 컨설팅 내용: 지원서 작성 방법, 봉사단 경험 공유, 봉사단 준비 과정, 귀국 후 진로 및 취업 등 지원자가 궁금한 모든 것",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 컨설팅 내용: 지원서 작성 방법, 봉사단 경험 공유, 봉사단 준비 과정, 귀국 후 진로 및 취업 등 지원자가 궁금한 모든 것"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d29d17668c45b62b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "많은 관심 부탁드립니다!😄",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "많은 관심 부탁드립니다!😄"
+    }
+  ],
+  "summary": {
+    "segmentCount": 11,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "label_value": 4,
+      "list_item": 3
+    }
+  }
+}

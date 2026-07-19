@@ -1,0 +1,353 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2496",
+  "sourceContentHash": "1fa464fa4bf2acae794dcd49e4630e6241710528cf35e33045d81f17db6c74dc",
+  "sourceTitle": "2026-1학기 학사경고자 관리프로그램 안내(학사경고위험군 포함)",
+  "publishedAt": "2026-07-06",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d15b106ed3a31dcb",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026-1학기 학사경고자 관리프로그램 안내(학사경고위험군 포함)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026-1학기 학사경고자 관리프로그램 안내(학사경고위험군 포함)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cfa9af8a375f3001",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026학년도 1학기 학사경고자 및 학사경고 위험군 대상 관리 프로그램을 알려드리니 참고하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 학사경고자 및 학사경고 위험군 대상 관리 프로그램을 알려드리니 참고하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3de18087f4465ec3",
+      "segmentType": "label_value",
+      "labelText": "학사경고자 수강신청 학점 제한",
+      "bodyText": "1. 학사경고자 수강신청 학점 제한",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 학사경고자 수강신청 학점 제한"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3760e2947829c456",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 2026학번 이전 재학생: 학사경고 2회시 3학점, 3회시 6학점 수강신청 제한 (연속 4회시 제적)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 2026학번 이전 재학생: 학사경고 2회시 3학점, 3회시 6학점 수강신청 제한 (연속 4회시 제적)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c68418e12729e9b8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 2026학번 이후 재학생: 학사경고 1회부터 3학점 수강신청 제한(연속 3회시 제적)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 2026학번 이후 재학생: 학사경고 1회부터 3학점 수강신청 제한(연속 3회시 제적)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9c04dae97981cc13",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5c5e56d5fac6dacf",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학점제한 해제 방법",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학점제한 해제 방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7c90ca9c1b646e82",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 기한 내 전문상담 부서에 방문 또는 문의하여",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 기한 내 전문상담 부서에 방문 또는 문의하여"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-95292e6395043736",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "전문상담 프로그램 참여",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "전문상담 프로그램 참여"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ac1b3c78bb77d845",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(붙임파일 참고)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(붙임파일 참고)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ac313b5b2533c27c",
+      "segmentType": "label_value",
+      "labelText": "프로그램 마다 참여, 모집 기간이 다르므로 반드시 확인",
+      "bodyText": "※ 프로그램 마다 참여, 모집 기간이 다르므로 반드시 확인",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 프로그램 마다 참여, 모집 기간이 다르므로 반드시 확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d0ca6986f5a6b228",
+      "segmentType": "label_value",
+      "labelText": "학사경고 수강신청 학점 제한 해제 가능한지 문의 후 기한 내 참여",
+      "bodyText": "※ 학사경고 수강신청 학점 제한 해제 가능한지 문의 후 기한 내 참여",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 학사경고 수강신청 학점 제한 해제 가능한지 문의 후 기한 내 참여"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ffc836b9611e27a9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 학사경고 기록 삭제(2026학번 이후 재학생)",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 학사경고 기록 삭제(2026학번 이후 재학생)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f93edaa9301c62e1",
+      "segmentType": "label_value",
+      "labelText": "학사경고 해당학기의 다음학기 이내(학사경고 프로그램 운영 기간)에",
+      "bodyText": "- 학사경고 해당학기의 다음학기 이내(학사경고 프로그램 운영 기간)에",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 학사경고 해당학기의 다음학기 이내(학사경고 프로그램 운영 기간)에"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7f1107c6e521e301",
+      "segmentType": "label_value",
+      "labelText": "학과장면담, 전문상담, 학습지원 프로그램",
+      "bodyText": "학과장면담, 전문상담, 학습지원 프로그램",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학과장면담, 전문상담, 학습지원 프로그램"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d67ce71c4b8e0a23",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "을 모두 완료한 자는",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "을 모두 완료한 자는"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c0a8179d85f28628",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "재학 중 1회에 한하여 학사경고 기록 삭제 가능",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "재학 중 1회에 한하여 학사경고 기록 삭제 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e1fd32d0fe593380",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "자세한 사항은 붙임파일을 참고하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자세한 사항은 붙임파일을 참고하여 주시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 18,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 8,
+      "label_value": 5,
+      "list_item": 4
+    }
+  }
+}

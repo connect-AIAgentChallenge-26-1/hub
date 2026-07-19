@@ -1,0 +1,675 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-720-2409",
+  "sourceContentHash": "1d7126521fa92d27ec5009a8aed05a957a40e2e38dd6ac83e074b923b4e59116",
+  "sourceTitle": "(수정) 2026학년도 여름 계절수업 국립부경대학교 학점교류 수학 안내(삼척캠퍼스)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2409&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-720-2409-076c07a3906e9e",
+      "uidHint": "noticepilot-cand-knu-720-2409-076c07a3906e9e@noticepilot.local",
+      "sourceNoticeId": "knu-720-2409",
+      "sourceTitle": "(수정) 2026학년도 여름 계절수업 국립부경대학교 학점교류 수학 안내(삼척캠퍼스)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2409&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "submission_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-234d41f5d37ee54e",
+        "segmentType": "label_value",
+        "labelText": "학생 ➜ 소속학과 제출기준",
+        "bodyText": "2026. 5. 6.(수) 18:00까지(기일엄수)",
+        "sourceLocation": {
+          "lineIndex": 8,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "submission_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-06",
+            "start": 17,
+            "end": 31
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "submission_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "학생 ➜ 소속학과 제출기준",
+          "학생 ➜ 소속학과 제출기준 : 2026. 5. 6.(수) 18:00까지(기일엄수)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-50745726aefbee2e",
+        "segmentId": "seg-234d41f5d37ee54e",
+        "rawText": "2026. 5. 6.(수)",
+        "normalizedStart": "2026-05-06T18:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 17,
+          "end": 31
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-a39074ee59234dea",
+        "sourceNoticeId": "knu-720-2409",
+        "segmentId": "seg-234d41f5d37ee54e",
+        "temporalMentionIds": [
+          "tm-50745726aefbee2e"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "학생 ➜ 소속학과 제출기준",
+        "evidence": "학생 ➜ 소속학과 제출기준 : 2026. 5. 6.(수) 18:00까지(기일엄수)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "(수정) 2026학년도 여름 계절수업 국립부경대학교 학점교류 수학 안내(삼척캠퍼스) 제출 마감",
+      "dateText": "2026. 5. 6.(수)",
+      "normalizedStart": "2026-05-06T18:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "학생 ➜ 소속학과 제출기준 : 2026. 5. 6.(수) 18:00까지(기일엄수)",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2409-baefc8127efec6",
+      "uidHint": "noticepilot-cand-knu-720-2409-baefc8127efec6@noticepilot.local",
+      "sourceNoticeId": "knu-720-2409",
+      "sourceTitle": "(수정) 2026학년도 여름 계절수업 국립부경대학교 학점교류 수학 안내(삼척캠퍼스)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2409&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "deadline",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-ef71d10675234b73",
+        "segmentType": "paragraph",
+        "labelText": "",
+        "bodyText": "2026. 5. 7.(목) 18:00까지(기일엄수)",
+        "sourceLocation": {
+          "lineIndex": 6,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-07",
+            "start": 0,
+            "end": 14
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "deadline",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "none",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "2026. 5. 7.(목) 18:00까지(기일엄수)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-8aa77f41b780ceb7",
+        "segmentId": "seg-ef71d10675234b73",
+        "rawText": "2026. 5. 7.(목)",
+        "normalizedStart": "2026-05-07T18:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 0,
+          "end": 14
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-80c054fe4b3f924c",
+        "sourceNoticeId": "knu-720-2409",
+        "segmentId": "seg-ef71d10675234b73",
+        "temporalMentionIds": [
+          "tm-8aa77f41b780ceb7"
+        ],
+        "bindingKind": "unresolved",
+        "confidence": "none",
+        "ruleId": "binding.unresolved",
+        "locallyGrounded": false,
+        "labelText": "",
+        "evidence": "2026. 5. 7.(목) 18:00까지(기일엄수)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "(수정) 2026학년도 여름 계절수업 국립부경대학교 학점교류 수학 안내(삼척캠퍼스) 마감",
+      "dateText": "2026. 5. 7.(목)",
+      "normalizedStart": "2026-05-07T18:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "2026. 5. 7.(목) 18:00까지(기일엄수)",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2409-4109d5a2690837",
+      "uidHint": "noticepilot-cand-knu-720-2409-4109d5a2690837@noticepilot.local",
+      "sourceNoticeId": "knu-720-2409",
+      "sourceTitle": "(수정) 2026학년도 여름 계절수업 국립부경대학교 학점교류 수학 안내(삼척캠퍼스)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2409&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "submission_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-6cf88c9cda839f16",
+        "segmentType": "continuation",
+        "labelText": "제출기한(삼척교육지원과 도착기준)",
+        "bodyText": "2026. 5. 7.(목) 18:00까지(기일엄수)",
+        "sourceLocation": {
+          "lineIndex": 5,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-7d5c9baa174bec3c"
+        },
+        "actionSignals": [
+          "submission_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-07",
+            "start": 24,
+            "end": 38
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "internal_process",
+      "semanticClassification": {
+        "eventType": "submission_period",
+        "actionType": null,
+        "temporalRole": "internal_process",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "제출기한(삼척교육지원과 도착기준)",
+          "나. 제출기한(삼척교육지원과 도착기준) : 2026. 5. 7.(목) 18:00까지(기일엄수)",
+          "semantic.temporal_role.internal_workflow"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-d7e601bbb0e8e27f",
+        "segmentId": "seg-6cf88c9cda839f16",
+        "rawText": "2026. 5. 7.(목)",
+        "normalizedStart": "2026-05-07T18:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 24,
+          "end": 38
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-c406aa1ed2e60707",
+        "sourceNoticeId": "knu-720-2409",
+        "segmentId": "seg-6cf88c9cda839f16",
+        "temporalMentionIds": [
+          "tm-d7e601bbb0e8e27f"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "제출기한(삼척교육지원과 도착기준)",
+        "evidence": "나. 제출기한(삼척교육지원과 도착기준) : 2026. 5. 7.(목) 18:00까지(기일엄수)"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "(수정) 2026학년도 여름 계절수업 국립부경대학교 학점교류 수학 안내(삼척캠퍼스) 제출 마감",
+      "dateText": "2026. 5. 7.(목)",
+      "normalizedStart": "2026-05-07T18:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "나. 제출기한(삼척교육지원과 도착기준) : 2026. 5. 7.(목) 18:00까지(기일엄수)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "internal_workflow_deadline",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "reasonCodes": [
+        "internal_workflow_deadline",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "internal_workflow_deadline",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.internal_workflow_deadline",
+          "publishability.temporal_role.internal_process",
+          "publishability.temporal_role.internal_process.review",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2409-de5dc8f4e3acaa",
+      "uidHint": "noticepilot-cand-knu-720-2409-de5dc8f4e3acaa@noticepilot.local",
+      "sourceNoticeId": "knu-720-2409",
+      "sourceTitle": "(수정) 2026학년도 여름 계절수업 국립부경대학교 학점교류 수학 안내(삼척캠퍼스)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2409&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-111fa6e662d5aa14",
+        "segmentType": "list_item",
+        "labelText": "",
+        "bodyText": "2026.7.17.(금) 제헌절 공휴일 지정으로 계절수업 운영 기간 변경",
+        "sourceLocation": {
+          "lineIndex": 11,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-17",
+            "start": 10,
+            "end": 23
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "마. 수정사항 : 2026.7.17.(금) 제헌절 공휴일 지정으로 계절수업 운영 기간 변경",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-85929b8812ae1dbc",
+        "segmentId": "seg-111fa6e662d5aa14",
+        "rawText": "2026.7.17.(금)",
+        "normalizedStart": "2026-07-17",
+        "normalizedEnd": "2026-07-17",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 10,
+          "end": 23
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-c1b41debda253f5f",
+        "sourceNoticeId": "knu-720-2409",
+        "segmentId": "seg-111fa6e662d5aa14",
+        "temporalMentionIds": [
+          "tm-85929b8812ae1dbc"
+        ],
+        "bindingKind": "same_list_item",
+        "confidence": "high",
+        "ruleId": "binding.same_list_item",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "마. 수정사항 : 2026.7.17.(금) 제헌절 공휴일 지정으로 계절수업 운영 기간 변경"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "(수정) 2026학년도 여름 계절수업 국립부경대학교 학점교류 수학 안내(삼척캠퍼스) 행사 일정",
+      "dateText": "2026.7.17.(금)",
+      "normalizedStart": "2026-07-17",
+      "normalizedEnd": "2026-07-17",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "마. 수정사항 : 2026.7.17.(금) 제헌절 공휴일 지정으로 계절수업 운영 기간 변경",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 4,
+    "autoConfirmedCount": 3,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 3
+  }
+}

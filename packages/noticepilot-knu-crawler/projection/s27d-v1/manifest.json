@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "noticepilot.registryIcsProjectionManifest.v0.1",
+  "projectionId": "s27d-registry-ics-projection-20260713-v1",
+  "projectorVersion": "0.1.0",
+  "createdAt": "2026-07-13T12:30:00+09:00",
+  "migrationMode": "pre_subscription_cutover",
+  "uidPolicy": {
+    "persistentUidFormat": "{calendarEventId}@noticepilot.local",
+    "legacyCandidateUidDurable": false,
+    "legacyCancellationTombstonesEmitted": false,
+    "reason": "no_subscription_endpoint_and_legacy_candidate_uid_was_nonpersistent"
+  },
+  "sourceRegistry": {
+    "registryId": "s27c-publishable-corpus-20260713-v1",
+    "path": "../../registry/s27c-v1",
+    "manifestSha256": "47fa8e232254df978575f31e06d555c20cf5f50e99862dc8ae0e772a7e4a03dc"
+  },
+  "legacyArtifacts": {
+    "student_default": {
+      "report": {
+        "path": "../../derived/mvp-policy-v0.1/ics/student_default/ics_export_report.json",
+        "sha256": "1037bd02f7f5f0af651c6417282435116e8cc0f8051c18b2aa875d07ce56d742"
+      },
+      "ics": {
+        "path": "../../derived/mvp-policy-v0.1/ics/student_default/noticepilot-student-default.ics",
+        "sha256": "42c1189cb4ab2c4638cb66199dc0d2b9179ba1a4eae06c8a3fc19f61a7b2767f"
+      }
+    },
+    "job_application": {
+      "report": {
+        "path": "../../derived/mvp-policy-v0.1/ics/job_application/ics_export_report.json",
+        "sha256": "6a1e14e79db76e4d648097b26ccd8f33923fd8a190ccb6e467f42812136cf682"
+      },
+      "ics": {
+        "path": "../../derived/mvp-policy-v0.1/ics/job_application/noticepilot-job-applications.ics",
+        "sha256": "ac71af30d7c705c8379fe56aabf1c7cc69d82ae4be9b14cdb14fa50db02623b8"
+      }
+    }
+  },
+  "counts": {
+    "calendarEventCount": 900,
+    "legacyCandidateUidCount": 909,
+    "persistentUidCount": 900,
+    "outboxIntentCount": 900,
+    "outboxConsumedCount": 900,
+    "legacyCancellationTombstoneCount": 0,
+    "singletonEventCount": 891,
+    "duplicateEventCount": 8,
+    "extensionEventCount": 1,
+    "timedEventCount": 308,
+    "timedWithoutEndCount": 155,
+    "allDayEventCount": 592,
+    "sequenceOneEventCount": 1
+  },
+  "feeds": {
+    "student_default": {
+      "calendarName": "NoticePilot 학생 일정",
+      "eventCount": 601,
+      "legacyEventCount": 609,
+      "eventCountDelta": -8,
+      "ics": {
+        "path": "feeds/student_default/noticepilot-student-default.ics",
+        "sha256": "725a5f49c73de7e59b3bbf1a68271cdac15262653d812cd816d8b03f966d1be8"
+      },
+      "report": {
+        "path": "feeds/student_default/ics-projection-report.json",
+        "sha256": "987bab2c7a42b70204acc2ff1e0ffa47d4f13b696cf3b7863a2e9d43797e3d21"
+      }
+    },
+    "job_application": {
+      "calendarName": "NoticePilot 채용 접수 일정",
+      "eventCount": 299,
+      "legacyEventCount": 300,
+      "eventCountDelta": -1,
+      "ics": {
+        "path": "feeds/job_application/noticepilot-job-applications.ics",
+        "sha256": "0c7a284d55cd6d8ca168946e63872185b49d1ccb282b66416aa5c800187b7d59"
+      },
+      "report": {
+        "path": "feeds/job_application/ics-projection-report.json",
+        "sha256": "cb48775ce7595ac556a122498c436df742eefda1a941a00e2216b0f7b53a31b0"
+      }
+    }
+  },
+  "artifacts": {
+    "activeProjections": {
+      "path": "active-calendar-event-projections.jsonl",
+      "sha256": "03e0b86ea0caba7c2b5f98bea036a11ab3961674ffafad0fb65bd1f1cd479c54"
+    },
+    "legacyUidCutoverMap": {
+      "path": "legacy-candidate-uid-cutover-map.jsonl",
+      "sha256": "25c1744f6d0d184580dfb51cc6179bff3500a1dd70a0cb66f6b91951799935fd"
+    },
+    "outboxConsumptionReceipts": {
+      "path": "outbox-consumption-receipts.jsonl",
+      "sha256": "2686f41f5863809da4f080192a5ef0c51e42cd0999cf90cb1eb198ca2039ff37"
+    }
+  },
+  "invariants": {
+    "onePersistentUidPerCalendarEvent": true,
+    "allOutboxIntentsConsumedExactlyOnce": true,
+    "allLegacyCandidateUidsMapped": true,
+    "duplicateSourcesCollapseToOneActiveVevent": true,
+    "extensionPreservesUidAndUsesSequenceOne": true,
+    "allSourceLinksPreserved": true,
+    "timedEventsWithoutEndOmitDtend": true,
+    "legacyArtifactsRemainUnmodified": true,
+    "s27cRegistryRemainsImmutable": true
+  },
+  "contentDigest": "41427e974b1df37b3f557b2ca395ef326974696f5a1f395e9fcdce4cafe17c09",
+  "pathReferences": {
+    "base": "projection_manifest_directory",
+    "format": "posix_relative"
+  }
+}

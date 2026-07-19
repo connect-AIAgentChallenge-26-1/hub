@@ -1,0 +1,496 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-5647",
+  "sourceContentHash": "a49a9e7907d367435c614a84e1c2b740c7d58c8d880a1a205e25ec31d4b4af9b",
+  "sourceTitle": "★ 2026 유학생 서포터즈 모집 （~1/30까지） ★",
+  "publishedAt": "2026-01-21",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b65ddcd9a5931ca2",
+      "segmentType": "title",
+      "labelText": "★ 2026 유학생 서포터즈 모집 （~",
+      "bodyText": "1/30까지） ★",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-30",
+          "start": 21,
+          "end": 25
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "★ 2026 유학생 서포터즈 모집 （~1/30까지） ★"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fe5612b55feec38b",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 국제교류과에서 함께 근무할 외국인 유학생 서포터즈를 아래와 같이 모집합니다.",
+      "bodyText": "강원대학교 국제교류과에서 함께 근무할 외국인 유학생 서포터즈를 아래와 같이 모집합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 국제교류과에서 함께 근무할 외국인 유학생 서포터즈를 아래와 같이 모집합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cae32207307f3211",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "【 근무내용 】",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "【 근무내용 】"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-af563b3d98a92d42",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "■ 근무기간: 2026. 3. ~ 2027. 2. (평일 09:00~18:00 중)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 근무기간: 2026. 3. ~ 2027. 2. (평일 09:00~18:00 중)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-11c5417dc10590f1",
+      "segmentType": "label_value",
+      "labelText": "■ 선발인원",
+      "bodyText": "■ 선발인원: 총 8명",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 선발인원: 총 8명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7832efbe2bb6c341",
+      "segmentType": "label_value",
+      "labelText": "■ 지원조건",
+      "bodyText": "■ 지원조건: 한국어능력시험 4급 이상을 취득한 학위과정(학부·대학원) 재학생",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate",
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 지원조건: 한국어능력시험 4급 이상을 취득한 학위과정(학부·대학원) 재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6787e67f69345883",
+      "segmentType": "label_value",
+      "labelText": "TOPIK 4급 이상 성적을 받지 못했다면 선발될 수 없습니다.",
+      "bodyText": "※ TOPIK 4급 이상 성적을 받지 못했다면 선발될 수 없습니다.",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ TOPIK 4급 이상 성적을 받지 못했다면 선발될 수 없습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2db21a407efd070a",
+      "segmentType": "label_value",
+      "labelText": "2026. 3. 1. 기준 재학생만 가능. 휴학생, 수료생은 선발될 수 없습니다.",
+      "bodyText": "※ 2026. 3. 1. 기준 재학생만 가능. 휴학생, 수료생은 선발될 수 없습니다.",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled",
+        "enrollment_status:on_leave"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 2026. 3. 1. 기준 재학생만 가능. 휴학생, 수료생은 선발될 수 없습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-102252a71ec8c1bb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "■ 근무시간: 월 최대 40시간 (방학기간 중 최대 60시간 이내)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 근무시간: 월 최대 40시간 (방학기간 중 최대 60시간 이내)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a105a068ad0360f2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "■ 시급단가: 10,320원",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 시급단가: 10,320원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c2623cc5b1cb6f06",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "■ 근무지: 강원대학교(춘천) 국제교류처 4층 국제교류과",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 근무지: 강원대학교(춘천) 국제교류처 4층 국제교류과"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ba598bac7d6f4ef5",
+      "segmentType": "label_value",
+      "labelText": "■ 활동내용",
+      "bodyText": "■ 활동내용",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 활동내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3604cd7ed7f2cbd8",
+      "segmentType": "label_value",
+      "labelText": "∘ 한국 체류(외국인 등록 및 비자 연장 신청 등) 안내",
+      "bodyText": "∘ 한국 체류(외국인 등록 및 비자 연장 신청 등) 안내",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "∘ 한국 체류(외국인 등록 및 비자 연장 신청 등) 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7d060190c0ac3e16",
+      "segmentType": "label_value",
+      "labelText": "∘ 학교생활(수강신청, 캠퍼스 소개, 시설이용 등) 안내",
+      "bodyText": "∘ 학교생활(수강신청, 캠퍼스 소개, 시설이용 등) 안내",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "∘ 학교생활(수강신청, 캠퍼스 소개, 시설이용 등) 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-79c54acc0916ac32",
+      "segmentType": "label_value",
+      "labelText": "∘ 언어별 통역·번역 지원",
+      "bodyText": "∘ 언어별 통역·번역 지원",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "∘ 언어별 통역·번역 지원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-03a522cc3e10e259",
+      "segmentType": "label_value",
+      "labelText": "∘ 외국인 유학생 유치를 위한 온·오프라인 홍보 지원",
+      "bodyText": "∘ 외국인 유학생 유치를 위한 온·오프라인 홍보 지원",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "∘ 외국인 유학생 유치를 위한 온·오프라인 홍보 지원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-097b170fe4cbf9f2",
+      "segmentType": "label_value",
+      "labelText": "∘ 부서 내‧외 각종 행사 지원",
+      "bodyText": "∘ 부서 내‧외 각종 행사 지원",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "∘ 부서 내‧외 각종 행사 지원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2f9a33fd4c9f50b9",
+      "segmentType": "label_value",
+      "labelText": "【 신청방법 】",
+      "bodyText": "【 신청방법 】",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "【 신청방법 】"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-75dddac142f23bdd",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 구글 폼 작성 : https://forms.gle/K7Xarn2omWJBiY3d6",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 구글 폼 작성 : https://forms.gle/K7Xarn2omWJBiY3d6"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2ea62b453623afd7",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 1. 30.(금) 오후 5시까지",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-30",
+          "start": 8,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "※ 접수기간: 2026. 1. 30.(금) 오후 5시까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f7c551582fc1cf06",
+      "segmentType": "label_value",
+      "labelText": "【 선발일정 】",
+      "bodyText": "【 선발일정 】",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "【 선발일정 】"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f836f8e1828872d0",
+      "segmentType": "label_value",
+      "labelText": "∘ 면접(대면 혹은 Zoom)",
+      "bodyText": "2026. 2. 4.(수) ~ 2. 5.(목)",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-04",
+          "start": 18,
+          "end": 32
+        },
+        {
+          "value": "2026-02-05",
+          "start": 35,
+          "end": 43
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "∘ 면접(대면 혹은 Zoom): 2026. 2. 4.(수) ~ 2. 5.(목)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d51dcb9d5e6d5630",
+      "segmentType": "label_value",
+      "labelText": "∘ 선발 결과 발표",
+      "bodyText": "2026. 2. 6.(금) ※ 개별 안내 예정",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-06",
+          "start": 12,
+          "end": 26
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "∘ 선발 결과 발표: 2026. 2. 6.(금) ※ 개별 안내 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-279b65c18ba07ddd",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 문의: knu_present@kangwon.ac.kr / 033-250-6997",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 문의: knu_present@kangwon.ac.kr / 033-250-6997"
+    }
+  ],
+  "summary": {
+    "segmentCount": 24,
+    "locallyGroundedCount": 4,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 16,
+      "paragraph": 5,
+      "list_item": 2
+    }
+  }
+}

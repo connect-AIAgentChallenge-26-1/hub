@@ -1,0 +1,409 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11197",
+  "sourceContentHash": "0925edc1bbbe05286967036159e2474921d3c12bc8a6f9a2d6ba7718f1f9cd8a",
+  "sourceTitle": "「강원대학교x고려대학교 Summer Agentic AI 심화 몰입 캠프」 참여자 모집",
+  "publishedAt": "2026-07-08",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4e732dd069d05136",
+      "segmentType": "title",
+      "labelText": "「강원대학교x고려대학교 Summer Agentic AI 심화 몰입 캠프」 참여자 모집",
+      "bodyText": "「강원대학교x고려대학교 Summer Agentic AI 심화 몰입 캠프」 참여자 모집",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "「강원대학교x고려대학교 Summer Agentic AI 심화 몰입 캠프」 참여자 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cfed8b0f03289036",
+      "segmentType": "label_value",
+      "labelText": "인공지능 교육모델 개발 및 융합인재 양성을 위해「강원대학교x고려대학교 Summer Agentic AI 심화 몰입 캠프」 참여자 모집을 다음과 같이 공고하오니 세부 내용을 참고하시어 기한 내 신청하여 주시기 바랍니다.",
+      "bodyText": "강원대학교 현장체험오픈센터에서는 글로벌 인공지능 교육모델 개발 및 융합인재 양성을 위해「강원대학교x고려대학교 Summer Agentic AI 심화 몰입 캠프」 참여자 모집을 다음과 같이 공고하오니 세부 내용을 참고하시어 기한 내 신청하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 현장체험오픈센터에서는 글로벌 인공지능 교육모델 개발 및 융합인재 양성을 위해「강원대학교x고려대학교 Summer Agentic AI 심화 몰입 캠프」 참여자 모집을 다음과 같이 공고하오니 세부 내용을 참고하시어 기한 내 신청하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9870f9ebe43e42c6",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "가. 사업명: 「강원대학교x고려대학교 Summer Agentic AI 심화 몰입 캠프」",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 사업명: 「강원대학교x고려대학교 Summer Agentic AI 심화 몰입 캠프」"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a5194418ea557022",
+      "segmentType": "label_value",
+      "labelText": "사업기간",
+      "bodyText": "2026. 7. 8.(수) ~ 2026. 8. 14.(금)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-08",
+          "start": 9,
+          "end": 23
+        },
+        {
+          "value": "2026-08-14",
+          "start": 26,
+          "end": 41
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "나. 사업기간: 2026. 7. 8.(수) ~ 2026. 8. 14.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e4b12749f763df7a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "다. 참여대상: 강원대학교 학부생 중 아래 조건에 해당하는 자",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 참여대상: 강원대학교 학부생 중 아래 조건에 해당하는 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b3c42af7b18777b4",
+      "segmentType": "label_value",
+      "labelText": "데이터베이스, 알고리즘, 인공지능, 운영체제 과목 이수 혹은 이에 준하는 프로젝트 경험자",
+      "bodyText": "- 데이터베이스, 알고리즘, 인공지능, 운영체제 과목 이수 혹은 이에 준하는 프로젝트 경험자",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 데이터베이스, 알고리즘, 인공지능, 운영체제 과목 이수 혹은 이에 준하는 프로젝트 경험자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7602e4290d023c1a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- Git/CLI기반 협업 및 개발 경험자",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- Git/CLI기반 협업 및 개발 경험자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-59350b52906310ad",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "라. 신청기간:",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "라. 신청기간:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-be9c21fb19fc751c",
+      "segmentType": "continuation",
+      "labelText": "신청기간",
+      "bodyText": "2026. 7. 17.(금",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-59350b52906310ad"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-17",
+          "start": 16,
+          "end": 27
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "라. 신청기간: 공고 후 ~ 2026. 7. 17.(금"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8b687a47e5efc1cb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 7. 17.(금",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-17",
+          "start": 7,
+          "end": 18
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "공고 후 ~ 2026. 7. 17.(금"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-676a82fa2e352808",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1df147655c985c30",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "까지",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f9c5e1bd47993617",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "마. 신청방법: 구글 폼 접수",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "마. 신청방법: 구글 폼 접수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5f22e6013b528eba",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 구글 폼 주소:",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 구글 폼 주소:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d82ef68cd3dd7a0a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://forms.gle/J8wySvWtdDJ6aq9T8",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://forms.gle/J8wySvWtdDJ6aq9T8"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-23ad6ea3d272464f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 담당자 연락처: 033-760-8174",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 담당자 연락처: 033-760-8174"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f9361cfa355f3dca",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 담당자 이메일: kyh000416@kangwon.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 담당자 이메일: kyh000416@kangwon.ac.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f187ea05f1b3c3cf",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 주소: (26403) 강원특별자치도 원주시 남원로150, 산학2호관 W4-102호",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 주소: (26403) 강원특별자치도 원주시 남원로150, 산학2호관 W4-102호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dd8d62c368a1d352",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "붙임",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f424fb24d3328b15",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 강원대학교x고려대학교 Summer Agentic AI 심화 몰입 캠프_강원대학교 포스터 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 강원대학교x고려대학교 Summer Agentic AI 심화 몰입 캠프_강원대학교 포스터 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 20,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 5,
+      "list_item": 8,
+      "continuation": 1,
+      "paragraph": 5
+    }
+  }
+}

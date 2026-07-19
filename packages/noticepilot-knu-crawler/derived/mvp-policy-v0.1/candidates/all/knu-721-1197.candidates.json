@@ -1,0 +1,363 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-721-1197",
+  "sourceContentHash": "dabe91fe58e8b18b0188e69d7c284f0a4e2e2e2420577de6c5d4f103f8ad1728",
+  "sourceTitle": "2026년도 1학기 국가근로장학생 희망근로기관 신청안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=1197&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-721-1197-ea1297b6d1e51a",
+      "uidHint": "noticepilot-cand-knu-721-1197-ea1297b6d1e51a@noticepilot.local",
+      "sourceNoticeId": "knu-721-1197",
+      "sourceTitle": "2026년도 1학기 국가근로장학생 희망근로기관 신청안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=1197&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-bffc59f67f6f1595",
+        "segmentType": "label_value",
+        "labelText": "신청기간",
+        "bodyText": "2026. 1. 22.(목) ∼2. 2.(월) 23:59까지(기간 연장 불가)",
+        "sourceLocation": {
+          "lineIndex": 3,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-01-22",
+            "start": 9,
+            "end": 24
+          },
+          {
+            "value": "2026-02-02",
+            "start": 26,
+            "end": 34
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "신청기간",
+          "3. 신청기간: 2026. 1. 22.(목) ∼2. 2.(월) 23:59까지(기간 연장 불가)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-9cfb166306b20d48",
+        "segmentId": "seg-bffc59f67f6f1595",
+        "rawText": "2026. 1. 22.(목) ∼2. 2.(월) 23:59까지(기간 연장 불가)",
+        "normalizedStart": "2026-01-22T00:00:00+09:00",
+        "normalizedEnd": "2026-02-02T23:59:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 9,
+          "end": 34
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-3113d147e8a4fd11",
+        "sourceNoticeId": "knu-721-1197",
+        "segmentId": "seg-bffc59f67f6f1595",
+        "temporalMentionIds": [
+          "tm-9cfb166306b20d48"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "신청기간",
+        "evidence": "3. 신청기간: 2026. 1. 22.(목) ∼2. 2.(월) 23:59까지(기간 연장 불가)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026년도 1학기 국가근로장학생 희망근로기관 신청안내 신청기간",
+      "dateText": "2026. 1. 22.(목) ∼2. 2.(월) 23:59까지(기간 연장 불가)",
+      "normalizedStart": "2026-01-22T00:00:00+09:00",
+      "normalizedEnd": "2026-02-02T23:59:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "3. 신청기간: 2026. 1. 22.(목) ∼2. 2.(월) 23:59까지(기간 연장 불가)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": "start_of_day_assumed_for_timed_range"
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "start_of_day_assumed_for_timed_range",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-721-1197-835a18261cc4b6",
+      "uidHint": "noticepilot-cand-knu-721-1197-835a18261cc4b6@noticepilot.local",
+      "sourceNoticeId": "knu-721-1197",
+      "sourceTitle": "2026년도 1학기 국가근로장학생 희망근로기관 신청안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/721/detail.do?pstSn=1197&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "scholarship",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "exam_or_interview",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-1fdaa0134436151e",
+        "segmentType": "label_value",
+        "labelText": "향후일정",
+        "bodyText": "'26.2.5.~20.예정)하니 일정을 꼭 감안하기 바라며 기간 중 연락이 닿지 않는 경우는 심사에서 제외될 수 있음",
+        "sourceLocation": {
+          "lineIndex": 9,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "exam_or_interview"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-05",
+            "start": 33,
+            "end": 40
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "exam_or_interview",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "향후일정",
+          "8. 향후일정: 각 근로지별로 면접(전화 또는 대면) 실시('26.2.5.~20.예정)하니 일정을 꼭 감안하기 바라며 기간 중 연락이 닿지 않는 경우는 심사에서 제외될 수 있음",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-a2d85d2c58524fab",
+        "segmentId": "seg-1fdaa0134436151e",
+        "rawText": "'26.2.5.~20.예정)하니 일정을 꼭 감안하기 바라며 기간 중 연락이 닿지 않는",
+        "normalizedStart": "2026-02-05",
+        "normalizedEnd": "2026-02-20",
+        "resolutionKind": "absolute_range_day_only_end",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 33,
+          "end": 40
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-1ff44de4513d6f24",
+        "sourceNoticeId": "knu-721-1197",
+        "segmentId": "seg-1fdaa0134436151e",
+        "temporalMentionIds": [
+          "tm-a2d85d2c58524fab"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "향후일정",
+        "evidence": "8. 향후일정: 각 근로지별로 면접(전화 또는 대면) 실시('26.2.5.~20.예정)하니 일정을 꼭 감안하기 바라며 기간 중 연락이 닿지 않는 경우는 심사에서 제외될 수 있음"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026년도 1학기 국가근로장학생 희망근로기관 신청안내 시험·면접 일정",
+      "dateText": "'26.2.5.~20.예정)하니 일정을 꼭 감안하기 바라며 기간 중 연락이 닿지 않는",
+      "normalizedStart": "2026-02-05",
+      "normalizedEnd": "2026-02-20",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "8. 향후일정: 각 근로지별로 면접(전화 또는 대면) 실시('26.2.5.~20.예정)하니 일정을 꼭 감안하기 바라며 기간 중 연락이 닿지 않는 경우는 심사에서 제외될 수 있음",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range_day_only_end",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

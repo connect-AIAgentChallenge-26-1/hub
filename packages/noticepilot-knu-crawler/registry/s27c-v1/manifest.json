@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "noticepilot.calendarEventRegistryManifest.v0.1",
+  "registryId": "s27c-publishable-corpus-20260713-v1",
+  "registryVersion": "0.1.0",
+  "createdAt": "2026-07-13T11:30:00+09:00",
+  "idStrategy": "registry_assigned_opaque_v0",
+  "scope": "all_publishable_candidates_with_approved_s27b_merges",
+  "counts": {
+    "publishableCandidateCount": 909,
+    "calendarEventCount": 900,
+    "candidateAssignmentCount": 909,
+    "sourceLinkCount": 909,
+    "revisionCount": 901,
+    "relationDecisionCount": 343,
+    "promotionDecisionCount": 900,
+    "outboxIntentCount": 900,
+    "singletonEventCount": 891,
+    "duplicateEventCount": 8,
+    "extensionEventCount": 1,
+    "approvedMergePlanCount": 9,
+    "activeRevisionCount": 900,
+    "icsUidMigrationCount": 0
+  },
+  "invariants": {
+    "oneAssignmentPerPublishableCandidate": true,
+    "oneCanonicalSourceLinkPerEvent": true,
+    "oneActiveRevisionPerEvent": true,
+    "approvedMergeMembersShareEventId": true,
+    "needsReviewRelationsNotMerged": true,
+    "opaqueIdsExcludeTitleDateAndCandidateMaterial": true,
+    "icsMutationPerformed": false
+  },
+  "artifacts": {
+    "assignments": {
+      "path": "candidate-event-assignments.jsonl",
+      "sha256": "defb3c3e5611c0e06b8855181bcc976dcbfdfe5b7d641b6c99b3d7ceba5b899e"
+    },
+    "events": {
+      "path": "calendar-events.jsonl",
+      "sha256": "d2ce850797e41e7575dbb09d7bbb2ae560c9a350d35363ae30ab9001e8e01fe3"
+    },
+    "outbox": {
+      "path": "projection-outbox-intents.jsonl",
+      "sha256": "26eadf0dd86a81cfa8e67b68c07f1f7b1a69c341167ed892636d1b9856a3abca"
+    },
+    "promotionDecisions": {
+      "path": "promotion-decisions.jsonl",
+      "sha256": "75142b2653bffae6437445b64a171d6e93c076b742de86e8a940f15c27c97e9b"
+    },
+    "relationDecisions": {
+      "path": "relation-decisions.jsonl",
+      "sha256": "92a54d34e5705e08d9689ae5b0957bd2ee5ba148e02694707d45ad5021b46057"
+    },
+    "revisions": {
+      "path": "calendar-event-revisions.jsonl",
+      "sha256": "7999a0905115f121f0be8235860ccf0b3403a9d86665afa178ee4f7cf1c03f3b"
+    },
+    "sourceLinks": {
+      "path": "calendar-event-source-links.jsonl",
+      "sha256": "4d930d925f181589179e761d260c9b455f30814d67bdfde43e6dc0fc15324e66"
+    }
+  },
+  "contentDigest": "4ab94755419cfe87301563e2e082e329e779987199f08c7a3ac436f88ba41f8f",
+  "upstream": {
+    "policyVersion": "noticepilot.crossNoticeReconciliationPolicy.v0.3",
+    "s27bAudit": {
+      "path": "../../derived/mvp-policy-v0.1/reports/s27b-cross-notice/s27b-cross-notice-reconciler-audit.json",
+      "sha256": "39ba1e02d5e2fa2ec95272d2af4793bc3d7efbbc095a21bfadf631a506fbc178"
+    },
+    "reconciliationCandidateViews": {
+      "path": "../../derived/mvp-policy-v0.1/reports/s27b-cross-notice/reconciliation-candidate-views.jsonl",
+      "sha256": "d95744b65c54cc94bd2dc6fbd66ef7bcbe71dc78f692b35f9c8048f920109189"
+    },
+    "relationDecisions": {
+      "path": "../../derived/mvp-policy-v0.1/reports/s27b-cross-notice/relation-decisions.jsonl",
+      "sha256": "e2e917d7992f4a304af5576b3b257af264d845786dd594f1c7b0c5de3d913247"
+    },
+    "mergePlans": {
+      "path": "../../derived/mvp-policy-v0.1/reports/s27b-cross-notice/merge-plans.jsonl",
+      "sha256": "4cfaa2107ba2830db5be36025275358ef05832ae549d11c56114385d3bdf4afd"
+    }
+  }
+}

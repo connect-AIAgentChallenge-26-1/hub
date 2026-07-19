@@ -1,0 +1,126 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3181",
+  "sourceContentHash": "80ec340a52c46c05a7a720ab4e310dea32d09b89744d02926ecedbf98f81a1eb",
+  "sourceTitle": "인문사회대학 자유전공학과 기간제 계약직（사무원） 최종합격자 알림",
+  "publishedAt": "2026-02-05",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d323ee6e88bb5b66",
+      "segmentType": "title",
+      "labelText": "인문사회대학 자유전공학과 기간제 계약직（사무원） 최종합격자 알림",
+      "bodyText": "인문사회대학 자유전공학과 기간제 계약직（사무원） 최종합격자 알림",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "인문사회대학 자유전공학과 기간제 계약직（사무원） 최종합격자 알림"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4a479bd68cd0a260",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 삼척캠퍼스 인문사회대학 자유전공학과 기간제 계약직(사무원) 채용에 응시해주셔서 감사드립니다.",
+      "bodyText": "강원대학교 삼척캠퍼스 인문사회대학 자유전공학과 기간제 계약직(사무원) 채용에 응시해주셔서 감사드립니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척캠퍼스 인문사회대학 자유전공학과 기간제 계약직(사무원) 채용에 응시해주셔서 감사드립니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-026c2eb424a2eeaa",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "<합격자>",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<합격자>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-06eed266c065c6a2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "응시번호 4번 박*준",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "응시번호 4번 박*준"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e966dd362b1be766",
+      "segmentType": "label_value",
+      "labelText": "○ 면접시험 합격자는 별도 유선상으로 관련 서류를 안내드릴예정입니다",
+      "bodyText": "○ 면접시험 합격자는 별도 유선상으로 관련 서류를 안내드릴예정입니다",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 면접시험 합격자는 별도 유선상으로 관련 서류를 안내드릴예정입니다"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-312b6e2da15a5485",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○ 기타 궁굼하신 사항은 강원대학교 8행정실(☎570-6707)로 문의하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 기타 궁굼하신 사항은 강원대학교 8행정실(☎570-6707)로 문의하여 주시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "paragraph": 3
+    }
+  }
+}

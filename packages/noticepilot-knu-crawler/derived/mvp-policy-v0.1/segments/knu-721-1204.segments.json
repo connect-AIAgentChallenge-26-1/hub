@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-1204",
+  "sourceContentHash": "a321ce329cfea6408f97d0dabc2d63c3bed055395cd270f91aebd9f0338515dd",
+  "sourceTitle": "2026년도 하림장학재단 장학생 선발 안내",
+  "publishedAt": "2026-02-02",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fb6e22acbc651770",
+      "segmentType": "title",
+      "labelText": "2026년도 하림장학재단 장학생 선발 안내",
+      "bodyText": "2026년도 하림장학재단 장학생 선발 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년도 하림장학재단 장학생 선발 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5b17ec868716e585",
+      "segmentType": "label_value",
+      "labelText": "선발인원",
+      "bodyText": "1. 선발인원: 2명",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 선발인원: 2명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c182737ec98ae731",
+      "segmentType": "label_value",
+      "labelText": "지원인원이 선발인원을 초과할 경우, 교외장학금 선발기준에 의거 선발 예정",
+      "bodyText": "※ 지원인원이 선발인원을 초과할 경우, 교외장학금 선발기준에 의거 선발 예정",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 지원인원이 선발인원을 초과할 경우, 교외장학금 선발기준에 의거 선발 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-10304f33dd1138b8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 장학금액: 200만원(생활비성/재단 조건 충족시 재학기간 동안 지원 가능할 수도 있음)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 장학금액: 200만원(생활비성/재단 조건 충족시 재학기간 동안 지원 가능할 수도 있음)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1906a411bc949c1e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 자격기준",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 자격기준"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f8d77491e7376023",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1) 2026학년도 1학기 기준 2학년인 학부재학생",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "student_year:2",
+        "degree_level:undergraduate",
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1) 2026학년도 1학기 기준 2학년인 학부재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ccadd4d6104c84a8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2) 직전학기 12학점 이상 이수, 직전학기 B+ 이상인 자",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2) 직전학기 12학점 이상 이수, 직전학기 B+ 이상인 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4119ee467a42b54c",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 1학기 학자금지원구간(3분위 이하) 증명서를 제출할 수 있는 자",
+      "bodyText": "3) 2026학년도 1학기 학자금지원구간(3분위 이하) 증명서를 제출할 수 있는 자",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3) 2026학년도 1학기 학자금지원구간(3분위 이하) 증명서를 제출할 수 있는 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-edaa30014b5f6fd2",
+      "segmentType": "label_value",
+      "labelText": "기존 하림장학재단 생활비성 장학금 및 외부재단 생활비성 계속장학생은 지원 불가",
+      "bodyText": "※ 기존 하림장학재단 생활비성 장학금 및 외부재단 생활비성 계속장학생은 지원 불가",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 기존 하림장학재단 생활비성 장학금 및 외부재단 생활비성 계속장학생은 지원 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-190ccf68bea53c37",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 2. 10.(화) ~ 11.(수), 17:00",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-10",
+          "start": 9,
+          "end": 24
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "4. 접수기간: 2026. 2. 10.(화) ~ 11.(수), 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-80298c8a91d95e4e",
+      "segmentType": "label_value",
+      "labelText": "제출장소",
+      "bodyText": "5. 제출장소: 나래관 2층 학생과",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 제출장소: 나래관 2층 학생과"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-528ecdf028b904c7",
+      "segmentType": "label_value",
+      "labelText": "제출서류",
+      "bodyText": "6. 제출서류: 신청서, 추천서, 성적증명서, 학자금지원구간 증명서, 개인정보 수집‧이용 및 제3자 제공 동의서",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 제출서류: 신청서, 추천서, 성적증명서, 학자금지원구간 증명서, 개인정보 수집‧이용 및 제3자 제공 동의서"
+    }
+  ],
+  "summary": {
+    "segmentCount": 12,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "list_item": 4
+    }
+  }
+}

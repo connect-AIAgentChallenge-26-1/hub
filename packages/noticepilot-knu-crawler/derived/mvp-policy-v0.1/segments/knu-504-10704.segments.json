@@ -1,0 +1,448 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10704",
+  "sourceContentHash": "94a07fde8c35371298fb63aa7a4c8dd949b075275571d1081e287c6cb2d8fbf8",
+  "sourceTitle": "중국음식 원데이 쿠킹클래스 참가자 모집",
+  "publishedAt": "2026-03-09",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d841570c8ad892f3",
+      "segmentType": "title",
+      "labelText": "중국음식 원데이 쿠킹클래스 참가자 모집",
+      "bodyText": "중국음식 원데이 쿠킹클래스 참가자 모집",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "중국음식 원데이 쿠킹클래스 참가자 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c82450d51086cf52",
+      "segmentType": "label_value",
+      "labelText": "공자아카데미에서는 다음과 같이 '중국음식 원데이 쿠킹클래스' 를 운영하오니, 관심있는 분들의 많은 참여 바랍니다.",
+      "bodyText": "공자아카데미에서는 다음과 같이 '중국음식 원데이 쿠킹클래스' 를 운영하오니, 관심있는 분들의 많은 참여 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "공자아카데미에서는 다음과 같이 '중국음식 원데이 쿠킹클래스' 를 운영하오니, 관심있는 분들의 많은 참여 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fccd171e7fc0f097",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 행 사 명: 중국음식 원데이 쿠킹클래스",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 행 사 명: 중국음식 원데이 쿠킹클래스"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2861e67297a87c2a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "​ - ​요리명: 돼지고기 마늘쫑 볶음(肉炒蒜薹). 두반장 가지볶음(酱茄条)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "​ - ​요리명: 돼지고기 마늘쫑 볶음(肉炒蒜薹). 두반장 가지볶음(酱茄条)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b0017996d8225317",
+      "segmentType": "label_value",
+      "labelText": "행사일시",
+      "bodyText": "2. 행사일시:",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 행사일시:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-209bfe72bad67e2e",
+      "segmentType": "continuation",
+      "labelText": "행사일시",
+      "bodyText": "2026. 4. 24.(금) 10시 ~ 12시",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-b0017996d8225317"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-24",
+          "start": 9,
+          "end": 24
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 행사일시: 2026. 4. 24.(금) 10시 ~ 12시"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ca339649b6e5c09b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 4. 24.(금) 10시 ~ 12시",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-24",
+          "start": 0,
+          "end": 15
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 4. 24.(금) 10시 ~ 12시"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bd95e0755e4a9c05",
+      "segmentType": "label_value",
+      "labelText": "행사장소",
+      "bodyText": "3. 행사장소: 봄봄요리학원(춘천시 후석로 348-1, 2층)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 행사장소: 봄봄요리학원(춘천시 후석로 348-1, 2층)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-501b508f52220d84",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 참가대상: 중국음식 만들기에 관심있는 성인 누구나(중국인 제외)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 참가대상: 중국음식 만들기에 관심있는 성인 누구나(중국인 제외)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3563243f18fcd654",
+      "segmentType": "label_value",
+      "labelText": "선발인원",
+      "bodyText": "5. 선발인원: 12명(전년도 참여자 후순위 적용)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 선발인원: 12명(전년도 참여자 후순위 적용)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1fb221633fd18da4",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "6. 신청기간:",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 신청기간:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d1bf67959c4c61d0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 4. 6.(월) 10시 ~ 4. 9.(목) 17시, 선착순 모집",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-06",
+          "start": 0,
+          "end": 14
+        },
+        {
+          "value": "2026-04-09",
+          "start": 21,
+          "end": 29
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2026. 4. 6.(월) 10시 ~ 4. 9.(목) 17시, 선착순 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-188107b1846879e6",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "7. 신청방법: 온라인 신청서(네이버폼) 제출",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "7. 신청방법: 온라인 신청서(네이버폼) 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-220e76838a13851d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 링크:",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 링크:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b7ab24340e7a6b6b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://naver.me/FetQvWDg",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://naver.me/FetQvWDg"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a5d767ad87bb594c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "8. 참 가 비: 무료",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "8. 참 가 비: 무료"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-430057a4a39f1f26",
+      "segmentType": "label_value",
+      "labelText": "선발발표",
+      "bodyText": "2026. 4. 10.(금) 오후, 공자아카데미 홈페이지 공고",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-10",
+          "start": 9,
+          "end": 24
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "9. 선발발표: 2026. 4. 10.(금) 오후, 공자아카데미 홈페이지 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9d2a8dcb08d263f5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "10. 유의사항",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "10. 유의사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6b4574ff1cdc5fd7",
+      "segmentType": "label_value",
+      "labelText": "취소 시 사전 연락바라며, 무단불참하는 경우 차기 공자아카데미 프로그램 지원 시 패널티(후순위) 적용",
+      "bodyText": "- 취소 시 사전 연락바라며, 무단불참하는 경우 차기 공자아카데미 프로그램 지원 시 패널티(후순위) 적용",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 취소 시 사전 연락바라며, 무단불참하는 경우 차기 공자아카데미 프로그램 지원 시 패널티(후순위) 적용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-334b8a145240ae7a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 클래스 개강 10분 전부터 입장 가능",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 클래스 개강 10분 전부터 입장 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1e26cfb966b944e3",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 포장용기 및 앞치마 개별준비",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 포장용기 및 앞치마 개별준비"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-77a6360f4b15fdbf",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 본인 부주의로 인한 상해 및 파손 사고 등의 책임은 본인에게 있음​",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 본인 부주의로 인한 상해 및 파손 사고 등의 책임은 본인에게 있음​"
+    }
+  ],
+  "summary": {
+    "segmentCount": 22,
+    "locallyGroundedCount": 3,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 8,
+      "list_item": 8,
+      "paragraph": 4,
+      "continuation": 1
+    }
+  }
+}

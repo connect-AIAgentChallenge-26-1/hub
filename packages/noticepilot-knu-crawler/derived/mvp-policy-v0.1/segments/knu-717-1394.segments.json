@@ -1,0 +1,92 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-717-1394",
+  "sourceContentHash": "54ee63437e3dfcb4a36332fbfe60c3475d66b530687f90bc6d53a0dfa2083bdc",
+  "sourceTitle": "(추천채용) 소노인터내셔널_비발디파크 인사총무 채용",
+  "publishedAt": "2026-03-23",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b43aebabcbf3c2f9",
+      "segmentType": "title",
+      "labelText": "(추천채용) 소노인터내셔널_비발디파크 인사총무 채용",
+      "bodyText": "(추천채용) 소노인터내셔널_비발디파크 인사총무 채용",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(추천채용) 소노인터내셔널_비발디파크 인사총무 채용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-26158008430c6e8f",
+      "segmentType": "label_value",
+      "labelText": "추천채용 지원방법",
+      "bodyText": "추천채용 지원방법: 온라인 네이버폼 응답(",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "추천채용 지원방법: 온라인 네이버폼 응답("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-60d6b92a4ef31104",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://naver.me/GtJQiCj7",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://naver.me/GtJQiCj7"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b04a14511ccdc5f5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    }
+  ],
+  "summary": {
+    "segmentCount": 4,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "paragraph": 2
+    }
+  }
+}

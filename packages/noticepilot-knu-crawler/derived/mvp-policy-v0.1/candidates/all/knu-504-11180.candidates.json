@@ -1,0 +1,368 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11180",
+  "sourceContentHash": "c50118a87e5fa59080c629ccf384b7cd68b9f6b58712398ff1c420d9253ece3d",
+  "sourceTitle": "2026학년도 하계방학 강원대학교 삼척도서관 북ː드림 프로그램 안내(신청 7.6~7.10)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11180&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "all"
+    ],
+    "scopeType": "all_campuses",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "all": "전체"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11180-3bc1afa83074e1",
+      "uidHint": "noticepilot-cand-knu-504-11180-3bc1afa83074e1@noticepilot.local",
+      "sourceNoticeId": "knu-504-11180",
+      "sourceTitle": "2026학년도 하계방학 강원대학교 삼척도서관 북ː드림 프로그램 안내(신청 7.6~7.10)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11180&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-944de4c7d25f5e19",
+        "segmentType": "title",
+        "labelText": "2026학년도 하계방학 강원대학교 삼척도서관 북ː드림 프로그램 안내(신청",
+        "bodyText": "7.6~7.10)",
+        "sourceLocation": {
+          "lineIndex": -1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-06",
+            "start": 41,
+            "end": 44
+          },
+          {
+            "value": "2026-07-10",
+            "start": 45,
+            "end": 49
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "low",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "2026학년도 하계방학 강원대학교 삼척도서관 북ː드림 프로그램 안내(신청",
+          "2026학년도 하계방학 강원대학교 삼척도서관 북ː드림 프로그램 안내(신청 7.6~7.10)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-0e312ee98f336c21",
+        "segmentId": "seg-944de4c7d25f5e19",
+        "rawText": "7.6~7.10)",
+        "normalizedStart": "2026-07-06",
+        "normalizedEnd": "2026-07-10",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 41,
+          "end": 49
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-d390350403f64f0d",
+        "sourceNoticeId": "knu-504-11180",
+        "segmentId": "seg-944de4c7d25f5e19",
+        "temporalMentionIds": [
+          "tm-0e312ee98f336c21"
+        ],
+        "bindingKind": "title_context",
+        "confidence": "low",
+        "ruleId": "binding.title_context",
+        "locallyGrounded": false,
+        "labelText": "2026학년도 하계방학 강원대학교 삼척도서관 북ː드림 프로그램 안내(신청",
+        "evidence": "2026학년도 하계방학 강원대학교 삼척도서관 북ː드림 프로그램 안내(신청 7.6~7.10)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 하계방학 강원대학교 삼척도서관 북ː드림 프로그램 안내(신청 7.6~7.10) 신청기간",
+      "dateText": "7.6~7.10)",
+      "normalizedStart": "2026-07-06",
+      "normalizedEnd": "2026-07-10",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "2026학년도 하계방학 강원대학교 삼척도서관 북ː드림 프로그램 안내(신청 7.6~7.10)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11180-101fc8d625d0d1",
+      "uidHint": "noticepilot-cand-knu-504-11180-101fc8d625d0d1@noticepilot.local",
+      "sourceNoticeId": "knu-504-11180",
+      "sourceTitle": "2026학년도 하계방학 강원대학교 삼척도서관 북ː드림 프로그램 안내(신청 7.6~7.10)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11180&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-5d7ec274c0ce4687",
+        "segmentType": "label_value",
+        "labelText": "/ (운영)",
+        "bodyText": "2026. 7. 15.(수) ~ 8. 19.(수)",
+        "sourceLocation": {
+          "lineIndex": 12,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-15",
+            "start": 7,
+            "end": 22
+          },
+          {
+            "value": "2026-08-19",
+            "start": 25,
+            "end": 34
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "/ (운영)",
+          "/ (운영) 2026. 7. 15.(수) ~ 8. 19.(수)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-5b18ec59f688385d",
+        "segmentId": "seg-5d7ec274c0ce4687",
+        "rawText": "2026. 7. 15.(수) ~ 8. 19.(수)",
+        "normalizedStart": "2026-07-15",
+        "normalizedEnd": "2026-08-19",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 7,
+          "end": 34
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-7c83d845e13a2815",
+        "sourceNoticeId": "knu-504-11180",
+        "segmentId": "seg-5d7ec274c0ce4687",
+        "temporalMentionIds": [
+          "tm-5b18ec59f688385d"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "/ (운영)",
+        "evidence": "/ (운영) 2026. 7. 15.(수) ~ 8. 19.(수)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 하계방학 강원대학교 삼척도서관 북ː드림 프로그램 안내(신청 7.6~7.10) 행사 기간",
+      "dateText": "2026. 7. 15.(수) ~ 8. 19.(수)",
+      "normalizedStart": "2026-07-15",
+      "normalizedEnd": "2026-08-19",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "/ (운영) 2026. 7. 15.(수) ~ 8. 19.(수)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

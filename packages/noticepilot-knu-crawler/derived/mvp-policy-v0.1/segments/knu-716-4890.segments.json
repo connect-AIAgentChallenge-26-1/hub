@@ -1,0 +1,146 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4890",
+  "sourceContentHash": "dced8c3a3bf3b022b1984bf09fffedbcde9c7b4942845f832dc18a610ae6436e",
+  "sourceTitle": "강원대학교RISE사업단 강원LRS공유대학본부 직원 공개채용 최종합격자 공고",
+  "publishedAt": "2026-07-01",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7412496613285f15",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "강원대학교RISE사업단 강원LRS공유대학본부 직원 공개채용 최종합격자 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교RISE사업단 강원LRS공유대학본부 직원 공개채용 최종합격자 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6629dc9ca397bb94",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "[강원대학교RISE사업단 강원LRS공유대학본부 직원 공개채용 최종합격자 공고]",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[강원대학교RISE사업단 강원LRS공유대학본부 직원 공개채용 최종합격자 공고]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-69ef0a1db47a6f64",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교RISE사업단 강원LRS공유대학본부 직원 공개채용 공고와 관련하여 다음과 같이 최종합격자를 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교RISE사업단 강원LRS공유대학본부 직원 공개채용 공고와 관련하여 다음과 같이 최종합격자를 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a8453118a6977414",
+      "segmentType": "continuation",
+      "labelText": "",
+      "bodyText": "2026.07.01.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-69ef0a1db47a6f64"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-01",
+          "start": 63,
+          "end": 73
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "강원대학교RISE사업단 강원LRS공유대학본부 직원 공개채용 공고와 관련하여 다음과 같이 최종합격자를 공고합니다. 2026.07.01."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c5d5a4c010e34329",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026.07.01.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-01",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026.07.01."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c1c33c130d3054fb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교RISE사업단 강원LRS공유대학본부장",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교RISE사업단 강원LRS공유대학본부장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 4,
+      "continuation": 1
+    }
+  }
+}

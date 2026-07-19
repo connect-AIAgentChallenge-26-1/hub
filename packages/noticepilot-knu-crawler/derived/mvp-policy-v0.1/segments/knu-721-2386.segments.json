@@ -1,0 +1,275 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2386",
+  "sourceContentHash": "58309c18bf4f1e6341d051038dded0cef1d833dd162ce86a955e52c6e3dd7286",
+  "sourceTitle": "2026-2027 불가리아 정부초청 장학생 선발 안내",
+  "publishedAt": "2026-05-07",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-254fd623a17d7a70",
+      "segmentType": "title",
+      "labelText": "2026-2027 불가리아 정부초청 장학생 선발 안내",
+      "bodyText": "2026-2027 불가리아 정부초청 장학생 선발 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026-2027 불가리아 정부초청 장학생 선발 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-225464c138cbd4b7",
+      "segmentType": "label_value",
+      "labelText": "2026-2027 불가리아 정부초청 장학생 선발을 아래와 같이 안내하오니, 관심있는 학생(대상",
+      "bodyText": "2026-2027 불가리아 정부초청 장학생 선발을 아래와 같이 안내하오니, 관심있는 학생(대상: 한국 국적자)의 많은 지원바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026-2027 불가리아 정부초청 장학생 선발을 아래와 같이 안내하오니, 관심있는 학생(대상: 한국 국적자)의 많은 지원바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-496a2afe72d7156d",
+      "segmentType": "label_value",
+      "labelText": "선발과정",
+      "bodyText": "1. 선발과정: 학사과정, 석사과정, 박사과정",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate",
+        "degree_level:graduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 선발과정: 학사과정, 석사과정, 박사과정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-312169f6f8f1e055",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 장학내역: 수업료 면제, 기숙사 제공, 장학금",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 장학내역: 수업료 면제, 기숙사 제공, 장학금"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-586b9f32a00837df",
+      "segmentType": "label_value",
+      "labelText": "지원방법 및 지원마감일",
+      "bodyText": "3. 지원방법 및 지원마감일",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 지원방법 및 지원마감일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-35d849e5d6d8d504",
+      "segmentType": "label_value",
+      "labelText": "가) 지원방법",
+      "bodyText": "가) 지원방법: 원본 제출서류 대사관으로 우편 제출",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가) 지원방법: 원본 제출서류 대사관으로 우편 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c8057924886dd530",
+      "segmentType": "label_value",
+      "labelText": "나) 제출처: 주한불가리아대사관(주소: 서울시 용산구 한남대로 102-8 <우",
+      "bodyText": "나) 제출처: 주한불가리아대사관(주소: 서울시 용산구 한남대로 102-8 <우:04418>)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나) 제출처: 주한불가리아대사관(주소: 서울시 용산구 한남대로 102-8 <우:04418>)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-210b3152f2920308",
+      "segmentType": "label_value",
+      "labelText": "다) 지원마감일",
+      "bodyText": "2026.9.1.(화)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-09-01",
+          "start": 10,
+          "end": 22
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "다) 지원마감일: 2026.9.1.(화)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-917474be5caa9e7a",
+      "segmentType": "label_value",
+      "labelText": "제출서류 등 지원 세부사항",
+      "bodyText": "4. 제출서류 등 지원 세부사항: <붙임> 파일 참조",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 제출서류 등 지원 세부사항: <붙임> 파일 참조"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c67b215fb0c24058",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 문의처: 주한불가리아대사관(embassy.seoul@mfa.bg / 유선문의 불가)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 문의처: 주한불가리아대사관(embassy.seoul@mfa.bg / 유선문의 불가)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1668b2e07a6db1e9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "붙임",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ac0a2477d174c217",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 2026-2027 Bulgarian Government Scholarship Program.",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 2026-2027 Bulgarian Government Scholarship Program."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2774c03f4883a44b",
+      "segmentType": "label_value",
+      "labelText": "지원서(Application Form). 끝.",
+      "bodyText": "2. 지원서(Application Form). 끝.",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 지원서(Application Form). 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 13,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 8,
+      "list_item": 3,
+      "paragraph": 1
+    }
+  }
+}

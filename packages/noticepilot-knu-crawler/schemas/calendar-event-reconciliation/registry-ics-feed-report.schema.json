@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/registry-ics-feed-report.schema.json",
+  "title": "NoticePilot S27-D registry ICS feed report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "projectorVersion", "projectionId", "migrationMode",
+    "feedScope", "calendarName", "timezone", "outputIcsPath",
+    "pathReferences", "eventCount", "uniqueUidCount", "legacyEventCount",
+    "eventCountDelta", "sequenceZeroEventCount", "sequenceOneEventCount",
+    "allDayEventCount", "timedEventCount", "timedWithoutEndCount",
+    "dtendLineCount", "legacyCancellationTombstoneCount", "events"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.registryIcsFeedReport.v0.1"},
+    "projectorVersion": {"type": "string"},
+    "projectionId": {"type": "string"},
+    "migrationMode": {"const": "pre_subscription_cutover"},
+    "feedScope": {"enum": ["student_default", "job_application"]},
+    "calendarName": {"type": "string"},
+    "timezone": {"const": "Asia/Seoul"},
+    "outputIcsPath": {"type": "string"},
+    "pathReferences": {"type": "object"},
+    "eventCount": {"type": "integer", "minimum": 0},
+    "uniqueUidCount": {"type": "integer", "minimum": 0},
+    "legacyEventCount": {"type": "integer", "minimum": 0},
+    "eventCountDelta": {"type": "integer"},
+    "sequenceZeroEventCount": {"type": "integer", "minimum": 0},
+    "sequenceOneEventCount": {"type": "integer", "minimum": 0},
+    "allDayEventCount": {"type": "integer", "minimum": 0},
+    "timedEventCount": {"type": "integer", "minimum": 0},
+    "timedWithoutEndCount": {"type": "integer", "minimum": 0},
+    "dtendLineCount": {"type": "integer", "minimum": 0},
+    "legacyCancellationTombstoneCount": {"const": 0},
+    "events": {"type": "array"}
+  }
+}

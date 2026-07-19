@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-1596",
+  "sourceContentHash": "f21cb1eed8bba30268fe94ff50890bb70464bcc74b1890653b4a2346b0ae200d",
+  "sourceTitle": "2026학년도 1학기 예비수강신청 안내（학부）",
+  "publishedAt": "2026-01-29",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c6eb836aef82b223",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 예비수강신청 안내（학부）",
+      "bodyText": "2026학년도 1학기 예비수강신청 안내（학부）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "preliminary_course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 예비수강신청 안내（학부）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d31505e7ec19af26",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ".",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0c162ecdf19dcd45",
+      "segmentType": "label_value",
+      "labelText": "2026년 교육과정 개편으로 동일과목 조회 방법을 알려드리니 참고하시기바랍니다.",
+      "bodyText": "- 2026년 교육과정 개편으로 동일과목 조회 방법을 알려드리니 참고하시기바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 2026년 교육과정 개편으로 동일과목 조회 방법을 알려드리니 참고하시기바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a796343c6ffba8f6",
+      "segmentType": "label_value",
+      "labelText": "수강신청 로그인 -> 동일과목 조회(과목명 변경으로 인한 경우)",
+      "bodyText": "- 수강신청 로그인 -> 동일과목 조회(과목명 변경으로 인한 경우)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 수강신청 로그인 -> 동일과목 조회(과목명 변경으로 인한 경우)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7bba88e217e007fd",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 예시: 동일명칭은 과목 검색으로 수강신청 2025년 수강과목(지속가능발전의이해 1140001)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 예시: 동일명칭은 과목 검색으로 수강신청 2025년 수강과목(지속가능발전의이해 1140001)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-83c78e8726214d71",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-> 2026년 교과목(지속가능발전의이해 14200003)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-> 2026년 교과목(지속가능발전의이해 14200003)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2f72a9a8aa55a09a",
+      "segmentType": "label_value",
+      "labelText": "개편 교육과정 수강상담은 소속 학과로 문의하시기 바랍니다.",
+      "bodyText": "- 개편 교육과정 수강상담은 소속 학과로 문의하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 개편 교육과정 수강상담은 소속 학과로 문의하시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 1,
+      "label_value": 3,
+      "list_item": 2
+    }
+  }
+}

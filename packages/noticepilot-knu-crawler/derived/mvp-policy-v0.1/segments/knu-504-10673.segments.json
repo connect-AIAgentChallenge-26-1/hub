@@ -1,0 +1,337 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10673",
+  "sourceContentHash": "f4e9ee985b9017ce41149dc9cf8a0e935685a1203405c12b2af3e6094ad1fa08",
+  "sourceTitle": "2026학년도 1학기 재학생 등록금 1차 추가 납부기간 안내",
+  "publishedAt": "2026-02-27",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-627e1774903572ae",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 재학생 등록금 1차 추가 납부기간 안내",
+      "bodyText": "2026학년도 1학기 재학생 등록금 1차 추가 납부기간 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 재학생 등록금 1차 추가 납부기간 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ab2e8acda84270b2",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 1학기 재학생 등록금 1차 추가 납부 기간을 아래와 같이 안내합니다.",
+      "bodyText": "2026학년도 1학기 재학생 등록금 1차 추가 납부 기간을 아래와 같이 안내합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 재학생 등록금 1차 추가 납부 기간을 아래와 같이 안내합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a234465ef22cf87d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 대상: 재학생 중 등록금 미납자",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 대상: 재학생 중 등록금 미납자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0fd12b9a6ba56c0c",
+      "segmentType": "label_value",
+      "labelText": "등록금 조회/납부기간",
+      "bodyText": "2026. 3. 5.（목） 09시 ~ 3. 6.（금） 16시",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-05",
+          "start": 16,
+          "end": 30
+        },
+        {
+          "value": "2026-03-06",
+          "start": 37,
+          "end": 45
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 등록금 조회/납부기간: 2026. 3. 5.（목） 09시 ~ 3. 6.（금） 16시"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0c6b8204b747d4c9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 조회방법: [학교홈페이지]-[사용자메뉴]-[등록금납입]-로그인（학번, 생년월일8자리）-고지서 조회",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 조회방법: [학교홈페이지]-[사용자메뉴]-[등록금납입]-로그인（학번, 생년월일8자리）-고지서 조회"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1a6fe18d2eb7d1cc",
+      "segmentType": "label_value",
+      "labelText": "초과학기생, 학사학위취득유예자, 시간제 등록생의 납부기간",
+      "bodyText": "2026. 3. 12.（목） ~ 3. 13.（금） 16:00",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-12",
+          "start": 35,
+          "end": 50
+        },
+        {
+          "value": "2026-03-13",
+          "start": 53,
+          "end": 62
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "※ 초과학기생, 학사학위취득유예자, 시간제 등록생의 납부기간: 2026. 3. 12.（목） ~ 3. 13.（금） 16:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d631a242aeec1ee9",
+      "segmentType": "label_value",
+      "labelText": "납부은행",
+      "bodyText": "3. 납부은행: 신한은행",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 납부은행: 신한은행"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-26a0b1075373a554",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 은행창구 방문: 고지서 출력 후 은행 방문 납부",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 은행창구 방문: 고지서 출력 후 은행 방문 납부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-284d88a1a7a539f3",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 인터넷뱅킹: 고지서 상의 가상계좌로 납부",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 인터넷뱅킹: 고지서 상의 가상계좌로 납부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-67b6dbe0c67b31c7",
+      "segmentType": "label_value",
+      "labelText": "납부확인서 출력",
+      "bodyText": "4. 납부확인서 출력: [",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 납부확인서 출력: ["
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8a47df5ca845de08",
+      "segmentType": "label_value",
+      "labelText": "등록금고지서",
+      "bodyText": "등록금고지서",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "등록금고지서"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8843a774594c18e1",
+      "segmentType": "label_value",
+      "labelText": "]-로그인（학번, 생년월일8자리）-납부확인서 조회",
+      "bodyText": "]-로그인（학번, 생년월일8자리）-납부확인서 조회",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "]-로그인（학번, 생년월일8자리）-납부확인서 조회"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-470e00d57b08f9a5",
+      "segmentType": "label_value",
+      "labelText": "납부확인은 다음날 오전 10시부터 납부확인서 출력으로 확인 가능",
+      "bodyText": "※ 납부확인은 다음날 오전 10시부터 납부확인서 출력으로 확인 가능",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 납부확인은 다음날 오전 10시부터 납부확인서 출력으로 확인 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4ce6d050dc422f74",
+      "segmentType": "label_value",
+      "labelText": "（붙임1）2026학년도 1학기 재학생 등록금 수납 계획 1부.",
+      "bodyText": "（붙임1）2026학년도 1학기 재학생 등록금 수납 계획 1부.",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "（붙임1）2026학년도 1학기 재학생 등록금 수납 계획 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-888e15fca6882403",
+      "segmentType": "label_value",
+      "labelText": "（붙임2）등록금 납부확인서 발급 방법 1부.",
+      "bodyText": "（붙임2）등록금 납부확인서 발급 방법 1부.",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "（붙임2）등록금 납부확인서 발급 방법 1부."
+    }
+  ],
+  "summary": {
+    "segmentCount": 15,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 10,
+      "list_item": 4
+    }
+  }
+}

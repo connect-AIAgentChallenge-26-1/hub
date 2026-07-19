@@ -1,0 +1,209 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10804",
+  "sourceContentHash": "63d9d56c631154f534fd768c3bc3c03d9c5bb50d048dc77c8e1bc0bbec62a95a",
+  "sourceTitle": "학생 무료 건강검진 안내",
+  "publishedAt": "2026-03-31",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2d3336af10c09440",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "학생 무료 건강검진 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학생 무료 건강검진 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a5b8e6c8f217c090",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "<강원대생 무료 건강검진 안내>",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<강원대생 무료 건강검진 안내>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d93c0baa9c98b53f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▶ 검진대상 : 강원대학교 재학생(대학원생 포함)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:graduate",
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶ 검진대상 : 강원대학교 재학생(대학원생 포함)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4383f9aeb139fbfb",
+      "segmentType": "label_value",
+      "labelText": "* 인원 한정, 선착순 마감",
+      "bodyText": "* 인원 한정, 선착순 마감",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 인원 한정, 선착순 마감"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4ee9fad971ab7769",
+      "segmentType": "label_value",
+      "labelText": "검진기간",
+      "bodyText": "3월 31일(화) ~ 4월3일(금) 10:00 ~ 16:00",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-31",
+          "start": 9,
+          "end": 18
+        },
+        {
+          "value": "2026-04-03",
+          "start": 21,
+          "end": 28
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "▶ 검진기간 : 3월 31일(화) ~ 4월3일(금) 10:00 ~ 16:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-642912df778cde45",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▶ 검진장소 : 미래광장(방문검진차량)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶ 검진장소 : 미래광장(방문검진차량)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3c91cc8d8466fbca",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▶ 검진과목 : 흉부 X선 촬영(결핵), 혈액검사(간기능, B형간염, 빈혈), 소변검사 (당뇨,단백뇨,잠혈), 혈압, 체위검사",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶ 검진과목 : 흉부 X선 촬영(결핵), 혈액검사(간기능, B형간염, 빈혈), 소변검사 (당뇨,단백뇨,잠혈), 혈압, 체위검사"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-063ac406f1e77a39",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(5시간 공복을 유지할 경우 정확한 검사에 도움이 됩니다.) ﻿",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(5시간 공복을 유지할 경우 정확한 검사에 도움이 됩니다.) ﻿"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-113c95167ad0519c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▶ 검진비용 : 무료(전액지원)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶ 검진비용 : 무료(전액지원)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b5a463cbaf7f3063",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▶ 기타문의 : 보건진료소(☎ 250-8091, 8080)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶ 기타문의 : 보건진료소(☎ 250-8091, 8080)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "list_item": 5,
+      "label_value": 2
+    }
+  }
+}

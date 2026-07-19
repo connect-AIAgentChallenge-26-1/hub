@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "noticepilot.knuCollectionProfiles.v0.1",
+  "profiles": {
+    "runtime": {
+      "label": "현재 검증된 운영 수집 범위",
+      "boards": ["720", "721"],
+      "publishedFrom": null,
+      "publishedThrough": null,
+      "attachmentPolicy": "metadata"
+    },
+    "observation-2026": {
+      "label": "2026년 중앙 공지 7개 게시판 관찰 corpus",
+      "boards": ["504", "715", "716", "717", "719", "720", "721"],
+      "publishedFrom": "2026-01-01",
+      "publishedThrough": "2026-07-11",
+      "attachmentPolicy": "selective"
+    }
+  }
+}

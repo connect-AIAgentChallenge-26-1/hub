@@ -1,0 +1,130 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-5624",
+  "sourceContentHash": "0b25c2fbc39d1b9e457fc08fceb3001162d3ec781ab84b56ffaa7ace1fb28081",
+  "sourceTitle": "한전 선로 공사에 따른 학내 정전일정 알림（재공고）",
+  "publishedAt": "2026-01-06",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8532dc3654e43e62",
+      "segmentType": "title",
+      "labelText": "한전 선로 공사에 따른 학내 정전일정 알림（재공고）",
+      "bodyText": "한전 선로 공사에 따른 학내 정전일정 알림（재공고）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "한전 선로 공사에 따른 학내 정전일정 알림（재공고）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-73db8f4882d44fc8",
+      "segmentType": "label_value",
+      "labelText": "학생생활관(3차 BTL) 공사용 임시전기선로 철거공사에 따라 한국전력공사에서 정전을 예고하여 아래와 같이 정전일정을 안내하오니 정전으로 인한 피해가 발생하지 않도록 대비하여 주시기 바랍니다.",
+      "bodyText": "학생생활관(3차 BTL) 공사용 임시전기선로 철거공사에 따라 한국전력공사에서 정전을 예고하여 아래와 같이 정전일정을 안내하오니 정전으로 인한 피해가 발생하지 않도록 대비하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학생생활관(3차 BTL) 공사용 임시전기선로 철거공사에 따라 한국전력공사에서 정전을 예고하여 아래와 같이 정전일정을 안내하오니 정전으로 인한 피해가 발생하지 않도록 대비하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d24784e455467b3",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 학내 인입선로와 공사용 임시전기 선로가 동일 한전 인입선로에서 분기되어 한전에서 임시전기 설비 철거공사를 위해 학내 인입선로도 불가피하게 전원공급 차단(한전 휴일작업 불가에 따라 부득이하게 평일 정전)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 학내 인입선로와 공사용 임시전기 선로가 동일 한전 인입선로에서 분기되어 한전에서 임시전기 설비 철거공사를 위해 학내 인입선로도 불가피하게 전원공급 차단(한전 휴일작업 불가에 따라 부득이하게 평일 정전)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4f1c49a56eb8647a",
+      "segmentType": "label_value",
+      "labelText": "정전일시",
+      "bodyText": "2026. 1. 23.(금) 15:00 ~ 17:00 (약 2시간)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-23",
+          "start": 9,
+          "end": 24
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "가. 정전일시: 2026. 1. 23.(금) 15:00 ~ 17:00 (약 2시간)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8ffbde9b6820ccca",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "나. 대상건물(제2변전실 계통): 첨부물 참조",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 대상건물(제2변전실 계통): 첨부물 참조"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-82391e5ec1b8888d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "다. 협조요청사항: 첨부물 참조",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 협조요청사항: 첨부물 참조"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "list_item": 3
+    }
+  }
+}

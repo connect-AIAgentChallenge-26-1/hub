@@ -1,0 +1,557 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10975",
+  "sourceContentHash": "5e6c9c104f89aee80141e3b265a14e8133011f00c130408584e6408c7708d466",
+  "sourceTitle": "(2026. 5. 20. 시행） 재학생 대상 모의토익 실시 안내 및 응시생 모집",
+  "publishedAt": "2026-05-11",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cc705aa58268a414",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026. 5. 20. 시행） 재학생 대상 모의토익 실시 안내 및 응시생 모집",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [
+        {
+          "value": "2026-05-20",
+          "start": 1,
+          "end": 12
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "(2026. 5. 20. 시행） 재학생 대상 모의토익 실시 안내 및 응시생 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f45e505ed99f4d20",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "안녕하세요.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "안녕하세요."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8f7eef1dac881002",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 춘천기획지원과(구. 언어연수과)는 강원대 재학생의 토익 실력 향상을 위한 모의 토익 응시자를 모집합니다.",
+      "bodyText": "강원대학교 춘천기획지원과(구. 언어연수과)는 강원대 재학생의 토익 실력 향상을 위한 모의 토익 응시자를 모집합니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 춘천기획지원과(구. 언어연수과)는 강원대 재학생의 토익 실력 향상을 위한 모의 토익 응시자를 모집합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3278afe0c7059be6",
+      "segmentType": "label_value",
+      "labelText": "시험 참가를 원하시는 분은 아래 신청서 작성을 클릭하여 신청서를 작성해 주시기 바랍니다.",
+      "bodyText": "시험 참가를 원하시는 분은 아래 신청서 작성을 클릭하여 신청서를 작성해 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "시험 참가를 원하시는 분은 아래 신청서 작성을 클릭하여 신청서를 작성해 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8296a74d4fcbe90c",
+      "segmentType": "label_value",
+      "labelText": "신청서 작성 뒤 시험 당일 '노쇼' 하는 학생은 향후 모의토익 2개 회차 응시 불가",
+      "bodyText": "※ 신청서 작성 뒤 시험 당일 '노쇼' 하는 학생은 향후 모의토익 2개 회차 응시 불가",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 신청서 작성 뒤 시험 당일 '노쇼' 하는 학생은 향후 모의토익 2개 회차 응시 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2f5242e9566a7146",
+      "segmentType": "continuation",
+      "labelText": "신청서 작성 뒤 시험 당일 '노쇼' 하는 학생은 향후 모의토익 2개 회차 응시 불가 （취소 희망시",
+      "bodyText": "5월 15일 17:00 까지 사전 연락 바람）",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-8296a74d4fcbe90c"
+      },
+      "actionSignals": [
+        "application_period",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-15",
+          "start": 57,
+          "end": 63
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "※ 신청서 작성 뒤 시험 당일 '노쇼' 하는 학생은 향후 모의토익 2개 회차 응시 불가 （취소 희망시 5월 15일 17:00 까지 사전 연락 바람）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8fdf2676edfb5f6a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "5월 15일 17:00 까지 사전 연락 바람）",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-15",
+          "start": 8,
+          "end": 14
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "（취소 희망시 5월 15일 17:00 까지 사전 연락 바람）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e37d0bff2f7694ed",
+      "segmentType": "label_value",
+      "labelText": "춘천기획지원과(구. 언어연수과) 모의토익 담당자 연락처",
+      "bodyText": "춘천기획지원과(구. 언어연수과) 모의토익 담당자 연락처",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "춘천기획지원과(구. 언어연수과) 모의토익 담당자 연락처"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-269bc39d33736e89",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "☎ 033-250-7155",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "☎ 033-250-7155"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-95a925eb06cb7a13",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "E-mail :",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "E-mail :"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b9be35a0d9e329f5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "akira23@kangwon.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "akira23@kangwon.ac.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-22dc7b940ed36499",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "모의토익 안내",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "모의토익 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-465f6de0dd655cdf",
+      "segmentType": "label_value",
+      "labelText": "시험날짜",
+      "bodyText": "2026년 5월 20일（수）",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-20",
+          "start": 9,
+          "end": 24
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 시험날짜: 2026년 5월 20일（수）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b37b094f6e26352f",
+      "segmentType": "label_value",
+      "labelText": "시험시간: 18:30 - 20",
+      "bodyText": "2. 시험시간: 18:30 - 20:30",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 시험시간: 18:30 - 20:30"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-491f74b7bf224f29",
+      "segmentType": "label_value",
+      "labelText": "시험장소",
+      "bodyText": "3. 시험장소: 국제교류처 강의실（고사실 추후 공지）",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 시험장소: 국제교류처 강의실（고사실 추후 공지）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-77a1dff4c2366ba6",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 대상자: 강원대학교 재학생（춘천 캠퍼스）",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 대상자: 강원대학교 재학생（춘천 캠퍼스）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-25055ec104bc2c7d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 비용: 무료",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 비용: 무료"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6e39ecd437cf8bb1",
+      "segmentType": "label_value",
+      "labelText": "모집인원",
+      "bodyText": "6. 모집인원: 최대 80명（선착순 모집）",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 모집인원: 최대 80명（선착순 모집）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f8a100fdd8b81c0a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "7. 진행방식",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "7. 진행방식"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9e584b719ac99591",
+      "segmentType": "label_value",
+      "labelText": "실제 토익（LC+RC）과 유사한 환경하에 오프라인 필기 시험 실시",
+      "bodyText": "- 실제 토익（LC+RC）과 유사한 환경하에 오프라인 필기 시험 실시",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 실제 토익（LC+RC）과 유사한 환경하에 오프라인 필기 시험 실시"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-feda6d0b2cc345cc",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 준비물 : 연필 혹은 컴퓨터용 사인펜, 지우개（수정테이프）, 신분증（학생증）",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 준비물 : 연필 혹은 컴퓨터용 사인펜, 지우개（수정테이프）, 신분증（학생증）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f94bc733a91278a5",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "5월 12일(화) 9시 ~ 5월 15일 17시까지",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-12",
+          "start": 9,
+          "end": 18
+        },
+        {
+          "value": "2026-05-15",
+          "start": 24,
+          "end": 30
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "8. 접수기간: 5월 12일(화) 9시 ~ 5월 15일 17시까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-be1d68a741bd7c75",
+      "segmentType": "label_value",
+      "labelText": "접수방법",
+      "bodyText": "9. 접수방법: 아래 링크에 접속하여 신청",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "9. 접수방법: 아래 링크에 접속하여 신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-616dc8dbddc33ff1",
+      "segmentType": "label_value",
+      "labelText": "신청링크",
+      "bodyText": "- 신청링크:",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 신청링크:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1407775daa9b4671",
+      "segmentType": "label_value",
+      "labelText": "모의토익 신청 바로가기",
+      "bodyText": "모의토익 신청 바로가기",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "모의토익 신청 바로가기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b0f4f9f10b630e87",
+      "segmentType": "label_value",
+      "labelText": "신청자가 많으면 조기 마감될 수 있습니다.",
+      "bodyText": "※ 신청자가 많으면 조기 마감될 수 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 신청자가 많으면 조기 마감될 수 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ba94b46e0d0515f4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "감사합니다.",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "감사합니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 27,
+    "locallyGroundedCount": 4,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 7,
+      "label_value": 14,
+      "continuation": 1,
+      "list_item": 4
+    }
+  }
+}

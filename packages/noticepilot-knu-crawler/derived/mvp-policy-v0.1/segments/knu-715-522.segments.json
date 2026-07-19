@@ -1,0 +1,124 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-715-522",
+  "sourceContentHash": "bd45e6a1ca0edb3ca164418b3bb2d4144da04a3b580d997555cbf9c3f540b8b1",
+  "sourceTitle": "2025학년도 KNU 내가 만드는 교양교과목 공모전 발표회 및 시상식 개최 안내",
+  "publishedAt": "2026-02-10",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-11d788b01b96e587",
+      "segmentType": "title",
+      "labelText": "2025학년도 KNU 내가 만드는 교양교과목 공모전 발표회 및 시상식 개최 안내",
+      "bodyText": "2025학년도 KNU 내가 만드는 교양교과목 공모전 발표회 및 시상식 개최 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2025학년도 KNU 내가 만드는 교양교과목 공모전 발표회 및 시상식 개최 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-665f2e0dae794cb5",
+      "segmentType": "label_value",
+      "labelText": "학생 주도 교양교과목 수상작 발표를 통해 학생 중심 교육을 강화하고, 학생이 직접 기획한 교과목의 성과를 공유 및 확산",
+      "bodyText": "학생 주도 교양교과목 수상작 발표를 통해 학생 중심 교육을 강화하고, 학생이 직접 기획한 교과목의 성과를 공유 및 확산",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학생 주도 교양교과목 수상작 발표를 통해 학생 중심 교육을 강화하고, 학생이 직접 기획한 교과목의 성과를 공유 및 확산"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-20880f308c82229c",
+      "segmentType": "continuation",
+      "labelText": "학생 주도 교양교과목 수상작 발표를 통해 학생 중심 교육을 강화하고, 학생이 직접 기획한 교과목의 성과를 공유 및 확산 일시",
+      "bodyText": "2026. 02. 10.(화), 14:00~15:10",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-665f2e0dae794cb5"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-10",
+          "start": 71,
+          "end": 87
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "학생 주도 교양교과목 수상작 발표를 통해 학생 중심 교육을 강화하고, 학생이 직접 기획한 교과목의 성과를 공유 및 확산 일시: 2026. 02. 10.(화), 14:00~15:10"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f5c51126131d5e5d",
+      "segmentType": "label_value",
+      "labelText": "일시",
+      "bodyText": "2026. 02. 10.(화), 14:00~15:10",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-10",
+          "start": 4,
+          "end": 20
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "일시: 2026. 02. 10.(화), 14:00~15:10"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0764210799eb77e2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "장소: 춘천캠퍼스 60주년 기념관 311호",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "장소: 춘천캠퍼스 60주년 기념관 311호"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "continuation": 1,
+      "paragraph": 1
+    }
+  }
+}

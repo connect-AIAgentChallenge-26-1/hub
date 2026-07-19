@@ -1,0 +1,330 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-1601",
+  "sourceContentHash": "dc1a94f12c3e17daad830791e9a5e86b1d434fce54fc93249c1a2bd629c35547",
+  "sourceTitle": "2025학년도 전기 학위수여식 개최 안내",
+  "publishedAt": "2026-02-03",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0f0b00df19b0d6c2",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2025학년도 전기 학위수여식 개최 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2025학년도 전기 학위수여식 개최 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-67717a2a87f5c69e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 삼척캠퍼스에서는 2025학년도 전기 학위수여식을 다음과 같이 개최합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척캠퍼스에서는 2025학년도 전기 학위수여식을 다음과 같이 개최합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-10c0f2334e58554c",
+      "segmentType": "label_value",
+      "labelText": "◇ 일시",
+      "bodyText": "2026.2.19.(목) 11:00(삼척), 14:00(도계)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-19",
+          "start": 7,
+          "end": 20
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "◇ 일시 : 2026.2.19.(목) 11:00(삼척), 14:00(도계)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5cec03e93f893e7a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "◇ 장소 : 복합스포츠센터(삼척), 국제회의장(도계)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "◇ 장소 : 복합스포츠센터(삼척), 국제회의장(도계)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-651ef734575d39fb",
+      "segmentType": "label_value",
+      "labelText": "◇ 행사 주요 내용",
+      "bodyText": "◇ 행사 주요 내용",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "◇ 행사 주요 내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3d8a81b17a064a97",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "• 박·석사 과정 졸업생 중 참석 희망자는 학위수여식에서 학위기를 직접 수여 받을 수 있음",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:graduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "• 박·석사 과정 졸업생 중 참석 희망자는 학위수여식에서 학위기를 직접 수여 받을 수 있음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b96e9a7078ff6278",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 학과 사무실에서 학위수여식 참석 여부 조사 시 ‘참석’ 응답자에 한 함",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 학과 사무실에서 학위수여식 참석 여부 조사 시 ‘참석’ 응답자에 한 함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d5c22edbd5a4377a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "• 학사 과정은 학과별 대표 졸업생이 학위수여식에서 학위기를 직접 수여 받을 수 있음",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "• 학사 과정은 학과별 대표 졸업생이 학위수여식에서 학위기를 직접 수여 받을 수 있음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ef25efbc294ec94e",
+      "segmentType": "label_value",
+      "labelText": "참석자는 행사시작 30분전(삼척 10:30, 도계 13",
+      "bodyText": "• 참석자는 행사시작 30분전(삼척 10:30, 도계 13:30)까지 지정 좌석에 착석하여야 하며, 행사는 1시간 이상 진행되므로 행사 중간에 이석 금지됨",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "• 참석자는 행사시작 30분전(삼척 10:30, 도계 13:30)까지 지정 좌석에 착석하여야 하며, 행사는 1시간 이상 진행되므로 행사 중간에 이석 금지됨"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-50a4fb3cb91c59ae",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "◇ 문의사항",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "◇ 문의사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c046419a5178f761",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "• 졸업증서(학위기) 배부 및 학위복 대여(학·석사) : 소속 학과 사무실",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:graduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "• 졸업증서(학위기) 배부 및 학위복 대여(학·석사) : 소속 학과 사무실"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aef9f94caab2b337",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "• 산업과학대학원 및 방재전문대학원 관련 문의 : 제7행정실(033-570-6468)",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "• 산업과학대학원 및 방재전문대학원 관련 문의 : 제7행정실(033-570-6468)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9da1cf1232ed426f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "• 학위수여식 참석자는 40분전(삼척 10:20, 도계 13:20)까지 대여 완료 요망",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "• 학위수여식 참석자는 40분전(삼척 10:20, 도계 13:20)까지 대여 완료 요망"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-15f7cf14fa70fc85",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "• 박사 학위복은 개별 준비",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:graduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "• 박사 학위복은 개별 준비"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-020d57f129ef773b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "• 기타 문의",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "• 기타 문의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-145fe63269ca7583",
+      "segmentType": "label_value",
+      "labelText": "교육지원과(033-570-6434, 6424), 도계운영지원과(033-540-3211)",
+      "bodyText": "- 교육지원과(033-570-6434, 6424), 도계운영지원과(033-540-3211)",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 교육지원과(033-570-6434, 6424), 도계운영지원과(033-540-3211)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9ee9a4bd72fcfd67",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "새로운 출발! 새로운 도전! 졸업을 진심으로 축하합니다.",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "새로운 출발! 새로운 도전! 졸업을 진심으로 축하합니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 17,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 4,
+      "label_value": 4,
+      "list_item": 8
+    }
+  }
+}

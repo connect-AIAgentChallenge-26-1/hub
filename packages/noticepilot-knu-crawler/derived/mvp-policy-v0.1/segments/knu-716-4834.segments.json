@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4834",
+  "sourceContentHash": "310713d922fab423248fd52f4a9160bf0834d7ad137236bba9d8a031f2b67f15",
+  "sourceTitle": "강원권 미세먼지연구관리센터 사무국장 채용 1차 서류전형 합격자 공고",
+  "publishedAt": "2026-06-10",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1e25c5ec41dc662f",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "강원권 미세먼지연구관리센터 사무국장 채용 1차 서류전형 합격자 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원권 미세먼지연구관리센터 사무국장 채용 1차 서류전형 합격자 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b8a03145cbd46bc9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원권 미세먼지연구관리센터 사무국장 채용 1차 서류전형 합격자 공고",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원권 미세먼지연구관리센터 사무국장 채용 1차 서류전형 합격자 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-34ae8ee4d9cb9466",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원권 미세먼지연구관리센터 사무국장 채용의 1차 서류전형 합격자를 공고합니다.(세부 내용 첨부 파일 참조 )",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원권 미세먼지연구관리센터 사무국장 채용의 1차 서류전형 합격자를 공고합니다.(세부 내용 첨부 파일 참조 )"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bcbae62615601ce0",
+      "segmentType": "label_value",
+      "labelText": "2차 면접 전형 일시",
+      "bodyText": "6월 22일(월) 10시(합격자 개별 연락 예정)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-22",
+          "start": 14,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2차 면접 전형 일시 : 6월 22일(월) 10시(합격자 개별 연락 예정)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-377d8f622b89017a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원권 미세먼지연구관리센터장",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원권 미세먼지연구관리센터장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "label_value": 1
+    }
+  }
+}

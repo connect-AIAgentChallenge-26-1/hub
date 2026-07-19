@@ -1,0 +1,168 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10962",
+  "sourceContentHash": "7d663377c54574508d9c8c931e78c55b2ebb1bcb2e6884175803913804dec655",
+  "sourceTitle": "(종료)API 서비스 보안 업그레이드 작업 안내(5.7. 19시~ )",
+  "publishedAt": "2026-05-07",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-56c354dc10360689",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "5.7. 19시~ )",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-07",
+          "start": 27,
+          "end": 30
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "(종료)API 서비스 보안 업그레이드 작업 안내(5.7. 19시~ )"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e2aaa528d840fb6c",
+      "segmentType": "label_value",
+      "labelText": "API 서비스의 보안 강화 및 품질 향상을 위한 업그레이드 작업으로 인해, 아래와 같이 서비스 이용이 일시 중단됩니다.",
+      "bodyText": "API 서비스의 보안 강화 및 품질 향상을 위한 업그레이드 작업으로 인해, 아래와 같이 서비스 이용이 일시 중단됩니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "API 서비스의 보안 강화 및 품질 향상을 위한 업그레이드 작업으로 인해, 아래와 같이 서비스 이용이 일시 중단됩니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-15ed04516d5f86a4",
+      "segmentType": "continuation",
+      "labelText": "작업일시",
+      "bodyText": "2026.5.7.(목) 19:00 ~ 19:30 (약 30분)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-e2aaa528d840fb6c"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-07",
+          "start": 76,
+          "end": 88
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "API 서비스의 보안 강화 및 품질 향상을 위한 업그레이드 작업으로 인해, 아래와 같이 서비스 이용이 일시 중단됩니다. 가. 작업일시: 2026.5.7.(목) 19:00 ~ 19:30 (약 30분)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9a73b182398eaf34",
+      "segmentType": "label_value",
+      "labelText": "작업일시",
+      "bodyText": "2026.5.7.(목) 19:00 ~ 19:30 (약 30분)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-07",
+          "start": 9,
+          "end": 21
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "가. 작업일시: 2026.5.7.(목) 19:00 ~ 19:30 (약 30분)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-658e61c4755adc91",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "나. 작업영향: 작업 시간 중 API 서비스 이용 불가",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 작업영향: 작업 시간 중 API 서비스 이용 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5d6ce099c4414393",
+      "segmentType": "label_value",
+      "labelText": "스마트캠퍼스 e-루리 모바일 로그인(웹서비스 SSO 로그인 가능), 대표홈페이지 전화번호안내, 정보화본부 홈페이지 온라인 민원신청, 발전기금 홈페이지 로그인",
+      "bodyText": "※ 스마트캠퍼스 e-루리 모바일 로그인(웹서비스 SSO 로그인 가능), 대표홈페이지 전화번호안내, 정보화본부 홈페이지 온라인 민원신청, 발전기금 홈페이지 로그인",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 스마트캠퍼스 e-루리 모바일 로그인(웹서비스 SSO 로그인 가능), 대표홈페이지 전화번호안내, 정보화본부 홈페이지 온라인 민원신청, 발전기금 홈페이지 로그인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-69031b2fcdcdb31e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "다. 문의사항: 정보화과 데이터혁신팀(7722).",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 문의사항: 정보화과 데이터혁신팀(7722)."
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "continuation": 1,
+      "list_item": 2
+    }
+  }
+}

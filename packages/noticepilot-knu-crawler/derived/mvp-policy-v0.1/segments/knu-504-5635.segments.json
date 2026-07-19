@@ -1,0 +1,111 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-5635",
+  "sourceContentHash": "ef7ce4fdfb98f9dbc84ae6571d71649226c865b90ddb015e54f7277d2874f74e",
+  "sourceTitle": "글로벌 인재양성 GB캠프_대학교 영어 세미나 참가 신청 안내",
+  "publishedAt": "2026-01-12",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-98193a28fdac850e",
+      "segmentType": "title",
+      "labelText": "글로벌 인재양성 GB캠프_대학교 영어 세미나 참가 신청 안내",
+      "bodyText": "글로벌 인재양성 GB캠프_대학교 영어 세미나 참가 신청 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "글로벌 인재양성 GB캠프_대학교 영어 세미나 참가 신청 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-11ddacc69386342d",
+      "segmentType": "label_value",
+      "labelText": "글로벌 인재양성 GB캠프_대학교 영어 세미나 참가 신청서입니다. 이 세미나는",
+      "bodyText": "1/26(월),1/29(목), 2/2(월), 2/5(목), 2/9(월), 2/12(월) 10:30-12:30 사이 zoom으로 진행됩니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-26",
+          "start": 43,
+          "end": 50
+        },
+        {
+          "value": "2026-01-29",
+          "start": 51,
+          "end": 58
+        },
+        {
+          "value": "2026-02-02",
+          "start": 60,
+          "end": 66
+        },
+        {
+          "value": "2026-02-05",
+          "start": 68,
+          "end": 74
+        },
+        {
+          "value": "2026-02-09",
+          "start": 76,
+          "end": 82
+        },
+        {
+          "value": "2026-02-12",
+          "start": 84,
+          "end": 91
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "글로벌 인재양성 GB캠프_대학교 영어 세미나 참가 신청서입니다. 이 세미나는 1/26(월),1/29(목), 2/2(월), 2/5(목), 2/9(월), 2/12(월) 10:30-12:30 사이 zoom으로 진행됩니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-886cab215324d2a7",
+      "segmentType": "label_value",
+      "labelText": "참여를 희망하는 학생은 첨부의 QR을 참고하여 구글폼으로 신청바랍니다.",
+      "bodyText": "참여를 희망하는 학생은 첨부의 QR을 참고하여 구글폼으로 신청바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "참여를 희망하는 학생은 첨부의 QR을 참고하여 구글폼으로 신청바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 3,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2
+    }
+  }
+}

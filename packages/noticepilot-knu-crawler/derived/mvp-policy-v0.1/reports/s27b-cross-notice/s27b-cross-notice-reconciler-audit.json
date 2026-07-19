@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "noticepilot.s27bCrossNoticeReconcilerAudit.v0.2",
+  "result": "pass",
+  "reconcilerVersion": "0.1.1",
+  "policyVersion": "noticepilot.crossNoticeReconciliationPolicy.v0.3",
+  "currentDir": "../..",
+  "pathReferences": {
+    "base": "audit_report_directory",
+    "format": "posix_relative"
+  },
+  "scope": {
+    "d8CanonicalSourceIdentityApplied": true,
+    "reconciliationCandidateViewApplied": true,
+    "calendarEventSourceLinkContractDefined": true,
+    "atomicPersistenceBoundaryDefined": true,
+    "crossNoticeReconcilerExecuted": true,
+    "relationPersistenceExecuted": false,
+    "calendarEventIdAssignmentExecuted": false,
+    "runtimeMutationExecuted": false,
+    "icsMutationExecuted": false
+  },
+  "checks": {
+    "publishableCandidateCount": 909,
+    "viewCount": 909,
+    "uniqueViewCandidateIdCount": 909,
+    "diagnosticPairCount": 343,
+    "diagnosticClusterCount": 110,
+    "relationDecisionCount": 343,
+    "decisionCount": 343,
+    "relation_distinct": 100,
+    "relation_duplicate": 8,
+    "relation_revision": 0,
+    "relation_extension": 1,
+    "relation_replacement": 0,
+    "relation_needs_review": 234,
+    "mergeAllowedCount": 9,
+    "canonicalSelectionNeedsReviewCount": 0,
+    "candidateInDiagnosticPairCount": 314,
+    "isolatedCandidateCount": 595,
+    "mergePlanCount": 9,
+    "automaticMergePlanCount": 9,
+    "blockedMergePlanCount": 0,
+    "unresolvedDuplicateCanonicalSelectionCount": 0,
+    "calendarEventIdAssignmentCount": 0,
+    "runtimeMutationCount": 0,
+    "icsMutationCount": 0,
+    "layeredBaselineResult": "match",
+    "layeredBaselineChangeCount": 0
+  },
+  "artifacts": {
+    "reconciliationCandidateViews": "reconciliation-candidate-views.jsonl",
+    "relationDecisions": "relation-decisions.jsonl",
+    "mergePlans": "merge-plans.jsonl",
+    "canonicalSelectionReview": "canonical-selection-review.jsonl",
+    "layeredBaselineNoChangeDiff": "layered-baseline-no-change-diff.json"
+  },
+  "creatorDecisionStatus": {
+    "representativeBoardPriorityConfigured": true,
+    "unresolvedDuplicateCanonicalSelectionCount": 0,
+    "nextDecisionRequiredBeforePersistence": false,
+    "approvedRepresentativePolicy": "specialized_board_over_general_board",
+    "unresolvedAction": "needs_review"
+  },
+  "samples": {
+    "unresolvedDuplicateCanonicalSelections": [],
+    "automaticMergePlans": [
+      {
+        "schemaVersion": "noticepilot.crossNoticeMergePlan.v0.1",
+        "memberCandidateIds": [
+          "cand-knu-504-10734-405f9a03ff6299",
+          "cand-knu-721-2307-8ff8a3e58ff992"
+        ],
+        "decisionPairIds": [
+          "xnpair-e0072416d540d4ac"
+        ],
+        "pairwiseComplete": true,
+        "canonicalCandidateId": "cand-knu-721-2307-8ff8a3e58ff992",
+        "status": "approved",
+        "ruleIds": [
+          "D6.complete_pairwise_evidence"
+        ],
+        "calendarEventIdAssigned": false
+      },
+      {
+        "schemaVersion": "noticepilot.crossNoticeMergePlan.v0.1",
+        "memberCandidateIds": [
+          "cand-knu-504-10892-5e67111e84483e",
+          "cand-knu-721-2361-eb061e39115b0b"
+        ],
+        "decisionPairIds": [
+          "xnpair-ae2df944dfbdaa3e"
+        ],
+        "pairwiseComplete": true,
+        "canonicalCandidateId": "cand-knu-721-2361-eb061e39115b0b",
+        "status": "approved",
+        "ruleIds": [
+          "D6.complete_pairwise_evidence"
+        ],
+        "calendarEventIdAssigned": false
+      },
+      {
+        "schemaVersion": "noticepilot.crossNoticeMergePlan.v0.1",
+        "memberCandidateIds": [
+          "cand-knu-504-10892-6e6ef34a4f590a",
+          "cand-knu-721-2361-edcf4d6886a376"
+        ],
+        "decisionPairIds": [
+          "xnpair-b8b2685f3faed6c6"
+        ],
+        "pairwiseComplete": true,
+        "canonicalCandidateId": "cand-knu-721-2361-edcf4d6886a376",
+        "status": "approved",
+        "ruleIds": [
+          "D6.complete_pairwise_evidence"
+        ],
+        "calendarEventIdAssigned": false
+      },
+      {
+        "schemaVersion": "noticepilot.crossNoticeMergePlan.v0.1",
+        "memberCandidateIds": [
+          "cand-knu-504-10892-85c595b959a20d",
+          "cand-knu-721-2361-8dcf78ab759928"
+        ],
+        "decisionPairIds": [
+          "xnpair-361b4c8dc4ac0510"
+        ],
+        "pairwiseComplete": true,
+        "canonicalCandidateId": "cand-knu-721-2361-8dcf78ab759928",
+        "status": "approved",
+        "ruleIds": [
+          "D6.complete_pairwise_evidence"
+        ],
+        "calendarEventIdAssigned": false
+      },
+      {
+        "schemaVersion": "noticepilot.crossNoticeMergePlan.v0.1",
+        "memberCandidateIds": [
+          "cand-knu-504-10892-f4c4111e073303",
+          "cand-knu-721-2361-6e7236f1828258"
+        ],
+        "decisionPairIds": [
+          "xnpair-55884554bcb409a6"
+        ],
+        "pairwiseComplete": true,
+        "canonicalCandidateId": "cand-knu-721-2361-6e7236f1828258",
+        "status": "approved",
+        "ruleIds": [
+          "D6.complete_pairwise_evidence"
+        ],
+        "calendarEventIdAssigned": false
+      },
+      {
+        "schemaVersion": "noticepilot.crossNoticeMergePlan.v0.1",
+        "memberCandidateIds": [
+          "cand-knu-504-11158-52f13badd8e21c",
+          "cand-knu-715-3430-9731c898c31d65"
+        ],
+        "decisionPairIds": [
+          "xnpair-90181e29402517ca"
+        ],
+        "pairwiseComplete": true,
+        "canonicalCandidateId": "cand-knu-715-3430-9731c898c31d65",
+        "status": "approved",
+        "ruleIds": [
+          "D6.complete_pairwise_evidence"
+        ],
+        "calendarEventIdAssigned": false
+      },
+      {
+        "schemaVersion": "noticepilot.crossNoticeMergePlan.v0.1",
+        "memberCandidateIds": [
+          "cand-knu-504-11158-5665d5fb5fd961",
+          "cand-knu-715-3430-8cad580da3684e"
+        ],
+        "decisionPairIds": [
+          "xnpair-1d953ebbd78283aa"
+        ],
+        "pairwiseComplete": true,
+        "canonicalCandidateId": "cand-knu-715-3430-8cad580da3684e",
+        "status": "approved",
+        "ruleIds": [
+          "D6.complete_pairwise_evidence"
+        ],
+        "calendarEventIdAssigned": false
+      },
+      {
+        "schemaVersion": "noticepilot.crossNoticeMergePlan.v0.1",
+        "memberCandidateIds": [
+          "cand-knu-504-11173-0865114f7b5e86",
+          "cand-knu-715-3432-d08f3d64a83668"
+        ],
+        "decisionPairIds": [
+          "xnpair-7ae4e6b0d7e69105"
+        ],
+        "pairwiseComplete": true,
+        "canonicalCandidateId": "cand-knu-715-3432-d08f3d64a83668",
+        "status": "approved",
+        "ruleIds": [
+          "D6.complete_pairwise_evidence"
+        ],
+        "calendarEventIdAssigned": false
+      },
+      {
+        "schemaVersion": "noticepilot.crossNoticeMergePlan.v0.1",
+        "memberCandidateIds": [
+          "cand-knu-716-3184-befa8b61f44088",
+          "cand-knu-716-3235-f05a8929780d07"
+        ],
+        "decisionPairIds": [
+          "xnpair-9558941473c8edd8"
+        ],
+        "pairwiseComplete": true,
+        "canonicalCandidateId": "cand-knu-716-3235-f05a8929780d07",
+        "status": "approved",
+        "ruleIds": [
+          "D6.complete_pairwise_evidence"
+        ],
+        "calendarEventIdAssigned": false
+      }
+    ],
+    "blockedMergePlans": []
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-5663",
+  "sourceContentHash": "29ddc7b752220726fb26fd38df10de83595c681d7a4e3ad664356f41ae8aa6d1",
+  "sourceTitle": "2026학년도 1학기 재학생 등록금 납부일정 안내",
+  "publishedAt": "2026-02-02",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f0de20e7df01ed1c",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 재학생 등록금 납부일정 안내",
+      "bodyText": "2026학년도 1학기 재학생 등록금 납부일정 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 재학생 등록금 납부일정 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f22e5f002e3930a3",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 1학기 재학생 등록금 수납일정을 다음과 같이 안내합니다. 1.",
+      "bodyText": "2026학년도 1학기 재학생 등록금 수납일정을 다음과 같이 안내합니다. 1.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 재학생 등록금 수납일정을 다음과 같이 안내합니다. 1."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d9ee534ba1590344",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "등록금 조회기간: 2026. 2. 24.(목) 09시 ~ 2. 27.(금) 16시 ※ 조회방법: [학교홈페이지]-[사용자메뉴]-[등록금납입]-학번, 생년월일8자리 입력 후 조회 2.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 1,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "등록금 조회기간: 2026. 2. 24.(목) 09시 ~ 2. 27.(금) 16시 ※ 조회방법: [학교홈페이지]-[사용자메뉴]-[등록금납입]-학번, 생년월일8자리 입력 후 조회 2."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-34a0d69f554ae889",
+      "segmentType": "label_value",
+      "labelText": "등록금 분납신청",
+      "bodyText": "2026. 2. 19.(목) 09시 ~ 2. 27.(금) 18시까지 ※ K-Cloud를 통한 신청(분납횟수 2회~4회 선택). 신청기간 이후에는 분납신청 불가 ※ 분할",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 2,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-19",
+          "start": 10,
+          "end": 25
+        },
+        {
+          "value": "2026-02-27",
+          "start": 32,
+          "end": 41
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "등록금 분납신청: 2026. 2. 19.(목) 09시 ~ 2. 27.(금) 18시까지 ※ K-Cloud를 통한 신청(분납횟수 2회~4회 선택). 신청기간 이후에는 분납신청 불가 ※ 분할"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-40ae01c36b03d868",
+      "segmentType": "label_value",
+      "labelText": "등록금 납부기간",
+      "bodyText": "2026. 2. 24.(화) ~ 2. 27.(금) 16:00 ※ 초과학기생, 학사학위취득유예자, 시간제 등록생의",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 3,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-24",
+          "start": 25,
+          "end": 40
+        },
+        {
+          "value": "2026-02-27",
+          "start": 43,
+          "end": 52
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "납부시 카드납부 불가 3. 등록금 납부기간: 2026. 2. 24.(화) ~ 2. 27.(금) 16:00 ※ 초과학기생, 학사학위취득유예자, 시간제 등록생의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7a33087aba342399",
+      "segmentType": "label_value",
+      "labelText": "납부기간",
+      "bodyText": "2026. 3. 12.(목) ~ 3. 13.(금) 16:00 ※ 추가",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 4,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-12",
+          "start": 6,
+          "end": 21
+        },
+        {
+          "value": "2026-03-13",
+          "start": 24,
+          "end": 33
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "납부기간: 2026. 3. 12.(목) ~ 3. 13.(금) 16:00 ※ 추가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-83eac938b5bdf2e9",
+      "segmentType": "label_value",
+      "labelText": "납부기간",
+      "bodyText": "1/3이내 별도 지정기간(붙임1 참조) 자세한 내용은 붙임 문서를 확인 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 5,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-03",
+          "start": 11,
+          "end": 14
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "납부기간: 수업일수 1/3이내 별도 지정기간(붙임1 참조) 자세한 내용은 붙임 문서를 확인 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 4,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 5,
+      "paragraph": 1
+    }
+  }
+}

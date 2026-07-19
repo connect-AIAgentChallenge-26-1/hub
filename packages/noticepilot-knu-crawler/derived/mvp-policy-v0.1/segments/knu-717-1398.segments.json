@@ -1,0 +1,122 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-717-1398",
+  "sourceContentHash": "0f62fef5e27736cb89be316481c4e49659f41e041a675c982d8e8d07e8894b0d",
+  "sourceTitle": "2026 강원지역 기업탐방(건강보험심사평가원 데이터클라우드센터) 참여 안내",
+  "publishedAt": "2026-04-06",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0ed5ebfb43cd56cb",
+      "segmentType": "title",
+      "labelText": "2026 강원지역 기업탐방(건강보험심사평가원 데이터클라우드센터) 참여 안내",
+      "bodyText": "2026 강원지역 기업탐방(건강보험심사평가원 데이터클라우드센터) 참여 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026 강원지역 기업탐방(건강보험심사평가원 데이터클라우드센터) 참여 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-faad56da9c2533be",
+      "segmentType": "label_value",
+      "labelText": "😀신청방법",
+      "bodyText": "😀신청방법: 네이버폼(",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "😀신청방법: 네이버폼("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e24f2570ebd23378",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://naver.me/GgUxmIxt",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://naver.me/GgUxmIxt"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-76b7d33b5b9b5a3e",
+      "segmentType": "label_value",
+      "labelText": ") 응답 후, 선발 안내드릴 예정입니다.",
+      "bodyText": ") 응답 후, 선발 안내드릴 예정입니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ") 응답 후, 선발 안내드릴 예정입니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-71df974e4508b4af",
+      "segmentType": "label_value",
+      "labelText": "😆신청기한",
+      "bodyText": "2026.4.8.(수) 09시~16.(목) 09시까지",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-08",
+          "start": 7,
+          "end": 19
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "😆신청기한: 2026.4.8.(수) 09시~16.(목) 09시까지"
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "paragraph": 1
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noticepilot.scheduleSegmentContract.v0.1",
+  "title": "NoticePilot Schedule Segment Contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "segmentId", "segmentType", "labelText", "bodyText", "sourceLocation", "ownershipConfidence", "actionSignals", "audienceSignals"],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.scheduleSegmentContract.v0.1"},
+    "segmentId": {"type": "string", "minLength": 1},
+    "segmentType": {"type": "string", "enum": ["title", "paragraph", "list_item", "label_value", "table_row", "continuation"]},
+    "labelText": {"type": "string"},
+    "bodyText": {"type": "string"},
+    "sourceLocation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lineIndex", "clauseIndex", "parentSegmentId"],
+      "properties": {
+        "lineIndex": {"type": ["integer", "null"], "minimum": 0},
+        "clauseIndex": {"type": ["integer", "null"], "minimum": 0},
+        "parentSegmentId": {"type": ["string", "null"]}
+      }
+    },
+    "ownershipConfidence": {"type": "string", "enum": ["high", "medium", "low", "none"]},
+    "actionSignals": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "audienceSignals": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true}
+  },
+  "anyOf": [
+    {"properties": {"labelText": {"minLength": 1}}},
+    {"properties": {"bodyText": {"minLength": 1}}}
+  ]
+}

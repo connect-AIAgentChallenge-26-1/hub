@@ -1,0 +1,366 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11064",
+  "sourceContentHash": "b556fde4d45ee8e12d098044955560c61122e5b84f58ce083af6d37530b1bfab",
+  "sourceTitle": "SW중심대학 공동「2026 AI·SW중심대학 디지털 경진대회」강원대학교 대표 참가자 모집 (~6. 4.(목)12:00까지)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11064&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11064-38b24ce25b538b",
+      "uidHint": "noticepilot-cand-knu-504-11064-38b24ce25b538b@noticepilot.local",
+      "sourceNoticeId": "knu-504-11064",
+      "sourceTitle": "SW중심대학 공동「2026 AI·SW중심대학 디지털 경진대회」강원대학교 대표 참가자 모집 (~6. 4.(목)12:00까지)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11064&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-3c21b329928e5730",
+        "segmentType": "title",
+        "labelText": "SW중심대학 공동「2026 AI·SW중심대학 디지털 경진대회」강원대학교 대표 참가자 모집 (~",
+        "bodyText": "6. 4.(목)12:00까지)",
+        "sourceLocation": {
+          "lineIndex": -1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-04",
+            "start": 52,
+            "end": 60
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "low",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "SW중심대학 공동「2026 AI·SW중심대학 디지털 경진대회」강원대학교 대표 참가자 모집 (~",
+          "SW중심대학 공동「2026 AI·SW중심대학 디지털 경진대회」강원대학교 대표 참가자 모집 (~6. 4.(목)12:00까지)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-5f08ee49b6973f47",
+        "segmentId": "seg-3c21b329928e5730",
+        "rawText": "6. 4.(목)",
+        "normalizedStart": "2026-06-04T12:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 52,
+          "end": 60
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-e49676bd58c5907f",
+        "sourceNoticeId": "knu-504-11064",
+        "segmentId": "seg-3c21b329928e5730",
+        "temporalMentionIds": [
+          "tm-5f08ee49b6973f47"
+        ],
+        "bindingKind": "title_context",
+        "confidence": "low",
+        "ruleId": "binding.title_context",
+        "locallyGrounded": false,
+        "labelText": "SW중심대학 공동「2026 AI·SW중심대학 디지털 경진대회」강원대학교 대표 참가자 모집 (~",
+        "evidence": "SW중심대학 공동「2026 AI·SW중심대학 디지털 경진대회」강원대학교 대표 참가자 모집 (~6. 4.(목)12:00까지)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "SW중심대학 공동「2026 AI·SW중심대학 디지털 경진대회」강원대학교 대표 참가자 모집 (~6. 4.(목)12:00까지) 신청 마감",
+      "dateText": "6. 4.(목)",
+      "normalizedStart": "2026-06-04T12:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "SW중심대학 공동「2026 AI·SW중심대학 디지털 경진대회」강원대학교 대표 참가자 모집 (~6. 4.(목)12:00까지)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "same_datetime_candidates_consolidated",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "same_datetime_candidates_consolidated",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11064-b900c0241b64e9",
+      "uidHint": "noticepilot-cand-knu-504-11064-b900c0241b64e9@noticepilot.local",
+      "sourceNoticeId": "knu-504-11064",
+      "sourceTitle": "SW중심대학 공동「2026 AI·SW중심대학 디지털 경진대회」강원대학교 대표 참가자 모집 (~6. 4.(목)12:00까지)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11064&pageIndex=3&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-88869689e380ecd1",
+        "segmentType": "continuation",
+        "labelText": "■ 대회 일정 - 예선",
+        "bodyText": "2026. 7. 1.(수) ~ 7. 24.(금) / 온라인 진행",
+        "sourceLocation": {
+          "lineIndex": 29,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-897e1dcf24b3fcf1"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-01",
+            "start": 14,
+            "end": 28
+          },
+          {
+            "value": "2026-07-24",
+            "start": 31,
+            "end": 40
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "■ 대회 일정 - 예선",
+          "■ 대회 일정 - 예선: 2026. 7. 1.(수) ~ 7. 24.(금) / 온라인 진행",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-cb50dc0974b4cfb8",
+        "segmentId": "seg-88869689e380ecd1",
+        "rawText": "2026. 7. 1.(수) ~ 7. 24.(금) / 온라인 진행",
+        "normalizedStart": "2026-07-01",
+        "normalizedEnd": "2026-07-24",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 14,
+          "end": 40
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-2cbea2725924e001",
+        "sourceNoticeId": "knu-504-11064",
+        "segmentId": "seg-88869689e380ecd1",
+        "temporalMentionIds": [
+          "tm-cb50dc0974b4cfb8"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "■ 대회 일정 - 예선",
+        "evidence": "■ 대회 일정 - 예선: 2026. 7. 1.(수) ~ 7. 24.(금) / 온라인 진행"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "SW중심대학 공동「2026 AI·SW중심대학 디지털 경진대회」강원대학교 대표 참가자 모집 (~6. 4.(목)12:00까지) 행사 기간",
+      "dateText": "2026. 7. 1.(수) ~ 7. 24.(금) / 온라인 진행",
+      "normalizedStart": "2026-07-01",
+      "normalizedEnd": "2026-07-24",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "■ 대회 일정 - 예선: 2026. 7. 1.(수) ~ 7. 24.(금) / 온라인 진행",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

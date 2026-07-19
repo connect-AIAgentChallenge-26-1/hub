@@ -1,0 +1,288 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10657",
+  "sourceContentHash": "ecf46c301a4e7975dbeb82f0c87f982b37217d0332dc3eb4a94e67e78d7c055e",
+  "sourceTitle": "강원대학교 2026학년도 봄학기 원어민 외국어 회화（영어, 일어, 독어, 프랑스어） 수강생 모집 안내",
+  "publishedAt": "2026-02-25",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-724cfe8c95e6ed81",
+      "segmentType": "title",
+      "labelText": "강원대학교 2026학년도 봄학기 원어민 외국어 회화（영어, 일어, 독어, 프랑스어） 수강생 모집 안내",
+      "bodyText": "강원대학교 2026학년도 봄학기 원어민 외국어 회화（영어, 일어, 독어, 프랑스어） 수강생 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 2026학년도 봄학기 원어민 외국어 회화（영어, 일어, 독어, 프랑스어） 수강생 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-05a059b58bdf2b9f",
+      "segmentType": "label_value",
+      "labelText": "언어연수과에서는 강원대 구성원 및 지역민을 위한 원어민 외국어 회화 강좌를 운영하고 있습니다.",
+      "bodyText": "언어연수과에서는 강원대 구성원 및 지역민을 위한 원어민 외국어 회화 강좌를 운영하고 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "언어연수과에서는 강원대 구성원 및 지역민을 위한 원어민 외국어 회화 강좌를 운영하고 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d4e765f655a9e92d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "관심있으신 분들의 많은 참여 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "관심있으신 분들의 많은 참여 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-05e3aacb8631e535",
+      "segmentType": "label_value",
+      "labelText": "강의운영기간",
+      "bodyText": "2026. 3. 24.（화） ~ 2026. 5. 29.（금）",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-24",
+          "start": 11,
+          "end": 26
+        },
+        {
+          "value": "2026-05-29",
+          "start": 29,
+          "end": 44
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "▶ 강의운영기간 : 2026. 3. 24.（화） ~ 2026. 5. 29.（금）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9b9372454aac254a",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 2. 25.（수） ~ 2026. 3. 17.（화）",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-25",
+          "start": 8,
+          "end": 23
+        },
+        {
+          "value": "2026-03-17",
+          "start": 26,
+          "end": 41
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "▶ 접수기간: 2026. 2. 25.（수） ~ 2026. 3. 17.（화）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1e80a00f2ffe4a2b",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 재학생 및 교직원 수강 시 수강료의 10％ 환급",
+      "bodyText": "▶ 강원대학교 재학생 및 교직원 수강 시 수강료의 10％ 환급",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "event"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶ 강원대학교 재학생 및 교직원 수강 시 수강료의 10％ 환급"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f52053b87f311b48",
+      "segmentType": "label_value",
+      "labelText": "교직원 상시학습 인정（최대 30시간） 또는 개인능력 개발비 지원（수강료의 60％）",
+      "bodyText": "▶ 교직원 상시학습 인정（최대 30시간） 또는 개인능력 개발비 지원（수강료의 60％）",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶ 교직원 상시학습 인정（최대 30시간） 또는 개인능력 개발비 지원（수강료의 60％）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-870b7163f17f603e",
+      "segmentType": "label_value",
+      "labelText": "접수신청 및 자세한 사항은 아래 강원대 국제교류처 홈페이지를 참고하여 주시기 바랍니다.",
+      "bodyText": "접수신청 및 자세한 사항은 아래 강원대 국제교류처 홈페이지를 참고하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "접수신청 및 자세한 사항은 아래 강원대 국제교류처 홈페이지를 참고하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dda1e6e8c68e467a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▶ 외국어 강좌 안내:",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶ 외국어 강좌 안내:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6c6c5e791f64341f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://lrl.kr/dDdEn",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://lrl.kr/dDdEn"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-63ec82591a2e3a1d",
+      "segmentType": "label_value",
+      "labelText": "강좌신청",
+      "bodyText": "▶ 강좌신청:",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶ 강좌신청:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-370d8e09b719c468",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://moaform.com/q/hd4Wkq",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://moaform.com/q/hd4Wkq"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cb8ca9abc5bed0a1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "감사합니다.",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "감사합니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 13,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "paragraph": 4,
+      "list_item": 1
+    }
+  }
+}

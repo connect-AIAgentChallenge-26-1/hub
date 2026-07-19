@@ -1,0 +1,334 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2474",
+  "sourceContentHash": "d7e497322cba95d8d353220bf0ec9d9f2ef6d7bf7bc79b62252953f7403d28d4",
+  "sourceTitle": "[강원LRS공유대학] 2026학년도 여름 계절학기 수강 및 성적 평가 안내",
+  "publishedAt": "2026-06-16",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8c0480eab3a745d2",
+      "segmentType": "title",
+      "labelText": "[강원LRS공유대학] 2026학년도 여름 계절학기 수강 및 성적 평가 안내",
+      "bodyText": "[강원LRS공유대학] 2026학년도 여름 계절학기 수강 및 성적 평가 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[강원LRS공유대학] 2026학년도 여름 계절학기 수강 및 성적 평가 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-34ef00aa3923420e",
+      "segmentType": "label_value",
+      "labelText": "강원LRS공유대학 2026학년도 여름 계절학기 수강 및 성적 평가 안내입니다. 자세한 사항은 첨부파일을 참조해 주시기 바랍니다.",
+      "bodyText": "강원LRS공유대학 2026학년도 여름 계절학기 수강 및 성적 평가 안내입니다. 자세한 사항은 첨부파일을 참조해 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원LRS공유대학 2026학년도 여름 계절학기 수강 및 성적 평가 안내입니다. 자세한 사항은 첨부파일을 참조해 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ed7aefd09f18aed4",
+      "segmentType": "label_value",
+      "labelText": "수강 방법",
+      "bodyText": "수강 방법",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수강 방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-357ac3aaf3d2b6bf",
+      "segmentType": "label_value",
+      "labelText": ": 소속 대학 수강신청 시스템에서 신청 후, 강원LRS공유대학 LMS(https",
+      "bodyText": ": 소속 대학 수강신청 시스템에서 신청 후, 강원LRS공유대학 LMS(https://lms.gwlrs.ac.kr)에서 수강 (대면 수업은 공유대학에서 별도 신청)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 소속 대학 수강신청 시스템에서 신청 후, 강원LRS공유대학 LMS(https://lms.gwlrs.ac.kr)에서 수강 (대면 수업은 공유대학에서 별도 신청)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-09054c819da76c67",
+      "segmentType": "label_value",
+      "labelText": "수업기간",
+      "bodyText": "수업기간",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수업기간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-50df4c32a9a52e27",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 6. 23.(화) ~ 7. 13.(월), 당일 수강 원칙(주말 제외)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-23",
+          "start": 2,
+          "end": 17
+        },
+        {
+          "value": "2026-07-13",
+          "start": 20,
+          "end": 29
+        }
+      ],
+      "locallyGrounded": true,
+      "text": ": 2026. 6. 23.(화) ~ 7. 13.(월), 당일 수강 원칙(주말 제외)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5ae8b279f5b81ca3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "수료기준",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수료기준"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3d523dc686b56431",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 강의 영상 재생 시간의 90% 이상 수강 시 출석 인정",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 강의 영상 재생 시간의 90% 이상 수강 시 출석 인정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0a2c49c0c801e8d4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "성적평가(이원화)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "성적평가(이원화)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-87175f04f965270d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ":",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ":"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bc5290323d2eca78",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "① 백분율 점수(책임교수, 100점 만점 절대평가) +",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 1,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "① 백분율 점수(책임교수, 100점 만점 절대평가) +"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f01b3a173104a1e0",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "② 학점 등급(소속대학 규정에 따라 상대/절대평가 적용)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 2,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "② 학점 등급(소속대학 규정에 따라 상대/절대평가 적용)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9c138a846b66e8ca",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "유의사항",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "유의사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1a8ccaf9d5d56bc1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 책임교수가 95점을 부여해도 소속 대학 규정에 따라 상대평가로 산출되어 최종 등급이 낮아질 수 있음",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 책임교수가 95점을 부여해도 소속 대학 규정에 따라 상대평가로 산출되어 최종 등급이 낮아질 수 있음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8e50e9fca745cadc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "문의",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "문의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-67748402ddffad31",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 시스템·수강 문의 강원LRS공유대학본부(033-250-7829) / 교과목 문의는 각 과목 Q&A 게시판",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 시스템·수강 문의 강원LRS공유대학본부(033-250-7829) / 교과목 문의는 각 과목 Q&A 게시판"
+    }
+  ],
+  "summary": {
+    "segmentCount": 16,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 4,
+      "paragraph": 9,
+      "list_item": 2
+    }
+  }
+}

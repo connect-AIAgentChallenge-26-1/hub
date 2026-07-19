@@ -526,6 +526,118 @@ a {
   font-weight: 800;
 }
 
+.subscription-state-badge.provisioning {
+  background: #fff7ed;
+  color: #9a3412;
+}
+
+.subscription-state-badge.ready {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.subscription-state-badge.unavailable {
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.subscription-provision-panel,
+.subscription-ready-panel {
+  display: grid;
+  gap: 14px;
+}
+
+.subscription-provision-panel p,
+.subscription-copy-status,
+.subscription-warning,
+.subscription-scope-note {
+  margin: 0;
+}
+
+.subscription-provision-panel .primary-button,
+.subscription-action-row .primary-button,
+.subscription-action-row .ghost-button {
+  width: fit-content;
+}
+
+.subscription-progress {
+  color: #1e40af;
+  font-weight: 700;
+}
+
+.subscription-unavailable,
+.subscription-copy-status.failure {
+  color: #991b1b;
+}
+
+.subscription-feed-details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+.subscription-feed-details > div {
+  min-width: 0;
+  border: 1px solid #dfe5ef;
+  border-radius: 8px;
+  background: #f8fafc;
+  padding: 12px;
+}
+
+.subscription-feed-details .subscription-detail-wide {
+  grid-column: 1 / -1;
+}
+
+.subscription-feed-details dt {
+  color: #64748b;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.subscription-feed-details dd {
+  margin: 5px 0 0;
+  color: #172033;
+  font-weight: 700;
+}
+
+.capability-value {
+  display: block;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
+.subscription-action-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.subscription-copy-status.success {
+  color: #166534;
+  font-weight: 700;
+}
+
+.subscription-warning,
+.subscription-scope-note {
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
+.subscription-warning {
+  border: 1px solid #fde68a;
+  background: #fffbeb;
+  color: #92400e;
+}
+
+.subscription-scope-note {
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  color: #1e3a8a;
+}
+
 .workspace-main,
 .workspace-sidebar {
   display: grid;
@@ -913,5 +1025,9 @@ a {
 
   .item-card-actions {
     justify-content: flex-start;
+  }
+
+  .subscription-feed-details {
+    grid-template-columns: 1fr;
   }
 }

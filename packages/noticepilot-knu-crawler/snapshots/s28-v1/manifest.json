@@ -1,0 +1,73 @@
+{
+  "schemaVersion": "noticepilot.subscriptionFeedSnapshotManifest.v0.1",
+  "snapshotSetId": "snapset_874ba65cc0b7e371837e5ab3b9887ee6",
+  "snapshotSetHash": "874ba65cc0b7e371837e5ab3b9887ee63093f43105b34b11281ba95648538018",
+  "createdAt": "2026-07-13T17:30:00+09:00",
+  "snapshotContract": {
+    "schemaVersion": "noticepilot.subscriptionFeedSnapshot.v0.1",
+    "builderVersion": "0.1.0",
+    "idStrategy": "content_addressed_snapshot_hash_v0",
+    "hashContract": "sha256_canonical_json_utf8_sorted_keys_compact_v0"
+  },
+  "snapshotCount": 2,
+  "totalEventCount": 900,
+  "artifacts": {
+    "job_application": {
+      "path": "job_application.snapshot.json",
+      "sha256": "829729053ebc237786518fadc939d627d5a9d6c05ead43bf1b09e02358b0e9c9",
+      "snapshotId": "feedsnap_0503ff13f28784d645e5722ac2e771a8",
+      "snapshotHash": "0503ff13f28784d645e5722ac2e771a825470e350b6efa43de7f52a19eba65b2",
+      "profileId": "subprof_0887a1e133464366af8d870e1950ca53",
+      "profileRevision": 1,
+      "eventCount": 299
+    },
+    "student_default": {
+      "path": "student_default.snapshot.json",
+      "sha256": "1bae75a2eddfc6c45ba1850be6ac12fc7a7c0fd2751bc27446ca1f0f2000cfeb",
+      "snapshotId": "feedsnap_d44c2066a621c9bd81762a9099dd7106",
+      "snapshotHash": "d44c2066a621c9bd81762a9099dd7106ef63bb44058b1f7f7fe9d4421e4ae205",
+      "profileId": "subprof_9baaae14deb3460fa31777d362507cbc",
+      "profileRevision": 1,
+      "eventCount": 601
+    }
+  },
+  "upstream": {
+    "defaultSubscriptionProfiles": {
+      "path": "configs/noticepilot_default_subscription_profiles.v0.1.json",
+      "sha256": "44dafab8d886d4e1cbb594ac99dcbcd662218e0f42e90f27235c0a23c1d68f47"
+    },
+    "feedEligibilityPolicy": {
+      "path": "configs/noticepilot_feed_eligibility_policy.v0.2.json",
+      "sha256": "0dc8107d3e29418607b5596c78fc3d39d99685e6e62347a107a9d8ee6f5ee612"
+    },
+    "jobDecisionLedger": {
+      "path": "derived/mvp-policy-v0.1/reports/s28-feed-builder/job_application-feed-build-decisions.jsonl",
+      "sha256": "b44b6189346e18d52825bf14b9ddb828dc7006d768b9c0d2f8925ee9eb67434a"
+    },
+    "jobFeedBuildResult": {
+      "path": "derived/mvp-policy-v0.1/reports/s28-feed-builder/job_application-feed-build-result.json",
+      "sha256": "0fb2f8fe1656fc9271169917adb4e7cc0312d646fcce5ed2fd389a65bfdcb863"
+    },
+    "s27cRegistryManifest": {
+      "path": "registry/s27c-v1/manifest.json",
+      "sha256": "47fa8e232254df978575f31e06d555c20cf5f50e99862dc8ae0e772a7e4a03dc"
+    },
+    "s27dProjectionManifest": {
+      "path": "projection/s27d-v1/manifest.json",
+      "sha256": "922eacc5a270f5119d0e86892d961ed742486b35b6a65d7a0d1642119820481f"
+    },
+    "studentDecisionLedger": {
+      "path": "derived/mvp-policy-v0.1/reports/s28-feed-builder/student_default-feed-build-decisions.jsonl",
+      "sha256": "07f9a02780159298962d56e48a01fcbc9cc87c163b7278b7f32d45beaa480a14"
+    },
+    "studentFeedBuildResult": {
+      "path": "derived/mvp-policy-v0.1/reports/s28-feed-builder/student_default-feed-build-result.json",
+      "sha256": "2247cafae28b8a2ab9897779867f3494c8c2c9a08afe17337e4e3850d0ba893b"
+    }
+  },
+  "delivery": {
+    "subscriptionUrlIssued": false,
+    "feedTokenIssued": false,
+    "icsSerialized": false
+  }
+}

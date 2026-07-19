@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-3949",
+  "sourceContentHash": "58e1b878bd5df7b35f04e816ef2b0bf6353c23fd9a66049afa30e6613ed0c390",
+  "sourceTitle": "국가교육위원회 소속 제2기 국민참여위원회 위원 공개모집 안내",
+  "publishedAt": "2026-02-23",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-322aa990f2a7bef8",
+      "segmentType": "title",
+      "labelText": "국가교육위원회 소속 제2기 국민참여위원회 위원 공개모집 안내",
+      "bodyText": "국가교육위원회 소속 제2기 국민참여위원회 위원 공개모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국가교육위원회 소속 제2기 국민참여위원회 위원 공개모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-56ee44614b12d6c8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 02-2100-3393（국가교육위원회 숙의공론화과）",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 02-2100-3393（국가교육위원회 숙의공론화과）"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

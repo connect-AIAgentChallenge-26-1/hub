@@ -1,0 +1,361 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10997",
+  "sourceContentHash": "7208a483d9e38eb527585c0497efe4be975f74146120bd625b90aed61161c516",
+  "sourceTitle": "[2026 5월 정기토익대비 ZOOM LIVE 무료 토익 특강 안내]",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10997&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "ALL",
+    "campuses": [
+      "all"
+    ],
+    "scopeType": "all_campuses",
+    "confidence": "high",
+    "source": "listMetadata.campus",
+    "labels": {
+      "all": "전체"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10997-23389ac4bd82c7",
+      "uidHint": "noticepilot-cand-knu-504-10997-23389ac4bd82c7@noticepilot.local",
+      "sourceNoticeId": "knu-504-10997",
+      "sourceTitle": "[2026 5월 정기토익대비 ZOOM LIVE 무료 토익 특강 안내]",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10997&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-5eef5b9b24a95651",
+        "segmentType": "continuation",
+        "labelText": "일정",
+        "bodyText": "5월 30일(토) 10:00 ~ 11:30 (90분)",
+        "sourceLocation": {
+          "lineIndex": 4,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-8703bcb106b1d604"
+        },
+        "actionSignals": [
+          "application_period",
+          "event"
+        ],
+        "audienceSignals": [
+          "enrollment_status:enrolled"
+        ],
+        "dateSpans": [
+          {
+            "value": "2026-05-30",
+            "start": 70,
+            "end": 79
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "일정",
+          "특강에 관심 있는 강원대학교 재학생 여러분께서는 아래 링크에 접속하여 일정을 확인한 후 신청해주시기 바랍니다. 1. 일정 : 5월 30일(토) 10:00 ~ 11:30 (90분)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-91b77dfe30b99e9b",
+        "segmentId": "seg-5eef5b9b24a95651",
+        "rawText": "5월 30일(토) 10:00 ~ 11:30 (90분)",
+        "normalizedStart": "2026-05-30T10:00:00+09:00",
+        "normalizedEnd": "2026-05-30T11:30:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 70,
+          "end": 79
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-23ef0e4b67b32bb9",
+        "sourceNoticeId": "knu-504-10997",
+        "segmentId": "seg-5eef5b9b24a95651",
+        "temporalMentionIds": [
+          "tm-91b77dfe30b99e9b"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "일정",
+        "evidence": "특강에 관심 있는 강원대학교 재학생 여러분께서는 아래 링크에 접속하여 일정을 확인한 후 신청해주시기 바랍니다. 1. 일정 : 5월 30일(토) 10:00 ~ 11:30 (90분)"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[2026 5월 정기토익대비 ZOOM LIVE 무료 토익 특강 안내] 신청기간",
+      "dateText": "5월 30일(토) 10:00 ~ 11:30 (90분)",
+      "normalizedStart": "2026-05-30T10:00:00+09:00",
+      "normalizedEnd": "2026-05-30T11:30:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "특강에 관심 있는 강원대학교 재학생 여러분께서는 아래 링크에 접속하여 일정을 확인한 후 신청해주시기 바랍니다. 1. 일정 : 5월 30일(토) 10:00 ~ 11:30 (90분)",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10997-026d476b68e744",
+      "uidHint": "noticepilot-cand-knu-504-10997-026d476b68e744@noticepilot.local",
+      "sourceNoticeId": "knu-504-10997",
+      "sourceTitle": "[2026 5월 정기토익대비 ZOOM LIVE 무료 토익 특강 안내]",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10997&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "ALL",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "listMetadata.campus",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-633d489c163e85d0",
+        "segmentType": "paragraph",
+        "labelText": "",
+        "bodyText": "5월 31일(일) 시행 예정인 정기 토익 시험 대비 특강으로 진행됩니다.",
+        "sourceLocation": {
+          "lineIndex": 3,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "exam_or_interview",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-31",
+            "start": 10,
+            "end": 19
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "이번 무료 특강은 5월 31일(일) 시행 예정인 정기 토익 시험 대비 특강으로 진행됩니다.",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-5c3f640e3c2bbff0",
+        "segmentId": "seg-633d489c163e85d0",
+        "rawText": "5월 31일(일)",
+        "normalizedStart": "2026-05-31",
+        "normalizedEnd": "2026-05-31",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 10,
+          "end": 19
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-9520360ab8743cfd",
+        "sourceNoticeId": "knu-504-10997",
+        "segmentId": "seg-633d489c163e85d0",
+        "temporalMentionIds": [
+          "tm-5c3f640e3c2bbff0"
+        ],
+        "bindingKind": "same_paragraph",
+        "confidence": "high",
+        "ruleId": "binding.same_paragraph",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "이번 무료 특강은 5월 31일(일) 시행 예정인 정기 토익 시험 대비 특강으로 진행됩니다."
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "[2026 5월 정기토익대비 ZOOM LIVE 무료 토익 특강 안내] 행사 일정",
+      "dateText": "5월 31일(일)",
+      "normalizedStart": "2026-05-31",
+      "normalizedEnd": "2026-05-31",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "이번 무료 특강은 5월 31일(일) 시행 예정인 정기 토익 시험 대비 특강으로 진행됩니다.",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

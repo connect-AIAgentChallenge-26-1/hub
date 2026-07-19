@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10690",
+  "sourceContentHash": "a50fdbbdf665540b3295712ea628c5fa66454f376f1313a407d8090d4bb5ac33",
+  "sourceTitle": "[삼척공동실험실습관]2026학년도 제1회, 2회 분석기기 세미나 개최 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10690&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉 삼척",
+    "campuses": [
+      "samcheok",
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "samcheok": "삼척",
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10690-9150575a6868ad",
+      "uidHint": "noticepilot-cand-knu-504-10690-9150575a6868ad@noticepilot.local",
+      "sourceNoticeId": "knu-504-10690",
+      "sourceTitle": "[삼척공동실험실습관]2026학년도 제1회, 2회 분석기기 세미나 개최 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10690&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 삼척",
+        "campuses": [
+          "samcheok",
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "samcheok": "삼척",
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-e6c5f4cab54b675e",
+        "segmentType": "continuation",
+        "labelText": "신청기간",
+        "bodyText": "2026.3.30.(월) 까지(선착순 참가인원 15명으로 제한)",
+        "sourceLocation": {
+          "lineIndex": 26,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-0a8c9931a46f3a3c"
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-30",
+            "start": 10,
+            "end": 23
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "신청기간",
+          "3. 신청기간: ~2026.3.30.(월) 까지(선착순 참가인원 15명으로 제한)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-ea869932a7501bb5",
+        "segmentId": "seg-e6c5f4cab54b675e",
+        "rawText": "2026.3.30.(월)",
+        "normalizedStart": "2026-03-30",
+        "normalizedEnd": "2026-03-30",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 10,
+          "end": 23
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-e40b6c3603c9f6ac",
+        "sourceNoticeId": "knu-504-10690",
+        "segmentId": "seg-e6c5f4cab54b675e",
+        "temporalMentionIds": [
+          "tm-ea869932a7501bb5"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "신청기간",
+        "evidence": "3. 신청기간: ~2026.3.30.(월) 까지(선착순 참가인원 15명으로 제한)"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "[삼척공동실험실습관]2026학년도 제1회, 2회 분석기기 세미나 개최 안내 신청 마감",
+      "dateText": "2026.3.30.(월)",
+      "normalizedStart": "2026-03-30",
+      "normalizedEnd": "2026-03-30",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "3. 신청기간: ~2026.3.30.(월) 까지(선착순 참가인원 15명으로 제한)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "structured_segment_grounded"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "same_datetime_candidates_consolidated",
+        "structured_segment_grounded"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "same_datetime_candidates_consolidated",
+          "structured_segment_grounded"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

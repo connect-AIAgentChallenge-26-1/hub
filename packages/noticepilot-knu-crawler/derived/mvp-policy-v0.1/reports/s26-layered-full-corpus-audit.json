@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "noticepilot.s26LayeredFullCorpusAudit.v0.3",
+  "result": "pass",
+  "baselineDir": "../../../baseline/policy15",
+  "currentDir": "..",
+  "auditVersion": "0.1.2",
+  "pathReferences": {
+    "base": "audit_report_directory",
+    "format": "posix_relative"
+  },
+  "scope": {
+    "unifiedLayeredFullCorpusAuditPerformed": true,
+    "componentStages": [
+      "S24-A",
+      "S24-B",
+      "S24-C",
+      "S24-D",
+      "S25"
+    ],
+    "allowlistDecisionPerformed": false,
+    "baselinePromotionDecisionPerformed": true,
+    "baselineReplacementPerformed": false,
+    "separateLayeredBaselineCreated": true,
+    "layeredBaselineId": "layered-s26-corpus-2059-20260712-v1",
+    "layeredBaselineDir": "../../../baseline/layered-s26-v1",
+    "decisionRecord": "../../../baseline/layered-s26-v1/decision-record.json"
+  },
+  "checks": {
+    "allComponentAuditsPass": true,
+    "noticeDecisionCount": 2059,
+    "candidateCount": 1304,
+    "uniqueCandidateIdCount": 1304,
+    "crossLayerCandidateCounts": {
+      "s24a": 1304,
+      "s24b": 1304,
+      "s24c": 1304,
+      "s24d": 1304,
+      "s25": 1304
+    },
+    "crossLayerUniqueCandidateCounts": {
+      "s24a": 1304,
+      "s24b": 1304,
+      "s24c": 1304,
+      "s24d": 1304,
+      "s25": 1304
+    },
+    "crossLayerCountConsistency": true,
+    "completeTraceCandidateCount": 1304,
+    "traceErrorCount": 0,
+    "board716CandidateCount": 300,
+    "board716ContractErrorCount": 0,
+    "runtimeApplicabilityJudgmentFieldCount": 1304,
+    "runtimePublishabilityJudgmentFieldCount": 1304,
+    "runtimeJudgmentContractErrorCount": 0,
+    "runtimeJudgmentReconstructionMismatchCount": 0,
+    "crossArtifactJudgmentMismatchCount": 0,
+    "scopeCounts": {
+      "conditional": 20,
+      "profile_scoped": 12,
+      "unknown": 282,
+      "unrestricted": 990
+    },
+    "scopeCountsMatchExpected": true,
+    "verdictCounts": {
+      "auto_confirmed": 909,
+      "needs_review": 395
+    },
+    "verdictCountsMatchExpected": true,
+    "reconcilerSecondPassInputCandidateCount": 1304,
+    "reconcilerSecondPassOutputCandidateCount": 1304,
+    "reconcilerSecondPassRemovedCandidateCount": 0,
+    "reconcilerSecondPassConflictDetectionCount": 9,
+    "reconcilerCandidateObjectMismatchCount": 0,
+    "publishableSemanticsMatch": true,
+    "reviewQueueMatchesAcrossAllAudits": true,
+    "icsMatchesAcrossAllAudits": true
+  },
+  "componentAudits": {
+    "s24aBoard716Trace": {
+      "schemaVersion": "noticepilot.s24Board716TraceAudit.v0.1",
+      "result": "pass",
+      "report": "s26-components/s24a-board716-trace.json",
+      "returnCode": 0
+    },
+    "s24bApplicability": {
+      "schemaVersion": "noticepilot.s24ApplicabilityEvaluatorAudit.v0.2",
+      "result": "pass",
+      "report": "s26-components/s24b-applicability.json",
+      "returnCode": 0
+    },
+    "s24cPublishability": {
+      "schemaVersion": "noticepilot.s24PublishabilityEvaluatorAudit.v0.2",
+      "result": "pass",
+      "report": "s26-components/s24c-publishability.json",
+      "returnCode": 0
+    },
+    "s24dRuntimeWiring": {
+      "schemaVersion": "noticepilot.s24RuntimeJudgmentWiringAudit.v0.1",
+      "result": "pass",
+      "report": "s26-components/s24d-runtime-wiring.json",
+      "returnCode": 0
+    },
+    "s25CandidateReconciler": {
+      "schemaVersion": "noticepilot.s25CandidateReconcilerAudit.v0.1",
+      "result": "pass",
+      "report": "s26-components/s25-candidate-reconciler.json",
+      "returnCode": 0
+    }
+  },
+  "baselineObservation": {
+    "comparisonSchemaVersion": "noticepilot.policyBaselineDiff.v0.1",
+    "result": "different",
+    "changeCount": 304,
+    "allowlist": null,
+    "summaryChangeCount": 4,
+    "candidateIntegrityChangeCount": 0,
+    "publishableCandidateChanges": {
+      "added": 0,
+      "removed": 0,
+      "changed": 300
+    },
+    "reviewQueueChanges": {
+      "added": 0,
+      "removed": 0,
+      "changed": 0
+    },
+    "icsEventChanges": {
+      "student_default": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0
+      },
+      "job_application": {
+        "added": 0,
+        "removed": 0,
+        "changed": 0
+      }
+    },
+    "rawDiffReport": "s26-policy15-observation-diff.json",
+    "adjudication": "accepted_for_separate_layered_baseline"
+  },
+  "samples": {
+    "componentFailures": [],
+    "countInconsistencies": [],
+    "componentExecutionErrors": []
+  }
+}

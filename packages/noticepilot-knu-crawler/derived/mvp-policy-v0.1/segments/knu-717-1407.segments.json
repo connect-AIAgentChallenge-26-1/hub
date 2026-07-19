@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-717-1407",
+  "sourceContentHash": "e04f3bf39c3b61cb51bd02f45c6174f8ffc38e7a420ab302797ce383a033b5ca",
+  "sourceTitle": "2026 강원지역 기업탐방(휴젤)",
+  "publishedAt": "2026-05-14",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-813a6341d3dace7f",
+      "segmentType": "title",
+      "labelText": "2026 강원지역 기업탐방(휴젤)",
+      "bodyText": "2026 강원지역 기업탐방(휴젤)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026 강원지역 기업탐방(휴젤)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a6eb039961e3011b",
+      "segmentType": "label_value",
+      "labelText": "지원방법",
+      "bodyText": "지원방법: 네이버폼 응답 후 선발 (",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "지원방법: 네이버폼 응답 후 선발 ("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eb5449ce2da85a8c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://naver.me/GsBj8uaN",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://naver.me/GsBj8uaN"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0eea0f1de529b491",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "5월 18일(월) 18시 마감",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-18",
+          "start": 4,
+          "end": 13
+        }
+      ],
+      "locallyGrounded": false,
+      "text": ") / 5월 18일(월) 18시 마감"
+    }
+  ],
+  "summary": {
+    "segmentCount": 4,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "paragraph": 2
+    }
+  }
+}

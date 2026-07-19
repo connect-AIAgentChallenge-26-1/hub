@@ -1,0 +1,5838 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2263",
+  "sourceContentHash": "02f2f88b87957737f6fbc52bdab592139c7f09509dea0ea89cb12b597290f318",
+  "sourceTitle": "[근로]2026학년도 1학기 근로장학생 신청 안내(신청기간: 2025. 2. 5.(목) 10시 ~ 2. 11.(수) 18시까지 ]",
+  "publishedAt": "2026-02-03",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1b677b6137abd597",
+      "segmentType": "title",
+      "labelText": "[근로]2026학년도 1학기 근로장학생 신청 안내(신청기간",
+      "bodyText": "2025. 2. 5.(목) 10시 ~ 2. 11.(수) 18시까지 ]",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2025-02-05",
+          "start": 34,
+          "end": 48
+        },
+        {
+          "value": "2025-02-11",
+          "start": 55,
+          "end": 64
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "[근로]2026학년도 1학기 근로장학생 신청 안내(신청기간: 2025. 2. 5.(목) 10시 ~ 2. 11.(수) 18시까지 ]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-64c86336b8833740",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e7d99ce20741e721",
+      "segmentType": "label_value",
+      "labelText": "근로장학생 신청기간",
+      "bodyText": "근로장학생 신청기간",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로장학생 신청기간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-37f3160e94e270cf",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ":",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ":"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-185e5d8f0116bf84",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 2. 5.(",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-05",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 2. 5.("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e04c28bfc7b340e8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "목",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "목"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-afaf9188ae1e5af3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2. 11.(",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-11",
+          "start": 10,
+          "end": 15
+        }
+      ],
+      "locallyGrounded": false,
+      "text": ") 10:00 ~ 2. 11.("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b39cc3ab9e1c3670",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "수",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-44e8a8f579741aee",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ") 18:00",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ") 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-15b546feca778f8e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "→",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "→"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-898c7da13d83321d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "인트라넷으로",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "인트라넷으로"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9ad5a3d693783ecc",
+      "segmentType": "label_value",
+      "labelText": "신청",
+      "bodyText": "신청",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f15707686f490ffc",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2.",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-544dea4770537e2c",
+      "segmentType": "label_value",
+      "labelText": "신청자격 및 선발대상자",
+      "bodyText": "신청자격 및 선발대상자",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청자격 및 선발대상자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-75178213b96017e5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d3b79ae4a6366174",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "반드시",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "반드시"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b30a58e28ca85644",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "“",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "“"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-09b6d5f9aa849bbe",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "재학생",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e884dd4b1c550545",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "”)",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "”)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8e00a654b7635fe7",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-59e6c8034415c2ce",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "한국장학재단",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "한국장학재단"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7bc85a9d32a5ee20",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-41519c542122837d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학년도",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학년도"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a6d322c1724510b6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7ee6b8e3570d355e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학기",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2d6deb21fb5f8854",
+      "segmentType": "label_value",
+      "labelText": "국가근로장학금 신청자 중 학자금 지원",
+      "bodyText": "국가근로장학금 신청자 중 학자금 지원",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국가근로장학금 신청자 중 학자금 지원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a2465e8e154dab0e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "9",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "9"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f0e315067e6869b1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구간 이하 확인",
+      "sourceLocation": {
+        "lineIndex": 26,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구간 이하 확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6ba99fedbd1febbb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 2. 3.(",
+      "sourceLocation": {
+        "lineIndex": 27,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-03",
+          "start": 1,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "(2026. 2. 3.("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4b365fd4a24907c3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "화",
+      "sourceLocation": {
+        "lineIndex": 28,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "화"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-75c993f6255a9aae",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 29,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-757a1478a174ff8f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "기준",
+      "sourceLocation": {
+        "lineIndex": 30,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기준"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8890e4fe7b79ab34",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 31,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-db70ca47e72ccfe4",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※",
+      "sourceLocation": {
+        "lineIndex": 32,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-af51dcff577b2724",
+      "segmentType": "label_value",
+      "labelText": "선발순위",
+      "bodyText": "선발순위",
+      "sourceLocation": {
+        "lineIndex": 33,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "선발순위"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-55a35d5986a39dbf",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(1~3)",
+      "sourceLocation": {
+        "lineIndex": 34,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(1~3)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5a839d6c867ec5cb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "순위",
+      "sourceLocation": {
+        "lineIndex": 35,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "순위"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-33fb101575997117",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1",
+      "sourceLocation": {
+        "lineIndex": 36,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8b510ee9877747d6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "순위",
+      "sourceLocation": {
+        "lineIndex": 37,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "순위"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-714547e60775966e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2",
+      "sourceLocation": {
+        "lineIndex": 38,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-82b9045bde812b76",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "순위",
+      "sourceLocation": {
+        "lineIndex": 39,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "순위"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f4060cc1bd8116f7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "3",
+      "sourceLocation": {
+        "lineIndex": 40,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1176841e455279fc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "순위",
+      "sourceLocation": {
+        "lineIndex": 41,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "순위"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b2709bd0cec56cf8",
+      "segmentType": "label_value",
+      "labelText": "학자금 지원",
+      "bodyText": "학자금 지원",
+      "sourceLocation": {
+        "lineIndex": 42,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학자금 지원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c7a294a3f8f1502b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "4",
+      "sourceLocation": {
+        "lineIndex": 43,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-30fd8db9786e21f2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구간 이하",
+      "sourceLocation": {
+        "lineIndex": 44,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구간 이하"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ec57f2ce44ffe083",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 45,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4c41aaec882db3a4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "기초생활수급자 및 차상위계층 포함",
+      "sourceLocation": {
+        "lineIndex": 46,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기초생활수급자 및 차상위계층 포함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ecbf6d193c8e9397",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 47,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b30e399cc8718e75",
+      "segmentType": "label_value",
+      "labelText": "학자금 지원",
+      "bodyText": "학자금 지원",
+      "sourceLocation": {
+        "lineIndex": 48,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학자금 지원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4f93bc6dd1e289f1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "5",
+      "sourceLocation": {
+        "lineIndex": 49,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3ca938a801073043",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구간 이상",
+      "sourceLocation": {
+        "lineIndex": 50,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구간 이상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-693ced6ebee072a8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "∼",
+      "sourceLocation": {
+        "lineIndex": 51,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "∼"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f60f03f5835e639f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "6",
+      "sourceLocation": {
+        "lineIndex": 52,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e2abc7d682ffc176",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구간 이하",
+      "sourceLocation": {
+        "lineIndex": 53,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구간 이하"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-15fa582fcd829792",
+      "segmentType": "label_value",
+      "labelText": "학자금 지원",
+      "bodyText": "학자금 지원",
+      "sourceLocation": {
+        "lineIndex": 54,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학자금 지원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8d62c8a82372a017",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "7",
+      "sourceLocation": {
+        "lineIndex": 55,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "7"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9cff9b5b0dcb4f9e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구간 이상",
+      "sourceLocation": {
+        "lineIndex": 56,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구간 이상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6276fa56448717b8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "∼",
+      "sourceLocation": {
+        "lineIndex": 57,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "∼"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a8e5b48c66082742",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "9",
+      "sourceLocation": {
+        "lineIndex": 58,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "9"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3fe57578fe4c7527",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구간 이하",
+      "sourceLocation": {
+        "lineIndex": 59,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구간 이하"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f877f66846c787c8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※",
+      "sourceLocation": {
+        "lineIndex": 60,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c264f962c214ed82",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "직전학기",
+      "sourceLocation": {
+        "lineIndex": 61,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "직전학기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7cd82df6feeabbc7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(2025-2)",
+      "sourceLocation": {
+        "lineIndex": 62,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(2025-2)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b11d56524a32c590",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "성적",
+      "sourceLocation": {
+        "lineIndex": 63,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "성적"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-583f573e6f7dcf69",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "70",
+      "sourceLocation": {
+        "lineIndex": 64,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "70"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c00efb2ebae62409",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "점",
+      "sourceLocation": {
+        "lineIndex": 65,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "점"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7d002fcb223e7904",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(100",
+      "sourceLocation": {
+        "lineIndex": 66,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(100"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-852cf8cfa3988e47",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "점 만점",
+      "sourceLocation": {
+        "lineIndex": 67,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "점 만점"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7023fad6a9751ce4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 68,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-282eeaf58eb3b118",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "이상",
+      "sourceLocation": {
+        "lineIndex": 69,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "이상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e922c3731ea9afc3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "–",
+      "sourceLocation": {
+        "lineIndex": 70,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "–"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f673e0bb02f90f24",
+      "segmentType": "label_value",
+      "labelText": "성적 미달 시 추천불가",
+      "bodyText": "성적 미달 시 추천불가",
+      "sourceLocation": {
+        "lineIndex": 71,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "성적 미달 시 추천불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9f063ddc6987fd46",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※",
+      "sourceLocation": {
+        "lineIndex": 72,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8ff070cc5037cfa7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "일반근로",
+      "sourceLocation": {
+        "lineIndex": 73,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "일반근로"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e8a6972a9627c5a5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ":",
+      "sourceLocation": {
+        "lineIndex": 74,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ":"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cadfa60db2249645",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "제한 없음",
+      "sourceLocation": {
+        "lineIndex": 75,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "제한 없음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c3d6adf4603753f8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 76,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8966bb7de84d9dd1",
+      "segmentType": "label_value",
+      "labelText": "한국장학재단 국가근로장학금을 신청 하지 않은",
+      "bodyText": "한국장학재단 국가근로장학금을 신청 하지 않은",
+      "sourceLocation": {
+        "lineIndex": 77,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "한국장학재단 국가근로장학금을 신청 하지 않은"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ffe37ca10c32cb7f",
+      "segmentType": "label_value",
+      "labelText": "학생도 신청 가능",
+      "bodyText": "학생도 신청 가능",
+      "sourceLocation": {
+        "lineIndex": 78,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학생도 신청 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-942fcba4fa0b1b3a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 79,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-13455b5b5f2bea92",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3.",
+      "sourceLocation": {
+        "lineIndex": 80,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-107be660ba2e9ecd",
+      "segmentType": "label_value",
+      "labelText": "신청절차",
+      "bodyText": "신청절차",
+      "sourceLocation": {
+        "lineIndex": 81,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청절차"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-764f96647a6c1e42",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1)",
+      "sourceLocation": {
+        "lineIndex": 82,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5738c3e25e9f351e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "통합학사정보시스템",
+      "sourceLocation": {
+        "lineIndex": 83,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "통합학사정보시스템"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b21226d66859a127",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 84,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1db030d606e6524c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "인트라넷",
+      "sourceLocation": {
+        "lineIndex": 85,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "인트라넷"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c1236851e9290a68",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 86,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e12f9d7d88d49571",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "로그인",
+      "sourceLocation": {
+        "lineIndex": 87,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "로그인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d2c03874bf56bc5d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ">",
+      "sourceLocation": {
+        "lineIndex": 88,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ">"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-40651f0fbf7b28d6",
+      "segmentType": "label_value",
+      "labelText": "근로장학생신청",
+      "bodyText": "근로장학생신청",
+      "sourceLocation": {
+        "lineIndex": 89,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로장학생신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bc09870cbf2c2fa3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 90,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-21948e603133dee8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학생",
+      "sourceLocation": {
+        "lineIndex": 91,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-134ac9a177cc2a64",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 92,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d2661ca75eb8ccae",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2)",
+      "sourceLocation": {
+        "lineIndex": 93,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fc976573a0e7028d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "근로유형선택",
+      "sourceLocation": {
+        "lineIndex": 94,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로유형선택"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4e2263d29458af06",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 95,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7d2a568c4a5332e8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "국가근로",
+      "sourceLocation": {
+        "lineIndex": 96,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국가근로"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-45f05a7cdd05e134",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ",",
+      "sourceLocation": {
+        "lineIndex": 97,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ","
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4a9ebe0410b3fb4c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "일반근로",
+      "sourceLocation": {
+        "lineIndex": 98,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "일반근로"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e6f6392d2cee3fc6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 99,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1a8500883e86e7ef",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3)",
+      "sourceLocation": {
+        "lineIndex": 100,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ed93bd73afc85a9e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "자기소개",
+      "sourceLocation": {
+        "lineIndex": 101,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자기소개"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a09036819a098b4d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 102,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e2e9bc7db8e8e37f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "한글",
+      "sourceLocation": {
+        "lineIndex": 103,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "한글"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aa998de782622572",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "50",
+      "sourceLocation": {
+        "lineIndex": 104,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "50"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9a480b07373e71ec",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "자 필수입력",
+      "sourceLocation": {
+        "lineIndex": 105,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자 필수입력"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3f09289eeaafedc8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 106,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2413b28fe041b10a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "및 자격증 입력",
+      "sourceLocation": {
+        "lineIndex": 107,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "및 자격증 입력"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1f7ef2181e3c217b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4)",
+      "sourceLocation": {
+        "lineIndex": 108,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bcb53006f76b2189",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "개인정보 수집 및 이용에 관한 동의 체크",
+      "sourceLocation": {
+        "lineIndex": 109,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "개인정보 수집 및 이용에 관한 동의 체크"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b8de28902efb47e7",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5)",
+      "sourceLocation": {
+        "lineIndex": 110,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7e0baa8f90487099",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "근로지 선택",
+      "sourceLocation": {
+        "lineIndex": 111,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로지 선택"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8ecfec484a864dd5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 112,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1bcca2ef711a7b94",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "근로지는",
+      "sourceLocation": {
+        "lineIndex": 113,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로지는"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-79f00d3b175bee1c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "“",
+      "sourceLocation": {
+        "lineIndex": 114,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "“"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2e006f646efe46f9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "최대",
+      "sourceLocation": {
+        "lineIndex": 115,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "최대"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4a2df44aebf98e23",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "”3",
+      "sourceLocation": {
+        "lineIndex": 116,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "”3"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d7fc50c9c15080ac",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "개 희망",
+      "sourceLocation": {
+        "lineIndex": 117,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "개 희망"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-01813c1e3dc0e6f7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "근로지",
+      "sourceLocation": {
+        "lineIndex": 118,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e04accddde4aeb86",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 119,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9e7e30ccf5c1530c",
+      "segmentType": "label_value",
+      "labelText": "우선선발아님",
+      "bodyText": "우선선발아님",
+      "sourceLocation": {
+        "lineIndex": 120,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "우선선발아님"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-59eff3ab639dd075",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 121,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-51e6ce9a8875c682",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "선택 가능",
+      "sourceLocation": {
+        "lineIndex": 122,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "선택 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-efc746688607e6a5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 123,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7fc6139a763656ff",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "6)",
+      "sourceLocation": {
+        "lineIndex": 124,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bd1ed629d67945da",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "계좌번호 입력",
+      "sourceLocation": {
+        "lineIndex": 125,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "계좌번호 입력"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-784015a06eaba05f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※",
+      "sourceLocation": {
+        "lineIndex": 126,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2db555cd5f727d68",
+      "segmentType": "label_value",
+      "labelText": "국가근로는 한국장학재단에 입력된 계좌번호로 장학금 지급",
+      "bodyText": "국가근로는 한국장학재단에 입력된 계좌번호로 장학금 지급",
+      "sourceLocation": {
+        "lineIndex": 127,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국가근로는 한국장학재단에 입력된 계좌번호로 장학금 지급"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-19ec9069eca45787",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "7)",
+      "sourceLocation": {
+        "lineIndex": 128,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "7)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-65cb3714bb2ee7a6",
+      "segmentType": "label_value",
+      "labelText": "신청",
+      "bodyText": "신청",
+      "sourceLocation": {
+        "lineIndex": 129,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8d383d13a163e718",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4.",
+      "sourceLocation": {
+        "lineIndex": 130,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8d78ea11846f2236",
+      "segmentType": "label_value",
+      "labelText": "선발 기준",
+      "bodyText": "선발 기준",
+      "sourceLocation": {
+        "lineIndex": 131,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "선발 기준"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-af217cb42a3a864b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1)",
+      "sourceLocation": {
+        "lineIndex": 132,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-54418e798578e3cf",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "기본요건",
+      "sourceLocation": {
+        "lineIndex": 133,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기본요건"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cdf6a64764b08c1a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ":",
+      "sourceLocation": {
+        "lineIndex": 134,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ":"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2a5c70c4972900aa",
+      "segmentType": "label_value",
+      "labelText": "학자금 지원 구간에 따른 선발 순위",
+      "bodyText": "학자금 지원 구간에 따른 선발 순위",
+      "sourceLocation": {
+        "lineIndex": 135,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학자금 지원 구간에 따른 선발 순위"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e4973a6d19e5ada2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ",",
+      "sourceLocation": {
+        "lineIndex": 136,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ","
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5418b5ef9ef75d43",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "직전학기 성적 높은순",
+      "sourceLocation": {
+        "lineIndex": 137,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "직전학기 성적 높은순"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-323c3f94fbe78b5d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2)",
+      "sourceLocation": {
+        "lineIndex": 138,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b43919ad918b9b55",
+      "segmentType": "label_value",
+      "labelText": "근로지별 자체 선발 기준",
+      "bodyText": "근로지별 자체 선발 기준",
+      "sourceLocation": {
+        "lineIndex": 139,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로지별 자체 선발 기준"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c08ccdc32cec86c9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 140,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7ca2a691b7e5fc1f",
+      "segmentType": "label_value",
+      "labelText": "학자금지원구간선발순위",
+      "bodyText": "학자금지원구간선발순위",
+      "sourceLocation": {
+        "lineIndex": 141,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학자금지원구간선발순위"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1ad7560c132c4b86",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(40",
+      "sourceLocation": {
+        "lineIndex": 142,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(40"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6bcf6adf868d7d61",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "점",
+      "sourceLocation": {
+        "lineIndex": 143,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "점"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e567202082ef2b62",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ") +",
+      "sourceLocation": {
+        "lineIndex": 144,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ") +"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d5371ab016c456c4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "직전학기성적",
+      "sourceLocation": {
+        "lineIndex": 145,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "직전학기성적"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c2ad436a422fcb18",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(20",
+      "sourceLocation": {
+        "lineIndex": 146,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(20"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d0e011ab1e2a496",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "점",
+      "sourceLocation": {
+        "lineIndex": 147,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "점"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e93fe72bd500b237",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ") +",
+      "sourceLocation": {
+        "lineIndex": 148,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ") +"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-78d600727a93a9b5",
+      "segmentType": "label_value",
+      "labelText": "근로지별자체 선발기준",
+      "bodyText": "근로지별자체 선발기준",
+      "sourceLocation": {
+        "lineIndex": 149,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로지별자체 선발기준"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-efd831abe5c94470",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(40",
+      "sourceLocation": {
+        "lineIndex": 150,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(40"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-13b8d617983d6c30",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "점",
+      "sourceLocation": {
+        "lineIndex": 151,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "점"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ba766c04233d3055",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 152,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6b1461552c67eed4",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 153,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bce64d79e2531297",
+      "segmentType": "label_value",
+      "labelText": "정원미달로 기간 외에 선발할 경우 부서 자체 선발기준 예외 적용",
+      "bodyText": "정원미달로 기간 외에 선발할 경우 부서 자체 선발기준 예외 적용",
+      "sourceLocation": {
+        "lineIndex": 154,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "정원미달로 기간 외에 선발할 경우 부서 자체 선발기준 예외 적용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b36d33535c24c73f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026",
+      "sourceLocation": {
+        "lineIndex": 155,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b33df71c2ffb164c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학년도",
+      "sourceLocation": {
+        "lineIndex": 156,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학년도"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-39ece2f6475e4be0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1",
+      "sourceLocation": {
+        "lineIndex": 157,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4ec5e2530ee6f46a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학기",
+      "sourceLocation": {
+        "lineIndex": 158,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0ff7c91cd2fa7bab",
+      "segmentType": "label_value",
+      "labelText": "학자금 지원구간 순위",
+      "bodyText": "학자금 지원구간 순위",
+      "sourceLocation": {
+        "lineIndex": 159,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학자금 지원구간 순위"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b33aa39e64a7cd2f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "직전학기",
+      "sourceLocation": {
+        "lineIndex": 160,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "직전학기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d0f4be26d23b1d69",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(2025-2",
+      "sourceLocation": {
+        "lineIndex": 161,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(2025-2"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-12629d03968cbae6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학기",
+      "sourceLocation": {
+        "lineIndex": 162,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-49e7a2252dc7a6c4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 163,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-63db66c0c4398b12",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "환산점수",
+      "sourceLocation": {
+        "lineIndex": 164,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "환산점수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bacce94b8ae3dd49",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "자율항목",
+      "sourceLocation": {
+        "lineIndex": 165,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자율항목"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-96f5fd8548db2ec2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "부서별 필요항목 심사",
+      "sourceLocation": {
+        "lineIndex": 166,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "부서별 필요항목 심사"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bcb21efa8db36aef",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구분",
+      "sourceLocation": {
+        "lineIndex": 167,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구분"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f4772c809bbc8c67",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "배점",
+      "sourceLocation": {
+        "lineIndex": 168,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "배점"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a75c3dec5fda4863",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(40)",
+      "sourceLocation": {
+        "lineIndex": 169,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(40)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f6dd0e819800ccd7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구분",
+      "sourceLocation": {
+        "lineIndex": 170,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구분"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8f309b50d1cb7eab",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "배점",
+      "sourceLocation": {
+        "lineIndex": 171,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "배점"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e8859749935eedcb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(20)",
+      "sourceLocation": {
+        "lineIndex": 172,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(20)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3604948c17578b52",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구분",
+      "sourceLocation": {
+        "lineIndex": 173,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구분"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-80b370e57f7dd822",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "배점",
+      "sourceLocation": {
+        "lineIndex": 174,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "배점"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b68a24e34b7b4e4e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(40)",
+      "sourceLocation": {
+        "lineIndex": 175,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(40)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e3e87605c379ce2d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1",
+      "sourceLocation": {
+        "lineIndex": 176,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-92740a9248201d59",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "순위",
+      "sourceLocation": {
+        "lineIndex": 177,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "순위"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fb66c83ff00e67e7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 178,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e5a6b96f92f9c29d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "기초생활수급자",
+      "sourceLocation": {
+        "lineIndex": 179,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기초생활수급자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-10cd53e2edf7f3df",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "~ 4",
+      "sourceLocation": {
+        "lineIndex": 180,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "~ 4"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4542f526be5ef78f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구간",
+      "sourceLocation": {
+        "lineIndex": 181,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b1ebb1e9e788068e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 182,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ec12deb81fc2607b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "40",
+      "sourceLocation": {
+        "lineIndex": 183,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "40"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-30d5bc75ba3cba8f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "70",
+      "sourceLocation": {
+        "lineIndex": 184,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "70"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6bcdfecf5a72016f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "점",
+      "sourceLocation": {
+        "lineIndex": 185,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "점"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a7429787945b989e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "~ 100",
+      "sourceLocation": {
+        "lineIndex": 186,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "~ 100"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3304f1710d16b61a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "점",
+      "sourceLocation": {
+        "lineIndex": 187,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "점"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2b882d6453bc91b3",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▪",
+      "sourceLocation": {
+        "lineIndex": 188,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▪"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b5ac56eea7ea5053",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "환산점수",
+      "sourceLocation": {
+        "lineIndex": 189,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "환산점수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-72f49079a410aa2b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "81",
+      "sourceLocation": {
+        "lineIndex": 190,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "81"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-02172e2d9338e2e0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "점",
+      "sourceLocation": {
+        "lineIndex": 191,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "점"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c0d46804b92119ce",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "~ 100",
+      "sourceLocation": {
+        "lineIndex": 192,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "~ 100"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-93c1a90629caeb04",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "점",
+      "sourceLocation": {
+        "lineIndex": 193,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "점"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0a6607dcda882553",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ":",
+      "sourceLocation": {
+        "lineIndex": 194,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ":"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-abf7f31c105a5745",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "환산점수별",
+      "sourceLocation": {
+        "lineIndex": 195,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "환산점수별"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6b80f9e5d75a48c5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1",
+      "sourceLocation": {
+        "lineIndex": 196,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dcf9bea9a50bf064",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "점 간격으로",
+      "sourceLocation": {
+        "lineIndex": 197,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "점 간격으로"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2a5da41640652d6f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1",
+      "sourceLocation": {
+        "lineIndex": 198,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-368a153d250bafd6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "점",
+      "sourceLocation": {
+        "lineIndex": 199,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "점"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-452e96017242a4bb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "~ 20",
+      "sourceLocation": {
+        "lineIndex": 200,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "~ 20"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a0b885f3b31bca79",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "점 부여",
+      "sourceLocation": {
+        "lineIndex": 201,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "점 부여"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8371624f383d5fc9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▪",
+      "sourceLocation": {
+        "lineIndex": 202,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▪"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-14306e28e5022831",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "환산점수",
+      "sourceLocation": {
+        "lineIndex": 203,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "환산점수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1f39b3f2ab1791bf",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "80",
+      "sourceLocation": {
+        "lineIndex": 204,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "80"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-61800efd966c7c87",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "점 이하",
+      "sourceLocation": {
+        "lineIndex": 205,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "점 이하"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-807879c9d8ce1b06",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 0",
+      "sourceLocation": {
+        "lineIndex": 206,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 0"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f84e60a453b9f0e3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "점 부여",
+      "sourceLocation": {
+        "lineIndex": 207,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "점 부여"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dfec34f4385acccc",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▪",
+      "sourceLocation": {
+        "lineIndex": 208,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▪"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1fd6cf148b2cd59c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "각 근로지에서 필요한 항목",
+      "sourceLocation": {
+        "lineIndex": 209,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "각 근로지에서 필요한 항목"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f9a587295989e4e5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "*",
+      "sourceLocation": {
+        "lineIndex": 210,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "*"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8ce87cbc81fa0911",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "을 심사하여",
+      "sourceLocation": {
+        "lineIndex": 211,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "을 심사하여"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-86dedd3c4931a9b3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "40",
+      "sourceLocation": {
+        "lineIndex": 212,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "40"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e51c4c89562ce28c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "점 내에서 배점",
+      "sourceLocation": {
+        "lineIndex": 213,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "점 내에서 배점"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-be0e0f31027c1e59",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "*",
+      "sourceLocation": {
+        "lineIndex": 214,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "*"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-094903bd5002a6b9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "금지항목제외한 자율항목",
+      "sourceLocation": {
+        "lineIndex": 215,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "금지항목제외한 자율항목"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e83f743c5d6f91a4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "예",
+      "sourceLocation": {
+        "lineIndex": 216,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "예"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-34c44208d700881d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 217,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eb1adeb2b449e3e3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "관련자격증",
+      "sourceLocation": {
+        "lineIndex": 218,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "관련자격증"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-83fbcbe05921ee67",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ",",
+      "sourceLocation": {
+        "lineIndex": 219,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ","
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-659c6c020b685431",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "관련학과 등",
+      "sourceLocation": {
+        "lineIndex": 220,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "관련학과 등"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-55e12f97b4a3716f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2",
+      "sourceLocation": {
+        "lineIndex": 221,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-95aa3aed45c5e7aa",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "순위",
+      "sourceLocation": {
+        "lineIndex": 222,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "순위"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-129b186aebe06a65",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(5",
+      "sourceLocation": {
+        "lineIndex": 223,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(5"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-24c094d3e7253c36",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구간",
+      "sourceLocation": {
+        "lineIndex": 224,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0dcb922c344e13a9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "~ 6",
+      "sourceLocation": {
+        "lineIndex": 225,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "~ 6"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2b55f91243eec692",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구간",
+      "sourceLocation": {
+        "lineIndex": 226,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dbb82f2379459311",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 227,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eccb54781e278ce0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "25",
+      "sourceLocation": {
+        "lineIndex": 228,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "25"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-599aab0c60918ebc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "3",
+      "sourceLocation": {
+        "lineIndex": 229,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-426f1b92808f588f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "순위",
+      "sourceLocation": {
+        "lineIndex": 230,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "순위"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d377409f550a81b4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(7",
+      "sourceLocation": {
+        "lineIndex": 231,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(7"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6fd618f80240f0da",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구간",
+      "sourceLocation": {
+        "lineIndex": 232,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6072987b0114d179",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "~ 9",
+      "sourceLocation": {
+        "lineIndex": 233,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "~ 9"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d69e9a928d3d1962",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구간",
+      "sourceLocation": {
+        "lineIndex": 234,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-308591aed4963969",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 235,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3e154660ab28ae18",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "10",
+      "sourceLocation": {
+        "lineIndex": 236,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "10"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-40f23700dacc761c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "순위외",
+      "sourceLocation": {
+        "lineIndex": 237,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "순위외"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f51ee47505fe2247",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 238,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-96558d12f6afd928",
+      "segmentType": "label_value",
+      "labelText": "학교내 운영되는 일반근로 해당",
+      "bodyText": "학교내 운영되는 일반근로 해당",
+      "sourceLocation": {
+        "lineIndex": 239,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학교내 운영되는 일반근로 해당"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-96f2533f08c82d6f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 240,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d0f7dabb0199ca1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "0",
+      "sourceLocation": {
+        "lineIndex": 241,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "0"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-702203bdd0cc10c5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5.",
+      "sourceLocation": {
+        "lineIndex": 242,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cd688cae0a76a0b0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "시급",
+      "sourceLocation": {
+        "lineIndex": 243,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "시급"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ce0c1d88cbd95aea",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "국가근로",
+      "sourceLocation": {
+        "lineIndex": 244,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국가근로"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-24cb5d7e40738df2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "일반근로",
+      "sourceLocation": {
+        "lineIndex": 245,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "일반근로"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c10cc940c20cd844",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "교 내",
+      "sourceLocation": {
+        "lineIndex": 246,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "교 내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7553f787772ea271",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "교 외",
+      "sourceLocation": {
+        "lineIndex": 247,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "교 외"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-80b93dd6dd9f08a5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "10,320",
+      "sourceLocation": {
+        "lineIndex": 248,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "10,320"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ee95eadea6438cae",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "원",
+      "sourceLocation": {
+        "lineIndex": 249,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ee0a160eb3b0059f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "12,790",
+      "sourceLocation": {
+        "lineIndex": 250,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "12,790"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-546115b849a3ea66",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "원",
+      "sourceLocation": {
+        "lineIndex": 251,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9a115391804d7715",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "10,320",
+      "sourceLocation": {
+        "lineIndex": 252,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "10,320"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-88d41fbc9394605d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "원",
+      "sourceLocation": {
+        "lineIndex": 253,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fc2c22b4ca3f73ef",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "6.",
+      "sourceLocation": {
+        "lineIndex": 254,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-011de05522bf4e6f",
+      "segmentType": "label_value",
+      "labelText": "근로시간 및 근로기간",
+      "bodyText": "근로시간 및 근로기간",
+      "sourceLocation": {
+        "lineIndex": 255,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로시간 및 근로기간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5aeeeadb68ac1c29",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "ㅇ 국가",
+      "sourceLocation": {
+        "lineIndex": 256,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ 국가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-103194202d0b9e8e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ",",
+      "sourceLocation": {
+        "lineIndex": 257,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ","
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-39c938cbd1157371",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "일반근로",
+      "sourceLocation": {
+        "lineIndex": 258,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "일반근로"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c22e884e4faaa9fb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ":",
+      "sourceLocation": {
+        "lineIndex": 259,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ":"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5de16c6b1aec12e0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "개인별",
+      "sourceLocation": {
+        "lineIndex": 260,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "개인별"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cc40212fec9eb29f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "140",
+      "sourceLocation": {
+        "lineIndex": 261,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "140"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-11f1aaa8d4a3edee",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "시간",
+      "sourceLocation": {
+        "lineIndex": 262,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "시간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-019fbaa2044ec6c1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 263,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-02c44df62a363af2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "근로시간",
+      "sourceLocation": {
+        "lineIndex": 264,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로시간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b198a148d5a5f427",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ":",
+      "sourceLocation": {
+        "lineIndex": 265,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ":"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d01624178383fc53",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1",
+      "sourceLocation": {
+        "lineIndex": 266,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7b06106064ccb6ea",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "일 최대",
+      "sourceLocation": {
+        "lineIndex": 267,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "일 최대"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-97cb7f8b5f77e68a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "8",
+      "sourceLocation": {
+        "lineIndex": 268,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "8"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2a60a3ff5199a2e2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "시간",
+      "sourceLocation": {
+        "lineIndex": 269,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "시간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-99602efa540839c8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ", 1",
+      "sourceLocation": {
+        "lineIndex": 270,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ", 1"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f4cca6fe320b07f7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "월 최대",
+      "sourceLocation": {
+        "lineIndex": 271,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "월 최대"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-77cffea127f4f45a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "80",
+      "sourceLocation": {
+        "lineIndex": 272,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "80"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2b074c9953ba8da9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "시간 이내",
+      "sourceLocation": {
+        "lineIndex": 273,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "시간 이내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f0b7f8c8f30886a0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 274,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a4cfe97facc22ff1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학기중",
+      "sourceLocation": {
+        "lineIndex": 275,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학기중"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-821ed65eb71b4dc0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 276,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c4900c1ec5d3b3d7",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 277,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0f43410abe60accc",
+      "segmentType": "label_value",
+      "labelText": "근로기간",
+      "bodyText": "근로기간",
+      "sourceLocation": {
+        "lineIndex": 278,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로기간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d588597b132b296b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ":",
+      "sourceLocation": {
+        "lineIndex": 279,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ":"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8b67231a0320304b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 3. 3.(",
+      "sourceLocation": {
+        "lineIndex": 280,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 3. 3.("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0fb2d1c5cea8db57",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "화",
+      "sourceLocation": {
+        "lineIndex": 281,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "화"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-84198f5dcf2e97bb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "6. 30.(",
+      "sourceLocation": {
+        "lineIndex": 282,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-30",
+          "start": 4,
+          "end": 9
+        }
+      ],
+      "locallyGrounded": false,
+      "text": ") ~ 6. 30.("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e5bc882c46a73947",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "화",
+      "sourceLocation": {
+        "lineIndex": 283,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "화"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-873432aa9c91f1a2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 284,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3a948ce662a0a284",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "7.",
+      "sourceLocation": {
+        "lineIndex": 285,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "7."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9fba4951021cf566",
+      "segmentType": "label_value",
+      "labelText": "근로장학생 선발결과 확인",
+      "bodyText": "근로장학생 선발결과 확인",
+      "sourceLocation": {
+        "lineIndex": 286,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로장학생 선발결과 확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fe1b81d623778c70",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ":",
+      "sourceLocation": {
+        "lineIndex": 287,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ":"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1f9360d778c9c52e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 2. 24.(",
+      "sourceLocation": {
+        "lineIndex": 288,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-24",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 2. 24.("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9046a9d151986c0b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "화",
+      "sourceLocation": {
+        "lineIndex": 289,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "화"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d7fa9deefedeed92",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 290,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e3cd8b4c1ce1a461",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "예정",
+      "sourceLocation": {
+        "lineIndex": 291,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-93c9b1c9b73f6462",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 292,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-006075a9a951c476",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "인트라넷",
+      "sourceLocation": {
+        "lineIndex": 293,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "인트라넷"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-75f06eb779516a44",
+      "segmentType": "label_value",
+      "labelText": "근로장학생신청",
+      "bodyText": "근로장학생신청",
+      "sourceLocation": {
+        "lineIndex": 294,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로장학생신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c5f22c6393e89560",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 295,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cf66265dcc323869",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학생",
+      "sourceLocation": {
+        "lineIndex": 296,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7d8dae988ede108a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 297,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7bac06c78aeb749c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "메뉴에서 확인 가능",
+      "sourceLocation": {
+        "lineIndex": 298,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "메뉴에서 확인 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7d2b3dae1177ec1b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "8.",
+      "sourceLocation": {
+        "lineIndex": 299,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "8."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-236877f7b7aef749",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "기타사항",
+      "sourceLocation": {
+        "lineIndex": 300,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기타사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9dac619410933a4e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1)",
+      "sourceLocation": {
+        "lineIndex": 301,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2c1325b8932beec5",
+      "segmentType": "label_value",
+      "labelText": "근로장학생 선발 및 후보자 결정기간",
+      "bodyText": "근로장학생 선발 및 후보자 결정기간",
+      "sourceLocation": {
+        "lineIndex": 302,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로장학생 선발 및 후보자 결정기간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-45bf971b0cd48c1c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 2. 13.(",
+      "sourceLocation": {
+        "lineIndex": 303,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-13",
+          "start": 1,
+          "end": 12
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "(2026. 2. 13.("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3c166467e34448fd",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "금",
+      "sourceLocation": {
+        "lineIndex": 304,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "금"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-927ab326dc2b7970",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 305,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b0b9c4dd70f44197",
+      "segmentType": "label_value",
+      "labelText": "에 신청자들을 대상으로 근로지 담당자가 면접 및 심사하기 위해 연락 할 수 있음",
+      "bodyText": "에 신청자들을 대상으로 근로지 담당자가 면접 및 심사하기 위해 연락 할 수 있음",
+      "sourceLocation": {
+        "lineIndex": 306,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "에 신청자들을 대상으로 근로지 담당자가 면접 및 심사하기 위해 연락 할 수 있음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c09017a9b210a845",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2)",
+      "sourceLocation": {
+        "lineIndex": 307,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-49e01dc127dc1155",
+      "segmentType": "label_value",
+      "labelText": "졸업유예 학생 중 미수강신청자는 신청 불가 및 선발취소",
+      "bodyText": "졸업유예 학생 중 미수강신청자는 신청 불가 및 선발취소",
+      "sourceLocation": {
+        "lineIndex": 308,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "졸업유예 학생 중 미수강신청자는 신청 불가 및 선발취소"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2fee670371e54a61",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※",
+      "sourceLocation": {
+        "lineIndex": 309,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-20e3b30a6d240d21",
+      "segmentType": "label_value",
+      "labelText": "근로진행중 선발 취소 될수 있음",
+      "bodyText": "근로진행중 선발 취소 될수 있음",
+      "sourceLocation": {
+        "lineIndex": 310,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로진행중 선발 취소 될수 있음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-805aa170f751fc3a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 311,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-36f3aa9adb1a3174",
+      "segmentType": "label_value",
+      "labelText": "장학금 미지급",
+      "bodyText": "장학금 미지급",
+      "sourceLocation": {
+        "lineIndex": 312,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "장학금 미지급"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-84df37e3936499ff",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 313,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9e85d23ae66ee9b8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3)",
+      "sourceLocation": {
+        "lineIndex": 314,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b2556ca76535b075",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "한 부서에서 총",
+      "sourceLocation": {
+        "lineIndex": 315,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "한 부서에서 총"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f6c65576f497686b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "4",
+      "sourceLocation": {
+        "lineIndex": 316,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-57260e8c7c20dc55",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "회 초과 근로 불가",
+      "sourceLocation": {
+        "lineIndex": 317,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "회 초과 근로 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ef8a7744f30f5bc9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 318,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9c36f69d0cb603b8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "연속성 무관",
+      "sourceLocation": {
+        "lineIndex": 319,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "연속성 무관"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d7f6a95ba0510e3b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ",",
+      "sourceLocation": {
+        "lineIndex": 320,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ","
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e1b12f1b1a01af3b",
+      "segmentType": "label_value",
+      "labelText": "추천 불가",
+      "bodyText": "추천 불가",
+      "sourceLocation": {
+        "lineIndex": 321,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "추천 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c2b945718c201ac0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 322,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7af2bf7a4ca5ca94",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4)",
+      "sourceLocation": {
+        "lineIndex": 323,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6c0a27bb8f91929b",
+      "segmentType": "label_value",
+      "labelText": "기존 근로진행자 중 부서에서 근무태만으로 보고된 자는 선발에서 제외",
+      "bodyText": "기존 근로진행자 중 부서에서 근무태만으로 보고된 자는 선발에서 제외",
+      "sourceLocation": {
+        "lineIndex": 324,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기존 근로진행자 중 부서에서 근무태만으로 보고된 자는 선발에서 제외"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7b3647ab451046f6",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5)",
+      "sourceLocation": {
+        "lineIndex": 325,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ae86ad40c409fdf9",
+      "segmentType": "label_value",
+      "labelText": "근로기간 내에는",
+      "bodyText": "근로기간 내에는",
+      "sourceLocation": {
+        "lineIndex": 326,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "근로기간 내에는"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4ff4624c814f677e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "재학생의 신분을 유지",
+      "sourceLocation": {
+        "lineIndex": 327,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "재학생의 신분을 유지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9552f911807021fe",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "해야 하며",
+      "sourceLocation": {
+        "lineIndex": 328,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "해야 하며"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-76cc724663e20fc8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ",",
+      "sourceLocation": {
+        "lineIndex": 329,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ","
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-21ce8827ae1b9baf",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "휴",
+      "sourceLocation": {
+        "lineIndex": 330,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "휴"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-807431966d75953d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "·",
+      "sourceLocation": {
+        "lineIndex": 331,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "·"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e6031e846ae31170",
+      "segmentType": "label_value",
+      "labelText": "복학 및",
+      "bodyText": "복학 및",
+      "sourceLocation": {
+        "lineIndex": 332,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "복학 및"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1e5b8c89e0bdd549",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "해외여행 등의",
+      "sourceLocation": {
+        "lineIndex": 333,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "해외여행 등의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6eea7f414ea97f1a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "출입국 사유가 있을 시 해당부서에 즉각 알려야 함",
+      "sourceLocation": {
+        "lineIndex": 334,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "출입국 사유가 있을 시 해당부서에 즉각 알려야 함"
+    }
+  ],
+  "summary": {
+    "segmentCount": 336,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 36,
+      "label_value": 37,
+      "paragraph": 262
+    }
+  }
+}

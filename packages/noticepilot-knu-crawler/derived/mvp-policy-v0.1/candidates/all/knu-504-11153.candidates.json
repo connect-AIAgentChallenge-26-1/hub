@@ -1,0 +1,364 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11153",
+  "sourceContentHash": "07c12992886e15712d0ba9bbc6b420f0cfb73c1ee2032ef0b5ea688148ef1b25",
+  "sourceTitle": "강원대학교 RISE사업 Station G-France 지원사업 공고",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11153&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11153-0498969a325adf",
+      "uidHint": "noticepilot-cand-knu-504-11153-0498969a325adf@noticepilot.local",
+      "sourceNoticeId": "knu-504-11153",
+      "sourceTitle": "강원대학교 RISE사업 Station G-France 지원사업 공고",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11153&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-fb259a723a8d54e2",
+        "segmentType": "continuation",
+        "labelText": "E사업단에서는 강원도 내 글로벌 진출 역량을 갖춘 바이오 기업의 해외 시장 진출 및 투자 유치 지원을 위해 「Station G-France」지원 사업을 다음과 같이 공고하오니, 관심 있는 기업의 많은 참여 바랍니다.",
+        "bodyText": "2026년 6월 23일",
+        "sourceLocation": {
+          "lineIndex": 1,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-4b516295efce55fe"
+        },
+        "actionSignals": [
+          "application_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-23",
+            "start": 130,
+            "end": 142
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "E사업단에서는 강원도 내 글로벌 진출 역량을 갖춘 바이오 기업의 해외 시장 진출 및 투자 유치 지원을 위해 「Station G-France」지원 사업을 다음과 같이 공고하오니, 관심 있는 기업의 많은 참여 바랍니다.",
+          " 내 글로벌 진출 역량을 갖춘 바이오 기업의 해외 시장 진출 및 투자 유치 지원을 위해 「Station G-France」지원 사업을 다음과 같이 공고하오니, 관심 있는 기업의 많은 참여 바랍니다. 2026년 6월 23일",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-c7ad7c39d39d3eb0",
+        "segmentId": "seg-fb259a723a8d54e2",
+        "rawText": "2026년 6월 23일",
+        "normalizedStart": "2026-06-23",
+        "normalizedEnd": "2026-06-23",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 130,
+          "end": 142
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-64645ec66c45a18c",
+        "sourceNoticeId": "knu-504-11153",
+        "segmentId": "seg-fb259a723a8d54e2",
+        "temporalMentionIds": [
+          "tm-c7ad7c39d39d3eb0"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "E사업단에서는 강원도 내 글로벌 진출 역량을 갖춘 바이오 기업의 해외 시장 진출 및 투자 유치 지원을 위해 「Station G-France」지원 사업을 다음과 같이 공고하오니, 관심 있는 기업의 많은 참여 바랍니다.",
+        "evidence": "강원대학교 RISE사업단에서는 강원도 내 글로벌 진출 역량을 갖춘 바이오 기업의 해외 시장 진출 및 투자 유치 지원을 위해 「Station G-France」지원 사업을 다음과 같이 공고하오니, 관심 있는 기업의 많은 참여 바랍니다. 2026년 6월 23일"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "강원대학교 RISE사업 Station G-France 지원사업 공고 신청 마감",
+      "dateText": "2026년 6월 23일",
+      "normalizedStart": "2026-06-23",
+      "normalizedEnd": "2026-06-23",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "강원대학교 RISE사업단에서는 강원도 내 글로벌 진출 역량을 갖춘 바이오 기업의 해외 시장 진출 및 투자 유치 지원을 위해 「Station G-France」지원 사업을 다음과 같이 공고하오니, 관심 있는 기업의 많은 참여 바랍니다. 2026년 6월 23일",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11153-e237a8535d09d9",
+      "uidHint": "noticepilot-cand-knu-504-11153-e237a8535d09d9@noticepilot.local",
+      "sourceNoticeId": "knu-504-11153",
+      "sourceTitle": "강원대학교 RISE사업 Station G-France 지원사업 공고",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11153&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-71685764c5cf6968",
+        "segmentType": "label_value",
+        "labelText": "사업기간",
+        "bodyText": "26.10.12.(월)~’26.10.17.(토)/ 4박 6일",
+        "sourceLocation": {
+          "lineIndex": 5,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-10-12",
+            "start": 10,
+            "end": 22
+          },
+          {
+            "value": "2026-10-17",
+            "start": 23,
+            "end": 36
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "사업기간",
+          "2. 사업기간: ‘26.10.12.(월)~’26.10.17.(토)/ 4박 6일",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-ce6be6362b5e8361",
+        "segmentId": "seg-71685764c5cf6968",
+        "rawText": "26.10.12.(월)~’26.10.17.(토)/ 4박 6일",
+        "normalizedStart": "2026-10-12",
+        "normalizedEnd": "2026-10-17",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 10,
+          "end": 36
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-d1f70ff842625658",
+        "sourceNoticeId": "knu-504-11153",
+        "segmentId": "seg-71685764c5cf6968",
+        "temporalMentionIds": [
+          "tm-ce6be6362b5e8361"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "사업기간",
+        "evidence": "2. 사업기간: ‘26.10.12.(월)~’26.10.17.(토)/ 4박 6일"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "강원대학교 RISE사업 Station G-France 지원사업 공고 행사 기간",
+      "dateText": "26.10.12.(월)~’26.10.17.(토)/ 4박 6일",
+      "normalizedStart": "2026-10-12",
+      "normalizedEnd": "2026-10-17",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "2. 사업기간: ‘26.10.12.(월)~’26.10.17.(토)/ 4박 6일",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 2,
+    "calendarFeedIncludedCount": 0
+  }
+}

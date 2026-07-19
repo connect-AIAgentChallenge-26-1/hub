@@ -1,0 +1,60 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-3961",
+  "sourceContentHash": "cd6a1c808a28bab4263936bc780c5703ed313e69e2ec96dad1b887f8bc0046a8",
+  "sourceTitle": "2026년 청년 도박문제 예방활동단 모집 안내",
+  "publishedAt": "2026-02-25",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d40060edc21fe723",
+      "segmentType": "title",
+      "labelText": "2026년 청년 도박문제 예방활동단 모집 안내",
+      "bodyText": "2026년 청년 도박문제 예방활동단 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 청년 도박문제 예방활동단 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-adf3bf04b3e60d0e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 02-740-9047（한국도박문제예방치유원 협력지원본부 예방홍보팀）",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 02-740-9047（한국도박문제예방치유원 협력지원본부 예방홍보팀）"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

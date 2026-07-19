@@ -1,0 +1,100 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11012",
+  "sourceContentHash": "00a8ca5a9abb4bc340da556d1cbb94118662ce53e3224beb51d98d0c98ae442a",
+  "sourceTitle": "2026학년도 1학기 학습클리닉 학생튜터 모집 안내(~5/25)",
+  "publishedAt": "2026-05-15",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38e59e4333bad2d0",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 학습클리닉 학생튜터 모집 안내(~",
+      "bodyText": "5/25)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-25",
+          "start": 30,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2026학년도 1학기 학습클리닉 학생튜터 모집 안내(~5/25)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-85051dc1e9f50508",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학습클리닉 홈페이지",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학습클리닉 홈페이지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4fe0520688d3b3da",
+      "segmentType": "label_value",
+      "labelText": "튜터 신청 바로가기 ▶",
+      "bodyText": "튜터 신청 바로가기 ▶",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "튜터 신청 바로가기 ▶"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-29a5e8f7a2a74993",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://cats.kangwon.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://cats.kangwon.ac.kr"
+    }
+  ],
+  "summary": {
+    "segmentCount": 4,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "label_value": 1
+    }
+  }
+}

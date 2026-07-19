@@ -1,0 +1,95 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4849",
+  "sourceContentHash": "66dd8b876967fe42da0db8b5704c4fb91bdb8dc44b335dc9397a5f9da9a826bc",
+  "sourceTitle": "강원대학교(강릉캠퍼스) 청년인턴 채용 서류 전형 합격자 및 면접 일정 공고",
+  "publishedAt": "2026-06-16",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5cbc58ca01523e0f",
+      "segmentType": "title",
+      "labelText": "강원대학교(강릉캠퍼스) 청년인턴 채용 서류 전형 합격자 및 면접 일정 공고",
+      "bodyText": "강원대학교(강릉캠퍼스) 청년인턴 채용 서류 전형 합격자 및 면접 일정 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교(강릉캠퍼스) 청년인턴 채용 서류 전형 합격자 및 면접 일정 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-163de1353454738d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 강릉캠퍼스 공고 제2026-37호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉캠퍼스 공고 제2026-37호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6b56e0ca2faea684",
+      "segmentType": "label_value",
+      "labelText": "<강원대학교(강릉캠퍼스) 청년인턴 채용 서류 전형 합격자 안내 및 면접 일정 공고>",
+      "bodyText": "<강원대학교(강릉캠퍼스) 청년인턴 채용 서류 전형 합격자 안내 및 면접 일정 공고>",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<강원대학교(강릉캠퍼스) 청년인턴 채용 서류 전형 합격자 안내 및 면접 일정 공고>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dfd1ce9f3e8564f9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 강릉캠퍼스 제 2026-37호와 관련하여 다음과 같이 서류전형 합격자를 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉캠퍼스 제 2026-37호와 관련하여 다음과 같이 서류전형 합격자를 공고합니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 4,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "label_value": 1
+    }
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2259",
+  "sourceContentHash": "5074558232fe99d4162249eaaf9eb1d243d37b769eecb5a7680c81b1bc11e59c",
+  "sourceTitle": "2026학년도 1학기 학자금대출 신청(소속 변경) 안내",
+  "publishedAt": "2026-01-21",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d073005f79c8d312",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 학자금대출 신청(소속 변경) 안내",
+      "bodyText": "2026학년도 1학기 학자금대출 신청(소속 변경) 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 학자금대출 신청(소속 변경) 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-182fd33c75e0ae45",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 1학기 학자금대출 신청시 학교 소속을 확인하여 신청해주시기 바랍니다.",
+      "bodyText": "2026학년도 1학기 학자금대출 신청시 학교 소속을 확인하여 신청해주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 학자금대출 신청시 학교 소속을 확인하여 신청해주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-61afa378d02a93c6",
+      "segmentType": "continuation",
+      "labelText": "2026학년도 1학기 학자금대출 신청시 학교 소속을 확인하여 신청해주시기 바랍니다.",
+      "bodyText": "2026.3.1일 강원대학교로 통합이 되어 강원대학교(강릉캠퍼스), 강원대학교(원주캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-182fd33c75e0ae45"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-01",
+          "start": 47,
+          "end": 56
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2026학년도 1학기 학자금대출 신청시 학교 소속을 확인하여 신청해주시기 바랍니다. 2026.3.1일 강원대학교로 통합이 되어 강원대학교(강릉캠퍼스), 강원대학교(원주캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eb734e1bfc097f10",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026.3.1일 강원대학교로 통합이 되어 강원대학교(강릉캠퍼스), 강원대학교(원주캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-01",
+          "start": 0,
+          "end": 9
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026.3.1일 강원대학교로 통합이 되어 강원대학교(강릉캠퍼스), 강원대학교(원주캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-af408bb2e8793079",
+      "segmentType": "label_value",
+      "labelText": "학자금대출 신청",
+      "bodyText": "학자금대출 신청",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학자금대출 신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a9fecd2059139e42",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "시 본인의 1학기 학과 정보를 확인하여 강원대학교(강릉캠퍼스) 학부, 대학원 또는 강원대학교(원주캠퍼스) 학부, 대학원으로",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "시 본인의 1학기 학과 정보를 확인하여 강원대학교(강릉캠퍼스) 학부, 대학원 또는 강원대학교(원주캠퍼스) 학부, 대학원으로"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-43b56c372120891f",
+      "segmentType": "label_value",
+      "labelText": "신청해주시기 바랍니다.",
+      "bodyText": "신청해주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청해주시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "continuation": 1,
+      "paragraph": 2
+    }
+  }
+}

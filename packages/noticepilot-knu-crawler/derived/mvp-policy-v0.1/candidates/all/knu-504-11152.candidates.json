@@ -1,0 +1,365 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11152",
+  "sourceContentHash": "934072b168ad2fc50b6b39206487304394ecf64f80962d8011626d42fe851468",
+  "sourceTitle": "강원대학교 RISE사업 2차년도 시제품 제작(RISE-ON) 지원사업 모집 공고",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11152&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천 삼척",
+    "campuses": [
+      "chuncheon",
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천",
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11152-47ae581d2925c3",
+      "uidHint": "noticepilot-cand-knu-504-11152-47ae581d2925c3@noticepilot.local",
+      "sourceNoticeId": "knu-504-11152",
+      "sourceTitle": "강원대학교 RISE사업 2차년도 시제품 제작(RISE-ON) 지원사업 모집 공고",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11152&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-bb1c9d867766a16e",
+        "segmentType": "continuation",
+        "labelText": " 지역혁신중심 대학지원체계(RISE) 사업의 일환으로 참여기업의 기술 사업화 및 제품 고도화를 지원하기 위한 「시제품 제작(RISE-ON) 지원사업」을 다음과 같이 공고하오니, 관심 있는 기업의 많은 참여 바랍니다.",
+        "bodyText": "2026년 6월 23일",
+        "sourceLocation": {
+          "lineIndex": 1,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-21de6db312475ed6"
+        },
+        "actionSignals": [
+          "application_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-23",
+            "start": 137,
+            "end": 149
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          " 지역혁신중심 대학지원체계(RISE) 사업의 일환으로 참여기업의 기술 사업화 및 제품 고도화를 지원하기 위한 「시제품 제작(RISE-ON) 지원사업」을 다음과 같이 공고하오니, 관심 있는 기업의 많은 참여 바랍니다.",
+          "원체계(RISE) 사업의 일환으로 참여기업의 기술 사업화 및 제품 고도화를 지원하기 위한 「시제품 제작(RISE-ON) 지원사업」을 다음과 같이 공고하오니, 관심 있는 기업의 많은 참여 바랍니다. 2026년 6월 23일",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-705f7161c7c47c0d",
+        "segmentId": "seg-bb1c9d867766a16e",
+        "rawText": "2026년 6월 23일",
+        "normalizedStart": "2026-06-23",
+        "normalizedEnd": "2026-06-23",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 137,
+          "end": 149
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-5d4814225a716367",
+        "sourceNoticeId": "knu-504-11152",
+        "segmentId": "seg-bb1c9d867766a16e",
+        "temporalMentionIds": [
+          "tm-705f7161c7c47c0d"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": " 지역혁신중심 대학지원체계(RISE) 사업의 일환으로 참여기업의 기술 사업화 및 제품 고도화를 지원하기 위한 「시제품 제작(RISE-ON) 지원사업」을 다음과 같이 공고하오니, 관심 있는 기업의 많은 참여 바랍니다.",
+        "evidence": "강원대학교 RISE사업단에서는 지역혁신중심 대학지원체계(RISE) 사업의 일환으로 참여기업의 기술 사업화 및 제품 고도화를 지원하기 위한 「시제품 제작(RISE-ON) 지원사업」을 다음과 같이 공고하오니, 관심 있는 기업의 많은 참여 바랍니다. 2026년 6월 23일"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "강원대학교 RISE사업 2차년도 시제품 제작(RISE-ON) 지원사업 모집 공고 신청 마감",
+      "dateText": "2026년 6월 23일",
+      "normalizedStart": "2026-06-23",
+      "normalizedEnd": "2026-06-23",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "강원대학교 RISE사업단에서는 지역혁신중심 대학지원체계(RISE) 사업의 일환으로 참여기업의 기술 사업화 및 제품 고도화를 지원하기 위한 「시제품 제작(RISE-ON) 지원사업」을 다음과 같이 공고하오니, 관심 있는 기업의 많은 참여 바랍니다. 2026년 6월 23일",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-11152-d3bd287fba2da5",
+      "uidHint": "noticepilot-cand-knu-504-11152-d3bd287fba2da5@noticepilot.local",
+      "sourceNoticeId": "knu-504-11152",
+      "sourceTitle": "강원대학교 RISE사업 2차년도 시제품 제작(RISE-ON) 지원사업 모집 공고",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11152&pageIndex=1&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-9a20f5b0e86aa684",
+        "segmentType": "label_value",
+        "labelText": "사업기간",
+        "bodyText": "2026. 11. 30.(월)",
+        "sourceLocation": {
+          "lineIndex": 5,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-11-30",
+            "start": 14,
+            "end": 30
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "사업기간",
+          "2. 사업기간: 공고일~ 2026. 11. 30.(월)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-0521d2428e6c0406",
+        "segmentId": "seg-9a20f5b0e86aa684",
+        "rawText": "2026. 11. 30.(월)",
+        "normalizedStart": "2026-11-30",
+        "normalizedEnd": "2026-11-30",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 14,
+          "end": 30
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-57bbbe710f8ec6b2",
+        "sourceNoticeId": "knu-504-11152",
+        "segmentId": "seg-9a20f5b0e86aa684",
+        "temporalMentionIds": [
+          "tm-0521d2428e6c0406"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "사업기간",
+        "evidence": "2. 사업기간: 공고일~ 2026. 11. 30.(월)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "강원대학교 RISE사업 2차년도 시제품 제작(RISE-ON) 지원사업 모집 공고 행사 일정",
+      "dateText": "2026. 11. 30.(월)",
+      "normalizedStart": "2026-11-30",
+      "normalizedEnd": "2026-11-30",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "2. 사업기간: 공고일~ 2026. 11. 30.(월)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "unknown_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "unknown_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 2,
+    "calendarFeedIncludedCount": 0
+  }
+}

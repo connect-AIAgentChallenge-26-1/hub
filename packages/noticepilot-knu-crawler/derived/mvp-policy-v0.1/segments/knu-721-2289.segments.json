@@ -1,0 +1,433 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2289",
+  "sourceContentHash": "bbb4ce863bb5d59badbc502679b876f068e76e1d5b60e5f747a796f5cc68b291",
+  "sourceTitle": "2026년도 유한재단 신규장학생 선발안내",
+  "publishedAt": "2026-03-09",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f5ac02625825e7e3",
+      "segmentType": "title",
+      "labelText": "2026년도 유한재단 신규장학생 선발안내",
+      "bodyText": "2026년도 유한재단 신규장학생 선발안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년도 유한재단 신규장학생 선발안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8dd279fbc7222860",
+      "segmentType": "label_value",
+      "labelText": "선발인원",
+      "bodyText": "1. 선발인원 : 12명",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 선발인원 : 12명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-de7a264ec73b6485",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 장학금액 : 300만원(생활비, 2회)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 장학금액 : 300만원(생활비, 2회)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0ddeba82c7fbdd43",
+      "segmentType": "label_value",
+      "labelText": "단, 휴학 등 사고 시 미지급",
+      "bodyText": "※ 단, 휴학 등 사고 시 미지급",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 단, 휴학 등 사고 시 미지급"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0770aacedc1cf411",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "3. 신청기간 :",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 신청기간 :"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6eb1576a7c7643ed",
+      "segmentType": "continuation",
+      "labelText": "신청기간",
+      "bodyText": "2026. 3. 18.(",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-0770aacedc1cf411"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-18",
+          "start": 10,
+          "end": 21
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 신청기간 : 2026. 3. 18.("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0fad5fd473a62bd6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 3. 18.(",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-18",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 3. 18.("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3833ccf65b3e05c7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "수",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f3f9e67c5e572578",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ") ~ 19.(",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ") ~ 19.("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6ac9724fd57a17c4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "목",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "목"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2d4cd0182b91aba4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ") 17:00",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ") 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1df147655c985c30",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "까지",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fa91a51f8405afaf",
+      "segmentType": "label_value",
+      "labelText": "지원자격",
+      "bodyText": "4. 지원자격 : 한부모 또는 다문화가정의 학생으로 학자금지원구간 4분위 이하(2026.1학기 기준)이며, 직전학기 12학점 이상 이수하여 평점평균 3.0 이상 취득자",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 지원자격 : 한부모 또는 다문화가정의 학생으로 학자금지원구간 4분위 이하(2026.1학기 기준)이며, 직전학기 12학점 이상 이수하여 평점평균 3.0 이상 취득자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8dc61365dd875bcb",
+      "segmentType": "label_value",
+      "labelText": "단, 한부모 및 다문화가정 학생의 지원인원이 미달될 경우",
+      "bodyText": "※ 단, 한부모 및 다문화가정 학생의 지원인원이 미달될 경우",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 단, 한부모 및 다문화가정 학생의 지원인원이 미달될 경우"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c14e0300e7fad22a",
+      "segmentType": "label_value",
+      "labelText": "소득분위 4분위 이하 학생도 선발 예정",
+      "bodyText": "소득분위 4분위 이하 학생도 선발 예정",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "소득분위 4분위 이하 학생도 선발 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e669734e7503a6be",
+      "segmentType": "label_value",
+      "labelText": "유한재단 장학금 기 수혜자는 신청 불가",
+      "bodyText": "※ 유한재단 장학금 기 수혜자는 신청 불가",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 유한재단 장학금 기 수혜자는 신청 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7c1b76fe857408a2",
+      "segmentType": "label_value",
+      "labelText": "제출서류",
+      "bodyText": "5. 제출서류 : 교외장학금 신청서, 추천서, 개인정보 제공·활용동의서, 성적증명서, 재학증명서, 한부모 또는 다문화가정 입증서류(한부모가족증명서, 가족관계증명서 등),학자금지원구간통지서(2026-1학기 기준)",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 제출서류 : 교외장학금 신청서, 추천서, 개인정보 제공·활용동의서, 성적증명서, 재학증명서, 한부모 또는 다문화가정 입증서류(한부모가족증명서, 가족관계증명서 등),학자금지원구간통지서(2026-1학기 기준)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9aceab75a46a6939",
+      "segmentType": "label_value",
+      "labelText": "신청서 및 추천서 등은 붙임 서식을 작성하여 제출",
+      "bodyText": "※ 신청서 및 추천서 등은 붙임 서식을 작성하여 제출",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 신청서 및 추천서 등은 붙임 서식을 작성하여 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a61dd1d0dd3044a1",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "6. 신청방법 : 학생과(나래관 2층) 방문 직접 제출",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 신청방법 : 학생과(나래관 2층) 방문 직접 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a00e0a5676f88d24",
+      "segmentType": "label_value",
+      "labelText": "선발방법",
+      "bodyText": "7. 선발방법 : 재단 요청에 의해",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "7. 선발방법 : 재단 요청에 의해"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-84443d046e4b6a92",
+      "segmentType": "label_value",
+      "labelText": "한부모 및 다문화 가정학생 우선선발",
+      "bodyText": "한부모 및 다문화 가정학생 우선선발",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "한부모 및 다문화 가정학생 우선선발"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f84df4a458b2f06f",
+      "segmentType": "label_value",
+      "labelText": ", 선발인원 미충족 시 ｢강원대학교 교외장학금 장학생 선발기준｣에 의거 선발",
+      "bodyText": ", 선발인원 미충족 시 ｢강원대학교 교외장학금 장학생 선발기준｣에 의거 선발",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ", 선발인원 미충족 시 ｢강원대학교 교외장학금 장학생 선발기준｣에 의거 선발"
+    }
+  ],
+  "summary": {
+    "segmentCount": 22,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 13,
+      "list_item": 1,
+      "continuation": 1,
+      "paragraph": 6
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/legacy-candidate-uid-cutover-map.schema.json",
+  "title": "NoticePilot legacy candidate UID to persistent event UID cutover row",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "projectionId", "candidateId", "calendarEventId",
+    "feedScope", "legacyUid", "persistentUid", "relationBasis", "canonical",
+    "disposition", "legacyCancellationTombstoneEmitted", "migrationMode"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.legacyCandidateUidCutoverMap.v0.1"},
+    "projectionId": {"type": "string"},
+    "candidateId": {"type": "string"},
+    "calendarEventId": {"type": "string", "pattern": "^evt_[0-9a-f]{32}$"},
+    "feedScope": {"enum": ["student_default", "job_application"]},
+    "legacyUid": {"type": "string"},
+    "persistentUid": {"type": "string", "pattern": "^evt_[0-9a-f]{32}@noticepilot\\.local$"},
+    "relationBasis": {"enum": ["singleton", "duplicate", "extension"]},
+    "canonical": {"type": "boolean"},
+    "disposition": {
+      "enum": [
+        "same_event_uid_rekeyed",
+        "duplicate_source_collapsed_into_canonical_event",
+        "superseded_revision_collapsed_into_active_event"
+      ]
+    },
+    "legacyCancellationTombstoneEmitted": {"const": false},
+    "migrationMode": {"const": "pre_subscription_cutover"}
+  }
+}

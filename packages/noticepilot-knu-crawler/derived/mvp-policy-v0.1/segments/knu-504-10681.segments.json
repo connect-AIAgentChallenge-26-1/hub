@@ -1,0 +1,172 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10681",
+  "sourceContentHash": "b1caa3a0bef99657d5e78d46ab9755fcdedf462a155b771d283911b9dcf99594",
+  "sourceTitle": "2026학년도 1학기 통학버스 운행노선 시간표 안내（삼척캠퍼스）",
+  "publishedAt": "2026-03-03",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ebe8980612f04fe8",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026학년도 1학기 통학버스 운행노선 시간표 안내（삼척캠퍼스）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 통학버스 운행노선 시간표 안내（삼척캠퍼스）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3bf6a4b7aa33c65f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026학년도 1학기 통학버스 운행노선 시간표를 안내하오니 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 통학버스 운행노선 시간표를 안내하오니 참고하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0445ef7dec3e9a89",
+      "segmentType": "label_value",
+      "labelText": "○ 운행기간",
+      "bodyText": "2026. 3. 3.(화) ~ 6. 19.(금) / 1학기 종강시까지",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 9,
+          "end": 23
+        },
+        {
+          "value": "2026-06-19",
+          "start": 26,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "○ 운행기간 : 2026. 3. 3.(화) ~ 6. 19.(금) / 1학기 종강시까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cdef9963c72aa1d0",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 주말 및 공휴일 미 운행, 지정 정류장에서만 승하차가능",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 주말 및 공휴일 미 운행, 지정 정류장에서만 승하차가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a683ee4e7db6e013",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○ 운행 주요내용",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 운행 주요내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0c4d191504a95e6e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 학교버스 : 시내순환(3회), 삼척↔도계캠퍼스(10회)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 학교버스 : 시내순환(3회), 삼척↔도계캠퍼스(10회)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-281a925be66e0df3",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 임차버스 : 동해↔도계캠퍼스(2회) / 동천여행사",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 임차버스 : 동해↔도계캠퍼스(2회) / 동천여행사"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-06d629c3046f46f5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "첨부 2026.1학기 통학버스 운행노선 시간표 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "첨부 2026.1학기 통학버스 운행노선 시간표 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "label_value": 1,
+      "list_item": 3
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "noticepilot.calendarEventIdentityDraft.v0.2",
+  "status": "strategy_approved_registry_not_created",
+  "selectedStrategy": "registry_assigned_opaque_v0",
+  "policyVersion": "noticepilot.crossNoticeReconciliationPolicy.v0.3",
+  "calendarEventIdAssigned": false,
+  "dateExcludedFromIdentityMaterial": true,
+  "options": [
+    {
+      "id": "source_anchored_v0",
+      "description": "Opaque ID derived from the first approved canonical candidate; later approved revisions reuse it.",
+      "advantages": [
+        "lowest accidental merge risk",
+        "stable across date changes"
+      ],
+      "risks": [
+        "pre-existing duplicates require alias/merge records",
+        "first-source choice becomes historical anchor"
+      ]
+    },
+    {
+      "id": "semantic_hash_v0",
+      "description": "Hash institution, normalized subject title, semantic key, campus, and actor; exclude dates.",
+      "advantages": [
+        "deterministic before persistence",
+        "can converge cross-board duplicates"
+      ],
+      "risks": [
+        "recurring events with identical titles may collide",
+        "normalizer changes can alter IDs"
+      ],
+      "diagnosticPreview": {
+        "uniquePreviewIdCount": 805,
+        "multiCandidatePreviewIdCount": 79,
+        "maxCandidatesPerPreviewId": 6
+      }
+    },
+    {
+      "id": "registry_assigned_opaque_v0",
+      "description": "Assign an opaque ID only after a relation decision is approved and persisted.",
+      "advantages": [
+        "identity policy is decoupled from normalization",
+        "supports explicit aliases and splits"
+      ],
+      "risks": [
+        "requires persistent registry before incremental runtime",
+        "not independently reproducible from one candidate"
+      ]
+    }
+  ]
+}

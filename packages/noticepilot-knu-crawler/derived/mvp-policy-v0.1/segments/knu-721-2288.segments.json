@@ -1,0 +1,738 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2288",
+  "sourceContentHash": "3cc7def63720e2d746ca643371c1c727399566ee6347806ec6e4553fcbc0e177",
+  "sourceTitle": "[춘천] 2026-1학기 KNU-SOS 장학금 신청 안내",
+  "publishedAt": "2026-03-06",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fa34c6d77d5711f8",
+      "segmentType": "title",
+      "labelText": "[춘천] 2026-1학기 KNU-SOS 장학금 신청 안내",
+      "bodyText": "[춘천] 2026-1학기 KNU-SOS 장학금 신청 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[춘천] 2026-1학기 KNU-SOS 장학금 신청 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c17ee0b18f5b60ef",
+      "segmentType": "label_value",
+      "labelText": "2026-1학기 KNU-SOS 장학생 선발 계획을 다음과 같이 안내합니다.",
+      "bodyText": "2026-1학기 KNU-SOS 장학생 선발 계획을 다음과 같이 안내합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026-1학기 KNU-SOS 장학생 선발 계획을 다음과 같이 안내합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cce4a834582a22bb",
+      "segmentType": "label_value",
+      "labelText": "★ 장학 신청 전 반드시 (붙임1) 안내문을 확인하시길 바랍니다.★",
+      "bodyText": "★ 장학 신청 전 반드시 (붙임1) 안내문을 확인하시길 바랍니다.★",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "★ 장학 신청 전 반드시 (붙임1) 안내문을 확인하시길 바랍니다.★"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3ca5215d4a3efe5b",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "2026. 3. 9.(월) ~ 6. 22.(월)까지(상시접수)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-09",
+          "start": 9,
+          "end": 23
+        },
+        {
+          "value": "2026-06-22",
+          "start": 26,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 신청기간: 2026. 3. 9.(월) ~ 6. 22.(월)까지(상시접수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-80614be0bc8a0d3f",
+      "segmentType": "label_value",
+      "labelText": "신청대상",
+      "bodyText": "2. 신청대상: 다음 아래에 해당하는 자 중 장학사정관이 추천한 자",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 신청대상: 다음 아래에 해당하는 자 중 장학사정관이 추천한 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-110edd9727555078",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(장학사정관: 단과대학 부학장, 학과(부)장, 학과(전공)주임교수, 학생부처장, 학생지원과장)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(장학사정관: 단과대학 부학장, 학과(부)장, 학과(전공)주임교수, 학생부처장, 학생지원과장)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6cd17988b1a1099f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "① 재학 중 보호자의 실직 또는 파산, 사업체 부도로 인한 사유로 가계가 곤란한 자",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "① 재학 중 보호자의 실직 또는 파산, 사업체 부도로 인한 사유로 가계가 곤란한 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ca23dd868bc0c603",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "② 재학 중 보호자의 신용회복/개인회생/면책의 진행 또는 그 결정으로 인한 사유로 가계가 곤란한 자",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "② 재학 중 보호자의 신용회복/개인회생/면책의 진행 또는 그 결정으로 인한 사유로 가계가 곤란한 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ba6e5006f3c1c634",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "③ 재학 중 본인 및 가족(부, 모, 형제자매)의 6개월 이상의 장기투병(중증질환, 희귀난치병 질환)으로 인하여 경제사정이 곤란한 자 ※ [붙임2] 참고",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "③ 재학 중 본인 및 가족(부, 모, 형제자매)의 6개월 이상의 장기투병(중증질환, 희귀난치병 질환)으로 인하여 경제사정이 곤란한 자 ※ [붙임2] 참고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3f4316edbcae7dc7",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "④ 재학 중 자연재해로 인하여 경제사정이 곤란한 자",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "④ 재학 중 자연재해로 인하여 경제사정이 곤란한 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-31a9886d7e24b842",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "⑤ 보호자(부, 모)가 장애인으로 가계가 곤란한 자",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "⑤ 보호자(부, 모)가 장애인으로 가계가 곤란한 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-569d7d8d1eb16589",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 경증일 경우 해당학기 소득분위가 6구간 이하인 자(한국장학재단 산정)",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 경증일 경우 해당학기 소득분위가 6구간 이하인 자(한국장학재단 산정)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1ec068c6e66550ea",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "⑥ 재학 중 부모의 사망으로 인하여 가계가 곤란한 자",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "⑥ 재학 중 부모의 사망으로 인하여 가계가 곤란한 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c9f33261bf3c6179",
+      "segmentType": "label_value",
+      "labelText": "학생 본인이 근로자로서 부양가족이 3인(본인포함)이상이며 부양기간이 6개월 이상 지속되어 가계경제가 곤란한 자",
+      "bodyText": "⑦ 학생 본인이 근로자로서 부양가족이 3인(본인포함)이상이며 부양기간이 6개월 이상 지속되어 가계경제가 곤란한 자",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "⑦ 학생 본인이 근로자로서 부양가족이 3인(본인포함)이상이며 부양기간이 6개월 이상 지속되어 가계경제가 곤란한 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5e73338d86c37a97",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "** 학생 본인이 보호자(부 또는 모)로 자식을 부양하는 경우 제외",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "** 학생 본인이 보호자(부 또는 모)로 자식을 부양하는 경우 제외"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fe9fdeac5d2639ea",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "⑧ 기타 불가피한 사유로 경제적 곤란에 처한 충분한 근거가 입증이 되는 자",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "⑧ 기타 불가피한 사유로 경제적 곤란에 처한 충분한 근거가 입증이 되는 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d0c7eebbfdee216f",
+      "segmentType": "label_value",
+      "labelText": "선발대상",
+      "bodyText": "3. 선발대상",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 선발대상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f097ccf9fbe101fa",
+      "segmentType": "label_value",
+      "labelText": "장학생 선발 공고일 기준 재학 중인 학부생",
+      "bodyText": "- 장학생 선발 공고일 기준 재학 중인 학부생",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 장학생 선발 공고일 기준 재학 중인 학부생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ad7e5f24013edabc",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1.5(70점)이상인 자",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-05",
+          "start": 27,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 직전학기 6학점 이수자 중 직전학기 평점평균 1.5(70점)이상인 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a24a372f9387824f",
+      "segmentType": "label_value",
+      "labelText": "제출서류 ※ 자세한 내용은 [붙임 1] p. 3~4 , p. 8",
+      "bodyText": "4. 제출서류 ※ 자세한 내용은 [붙임 1] p. 3~4 , p. 8",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 제출서류 ※ 자세한 내용은 [붙임 1] p. 3~4 , p. 8"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e1b9765000b88fe6",
+      "segmentType": "label_value",
+      "labelText": "장학 유형별 최초 1회 신청자 필요서류",
+      "bodyText": "- 장학 유형별 최초 1회 신청자 필요서류",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 장학 유형별 최초 1회 신청자 필요서류"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1b72714e73a6f02b",
+      "segmentType": "label_value",
+      "labelText": "장학사정관 추천서,",
+      "bodyText": "①장학사정관 추천서,",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 1,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "①장학사정관 추천서,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f5e78f5e278ac612",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "②가족관계증명서,",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 2,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "②가족관계증명서,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b41f1173f15f1322",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "③소득증빙자료,",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 3,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "③소득증빙자료,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-450b9c6ad5cb07af",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "④지방세 납세증명서,",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 4,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "④지방세 납세증명서,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c233ac030b5c11b1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "⑤세목별 과세증명서,",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 5,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "⑤세목별 과세증명서,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d729adc71be4d995",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "⑥유형별 증빙서류",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 6,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "⑥유형별 증빙서류"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1f28534927de31ab",
+      "segmentType": "label_value",
+      "labelText": "동일유형 2회차 신청자 필요서류",
+      "bodyText": "- 동일유형 2회차 신청자 필요서류",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 동일유형 2회차 신청자 필요서류"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5eee82f06cbf4756",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "①가족관계증명서,",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 1,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "①가족관계증명서,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-015aa8a3c5bcc25c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "②소득증빙자료,",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 2,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "②소득증빙자료,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2d409fb2e7cf419a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "③지방세 납세증명서,",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 3,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "③지방세 납세증명서,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d8f085a16988f6fa",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "④세목별 과세증명서 ※ 그 밖의 서류는 1회차 증빙서류로 갈음함",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 4,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "④세목별 과세증명서 ※ 그 밖의 서류는 1회차 증빙서류로 갈음함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0ca1ec005048f2f2",
+      "segmentType": "label_value",
+      "labelText": "서류 제출 시 '귀속연도' 확인",
+      "bodyText": "※ 서류 제출 시 '귀속연도' 확인",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 서류 제출 시 '귀속연도' 확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-93f3e2591d722514",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 장학금액: 생활비보조(1인당 100만원)",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 장학금액: 생활비보조(1인당 100만원)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c7a20b48b8e4c1a5",
+      "segmentType": "label_value",
+      "labelText": "신청절차",
+      "bodyText": "6. 신청절차: (학생) 장학사정관 면담 신청 → (장학사정관) 학생 면담 후 추천서 작성 →(학생) K-Cloud 장학신청 및 서류 온라인 제출(파일업로드)",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 신청절차: (학생) 장학사정관 면담 신청 → (장학사정관) 학생 면담 후 추천서 작성 →(학생) K-Cloud 장학신청 및 서류 온라인 제출(파일업로드)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-94b08e6cbed6e254",
+      "segmentType": "label_value",
+      "labelText": "장학신청 시 '학생 본인계좌' 입력 확인(k-cloud>학부생서비스>교과>학적>신상정보변경>은행정보)",
+      "bodyText": "※ 장학신청 시 '학생 본인계좌' 입력 확인(k-cloud>학부생서비스>교과>학적>신상정보변경>은행정보)",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 장학신청 시 '학생 본인계좌' 입력 확인(k-cloud>학부생서비스>교과>학적>신상정보변경>은행정보)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0c6bdf7865f1c172",
+      "segmentType": "label_value",
+      "labelText": "** 최초 장학 신청 학생은 증빙서류를 구비하여 장학사정관 면담 후 추천서를 받아 K-Cloud 장학신청 및 서류 온라인 제출(파일업로드)하면 됩니다**",
+      "bodyText": "** 최초 장학 신청 학생은 증빙서류를 구비하여 장학사정관 면담 후 추천서를 받아 K-Cloud 장학신청 및 서류 온라인 제출(파일업로드)하면 됩니다**",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "** 최초 장학 신청 학생은 증빙서류를 구비하여 장학사정관 면담 후 추천서를 받아 K-Cloud 장학신청 및 서류 온라인 제출(파일업로드)하면 됩니다**"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e3abb0cb98f95bcb",
+      "segmentType": "label_value",
+      "labelText": "** 동일 유형 2회 신청자의 경우, 가족관계증명서, 소득증빙자료, 지방세 납세증명서, 세목별 과세증명서만 제출 / 장학사정관 추천서 및 유형별 증빙서류 제출 제외**",
+      "bodyText": "** 동일 유형 2회 신청자의 경우, 가족관계증명서, 소득증빙자료, 지방세 납세증명서, 세목별 과세증명서만 제출 / 장학사정관 추천서 및 유형별 증빙서류 제출 제외**",
+      "sourceLocation": {
+        "lineIndex": 26,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "** 동일 유형 2회 신청자의 경우, 가족관계증명서, 소득증빙자료, 지방세 납세증명서, 세목별 과세증명서만 제출 / 장학사정관 추천서 및 유형별 증빙서류 제출 제외**"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3f655b0f773effa9",
+      "segmentType": "label_value",
+      "labelText": "기타 자세한 사항은 [붙임]을 반드시 확인하시길 바라며, 추가 문의사항이 있을 시 033-250-6034(춘천학생지원과 장학팀)로 연락 바랍니다.",
+      "bodyText": "※ 기타 자세한 사항은 [붙임]을 반드시 확인하시길 바라며, 추가 문의사항이 있을 시 033-250-6034(춘천학생지원과 장학팀)로 연락 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 27,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 기타 자세한 사항은 [붙임]을 반드시 확인하시길 바라며, 추가 문의사항이 있을 시 033-250-6034(춘천학생지원과 장학팀)로 연락 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 39,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 17,
+      "paragraph": 3,
+      "list_item": 18
+    }
+  }
+}

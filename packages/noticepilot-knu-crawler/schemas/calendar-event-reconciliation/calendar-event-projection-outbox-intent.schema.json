@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/calendar-event-projection-outbox-intent.schema.json",
+  "title": "NoticePilot CalendarEvent projection outbox intent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "outboxId", "registryId", "calendarEventId", "kind",
+    "reason", "status", "createdAt", "icsSerialized"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.calendarEventProjectionOutboxIntent.v0.1"},
+    "outboxId": {"type": "string", "pattern": "^outbox_[0-9a-f]{32}$"},
+    "registryId": {"type": "string"},
+    "calendarEventId": {"type": "string", "pattern": "^evt_[0-9a-f]{32}$"},
+    "kind": {"const": "calendar_event_projection_changed"},
+    "reason": {"const": "registry_identity_created"},
+    "status": {"const": "pending_s27d_projection"},
+    "createdAt": {"type": "string"},
+    "icsSerialized": {"const": false}
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2359",
+  "sourceContentHash": "707071032e6c4e9f9e04cd3f64eee35e78afddb8b75f9f15f73c6cc1b908a988",
+  "sourceTitle": "2026학년도 입학식 및 오리엔테이션 안내",
+  "publishedAt": "2026-02-13",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f85039fa5aec61f2",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026학년도 입학식 및 오리엔테이션 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 입학식 및 오리엔테이션 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d60d04e810511b8",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 입학식 및 오리엔테이션 행사를 다음과 같이 개최함을 알려드립니다.",
+      "bodyText": "2026학년도 입학식 및 오리엔테이션 행사를 다음과 같이 개최함을 알려드립니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 입학식 및 오리엔테이션 행사를 다음과 같이 개최함을 알려드립니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-887d059358df9783",
+      "segmentType": "continuation",
+      "labelText": "◇ 일시",
+      "bodyText": "2026. 2. 27.（금） 10:00, 16:00",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-0d60d04e810511b8"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-27",
+          "start": 52,
+          "end": 67
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2026학년도 입학식 및 오리엔테이션 행사를 다음과 같이 개최함을 알려드립니다. ◇ 일시 : 2026. 2. 27.（금） 10:00, 16:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-11a0ae1539a6c5e0",
+      "segmentType": "label_value",
+      "labelText": "◇ 일시",
+      "bodyText": "2026. 2. 27.（금） 10:00, 16:00",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-27",
+          "start": 7,
+          "end": 22
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "◇ 일시 : 2026. 2. 27.（금） 10:00, 16:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1bc6dd129156ee6e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "• 오전（10:00~） : 간호대학, 경영대학, 동물생명과학대학, 사범대학, 사회과학대학,",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "• 오전（10:00~） : 간호대학, 경영대학, 동물생명과학대학, 사범대학, 사회과학대학,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2d634883f4fb6122",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "약학대학, 의과대학, 인문대학, 자연과학대학 [9개]",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "약학대학, 의과대학, 인문대학, 자연과학대학 [9개]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c64f96020f1f9a95",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "• 오후（16:00~） : 농업생명과학대학, 문화예술‧공과대학, 산림환경과학대학",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "• 오후（16:00~） : 농업생명과학대학, 문화예술‧공과대학, 산림환경과학대학"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-70bb24ff9e14aebc",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "수의과대학, 의생명과학대학, IT대학, 글로벌미래융합대학 [7개]",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수의과대학, 의생명과학대학, IT대학, 글로벌미래융합대학 [7개]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4b5e287177f4f9f4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "◇ 장소 : 강원대학교 백령아트센터",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "◇ 장소 : 강원대학교 백령아트센터"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-480eb0e3e04a1b61",
+      "segmentType": "label_value",
+      "labelText": "◇ 행사 주요 내용",
+      "bodyText": "◇ 행사 주요 내용",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "◇ 행사 주요 내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1c81ec5ca6f73d58",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "• 1부 입학식",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "• 1부 입학식"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aa7ef98a62f5c4fb",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "• 2부 오리엔테이션",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "• 2부 오리엔테이션"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4d1daf1df97622fb",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 오전 09:30까지, 오후 15:30까지 행사장에 단과대학 별 입장 완료",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 오전 09:30까지, 오후 15:30까지 행사장에 단과대학 별 입장 완료"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5f2a8c76fd74c002",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "◇ 문의 사항 연락처",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "◇ 문의 사항 연락처"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5d4955ade75ae1a0",
+      "segmentType": "label_value",
+      "labelText": "행사장 입장 및 오리엔테이션 관련",
+      "bodyText": "• 행사장 입장 및 오리엔테이션 관련 : 소속 학과 사무실",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "• 행사장 입장 및 오리엔테이션 관련 : 소속 학과 사무실"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-efb46f66881240a5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "•기타 문의 : 강원대학교 학사지원과",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "•기타 문의 : 강원대학교 학사지원과"
+    }
+  ],
+  "summary": {
+    "segmentCount": 16,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 4,
+      "continuation": 1,
+      "list_item": 6,
+      "paragraph": 4
+    }
+  }
+}

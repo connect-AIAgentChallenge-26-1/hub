@@ -1,0 +1,321 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10777",
+  "sourceContentHash": "109b1982564ac2eb32ee3295e296507a153816f81998d86f7ce5b4388b286efe",
+  "sourceTitle": "[강릉-원주] 2026취업동아리 모집",
+  "publishedAt": "2026-03-23",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d168672dc3dfbf53",
+      "segmentType": "title",
+      "labelText": "[강릉-원주] 2026취업동아리 모집",
+      "bodyText": "[강릉-원주] 2026취업동아리 모집",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[강릉-원주] 2026취업동아리 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-15d1611bfac5cab3",
+      "segmentType": "label_value",
+      "labelText": "모집기간",
+      "bodyText": "2026.3.23.(월)~4.5.(일)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-23",
+          "start": 10,
+          "end": 23
+        },
+        {
+          "value": "2026-04-05",
+          "start": 24,
+          "end": 31
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 모집기간 : 2026.3.23.(월)~4.5.(일)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ff3b734e7dff5aa9",
+      "segmentType": "label_value",
+      "labelText": "운영기간",
+      "bodyText": "2. 운영기간 : 2026. 5. ~12.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 운영기간 : 2026. 5. ~12."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ecf8a2bc59a89037",
+      "segmentType": "label_value",
+      "labelText": "모집대상",
+      "bodyText": "3. 모집대상 : 강릉, 원주캠퍼스 재학생 총 15팀 (팀당 최소 4인이상)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 모집대상 : 강릉, 원주캠퍼스 재학생 총 15팀 (팀당 최소 4인이상)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f4dad95eb8cd45a8",
+      "segmentType": "label_value",
+      "labelText": "1차 선발확정",
+      "bodyText": "2026.4.13.(월)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-13",
+          "start": 12,
+          "end": 25
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "4. 1차 선발확정: 2026.4.13.(월)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3399e6ea3de853c2",
+      "segmentType": "label_value",
+      "labelText": "1차 선발확정 후 팀 또는 리더 면접을 통해 선발팀 확정 (추후 개별통보 및 공지)",
+      "bodyText": "- 1차 선발확정 후 팀 또는 리더 면접을 통해 선발팀 확정 (추후 개별통보 및 공지)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 1차 선발확정 후 팀 또는 리더 면접을 통해 선발팀 확정 (추후 개별통보 및 공지)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-69ddaab947f51cef",
+      "segmentType": "label_value",
+      "labelText": "제출서류",
+      "bodyText": "5. 제출서류 : 동아리 신청서, 활동계획서 필수 제출 (아래 첨부파일 확인)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 제출서류 : 동아리 신청서, 활동계획서 필수 제출 (아래 첨부파일 확인)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-72ee5e67ec6ab90d",
+      "segmentType": "label_value",
+      "labelText": "제출방법",
+      "bodyText": "6. 제출방법",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "6. 제출방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ebd98fff49bc287c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 하이시스템(",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 하이시스템("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-805c894ff9d7d412",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://high.gwnu.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://high.gwnu.ac.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-68a0ee2e5c548773",
+      "segmentType": "label_value",
+      "labelText": ") 신청을 먼저하세요!! (하이시스템은 팀 리더만 신청하시고, 제출서류에는 팀원 모두 기재하세요!!!)",
+      "bodyText": ") 신청을 먼저하세요!! (하이시스템은 팀 리더만 신청하시고, 제출서류에는 팀원 모두 기재하세요!!!)",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ") 신청을 먼저하세요!! (하이시스템은 팀 리더만 신청하시고, 제출서류에는 팀원 모두 기재하세요!!!)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-104efc49913feefc",
+      "segmentType": "label_value",
+      "labelText": "제출 이메일",
+      "bodyText": "- 제출 이메일 :",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 제출 이메일 :"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38989fd814dc75ca",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "service@kangwon.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "service@kangwon.ac.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d3e1053285b66b5d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 이메일 제목 : 2026취업동아리신청_팀명",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 이메일 제목 : 2026취업동아리신청_팀명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-09d163e4e83bb595",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "7. 문의사항 : 강릉학생지원과 학생성공지원팀 담당자 033)640-2797",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "7. 문의사항 : 강릉학생지원과 학생성공지원팀 담당자 033)640-2797"
+    }
+  ],
+  "summary": {
+    "segmentCount": 15,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 9,
+      "list_item": 3,
+      "paragraph": 2
+    }
+  }
+}

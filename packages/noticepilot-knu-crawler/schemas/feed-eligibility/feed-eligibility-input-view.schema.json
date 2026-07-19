@@ -1,0 +1,183 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/feed-eligibility-input-view.schema.json",
+  "title": "NoticePilot FeedEligibilityInputView",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "calendarEventId",
+    "institutionId",
+    "eventStatus",
+    "canonicalCandidateId",
+    "sourceCandidateIds",
+    "feedScopes",
+    "eventType",
+    "targetActor",
+    "temporalState",
+    "campusScope",
+    "audienceRules",
+    "sourceLinks",
+    "reviewState"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "noticepilot.feedEligibilityInputView.v0.2"
+    },
+    "calendarEventId": {
+      "type": "string",
+      "pattern": "^evt_[0-9a-f]{32}$"
+    },
+    "institutionId": {
+      "const": "kangwon"
+    },
+    "eventStatus": {
+      "type": "string"
+    },
+    "canonicalCandidateId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "sourceCandidateIds": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "feedScopes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "student_default",
+          "job_application"
+        ]
+      }
+    },
+    "eventType": {
+      "type": "string",
+      "minLength": 1
+    },
+    "targetActor": {
+      "enum": [
+        "student",
+        "job_applicant"
+      ]
+    },
+    "campusScope": {
+      "type": "object"
+    },
+    "audienceRules": {
+      "type": "object"
+    },
+    "sourceLinks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sourceLinkId",
+          "sourceNoticeId",
+          "sourceCandidateId",
+          "canonical",
+          "activeSource",
+          "canonicalBoardId",
+          "noticeType"
+        ],
+        "properties": {
+          "sourceLinkId": {
+            "type": "string"
+          },
+          "sourceNoticeId": {
+            "type": "string"
+          },
+          "sourceCandidateId": {
+            "type": "string"
+          },
+          "canonical": {
+            "type": "boolean"
+          },
+          "activeSource": {
+            "type": "boolean"
+          },
+          "canonicalBoardId": {
+            "type": "string"
+          },
+          "noticeType": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "reviewState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "canonicalVerdict",
+        "sourceVerdicts",
+        "anySourceRequiresReview",
+        "allSourcesAutoConfirmed",
+        "unknownCandidateIds"
+      ],
+      "properties": {
+        "canonicalVerdict": {
+          "enum": [
+            "auto_confirmed",
+            "needs_review",
+            "unknown"
+          ]
+        },
+        "sourceVerdicts": {
+          "type": "array"
+        },
+        "anySourceRequiresReview": {
+          "type": "boolean"
+        },
+        "allSourcesAutoConfirmed": {
+          "type": "boolean"
+        },
+        "unknownCandidateIds": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "temporalState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "normalizedStart",
+        "normalizedEnd",
+        "hasValidNormalizedDate",
+        "source"
+      ],
+      "properties": {
+        "normalizedStart": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "normalizedEnd": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "hasValidNormalizedDate": {
+          "type": "boolean"
+        },
+        "source": {
+          "const": "s27d_active_projection"
+        }
+      }
+    }
+  }
+}

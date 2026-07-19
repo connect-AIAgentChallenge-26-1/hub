@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-3903",
+  "sourceContentHash": "c43d2c278fe6ce47f42e90d1cf2cf493ec375779fb20c463e37be00ef3722c8c",
+  "sourceTitle": "국민권익위원회 ＜2026 청백리포터＞ 모집 안내",
+  "publishedAt": "2026-01-19",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7ca9bd1ae3f37fdd",
+      "segmentType": "title",
+      "labelText": "국민권익위원회 ＜2026 청백리포터＞ 모집 안내",
+      "bodyText": "국민권익위원회 ＜2026 청백리포터＞ 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국민권익위원회 ＜2026 청백리포터＞ 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6be9e5b000327b52",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의 사항 : 044-200-7080(국민권익위원회 대변인실)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의 사항 : 044-200-7080(국민권익위원회 대변인실)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1
+    }
+  }
+}

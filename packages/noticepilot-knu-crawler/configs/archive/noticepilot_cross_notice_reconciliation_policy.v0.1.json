@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "noticepilot.crossNoticeReconciliationPolicy.v0.1",
+  "policyVersion": "0.1.0",
+  "status": "approved_for_s27b_implementation",
+  "approvedAt": "2026-07-13T01:40:00+09:00",
+  "executionScope": {
+    "s27aDiagnosticOnly": true,
+    "relationAssignmentsPerformed": false,
+    "calendarEventIdsAssigned": false,
+    "runtimeMutationPerformed": false,
+    "icsMutationPerformed": false
+  },
+  "relations": [
+    "distinct",
+    "duplicate",
+    "revision",
+    "extension",
+    "replacement",
+    "needs_review"
+  ],
+  "decisions": {
+    "S27A-D1": {
+      "status": "approved",
+      "rule": "same_normalized_title_different_date_window_defaults_distinct",
+      "defaultRelation": "distinct",
+      "notes": [
+        "A repeated title does not create identity across different windows.",
+        "A stronger explicit original-notice reference may create a separately reviewable relation candidate, but never an automatic merge under D1."
+      ]
+    },
+    "S27A-D2": {
+      "status": "approved",
+      "rule": "cross_board_duplicate_requires_all_identity_conditions",
+      "automaticRelation": "duplicate",
+      "allOf": [
+        "same_base_title",
+        "same_event_type_and_action_type",
+        "same_normalized_start_end_and_all_day_mode",
+        "campus_scopes_compatible",
+        "target_actor_and_audience_compatible",
+        "no_revision_extension_replacement_or_cancellation_evidence"
+      ],
+      "onAnyConditionFailure": "needs_review_or_distinct_by_other_approved_rule"
+    },
+    "S27A-D3": {
+      "status": "approved",
+      "markerAloneNeverAuthorizesRelation": true,
+      "rules": {
+        "extension": {
+          "automaticRelation": "extension",
+          "allOf": [
+            "only_later_notice_has_extension_marker",
+            "same_base_title",
+            "same_semantic_action_and_scope",
+            "same_normalized_start",
+            "later_normalized_end_is_later"
+          ]
+        },
+        "repost_or_reannouncement": {
+          "markers": [
+            "재공지",
+            "재안내"
+          ],
+          "automaticRelation": "duplicate",
+          "allOf": [
+            "calendar_event_projection_exactly_equal"
+          ]
+        },
+        "revision": {
+          "markers": [
+            "수정",
+            "정정",
+            "변경"
+          ],
+          "automaticRelation": null,
+          "allOfForReviewCandidate": [
+            "only_later_notice_has_marker",
+            "same_base_title",
+            "explicit_event_field_change",
+            "publication_order_known"
+          ],
+          "result": "needs_review",
+          "initialS27AutomaticRevisionAllowed": false
+        },
+        "additional_recruitment_or_closed": {
+          "markers": [
+            "추가모집",
+            "추가 모집",
+            "마감"
+          ],
+          "defaultRelation": "distinct"
+        },
+        "replacement_or_cancellation": {
+          "markers": [
+            "대체",
+            "취소"
+          ],
+          "withoutBodyOriginalNoticeReference": "needs_review",
+          "automaticRelationWithoutBodyReferenceAllowed": false
+        }
+      }
+    },
+    "S27A-D4": {
+      "status": "approved",
+      "rule": "campus_disjoint_always_distinct",
+      "defaultRelation": "distinct",
+      "parentChildIdentityAllowed": false
+    },
+    "S27A-D5": {
+      "status": "approved",
+      "selectedStrategy": "registry_assigned_opaque_v0",
+      "assignmentTiming": "after_approved_relation_is_persisted",
+      "dateExcludedFromIdMaterial": true,
+      "registryRequired": true,
+      "semanticHashAsCanonicalIdAllowed": false
+    },
+    "S27A-D6": {
+      "status": "approved",
+      "rule": "every_pair_must_be_directly_proven_before_cluster_merge",
+      "transitiveMergeAllowed": false,
+      "requiredGraph": "complete_pairwise_evidence",
+      "incompleteGraphAction": "split_or_needs_review"
+    },
+    "S27A-D7": {
+      "status": "approved",
+      "rule": "one_active_ics_event_preserve_all_source_links",
+      "activeIcsProjectionCountPerApprovedIdentity": 1,
+      "preserveAllSourceLinks": true,
+      "preserveAllSourceCandidateIds": true,
+      "historicalSourcesRemainAuditable": true
+    },
+    "S27A-D8": {
+      "status": "approved_with_required_configuration",
+      "rule": "source_url_then_configured_board_priority",
+      "tieBreakOrder": [
+        "source_url_identity_or_authority_rule",
+        "configured_board_priority"
+      ],
+      "sourceUrlPolicy": {
+        "lexicalUrlOrderingAllowed": false,
+        "sameUrlMayEstablishSameSourceReference": true,
+        "differentUrlsRequireBoardPriorityOrReview": true
+      },
+      "boardPriority": [],
+      "boardPriorityConfigurationStatus": "creator_configuration_required",
+      "noticeSequenceFallbackAllowed": false,
+      "candidateIdFallbackAllowed": false,
+      "unresolvedTieAction": "needs_review"
+    }
+  },
+  "globalFailClosedRules": [
+    "diagnostic_signal_is_not_relation_decision",
+    "title_equality_alone_never_merges",
+    "date_equality_alone_never_merges",
+    "marker_alone_never_authorizes_relation",
+    "campus_disjoint_always_distinct",
+    "transitive_cluster_merge_forbidden",
+    "missing_board_priority_never_uses_implicit_order",
+    "no_runtime_or_ics_mutation_in_s27a"
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-720-2434",
+  "sourceContentHash": "cf1d884cd644f35b266cf0685dff88d5f0b0e1eb62cd27fc08ed56d3bb7ea005",
+  "sourceTitle": "2026학년도 여름 계절수업 동국대학교 WISE캠퍼스 학점교류 수학 안내(춘천캠퍼스)",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2434&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-720-2434-3bca1d4b7b4af0",
+      "uidHint": "noticepilot-cand-knu-720-2434-3bca1d4b7b4af0@noticepilot.local",
+      "sourceNoticeId": "knu-720-2434",
+      "sourceTitle": "2026학년도 여름 계절수업 동국대학교 WISE캠퍼스 학점교류 수학 안내(춘천캠퍼스)",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2434&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "submission_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-23dcd42b3aff7ad9",
+        "segmentType": "label_value",
+        "labelText": "제출기한(춘천교육지원과 도착기준)",
+        "bodyText": "2026. 5. 4.(월) 18:00까지(기일엄수)",
+        "sourceLocation": {
+          "lineIndex": 14,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "submission_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-04",
+            "start": 24,
+            "end": 38
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "internal_process",
+      "semanticClassification": {
+        "eventType": "submission_period",
+        "actionType": null,
+        "temporalRole": "internal_process",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "제출기한(춘천교육지원과 도착기준)",
+          "나. 제출기한(춘천교육지원과 도착기준) : 2026. 5. 4.(월) 18:00까지(기일엄수)",
+          "semantic.temporal_role.internal_workflow"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-2328d7e3e0e95f25",
+        "segmentId": "seg-23dcd42b3aff7ad9",
+        "rawText": "2026. 5. 4.(월)",
+        "normalizedStart": "2026-05-04T18:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 24,
+          "end": 38
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-7fc10873e135f30e",
+        "sourceNoticeId": "knu-720-2434",
+        "segmentId": "seg-23dcd42b3aff7ad9",
+        "temporalMentionIds": [
+          "tm-2328d7e3e0e95f25"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "제출기한(춘천교육지원과 도착기준)",
+        "evidence": "나. 제출기한(춘천교육지원과 도착기준) : 2026. 5. 4.(월) 18:00까지(기일엄수)"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "2026학년도 여름 계절수업 동국대학교 WISE캠퍼스 학점교류 수학 안내(춘천캠퍼스) 제출 마감",
+      "dateText": "2026. 5. 4.(월)",
+      "normalizedStart": "2026-05-04T18:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "나. 제출기한(춘천교육지원과 도착기준) : 2026. 5. 4.(월) 18:00까지(기일엄수)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "internal_workflow_deadline",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "reasonCodes": [
+        "internal_workflow_deadline",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "internal_workflow_deadline",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.internal_workflow_deadline",
+          "publishability.temporal_role.internal_process",
+          "publishability.temporal_role.internal_process.review",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

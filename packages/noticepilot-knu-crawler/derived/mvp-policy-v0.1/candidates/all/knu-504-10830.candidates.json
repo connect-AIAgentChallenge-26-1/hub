@@ -1,0 +1,201 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10830",
+  "sourceContentHash": "f207bc61e98e552d3048a8949dc3c552eac4de2aae1f3e169a8d0923b64a2a81",
+  "sourceTitle": "강원대학교 제14기 학생홍보대사(가온) 서류전형 합격자(면접전형 대상자) 발표 및 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10830&pageIndex=7&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10830-ac296b09d98892",
+      "uidHint": "noticepilot-cand-knu-504-10830-ac296b09d98892@noticepilot.local",
+      "sourceNoticeId": "knu-504-10830",
+      "sourceTitle": "강원대학교 제14기 학생홍보대사(가온) 서류전형 합격자(면접전형 대상자) 발표 및 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10830&pageIndex=7&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "exam_or_interview",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-80618d8eb63e4d57",
+        "segmentType": "continuation",
+        "labelText": "■ 면접 일시",
+        "bodyText": "2026. 4. 17.(금)",
+        "sourceLocation": {
+          "lineIndex": 3,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-32de810ea1f5089f"
+        },
+        "actionSignals": [
+          "exam_or_interview"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-04-17",
+            "start": 9,
+            "end": 24
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "exam_or_interview",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "■ 면접 일시",
+          "■ 면접 일시: 2026. 4. 17.(금)",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-4971de3e1b56cb13",
+        "segmentId": "seg-80618d8eb63e4d57",
+        "rawText": "2026. 4. 17.(금)",
+        "normalizedStart": "2026-04-17",
+        "normalizedEnd": "2026-04-17",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 9,
+          "end": 24
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-9e9c6a9635c636ec",
+        "sourceNoticeId": "knu-504-10830",
+        "segmentId": "seg-80618d8eb63e4d57",
+        "temporalMentionIds": [
+          "tm-4971de3e1b56cb13"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "■ 면접 일시",
+        "evidence": "■ 면접 일시: 2026. 4. 17.(금)"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "강원대학교 제14기 학생홍보대사(가온) 서류전형 합격자(면접전형 대상자) 발표 및 안내 시험·면접 일정",
+      "dateText": "2026. 4. 17.(금)",
+      "normalizedStart": "2026-04-17",
+      "normalizedEnd": "2026-04-17",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "■ 면접 일시: 2026. 4. 17.(금)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "post_result_selected_participant_action"
+      ],
+      "reasonCodes": [
+        "completed_result_announcement",
+        "post_result_selected_participant_action",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "conditional",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "medium",
+        "ruleId": "applicability.conditional.selected_participant",
+        "reasonCodes": [
+          "post_result_selected_participant_action",
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "completed_result_announcement",
+          "post_result_selected_participant_action",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.completed_result_announcement",
+          "publishability.reason.post_result_selected_participant_action",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

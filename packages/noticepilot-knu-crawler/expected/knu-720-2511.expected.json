@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "noticepilot.expectedEvents.v0.3",
+  "corpusId": "knu-720-2511",
+  "expectedEvents": [
+    {
+      "eventType": "submission_deadline",
+      "targetActor": "student",
+      "normalizedStart": "2026-08-03T18:00:00+09:00",
+      "shouldAutoConfirm": true,
+      "evidenceContains": "학생 : 2026. 8. 3.(월) 18:00 까지"
+    },
+    {
+      "eventType": "submission_deadline",
+      "targetActor": "department",
+      "normalizedStart": "2026-08-04T18:00:00+09:00",
+      "shouldAutoConfirm": false,
+      "evidenceContains": "학과 : 2026. 8. 4.(화) 18:00 까지"
+    }
+  ],
+  "expectedCandidateCount": 2,
+  "expectedAutoConfirmedCount": 1
+}

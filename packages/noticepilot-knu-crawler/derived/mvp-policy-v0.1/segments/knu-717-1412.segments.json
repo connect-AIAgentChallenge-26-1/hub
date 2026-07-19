@@ -1,0 +1,418 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-717-1412",
+  "sourceContentHash": "576bc430dcb88f6d5933417953444de4128e41d76f002234bb06ba34f6f90c71",
+  "sourceTitle": "KT에이블스쿨 10기 모집",
+  "publishedAt": "2026-06-23",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-378f01619d66313a",
+      "segmentType": "title",
+      "labelText": "KT에이블스쿨 10기 모집",
+      "bodyText": "KT에이블스쿨 10기 모집",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "KT에이블스쿨 10기 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-304fd2105603796b",
+      "segmentType": "label_value",
+      "labelText": "KT에이블스쿨 10기 모집",
+      "bodyText": "KT에이블스쿨 10기 모집",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "KT에이블스쿨 10기 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e8ede10b00c71333",
+      "segmentType": "label_value",
+      "labelText": "■ 모집",
+      "bodyText": "■ 모집",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-351f9c4734353622",
+      "segmentType": "label_value",
+      "labelText": "모집기간",
+      "bodyText": "2026.7.7.(화) ~ 8.10.(월) / 합격자 발표 8.28(금)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-07",
+          "start": 9,
+          "end": 21
+        },
+        {
+          "value": "2026-08-10",
+          "start": 24,
+          "end": 32
+        },
+        {
+          "value": "2026-08-28",
+          "start": 42,
+          "end": 49
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 모집기간: 2026.7.7.(화) ~ 8.10.(월) / 합격자 발표 8.28(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dd6249a3df68b487",
+      "segmentType": "label_value",
+      "labelText": "모집대상",
+      "bodyText": "2. 모집대상",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 모집대상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8a16771e647d72bd",
+      "segmentType": "label_value",
+      "labelText": "30세 이하(91.09.29이후 출생자), 미취업자(교육 시작일 기준)",
+      "bodyText": "- 30세 이하(91.09.29이후 출생자), 미취업자(교육 시작일 기준)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 30세 이하(91.09.29이후 출생자), 미취업자(교육 시작일 기준)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3bdf271b23d8869f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "년제 대학(학사 이상)졸업자 및 졸업예정자, 6학기 이상 수료자이거나 동등 학력 이상자",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "년제 대학(학사 이상)졸업자 및 졸업예정자, 6학기 이상 수료자이거나 동등 학력 이상자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bfbbbcd4eb044f0b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "보유 또는 발급 가능한자",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "보유 또는 발급 가능한자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-08f3a57c99b855c0",
+      "segmentType": "label_value",
+      "labelText": "모집일정",
+      "bodyText": "3. 모집일정: 포스터 내 확인",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 모집일정: 포스터 내 확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-58eef9e54536d6ff",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "4. 신청방법: 포스터 내 신청 QR",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 신청방법: 포스터 내 신청 QR"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-254f2515dad60ebf",
+      "segmentType": "label_value",
+      "labelText": "■ 교육운영",
+      "bodyText": "■ 교육운영",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 교육운영"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7a441e401e931e89",
+      "segmentType": "label_value",
+      "labelText": "모집분야",
+      "bodyText": "1. 모집분야: AI개발자 트랙/DX컨설턴트 트랙",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 모집분야: AI개발자 트랙/DX컨설턴트 트랙"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d231e1f8b3dca708",
+      "segmentType": "label_value",
+      "labelText": "교육기간",
+      "bodyText": "2026.9.29.(화) ~ 27.3.5.(금)",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-09-29",
+          "start": 9,
+          "end": 22
+        },
+        {
+          "value": "2027-03-05",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 교육기간: 2026.9.29.(화) ~ 27.3.5.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f670ee95173eca58",
+      "segmentType": "label_value",
+      "labelText": "수강혜택",
+      "bodyText": "3. 수강혜택",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 수강혜택"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-35422d6accaeb38e",
+      "segmentType": "label_value",
+      "labelText": "수료생 취업 연계 지원",
+      "bodyText": "- 수료생 취업 연계 지원",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 수료생 취업 연계 지원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bae1bfa68b69153d",
+      "segmentType": "label_value",
+      "labelText": "우수 수료생 KT 채용 지원 시 우대",
+      "bodyText": "- 우수 수료생 KT 채용 지원 시 우대",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 우수 수료생 KT 채용 지원 시 우대"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ff0f01d6d17809d0",
+      "segmentType": "label_value",
+      "labelText": "*본 교육과정은 KT가 고용노동부와 함께 대한민국 청년들을 “기업실무형 AI·Cloud기반 AX인재”로 양성하고, 일자리 창출에 기여하는 프로그램입니다.",
+      "bodyText": "*본 교육과정은 KT가 고용노동부와 함께 대한민국 청년들을 “기업실무형 AI·Cloud기반 AX인재”로 양성하고, 일자리 창출에 기여하는 프로그램입니다.",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "*본 교육과정은 KT가 고용노동부와 함께 대한민국 청년들을 “기업실무형 AI·Cloud기반 AX인재”로 양성하고, 일자리 창출에 기여하는 프로그램입니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bd1e3a89e03bc9c2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "■ 문의 : 해당 홈페이지 Q&A (",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 문의 : 해당 홈페이지 Q&A ("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ecdb1e2de1d3930e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://linktr.ee/kt_aivle",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://linktr.ee/kt_aivle"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ee4a2f7ac5a087c1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    }
+  ],
+  "summary": {
+    "segmentCount": 20,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 14,
+      "paragraph": 5
+    }
+  }
+}

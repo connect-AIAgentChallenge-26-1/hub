@@ -1,0 +1,131 @@
+{
+  "schemaVersion": "noticepilot.mvpPolicySummary.v0.5",
+  "pipelineVersion": "0.1.18",
+  "policyVersion": "noticepilot.studentFirstMvp.v0.1",
+  "source": {
+    "indexNoticeCount": 2059,
+    "processedNoticeCount": 2059,
+    "missingNormalizedCount": 0,
+    "missingNormalizedNoticeIds": [],
+    "boardsFilter": [],
+    "limit": null
+  },
+  "noticeCount": 2059,
+  "dispositionCounts": {
+    "needs_review": 726,
+    "not_calendar_relevant": 616,
+    "publishable": 717
+  },
+  "candidateCount": 1304,
+  "candidateStatusCounts": {
+    "auto_confirmed": 909,
+    "needs_review": 395
+  },
+  "feedCandidateCounts": {
+    "job_application": 300,
+    "student_default": 609
+  },
+  "eventTypeCounts": {
+    "academic_period": 56,
+    "application_period": 394,
+    "deadline": 56,
+    "event": 204,
+    "exam_or_interview": 30,
+    "job_application_period": 300,
+    "payment_period": 23,
+    "result_announcement": 59,
+    "submission_period": 182
+  },
+  "actionTypeCounts": {
+    "course_evaluation": 3,
+    "course_registration": 20,
+    "course_registration_cancellation": 5,
+    "course_registration_change": 9,
+    "leave_of_absence_application": 2,
+    "preliminary_course_registration": 1,
+    "readmission_application": 2,
+    "return_from_leave_application": 2
+  },
+  "personalizationReadyCandidateCount": 12,
+  "studentYearScopedCandidateCount": 4,
+  "structuredSegmentCandidateCount": 1304,
+  "locallyGroundedCandidateCount": 1238,
+  "sourceSegmentTypeCounts": {
+    "continuation": 230,
+    "label_value": 853,
+    "list_item": 93,
+    "paragraph": 74,
+    "table_row": 8,
+    "title": 46
+  },
+  "rangeCandidateCount": 785,
+  "relativeDateCandidateCount": 0,
+  "boardDispositionCounts": {
+    "504": {
+      "needs_review": 275,
+      "not_calendar_relevant": 165,
+      "publishable": 172
+    },
+    "715": {
+      "needs_review": 37,
+      "not_calendar_relevant": 16,
+      "publishable": 15
+    },
+    "716": {
+      "needs_review": 58,
+      "not_calendar_relevant": 270,
+      "publishable": 300
+    },
+    "717": {
+      "needs_review": 22,
+      "not_calendar_relevant": 3,
+      "publishable": 6
+    },
+    "719": {
+      "needs_review": 209,
+      "not_calendar_relevant": 81,
+      "publishable": 11
+    },
+    "720": {
+      "needs_review": 67,
+      "not_calendar_relevant": 19,
+      "publishable": 121
+    },
+    "721": {
+      "needs_review": 58,
+      "not_calendar_relevant": 62,
+      "publishable": 92
+    }
+  },
+  "reasonCodeCounts": {
+    "unresolved_action_date": 457,
+    "attachment_may_contain_required_schedule": 304,
+    "board716_non_application_stage": 270,
+    "no_publishable_calendar_action": 267,
+    "attachment_required_for_schedule": 204,
+    "action_label_not_locally_grounded": 149,
+    "audience_requires_review": 114,
+    "internal_workflow_deadline": 77,
+    "same_datetime_candidates_consolidated": 49,
+    "truncated_date_context": 49,
+    "date_before_publication": 48,
+    "reference_date_not_user_action": 48,
+    "non_student_audience": 46,
+    "same_action_boundary_candidates_consolidated": 43,
+    "board716_application_stage": 37,
+    "missing_application_period": 37,
+    "ambiguous_date": 35,
+    "completed_result_announcement": 34,
+    "board716_unknown_stage": 21,
+    "multiple_discrete_event_dates": 20,
+    "internal_process_period": 18,
+    "recurring_time_window_requires_expansion": 17,
+    "same_day_precision_candidates_consolidated": 14,
+    "open_ended_application_period": 10,
+    "non_student_action_target": 10,
+    "conditional_selected_participant_action": 10,
+    "partial_activity_period_requires_review": 10,
+    "conflicting_same_action_dates": 9,
+    "non_student_local_action": 2
+  }
+}

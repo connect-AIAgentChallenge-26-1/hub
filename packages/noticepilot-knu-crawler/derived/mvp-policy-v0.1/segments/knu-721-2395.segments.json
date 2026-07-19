@@ -1,0 +1,360 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2395",
+  "sourceContentHash": "2f99fcb962a59772cf26f71bedede0f11395f8de83b5519d2c88051f27dfb2f9",
+  "sourceTitle": "2026학년도 2학기 1차 주거안정장학금 신청 안내",
+  "publishedAt": "2026-05-19",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6945bb9f64eefdfe",
+      "segmentType": "title",
+      "labelText": "2026학년도 2학기 1차 주거안정장학금 신청 안내",
+      "bodyText": "2026학년도 2학기 1차 주거안정장학금 신청 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 2학기 1차 주거안정장학금 신청 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-90a6618b644bd967",
+      "segmentType": "label_value",
+      "labelText": "(학생의 학적(학과) 소속에 따라 각 캠퍼스로 신청-춘천캠퍼스, 삼척캠퍼스, 강릉캠퍼스, 원주캠퍼스)",
+      "bodyText": "(학생의 학적(학과) 소속에 따라 각 캠퍼스로 신청-춘천캠퍼스, 삼척캠퍼스, 강릉캠퍼스, 원주캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(학생의 학적(학과) 소속에 따라 각 캠퍼스로 신청-춘천캠퍼스, 삼척캠퍼스, 강릉캠퍼스, 원주캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-14aae32f6fa8aeb9",
+      "segmentType": "label_value",
+      "labelText": "ㅇ (신청기간)",
+      "bodyText": "2026. 5. 22.(금), 09:00 ~ 6. 22.(월), 18:00",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-22",
+          "start": 9,
+          "end": 24
+        },
+        {
+          "value": "2026-06-22",
+          "start": 34,
+          "end": 43
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "ㅇ (신청기간) 2026. 5. 22.(금), 09:00 ~ 6. 22.(월), 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ef0afcb9f7b4d531",
+      "segmentType": "label_value",
+      "labelText": "ㅇ (서류 제출 및 가구원 동의)",
+      "bodyText": "2026. 5. 22.(금), 09:00 ~ 6. 29.(월), 18:00",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-22",
+          "start": 19,
+          "end": 34
+        },
+        {
+          "value": "2026-06-29",
+          "start": 44,
+          "end": 53
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "ㅇ (서류 제출 및 가구원 동의) 2026. 5. 22.(금), 09:00 ~ 6. 29.(월), 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-64d88095dd988fab",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 원거리 심사를 위한 부모 주소정보 확인을 위하여 가구원 동의 필수",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 원거리 심사를 위한 부모 주소정보 확인을 위하여 가구원 동의 필수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c3435e7c0ae36d24",
+      "segmentType": "label_value",
+      "labelText": "ㅇ (신청대상)",
+      "bodyText": "ㅇ (신청대상)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ (신청대상)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bb65dc756ea936bf",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "①재학생 중",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 1,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "①재학생 중"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c01122c8980f04d5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "②기초/차상위 학생",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 2,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "②기초/차상위 학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0554034a84fafe35",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "③원거리 진학자",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 3,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "③원거리 진학자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d1dfe6ac87af1324",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "④만 39세 이하 미혼인 자",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 4,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "④만 39세 이하 미혼인 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2ab00d0e61c83398",
+      "segmentType": "label_value",
+      "labelText": "위 지원요건을 모두 충족해야 하며, 자세한 사항은 한국장학재단 홈페이지 참조",
+      "bodyText": "※ 위 지원요건을 모두 충족해야 하며, 자세한 사항은 한국장학재단 홈페이지 참조",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 위 지원요건을 모두 충족해야 하며, 자세한 사항은 한국장학재단 홈페이지 참조"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7c94a8713078ce1d",
+      "segmentType": "label_value",
+      "labelText": "ㅇ (지원금액) 학기중 최대 월 20만원 한도 내 주거관련 비용 지원(연간 최대 240만원 지원)",
+      "bodyText": "ㅇ (지원금액) 학기중 최대 월 20만원 한도 내 주거관련 비용 지원(연간 최대 240만원 지원)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ (지원금액) 학기중 최대 월 20만원 한도 내 주거관련 비용 지원(연간 최대 240만원 지원)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b5a9e417b4fd6cdc",
+      "segmentType": "label_value",
+      "labelText": "ㅇ (지원방식) 학생이 제출한 지급 요청서 검토 후 월 지급 한도 내에서 학생이 지출한 비용을 개별 지급",
+      "bodyText": "ㅇ (지원방식) 학생이 제출한 지급 요청서 검토 후 월 지급 한도 내에서 학생이 지출한 비용을 개별 지급",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ (지원방식) 학생이 제출한 지급 요청서 검토 후 월 지급 한도 내에서 학생이 지출한 비용을 개별 지급"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ca1ff263044521cf",
+      "segmentType": "label_value",
+      "labelText": "ㅇ (신청방법) 한국장학재단 누리집(www.kosaf.go.kr) 및 모바일 앱에서 학생 직접 신청",
+      "bodyText": "ㅇ (신청방법) 한국장학재단 누리집(www.kosaf.go.kr) 및 모바일 앱에서 학생 직접 신청",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ (신청방법) 한국장학재단 누리집(www.kosaf.go.kr) 및 모바일 앱에서 학생 직접 신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6c65db4992ec1189",
+      "segmentType": "label_value",
+      "labelText": "ㅇ (신청 문의) 한국장학재단 상담센터(☎1599-2000)",
+      "bodyText": "ㅇ (신청 문의) 한국장학재단 상담센터(☎1599-2000)",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ (신청 문의) 한국장학재단 상담센터(☎1599-2000)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cce88645bc5ce2df",
+      "segmentType": "label_value",
+      "labelText": "(첨부) 1. 2026학년도 2학기 1차 주거안정장학금 신청 홍보 포스터",
+      "bodyText": "(첨부) 1. 2026학년도 2학기 1차 주거안정장학금 신청 홍보 포스터",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(첨부) 1. 2026학년도 2학기 1차 주거안정장학금 신청 홍보 포스터"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-db09a6aad60e558c",
+      "segmentType": "label_value",
+      "labelText": "주거안정장학금 장학생 통합신청 매뉴얼(홈페이지 및 모바일)",
+      "bodyText": "2. 주거안정장학금 장학생 통합신청 매뉴얼(홈페이지 및 모바일)",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 주거안정장학금 장학생 통합신청 매뉴얼(홈페이지 및 모바일)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 17,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 11,
+      "list_item": 5
+    }
+  }
+}

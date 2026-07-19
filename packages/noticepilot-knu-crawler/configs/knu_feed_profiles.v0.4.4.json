@@ -1,0 +1,39 @@
+{
+  "schemaVersion": "noticepilot.feedProfiles.v0.4.4",
+  "institution": "kangwon.ac.kr",
+  "description": "Campus-specific NoticePilot calendar feed profiles for Kangwon National University.",
+  "profiles": [
+    {
+      "profileId": "knu-chuncheon",
+      "label": "춘천",
+      "calendarName": "NoticePilot 마감 일정 - 춘천",
+      "campuses": ["chuncheon"],
+      "includeAllCampus": true,
+      "includeUnknownCampus": false
+    },
+    {
+      "profileId": "knu-samcheok",
+      "label": "삼척",
+      "calendarName": "NoticePilot 마감 일정 - 삼척",
+      "campuses": ["samcheok"],
+      "includeAllCampus": true,
+      "includeUnknownCampus": false
+    },
+    {
+      "profileId": "knu-dogye",
+      "label": "도계",
+      "calendarName": "NoticePilot 마감 일정 - 도계",
+      "campuses": ["dogye"],
+      "includeAllCampus": true,
+      "includeUnknownCampus": false
+    },
+    {
+      "profileId": "knu-gangneung-wonju",
+      "label": "강릉원주",
+      "calendarName": "NoticePilot 마감 일정 - 강릉원주",
+      "campuses": ["gangneung_wonju"],
+      "includeAllCampus": true,
+      "includeUnknownCampus": false
+    }
+  ]
+}

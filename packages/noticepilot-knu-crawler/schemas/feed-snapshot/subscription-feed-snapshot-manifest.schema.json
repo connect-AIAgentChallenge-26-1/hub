@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noticepilot.subscriptionFeedSnapshotManifest.v0.1",
+  "title": "NoticePilot Subscription Feed Snapshot Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "snapshotSetId", "snapshotSetHash", "createdAt", "snapshotContract", "snapshotCount", "totalEventCount", "artifacts", "upstream", "delivery"],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.subscriptionFeedSnapshotManifest.v0.1"},
+    "snapshotSetId": {"type": "string", "pattern": "^snapset_[0-9a-f]{32}$"},
+    "snapshotSetHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "createdAt": {"type": "string", "format": "date-time"},
+    "snapshotContract": {"type": "object"},
+    "snapshotCount": {"type": "integer", "minimum": 1},
+    "totalEventCount": {"type": "integer", "minimum": 0},
+    "artifacts": {"type": "object", "minProperties": 1},
+    "upstream": {"type": "object", "minProperties": 1},
+    "delivery": {
+      "type": "object", "additionalProperties": false,
+      "required": ["subscriptionUrlIssued", "feedTokenIssued", "icsSerialized"],
+      "properties": {
+        "subscriptionUrlIssued": {"const": false},
+        "feedTokenIssued": {"const": false},
+        "icsSerialized": {"const": false}
+      }
+    }
+  }
+}

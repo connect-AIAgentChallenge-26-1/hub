@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10980",
+  "sourceContentHash": "320facad87551e3e00daf566e3de1fff05a858133ff249e5828787abe1e75813",
+  "sourceTitle": "2026 통일동아리 모집",
+  "publishedAt": "2026-05-11",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-06c7fb0e8c99aa29",
+      "segmentType": "title",
+      "labelText": "2026 통일동아리 모집",
+      "bodyText": "2026 통일동아리 모집",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026 통일동아리 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1dc9eec2ca2d3c95",
+      "segmentType": "label_value",
+      "labelText": "강릉캠퍼스 남북바다자원교류원에서 재학생의 평화.통일분야 자율적 실천활동 지원을 통한 인식 제고를 위해 2026 통일동아리 참가 학생을 모집합니다.",
+      "bodyText": "강릉캠퍼스 남북바다자원교류원에서 재학생의 평화.통일분야 자율적 실천활동 지원을 통한 인식 제고를 위해 2026 통일동아리 참가 학생을 모집합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강릉캠퍼스 남북바다자원교류원에서 재학생의 평화.통일분야 자율적 실천활동 지원을 통한 인식 제고를 위해 2026 통일동아리 참가 학생을 모집합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e86913998568a37c",
+      "segmentType": "label_value",
+      "labelText": "신청기한",
+      "bodyText": "- 신청기한:",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 신청기한:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9556ae1972d755c2",
+      "segmentType": "continuation",
+      "labelText": "신청기한",
+      "bodyText": "5.22.(금)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-e86913998568a37c"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-22",
+          "start": 10,
+          "end": 18
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 신청기한: ~ 5.22.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-54268a26063d0fa2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "5.22.(금)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-22",
+          "start": 2,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "~ 5.22.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-853d4436f340c31d",
+      "segmentType": "label_value",
+      "labelText": ", 비교과통합관리시스템(HIGH)에서 신청",
+      "bodyText": ", 비교과통합관리시스템(HIGH)에서 신청",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ", 비교과통합관리시스템(HIGH)에서 신청"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 3,
+      "continuation": 1,
+      "paragraph": 1
+    }
+  }
+}

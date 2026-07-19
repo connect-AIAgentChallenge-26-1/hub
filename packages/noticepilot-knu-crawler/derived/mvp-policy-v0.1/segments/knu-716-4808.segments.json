@@ -1,0 +1,264 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4808",
+  "sourceContentHash": "05be92365e0ff0baf8985add6d954c29801ed5d60b69440cbc80c5736a6ed063",
+  "sourceTitle": "강원대학교 의과대학 임상수기실 계약직 직원 채용 공고",
+  "publishedAt": "2026-06-01",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e5dd58c2fbb082ed",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "강원대학교 의과대학 임상수기실 계약직 직원 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 의과대학 임상수기실 계약직 직원 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-065a9d841d26c08f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "<의과대학 의학과 임상수기실 계약직 직원 채용 공고>",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<의과대학 의학과 임상수기실 계약직 직원 채용 공고>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8bed3f1c6046a830",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 의과대학 의학과에서는 유능한 인재를 채용하고자 붙임과 같이 직원 채용을 공고하오니 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 의과대학 의학과에서는 유능한 인재를 채용하고자 붙임과 같이 직원 채용을 공고하오니 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 의과대학 의학과에서는 유능한 인재를 채용하고자 붙임과 같이 직원 채용을 공고하오니 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3bb791ffc932709a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○ 채용직종 : 계약직 행정 직원",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 채용직종 : 계약직 행정 직원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1bd971e25eb2dd36",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○ 담당업무 : 심폐소생술 교육 스케쥴 계획 및 행정업무, 임상수기실 업무",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 담당업무 : 심폐소생술 교육 스케쥴 계획 및 행정업무, 임상수기실 업무"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e7d92bc55a324d17",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○ 채용인원 : 1명",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 채용인원 : 1명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d0b82e70d49f7da3",
+      "segmentType": "label_value",
+      "labelText": "○ 접수기간",
+      "bodyText": "2026.06.01,(화) ~2026.06.08.(월)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-01",
+          "start": 9,
+          "end": 19
+        },
+        {
+          "value": "2026-06-08",
+          "start": 25,
+          "end": 39
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "○ 접수기간 : 2026.06.01,(화) ~2026.06.08.(월)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b4427a255edb1998",
+      "segmentType": "label_value",
+      "labelText": "○ 접수방법",
+      "bodyText": "○ 접수방법: 이메일 접수(knumed@kangwon.ac.kr)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 접수방법: 이메일 접수(knumed@kangwon.ac.kr)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-db31ed73b21a60c3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "기타 자세한 사항은 붙임의 공고문을 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "기타 자세한 사항은 붙임의 공고문을 참고하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d68c1998bb591e99",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 6. 1.",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-01",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 6. 1."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9afd0005b30934f2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 의과대학장",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 의과대학장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-fd29b7f930391599",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-06-01~2026-06-08",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-01",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-06-08",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-06-01~2026-06-08"
+    }
+  ],
+  "summary": {
+    "segmentCount": 12,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 4,
+      "paragraph": 7,
+      "title": 1
+    }
+  }
+}

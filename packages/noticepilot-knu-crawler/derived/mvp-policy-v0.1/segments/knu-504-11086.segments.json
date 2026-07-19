@@ -1,0 +1,392 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11086",
+  "sourceContentHash": "084f93a2fa985fc45e880c278d3576d39d21ad26ade6be0af98c3ce8cf82a8e5",
+  "sourceTitle": "\"대학생활을 바꾸는 Claude AI 실전 활용 특강\" - 2026-1 실습형 학습역량 강화 특강 안내",
+  "publishedAt": "2026-06-05",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-de07e99ff65c01bf",
+      "segmentType": "title",
+      "labelText": "\"대학생활을 바꾸는 Claude AI 실전 활용 특강\" - 2026-1 실습형 학습역량 강화 특강 안내",
+      "bodyText": "\"대학생활을 바꾸는 Claude AI 실전 활용 특강\" - 2026-1 실습형 학습역량 강화 특강 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "\"대학생활을 바꾸는 Claude AI 실전 활용 특강\" - 2026-1 실습형 학습역량 강화 특강 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9bca7ef7c207229f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "주제: 대학생활을 바꾸는 Claude AI 실전 활용 특강",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "주제: 대학생활을 바꾸는 Claude AI 실전 활용 특강"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ce644f907345adcb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강사: 지현이 강사",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강사: 지현이 강사"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f5b819d06f30c88c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "대상: (춘천) 학부·대학원 재학생 및 교직원 누구나",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate",
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "대상: (춘천) 학부·대학원 재학생 및 교직원 누구나"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4eaf38a3bf2955a3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "인원: 30명 내외(선착순 신청)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "인원: 30명 내외(선착순 신청)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-afb6c6784a397216",
+      "segmentType": "label_value",
+      "labelText": "모집 인원 초과 시 학생 우선 선발",
+      "bodyText": "모집 인원 초과 시 학생 우선 선발",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "모집 인원 초과 시 학생 우선 선발"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-108dff284d93f869",
+      "segmentType": "label_value",
+      "labelText": "인원초과시에도 신청은 가능하며 후순위 부여",
+      "bodyText": "인원초과시에도 신청은 가능하며 후순위 부여",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "인원초과시에도 신청은 가능하며 후순위 부여"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-031a4d32214a2948",
+      "segmentType": "continuation",
+      "labelText": "인원초과시에도 신청은 가능하며 후순위 부여 일시",
+      "bodyText": "2026. 6. 23.(화) 14:00 ~ 16:00",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-108dff284d93f869"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-23",
+          "start": 28,
+          "end": 43
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "인원초과시에도 신청은 가능하며 후순위 부여 일시: 2026. 6. 23.(화) 14:00 ~ 16:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1ff6abddbb91f119",
+      "segmentType": "label_value",
+      "labelText": "일시",
+      "bodyText": "2026. 6. 23.(화) 14:00 ~ 16:00",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-23",
+          "start": 4,
+          "end": 19
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "일시: 2026. 6. 23.(화) 14:00 ~ 16:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0037ac8e0c21e8b5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "장소: 춘천캠퍼스 미래관 307호",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "장소: 춘천캠퍼스 미래관 307호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9f9d36fc3ee5cc3b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 건물 뒤편 사범대 쪽 입구(3층)를 이용하여 출입",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 건물 뒤편 사범대 쪽 입구(3층)를 이용하여 출입"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2eb0b177c870763d",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "2026. 6. 5.(금) ~ 6. 21.(일) 24시까지",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-05",
+          "start": 6,
+          "end": 20
+        },
+        {
+          "value": "2026-06-21",
+          "start": 23,
+          "end": 32
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "신청기간: 2026. 6. 5.(금) ~ 6. 21.(일) 24시까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-24961c4c8be9ae8b",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "신청방법: 교수학습개발원 홈페이지 → 학습지원 프로그램 → 특강형 프로그램 → 2026-1 실습형 학습역량 강화 특강 → 신청하기",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청방법: 교수학습개발원 홈페이지 → 학습지원 프로그램 → 특강형 프로그램 → 2026-1 실습형 학습역량 강화 특강 → 신청하기"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0a2d57ad8e71454d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-797f38f688fd10fb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://itl.kangwon.ac.kr/ko/teach_learn/special/view/495?p=1&status=all",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://itl.kangwon.ac.kr/ko/teach_learn/special/view/495?p=1&status=all"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6d3ae4944048753e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d29aa8fa8a6e07e4",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "★ 참여 혜택",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "★ 참여 혜택"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d602eeffa1570b63",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 비교과마일리지",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 비교과마일리지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-71d9fa0d927e3d26",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 특강 종료 후 햄버거 제공",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 특강 종료 후 햄버거 제공"
+    }
+  ],
+  "summary": {
+    "segmentCount": 19,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 9,
+      "label_value": 5,
+      "continuation": 1,
+      "list_item": 3
+    }
+  }
+}

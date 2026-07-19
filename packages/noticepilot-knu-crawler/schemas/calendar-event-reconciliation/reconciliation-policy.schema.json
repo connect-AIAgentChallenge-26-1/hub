@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/reconciliation-policy.schema.json",
+  "title": "NoticePilot cross-notice reconciliation policy",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schemaVersion",
+    "policyVersion",
+    "status",
+    "decisions",
+    "globalFailClosedRules"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": "noticepilot.crossNoticeReconciliationPolicy.v0.3"
+    },
+    "policyVersion": {
+      "const": "0.3.0"
+    },
+    "status": {
+      "const": "approved_for_s27b_implementation"
+    },
+    "decisions": {
+      "type": "object",
+      "required": [
+        "S27A-D1",
+        "S27A-D2",
+        "S27A-D3",
+        "S27A-D4",
+        "S27A-D5",
+        "S27A-D6",
+        "S27A-D7",
+        "S27A-D8"
+      ]
+    }
+  }
+}

@@ -1,0 +1,730 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-719-4166",
+  "sourceContentHash": "32bf4e2800f3e208f4783208824aff01bc9a911f7cd6afb08edf692c40925a45",
+  "sourceTitle": "「2026 학교안전사고 데이터 분석‧활용 경진대회」",
+  "publishedAt": "2026-06-18",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6e87767926fd9a40",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "「2026 학교안전사고 데이터 분석‧활용 경진대회」",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "「2026 학교안전사고 데이터 분석‧활용 경진대회」"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ef7a4920c51e5c8f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026 학교안전사고 데이터 분석·활용 경진대회",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026 학교안전사고 데이터 분석·활용 경진대회"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-da6bb4879af8ea3b",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 6. 17.(수) ~ 7. 27.(월)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-17",
+          "start": 6,
+          "end": 21
+        },
+        {
+          "value": "2026-07-27",
+          "start": 24,
+          "end": 33
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "접수기간: 2026. 6. 17.(수) ~ 7. 27.(월)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cde5652d3bba4c14",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "▣ 공모부문",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▣ 공모부문"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b8bf201fac607970",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "공모부문 / 참가대상 / 공모내용",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "공모부문 / 참가대상 / 공모내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a364645b66390c04",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "포스터 / 초등 4~6학년 학생, 중·고등학생 / 학교안전사고 예방 포스터",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "student_year:4",
+        "student_year:5",
+        "student_year:6"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "포스터 / 초등 4~6학년 학생, 중·고등학생 / 학교안전사고 예방 포스터"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8a20ac4a966383ae",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "보고서 / 대학생(대학원생 포함) / 학교안전사고 데이터 분석·활용 보고서",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:graduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "보고서 / 대학생(대학원생 포함) / 학교안전사고 데이터 분석·활용 보고서"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cb80052699498879",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "▣ 참가방법",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▣ 참가방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-39e11b2d8d853628",
+      "segmentType": "label_value",
+      "labelText": "경진대회 홈페이지를 통한 온라인 접수 (",
+      "bodyText": "경진대회 홈페이지를 통한 온라인 접수 (",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "경진대회 홈페이지를 통한 온라인 접수 ("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-340f4de8d8ed5123",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "www.학교데이터경진대회.com",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "www.학교데이터경진대회.com"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5fcfe997cee40269",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d96d58683888a7de",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1팀당 최대 4명까지 팀원 구성 (개인 참여 가능)",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1팀당 최대 4명까지 팀원 구성 (개인 참여 가능)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-52e3a1e94a0331da",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "초·중·고등학생 참가 시, 지도교사 1명 포함 필수 (지도교사는 팀원 수에 미포함)",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "초·중·고등학생 참가 시, 지도교사 1명 포함 필수 (지도교사는 팀원 수에 미포함)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b0a26a9cddf018e7",
+      "segmentType": "label_value",
+      "labelText": "홈페이지에서 제출 방법 및 상세 규격에 대한 내용을 반드시 확인 후 제출",
+      "bodyText": "※ 홈페이지에서 제출 방법 및 상세 규격에 대한 내용을 반드시 확인 후 제출",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 홈페이지에서 제출 방법 및 상세 규격에 대한 내용을 반드시 확인 후 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-65f0cb58f1e45638",
+      "segmentType": "label_value",
+      "labelText": "▣ 공모일정",
+      "bodyText": "▣ 공모일정",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▣ 공모일정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8b7585a1107bbfbe",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "6. 17.(수) ~ 7. 27.(월) 18시",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-17",
+          "start": 6,
+          "end": 15
+        },
+        {
+          "value": "2026-07-27",
+          "start": 18,
+          "end": 27
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "접수기간: 6. 17.(수) ~ 7. 27.(월) 18시"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ec7e7fb3756ab3d7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "예비/1차 심사: 8월 초 (서면심사)",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "예비/1차 심사: 8월 초 (서면심사)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-89fc7c9767ca7259",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "공개검증: 8월 중",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "공개검증: 8월 중"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fbf9d33883dae591",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2차 심사: 8월 말 (발표심사)",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2차 심사: 8월 말 (발표심사)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1910fb5911ed750a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "9. 18.(금)",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-09-18",
+          "start": 5,
+          "end": 14
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "시상식: 9. 18.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cfd70fd2f909183e",
+      "segmentType": "label_value",
+      "labelText": "상기 일정은 경진대회 진행상황에 따라 변경될 수 있음",
+      "bodyText": "※ 상기 일정은 경진대회 진행상황에 따라 변경될 수 있음",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 상기 일정은 경진대회 진행상황에 따라 변경될 수 있음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7ce277fb73f7be11",
+      "segmentType": "label_value",
+      "labelText": "2차 발표심사는 보고서 부문 한해 진행",
+      "bodyText": "※ 2차 발표심사는 보고서 부문 한해 진행",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 2차 발표심사는 보고서 부문 한해 진행"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-61352d0b07b1f10a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "▣ 데이터 활용",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▣ 데이터 활용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ab7316dc4c4ce51d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "중앙회 제공 데이터 (필수)",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "중앙회 제공 데이터 (필수)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e4e77ca9af8cdc0e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "공공데이터 (선택)",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "공공데이터 (선택)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a341c76e7119f4ed",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "▣ 시상규모 (총 상금 2,400만 원 / 총 26명(팀) 시상)",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▣ 시상규모 (총 상금 2,400만 원 / 총 26명(팀) 시상)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-35eb7044dca28041",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "구분 / 상장 / 상금 / 수상인원(초·중·고·대·계)",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "구분 / 상장 / 상금 / 수상인원(초·중·고·대·계)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3cb6618006b47aba",
+      "segmentType": "label_value",
+      "labelText": "대상 / 교육부장관상 / 각 200만 원 / 초0·중1·고0·대1 = 계 2",
+      "bodyText": "대상 / 교육부장관상 / 각 200만 원 / 초0·중1·고0·대1 = 계 2",
+      "sourceLocation": {
+        "lineIndex": 26,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "대상 / 교육부장관상 / 각 200만 원 / 초0·중1·고0·대1 = 계 2"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9a0f2d3f8701da8d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "최우수상 / 국가데이터처장상 / 각 150만 원 / 초1·중1·고1·대1 = 계 4",
+      "sourceLocation": {
+        "lineIndex": 27,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "최우수상 / 국가데이터처장상 / 각 150만 원 / 초1·중1·고1·대1 = 계 4"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9ebe1075c37a2d6d",
+      "segmentType": "label_value",
+      "labelText": "우수상 / 대한민국교육감협의회장상 / 각 100만 원 / 초2·중2·고2·대2 = 계 8",
+      "bodyText": "우수상 / 대한민국교육감협의회장상 / 각 100만 원 / 초2·중2·고2·대2 = 계 8",
+      "sourceLocation": {
+        "lineIndex": 28,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "우수상 / 대한민국교육감협의회장상 / 각 100만 원 / 초2·중2·고2·대2 = 계 8"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dbc4f7f93c5c9e86",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "장려상 / 학교안전공제중앙회이사장상 / 각 50만 원 / 초3·중3·고3·대3 = 계 12",
+      "sourceLocation": {
+        "lineIndex": 29,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "장려상 / 학교안전공제중앙회이사장상 / 각 50만 원 / 초3·중3·고3·대3 = 계 12"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-824f6f24eacab686",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 상기 시상 내용은 경진대회 진행상황에 따라 변경될 수 있음",
+      "sourceLocation": {
+        "lineIndex": 30,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 상기 시상 내용은 경진대회 진행상황에 따라 변경될 수 있음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ef8788922f17016c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "▣ 문의처",
+      "sourceLocation": {
+        "lineIndex": 31,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▣ 문의처"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3974381115332e39",
+      "segmentType": "label_value",
+      "labelText": "경진대회 운영사무국",
+      "bodyText": "경진대회 운영사무국: 070-4610-6440 /",
+      "sourceLocation": {
+        "lineIndex": 32,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "경진대회 운영사무국: 070-4610-6440 /"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d69065d3d3a76636",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "schooldata.contest@gmail.com",
+      "sourceLocation": {
+        "lineIndex": 33,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "schooldata.contest@gmail.com"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a79c38111b577ee5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "▣ 주최/주관 및 후원",
+      "sourceLocation": {
+        "lineIndex": 34,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▣ 주최/주관 및 후원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-764135279c5af351",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "주최·주관: 학교안전공제중앙회",
+      "sourceLocation": {
+        "lineIndex": 35,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "주최·주관: 학교안전공제중앙회"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bbf52aeed299b02d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "후원: 교육부, 국가데이터처, 대한민국교육감협의회",
+      "sourceLocation": {
+        "lineIndex": 36,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "후원: 교육부, 국가데이터처, 대한민국교육감협의회"
+    }
+  ],
+  "summary": {
+    "segmentCount": 38,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 26,
+      "label_value": 10,
+      "list_item": 1
+    }
+  }
+}

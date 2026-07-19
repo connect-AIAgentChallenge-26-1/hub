@@ -1,0 +1,533 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10952",
+  "sourceContentHash": "df9f7471dae42dfaf6d2c61a8ce3a3fc2b84f453fd7c0e56fd762377efdb1c73",
+  "sourceTitle": "2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 공고",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10952&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "all"
+    ],
+    "scopeType": "all_campuses",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "all": "전체"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10952-efca9d1895139d",
+      "uidHint": "noticepilot-cand-knu-504-10952-efca9d1895139d@noticepilot.local",
+      "sourceNoticeId": "knu-504-10952",
+      "sourceTitle": "2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 공고",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10952&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-b160a2e24d948ddf",
+        "segmentType": "label_value",
+        "labelText": "(신청기간)",
+        "bodyText": "2026.5.7.(목) ~ 2026.5.24.(일) 20:00",
+        "sourceLocation": {
+          "lineIndex": 45,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-07",
+            "start": 10,
+            "end": 22
+          },
+          {
+            "value": "2026-05-24",
+            "start": 25,
+            "end": 38
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "(신청기간)",
+          "5. (신청기간) 2026.5.7.(목) ~ 2026.5.24.(일) 20:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-6af7afc23e398378",
+        "segmentId": "seg-b160a2e24d948ddf",
+        "rawText": "2026.5.7.(목) ~ 2026.5.24.(일) 20:00",
+        "normalizedStart": "2026-05-07T00:00:00+09:00",
+        "normalizedEnd": "2026-05-24T20:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 10,
+          "end": 38
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-76923bf8c25d985f",
+        "sourceNoticeId": "knu-504-10952",
+        "segmentId": "seg-b160a2e24d948ddf",
+        "temporalMentionIds": [
+          "tm-6af7afc23e398378"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "(신청기간)",
+        "evidence": "5. (신청기간) 2026.5.7.(목) ~ 2026.5.24.(일) 20:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 공고 신청기간",
+      "dateText": "2026.5.7.(목) ~ 2026.5.24.(일) 20:00",
+      "normalizedStart": "2026-05-07T00:00:00+09:00",
+      "normalizedEnd": "2026-05-24T20:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "5. (신청기간) 2026.5.7.(목) ~ 2026.5.24.(일) 20:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "conflicting_same_action_dates"
+      ],
+      "reasonCodes": [
+        "conflicting_same_action_dates",
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": "start_of_day_assumed_for_timed_range"
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "conflicting_same_action_dates",
+          "start_of_day_assumed_for_timed_range",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.conflicting_same_action_dates",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10952-9adad0039ffbb3",
+      "uidHint": "noticepilot-cand-knu-504-10952-9adad0039ffbb3@noticepilot.local",
+      "sourceNoticeId": "knu-504-10952",
+      "sourceTitle": "2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 공고",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10952&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-d495a075709c0e8e",
+        "segmentType": "continuation",
+        "labelText": "★ 2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 설명회 ○ 삼척",
+        "bodyText": "2026.5.20.(수) 18:00 / 제1학생회관 소강당",
+        "sourceLocation": {
+          "lineIndex": 54,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-37b158e156bc0acf"
+        },
+        "actionSignals": [
+          "application_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-20",
+            "start": 46,
+            "end": 59
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "★ 2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 설명회 ○ 삼척",
+          "★ 2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 설명회 ○ 삼척 : 2026.5.20.(수) 18:00 / 제1학생회관 소강당",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-b0f5129315f7c54c",
+        "segmentId": "seg-d495a075709c0e8e",
+        "rawText": "2026.5.20.(수)",
+        "normalizedStart": "2026-05-20T18:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 46,
+          "end": 59
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-b16ee618662997d3",
+        "sourceNoticeId": "knu-504-10952",
+        "segmentId": "seg-d495a075709c0e8e",
+        "temporalMentionIds": [
+          "tm-b0f5129315f7c54c"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "★ 2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 설명회 ○ 삼척",
+        "evidence": "★ 2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 설명회 ○ 삼척 : 2026.5.20.(수) 18:00 / 제1학생회관 소강당"
+      },
+      "targetActor": "student",
+      "feedScopes": [],
+      "title": "2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 공고 신청 마감",
+      "dateText": "2026.5.20.(수)",
+      "normalizedStart": "2026-05-20T18:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "★ 2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 설명회 ○ 삼척 : 2026.5.20.(수) 18:00 / 제1학생회관 소강당",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "conflicting_same_action_dates"
+      ],
+      "reasonCodes": [
+        "conflicting_same_action_dates",
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "conflicting_same_action_dates",
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.reason.conflicting_same_action_dates",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10952-4d1f3547331050",
+      "uidHint": "noticepilot-cand-knu-504-10952-4d1f3547331050@noticepilot.local",
+      "sourceNoticeId": "knu-504-10952",
+      "sourceTitle": "2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 공고",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10952&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "all"
+        ],
+        "scopeType": "all_campuses",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "all": "전체"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-2fc4d45f6afa20f2",
+        "segmentType": "label_value",
+        "labelText": "(봉사활동기간)",
+        "bodyText": "2027.1.10.(일) ~ 2027.1.21.(목)/ 10박 12일",
+        "sourceLocation": {
+          "lineIndex": 10,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2027-01-10",
+            "start": 12,
+            "end": 25
+          },
+          {
+            "value": "2027-01-21",
+            "start": 28,
+            "end": 41
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "(봉사활동기간)",
+          "2. (봉사활동기간) 2027.1.10.(일) ~ 2027.1.21.(목)/ 10박 12일",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-084e60d037cc692f",
+        "segmentId": "seg-2fc4d45f6afa20f2",
+        "rawText": "2027.1.10.(일) ~ 2027.1.21.(목)/ 10박 12일",
+        "normalizedStart": "2027-01-10",
+        "normalizedEnd": "2027-01-21",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 12,
+          "end": 41
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-9252686ed1403e5e",
+        "sourceNoticeId": "knu-504-10952",
+        "segmentId": "seg-2fc4d45f6afa20f2",
+        "temporalMentionIds": [
+          "tm-084e60d037cc692f"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "(봉사활동기간)",
+        "evidence": "2. (봉사활동기간) 2027.1.10.(일) ~ 2027.1.21.(목)/ 10박 12일"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 강원대학교 동계 해외봉사단(손길 4기) 모집 공고 행사 기간",
+      "dateText": "2027.1.10.(일) ~ 2027.1.21.(목)/ 10박 12일",
+      "normalizedStart": "2027-01-10",
+      "normalizedEnd": "2027-01-21",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "2. (봉사활동기간) 2027.1.10.(일) ~ 2027.1.21.(목)/ 10박 12일",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 3,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 2,
+    "calendarFeedIncludedCount": 1
+  }
+}

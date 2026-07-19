@@ -1,0 +1,175 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11014",
+  "sourceContentHash": "8295003f0533d2478fc9342983a11fe6ba39964e08e936521334aebdb04e9288",
+  "sourceTitle": "국방사업관리사 교육과정 모집 안내",
+  "publishedAt": "2026-05-18",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c1ae81a5ae4733fd",
+      "segmentType": "title",
+      "labelText": "국방사업관리사 교육과정 모집 안내",
+      "bodyText": "국방사업관리사 교육과정 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국방사업관리사 교육과정 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-688238bfe6e554fb",
+      "segmentType": "label_value",
+      "labelText": "2026년 국방사업관리사 교육과정 인원을 모집하오니 많은 분들의 적극적인 참여 바랍니다.",
+      "bodyText": "2026년 국방사업관리사 교육과정 인원을 모집하오니 많은 분들의 적극적인 참여 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 국방사업관리사 교육과정 인원을 모집하오니 많은 분들의 적극적인 참여 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b713abdd55cd399d",
+      "segmentType": "label_value",
+      "labelText": "모집기간",
+      "bodyText": "2026.5.18.(월) ~ 6.5.(금) 18:00",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-18",
+          "start": 10,
+          "end": 23
+        },
+        {
+          "value": "2026-06-05",
+          "start": 26,
+          "end": 33
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 모집기간 : 2026.5.18.(월) ~ 6.5.(금) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7cb840fb8c07581e",
+      "segmentType": "label_value",
+      "labelText": "모집인원",
+      "bodyText": "2. 모집인원 : 60명",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 모집인원 : 60명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d013b0fb874ff7e4",
+      "segmentType": "label_value",
+      "labelText": "교육기간",
+      "bodyText": "2026.6.22.(월) ~ 7.3.(금) / 대면 70시간",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-22",
+          "start": 10,
+          "end": 23
+        },
+        {
+          "value": "2026-07-03",
+          "start": 26,
+          "end": 33
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 교육기간 : 2026.6.22.(월) ~ 7.3.(금) / 대면 70시간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-494679ac6e87acad",
+      "segmentType": "label_value",
+      "labelText": "교육장소",
+      "bodyText": "4. 교육장소 : 강원대학교 춘천캠퍼스 한빛관 201호",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 교육장소 : 강원대학교 춘천캠퍼스 한빛관 201호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cc1e8aa98308f8e1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 문의 : 강원대학교 첨단군사과학기술연구소(033-250-8524~5 / amsti@kangwon.ac.kr)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 문의 : 강원대학교 첨단군사과학기술연구소(033-250-8524~5 / amsti@kangwon.ac.kr)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 5,
+      "list_item": 1
+    }
+  }
+}

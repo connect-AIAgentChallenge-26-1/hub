@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4675",
+  "sourceContentHash": "3b77fe782e0547b4d58922fe8dcd7aa2600441323ba5830e76f58c5b282fa542",
+  "sourceTitle": "강원대학교 총무과 기간제 계약직 신규채용 공고",
+  "publishedAt": "2026-04-07",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9923895b7e529465",
+      "segmentType": "title",
+      "labelText": "강원대학교 총무과 기간제 계약직 신규채용 공고",
+      "bodyText": "강원대학교 총무과 기간제 계약직 신규채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 총무과 기간제 계약직 신규채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8554a052da3da193",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 공고 제2026-172호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 공고 제2026-172호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bb9890d17b3d4f23",
+      "segmentType": "label_value",
+      "labelText": "<강원대학교 총무과 기간제 계약직 신규채용 공고>",
+      "bodyText": "<강원대학교 총무과 기간제 계약직 신규채용 공고>",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<강원대학교 총무과 기간제 계약직 신규채용 공고>"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ff0f3841b2fad853",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 총무과에서 다음과 같이 기간제 계약직 직원 신규채용을 실시하오니 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 총무과에서 다음과 같이 기간제 계약직 직원 신규채용을 실시하오니 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 총무과에서 다음과 같이 기간제 계약직 직원 신규채용을 실시하오니 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5cfc0d6c5438679b",
+      "segmentType": "continuation",
+      "labelText": "강원대학교 총무과에서 다음과 같이 기간제 계약직 직원 신규채용을 실시하오니 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "2026. 4. 7.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-ff0f3841b2fad853"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-07",
+          "start": 62,
+          "end": 72
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "강원대학교 총무과에서 다음과 같이 기간제 계약직 직원 신규채용을 실시하오니 유능한 인재의 많은 지원 바랍니다. 2026. 4. 7."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d6c1d978194222a2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 4. 7.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-07",
+          "start": 0,
+          "end": 10
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 4. 7."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-912248c2739236bb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교총장",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교총장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-90b87bea5520d123",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-04-07~2026-04-14",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-07",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-04-14",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-04-07~2026-04-14"
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "continuation": 1,
+      "label_value": 3,
+      "paragraph": 3,
+      "title": 1
+    }
+  }
+}

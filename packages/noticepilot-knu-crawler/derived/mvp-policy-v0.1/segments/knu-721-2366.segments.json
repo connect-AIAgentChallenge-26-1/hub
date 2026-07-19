@@ -1,0 +1,240 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2366",
+  "sourceContentHash": "bbff7223c960e3a5d706c84dbd8f75e0150501314b4711b159de29e54573439a",
+  "sourceTitle": "2026년도 대통령과학장학금 신규장학생 선발 안내",
+  "publishedAt": "2026-04-21",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d88bc8ec7e647442",
+      "segmentType": "title",
+      "labelText": "2026년도 대통령과학장학금 신규장학생 선발 안내",
+      "bodyText": "2026년도 대통령과학장학금 신규장학생 선발 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년도 대통령과학장학금 신규장학생 선발 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-502760042bb6539b",
+      "segmentType": "label_value",
+      "labelText": "신청자격",
+      "bodyText": "가. 신청자격: 대한민국 국적자로 자연과학 및 공학계열 전공 학부생",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 신청자격: 대한민국 국적자로 자연과학 및 공학계열 전공 학부생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c23e56e9428ba967",
+      "segmentType": "label_value",
+      "labelText": "신청마감",
+      "bodyText": "나. 신청마감:",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 신청마감:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-92caf0685cd76b62",
+      "segmentType": "continuation",
+      "labelText": "신청마감",
+      "bodyText": "2026. 4. 22.(수) 18:00",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-c23e56e9428ba967"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-22",
+          "start": 9,
+          "end": 24
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "나. 신청마감: 2026. 4. 22.(수) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-409dd6e7c5697aef",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 4. 22.(수) 18:00",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-22",
+          "start": 0,
+          "end": 15
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 4. 22.(수) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-281f68181196e694",
+      "segmentType": "label_value",
+      "labelText": "선발규모는 157명 내외이나 국내 3학년 유형은 비수도권 대학생 12명을 우대 선발",
+      "bodyText": "※ 선발규모는 157명 내외이나 국내 3학년 유형은 비수도권 대학생 12명을 우대 선발",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "student_year:3"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 선발규모는 157명 내외이나 국내 3학년 유형은 비수도권 대학생 12명을 우대 선발"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b7311eed5167bab4",
+      "segmentType": "label_value",
+      "labelText": "(국내 1학년 63명, 3학년 60명, 지역추천 14명, 해외 20명)",
+      "bodyText": "(국내 1학년 63명, 3학년 60명, 지역추천 14명, 해외 20명)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "student_year:1",
+        "student_year:3"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(국내 1학년 63명, 3학년 60명, 지역추천 14명, 해외 20명)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-55719e3e621e32ef",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "다. 신청방법: 한국장학재단 홈페이지로 개별 본인신청(한국장학재단 누리집(",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 신청방법: 한국장학재단 홈페이지로 개별 본인신청(한국장학재단 누리집("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-03bc328b157cef0f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "www.kosaf.go.kr",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "www.kosaf.go.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c4dcb835947cb479",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "))",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "))"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-448665f63a31099e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "라. 문 의 처: 한국장학재단(☎ 1599-2290)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "라. 문 의 처: 한국장학재단(☎ 1599-2290)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 11,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 5,
+      "continuation": 1,
+      "paragraph": 3,
+      "list_item": 1
+    }
+  }
+}

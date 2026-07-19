@@ -1,0 +1,909 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10819",
+  "sourceContentHash": "65778f2884fa70dd79f6b21fb03d779dde8238374e14c3e1816ed38b30839182",
+  "sourceTitle": "[보안공지] 오픈 소스 Python API 라이브러리(LiteLLM) 관련 사용자 보안 조치 사항 안내",
+  "publishedAt": "2026-04-02",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9acc857d560897d0",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "[보안공지] 오픈 소스 Python API 라이브러리(LiteLLM) 관련 사용자 보안 조치 사항 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[보안공지] 오픈 소스 Python API 라이브러리(LiteLLM) 관련 사용자 보안 조치 사항 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-07ba0df8092d43a7",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 최근",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 최근"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bcb3fcf24e18da50",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "Python 패키지 저장소(PyPI)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "Python 패키지 저장소(PyPI)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e7096bb15c63b467",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "에 등록된",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "에 등록된"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c24c48db52a2eca7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "LiteLLM",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "LiteLLM"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4422b47e7d703508",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "*을 통해 악성코드 유포되는 사례가 발생하고 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "*을 통해 악성코드 유포되는 사례가 발생하고 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dc27686696f90d3c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 오픈 소스 Python 라이브러리로, OpenAI, Google, AWS, Azure 등 다양한 AI 모델 API를 통합 관리하는 프록시 도구",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 오픈 소스 Python 라이브러리로, OpenAI, Google, AWS, Azure 등 다양한 AI 모델 API를 통합 관리하는 프록시 도구"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-613cd98715fb214e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4744532096824e12",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "위험 내용",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "위험 내용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3ba6377b80544c61",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 설치 시 시스템 내 저장된",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 설치 시 시스템 내 저장된"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-04ff471f48413ea3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "API 키, DB 암호, 클라우드 인증키",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "API 키, DB 암호, 클라우드 인증키"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-40d6e0614214546e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "등을 외부로",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "등을 외부로"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a31992378bcd4a39",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "유출",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "유출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-22233a373f95825b",
+      "segmentType": "label_value",
+      "labelText": "업무 자료 및 개인정보 유출 방지를 위한 보안 조치 사항을 배포하오니, 각 부서(학과)에서는 구성원들에게 적극 안내(자료 공유‧전파, 교육 등)하여 주시기 바랍니다.",
+      "bodyText": "2. 업무 자료 및 개인정보 유출 방지를 위한 보안 조치 사항을 배포하오니, 각 부서(학과)에서는 구성원들에게 적극 안내(자료 공유‧전파, 교육 등)하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 업무 자료 및 개인정보 유출 방지를 위한 보안 조치 사항을 배포하오니, 각 부서(학과)에서는 구성원들에게 적극 안내(자료 공유‧전파, 교육 등)하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bc9924b4d5e04efd",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "【보안 조치 사항】",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "【보안 조치 사항】"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bb4c2295ea356d66",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 버전 확인 및 삭제",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 버전 확인 및 삭제"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-44a908730614418d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6022a4460bcf039a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "실행 위치",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "실행 위치"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-43fd068ed583fce5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 터미널(MacOS/Linux), 명령 프롬프트/PowerShell(Windows)",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 터미널(MacOS/Linux), 명령 프롬프트/PowerShell(Windows)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5d2e64792bd06d14",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-393a4d98c8f838e0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "확인 명령어",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "확인 명령어"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7741e1abf216c8f3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": pip show litellm",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": pip show litellm"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7ade47e46e4b24d1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cfb88d8895ddbf18",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "위험 버전: v1.82.7, v1.82.8",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "위험 버전: v1.82.7, v1.82.8"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b318aa8abe80ca22",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-49fe65a844b8c73b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "조치 사항",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "조치 사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0386fab47330e6b5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 위험 버전 발견 즉시 삭제(pip uninstall litellm) 후, 안전한 버전(v1.82.6 이하)으로 재설치",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 위험 버전 발견 즉시 삭제(pip uninstall litellm) 후, 안전한 버전(v1.82.6 이하)으로 재설치"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a774ce8e949de93f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 후속 조치",
+      "sourceLocation": {
+        "lineIndex": 26,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 후속 조치"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d6302c7a4291af3a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 해당 환경에 저장된",
+      "sourceLocation": {
+        "lineIndex": 27,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 해당 환경에 저장된"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3214661165e8b381",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "모든 비밀번호 및 키 유출",
+      "sourceLocation": {
+        "lineIndex": 28,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "모든 비밀번호 및 키 유출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-483974de91519b39",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "로 간주",
+      "sourceLocation": {
+        "lineIndex": 29,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "로 간주"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d66296f98f1771e5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 30,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4bf8ce257d8516cd",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "API 키 교체",
+      "sourceLocation": {
+        "lineIndex": 31,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "API 키 교체"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-98195884bdff54b6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": OpenAI, AWS, Google Cloud 등 연결된 모든 서비스 키 갱신",
+      "sourceLocation": {
+        "lineIndex": 32,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": OpenAI, AWS, Google Cloud 등 연결된 모든 서비스 키 갱신"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2a0275dd51db2561",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 33,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6a24907a6706ae16",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "자격 증명 갱신",
+      "sourceLocation": {
+        "lineIndex": 34,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자격 증명 갱신"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5a4421dfc9993aca",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": DB 암호, SSH 키, 환경 변수에 저장된 인증 정보 전체 변경",
+      "sourceLocation": {
+        "lineIndex": 35,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": DB 암호, SSH 키, 환경 변수에 저장된 인증 정보 전체 변경"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3d0b1a962a26bafd",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 36,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5f3bbb58ae91f308",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "이상 징후 점검",
+      "sourceLocation": {
+        "lineIndex": 37,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "이상 징후 점검"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38724c8b54bc4dfb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 비정상적인 네트워크 트래픽이나 권한 없는 접속 기록 확인",
+      "sourceLocation": {
+        "lineIndex": 38,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 비정상적인 네트워크 트래픽이나 권한 없는 접속 기록 확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9c36b29af5e28ab9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 안전한 사용 가이드",
+      "sourceLocation": {
+        "lineIndex": 39,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 안전한 사용 가이드"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-47f67063c9b3f88f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 40,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e17857a691fbc030",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "사용 자제",
+      "sourceLocation": {
+        "lineIndex": 41,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "사용 자제"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-735e5ca99418bd1f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 가급적 업무용 중요 PC나 서버에서 외부 오픈소스 프록시 라이브러리의 직접 사용 지양",
+      "sourceLocation": {
+        "lineIndex": 42,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 가급적 업무용 중요 PC나 서버에서 외부 오픈소스 프록시 라이브러리의 직접 사용 지양"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-414916095905e26b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 43,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9968c2fbe4f41e6c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "권한 제한",
+      "sourceLocation": {
+        "lineIndex": 44,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "권한 제한"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0cea06590abd6078",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 권한 설정 파일은 반드시 '읽기 전용'으로 설정",
+      "sourceLocation": {
+        "lineIndex": 45,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 권한 설정 파일은 반드시 '읽기 전용'으로 설정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2258e22d25ca977e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 46,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c51c0be5c2d6a4b0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "수동 승인",
+      "sourceLocation": {
+        "lineIndex": 47,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수동 승인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a7e58a73c68d09e8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 외부 사이트 접속이나 위험 기능 실행 시 자동 실행을 차단하고 사용자 승인을 거치도록 설정",
+      "sourceLocation": {
+        "lineIndex": 48,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 외부 사이트 접속이나 위험 기능 실행 시 자동 실행을 차단하고 사용자 승인을 거치도록 설정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3005d45727cd4f92",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 보안사고 발생시 즉시 신고: 정보화본부 정보보호팀(033-250-7726)",
+      "sourceLocation": {
+        "lineIndex": 49,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 보안사고 발생시 즉시 신고: 정보화본부 정보보호팀(033-250-7726)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f14da94026393d36",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "붙임 LiteLLM 악성패키지 유포 주의 보안 권고문 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 50,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 LiteLLM 악성패키지 유포 주의 보안 권고문 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 52,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 17,
+      "paragraph": 33,
+      "label_value": 1
+    }
+  }
+}

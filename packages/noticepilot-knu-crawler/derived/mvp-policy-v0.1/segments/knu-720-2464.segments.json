@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2464",
+  "sourceContentHash": "62fb6bfa488fe4aa8b155a4d952d121d8a590260465b283fa5c29c3aeb261c83",
+  "sourceTitle": "2026학년도 2학기 휴학 및 복학 안내",
+  "publishedAt": "2026-06-08",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b1f3ae0b8e6ec5ed",
+      "segmentType": "title",
+      "labelText": "2026학년도 2학기 휴학 및 복학 안내",
+      "bodyText": "2026학년도 2학기 휴학 및 복학 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 2학기 휴학 및 복학 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-389a2f76ef246cd5",
+      "segmentType": "label_value",
+      "labelText": "* K-cloud에서 휴,복학 신청 시 PC에서만 가능, 모바일 불가",
+      "bodyText": "* K-cloud에서 휴,복학 신청 시 PC에서만 가능, 모바일 불가",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "return_from_leave_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* K-cloud에서 휴,복학 신청 시 PC에서만 가능, 모바일 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4eac069178cf5408",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 2학기 휴학 및 복학 신청 일정 및 방법을 안내합니다.",
+      "bodyText": "2026학년도 2학기 휴학 및 복학 신청 일정 및 방법을 안내합니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "return_from_leave_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 2학기 휴학 및 복학 신청 일정 및 방법을 안내합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e6cec3d6098b89d3",
+      "segmentType": "label_value",
+      "labelText": "첨부하는 파일을 숙지하여 휴학 및 복학 신청을 해 주시기 바랍니다.",
+      "bodyText": "첨부하는 파일을 숙지하여 휴학 및 복학 신청을 해 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "return_from_leave_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "첨부하는 파일을 숙지하여 휴학 및 복학 신청을 해 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-10c9b64dec0167ad",
+      "segmentType": "label_value",
+      "labelText": "일반휴학 신청자(일반휴학 연장자 포함)는 학부(과)장 상담 후 일반휴학 승인이 가능하므로 반드시 학부(과) 또는 전공 사무실로 문의하시기 바랍니다.",
+      "bodyText": "일반휴학 신청자(일반휴학 연장자 포함)는 학부(과)장 상담 후 일반휴학 승인이 가능하므로 반드시 학부(과) 또는 전공 사무실로 문의하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "일반휴학 신청자(일반휴학 연장자 포함)는 학부(과)장 상담 후 일반휴학 승인이 가능하므로 반드시 학부(과) 또는 전공 사무실로 문의하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ba55eacaf7f59ccc",
+      "segmentType": "label_value",
+      "labelText": "(학과장 상담을 실시하지 않으면 휴학 승인이 되지 않음)",
+      "bodyText": "(학과장 상담을 실시하지 않으면 휴학 승인이 되지 않음)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(학과장 상담을 실시하지 않으면 휴학 승인이 되지 않음)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5a36382c365c8229",
+      "segmentType": "label_value",
+      "labelText": "K-Cloud를 통한 휴학 및 복학 신청 승인은 해당 학부(과)장 승인을 거쳐 소속 단과대학장 승인 후 학적변경이 되오니,",
+      "bodyText": "K-Cloud를 통한 휴학 및 복학 신청 승인은 해당 학부(과)장 승인을 거쳐 소속 단과대학장 승인 후 학적변경이 되오니,",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "return_from_leave_application",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "K-Cloud를 통한 휴학 및 복학 신청 승인은 해당 학부(과)장 승인을 거쳐 소속 단과대학장 승인 후 학적변경이 되오니,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-830b2e5ad00e5c68",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "학적상태가 변경되지 않을 경우 소속 학부(과)이나 전공사무실 또는 단과대학 행정실로 문의해 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "학적상태가 변경되지 않을 경우 소속 학부(과)이나 전공사무실 또는 단과대학 행정실로 문의해 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c717b3af931ee732",
+      "segmentType": "label_value",
+      "labelText": "수강신청 방법 및 등록금 납부 방법은 추후 담당부서에서 공지하는 내용 참조",
+      "bodyText": "※ 수강신청 방법 및 등록금 납부 방법은 추후 담당부서에서 공지하는 내용 참조",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 수강신청 방법 및 등록금 납부 방법은 추후 담당부서에서 공지하는 내용 참조"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c1420df43dcd3b48",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "붙임 : 2026-2학기 휴학 및 복학 신청 안내 1부",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "leave_of_absence_application",
+        "return_from_leave_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 : 2026-2학기 휴학 및 복학 신청 안내 1부"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "paragraph": 2
+    }
+  }
+}

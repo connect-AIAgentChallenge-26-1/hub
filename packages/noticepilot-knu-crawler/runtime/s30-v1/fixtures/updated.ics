@@ -1,0 +1,103 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//NoticePilot//Persistent Calendar Registry//KO
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:NoticePilot Samsung Calendar QA
+X-WR-TIMEZONE:Asia/Seoul
+X-NOTICEPILOT-PROJECTION-ID:s27d-registry-ics-projection-20260713-v1
+X-NOTICEPILOT-MIGRATION-MODE:pre_subscription_cutover
+BEGIN:VTIMEZONE
+TZID:Asia/Seoul
+X-LIC-LOCATION:Asia/Seoul
+BEGIN:STANDARD
+TZOFFSETFROM:+0900
+TZOFFSETTO:+0900
+TZNAME:KST
+DTSTART:19700101T000000
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:evt_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@noticepilot.local
+DTSTAMP:20260713T121000Z
+CREATED:20260713T120000Z
+LAST-MODIFIED:20260713T121000Z
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:[S30 수정] 한글 장문 일정 — 종료일 연장
+DESCRIPTION:NoticePilot 지속형 캘린더 이벤트\n대표 공지: https
+ ://example.invalid/notices/evt_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n이벤트
+  ID: evt_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n개정: 1 / SEQUENCE 1
+CATEGORIES:NoticePilot
+URL:https://example.invalid/notices/evt_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+TRANSP:TRANSPARENT
+DTSTART;VALUE=DATE:20260801
+DTEND;VALUE=DATE:20260806
+X-NOTICEPILOT-EVENT-ID:evt_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+X-NOTICEPILOT-REGISTRY-ID:s30-samsung-qa-registry-v1
+X-NOTICEPILOT-REVISION:1
+X-NOTICEPILOT-RELATION-BASIS:qa_fixture
+X-NOTICEPILOT-CANONICAL-CANDIDATE-ID:cand_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+X-NOTICEPILOT-CAMPUS-SCOPE:
+X-NOTICEPILOT-SOURCE-COUNT:1
+X-NOTICEPILOT-SOURCE-NOTICE-ID:
+X-NOTICEPILOT-SOURCE-CANDIDATE-ID:
+X-NOTICEPILOT-SOURCE-URL:https://example.invalid/notices/evt_aaaaaaaaaaaaaa
+ aaaaaaaaaaaaaaaaaa
+END:VEVENT
+BEGIN:VEVENT
+UID:evt_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb@noticepilot.local
+DTSTAMP:20260713T120000Z
+CREATED:20260713T120000Z
+LAST-MODIFIED:20260713T120000Z
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:[S30 초기] Asia/Seoul 시간 일정
+DESCRIPTION:NoticePilot 지속형 캘린더 이벤트\n대표 공지: https
+ ://example.invalid/notices/evt_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\n이벤트
+  ID: evt_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\n개정: 0 / SEQUENCE 0
+CATEGORIES:NoticePilot
+URL:https://example.invalid/notices/evt_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+TRANSP:TRANSPARENT
+DTSTART;TZID=Asia/Seoul:20260805T140000
+DTEND;TZID=Asia/Seoul:20260805T153000
+X-NOTICEPILOT-EVENT-ID:evt_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+X-NOTICEPILOT-REGISTRY-ID:s30-samsung-qa-registry-v1
+X-NOTICEPILOT-REVISION:0
+X-NOTICEPILOT-RELATION-BASIS:qa_fixture
+X-NOTICEPILOT-CANONICAL-CANDIDATE-ID:cand_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+X-NOTICEPILOT-CAMPUS-SCOPE:
+X-NOTICEPILOT-SOURCE-COUNT:1
+X-NOTICEPILOT-SOURCE-NOTICE-ID:
+X-NOTICEPILOT-SOURCE-CANDIDATE-ID:
+X-NOTICEPILOT-SOURCE-URL:https://example.invalid/notices/evt_bbbbbbbbbbbbbb
+ bbbbbbbbbbbbbbbbbb
+END:VEVENT
+BEGIN:VEVENT
+UID:evt_cccccccccccccccccccccccccccccccc@noticepilot.local
+DTSTAMP:20260713T121000Z
+CREATED:20260713T120000Z
+LAST-MODIFIED:20260713T121000Z
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:[S30 신규] 구독 갱신 신규 이벤트
+DESCRIPTION:NoticePilot 지속형 캘린더 이벤트\n대표 공지: https
+ ://example.invalid/notices/evt_cccccccccccccccccccccccccccccccc\n이벤트
+  ID: evt_cccccccccccccccccccccccccccccccc\n개정: 0 / SEQUENCE 0
+CATEGORIES:NoticePilot
+URL:https://example.invalid/notices/evt_cccccccccccccccccccccccccccccccc
+TRANSP:TRANSPARENT
+DTSTART;TZID=Asia/Seoul:20260807T090000
+X-NOTICEPILOT-EVENT-ID:evt_cccccccccccccccccccccccccccccccc
+X-NOTICEPILOT-REGISTRY-ID:s30-samsung-qa-registry-v1
+X-NOTICEPILOT-REVISION:0
+X-NOTICEPILOT-RELATION-BASIS:qa_fixture
+X-NOTICEPILOT-CANONICAL-CANDIDATE-ID:cand_cccccccccccccccccccccccccccccccc
+X-NOTICEPILOT-CAMPUS-SCOPE:
+X-NOTICEPILOT-SOURCE-COUNT:1
+X-NOTICEPILOT-SOURCE-NOTICE-ID:
+X-NOTICEPILOT-SOURCE-CANDIDATE-ID:
+X-NOTICEPILOT-SOURCE-URL:https://example.invalid/notices/evt_cccccccccccccc
+ cccccccccccccccccc
+END:VEVENT
+END:VCALENDAR

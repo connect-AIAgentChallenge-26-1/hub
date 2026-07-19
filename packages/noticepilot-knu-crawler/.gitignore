@@ -1,0 +1,19 @@
+.venv/
+__pycache__/
+*/__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+probe_out*/
+attachments/
+raw_downloads/
+calendar/
+
+# Large/local-only observation corpus
+local-observation-data/
+observation-output/
+derived/
+
+# Local baseline comparison reports and allowlists
+policy15-baseline-diff*.json
+baseline/policy15/local-allowlist.json

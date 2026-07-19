@@ -1,0 +1,612 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10740",
+  "sourceContentHash": "e1fbfe5f30994cd33fb2d0d911b429ffab843122b3fd11c62f8681959fddba43",
+  "sourceTitle": "2026-1학기 ISIC 국제학생증 발급비 지원행사 안내",
+  "publishedAt": "2026-03-16",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b71cbe6965bdeb73",
+      "segmentType": "title",
+      "labelText": "2026-1학기 ISIC 국제학생증 발급비 지원행사 안내",
+      "bodyText": "2026-1학기 ISIC 국제학생증 발급비 지원행사 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026-1학기 ISIC 국제학생증 발급비 지원행사 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2f38c5dd5ed53b46",
+      "segmentType": "label_value",
+      "labelText": "ISIC 국제학생증 인증비 지원행사 안내",
+      "bodyText": "ISIC 국제학생증 인증비 지원행사 안내",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ISIC 국제학생증 인증비 지원행사 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4ce4ffd9a93fabf3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "ISIC(International Student Identity Card) 국제학생증은 해외에서 학생 신분을 증명할 수 있으며, 이를 통해 전세계적으로 150,000여 학생 할인 혜택을 이용할 수 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ISIC(International Student Identity Card) 국제학생증은 해외에서 학생 신분을 증명할 수 있으며, 이를 통해 전세계적으로 150,000여 학생 할인 혜택을 이용할 수 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6ccfb2d4bcd9af2c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1.발급대상",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1.발급대상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9fd77e60aad710c7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 강원대학교 강릉캠퍼스 2026년 신입생",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 강원대학교 강릉캠퍼스 2026년 신입생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-52dad42442abcf72",
+      "segmentType": "label_value",
+      "labelText": "온라인 행사 기간",
+      "bodyText": "2.온라인 행사 기간",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2.온라인 행사 기간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c0bbf875abe3eb09",
+      "segmentType": "continuation",
+      "labelText": "온라인 행사 기간",
+      "bodyText": "2026년 3월13일(금) ~ 3월31일(화)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-52dad42442abcf72"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-13",
+          "start": 14,
+          "end": 28
+        },
+        {
+          "value": "2026-03-31",
+          "start": 31,
+          "end": 39
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2.온라인 행사 기간 : 2026년 3월13일(금) ~ 3월31일(화)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-39484dcdb46a8613",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026년 3월13일(금) ~ 3월31일(화)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-13",
+          "start": 2,
+          "end": 16
+        },
+        {
+          "value": "2026-03-31",
+          "start": 19,
+          "end": 27
+        }
+      ],
+      "locallyGrounded": false,
+      "text": ": 2026년 3월13일(금) ~ 3월31일(화)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d3a99c79b6d04c6d",
+      "segmentType": "label_value",
+      "labelText": "행사혜택",
+      "bodyText": "3.행사혜택",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3.행사혜택"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b42e8426b3aa301c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ":",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ":"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cd1d056a2a1cbfce",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "무료발급",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "무료발급"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0affc5e94fea6679",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "(인증비 19,000원 하나은행 부담)",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(인증비 19,000원 하나은행 부담)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6618ac29e29c371e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "누적 1만원 이상 사용 시 메가커피 쿠폰 2매",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "누적 1만원 이상 사용 시 메가커피 쿠폰 2매"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1a32a5f36a4aace0",
+      "segmentType": "label_value",
+      "labelText": "ISIC 유효기간 발급월로부터 1년간 유효",
+      "bodyText": "ISIC 유효기간 발급월로부터 1년간 유효",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ISIC 유효기간 발급월로부터 1년간 유효"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-abc415e4c41b2a2f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4.발급절차",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4.발급절차"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fd1a68c9a8062b84",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ":",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ":"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-21f4899a85b547a8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "가. 신분증(주민등록증 또는 운전면허증) 준비",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 신분증(주민등록증 또는 운전면허증) 준비"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-849e016718b3844c",
+      "segmentType": "label_value",
+      "labelText": "아래 url 접속 후 온라인 신청서 작성",
+      "bodyText": "나. 아래 url 접속 후 온라인 신청서 작성",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 아래 url 접속 후 온라인 신청서 작성"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6e392c194836ad8d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "isic.co.kr/hbr/064033",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "isic.co.kr/hbr/064033"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-df7d09d5e041499f",
+      "segmentType": "label_value",
+      "labelText": "MY ID 로그인 후 행사 카드 선택",
+      "bodyText": "다. MY ID 로그인 후 행사 카드 선택",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. MY ID 로그인 후 행사 카드 선택"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ed8982ec57dbb687",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "라. 고객확인번호 메모후 My브랜치 바로가기 클릭",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "라. 고객확인번호 메모후 My브랜치 바로가기 클릭"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7850152db7fc3ec6",
+      "segmentType": "label_value",
+      "labelText": "통장+카드 또는 카드 선택 후 발급 신청",
+      "bodyText": "라. 통장+카드 또는 카드 선택 후 발급 신청",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "라. 통장+카드 또는 카드 선택 후 발급 신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3b7ca99a62d9efae",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "마. 카드는 업무일 기준 7일 이내 배송",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "마. 카드는 업무일 기준 7일 이내 배송"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-596e92fa0a52aa39",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "[ISIC 혜택]",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[ISIC 혜택]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a8c503227dd3faab",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-항공: ISIC 소지자를 위한 학생 할인 항공요금 제공",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-항공: ISIC 소지자를 위한 학생 할인 항공요금 제공"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a619b733caae1125",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-교통: 교통패스,기차,버스,페리 등 할인 또는 특별요금",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-교통: 교통패스,기차,버스,페리 등 할인 또는 특별요금"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-750a4ade1f5b9cff",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-숙소: 개별 숙소 현장 할인 및 특별서비스 제공",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-숙소: 개별 숙소 현장 할인 및 특별서비스 제공"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c1a54dda2369c16d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-관광: 문화재, 유적지, 박물관 무료입장 또는 할인",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-관광: 문화재, 유적지, 박물관 무료입장 또는 할인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-268863ba5fa00129",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-금융: 현지화폐 인출, 환전 우대, 체크카드 금융기능",
+      "sourceLocation": {
+        "lineIndex": 26,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-금융: 현지화폐 인출, 환전 우대, 체크카드 금융기능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c88a23119c3094b0",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-국내: 공연, 미술관, 박물관, 교통, 숙박 등 할인 혜택",
+      "sourceLocation": {
+        "lineIndex": 27,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-국내: 공연, 미술관, 박물관, 교통, 숙박 등 할인 혜택"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8b21a5791c1a47e3",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-기타: 테마파크, 놀인공원, 레스토랑, 영화관 등 할인",
+      "sourceLocation": {
+        "lineIndex": 28,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-기타: 테마파크, 놀인공원, 레스토랑, 영화관 등 할인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-981861d74dc305c3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "상세 내용은 첨부 포스터를 참고 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 29,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "상세 내용은 첨부 포스터를 참고 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 32,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "paragraph": 11,
+      "list_item": 12,
+      "continuation": 1
+    }
+  }
+}

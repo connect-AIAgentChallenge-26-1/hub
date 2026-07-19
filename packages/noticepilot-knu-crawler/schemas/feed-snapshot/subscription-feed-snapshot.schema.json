@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noticepilot.subscriptionFeedSnapshot.v0.1",
+  "title": "NoticePilot Subscription Feed Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "snapshotBuilderVersion", "snapshotId", "snapshotHash",
+    "snapshotIdStrategy", "hashContract", "generatedAt", "profile", "builder",
+    "sourceContext", "feed", "integrity"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.subscriptionFeedSnapshot.v0.1"},
+    "snapshotBuilderVersion": {"const": "0.1.0"},
+    "snapshotId": {"type": "string", "pattern": "^feedsnap_[0-9a-f]{32}$"},
+    "snapshotHash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "snapshotIdStrategy": {"const": "content_addressed_snapshot_hash_v0"},
+    "hashContract": {"const": "sha256_canonical_json_utf8_sorted_keys_compact_v0"},
+    "generatedAt": {"type": "string", "format": "date-time"},
+    "profile": {
+      "type": "object", "additionalProperties": false,
+      "required": ["profileId", "profileRevision", "profileFingerprintSha256"],
+      "properties": {
+        "profileId": {"type": "string", "minLength": 1},
+        "profileRevision": {"type": "integer", "minimum": 1},
+        "profileFingerprintSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "builder": {
+      "type": "object", "additionalProperties": false,
+      "required": ["feedBuilderVersion", "policySchemaVersion", "policyVersion"],
+      "properties": {
+        "feedBuilderVersion": {"type": "string", "minLength": 1},
+        "policySchemaVersion": {"type": "string", "minLength": 1},
+        "policyVersion": {"type": "string", "minLength": 1}
+      }
+    },
+    "sourceContext": {
+      "type": "object", "additionalProperties": false,
+      "required": ["registryId", "projectionId"],
+      "properties": {
+        "registryId": {"type": "string", "minLength": 1},
+        "projectionId": {"type": "string", "minLength": 1}
+      }
+    },
+    "feed": {
+      "type": "object", "additionalProperties": false,
+      "required": ["inputEventCount", "eventCount", "excludedEventCount", "eventIds", "primaryReasonCounts", "sortContract"],
+      "properties": {
+        "inputEventCount": {"type": "integer", "minimum": 0},
+        "eventCount": {"type": "integer", "minimum": 0},
+        "excludedEventCount": {"type": "integer", "minimum": 0},
+        "eventIds": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "primaryReasonCounts": {"type": "object", "minProperties": 1, "additionalProperties": {"type": "integer", "minimum": 0}},
+        "sortContract": {"type": "object"}
+      }
+    },
+    "integrity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["eventMembershipSha256", "feedBuildResultSha256", "decisionLedgerSha256"],
+      "properties": {
+        "eventMembershipSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "feedBuildResultSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "decisionLedgerSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

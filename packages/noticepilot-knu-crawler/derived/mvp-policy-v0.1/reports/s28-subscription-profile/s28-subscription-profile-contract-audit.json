@@ -1,0 +1,51 @@
+{
+  "schemaVersion": "noticepilot.s28SubscriptionProfileContractAudit.v0.1",
+  "auditorVersion": "0.1.1",
+  "result": "pass",
+  "scope": {
+    "subscriptionProfileContractDefined": true,
+    "profileDefaultsApproved": false,
+    "feedEligibilityRulesImplemented": false,
+    "feedBuilderImplemented": false,
+    "feedSnapshotImplemented": false,
+    "subscriptionTokenIssued": false,
+    "subscriptionEndpointImplemented": false,
+    "s27RegistryMutationPerformed": false,
+    "s27ProjectionMutationPerformed": false,
+    "icsMutationPerformed": false
+  },
+  "checks": {
+    "subscriptionProfileSchemaVersion": "noticepilot.subscriptionProfile.v0.1",
+    "requiredRootFieldCount": 14,
+    "validContractExampleCount": 2,
+    "authoritativeDefaultProfileCount": 0,
+    "canonicalBoardCount": 9,
+    "explicitPolicyFieldCount": 4,
+    "deliveryIdentityFieldLeakCount": 0,
+    "s27cManifestSha256": "47fa8e232254df978575f31e06d555c20cf5f50e99862dc8ae0e772a7e4a03dc",
+    "s27dManifestSha256": "922eacc5a270f5119d0e86892d961ed742486b35b6a65d7a0d1642119820481f",
+    "foundation17ManifestHashMatch": true,
+    "s27CalendarEventCount": 900,
+    "s27PersistentUidCount": 900,
+    "s27StudentFeedEventCount": 601,
+    "s27JobApplicationFeedEventCount": 299,
+    "registryArtifactErrorCount": 0,
+    "projectionArtifactErrorCount": 0,
+    "errorCount": 0
+  },
+  "artifacts": {
+    "schema": "schemas/subscription-profile/subscription-profile.schema.json",
+    "validator": "noticepilot_subscription_profile.py",
+    "examples": "configs/subscription_profile_contract_examples.v0.1.json",
+    "contractDocument": "S28_1_SUBSCRIPTION_PROFILE_CONTRACT.md"
+  },
+  "deferredToS28_2": [
+    "default_profile_policy",
+    "campus_match_decision_order",
+    "source_link_join_semantics",
+    "review_required_event_state_projection",
+    "audience_unscoped_event_product_default",
+    "selection_reason_vocabulary"
+  ],
+  "errors": []
+}

@@ -1,0 +1,110 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4566",
+  "sourceContentHash": "dcf29dec482629c4c3f662a8ca6e526cbf50226b8c553d7470708e2f6314dac8",
+  "sourceTitle": "소비조합 기간제근로자(조리원)신규채용 합격자발표 안내",
+  "publishedAt": "2026-03-05",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e1a0f8a72416eb23",
+      "segmentType": "title",
+      "labelText": "소비조합 기간제근로자(조리원)신규채용 합격자발표 안내",
+      "bodyText": "소비조합 기간제근로자(조리원)신규채용 합격자발표 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "소비조합 기간제근로자(조리원)신규채용 합격자발표 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d2b2b860a0e5b5f2",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 소비조합 기간제근로자(조리원) 채용에 응시해 주셔서 감사합니다,",
+      "bodyText": "강원대학교 소비조합 기간제근로자(조리원) 채용에 응시해 주셔서 감사합니다,",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 소비조합 기간제근로자(조리원) 채용에 응시해 주셔서 감사합니다,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7da792d459f29986",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "< 최종합격자 >",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "< 최종합격자 >"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8e1ffcb5ec458bd3",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 조리원 : 응시번호 2번 이 * 자",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 조리원 : 응시번호 2번 이 * 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ba7ddd07407c63b6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 채용관련 서류는 추후 유선으로 통보할 예정이오니 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 채용관련 서류는 추후 유선으로 통보할 예정이오니 참고하시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 5,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "paragraph": 2,
+      "list_item": 1
+    }
+  }
+}

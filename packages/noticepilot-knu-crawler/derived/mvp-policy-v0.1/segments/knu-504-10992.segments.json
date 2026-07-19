@@ -1,0 +1,424 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10992",
+  "sourceContentHash": "bc367b419412cc89662dd6e7f2d3e6d7aec5f7ed6d4c540666841fc197a3f07d",
+  "sourceTitle": "2026 CO-SHOW 경진대회 및 해커톤 학생 모집",
+  "publishedAt": "2026-05-13",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bae34b4cafe7bb88",
+      "segmentType": "title",
+      "labelText": "2026 CO-SHOW 경진대회 및 해커톤 학생 모집",
+      "bodyText": "2026 CO-SHOW 경진대회 및 해커톤 학생 모집",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026 CO-SHOW 경진대회 및 해커톤 학생 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f45e505ed99f4d20",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "안녕하세요.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "안녕하세요."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f84e5be2a83c845a",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 첨단소재 나노융합 혁신융합대학사업단에서 '2026 CO-SHOW 경진대회 및 해커톤' 학생을 모집하고 있습니다.",
+      "bodyText": "강원대학교 첨단소재 나노융합 혁신융합대학사업단에서 '2026 CO-SHOW 경진대회 및 해커톤' 학생을 모집하고 있습니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 첨단소재 나노융합 혁신융합대학사업단에서 '2026 CO-SHOW 경진대회 및 해커톤' 학생을 모집하고 있습니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-54380365a48044f1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 예선(강원대 아이디어톤)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 예선(강원대 아이디어톤)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aede6c91bffc3e0e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 강원대학교 재학생 3팀 ~ 5팀(3인 1팀)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 강원대학교 재학생 3팀 ~ 5팀(3인 1팀)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-345071e71e5a87bb",
+      "segmentType": "label_value",
+      "labelText": "모집일정",
+      "bodyText": "2026. 5. 17.(일)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-17",
+          "start": 14,
+          "end": 29
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 모집일정: 공고일 ~ 2026. 5. 17.(일)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-052c6090b4f41c5e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 참고사항: 3팀 이내 모집 시, 3팀 모두 해커톤 경진대회(본선) 참가 가능",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 참고사항: 3팀 이내 모집 시, 3팀 모두 해커톤 경진대회(본선) 참가 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cc6407f2bd5d5df0",
+      "segmentType": "label_value",
+      "labelText": "5팀 이상 모집 시, 상위 3팀만 해커톤 경진대회(본선) 참여 예정",
+      "bodyText": "5팀 이상 모집 시, 상위 3팀만 해커톤 경진대회(본선) 참여 예정",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5팀 이상 모집 시, 상위 3팀만 해커톤 경진대회(본선) 참여 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5e6d789a0a0696a5",
+      "segmentType": "label_value",
+      "labelText": "참가신청",
+      "bodyText": "- 참가신청: (서식1) 강원대 아이디어톤 신청서 작성 후 메일 제출",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 참가신청: (서식1) 강원대 아이디어톤 신청서 작성 후 메일 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b03ec2e42fbd5782",
+      "segmentType": "label_value",
+      "labelText": "메일제목과 파일명은 반드시 [아이디어톤]_팀명으로 제출",
+      "bodyText": "※ 메일제목과 파일명은 반드시 [아이디어톤]_팀명으로 제출",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 메일제목과 파일명은 반드시 [아이디어톤]_팀명으로 제출"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3e9e32743ad92657",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 제 출 처:",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 제 출 처:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9dd839cefc56ba48",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "ebbj0415@kangwon.ac.kr",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ebbj0415@kangwon.ac.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-463d3d22d4ec2c13",
+      "segmentType": "label_value",
+      "labelText": "교육일정",
+      "bodyText": "- 교육일정",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 교육일정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-89ff1c251d5be4cb",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "일 자",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "일 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-64bfe672c7717658",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "내 용",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "내 용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3ae1119079501f5c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "5월 29일 금요일",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-29",
+          "start": 0,
+          "end": 6
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "5월 29일 금요일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-05ff790f555f768a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "시제품 제작 계획서 작성 특강, 아이디어 회의,",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "시제품 제작 계획서 작성 특강, 아이디어 회의,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ff78458b0f4a5b29",
+      "segmentType": "label_value",
+      "labelText": "그룹 티칭(멘토링), 발표 자료 작성, 중식 또는 석식 제공 예정",
+      "bodyText": "그룹 티칭(멘토링), 발표 자료 작성, 중식 또는 석식 제공 예정",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "그룹 티칭(멘토링), 발표 자료 작성, 중식 또는 석식 제공 예정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4a14e9f5264bf5d1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "5월 30일 토요일",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-30",
+          "start": 0,
+          "end": 6
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "5월 30일 토요일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3b8b9c4c5dbb241a",
+      "segmentType": "label_value",
+      "labelText": "발표 및 심사",
+      "bodyText": "발표 및 심사",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "발표 및 심사"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0b550ee1b3adf033",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 문의사항: 033-250-7754(평일 9-6시, 점심 12-13시 제외)",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 문의사항: 033-250-7754(평일 9-6시, 점심 12-13시 제외)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 21,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 7,
+      "label_value": 8,
+      "list_item": 5
+    }
+  }
+}

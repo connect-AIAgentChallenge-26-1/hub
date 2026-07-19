@@ -1,0 +1,755 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-720-2352",
+  "sourceContentHash": "987af599fd0062278adfd85c52b2a5909944a933721abe442852c2f46b2ba265",
+  "sourceTitle": "2026학년도 1학기 수강신청 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2352&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉 원주",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-720-2352-1ec44f2b9ccdee",
+      "uidHint": "noticepilot-cand-knu-720-2352-1ec44f2b9ccdee@noticepilot.local",
+      "sourceNoticeId": "knu-720-2352",
+      "sourceTitle": "2026학년도 1학기 수강신청 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2352&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "course_registration",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": true,
+        "confidence": "high",
+        "evidence": [
+          "student_year_explicit"
+        ]
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-3399e47534adfbfb",
+        "segmentType": "table_row",
+        "labelText": "수강신청 일정 | 1 ~ 4학년",
+        "bodyText": "2.19.(목) 10:00 ~ 18:00",
+        "sourceLocation": {
+          "lineIndex": 188,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-5011e03be0d7f964"
+        },
+        "actionSignals": [
+          "course_registration",
+          "application_period"
+        ],
+        "audienceSignals": [
+          "student_year:1",
+          "student_year:2",
+          "student_year:3",
+          "student_year:4"
+        ],
+        "dateSpans": [
+          {
+            "value": "2026-02-19",
+            "start": 19,
+            "end": 27
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "course_registration",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.explicit_structured_candidate",
+        "evidence": [
+          "1 ~ 4학년",
+          "1 ~ 4학년 : 2.19.(목) 10:00 ~ 18:00"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-ab0861b13de4948c",
+        "segmentId": "seg-3399e47534adfbfb",
+        "rawText": "2.19.(목) 10:00 ~ 18:00",
+        "normalizedStart": "2026-02-19T10:00:00+09:00",
+        "normalizedEnd": "2026-02-19T18:00:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": null
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-ac1a306a87c9ca9c",
+        "sourceNoticeId": "knu-720-2352",
+        "segmentId": "seg-3399e47534adfbfb",
+        "temporalMentionIds": [
+          "tm-ab0861b13de4948c"
+        ],
+        "bindingKind": "same_table_row",
+        "confidence": "high",
+        "ruleId": "binding.same_table_row",
+        "locallyGrounded": true,
+        "labelText": "수강신청 일정 | 1 ~ 4학년",
+        "evidence": "수강신청 일정 | 1 ~ 4학년: 2.19.(목) 10:00 ~ 18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 1학기 수강신청 안내 (1,2,3,4학년) 수강신청 기간",
+      "dateText": "2.19.(목) 10:00 ~ 18:00",
+      "normalizedStart": "2026-02-19T10:00:00+09:00",
+      "normalizedEnd": "2026-02-19T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "1 ~ 4학년 : 2.19.(목) 10:00 ~ 18:00",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "audience_rules_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "student_year_scope_explicit"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "profile_scoped",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": true,
+          "confidence": "high",
+          "evidence": [
+            "student_year_explicit"
+          ]
+        },
+        "confidence": "high",
+        "ruleId": "applicability.profile.explicit_dimensions",
+        "reasonCodes": [
+          "audience_rules_extracted",
+          "student_audience",
+          "student_year_scope_explicit"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "audience_rules_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "student_year_scope_explicit"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2352-ecc40f707dd877",
+      "uidHint": "noticepilot-cand-knu-720-2352-ecc40f707dd877@noticepilot.local",
+      "sourceNoticeId": "knu-720-2352",
+      "sourceTitle": "2026학년도 1학기 수강신청 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2352&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "course_registration",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [
+          1,
+          4
+        ],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": true,
+        "confidence": "high",
+        "evidence": [
+          "student_year_explicit"
+        ]
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-5b3bf70575c08942",
+        "segmentType": "table_row",
+        "labelText": "수강신청 일정 | 1·4학년",
+        "bodyText": "2.20.(금) 10:00~13:00",
+        "sourceLocation": {
+          "lineIndex": 248,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-82b1f99b73956eae"
+        },
+        "actionSignals": [
+          "course_registration",
+          "application_period"
+        ],
+        "audienceSignals": [
+          "student_year:1",
+          "student_year:4"
+        ],
+        "dateSpans": [
+          {
+            "value": "2026-02-20",
+            "start": 17,
+            "end": 25
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "course_registration",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.explicit_structured_candidate",
+        "evidence": [
+          "1·4학년",
+          "1·4학년 : 2.20.(금) 10:00~13:00"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-d93276398d798076",
+        "segmentId": "seg-5b3bf70575c08942",
+        "rawText": "2.20.(금) 10:00~13:00",
+        "normalizedStart": "2026-02-20T10:00:00+09:00",
+        "normalizedEnd": "2026-02-20T13:00:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": null
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-f405eff6cc877cde",
+        "sourceNoticeId": "knu-720-2352",
+        "segmentId": "seg-5b3bf70575c08942",
+        "temporalMentionIds": [
+          "tm-d93276398d798076"
+        ],
+        "bindingKind": "same_table_row",
+        "confidence": "high",
+        "ruleId": "binding.same_table_row",
+        "locallyGrounded": true,
+        "labelText": "수강신청 일정 | 1·4학년",
+        "evidence": "수강신청 일정 | 1·4학년: 2.20.(금) 10:00~13:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 1학기 수강신청 안내 (1,4학년) 수강신청 기간",
+      "dateText": "2.20.(금) 10:00~13:00",
+      "normalizedStart": "2026-02-20T10:00:00+09:00",
+      "normalizedEnd": "2026-02-20T13:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "1·4학년 : 2.20.(금) 10:00~13:00",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "audience_rules_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "student_year_scope_explicit"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "profile_scoped",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [
+            1,
+            4
+          ],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": true,
+          "confidence": "high",
+          "evidence": [
+            "student_year_explicit"
+          ]
+        },
+        "confidence": "high",
+        "ruleId": "applicability.profile.explicit_dimensions",
+        "reasonCodes": [
+          "audience_rules_extracted",
+          "student_audience",
+          "student_year_scope_explicit"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "audience_rules_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "student_year_scope_explicit"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2352-3c04bbef0825e1",
+      "uidHint": "noticepilot-cand-knu-720-2352-3c04bbef0825e1@noticepilot.local",
+      "sourceNoticeId": "knu-720-2352",
+      "sourceTitle": "2026학년도 1학기 수강신청 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2352&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "course_registration",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [
+          2,
+          3
+        ],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": true,
+        "confidence": "high",
+        "evidence": [
+          "student_year_explicit"
+        ]
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-dc07d1b4eb803aa8",
+        "segmentType": "table_row",
+        "labelText": "수강신청 일정 | 2·3학년",
+        "bodyText": "2.20.(금) 14:00~17:00",
+        "sourceLocation": {
+          "lineIndex": 284,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-82b1f99b73956eae"
+        },
+        "actionSignals": [
+          "course_registration",
+          "application_period"
+        ],
+        "audienceSignals": [
+          "student_year:2",
+          "student_year:3"
+        ],
+        "dateSpans": [
+          {
+            "value": "2026-02-20",
+            "start": 17,
+            "end": 25
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "course_registration",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.explicit_structured_candidate",
+        "evidence": [
+          "2·3학년",
+          "2·3학년 : 2.20.(금) 14:00~17:00"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-389f004d68676ca1",
+        "segmentId": "seg-dc07d1b4eb803aa8",
+        "rawText": "2.20.(금) 14:00~17:00",
+        "normalizedStart": "2026-02-20T14:00:00+09:00",
+        "normalizedEnd": "2026-02-20T17:00:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": null
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-2453004cab413718",
+        "sourceNoticeId": "knu-720-2352",
+        "segmentId": "seg-dc07d1b4eb803aa8",
+        "temporalMentionIds": [
+          "tm-389f004d68676ca1"
+        ],
+        "bindingKind": "same_table_row",
+        "confidence": "high",
+        "ruleId": "binding.same_table_row",
+        "locallyGrounded": true,
+        "labelText": "수강신청 일정 | 2·3학년",
+        "evidence": "수강신청 일정 | 2·3학년: 2.20.(금) 14:00~17:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 1학기 수강신청 안내 (2,3학년) 수강신청 기간",
+      "dateText": "2.20.(금) 14:00~17:00",
+      "normalizedStart": "2026-02-20T14:00:00+09:00",
+      "normalizedEnd": "2026-02-20T17:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "2·3학년 : 2.20.(금) 14:00~17:00",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "audience_rules_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "student_year_scope_explicit"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "profile_scoped",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [
+            2,
+            3
+          ],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": true,
+          "confidence": "high",
+          "evidence": [
+            "student_year_explicit"
+          ]
+        },
+        "confidence": "high",
+        "ruleId": "applicability.profile.explicit_dimensions",
+        "reasonCodes": [
+          "audience_rules_extracted",
+          "student_audience",
+          "student_year_scope_explicit"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "audience_rules_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "student_year_scope_explicit"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-720-2352-ae45d52d011b9b",
+      "uidHint": "noticepilot-cand-knu-720-2352-ae45d52d011b9b@noticepilot.local",
+      "sourceNoticeId": "knu-720-2352",
+      "sourceTitle": "2026학년도 1학기 수강신청 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/720/detail.do?pstSn=2352&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "school_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": "course_registration",
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": true,
+        "confidence": "high",
+        "evidence": [
+          "student_year_explicit"
+        ]
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-ea829762bc6d6e68",
+        "segmentType": "table_row",
+        "labelText": "수강신청 일정 | 1 ~ 4학년",
+        "bodyText": "2.21.(토) 10:00 ~ 2.25.(수) 18:00",
+        "sourceLocation": {
+          "lineIndex": 188,
+          "clauseIndex": 1,
+          "parentSegmentId": "seg-5011e03be0d7f964"
+        },
+        "actionSignals": [
+          "course_registration",
+          "application_period"
+        ],
+        "audienceSignals": [
+          "student_year:1",
+          "student_year:2",
+          "student_year:3",
+          "student_year:4"
+        ],
+        "dateSpans": [
+          {
+            "value": "2026-02-21",
+            "start": 19,
+            "end": 27
+          },
+          {
+            "value": "2026-02-25",
+            "start": 36,
+            "end": 44
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": "course_registration",
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.explicit_structured_candidate",
+        "evidence": [
+          "1 ~ 4학년",
+          "1 ~ 4학년 : 2.21.(토) 10:00 ~ 2.25.(수) 18:00"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-60bff88ffeddf70b",
+        "segmentId": "seg-ea829762bc6d6e68",
+        "rawText": "2.21.(토) 10:00 ~ 2.25.(수) 18:00",
+        "normalizedStart": "2026-02-21T10:00:00+09:00",
+        "normalizedEnd": "2026-02-25T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": null
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-aed9f399173509fd",
+        "sourceNoticeId": "knu-720-2352",
+        "segmentId": "seg-ea829762bc6d6e68",
+        "temporalMentionIds": [
+          "tm-60bff88ffeddf70b"
+        ],
+        "bindingKind": "same_table_row",
+        "confidence": "high",
+        "ruleId": "binding.same_table_row",
+        "locallyGrounded": true,
+        "labelText": "수강신청 일정 | 1 ~ 4학년",
+        "evidence": "수강신청 일정 | 1 ~ 4학년: 2.21.(토) 10:00 ~ 2.25.(수) 18:00"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026학년도 1학기 수강신청 안내 (1,2,3,4학년) 수강신청 기간",
+      "dateText": "2.21.(토) 10:00 ~ 2.25.(수) 18:00",
+      "normalizedStart": "2026-02-21T10:00:00+09:00",
+      "normalizedEnd": "2026-02-25T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "1 ~ 4학년 : 2.21.(토) 10:00 ~ 2.25.(수) 18:00",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "audience_rules_extracted",
+        "structured_segment_grounded",
+        "student_audience",
+        "student_year_scope_explicit"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "profile_scoped",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": true,
+          "confidence": "high",
+          "evidence": [
+            "student_year_explicit"
+          ]
+        },
+        "confidence": "high",
+        "ruleId": "applicability.profile.explicit_dimensions",
+        "reasonCodes": [
+          "audience_rules_extracted",
+          "student_audience",
+          "student_year_scope_explicit"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "audience_rules_extracted",
+          "structured_segment_grounded",
+          "student_audience",
+          "student_year_scope_explicit"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 4,
+    "autoConfirmedCount": 4,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 4
+  }
+}

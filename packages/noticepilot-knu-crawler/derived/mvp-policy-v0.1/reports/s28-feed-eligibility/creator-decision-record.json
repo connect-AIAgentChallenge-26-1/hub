@@ -1,0 +1,50 @@
+{
+  "schemaVersion": "noticepilot.s28FeedEligibilityCreatorDecisionRecord.v0.1",
+  "status": "approved",
+  "policySchemaVersion": "noticepilot.feedEligibilityPolicy.v0.2",
+  "policyVersion": "0.2.0",
+  "approvedAt": "2026-07-13T15:30:00+09:00",
+  "decisions": [
+    {
+      "id": "E1",
+      "topic": "source_link_match_mode",
+      "selected": "canonical_source_only",
+      "source": "creator_decision"
+    },
+    {
+      "id": "E2",
+      "topic": "review_state_aggregation",
+      "selected": "canonical_candidate_only",
+      "source": "creator_decision"
+    },
+    {
+      "id": "E3",
+      "topic": "default_student_profile_policy",
+      "selected": {
+        "includeUnknownCampusEvents": true,
+        "includeReviewRequiredEvents": true,
+        "reviewRequiredInclusionRule": "include_if_valid_normalized_date"
+      },
+      "source": "inherited_authoritative_contract",
+      "contract": "docs/architecture/subscription-foundation-contract.md"
+    },
+    {
+      "id": "E4",
+      "topic": "default_job_profile_policy",
+      "selected": {
+        "includeUnknownCampusEvents": true,
+        "includeReviewRequiredEvents": true,
+        "reviewRequiredInclusionRule": "include_if_valid_normalized_date"
+      },
+      "source": "inherited_authoritative_contract_without_job_feed_exception",
+      "contract": "docs/architecture/subscription-foundation-contract.md"
+    },
+    {
+      "id": "E5",
+      "topic": "audience_unscoped_default",
+      "selected": "include",
+      "source": "creator_decision"
+    }
+  ],
+  "unresolvedDecisionIds": []
+}

@@ -1,0 +1,193 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2384",
+  "sourceContentHash": "5c5f7a0bd63e7155dd6b6d821c78cec204676557fe5344ce185a0336319785b4",
+  "sourceTitle": "2026학년도 1학기 2차 폐강 강좌 확정 및 추가수강 신청 안내(삼척캠퍼스)",
+  "publishedAt": "2026-03-12",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-20c16c64eb2169f1",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 2차 폐강 강좌 확정 및 추가수강 신청 안내(삼척캠퍼스)",
+      "bodyText": "2026학년도 1학기 2차 폐강 강좌 확정 및 추가수강 신청 안내(삼척캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 2차 폐강 강좌 확정 및 추가수강 신청 안내(삼척캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-572781cc97863b79",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 1학기 2차 폐강강좌를 다음과 같이 알려드리니, 폐강강좌를 수강신청한 학생은 추가 수강신청 기간에 다시 수강신청해주시기 바랍니다.",
+      "bodyText": "2026학년도 1학기 2차 폐강강좌를 다음과 같이 알려드리니, 폐강강좌를 수강신청한 학생은 추가 수강신청 기간에 다시 수강신청해주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 2차 폐강강좌를 다음과 같이 알려드리니, 폐강강좌를 수강신청한 학생은 추가 수강신청 기간에 다시 수강신청해주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9fb81646efa00f4b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 2차 폐강 확정 강좌: 26강좌",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-02",
+          "start": 0,
+          "end": 4
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 2차 폐강 확정 강좌: 26강좌"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bf9949d6dcad6d15",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "( 기초교양: 4강좌, 균형교양: 2강좌, 글로컬교양: 1강좌, 전공필수: 1강좌, 전공선택: 18강좌)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "( 기초교양: 4강좌, 균형교양: 2강좌, 글로컬교양: 1강좌, 전공필수: 1강좌, 전공선택: 18강좌)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38da669fa7c2170c",
+      "segmentType": "label_value",
+      "labelText": "추가 수강신청 기간",
+      "bodyText": "2026. 3. 13.(금) 10:00 ~ 17:00",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-13",
+          "start": 15,
+          "end": 30
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 추가 수강신청 기간: 2026. 3. 13.(금) 10:00 ~ 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c76ce4f1bb7de1b1",
+      "segmentType": "label_value",
+      "labelText": "* 2차 폐강 기간에 폐강 확정된 강좌를 수강 신청한 학생에 한하여 수강 신청 가능",
+      "bodyText": "* 2차 폐강 기간에 폐강 확정된 강좌를 수강 신청한 학생에 한하여 수강 신청 가능",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 2차 폐강 기간에 폐강 확정된 강좌를 수강 신청한 학생에 한하여 수강 신청 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a91f1db01e2a0491",
+      "segmentType": "label_value",
+      "labelText": "붙임 1. 2026학년도 1학기 2차 폐강 확정 강좌 목록(삼척캠퍼스) 1부.",
+      "bodyText": "붙임 1. 2026학년도 1학기 2차 폐강 확정 강좌 목록(삼척캠퍼스) 1부.",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 1. 2026학년도 1학기 2차 폐강 확정 강좌 목록(삼척캠퍼스) 1부."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cfef9c38e6c025bb",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 1학기 폐강강좌 수강자 추가 수강 신청 안내 1부. 끝.",
+      "bodyText": "2. 2026학년도 1학기 폐강강좌 수강자 추가 수강 신청 안내 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 2026학년도 1학기 폐강강좌 수강자 추가 수강 신청 안내 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 5,
+      "list_item": 1,
+      "paragraph": 1
+    }
+  }
+}

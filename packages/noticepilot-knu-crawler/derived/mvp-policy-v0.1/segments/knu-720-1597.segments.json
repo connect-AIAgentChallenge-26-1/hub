@@ -1,0 +1,65 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-1597",
+  "sourceContentHash": "13fd5916e0a2438c2efa8b9891827a9a1f57d2efe092fc7fbbe5750fe91fa830",
+  "sourceTitle": "2026학년도 1학기 신입생 수강신청 일정 및 방법 안내（삼척.도계）",
+  "publishedAt": "2026-01-31",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-19e579030907fb44",
+      "segmentType": "title",
+      "labelText": "2026학년도 1학기 신입생 수강신청 일정 및 방법 안내（삼척.도계）",
+      "bodyText": "2026학년도 1학기 신입생 수강신청 일정 및 방법 안내（삼척.도계）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 신입생 수강신청 일정 및 방법 안내（삼척.도계）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9989aa89f459cb54",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 1학기 신입생 수강신청 일정 및 방법 안내합니다.",
+      "bodyText": "2026학년도 1학기 신입생 수강신청 일정 및 방법 안내합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 신입생 수강신청 일정 및 방법 안내합니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1
+    }
+  }
+}

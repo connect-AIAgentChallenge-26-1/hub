@@ -1,0 +1,163 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10906",
+  "sourceContentHash": "f96aef8b036d5ed65cde2c12f4a23958626c3f798cf98a26475f089cc8c74053",
+  "sourceTitle": "취업 서포터즈 모집 (~4/27)",
+  "publishedAt": "2026-04-22",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-08e05fdc6884248d",
+      "segmentType": "title",
+      "labelText": "취업 서포터즈 모집 (~",
+      "bodyText": "4/27)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-27",
+          "start": 13,
+          "end": 17
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "취업 서포터즈 모집 (~4/27)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b151162b74f93d2d",
+      "segmentType": "label_value",
+      "labelText": "취업서포터즈 모집을 진행합니다.",
+      "bodyText": "취업서포터즈 모집을 진행합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "취업서포터즈 모집을 진행합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b95f430c6707ff83",
+      "segmentType": "label_value",
+      "labelText": "⭐ 모집기간",
+      "bodyText": "4월 27일 (월)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-27",
+          "start": 8,
+          "end": 18
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "⭐ 모집기간: 4월 27일 (월)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6440c599f14ab1f1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "⭐ 홍보영상도 같이 제작하고, 프로그램도 기획해보는 다시 없을 기회",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "⭐ 홍보영상도 같이 제작하고, 프로그램도 기획해보는 다시 없을 기회"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-340c99e7c9d39a21",
+      "segmentType": "label_value",
+      "labelText": "⭐올해는 평화통일 서포터즈도 함께하는 1석 2조의 활동까지!",
+      "bodyText": "⭐올해는 평화통일 서포터즈도 함께하는 1석 2조의 활동까지!",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "⭐올해는 평화통일 서포터즈도 함께하는 1석 2조의 활동까지!"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8c9908da20632171",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "문의사항: 033-640-2042",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "문의사항: 033-640-2042"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5fc889ec330cb42f",
+      "segmentType": "label_value",
+      "labelText": "접수 후, 잘 들어왔는지 꼭! 확인 진행부탁드립니다.",
+      "bodyText": "접수 후, 잘 들어왔는지 꼭! 확인 진행부탁드립니다.",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "접수 후, 잘 들어왔는지 꼭! 확인 진행부탁드립니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 4,
+      "paragraph": 2
+    }
+  }
+}

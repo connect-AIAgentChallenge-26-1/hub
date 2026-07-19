@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10676",
+  "sourceContentHash": "ae63f51a516a5588de3670140aa9725366d57af041a0d40069063f326f6e58a8",
+  "sourceTitle": "[긴급]삼척캠퍼스 통학버스 임시 미운행 노선 안내(3.3）",
+  "publishedAt": "2026-03-03",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-afd082328829e1b2",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "3.3）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 28,
+          "end": 31
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "[긴급]삼척캠퍼스 통학버스 임시 미운행 노선 안내(3.3）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0c360fce831157ea",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "삼척캠퍼스 통학버스 임시 미운행 노선을 안내하오니 참고바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "삼척캠퍼스 통학버스 임시 미운행 노선을 안내하오니 참고바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5134ffe6c4120632",
+      "segmentType": "label_value",
+      "labelText": "○ 임시 미운행 기간",
+      "bodyText": "2023 .3 .3.(화)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2023-03-03",
+          "start": 14,
+          "end": 28
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "○ 임시 미운행 기간 : 2023 .3 .3.(화)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-28ec04e2fcfcd183",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○ 미운행 노선",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 미운행 노선"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-904605fdd81593ca",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 5회(도계 13:00), 6회(삼척 14:00), 8회(삼척 16:00), 9회(도계 18:05)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 5회(도계 13:00), 6회(삼척 14:00), 8회(삼척 16:00), 9회(도계 18:05)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ed518c3bca18bbf0",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 도계 18:05(9회) 버스 이용자는 교직원 퇴근(18:10) 버스 이용 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 도계 18:05(9회) 버스 이용자는 교직원 퇴근(18:10) 버스 이용 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-02dd38f52e486cf0",
+      "segmentType": "label_value",
+      "labelText": "<학교 행사 관계로 부득이 미 운행하오니 양해 바랍니다.>",
+      "bodyText": "<학교 행사 관계로 부득이 미 운행하오니 양해 바랍니다.>",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "<학교 행사 관계로 부득이 미 운행하오니 양해 바랍니다.>"
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "label_value": 2,
+      "list_item": 2
+    }
+  }
+}

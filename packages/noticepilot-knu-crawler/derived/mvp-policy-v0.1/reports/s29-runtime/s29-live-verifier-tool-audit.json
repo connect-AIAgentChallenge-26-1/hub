@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "noticepilot.s29LiveVerifierToolAudit.v0.1",
+  "auditorVersion": "0.1.0",
+  "result": "pass",
+  "packageVersion": "0.4.4-observation.3-policy.15-foundation.24.2",
+  "liveDatabaseExecutionPerformedByPackageBuilder": false,
+  "checks": {
+    "moduleImport": true,
+    "cliSyntax": true,
+    "reportContractTests": 6,
+    "postgresPersistenceRegressionTests": 16,
+    "nonDestructiveTransactionDesign": true,
+    "finalResidueGate": true,
+    "dsnPersisted": false,
+    "rawTokenPersisted": false
+  },
+  "liveExecutionCommand": "python3 tools/verify_s29_live_postgres.py --root . --dsn <DSN> --output runtime/s29-v1/live-postgres-verification.json",
+  "completionCondition": "generated report status=pass and livePostgresVerified=true"
+}

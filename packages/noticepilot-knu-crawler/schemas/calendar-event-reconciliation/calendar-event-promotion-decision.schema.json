@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/calendar-event-promotion-decision.schema.json",
+  "title": "NoticePilot CalendarEvent promotion decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "promotionDecisionId", "registryId", "calendarEventId",
+    "candidateIds", "canonicalCandidateId", "decisionStatus", "promotionKind",
+    "relationBasis", "ruleIds", "persistedAt"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.calendarEventPromotionDecision.v0.1"},
+    "promotionDecisionId": {"type": "string", "pattern": "^prom_[0-9a-f]{32}$"},
+    "registryId": {"type": "string"},
+    "calendarEventId": {"type": "string", "pattern": "^evt_[0-9a-f]{32}$"},
+    "candidateIds": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "canonicalCandidateId": {"type": "string"},
+    "decisionStatus": {"const": "approved"},
+    "promotionKind": {"enum": ["reconciled_identity", "unmerged_publishable_identity"]},
+    "relationBasis": {"enum": ["singleton", "duplicate", "extension"]},
+    "ruleIds": {"type": "array", "uniqueItems": true, "items": {"type": "string"}},
+    "persistedAt": {"type": "string"}
+  }
+}

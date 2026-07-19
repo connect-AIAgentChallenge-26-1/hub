@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/atomic-calendar-event-persistence-plan.schema.json",
+  "title": "NoticePilot Atomic CalendarEvent Persistence Plan",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion", "operation", "relationDecision", "targetCalendarEventId",
+    "expectedEventVersion", "eventMutation", "sourceLinkDrafts",
+    "revisionRecord", "outboxIntent", "idStrategy"
+  ],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.atomicCalendarEventPersistencePlan.v0.1"},
+    "operation": {
+      "enum": ["create_distinct_event", "attach_duplicate_source", "apply_extension", "record_needs_review"]
+    },
+    "relationDecision": {"type": "object"},
+    "targetCalendarEventId": {"type": ["string", "null"]},
+    "expectedEventVersion": {"type": ["integer", "null"], "minimum": 0},
+    "eventMutation": {"type": ["object", "null"]},
+    "sourceLinkDrafts": {"type": "array", "items": {"type": "object"}},
+    "revisionRecord": {"type": ["object", "null"]},
+    "outboxIntent": {"type": ["object", "null"]},
+    "idStrategy": {"const": "registry_assigned_opaque_v0"}
+  }
+}

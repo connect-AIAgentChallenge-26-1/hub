@@ -1,0 +1,94 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-1192",
+  "sourceContentHash": "aad619a767314e5109a553a944ef7d7924bdace88df42abb2f71af5ddb64ceca",
+  "sourceTitle": "2026년도 제59차 함경북도 장학회 장학생 모집 안내",
+  "publishedAt": "2026-01-09",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-44f66e72d0748b66",
+      "segmentType": "title",
+      "labelText": "2026년도 제59차 함경북도 장학회 장학생 모집 안내",
+      "bodyText": "2026년도 제59차 함경북도 장학회 장학생 모집 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년도 제59차 함경북도 장학회 장학생 모집 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8e9ffbfb92d892df",
+      "segmentType": "label_value",
+      "labelText": "신청자격",
+      "bodyText": "1. 신청자격: 원적이 함경북도인 자 또는 그 후손",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 신청자격: 원적이 함경북도인 자 또는 그 후손"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6a69fe7cb2e0fdbd",
+      "segmentType": "label_value",
+      "labelText": "모집인원",
+      "bodyText": "2. 모집인원: 총 00명",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 모집인원: 총 00명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-24252bd3e447fa02",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 자세한 사항은 붙임 파일 참조",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 자세한 사항은 붙임 파일 참조"
+    }
+  ],
+  "summary": {
+    "segmentCount": 4,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "paragraph": 1
+    }
+  }
+}

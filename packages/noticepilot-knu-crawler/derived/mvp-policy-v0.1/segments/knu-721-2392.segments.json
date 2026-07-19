@@ -1,0 +1,61 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2392",
+  "sourceContentHash": "a4c1e82d7862d64f0fe9e7845b746f849fb25ef50ac38c9045b7d2e87043ec11",
+  "sourceTitle": "[원주운전면허시험장] 취약계층 학생 대상 무료 운전면허 취득 지원서비스 안내",
+  "publishedAt": "2026-05-13",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-316d8e98d6be9247",
+      "segmentType": "title",
+      "labelText": "[원주운전면허시험장] 취약계층 학생 대상 무료 운전면허 취득 지원서비스 안내",
+      "bodyText": "[원주운전면허시험장] 취약계층 학생 대상 무료 운전면허 취득 지원서비스 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[원주운전면허시험장] 취약계층 학생 대상 무료 운전면허 취득 지원서비스 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-61f6157deca9cc72",
+      "segmentType": "label_value",
+      "labelText": "장학금에 관한 내용은 아니지만, 학생들을 대상으로 하는 경제적 지원사업이기 때문에 해당 게시판에 공고합니다",
+      "bodyText": "장학금에 관한 내용은 아니지만, 학생들을 대상으로 하는 경제적 지원사업이기 때문에 해당 게시판에 공고합니다",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "장학금에 관한 내용은 아니지만, 학생들을 대상으로 하는 경제적 지원사업이기 때문에 해당 게시판에 공고합니다"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1
+    }
+  }
+}

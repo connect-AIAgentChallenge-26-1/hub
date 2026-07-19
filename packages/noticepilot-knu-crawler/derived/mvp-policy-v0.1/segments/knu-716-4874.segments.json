@@ -1,0 +1,143 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4874",
+  "sourceContentHash": "3c64f342c772be6f58059646e7758e98b157e0ffef6ca1c95a25c0b7cfda9505",
+  "sourceTitle": "강원대학교 원주캠퍼스 공무직(무기계약직) 채용 서류전형 합격자 및 면접일정 공고",
+  "publishedAt": "2026-06-24",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6820967e9770d236",
+      "segmentType": "title",
+      "labelText": "강원대학교 원주캠퍼스 공무직(무기계약직) 채용 서류전형 합격자 및 면접일정 공고",
+      "bodyText": "강원대학교 원주캠퍼스 공무직(무기계약직) 채용 서류전형 합격자 및 면접일정 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 원주캠퍼스 공무직(무기계약직) 채용 서류전형 합격자 및 면접일정 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-58b59e4edc5ab658",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 원주캠퍼스 공고 제2026-15호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 원주캠퍼스 공고 제2026-15호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-01842208df571da0",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 원주캠퍼스 공무직(무기계약직) 채용 서류전형 합격자 및 면접일정을 붙임과 같이 공고합니다.",
+      "bodyText": "강원대학교 원주캠퍼스 공무직(무기계약직) 채용 서류전형 합격자 및 면접일정을 붙임과 같이 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 원주캠퍼스 공무직(무기계약직) 채용 서류전형 합격자 및 면접일정을 붙임과 같이 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9157a1cc3eca145f",
+      "segmentType": "continuation",
+      "labelText": "강원대학교 원주캠퍼스 공무직(무기계약직) 채용 서류전형 합격자 및 면접일정을 붙임과 같이 공고합니다.",
+      "bodyText": "2026. 6. 24.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-01842208df571da0"
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-24",
+          "start": 57,
+          "end": 68
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "강원대학교 원주캠퍼스 공무직(무기계약직) 채용 서류전형 합격자 및 면접일정을 붙임과 같이 공고합니다. 2026. 6. 24."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-eef9a0c6ed4532da",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 6. 24.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-24",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 6. 24."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6db6498a8e61ce8d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교총장",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교총장"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 3,
+      "label_value": 1,
+      "continuation": 1
+    }
+  }
+}

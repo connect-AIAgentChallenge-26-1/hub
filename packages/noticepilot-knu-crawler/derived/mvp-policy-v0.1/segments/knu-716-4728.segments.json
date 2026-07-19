@@ -1,0 +1,229 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4728",
+  "sourceContentHash": "57488e50b3139120df4b5ea98053bba925cc8540eb49ef7792855b819693534c",
+  "sourceTitle": "의과대학 의학과(생리학교실) 조교 신규채용 공고",
+  "publishedAt": "2026-04-27",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-346433fdc37a352c",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "의과대학 의학과(생리학교실) 조교 신규채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "의과대학 의학과(생리학교실) 조교 신규채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7c3eefe561c5d049",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 의과대학 의학과(생리학교실)에서 다음과 같이 조교 공개채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 의과대학 의학과(생리학교실)에서 다음과 같이 조교 공개채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 의과대학 의학과(생리학교실)에서 다음과 같이 조교 공개채용을 실시하오니 참신하고 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9ec15a3d1c7d50ce",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 채용부서 : 의과대학 의학과(생리학교실)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 채용부서 : 의과대학 의학과(생리학교실)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-38bf4e551c2b18d1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 채용인원 : 1명",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 채용인원 : 1명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8d05b282dc7b0376",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 담당예정업무 : 생리학교실 수업보조, 행정업무, 연구보조, 물품관리",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 담당예정업무 : 생리학교실 수업보조, 행정업무, 연구보조, 물품관리"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f030966a4beb77c8",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026. 4. 27.(월) ~ 2026. 5. 6.(수) 18:00",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-27",
+          "start": 10,
+          "end": 25
+        },
+        {
+          "value": "2026-05-06",
+          "start": 28,
+          "end": 42
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "4. 접수기간 : 2026. 4. 27.(월) ~ 2026. 5. 6.(수) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b5df41836bc0beec",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 기타 자세한 사항은 붙임 공고문 참고",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 기타 자세한 사항은 붙임 공고문 참고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5e2a3735807e2159",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 4. 27.",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-27",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 4. 27."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2edbb9a94d567e1c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 총장",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 총장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-32e2cee6c9e29b5f",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-04-27~2026-05-06",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-27",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-05-06",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-04-27~2026-05-06"
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 3,
+      "list_item": 4,
+      "paragraph": 2,
+      "title": 1
+    }
+  }
+}

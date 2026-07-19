@@ -1,0 +1,540 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-1190",
+  "sourceContentHash": "6aac3e040196a5b4ab2645caec8897313a5ee2c3e7b3957858ec3827cbaf8786",
+  "sourceTitle": "2026-1학기 재학생 우선감면장학금 신청 안내[기간: 26. 1. 12.（월）~1. 23.（금）]",
+  "publishedAt": "2026-01-08",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5eb3ca4f92d29b78",
+      "segmentType": "title",
+      "labelText": "2026-1학기 재학생 우선감면장학금 신청 안내[기간",
+      "bodyText": "26. 1. 12.（월）~1. 23.（금）]",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [
+        {
+          "value": "2026-01-12",
+          "start": 31,
+          "end": 44
+        },
+        {
+          "value": "2026-01-23",
+          "start": 45,
+          "end": 54
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2026-1학기 재학생 우선감면장학금 신청 안내[기간: 26. 1. 12.（월）~1. 23.（금）]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1565be3245222582",
+      "segmentType": "label_value",
+      "labelText": "2026-1학기 교내 우선감면장학금 신청을 다음과 같이 안내합니다.",
+      "bodyText": "2026-1학기 교내 우선감면장학금 신청을 다음과 같이 안내합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026-1학기 교내 우선감면장학금 신청을 다음과 같이 안내합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-17b6e79f9c0bbdef",
+      "segmentType": "label_value",
+      "labelText": "해당 학생은 공지내용을 참고하여 해당 기간 내에 K-Cloud에서 장학을 신청하시기 바랍니다.",
+      "bodyText": "해당 학생은 공지내용을 참고하여 해당 기간 내에 K-Cloud에서 장학을 신청하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "해당 학생은 공지내용을 참고하여 해당 기간 내에 K-Cloud에서 장학을 신청하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d47a31b476ebe748",
+      "segmentType": "label_value",
+      "labelText": "신청 대상자 (아래의 신청대상자만 신청 기간에 신청)",
+      "bodyText": "1. 신청 대상자 (아래의 신청대상자만 신청 기간에 신청)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 신청 대상자 (아래의 신청대상자만 신청 기간에 신청)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-01811d608ea1b6c3",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026-1학기 '재학' 예정인 학생 중 아래 요건에 해당하는 자",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026-1학기 '재학' 예정인 학생 중 아래 요건에 해당하는 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0ba6ceb827563bc1",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 국가유공자 및 그 자녀",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 국가유공자 및 그 자녀"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bbfa9b963342cef5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 미래글로벌인재장학생(2021학번까지)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 미래글로벌인재장학생(2021학번까지)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-252065e0a06da833",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 북한이탈주민(본인 또는 자녀 중 조건에 해당하는 자)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 북한이탈주민(본인 또는 자녀 중 조건에 해당하는 자)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1db73bc6599cce25",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 입학 시 수석장학금(2021학번까지), 단과대학 수석장학금(2021학번까지), 차석장학금(2021학번까지)을 받고 입학한 장학생 ※ 2021년 이후 입학한 신입생은 해당사항 없음",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 입학 시 수석장학금(2021학번까지), 단과대학 수석장학금(2021학번까지), 차석장학금(2021학번까지)을 받고 입학한 장학생 ※ 2021년 이후 입학한 신입생은 해당사항 없음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c37288c757e8e60f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 자아실현장학생(장애인)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 자아실현장학생(장애인)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-06f736e8317af481",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 학업장려(희망/백혈병 소아암) 장학생",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 학업장려(희망/백혈병 소아암) 장학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-48c86e8f0408cf25",
+      "segmentType": "label_value",
+      "labelText": "동시재학장학생 ※ 형제 자매가 2026학년도 신입생일 경우, 등록금 납부 후 '3월 후'에 신청 바람(등록금 환불로 진행될 예정)",
+      "bodyText": "- 동시재학장학생 ※ 형제 자매가 2026학년도 신입생일 경우, 등록금 납부 후 '3월 후'에 신청 바람(등록금 환불로 진행될 예정)",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "admission_type:new_student"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 동시재학장학생 ※ 형제 자매가 2026학년도 신입생일 경우, 등록금 납부 후 '3월 후'에 신청 바람(등록금 환불로 진행될 예정)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7434b8d2c25fbc18",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 글로벌비즈니스학과 재학생",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 글로벌비즈니스학과 재학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7d44d0d4bad1393d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- KNU미래글로벌인재 Ⅰ,Ⅱ 장학금을 받고 입학한 장학생(2023학번부터 해당)",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- KNU미래글로벌인재 Ⅰ,Ⅱ 장학금을 받고 입학한 장학생(2023학번부터 해당)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-851b6c897580d302",
+      "segmentType": "label_value",
+      "labelText": "★★성적우수 장학생은 소속 학과에서 정한 기준에 따라 학과에서 선발",
+      "bodyText": "★★성적우수 장학생은 소속 학과에서 정한 기준에 따라 학과에서 선발",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "★★성적우수 장학생은 소속 학과에서 정한 기준에 따라 학과에서 선발"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7a243f84fe287f7b",
+      "segmentType": "label_value",
+      "labelText": "( 성적우수장학생 선발여부 및 성적우수 장학금에 대한 문의",
+      "bodyText": "( 성적우수장학생 선발여부 및 성적우수 장학금에 대한 문의: 소속학과)★★",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "( 성적우수장학생 선발여부 및 성적우수 장학금에 대한 문의: 소속학과)★★"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c80f354a0e10232e",
+      "segmentType": "label_value",
+      "labelText": "신청 기간",
+      "bodyText": "2026. 1. 12.(월) 09:00~1. 23.(금) 23:59",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-12",
+          "start": 11,
+          "end": 26
+        },
+        {
+          "value": "2026-01-23",
+          "start": 33,
+          "end": 42
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2. 신청 기간 : 2026. 1. 12.(월) 09:00~1. 23.(금) 23:59"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ba97fed59d0ef35f",
+      "segmentType": "label_value",
+      "labelText": "해당기간에 신청을 못한 학생은 등록금 납부 후, 개강 후에 개별 신청(등록금 환불)",
+      "bodyText": "※ 해당기간에 신청을 못한 학생은 등록금 납부 후, 개강 후에 개별 신청(등록금 환불)",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 해당기간에 신청을 못한 학생은 등록금 납부 후, 개강 후에 개별 신청(등록금 환불)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c68f2e584e4a1986",
+      "segmentType": "label_value",
+      "labelText": "원활한 장학금 지급을 위해 기간 내 장학 신청 권장",
+      "bodyText": "※ 원활한 장학금 지급을 위해 기간 내 장학 신청 권장",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 원활한 장학금 지급을 위해 기간 내 장학 신청 권장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-68f084f11d766435",
+      "segmentType": "label_value",
+      "labelText": "신청 방법",
+      "bodyText": "3. 신청 방법 : k-cloud 접속하여 신청 * [붙임2] 장학 신청 매뉴얼 참고",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 신청 방법 : k-cloud 접속하여 신청 * [붙임2] 장학 신청 매뉴얼 참고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6b0355d38f4407f6",
+      "segmentType": "label_value",
+      "labelText": "장학 신청 경로",
+      "bodyText": "※ 장학 신청 경로 : k-cloud > 학부생서비스 > 교과 > 장학 > 장학신청",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 장학 신청 경로 : k-cloud > 학부생서비스 > 교과 > 장학 > 장학신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d6c8071621e7bba",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 장학별 세부 계획은 통합대학 출범 이후 변동될 수 있으며, 그 밖의 자세한 내용은 [붙임1]을 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 장학별 세부 계획은 통합대학 출범 이후 변동될 수 있으며, 그 밖의 자세한 내용은 [붙임1]을 참고하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bf3bcb01a1aaf756",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 문의 사항",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 문의 사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9f944964705fead7",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 우선감면장학: 학생과(033-250-6034)",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 우선감면장학: 학생과(033-250-6034)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ef5a8f6f80da7b5d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 성적장학금: 소속 학과",
+      "sourceLocation": {
+        "lineIndex": 23,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 성적장학금: 소속 학과"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-434cc3ea64715a12",
+      "segmentType": "label_value",
+      "labelText": "붙임 1. 2026-1학기 우선감면장학금 신청안내",
+      "bodyText": "붙임 1. 2026-1학기 우선감면장학금 신청안내",
+      "sourceLocation": {
+        "lineIndex": 24,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 1. 2026-1학기 우선감면장학금 신청안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-073bfa2798923514",
+      "segmentType": "label_value",
+      "labelText": "장학신청 매뉴얼(학생)",
+      "bodyText": "2. 장학신청 매뉴얼(학생)",
+      "sourceLocation": {
+        "lineIndex": 25,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 장학신청 매뉴얼(학생)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 27,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 13,
+      "paragraph": 1,
+      "list_item": 12
+    }
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10794",
+  "sourceContentHash": "25094bf531826afe8f4df08e0187440184bd666f7301b8c8e7417028f00384af",
+  "sourceTitle": "강원권 통일+센터 연계 통일명사특강 실시 안내",
+  "publishedAt": "2026-03-26",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e615f0b356a2417a",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "강원권 통일+센터 연계 통일명사특강 실시 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원권 통일+센터 연계 통일명사특강 실시 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c333926fbf8875f2",
+      "segmentType": "label_value",
+      "labelText": "포스터 클릭 시 신청페이지로 이동합니다!",
+      "bodyText": "포스터 클릭 시 신청페이지로 이동합니다!",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "포스터 클릭 시 신청페이지로 이동합니다!"
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1
+    }
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-717-1397",
+  "sourceContentHash": "af880b30af0157e0bded0517e775efe0a3f32b948bdd2a6aba007a6ca0c64f35",
+  "sourceTitle": "(추천채용) 휴젤(주) IT보안직무 채용(마감)",
+  "publishedAt": "2026-04-02",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cf8f114c4add1420",
+      "segmentType": "title",
+      "labelText": "(추천채용) 휴젤(주) IT보안직무 채용(마감)",
+      "bodyText": "(추천채용) 휴젤(주) IT보안직무 채용(마감)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(추천채용) 휴젤(주) IT보안직무 채용(마감)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0c7d306051900223",
+      "segmentType": "label_value",
+      "labelText": "지원방법: 네이버폼 작성(https",
+      "bodyText": "- 지원방법: 네이버폼 작성(https://naver.me/GtJQiCj7)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 지원방법: 네이버폼 작성(https://naver.me/GtJQiCj7)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-385d122404a3db91",
+      "segmentType": "label_value",
+      "labelText": "지원기한",
+      "bodyText": "2026.4.7. 18시까지(적임자 추천 시 조기마감)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-07",
+          "start": 8,
+          "end": 16
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "- 지원기한: 2026.4.7. 18시까지(적임자 추천 시 조기마감)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 3,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2
+    }
+  }
+}

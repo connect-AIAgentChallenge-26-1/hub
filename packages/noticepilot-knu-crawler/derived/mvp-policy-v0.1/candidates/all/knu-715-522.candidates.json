@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-715-522",
+  "sourceContentHash": "bd45e6a1ca0edb3ca164418b3bb2d4144da04a3b580d997555cbf9c3f540b8b1",
+  "sourceTitle": "2025학년도 KNU 내가 만드는 교양교과목 공모전 발표회 및 시상식 개최 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/715/detail.do?pstSn=522&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-715-522-923cdb27f4e520",
+      "uidHint": "noticepilot-cand-knu-715-522-923cdb27f4e520@noticepilot.local",
+      "sourceNoticeId": "knu-715-522",
+      "sourceTitle": "2025학년도 KNU 내가 만드는 교양교과목 공모전 발표회 및 시상식 개최 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/715/detail.do?pstSn=522&pageIndex=2&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "event",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-20880f308c82229c",
+        "segmentType": "continuation",
+        "labelText": "학생 주도 교양교과목 수상작 발표를 통해 학생 중심 교육을 강화하고, 학생이 직접 기획한 교과목의 성과를 공유 및 확산 일시",
+        "bodyText": "2026. 02. 10.(화), 14:00~15:10",
+        "sourceLocation": {
+          "lineIndex": 0,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-665f2e0dae794cb5"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-10",
+            "start": 71,
+            "end": 87
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "학생 주도 교양교과목 수상작 발표를 통해 학생 중심 교육을 강화하고, 학생이 직접 기획한 교과목의 성과를 공유 및 확산 일시",
+          "학생 주도 교양교과목 수상작 발표를 통해 학생 중심 교육을 강화하고, 학생이 직접 기획한 교과목의 성과를 공유 및 확산 일시: 2026. 02. 10.(화), 14:00~15:10",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-09c5746a1dd2611e",
+        "segmentId": "seg-20880f308c82229c",
+        "rawText": "2026. 02. 10.(화), 14:00~15:10",
+        "normalizedStart": "2026-02-10T14:00:00+09:00",
+        "normalizedEnd": "2026-02-10T15:10:00+09:00",
+        "resolutionKind": "absolute_time_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 71,
+          "end": 87
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-88e4e9ec4e84fbb1",
+        "sourceNoticeId": "knu-715-522",
+        "segmentId": "seg-20880f308c82229c",
+        "temporalMentionIds": [
+          "tm-09c5746a1dd2611e"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "학생 주도 교양교과목 수상작 발표를 통해 학생 중심 교육을 강화하고, 학생이 직접 기획한 교과목의 성과를 공유 및 확산 일시",
+        "evidence": "학생 주도 교양교과목 수상작 발표를 통해 학생 중심 교육을 강화하고, 학생이 직접 기획한 교과목의 성과를 공유 및 확산 일시: 2026. 02. 10.(화), 14:00~15:10"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2025학년도 KNU 내가 만드는 교양교과목 공모전 발표회 및 시상식 개최 안내 행사 기간",
+      "dateText": "2026. 02. 10.(화), 14:00~15:10",
+      "normalizedStart": "2026-02-10T14:00:00+09:00",
+      "normalizedEnd": "2026-02-10T15:10:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "학생 주도 교양교과목 수상작 발표를 통해 학생 중심 교육을 강화하고, 학생이 직접 기획한 교과목의 성과를 공유 및 확산 일시: 2026. 02. 10.(화), 14:00~15:10",
+      "confidence": "high",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience"
+      ],
+      "dateResolution": {
+        "kind": "absolute_time_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 1,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 1
+  }
+}

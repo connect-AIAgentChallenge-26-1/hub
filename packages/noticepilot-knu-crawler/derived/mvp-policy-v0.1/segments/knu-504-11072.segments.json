@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11072",
+  "sourceContentHash": "c6c203cfb9cc54e1d193fbcd4cb1cc7adba43a2ad208cda6e06b15f1a4561fdf",
+  "sourceTitle": "[강릉캠퍼스](긴급)자연1호관 공사 진행을 위한 인근 통행 제한 안내",
+  "publishedAt": "2026-06-02",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5f64c80e6a08bfff",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "[강릉캠퍼스](긴급)자연1호관 공사 진행을 위한 인근 통행 제한 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[강릉캠퍼스](긴급)자연1호관 공사 진행을 위한 인근 통행 제한 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c54fd63fb08becfb",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 강릉캠퍼스 강릉시설지원과에서 안내드립니다.",
+      "bodyText": "강원대학교 강릉캠퍼스 강릉시설지원과에서 안내드립니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉캠퍼스 강릉시설지원과에서 안내드립니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9cb291c99c6d7ed5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 현재 캠퍼스 내에서 진행 중인 ‘자연1호관 개축 공사’와 관련, 아스콘 포장에 따른 교내 구성원 및 대학 이용자의 안전사고를 예방하고자 인근 구간의 일부 통행을 제한하고자 합니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 현재 캠퍼스 내에서 진행 중인 ‘자연1호관 개축 공사’와 관련, 아스콘 포장에 따른 교내 구성원 및 대학 이용자의 안전사고를 예방하고자 인근 구간의 일부 통행을 제한하고자 합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3b24241cd1460a8b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 교내 재학생 및 방문객들께서는 다음 사항을 참조하시어 학내 통행 시 안전 사고에 유의하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 교내 재학생 및 방문객들께서는 다음 사항을 참조하시어 학내 통행 시 안전 사고에 유의하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2b0fbb069e35a313",
+      "segmentType": "label_value",
+      "labelText": "제한 기간",
+      "bodyText": "2026. 6. 4.(목) ~ 9.(화) (6일간)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-04",
+          "start": 11,
+          "end": 25
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "가. 제한 기간 : 2026. 6. 4.(목) ~ 9.(화) (6일간)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8a876192e83c0790",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "나. 제한 대상 : 해당 구간 내 모든 차량 및 보행자 진입 전면 통제",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 제한 대상 : 해당 구간 내 모든 차량 및 보행자 진입 전면 통제"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b362ed892c61bbe8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "다. 제한 사유 : 아스콘 포장에 따른 대형 장비 가동에 따른 안전확보",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 제한 사유 : 아스콘 포장에 따른 대형 장비 가동에 따른 안전확보"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-44857b4f981af9c5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "라. 통제·통행 계획 : 붙임 참조",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "라. 통제·통행 계획 : 붙임 참조"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f3dcd7ef73ea0e4f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "마. 문 의 : 강릉시설지원과 주무관 이규남(☎033-640-1911)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "마. 문 의 : 강릉시설지원과 주무관 이규남(☎033-640-1911)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3b31e83e51e081dd",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "붙임 자연1호관 아스콘 포장에 따른 차량 통제 및 보행자 이동통로 계획 1부. 끝.",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 자연1호관 아스콘 포장에 따른 차량 통제 및 보행자 이동통로 계획 1부. 끝."
+    }
+  ],
+  "summary": {
+    "segmentCount": 10,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 2,
+      "list_item": 6,
+      "paragraph": 1
+    }
+  }
+}

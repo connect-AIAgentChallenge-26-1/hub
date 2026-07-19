@@ -1,0 +1,162 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-717-1382",
+  "sourceContentHash": "c12e24021890b6df9aaf28e2a4b5f5e683578a69580a0bc2ced9a9097d7297c6",
+  "sourceTitle": "2026년 한글과컴퓨터 채용설명회（참가자 혜택: 상반기 공채 서류가점）",
+  "publishedAt": "2026-01-08",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-69e1f85869675a2d",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026년 한글과컴퓨터 채용설명회（참가자 혜택: 상반기 공채 서류가점）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 한글과컴퓨터 채용설명회（참가자 혜택: 상반기 공채 서류가점）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c3c212ec78ab0600",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026년 한글과 컴퓨터 채용설명회가",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 한글과 컴퓨터 채용설명회가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a90f64fadff4d660",
+      "segmentType": "continuation",
+      "labelText": "",
+      "bodyText": "2026년 1월 14일 수요일에 한림대학교 비전홀에서 진행됩니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-c3c212ec78ab0600"
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-14",
+          "start": 21,
+          "end": 33
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2026년 한글과 컴퓨터 채용설명회가 2026년 1월 14일 수요일에 한림대학교 비전홀에서 진행됩니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bf61e647ce498327",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026년 1월 14일 수요일에 한림대학교 비전홀에서 진행됩니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-14",
+          "start": 0,
+          "end": 12
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026년 1월 14일 수요일에 한림대학교 비전홀에서 진행됩니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-54592521f175c01d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "참가자에게는 상반기 채용 서류전형 가산점이 부여됩니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "참가자에게는 상반기 채용 서류전형 가산점이 부여됩니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0cee90400963ddf0",
+      "segmentType": "label_value",
+      "labelText": "사전신청은 없으며 당일 현장 신청 후 참여하시면 됩니다.",
+      "bodyText": "사전신청은 없으며 당일 현장 신청 후 참여하시면 됩니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "사전신청은 없으며 당일 현장 신청 후 참여하시면 됩니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4b8a55daadccab95",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "*문의: 취업지원과 033-250-7764",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "*문의: 취업지원과 033-250-7764"
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 4,
+      "continuation": 1,
+      "label_value": 1
+    }
+  }
+}

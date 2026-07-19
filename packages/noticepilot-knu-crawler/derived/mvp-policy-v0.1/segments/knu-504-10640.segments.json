@@ -1,0 +1,149 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10640",
+  "sourceContentHash": "cc984ed4cd2ccb176504e8017047842d7b7f1151d6167e899b8ae56950a86430",
+  "sourceTitle": "네트워크 장비 설치 작업에 따른 인터넷 서비스 중단 안내（26.2.13.（금）",
+  "publishedAt": "2026-02-13",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3f34c47bd75b2c1d",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "26.2.13.（금）",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-13",
+          "start": 32,
+          "end": 43
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "네트워크 장비 설치 작업에 따른 인터넷 서비스 중단 안내（26.2.13.（금）"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cbfde118a111ec24",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026.2.9.） 「（중요） 네트워크 장비 설치 작업에 따른 정보서비스 중단 안내」",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-09",
+          "start": 17,
+          "end": 25
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "1. 관련: 정보화과-1186（2026.2.9.） 「（중요） 네트워크 장비 설치 작업에 따른 정보서비스 중단 안내」"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0a4900a9f5f18f61",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2.신규 도입 전산망, 보안 장비의 설치작업으로 대내외 인터넷 서비스가 중단됨을 알려드리니 이용에 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2.신규 도입 전산망, 보안 장비의 설치작업으로 대내외 인터넷 서비스가 중단됨을 알려드리니 이용에 참고하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-49c1f1a20a3413dc",
+      "segmentType": "label_value",
+      "labelText": "중단 기간",
+      "bodyText": "2026.2.13.（금） 20:00 ~ 2.14.（토） 02:00",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-13",
+          "start": 10,
+          "end": 23
+        },
+        {
+          "value": "2026-02-14",
+          "start": 32,
+          "end": 40
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "가. 중단 기간: 2026.2.13.（금） 20:00 ~ 2.14.（토） 02:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0386516d8497cc44",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "나. 중단 서비스: 대내외 인터넷 전체, 코러스, 대표/부서홈페이지, 무선랜, 출입 등",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 중단 서비스: 대내외 인터넷 전체, 코러스, 대표/부서홈페이지, 무선랜, 출입 등"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fb02ed85b64c3955",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "다. 문의사항: 정보화과 지능정보인프라팀 250-7727~9",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 문의사항: 정보화과 지능정보인프라팀 250-7727~9"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 4,
+      "label_value": 1
+    }
+  }
+}

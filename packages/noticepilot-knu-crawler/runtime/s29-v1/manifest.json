@@ -1,0 +1,82 @@
+{
+  "artifacts": {
+    "bootstrap-manifest.json": {
+      "path": "bootstrap-manifest.json",
+      "sha256": "05e46c057f1b9a2f1a27da2693c2229fcebfe5cdfe064ddb9afa78113e82d0a2"
+    },
+    "incremental-replay-report.json": {
+      "path": "incremental-replay-report.json",
+      "sha256": "79019d077dd6772d970c217f8ed9a544a810efba67f6812d014dfbb2c390a157"
+    },
+    "live-postgres-verification.json": {
+      "path": "live-postgres-verification.json",
+      "semanticReportSha256": "eb66e820ac8885296a4389889519fe78a53a22d7eb814625dafe391f1a3dddbf",
+      "sha256": "8eecf611b93725372cafd5adfbef05717c0b66c5d9ae3b314233a7222a55d36d"
+    },
+    "reference-subscription-feeds.json": {
+      "path": "reference-subscription-feeds.json",
+      "sha256": "0e3ed89b5aec3adade447f27046341f6ead2cdae2ce1e3c9e08325aff048393c"
+    }
+  },
+  "bootstrap": {
+    "bundleSha256": "993cf03aeafed649e67a6bbe5c91353df9494ff1b2207f02234862b337bc2194",
+    "counts": {
+      "calendar_event": 900,
+      "calendar_event_candidate": 1304,
+      "calendar_event_revision": 901,
+      "calendar_event_source_link": 909,
+      "candidate_event_assignment": 909,
+      "cross_notice_relation_decision": 343,
+      "extraction_run": 2059,
+      "feed_snapshot": 2,
+      "feed_snapshot_event": 900,
+      "source_notice": 2059,
+      "subscription_profile_head": 2,
+      "subscription_profile_revision": 2
+    },
+    "idempotentSecondInsert": true
+  },
+  "createdAt": "2026-07-13T20:30:00+09:00",
+  "delivery": {
+    "etag304Verified": true,
+    "eventCounts": [
+      601,
+      299
+    ],
+    "feedCount": 2,
+    "rawTokenPersisted": false,
+    "wsgiReadEndpointImplemented": true
+  },
+  "incrementalRuntime": {
+    "contentChangedSimulation": true,
+    "durableOutbox": true,
+    "fullCorpusUnchangedReplay": true
+  },
+  "liveVerification": {
+    "checkCount": 13,
+    "constraintSqlstates": {
+      "check": "23514",
+      "foreignKey": "23503",
+      "unique": "23505"
+    },
+    "fileSha256": "8eecf611b93725372cafd5adfbef05717c0b66c5d9ae3b314233a7222a55d36d",
+    "generatedAt": "2026-07-13T08:59:22.658255Z",
+    "livePostgresVerified": true,
+    "mutationsCommitted": false,
+    "probeResidueCount": 0,
+    "reportSha256": "eb66e820ac8885296a4389889519fe78a53a22d7eb814625dafe391f1a3dddbf",
+    "schemaVersion": "noticepilot.s29LivePostgresVerification.v0.1",
+    "status": "pass"
+  },
+  "manifestHash": "945deaf9806851c321a0ed31db34cdd10a3a56e864a5712df08b8feb72d1731c",
+  "migration": {
+    "executedAgainstLivePostgres": true,
+    "liveVerificationReport": "live-postgres-verification.json",
+    "path": "migrations/postgresql/0001_s29_initial.sql",
+    "sha256": "a542301b0630c17a27169b4412f439f54f133c2d95b08a01d39e188b9ce8c759",
+    "validatedStatically": true,
+    "version": "0001_s29_initial"
+  },
+  "runtimeVersion": "0.1.0",
+  "schemaVersion": "noticepilot.s29RuntimeManifest.v0.1"
+}

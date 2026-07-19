@@ -1,0 +1,234 @@
+{
+  "schemaVersion": "noticepilot.feedEligibilityPolicy.v0.2",
+  "policyVersion": "0.2.0",
+  "status": "approved",
+  "scope": "s28_single_event_eligibility_before_feed_builder",
+  "approvedAt": "2026-07-13T15:30:00+09:00",
+  "authoritativeInputs": {
+    "activeEventProjection": "projection/s27d-v1/active-calendar-event-projections.jsonl",
+    "eventSourceLinks": "registry/s27c-v1/calendar-event-source-links.jsonl",
+    "candidatePublishabilityJudgment": "derived/mvp-policy-v0.1/decisions/notices.jsonl",
+    "profileContract": "noticepilot.subscriptionProfile.v0.1",
+    "identityAuthority": "calendarEventId",
+    "campusAuthority": "active_event_projection.campusScope",
+    "audienceAuthority": "active_event_projection.audienceRules",
+    "sourceAuthority": "calendar_event_source_links",
+    "reviewAuthority": "canonical_candidate_publishability_judgment",
+    "temporalAuthority": "s27d_active_event_projection.normalizedStart"
+  },
+  "fixedRules": {
+    "profileStatus": "only_active_profiles_are_eligible",
+    "eventStatus": "confirmed_only_in_s28_stateless_eligibility",
+    "temporalEligibility": {
+      "reviewRequiredWithValidNormalizedDate": "include_by_default",
+      "invalidNormalizedDate": "exclude",
+      "currentProjectionGuarantee": "all_s27d_active_events_have_valid_normalized_start"
+    },
+    "campusMatching": {
+      "specific": "selectedCampuses_intersects_event_campuses",
+      "all": "includeAllCampusEvents_boolean",
+      "unknown": "includeUnknownCampusEvents_boolean"
+    },
+    "sourceMatching": "board_and_notice_type_must_match_the_same_canonical_source_link",
+    "eventMatching": "feed_scope_event_type_and_target_actor_all_must_match",
+    "audienceMatching": {
+      "mode": "all_dimensions",
+      "emptyProfileDimension": "unrestricted",
+      "emptyEventDimension": "unrestricted",
+      "nonEmptyDimensions": "intersection_required",
+      "unscoped": "include_by_default_when_personalization_is_enabled"
+    },
+    "reasonSelection": "all_exclusion_reasons_are_recorded_and_primary_is_reasonPrecedence_first",
+    "feedBuilderBoundary": "single_event_evaluator_only_no_snapshot_no_sort_no_ics"
+  },
+  "decisions": {
+    "sourceLinkMatchMode": "canonical_source_only",
+    "reviewStateAggregationMode": "canonical_candidate_only",
+    "defaultStudentProfilePolicy": {
+      "includeUnknownCampusEvents": true,
+      "includeReviewRequiredEvents": true,
+      "reviewRequiredInclusionRule": "include_if_valid_normalized_date"
+    },
+    "defaultJobProfilePolicy": {
+      "includeUnknownCampusEvents": true,
+      "includeReviewRequiredEvents": true,
+      "reviewRequiredInclusionRule": "include_if_valid_normalized_date"
+    },
+    "audienceUnscopedDefault": "include"
+  },
+  "decisionProvenance": {
+    "E1": {
+      "source": "creator_decision",
+      "selected": "canonical_source_only",
+      "recordedAt": "2026-07-13T15:30:00+09:00"
+    },
+    "E2": {
+      "source": "creator_decision",
+      "selected": "canonical_candidate_only",
+      "recordedAt": "2026-07-13T15:30:00+09:00"
+    },
+    "E3": {
+      "source": "inherited_authoritative_contract",
+      "contract": "docs/architecture/subscription-foundation-contract.md",
+      "rules": [
+        "includeUnknownCampusNotices=true",
+        "review_required_included_when_valid_normalized_date"
+      ]
+    },
+    "E4": {
+      "source": "inherited_authoritative_contract_without_job_feed_exception",
+      "contract": "docs/architecture/subscription-foundation-contract.md",
+      "rules": [
+        "includeUnknownCampusNotices=true",
+        "review_required_included_when_valid_normalized_date"
+      ]
+    },
+    "E5": {
+      "source": "creator_decision",
+      "selected": "include",
+      "recordedAt": "2026-07-13T15:30:00+09:00"
+    }
+  },
+  "unresolvedDecisionIds": [],
+  "corpusImpact": {
+    "activeCalendarEventCount": 900,
+    "confirmedEventCount": 900,
+    "validNormalizedDateEventCount": 900,
+    "unknownCampusEventCount": 1,
+    "unknownCampusStudentEventCount": 0,
+    "unknownCampusJobEventCount": 1,
+    "personalizationReadyEventCount": 12,
+    "audienceUnscopedEventCount": 888,
+    "multiSourceEventCount": 9,
+    "crossBoardDuplicateEventCount": 8,
+    "sameBoardExtensionEventCount": 1,
+    "currentActiveReviewRequiredEventCount": 0,
+    "upstreamReviewQueueCandidateCount": 395
+  },
+  "reasonPrecedence": [
+    "profile_not_active",
+    "institution_mismatch",
+    "unsupported_event_status",
+    "invalid_normalized_date",
+    "review_state_unknown",
+    "campus_unknown_excluded",
+    "campus_all_excluded",
+    "campus_no_intersection",
+    "source_board_or_notice_type_mismatch",
+    "feed_scope_mismatch",
+    "event_type_mismatch",
+    "target_actor_mismatch",
+    "review_required_excluded",
+    "audience_unscoped_excluded",
+    "audience_degree_level_mismatch",
+    "audience_student_year_mismatch",
+    "audience_enrollment_status_mismatch",
+    "audience_admission_type_mismatch",
+    "eligible_all_dimensions_matched"
+  ],
+  "reasonCatalog": [
+    {
+      "code": "profile_not_active",
+      "outcome": "exclude",
+      "dimension": "profile"
+    },
+    {
+      "code": "institution_mismatch",
+      "outcome": "exclude",
+      "dimension": "institution"
+    },
+    {
+      "code": "unsupported_event_status",
+      "outcome": "exclude",
+      "dimension": "event_status"
+    },
+    {
+      "code": "invalid_normalized_date",
+      "outcome": "exclude",
+      "dimension": "temporal"
+    },
+    {
+      "code": "review_state_unknown",
+      "outcome": "exclude",
+      "dimension": "review"
+    },
+    {
+      "code": "campus_unknown_excluded",
+      "outcome": "exclude",
+      "dimension": "campus"
+    },
+    {
+      "code": "campus_all_excluded",
+      "outcome": "exclude",
+      "dimension": "campus"
+    },
+    {
+      "code": "campus_no_intersection",
+      "outcome": "exclude",
+      "dimension": "campus"
+    },
+    {
+      "code": "source_board_or_notice_type_mismatch",
+      "outcome": "exclude",
+      "dimension": "source"
+    },
+    {
+      "code": "feed_scope_mismatch",
+      "outcome": "exclude",
+      "dimension": "event"
+    },
+    {
+      "code": "event_type_mismatch",
+      "outcome": "exclude",
+      "dimension": "event"
+    },
+    {
+      "code": "target_actor_mismatch",
+      "outcome": "exclude",
+      "dimension": "event"
+    },
+    {
+      "code": "review_required_excluded",
+      "outcome": "exclude",
+      "dimension": "review"
+    },
+    {
+      "code": "audience_unscoped_excluded",
+      "outcome": "exclude",
+      "dimension": "audience"
+    },
+    {
+      "code": "audience_degree_level_mismatch",
+      "outcome": "exclude",
+      "dimension": "audience"
+    },
+    {
+      "code": "audience_student_year_mismatch",
+      "outcome": "exclude",
+      "dimension": "audience"
+    },
+    {
+      "code": "audience_enrollment_status_mismatch",
+      "outcome": "exclude",
+      "dimension": "audience"
+    },
+    {
+      "code": "audience_admission_type_mismatch",
+      "outcome": "exclude",
+      "dimension": "audience"
+    },
+    {
+      "code": "eligible_all_dimensions_matched",
+      "outcome": "include",
+      "dimension": "final"
+    }
+  ],
+  "deferred": {
+    "defaultProfileMaterialization": "S28-3",
+    "feedBuilder": "S28-3",
+    "feedSnapshot": "S28-4",
+    "profileMatrixFullCorpusAudit": "S28-5",
+    "cancellationHistoricalMembership": "S29_incremental_delivery",
+    "subscriptionUrlAndToken": "S29"
+  }
+}

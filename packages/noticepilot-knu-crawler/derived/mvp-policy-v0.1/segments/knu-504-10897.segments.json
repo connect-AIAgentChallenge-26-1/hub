@@ -1,0 +1,473 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10897",
+  "sourceContentHash": "4f73f1b952c6b2b7ab4738a63a84f615c519045a3f65b78ec52cb8ad7be114b4",
+  "sourceTitle": "★ 50기 WFK 월드프렌즈코리아 청년봉사단 단원(대학추천자) 모집(~2026. 5. 8. 17시까지)",
+  "publishedAt": "2026-04-20",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b0cc88e8ffabe2c0",
+      "segmentType": "title",
+      "labelText": "★ 50기 WFK 월드프렌즈코리아 청년봉사단 단원(대학추천자) 모집(~",
+      "bodyText": "2026. 5. 8. 17시까지)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-08",
+          "start": 39,
+          "end": 49
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "★ 50기 WFK 월드프렌즈코리아 청년봉사단 단원(대학추천자) 모집(~2026. 5. 8. 17시까지)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-360d555d1d647bc6",
+      "segmentType": "label_value",
+      "labelText": "선발인원",
+      "bodyText": "가. 선발인원: 최대 2명",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 선발인원: 최대 2명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a2c00e077de11786",
+      "segmentType": "label_value",
+      "labelText": "서류심사 및 면접을 통해 지원자격 여부 점검을 할 수 있으며, 적합자 없을 시 미추천",
+      "bodyText": "※ 서류심사 및 면접을 통해 지원자격 여부 점검을 할 수 있으며, 적합자 없을 시 미추천",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 서류심사 및 면접을 통해 지원자격 여부 점검을 할 수 있으며, 적합자 없을 시 미추천"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3dd084ae501fe8c3",
+      "segmentType": "label_value",
+      "labelText": "지원자격",
+      "bodyText": "나. 지원자격: 재학생(",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "나. 지원자격: 재학생("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9e53e0dedc0110d7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "춘천캠퍼스",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "춘천캠퍼스"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c2c7e2ecacf686fe",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "해당)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "해당)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a134cdcb355bc01e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-182da52fc07c7cb4",
+      "segmentType": "label_value",
+      "labelText": "국내・외 모든 일정 참여 가능자",
+      "bodyText": "국내・외 모든 일정 참여 가능자",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "국내・외 모든 일정 참여 가능자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8d33bd9224f8f170",
+      "segmentType": "label_value",
+      "labelText": "(사전OT, 온라인교육, 1~3차 국내교육, 해외봉사활동, 해단식 등)",
+      "bodyText": "(사전OT, 온라인교육, 1~3차 국내교육, 해외봉사활동, 해단식 등)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(사전OT, 온라인교육, 1~3차 국내교육, 해외봉사활동, 해단식 등)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-28111cad624c729b",
+      "segmentType": "label_value",
+      "labelText": "국내외 활동에 결격사유가 없으며, 봉사활동을 수행하는데 심신이 적합 또는 건강한 자",
+      "bodyText": "- 국내외 활동에 결격사유가 없으며, 봉사활동을 수행하는데 심신이 적합 또는 건강한 자",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 국내외 활동에 결격사유가 없으며, 봉사활동을 수행하는데 심신이 적합 또는 건강한 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c3db892dac28b69d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "다. 자격제한",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 자격제한"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f2df2aaf4735c872",
+      "segmentType": "label_value",
+      "labelText": "신청일 기준",
+      "bodyText": "- 신청일 기준",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 신청일 기준"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a035f406fb415e1c",
+      "segmentType": "label_value",
+      "labelText": "마지막 학기자, 졸업(유예)예정자, 휴학생, 외국 국적자 제외",
+      "bodyText": "마지막 학기자, 졸업(유예)예정자, 휴학생, 외국 국적자 제외",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "마지막 학기자, 졸업(유예)예정자, 휴학생, 외국 국적자 제외"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8d03a211e98ffaf7",
+      "segmentType": "label_value",
+      "labelText": "신청기한",
+      "bodyText": "라. 신청기한:",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "라. 신청기한:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a6593f1561442619",
+      "segmentType": "continuation",
+      "labelText": "신청기한",
+      "bodyText": "2026. 5. 8.(금) 17:00",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-8d03a211e98ffaf7"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-08",
+          "start": 9,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "라. 신청기한: 2026. 5. 8.(금) 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5829b197df151ace",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 5. 8.(금) 17:00",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-08",
+          "start": 0,
+          "end": 14
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 5. 8.(금) 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c3aba40c0757eb1c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "까지",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c56885faf39cdd26",
+      "segmentType": "label_value",
+      "labelText": "기한엄수",
+      "bodyText": "※ 기한엄수",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 기한엄수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4b5e5cb07e5b31c9",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "마. 신청방법: 한국대학사회봉사협의회 홈페이지(",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "마. 신청방법: 한국대학사회봉사협의회 홈페이지("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5a241d3bb4a3e4b2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "http://kucss.or.kr",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "http://kucss.or.kr"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a55bb3433b61e708",
+      "segmentType": "label_value",
+      "labelText": ") 단원지원서 작성",
+      "bodyText": ") 단원지원서 작성",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ") 단원지원서 작성"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ed92a9728b06907e",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "바. 참가비: 본인부담금 650,000원 ~ 850,000원(국가별 상이)",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "바. 참가비: 본인부담금 650,000원 ~ 850,000원(국가별 상이)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-85901994e940b743",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "사. 문의사항: 춘천학생지원과 033-250-6051",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "사. 문의사항: 춘천학생지원과 033-250-6051"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ef396ade33bd21ef",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "아. 기타사항: 붙임파일 참조",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "아. 기타사항: 붙임파일 참조"
+    }
+  ],
+  "summary": {
+    "segmentCount": 24,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 12,
+      "paragraph": 5,
+      "list_item": 5,
+      "continuation": 1
+    }
+  }
+}

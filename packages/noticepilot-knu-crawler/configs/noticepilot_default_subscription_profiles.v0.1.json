@@ -1,0 +1,135 @@
+{
+  "schemaVersion": "noticepilot.defaultSubscriptionProfiles.v0.1",
+  "authoritativePolicyDefaults": true,
+  "userCampusDefaultEstablished": false,
+  "purpose": "all_campus_reference_profiles_for_deterministic_feed_builder_audit",
+  "profiles": [
+    {
+      "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+      "profileId": "subprof_9baaae14deb3460fa31777d362507cbc",
+      "profileRevision": 1,
+      "institutionId": "kangwon",
+      "displayName": "기준 프로필 — 전체 캠퍼스 학생 일정",
+      "calendarName": "NoticePilot 학생 일정",
+      "timezone": "Asia/Seoul",
+      "status": "active",
+      "campusSelection": {
+        "selectedCampuses": [
+          "chuncheon",
+          "samcheok",
+          "dogye",
+          "gangneung_wonju"
+        ],
+        "includeAllCampusEvents": true,
+        "includeUnknownCampusEvents": true,
+        "matchingMode": "intersects"
+      },
+      "sourceSelection": {
+        "selectedBoardIds": [
+          "504",
+          "715",
+          "717",
+          "719",
+          "720",
+          "721"
+        ],
+        "selectedNoticeTypes": [
+          "career",
+          "competition",
+          "event",
+          "general_notice",
+          "scholarship",
+          "school_notice"
+        ],
+        "canonicalBoardsOnly": true,
+        "matchingMode": "all_dimensions"
+      },
+      "eventSelection": {
+        "includedFeedScopes": [
+          "student_default"
+        ],
+        "includedEventTypes": [
+          "academic_period",
+          "application_period",
+          "deadline",
+          "event",
+          "exam_or_interview",
+          "payment_period",
+          "result_announcement",
+          "submission_period"
+        ],
+        "includedTargetActors": [
+          "student"
+        ],
+        "includeReviewRequiredEvents": true,
+        "matchingMode": "all_dimensions"
+      },
+      "audienceFilter": {
+        "enabled": false,
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "unscopedEventPolicy": "include"
+      },
+      "createdAt": "2026-07-13T16:30:00+09:00",
+      "updatedAt": "2026-07-13T16:30:00+09:00"
+    },
+    {
+      "schemaVersion": "noticepilot.subscriptionProfile.v0.1",
+      "profileId": "subprof_0887a1e133464366af8d870e1950ca53",
+      "profileRevision": 1,
+      "institutionId": "kangwon",
+      "displayName": "기준 프로필 — 전체 캠퍼스 채용 일정",
+      "calendarName": "NoticePilot 채용 접수 일정",
+      "timezone": "Asia/Seoul",
+      "status": "active",
+      "campusSelection": {
+        "selectedCampuses": [
+          "chuncheon",
+          "samcheok",
+          "dogye",
+          "gangneung_wonju"
+        ],
+        "includeAllCampusEvents": true,
+        "includeUnknownCampusEvents": true,
+        "matchingMode": "intersects"
+      },
+      "sourceSelection": {
+        "selectedBoardIds": [
+          "716"
+        ],
+        "selectedNoticeTypes": [
+          "job_posting"
+        ],
+        "canonicalBoardsOnly": true,
+        "matchingMode": "all_dimensions"
+      },
+      "eventSelection": {
+        "includedFeedScopes": [
+          "job_application"
+        ],
+        "includedEventTypes": [
+          "job_application_period"
+        ],
+        "includedTargetActors": [
+          "job_applicant"
+        ],
+        "includeReviewRequiredEvents": true,
+        "matchingMode": "all_dimensions"
+      },
+      "audienceFilter": {
+        "enabled": false,
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "unscopedEventPolicy": "include"
+      },
+      "createdAt": "2026-07-13T16:30:00+09:00",
+      "updatedAt": "2026-07-13T16:30:00+09:00"
+    }
+  ]
+}

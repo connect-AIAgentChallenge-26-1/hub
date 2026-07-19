@@ -1,0 +1,272 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10784",
+  "sourceContentHash": "2c58c46296a5a8dbdc861b3a763a99a1f9527bcb87b310ea5ef3643ae28d1188",
+  "sourceTitle": "[2026 3월 정기토익대비 ZOOM LIVE 무료 토익 특강 안내]",
+  "publishedAt": "2026-03-24",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8a805d3f98473978",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "[2026 3월 정기토익대비 ZOOM LIVE 무료 토익 특강 안내]",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[2026 3월 정기토익대비 ZOOM LIVE 무료 토익 특강 안내]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f45e505ed99f4d20",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "안녕하세요.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "안녕하세요."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5acd39c27f05ba10",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 춘천기획지원과 언어연수팀(구. 언어연수과)입니다.",
+      "bodyText": "강원대학교 춘천기획지원과 언어연수팀(구. 언어연수과)입니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 춘천기획지원과 언어연수팀(구. 언어연수과)입니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8a582f56c294b903",
+      "segmentType": "label_value",
+      "labelText": "정기 토익 시험을 준비 중인 모든 강원대 재학생들을 위한 “정기 토익 대비 무료 특강”을 안내드립니다.",
+      "bodyText": "정기 토익 시험을 준비 중인 모든 강원대 재학생들을 위한 “정기 토익 대비 무료 특강”을 안내드립니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "정기 토익 시험을 준비 중인 모든 강원대 재학생들을 위한 “정기 토익 대비 무료 특강”을 안내드립니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7798f3e970209d65",
+      "segmentType": "label_value",
+      "labelText": "아래 링크 접속하여, 일정 확인 후, 특강 참여 희망하는 학생들은 신청해주시길 바랍니다.",
+      "bodyText": "아래 링크 접속하여, 일정 확인 후, 특강 참여 희망하는 학생들은 신청해주시길 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "아래 링크 접속하여, 일정 확인 후, 특강 참여 희망하는 학생들은 신청해주시길 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d5c701c7f5e8bb26",
+      "segmentType": "continuation",
+      "labelText": "일정",
+      "bodyText": "03월 27일(금) 14시 ~ 15시30분 (실시간 ZOOM LIVE)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-7798f3e970209d65"
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-27",
+          "start": 58,
+          "end": 68
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "아래 링크 접속하여, 일정 확인 후, 특강 참여 희망하는 학생들은 신청해주시길 바랍니다. 1. 일정 : 03월 27일(금) 14시 ~ 15시30분 (실시간 ZOOM LIVE)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e75ae6b244a5e12e",
+      "segmentType": "label_value",
+      "labelText": "일정",
+      "bodyText": "03월 27일(금) 14시 ~ 15시30분 (실시간 ZOOM LIVE)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-27",
+          "start": 8,
+          "end": 18
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "1. 일정 : 03월 27일(금) 14시 ~ 15시30분 (실시간 ZOOM LIVE)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e9514df55d2a2014",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 과목 : 토익",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 과목 : 토익"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6ab6a295f9a8c0d9",
+      "segmentType": "label_value",
+      "labelText": "자세한 사항은 아래 링크를 참고하여서 신청해주세요~",
+      "bodyText": "자세한 사항은 아래 링크를 참고하여서 신청해주세요~",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자세한 사항은 아래 링크를 참고하여서 신청해주세요~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8c2f60af96fd0e61",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▶클릭◀",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶클릭◀"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-59f25d68b5065783",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://info.english.co.kr/brochure/1492",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://info.english.co.kr/brochure/1492"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9da9808813d37e8f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "문의 033-250-7936 또는 카카오톡 오픈채팅 KNU 국제교류처 언어연수과 검색후 채팅 문의",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "문의 033-250-7936 또는 카카오톡 오픈채팅 KNU 국제교류처 언어연수과 검색후 채팅 문의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0c7faffec973a11b",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "감사합니다.",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "감사합니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 13,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 4,
+      "label_value": 5,
+      "continuation": 1,
+      "list_item": 2
+    }
+  }
+}

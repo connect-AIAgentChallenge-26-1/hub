@@ -1,0 +1,348 @@
+{
+  "schemaVersion": "noticepilot.s27cCalendarEventRegistryAudit.v0.1",
+  "result": "pass",
+  "registryVersion": "0.1.0",
+  "registryId": "s27c-publishable-corpus-20260713-v1",
+  "idStrategy": "registry_assigned_opaque_v0",
+  "currentDir": "../..",
+  "registryDir": "../../../../registry/s27c-v1",
+  "pathReferences": {
+    "base": "audit_report_directory",
+    "format": "posix_relative"
+  },
+  "scope": {
+    "allPublishableCandidatesAssigned": true,
+    "approvedMergePlansPersisted": true,
+    "relationDecisionsPersisted": true,
+    "opaqueCalendarEventIdsIssued": true,
+    "revisionHistoryPersisted": true,
+    "existingRuntimeCandidateMutationExecuted": false,
+    "icsUidMigrationExecuted": false,
+    "outboxConsumed": false
+  },
+  "checks": {
+    "publishableCandidateCount": 909,
+    "calendarEventCount": 900,
+    "uniqueCalendarEventIdCount": 900,
+    "candidateAssignmentCount": 909,
+    "uniqueAssignedCandidateCount": 909,
+    "sourceLinkCount": 909,
+    "revisionCount": 901,
+    "activeRevisionCount": 900,
+    "promotionDecisionCount": 900,
+    "persistedRelationDecisionCount": 343,
+    "projectionOutboxIntentCount": 900,
+    "singletonEventCount": 891,
+    "duplicateEventCount": 8,
+    "extensionEventCount": 1,
+    "twoCandidateEventCount": 9,
+    "oneCandidateEventCount": 891,
+    "approvedMergePlanCount": 9,
+    "mergeAppliedDecisionCount": 9,
+    "needsReviewRelationCount": 234,
+    "needsReviewMergeAppliedCount": 0,
+    "extensionHistoryValid": true,
+    "registryValidationErrorCount": 0,
+    "manifestHashErrorCount": 0,
+    "manifestCountErrorCount": 0,
+    "contentDigestMatches": true,
+    "upstreamHashErrorCount": 0,
+    "registrySemanticDiffResult": "match",
+    "registrySemanticChangeCount": 0,
+    "layeredBaselineResult": "match",
+    "layeredBaselineChangeCount": 0,
+    "icsUidMigrationCount": 0,
+    "outboxConsumedCount": 0
+  },
+  "artifacts": {
+    "manifest": "../../../../registry/s27c-v1/manifest.json",
+    "events": "../../../../registry/s27c-v1/calendar-events.jsonl",
+    "sourceLinks": "../../../../registry/s27c-v1/calendar-event-source-links.jsonl",
+    "revisions": "../../../../registry/s27c-v1/calendar-event-revisions.jsonl",
+    "assignments": "../../../../registry/s27c-v1/candidate-event-assignments.jsonl",
+    "relationDecisions": "../../../../registry/s27c-v1/relation-decisions.jsonl",
+    "promotionDecisions": "../../../../registry/s27c-v1/promotion-decisions.jsonl",
+    "outbox": "../../../../registry/s27c-v1/projection-outbox-intents.jsonl",
+    "registrySemanticDiff": "registry-semantic-diff.json",
+    "layeredBaselineNoChangeDiff": "layered-baseline-no-change-diff.json"
+  },
+  "errors": {
+    "registryValidation": [],
+    "manifestHashes": [],
+    "manifestCounts": [],
+    "upstreamHashes": [],
+    "semanticChanges": []
+  },
+  "samples": {
+    "extensionEvent": [
+      {
+        "activeRevisionId": "evrev_1020cae13f6e304971b552cb62ab2003",
+        "calendarEventId": "evt_66920cf16e03927d43765d5261bafb0c",
+        "canonicalCandidateId": "cand-knu-716-3235-f05a8929780d07",
+        "canonicalSourceNoticeId": "knu-716-3235",
+        "createdAt": "2026-07-13T11:30:00+09:00",
+        "icsUidMigrationPerformed": false,
+        "idStrategy": "registry_assigned_opaque_v0",
+        "projection": {
+          "actionType": null,
+          "audienceRules": {
+            "admissionTypes": [],
+            "confidence": "none",
+            "degreeLevels": [],
+            "enrollmentStatuses": [],
+            "evidence": [],
+            "matchMode": "all_dimensions",
+            "personalizationReady": false,
+            "studentYears": []
+          },
+          "campusScope": {
+            "campuses": [
+              "chuncheon"
+            ],
+            "confidence": "medium",
+            "labels": {
+              "chuncheon": "춘천"
+            },
+            "scopeType": "campus_specific",
+            "source": "listMetadata.campus",
+            "sourceLabel": "춘천"
+          },
+          "endDateInclusive": true,
+          "eventType": "job_application_period",
+          "feedScopes": [
+            "job_application"
+          ],
+          "isAllDay": true,
+          "normalizedEnd": "2026-02-19",
+          "normalizedStart": "2026-02-05",
+          "targetActor": "job_applicant",
+          "temporalRole": "user_action_period",
+          "timezone": "Asia/Seoul",
+          "title": "강원대학교 학생능력개발원 기간제 상담원 채용 공고（연장） 채용 접수기간"
+        },
+        "registryId": "s27c-publishable-corpus-20260713-v1",
+        "relationBasis": "extension",
+        "revisionNumber": 2,
+        "schemaVersion": "noticepilot.calendarEventRegistryEvent.v0.1",
+        "sequence": 1,
+        "sourceCandidateIds": [
+          "cand-knu-716-3184-befa8b61f44088",
+          "cand-knu-716-3235-f05a8929780d07"
+        ],
+        "sourceNoticeIds": [
+          "knu-716-3184",
+          "knu-716-3235"
+        ],
+        "status": "published",
+        "updatedAt": "2026-07-13T11:30:00+09:00",
+        "version": 0
+      }
+    ],
+    "duplicateEvents": [
+      {
+        "activeRevisionId": "evrev_bbd4e19676d6882fff0efeee8a21eb27",
+        "calendarEventId": "evt_349efd03df51128fcc702eca4c71ff98",
+        "canonicalCandidateId": "cand-knu-721-2361-6e7236f1828258",
+        "canonicalSourceNoticeId": "knu-721-2361",
+        "createdAt": "2026-07-13T11:30:00+09:00",
+        "icsUidMigrationPerformed": false,
+        "idStrategy": "registry_assigned_opaque_v0",
+        "projection": {
+          "actionType": null,
+          "audienceRules": {
+            "admissionTypes": [],
+            "confidence": "none",
+            "degreeLevels": [],
+            "enrollmentStatuses": [],
+            "evidence": [],
+            "matchMode": "all_dimensions",
+            "personalizationReady": false,
+            "studentYears": []
+          },
+          "campusScope": {
+            "campuses": [
+              "chuncheon",
+              "dogye",
+              "samcheok",
+              "gangneung_wonju"
+            ],
+            "confidence": "high",
+            "labels": {
+              "chuncheon": "춘천",
+              "dogye": "도계",
+              "gangneung_wonju": "강릉원주",
+              "samcheok": "삼척"
+            },
+            "scopeType": "campus_specific",
+            "source": "title_or_body",
+            "sourceLabel": "title_or_body"
+          },
+          "endDateInclusive": true,
+          "eventType": "event",
+          "feedScopes": [
+            "student_default"
+          ],
+          "isAllDay": true,
+          "normalizedEnd": "2026-07-24",
+          "normalizedStart": "2026-07-06",
+          "targetActor": "student",
+          "temporalRole": "event_occurrence",
+          "timezone": "Asia/Seoul",
+          "title": "👉(변경)200만원 장학금 + 학점 인정✨창업미네르바스쿨 창업순회실습 참가자 모집 (~6/5, 16시) 행사 기간"
+        },
+        "registryId": "s27c-publishable-corpus-20260713-v1",
+        "relationBasis": "duplicate",
+        "revisionNumber": 1,
+        "schemaVersion": "noticepilot.calendarEventRegistryEvent.v0.1",
+        "sequence": 0,
+        "sourceCandidateIds": [
+          "cand-knu-504-10892-f4c4111e073303",
+          "cand-knu-721-2361-6e7236f1828258"
+        ],
+        "sourceNoticeIds": [
+          "knu-504-10892",
+          "knu-721-2361"
+        ],
+        "status": "published",
+        "updatedAt": "2026-07-13T11:30:00+09:00",
+        "version": 0
+      },
+      {
+        "activeRevisionId": "evrev_79544ebb68d7d8aac99ded4cb0dbd6e5",
+        "calendarEventId": "evt_413507362f6545e75a681138f914f73b",
+        "canonicalCandidateId": "cand-knu-721-2361-8dcf78ab759928",
+        "canonicalSourceNoticeId": "knu-721-2361",
+        "createdAt": "2026-07-13T11:30:00+09:00",
+        "icsUidMigrationPerformed": false,
+        "idStrategy": "registry_assigned_opaque_v0",
+        "projection": {
+          "actionType": null,
+          "audienceRules": {
+            "admissionTypes": [],
+            "confidence": "none",
+            "degreeLevels": [],
+            "enrollmentStatuses": [],
+            "evidence": [],
+            "matchMode": "all_dimensions",
+            "personalizationReady": false,
+            "studentYears": []
+          },
+          "campusScope": {
+            "campuses": [
+              "chuncheon",
+              "dogye",
+              "samcheok",
+              "gangneung_wonju"
+            ],
+            "confidence": "high",
+            "labels": {
+              "chuncheon": "춘천",
+              "dogye": "도계",
+              "gangneung_wonju": "강릉원주",
+              "samcheok": "삼척"
+            },
+            "scopeType": "campus_specific",
+            "source": "title_or_body",
+            "sourceLabel": "title_or_body"
+          },
+          "endDateInclusive": true,
+          "eventType": "event",
+          "feedScopes": [
+            "student_default"
+          ],
+          "isAllDay": true,
+          "normalizedEnd": "2026-07-31",
+          "normalizedStart": "2026-07-27",
+          "targetActor": "student",
+          "temporalRole": "event_occurrence",
+          "timezone": "Asia/Seoul",
+          "title": "👉(변경)200만원 장학금 + 학점 인정✨창업미네르바스쿨 창업순회실습 참가자 모집 (~6/5, 16시) 행사 기간"
+        },
+        "registryId": "s27c-publishable-corpus-20260713-v1",
+        "relationBasis": "duplicate",
+        "revisionNumber": 1,
+        "schemaVersion": "noticepilot.calendarEventRegistryEvent.v0.1",
+        "sequence": 0,
+        "sourceCandidateIds": [
+          "cand-knu-504-10892-85c595b959a20d",
+          "cand-knu-721-2361-8dcf78ab759928"
+        ],
+        "sourceNoticeIds": [
+          "knu-504-10892",
+          "knu-721-2361"
+        ],
+        "status": "published",
+        "updatedAt": "2026-07-13T11:30:00+09:00",
+        "version": 0
+      },
+      {
+        "activeRevisionId": "evrev_0547edc8fc4ac1df8463031d25aade4b",
+        "calendarEventId": "evt_4bbb3bd0df03f095e12fc1d6a1e8cc0b",
+        "canonicalCandidateId": "cand-knu-721-2361-edcf4d6886a376",
+        "canonicalSourceNoticeId": "knu-721-2361",
+        "createdAt": "2026-07-13T11:30:00+09:00",
+        "icsUidMigrationPerformed": false,
+        "idStrategy": "registry_assigned_opaque_v0",
+        "projection": {
+          "actionType": null,
+          "audienceRules": {
+            "admissionTypes": [],
+            "confidence": "none",
+            "degreeLevels": [],
+            "enrollmentStatuses": [],
+            "evidence": [],
+            "matchMode": "all_dimensions",
+            "personalizationReady": false,
+            "studentYears": []
+          },
+          "campusScope": {
+            "campuses": [
+              "chuncheon",
+              "dogye",
+              "samcheok",
+              "gangneung_wonju"
+            ],
+            "confidence": "high",
+            "labels": {
+              "chuncheon": "춘천",
+              "dogye": "도계",
+              "gangneung_wonju": "강릉원주",
+              "samcheok": "삼척"
+            },
+            "scopeType": "campus_specific",
+            "source": "title_or_body",
+            "sourceLabel": "title_or_body"
+          },
+          "endDateInclusive": false,
+          "eventType": "application_period",
+          "feedScopes": [
+            "student_default"
+          ],
+          "isAllDay": false,
+          "normalizedEnd": "2026-06-05T16:00:00+09:00",
+          "normalizedStart": "2026-04-20T00:00:00+09:00",
+          "targetActor": "student",
+          "temporalRole": "user_action_period",
+          "timezone": "Asia/Seoul",
+          "title": "👉(변경)200만원 장학금 + 학점 인정✨창업미네르바스쿨 창업순회실습 참가자 모집 (~6/5, 16시) 신청기간"
+        },
+        "registryId": "s27c-publishable-corpus-20260713-v1",
+        "relationBasis": "duplicate",
+        "revisionNumber": 1,
+        "schemaVersion": "noticepilot.calendarEventRegistryEvent.v0.1",
+        "sequence": 0,
+        "sourceCandidateIds": [
+          "cand-knu-504-10892-6e6ef34a4f590a",
+          "cand-knu-721-2361-edcf4d6886a376"
+        ],
+        "sourceNoticeIds": [
+          "knu-504-10892",
+          "knu-721-2361"
+        ],
+        "status": "published",
+        "updatedAt": "2026-07-13T11:30:00+09:00",
+        "version": 0
+      }
+    ]
+  }
+}

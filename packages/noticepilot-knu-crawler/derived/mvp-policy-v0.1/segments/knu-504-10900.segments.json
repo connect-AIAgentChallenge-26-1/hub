@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10900",
+  "sourceContentHash": "03d98c6a69a246a18aa4b3858861ac058761d723ed0dec20e961e8826f7575f6",
+  "sourceTitle": "[생활협동조합] 중간고사 응원 이벤트 '생협이 쏜다' 행사 안내",
+  "publishedAt": "2026-04-21",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-795dc9ada467c4f6",
+      "segmentType": "title",
+      "labelText": "[생활협동조합] 중간고사 응원 이벤트 '생협이 쏜다' 행사 안내",
+      "bodyText": "[생활협동조합] 중간고사 응원 이벤트 '생협이 쏜다' 행사 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[생활협동조합] 중간고사 응원 이벤트 '생협이 쏜다' 행사 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ae1b905fbc3c870c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "생활협동조합의 '학생 조합원' 중간고사 응원 EVENT! 많은 관심과 참여 바랍니다. 😊",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "생활협동조합의 '학생 조합원' 중간고사 응원 EVENT! 많은 관심과 참여 바랍니다. 😊"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c4a748e93bb88252",
+      "segmentType": "label_value",
+      "labelText": "해람카페 운영시간 연장 안내 ※",
+      "bodyText": "※ 해람카페 운영시간 연장 안내 ※",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 해람카페 운영시간 연장 안내 ※"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-842b86e85055f9c4",
+      "segmentType": "label_value",
+      "labelText": "중간고사 기간을 맞아 해람카페 운영시간이 연장됩니다.",
+      "bodyText": "중간고사 기간을 맞아 해람카페 운영시간이 연장됩니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "중간고사 기간을 맞아 해람카페 운영시간이 연장됩니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cb8a62d9b9375884",
+      "segmentType": "continuation",
+      "labelText": "🗓 기간",
+      "bodyText": "4월 21일(화) ~ 23일(목) (3일간)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-842b86e85055f9c4"
+      },
+      "actionSignals": [
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-21",
+          "start": 36,
+          "end": 45
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "중간고사 기간을 맞아 해람카페 운영시간이 연장됩니다. 🗓 기간: 4월 21일(화) ~ 23일(목) (3일간)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-645aa87fbf42ed36",
+      "segmentType": "label_value",
+      "labelText": "🗓 기간",
+      "bodyText": "4월 21일(화) ~ 23일(목) (3일간)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-21",
+          "start": 6,
+          "end": 15
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "🗓 기간: 4월 21일(화) ~ 23일(목) (3일간)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e2e66584f51e1947",
+      "segmentType": "label_value",
+      "labelText": "⏰ 운영 종료시간: 기존 17:00 → 변경 18",
+      "bodyText": "⏰ 운영 종료시간: 기존 17:00 → 변경 18:00",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "⏰ 운영 종료시간: 기존 17:00 → 변경 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-716faea0133899c2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "이용에 참고해 주세요 😊",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "이용에 참고해 주세요 😊"
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "label_value": 4,
+      "continuation": 1
+    }
+  }
+}

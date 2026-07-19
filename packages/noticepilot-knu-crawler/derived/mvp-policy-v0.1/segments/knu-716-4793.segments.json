@@ -1,0 +1,244 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4793",
+  "sourceContentHash": "234ab46de1ac880d23426e16c039a2675b45607cfb8692df35b04e94a4683603",
+  "sourceTitle": "강원대학교 삼척캠퍼스 무기계약직 신규 채용공고",
+  "publishedAt": "2026-05-26",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-52ea573b5c5fd906",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "강원대학교 삼척캠퍼스 무기계약직 신규 채용공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 삼척캠퍼스 무기계약직 신규 채용공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cd976bca3a5dba83",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "◩ 강원대학교삼척캠퍼스공고 제2026-85호",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "◩ 강원대학교삼척캠퍼스공고 제2026-85호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ff761c93b799d257",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1.채용분야:시설관리원(삼척생활관), 환경미화원(삼척행정지원과), 입학사정관(삼척입학본부),사무원(도계캠퍼스 도서관)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1.채용분야:시설관리원(삼척생활관), 환경미화원(삼척행정지원과), 입학사정관(삼척입학본부),사무원(도계캠퍼스 도서관)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-25c6973dfa1ab1c1",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026.5.26.(화)~6.2.(화) 18:00",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-26",
+          "start": 7,
+          "end": 20
+        },
+        {
+          "value": "2026-06-02",
+          "start": 21,
+          "end": 28
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2.접수기간:2026.5.26.(화)~6.2.(화) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-12fbdb0a9ec5c87f",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3.근무지:시설관리원,환경미화원,입학사정관(삼척캠퍼스), 사무원(도계캠퍼스)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3.근무지:시설관리원,환경미화원,입학사정관(삼척캠퍼스), 사무원(도계캠퍼스)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-88bdef9551acf2f1",
+      "segmentType": "label_value",
+      "labelText": "선발방법",
+      "bodyText": "4.선발방법:1차서류전형,2차면접",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4.선발방법:1차서류전형,2차면접"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-84ef94adb2a81417",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5.문의전화:033-570-6237",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5.문의전화:033-570-6237"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-47ba19cfad6c9883",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "*붙임:채용공고문",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "*붙임:채용공고문"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5991e885c3958f3a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026.5.26.",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-26",
+          "start": 0,
+          "end": 9
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026.5.26."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-95dfc3360373bf19",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교총장",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교총장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-b74dd0b591488e12",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-05-26~2026-06-02",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-26",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-06-02",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-05-26~2026-06-02"
+    }
+  ],
+  "summary": {
+    "segmentCount": 11,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 3,
+      "list_item": 3,
+      "paragraph": 4,
+      "title": 1
+    }
+  }
+}

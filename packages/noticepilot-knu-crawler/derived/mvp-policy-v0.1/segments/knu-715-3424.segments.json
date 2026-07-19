@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-715-3424",
+  "sourceContentHash": "f3f0e6a791b1dc4bae45fb0734b95986015e52221e9d86f031aa44158f7c3353",
+  "sourceTitle": "「2026 대학생 국가숲길 챌린지」 안내",
+  "publishedAt": "2026-06-15",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2a1d602d5a1fc66f",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "「2026 대학생 국가숲길 챌린지」 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "「2026 대학생 국가숲길 챌린지」 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3d2e6b8ade03f5f4",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "가. 사업명 : 2026 대학생 국가숲길 챌린지",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "가. 사업명 : 2026 대학생 국가숲길 챌린지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e285c0b236bbf8a4",
+      "segmentType": "label_value",
+      "labelText": "모집기간",
+      "bodyText": "2026. 6. 17(수) ~ 6. 29(월)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-17",
+          "start": 10,
+          "end": 24
+        },
+        {
+          "value": "2026-06-29",
+          "start": 27,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "나. 모집기간 : 2026. 6. 17(수) ~ 6. 29(월)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-574dd582ff99f0ae",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "다. 참가대상 : 전국 대학생(휴학생 포함) 72명, 4인 1팀",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:on_leave"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "다. 참가대상 : 전국 대학생(휴학생 포함) 72명, 4인 1팀"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7dfbbb05a8909e4c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "라. 주요내용 : 국가숲길 탐방, sns 인증형 챌린지, 환경보전 활동, 지역명소 발굴 등",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "라. 주요내용 : 국가숲길 탐방, sns 인증형 챌린지, 환경보전 활동, 지역명소 발굴 등"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aa3734c0f742e6cd",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "마. 신청방법 : 구글 폼 제출 (",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "마. 신청방법 : 구글 폼 제출 ("
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cfb3a97fa777ba60",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://docs.google.com/forms/d/e/1FAIpQLSfIaMGmAhOBWIyANEgtvKdu0KsxIgsyzK7Gxh_GTEHgAOVNPA/viewform",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://docs.google.com/forms/d/e/1FAIpQLSfIaMGmAhOBWIyANEgtvKdu0KsxIgsyzK7Gxh_GTEHgAOVNPA/viewform"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-18dcb63d56c81eb9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ")",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ")"
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 3,
+      "label_value": 2,
+      "paragraph": 2
+    }
+  }
+}

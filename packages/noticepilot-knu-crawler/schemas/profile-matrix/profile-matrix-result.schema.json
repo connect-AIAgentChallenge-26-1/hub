@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noticepilot.profileMatrixResult.v0.1",
+  "title": "NoticePilot S28 Profile Matrix Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "matrixVersion", "matrixSha256", "feedBuilderVersion", "policySchemaVersion", "policyVersion", "sourceContext", "inputEventCount", "profileCaseCount", "decisionCount", "caseResults", "coverage", "boundaryEventIds", "invariants", "result"],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.profileMatrixResult.v0.1"},
+    "matrixVersion": {"const": "0.1.0"},
+    "matrixSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "feedBuilderVersion": {"type": "string", "minLength": 1},
+    "policySchemaVersion": {"type": "string", "minLength": 1},
+    "policyVersion": {"type": "string", "minLength": 1},
+    "sourceContext": {
+      "type": "object", "additionalProperties": false,
+      "required": ["registryId", "projectionId"],
+      "properties": {
+        "registryId": {"type": "string", "minLength": 1},
+        "projectionId": {"type": "string", "minLength": 1}
+      }
+    },
+    "inputEventCount": {"const": 900},
+    "profileCaseCount": {"const": 44},
+    "decisionCount": {"const": 39600},
+    "caseResults": {
+      "type": "array", "minItems": 44, "maxItems": 44,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["caseId", "category", "profileId", "includedEventCount", "excludedEventCount", "membershipSha256", "feedBuildResultSha256", "decisionLedgerSha256", "primaryReasonCounts", "allReasonCounts"],
+        "properties": {
+          "caseId": {"type": "string", "minLength": 1},
+          "category": {"type": "string", "minLength": 1},
+          "profileId": {"type": "string", "pattern": "^subprof_[0-9a-f]{32}$"},
+          "includedEventCount": {"type": "integer", "minimum": 0, "maximum": 900},
+          "excludedEventCount": {"type": "integer", "minimum": 0, "maximum": 900},
+          "membershipSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "feedBuildResultSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "decisionLedgerSha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "primaryReasonCounts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+          "allReasonCounts": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}}
+        }
+      }
+    },
+    "coverage": {"type": "object"},
+    "boundaryEventIds": {"type": "object"},
+    "invariants": {"type": "array", "items": {"type": "object"}},
+    "result": {"enum": ["pass", "fail"]}
+  }
+}

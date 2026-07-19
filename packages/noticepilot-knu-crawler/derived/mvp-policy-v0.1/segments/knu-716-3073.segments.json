@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-3073",
+  "sourceContentHash": "2b6ff9689d4cb7ee6812dc4252b1d98a11836547002b728e2e87055b5c6c6cf0",
+  "sourceTitle": "산학협력단 K-하이테크 플랫폼 사업 전담직원 채용 공고",
+  "publishedAt": "2026-01-09",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5ef151a206b44992",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "산학협력단 K-하이테크 플랫폼 사업 전담직원 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "산학협력단 K-하이테크 플랫폼 사업 전담직원 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d1d49950be35da89",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 산학협력단에서는 유능한 인재를 채용하고자 다음과 같이 사업 전담직원 채용을 공고하오니 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 산학협력단에서는 유능한 인재를 채용하고자 다음과 같이 사업 전담직원 채용을 공고하오니 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 산학협력단에서는 유능한 인재를 채용하고자 다음과 같이 사업 전담직원 채용을 공고하오니 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8ead7e7043e37a7c",
+      "segmentType": "continuation",
+      "labelText": "강원대학교 산학협력단에서는 유능한 인재를 채용하고자 다음과 같이 사업 전담직원 채용을 공고하오니 많은 지원 바랍니다.",
+      "bodyText": "2026년 1월 9일",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-d1d49950be35da89"
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-09",
+          "start": 66,
+          "end": 77
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "강원대학교 산학협력단에서는 유능한 인재를 채용하고자 다음과 같이 사업 전담직원 채용을 공고하오니 많은 지원 바랍니다. 2026년 1월 9일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-25c50686b881d83f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026년 1월 9일",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-09",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026년 1월 9일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-66c2db96776da465",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 산학협력단장",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 산학협력단장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-e03db209d1e815b2",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-01-12~2026-01-16",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-12",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-01-16",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-01-12~2026-01-16"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "continuation": 1,
+      "label_value": 2,
+      "paragraph": 2,
+      "title": 1
+    }
+  }
+}

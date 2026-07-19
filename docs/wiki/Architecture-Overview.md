@@ -1,6 +1,6 @@
 # Architecture Overview
 
-> Wiki version: 2026-07-12 domain-foundation baseline  
+> Wiki version: 2026-07-19 Foundation.25.1 reference-integration baseline
 > Source of truth: repository runtime code, strict schemas, tests, and authoritative architecture contracts  
 > Scope: repository-visible implementation only
 
@@ -8,10 +8,11 @@
 
 NoticePilot transforms long university notices into actionable items and calendar-event candidates.
 
-The repository now contains two related but distinct surfaces:
+The repository now contains three related but distinct surfaces:
 
 1. **Manual-analysis runtime** — user-facing review, editing, Markdown export, and one-off `.ics` download.
-2. **Subscription domain foundation** — strict source, canonical notice, extraction, candidate, event, and feed schemas.
+2. **Subscription domain foundation** — the exact restored Foundation.25.1 package with source, event, persistence, and delivery implementations.
+3. **Local reference delivery** — an opt-in Express/Python bridge exposing one fixed Foundation snapshot through an in-memory capability URL.
 
 The manual-analysis UI is not the authoritative subscription-domain model.
 
@@ -39,21 +40,31 @@ Extraction boundary
 ├─ ExtractionItem[]
 └─ CalendarEventCandidate[]
 
-Consumer boundary — pending
+Production consumer boundary
 ├─ candidate promotion
 ├─ CalendarEvent identity issuance
 ├─ previous/current reconciliation
 ├─ sequence increment
 └─ cancellation generation
+   └─ implemented inside restored Foundation.25.1; not wired to live root ingestion
 
-Delivery boundary — pending
-├─ core ICS serializer
-├─ SubscriptionIcsFeed persistence
-├─ feed endpoint
-└─ calendar-client refresh behavior
+Local reference delivery — runtime active only when explicitly enabled
+├─ fixed Foundation snapshot
+├─ in-memory capability provisioning
+├─ Express GET / HEAD / conditional 304 endpoint
+└─ server-restart expiry
+
+Production delivery — pending
+├─ account-owned persistent profile and token lifecycle
+├─ durable feed state
+├─ live crawler/snapshot refresh
+└─ operational deployment and observability
 ```
 
-Current implementation reaches `CalendarEventCandidate` through tested adapters. Persistent event promotion, reconciliation, feed state, and subscription delivery are not implemented.
+Root adapters reach `CalendarEventCandidate`. The restored Foundation package
+contains the later event and delivery layers, and the root reference bridge
+exercises one sealed snapshot. A live multi-user ingestion and persistent
+delivery runtime is not implemented.
 
 ## 4. Current User-Facing Runtime
 
@@ -63,6 +74,13 @@ Manual text or TXT/MD
 → AppAnalysisSchema-compatible result
 → user review/edit
 → Markdown or selected one-off all-day ICS
+
+Calendar tab + explicit local reference mode
+→ POST /api/subscription-feeds/reference
+→ Express/Python bridge
+→ fixed 601-event Foundation snapshot
+→ in-memory capability URL
+→ GET / HEAD / conditional 304 ICS delivery
 ```
 
 Runtime-active capabilities:
@@ -82,8 +100,10 @@ Runtime-active capabilities:
 - inert `metadata.userPreferencesSnapshot`
 - Markdown checklist export
 - selected one-off all-day `.ics` export
+- opt-in fixed Foundation.25.1 reference feed creation and copy flow
+- capability-authenticated reference ICS delivery on loopback hosts only
 
-Campus preferences currently do not filter notices, alter extraction, personalize exports, or create a feed.
+Campus preferences currently do not filter notices, alter extraction, personalize exports, or alter the fixed reference feed.
 
 ## 5. Strict Subscription Domain
 
@@ -117,7 +137,10 @@ AppAnalysisSchema
 ≠ authoritative core subscription schema
 ```
 
-The existence of `CalendarEvent` and `SubscriptionIcsFeed` schemas does not mean event reconciliation or feed delivery is implemented.
+The restored Foundation package implements and verifies event reconciliation
+and subscription delivery semantics. The root application consumes only the
+fixed reference snapshot; it does not yet provide production account-owned
+event or feed persistence.
 
 ## 6. Implemented Adapter Boundaries
 
@@ -202,7 +225,9 @@ The wrapper rejects null, partial, or unknown-key domain-adapter options. It doe
 - keeps live AI mode explicitly unavailable until implemented
 - treats external/model output as untrusted
 - returns safe AppAnalysis-compatible responses
-- does not currently persist notices, events, or feeds
+- exposes the opt-in reference provisioning and capability delivery routes
+- rejects reference mode on non-loopback hosts before gateway startup
+- does not persist root-application notices, events, or feeds
 
 ### Source adapters
 
@@ -211,7 +236,7 @@ The wrapper rejects null, partial, or unknown-key domain-adapter options. It doe
 - produce strict domain objects
 - stop at `ExtractionResult` / `CalendarEventCandidate`
 
-### Calendar-event consumer — pending
+### Calendar-event consumer — isolated Foundation implementation
 
 - decides candidate eligibility and promotion
 - issues persistent event IDs
@@ -219,12 +244,19 @@ The wrapper rejects null, partial, or unknown-key domain-adapter options. It doe
 - increments sequence
 - generates cancellation state
 
-### Delivery layer — pending
+These behaviors are implemented and verified inside the restored Foundation
+package. They are not connected to a live root crawler or account-owned runtime.
+
+### Delivery layer — local reference active, production pending
 
 - serializes validated events to ICS
 - stores feed state
 - exposes feed URLs or tokens
 - defines refresh, caching, retention, and observability
+
+The local bridge renders a fixed snapshot and keeps capability state in memory.
+Persistent profiles, rotation/revocation UI, live refresh, and production
+observability remain pending.
 
 ## 9. Candidate, Event, and ICS Semantics
 
@@ -275,6 +307,9 @@ analysis session
 
 campus preferences
 → separate browser localStorage
+
+local reference capability
+→ Python bridge memory until server restart
 ```
 
 ### Pending

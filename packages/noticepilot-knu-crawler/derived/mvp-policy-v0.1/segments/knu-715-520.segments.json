@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-715-520",
+  "sourceContentHash": "ac04abc1a0bdf4251afc136db94f42f3a880e42cb9f454494d26ecf5ee614dbb",
+  "sourceTitle": "강원대학교 총동창회 정기총회 및 신년교례회",
+  "publishedAt": "2026-02-06",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0f9bf930d65956f4",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "강원대학교 총동창회 정기총회 및 신년교례회",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 총동창회 정기총회 및 신년교례회"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-053cdacbb1e70568",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "총동창회 신년교례회에서 푸짐한 경품을 준비했으니",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "총동창회 신년교례회에서 푸짐한 경품을 준비했으니"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f60d10b8e5b6bc08",
+      "segmentType": "label_value",
+      "labelText": "서둘러 신청해 주시기 바랍니다",
+      "bodyText": "서둘러 신청해 주시기 바랍니다",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "서둘러 신청해 주시기 바랍니다"
+    }
+  ],
+  "summary": {
+    "segmentCount": 3,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 1,
+      "label_value": 1
+    }
+  }
+}

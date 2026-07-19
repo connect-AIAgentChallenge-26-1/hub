@@ -1,0 +1,212 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-5667",
+  "sourceContentHash": "13ee1957de3049758e0454b86df62d3a9cd358d1bed28f1f568d9560188098e6",
+  "sourceTitle": "강원창업보육센터 신규 입주기업 모집 공고（2026년 1차）",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5667&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천 삼척",
+    "campuses": [
+      "chuncheon",
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천",
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-5667-03be4478dea2b8",
+      "uidHint": "noticepilot-cand-knu-504-5667-03be4478dea2b8@noticepilot.local",
+      "sourceNoticeId": "knu-504-5667",
+      "sourceTitle": "강원창업보육센터 신규 입주기업 모집 공고（2026년 1차）",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=5667&pageIndex=11&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-e8452f5b37144cb5",
+        "segmentType": "label_value",
+        "labelText": "모집기간",
+        "bodyText": "2026. 2. 4.(수) ~ 2. 23.(월) 낮 12시 까지 (우편제출인 경우 당일 도착분에 한함)",
+        "sourceLocation": {
+          "lineIndex": 23,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "submission_period",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-04",
+            "start": 10,
+            "end": 24
+          },
+          {
+            "value": "2026-02-23",
+            "start": 27,
+            "end": 36
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "모집기간",
+          "5) 모집기간 : 2026. 2. 4.(수) ~ 2. 23.(월) 낮 12시 까지 (우편제출인 경우 당일 도착분에 한함)",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-55d32d7f847f05ea",
+        "segmentId": "seg-e8452f5b37144cb5",
+        "rawText": "2026. 2. 4.(수) ~ 2. 23.(월) 낮 12시 까지 (우편제출인 경우 당일 도착분에 한함)",
+        "normalizedStart": "2026-02-04T00:00:00+09:00",
+        "normalizedEnd": "2026-02-23T12:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 10,
+          "end": 36
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-2016fab697bfb483",
+        "sourceNoticeId": "knu-504-5667",
+        "segmentId": "seg-e8452f5b37144cb5",
+        "temporalMentionIds": [
+          "tm-55d32d7f847f05ea"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "모집기간",
+        "evidence": "5) 모집기간 : 2026. 2. 4.(수) ~ 2. 23.(월) 낮 12시 까지 (우편제출인 경우 당일 도착분에 한함)"
+      },
+      "targetActor": "unknown",
+      "feedScopes": [],
+      "title": "강원창업보육센터 신규 입주기업 모집 공고（2026년 1차） 신청기간",
+      "dateText": "2026. 2. 4.(수) ~ 2. 23.(월) 낮 12시 까지 (우편제출인 경우 당일 도착분에 한함)",
+      "normalizedStart": "2026-02-04T00:00:00+09:00",
+      "normalizedEnd": "2026-02-23T12:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "5) 모집기간 : 2026. 2. 4.(수) ~ 2. 23.(월) 낮 12시 까지 (우편제출인 경우 당일 도착분에 한함)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "unknown_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": "start_of_day_assumed_for_timed_range"
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "unknown",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.unknown",
+        "reasonCodes": [
+          "unknown_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "start_of_day_assumed_for_timed_range",
+          "structured_segment_grounded",
+          "unknown_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.unknown.review",
+          "publishability.reason.unknown_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11165",
+  "sourceContentHash": "a6f7494ca7cc4a1914f579c9da50ef2d5c3ef4e0abdec17537bc0e88110f4bc3",
+  "sourceTitle": "중앙박물관 제4기 곰곰이 서포터즈 모집 공고",
+  "publishedAt": "2026-06-26",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-210106ba435812ea",
+      "segmentType": "title",
+      "labelText": "중앙박물관 제4기 곰곰이 서포터즈 모집 공고",
+      "bodyText": "중앙박물관 제4기 곰곰이 서포터즈 모집 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "중앙박물관 제4기 곰곰이 서포터즈 모집 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ad532d38a8e8e8cc",
+      "segmentType": "label_value",
+      "labelText": "제4기 중앙박물관 곰곰이 서포터즈를 다음과 같이 모집하오니, 많은 참여 바랍니다.",
+      "bodyText": "제4기 중앙박물관 곰곰이 서포터즈를 다음과 같이 모집하오니, 많은 참여 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "제4기 중앙박물관 곰곰이 서포터즈를 다음과 같이 모집하오니, 많은 참여 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-97d0d7679958adc3",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2025.6.26(금)-2025.7.3(금)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2025-06-26",
+          "start": 10,
+          "end": 22
+        },
+        {
+          "value": "2025-07-03",
+          "start": 23,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 접수기간 : 2025.6.26(금)-2025.7.3(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-57adcca0600364c1",
+      "segmentType": "label_value",
+      "labelText": "접수방법",
+      "bodyText": "2. 접수방법 : 이메일(kwangjun@kangwon.ac.kr)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 접수방법 : 이메일(kwangjun@kangwon.ac.kr)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5eadb8bf02c84192",
+      "segmentType": "label_value",
+      "labelText": "결과발표",
+      "bodyText": "2025.7.10(금) 이전 개별 통보",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2025-07-10",
+          "start": 10,
+          "end": 22
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "3. 결과발표 : 2025.7.10(금) 이전 개별 통보"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1dca6cc7fd6a7bb1",
+      "segmentType": "label_value",
+      "labelText": "선발기준 등 자세한 사항은 붙임 참조",
+      "bodyText": "4. 선발기준 등 자세한 사항은 붙임 참조",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 선발기준 등 자세한 사항은 붙임 참조"
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 5
+    }
+  }
+}

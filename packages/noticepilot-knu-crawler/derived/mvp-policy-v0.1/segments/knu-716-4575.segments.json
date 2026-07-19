@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4575",
+  "sourceContentHash": "e978352e547bc27d0c710e074ff8ff3e50349c5545aadfec2e7ef1a9bab17f41",
+  "sourceTitle": "G-LAMP사업단 계약직원 채용 공고",
+  "publishedAt": "2026-03-09",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f296411fa69f7cf7",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "G-LAMP사업단 계약직원 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "G-LAMP사업단 계약직원 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-da3dc1c75cb47599",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "[강원대학교 G-LAMP사업단 계약직 직원 신규채용 공고]",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[강원대학교 G-LAMP사업단 계약직 직원 신규채용 공고]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-689494b1c931d8fc",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 G-LAMP사업단 에서는 다음과 같이 계약직 직원 신규채용을 실시하오니 유능한 인재의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 G-LAMP사업단 에서는 다음과 같이 계약직 직원 신규채용을 실시하오니 유능한 인재의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 G-LAMP사업단 에서는 다음과 같이 계약직 직원 신규채용을 실시하오니 유능한 인재의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0aabe58046d478c3",
+      "segmentType": "label_value",
+      "labelText": "모집기간",
+      "bodyText": "2026. 3. 9. ~ 2026. 3. 17.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-09",
+          "start": 7,
+          "end": 17
+        },
+        {
+          "value": "2026-03-17",
+          "start": 21,
+          "end": 32
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "-모집기간: 2026. 3. 9. ~ 2026. 3. 17."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-987d29b61b8ae95d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-채용분야 및 인원: 실험실 관리 및 실험동물실 사육관리 1명",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-채용분야 및 인원: 실험실 관리 및 실험동물실 사육관리 1명"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ee64302a89ce486f",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2025년 3월 9일",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2025-03-09",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2025년 3월 9일"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5bc37cf4ac6a67f8",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 G-LAMP사업단장",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 G-LAMP사업단장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-7f8b52f965846757",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-03-09~2026-03-17",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-03-09",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-03-17",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-03-09~2026-03-17"
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 3,
+      "list_item": 1,
+      "paragraph": 3,
+      "title": 1
+    }
+  }
+}

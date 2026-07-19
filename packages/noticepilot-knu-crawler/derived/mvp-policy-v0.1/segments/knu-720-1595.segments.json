@@ -1,0 +1,395 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-1595",
+  "sourceContentHash": "d9d287c655b2e288d68a69c3261fdf8a5a7a370b5268eeb58cafc48f4bb6f13f",
+  "sourceTitle": "2026학년도 1학기 학부 수업시간표 공고(춘천캠퍼스)(2026.3.12.)",
+  "publishedAt": "2026-01-26",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-bec1051dd45eeb1c",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "2026.3.12.)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [
+        {
+          "value": "2026-03-12",
+          "start": 31,
+          "end": 40
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2026학년도 1학기 학부 수업시간표 공고(춘천캠퍼스)(2026.3.12.)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0d68f35f64c14e8a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026학년도 1학기 학부 수업시간표를 붙임과 같이 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 1학기 학부 수업시간표를 붙임과 같이 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c131fe11bb54cea8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 관련: 「강원대학교 수업관리 지침」 제12조제3항",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 관련: 「강원대학교 수업관리 지침」 제12조제3항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-16304a27aff00c2b",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 수업시간표 목록: <붙임> 참고",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 수업시간표 목록: <붙임> 참고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-17ec9dcf3043d947",
+      "segmentType": "label_value",
+      "labelText": "수강지도와 관련된 부분은 해당 학과로 문의하여 주시기 바라며,",
+      "bodyText": "3. 수강지도와 관련된 부분은 해당 학과로 문의하여 주시기 바라며,",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 수강지도와 관련된 부분은 해당 학과로 문의하여 주시기 바라며,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6a7f9d96f19a3ef7",
+      "segmentType": "label_value",
+      "labelText": "수업시간표는 추후 변경될 수 있으니, 수강신청 시 반드시 수강신청 시스템에서",
+      "bodyText": "수업시간표는 추후 변경될 수 있으니, 수강신청 시 반드시 수강신청 시스템에서",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "수업시간표는 추후 변경될 수 있으니, 수강신청 시 반드시 수강신청 시스템에서"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-114804d1d09b6ea7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "최종 확인하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "최종 확인하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f6b1108f5d7864b2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "아울러, 교과목 정보는 수업계획서를 확인하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "아울러, 교과목 정보는 수업계획서를 확인하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a4ed08362b7d4a5a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 수업계획서 조회방법: K-cloud > 학부서비스> 교과> 수업> 수업계획서 조회",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 수업계획서 조회방법: K-cloud > 학부서비스> 교과> 수업> 수업계획서 조회"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f4e025a5cfc10635",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 전공교과목 시간표 관련 문의: 해당학과",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 전공교과목 시간표 관련 문의: 해당학과"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-48ce595b368fcd0c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-교양교과목 시간표 관련 문의: 교양교육원 033-250-7207",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-교양교과목 시간표 관련 문의: 교양교육원 033-250-7207"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e9af79b8a34b4fa6",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "-교직교과목 시간표 관련 문의: 교원양성지원센터 033-250-6776",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-교직교과목 시간표 관련 문의: 교원양성지원센터 033-250-6776"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-46d43c1a0c0adde6",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "1차 변경(2026. 2. 4. 수정)",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1차 변경(2026. 2. 4. 수정)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-46c96d91a9dfa920",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 일부 교과목 미개설, 시간표 및 강의담당 교원 변경",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 일부 교과목 미개설, 시간표 및 강의담당 교원 변경"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b2c44bd72396826a",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2차 변경(2026. 2. 10.)",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2차 변경(2026. 2. 10.)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5b7950cfb2b8ce79",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 일부 교과목 미개설, 시간표 및 강의담당 교원 변경",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 일부 교과목 미개설, 시간표 및 강의담당 교원 변경"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-71065f7634691482",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "3차 변경(2026. 2. 27.)",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3차 변경(2026. 2. 27.)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e5ffb45c26aa2914",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 일부 교과목 미개설, 시간표 및 강의담당 교원 변경",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 일부 교과목 미개설, 시간표 및 강의담당 교원 변경"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-99a791a50de71d0e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "4차 변경(2026. 3. 12.)",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4차 변경(2026. 3. 12.)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8632ebb3e2bf4701",
+      "segmentType": "label_value",
+      "labelText": "시간표 및 강의담당 교원 변경, 폐강강좌 표기(100개)",
+      "bodyText": "-시간표 및 강의담당 교원 변경, 폐강강좌 표기(100개)",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "-시간표 및 강의담당 교원 변경, 폐강강좌 표기(100개)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 20,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 7,
+      "list_item": 9,
+      "label_value": 3
+    }
+  }
+}

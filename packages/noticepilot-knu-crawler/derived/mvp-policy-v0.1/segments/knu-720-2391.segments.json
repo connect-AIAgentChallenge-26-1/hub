@@ -1,0 +1,294 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2391",
+  "sourceContentHash": "df73f115b3ae18d028ec0a857e68c087f3b4475d49ced92753cc4a24d0f90e06",
+  "sourceTitle": "2025학년도 후기（2026년 8월 졸업）예비 졸업사정 결과 확인 안내",
+  "publishedAt": "2026-03-27",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ffc71fced45bb7ae",
+      "segmentType": "title",
+      "labelText": "2025학년도 후기（2026년 8월 졸업）예비 졸업사정 결과 확인 안내",
+      "bodyText": "2025학년도 후기（2026년 8월 졸업）예비 졸업사정 결과 확인 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2025학년도 후기（2026년 8월 졸업）예비 졸업사정 결과 확인 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-88da9c6a9ff4ec65",
+      "segmentType": "label_value",
+      "labelText": "2025학년도 후기(2026.8월 졸업) 예비 졸업사정 결과 학생 확인 방법을 다음과 같이 안내하오니, 기한 내 K-Cloud를 통하여 사정결과를 확인하여 주시기 바랍니다.",
+      "bodyText": "2025학년도 후기(2026.8월 졸업) 예비 졸업사정 결과 학생 확인 방법을 다음과 같이 안내하오니, 기한 내 K-Cloud를 통하여 사정결과를 확인하여 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2025학년도 후기(2026.8월 졸업) 예비 졸업사정 결과 학생 확인 방법을 다음과 같이 안내하오니, 기한 내 K-Cloud를 통하여 사정결과를 확인하여 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a25f445eeef4f5d4",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "1. 확인대상: 2025학년도 후기 졸업 대상자",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "1. 확인대상: 2025학년도 후기 졸업 대상자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8c4ab9b1a629c618",
+      "segmentType": "label_value",
+      "labelText": "(재학생, 수료생, 학사학위취득유예생, 조기졸업신청자)",
+      "bodyText": "(재학생, 수료생, 학사학위취득유예생, 조기졸업신청자)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(재학생, 수료생, 학사학위취득유예생, 조기졸업신청자)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d8a8d3ee66b20a5d",
+      "segmentType": "label_value",
+      "labelText": "확인기간",
+      "bodyText": "2. 확인기간:",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 확인기간:"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4757fe5e9960061c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 4. 16.(목) 9:00 ~ 4. 20.(월) 18:00",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-16",
+          "start": 0,
+          "end": 15
+        },
+        {
+          "value": "2026-04-20",
+          "start": 23,
+          "end": 32
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 4. 16.(목) 9:00 ~ 4. 20.(월) 18:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-877f01f40032445d",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 확인방법: K-Cloud에 접속하여 사정결과 확인 후 오른쪽 상단 [본인확인] 클릭",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 확인방법: K-Cloud에 접속하여 사정결과 확인 후 오른쪽 상단 [본인확인] 클릭"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-771a7dbcb2ca2077",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "4. 확인경로: K-Cloud → 학부생서비스 → 교과 → 학적 →",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 확인경로: K-Cloud → 학부생서비스 → 교과 → 학적 →"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b66472c9170f25dc",
+      "segmentType": "label_value",
+      "labelText": "예비졸업사정 결과확인",
+      "bodyText": "예비졸업사정 결과확인",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "예비졸업사정 결과확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e6334d1c1a59ce0e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "→ 본인확인 클릭",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "→ 본인확인 클릭"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e31fc4c1a888520c",
+      "segmentType": "label_value",
+      "labelText": "결과문의",
+      "bodyText": "5. 결과문의: 사정결과에 이의가 있는 경우, 소속학과로 문의",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 결과문의: 사정결과에 이의가 있는 경우, 소속학과로 문의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9799f2f70688b2d9",
+      "segmentType": "label_value",
+      "labelText": "[본인확인]을 클릭하면 사정결과 변경이 어려우므로, 이의가 있는 경우 [본인확인]을 클릭하지 말고 소속학과로 문의",
+      "bodyText": "※ [본인확인]을 클릭하면 사정결과 변경이 어려우므로, 이의가 있는 경우 [본인확인]을 클릭하지 말고 소속학과로 문의",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ [본인확인]을 클릭하면 사정결과 변경이 어려우므로, 이의가 있는 경우 [본인확인]을 클릭하지 말고 소속학과로 문의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-36c410350fae6ac9",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026. 4. 20.(월) 18:00 자동 확정",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-20",
+          "start": 54,
+          "end": 69
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "6. 유의사항: 기한 내 학생이 확인하지 않은 경우, 사정결과에 동의한 것으로 간주하여 사정결과 2026. 4. 20.(월) 18:00 자동 확정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a21d45603ab0f7c1",
+      "segmentType": "label_value",
+      "labelText": "붙임 졸업사정 결과 학생 확인 매뉴얼 1부. 끝",
+      "bodyText": "붙임 졸업사정 결과 학생 확인 매뉴얼 1부. 끝",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 졸업사정 결과 학생 확인 매뉴얼 1부. 끝"
+    }
+  ],
+  "summary": {
+    "segmentCount": 14,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 7,
+      "list_item": 4,
+      "paragraph": 2
+    }
+  }
+}

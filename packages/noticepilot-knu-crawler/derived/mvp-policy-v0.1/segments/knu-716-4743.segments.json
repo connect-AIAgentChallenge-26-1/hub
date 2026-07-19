@@ -1,0 +1,169 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4743",
+  "sourceContentHash": "2935a40c2033b8398c096a85765ba51f4f596b2aaac7cbdbbe90d8a934105190",
+  "sourceTitle": "2026년 강원대학교 원주캠퍼스 청년인턴 채용(재공고) 면접일자 변경 안내",
+  "publishedAt": "2026-05-07",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-aa13702296e68cd1",
+      "segmentType": "title",
+      "labelText": "2026년 강원대학교 원주캠퍼스 청년인턴 채용(재공고) 면접일자 변경 안내",
+      "bodyText": "2026년 강원대학교 원주캠퍼스 청년인턴 채용(재공고) 면접일자 변경 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 강원대학교 원주캠퍼스 청년인턴 채용(재공고) 면접일자 변경 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f60665ff885dfa18",
+      "segmentType": "label_value",
+      "labelText": "2026년 강원대학교 원주캠퍼스 청년인턴 채용 면접일자를 아래와 같이 변경하오니 착오 없으시기 바랍니다.",
+      "bodyText": "2026년 강원대학교 원주캠퍼스 청년인턴 채용 면접일자를 아래와 같이 변경하오니 착오 없으시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 강원대학교 원주캠퍼스 청년인턴 채용 면접일자를 아래와 같이 변경하오니 착오 없으시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-00c019a9e8a9250a",
+      "segmentType": "continuation",
+      "labelText": "",
+      "bodyText": "2026. 5. 14.(목) 14:00",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-f60665ff885dfa18"
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-14",
+          "start": 63,
+          "end": 78
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "2026년 강원대학교 원주캠퍼스 청년인턴 채용 면접일자를 아래와 같이 변경하오니 착오 없으시기 바랍니다. 기존: 2026. 5. 14.(목) 14:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a6719b491fead570",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 5. 14.(목) 14:00",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-14",
+          "start": 4,
+          "end": 19
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "기존: 2026. 5. 14.(목) 14:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e4aa4c1d734ce49c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "변경: 2026. 5. 13.(수) 14:00",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "변경: 2026. 5. 13.(수) 14:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1cdf94f091dc7336",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 5. 12.) 및 면접장소(원주캠퍼스 본관 203호)는 변동 없음",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-12",
+          "start": 17,
+          "end": 28
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "기타사항: 정책제안서 제출기한(2026. 5. 12.) 및 면접장소(원주캠퍼스 본관 203호)는 변동 없음"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-6886b9f3bb3d7fc5",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "문의: 033-760-8012",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "문의: 033-760-8012"
+    }
+  ],
+  "summary": {
+    "segmentCount": 7,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "continuation": 1,
+      "paragraph": 4
+    }
+  }
+}

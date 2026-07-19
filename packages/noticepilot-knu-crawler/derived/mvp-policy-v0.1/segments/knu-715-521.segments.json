@@ -1,0 +1,133 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-715-521",
+  "sourceContentHash": "ce09bc590efe8f13974ad93bd3e75706ec077cb78c99415494f3c56d866e6813",
+  "sourceTitle": "[강원대학교 중독과 트라우마 회복연구소] 국제 심포지엄 개최 안내",
+  "publishedAt": "2026-02-09",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8bccb73b2b9bf700",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "[강원대학교 중독과 트라우마 회복연구소] 국제 심포지엄 개최 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[강원대학교 중독과 트라우마 회복연구소] 국제 심포지엄 개최 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f6ccd199f1890ca1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "[강원대학교 중독과 트라우마 회복연구소] 국제 심포지엄 개최 안내",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[강원대학교 중독과 트라우마 회복연구소] 국제 심포지엄 개최 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1df038a146162b30",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2026. 2. 26. (목) 14:00~17:00",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-26",
+          "start": 8,
+          "end": 24
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "- 일 시 : 2026. 2. 26. (목) 14:00~17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-835abb22d9c02025",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 장 소 : 서울 정동 1928 아트센터",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 장 소 : 서울 정동 1928 아트센터"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d3fd2df13f38008d",
+      "segmentType": "label_value",
+      "labelText": "참가신청링크 : https",
+      "bodyText": "- 참가신청링크 : https://forms.gle/vwpyitLe31Bb62KS7 (※ 당일 현장 등록 가능)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 참가신청링크 : https://forms.gle/vwpyitLe31Bb62KS7 (※ 당일 현장 등록 가능)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-945b8d7864305761",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "자세한 내용은 포스터를 참고하시고, 관심있는 분들의 많은 참여를 부탁드립니다.",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자세한 내용은 포스터를 참고하시고, 관심있는 분들의 많은 참여를 부탁드립니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 6,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "list_item": 2,
+      "label_value": 1
+    }
+  }
+}

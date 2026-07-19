@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noticepilot.local/schemas/cross-notice-pair-diagnostic.schema.json",
+  "title": "NoticePilot cross-notice pair diagnostic",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["schemaVersion", "pairId", "diagnosticTier", "relationDecision", "retrievalReasons", "signals", "candidates"],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.crossNoticePairDiagnostic.v0.2"},
+    "pairId": {"type": "string"},
+    "diagnosticTier": {"enum": ["high_signal", "medium_signal"]},
+    "relationDecision": {
+      "type": "object",
+      "required": ["status", "policyVersion", "relation", "allowedRelations", "automaticMutationAllowed"],
+      "properties": {
+        "status": {"const": "policy_approved_execution_deferred"},
+        "policyVersion": {"const": "noticepilot.crossNoticeReconciliationPolicy.v0.3"},
+        "relation": {"type": "null"},
+        "automaticMutationAllowed": {"const": false}
+      }
+    },
+    "retrievalReasons": {"type": "array", "items": {"type": "string"}, "minItems": 1},
+    "candidates": {"type": "array", "minItems": 2, "maxItems": 2}
+  }
+}

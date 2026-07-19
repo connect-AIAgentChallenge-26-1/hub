@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-11018",
+  "sourceContentHash": "d915b56139ad5d63a21d0ed0ede714913fd63adec0802cc60280720acda44bfb",
+  "sourceTitle": "<2026학년도 후기 석사과정 입학 안내│강원 글로벌 그린바이오 농식품 전문인재 양성과정>",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11018&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "title_or_body",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "high",
+    "source": "title_or_body",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-11018-2d0d52984e420a",
+      "uidHint": "noticepilot-cand-knu-504-11018-2d0d52984e420a@noticepilot.local",
+      "sourceNoticeId": "knu-504-11018",
+      "sourceTitle": "<2026학년도 후기 석사과정 입학 안내│강원 글로벌 그린바이오 농식품 전문인재 양성과정>",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=11018&pageIndex=4&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "title_or_body",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "high",
+        "source": "title_or_body",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-013597b0483d8eb8",
+        "segmentType": "label_value",
+        "labelText": "■ 온라인 신청 및 서류접수 기간(한국시간 기준)",
+        "bodyText": "2026.5.11.(월) 09:00 ~ 6.12.(금) 17:00",
+        "sourceLocation": {
+          "lineIndex": 2,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-11",
+            "start": 29,
+            "end": 42
+          },
+          {
+            "value": "2026-06-12",
+            "start": 51,
+            "end": 59
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "■ 온라인 신청 및 서류접수 기간(한국시간 기준)",
+          "■ 온라인 신청 및 서류접수 기간(한국시간 기준): 2026.5.11.(월) 09:00 ~ 6.12.(금) 17:00",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-a61ede55956fcd2b",
+        "segmentId": "seg-013597b0483d8eb8",
+        "rawText": "2026.5.11.(월) 09:00 ~ 6.12.(금) 17:00",
+        "normalizedStart": "2026-05-11T09:00:00+09:00",
+        "normalizedEnd": "2026-06-12T17:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 29,
+          "end": 59
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-5f422ee52b54c4f2",
+        "sourceNoticeId": "knu-504-11018",
+        "segmentId": "seg-013597b0483d8eb8",
+        "temporalMentionIds": [
+          "tm-a61ede55956fcd2b"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "■ 온라인 신청 및 서류접수 기간(한국시간 기준)",
+        "evidence": "■ 온라인 신청 및 서류접수 기간(한국시간 기준): 2026.5.11.(월) 09:00 ~ 6.12.(금) 17:00"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "<2026학년도 후기 석사과정 입학 안내│강원 글로벌 그린바이오 농식품 전문인재 양성과정> 신청기간",
+      "dateText": "2026.5.11.(월) 09:00 ~ 6.12.(금) 17:00",
+      "normalizedStart": "2026-05-11T09:00:00+09:00",
+      "normalizedEnd": "2026-06-12T17:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "■ 온라인 신청 및 서류접수 기간(한국시간 기준): 2026.5.11.(월) 09:00 ~ 6.12.(금) 17:00",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "structured_segment_grounded",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 1,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 1,
+    "calendarFeedIncludedCount": 0
+  }
+}

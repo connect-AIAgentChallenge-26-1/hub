@@ -1,0 +1,520 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-2447",
+  "sourceContentHash": "446d3ef4bcc9f256047f59fece021e9e0f5259397b1035615c4051870f0aadd1",
+  "sourceTitle": "2026학년도 하계 계절수업 수강신청 및 등록 안내",
+  "publishedAt": "2026-05-11",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-07fb6ecaa8c50dc7",
+      "segmentType": "title",
+      "labelText": "2026학년도 하계 계절수업 수강신청 및 등록 안내",
+      "bodyText": "2026학년도 하계 계절수업 수강신청 및 등록 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 하계 계절수업 수강신청 및 등록 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-dd8156ecc14b6947",
+      "segmentType": "label_value",
+      "labelText": "강원대학교(강릉·원주) 2026학년도 하계 계절수업 수강신청 및 등록기간을 아래와 같이 공고합니다.",
+      "bodyText": "강원대학교(강릉·원주) 2026학년도 하계 계절수업 수강신청 및 등록기간을 아래와 같이 공고합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교(강릉·원주) 2026학년도 하계 계절수업 수강신청 및 등록기간을 아래와 같이 공고합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9472397400311783",
+      "segmentType": "label_value",
+      "labelText": "□ 운영기간",
+      "bodyText": "2026. 6. 24.(수) ∼ 7. 14.(화) 【15일간】, 토·일제외",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-24",
+          "start": 9,
+          "end": 24
+        },
+        {
+          "value": "2026-07-14",
+          "start": 27,
+          "end": 36
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "□ 운영기간 : 2026. 6. 24.(수) ∼ 7. 14.(화) 【15일간】, 토·일제외"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-054e081843cf16eb",
+      "segmentType": "label_value",
+      "labelText": "□ 수강신청",
+      "bodyText": "2026. 5. 19.(화) 10:00 ∼ 5. 26.(화) 18:00까지",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-19",
+          "start": 9,
+          "end": 24
+        },
+        {
+          "value": "2026-05-26",
+          "start": 33,
+          "end": 42
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "□ 수강신청 : 2026. 5. 19.(화) 10:00 ∼ 5. 26.(화) 18:00까지"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-df1b49b3ea08accd",
+      "segmentType": "label_value",
+      "labelText": "□ 등록기간",
+      "bodyText": "2026. 6. 4.(목) ~ 6. 10.(수) 15:30까지 가상계좌 납부(농협 지점 방문 등)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-04",
+          "start": 9,
+          "end": 23
+        },
+        {
+          "value": "2026-06-10",
+          "start": 26,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "□ 등록기간 : 2026. 6. 4.(목) ~ 6. 10.(수) 15:30까지 가상계좌 납부(농협 지점 방문 등)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2de15202f936d7ef",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "□ 수 강 료 : 학점당 25,000원(단, 실기교과목은 학점당 50,000원)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 수 강 료 : 학점당 25,000원(단, 실기교과목은 학점당 50,000원)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0bdefe4aaaaa46f2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "□ 개설교과목 및 시간표 : 별첨",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 개설교과목 및 시간표 : 별첨"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a19b6579d17899c3",
+      "segmentType": "label_value",
+      "labelText": "□ 수강대상자",
+      "bodyText": "□ 수강대상자",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 수강대상자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a7f0b17b9059bfaf",
+      "segmentType": "label_value",
+      "labelText": "○ 재적생 중 수강을 희망하는 자",
+      "bodyText": "○ 재적생 중 수강을 희망하는 자",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 재적생 중 수강을 희망하는 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e99989c49ba5b17c",
+      "segmentType": "label_value",
+      "labelText": "휴학생은 OCU 및 E-learning, 융합교과목을 제외한 현장수업 교과목 수강 가능",
+      "bodyText": "※ 휴학생은 OCU 및 E-learning, 융합교과목을 제외한 현장수업 교과목 수강 가능",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [
+        "enrollment_status:on_leave"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 휴학생은 OCU 및 E-learning, 융합교과목을 제외한 현장수업 교과목 수강 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-123dc6ab46911175",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "○ 재이수, 부전공 및 복수전공을 희망하는 자",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 재이수, 부전공 및 복수전공을 희망하는 자"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-08c3e391d9374080",
+      "segmentType": "label_value",
+      "labelText": "○ 수강 절차",
+      "bodyText": "○ 수강 절차 : 소속 학과(부)장의 수강지도를 받은 후 학내 홈페이지의 “하계 계절수업 수강신청 배너”를 통해 본인이 직접 수강 신청",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 수강 절차 : 소속 학과(부)장의 수강지도를 받은 후 학내 홈페이지의 “하계 계절수업 수강신청 배너”를 통해 본인이 직접 수강 신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-37d8f124feb68f20",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "□ 환불대상",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 환불대상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f3802a01c62c9216",
+      "segmentType": "label_value",
+      "labelText": "○ 수강신청 과목이 폐강된 경우",
+      "bodyText": "○ 수강신청 과목이 폐강된 경우",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 수강신청 과목이 폐강된 경우"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-02897644b86575e6",
+      "segmentType": "label_value",
+      "labelText": "○ 수강신청 취소자인 경우(질병, 군입대, 인턴, 취직 등의 사유)",
+      "bodyText": "○ 수강신청 취소자인 경우(질병, 군입대, 인턴, 취직 등의 사유)",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration_cancellation",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 수강신청 취소자인 경우(질병, 군입대, 인턴, 취직 등의 사유)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1f8c9317580e5bd1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "□ 환불방법 : 수강 취소 신청 후 본인 명의 계좌로 입금",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 환불방법 : 수강 취소 신청 후 본인 명의 계좌로 입금"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d80ad00de447d1ff",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "□ 유의사항",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "□ 유의사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-45e632ce2851c2a1",
+      "segmentType": "label_value",
+      "labelText": "○ 수강학점은 매 계절수업당 6학점 초과 불가",
+      "bodyText": "○ 수강학점은 매 계절수업당 6학점 초과 불가",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 수강학점은 매 계절수업당 6학점 초과 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1ed897f6c0f60aff",
+      "segmentType": "label_value",
+      "labelText": "○ 방송·통신수업(OCU, 이러닝) 교과목 포함하여 6학점 이내 신청가능",
+      "bodyText": "○ 방송·통신수업(OCU, 이러닝) 교과목 포함하여 6학점 이내 신청가능",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 방송·통신수업(OCU, 이러닝) 교과목 포함하여 6학점 이내 신청가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b241751c8e22d551",
+      "segmentType": "label_value",
+      "labelText": "○ 수강 등록인원 20명이상 시 개설 가능",
+      "bodyText": "○ 수강 등록인원 20명이상 시 개설 가능",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 수강 등록인원 20명이상 시 개설 가능"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-92c2931c6498aa7d",
+      "segmentType": "label_value",
+      "labelText": "○ 현장실습/창업실습 교과목 및 해외봉사 교과목은 해당 교과(부서) 담당자와 협의 후 신청",
+      "bodyText": "○ 현장실습/창업실습 교과목 및 해외봉사 교과목은 해당 교과(부서) 담당자와 협의 후 신청",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "○ 현장실습/창업실습 교과목 및 해외봉사 교과목은 해당 교과(부서) 담당자와 협의 후 신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e4dba7bd4e48fffe",
+      "segmentType": "label_value",
+      "labelText": "기타 자세한 사항은 각 학과 및 강릉교육지원과(033-640-2841)로 문의",
+      "bodyText": "※ 기타 자세한 사항은 각 학과 및 강릉교육지원과(033-640-2841)로 문의",
+      "sourceLocation": {
+        "lineIndex": 20,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 기타 자세한 사항은 각 학과 및 강릉교육지원과(033-640-2841)로 문의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-62ed64f91575ee7d",
+      "segmentType": "label_value",
+      "labelText": "현장실습 문의",
+      "bodyText": "- 현장실습 문의: 산학협력종합지원본부(033-640-1618) 또는 (전공실습에 한하여) 해당 전공 학과 사무실",
+      "sourceLocation": {
+        "lineIndex": 21,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 현장실습 문의: 산학협력종합지원본부(033-640-1618) 또는 (전공실습에 한하여) 해당 전공 학과 사무실"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2f138ddad40afff5",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 해외봉사 문의: 사회봉사센터(033-640-2734) - 이러닝 문의: 원격교육센터(033-250-7543)",
+      "sourceLocation": {
+        "lineIndex": 22,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 해외봉사 문의: 사회봉사센터(033-640-2734) - 이러닝 문의: 원격교육센터(033-250-7543)"
+    }
+  ],
+  "summary": {
+    "segmentCount": 24,
+    "locallyGroundedCount": 3,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 16,
+      "paragraph": 6,
+      "list_item": 1
+    }
+  }
+}

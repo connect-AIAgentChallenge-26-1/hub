@@ -1,0 +1,260 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2431",
+  "sourceContentHash": "0bef48bc092ea639ff969f28d0bbe4d3f1ca420ce2fde20733943947398b9c16",
+  "sourceTitle": "'2026년 하계(제33기) 대학생 재능봉사 캠프' 멘토팀 선발 결과 안내",
+  "publishedAt": "2026-07-03",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a6313dd80682b690",
+      "segmentType": "title",
+      "labelText": "'2026년 하계(제33기) 대학생 재능봉사 캠프' 멘토팀 선발 결과 안내",
+      "bodyText": "'2026년 하계(제33기) 대학생 재능봉사 캠프' 멘토팀 선발 결과 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "'2026년 하계(제33기) 대학생 재능봉사 캠프' 멘토팀 선발 결과 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4f715a784a7c45b1",
+      "segmentType": "label_value",
+      "labelText": "'2026년 하계(제33기) 대학생 재능봉사 캠프' 멘토팀 선발 결과 안내",
+      "bodyText": "'2026년 하계(제33기) 대학생 재능봉사 캠프' 멘토팀 선발 결과 안내",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "'2026년 하계(제33기) 대학생 재능봉사 캠프' 멘토팀 선발 결과 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-15606acdc6ec6f99",
+      "segmentType": "label_value",
+      "labelText": "모집기간",
+      "bodyText": "2026. 6. 23.(화) ~ 6. 30.(화)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-23",
+          "start": 10,
+          "end": 25
+        },
+        {
+          "value": "2026-06-30",
+          "start": 28,
+          "end": 37
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "1. 모집기간 : 2026. 6. 23.(화) ~ 6. 30.(화)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-71dbbd5d81687c3a",
+      "segmentType": "label_value",
+      "labelText": "선발인원",
+      "bodyText": "2. 선발인원 : 총 7명(1개팀)",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 선발인원 : 총 7명(1개팀)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2c1fdc389d09dac9",
+      "segmentType": "label_value",
+      "labelText": "COSMOS팀(교육학과 정O원 등 7명)",
+      "bodyText": "- COSMOS팀(교육학과 정O원 등 7명)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- COSMOS팀(교육학과 정O원 등 7명)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4fc3aa49c0d71f74",
+      "segmentType": "label_value",
+      "labelText": "선발방법",
+      "bodyText": "3. 선발방법 : 멘토모집 안내 시 공지한 팀단위 신청자 및 활동계획서 제출자 선발",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period",
+        "result_announcement",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 선발방법 : 멘토모집 안내 시 공지한 팀단위 신청자 및 활동계획서 제출자 선발"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9efbd4609ab2ec0a",
+      "segmentType": "label_value",
+      "labelText": "활동기간",
+      "bodyText": "4. 활동기간 : 2026. 7. ~ 2026. 8.(하계 방학기간 중 4~6일)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "4. 활동기간 : 2026. 7. ~ 2026. 8.(하계 방학기간 중 4~6일)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-76ffa362bf418821",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 1일 최대 8시간/총 30시간 이상 멘토링프로그램 진행",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 1일 최대 8시간/총 30시간 이상 멘토링프로그램 진행"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-391f4d295f926404",
+      "segmentType": "label_value",
+      "labelText": "* 캠프 세부일정은 멘토팀과 참여기관 간 협의에 따라 확정",
+      "bodyText": "* 캠프 세부일정은 멘토팀과 참여기관 간 협의에 따라 확정",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 캠프 세부일정은 멘토팀과 참여기관 간 협의에 따라 확정"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d6b29ac2b0c06d07",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 기타사항",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 기타사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-020ff5d943f8d199",
+      "segmentType": "label_value",
+      "labelText": "(매우 중요)선발된 멘토는 한국장학재단의 온라인 사전교육 필수 이수!!!!",
+      "bodyText": "- (매우 중요)선발된 멘토는 한국장학재단의 온라인 사전교육 필수 이수!!!!",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- (매우 중요)선발된 멘토는 한국장학재단의 온라인 사전교육 필수 이수!!!!"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-adcb46b9306edd25",
+      "segmentType": "label_value",
+      "labelText": "캠프 운영관련 세부사항은 향후 별도의 커뮤니티를 통해 단계별로 안내 예정",
+      "bodyText": "- 캠프 운영관련 세부사항은 향후 별도의 커뮤니티를 통해 단계별로 안내 예정",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 캠프 운영관련 세부사항은 향후 별도의 커뮤니티를 통해 단계별로 안내 예정"
+    }
+  ],
+  "summary": {
+    "segmentCount": 12,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 9,
+      "list_item": 2
+    }
+  }
+}

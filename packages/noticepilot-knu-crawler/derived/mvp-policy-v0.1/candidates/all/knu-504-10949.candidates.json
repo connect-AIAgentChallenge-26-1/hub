@@ -1,0 +1,714 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10949",
+  "sourceContentHash": "b3993f0c7fd9a46af81d9d8c99ff7ac3352fde6ce913a4fdea220d8bb4b4820b",
+  "sourceTitle": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10949&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "강릉 원주",
+    "campuses": [
+      "gangneung_wonju"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "gangneung_wonju": "강릉원주"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10949-d0b19d160ccaf4",
+      "uidHint": "noticepilot-cand-knu-504-10949-d0b19d160ccaf4@noticepilot.local",
+      "sourceNoticeId": "knu-504-10949",
+      "sourceTitle": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10949&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-01f4b4e671f8cd41",
+        "segmentType": "label_value",
+        "labelText": "( ※ 교원자격증 취득을 희망하는 지원자는",
+        "bodyText": "2026. 5. 4.(월) ~ 5. 8.(금) 18:00까지 해당 전공학과와 상의하여 \"전공 및 교직과정 학점인정원\" 확인 받고 서류를 준비하여, 관련서류를 우편으로 제출하셔야 합니다.)",
+        "sourceLocation": {
+          "lineIndex": 2,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "submission_period",
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-04",
+            "start": 24,
+            "end": 38
+          },
+          {
+            "value": "2026-05-08",
+            "start": 41,
+            "end": 49
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "( ※ 교원자격증 취득을 희망하는 지원자는",
+          "( ※ 교원자격증 취득을 희망하는 지원자는 2026. 5. 4.(월) ~ 5. 8.(금) 18:00까지 해당 전공학과와 상의하여 \"전공 및 교직과정 학점인정원\" 확인 받고 서류를 준비하여, 관련",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-d53087c81c70747f",
+        "segmentId": "seg-01f4b4e671f8cd41",
+        "rawText": "2026. 5. 4.(월) ~ 5. 8.(금) 18:00까지 해당 전공학과와 상의하여 \"전공 및 교직과정 학점",
+        "normalizedStart": "2026-05-04T00:00:00+09:00",
+        "normalizedEnd": "2026-05-08T18:00:00+09:00",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 24,
+          "end": 49
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-7fa5d19e404c936a",
+        "sourceNoticeId": "knu-504-10949",
+        "segmentId": "seg-01f4b4e671f8cd41",
+        "temporalMentionIds": [
+          "tm-d53087c81c70747f"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "( ※ 교원자격증 취득을 희망하는 지원자는",
+        "evidence": "( ※ 교원자격증 취득을 희망하는 지원자는 2026. 5. 4.(월) ~ 5. 8.(금) 18:00까지 해당 전공학과와 상의하여 \"전공 및 교직과정 학점인정원\" 확인 받고 서류를 준비하여, 관련서류를 우편으로 제출하셔야 합니다.)"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 안내 진행 기간",
+      "dateText": "2026. 5. 4.(월) ~ 5. 8.(금) 18:00까지 해당 전공학과와 상의하여 \"전공 및 교직과정 학점",
+      "normalizedStart": "2026-05-04T00:00:00+09:00",
+      "normalizedEnd": "2026-05-08T18:00:00+09:00",
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "( ※ 교원자격증 취득을 희망하는 지원자는 2026. 5. 4.(월) ~ 5. 8.(금) 18:00까지 해당 전공학과와 상의하여 \"전공 및 교직과정 학점인정원\" 확인 받고 서류를 준비하여, 관련서류를 우편으로 제출하셔야 합니다.)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "start_of_day_assumed_for_timed_range",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": "start_of_day_assumed_for_timed_range"
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "start_of_day_assumed_for_timed_range",
+          "structured_segment_grounded",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10949-2155d7c7ab4088",
+      "uidHint": "noticepilot-cand-knu-504-10949-2155d7c7ab4088@noticepilot.local",
+      "sourceNoticeId": "knu-504-10949",
+      "sourceTitle": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10949&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-ab41a731c812a9f5",
+        "segmentType": "label_value",
+        "labelText": "인터넷 원서접수 기간",
+        "bodyText": "2026. 5. 12.(화) 09:00부터 ~ 5. 18.(월) 18:00까지",
+        "sourceLocation": {
+          "lineIndex": 1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-05-12",
+            "start": 16,
+            "end": 31
+          },
+          {
+            "value": "2026-05-18",
+            "start": 42,
+            "end": 51
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "인터넷 원서접수 기간",
+          "가. 인터넷 원서접수 기간: 2026. 5. 12.(화) 09:00부터 ~ 5. 18.(월) 18:00까지",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-529db3c9510186db",
+        "segmentId": "seg-ab41a731c812a9f5",
+        "rawText": "5. 18.(월)",
+        "normalizedStart": "2026-05-18T18:00:00+09:00",
+        "normalizedEnd": null,
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 16,
+          "end": 51
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-4caaccd0cb317251",
+        "sourceNoticeId": "knu-504-10949",
+        "segmentId": "seg-ab41a731c812a9f5",
+        "temporalMentionIds": [
+          "tm-529db3c9510186db"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "인터넷 원서접수 기간",
+        "evidence": "가. 인터넷 원서접수 기간: 2026. 5. 12.(화) 09:00부터 ~ 5. 18.(월) 18:00까지"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 안내 신청 마감",
+      "dateText": "5. 18.(월)",
+      "normalizedStart": "2026-05-18T18:00:00+09:00",
+      "normalizedEnd": null,
+      "endDateInclusive": false,
+      "isAllDay": false,
+      "evidence": "가. 인터넷 원서접수 기간: 2026. 5. 12.(화) 09:00부터 ~ 5. 18.(월) 18:00까지",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "structured_segment_grounded",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10949-47018b32387ddd",
+      "uidHint": "noticepilot-cand-knu-504-10949-47018b32387ddd@noticepilot.local",
+      "sourceNoticeId": "knu-504-10949",
+      "sourceTitle": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10949&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "result_announcement",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-2782635417ca255d",
+        "segmentType": "continuation",
+        "labelText": "합격자 발표일 - (특별전형, 일반전형)",
+        "bodyText": "2026. 6. 29.(월) 예정",
+        "sourceLocation": {
+          "lineIndex": 5,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-23d5230f92cfd1e1"
+        },
+        "actionSignals": [
+          "result_announcement"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-29",
+            "start": 26,
+            "end": 41
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "result_announcement",
+      "semanticClassification": {
+        "eventType": "result_announcement",
+        "actionType": null,
+        "temporalRole": "result_announcement",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "합격자 발표일 - (특별전형, 일반전형)",
+          "다. 합격자 발표일 - (특별전형, 일반전형) 2026. 6. 29.(월) 예정",
+          "semantic.temporal_role.result_announcement"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-b34821669bdfaf18",
+        "segmentId": "seg-2782635417ca255d",
+        "rawText": "2026. 6. 29.(월)",
+        "normalizedStart": "2026-06-29",
+        "normalizedEnd": "2026-06-29",
+        "resolutionKind": "absolute_single",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 26,
+          "end": 41
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-6017a5197901e988",
+        "sourceNoticeId": "knu-504-10949",
+        "segmentId": "seg-2782635417ca255d",
+        "temporalMentionIds": [
+          "tm-b34821669bdfaf18"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "합격자 발표일 - (특별전형, 일반전형)",
+        "evidence": "다. 합격자 발표일 - (특별전형, 일반전형) 2026. 6. 29.(월) 예정"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 안내 결과 발표 예정",
+      "dateText": "2026. 6. 29.(월)",
+      "normalizedStart": "2026-06-29",
+      "normalizedEnd": "2026-06-29",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "다. 합격자 발표일 - (특별전형, 일반전형) 2026. 6. 29.(월) 예정",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "structured_segment_grounded"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "structured_segment_grounded"
+      ],
+      "dateResolution": {
+        "kind": "absolute_single",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "structured_segment_grounded"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.result_announcement",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10949-b3b6ef3b3a9413",
+      "uidHint": "noticepilot-cand-knu-504-10949-b3b6ef3b3a9413@noticepilot.local",
+      "sourceNoticeId": "knu-504-10949",
+      "sourceTitle": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10949&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "강릉 원주",
+        "campuses": [
+          "gangneung_wonju"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "gangneung_wonju": "강릉원주"
+        }
+      },
+      "eventType": "academic_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-62265b86e5ccc784",
+        "segmentType": "label_value",
+        "labelText": "합격자 등록기간",
+        "bodyText": "2026. 7. 27.(월) ~ 7. 29.(수)",
+        "sourceLocation": {
+          "lineIndex": 7,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-07-27",
+            "start": 13,
+            "end": 28
+          },
+          {
+            "value": "2026-07-29",
+            "start": 31,
+            "end": 40
+          }
+        ],
+        "locallyGrounded": false
+      },
+      "temporalRole": "conditional_followup",
+      "semanticClassification": {
+        "eventType": "academic_period",
+        "actionType": null,
+        "temporalRole": "conditional_followup",
+        "confidence": "medium",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "합격자 등록기간",
+          "라. 합격자 등록기간: 2026. 7. 27.(월) ~ 7. 29.(수)",
+          "semantic.temporal_role.conditional_followup"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-5d3571f41c5cf3c4",
+        "segmentId": "seg-62265b86e5ccc784",
+        "rawText": "2026. 7. 27.(월) ~ 7. 29.(수)",
+        "normalizedStart": "2026-07-27",
+        "normalizedEnd": "2026-07-29",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 13,
+          "end": 40
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-2bc777e1906af430",
+        "sourceNoticeId": "knu-504-10949",
+        "segmentId": "seg-62265b86e5ccc784",
+        "temporalMentionIds": [
+          "tm-5d3571f41c5cf3c4"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "medium",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": false,
+        "labelText": "합격자 등록기간",
+        "evidence": "라. 합격자 등록기간: 2026. 7. 27.(월) ~ 7. 29.(수)"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "2026학년도 후기 교육대학원(강릉·원주) 신입생 모집 안내 진행 기간",
+      "dateText": "2026. 7. 27.(월) ~ 7. 29.(수)",
+      "normalizedStart": "2026-07-27",
+      "normalizedEnd": "2026-07-29",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "라. 합격자 등록기간: 2026. 7. 27.(월) ~ 7. 29.(수)",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "conditional_selected_participant_action",
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "reasonCodes": [
+        "conditional_selected_participant_action",
+        "mixed_audience",
+        "structured_segment_grounded",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "conditional",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "medium",
+        "ruleId": "applicability.conditional.selected_participant",
+        "reasonCodes": [
+          "conditional_selected_participant_action",
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "conditional_selected_participant_action",
+          "mixed_audience",
+          "structured_segment_grounded",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.conditional_selected_participant_action",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.conditional_followup",
+          "publishability.temporal_role.conditional_followup.review",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 4,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 4,
+    "calendarFeedIncludedCount": 0
+  }
+}

@@ -1,0 +1,376 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-719-3937",
+  "sourceContentHash": "6d351390c3d6d7fd5d72b314e90762dce656cf96098ee74b503fbfb85747c658",
+  "sourceTitle": "2026년 제5회 에이프캠프（APE CAMP） 국내 참여자 오픈콜 공고문",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=3937&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천 삼척",
+    "campuses": [
+      "chuncheon",
+      "samcheok"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천",
+      "samcheok": "삼척"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-719-3937-b21cfe19f39fb2",
+      "uidHint": "noticepilot-cand-knu-719-3937-b21cfe19f39fb2@noticepilot.local",
+      "sourceNoticeId": "knu-719-3937",
+      "sourceTitle": "2026년 제5회 에이프캠프（APE CAMP） 국내 참여자 오픈콜 공고문",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=3937&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-3339b9df47969869",
+        "segmentType": "continuation",
+        "labelText": "캠프 필수 일정 참여 - （필수 참석）",
+        "bodyText": "6월 13일（토） ~ 6월 15일（월） 2박 3일간 진행되는 메인 프로그램 전 일정",
+        "sourceLocation": {
+          "lineIndex": 12,
+          "clauseIndex": 0,
+          "parentSegmentId": "seg-0d9e33e883fe8f71"
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-13",
+            "start": 24,
+            "end": 33
+          },
+          {
+            "value": "2026-06-15",
+            "start": 36,
+            "end": 45
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "캠프 필수 일정 참여 - （필수 참석）",
+          "• 캠프 필수 일정 참여 - （필수 참석） 6월 13일（토） ~ 6월 15일（월） 2박 3일간 진행되는 메인 프로그램 전 일정",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-33aaf279e8db54bd",
+        "segmentId": "seg-3339b9df47969869",
+        "rawText": "6월 13일（토） ~ 6월 15일（월） 2박 3일간 진행되는 메인 프로그램 전 일정",
+        "normalizedStart": "2026-06-13",
+        "normalizedEnd": "2026-06-15",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 24,
+          "end": 45
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-ae6b9ca4be32dd86",
+        "sourceNoticeId": "knu-719-3937",
+        "segmentId": "seg-3339b9df47969869",
+        "temporalMentionIds": [
+          "tm-33aaf279e8db54bd"
+        ],
+        "bindingKind": "continuation_owner",
+        "confidence": "high",
+        "ruleId": "binding.continuation_owner",
+        "locallyGrounded": true,
+        "labelText": "캠프 필수 일정 참여 - （필수 참석）",
+        "evidence": "• 캠프 필수 일정 참여 - （필수 참석） 6월 13일（토） ~ 6월 15일（월） 2박 3일간 진행되는 메인 프로그램 전 일정"
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026년 제5회 에이프캠프（APE CAMP） 국내 참여자 오픈콜 공고문 행사 기간",
+      "dateText": "6월 13일（토） ~ 6월 15일（월） 2박 3일간 진행되는 메인 프로그램 전 일정",
+      "normalizedStart": "2026-06-13",
+      "normalizedEnd": "2026-06-15",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "• 캠프 필수 일정 참여 - （필수 참석） 6월 13일（토） ~ 6월 15일（월） 2박 3일간 진행되는 메인 프로그램 전 일정",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-719-3937-2a39a09a0abfe2",
+      "uidHint": "noticepilot-cand-knu-719-3937-2a39a09a0abfe2@noticepilot.local",
+      "sourceNoticeId": "knu-719-3937",
+      "sourceTitle": "2026년 제5회 에이프캠프（APE CAMP） 국내 참여자 오픈콜 공고문",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/719/detail.do?pstSn=3937&pageIndex=5&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "competition",
+      "campusScope": {
+        "sourceLabel": "춘천 삼척",
+        "campuses": [
+          "chuncheon",
+          "samcheok"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천",
+          "samcheok": "삼척"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-b48400f485832919",
+        "segmentType": "paragraph",
+        "labelText": "",
+        "bodyText": "6월 13일（토）부터 6월 16일（화）까지 3박 4일간 개최될 ‘에이프캠프（APE CAMP） 2026’의 국내 참여자를 모집합니다.",
+        "sourceLocation": {
+          "lineIndex": 1,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period",
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-06-13",
+            "start": 16,
+            "end": 25
+          },
+          {
+            "value": "2026-06-16",
+            "start": 28,
+            "end": 37
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "한국문화예술위원회는 다가오는 6월 13일（토）부터 6월 16일（화）까지 3박 4일간 개최될 ‘에이프캠프（APE CAMP） 2026’의 국내 참여자를 모집합니다.",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-a1d0e2fa9ccfedb5",
+        "segmentId": "seg-b48400f485832919",
+        "rawText": "6월 13일（토）부터 6월 16일（화）까지 3박 4일간 개최될 ‘에이프캠프（APE CAMP） 2026’",
+        "normalizedStart": "2026-06-13",
+        "normalizedEnd": "2026-06-16",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": true,
+        "span": {
+          "start": 16,
+          "end": 37
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-907a8a837ad69d6f",
+        "sourceNoticeId": "knu-719-3937",
+        "segmentId": "seg-b48400f485832919",
+        "temporalMentionIds": [
+          "tm-a1d0e2fa9ccfedb5"
+        ],
+        "bindingKind": "same_paragraph",
+        "confidence": "high",
+        "ruleId": "binding.same_paragraph",
+        "locallyGrounded": true,
+        "labelText": "",
+        "evidence": "한국문화예술위원회는 다가오는 6월 13일（토）부터 6월 16일（화）까지 3박 4일간 개최될 ‘에이프캠프（APE CAMP） 2026’의 국내 참여자를 모집합니다."
+      },
+      "targetActor": "student",
+      "feedScopes": [
+        "student_default"
+      ],
+      "title": "2026년 제5회 에이프캠프（APE CAMP） 국내 참여자 오픈콜 공고문 신청기간",
+      "dateText": "6월 13일（토）부터 6월 16일（화）까지 3박 4일간 개최될 ‘에이프캠프（APE CAMP） 2026’",
+      "normalizedStart": "2026-06-13",
+      "normalizedEnd": "2026-06-16",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "한국문화예술위원회는 다가오는 6월 13일（토）부터 6월 16일（화）까지 3박 4일간 개최될 ‘에이프캠프（APE CAMP） 2026’의 국내 참여자를 모집합니다.",
+      "confidence": "medium",
+      "uncertaintyReasons": [],
+      "reasonCodes": [
+        "same_datetime_candidates_consolidated",
+        "structured_segment_grounded",
+        "student_audience",
+        "year_inferred_from_published_at"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": true,
+        "calculationPolicy": null
+      },
+      "status": "auto_confirmed",
+      "includeInCalendarFeed": true,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "student",
+        "scope": "unrestricted",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "high",
+        "ruleId": "applicability.actor.student",
+        "reasonCodes": [
+          "student_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "auto_confirmed",
+        "includeInCalendarFeed": true,
+        "reasonCodes": [
+          "same_datetime_candidates_consolidated",
+          "structured_segment_grounded",
+          "student_audience",
+          "year_inferred_from_published_at"
+        ],
+        "ruleIds": [
+          "publishability.audience.student.auto_confirm",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.auto_confirmed"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 2,
+    "needsReviewCount": 0,
+    "calendarFeedIncludedCount": 2
+  }
+}

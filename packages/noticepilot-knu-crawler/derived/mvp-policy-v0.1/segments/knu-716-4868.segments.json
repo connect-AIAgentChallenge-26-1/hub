@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4868",
+  "sourceContentHash": "47bf6228b3171cc831d282a50deb60b1de9201143769c5b6aa5c1788327710b7",
+  "sourceTitle": "강원대학교 스마트인프라연구 연구교수 채용 공고",
+  "publishedAt": "2026-06-22",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1501afe846e7d12d",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "강원대학교 스마트인프라연구 연구교수 채용 공고",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 스마트인프라연구 연구교수 채용 공고"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0472907b6d9c8809",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 문의처: 스마트인프라연구소 행정지원실(033-640-2974)",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 문의처: 스마트인프라연구소 행정지원실(033-640-2974)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9186326fc115193c",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "붙임 1. 연구교수 채용공고문 1부",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "붙임 1. 연구교수 채용공고문 1부"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2f8ebc3a8b97f718",
+      "segmentType": "label_value",
+      "labelText": "지원서류 서식 1부",
+      "bodyText": "2. 지원서류 서식 1부",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 지원서류 서식 1부"
+    }
+  ],
+  "summary": {
+    "segmentCount": 4,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "list_item": 1,
+      "paragraph": 1,
+      "label_value": 1
+    }
+  }
+}

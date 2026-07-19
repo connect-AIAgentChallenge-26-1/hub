@@ -1,0 +1,115 @@
+{
+  "checks": {
+    "bootstrapAtomic": true,
+    "bootstrapIdempotent": true,
+    "changedNoticeEnqueuesExtraction": true,
+    "etag304": true,
+    "fullCorpusReplayUnchanged": true,
+    "persistentUidFeedRendered": true,
+    "rawTokenPersisted": false,
+    "relationalIntegrity": true
+  },
+  "counts": {
+    "calendar_event": 900,
+    "calendar_event_candidate": 1304,
+    "calendar_event_revision": 901,
+    "calendar_event_source_link": 909,
+    "candidate_event_assignment": 909,
+    "changedSimulationOutboxCount": 1,
+    "cross_notice_relation_decision": 343,
+    "extraction_run": 2059,
+    "feed_snapshot": 2,
+    "feed_snapshot_event": 900,
+    "fullCorpusReplayNoticeCount": 2059,
+    "fullCorpusReplayOutboxCount": 0,
+    "jobRenderedEventCount": 299,
+    "source_notice": 2059,
+    "studentRenderedEventCount": 601,
+    "subscriptionFeedCount": 2,
+    "subscription_profile_head": 2,
+    "subscription_profile_revision": 2
+  },
+  "deferred": {
+    "liveConnectionPoolAndProcessSupervision": true,
+    "livePostgresMigrationExecution": true,
+    "physicalCalendarClientQA": "S30",
+    "productionSecretAndBaseUrlConfiguration": true
+  },
+  "environment": {
+    "liveDatabaseExecutionPerformed": false,
+    "livePostgresAvailable": false,
+    "postgresDriverAvailable": false
+  },
+  "errors": [],
+  "migration": {
+    "executedAgainstLivePostgres": false,
+    "livePostgresReason": "postgres_server_and_python_driver_unavailable_in_execution_environment",
+    "path": "migrations/postgresql/0001_s29_initial.sql",
+    "sha256": "a542301b0630c17a27169b4412f439f54f133c2d95b08a01d39e188b9ce8c759",
+    "validatedStatically": true,
+    "version": "0001_s29_initial"
+  },
+  "result": "pass",
+  "runtimeManifest": {
+    "artifacts": {
+      "bootstrap-manifest.json": {
+        "path": "bootstrap-manifest.json",
+        "sha256": "05e46c057f1b9a2f1a27da2693c2229fcebfe5cdfe064ddb9afa78113e82d0a2"
+      },
+      "incremental-replay-report.json": {
+        "path": "incremental-replay-report.json",
+        "sha256": "79019d077dd6772d970c217f8ed9a544a810efba67f6812d014dfbb2c390a157"
+      },
+      "reference-subscription-feeds.json": {
+        "path": "reference-subscription-feeds.json",
+        "sha256": "0e3ed89b5aec3adade447f27046341f6ead2cdae2ce1e3c9e08325aff048393c"
+      }
+    },
+    "bootstrap": {
+      "bundleSha256": "993cf03aeafed649e67a6bbe5c91353df9494ff1b2207f02234862b337bc2194",
+      "counts": {
+        "calendar_event": 900,
+        "calendar_event_candidate": 1304,
+        "calendar_event_revision": 901,
+        "calendar_event_source_link": 909,
+        "candidate_event_assignment": 909,
+        "cross_notice_relation_decision": 343,
+        "extraction_run": 2059,
+        "feed_snapshot": 2,
+        "feed_snapshot_event": 900,
+        "source_notice": 2059,
+        "subscription_profile_head": 2,
+        "subscription_profile_revision": 2
+      },
+      "idempotentSecondInsert": true
+    },
+    "createdAt": "2026-07-13T20:30:00+09:00",
+    "delivery": {
+      "etag304Verified": true,
+      "eventCounts": [
+        601,
+        299
+      ],
+      "feedCount": 2,
+      "rawTokenPersisted": false,
+      "wsgiReadEndpointImplemented": true
+    },
+    "incrementalRuntime": {
+      "contentChangedSimulation": true,
+      "durableOutbox": true,
+      "fullCorpusUnchangedReplay": true
+    },
+    "manifestHash": "6a4b783e305a17fa56530a38be1fc91a2c6320762b66515346ebd37c12210640",
+    "migration": {
+      "executedAgainstLivePostgres": false,
+      "livePostgresReason": "postgres_server_and_python_driver_unavailable_in_execution_environment",
+      "path": "migrations/postgresql/0001_s29_initial.sql",
+      "sha256": "a542301b0630c17a27169b4412f439f54f133c2d95b08a01d39e188b9ce8c759",
+      "validatedStatically": true,
+      "version": "0001_s29_initial"
+    },
+    "runtimeVersion": "0.1.0",
+    "schemaVersion": "noticepilot.s29RuntimeManifest.v0.1"
+  },
+  "schemaVersion": "noticepilot.s29PostgresRuntimeAudit.v0.1"
+}

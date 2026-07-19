@@ -1,0 +1,249 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-716-4872",
+  "sourceContentHash": "9e1b9818b88e870ab0972418a92cb68d01a64a11474f99c1244b68abb23c8b2c",
+  "sourceTitle": "강원대학교 전입희망자 모집 공고(전산)",
+  "publishedAt": "2026-06-24",
+  "extractor": {
+    "version": "0.1.15",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cf986e79118e26f3",
+      "segmentType": "title",
+      "labelText": "강원대학교 전입희망자 모집 공고(전산)",
+      "bodyText": "강원대학교 전입희망자 모집 공고(전산)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 전입희망자 모집 공고(전산)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ee10670af3f96d1c",
+      "segmentType": "label_value",
+      "labelText": "강원대학교에서는 다음과 같이 전입희망자를 공개 모집하오니 역량 있고 창의적인 인재들의 많은 지원 바랍니다.",
+      "bodyText": "강원대학교에서는 다음과 같이 전입희망자를 공개 모집하오니 역량 있고 창의적인 인재들의 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교에서는 다음과 같이 전입희망자를 공개 모집하오니 역량 있고 창의적인 인재들의 많은 지원 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2e054b0fb2c95c57",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "ㅇ 채용분야: 전산9급(1명)",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ 채용분야: 전산9급(1명)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-758ad1276a867cac",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "ㅇ 근무지역: 춘천",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ 근무지역: 춘천"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-8e1b20c3f510f33b",
+      "segmentType": "label_value",
+      "labelText": "ㅇ 접수기간",
+      "bodyText": "2026. 6. 25.(목) ~ 7. 6.(월)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-25",
+          "start": 8,
+          "end": 23
+        },
+        {
+          "value": "2026-07-06",
+          "start": 26,
+          "end": 34
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "ㅇ 접수기간: 2026. 6. 25.(목) ~ 7. 6.(월)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-c28ab63c87b5b54a",
+      "segmentType": "label_value",
+      "labelText": "ㅇ 선발방법",
+      "bodyText": "ㅇ 선발방법: 서류, 면접",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ 선발방법: 서류, 면접"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a9e85686b2de3eb7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "ㅇ 응시방법: 등기우편 접수 및 방문접수",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ 응시방법: 등기우편 접수 및 방문접수"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a02ddf0b3f636fd7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "ㅇ 문 의 처: 강원대학교 총무과(033-250-7015)",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "ㅇ 문 의 처: 강원대학교 총무과(033-250-7015)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1a358a21691e55c7",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026. 6. 24.",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-24",
+          "start": 0,
+          "end": 11
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "2026. 6. 24."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-95dfc3360373bf19",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교총장",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교총장"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-board716-bc1125e80eb21470",
+      "segmentType": "label_value",
+      "labelText": "접수기간",
+      "bodyText": "2026-06-25~2026-07-06",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-25",
+          "start": 14,
+          "end": 24
+        },
+        {
+          "value": "2026-07-06",
+          "start": 25,
+          "end": 35
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "채용안내 목록 접수기간: 2026-06-25~2026-07-06"
+    }
+  ],
+  "summary": {
+    "segmentCount": 11,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "label_value": 4,
+      "paragraph": 6,
+      "title": 1
+    }
+  }
+}

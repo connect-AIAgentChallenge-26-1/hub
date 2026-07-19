@@ -1,0 +1,354 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-11082",
+  "sourceContentHash": "10b219554fb4b1ee747a9fbef0bf93ee4421dff9ac231e11c3df8aa3d5bf1523",
+  "sourceTitle": "[2026 강원대학교 여름학기 외국어 특강 안내]",
+  "publishedAt": "2026-06-04",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e338e25841db120c",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "[2026 강원대학교 여름학기 외국어 특강 안내]",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[2026 강원대학교 여름학기 외국어 특강 안내]"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f45e505ed99f4d20",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "안녕하세요.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "안녕하세요."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-fd1d57cb3ea0f59d",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 춘천기획지원과입니다.",
+      "bodyText": "강원대학교 춘천기획지원과입니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 춘천기획지원과입니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-525170b49035a605",
+      "segmentType": "label_value",
+      "labelText": "공인 어학 시험 준비 중인 모든 강원대 재학생들을 위한 “여름학기 외국어 특강”을 안내드립니다.",
+      "bodyText": "공인 어학 시험 준비 중인 모든 강원대 재학생들을 위한 “여름학기 외국어 특강”을 안내드립니다.",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview",
+        "event"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "공인 어학 시험 준비 중인 모든 강원대 재학생들을 위한 “여름학기 외국어 특강”을 안내드립니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-56b0a419dd4f43a1",
+      "segmentType": "label_value",
+      "labelText": "아래 링크 접속하여, 특강 과목 및 일정 확인 후, 특강 참여 희망하는 학생들은 신청해주시길 바랍니다.",
+      "bodyText": "아래 링크 접속하여, 특강 과목 및 일정 확인 후, 특강 참여 희망하는 학생들은 신청해주시길 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "아래 링크 접속하여, 특강 과목 및 일정 확인 후, 특강 참여 희망하는 학생들은 신청해주시길 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7299a9fc7c49a1b6",
+      "segmentType": "continuation",
+      "labelText": "일정",
+      "bodyText": "6/29(월)~7/23(목) (강좌별 상이)",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-56b0a419dd4f43a1"
+      },
+      "actionSignals": [
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-29",
+          "start": 66,
+          "end": 73
+        },
+        {
+          "value": "2026-07-23",
+          "start": 74,
+          "end": 81
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "아래 링크 접속하여, 특강 과목 및 일정 확인 후, 특강 참여 희망하는 학생들은 신청해주시길 바랍니다. 1. 일정 : 6/29(월)~7/23(목) (강좌별 상이)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-cb98161738dd6c05",
+      "segmentType": "label_value",
+      "labelText": "일정",
+      "bodyText": "6/29(월)~7/23(목) (강좌별 상이)",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-29",
+          "start": 8,
+          "end": 15
+        },
+        {
+          "value": "2026-07-23",
+          "start": 16,
+          "end": 23
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "1. 일정 : 6/29(월)~7/23(목) (강좌별 상이)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-abc72a97dd9ec572",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 강좌 : 대면 토익 입문반, 대면 토익 종합반, 비대면 토익 650+ 집중캠프반, 비대면 토익 750+ 집중캠프반, 비대면 토익 850+ 집중캠프반, 비대면 토익 600반, 비대면 토익 700반, 비대면 토익 800반, 비대면 토익 실전문제풀이 공략반, 비대면 토익스피킹 IM3, 비대면 오픽 IM3, 비대면 토플 80+ LR, 비대면 토플 80+ SW, 비대면 아이엘츠 6.5+ LR",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 강좌 : 대면 토익 입문반, 대면 토익 종합반, 비대면 토익 650+ 집중캠프반, 비대면 토익 750+ 집중캠프반, 비대면 토익 850+ 집중캠프반, 비대면 토익 600반, 비대면 토익 700반, 비대면 토익 800반, 비대면 토익 실전문제풀이 공략반, 비대면 토익스피킹 IM3, 비대면 오픽 IM3, 비대면 토플 80+ LR, 비대면 토플 80+ SW, 비대면 아이엘츠 6.5+ LR"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2a02899f62c5f666",
+      "segmentType": "label_value",
+      "labelText": "수강 혜택",
+      "bodyText": "3. 수강 혜택",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 수강 혜택"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-30fb376803f0f348",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 강의 녹화본/강좌 연계 동영상 강의 제공",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 강의 녹화본/강좌 연계 동영상 강의 제공"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9778705439372f53",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "- 최신 경향의 모의테스트 2회 제공(강좌별 상이)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 최신 경향의 모의테스트 2회 제공(강좌별 상이)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a1fa4a2b1f041a37",
+      "segmentType": "label_value",
+      "labelText": "우수자 장학금 지급",
+      "bodyText": "- 우수자 장학금 지급",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "- 우수자 장학금 지급"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5f304c028066503b",
+      "segmentType": "label_value",
+      "labelText": "자세한 사항은 아래 링크를 참고하여서 신청해주세요~",
+      "bodyText": "자세한 사항은 아래 링크를 참고하여서 신청해주세요~",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "자세한 사항은 아래 링크를 참고하여서 신청해주세요~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-14ab617607325a49",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "▶클릭◀",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "▶클릭◀"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d47cda47e66e1ee2",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "https://info.english.co.kr/brochure/1523",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "https://info.english.co.kr/brochure/1523"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1b48897b7fd1a07e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "문의 : 📞 033-250-7936 / 카카오톡 채널 @강원대기획지원과",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "문의 : 📞 033-250-7936 / 카카오톡 채널 @강원대기획지원과"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b685eab0b45dca80",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "감사합니다.",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "감사합니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 17,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 4,
+      "label_value": 7,
+      "continuation": 1,
+      "list_item": 4
+    }
+  }
+}

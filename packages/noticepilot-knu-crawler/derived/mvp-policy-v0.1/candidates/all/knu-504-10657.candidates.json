@@ -1,0 +1,368 @@
+{
+  "schemaVersion": "noticepilot.calendarCandidates.v0.11",
+  "sourceNoticeId": "knu-504-10657",
+  "sourceContentHash": "ecf46c301a4e7975dbeb82f0c87f982b37217d0332dc3eb4a94e67e78d7c055e",
+  "sourceTitle": "강원대학교 2026학년도 봄학기 원어민 외국어 회화（영어, 일어, 독어, 프랑스어） 수강생 모집 안내",
+  "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10657&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+  "timezone": "Asia/Seoul",
+  "sourceCampusScope": {
+    "sourceLabel": "춘천",
+    "campuses": [
+      "chuncheon"
+    ],
+    "scopeType": "campus_specific",
+    "confidence": "medium",
+    "source": "listMetadata.campus",
+    "labels": {
+      "chuncheon": "춘천"
+    }
+  },
+  "extractor": {
+    "version": "0.1.18",
+    "createdAt": "2026-07-12T07:26:38+00:00",
+    "mode": "structured_schedule_segment_v0.2",
+    "policyVersion": "noticepilot.studentFirstMvp.v0.1"
+  },
+  "candidates": [
+    {
+      "id": "cand-knu-504-10657-bf58a67ee29fbe",
+      "uidHint": "noticepilot-cand-knu-504-10657-bf58a67ee29fbe@noticepilot.local",
+      "sourceNoticeId": "knu-504-10657",
+      "sourceTitle": "강원대학교 2026학년도 봄학기 원어민 외국어 회화（영어, 일어, 독어, 프랑스어） 수강생 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10657&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "application_period",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-9b9372454aac254a",
+        "segmentType": "label_value",
+        "labelText": "접수기간",
+        "bodyText": "2026. 2. 25.（수） ~ 2026. 3. 17.（화）",
+        "sourceLocation": {
+          "lineIndex": 3,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "application_period"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-02-25",
+            "start": 8,
+            "end": 23
+          },
+          {
+            "value": "2026-03-17",
+            "start": 26,
+            "end": 41
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "user_action_period",
+      "semanticClassification": {
+        "eventType": "application_period",
+        "actionType": null,
+        "temporalRole": "user_action_period",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "접수기간",
+          "▶ 접수기간: 2026. 2. 25.（수） ~ 2026. 3. 17.（화）",
+          "semantic.temporal_role.user_action_period"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-dc92fa9f79781cb4",
+        "segmentId": "seg-9b9372454aac254a",
+        "rawText": "2026. 2. 25.（수） ~ 2026. 3. 17.（화）",
+        "normalizedStart": "2026-02-25",
+        "normalizedEnd": "2026-03-17",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 8,
+          "end": 41
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-6a1874325cc8b260",
+        "sourceNoticeId": "knu-504-10657",
+        "segmentId": "seg-9b9372454aac254a",
+        "temporalMentionIds": [
+          "tm-dc92fa9f79781cb4"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "접수기간",
+        "evidence": "▶ 접수기간: 2026. 2. 25.（수） ~ 2026. 3. 17.（화）"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "강원대학교 2026학년도 봄학기 원어민 외국어 회화（영어, 일어, 독어, 프랑스어） 수강생 모집 안내 신청기간",
+      "dateText": "2026. 2. 25.（수） ~ 2026. 3. 17.（화）",
+      "normalizedStart": "2026-02-25",
+      "normalizedEnd": "2026-03-17",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "▶ 접수기간: 2026. 2. 25.（수） ~ 2026. 3. 17.（화）",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "structured_segment_grounded"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "structured_segment_grounded"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "structured_segment_grounded"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.user_action_period",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    },
+    {
+      "id": "cand-knu-504-10657-9ebd6c8a504008",
+      "uidHint": "noticepilot-cand-knu-504-10657-9ebd6c8a504008@noticepilot.local",
+      "sourceNoticeId": "knu-504-10657",
+      "sourceTitle": "강원대학교 2026학년도 봄학기 원어민 외국어 회화（영어, 일어, 독어, 프랑스어） 수강생 모집 안내",
+      "sourceUrl": "https://www.kangwon.ac.kr/ko/bbs/504/detail.do?pstSn=10657&pageIndex=10&pageItm=50&searchOrderSort=0&searchGbn=0",
+      "noticeType": "general_notice",
+      "campusScope": {
+        "sourceLabel": "춘천",
+        "campuses": [
+          "chuncheon"
+        ],
+        "scopeType": "campus_specific",
+        "confidence": "medium",
+        "source": "listMetadata.campus",
+        "labels": {
+          "chuncheon": "춘천"
+        }
+      },
+      "eventType": "event",
+      "actionType": null,
+      "audienceRules": {
+        "degreeLevels": [],
+        "studentYears": [],
+        "enrollmentStatuses": [],
+        "admissionTypes": [],
+        "matchMode": "all_dimensions",
+        "personalizationReady": false,
+        "confidence": "none",
+        "evidence": []
+      },
+      "sourceSegment": {
+        "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+        "segmentId": "seg-05e3aacb8631e535",
+        "segmentType": "label_value",
+        "labelText": "강의운영기간",
+        "bodyText": "2026. 3. 24.（화） ~ 2026. 5. 29.（금）",
+        "sourceLocation": {
+          "lineIndex": 2,
+          "clauseIndex": 0,
+          "parentSegmentId": null
+        },
+        "actionSignals": [
+          "event"
+        ],
+        "audienceSignals": [],
+        "dateSpans": [
+          {
+            "value": "2026-03-24",
+            "start": 11,
+            "end": 26
+          },
+          {
+            "value": "2026-05-29",
+            "start": 29,
+            "end": 44
+          }
+        ],
+        "locallyGrounded": true
+      },
+      "temporalRole": "event_occurrence",
+      "semanticClassification": {
+        "eventType": "event",
+        "actionType": null,
+        "temporalRole": "event_occurrence",
+        "confidence": "high",
+        "ruleId": "semantic.policy15.compatible_classification",
+        "evidence": [
+          "강의운영기간",
+          "▶ 강의운영기간 : 2026. 3. 24.（화） ~ 2026. 5. 29.（금）",
+          "semantic.temporal_role.event_occurrence"
+        ]
+      },
+      "temporalMention": {
+        "schemaVersion": "noticepilot.temporalMention.v0.1",
+        "mentionId": "tm-bdc2b1ed853078b3",
+        "segmentId": "seg-05e3aacb8631e535",
+        "rawText": "2026. 3. 24.（화） ~ 2026. 5. 29.（금）",
+        "normalizedStart": "2026-03-24",
+        "normalizedEnd": "2026-05-29",
+        "resolutionKind": "absolute_range",
+        "deterministic": true,
+        "timezone": "Asia/Seoul",
+        "inferredYear": false,
+        "span": {
+          "start": 11,
+          "end": 44
+        }
+      },
+      "boundTemporalFact": {
+        "schemaVersion": "noticepilot.boundTemporalFact.v0.1",
+        "factId": "btf-f3fade41c55db5da",
+        "sourceNoticeId": "knu-504-10657",
+        "segmentId": "seg-05e3aacb8631e535",
+        "temporalMentionIds": [
+          "tm-bdc2b1ed853078b3"
+        ],
+        "bindingKind": "same_segment",
+        "confidence": "high",
+        "ruleId": "binding.same_segment",
+        "locallyGrounded": true,
+        "labelText": "강의운영기간",
+        "evidence": "▶ 강의운영기간 : 2026. 3. 24.（화） ~ 2026. 5. 29.（금）"
+      },
+      "targetActor": "mixed",
+      "feedScopes": [],
+      "title": "강원대학교 2026학년도 봄학기 원어민 외국어 회화（영어, 일어, 독어, 프랑스어） 수강생 모집 안내 행사 기간",
+      "dateText": "2026. 3. 24.（화） ~ 2026. 5. 29.（금）",
+      "normalizedStart": "2026-03-24",
+      "normalizedEnd": "2026-05-29",
+      "endDateInclusive": true,
+      "isAllDay": true,
+      "evidence": "▶ 강의운영기간 : 2026. 3. 24.（화） ~ 2026. 5. 29.（금）",
+      "confidence": "medium",
+      "uncertaintyReasons": [
+        "mixed_audience",
+        "structured_segment_grounded"
+      ],
+      "reasonCodes": [
+        "mixed_audience",
+        "structured_segment_grounded"
+      ],
+      "dateResolution": {
+        "kind": "absolute_range",
+        "inferredYear": false,
+        "calculationPolicy": null
+      },
+      "status": "needs_review",
+      "includeInCalendarFeed": false,
+      "createdBy": "structured_rule",
+      "reviewedByUser": false,
+      "applicabilityJudgment": {
+        "schemaVersion": "noticepilot.applicabilityJudgment.v0.1",
+        "targetActor": "mixed",
+        "scope": "unknown",
+        "audienceRules": {
+          "degreeLevels": [],
+          "studentYears": [],
+          "enrollmentStatuses": [],
+          "admissionTypes": [],
+          "matchMode": "all_dimensions",
+          "personalizationReady": false,
+          "confidence": "none",
+          "evidence": []
+        },
+        "confidence": "none",
+        "ruleId": "applicability.actor.mixed",
+        "reasonCodes": [
+          "mixed_audience"
+        ]
+      },
+      "publishabilityJudgment": {
+        "schemaVersion": "noticepilot.publishabilityJudgment.v0.1",
+        "verdict": "needs_review",
+        "includeInCalendarFeed": false,
+        "reasonCodes": [
+          "mixed_audience",
+          "structured_segment_grounded"
+        ],
+        "ruleIds": [
+          "publishability.audience.mixed.review",
+          "publishability.reason.mixed_audience",
+          "publishability.temporal_role.event_occurrence",
+          "publishability.verdict.needs_review"
+        ]
+      }
+    }
+  ],
+  "summary": {
+    "candidateCount": 2,
+    "autoConfirmedCount": 0,
+    "needsReviewCount": 2,
+    "calendarFeedIncludedCount": 0
+  }
+}

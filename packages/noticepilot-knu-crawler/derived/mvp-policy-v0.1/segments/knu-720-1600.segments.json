@@ -1,0 +1,441 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-720-1600",
+  "sourceContentHash": "bcb458c43943685f50ccefbdf12b97b5f357c42f1567549d17b7b57d5716f969",
+  "sourceTitle": "2026학년도 전과 합격자 발표 및 등록 안내",
+  "publishedAt": "2026-02-03",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-469ca5aaf2df1e41",
+      "segmentType": "title",
+      "labelText": "2026학년도 전과 합격자 발표 및 등록 안내",
+      "bodyText": "2026학년도 전과 합격자 발표 및 등록 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 전과 합격자 발표 및 등록 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-a14137c9310f1eb2",
+      "segmentType": "label_value",
+      "labelText": "2026학년도 전과 합격 발표 및 기타 등록·수강신청 등에 대하여 다음과 같이 안내합니다.",
+      "bodyText": "2026학년도 전과 합격 발표 및 기타 등록·수강신청 등에 대하여 다음과 같이 안내합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "major_transfer_application",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026학년도 전과 합격 발표 및 기타 등록·수강신청 등에 대하여 다음과 같이 안내합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1f1370b16adf6887",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "■ 합격여부 확인",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 합격여부 확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-94ce6f59813395d5",
+      "segmentType": "label_value",
+      "labelText": "확인기간",
+      "bodyText": "2026. 1. 30.(금) 10:00~",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-01-30",
+          "start": 6,
+          "end": 21
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "확인기간: 2026. 1. 30.(금) 10:00~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7a145f520822f238",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "확인방법: K-Cloud → 학부생서비스 → 학적 → 전과신청 및 결과확인 메뉴에서 확인",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "major_transfer_application",
+        "application_period",
+        "result_announcement"
+      ],
+      "audienceSignals": [
+        "degree_level:undergraduate"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "확인방법: K-Cloud → 학부생서비스 → 학적 → 전과신청 및 결과확인 메뉴에서 확인"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5e873ebe166cb413",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "■ 안내사항",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "■ 안내사항"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-acb71107ca4a0135",
+      "segmentType": "label_value",
+      "labelText": "● 등록 및 휴학",
+      "bodyText": "● 등록 및 휴학",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "● 등록 및 휴학"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ffc2baf49e80fb85",
+      "segmentType": "label_value",
+      "labelText": "등록금 고지서 금액은 전과한 학과 등록금액 적용",
+      "bodyText": "등록금 고지서 금액은 전과한 학과 등록금액 적용",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "등록금 고지서 금액은 전과한 학과 등록금액 적용"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-66cc0cb0ad48250f",
+      "segmentType": "label_value",
+      "labelText": "(기존 학과에 등록금을 납부한 경우 환불 처리 등은 각 캠퍼스 재무과로 문의)",
+      "bodyText": "(기존 학과에 등록금을 납부한 경우 환불 처리 등은 각 캠퍼스 재무과로 문의)",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "(기존 학과에 등록금을 납부한 경우 환불 처리 등은 각 캠퍼스 재무과로 문의)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-1a54988dad846890",
+      "segmentType": "label_value",
+      "labelText": "휴학생의 경우 학사일정에 따라 복학신청 및 등록금 납부 (미복학 시 전과 취소)",
+      "bodyText": "휴학생의 경우 학사일정에 따라 복학신청 및 등록금 납부 (미복학 시 전과 취소)",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "return_from_leave_application",
+        "payment_period",
+        "application_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:on_leave"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "휴학생의 경우 학사일정에 따라 복학신청 및 등록금 납부 (미복학 시 전과 취소)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d8643bc0d6503e49",
+      "segmentType": "label_value",
+      "labelText": "재학생의 휴학은 등록금 납부 후 개강(",
+      "bodyText": "2026.3.3.(화)) 이후부터 가능 (개강 전 휴학 시 전과 취소)",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [
+        {
+          "value": "2026-03-03",
+          "start": 21,
+          "end": 33
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "재학생의 휴학은 등록금 납부 후 개강(2026.3.3.(화)) 이후부터 가능 (개강 전 휴학 시 전과 취소)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-2fa1f4cac5306376",
+      "segmentType": "label_value",
+      "labelText": "● 수강신청",
+      "bodyText": "● 수강신청",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "● 수강신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-5b2b549aac7bf499",
+      "segmentType": "label_value",
+      "labelText": "✔ 예비 수강신청 기간",
+      "bodyText": "2026. 2. 5.(목) ~ 2. 6.(금)",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "preliminary_course_registration",
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-05",
+          "start": 14,
+          "end": 28
+        },
+        {
+          "value": "2026-02-06",
+          "start": 31,
+          "end": 39
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "✔ 예비 수강신청 기간: 2026. 2. 5.(목) ~ 2. 6.(금)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b0a5726b594c617c",
+      "segmentType": "label_value",
+      "labelText": "✔ 전과한 학과에서 학점인정 실시",
+      "bodyText": "✔ 전과한 학과에서 학점인정 실시",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "✔ 전과한 학과에서 학점인정 실시"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b554c6e4ae03f0b5",
+      "segmentType": "label_value",
+      "labelText": "✔ 전과한 학과에서 수강지도를 받아 수강신청 하여야 함",
+      "bodyText": "✔ 전과한 학과에서 수강지도를 받아 수강신청 하여야 함",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "course_registration",
+        "major_transfer_application",
+        "application_period",
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "✔ 전과한 학과에서 수강지도를 받아 수강신청 하여야 함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7e2d37b8ad8383ac",
+      "segmentType": "label_value",
+      "labelText": "✔ 기타 세부 자세한 사항은 전과한 학과사무실에 문의",
+      "bodyText": "✔ 기타 세부 자세한 사항은 전과한 학과사무실에 문의",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "✔ 기타 세부 자세한 사항은 전과한 학과사무실에 문의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-d394b27fa26745df",
+      "segmentType": "label_value",
+      "labelText": "● 전과취소",
+      "bodyText": "● 전과취소",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "● 전과취소"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7707ddaad65775df",
+      "segmentType": "label_value",
+      "labelText": "전과 취소 시에는 향후 전과 지원 불가!!!!! (미등록 및 사전 휴학에 따른 취소 포함)",
+      "bodyText": "※ 전과 취소 시에는 향후 전과 지원 불가!!!!! (미등록 및 사전 휴학에 따른 취소 포함)",
+      "sourceLocation": {
+        "lineIndex": 16,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 전과 취소 시에는 향후 전과 지원 불가!!!!! (미등록 및 사전 휴학에 따른 취소 포함)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9b8405a6b3c04d8e",
+      "segmentType": "label_value",
+      "labelText": "✔ 개강 후 전과 취소 절대 불가",
+      "bodyText": "✔ 개강 후 전과 취소 절대 불가",
+      "sourceLocation": {
+        "lineIndex": 17,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "✔ 개강 후 전과 취소 절대 불가"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-ddb35236e164db3d",
+      "segmentType": "label_value",
+      "labelText": "✔ 개강 전 전과 취소 절차는 전과한 학과로 문의 후 진행",
+      "bodyText": "✔ 개강 전 전과 취소 절차는 전과한 학과로 문의 후 진행",
+      "sourceLocation": {
+        "lineIndex": 18,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "✔ 개강 전 전과 취소 절차는 전과한 학과로 문의 후 진행"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9eef24ea8c06f4c9",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "별첨 : 학과(전과) 사무실 연락처 1부",
+      "sourceLocation": {
+        "lineIndex": 19,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "별첨 : 학과(전과) 사무실 연락처 1부"
+    }
+  ],
+  "summary": {
+    "segmentCount": 21,
+    "locallyGroundedCount": 2,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 16,
+      "paragraph": 4
+    }
+  }
+}

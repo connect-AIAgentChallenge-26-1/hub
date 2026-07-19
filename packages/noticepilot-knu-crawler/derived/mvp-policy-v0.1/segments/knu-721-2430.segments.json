@@ -1,0 +1,374 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-721-2430",
+  "sourceContentHash": "de5b13741f612ee825d085c14db4c496d858d3dce3194ef68460adb1fbcaf6d6",
+  "sourceTitle": "[한국농어촌희망재단] 2026년 2학기 청년창업농장학생 신청,접수기간 연장 안내",
+  "publishedAt": "2026-07-02",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9c453b176b01aeca",
+      "segmentType": "title",
+      "labelText": "[한국농어촌희망재단] 2026년 2학기 청년창업농장학생 신청,접수기간 연장 안내",
+      "bodyText": "[한국농어촌희망재단] 2026년 2학기 청년창업농장학생 신청,접수기간 연장 안내",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[한국농어촌희망재단] 2026년 2학기 청년창업농장학생 신청,접수기간 연장 안내"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9fe1290789536161",
+      "segmentType": "label_value",
+      "labelText": "2026년 2학기 청년창업농장학금 신청기간이 연장되었습니다. 자세한 사항은 첨부파일을 참조해 주시기 바랍니다.",
+      "bodyText": "2026년 2학기 청년창업농장학금 신청기간이 연장되었습니다. 자세한 사항은 첨부파일을 참조해 주시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2026년 2학기 청년창업농장학금 신청기간이 연장되었습니다. 자세한 사항은 첨부파일을 참조해 주시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-da4de47ddff26010",
+      "segmentType": "label_value",
+      "labelText": "신청기간",
+      "bodyText": "신청기간",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청기간"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b8e8516f1160a2af",
+      "segmentType": "continuation",
+      "labelText": "신청기간",
+      "bodyText": "2026년 6월 1일(월) 10:00 ~",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": "seg-da4de47ddff26010"
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-01",
+          "start": 7,
+          "end": 21
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "신청기간 : 2026년 6월 1일(월) 10:00 ~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-728f1cfc14c06149",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "2026년 6월 1일(월) 10:00 ~",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-06-01",
+          "start": 2,
+          "end": 16
+        }
+      ],
+      "locallyGrounded": false,
+      "text": ": 2026년 6월 1일(월) 10:00 ~"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4eabe15e61ce886d",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "7월 6일(월) 17:00",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-07-06",
+          "start": 0,
+          "end": 8
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "7월 6일(월) 17:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-816c6f6d55580ee2",
+      "segmentType": "label_value",
+      "labelText": "신청대상",
+      "bodyText": "신청대상",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청대상"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-511589e836369afe",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 대한민국 국적을 가진 대학교에 재학 중인 3학년 이상(농업계 대학 농식품계열 학과는 1학년 2학기 이상)의 만 40세 미만 학생",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "student_year:1",
+        "student_year:3"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 대한민국 국적을 가진 대학교에 재학 중인 3학년 이상(농업계 대학 농식품계열 학과는 1학년 2학기 이상)의 만 40세 미만 학생"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-0f330fead3c000a8",
+      "segmentType": "label_value",
+      "labelText": "지원금액",
+      "bodyText": "지원금액",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "지원금액"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-87bbfb2feaedf653",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 매학기 등록금 전액 + 학업장려금 250만원",
+      "sourceLocation": {
+        "lineIndex": 7,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "payment_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 매학기 등록금 전액 + 학업장려금 250만원"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-50ed5d2310463888",
+      "segmentType": "label_value",
+      "labelText": "신청방법",
+      "bodyText": "신청방법",
+      "sourceLocation": {
+        "lineIndex": 8,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청방법"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-3614cc0ec934e2d0",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 한국농어촌희망재단 홈페이지(PC또는 스마트폰,",
+      "sourceLocation": {
+        "lineIndex": 9,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 한국농어촌희망재단 홈페이지(PC또는 스마트폰,"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-328ab4a26664dd37",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "www.rhof.or.kr)에서",
+      "sourceLocation": {
+        "lineIndex": 10,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "www.rhof.or.kr)에서"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-60f7174f867d6f82",
+      "segmentType": "label_value",
+      "labelText": "신청",
+      "bodyText": "신청",
+      "sourceLocation": {
+        "lineIndex": 11,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-86641c93c2efb962",
+      "segmentType": "label_value",
+      "labelText": "* 지원 자격요건, 지원내용, 제출서류, 결과발표 등은 기존 선발공고와 동일함",
+      "bodyText": "* 지원 자격요건, 지원내용, 제출서류, 결과발표 등은 기존 선발공고와 동일함",
+      "sourceLocation": {
+        "lineIndex": 12,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "submission_period",
+        "application_period",
+        "result_announcement"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 지원 자격요건, 지원내용, 제출서류, 결과발표 등은 기존 선발공고와 동일함"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-29d41f9266bfefee",
+      "segmentType": "label_value",
+      "labelText": "신청문의",
+      "bodyText": "신청문의",
+      "sourceLocation": {
+        "lineIndex": 13,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "신청문의"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-7674231605b4ca2e",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": ": 한국농어촌희망재단 대표전화(02-6958-9475)",
+      "sourceLocation": {
+        "lineIndex": 14,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": ": 한국농어촌희망재단 대표전화(02-6958-9475)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-188f879aad6adef1",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "* 상담시간: 오전 9시 ~ 오후 6시",
+      "sourceLocation": {
+        "lineIndex": 15,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "* 상담시간: 오전 9시 ~ 오후 6시"
+    }
+  ],
+  "summary": {
+    "segmentCount": 18,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 8,
+      "continuation": 1,
+      "paragraph": 8
+    }
+  }
+}

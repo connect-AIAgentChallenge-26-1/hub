@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10955",
+  "sourceContentHash": "174f046bee355916b537c45271d6d0144c9e5eb65b417443a3b39978caf5bb43",
+  "sourceTitle": "한국TOEIC위원회 주관 <YBM과 함께하는 토익설명회> 개최",
+  "publishedAt": "2026-05-06",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f834dca2c9dd980b",
+      "segmentType": "title",
+      "labelText": "",
+      "bodyText": "한국TOEIC위원회 주관 <YBM과 함께하는 토익설명회> 개최",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "한국TOEIC위원회 주관 <YBM과 함께하는 토익설명회> 개최"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-affde4e3b78623ab",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "강원대학교 강릉캠퍼스 영어영문학과에서는 한국TOEIC위원회 주관으로 다음과 같이 YBM과 함께하는 토익설명회를 개최합니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉캠퍼스 영어영문학과에서는 한국TOEIC위원회 주관으로 다음과 같이 YBM과 함께하는 토익설명회를 개최합니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e1b952bbc34794fe",
+      "segmentType": "paragraph",
+      "labelText": "",
+      "bodyText": "관심있는 재학생들의 많은 참여 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [
+        "enrollment_status:enrolled"
+      ],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "관심있는 재학생들의 많은 참여 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-174dc0d677592822",
+      "segmentType": "label_value",
+      "labelText": "일시",
+      "bodyText": "2026.05.13.(수) 12:00-13:00",
+      "sourceLocation": {
+        "lineIndex": 2,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-13",
+          "start": 7,
+          "end": 21
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "1. 일시: 2026.05.13.(수) 12:00-13:00"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b1be3371556d485a",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "2. 장소: 교육지원센터(C9) 119호",
+      "sourceLocation": {
+        "lineIndex": 3,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "2. 장소: 교육지원센터(C9) 119호"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-4789306d2297fae8",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "3. 내용: TOEIC 시험정보 및 학습전략 안내 등",
+      "sourceLocation": {
+        "lineIndex": 4,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "exam_or_interview"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "3. 내용: TOEIC 시험정보 및 학습전략 안내 등"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-05be99d6e52b7a85",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "05.06.-05.12.)",
+      "sourceLocation": {
+        "lineIndex": 5,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-05-06",
+          "start": 24,
+          "end": 29
+        },
+        {
+          "value": "2026-05-12",
+          "start": 31,
+          "end": 36
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "4. 참여방법: High시스템에서 사전신청(05.06.-05.12.)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-54d29ffbb5e60382",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "5. 참여혜택: 토익무료응시권(10명 이내) 및 행사 후 만족도조사 완료 시 체인지 1시간 부여",
+      "sourceLocation": {
+        "lineIndex": 6,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "event"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "5. 참여혜택: 토익무료응시권(10명 이내) 및 행사 후 만족도조사 완료 시 체인지 1시간 부여"
+    }
+  ],
+  "summary": {
+    "segmentCount": 8,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "paragraph": 2,
+      "label_value": 1,
+      "list_item": 4
+    }
+  }
+}

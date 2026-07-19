@@ -1,0 +1,164 @@
+{
+  "schemaVersion": "noticepilot.s30RegressionSummary.v0.1",
+  "status": "pass",
+  "moduleCount": 30,
+  "testCount": 428,
+  "executionMode": "module_isolated_unittest",
+  "modules": [
+    {
+      "module": "tests.test_baseline_and_judgment_contracts",
+      "status": "pass",
+      "testCount": 13
+    },
+    {
+      "module": "tests.test_mvp_policy_pipeline",
+      "status": "pass",
+      "testCount": 143
+    },
+    {
+      "module": "tests.test_s22_structure_temporal_layers",
+      "status": "pass",
+      "testCount": 9
+    },
+    {
+      "module": "tests.test_s23_binding_semantic_layers",
+      "status": "pass",
+      "testCount": 12
+    },
+    {
+      "module": "tests.test_s24_applicability_evaluator",
+      "status": "pass",
+      "testCount": 11
+    },
+    {
+      "module": "tests.test_s24_board716_metadata_trace",
+      "status": "pass",
+      "testCount": 8
+    },
+    {
+      "module": "tests.test_s24_publishability_evaluator",
+      "status": "pass",
+      "testCount": 12
+    },
+    {
+      "module": "tests.test_s24_runtime_judgment_wiring",
+      "status": "pass",
+      "testCount": 6
+    },
+    {
+      "module": "tests.test_s25_candidate_reconciler",
+      "status": "pass",
+      "testCount": 13
+    },
+    {
+      "module": "tests.test_s26_layered_baseline",
+      "status": "pass",
+      "testCount": 6
+    },
+    {
+      "module": "tests.test_s26_layered_full_corpus_audit",
+      "status": "pass",
+      "testCount": 5
+    },
+    {
+      "module": "tests.test_s27a_cross_notice_diagnostics",
+      "status": "pass",
+      "testCount": 13
+    },
+    {
+      "module": "tests.test_s27b_full_corpus_reconciler",
+      "status": "pass",
+      "testCount": 4
+    },
+    {
+      "module": "tests.test_s27b_step1_d8_source_identity",
+      "status": "pass",
+      "testCount": 3
+    },
+    {
+      "module": "tests.test_s27b_step2_reconciliation_candidate_view",
+      "status": "pass",
+      "testCount": 4
+    },
+    {
+      "module": "tests.test_s27b_step3_calendar_event_source_link",
+      "status": "pass",
+      "testCount": 3
+    },
+    {
+      "module": "tests.test_s27b_step4_atomic_persistence_boundary",
+      "status": "pass",
+      "testCount": 4
+    },
+    {
+      "module": "tests.test_s27b_step5_cross_notice_reconciler",
+      "status": "pass",
+      "testCount": 6
+    },
+    {
+      "module": "tests.test_s27c_calendar_event_registry",
+      "status": "pass",
+      "testCount": 13
+    },
+    {
+      "module": "tests.test_s27d_registry_ics_projection",
+      "status": "pass",
+      "testCount": 15
+    },
+    {
+      "module": "tests.test_s28_feed_builder",
+      "status": "pass",
+      "testCount": 16
+    },
+    {
+      "module": "tests.test_s28_feed_eligibility_policy",
+      "status": "pass",
+      "testCount": 16
+    },
+    {
+      "module": "tests.test_s28_feed_snapshot",
+      "status": "pass",
+      "testCount": 14
+    },
+    {
+      "module": "tests.test_s28_profile_matrix",
+      "status": "pass",
+      "testCount": 15
+    },
+    {
+      "module": "tests.test_s28_subscription_profile_contract",
+      "status": "pass",
+      "testCount": 13
+    },
+    {
+      "module": "tests.test_s29_incremental_runtime",
+      "status": "pass",
+      "testCount": 10
+    },
+    {
+      "module": "tests.test_s29_live_postgres_verifier",
+      "status": "pass",
+      "testCount": 6
+    },
+    {
+      "module": "tests.test_s29_postgres_persistence",
+      "status": "pass",
+      "testCount": 17
+    },
+    {
+      "module": "tests.test_s29_subscription_delivery",
+      "status": "pass",
+      "testCount": 8
+    },
+    {
+      "module": "tests.test_s30_samsung_calendar_qa",
+      "status": "pass",
+      "testCount": 10
+    }
+  ],
+  "layeredBaseline": {
+    "result": "match",
+    "changeCount": 0
+  },
+  "generatedAt": "2026-07-13T22:30:00+09:00"
+}

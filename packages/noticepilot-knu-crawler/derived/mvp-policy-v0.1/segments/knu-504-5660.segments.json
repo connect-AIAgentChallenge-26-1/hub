@@ -1,0 +1,93 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-5660",
+  "sourceContentHash": "acd1457351dca55566017186dbbfaa37d833b53de85f0c9dee936f5de54ac16f",
+  "sourceTitle": "[삼척관광문화재단] 설 연휴기간 이사부 독도 기념관 단기 아르바이트 모집",
+  "publishedAt": "2026-02-02",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-e62011330b7d6331",
+      "segmentType": "title",
+      "labelText": "[삼척관광문화재단] 설 연휴기간 이사부 독도 기념관 단기 아르바이트 모집",
+      "bodyText": "[삼척관광문화재단] 설 연휴기간 이사부 독도 기념관 단기 아르바이트 모집",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "[삼척관광문화재단] 설 연휴기간 이사부 독도 기념관 단기 아르바이트 모집"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-b07613ed07dc3b49",
+      "segmentType": "label_value",
+      "labelText": "삼척관광문화재단에서 설 연휴기간(",
+      "bodyText": "2026.2.15.(일), 2.16.(월), 2.18.3(수)) 이사부 독도 기념관 단기 아르바이트 모집한다고 하오니 관심있는 분들은 첨부파일 참고하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-02-15",
+          "start": 18,
+          "end": 31
+        },
+        {
+          "value": "2026-02-16",
+          "start": 33,
+          "end": 41
+        },
+        {
+          "value": "2026-02-18",
+          "start": 43,
+          "end": 47
+        }
+      ],
+      "locallyGrounded": true,
+      "text": "삼척관광문화재단에서 설 연휴기간(2026.2.15.(일), 2.16.(월), 2.18.3(수)) 이사부 독도 기념관 단기 아르바이트 모집한다고 하오니 관심있는 분들은 첨부파일 참고하시기 바랍니다."
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-f99fce31a19e857c",
+      "segmentType": "list_item",
+      "labelText": "",
+      "bodyText": "※ 자세한 사항은 삼척관광문화재단(033-575-8201)으로 문의하시기 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "※ 자세한 사항은 삼척관광문화재단(033-575-8201)으로 문의하시기 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 3,
+    "locallyGroundedCount": 1,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1,
+      "list_item": 1
+    }
+  }
+}

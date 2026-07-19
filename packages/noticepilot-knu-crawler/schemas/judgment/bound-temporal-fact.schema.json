@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "noticepilot.boundTemporalFact.v0.1",
+  "title": "NoticePilot Bound Temporal Fact",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "factId", "sourceNoticeId", "segmentId", "temporalMentionIds", "bindingKind", "confidence", "ruleId", "locallyGrounded", "labelText", "evidence"],
+  "properties": {
+    "schemaVersion": {"const": "noticepilot.boundTemporalFact.v0.1"},
+    "factId": {"type": "string", "minLength": 1},
+    "sourceNoticeId": {"type": "string", "minLength": 1},
+    "segmentId": {"type": "string", "minLength": 1},
+    "temporalMentionIds": {"type": "array", "minItems": 1, "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+    "bindingKind": {"type": "string", "enum": ["same_segment", "same_table_row", "continuation_owner", "same_list_item", "same_paragraph", "title_context", "unresolved"]},
+    "confidence": {"type": "string", "enum": ["high", "medium", "low", "none"]},
+    "ruleId": {"type": "string", "minLength": 1},
+    "locallyGrounded": {"type": "boolean"},
+    "labelText": {"type": "string"},
+    "evidence": {"type": "string"}
+  }
+}

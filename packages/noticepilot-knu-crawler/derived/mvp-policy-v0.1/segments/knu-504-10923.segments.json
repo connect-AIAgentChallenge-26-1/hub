@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+  "sourceNoticeId": "knu-504-10923",
+  "sourceContentHash": "6a0244f06a2524a4d4a9ff8d937659e407916142c94a8256b1aa10df83d2d84b",
+  "sourceTitle": "강원대학교 강릉캠퍼스 학생 홍보대사(가온) 선발 기간 연장(4월 28일)",
+  "publishedAt": "2026-04-24",
+  "extractor": {
+    "version": "0.1.14",
+    "mode": "structured_schedule_segment_v0.2"
+  },
+  "segments": [
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-06ac84f2f4ae176e",
+      "segmentType": "title",
+      "labelText": "강원대학교 강릉캠퍼스 학생 홍보대사(가온) 선발 기간 연장(",
+      "bodyText": "4월 28일)",
+      "sourceLocation": {
+        "lineIndex": -1,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [],
+      "audienceSignals": [],
+      "dateSpans": [
+        {
+          "value": "2026-04-28",
+          "start": 33,
+          "end": 39
+        }
+      ],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉캠퍼스 학생 홍보대사(가온) 선발 기간 연장(4월 28일)"
+    },
+    {
+      "schemaVersion": "noticepilot.scheduleSegments.v0.3",
+      "segmentId": "seg-9c6e01f0dfa96168",
+      "segmentType": "label_value",
+      "labelText": "강원대학교 강릉캠퍼스 홍보대사 가온 선발 기간을 연장합니다. 많은 지원 바랍니다.",
+      "bodyText": "강원대학교 강릉캠퍼스 홍보대사 가온 선발 기간을 연장합니다. 많은 지원 바랍니다.",
+      "sourceLocation": {
+        "lineIndex": 0,
+        "clauseIndex": 0,
+        "parentSegmentId": null
+      },
+      "actionSignals": [
+        "application_period"
+      ],
+      "audienceSignals": [],
+      "dateSpans": [],
+      "locallyGrounded": false,
+      "text": "강원대학교 강릉캠퍼스 홍보대사 가온 선발 기간을 연장합니다. 많은 지원 바랍니다."
+    }
+  ],
+  "summary": {
+    "segmentCount": 2,
+    "locallyGroundedCount": 0,
+    "typeCounts": {
+      "title": 1,
+      "label_value": 1
+    }
+  }
+}
