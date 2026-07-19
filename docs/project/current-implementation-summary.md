@@ -275,6 +275,7 @@ Status: Public and LAN profiles implemented; physical client/host evidence pendi
 - Docker-backed Caddy validation and root contract tests
 - alternative LAN profile on an unprivileged port with a pinned RFC1918
   interface, explicit client CIDR, `tls internal`, and no LAN HSTS persistence
+- HTTP/3 disabled so the LAN proof opens no unreviewed UDP listener
 - fail-closed LAN environment validation before Caddy adaptation
 
 The immediate remaining gate is loading the LAN CA root into a real calendar
@@ -312,8 +313,10 @@ LAN HTTPS profile verification on 2026-07-20:
 - production build, Wiki sync 18/18, and high-severity audit: passed
 - Foundation.25.1 regression: 462/462 passed
 - pinned Docker Caddy v2.11.4 validation: passed
-- macOS Homebrew Caddy v2.11.4 fixed-launcher validation at the selected LAN
-  address: passed without changing the host trust store
+- macOS Homebrew Caddy v2.11.4 fixed-launcher validation and live listener
+  inspection at the selected LAN address: passed; TCP 8443 bound only to that
+  address, the admin API bound only to loopback, UDP 8443 remained closed, and
+  the host trust store was not changed
 - internal-CA Docker routing/TLS smoke: untrusted TLS failed; trusted `GET` and
   `HEAD` returned `200`; query, encoded/suffix path, `POST`, `/api`, and a
   disallowed client CIDR returned `404`; plaintext HTTP was closed; loopback

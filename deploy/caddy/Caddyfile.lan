@@ -4,6 +4,9 @@
 	admin 127.0.0.1:2019
 	auto_https disable_redirects
 	skip_install_trust
+	servers {
+		protocols h1 h2
+	}
 	log default {
 		format filter {
 			request>uri replace [REDACTED]

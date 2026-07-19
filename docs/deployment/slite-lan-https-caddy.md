@@ -191,6 +191,16 @@ ss -ltnp | grep -E ':(2019|3001|8443)([[:space:]]|$)'
 
 Port 3001 and Caddy admin port 2019 must show loopback addresses only. Port
 8443 must show only the selected private IPv4 address, never `0.0.0.0` or `::`.
+The LAN profile disables HTTP/3, so these commands must show no UDP 8443
+listener:
+
+```bash
+# macOS
+lsof -nP -iUDP:8443
+
+# Linux
+ss -lunp | grep -E ':8443([[:space:]]|$)'
+```
 
 ## 5. LAN Safety Checks
 

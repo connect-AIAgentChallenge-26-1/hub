@@ -84,6 +84,8 @@ test('TLS-03 LAN HTTPS uses an internal CA and a pinned private interface', asyn
 
   assert.match(caddyfile, /auto_https disable_redirects/)
   assert.match(caddyfile, /^\s*skip_install_trust$/m)
+  assert.match(caddyfile, /servers \{\s+protocols h1 h2\s+\}/m)
+  assert.doesNotMatch(caddyfile, /protocols[^\n]*h3/)
   assert.match(
     caddyfile,
     /^https:\/\/\{\$NOTICEPILOT_LAN_HOST\}:\{\$NOTICEPILOT_LAN_HTTPS_PORT\} \{$/m,

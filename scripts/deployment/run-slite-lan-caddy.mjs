@@ -20,13 +20,17 @@ if (process.argv.length !== 4 || !['validate', 'run'].includes(process.argv[3]))
   try {
     const environment = loadSliteLanEnvironmentFile(process.argv[2])
     mkdirSync(runtimeRoot, { recursive: true, mode: 0o700 })
+    const hostEnvironment = {
+      PATH: process.env.PATH ?? '',
+      ...(process.env.HOME ? { HOME: process.env.HOME } : {}),
+    }
 
     const child = spawn(
       'caddy',
       [process.argv[3], '--config', caddyfile, '--adapter', 'caddyfile'],
       {
         env: {
-          PATH: process.env.PATH ?? '',
+          ...hostEnvironment,
           ...environment,
           XDG_CONFIG_HOME: join(runtimeRoot, 'config'),
           XDG_DATA_HOME: join(runtimeRoot, 'share'),
