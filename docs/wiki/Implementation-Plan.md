@@ -58,7 +58,7 @@ Not implemented yet:
 - advanced relative date resolution
 - school-level notice parsing
 - checkbox-based batch .ics export
-- subscription calendar feed URL / backend feed generation
+- production user-specific subscription feed and persistent backend generation
 - login / database / payment
 - Google Calendar API integration
 ```

@@ -20,10 +20,13 @@ long notice
 
 ### Standalone Crawler Release Boundary
 
-Foundation.25.1 is a verified standalone crawler release that remains separate
-from the root application runtime. Runtime wiring and deployment were not
-performed. See the [Foundation.25.1 standalone release record](../releases/foundation-25.1.md)
-for the detailed release authority and upstream distribution boundary.
+Foundation.25.1 is a verified standalone crawler release. Its exact promoted
+package subtree is restored at `packages/noticepilot-knu-crawler`. The root app
+now has an explicitly opt-in, local/reference-only bridge that provisions and
+renders one fixed all-campus student subscription feed from that package.
+Production ingestion, per-user persistence, and deployment were not performed.
+See the [Foundation.25.1 standalone release record](../releases/foundation-25.1.md)
+for the detailed release and restoration authority.
 
 NoticePilot is not a generic summarization app. Its purpose is to extract actionable notice information:
 
@@ -184,7 +187,7 @@ Implemented capabilities:
 - full-width calendar tab layout
 - campus preference card with native checkbox-based campus chips
 - campus options in fixed order: `chuncheon`, `samcheok`, `dogye`, `gangneung_wonju`
-- subscription ICS status card with neutral `준비 중` badge
+- reference subscription ICS card with idle, provisioning, ready, copy, and unavailable states
 - separate campus preference storage key: `noticepilot:campus-preferences:v1`
 - no first-visit campus preference write before user change
 - campus preference normalization for invalid and duplicate campus IDs
@@ -193,6 +196,28 @@ Implemented capabilities:
 - server mock request includes `userPreferencesSnapshot`
 - server mock response echoes normalized `metadata.userPreferencesSnapshot`
 - campus preferences do not alter analysis sections, filtering, Markdown export, or `.ics` export behavior
+
+### Foundation.25.1 Reference Subscription Feed
+
+Status: Complete for the local/reference implementation boundary
+
+Implemented capabilities:
+
+- exact promoted Foundation.25.1 package restored without subtree changes
+- opt-in flag: `NOTICEPILOT_ENABLE_REFERENCE_FEED=true`
+- strict `POST /api/subscription-feeds/reference` with exact `{}` JSON body
+- fixed all-campus student reference calendar with 601 events
+- capability URL authentication for `GET` / `HEAD /subscription-feeds/:feedId/:token.ics`
+- conditional request support with `ETag` and `304`
+- Python-owned token provisioning, authentication, and ICS rendering through a long-lived JSON-lines bridge
+- raw capability token returned only inside `subscriptionPath`; no log, error, or localStorage persistence
+- UI builds the same-origin subscription URL in memory and exposes bilingual create, retry, copy, and expiry states
+- disabled and dependency-unavailable provisioning returns `503`; malformed or unauthorized public URLs return a generic `404`
+- bridge cleanup on application shutdown
+
+This slice is a non-production integration proof. It has no caller account
+authentication, database-backed feed lifetime, user-specific profile, campus
+filtering, revocation UI, rotation workflow, or deployment configuration.
 
 ## Current App Schema Baseline
 
@@ -257,7 +282,7 @@ The following are not implemented yet:
 - advanced relative date resolution
 - school-level notice parsing
 - checkbox-based batch `.ics` export
-- subscription calendar feed URL / backend feed generation
+- production user-specific subscription feeds and persistent feed storage
 - multiple saved notice projects
 - login / database
 - Google Calendar API integration

@@ -2,7 +2,7 @@
 
 NoticePilot은 대학생이 긴 공지, 과제 지침, 장학금 안내, 공모전 공지, 채용 공고를 실행 가능한 체크리스트와 캘린더 일정 후보로 바꿀 수 있게 돕는 MVP 웹앱입니다.
 
-현재 기준선은 **React + Vite 기반 frontend MVP + Express mock analyze API + Zod schema validation + frontend-server mock wiring + calendar tab/campus preferences 완료 상태**입니다. 실제 AI API는 아직 연결하지 않았고, client-side mock과 server mock 분석으로 사용자 검토/수정/export 흐름을 검증합니다. 수동 텍스트 붙여넣기만으로도 사용할 수 있으며, 서버 mock 분석은 Express 서버를 함께 실행했을 때 사용할 수 있습니다.
+현재 기준선은 **React + Vite 기반 frontend MVP + Express mock analyze API + Zod schema validation + frontend-server mock wiring + calendar tab/campus preferences + opt-in Foundation.25.1 reference subscription feed 완료 상태**입니다. 실제 AI API와 운영용 공지 수집 파이프라인은 아직 연결하지 않았습니다. client-side/server mock 분석으로 사용자 검토·수정·export 흐름을 검증하고, 로컬 reference mode에서는 복원된 Foundation 데이터로 capability URL 기반 구독형 ICS 경계를 검증할 수 있습니다.
 
 ## 제품 스냅샷
 
@@ -42,7 +42,7 @@ NoticePilot은 단순 요약 앱이 아니라 공지에서 다음 정보를 추�
 - mock 분석 dashboard
 - 공지 캘린더 탭
 - 관심 캠퍼스 설정 카드
-- 구독형 ICS 준비 중 상태 카드
+- 로컬 reference 구독형 ICS 생성·복사 상태 카드
 - 항목 수정 / 삭제
 - 할 일 완료 체크
 - 캘린더 일정 선택 토글
@@ -58,6 +58,8 @@ NoticePilot은 단순 요약 앱이 아니라 공지에서 다음 정보를 추�
 - 별도 localStorage 기반 캠퍼스 선호 설정 저장: `noticepilot:campus-preferences:v1`
 - 분석 요청/결과 metadata에 inert `userPreferencesSnapshot` 포함
 - Vite `/api` dev proxy를 통한 frontend ↔ server mock wiring
+- 환경변수로만 활성화되는 Foundation.25.1 reference feed API와 Python bridge
+- capability URL 기반 `GET` / `HEAD` ICS delivery 및 조건부 `304`
 
 ## 기술 스택
 
@@ -76,7 +78,7 @@ NoticePilot은 단순 요약 앱이 아니라 공지에서 다음 정보를 추�
 - 고급 상대 날짜 해석
 - 학교별 공지 parsing
 - checkbox 기반 batch `.ics` export
-- subscription calendar feed URL / backend feed generation
+- 운영용 사용자별 subscription feed와 영속 저장소
 - 여러 공지 프로젝트 저장
 - 로그인 / DB / Google Calendar API 연동
 
@@ -109,6 +111,12 @@ npm run dev
 ```
 
 Express analyze API 기본 주소는 `http://127.0.0.1:3001/`이며, Vite 개발 서버는 `/api` 요청을 이 서버로 proxy합니다.
+
+복원된 Foundation.25.1의 고정 reference calendar를 로컬에서 검증할 때만 서버를 다음처럼 실행합니다. 이 모드는 로그인·DB·사용자별 캠퍼스 필터가 없는 비운영 검증 경계이며, 생성된 capability URL은 서버 재시작 시 만료됩니다.
+
+```bash
+NOTICEPILOT_ENABLE_REFERENCE_FEED=true npm run dev:server
+```
 
 프로덕션 빌드 확인:
 
@@ -144,7 +152,7 @@ npm run build
 Phase 4 이후의 AI 연동 계약, 테스트 corpus, batch calendar export 로드맵은 repository 문서로 관리합니다.
 
 - [Current Implementation Summary](docs/project/current-implementation-summary.md)
-- [Foundation.25.1 Standalone Release Record](docs/releases/foundation-25.1.md) — 검증된 standalone crawler release 기록이며 root runtime에는 연결되지 않았습니다.
+- [Foundation.25.1 Standalone Release Record](docs/releases/foundation-25.1.md) — 검증된 standalone crawler package가 `packages/noticepilot-knu-crawler`에 복원됐고 로컬 reference feed 경계까지 연결됐으며, 운영용 수집·배포는 아직 수행되지 않았습니다.
 - [Phase 4 Plan](docs/roadmap/phase-4-plan.md)
 - [AI Output Schema](docs/ai/ai-output-schema.md)
 - [Prompt Contract](docs/ai/prompt-contract.md)
@@ -183,4 +191,4 @@ Phase 4 이후의 AI 연동 계약, 테스트 corpus, batch calendar export 로�
    - PDF / HWP / HWPX / OCR extraction
    - 학교별 공지 parsing
    - checkbox 기반 batch `.ics` export
-   - subscription calendar feed
+   - 사용자별 영속 subscription calendar feed
