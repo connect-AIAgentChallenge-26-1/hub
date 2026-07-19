@@ -1,6 +1,6 @@
 # NoticePilot Current Product Roadmap
 
-> Baseline: 2026-07-19 after Foundation.25.1 restoration and S-Lite durable-feed implementation
+> Baseline: 2026-07-20 after Foundation.25.1 restoration and S-Lite LAN HTTPS profile implementation
 >
 > Next productization route: S-Lite deployment and real calendar-client proof
 >
@@ -29,7 +29,7 @@ The routes must not be reported or implemented as one undifferentiated phase.
 | Test corpus | 10-entry baseline collected | Verified public entries now cover scholarship, school notice, assignment, competition, job posting, and ambiguous-date cases; deterministic corpus validation is next. |
 | Foundation.25.1 | Implemented, isolated | The exact package, data, persistence, projection, feed, and tests are restored. |
 | Local reference delivery | Opt-in runtime active | One fixed 601-event snapshot is exposed through an in-memory loopback capability that expires on server restart. |
-| S-Lite durable delivery | Runtime and HTTPS kit implemented; host pending | One administrator can issue, inspect, rotate, and revoke one SQLite-backed capability URL; Caddy exposes only its calendar read path. |
+| S-Lite durable delivery | Runtime plus public/LAN HTTPS profiles implemented; client proof pending | One administrator can issue, inspect, rotate, and revoke one SQLite-backed capability URL; Caddy exposes only its calendar read path. |
 | Production ingestion and feed | Pending | No live root ingestion, account-owned durable feed, production deployment, or operating service exists. |
 | Calendar-client QA | Automated evidence only | S30-A is complete; S30-B still requires a physical Samsung device. |
 
@@ -39,7 +39,8 @@ compatibility.
 
 ## 3. Route Decision
 
-S-Lite deployment and real-client proof are the next implementation route.
+S-Lite LAN client proof is the next validation route; public deployment follows
+only after that evidence exists.
 
 Reasons:
 
@@ -47,7 +48,8 @@ Reasons:
 - the smallest useful scope is one trusted administrator and one durable feed,
   without accounts, crawling, or AI;
 - token persistence, restart recovery, rotation, and revocation are now
-  implemented and must be proven behind HTTPS on persistent storage;
+  implemented and must be proven through the private-CA LAN profile on a real
+  calendar client;
 - AI extraction quality and live ingestion remain separate risks and should not
   be pulled into this first release boundary.
 
@@ -178,9 +180,9 @@ Sequence:
 
 1. **S0 S-Lite durable link:** one administrator, one SQLite singleton, one
    fixed Foundation snapshot, hash-only capability persistence, restart
-   recovery, rotation, and revocation. Runtime and Caddy/systemd kit are
-   complete; real host/DNS deployment, backup/restore drill, and client
-   lifecycle evidence remain.
+   recovery, rotation, and revocation. Runtime, public Caddy/systemd, and LAN
+   private-CA profiles are complete; physical LAN client evidence, real
+   host/DNS deployment, and backup/restore drill remain.
 2. **S1 live ingestion:** approved hosts and schemes, redirect and IP
    revalidation, response/attachment limits, scheduler, retries, and failure
    isolation.
