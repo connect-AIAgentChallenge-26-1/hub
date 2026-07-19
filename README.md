@@ -168,7 +168,7 @@ Phase 4 이후의 AI 연동 계약, 테스트 corpus, batch calendar export 로�
 
 1. **P0: Product truth and quality foundation**
    - repository/Wiki authority를 검토 가능한 one-way 경계로 정리
-   - 실제 공개 공지 corpus를 0건에서 최소 10건으로 구축
+   - 구축된 실제 공개 공지 10건 baseline의 구조·근거·분포를 결정적으로 검증
    - master roadmap, protected CI, upstream workflow guardrail 유지
 
 2. **Route M: Manual / AI assistant — next productization route**

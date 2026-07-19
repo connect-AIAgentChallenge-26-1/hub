@@ -24,7 +24,7 @@ The routes must not be reported or implemented as one undifferentiated phase.
 | --- | --- | --- |
 | Manual analysis UI | Runtime active | Client mock and Express server mock support review, editing, evidence, Markdown, and selected one-off all-day ICS export. |
 | AI contracts | Contract complete | Raw schema, prompt contract, normalization, strict validation, and error boundaries are documented; no live provider is connected. |
-| Test corpus | Scaffold only | Index, templates, and category folders exist; verified real entries are currently `0`. |
+| Test corpus | 10-entry baseline collected | Verified public entries now cover scholarship, school notice, assignment, competition, job posting, and ambiguous-date cases; deterministic corpus validation is next. |
 | Foundation.25.1 | Implemented, isolated | The exact package, data, persistence, projection, feed, and tests are restored. |
 | Local reference delivery | Opt-in runtime active | One fixed 601-event snapshot is exposed through an in-memory loopback capability that expires on server restart. |
 | Production ingestion and feed | Pending | No live root ingestion, account-owned durable feed, production deployment, or operating service exists. |
@@ -108,6 +108,10 @@ examples exist.
 
 Complete P0 corpus collection and record category coverage, ambiguity, evidence
 quality, copyright risk, and privacy review.
+
+Status: the initial 10-entry collection gate is complete. Structure, evidence,
+and distribution checks are implemented in M2 rather than inferred from file
+presence alone.
 
 ### M2 — Evaluation harness
 
@@ -243,4 +247,3 @@ Before either route is offered to external users, define and verify:
 - Upstream PR workflow guardrail: Issue #21
 - AI route detail: [`phase-4-plan.md`](phase-4-plan.md)
 - Batch/export route detail: [`batch-calendar-export.md`](batch-calendar-export.md)
-
