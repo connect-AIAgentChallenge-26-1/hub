@@ -1,12 +1,12 @@
 # Implementation Plan
 
-> Wiki version: 2026-07-09 Calendar tab / campus preferences baseline
-> Implementation baseline: React + Vite frontend MVP, Express mock analyze API, Zod server schemas, frontend-server mock analyze wiring, calendar tab, and campus preferences
-> Runtime scope: Phase 4 real AI integration is planned but not implemented yet.
+> Documentation baseline: current default branch after Foundation.25.1 restoration
+> Implementation baseline: manual-analysis MVP, exact standalone Foundation package, and an opt-in local reference-feed bridge
+> Runtime scope: live AI and production ingestion, account-owned feeds, deployment, and calendar-client validation remain pending.
 
 ## 1. Current Baseline
 
-The current NoticePilot project is no longer only a React + Vite UI skeleton. It now includes a React + Vite frontend MVP, an Express mock analyze API, Zod-backed server schemas, frontend-to-server mock analyze wiring, workspace tabs, and campus preferences.
+The current NoticePilot project is no longer only a React + Vite UI skeleton. It includes a React + Vite frontend MVP, an Express mock analyze API, Zod-backed server schemas, frontend-to-server mock analyze wiring, workspace tabs, campus preferences, the exactly restored Foundation.25.1 package, and an opt-in local bridge to its fixed reference feed.
 
 Current implemented baseline:
 
@@ -43,6 +43,9 @@ Current implemented baseline:
 - separate campus preference persistence
 - inert metadata.userPreferencesSnapshot
 - calendar tab with campus preferences and opt-in local reference subscription flow
+- exact Foundation.25.1 package at packages/noticepilot-knu-crawler
+- loopback-only Python bridge to the fixed 601-event all-campus student snapshot
+- capability-authenticated GET / HEAD subscription delivery with conditional 304 support
 - Markdown checklist download
 - optional evidence inclusion in Markdown export
 - selected all-day .ics export
@@ -58,12 +61,30 @@ Not implemented yet:
 - advanced relative date resolution
 - school-level notice parsing
 - checkbox-based batch .ics export
-- production user-specific subscription feed and persistent backend generation
+- scheduled production ingestion and root-runtime deployment
+- account-owned subscription persistence, filtering, rotation, and revocation
+- production calendar-client feed validation
 - login / database / payment
 - Google Calendar API integration
 ```
 
 This implementation plan assumes the current working app should be preserved. Do not rebuild the app from scratch.
+
+### 1.1 Current delivery-track crosswalk
+
+The historical phase plan below and the newer delivery tracks describe different views of the repository. Use this crosswalk when they differ:
+
+| Track | Current state | Boundary |
+| --- | --- | --- |
+| A — manual and AI analysis | Manual/client-mock/server-mock runtime active; strict root-domain adapters implemented and isolated; live provider pending | AI output remains untrusted and must pass schema and adapter boundaries. |
+| B — source and crawler integration | Foundation.25.1 is exactly restored with its crawler data and tests; scheduled production ingestion and root-runtime deployment are pending | Package availability is not proof of an operating production crawler. |
+| C — calendar-event consumer | Foundation includes event registry, revision, reconciliation, and projections; the root app does not run those stages against live updates | Manual-analysis `calendarEvents[]` remain a UI projection, not persistent Foundation events. |
+| D — persistence and feed delivery | Foundation persistence, serializer, delivery service, and a fixed 601-event snapshot are exercised through an opt-in loopback reference bridge | Reference capabilities expire on restart; account ownership, durable production state, operations, and deployment are pending. |
+| E — subscription frontend and validation | The calendar tab can provision and copy the local capability URL; campus preferences remain inert | User-specific management and real-client production validation are separate unfinished work. |
+
+The selected-event browser `.ics` download remains a one-off compatibility feature. The local Foundation reference feed proves a separate integration boundary; neither one is evidence that production subscription delivery is complete.
+
+When later historical phase text conflicts with this crosswalk, runtime code and tests, strict schemas and contracts, and the current implementation summary take precedence.
 
 ---
 
@@ -298,10 +319,9 @@ Implemented:
 Scope limits:
 
 ```text
-- no crawler
-- no real school notice collection
+- no scheduled production crawler or live root-app ingestion
 - no school selector or notice filtering
-- no subscription ICS URL/backend feed generation
+- no account-owned or durable production subscription feed
 - no behavior changes from campus preferences
 ```
 
