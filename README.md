@@ -2,7 +2,7 @@
 
 NoticePilot은 대학생이 긴 공지, 과제 지침, 장학금 안내, 공모전 공지, 채용 공고를 실행 가능한 체크리스트와 캘린더 일정 후보로 바꿀 수 있게 돕는 MVP 웹앱입니다.
 
-현재 기준선은 **React + Vite 기반 frontend MVP + Express mock analyze API + Zod schema validation + frontend-server mock wiring + calendar tab/campus preferences + opt-in Foundation.25.1 reference subscription feed 완료 상태**입니다. 실제 AI API와 운영용 공지 수집 파이프라인은 아직 연결하지 않았습니다. client-side/server mock 분석으로 사용자 검토·수정·export 흐름을 검증하고, 로컬 reference mode에서는 복원된 Foundation 데이터로 capability URL 기반 구독형 ICS 경계를 검증할 수 있습니다.
+현재 기준선은 **React + Vite 기반 frontend MVP + Express mock analyze API + Zod schema validation + frontend-server mock wiring + calendar tab/campus preferences + Foundation.25.1 기반 S-Lite 영속 단일 feed 발급 완료 상태**입니다. 실제 AI API와 운영용 공지 수집 파이프라인은 아직 연결하지 않았습니다. S-Lite는 로그인 없는 단일 관리자용 작은 서버 경계로, SQLite에 capability token hash만 저장해 서버 재시작 뒤에도 기존 ICS 링크를 유지합니다.
 
 ## 제품 스냅샷
 
@@ -78,7 +78,7 @@ NoticePilot은 단순 요약 앱이 아니라 공지에서 다음 정보를 추�
 - 고급 상대 날짜 해석
 - 학교별 공지 parsing
 - checkbox 기반 batch `.ics` export
-- 운영용 사용자별 subscription feed와 영속 저장소
+- 계정 소유의 사용자별 subscription feed와 다중 사용자 저장소
 - 여러 공지 프로젝트 저장
 - 로그인 / DB / Google Calendar API 연동
 
@@ -122,6 +122,39 @@ Reference mode는 숫자형 loopback host에서만 시작됩니다. `HOST=0.0.0.
 `HOST=::`, `HOST=localhost` 또는 LAN 주소와 함께 활성화하면 서버가 시작
 전에 실패합니다. 기본값 `127.0.0.1`을 그대로 사용하는 것을 권장합니다.
 
+한 명의 운영자가 재시작 후에도 유지되는 ICS 링크 하나를 발급하려면
+S-Lite mode를 사용합니다. 아래 세 환경변수는 모두 필수이며 reference mode와
+동시에 활성화할 수 없습니다.
+
+```bash
+export NOTICEPILOT_ENABLE_SLITE_FEED=true
+export NOTICEPILOT_SLITE_ADMIN_KEY="$(openssl rand -hex 32)"
+export NOTICEPILOT_SLITE_DB_PATH='/absolute/private/path/slite.sqlite3'
+npm run dev:server
+```
+
+첫 링크 발급:
+
+```bash
+curl -X POST http://127.0.0.1:3001/api/subscription-feeds/slite \
+  -H "Authorization: Bearer $NOTICEPILOT_SLITE_ADMIN_KEY" \
+  -H 'Content-Type: application/json' \
+  --data '{}'
+```
+
+응답의 `subscriptionPath`는 raw capability token을 포함해 한 번만 표시됩니다.
+실제 구독 주소는 공개 HTTPS origin과 이 path를 결합해 캘린더 앱에 등록합니다.
+상태 조회로 원래 URL을 복구할 수 없으며, 분실 시
+`POST /api/subscription-feeds/slite/rotate`로 명시적으로 회전해야 합니다.
+`DELETE /api/subscription-feeds/slite`는 feed를 폐기하고, 폐기 후 rotate는 같은
+feed ID로 새 링크를 명시적으로 활성화합니다.
+
+현재 S-Lite는 단일 프로세스·단일 replica 전용입니다. 외부 공개 시 TLS reverse
+proxy에서 관리자 API를 인터넷에 노출하지 않고 접근 제한·rate limit을 적용해야
+합니다. 안정적인 DB volume과 backup/restore도
+필수이며 이 저장소에는 배포 구성이 포함되지 않습니다. 상세 계약은
+[S-Lite Durable Feed](docs/architecture/slite-durable-feed.md)를 참고하세요.
+
 프로덕션 빌드 확인:
 
 ```bash
@@ -157,7 +190,7 @@ Phase 4 이후의 AI 연동 계약, 테스트 corpus, batch calendar export 로�
 
 - [Current Implementation Summary](docs/project/current-implementation-summary.md)
 - [Foundation.25.1 Standalone Release Record](docs/releases/foundation-25.1.md) — 검증된 standalone crawler package가 `packages/noticepilot-knu-crawler`에 복원됐고 로컬 reference feed 경계까지 연결됐으며, 운영용 수집·배포는 아직 수행되지 않았습니다.
-- [Current Product Roadmap](docs/roadmap/current-product-roadmap.md) — Route M 수동/AI assistant를 다음 제품화 경로로 두고 Route S 자동 구독과 공통 production gate를 분리합니다.
+- [Current Product Roadmap](docs/roadmap/current-product-roadmap.md) — 먼저 S-Lite 단일 영속 feed를 검증하고, 자동 수집·계정 feed와 AI assistant 확장을 별도 gate로 둡니다.
 - [Phase 4 Plan](docs/roadmap/phase-4-plan.md)
 - [AI Output Schema](docs/ai/ai-output-schema.md)
 - [Prompt Contract](docs/ai/prompt-contract.md)
@@ -171,22 +204,26 @@ Phase 4 이후의 AI 연동 계약, 테스트 corpus, batch calendar export 로�
    - 구축된 실제 공개 공지 10건 baseline의 구조·근거·분포를 결정적으로 검증
    - master roadmap, protected CI, upstream workflow guardrail 유지
 
-2. **Route M: Manual / AI assistant — next productization route**
+2. **S-Lite: durable single-feed release boundary**
+   - 공개 HTTPS 배포 경계와 관리자 API 접근 제한 결정
+   - SQLite volume backup/restore와 장애 시 fail-closed 동작 검증
+   - 실제 calendar client에서 링크 등록·재시작·회전·폐기 lifecycle QA
+
+3. **Route M: Manual / AI assistant — postponed independent route**
    - corpus structure와 expected truth를 검증하는 평가 기반 마련
    - 수동 텍스트만 받는 작은 server-side AI vertical slice 구현
-   - AI raw response를 normalize / validate한 뒤 기존 검토·수정 UI에 연결
    - corpus 기반으로 accuracy, evidence, correction, latency, failure를 평가
 
-3. **Controlled Route M expansion**
+4. **Controlled Route M expansion**
    - QA 근거가 확보된 뒤 PDF / HWP / HWPX / OCR extraction을 별도 단계로 검토
    - advanced date resolution과 school-level parsing은 각자의 entry gate 유지
    - checkbox 기반 batch `.ics` export는 단건 품질과 corpus가 충분한 이후 진행
 
-4. **Route S: Automated subscription — separately gated**
+5. **Route S: Automated subscription — separately gated**
    - live ingestion, persistent event runtime, account-owned feed를 순차 결정
    - subscription-management UI와 실제 calendar-client lifecycle QA 수행
    - local reference feed를 production subscription 완료로 간주하지 않음
 
-5. **Shared production gate**
+6. **Shared production gate**
    - 개인정보·보존·삭제, 인증·권한, secrets, abuse prevention 검토
    - monitoring, backup/restore, incident response, rollback, SLO 준비

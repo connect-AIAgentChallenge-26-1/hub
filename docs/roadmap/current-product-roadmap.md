@@ -1,8 +1,10 @@
 # NoticePilot Current Product Roadmap
 
-> Baseline: 2026-07-19 after Foundation.25.1 restoration and local reference-feed integration  
-> Next productization route: Route M — Manual / AI assistant  
-> Production subscription route: Route S — deferred until its product and operating gates are approved
+> Baseline: 2026-07-19 after Foundation.25.1 restoration and S-Lite durable-feed implementation
+>
+> Next productization route: S-Lite deployment and real calendar-client proof
+>
+> AI route: Route M — postponed as an independent product decision
 
 ## 1. Purpose
 
@@ -27,31 +29,29 @@ The routes must not be reported or implemented as one undifferentiated phase.
 | Test corpus | 10-entry baseline collected | Verified public entries now cover scholarship, school notice, assignment, competition, job posting, and ambiguous-date cases; deterministic corpus validation is next. |
 | Foundation.25.1 | Implemented, isolated | The exact package, data, persistence, projection, feed, and tests are restored. |
 | Local reference delivery | Opt-in runtime active | One fixed 601-event snapshot is exposed through an in-memory loopback capability that expires on server restart. |
+| S-Lite durable delivery | Implemented, deployment pending | One administrator can issue, inspect, rotate, and revoke one SQLite-backed capability URL that survives restart. |
 | Production ingestion and feed | Pending | No live root ingestion, account-owned durable feed, production deployment, or operating service exists. |
 | Calendar-client QA | Automated evidence only | S30-A is complete; S30-B still requires a physical Samsung device. |
 
-The local reference feed proves an integration boundary. It is not evidence of
-production account ownership, durable state, live refresh, deployment, or
-real-client compatibility.
+S-Lite proves the durable single-link boundary. It is not evidence of production
+account ownership, live ingestion/refresh, hardened deployment, or real-client
+compatibility.
 
 ## 3. Route Decision
 
-Route M is the next implementation route.
+S-Lite deployment and real-client proof are the next implementation route.
 
 Reasons:
 
-- the current user-facing shell already supports the complete manual review and
-  export loop;
-- server schemas, adapters, and mock HTTP behavior provide a stable provider
-  boundary;
-- the next unresolved product risk is extraction quality, which can be measured
-  with a verified corpus;
-- it does not require authentication, a database, live crawling, token
-  lifecycle, or operational feed deployment;
-- Route S requires those larger decisions together and must not grow directly
-  out of the local reference endpoint.
+- the first product goal is an ICS link that a calendar client can keep polling;
+- the smallest useful scope is one trusted administrator and one durable feed,
+  without accounts, crawling, or AI;
+- token persistence, restart recovery, rotation, and revocation are now
+  implemented and must be proven behind HTTPS on persistent storage;
+- AI extraction quality and live ingestion remain separate risks and should not
+  be pulled into this first release boundary.
 
-This decision selects the next route, not a provider, production launch, or
+This decision selects the next validation route, not a production launch or
 permission to handle private notice data.
 
 ## 4. Productization Flow
@@ -63,13 +63,15 @@ P0 Product truth and quality foundation
 ├─ schema, adapter, HTTP, and security contracts
 └─ protected PR and CI workflow
           │
-          ├─ Route M — Manual / AI assistant
-          │  corpus → evaluation harness → server AI vertical slice
-          │  → corpus QA → file/date expansion
+          ├─ S-Lite — durable single feed
+          │  SQLite capability → HTTPS deployment → real-client QA
           │
-          └─ Route S — Automated subscription
+          ├─ Route M — Manual / AI assistant (postponed)
+          │  corpus → evaluation harness → server AI vertical slice
+          │
+          └─ Route S — Automated subscription expansion
              live ingestion → event runtime → durable account feed
-             → management UI → calendar-client QA
+             → management UI → multi-client QA
                           │
                           ▼
 P3 Shared production gate
@@ -167,26 +169,31 @@ parsing and batch export retain their own entry gates.
 - Korean and English critical flows remain usable;
 - mock regression paths and export behavior remain stable.
 
-## 7. Route S — Automated Subscription
+## 7. Route S — Subscription Product
 
-Route S remains strategic but is not the next implementation route.
+The S-Lite entry slice is implemented. Automated ingestion and account-owned
+subscription expansion remain separately gated.
 
 Sequence:
 
-1. **S1 live ingestion:** approved hosts and schemes, redirect and IP
+1. **S0 S-Lite durable link:** one administrator, one SQLite singleton, one
+   fixed Foundation snapshot, hash-only capability persistence, restart
+   recovery, rotation, and revocation. Implementation is complete; HTTPS
+   deployment, backup/restore drill, and real-client lifecycle evidence remain.
+2. **S1 live ingestion:** approved hosts and schemes, redirect and IP
    revalidation, response/attachment limits, scheduler, retries, and failure
    isolation.
-2. **S2 event runtime:** promotion, reconciliation, persistent identity,
+3. **S2 event runtime:** promotion, reconciliation, persistent identity,
    revision, sequence, cancellation, and durable repositories wired from live
    root input.
-3. **S3 account feed:** identity, SubscriptionProfile ownership, token hashes,
+4. **S3 account feed:** identity, SubscriptionProfile ownership, token hashes,
    rotation/revocation, private caching, authorization failures, and durable
    endpoint state.
-4. **S4 management experience:** campus and source filters, feed status,
+5. **S4 management experience:** campus and source filters, feed status,
    lifecycle controls, errors, and recovery UI.
-5. **S5 calendar-client evidence:** Samsung and other approved clients must
+6. **S5 calendar-client evidence:** Samsung and other approved clients must
    prove continuing URL refresh, updates, stable UID behavior, and cancellation.
-6. **S6 operations:** production deployment, monitoring, backup/restore,
+7. **S6 operations:** production deployment, monitoring, backup/restore,
    incident response, rollback, and service-level objectives.
 
 S30-B physical Samsung QA retires one client risk. Passing it against a local

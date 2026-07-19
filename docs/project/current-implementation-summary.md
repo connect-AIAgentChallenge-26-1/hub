@@ -6,7 +6,7 @@ This document summarizes the current implementation baseline of NoticePilot befo
 
 ## Current Status
 
-NoticePilot is currently a React + Vite MVP UI with an Express mock analyze API and Zod-backed server schemas. The project validates the core workflow through client-side mock analysis and server mock analysis.
+NoticePilot is currently a React + Vite MVP UI with an Express mock analyze API, Zod-backed server schemas, and an opt-in S-Lite durable single-feed API. The project validates the analysis workflow through mock paths and validates one persistent subscription URL through Foundation.25.1 plus SQLite.
 
 Current user-facing flow:
 
@@ -24,7 +24,7 @@ Foundation.25.1 is a verified standalone crawler release. Its exact promoted
 package subtree is restored at `packages/noticepilot-knu-crawler`. The root app
 now has an explicitly opt-in, local/reference-only bridge that provisions and
 renders one fixed all-campus student subscription feed from that package.
-Production ingestion, per-user persistence, and deployment were not performed.
+Production ingestion, account identity, and deployment were not performed.
 See the [Foundation.25.1 standalone release record](../releases/foundation-25.1.md)
 for the detailed release and restoration authority.
 
@@ -45,7 +45,7 @@ Frontend: React + Vite
 Backend: Express
 Schema validation: Zod
 State: React useState in App.jsx
-Persistence: browser localStorage
+Persistence: browser localStorage + opt-in S-Lite SQLite singleton
 Export: client-side Markdown and .ics generation
 ```
 
@@ -152,9 +152,10 @@ Local isolated Node 22 verification passed:
 - `npm run build`: passed
 - `npm run security:audit`: passed with 0 vulnerabilities
 
-A repository CI workflow is now defined for Node 22 tests/build/audit and the
-Foundation.25.1 Python 3.14 regression suite. Its first remote run is pending;
-the local verification above does not represent a passing GitHub Actions run.
+A repository CI workflow is defined for Node 22 tests/build/audit and the
+Foundation.25.1 Python 3.14 regression suite. Previous product-baseline PRs have
+passed those remote checks; the historical local counts above describe the
+earlier phase rather than the current regression total.
 
 ### Phase 3. Frontend ↔ Server Mock Analyze Wiring
 
@@ -223,11 +224,44 @@ This slice is a non-production integration proof. It has no caller account
 authentication, database-backed feed lifetime, user-specific profile, campus
 filtering, revocation UI, rotation workflow, or deployment configuration.
 
+### S-Lite Durable Single Subscription Feed
+
+Status: Complete for the single-admin, single-process implementation boundary
+
+Implemented capabilities:
+
+- explicit opt-in flag: `NOTICEPILOT_ENABLE_SLITE_FEED=true`
+- fail-closed startup requiring a whitespace-free 32-byte administrator key and
+  an absolute SQLite path
+- reference mode and S-Lite mode are mutually exclusive
+- authenticated administrator status, create, rotate, and revoke endpoints
+- one singleton feed backed by the fixed Foundation.25.1 601-event snapshot
+- SQLite persistence of feed identity, lifecycle state, SHA-256 token hash, and
+  a hash-derived display fingerprint; the raw token, raw prefix, and full
+  subscription URL are never stored
+- raw capability URL returned only after a successful create or rotate commit
+- existing URL continues to render after a full bridge/server restart
+- rotate preserves feed identity, issues a new token once, and invalidates the
+  old token with a generic `404`
+- revoke persists across restart; explicit rotate is required to reactivate it
+- public `GET`, `HEAD`, `ETag`, and `304` behavior with allowlisted headers and
+  non-reflecting `404`/`503` failures
+- private `0600` database creation, schema-version checks, `BEGIN IMMEDIATE`,
+  `busy_timeout`, and `synchronous=FULL`
+- real A→B→C restart integration coverage registered in root `npm test`
+
+This is not a production subscription service. It has no UI, accounts,
+multi-user profile ownership, live ingestion, crawler schedule, dynamic
+snapshot refresh, multi-process coordination, TLS/reverse-proxy deployment,
+rate limiting, observability, or automated backup/restore. See
+[`slite-durable-feed.md`](../architecture/slite-durable-feed.md).
+
 Local hardening verification on 2026-07-19:
 
 - focused frontend API contract: 3/3 passed
 - focused reference-feed HTTP and real bridge contract: 6/6 passed
-- root `npm test`, including frontend contracts: 130/130 passed
+- focused S-Lite lifecycle, failure, and restart contract: 7/7 passed
+- root `npm test`, including S-Lite restart contracts: 137/137 passed
 - Foundation.25.1 regression: 462/462 passed
 - production build: passed with 57 modules
 - high-severity dependency audit: passed with 0 vulnerabilities
@@ -298,9 +332,9 @@ The following are not implemented yet:
 - advanced relative date resolution
 - school-level notice parsing
 - checkbox-based batch `.ics` export
-- production user-specific subscription feeds and persistent feed storage
+- production account-owned or multi-user subscription feeds
 - multiple saved notice projects
-- login / database
+- login / general application database
 - Google Calendar API integration
 - payment
 

@@ -26,12 +26,14 @@ export class PythonReferenceFeedGateway {
     pythonCommand = process.env.NOTICEPILOT_PYTHON || 'python3',
     bridgePath = DEFAULT_BRIDGE_PATH,
     foundationRoot = DEFAULT_FOUNDATION_ROOT,
+    bridgeArgs = [],
     requestTimeoutMs = 30_000,
     spawnProcess = spawn,
   } = {}) {
     this.pythonCommand = pythonCommand
     this.bridgePath = bridgePath
     this.foundationRoot = foundationRoot
+    this.bridgeArgs = [...bridgeArgs]
     this.requestTimeoutMs = requestTimeoutMs
     this.spawnProcess = spawnProcess
     this.child = null
@@ -94,7 +96,13 @@ export class PythonReferenceFeedGateway {
 
     const child = this.spawnProcess(
       this.pythonCommand,
-      ['-B', this.bridgePath, '--foundation-root', this.foundationRoot],
+      [
+        '-B',
+        this.bridgePath,
+        '--foundation-root',
+        this.foundationRoot,
+        ...this.bridgeArgs,
+      ],
       {
         stdio: ['pipe', 'pipe', 'pipe'],
         env: {
