@@ -102,7 +102,16 @@ provisioning, secret rotation, monitoring, automated backup/restore drills, and 
 calendar-client lifecycle evidence remain deployment gates rather than hidden
 assumptions.
 
-The repository includes a Caddy/systemd deployment kit that keeps Node on
-loopback and exposes only the public calendar read endpoint. See
-[`slite-https-caddy.md`](../deployment/slite-https-caddy.md). This is reviewed
-configuration, not evidence that a public host has been provisioned.
+The repository includes two alternative Caddy boundaries that keep Node on
+loopback and expose only the calendar read endpoint:
+
+- [`slite-lan-https-caddy.md`](../deployment/slite-lan-https-caddy.md) uses a
+  pinned private IPv4 address, port 8443, an allowlisted LAN CIDR, and Caddy's
+  internal CA for same-network validation;
+- [`slite-https-caddy.md`](../deployment/slite-https-caddy.md) is the separate
+  public-domain Linux deployment profile.
+
+These are reviewed configurations, not evidence that a physical calendar
+client or public host has been provisioned. They must not be run as concurrent
+Caddy processes because their local admin endpoint and storage assumptions
+would conflict.

@@ -259,7 +259,7 @@ Caddy/systemd kit supplies the loopback-only HTTPS proxy boundary. See
 
 ### S-Lite HTTPS Reverse Proxy Kit
 
-Status: Implemented and locally validated; actual host deployment pending
+Status: Public and LAN profiles implemented; physical client/host evidence pending
 
 - S-Lite startup rejects non-loopback `HOST` values before gateway creation
 - Caddy Automatic HTTPS on a dedicated hostname
@@ -273,10 +273,14 @@ Status: Implemented and locally validated; actual host deployment pending
 - upstream connection errors become a fixed non-cacheable `503`
 - non-root hardened systemd unit with a private persistent state directory
 - Docker-backed Caddy validation and root contract tests
+- alternative LAN profile on an unprivileged port with a pinned RFC1918
+  interface, explicit client CIDR, `tls internal`, and no LAN HSTS persistence
+- HTTP/3 disabled so the LAN proof opens no unreviewed UDP listener
+- fail-closed LAN environment validation before Caddy adaptation
 
-The remaining gate is applying the kit to a real DNS name/Linux host, verifying
-the firewall and certificate, and collecting restart/rotation/revocation
-evidence from a real calendar client.
+The immediate remaining gate is loading the LAN CA root into a real calendar
+client and collecting refresh/restart/rotation/revocation evidence on the same
+network. Public DNS/Linux deployment remains a separate later gate.
 
 Local hardening verification on 2026-07-19:
 
@@ -301,6 +305,23 @@ HTTPS deployment-kit verification on 2026-07-19:
   HTTP `500` and dial failure became fixed `503`; canary capability was absent
   from logs
 - Debian container `systemd-analyze verify`: passed
+
+LAN HTTPS profile verification on 2026-07-20:
+
+- focused Caddy/environment and RFC1918 validator contracts: 29/29 passed
+- root `npm test`: 166/166 passed
+- production build, Wiki sync 18/18, and high-severity audit: passed
+- Foundation.25.1 regression: 462/462 passed
+- pinned Docker Caddy v2.11.4 validation: passed
+- macOS Homebrew Caddy v2.11.4 fixed-launcher validation and live listener
+  inspection at the selected LAN address: passed; TCP 8443 bound only to that
+  address, the admin API bound only to loopback, UDP 8443 remained closed, and
+  the host trust store was not changed
+- internal-CA Docker routing/TLS smoke: untrusted TLS failed; trusted `GET` and
+  `HEAD` returned `200`; query, encoded/suffix path, `POST`, `/api`, and a
+  disallowed client CIDR returned `404`; plaintext HTTP was closed; loopback
+  upstream failure returned `503`; canary capability was absent from logs
+- physical LAN calendar-client CA trust and refresh lifecycle: pending
 
 ## Current App Schema Baseline
 

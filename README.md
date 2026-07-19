@@ -157,7 +157,13 @@ backup/restore도 필수입니다. 상세 계약은
 `127.0.0.1:3001`에서만 시작하고 Caddy는 정확한
 `GET/HEAD /calendar/:token.ics`만 외부로 전달합니다. `/api` 전체는 public
 hostname에서 고정 `404`이며 capability URL access log도 활성화하지 않습니다.
-실제 DNS/host에 적용하는 절차는
+공인 도메인보다 먼저 같은 네트워크에서 검증하려면 별도의
+[S-Lite LAN HTTPS Validation with Caddy](docs/deployment/slite-lan-https-caddy.md)를
+사용합니다. 이 프로필은 고정 private IPv4와 8443 포트, Caddy 내부 CA를
+사용하며 허용된 LAN CIDR의 calendar read 요청만 전달합니다. 다른 기기에는
+Caddy root 인증서를 명시적으로 신뢰시켜야 합니다.
+
+실제 DNS/host에 적용하는 공개 배포 절차는
 [S-Lite HTTPS Deployment with Caddy](docs/deployment/slite-https-caddy.md)를
 따릅니다. 이 kit가 실제 host, DNS, firewall, backup 또는 calendar-client
 검증을 대신하지는 않습니다.
@@ -212,7 +218,8 @@ Phase 4 이후의 AI 연동 계약, 테스트 corpus, batch calendar export 로�
    - master roadmap, protected CI, upstream workflow guardrail 유지
 
 2. **S-Lite: durable single-feed release boundary**
-   - 준비된 Caddy/systemd kit를 실제 DNS·Linux host에 적용
+   - LAN Caddy profile로 같은 네트워크의 실제 calendar client lifecycle 검증
+   - 검증 후 public Caddy/systemd kit를 실제 DNS·Linux host에 적용
    - SQLite volume backup/restore와 장애 시 fail-closed 동작 검증
    - 실제 calendar client에서 링크 등록·재시작·회전·폐기 lifecycle QA
 

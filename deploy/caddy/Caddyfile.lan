@@ -1,0 +1,78 @@
+{
+	# Keep the control plane local and never redirect a capability-bearing HTTP
+	# path. LAN clients must receive the final https:// URL directly.
+	admin 127.0.0.1:2019
+	auto_https disable_redirects
+	skip_install_trust
+	servers {
+		protocols h1 h2
+	}
+	log default {
+		format filter {
+			request>uri replace [REDACTED]
+			request>headers>Authorization delete
+			request>headers>Cookie delete
+			request>headers>Referer delete
+			wrap json
+		}
+	}
+}
+
+https://{$NOTICEPILOT_LAN_HOST}:{$NOTICEPILOT_LAN_HTTPS_PORT} {
+	# Bind only the selected private interface. Keep Node on loopback.
+	bind {$NOTICEPILOT_LAN_BIND}
+	tls internal
+
+	header {
+		-Server
+	}
+
+	@calendar {
+		method GET HEAD
+		remote_ip {$NOTICEPILOT_LAN_CIDR}
+		vars_regexp {http.request.uri} ^/calendar/[A-Za-z0-9_-]{32,256}\.ics$
+	}
+
+	handle @calendar {
+		reverse_proxy 127.0.0.1:3001 {
+			header_up -Authorization
+			header_up -Cookie
+			header_up -Forwarded
+			header_up -Proxy-Authorization
+			header_up -Referer
+
+			@upstream_failure status 5xx
+			handle_response @upstream_failure {
+				header Cache-Control "no-store"
+				header Content-Type "text/plain; charset=utf-8"
+				header Content-Security-Policy "default-src 'none'"
+				header Referrer-Policy "no-referrer"
+				header Retry-After "300"
+				header X-Content-Type-Options "nosniff"
+				respond "temporarily unavailable" 503
+			}
+		}
+	}
+
+	# The administrator API remains local to the NoticePilot host.
+	handle {
+		header Cache-Control "no-store"
+		header Content-Type "text/plain; charset=utf-8"
+		header Content-Security-Policy "default-src 'none'"
+		header Referrer-Policy "no-referrer"
+		header X-Content-Type-Options "nosniff"
+		respond "not found" 404
+	}
+
+	# Access logging is intentionally absent because the URL is the credential.
+
+	handle_errors {
+		header Cache-Control "no-store"
+		header Content-Type "text/plain; charset=utf-8"
+		header Content-Security-Policy "default-src 'none'"
+		header Referrer-Policy "no-referrer"
+		header Retry-After "300"
+		header X-Content-Type-Options "nosniff"
+		respond "temporarily unavailable" 503
+	}
+}
