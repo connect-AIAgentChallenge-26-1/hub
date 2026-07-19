@@ -5,7 +5,7 @@ import { mkdtemp, readFile, rm, stat } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { test } from 'node:test'
-import { createApp } from '../index.js'
+import { createApp, isFeedLoopbackHost } from '../index.js'
 import { ReferenceFeedGatewayError } from '../services/referenceFeedGateway.js'
 
 const ADMIN_KEY = 'admin-key-with-at-least-thirty-two-bytes-1234'
@@ -141,6 +141,23 @@ test('SL-00 S-Lite startup is explicit, complete, and mutually exclusive', () =>
       }),
     (error) => error.code === 'SLITE_ADMIN_KEY_REQUIRED',
   )
+  for (const host of ['127.0.0.1', '127.0.0.2', '::1', '[::1]']) {
+    assert.equal(isFeedLoopbackHost(host), true)
+  }
+  for (const host of ['0.0.0.0', '::', '192.168.0.10', 'localhost']) {
+    assert.equal(isFeedLoopbackHost(host), false)
+    assert.throws(
+      () =>
+        createApp({
+          sliteFeedEnabled: true,
+          sliteFeedHost: host,
+          sliteFeedAdminKey: ADMIN_KEY,
+          sliteFeedDatabasePath: DATABASE_PATH,
+          sliteFeedGatewayFactory: factory,
+        }),
+      (error) => error.code === 'SLITE_FEED_LOOPBACK_REQUIRED',
+    )
+  }
   assert.equal(factoryCalls, 0)
 })
 

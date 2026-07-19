@@ -1,0 +1,33 @@
+[Unit]
+Description=NoticePilot S-Lite single-feed server
+After=network.target
+
+[Service]
+Type=simple
+User=noticepilot
+Group=noticepilot
+WorkingDirectory=/opt/noticepilot
+EnvironmentFile=/etc/noticepilot/slite.env
+ExecStart=/usr/bin/env NODE_ENV=production HOST=127.0.0.1 PORT=3001 /usr/bin/node server/src/index.js
+Restart=on-failure
+RestartSec=5s
+TimeoutStopSec=15s
+UMask=0077
+
+NoNewPrivileges=true
+PrivateDevices=true
+PrivateTmp=true
+ProtectControlGroups=true
+ProtectHome=true
+ProtectKernelModules=true
+ProtectKernelTunables=true
+ProtectSystem=strict
+ReadWritePaths=/var/lib/noticepilot
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+RestrictNamespaces=true
+RestrictSUIDSGID=true
+StateDirectory=noticepilot
+StateDirectoryMode=0700
+
+[Install]
+WantedBy=multi-user.target

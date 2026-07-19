@@ -7,7 +7,7 @@ import { createSliteFeedRouters } from './routes/sliteFeedRoutes.js'
 import { createPythonReferenceFeedGateway } from './services/referenceFeedGateway.js'
 import { createPythonSliteFeedGateway } from './services/sliteFeedGateway.js'
 
-export function isReferenceFeedLoopbackHost(host) {
+export function isFeedLoopbackHost(host) {
   if (typeof host !== 'string') {
     return false
   }
@@ -27,6 +27,8 @@ export function isReferenceFeedLoopbackHost(host) {
   return false
 }
 
+export const isReferenceFeedLoopbackHost = isFeedLoopbackHost
+
 export function createApp({
   analyzeNotice,
   referenceFeedEnabled =
@@ -35,6 +37,7 @@ export function createApp({
   referenceFeedGateway,
   referenceFeedGatewayFactory = createPythonReferenceFeedGateway,
   sliteFeedEnabled = process.env.NOTICEPILOT_ENABLE_SLITE_FEED === 'true',
+  sliteFeedHost = process.env.HOST || '127.0.0.1',
   sliteFeedAdminKey = process.env.NOTICEPILOT_SLITE_ADMIN_KEY,
   sliteFeedDatabasePath = process.env.NOTICEPILOT_SLITE_DB_PATH,
   sliteFeedGateway,
@@ -49,7 +52,7 @@ export function createApp({
   }
   if (
     referenceFeedEnabled &&
-    !isReferenceFeedLoopbackHost(referenceFeedHost)
+    !isFeedLoopbackHost(referenceFeedHost)
   ) {
     const error = new Error(
       'Reference feed mode requires a loopback-only server host.',
@@ -58,6 +61,13 @@ export function createApp({
     throw error
   }
   if (sliteFeedEnabled) {
+    if (!isFeedLoopbackHost(sliteFeedHost)) {
+      const error = new Error(
+        'S-Lite feed mode requires a loopback-only server host.',
+      )
+      error.code = 'SLITE_FEED_LOOPBACK_REQUIRED'
+      throw error
+    }
     if (
       typeof sliteFeedAdminKey !== 'string' ||
       !/^[A-Za-z0-9_-]{32,256}$/.test(sliteFeedAdminKey)
@@ -219,7 +229,10 @@ const isMainModule = process.argv[1]
 if (isMainModule) {
   const port = Number(process.env.PORT || process.env.NOTICEPILOT_API_PORT || 3001)
   const host = process.env.HOST || '127.0.0.1'
-  const app = createApp({ referenceFeedHost: host })
+  const app = createApp({
+    referenceFeedHost: host,
+    sliteFeedHost: host,
+  })
 
   const server = app.listen(port, host, () => {
     console.log(`NoticePilot analyze API listening on http://${host}:${port}`)

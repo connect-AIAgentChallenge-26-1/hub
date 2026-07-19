@@ -97,7 +97,12 @@ issued link because the raw token cannot be reconstructed.
 
 The bridge serializes requests within one process. S-Lite is therefore approved
 only for one Node process, one Python bridge, and one replica. Multi-process
-coordination, live snapshot migration, rate limiting, TLS/reverse-proxy config,
-secret rotation, monitoring, automated backup/restore drills, and physical
+coordination, live snapshot migration, rate limiting, actual host/DNS/firewall
+provisioning, secret rotation, monitoring, automated backup/restore drills, and physical
 calendar-client lifecycle evidence remain deployment gates rather than hidden
 assumptions.
+
+The repository includes a Caddy/systemd deployment kit that keeps Node on
+loopback and exposes only the public calendar read endpoint. See
+[`slite-https-caddy.md`](../deployment/slite-https-caddy.md). This is reviewed
+configuration, not evidence that a public host has been provisioned.
