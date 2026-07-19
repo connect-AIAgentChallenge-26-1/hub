@@ -118,6 +118,10 @@ Express analyze API 기본 주소는 `http://127.0.0.1:3001/`이며, Vite 개발
 NOTICEPILOT_ENABLE_REFERENCE_FEED=true npm run dev:server
 ```
 
+Reference mode는 숫자형 loopback host에서만 시작됩니다. `HOST=0.0.0.0`,
+`HOST=::`, `HOST=localhost` 또는 LAN 주소와 함께 활성화하면 서버가 시작
+전에 실패합니다. 기본값 `127.0.0.1`을 그대로 사용하는 것을 권장합니다.
+
 프로덕션 빌드 확인:
 
 ```bash

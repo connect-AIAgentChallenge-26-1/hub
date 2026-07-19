@@ -152,8 +152,9 @@ Local isolated Node 22 verification passed:
 - `npm run build`: passed
 - `npm run security:audit`: passed with 0 vulnerabilities
 
-GitHub Actions verification pending. This local isolated verification does not
-represent a passing GitHub Actions or CI run.
+A repository CI workflow is now defined for Node 22 tests/build/audit and the
+Foundation.25.1 Python 3.14 regression suite. Its first remote run is pending;
+the local verification above does not represent a passing GitHub Actions run.
 
 ### Phase 3. Frontend ↔ Server Mock Analyze Wiring
 
@@ -214,10 +215,25 @@ Implemented capabilities:
 - UI builds the same-origin subscription URL in memory and exposes bilingual create, retry, copy, and expiry states
 - disabled and dependency-unavailable provisioning returns `503`; malformed or unauthorized public URLs return a generic `404`
 - bridge cleanup on application shutdown
+- reference mode fails before gateway startup unless the configured server host is loopback-only
+- frontend API contract tests are registered in the root `npm test` command
+- GitHub Actions defines separate JavaScript and Foundation.25.1 regression jobs
 
 This slice is a non-production integration proof. It has no caller account
 authentication, database-backed feed lifetime, user-specific profile, campus
 filtering, revocation UI, rotation workflow, or deployment configuration.
+
+Local hardening verification on 2026-07-19:
+
+- focused frontend API contract: 3/3 passed
+- focused reference-feed HTTP and real bridge contract: 6/6 passed
+- root `npm test`, including frontend contracts: 130/130 passed
+- Foundation.25.1 regression: 462/462 passed
+- production build: passed with 57 modules
+- high-severity dependency audit: passed with 0 vulnerabilities
+- known immutable-package warning: Python 3.14 emits one cleanup
+  `ResourceWarning` for the Foundation conditional-304 test; it does not fail
+  the suite and the restored subtree remains unchanged
 
 ## Current App Schema Baseline
 

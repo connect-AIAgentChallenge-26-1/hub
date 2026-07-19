@@ -171,7 +171,7 @@ Do not automatically fall back to server mock. A future user-controlled fallback
 - no PDF/HWPX/OCR
 - no school-specific parser
 - no campus preference filtering
-- no subscription ICS feed URL/backend generation
+- no production user-specific subscription feed or persistent backend generation; the separate opt-in local/reference slice remains unchanged
 - no database/auth/payment/Google Calendar API
 
 ## Phase 4-D. Corpus-based AI QA
@@ -283,5 +283,5 @@ Goal:
 Status:
 
 - future roadmap only
-- current MVP only shows a subscription ICS 준비 중 status card
-- no feed URL, backend feed generation, database, or user-specific subscription state exists yet
+- an opt-in loopback-only fixed reference feed exists for contract validation
+- no durable database or user-specific subscription state exists yet

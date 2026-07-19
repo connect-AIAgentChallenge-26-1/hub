@@ -42,7 +42,7 @@ Current implemented baseline:
 - localStorage persistence
 - separate campus preference persistence
 - inert metadata.userPreferencesSnapshot
-- calendar tab with campus preferences and subscription ICS 준비 중 status card
+- calendar tab with campus preferences and opt-in local reference subscription flow
 - Markdown checklist download
 - optional evidence inclusion in Markdown export
 - selected all-day .ics export
@@ -286,7 +286,7 @@ Implemented:
 - updated header links to supported workspace hashes
 - added full-width calendar tab
 - added campus preference card
-- added subscription ICS 준비 중 status card
+- added opt-in local reference subscription creation, copy, and status flow
 - added separate campus preference localStorage key
 - normalized invalid and duplicate campus IDs
 - attached inert metadata.userPreferencesSnapshot to client mock results
@@ -704,7 +704,8 @@ Move beyond downloaded .ics files toward a future subscription feed.
 Status:
 
 ```text
-Future roadmap only. The current MVP only shows a subscription ICS 준비 중 status card.
+Production user-specific feed remains future scope. The current MVP exposes
+only an opt-in, loopback-only fixed Foundation.25.1 reference feed.
 ```
 
 ---

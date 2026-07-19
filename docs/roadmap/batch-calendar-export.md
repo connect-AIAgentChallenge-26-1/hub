@@ -134,11 +134,13 @@ Any future use of campus preferences for filtering or subscription behavior shou
 
 ## Subscription Feed Direction
 
-Subscription calendar feed is a future roadmap item. The current app only has a subscription ICS 준비 중 status card.
+Production user-specific subscription calendar feeds remain a future roadmap
+item. The current app has an opt-in, loopback-only reference flow for one fixed
+Foundation.25.1 snapshot; it is not durable user subscription infrastructure.
 
 Downloaded `.ics` export should come first because it is simpler, reviewable, and does not require account infrastructure.
 
-Subscription feed would require additional decisions:
+Production subscription feeds still require additional decisions:
 
 - hosted feed URL
 - update cadence

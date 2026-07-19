@@ -68,9 +68,11 @@ Code and tests exist, but normal runtime callers do not use these paths automati
 - `KNU rule candidates → ExtractionResult + CalendarEventCandidate[]`
 - opt-in domain-adapter path in `normalizeAiRawToAppResult`
 
-### 2.3 Contract complete, runtime pending
+### 2.3 Foundation implemented, production runtime pending
 
-The contract is authoritative, but consumer or delivery implementation is absent:
+The contract and restored Foundation implementation are authoritative. The
+root application exercises one fixed reference snapshot, while live ingestion
+and account-owned persistent delivery remain absent:
 
 - persistent `CalendarEvent.eventId`
 - ICS UID derived from `CalendarEvent.eventId`
@@ -89,8 +91,8 @@ The contract is authoritative, but consumer or delivery implementation is absent
 - candidate promotion
 - previous/current event reconciliation
 - persistent repositories
-- core server-side ICS serializer
-- subscription-feed persistence and endpoint
+- production root server-side ICS pipeline
+- account-owned subscription-feed persistence and management endpoint
 - subscription-management UI
 - calendar-client subscription QA
 
