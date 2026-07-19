@@ -157,6 +157,7 @@ Phase 4 이후의 AI 연동 계약, 테스트 corpus, batch calendar export 로�
 
 - [Current Implementation Summary](docs/project/current-implementation-summary.md)
 - [Foundation.25.1 Standalone Release Record](docs/releases/foundation-25.1.md) — 검증된 standalone crawler package가 `packages/noticepilot-knu-crawler`에 복원됐고 로컬 reference feed 경계까지 연결됐으며, 운영용 수집·배포는 아직 수행되지 않았습니다.
+- [Current Product Roadmap](docs/roadmap/current-product-roadmap.md) — Route M 수동/AI assistant를 다음 제품화 경로로 두고 Route S 자동 구독과 공통 production gate를 분리합니다.
 - [Phase 4 Plan](docs/roadmap/phase-4-plan.md)
 - [AI Output Schema](docs/ai/ai-output-schema.md)
 - [Prompt Contract](docs/ai/prompt-contract.md)
@@ -165,34 +166,27 @@ Phase 4 이후의 AI 연동 계약, 테스트 corpus, batch calendar export 로�
 
 ## 다음 단계
 
-1. **Phase 4-A: Planning / Contract Documentation**
-   - 현재 구현 기준선 정리
-   - AI raw schema와 app schema mapping 문서화
-   - prompt contract 문서화
-   - 테스트 corpus 계획 수립
-   - batch calendar export 로드맵 정리
+1. **P0: Product truth and quality foundation**
+   - repository/Wiki authority를 검토 가능한 one-way 경계로 정리
+   - 실제 공개 공지 corpus를 0건에서 최소 10건으로 구축
+   - master roadmap, protected CI, upstream workflow guardrail 유지
 
-2. **Phase 4-B: Test Corpus Scaffold**
-   - 공개 URL과 수동 추출 텍스트 중심으로 실제 공지 corpus 구축
-   - 필요한 공개 첨부파일만 선별적으로 보관
-   - 공지 유형별 expected result 작성
+2. **Route M: Manual / AI assistant — next productization route**
+   - corpus structure와 expected truth를 검증하는 평가 기반 마련
+   - 수동 텍스트만 받는 작은 server-side AI vertical slice 구현
+   - AI raw response를 normalize / validate한 뒤 기존 검토·수정 UI에 연결
+   - corpus 기반으로 accuracy, evidence, correction, latency, failure를 평가
 
-3. **Phase 4-C: Real AI API Integration**
-   - Express `mode: "ai"` 구현
-   - AI API key는 server-only 환경변수로 관리
-   - AI raw response를 server에서 normalize / validate 후 현재 app schema로 변환
+3. **Controlled Route M expansion**
+   - QA 근거가 확보된 뒤 PDF / HWP / HWPX / OCR extraction을 별도 단계로 검토
+   - advanced date resolution과 school-level parsing은 각자의 entry gate 유지
+   - checkbox 기반 batch `.ics` export는 단건 품질과 corpus가 충분한 이후 진행
 
-4. **Phase 4-D: Corpus-based AI QA**
-   - 실제 공지 corpus 기준으로 AI 추출 결과 평가
-   - prompt / schema / validation backlog 정리
+4. **Route S: Automated subscription — separately gated**
+   - live ingestion, persistent event runtime, account-owned feed를 순차 결정
+   - subscription-management UI와 실제 calendar-client lifecycle QA 수행
+   - local reference feed를 production subscription 완료로 간주하지 않음
 
-5. **Phase 4-E: Date Resolution v1**
-   - 1차는 absolute date 중심
-   - reference date가 명확한 relative date만 제한적으로 처리
-   - 장기적으로 server-side date resolver로 확장
-
-6. **Phase 5 이후**
-   - PDF / HWP / HWPX / OCR extraction
-   - 학교별 공지 parsing
-   - checkbox 기반 batch `.ics` export
-   - 사용자별 영속 subscription calendar feed
+5. **Shared production gate**
+   - 개인정보·보존·삭제, 인증·권한, secrets, abuse prevention 검토
+   - monitoring, backup/restore, incident response, rollback, SLO 준비
