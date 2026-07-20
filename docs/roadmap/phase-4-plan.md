@@ -222,7 +222,7 @@ M2 completion does not authorize M3. M3 remains postponed and requires its separ
 
 Before implementation begins, approve:
 
-- M2 deterministic corpus validation;
+- confirm that the registered M2 deterministic validation remains green;
 - one provider or a narrow provider-adapter interface;
 - quality metrics, stop conditions, and rollback criteria;
 - server-side secret storage and environment separation;
