@@ -1,29 +1,47 @@
 {
+  "schemaVersion": "noticepilot.corpus.expected.v1",
   "id": "example-001",
-  "sourceTitle": "Example notice title",
+  "sourceTitle": "Example scholarship notice",
   "noticeType": "scholarship",
   "expected": {
-    "deadlines": [
+    "items": [
       {
-        "title": "Example application deadline",
-        "date": "2026-07-20",
-        "evidence": "Example evidence excerpt from the notice."
-      }
-    ],
-    "tasks": [],
-    "submissions": [
-      {
+        "assertionId": "item-submission-001",
+        "kind": "submission",
         "title": "Example required document",
-        "evidence": "Example evidence excerpt from the notice."
+        "dateExpression": null,
+        "normalizedDate": null,
+        "evidence": "Required document: transcript",
+        "reviewRequired": false
+      },
+      {
+        "assertionId": "item-deadline-001",
+        "kind": "deadline",
+        "title": "Example application deadline",
+        "dateExpression": "2026-07-10 through 2026-07-20",
+        "normalizedDate": "2026-07-20",
+        "evidence": "Application period: 2026-07-10 through 2026-07-20",
+        "reviewRequired": false
       }
     ],
-    "requirements": [],
-    "cautions": [],
-    "calendarEvents": [
+    "calendarEventCandidates": [
       {
+        "assertionId": "candidate-start-001",
+        "title": "Example application start",
+        "eventType": "start",
+        "dateExpression": "2026-07-10 through 2026-07-20",
+        "normalizedDate": "2026-07-10",
+        "evidence": "Application period: 2026-07-10 through 2026-07-20",
+        "reviewRequired": false
+      },
+      {
+        "assertionId": "candidate-deadline-001",
         "title": "Example application deadline",
-        "startDate": "2026-07-20",
-        "eventType": "deadline"
+        "eventType": "deadline",
+        "dateExpression": "2026-07-10 through 2026-07-20",
+        "normalizedDate": "2026-07-20",
+        "evidence": "Application period: 2026-07-10 through 2026-07-20",
+        "reviewRequired": false
       }
     ]
   }
