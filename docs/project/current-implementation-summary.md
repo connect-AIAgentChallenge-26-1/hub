@@ -183,6 +183,13 @@ Implemented capabilities:
 
 Status: M0 contract baseline, M1 initial corpus collection, and M2 deterministic corpus validation complete.
 
+Authority references:
+
+- Product sequence: [`../roadmap/current-product-roadmap.md`](../roadmap/current-product-roadmap.md)
+- Route M detail: [`../roadmap/phase-4-plan.md`](../roadmap/phase-4-plan.md)
+- Corpus planning: [`../qa/test-corpus-plan.md`](../qa/test-corpus-plan.md)
+- Corpus operational authority: [`../../test-corpus/README.md`](../../test-corpus/README.md)
+
 Implemented baseline:
 
 - AI raw schema, prompt contract, normalization boundary, and fail-closed provider-error rules are documented;
