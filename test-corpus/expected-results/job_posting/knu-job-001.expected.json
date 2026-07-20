@@ -1,42 +1,17 @@
 {
+  "schemaVersion": "noticepilot.corpus.expected.v1",
   "id": "knu-job-001",
   "sourceTitle": "[KOICA] 2026년 한국국제협력단 일반직, 공무직 채용 및 채용설명회 개최 안내(~6/23)",
   "noticeType": "job_posting",
   "expected": {
-    "deadlines": [
-      {
-        "title": "KOICA 지원서 접수 마감",
-        "date": "2026-06-23T11:00:00+09:00",
-        "evidence": "지원서 접수 마감: 2026. 6. 23.(화) 11:00"
-      }
+    "items": [
+      {"assertionId":"item-deadline-001","kind":"deadline","title":"KOICA 지원서 접수 마감","dateExpression":"2026. 6. 23.(화) 11:00","normalizedDate":"2026-06-23","evidence":"지원서 접수 마감: 2026. 6. 23.(화) 11:00","reviewRequired":true},
+      {"assertionId":"item-task-001","kind":"task","title":"KOICA 채용 지원","dateExpression":null,"normalizedDate":null,"evidence":"채용 구분: 일반직, 공무직","reviewRequired":false},
+      {"assertionId":"item-submission-001","kind":"submission","title":"채용 지원서","dateExpression":"2026. 6. 23.(화) 11:00","normalizedDate":"2026-06-23","evidence":"지원서 접수 마감: 2026. 6. 23.(화) 11:00","reviewRequired":true},
+      {"assertionId":"item-requirement-001","kind":"requirement","title":"KOICA 입사 관심자","dateExpression":null,"normalizedDate":null,"evidence":"대상: KOICA 입사에 관심 있는 대학(원)생 및 취업준비생","reviewRequired":false}
     ],
-    "tasks": [
-      {
-        "title": "KOICA 채용 지원",
-        "evidence": "채용 구분: 일반직, 공무직"
-      }
-    ],
-    "submissions": [
-      {
-        "title": "채용 지원서",
-        "evidence": "지원서 접수 마감: 2026. 6. 23.(화) 11:00"
-      }
-    ],
-    "requirements": [
-      {
-        "title": "KOICA 입사 관심자",
-        "evidence": "대상: KOICA 입사에 관심 있는 대학(원)생 및 취업준비생"
-      }
-    ],
-    "cautions": [],
-    "calendarEvents": [
-      {
-        "title": "KOICA 지원서 접수 마감",
-        "startDate": "2026-06-23T11:00:00+09:00",
-        "endDate": "",
-        "eventType": "deadline",
-        "reviewRequired": false
-      }
+    "calendarEventCandidates": [
+      {"assertionId":"candidate-deadline-001","title":"KOICA 지원서 접수 마감","eventType":"deadline","dateExpression":"2026. 6. 23.(화) 11:00","normalizedDate":"2026-06-23","evidence":"지원서 접수 마감: 2026. 6. 23.(화) 11:00","reviewRequired":true}
     ]
   }
 }
