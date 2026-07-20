@@ -74,13 +74,13 @@ M1 completion means that the initial category baseline and referenced corpus fil
 
 ### M2 — Deterministic validation
 
-**Status: Pending.**
+**Status: Complete.**
 
-M2 is complete only when the operational activation gate in `test-corpus/README.md` is complete and the registered repository validation passes.
-
-M2 must establish, at minimum:
+M2 completion is established by the active operational contract and registered repository validation:
 
 - strict expected-truth schema validation;
+- migration of all 10 real expected files to the active v1 contract;
+- zero remaining legacy expected files;
 - index, path, filename, ID, title, and notice-type consistency;
 - allowed enum and date validation;
 - exact evidence traceability to canonical extracted text;
@@ -89,7 +89,7 @@ M2 must establish, at minimum:
 - baseline category-distribution verification; and
 - deterministic, reviewable failures identifying the corpus ID and violated rule.
 
-File presence alone does not complete M2.
+M2 completion establishes corpus integrity and reproducibility. It does not establish provider-output quality, which remains a later M4 responsibility.
 
 ## 5. Coverage Priorities by Notice Type
 
