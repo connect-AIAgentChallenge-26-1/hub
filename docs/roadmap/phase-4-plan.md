@@ -1,287 +1,421 @@
-# NoticePilot Phase 4 Plan
+# NoticePilot Route M Plan
 
-## Purpose
+> Former document name: NoticePilot Phase 4 Plan
+>
+> Document role: detailed plan for Route M — Manual / AI assistant
+>
+> Master roadmap authority: [`current-product-roadmap.md`](current-product-roadmap.md)
+>
+> Current status: AI route postponed; no live provider is connected
+>
+> Corpus status: 10-entry collection complete; deterministic validation pending
 
-Phase 4 prepares NoticePilot for real AI integration without collapsing the project into an unstructured AI demo. The phase is split into documentation, corpus, integration, AI QA, and date-resolution subphases.
+## 1. Purpose and Boundary
 
-## Confirmed Direction
+This document preserves the historical Phase 4 planning lineage while reclassifying it as the detailed plan for **Route M — Manual / AI assistant**.
 
-The confirmed Phase 4 architecture is:
+Route M covers this user flow:
 
 ```text
-AI raw schema
-→ server-side normalization / validation
-→ current NoticePilot app schema
-→ frontend rendering / review / export
+user-provided notice text
+→ evidence-backed structured extraction
+→ user review and correction
+→ Markdown checklist and one-off all-day ICS export
 ```
 
-The AI should not directly return the current frontend app schema. This separation keeps prompt design, AI response evaluation, and future batch calendar export more maintainable.
+Route M does not own or sequence the following work:
 
-## Current Baseline Before Real AI
+- S-Lite deployment and physical calendar-client validation;
+- live crawling or scheduled ingestion;
+- durable event promotion and reconciliation;
+- account-owned subscription feeds;
+- subscription-management UI; or
+- production subscription operations.
 
-The current app already includes:
+Those boundaries remain under the master product roadmap and Route S.
 
-- React + Vite frontend MVP
-- Express mock analyze API
-- Zod-backed server schemas
-- client mock and server mock analysis paths
-- workspace tabs for `#analyze` and `#calendar`
-- separate campus preference storage
-- inert `metadata.userPreferencesSnapshot`
-- selected all-day `.ics` export
+## 2. Authority and Conflict Rule
 
-Campus preferences are stored and echoed as metadata only. They do not affect analysis, filtering, Markdown export, or `.ics` export behavior in Phase 4.
-
-## Phase 4-A. Planning / Contract Documentation
-
-### Goal
-
-Create the planning and contract documentation needed before implementing real AI.
-
-### Deliverables
-
-- `docs/project/current-implementation-summary.md`
-- `docs/roadmap/phase-4-plan.md`
-- `docs/ai/ai-output-schema.md`
-- `docs/ai/prompt-contract.md`
-- `docs/qa/test-corpus-plan.md`
-- `docs/roadmap/batch-calendar-export.md`
-
-### Entry Criteria
-
-- Frontend MVP follow-up complete
-- Express analyze API skeleton complete
-- Frontend ↔ server mock wiring complete
-- Zod-backed server schemas available
-- Calendar tab and campus preference metadata complete
-- client mock and server mock available as regression baselines
-
-### Exit Criteria
-
-- AI raw schema documented
-- mapping into current app schema documented
-- prompt contract documented
-- corpus structure and expected-result policy documented
-- Phase 4-B through Phase 4-E boundaries documented
-- batch calendar export roadmap documented as future behavior, not current implementation
-
-### Non-goals
-
-- no real AI API call
-- no API key
-- no PDF/HWP/HWPX/OCR extraction
-- no runtime behavior change
-- no campus-preference-based filtering or analysis behavior
-- no database/auth/payment/Google Calendar API
-
-## Phase 4-B. Test Corpus Scaffold
-
-### Goal
-
-Create the first reproducible test corpus structure for real notice examples.
-
-### Deliverables
-
-- `test-corpus/index/notice_index.tsv`
-- manually extracted text files
-- expected result JSON files
-- selected public raw attachments only when safe and necessary
-
-### Initial Target
-
-Start with 10 to 12 examples:
+Use the following authority order:
 
 ```text
-school notice: 2-3
-scholarship: 2-3
-assignment / course notice: 2
-competition: 1-2
-job / internship: 1-2
-ambiguous date notice: 1-2
+current implementation truth
+→ ../project/current-implementation-summary.md
+
+master product sequence and route decision
+→ current-product-roadmap.md
+
+Route M detail
+→ phase-4-plan.md
+
+batch/export/subscription detail
+→ batch-calendar-export.md
 ```
 
-### Entry Criteria
+If this document conflicts with current code, registered tests, the implementation summary, or the master roadmap, those sources take precedence.
 
-- Phase 4-A documentation merged
-- corpus columns and expected-result policy accepted
+## 3. Current Implementation Baseline
 
-### Exit Criteria
+### 3.1 Route M baseline
 
-- at least 10 examples indexed
-- each example has public URL or source metadata
-- each example has manually extracted text
-- each example has expected result file
-- privacy/copyright checks applied
+The current Route M-adjacent implementation includes:
 
-### Non-goals
+- React + Vite manual-analysis UI;
+- client mock and Express server mock analysis paths;
+- Zod-backed server schemas and normalization;
+- evidence review, editing, deletion, and completion controls;
+- Markdown export;
+- selected one-off all-day `.ics` export;
+- workspace tabs for `#analyze` and `#calendar`;
+- separately stored campus preferences;
+- inert `metadata.userPreferencesSnapshot`;
+- strict AI raw schema documentation; and
+- a prompt contract aligned with the current strict raw schema.
 
-- no automated crawling
-- no school-level parser
-- no OCR pipeline
-- no AI provider integration requirement
-
-## Phase 4-C. Real AI API Integration
-
-### Goal
-
-Implement `mode: "ai"` through the Express server while keeping API keys server-only.
-
-### Expected Runtime Flow
+The current analyze mode boundary remains:
 
 ```text
-frontend request
+missing mode or mode="mock" → mock result
+mode="ai"                  → 501 ai_not_implemented
+unknown explicit mode       → 400 unsupported_mode
+```
+
+A documented AI contract is not evidence that a live provider is connected or quality-validated.
+
+### 3.2 Adjacent implemented boundaries outside Route M
+
+The repository also contains:
+
+- an isolated Foundation.25.1 KNU crawler package;
+- an opt-in local reference feed using an in-memory capability that expires on restart;
+- an opt-in S-Lite SQLite-backed durable singleton feed;
+- administrator create, inspect, rotate, and revoke APIs for S-Lite; and
+- reviewed public and LAN Caddy profiles.
+
+These are not Route M deliverables or prerequisites. S-Lite proves one durable link, not account ownership, live ingestion, production deployment, or real-client compatibility.
+
+## 4. Historical Phase Mapping
+
+The historical Phase 4 labels remain available for traceability.
+
+| Historical stage | Current Route M stage | Current status |
+| --- | --- | --- |
+| Phase 4-A — Planning / Contract Documentation | M0 — Contract baseline | Complete |
+| Phase 4-B — Test Corpus Scaffold | M1 — Corpus collection + M2 — Deterministic validation | Collection complete; validation pending |
+| Phase 4-C — Real AI API Integration | M3 — Small server-side AI vertical slice | Postponed |
+| Phase 4-D — Corpus-based AI QA | M4 — Corpus-based AI QA | Blocked by M2 and M3 |
+| Phase 4-E — Date Resolution v1 | M5 — Controlled expansion | Blocked by M4 evidence |
+
+The mapping preserves historical references without treating all product work as one linear Phase 4 sequence.
+
+## 5. M0 — Contract Baseline
+
+**Historical label:** Phase 4-A — Planning / Contract Documentation  
+**Status:** Complete
+
+### Completed outputs
+
+- `docs/project/current-implementation-summary.md`;
+- `docs/roadmap/current-product-roadmap.md`;
+- `docs/roadmap/phase-4-plan.md`;
+- `docs/ai/ai-output-schema.md`;
+- `docs/ai/prompt-contract.md`;
+- `docs/qa/test-corpus-plan.md`; and
+- `docs/roadmap/batch-calendar-export.md`.
+
+The current contract establishes:
+
+```text
+AI raw JSON
+→ strict raw-schema parse
+→ server-side normalization or domain adapter
+→ strict app-schema validation
+→ existing review/edit/export UI
+```
+
+### Closed decisions
+
+- the AI must not return frontend-only state;
+- invalid JSON and raw-schema mismatches fail closed;
+- provider failures must not silently become mock successes;
+- `userPreferencesSnapshot` remains inert Route M metadata; and
+- client mock and server mock remain regression baselines.
+
+### What completion does not mean
+
+M0 completion does not mean:
+
+- a live provider is connected;
+- prompt quality is verified;
+- corpus evaluation is complete;
+- AI output is production-ready; or
+- subscription work is part of Route M.
+
+## 6. M1 — Corpus Collection
+
+**Historical label:** part of Phase 4-B — Test Corpus Scaffold  
+**Status:** Complete for the initial collection gate
+
+The repository contains 10 verified public-notice entries:
+
+```text
+scholarship:    3
+school_notice:  3
+assignment:     1
+competition:    1
+job_posting:    1
+ambiguous_date: 1
+```
+
+Each entry has:
+
+- a public source URL or verified source metadata;
+- manually curated extracted text;
+- a human-written expected result; and
+- privacy and copyright review.
+
+Templates are not counted as real corpus entries. Raw attachments remain excluded unless they are public, safe, necessary, and appropriately reviewed.
+
+Ten examples satisfy an integration entry gate. They do not establish product-level extraction quality or justify school-level parser generalization.
+
+## 7. M2 — Deterministic Corpus Validation
+
+**Historical label:** remaining part of Phase 4-B — Test Corpus Scaffold  
+**Status:** Pending
+
+M2 must verify the corpus rather than infer completion from file presence.
+
+### Required checks
+
+- required TSV columns and valid row shapes;
+- relative paths exist and remain inside the corpus root;
+- notice-type folder names match the index;
+- expected-result files parse as JSON;
+- required app-oriented sections exist;
+- source metadata is present and consistent;
+- evidence is present where expected and traceable to extracted text;
+- fabricated evidence and sensitive personal data are absent;
+- category distribution matches the recorded baseline;
+- template files are excluded from real-entry counts; and
+- deterministic output is suitable for CI or a reviewable local command.
+
+### Exit gate
+
+M2 is complete only when:
+
+- validation can be rerun deterministically;
+- every baseline entry passes or has an explicit blocking disposition;
+- failures identify the corpus ID and exact violated rule; and
+- the resulting report shape can support provider-output comparison in M4.
+
+M3 must not be treated as release-ready while M2 remains incomplete.
+
+## 8. M3 — Small Server-side AI Vertical Slice
+
+**Historical label:** Phase 4-C — Real AI API Integration  
+**Status:** Postponed; not the current productization route
+
+### Entry criteria
+
+Before implementation begins, approve:
+
+- M2 deterministic corpus validation;
+- one provider or a narrow provider-adapter interface;
+- quality metrics, stop conditions, and rollback criteria;
+- server-side secret storage and environment separation;
+- prompt-injection and untrusted-input boundaries;
+- personal-data, logging, and retention rules;
+- request-size, timeout, quota, and concurrency limits; and
+- an explicit reviewable implementation scope.
+
+### Initial runtime scope
+
+```text
+manual text
 → POST /api/analyze mode="ai"
-→ server builds prompt
-→ provider call
-→ parse AI raw JSON
-→ normalize to app schema
-→ attach inert app metadata as needed
-→ validate app schema
-→ return result to frontend
+→ one server-side provider adapter
+→ strict AI raw-schema parse
+→ normalization
+→ strict app-schema validation
+→ existing review/edit UI
+→ Markdown and one-off all-day ICS export
 ```
 
 ### Requirements
 
-- API key must never be exposed to the browser.
-- provider-specific code should remain server-side.
-- AI response must be parsed as AI raw schema first.
-- Zod schemas should validate AI raw output and app analysis output.
-- server normalization must convert AI raw schema into current NoticePilot app schema.
-- `userPreferencesSnapshot` should remain optional app metadata and must not alter extraction in this phase.
-- frontend should continue using existing validation defensively.
-- client mock and server mock should remain available.
+- provider credentials remain server-only;
+- provider-specific code remains behind a narrow server boundary;
+- raw output is parsed before app projection;
+- invalid JSON is not partially normalized;
+- schema mismatch fails closed;
+- invalid raw output does not create calendar events;
+- app-schema failure is not shown as a successful analysis;
+- provider errors, stacks, and credentials are not exposed to the client;
+- client mock and server mock remain available; and
+- provider failure never silently falls back to a successful mock result.
 
-### Error Policy
+### Explicit non-goals
 
-Distinguish the following where possible:
+- no PDF, HWP, HWPX, image, or OCR extraction;
+- no `/api/extract` in the same slice;
+- no root-application live crawling or scheduled ingestion;
+- no multi-institution parser orchestration;
+- no account database or saved multi-project repository;
+- no provider-result persistence;
+- no subscription database work;
+- no changes to the isolated S-Lite SQLite singleton;
+- no subscription management; and
+- no campus-preference filtering of Route M extraction or exports.
 
-- network/provider failure
-- timeout
-- quota/rate-limit error
-- invalid JSON
-- schema mismatch
-- unsupported mode
-- AI not configured
+The existing Foundation.25.1 crawler remains an isolated package and does not convert M3 into a school-level live-ingestion feature.
 
-Do not automatically fall back to server mock. A future user-controlled fallback action may be offered.
+## 9. M4 — Corpus-based AI QA
 
-### Non-goals
+**Historical label:** Phase 4-D — Corpus-based AI QA  
+**Status:** Blocked until M2 is complete and M3 works on a controlled input
 
-- no batch `.ics`
-- no PDF/HWPX/OCR
-- no school-specific parser
-- no campus preference filtering
-- no production user-specific subscription feed or persistent backend generation; the separate opt-in local/reference slice remains unchanged
-- no database/auth/payment/Google Calendar API
+### Structural validity
 
-## Phase 4-D. Corpus-based AI QA
+Measure:
 
-### Goal
+- schema-valid response rate;
+- required arrays and fields;
+- enum correctness;
+- valid `normalizedDate` behavior;
+- warning-shape correctness; and
+- fail-closed behavior for invalid output.
 
-Evaluate real AI extraction against the test corpus.
+### Extraction quality
 
-### Deliverables
+Measure correctness for:
 
-- QA report comparing AI output against expected results
-- prompt/schema revision backlog
-- failure taxonomy
-- examples of strong/weak extraction cases
+- deadlines;
+- tasks;
+- submissions;
+- requirements;
+- cautions; and
+- calendar event candidates.
 
-### Evaluation Dimensions
+### Reliability
 
-- deadline extraction accuracy
-- submission extraction accuracy
-- requirement extraction accuracy
-- caution extraction usefulness
-- calendar event candidate correctness
-- evidence quality
-- hallucination rate
-- reviewRequired appropriateness
-- warning quality
+Measure:
 
-### Entry Criteria
+- evidence coverage;
+- fabricated-evidence rate;
+- hallucination rate;
+- critical-omission rate;
+- user-correction rate;
+- `reviewRequired` appropriateness;
+- ambiguous-date preservation; and
+- source-to-output traceability.
 
-- Phase 4-B corpus scaffold exists
-- Phase 4-C real AI integration works on at least one example
+### Operational behavior
 
-### Exit Criteria
+Measure:
 
-- corpus examples can be run through real AI mode
-- AI output can be compared with expected results
-- top prompt/schema defects are identified
+- latency;
+- timeout;
+- quota and rate-limit failures;
+- invalid JSON;
+- schema mismatch;
+- provider failure; and
+- no-silent-fallback behavior.
 
-## Phase 4-E. Date Resolution v1
+### Required outputs
 
-### Goal
+- reproducible corpus runner or execution procedure;
+- provider, model, prompt, and contract revision record;
+- corpus-ID-level results;
+- expected-versus-actual report;
+- critical failure taxonomy;
+- regression baseline;
+- prompt/schema revision backlog; and
+- proposed quality thresholds and stop conditions.
 
-Improve date handling without overbuilding a full natural-language date engine.
+No release gate passes until the quality thresholds and stop conditions are explicitly approved. This document does not invent those numerical thresholds in advance.
 
-### Initial Rule
+## 10. M5 — Controlled Expansion
 
-- Prioritize absolute dates.
-- Allow relative dates only when a reliable reference date exists.
-- Ambiguous dates should be `reviewRequired: true`.
-- Preserve original date expressions.
+**Historical label:** Phase 4-E — Date Resolution v1 and later Route M expansion  
+**Status:** Blocked until M4 evidence supports expansion
 
-### Long-term Direction
+M5 is not one combined implementation phase. Each capability requires its own vertical slice and entry gate.
 
-Move date computation toward a server-side date resolver:
+### Candidate expansions
+
+1. **Date resolution**
+   - prioritize absolute dates;
+   - compute relative dates only from a reliable reference date;
+   - preserve the original expression;
+   - use an empty normalized date when recovery is unsafe;
+   - require review for ambiguous or derived dates; and
+   - exclude timestamp and time-specific ICS support unless separately approved.
+
+2. **File extraction**
+   - keep extraction separate from analysis;
+   - evaluate PDF text extraction first;
+   - review HWP/HWPX and OCR as distinct risks; and
+   - retain manual text as the stable fallback input class.
+
+3. **School-level parser evaluation**
+   - keep the isolated Foundation package distinct from root-app ingestion;
+   - require roughly 30 verified examples before generalization; and
+   - avoid overfitting to one institution or a small corpus.
+
+4. **Checkbox-based batch one-off ICS export**
+   - require stable single-notice extraction quality first;
+   - define event identity and duplicate handling separately; and
+   - do not conflate downloaded batch ICS with a durable subscription feed.
+
+Subscription expansion is not an M5 subphase. It remains Route S work under the master roadmap.
+
+## 11. Campus Preference Boundary
+
+For Route M:
 
 ```text
-originalDateExpression + referenceDate + context
-→ normalizedDate / reviewRequired / dateConfidence
+userPreferencesSnapshot
+→ request/result metadata only
+→ no extraction change
+→ no notice filtering
+→ no Markdown filtering
+→ no one-off ICS filtering
 ```
 
-### Non-goals
+Future Route S `SubscriptionProfile` filtering is a separate contract and must not be inferred from Route M metadata.
 
-- no full recurring schedule engine
-- no timezone-specific event support
-- no time-specific `.ics` event support in this phase
+## 12. Route M Release Gate
 
-## Post-Phase-4 Roadmap
+Before Route M is offered to external users, verify:
 
-### Phase 5. Advanced File Extraction
+- the target user and supported input class are explicit;
+- corpus-backed quality thresholds and stop criteria are approved;
+- evidence remains traceable through review and editing;
+- prompt injection and untrusted input are reviewed;
+- secrets, personal data, logs, and retention are reviewed;
+- provider failures cannot produce a false successful analysis;
+- request limits, abuse controls, and error redaction are defined;
+- Korean and English critical flows remain usable;
+- accessibility and user-correction flows are tested;
+- mock regression paths remain stable; and
+- Markdown and one-off ICS behavior remain correct.
 
-Goal:
+Passing this gate does not authorize Route S, S-Lite production deployment, live crawling, or account-owned subscription service.
 
-- introduce `/api/extract`
-- support PDF text extraction
-- evaluate HWP/HWPX extraction strategy
-- evaluate OCR for scanned documents/images
+## 13. Execution Rules
 
-Important boundary:
+- Implement one Route M vertical slice at a time.
+- Keep corpus, provider, schema, runtime, Wiki, and subscription work in separate reviewable PR boundaries.
+- Preserve the latest default branch, protected CI checks, and resolved review conversations before merge.
+- Do not modify `packages/noticepilot-knu-crawler/**` as part of Route M planning or provider integration.
+- Wiki publication, upstream PR creation, production deployment, and physical-device mutation retain separate approval gates.
 
-Analyze and extract should remain separate capabilities.
+## 14. References
 
-### Phase 6. School-level Notice Parsing
-
-Entry condition:
-
-- about 30 corpus examples collected
-
-Goal:
-
-- compare school notice patterns
-- identify institution-specific metadata needs
-- evaluate whether heuristic parsing or prompt rules are sufficient
-
-### Phase 7. Batch Calendar Export
-
-Goal:
-
-- parse multiple notices
-- collect calendar event candidates
-- allow event-level checkbox selection
-- export selected events as `.ics`
-
-### Phase 8. Subscription Calendar Feed
-
-Goal:
-
-- move beyond downloaded `.ics` files toward a subscription feed
-
-Status:
-
-- future roadmap only
-- an opt-in loopback-only fixed reference feed exists for contract validation
-- no durable database or user-specific subscription state exists yet
+- Current implementation: [`../project/current-implementation-summary.md`](../project/current-implementation-summary.md)
+- Master product roadmap: [`current-product-roadmap.md`](current-product-roadmap.md)
+- AI raw schema: [`../ai/ai-output-schema.md`](../ai/ai-output-schema.md)
+- Prompt contract: [`../ai/prompt-contract.md`](../ai/prompt-contract.md)
+- Corpus plan: [`../qa/test-corpus-plan.md`](../qa/test-corpus-plan.md)
+- Corpus baseline: [`../../test-corpus/README.md`](../../test-corpus/README.md)
+- Batch/export/subscription detail: [`batch-calendar-export.md`](batch-calendar-export.md)
