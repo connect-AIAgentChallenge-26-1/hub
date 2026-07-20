@@ -1,29 +1,38 @@
 {
+  "schemaVersion": "noticepilot.corpus.expected.v1",
   "id": "knu-ambiguous-001",
   "sourceTitle": "대표 홈페이지 서비스 간헐적 중단 안내",
   "noticeType": "ambiguous_date",
   "expected": {
-    "deadlines": [],
-    "tasks": [],
-    "submissions": [],
-    "requirements": [],
-    "cautions": [
+    "items": [
       {
+        "assertionId": "item-caution-001",
+        "kind": "caution",
         "title": "작업 종료 시각 미정",
-        "originalDateExpression": "작업 완료 시까지",
-        "reviewRequired": true,
-        "evidence": "작업 시간: 2026. 2. 3.(화) 18:30~작업 완료 시까지"
+        "dateExpression": "작업 완료 시까지",
+        "normalizedDate": null,
+        "evidence": "작업 시간: 2026. 2. 3.(화) 18:30~작업 완료 시까지",
+        "reviewRequired": true
       }
     ],
-    "calendarEvents": [
+    "calendarEventCandidates": [
       {
+        "assertionId": "candidate-start-001",
         "title": "홈페이지 서비스 작업 시작",
-        "startDate": "2026-02-03T18:30:00+09:00",
-        "endDate": "",
-        "eventType": "service_interruption",
-        "originalDateExpression": "작업 완료 시까지",
-        "reviewRequired": true,
-        "evidence": "작업 시간: 2026. 2. 3.(화) 18:30~작업 완료 시까지"
+        "eventType": "start",
+        "dateExpression": "2026. 2. 3.(화) 18:30",
+        "normalizedDate": "2026-02-03",
+        "evidence": "작업 시간: 2026. 2. 3.(화) 18:30~작업 완료 시까지",
+        "reviewRequired": true
+      },
+      {
+        "assertionId": "candidate-end-001",
+        "title": "홈페이지 서비스 작업 종료 미정",
+        "eventType": "end",
+        "dateExpression": "작업 완료 시까지",
+        "normalizedDate": null,
+        "evidence": "작업 시간: 2026. 2. 3.(화) 18:30~작업 완료 시까지",
+        "reviewRequired": true
       }
     ]
   }
