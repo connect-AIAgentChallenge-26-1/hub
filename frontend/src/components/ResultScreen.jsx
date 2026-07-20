@@ -20,7 +20,21 @@ function ResultScreen({ subjects, weightKey, onChangeWeight, onBack }) {
 
   const rankedSubjects = [...filteredSubjects].sort((a, b) => {
     if (sortKey === "dday") {
-      return getDaysUntil(a.examDate) - getDaysUntil(b.examDate);
+      const daysA = getDaysUntil(a.examDate);
+      const daysB = getDaysUntil(b.examDate);
+
+      // 시험일을 입력하지 않은 과목은 항상 맨 뒤로 보낸다.
+      if (daysA === null && daysB === null) {
+        return b.priorityScore - a.priorityScore;
+      }
+      if (daysA === null) {
+        return 1;
+      }
+      if (daysB === null) {
+        return -1;
+      }
+
+      return daysA - daysB;
     }
     return b.priorityScore - a.priorityScore;
   });
