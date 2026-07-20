@@ -1,294 +1,193 @@
 # NoticePilot Test Corpus Plan
 
-## Purpose
+> Document role: corpus purpose, coverage, evaluation scope, and stage gates
+>
+> Operational contract authority: [`../../test-corpus/README.md`](../../test-corpus/README.md)
+>
+> Current status:
+> - Route M M1 corpus collection: complete
+> - Route M M2 deterministic validation: pending
 
-The test corpus provides real notice examples for evaluating NoticePilot's extraction quality. It should be built before relying on real AI integration as a product-quality signal.
+## 1. Purpose
 
-The corpus should support:
+The test corpus provides verified real-notice examples for evaluating NoticePilot extraction quality before a live AI provider is treated as a product-quality signal.
 
-- prompt/schema validation
-- AI extraction QA
-- date handling QA
-- evidence quality review
-- future school-level parsing
-- future batch `.ics` export evaluation
+The corpus supports:
 
-## Confirmed Corpus Policy
+- prompt and schema evaluation;
+- AI extraction QA;
+- date and ambiguity QA;
+- evidence quality review;
+- future parser evaluation; and
+- future batch calendar-export evaluation.
 
-Initial policy:
+This plan defines why the corpus exists, what coverage it should provide, and which gates determine progress. It does not define the executable file shape.
 
-- Start with public URLs and manually extracted text.
-- Include raw PDF/HWPX/HWP files in the repo only when they are public, safe, and necessary.
-- Expected results should vary by notice type.
-- School-level parsing should be considered after around 30 examples are collected.
+## 2. Authority Boundary
 
-## Suggested Folder Structure
-
-```text
-test-corpus/
-  index/
-    notice_index.tsv
-  extracted-text/
-    school_notice/
-    scholarship/
-    assignment/
-    competition/
-    job_posting/
-    ambiguous_date/
-  expected-results/
-    school_notice/
-    scholarship/
-    assignment/
-    competition/
-    job_posting/
-    ambiguous_date/
-  raw/
-    selected-public-files/
-```
-
-## `notice_index.tsv` Columns
-
-Recommended columns:
+Use the following responsibility split:
 
 ```text
-id
-institution
-notice_type
-source_title
-source_url
-published_at
-file_type
-raw_file_path
-extracted_text_path
-expected_result_path
-has_attachment
-has_deadline
-has_relative_date
-has_vague_date
-contains_personal_info
-copyright_risk
-notes
+docs/qa/test-corpus-plan.md
+= purpose, scope, coverage, evaluation dimensions, and stage gates
+
+test-corpus/README.md
+= corpus layout, index contract, canonical extracted-text policy,
+  expected-truth schema, migration rules, validator requirements,
+  authoring workflow, and activation state
 ```
 
-Example:
+The operational file, path, expected-truth, evidence, migration, and activation contracts are defined exclusively in `test-corpus/README.md`.
+
+This document must not duplicate an expected-result JSON shape or introduce an alternate corpus schema. When the two documents appear to conflict, `test-corpus/README.md` governs corpus authoring and deterministic validation.
+
+## 3. Confirmed Corpus Policy
+
+- Use public notice pages or explicitly provided source material.
+- Keep manually curated canonical extracted text for each real entry.
+- Include raw PDF, HWPX, HWP, or image files only when they are public, safe, necessary, and appropriate for repository use.
+- Exclude login-required, internal-only, personal, applicant-list, and unclear-copyright material.
+- Human expected truth must remain grounded in canonical extracted text.
+- Expected truth must not be copied from AI or Foundation output without human review.
+- Expansion should add failure modes and source diversity rather than duplicate easy examples.
+
+## 4. Current Baseline and Stage Status
+
+The initial collection baseline was completed on 2026-07-19 with 10 verified Kangwon National University notices:
 
 ```text
-id	institution	notice_type	source_title	source_url	published_at	file_type	raw_file_path	extracted_text_path	expected_result_path	has_attachment	has_deadline	has_relative_date	has_vague_date	contains_personal_info	copyright_risk	notes
-kw-sch-001	kangwon	scholarship	2026학년도 2학기 장학금 신청 안내	https://example.edu/notice/1	2026-07-07	pdf		test-corpus/extracted-text/scholarship/kw-sch-001.txt	test-corpus/expected-results/scholarship/kw-sch-001.expected.json	true	true	false	false	false	low	신청기간과 제출서류 명확
+scholarship:    3
+school_notice:  3
+assignment:     1
+competition:    1
+job_posting:    1
+ambiguous_date: 1
 ```
 
-## Public URL Policy
+Each indexed entry has a public source, canonical extracted text, a human-written expected result, and privacy/copyright review.
 
-Preferred source types:
+### M1 — Corpus collection
 
-- public university notice pages
-- public scholarship notices
-- public competition announcements
-- public job/internship notices
-- public course/academic schedule notices
+**Status: Complete for the initial 10-entry gate.**
 
-Avoid:
+M1 completion means that the initial category baseline and referenced corpus files exist. It does not prove that expected truth is structurally valid, evidence-exact, semantically complete, or ready for provider comparison.
 
-- login-required pages
-- internal-only documents
-- personal student information
-- applicant lists
-- files containing names, student IDs, phone numbers, or resident-registration-number-like data
+### M2 — Deterministic validation
 
-## Raw File Inclusion Policy
+**Status: Pending.**
 
-Initial repo inclusion should be conservative.
+M2 is complete only when the operational activation gate in `test-corpus/README.md` is complete and the registered repository validation passes.
 
-Recommended approach:
+M2 must establish, at minimum:
 
-```text
-public URL + manually extracted text → include by default
-raw PDF/HWPX/HWP attachment       → include only if public, safe, and necessary
-```
+- strict expected-truth schema validation;
+- index, path, filename, ID, title, and notice-type consistency;
+- allowed enum and date validation;
+- exact evidence traceability to canonical extracted text;
+- duplicate and assertion-identity checks;
+- template exclusion from real-entry counts;
+- baseline category-distribution verification; and
+- deterministic, reviewable failures identifying the corpus ID and violated rule.
 
-Raw files should be excluded when:
+File presence alone does not complete M2.
 
-- file size is excessive
-- copyright status is unclear
-- the document contains personal information
-- the file is not necessary for current QA
+## 5. Coverage Priorities by Notice Type
 
-## Manually Extracted Text Policy
-
-Each corpus example should have a manually extracted text file.
-
-Purpose:
-
-- allows AI QA before PDF/HWPX/OCR extraction is implemented
-- makes prompt/schema evaluation independent from file parsing
-- supports reproducible expected-result writing
-
-## Expected Result Policy by Notice Type
-
-Expected result depth should vary by notice type.
+Expected-result depth should reflect the notice type while using the operational assertion contract defined in `test-corpus/README.md`.
 
 ### Scholarship
 
 Prioritize:
 
-- deadlines
-- submissions
-- requirements
-- calendarEvents
-- evidence
+- deadlines;
+- submissions;
+- requirements;
+- calendar-event candidate correctness; and
+- evidence traceability.
 
-### Assignment / Course Notice
-
-Prioritize:
-
-- tasks
-- submissions
-- deadlines
-- cautions
-- calendarEvents when applicable
-
-### School Notice
+### Assignment or course notice
 
 Prioritize:
 
-- deadlines
-- tasks
-- cautions
-- calendarEvents
+- tasks;
+- submissions;
+- deadlines;
+- cautions;
+- tentative schedules; and
+- calendar-event candidate correctness.
+
+### School notice
+
+Prioritize:
+
+- user-actionable deadlines;
+- tasks;
+- cautions;
+- internal-versus-student deadline distinction; and
+- calendar-event candidate correctness.
 
 ### Competition
 
 Prioritize:
 
-- deadlines
-- submissions
-- requirements
-- calendarEvents
+- application and submission deadlines;
+- submissions;
+- requirements;
+- separate event boundaries; and
+- evidence traceability.
 
-### Job / Internship
-
-Prioritize:
-
-- deadlines
-- requirements
-- submissions
-- calendarEvents
-- cautions
-
-### Ambiguous Date Notice
+### Job or internship notice
 
 Prioritize:
 
-- original date expression
-- reviewRequired
-- evidence
-- caution/warning behavior
+- application deadlines;
+- requirements;
+- submissions;
+- cautions; and
+- calendar-event candidate correctness.
 
-## Expected Result JSON Shape
+### Ambiguous-date notice
 
-Expected results may use an app-oriented structure for QA comparison:
+Prioritize:
 
-```json
-{
-  "id": "kw-sch-001",
-  "sourceTitle": "2026학년도 2학기 장학금 신청 안내",
-  "noticeType": "scholarship",
-  "expected": {
-    "deadlines": [
-      {
-        "title": "장학금 신청 마감",
-        "date": "2026-07-20",
-        "evidence": "신청 기간: 2026.07.10. ~ 2026.07.20."
-      }
-    ],
-    "submissions": [
-      {
-        "title": "성적증명서",
-        "evidence": "제출서류: 성적증명서, 자기소개서"
-      }
-    ],
-    "requirements": [],
-    "cautions": [],
-    "calendarEvents": [
-      {
-        "title": "장학금 신청 마감",
-        "startDate": "2026-07-20",
-        "eventType": "deadline"
-      }
-    ]
-  }
-}
-```
+- original date expression preservation;
+- unresolved or tentative date handling;
+- `reviewRequired` appropriateness;
+- caution behavior; and
+- evidence traceability.
 
-The expected result does not need to mirror every frontend field. It should capture the human-verified extraction target.
+## 6. Deterministic Validation Versus Provider Evaluation
 
-## Initial Corpus Target
-
-Start with a 10-example baseline:
+M2 deterministic validation and later provider-quality evaluation are separate gates.
 
 ```text
-scholarship: 3
-school/course notice: 3
-assignment: 1
-competition: 1
-job/internship: 1
-ambiguous date: 1
+M2 deterministic validation
+= corpus files and human expected truth are internally valid and reproducible
+
+M4 provider-quality evaluation
+= model output is compared against active human expected truth
 ```
 
-This baseline was collected on 2026-07-19 from public Kangwon National
-University notice pages and cross-checked against the restored Foundation.25.1
-evidence. The next gate is deterministic corpus validation. Later expansion
-should prioritize new failure modes and source diversity.
+M2 must not score provider quality. M4 must not compensate for an invalid corpus.
 
-## 30-example Threshold
+## 7. Evaluation Dimensions
 
-School-level parsing should not be treated as a serious implementation phase until about 30 examples are collected.
+Later provider-output evaluation should measure:
 
-Reason:
+1. deadline correctness;
+2. calendar-event candidate correctness;
+3. submission extraction correctness;
+4. requirement extraction correctness;
+5. task usefulness;
+6. caution usefulness;
+7. evidence exactness and coverage;
+8. hallucination absence;
+9. date-normalization correctness;
+10. ambiguity preservation;
+11. `reviewRequired` appropriateness; and
+12. critical omission and user-correction rate.
 
-- school notice formats vary
-- attachment patterns vary
-- date formats vary
-- categories differ by institution
-- premature parser design may overfit a small sample
-
-## Privacy and Copyright Cautions
-
-Do not include:
-
-- student names
-- student IDs
-- phone numbers
-- resident-registration-number-like strings
-- applicant lists
-- internal-only documents
-- login-required documents
-
-When in doubt, keep only:
-
-- public URL
-- manually extracted text excerpt
-- metadata
-- expected result
-
-## Evaluation Rubric
-
-Suggested extraction quality dimensions:
-
-```text
-1. Deadline correctness
-2. Calendar event candidate correctness
-3. Submission extraction correctness
-4. Requirement extraction correctness
-5. Task extraction usefulness
-6. Caution extraction usefulness
-7. Evidence quality
-8. Hallucination absence
-9. Date normalization correctness
-10. reviewRequired appropriateness
-```
-
-Suggested rating:
+Suggested qualitative disposition:
 
 ```text
 pass
@@ -297,12 +196,72 @@ major issue
 fail
 ```
 
-## Non-goals
+A text difference alone is not necessarily a semantic failure. Matching and scoring policy requires a separate executable evaluation harness after M2.
 
-The corpus scaffold does not require:
+## 8. Expansion Policy
 
-- automated crawling
-- OCR
-- PDF/HWPX parser implementation
-- school-specific parser
-- subscription calendar feed
+The current 10 examples are an integration entry gate, not sufficient product-quality evidence.
+
+Expansion should prioritize:
+
+- new failure modes;
+- new date, time, period, and ambiguity patterns;
+- attachment-related evidence boundaries;
+- different notice-board structures; and
+- institutional diversity.
+
+Do not add near-duplicate easy examples merely to increase the count.
+
+## 9. Approximate 30-example Threshold
+
+The approximate 30-example threshold applies to:
+
+- broader parser generalization;
+- multi-institution coverage claims; and
+- new school-specific parsing strategies.
+
+It does not block:
+
+- deterministic validation of the current 10-entry corpus;
+- Route M evaluation-harness work;
+- the existing Foundation.25.1 package;
+- verified-fixture export QA; or
+- S-Lite physical calendar-client validation.
+
+## 10. Privacy and Copyright Boundary
+
+Do not include:
+
+- student names or student IDs;
+- applicant lists;
+- resident-registration-number-like values;
+- unnecessary personal phone numbers;
+- internal-only documents;
+- login-required documents; or
+- raw files with unclear copyright status.
+
+When raw attachments are unnecessary, retain only:
+
+```text
+public source URL
++ canonical extracted text
++ corpus metadata
++ human expected truth
+```
+
+## 11. Non-goals
+
+This plan does not itself implement or authorize:
+
+- a live AI provider;
+- automated crawling or scheduling;
+- PDF, HWP, HWPX, image, or OCR extraction;
+- school-specific parser expansion;
+- candidate promotion;
+- persistent CalendarEvent identity or reconciliation;
+- ICS serialization;
+- batch-export UI;
+- subscription-feed management; or
+- production deployment.
+
+Those capabilities retain their own contracts and gates. The presence or absence of those implementations elsewhere in the repository does not alter the corpus-stage definitions in this plan.
