@@ -8,7 +8,7 @@
 >
 > Current status: AI route postponed; no live provider is connected
 >
-> Corpus status: 10-entry collection complete; deterministic validation pending
+> Corpus status: 10-entry collection and deterministic validation complete
 
 ## 1. Purpose and Boundary
 
@@ -101,9 +101,9 @@ The historical Phase 4 labels remain available for traceability.
 | Historical stage | Current Route M stage | Current status |
 | --- | --- | --- |
 | Phase 4-A — Planning / Contract Documentation | M0 — Contract baseline | Complete |
-| Phase 4-B — Test Corpus Scaffold | M1 — Corpus collection + M2 — Deterministic validation | Collection complete; validation pending |
+| Phase 4-B — Test Corpus Scaffold | M1 — Corpus collection + M2 — Deterministic validation | Initial collection and deterministic validation complete |
 | Phase 4-C — Real AI API Integration | M3 — Small server-side AI vertical slice | Postponed |
-| Phase 4-D — Corpus-based AI QA | M4 — Corpus-based AI QA | Blocked by M2 and M3 |
+| Phase 4-D — Corpus-based AI QA | M4 — Corpus-based AI QA | Blocked until M3 produces controlled provider output |
 | Phase 4-E — Date Resolution v1 | M5 — Controlled expansion | Blocked by M4 evidence |
 
 The mapping preserves historical references without treating all product work as one linear Phase 4 sequence.
@@ -181,34 +181,37 @@ Ten examples satisfy an integration entry gate. They do not establish product-le
 ## 7. M2 — Deterministic Corpus Validation
 
 **Historical label:** remaining part of Phase 4-B — Test Corpus Scaffold  
-**Status:** Pending
+**Status:** Complete for the initial 10-entry deterministic gate.
 
-M2 must verify the corpus rather than infer completion from file presence.
+M2 completion is established by the active operational corpus contract and the registered strict repository validation. It establishes corpus integrity rather than provider-output quality.
 
-### Required checks
+### Completed deterministic checks
 
-- required TSV columns and valid row shapes;
-- relative paths exist and remain inside the corpus root;
-- notice-type folder names match the index;
-- expected-result files parse as JSON;
-- required app-oriented sections exist;
-- source metadata is present and consistent;
-- evidence is present where expected and traceable to extracted text;
-- fabricated evidence and sensitive personal data are absent;
-- category distribution matches the recorded baseline;
-- template files are excluded from real-entry counts; and
-- deterministic output is suitable for CI or a reviewable local command.
+- required TSV columns, row shapes, allowed notice types, boolean values, copyright-risk values, and published dates are validated;
+- repository-relative paths remain inside the repository, resolve to files, follow the required notice-type and ID conventions, and are not duplicated;
+- expected truth conforms to the strict active `noticepilot.corpus.expected.v1` contract, including `items[]` and `calendarEventCandidates[]`;
+- unsupported versions, unknown keys, legacy expected files, and mixed contracts fail closed;
+- expected IDs, source titles, and notice types match the corpus index;
+- assertion and candidate enums, normalized dates, date-expression review rules, assertion identities, and exact duplicate assertions are validated;
+- assertion evidence is an exact substring of canonical extracted text, and each non-null date expression occurs inside its evidence;
+- index privacy and copyright metadata fields are present and valid;
+- the active baseline contains 10 indexed entries, 10 v1 expected files, zero legacy expected files, a separately validated v1 template, and the required category distribution; and
+- failures identify the affected row or corpus path and violated rule.
 
-### Exit gate
+The deterministic validator checks privacy and copyright metadata fields; it does not perform general sensitive-data detection over notice text.
 
-M2 is complete only when:
+### Completion evidence
 
-- validation can be rerun deterministically;
-- every baseline entry passes or has an explicit blocking disposition;
-- failures identify the corpus ID and exact violated rule; and
-- the resulting report shape can support provider-output comparison in M4.
+M2 is complete because:
 
-M3 must not be treated as release-ready while M2 remains incomplete.
+- strict validation is reproducible through the registered repository command;
+- all 10 indexed baseline entries use the active v1 contract;
+- zero legacy expected files remain;
+- the v1 template is validated separately from real-entry counts;
+- the deterministic checks above are enforced by the registered validator; and
+- provider-output comparison and quality scoring remain outside M2.
+
+M2 completion does not authorize M3. M3 remains postponed and requires its separate entry criteria before implementation resumes.
 
 ## 8. M3 — Small Server-side AI Vertical Slice
 
@@ -219,7 +222,7 @@ M3 must not be treated as release-ready while M2 remains incomplete.
 
 Before implementation begins, approve:
 
-- M2 deterministic corpus validation;
+- confirm that the registered M2 deterministic validation remains green;
 - one provider or a narrow provider-adapter interface;
 - quality metrics, stop conditions, and rollback criteria;
 - server-side secret storage and environment separation;
@@ -272,7 +275,7 @@ The existing Foundation.25.1 crawler remains an isolated package and does not co
 ## 9. M4 — Corpus-based AI QA
 
 **Historical label:** Phase 4-D — Corpus-based AI QA  
-**Status:** Blocked until M2 is complete and M3 works on a controlled input
+**Status:** Blocked until M3 produces controlled provider output
 
 ### Structural validity
 
@@ -323,7 +326,7 @@ Measure:
 
 ### Required outputs
 
-- reproducible corpus runner or execution procedure;
+- reproducible provider-output evaluation runner or execution procedure;
 - provider, model, prompt, and contract revision record;
 - corpus-ID-level results;
 - expected-versus-actual report;
