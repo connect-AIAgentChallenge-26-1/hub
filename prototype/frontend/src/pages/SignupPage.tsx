@@ -31,6 +31,8 @@ export function SignupPage() {
   return (
     <div className="auth-page">
       <div className="auth-card">
+        <div className="auth-brand">밥약</div>
+        <p className="auth-tagline">언제 볼까, 어디서 볼까를 한 번에</p>
         <h1>회원가입</h1>
         <form onSubmit={handleSubmit}>
           <div className="auth-field">

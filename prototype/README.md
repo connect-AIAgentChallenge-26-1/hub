@@ -6,8 +6,8 @@
 
 | 문서 | 링크 |
 |---|---|
-| 📋 기획서 | [온라인](https://aiden-park11.github.io/naver-ai-challenge/%EA%B8%B0%ED%9A%8D%EC%84%9C_%EB%B0%A5%EC%95%BD%EB%A7%A4%EC%B9%AD%EC%84%9C%EB%B9%84%EC%8A%A4.html) · [../docs/](../docs/기획서_밥약매칭서비스.html) |
-| 🎨 웹 디자인 시안 | [온라인](https://aiden-park11.github.io/naver-ai-challenge/%EB%94%94%EC%9E%90%EC%9D%B8%EC%8B%9C%EC%95%88_%EB%B0%A5%EC%95%BD%EC%9B%B9.html) · [../docs/](../docs/디자인시안_밥약웹.html) |
+| 📋 기획서 | [../docs/](../docs/기획서_밥약매칭서비스.html) |
+| 🎨 웹 디자인 시안 | [../docs/](../docs/디자인시안_밥약웹.html) |
 | 🖥 발표자료 | [../docs/발표자료_밥약.html](../docs/발표자료_밥약.html) |
 
 ## ✅ 진행 상황
