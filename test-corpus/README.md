@@ -4,67 +4,42 @@
 >
 > Current classification:
 > - Route M M1 corpus collection: complete
-> - Route M M2 deterministic validation: pending
+> - Route M M2 deterministic validation: complete
 >
 > Document role:
 > - operational contract for corpus layout and authoring
 > - canonical extracted-text policy
-> - approved target contract for expected truth JSON
-> - legacy migration and activation gates
+> - active expected-truth contract
+> - strict validator and activation authority
 >
 > Planning authority: [`../docs/qa/test-corpus-plan.md`](../docs/qa/test-corpus-plan.md)
 
 ## 1. Contract Status
 
-The approved target expected-truth contract is:
+The active and enforced expected-truth contract is:
 
 ```text
 noticepilot.corpus.expected.v1
 ```
 
-This contract is **approved but not active**.
-
 Current repository state:
 
 ```text
-v1 target contract                    approved
-legacy expected files                 migration pending
-example template                      migration pending
-executable validator enforcement      pending
-activation                            blocked
+v1 contract                           active and enforced
+real expected files                   10 / 10 migrated
+example expected template             migrated
+executable validator                  active
+legacy expected files                 0
+activation gate                       complete
 ```
 
-The current 10 expected JSON files and `templates/expected-result.example.json`
-still use the legacy app-oriented shape. The current validator also checks only
-that the legacy six expected sections exist as arrays. Those files are migration
-inputs, not examples of an active v1 contract.
-
-Do not describe v1 as active or enforced until the activation gate in section 16
-is complete.
+The repository validator runs in strict v1 mode. Legacy expected files, mixed legacy/v1 corpora, unsupported schema versions, and unknown keys fail closed.
 
 ## 2. Purpose and Truth Authority
 
-The corpus evaluates NoticePilot extraction behavior using real public notices.
-It supports:
+The corpus evaluates NoticePilot extraction behavior using verified public notices. It supports prompt and schema evaluation, AI extraction QA, date and ambiguity QA, evidence review, future parser evaluation, and future batch calendar-export evaluation.
 
-- prompt and schema validation;
-- AI extraction QA;
-- date and ambiguity QA;
-- evidence quality review;
-- future parser evaluation; and
-- future batch calendar-export evaluation.
-
-Expected truth is a set of human-verified semantic assertions derived from the
-canonical extracted text.
-
-It is not:
-
-- an `AppAnalysisSchema` snapshot;
-- an AI provider raw-response snapshot;
-- a complete `ExtractionResult`;
-- a persistent `CalendarEvent`;
-- a subscription feed; or
-- an ICS rendering.
+Expected truth is a set of human-verified semantic assertions derived from canonical extracted text. It is not an `AppAnalysisSchema` snapshot, AI provider raw response, complete `ExtractionResult`, persistent `CalendarEvent`, subscription feed, or ICS rendering.
 
 Authority order:
 
@@ -75,72 +50,52 @@ public source
 → actual AI / domain / app output
 ```
 
-Foundation.25.1 output may be used as cross-check evidence. It does not create or
-automatically approve expected truth.
+Foundation.25.1 output may be used as cross-check evidence. It does not create or automatically approve expected truth.
 
 ## 3. Current Baseline
 
-The corpus contains 10 verified real public-notice entries collected on
-2026-07-19:
+The active corpus contains 10 verified real public-notice entries collected on 2026-07-19:
 
-- scholarship: 3
-- school_notice: 3
-- assignment: 1
-- competition: 1
-- job_posting: 1
-- ambiguous_date: 1
+```text
+scholarship:    3
+school_notice:  3
+assignment:     1
+competition:    1
+job_posting:    1
+ambiguous_date: 1
+```
 
-Each entry has:
-
-- a public source URL;
-- a privacy and copyright review;
-- manually curated canonical extracted text; and
-- a human-written legacy expected result awaiting v1 migration.
-
-Raw attachments are intentionally not copied into this repository. Templates are
-examples only and are never counted as real entries.
+Each entry has a public source URL, privacy and copyright review, manually curated canonical extracted text, and a human-written v1 expected result. Raw attachments are intentionally not copied into this repository. Templates are examples only and are never counted as real entries.
 
 ## 4. Folder Structure
 
 ```text
 test-corpus/
   README.md
-  index/
-    notice_index.tsv
-  extracted-text/
-    school_notice/
-    scholarship/
-    assignment/
-    competition/
-    job_posting/
-    ambiguous_date/
-  expected-results/
-    school_notice/
-    scholarship/
-    assignment/
-    competition/
-    job_posting/
-    ambiguous_date/
-  raw/
-    selected-public-files/
+  index/notice_index.tsv
+  extracted-text/<notice_type>/<id>.txt
+  expected-results/<notice_type>/<id>.expected.json
+  raw/selected-public-files/
   templates/
     notice_index.example.tsv
     expected-result.example.json
     extracted-text.example.txt
 ```
 
-Use the notice-type folder names exactly as shown. `job_posting` includes public
-job and internship notices.
-
-## 5. `notice_index.tsv` Contract
-
-The real corpus index is:
+Allowed notice-type directories:
 
 ```text
-test-corpus/index/notice_index.tsv
+school_notice
+scholarship
+assignment
+competition
+job_posting
+ambiguous_date
 ```
 
-Required columns, in order:
+## 5. Index Contract
+
+`test-corpus/index/notice_index.tsv` is tab-separated and requires these columns in order:
 
 ```text
 id
@@ -162,18 +117,7 @@ copyright_risk
 notes
 ```
 
-Allowed `notice_type` values:
-
-```text
-school_notice
-scholarship
-assignment
-competition
-job_posting
-ambiguous_date
-```
-
-Cross-file invariants for each migrated v1 entry:
+Cross-file invariants:
 
 ```text
 expected.id          = index.id
@@ -181,50 +125,22 @@ expected.sourceTitle = index.source_title
 expected.noticeType  = index.notice_type
 ```
 
-The extracted-text and expected-result paths must remain repository-relative,
-resolve inside the repository, exist, and use the same notice-type directory as
-the index row. The expected filename must be `<id>.expected.json`.
-
-## 6. Real Entry Requirements
-
-Only add a real corpus entry when all of the following hold:
-
-- the source is a public notice page or explicitly provided source material;
-- no login is required;
-- the content is not internal-only;
-- student names, student IDs, and applicant lists are excluded;
-- resident-registration-number-like values are excluded;
-- phone numbers are excluded unless they are necessary public office contacts;
-- copyright risk is reviewed; and
-- the source facts can be represented faithfully in canonical extracted text.
-
-For each real entry, add:
+Referenced paths must be repository-relative, resolve inside the repository, exist, use the indexed notice-type directory, and follow these exact patterns:
 
 ```text
 test-corpus/extracted-text/<notice_type>/<id>.txt
 test-corpus/expected-results/<notice_type>/<id>.expected.json
 ```
 
-Then add exactly one matching row to `notice_index.tsv`.
+## 6. Canonical Extracted-text Policy
 
-## 7. Canonical Extracted-text Policy
+Canonical extracted text is the deterministic evidence source. It must preserve actionable content, dates, times, periods, requirements, cautions, labels, and source ambiguity without unnecessary personal information.
 
-The extracted-text file is the canonical evaluation source used by expected
-truth and deterministic evidence validation.
+Expected evidence must be an exact contiguous substring of this file. Canonical text remains stable unless human review identifies a source-transcription error.
 
-It should:
+## 7. Expected-truth Shape
 
-- preserve actionable source content faithfully;
-- retain dates, times, periods, requirements, cautions, and relevant labels;
-- avoid summarizing away ambiguity;
-- exclude unnecessary personal information; and
-- remain stable unless a human review identifies a source-transcription error.
-
-Expected evidence must match this file, not an untracked alternate source copy.
-
-## 8. Target Expected-truth Shape
-
-A migrated v1 file has this strict top-level shape:
+Every real expected file and the expected-result template use this strict shape:
 
 ```json
 {
@@ -239,7 +155,7 @@ A migrated v1 file has this strict top-level shape:
 }
 ```
 
-Allowed top-level keys:
+Only these top-level keys are allowed:
 
 ```text
 schemaVersion
@@ -249,32 +165,11 @@ noticeType
 expected
 ```
 
-Allowed keys inside `expected`:
+Only `items` and `calendarEventCandidates` are allowed inside `expected`.
 
-```text
-items
-calendarEventCandidates
-```
+## 8. Item Assertions
 
-Unknown keys are rejected after v1 activation.
-
-## 9. Item Assertions
-
-Target item shape:
-
-```json
-{
-  "assertionId": "deadline-001",
-  "kind": "deadline",
-  "title": "학생 교류 수학 서류 제출 마감",
-  "dateExpression": "2026. 8. 3.(월) 18:00",
-  "normalizedDate": "2026-08-03",
-  "evidence": "학생 제출 마감: 2026. 8. 3.(월) 18:00",
-  "reviewRequired": true
-}
-```
-
-Required fields:
+Required item fields:
 
 ```text
 assertionId
@@ -286,7 +181,7 @@ evidence
 reviewRequired
 ```
 
-Allowed `kind` values:
+Allowed item kinds:
 
 ```text
 deadline
@@ -296,27 +191,11 @@ requirement
 caution
 ```
 
-`assertionId` is stable within the expected file and must be unique. It is for
-human review, migration, and diff tracking. Actual AI or runtime output does not
-need to emit the same ID.
+`assertionId` must be stable and unique across both arrays within one expected file.
 
-## 10. Calendar-event Candidate Assertions
+## 9. Calendar-event Candidate Assertions
 
-Target candidate shape:
-
-```json
-{
-  "assertionId": "candidate-deadline-001",
-  "title": "교류 수학 학생 제출 마감",
-  "eventType": "deadline",
-  "dateExpression": "2026. 8. 3.(월) 18:00",
-  "normalizedDate": "2026-08-03",
-  "evidence": "학생 제출 마감: 2026. 8. 3.(월) 18:00",
-  "reviewRequired": true
-}
-```
-
-Required fields:
+Required candidate fields:
 
 ```text
 assertionId
@@ -328,7 +207,7 @@ evidence
 reviewRequired
 ```
 
-Allowed `eventType` values:
+Allowed event types:
 
 ```text
 deadline
@@ -339,182 +218,44 @@ meeting
 other
 ```
 
-The following legacy values are not valid v1 event types:
+Legacy event types such as `application_period`, `academic_period`, `result_announcement`, `submission_deadline`, `service_interruption`, and `event` are invalid.
 
-```text
-application_period
-academic_period
-result_announcement
-submission_deadline
-service_interruption
-event
-```
+## 10. Date, Time, Period, and Ambiguity Policy
 
-Migration must review source meaning instead of applying a blind string rename.
+`normalizedDate` is either a valid `YYYY-MM-DD` value or `null`. Timestamps, empty-string sentinels, partial dates, natural-language dates, and impossible calendar dates are invalid.
 
-## 11. Date, Time, Period, and Ambiguity Policy
+`dateExpression` preserves the original source expression or is `null` when no date expression exists. A non-null expression must occur inside its evidence.
 
-### 11.1 `normalizedDate`
+v1 has no structured time fields. Materially actionable time remains in `dateExpression` and `evidence`; `normalizedDate` stores only the calendar date and `reviewRequired` must be `true`.
 
-Allowed values:
+Periods are decomposed into semantic candidates. Use `start` for the opening boundary, `deadline` when a user action is due by the endpoint, and `end` for a non-deadline endpoint.
 
-```text
-valid YYYY-MM-DD
-null
-```
+Explicit tentative dates may retain their safely resolved calendar date but require review. Unresolved wording such as `추후 공지`, `별도 안내`, or `작업 완료 시까지` uses `normalizedDate: null` and `reviewRequired: true`.
 
-Disallowed values:
+## 11. Evidence, Titles, Ordering, and Duplicates
 
-- ISO timestamps;
-- empty-string sentinels;
-- partial dates;
-- natural-language dates; and
-- invalid calendar dates.
+Evidence must be non-empty, exact, contiguous, and sufficient to support the assertion. Do not paraphrase, correct, or invent evidence.
 
-### 11.2 `dateExpression`
-
-`dateExpression` is the original source expression or `null` when no date
-expression exists. A non-null value must appear inside `evidence`.
-
-### 11.3 Time
-
-v1 does not introduce structured time fields. Preserve time in:
-
-- `dateExpression`; and
-- `evidence`.
-
-When time is materially actionable but the current contract cannot represent it
-structurally:
-
-```text
-normalizedDate = calendar date only
-reviewRequired = true
-```
-
-Structured time requires a future versioned contract. Do not place timestamps in
-`normalizedDate`.
-
-### 11.4 Periods
-
-A legacy period must be reviewed and decomposed into semantic candidates when
-appropriate.
-
-Example:
-
-```text
-application period: 2026-01-15 through 2026-01-21
-→ start candidate: 2026-01-15
-→ deadline or end candidate: 2026-01-21
-```
-
-Use `deadline` when the user must complete an action by the endpoint. Use `end`
-for a non-deadline period endpoint. Use `announcement` for a result publication,
-`meeting` for attendance, and `other` only when the approved taxonomy cannot
-represent the source meaning more precisely.
-
-### 11.5 Ambiguity
-
-Do not invent a normalized date for wording such as:
-
-```text
-예정
-추후 공지
-별도 안내
-작업 완료 시까지
-```
-
-Preserve the wording in `dateExpression` and `evidence`, use
-`normalizedDate: null` when a date is not safely resolved, and set
-`reviewRequired: true`.
-
-## 12. Evidence and Title Policy
-
-### 12.1 Evidence
-
-Evidence must be:
-
-- a non-empty string;
-- an exact contiguous substring of canonical extracted text;
-- copied without paraphrasing, correction, or invented wording; and
-- sufficient to support the assertion.
-
-When `dateExpression` is non-null, it must occur inside the evidence string.
-Evidence offsets are computed by validation or adapters and are not stored in
-expected truth.
-
-### 12.2 Title
-
-The title is a concise human reference label. It must be non-empty, trimmed, and
-must not change source meaning.
-
-Title text is a quality comparison field, not the sole assertion identity. A
-semantically correct actual result may use different natural wording.
-
-## 13. Ordering, Duplicates, and Evaluation Direction
-
-Array position is not semantic identity or priority.
-
-Rules:
-
-- `assertionId` values are unique across both arrays in one file;
-- exact duplicate assertions are prohibited;
-- the same evidence may support different assertions when the meanings differ;
-- array reordering alone is not a semantic change; and
-- evaluators should use one-to-one matching.
+Titles are concise human reference labels and must not change source meaning. Array position is not identity or priority. Exact duplicate semantic assertions are prohibited. The same evidence may support different assertions when their meanings differ.
 
 Initial evaluation direction:
 
 ```text
-item match
-= kind + normalizedDate + exact evidence
-
-candidate match
-= eventType + normalizedDate + exact evidence
+item match      = kind + normalizedDate + exact evidence
+candidate match = eventType + normalizedDate + exact evidence
 ```
 
-Title and date-expression quality are secondary comparison dimensions. This
-matching runner is a target direction until executable evaluation is separately
-implemented.
+## 12. Fields Intentionally Excluded
 
-## 14. Fields Intentionally Excluded
+Expected truth does not require runtime or projection metadata such as confidence, warnings, generated IDs, timestamps, hashes, evidence offsets, UI selection state, App start/end dates, CalendarEvent IDs, ICS UID/sequence, cancellation, or subscription-feed state.
 
-Expected truth does not require exact values for:
+`reviewReasons` is not part of v1. Detailed reasons may be generated by downstream adapters without coupling human truth to one implementation.
 
-```text
-summary
-description wording
-confidence
-warnings
-generated runtime IDs
-extractionId
-createdAt / updatedAt
-hashes
-evidence offsets
-edited
-completed
-selected
-allDay
-App startDate / endDate
-CalendarEvent.eventId
-ICS UID
-sequence
-cancellation
-SubscriptionIcsFeed
-```
+## 13. Completed Legacy Migration Reference
 
-These belong to model metadata, adapter enrichment, UI projection, persistence,
-or delivery layers rather than human source truth.
+The completed migration used these semantic mappings:
 
-`reviewReasons` is also not required in v1. The current raw AI boundary exposes
-`reviewRequired`, while detailed reasons may be generated by downstream domain
-adapters. Requiring exact reasons would couple expected truth to one adapter
-implementation.
-
-## 15. Legacy Migration Rules
-
-The current app-oriented expected files migrate as follows:
-
-| Legacy shape | v1 target |
+| Legacy shape | Active v1 representation |
 | --- | --- |
 | `deadlines[]` | `items[]` with `kind=deadline` |
 | `tasks[]` | `items[]` with `kind=task` |
@@ -522,87 +263,64 @@ The current app-oriented expected files migrate as follows:
 | `requirements[]` | `items[]` with `kind=requirement` |
 | `cautions[]` | `items[]` with `kind=caution` |
 | `calendarEvents[]` | `calendarEventCandidates[]` |
-| timestamp in a date field | date part in `normalizedDate`; preserve time in expression/evidence |
-| empty string used as missing value | `null` |
-| `application_period` | human review; usually `start` plus `deadline` or `end` |
-| `academic_period` | human review; usually `start` plus `deadline` or `end` |
-| `result_announcement` | `announcement` |
-| `submission_deadline` | `deadline` |
-| `event` | `meeting` or `other` after source review |
-| `service_interruption` | `start` or `other` after source review |
+| timestamp date | date-only `normalizedDate`; time retained in expression/evidence |
+| empty missing value | `null` |
+| period event | reviewed `start` plus `deadline` or `end` |
 
-Migration is not a key-renaming exercise. Every file must be re-reviewed against
-its canonical extracted text. Do not bulk-replace event types without checking
-source meaning and ambiguity.
+This table is historical guidance only. Legacy files are not accepted by the active validator.
 
-## 16. Validator Requirements and Activation Gate
+## 14. Validator and Activation Gate
 
-Future executable v1 validation must check:
+The validator enforces:
 
-- exact schema version;
-- exact top-level and nested keys;
-- index ID, title, and notice-type agreement;
-- path containment, existence, and notice-type directory agreement;
-- assertion-ID uniqueness;
-- allowed item kinds and event types;
-- valid `YYYY-MM-DD` or `null`;
-- absence of empty-string date sentinels;
-- non-empty exact-match evidence;
-- date-expression containment inside evidence;
-- duplicate assertions;
-- template exclusion from real-entry counts; and
-- required category distribution where a gate declares one.
+- exact schema version and strict keys;
+- index ID, title, type, path, and filename agreement;
+- path containment and file existence;
+- assertion-ID uniqueness and duplicate rejection;
+- allowed item and event enums;
+- valid date or `null`;
+- time, tentative, and unresolved review invariants;
+- exact evidence and date-expression containment;
+- template validation while excluding templates from real counts; and
+- the declared 10-entry category baseline.
 
-v1 becomes active only after all of the following are complete:
+Activation gate status:
 
 ```text
-1. templates/expected-result.example.json migrated
-2. validator updated for v1
-3. validator tests added
-4. all 10 real expected JSON files migrated
-5. full evidence exact-match validation passed
-6. index cross-file validation passed
-7. registered repository tests passed
+1. expected-result template migrated            complete
+2. validator updated for v1                     complete
+3. validator tests registered                   complete
+4. all 10 real expected JSON files migrated     complete
+5. exact evidence validation                    enforced
+6. index cross-file validation                  enforced
+7. repository tests                             required by CI
 ```
 
-Until then, the correct status is:
+The active command is strict and has no legacy compatibility flag:
 
-```text
-approved target contract
-→ migration pending
-→ executable enforcement pending
-→ not active
+```bash
+npm run validate:corpus
 ```
 
-After the complete gate passes, update this section to `active and enforced` in a
-separate reviewed change.
+## 15. Authoring Workflow
 
-## 17. Authoring Workflow
-
-For a new or migrated entry:
+For a new entry:
 
 ```text
 1. verify the public source
 2. complete privacy and copyright review
-3. create or verify canonical extracted text
-4. create or verify the index row
+3. create canonical extracted text
+4. add the exact index row
 5. write human semantic assertions
 6. verify exact evidence matches
-7. review ambiguity and reviewRequired
-8. run the validator
+7. review time and ambiguity
+8. run npm run test:corpus
 9. complete human review
 ```
 
-Do not:
+Do not copy AI or Foundation output directly into expected truth, infer uncertain dates, write absent evidence, add an index row without its files, or count templates as real entries.
 
-- copy AI output directly into expected truth;
-- copy Foundation output without human review;
-- write evidence absent from canonical extracted text;
-- infer uncertain dates;
-- add an index row without referenced files; or
-- count templates as real corpus entries.
-
-## 18. Raw Files, Privacy, and Copyright
+## 16. Privacy, Copyright, Coverage, and Non-goals
 
 Prefer:
 
@@ -610,46 +328,8 @@ Prefer:
 public URL + canonical extracted text + expected result JSON
 ```
 
-Include a raw PDF, HWPX, HWP, or image only when it is public, safe, necessary,
-reasonably sized, and appropriate for repository use.
+Include raw files only when public, safe, necessary, reasonably sized, and appropriate for repository use. Exclude personal information, applicant lists, internal-only content, login-required documents, and unclear-copyright raw files.
 
-Exclude raw files containing personal information, applicant lists, internal-only
-content, or unclear copyright status.
+Future expansion should prioritize new failure modes, date and ambiguity patterns, attachment evidence boundaries, and institutional diversity. The approximate 30-example threshold applies to broader parser generalization and multi-institution claims, not deterministic validation of the current corpus.
 
-## 19. Coverage and Expansion
-
-The 10-entry collection gate is complete. Expansion should prioritize:
-
-- new failure modes;
-- new date and ambiguity patterns;
-- attachment-related evidence boundaries; and
-- institutional diversity.
-
-Do not add duplicate easy examples merely to increase the count.
-
-The approximate 30-example threshold applies to broader parser generalization,
-multi-institution coverage claims, and new school-specific parsing strategies. It
-does not block:
-
-- deterministic validation of the current corpus;
-- the existing Foundation.25.1 package;
-- Route M evaluation;
-- verified-fixture export QA; or
-- S-Lite physical calendar-client validation.
-
-## 20. Explicit Non-goals
-
-This corpus contract does not itself implement:
-
-- an AI provider runtime;
-- attachment extraction or OCR;
-- source crawling or scheduling;
-- candidate promotion;
-- persistent `CalendarEvent` identity;
-- reconciliation;
-- ICS serialization;
-- multi-notice batch UI; or
-- subscription management.
-
-The existence or absence of those implementations elsewhere in the repository is
-separate from this corpus contract.
+This contract does not implement an AI provider runtime, attachment extraction, OCR, crawling, scheduling, candidate promotion, CalendarEvent persistence, reconciliation, ICS serialization, batch UI, or subscription management.
