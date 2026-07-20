@@ -8,7 +8,7 @@
 >
 > Current status: AI route postponed; no live provider is connected
 >
-> Corpus status: 10-entry collection complete; deterministic validation pending
+> Corpus status: 10-entry collection and deterministic validation complete
 
 ## 1. Purpose and Boundary
 
