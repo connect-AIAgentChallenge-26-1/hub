@@ -1,6 +1,6 @@
 # NoticePilot Current Product Roadmap
 
-> Baseline: 2026-07-20 after Foundation.25.1 restoration and S-Lite LAN HTTPS profile implementation
+> Baseline: 2026-07-20 after Foundation.25.1 restoration, S-Lite LAN HTTPS profile implementation, and Route M M2 closure
 >
 > Next productization route: S-Lite deployment and real calendar-client proof
 >
@@ -97,7 +97,7 @@ deployment · observability · privacy/retention · incident/rollback · SLO
 - repository and Wiki authority direction is explicit;
 - at least 10 verified real entries exist;
 - every entry has extracted text and expected truth;
-- fabricated evidence and sensitive student data are absent;
+- exact evidence traceability passes deterministic validation, and corpus privacy policy and human review exclude sensitive student data;
 - the master and track-specific roadmaps agree;
 - required CI remains green and upstream workflow diff remains empty for any
   upstream submission.
