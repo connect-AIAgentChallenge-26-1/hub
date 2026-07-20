@@ -1,33 +1,47 @@
 {
+  "schemaVersion": "noticepilot.corpus.expected.v1",
   "id": "knu-scholarship-002",
   "sourceTitle": "2026년도 제34기 세아해암 장학생 모집 안내",
   "noticeType": "scholarship",
   "expected": {
-    "deadlines": [
+    "items": [
       {
+        "assertionId": "item-deadline-001",
+        "kind": "deadline",
         "title": "장학생 모집 마감",
-        "date": "2026-01-21",
-        "evidence": "모집 기간: 2026. 1. 15.~1. 21."
+        "dateExpression": "2026. 1. 15.~1. 21.",
+        "normalizedDate": "2026-01-21",
+        "evidence": "모집 기간: 2026. 1. 15.~1. 21.",
+        "reviewRequired": false
       }
     ],
-    "tasks": [],
-    "submissions": [],
-    "requirements": [],
-    "cautions": [],
-    "calendarEvents": [
+    "calendarEventCandidates": [
       {
-        "title": "장학생 모집 기간",
-        "startDate": "2026-01-15",
-        "endDate": "2026-01-21",
-        "eventType": "application_period",
+        "assertionId": "candidate-start-001",
+        "title": "장학생 모집 시작",
+        "eventType": "start",
+        "dateExpression": "2026. 1. 15.~1. 21.",
+        "normalizedDate": "2026-01-15",
+        "evidence": "모집 기간: 2026. 1. 15.~1. 21.",
         "reviewRequired": false
       },
       {
-        "title": "장학생 모집 설명회",
-        "startDate": "2026-01-12T10:30:00+09:00",
-        "endDate": "",
-        "eventType": "event",
+        "assertionId": "candidate-deadline-001",
+        "title": "장학생 모집 마감",
+        "eventType": "deadline",
+        "dateExpression": "2026. 1. 15.~1. 21.",
+        "normalizedDate": "2026-01-21",
+        "evidence": "모집 기간: 2026. 1. 15.~1. 21.",
         "reviewRequired": false
+      },
+      {
+        "assertionId": "candidate-meeting-001",
+        "title": "장학생 모집 설명회",
+        "eventType": "meeting",
+        "dateExpression": "2026. 1. 12.(월) 10:30",
+        "normalizedDate": "2026-01-12",
+        "evidence": "모집 설명회: 2026. 1. 12.(월) 10:30, 온라인",
+        "reviewRequired": true
       }
     ]
   }
