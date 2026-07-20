@@ -1,36 +1,56 @@
 {
+  "schemaVersion": "noticepilot.corpus.expected.v1",
   "id": "knu-scholarship-001",
   "sourceTitle": "2026-1학기 재학생 우선감면장학금 신청 안내[기간: 26. 1. 12.（월）~1. 23.（금）]",
   "noticeType": "scholarship",
   "expected": {
-    "deadlines": [
+    "items": [
       {
+        "assertionId": "item-deadline-001",
+        "kind": "deadline",
         "title": "우선감면장학금 신청 마감",
-        "date": "2026-01-23T23:59:00+09:00",
-        "evidence": "신청 기간: 2026. 1. 12.(월) 09:00~1. 23.(금) 23:59"
-      }
-    ],
-    "tasks": [
+        "dateExpression": "2026. 1. 12.(월) 09:00~1. 23.(금) 23:59",
+        "normalizedDate": "2026-01-23",
+        "evidence": "신청 기간: 2026. 1. 12.(월) 09:00~1. 23.(금) 23:59",
+        "reviewRequired": true
+      },
       {
+        "assertionId": "item-task-001",
+        "kind": "task",
         "title": "K-Cloud에서 장학 신청",
-        "evidence": "신청 방법: K-Cloud 장학신청"
-      }
-    ],
-    "submissions": [],
-    "requirements": [
-      {
-        "title": "우선감면장학금 수혜 요건 충족",
-        "evidence": "신청 대상: 2026-1학기 재학 예정자 중 우선감면장학금 수혜 요건 충족자"
-      }
-    ],
-    "cautions": [],
-    "calendarEvents": [
-      {
-        "title": "우선감면장학금 신청 기간",
-        "startDate": "2026-01-12T09:00:00+09:00",
-        "endDate": "2026-01-23T23:59:00+09:00",
-        "eventType": "application_period",
+        "dateExpression": null,
+        "normalizedDate": null,
+        "evidence": "신청 방법: K-Cloud 장학신청",
         "reviewRequired": false
+      },
+      {
+        "assertionId": "item-requirement-001",
+        "kind": "requirement",
+        "title": "우선감면장학금 수혜 요건 충족",
+        "dateExpression": null,
+        "normalizedDate": null,
+        "evidence": "신청 대상: 2026-1학기 재학 예정자 중 우선감면장학금 수혜 요건 충족자",
+        "reviewRequired": false
+      }
+    ],
+    "calendarEventCandidates": [
+      {
+        "assertionId": "candidate-start-001",
+        "title": "우선감면장학금 신청 시작",
+        "eventType": "start",
+        "dateExpression": "2026. 1. 12.(월) 09:00~1. 23.(금) 23:59",
+        "normalizedDate": "2026-01-12",
+        "evidence": "신청 기간: 2026. 1. 12.(월) 09:00~1. 23.(금) 23:59",
+        "reviewRequired": true
+      },
+      {
+        "assertionId": "candidate-deadline-001",
+        "title": "우선감면장학금 신청 마감",
+        "eventType": "deadline",
+        "dateExpression": "2026. 1. 12.(월) 09:00~1. 23.(금) 23:59",
+        "normalizedDate": "2026-01-23",
+        "evidence": "신청 기간: 2026. 1. 12.(월) 09:00~1. 23.(금) 23:59",
+        "reviewRequired": true
       }
     ]
   }
