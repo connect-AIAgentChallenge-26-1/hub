@@ -1,30 +1,46 @@
 {
+  "schemaVersion": "noticepilot.corpus.expected.v1",
   "id": "knu-scholarship-003",
   "sourceTitle": "2026년도 신라문화장학재단 장학생 공개선발 안내",
   "noticeType": "scholarship",
   "expected": {
-    "deadlines": [
+    "items": [
       {
+        "assertionId": "item-deadline-001",
+        "kind": "deadline",
         "title": "장학생 접수 마감",
-        "date": "2026-01-29",
-        "evidence": "접수 기간: 2026. 1. 16.~1. 29."
-      }
-    ],
-    "tasks": [],
-    "submissions": [],
-    "requirements": [
+        "dateExpression": "2026. 1. 16.~1. 29.",
+        "normalizedDate": "2026-01-29",
+        "evidence": "접수 기간: 2026. 1. 16.~1. 29.",
+        "reviewRequired": false
+      },
       {
+        "assertionId": "item-requirement-001",
+        "kind": "requirement",
         "title": "서류전형 대상",
-        "evidence": "선발 방법: 서류전형"
+        "dateExpression": null,
+        "normalizedDate": null,
+        "evidence": "선발 방법: 서류전형",
+        "reviewRequired": false
       }
     ],
-    "cautions": [],
-    "calendarEvents": [
+    "calendarEventCandidates": [
       {
-        "title": "장학생 접수 기간",
-        "startDate": "2026-01-16",
-        "endDate": "2026-01-29",
-        "eventType": "application_period",
+        "assertionId": "candidate-start-001",
+        "title": "장학생 접수 시작",
+        "eventType": "start",
+        "dateExpression": "2026. 1. 16.~1. 29.",
+        "normalizedDate": "2026-01-16",
+        "evidence": "접수 기간: 2026. 1. 16.~1. 29.",
+        "reviewRequired": false
+      },
+      {
+        "assertionId": "candidate-deadline-001",
+        "title": "장학생 접수 마감",
+        "eventType": "deadline",
+        "dateExpression": "2026. 1. 16.~1. 29.",
+        "normalizedDate": "2026-01-29",
+        "evidence": "접수 기간: 2026. 1. 16.~1. 29.",
         "reviewRequired": false
       }
     ]

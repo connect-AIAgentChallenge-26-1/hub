@@ -1,38 +1,56 @@
 {
+  "schemaVersion": "noticepilot.corpus.expected.v1",
   "id": "knu-school-001",
   "sourceTitle": "2026학년도 1학기 학부생 재입학 추가모집 안내",
   "noticeType": "school_notice",
   "expected": {
-    "deadlines": [
+    "items": [
       {
+        "assertionId": "item-deadline-001",
+        "kind": "deadline",
         "title": "재입학 서류 접수 마감",
-        "date": "2026-01-30",
-        "evidence": "접수 및 서류심사: 2026. 1. 19.(월)~1. 30.(금)"
-      }
-    ],
-    "tasks": [
-      {
-        "title": "재입학 지원서 접수",
-        "evidence": "접수 및 서류심사: 2026. 1. 19.(월)~1. 30.(금)"
-      }
-    ],
-    "submissions": [],
-    "requirements": [],
-    "cautions": [],
-    "calendarEvents": [
-      {
-        "title": "재입학 접수 및 서류심사",
-        "startDate": "2026-01-19",
-        "endDate": "2026-01-30",
-        "eventType": "academic_period",
+        "dateExpression": "2026. 1. 19.(월)~1. 30.(금)",
+        "normalizedDate": "2026-01-30",
+        "evidence": "접수 및 서류심사: 2026. 1. 19.(월)~1. 30.(금)",
         "reviewRequired": false
       },
       {
-        "title": "재입학 허가 통보 예정",
-        "startDate": "2026-02-05",
-        "endDate": "",
-        "eventType": "result_announcement",
+        "assertionId": "item-task-001",
+        "kind": "task",
+        "title": "재입학 지원서 접수",
+        "dateExpression": "2026. 1. 19.(월)~1. 30.(금)",
+        "normalizedDate": "2026-01-19",
+        "evidence": "접수 및 서류심사: 2026. 1. 19.(월)~1. 30.(금)",
         "reviewRequired": false
+      }
+    ],
+    "calendarEventCandidates": [
+      {
+        "assertionId": "candidate-start-001",
+        "title": "재입학 접수 및 서류심사 시작",
+        "eventType": "start",
+        "dateExpression": "2026. 1. 19.(월)~1. 30.(금)",
+        "normalizedDate": "2026-01-19",
+        "evidence": "접수 및 서류심사: 2026. 1. 19.(월)~1. 30.(금)",
+        "reviewRequired": false
+      },
+      {
+        "assertionId": "candidate-deadline-001",
+        "title": "재입학 서류 접수 마감",
+        "eventType": "deadline",
+        "dateExpression": "2026. 1. 19.(월)~1. 30.(금)",
+        "normalizedDate": "2026-01-30",
+        "evidence": "접수 및 서류심사: 2026. 1. 19.(월)~1. 30.(금)",
+        "reviewRequired": false
+      },
+      {
+        "assertionId": "candidate-announcement-001",
+        "title": "재입학 허가 통보 예정",
+        "eventType": "announcement",
+        "dateExpression": "2026. 2. 5.(목) 예정",
+        "normalizedDate": "2026-02-05",
+        "evidence": "재입학 허가 통보: 2026. 2. 5.(목) 예정",
+        "reviewRequired": true
       }
     ]
   }

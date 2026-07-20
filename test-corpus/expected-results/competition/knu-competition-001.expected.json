@@ -1,49 +1,18 @@
 {
+  "schemaVersion": "noticepilot.corpus.expected.v1",
   "id": "knu-competition-001",
   "sourceTitle": "2026 ICEE 창의공학 캡스톤디자인 경진대회 공학계열 참가팀 모집 (~7/31(금)까지 신청)",
   "noticeType": "competition",
   "expected": {
-    "deadlines": [
-      {
-        "title": "경진대회 참가 신청 마감",
-        "date": "2026-07-31",
-        "evidence": "신청 기한: 2026. 7. 31.(금)"
-      },
-      {
-        "title": "출품작 접수 마감",
-        "date": "2026-09-04",
-        "evidence": "출품작 접수: 2026. 9. 4.(금)"
-      }
+    "items": [
+      {"assertionId":"item-deadline-001","kind":"deadline","title":"경진대회 참가 신청 마감","dateExpression":"2026. 7. 31.(금)","normalizedDate":"2026-07-31","evidence":"신청 기한: 2026. 7. 31.(금)","reviewRequired":false},
+      {"assertionId":"item-deadline-002","kind":"deadline","title":"출품작 접수 마감","dateExpression":"2026. 9. 4.(금)","normalizedDate":"2026-09-04","evidence":"출품작 접수: 2026. 9. 4.(금)","reviewRequired":false},
+      {"assertionId":"item-submission-001","kind":"submission","title":"경진대회 출품작","dateExpression":"2026. 9. 4.(금)","normalizedDate":"2026-09-04","evidence":"출품작 접수: 2026. 9. 4.(금)","reviewRequired":false},
+      {"assertionId":"item-requirement-001","kind":"requirement","title":"공학계열 참가팀","dateExpression":null,"normalizedDate":null,"evidence":"대상: 공학계열 참가팀","reviewRequired":false}
     ],
-    "tasks": [],
-    "submissions": [
-      {
-        "title": "경진대회 출품작",
-        "evidence": "출품작 접수: 2026. 9. 4.(금)"
-      }
-    ],
-    "requirements": [
-      {
-        "title": "공학계열 참가팀",
-        "evidence": "대상: 공학계열 참가팀"
-      }
-    ],
-    "cautions": [],
-    "calendarEvents": [
-      {
-        "title": "경진대회 참가 신청 마감",
-        "startDate": "2026-07-31",
-        "endDate": "",
-        "eventType": "deadline",
-        "reviewRequired": false
-      },
-      {
-        "title": "경진대회 출품작 접수 마감",
-        "startDate": "2026-09-04",
-        "endDate": "",
-        "eventType": "submission_deadline",
-        "reviewRequired": false
-      }
+    "calendarEventCandidates": [
+      {"assertionId":"candidate-deadline-001","title":"경진대회 참가 신청 마감","eventType":"deadline","dateExpression":"2026. 7. 31.(금)","normalizedDate":"2026-07-31","evidence":"신청 기한: 2026. 7. 31.(금)","reviewRequired":false},
+      {"assertionId":"candidate-deadline-002","title":"경진대회 출품작 접수 마감","eventType":"deadline","dateExpression":"2026. 9. 4.(금)","normalizedDate":"2026-09-04","evidence":"출품작 접수: 2026. 9. 4.(금)","reviewRequired":false}
     ]
   }
 }

@@ -1,41 +1,56 @@
 {
+  "schemaVersion": "noticepilot.corpus.expected.v1",
   "id": "knu-school-003",
   "sourceTitle": "2026학년도 2학기 숙명여자대학교 교류 수학 안내",
   "noticeType": "school_notice",
   "expected": {
-    "deadlines": [
+    "items": [
       {
+        "assertionId": "item-deadline-001",
+        "kind": "deadline",
         "title": "학생 교류 수학 서류 제출 마감",
-        "date": "2026-08-03T18:00:00+09:00",
-        "evidence": "학생 제출 마감: 2026. 8. 3.(월) 18:00"
-      }
-    ],
-    "tasks": [],
-    "submissions": [
+        "dateExpression": "2026. 8. 3.(월) 18:00",
+        "normalizedDate": "2026-08-03",
+        "evidence": "학생 제출 마감: 2026. 8. 3.(월) 18:00",
+        "reviewRequired": true
+      },
       {
+        "assertionId": "item-submission-001",
+        "kind": "submission",
         "title": "교류 수학 신청 서류",
-        "evidence": "제출 서류: 다른대학 수학지원서, 숙명대학교 추천자 명단"
-      }
-    ],
-    "requirements": [
-      {
-        "title": "재학생 또는 복학 예정 휴학생",
-        "evidence": "신청 대상: 재학생, 2026학년도 2학기 복학 예정 휴학생"
-      }
-    ],
-    "cautions": [
-      {
-        "title": "학과 제출일은 내부 처리 기한",
-        "evidence": "학과 제출 마감: 2026. 8. 4.(화) 18:00"
-      }
-    ],
-    "calendarEvents": [
-      {
-        "title": "교류 수학 학생 제출 마감",
-        "startDate": "2026-08-03T18:00:00+09:00",
-        "endDate": "",
-        "eventType": "submission_deadline",
+        "dateExpression": null,
+        "normalizedDate": null,
+        "evidence": "제출 서류: 다른대학 수학지원서, 숙명대학교 추천자 명단",
         "reviewRequired": false
+      },
+      {
+        "assertionId": "item-requirement-001",
+        "kind": "requirement",
+        "title": "재학생 또는 복학 예정 휴학생",
+        "dateExpression": null,
+        "normalizedDate": null,
+        "evidence": "신청 대상: 재학생, 2026학년도 2학기 복학 예정 휴학생",
+        "reviewRequired": false
+      },
+      {
+        "assertionId": "item-caution-001",
+        "kind": "caution",
+        "title": "학과 제출일은 내부 처리 기한",
+        "dateExpression": "2026. 8. 4.(화) 18:00",
+        "normalizedDate": "2026-08-04",
+        "evidence": "학과 제출 마감: 2026. 8. 4.(화) 18:00",
+        "reviewRequired": true
+      }
+    ],
+    "calendarEventCandidates": [
+      {
+        "assertionId": "candidate-deadline-001",
+        "title": "교류 수학 학생 제출 마감",
+        "eventType": "deadline",
+        "dateExpression": "2026. 8. 3.(월) 18:00",
+        "normalizedDate": "2026-08-03",
+        "evidence": "학생 제출 마감: 2026. 8. 3.(월) 18:00",
+        "reviewRequired": true
       }
     ]
   }

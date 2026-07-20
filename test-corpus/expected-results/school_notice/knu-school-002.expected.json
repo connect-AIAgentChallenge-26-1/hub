@@ -1,45 +1,83 @@
 {
+  "schemaVersion": "noticepilot.corpus.expected.v1",
   "id": "knu-school-002",
   "sourceTitle": "2026학년도 1학기 수강신청 안내",
   "noticeType": "school_notice",
   "expected": {
-    "deadlines": [
+    "items": [
       {
-        "title": "전체 학년 수강신청 종료",
-        "date": "2026-02-25T18:00:00+09:00",
-        "evidence": "전체 학년: 2026. 2. 21.(토) 10:00~2. 25.(수) 18:00"
-      }
-    ],
-    "tasks": [
-      {
-        "title": "학년별 수강신청",
-        "evidence": "1·4학년: 2026. 2. 20.(금) 10:00~13:00"
-      }
-    ],
-    "submissions": [],
-    "requirements": [],
-    "cautions": [],
-    "calendarEvents": [
-      {
+        "assertionId": "item-task-001",
+        "kind": "task",
         "title": "1·4학년 수강신청",
-        "startDate": "2026-02-20T10:00:00+09:00",
-        "endDate": "2026-02-20T13:00:00+09:00",
-        "eventType": "academic_period",
-        "reviewRequired": false
+        "dateExpression": "2026. 2. 20.(금) 10:00~13:00",
+        "normalizedDate": "2026-02-20",
+        "evidence": "1·4학년: 2026. 2. 20.(금) 10:00~13:00",
+        "reviewRequired": true
       },
       {
-        "title": "2·3학년 수강신청",
-        "startDate": "2026-02-20T14:00:00+09:00",
-        "endDate": "2026-02-20T17:00:00+09:00",
-        "eventType": "academic_period",
-        "reviewRequired": false
+        "assertionId": "item-deadline-001",
+        "kind": "deadline",
+        "title": "전체 학년 수강신청 종료",
+        "dateExpression": "2026. 2. 21.(토) 10:00~2. 25.(수) 18:00",
+        "normalizedDate": "2026-02-25",
+        "evidence": "전체 학년: 2026. 2. 21.(토) 10:00~2. 25.(수) 18:00",
+        "reviewRequired": true
+      }
+    ],
+    "calendarEventCandidates": [
+      {
+        "assertionId": "candidate-start-001",
+        "title": "1·4학년 수강신청 시작",
+        "eventType": "start",
+        "dateExpression": "2026. 2. 20.(금) 10:00~13:00",
+        "normalizedDate": "2026-02-20",
+        "evidence": "1·4학년: 2026. 2. 20.(금) 10:00~13:00",
+        "reviewRequired": true
       },
       {
-        "title": "전체 학년 수강신청",
-        "startDate": "2026-02-21T10:00:00+09:00",
-        "endDate": "2026-02-25T18:00:00+09:00",
-        "eventType": "academic_period",
-        "reviewRequired": false
+        "assertionId": "candidate-deadline-001",
+        "title": "1·4학년 수강신청 종료",
+        "eventType": "deadline",
+        "dateExpression": "2026. 2. 20.(금) 10:00~13:00",
+        "normalizedDate": "2026-02-20",
+        "evidence": "1·4학년: 2026. 2. 20.(금) 10:00~13:00",
+        "reviewRequired": true
+      },
+      {
+        "assertionId": "candidate-start-002",
+        "title": "2·3학년 수강신청 시작",
+        "eventType": "start",
+        "dateExpression": "2026. 2. 20.(금) 14:00~17:00",
+        "normalizedDate": "2026-02-20",
+        "evidence": "2·3학년: 2026. 2. 20.(금) 14:00~17:00",
+        "reviewRequired": true
+      },
+      {
+        "assertionId": "candidate-deadline-002",
+        "title": "2·3학년 수강신청 종료",
+        "eventType": "deadline",
+        "dateExpression": "2026. 2. 20.(금) 14:00~17:00",
+        "normalizedDate": "2026-02-20",
+        "evidence": "2·3학년: 2026. 2. 20.(금) 14:00~17:00",
+        "reviewRequired": true
+      },
+      {
+        "assertionId": "candidate-start-003",
+        "title": "전체 학년 수강신청 시작",
+        "eventType": "start",
+        "dateExpression": "2026. 2. 21.(토) 10:00~2. 25.(수) 18:00",
+        "normalizedDate": "2026-02-21",
+        "evidence": "전체 학년: 2026. 2. 21.(토) 10:00~2. 25.(수) 18:00",
+        "reviewRequired": true
+      },
+      {
+        "assertionId": "candidate-deadline-003",
+        "title": "전체 학년 수강신청 종료",
+        "eventType": "deadline",
+        "dateExpression": "2026. 2. 21.(토) 10:00~2. 25.(수) 18:00",
+        "normalizedDate": "2026-02-25",
+        "evidence": "전체 학년: 2026. 2. 21.(토) 10:00~2. 25.(수) 18:00",
+        "reviewRequired": true
       }
     ]
   }

@@ -1,48 +1,65 @@
 {
+  "schemaVersion": "noticepilot.corpus.expected.v1",
   "id": "knu-assignment-001",
   "sourceTitle": "2026 캡스톤디자인 과제 모집 안내",
   "noticeType": "assignment",
   "expected": {
-    "deadlines": [
+    "items": [
       {
+        "assertionId": "item-deadline-001",
+        "kind": "deadline",
         "title": "캡스톤디자인 과제 신청 마감",
-        "date": "2026-03-31",
-        "evidence": "신청 마감: 2026. 3. 31.(화)"
-      }
-    ],
-    "tasks": [
-      {
-        "title": "캡스톤디자인 과제 신청",
-        "evidence": "지원 대상: 삼척·도계캠퍼스 재학생 팀"
-      }
-    ],
-    "submissions": [],
-    "requirements": [
-      {
-        "title": "삼척·도계캠퍼스 재학생 팀",
-        "evidence": "지원 대상: 삼척·도계캠퍼스 재학생 팀"
-      }
-    ],
-    "cautions": [
-      {
-        "title": "오리엔테이션 일정은 예정",
-        "evidence": "오리엔테이션: 2026. 4. 9.(목) 예정"
-      }
-    ],
-    "calendarEvents": [
-      {
-        "title": "캡스톤디자인 과제 신청 마감",
-        "startDate": "2026-03-31",
-        "endDate": "",
-        "eventType": "deadline",
+        "dateExpression": "2026. 3. 31.(화)",
+        "normalizedDate": "2026-03-31",
+        "evidence": "신청 마감: 2026. 3. 31.(화)",
         "reviewRequired": false
       },
       {
-        "title": "캡스톤디자인 오리엔테이션 예정",
-        "startDate": "2026-04-09",
-        "endDate": "",
-        "eventType": "event",
+        "assertionId": "item-task-001",
+        "kind": "task",
+        "title": "캡스톤디자인 과제 신청",
+        "dateExpression": null,
+        "normalizedDate": null,
+        "evidence": "지원 대상: 삼척·도계캠퍼스 재학생 팀",
         "reviewRequired": false
+      },
+      {
+        "assertionId": "item-requirement-001",
+        "kind": "requirement",
+        "title": "삼척·도계캠퍼스 재학생 팀",
+        "dateExpression": null,
+        "normalizedDate": null,
+        "evidence": "지원 대상: 삼척·도계캠퍼스 재학생 팀",
+        "reviewRequired": false
+      },
+      {
+        "assertionId": "item-caution-001",
+        "kind": "caution",
+        "title": "오리엔테이션 일정은 예정",
+        "dateExpression": "2026. 4. 9.(목) 예정",
+        "normalizedDate": "2026-04-09",
+        "evidence": "오리엔테이션: 2026. 4. 9.(목) 예정",
+        "reviewRequired": true
+      }
+    ],
+    "calendarEventCandidates": [
+      {
+        "assertionId": "candidate-deadline-001",
+        "title": "캡스톤디자인 과제 신청 마감",
+        "eventType": "deadline",
+        "dateExpression": "2026. 3. 31.(화)",
+        "normalizedDate": "2026-03-31",
+        "evidence": "신청 마감: 2026. 3. 31.(화)",
+        "reviewRequired": false
+      },
+      {
+        "assertionId": "candidate-meeting-001",
+        "title": "캡스톤디자인 오리엔테이션 예정",
+        "eventType": "meeting",
+        "dateExpression": "2026. 4. 9.(목) 예정",
+        "normalizedDate": "2026-04-09",
+        "evidence": "오리엔테이션: 2026. 4. 9.(목) 예정",
+        "reviewRequired": true
       }
     ]
   }
