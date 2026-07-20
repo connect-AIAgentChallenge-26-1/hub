@@ -2,11 +2,13 @@
 
 ## Purpose
 
-This document summarizes the current implementation baseline of NoticePilot before real AI integration begins. It is intended to prevent future implementation phases from accidentally breaking the existing MVP, mock analysis flows, validation behavior, campus preference metadata, and export workflows.
+This document summarizes the current implementation baseline of NoticePilot before any Route M provider integration resumes. It is intended to prevent future work from accidentally breaking the existing MVP, mock analysis flows, schema and corpus validation, campus preference metadata, export workflows, and subscription boundaries.
 
 ## Current Status
 
-NoticePilot is currently a React + Vite MVP UI with an Express mock analyze API, Zod-backed server schemas, and an opt-in S-Lite durable single-feed API. The project validates the analysis workflow through mock paths and validates one persistent subscription URL through Foundation.25.1 plus SQLite.
+NoticePilot currently includes a React + Vite manual-analysis UI, an Express mock analyze API, Zod-backed server schemas, an active 10-entry Route M corpus with strict deterministic validation, and an opt-in S-Lite durable single-feed API.
+
+Route M M1 corpus collection and M2 deterministic validation are complete for the initial 10-entry gate. No live AI provider is connected. M3 remains postponed, M4 remains blocked until controlled provider output exists, and S-Lite deployment plus real calendar-client proof remains the current productization route.
 
 Current user-facing flow:
 
@@ -177,6 +179,22 @@ Implemented capabilities:
 - privacy confirmation preserved
 - existing client-side mock flow preserved
 
+### Route M Contract and Corpus Validation Baseline
+
+Status: M0 contract baseline, M1 initial corpus collection, and M2 deterministic corpus validation complete.
+
+Implemented baseline:
+
+- AI raw schema, prompt contract, normalization boundary, and fail-closed provider-error rules are documented;
+- 10 verified public-notice corpus entries are active;
+- all 10 real expected files use `noticepilot.corpus.expected.v1`;
+- zero legacy expected files remain;
+- the expected-result template is validated separately from real-entry counts;
+- deterministic index, path, filename, ID, title, notice-type, enum, date, evidence, duplicate, assertion-identity, template, and category-distribution checks are active; and
+- `npm test` includes the registered corpus validator.
+
+This completion establishes corpus integrity and reproducibility only. It does not establish provider-output quality, approve numerical quality thresholds, or authorize M3 provider integration.
+
 ### Calendar Tab + Campus Preferences
 
 Status: Complete
@@ -344,7 +362,18 @@ metadata.userPreferencesSnapshot
 
 This snapshot is inert. It records current campus preference state for future product context, but it must not change current mock analysis output, exports, or filtering.
 
-This structure should be preserved through Phase 4. UI handlers may be generic, but the app state should not be migrated to a unified `items[]` model yet.
+This six-array structure remains the current app and UI projection boundary.
+
+The active corpus expected-truth boundary is separate:
+
+```text
+expected.items[]
+expected.calendarEventCandidates[]
+```
+
+Corpus expected truth contains human-verified semantic assertions. It is not an `AppAnalysisSchema` snapshot, provider raw response, complete `ExtractionResult`, persistent `CalendarEvent`, subscription feed, or ICS rendering.
+
+Activating the corpus v1 contract does not authorize migrating app state to a unified `items[]` model. The existing six-array app projection must remain stable unless a separate schema migration is approved.
 
 ## Current Regression Baselines
 
@@ -372,6 +401,11 @@ Future phases must not break the following behavior:
 - all-day selected `.ics` export
 - campus preferences remain inert metadata for export behavior
 - server unavailable / invalid response error UI
+- the active corpus remains strict `noticepilot.corpus.expected.v1`
+- all 10 real expected files remain migrated and legacy expected files remain zero
+- expected evidence remains exactly traceable to canonical extracted text
+- corpus index, path, schema, duplicate, template, and category-distribution validation remains green
+- `npm test` continues to invoke `npm run validate:corpus`
 
 ## Explicitly Unsupported Capabilities
 
@@ -379,12 +413,15 @@ The following are not implemented yet:
 
 - real AI API integration
 - AI prompt/schema hardening in runtime
+- provider-output corpus evaluation runner
+- corpus-ID-level expected-versus-actual reporting
+- approved provider quality thresholds and stop conditions
 - PDF extraction
 - HWP/HWPX extraction
 - image OCR
 - scanned PDF OCR
 - advanced relative date resolution
-- school-level notice parsing
+- root-application live school-level notice parsing or multi-institution parser orchestration
 - checkbox-based batch `.ics` export
 - production account-owned or multi-user subscription feeds
 - multiple saved notice projects
@@ -392,6 +429,15 @@ The following are not implemented yet:
 - Google Calendar API integration
 - payment
 
-## Phase 4 Starting Point
+## Route M Current Starting Point
 
-Phase 4 should not begin by directly wiring a provider API. The next step is to document the AI raw schema, prompt contract, corpus plan, and roadmap boundaries so that real AI integration can be implemented against a stable contract.
+- M0 contract documentation is complete.
+- M1 initial 10-entry corpus collection is complete.
+- M2 deterministic corpus validation is complete.
+- No live AI provider is connected.
+- M3 remains postponed and may resume only through its separately approved entry criteria.
+- M4 remains blocked until M3 produces controlled provider output.
+- provider-output comparison and quality scoring remain outside M2.
+- S-Lite deployment and physical calendar-client proof remain the current productization priority.
+
+The next Route M action is not automatic provider wiring. Any resumption must first confirm that the registered M2 validation remains green and separately approve provider, quality, security, privacy, operational-limit, and rollback criteria.
