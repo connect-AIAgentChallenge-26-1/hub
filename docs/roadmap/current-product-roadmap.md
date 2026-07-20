@@ -26,7 +26,7 @@ The routes must not be reported or implemented as one undifferentiated phase.
 | --- | --- | --- |
 | Manual analysis UI | Runtime active | Client mock and Express server mock support review, editing, evidence, Markdown, and selected one-off all-day ICS export. |
 | AI contracts | Contract complete | Raw schema, prompt contract, normalization, strict validation, and error boundaries are documented; no live provider is connected. |
-| Test corpus | 10-entry baseline collected | Verified public entries now cover scholarship, school notice, assignment, competition, job posting, and ambiguous-date cases; deterministic corpus validation is next. |
+| Test corpus | M1/M2 complete for the initial 10-entry gate | Ten verified public entries use the active strict `noticepilot.corpus.expected.v1` contract; all 10 expected files are migrated, zero legacy expected files remain, and deterministic index, path, schema, evidence, duplicate, and category-distribution validation is registered in CI. |
 | Foundation.25.1 | Implemented, isolated | The exact package, data, persistence, projection, feed, and tests are restored. |
 | Local reference delivery | Opt-in runtime active | One fixed 601-event snapshot is exposed through an in-memory loopback capability that expires on server restart. |
 | S-Lite durable delivery | Runtime plus public/LAN HTTPS profiles implemented; client proof pending | One administrator can issue, inspect, rotate, and revoke one SQLite-backed capability URL; Caddy exposes only its calendar read path. |
@@ -69,7 +69,7 @@ P0 Product truth and quality foundation
           │  SQLite capability → HTTPS deployment → real-client QA
           │
           ├─ Route M — Manual / AI assistant (postponed)
-          │  corpus → evaluation harness → server AI vertical slice
+          │  validated corpus → server AI vertical slice → provider-output evaluation
           │
           └─ Route S — Automated subscription expansion
              live ingestion → event runtime → durable account feed
@@ -108,22 +108,37 @@ examples exist.
 
 ## 6. Route M — Manual / AI Assistant
 
-### M1 — Corpus baseline
+### M1 — Corpus collection
 
-Complete P0 corpus collection and record category coverage, ambiguity, evidence
-quality, copyright risk, and privacy review.
+**Status: Complete for the initial 10-entry collection gate.**
 
-Status: the initial 10-entry collection gate is complete. Structure, evidence,
-and distribution checks are implemented in M2 rather than inferred from file
-presence alone.
+The repository contains 10 verified public-notice entries with canonical
+extracted text, human expected truth, and recorded privacy and copyright review.
 
-### M2 — Evaluation harness
+M1 completion establishes the initial collection baseline. It does not establish
+structural validity, provider-output quality, or product-level extraction quality.
 
-Provide deterministic checks for corpus structure and a report shape that can
-compare provider output with human expected truth without treating every text
-difference as a semantic failure.
+### M2 — Deterministic corpus validation
+
+**Status: Complete for the initial 10-entry deterministic gate.**
+
+All 10 real expected files use the active strict
+`noticepilot.corpus.expected.v1` contract, and zero legacy expected files remain.
+Registered repository validation deterministically enforces index, path, schema,
+identity, enum, date, evidence, duplicate, template, and category-distribution
+rules.
+
+M2 completion establishes corpus integrity and reproducibility only.
+Provider-output comparison and quality scoring remain M4 responsibilities.
+M2 completion does not authorize M3.
 
 ### M3 — Small server-side AI vertical slice
+
+**Status: Postponed; not the current productization route.**
+
+M3 may resume only under a separately approved entry gate. At minimum, the
+registered M2 validation must remain green and provider, quality, security,
+privacy, operational-limit, and rollback criteria must be approved.
 
 Initial runtime scope:
 
@@ -142,6 +157,12 @@ OCR, authentication, database, crawling, or subscription management in this
 slice. Provider credentials remain server-only.
 
 ### M4 — Corpus-based AI QA
+
+**Status: Blocked until M3 produces controlled provider output.**
+
+M4 owns the reproducible provider-output evaluation runner, corpus-ID-level
+expected-versus-actual reporting, failure taxonomy, regression baseline, and
+proposed quality thresholds and stop conditions.
 
 Measure:
 
