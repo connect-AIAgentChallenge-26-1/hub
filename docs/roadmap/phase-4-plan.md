@@ -101,9 +101,9 @@ The historical Phase 4 labels remain available for traceability.
 | Historical stage | Current Route M stage | Current status |
 | --- | --- | --- |
 | Phase 4-A — Planning / Contract Documentation | M0 — Contract baseline | Complete |
-| Phase 4-B — Test Corpus Scaffold | M1 — Corpus collection + M2 — Deterministic validation | Collection complete; validation pending |
+| Phase 4-B — Test Corpus Scaffold | M1 — Corpus collection + M2 — Deterministic validation | Initial collection and deterministic validation complete |
 | Phase 4-C — Real AI API Integration | M3 — Small server-side AI vertical slice | Postponed |
-| Phase 4-D — Corpus-based AI QA | M4 — Corpus-based AI QA | Blocked by M2 and M3 |
+| Phase 4-D — Corpus-based AI QA | M4 — Corpus-based AI QA | Blocked until M3 produces controlled provider output |
 | Phase 4-E — Date Resolution v1 | M5 — Controlled expansion | Blocked by M4 evidence |
 
 The mapping preserves historical references without treating all product work as one linear Phase 4 sequence.
