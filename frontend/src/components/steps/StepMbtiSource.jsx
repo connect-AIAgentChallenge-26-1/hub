@@ -2,7 +2,7 @@
 import { MBTI_TYPES } from "../../data/questions";
 import { OptionCard } from "../ui";
 
-export function StepMbtiSource({ mbti, setMbti, mbtiSource, setMbtiSource, onContinueWithout, onHome, onNext }) {
+export function StepMbtiSource({ mbti, setMbti, mbtiSource, setMbtiSource, onContinueWithout, onUseAiChat, onHome, onNext }) {
   return (
     <section className="panel">
       <p className="eyebrow">Step 1</p>
@@ -17,6 +17,9 @@ export function StepMbtiSource({ mbti, setMbti, mbtiSource, setMbtiSource, onCon
         </OptionCard>
         <OptionCard active={mbtiSource === "not-provided"} onClick={onContinueWithout}>
           공식 결과 없이 진행할게요
+        </OptionCard>
+        <OptionCard active={mbtiSource === "ai-estimated"} onClick={onUseAiChat}>
+          잘 모르겠어요 — AI와 짧게 대화해 추정
         </OptionCard>
       </div>
       {mbtiSource === "official-self-report" && (

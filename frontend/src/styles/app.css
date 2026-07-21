@@ -94,6 +94,25 @@ button{font:inherit;}
 .method-example-tag{display:inline-block;font-weight:700;font-size:11px;letter-spacing:.02em;margin-right:6px;opacity:.85;}
 .method-action{color:var(--text);}
 .method-reason{color:var(--text-muted);font-size:13px;}
+/* 신뢰 패널: 근거 지표 칩 + 설문답→지표→추천 흐름 */
+.method-basis{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:10px;}
+.method-basis-tag{font-weight:700;font-size:11px;letter-spacing:.02em;color:var(--text-muted);}
+.basis-chip{background:var(--surface);border:1px solid var(--border);color:var(--text-strong);border-radius:var(--r-pill);padding:4px 10px;font-size:12px;font-weight:600;}
+.basis-chip.chip-strong{background:var(--tint-blue);color:var(--on-tint-blue);border-color:transparent;}
+.trust-flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin-top:14px;}
+.trust-step{flex:1 1 200px;border:1px solid var(--border);background:var(--surface);border-radius:var(--r-md);padding:12px;}
+.trust-step-tag{display:block;font-weight:700;font-size:12px;color:var(--text-muted);margin-bottom:8px;}
+.trust-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.trust-arrow{display:flex;align-items:center;color:var(--text-muted);font-weight:700;font-size:18px;}
+@media (max-width:860px){.trust-flow{flex-direction:column;}.trust-arrow{transform:rotate(90deg);align-self:center;}}
+/* 주간 타임테이블 골격(#29) */
+.timetable-scroll{overflow-x:auto;margin-top:10px;}
+.timetable{border-collapse:collapse;width:100%;min-width:560px;font-size:13px;}
+.timetable th,.timetable td{border:1px solid var(--border);padding:8px 6px;text-align:center;vertical-align:middle;}
+.timetable thead th,.timetable tbody th{background:var(--surface-muted);color:var(--text-strong);font-weight:700;}
+.timetable .tt-cell{color:var(--text-muted);}
+.timetable .tt-focus{background:var(--tint-blue);color:var(--on-tint-blue);font-weight:600;}
+.timetable .tt-recovery{background:var(--tint-green);color:var(--on-tint-green);font-weight:600;}
 .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px;}
 ul{margin:10px 0 0;padding-left:18px;color:var(--text);line-height:1.7;}
 /* 실천 카드 */

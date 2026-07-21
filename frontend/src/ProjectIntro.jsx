@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SCORE_LABELS, STUDY_QUESTIONS, STRESS_QUESTIONS } from "./data/questions";
-import { buildDayPlan } from "./lib/schedule";
+import { buildDayPlan, buildWeeklyTimetable } from "./lib/schedule";
+import { loadEssentialHours, saveEssentialHours } from "./lib/storage";
 import AnalysisReport from "./components/AnalysisReport";
 import { ConsentNotice } from "./components/ConsentNotice";
 import { OptionCard, Progress, ScoreBar } from "./components/ui";
 import { StepIntro } from "./components/steps/StepIntro";
 import { StepMbtiSource } from "./components/steps/StepMbtiSource";
+import { StepMbtiChat } from "./components/steps/StepMbtiChat";
 import { StepSurvey } from "./components/steps/StepSurvey";
 import { StepTaskState } from "./components/steps/StepTaskState";
 import "./styles/app.css";
@@ -25,6 +27,7 @@ export default function ProjectIntro() {
     mbtiSource,
     setMbtiSource,
     mbtiKnown,
+    mbtiEstimated,
     studyAnswers,
     setStudyAnswers,
     stressAnswers,
@@ -59,11 +62,16 @@ export default function ProjectIntro() {
     canContinueStress,
     hasCompleteResult,
     continueWithoutOfficialMbti,
+    applyEstimatedMbti,
     handleRecordSave,
     handleFeedbackSave,
     resetFlowState,
     clearLocalState,
   } = useAssessmentFlow();
+
+  // AI 간이 추정 채팅(ADR-008): step 1 안에서 여닫는 하위 화면 + 추정 근거 메타(결과 라벨용).
+  const [mbtiChatOpen, setMbtiChatOpen] = useState(false);
+  const [estimatedMeta, setEstimatedMeta] = useState(null);
 
   const {
     recallPhase,
@@ -92,15 +100,24 @@ export default function ProjectIntro() {
     .sort(([, a], [, b]) => b - a)
     .slice(0, 5);
 
+  // 신뢰 패널: TOP3 추천이 실제로 반영한 행동지표를 중복 없이 모은다("설문답 → 지표 → 추천" 흐름).
+  const usedIndicators = [...new Set(result.recommendations.flatMap((item) => item.basedOn ?? []))];
+
   // 하루 스케줄 생성기(최소 슬라이스): result 메모와 분리된 로컬 입력으로 계산한다.
-  const [sleepHours, setSleepHours] = useState(7);
-  const [classHours, setClassHours] = useState(6);
-  const [otherHours, setOtherHours] = useState(3);
+  const [savedEssential] = useState(() => loadEssentialHours() ?? {});
+  const [sleepHours, setSleepHours] = useState(savedEssential.sleep ?? 7);
+  const [classHours, setClassHours] = useState(savedEssential.class ?? 6);
+  const [otherHours, setOtherHours] = useState(savedEssential.other ?? 3);
+  useEffect(() => {
+    // 필수시간 입력을 로컬 저장 → 새로고침해도 하루·주간 계획이 재현된다(서버 저장 아님).
+    saveEssentialHours({ sleep: sleepHours, class: classHours, other: otherHours });
+  }, [sleepHours, classHours, otherHours]);
   const dayPlan = buildDayPlan({
     essentialHours: { sleep: sleepHours, class: classHours, other: otherHours },
     recommendations: result.recommendations,
     routine: result.routine,
   });
+  const weeklyTimetable = buildWeeklyTimetable({ dayPlan, weeklyPlan: result.weeklyPlan });
 
   function handleServerSave() {
     saveToServer({
@@ -161,15 +178,42 @@ export default function ProjectIntro() {
         <>
         <Progress step={step} />
 
-        {step === 1 && (
+        {step === 1 && !mbtiChatOpen && (
           <StepMbtiSource
             mbti={mbti}
             setMbti={setMbti}
             mbtiSource={mbtiSource}
             setMbtiSource={setMbtiSource}
             onContinueWithout={continueWithoutOfficialMbti}
+            onUseAiChat={() => {
+              setMbtiSource("ai-estimated");
+              setMbtiChatOpen(true);
+            }}
             onHome={() => setStep(0)}
             onNext={() => setStep(2)}
+          />
+        )}
+
+        {step === 1 && mbtiChatOpen && (
+          <StepMbtiChat
+            onEstimated={(estimatedMbti, meta) => {
+              setEstimatedMeta(meta);
+              applyEstimatedMbti(estimatedMbti);
+              setMbtiChatOpen(false);
+            }}
+            onFallback={() => {
+              setEstimatedMeta(null);
+              continueWithoutOfficialMbti();
+              setMbtiChatOpen(false);
+            }}
+            onBack={() => {
+              setMbtiSource("");
+              setMbtiChatOpen(false);
+            }}
+            onHome={() => {
+              setMbtiChatOpen(false);
+              setStep(0);
+            }}
           />
         )}
 
@@ -224,8 +268,16 @@ export default function ProjectIntro() {
                 <p>
                   {mbtiKnown
                     ? `사용자가 입력한 공식 MBTI 결과: ${mbti}`
-                    : "공식 MBTI 결과를 입력하지 않았습니다. 추천에는 공부·스트레스 응답만 사용했습니다."}
+                    : mbtiEstimated
+                      ? `AI와의 짧은 대화로 간이 추정한 유형: ${mbti} (공식 판정 아님)`
+                      : "공식 MBTI 결과를 입력하지 않았습니다. 추천에는 공부·스트레스 응답만 사용했습니다."}
                 </p>
+                {mbtiEstimated && (
+                  <p className="hint" style={{ marginTop: 8 }}>
+                    이 값은 탐색적 간이 추정입니다. 공식 MBTI 평가 결과가 아니며, 매칭의 시작점으로만 사용됩니다.
+                    {estimatedMeta?.uncertainty ? ` ${estimatedMeta.uncertainty}` : ""}
+                  </p>
+                )}
               </div>
               <div className="result-card">
                 <h3>공부습관 기반 4축 탐색 신호</h3>
@@ -242,10 +294,15 @@ export default function ProjectIntro() {
               </div>
             </div>
 
-            {mbtiKnown && result.match?.temperament && (
+            {(mbtiKnown || mbtiEstimated) && result.match?.temperament && (
               <div className="feedback-card">
-                <p className="eyebrow">MBTI × 공부법 매칭</p>
+                <p className="eyebrow">MBTI × 공부법 매칭{mbtiEstimated ? " · 간이 추정" : ""}</p>
                 <h3>{mbti} · {result.match.temperamentLabel} 맞춤 매칭</h3>
+                {mbtiEstimated && (
+                  <p className="hint" style={{ marginTop: 0, marginBottom: 8 }}>
+                    아래 매칭은 <strong>AI 간이 추정</strong> 유형을 시작점으로 씁니다(공식 판정 아님).
+                  </p>
+                )}
                 <p>{result.match.reason}</p>
                 <div className="answers">
                   {result.recommendations.map((item) => (
@@ -311,10 +368,57 @@ export default function ProjectIntro() {
                       )}
                       <p className="method-action">오늘 할 일 · {item.action}</p>
                       <p className="method-reason">{item.reason}</p>
+                      {item.basedOn?.length > 0 && (
+                        <div className="method-basis">
+                          <span className="method-basis-tag">근거 지표</span>
+                          {item.basedOn.map((key) => (
+                            <span className="basis-chip" key={key}>{SCORE_LABELS[key] ?? key}</span>
+                          ))}
+                        </div>
+                      )}
                     </article>
                   ))}
                 </div>
               </div>
+            </div>
+
+            <div className="feedback-card trust-panel">
+              <p className="eyebrow">이 추천이 나온 근거 · 한계</p>
+              <h3>내 응답이 어떻게 추천으로 이어졌는지</h3>
+              <div className="trust-flow">
+                <div className="trust-step">
+                  <span className="trust-step-tag">① 내 응답 신호</span>
+                  <div className="trust-chips">
+                    {result.preferenceProfile.axes.map((axis) => (
+                      <span className="basis-chip" key={axis.axis}>{axis.analogy} · {axis.leaning}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="trust-arrow" aria-hidden="true">→</div>
+                <div className="trust-step">
+                  <span className="trust-step-tag">② 반영된 행동지표</span>
+                  <div className="trust-chips">
+                    {usedIndicators.map((key) => (
+                      <span className="basis-chip" key={key}>{SCORE_LABELS[key] ?? key}</span>
+                    ))}
+                  </div>
+                </div>
+                <div className="trust-arrow" aria-hidden="true">→</div>
+                <div className="trust-step">
+                  <span className="trust-step-tag">③ 추천 공부법</span>
+                  <div className="trust-chips">
+                    {result.recommendations.map((item) => (
+                      <span className="basis-chip chip-strong" key={item.id}>{item.title}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <p className="hint">
+                이 흐름은 규칙 기반 계산입니다. 점수는 우열이 아니라 "무엇을 먼저 시도할지" 신호이며, 실제 효과는 실행 후 결과로만 확인됩니다.
+              </p>
+              <p className="hint" style={{ marginTop: 6 }}>
+                MBTI는 고정된 진단이 아니라 탐색 시작점입니다. 같은 유형이라도 상황·과업에 따라 잘 맞는 방식이 달라질 수 있어, 아래 자기 점검 기록이 더 믿을 만한 신호가 됩니다.
+              </p>
             </div>
 
             <div className="two-col">
@@ -485,6 +589,36 @@ export default function ProjectIntro() {
                   ))}
                 </div>
               )}
+
+              <h3 style={{ marginTop: 20 }}>이번 주 타임테이블 (골격)</h3>
+              <p className="hint">{weeklyTimetable.note}</p>
+              <div className="timetable-scroll">
+                <table className="timetable">
+                  <thead>
+                    <tr>
+                      <th scope="col">시간대</th>
+                      {weeklyTimetable.days.map((day) => (
+                        <th scope="col" key={day.label}>{day.label}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {weeklyTimetable.slots.map((slot) => (
+                      <tr key={slot}>
+                        <th scope="row">{slot}</th>
+                        {weeklyTimetable.days.map((day) => {
+                          const cell = day.cells[slot];
+                          return (
+                            <td key={day.label + slot} className={cell ? `tt-cell tt-${cell.kind}` : "tt-cell"}>
+                              {cell ? `${cell.title} · ${cell.minutes}분` : "—"}
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
 
             <div className="routine">

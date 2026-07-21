@@ -36,7 +36,37 @@ MBTI는 사람을 고정적으로 판단하는 기준이 아닙니다. 이 프�
 - CSS
 - localStorage
 
-현재 `package.json` 기준의 실제 기술 스택만 정리했습니다.
+현재 프런트 `package.json` 기준의 실제 기술 스택만 정리했습니다. 연구 데이터 저장·LLM 프록시는 아래 백엔드(Express)에서 처리합니다.
+
+## 아키텍처
+
+화면(프런트) → 백엔드 프록시 → 저장소/외부 LLM 의 실제 데이터 흐름입니다. 백엔드는 환경변수 유무에 따라 저장소(Supabase↔in-memory)와 LLM(Gemini↔규칙 폴백)을 자동 분기합니다. 개인정보·대화 원문은 연구 저장 경로로 흐르지 않습니다(ADR-001/008).
+
+```mermaid
+flowchart LR
+  subgraph Client["브라우저 · Vercel (frontend)"]
+    UI["React 화면<br/>ProjectIntro · steps"]
+    LS[("localStorage<br/>결과·기록·필수시간")]
+    API["api.js 클라이언트"]
+    UI --> LS
+    UI -->|동의 시| API
+  end
+  subgraph Server["백엔드 · Render (Express)"]
+    IDX["index.js 라우트<br/>/api/results · /api/mbti-chat"]
+    STORE{"store.js<br/>어댑터 선택"}
+    LLM["lib/llm.js<br/>Gemini 프록시"]
+    IDX --> STORE
+    IDX --> LLM
+  end
+  API -->|POST/GET/DELETE| IDX
+  STORE -->|"키 있음"| SUPA[("Supabase<br/>research_results")]
+  STORE -->|"키 없음"| MEM[("in-memory<br/>폴백")]
+  LLM -->|"GEMINI_API_KEY 있음"| GEM[("외부 Gemini API")]
+  LLM -->|"키 없음·실패"| FB["규칙 설문 폴백"]
+```
+
+- **저장 경로(비식별):** 결과 화면 동의 → `POST /api/results` → `store.js`가 Supabase(`research_results`) 또는 in-memory에 비식별 파생값만 저장. 컬럼·쿼리 설명은 [docs/db-notes.md](docs/db-notes.md).
+- **LLM 경로(동의 원문 한정):** 간이 MBTI 추정 채팅만 `POST /api/mbti-chat`로 대화 원문을 Gemini에 전달(저장 안 함). 설계는 [docs/AI_Pipeline_Design.md](docs/AI_Pipeline_Design.md).
 
 ## 공개 데모
 

@@ -83,6 +83,44 @@ export function buildDayPlan({ essentialHours = {}, recommendations = [], routin
   return { freeMinutes, studyMinutes: used, blocks, note };
 }
 
+// v1.5: 주간 타임테이블 골격(#29). buildDayPlan 블록을 한 주에 "분산"해 배치한다.
+// 정확한 시계 시각·알림·캘린더는 하지 않는다(하드룰) — 거친 시간대(아침/오후/저녁) × 요일 그리드 골격만 제안한다.
+export const WEEKLY_SLOTS = ["아침", "오후", "저녁"];
+export const WEEKDAY_LABELS = ["월", "화", "수", "목", "금", "토", "일"];
+
+export function buildWeeklyTimetable({ dayPlan = {}, weeklyPlan = {} } = {}) {
+  const blocks = Array.isArray(dayPlan.blocks) ? dayPlan.blocks : [];
+  const focusBlocks = blocks.filter((block) => block.kind === "focus");
+  const recovery = blocks.find((block) => block.kind === "recovery");
+
+  // 분산 학습(F1·A4): 학습을 이틀 간격(월·수·금)으로 벌린다. 마감이 오늘이면 앞쪽 이틀로 압축.
+  const compressed = weeklyPlan.compressed === true;
+  const studyDayIndexes = compressed ? [0, 1] : [0, 2, 4];
+
+  const days = WEEKDAY_LABELS.map((label, index) => {
+    const cells = { 아침: null, 오후: null, 저녁: null };
+    if (focusBlocks.length > 0 && studyDayIndexes.includes(index)) {
+      // 학습 블록은 오후에 순환 배치, 회복은 같은 날 저녁.
+      const rank = studyDayIndexes.indexOf(index);
+      const block = focusBlocks[rank % focusBlocks.length];
+      cells["오후"] = { title: block.title, minutes: block.minutes, kind: "focus" };
+      if (recovery) {
+        cells["저녁"] = { title: recovery.title, minutes: recovery.minutes, kind: "recovery" };
+      }
+    }
+    return { label, cells };
+  });
+
+  const note =
+    focusBlocks.length === 0
+      ? "먼저 오늘 자유시간에 20분 학습 블록 하나를 넣으면 주간 배치가 만들어집니다."
+      : compressed
+        ? "마감이 가까워 학습을 앞쪽 이틀에 모았습니다. 다음 과제부터는 사흘로 벌려 더 오래 남기세요(분산·인출)."
+        : "같은 내용을 몰아보지 않고 월·수·금으로 벌려 다시 떠올리도록 배치했습니다(분산·인출, F1·A4).";
+
+  return { slots: WEEKLY_SLOTS, days, note, compressed };
+}
+
 // v1.5: 분산·인출 재현 시점을 사흘에 걸쳐 배치한다(§C-2). [F1] 분산연습 최고효용, [A4] 인출간격 이점.
 // 마감이 오늘이면 분산할 시간이 없으므로 압축 안내로 대체한다 — 실제 알림·캘린더 연동은 하지 않는다(하드룰).
 export function buildWeeklyPlan(recommendations = [], { deadline } = {}) {

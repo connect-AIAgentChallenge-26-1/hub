@@ -44,3 +44,12 @@ export function listResults(anonId) {
 export function deleteResults(anonId) {
   return request(`/api/results?anonId=${encodeURIComponent(anonId)}`, { method: "DELETE" });
 }
+
+// 간이 MBTI 추정 채팅(ADR-008). 동의한 사용자의 대화 원문을 이 경로로만 보낸다.
+// 서버가 없거나 실패하면 호출부가 규칙 설문으로 폴백하도록 null 유사 응답을 던진다.
+export function estimateMbtiFromChat(messages) {
+  return request("/api/mbti-chat", {
+    method: "POST",
+    body: JSON.stringify({ consent: true, messages }),
+  });
+}

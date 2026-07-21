@@ -89,6 +89,9 @@ export function useAssessmentFlow() {
   const [deadline, setDeadline] = useState(() => storedTaskState?.deadline ?? null);
   const [availableMinutes, setAvailableMinutes] = useState(() => storedTaskState?.availableMinutes ?? null);
   const mbtiKnown = mbtiSource === "official-self-report";
+  // AI 간이 추정(ADR-008): 공식은 아니지만 매칭 입력으로는 신뢰해 사용한다. 라벨만 "간이 추정"으로 구분.
+  const mbtiEstimated = mbtiSource === "ai-estimated";
+  const useMbtiSignal = (mbtiKnown || mbtiEstimated) && Boolean(mbti);
   const hasTaskState = Boolean(taskType || deadline);
 
   // task/state는 resultId 수명주기와 분리된 독립 저장이라, 값이 바뀔 때마다 그대로 반영한다.
@@ -108,9 +111,9 @@ export function useAssessmentFlow() {
       stressAnswers,
       useMbtiHints: false,
     });
-    const scores = calculateScores({ mbti, mbtiKnown, studyAnswers, stressAnswers });
-    // 매칭 에이전트(a): 공식 MBTI 입력 시에만 논문 기반 매칭을 실제 추천 신호로 반영한다.
-    const match = mbtiKnown && mbti ? matchMethods(mbti) : { temperament: null, adjustments: {}, reason: "", sources: [] };
+    const scores = calculateScores({ mbti, mbtiKnown: useMbtiSignal, studyAnswers, stressAnswers });
+    // 매칭 에이전트(a): 공식 입력 또는 AI 간이 추정(ADR-008) 시 논문 기반 매칭을 추천 신호로 반영한다.
+    const match = useMbtiSignal ? matchMethods(mbti) : { temperament: null, adjustments: {}, reason: "", sources: [] };
     // task/state 에이전트: 과제유형·마감 입력 시에만 조정한다(§C-1a, [A9][F1]).
     const taskState = hasTaskState
       ? computeTaskStateAdjustments({ taskType, deadline })
@@ -145,16 +148,17 @@ export function useAssessmentFlow() {
       weeklyPlan: buildWeeklyPlan(recommendationResult.recommendations, { deadline }),
       ...recommendationResult,
     };
-  }, [mbti, mbtiKnown, studyAnswers, stressAnswers, hasTaskState, taskType, deadline, availableMinutes]);
+  }, [mbti, mbtiKnown, useMbtiSignal, studyAnswers, stressAnswers, hasTaskState, taskType, deadline, availableMinutes]);
 
   const canContinueStudy = isCompleteAnswers(STUDY_QUESTIONS, studyAnswers);
   const canContinueStress = isCompleteAnswers(STRESS_QUESTIONS, stressAnswers);
   const hasCompleteResult =
-    (mbtiSource === "not-provided" || (mbtiKnown && Boolean(mbti))) && canContinueStudy && canContinueStress;
+    (mbtiSource === "not-provided" || useMbtiSignal) && canContinueStudy && canContinueStress;
 
   const inputFingerprint = useMemo(
-    () => buildInputFingerprint({ mbti, mbtiKnown, mbtiSource, studyAnswers, stressAnswers }),
-    [mbti, mbtiKnown, mbtiSource, studyAnswers, stressAnswers],
+    // useMbtiSignal 을 mbtiKnown 자리에 넘겨, 추정 유형도 지문에 4글자로 반영한다(src 로 공식/추정 구분).
+    () => buildInputFingerprint({ mbti, mbtiKnown: useMbtiSignal, mbtiSource, studyAnswers, stressAnswers }),
+    [mbti, useMbtiSignal, mbtiSource, studyAnswers, stressAnswers],
   );
 
   // 완결된 입력 지문 하나당 immutable (resultId, createdAt) 하나를 유지한다.
@@ -189,8 +193,9 @@ export function useAssessmentFlow() {
       schemaVersion: SCHEMA_VERSION,
       inputFingerprint,
       profile: {
-        mbti: mbtiKnown ? mbti : "UNKNOWN",
+        mbti: useMbtiSignal ? mbti : "UNKNOWN",
         mbtiKnown,
+        mbtiEstimated,
         mbtiSource,
         createdAt,
       },
@@ -198,12 +203,19 @@ export function useAssessmentFlow() {
       stressAnswers,
       result,
     });
-  }, [hasCompleteResult, inputFingerprint, mbti, mbtiKnown, mbtiSource, result, resultId, stressAnswers, studyAnswers]);
+  }, [hasCompleteResult, inputFingerprint, mbti, mbtiKnown, mbtiEstimated, useMbtiSignal, mbtiSource, result, resultId, stressAnswers, studyAnswers]);
 
   function continueWithoutOfficialMbti() {
     setMbti("");
     setMbtiSource("not-provided");
     setStep(2);
+  }
+
+  // AI 간이 추정 결과를 흐름에 반영(ADR-008). 공식 아님 — src="ai-estimated" 로 라벨 구분.
+  function applyEstimatedMbti(estimatedMbti) {
+    setMbti(estimatedMbti);
+    setMbtiSource("ai-estimated");
+    setStep(2); // 공부 설문으로 계속
   }
 
   function handleRecordSave() {
@@ -295,6 +307,7 @@ export function useAssessmentFlow() {
     mbtiSource,
     setMbtiSource,
     mbtiKnown,
+    mbtiEstimated,
     studyAnswers,
     setStudyAnswers,
     stressAnswers,
@@ -329,6 +342,7 @@ export function useAssessmentFlow() {
     canContinueStress,
     hasCompleteResult,
     continueWithoutOfficialMbti,
+    applyEstimatedMbti,
     handleRecordSave,
     handleFeedbackSave,
     resetFlowState,

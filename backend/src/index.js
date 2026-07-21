@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { saveResult, listResults, deleteResults, countAll, listAll, STORE_BACKEND } from "./store.js";
+import { estimateMbtiFromChat, isLlmAvailable } from "./lib/llm.js";
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -151,6 +152,42 @@ app.get("/api/analysis", async (_req, res) => {
     return res.json(analyze(await listAll()));
   } catch (error) {
     return res.status(502).json({ error: "store_failed", detail: error.message });
+  }
+});
+
+// 간이 MBTI 추정 채팅(ADR-008). 이 경로에 한해 동의한 사용자의 대화 원문을 외부 LLM에 보낸다.
+// 중요: 대화 원문은 research store 에 저장하지 않는다(연구 저장 경로와 분리 — ADR-001 화이트리스트 불변).
+// 키 없음/실패/타임아웃이면 available:false 또는 mbti:null 로 규칙 설문 폴백을 유도한다.
+app.post("/api/mbti-chat", async (req, res) => {
+  const body = req.body || {};
+  if (!body.consent) {
+    return res.status(400).json({ error: "consent_required" });
+  }
+  if (!isLlmAvailable) {
+    // 키 미설정 — 기능 비활성. 프론트는 규칙 설문으로 폴백한다.
+    return res.status(200).json({ available: false, mbti: null });
+  }
+  const messages = Array.isArray(body.messages) ? body.messages.slice(0, 12) : [];
+  if (messages.length === 0) {
+    return res.status(400).json({ error: "messages_required" });
+  }
+  try {
+    const estimate = await estimateMbtiFromChat(messages);
+    if (!estimate) {
+      // LLM 실패/계약위반 → 폴백 신호.
+      return res.status(200).json({ available: true, mbti: null, fallback: true });
+    }
+    // "간이 추정" 계약: 공식 판정 아님. 대화 원문은 응답에도 되돌려 저장하지 않는다.
+    return res.status(200).json({
+      available: true,
+      estimated: true,
+      mbti: estimate.mbti,
+      confidence: estimate.confidence,
+      rationale: estimate.rationale,
+      uncertainty: estimate.uncertainty,
+    });
+  } catch (error) {
+    return res.status(200).json({ available: true, mbti: null, fallback: true, detail: error.message });
   }
 });
 
