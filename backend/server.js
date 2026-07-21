@@ -46,43 +46,41 @@ const MOCK_RESTAURANTS = [
 // ==========================================
 // Scheduling & Free Slots Calculation Logic
 // ==========================================
+const KST_OFFSET_MS = 9 * 60 * 60 * 1000; // UTC+9
+
 function calculateFreeSlots(busyEvents) {
   const DAYS = ['월', '화', '수', '목', '금'];
-  const DAY_MAP = { 1: '월', 2: '화', 3: '수', 4: '목', 5: '금' }; // getDay() is 0 (Sun) to 6 (Sat)
+  const DAY_MAP = { 1: '월', 2: '화', 3: '수', 4: '목', 5: '금' };
   const SLOTS = [
-    { id: 1, start: '09:00', end: '10:00' },
-    { id: 2, start: '10:00', end: '11:00' },
-    { id: 3, start: '11:00', end: '12:00' },
-    { id: 4, start: '12:00', end: '13:00' },
-    { id: 5, start: '13:00', end: '14:00' },
-    { id: 6, start: '14:00', end: '15:00' },
-    { id: 7, start: '15:00', end: '16:00' },
-    { id: 8, start: '16:00', end: '17:00' },
-    { id: 9, start: '17:00', end: '18:00' },
+    { id: 1, start: 9 * 60, end: 10 * 60 },
+    { id: 2, start: 10 * 60, end: 11 * 60 },
+    { id: 3, start: 11 * 60, end: 12 * 60 },
+    { id: 4, start: 12 * 60, end: 13 * 60 },
+    { id: 5, start: 13 * 60, end: 14 * 60 },
+    { id: 6, start: 14 * 60, end: 15 * 60 },
+    { id: 7, start: 15 * 60, end: 16 * 60 },
+    { id: 8, start: 16 * 60, end: 17 * 60 },
+    { id: 9, start: 17 * 60, end: 18 * 60 },
   ];
 
   const busySlots = new Set();
 
   busyEvents.forEach(event => {
-    const start = new Date(event.start);
-    const end = new Date(event.end);
+    // All busyEvents are stored as proper UTC; convert to KST for slot matching
+    const startUTC = new Date(event.start);
+    const endUTC = new Date(event.end);
+    const startKST = new Date(startUTC.getTime() + KST_OFFSET_MS);
+    const endKST = new Date(endUTC.getTime() + KST_OFFSET_MS);
 
-    const dayNum = start.getDay(); // 0-6
-    if (dayNum < 1 || dayNum > 5) return; // Only Mon-Fri
+    const dayNum = startKST.getUTCDay(); // 0=Sun, 1=Mon, ... in KST
+    if (dayNum < 1 || dayNum > 5) return;
     const dayChar = DAY_MAP[dayNum];
 
-    // Minutes from midnight
-    const startMins = start.getHours() * 60 + start.getMinutes();
-    const endMins = end.getHours() * 60 + end.getMinutes();
+    const startMins = startKST.getUTCHours() * 60 + startKST.getUTCMinutes();
+    const endMins = endKST.getUTCHours() * 60 + endKST.getUTCMinutes();
 
     SLOTS.forEach(slot => {
-      const [sh, sm] = slot.start.split(':').map(Number);
-      const [eh, em] = slot.end.split(':').map(Number);
-      const slotStartMins = sh * 60 + sm;
-      const slotEndMins = eh * 60 + em;
-
-      // Overlap calculation
-      if (startMins < slotEndMins && endMins > slotStartMins) {
+      if (startMins < slot.end && endMins > slot.start) {
         busySlots.add(`${dayChar}-${slot.id}`);
       }
     });
@@ -390,10 +388,12 @@ app.post('/api/schedule/sync/everytime', async (req, res) => {
       weeklySchedule
         .filter(s => s.day === etDay)
         .forEach(s => {
-          const start = new Date(targetDate);
-          start.setHours(s.startHour, s.startMin, 0, 0);
-          const end = new Date(targetDate);
-          end.setHours(s.endHour, s.endMin, 0, 0);
+          // Class times are KST — store as proper UTC by subtracting 9 hours
+          const dayMidnightUTC = Date.UTC(
+            targetDate.getUTCFullYear(), targetDate.getUTCMonth(), targetDate.getUTCDate()
+          );
+          const start = new Date(dayMidnightUTC + s.startHour * 3600000 + s.startMin * 60000 - KST_OFFSET_MS);
+          const end = new Date(dayMidnightUTC + s.endHour * 3600000 + s.endMin * 60000 - KST_OFFSET_MS);
           busyEvents.push({ start, end });
         });
     }
