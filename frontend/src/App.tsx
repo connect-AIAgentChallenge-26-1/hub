@@ -202,7 +202,7 @@ export default function App() {
 
     const fetchRoomDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5050/api/rooms/${roomSimulatingId}`);
+        const response = await fetch(`${API_BASE}/api/rooms/${roomSimulatingId}`);
         const data = await response.json();
         if (data.success && data.room) {
           setRoomTitle(data.room.title);
@@ -274,7 +274,7 @@ export default function App() {
         finalKeyword = `${currentLocation} ${keyword}`;
       }
 
-      let fetchUrl = `http://localhost:5050/api/restaurants/search?query=${encodeURIComponent(finalKeyword)}&sort=${sort}`;
+      let fetchUrl = `${API_BASE}/api/restaurants/search?query=${encodeURIComponent(finalKeyword)}&sort=${sort}`;
       if (currentCoords) {
         fetchUrl += `&lat=${currentCoords.lat}&lng=${currentCoords.lng}`;
       }
@@ -302,7 +302,7 @@ export default function App() {
     setAiRecommendation('');
     setAiRecommendedMenu('');
     try {
-      const response = await fetch('http://localhost:5050/api/restaurants/recommend', {
+      const response = await fetch(`${API_BASE}/api/restaurants/recommend`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -366,7 +366,7 @@ export default function App() {
   const [isSendingCode, setIsSendingCode] = useState(false);
   const [isVerifyingCode, setIsVerifyingCode] = useState(false);
 
-  const API_BASE = 'http://localhost:5050';
+  const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5050';
 
   const handleSendCode = async () => {
     const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(userEmail);
@@ -463,7 +463,7 @@ export default function App() {
 
   const fetchGoogleCalendarSchedules = async (token: string) => {
     try {
-      const response = await fetch('http://localhost:5050/api/schedule/sync/google', {
+      const response = await fetch(`${API_BASE}/api/schedule/sync/google`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ accessToken: token })
@@ -496,7 +496,7 @@ export default function App() {
     }
     setIsSyncing(true);
     try {
-      const response = await fetch('http://localhost:5050/api/schedule/sync/ical', {
+      const response = await fetch(`${API_BASE}/api/schedule/sync/ical`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ appleId, appPassword })
@@ -529,7 +529,7 @@ export default function App() {
     }
     setIsSyncing(true);
     try {
-      const response = await fetch('http://localhost:5050/api/schedule/sync/everytime', {
+      const response = await fetch(`${API_BASE}/api/schedule/sync/everytime`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ everytimeUrl })
@@ -583,7 +583,7 @@ export default function App() {
   // Create real room in DB
   const handleCreateRoomInDb = async () => {
     try {
-      const response = await fetch('http://localhost:5050/api/rooms', {
+      const response = await fetch(`${API_BASE}/api/rooms`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -616,7 +616,7 @@ export default function App() {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:5050/api/rooms/${roomSimulatingId}/join`, {
+      const response = await fetch(`${API_BASE}/api/rooms/${roomSimulatingId}/join`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -657,7 +657,7 @@ export default function App() {
       }
     ];
     // POST request to simulate addition
-    fetch(`http://localhost:5050/api/rooms/${roomSimulatingId}/join`, {
+    fetch(`${API_BASE}/api/rooms/${roomSimulatingId}/join`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -700,7 +700,7 @@ export default function App() {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:5050/api/rooms/${roomSimulatingId}/confirm`, {
+      const response = await fetch(`${API_BASE}/api/rooms/${roomSimulatingId}/confirm`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
