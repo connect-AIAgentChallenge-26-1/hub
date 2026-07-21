@@ -91,7 +91,7 @@ export default function App() {
   // --- Auth States ---
   const [toast, setToast] = useState({ show: false, message: '' });
   const [verificationSent, setVerificationSent] = useState(false);
-  const [tempCode, setTempCode] = useState('');
+  const [_tempCode, _setTempCode] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [verifiedEmail, setVerifiedEmail] = useState('');
@@ -159,6 +159,21 @@ export default function App() {
     }, 3000);
   };
 
+  // 저장된 프로필이 있으면 온보딩을 건너뛰고, 없으면 온보딩으로 보낸다
+  const completeLogin = (email: string) => {
+    const saved = localStorage.getItem(`itda_profile_${email}`);
+    if (saved) {
+      try {
+        setUserProfile(JSON.parse(saved));
+        setIsOnboarding(false);
+        setCurrentStep(3);
+        return;
+      } catch { /* corrupted data — fall through to onboarding */ }
+    }
+    setIsOnboarding(true);
+    setCurrentStep(3);
+  };
+
   // --- Google Redirect Result Handler ---
   useEffect(() => {
     getRedirectResult(auth).then((result) => {
@@ -176,8 +191,7 @@ export default function App() {
           setIsSyncing(true);
           fetchGoogleCalendarSchedules(token);
         }
-        setIsOnboarding(true);
-        setCurrentStep(3);
+        completeLogin(user.email || '');
       }
     }).catch((error) => {
       if (error.code !== 'auth/popup-blocked') {
@@ -202,7 +216,7 @@ export default function App() {
 
     const fetchRoomDetails = async () => {
       try {
-        const response = await fetch(`http://localhost:5050/api/rooms/${roomSimulatingId}`);
+        const response = await fetch(`${API_BASE}/api/rooms/${roomSimulatingId}`);
         const data = await response.json();
         if (data.success && data.room) {
           setRoomTitle(data.room.title);
@@ -274,7 +288,7 @@ export default function App() {
         finalKeyword = `${currentLocation} ${keyword}`;
       }
 
-      let fetchUrl = `http://localhost:5050/api/restaurants/search?query=${encodeURIComponent(finalKeyword)}&sort=${sort}`;
+      let fetchUrl = `${API_BASE}/api/restaurants/search?query=${encodeURIComponent(finalKeyword)}&sort=${sort}`;
       if (currentCoords) {
         fetchUrl += `&lat=${currentCoords.lat}&lng=${currentCoords.lng}`;
       }
@@ -302,7 +316,7 @@ export default function App() {
     setAiRecommendation('');
     setAiRecommendedMenu('');
     try {
-      const response = await fetch('http://localhost:5050/api/restaurants/recommend', {
+      const response = await fetch(`${API_BASE}/api/restaurants/recommend`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -366,7 +380,7 @@ export default function App() {
   const [isSendingCode, setIsSendingCode] = useState(false);
   const [isVerifyingCode, setIsVerifyingCode] = useState(false);
 
-  const API_BASE = 'http://localhost:5050';
+  const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:5050';
 
   const handleSendCode = async () => {
     const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(userEmail);
@@ -411,10 +425,9 @@ export default function App() {
       if (data.success) {
         setIsVerified(true);
         setVerifiedEmail(userEmail);
-        showToastMsg('인증 성공! 프로필을 설정해 주세요.');
+        showToastMsg('인증 성공!');
         setTimeout(() => {
-          setIsOnboarding(true);
-          setCurrentStep(3);
+          completeLogin(userEmail);
         }, 1000);
       } else {
         showToastMsg(data.error || '인증에 실패했습니다.');
@@ -446,8 +459,7 @@ export default function App() {
           setIsSyncing(true);
           fetchGoogleCalendarSchedules(token);
         }
-        setIsOnboarding(true);
-        setCurrentStep(3);
+        completeLogin(user.email || '');
       } catch (popupError: any) {
         if (popupError.code === 'auth/popup-blocked' || popupError.code === 'auth/cancelled-popup-request') {
           await signInWithRedirect(auth, provider);
@@ -463,7 +475,7 @@ export default function App() {
 
   const fetchGoogleCalendarSchedules = async (token: string) => {
     try {
-      const response = await fetch('http://localhost:5050/api/schedule/sync/google', {
+      const response = await fetch(`${API_BASE}/api/schedule/sync/google`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ accessToken: token })
@@ -496,7 +508,7 @@ export default function App() {
     }
     setIsSyncing(true);
     try {
-      const response = await fetch('http://localhost:5050/api/schedule/sync/ical', {
+      const response = await fetch(`${API_BASE}/api/schedule/sync/ical`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ appleId, appPassword })
@@ -529,7 +541,7 @@ export default function App() {
     }
     setIsSyncing(true);
     try {
-      const response = await fetch('http://localhost:5050/api/schedule/sync/everytime', {
+      const response = await fetch(`${API_BASE}/api/schedule/sync/everytime`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ everytimeUrl })
@@ -583,7 +595,7 @@ export default function App() {
   // Create real room in DB
   const handleCreateRoomInDb = async () => {
     try {
-      const response = await fetch('http://localhost:5050/api/rooms', {
+      const response = await fetch(`${API_BASE}/api/rooms`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -616,7 +628,7 @@ export default function App() {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:5050/api/rooms/${roomSimulatingId}/join`, {
+      const response = await fetch(`${API_BASE}/api/rooms/${roomSimulatingId}/join`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -657,7 +669,7 @@ export default function App() {
       }
     ];
     // POST request to simulate addition
-    fetch(`http://localhost:5050/api/rooms/${roomSimulatingId}/join`, {
+    fetch(`${API_BASE}/api/rooms/${roomSimulatingId}/join`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -700,7 +712,7 @@ export default function App() {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:5050/api/rooms/${roomSimulatingId}/confirm`, {
+      const response = await fetch(`${API_BASE}/api/rooms/${roomSimulatingId}/confirm`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1770,12 +1782,18 @@ export default function App() {
       'https://api.dicebear.com/9.x/micah/svg?seed=Oscar'
     ];
     const randomAvatar = AVATARS[Math.floor(Math.random() * AVATARS.length)];
-    setUserProfile({
+    const profile = {
+      university: onboardingUniversity,
       mbti: onboardingMbti,
       major: onboardingMajor,
       year: onboardingYear,
       avatarUrl: randomAvatar
-    });
+    };
+    setUserProfile(profile);
+    const email = verifiedEmail || userEmail;
+    if (email) {
+      localStorage.setItem(`itda_profile_${email}`, JSON.stringify(profile));
+    }
     setIsOnboarding(false);
     showToastMsg('🎉 프로필 설정이 완료되었습니다!');
   };
