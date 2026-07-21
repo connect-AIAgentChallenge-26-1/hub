@@ -91,7 +91,7 @@ export default function App() {
   // --- Auth States ---
   const [toast, setToast] = useState({ show: false, message: '' });
   const [verificationSent, setVerificationSent] = useState(false);
-  const [tempCode, setTempCode] = useState('');
+  const [_tempCode, _setTempCode] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [verifiedEmail, setVerifiedEmail] = useState('');
@@ -1771,6 +1771,7 @@ export default function App() {
     ];
     const randomAvatar = AVATARS[Math.floor(Math.random() * AVATARS.length)];
     setUserProfile({
+      university: onboardingUniversity,
       mbti: onboardingMbti,
       major: onboardingMajor,
       year: onboardingYear,
