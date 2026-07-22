@@ -6,6 +6,8 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import java.net.ConnectException;
+import java.net.SocketTimeoutException;
 import java.net.URI;
 import java.time.Duration;
 import java.util.Map;
@@ -82,7 +84,8 @@ class EliceConditionExtractionClientSecurityTest {
         JsonNode root = new ObjectMapper().valueToTree(schema);
 
         assertThat(root.path("additionalProperties").asBoolean()).isFalse();
-        assertThat(root.path("required")).hasSize(3);
+        assertThat(root.path("required")).hasSize(2);
+        assertThat(root.path("properties").has("warnings")).isFalse();
         assertThat(root.path("properties").path("schemaVersion").path("enum").get(0).asText())
             .isEqualTo("placepick.condition-extraction.v1");
 
@@ -117,5 +120,15 @@ class EliceConditionExtractionClientSecurityTest {
         )).isInstanceOf(IllegalArgumentException.class)
             .hasMessageNotContaining("example.invalid")
             .hasMessageNotContaining(TOKEN);
+    }
+
+    @Test
+    void distinguishesRetryableTimeoutsFromStableTransportFailures() {
+        assertThat(EliceConditionExtractionClient.transportFailureStage(
+            new IllegalStateException(new SocketTimeoutException("synthetic timeout"))
+        )).isEqualTo(LlmProviderFailureStage.TRANSPORT_TIMEOUT);
+        assertThat(EliceConditionExtractionClient.transportFailureStage(
+            new IllegalStateException(new ConnectException("synthetic refusal"))
+        )).isEqualTo(LlmProviderFailureStage.TRANSPORT);
     }
 }

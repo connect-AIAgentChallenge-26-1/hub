@@ -2,7 +2,9 @@ package com.placepick.web;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
+import com.placepick.recommendation.condition.application.ConditionExtractionRecoveryService;
 import com.placepick.recommendation.condition.infrastructure.mock.DeterministicConditionExtractionAdapter;
+import com.placepick.infrastructure.observability.LlmProviderDiagnosticMetrics;
 import java.time.Clock;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -29,6 +31,15 @@ public class ServiceApiConfiguration {
     )
     ConditionExtractionPort mockConditionExtractionPort() {
         return new DeterministicConditionExtractionAdapter();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(ConditionExtractionRecoveryService.class)
+    ConditionExtractionRecoveryService conditionExtractionRecoveryService(
+        ConditionExtractionPort extractionPort,
+        LlmProviderDiagnosticMetrics metrics
+    ) {
+        return new ConditionExtractionRecoveryService(extractionPort, metrics);
     }
 
     @Bean

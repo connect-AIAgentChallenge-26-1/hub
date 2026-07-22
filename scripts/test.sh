@@ -25,9 +25,10 @@ case "${test_kind}" in
     gradlew :backend:evalTest
     ;;
   quality-eval)
-    log 'running the deterministic recommendation reason quality corpus'
+    log 'running deterministic reason and embedding-shadow quality policies'
     gradlew :backend:evalTest \
-      --tests com.placepick.recommendation.reason.application.ReasonStatementPolicyEvalTest
+      --tests com.placepick.recommendation.reason.application.ReasonStatementPolicyEvalTest \
+      --tests com.placepick.recommendation.application.scoring.EmbeddingShadowPromotionPolicyEvalTest
     ;;
   *)
     die 'usage: scripts/test.sh {unit|integration|eval|quality-eval}'

@@ -80,6 +80,45 @@ describe("HttpPlaygroundApi", () => {
     })).toThrow("condition.placeType");
   });
 
+  it("필수 조건이 비어 있는 manual Draft를 수정 가능한 상태로 보존한다", () => {
+    const parsed = __testing.parseDraft({
+      ...mockDraft,
+      manualEntryRequired: true,
+      condition: {
+        ...mockDraft.condition,
+        locationQuery: null,
+        placeType: null,
+      },
+    });
+
+    expect(parsed.manualEntryRequired).toBe(true);
+    expect(parsed.condition.locationQuery).toBeNull();
+    expect(parsed.condition.placeType).toBeNull();
+  });
+
+  it("manual Draft의 nullable 추출 조건을 workflow trace에서도 보존한다", () => {
+    const parsed = __testing.parseTrace({
+      id: 2,
+      stage: "CONDITION_EXTRACTED",
+      status: "completed",
+      occurredAt: "2026-07-17T02:00:00Z",
+      data: {
+        condition: {
+          ...mockDraft.condition,
+          locationQuery: null,
+          placeType: null,
+        },
+        warnings: ["PARTY_SIZE_NOT_PROVIDED"],
+      },
+    });
+
+    expect(parsed.stage).toBe("CONDITION_EXTRACTED");
+    expect(parsed.metrics).toMatchObject({
+      schemaValid: true,
+      warningCount: 1,
+    });
+  });
+
   it("백엔드 workflow-trace의 id·stage·data를 표시 모델로 검증해 변환한다", () => {
     const result = __testing.parseTrace({
       id: 4,

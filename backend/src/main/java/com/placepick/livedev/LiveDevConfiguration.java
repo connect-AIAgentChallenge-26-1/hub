@@ -19,6 +19,7 @@ import com.placepick.recommendation.application.scoring.CandidateScoringPolicy;
 import com.placepick.recommendation.application.scoring.RetrievalPolicy;
 import com.placepick.recommendation.application.trace.RecommendationTraceSinks;
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
+import com.placepick.recommendation.condition.application.ConditionExtractionRecoveryService;
 import com.placepick.recommendation.job.infrastructure.DeterministicRecommendationProvider;
 import com.placepick.recommendation.reason.adapter.out.llm.EliceGroundedReasonClient;
 import com.placepick.recommendation.reason.application.GroundedReasonService;
@@ -29,6 +30,7 @@ import java.time.Clock;
 import java.time.Duration;
 import java.util.UUID;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -72,7 +74,7 @@ public class LiveDevConfiguration {
             metrics,
             diagnosticMetrics,
             "elice",
-            Duration.ofSeconds(30)
+            EliceConditionExtractionClient.RESPONSE_TIMEOUT
         );
     }
 
@@ -84,6 +86,15 @@ public class LiveDevConfiguration {
         @Value("${OPENAI_MODEL:openai/gpt-4.1-mini}") String model
     ) {
         return EliceGroundedReasonClient.create(chatBaseUrl, token, model);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(ConditionExtractionRecoveryService.class)
+    ConditionExtractionRecoveryService liveDevConditionExtractionRecoveryService(
+        ConditionExtractionPort extractionPort,
+        LlmProviderDiagnosticMetrics metrics
+    ) {
+        return new ConditionExtractionRecoveryService(extractionPort, metrics);
     }
 
     @Bean
@@ -205,14 +216,14 @@ public class LiveDevConfiguration {
 
     @Bean
     LiveDevWorkflowService liveDevWorkflowService(
-        ConditionExtractionPort extractionPort,
+        ConditionExtractionRecoveryService extractionRecovery,
         LiveDevCoreFactory coreFactory,
         Clock liveDevClock,
         @Value("${placepick.live-dev.ttl:PT30M}") String ttl,
         @Value("${placepick.live-dev.max-concurrency:2}") int maximumConcurrency
     ) {
         return new LiveDevWorkflowService(
-            extractionPort,
+            extractionRecovery,
             coreFactory,
             liveDevClock,
             Duration.parse(ttl),

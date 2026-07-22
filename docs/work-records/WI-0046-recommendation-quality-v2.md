@@ -13,12 +13,25 @@ related:
   - ../adr/ADR-0015-retrieval-ranking-v2.md
   - ../adr/ADR-0016-grounded-reason-v3.md
   - ../adr/ADR-0017-production-otlp-observability.md
+  - ../adr/ADR-0018-condition-recovery-embedding-shadow.md
   - ../runbooks/RUN-0007-mvp-protection-observability.md
 paths:
   - backend/src/main/java/com/placepick/recommendation/**
+  - backend/src/main/java/com/placepick/infrastructure/external/llm/**
   - backend/src/main/java/com/placepick/infrastructure/observability/**
+  - backend/src/test/**
+  - backend/src/integrationTest/**
+  - backend/src/evalTest/**
   - frontend/src/features/live-playground/**
+  - frontend/src/features/product/**
+  - frontend/e2e/**
   - observability/**
+  - docs/**
+  - AGENTS.md
+  - backend/AGENTS.md
+  - README.md
+  - scripts/test.sh
+  - Makefile
 ---
 
 # WI-0046 PP-044 추천 품질 v2와 운영 진단 기반
@@ -49,8 +62,9 @@ Naver Local은 공식 계약상 한 번에 최대 다섯 항목만 반환하지�
 - 검색어·장소·주소·URL·prompt·응답·비밀은 일반 telemetry와 test report에 남지 않는다.
 
 두 번째 단계에서는 다중 검색·부분 결과·다른 추천과 점수 v2를 구현했다. 세 번째 단계에서는
-후보별 이유 v3를 독립 변경으로 구현한다. 조건 추출 복구, Embedding shadow와 OTLP 운영
-관측은 이후 변경으로 남겨 회귀 원인과 검증 증거를 분리한다.
+후보별 이유 v3를 독립 변경으로 구현했다. 네 번째 단계는 조건 추출 복구와 Embedding
+shadow 평가 기반을 구현한다. production OTLP 운영 관측과 실제 Provider 품질 campaign은
+후속 변경으로 남겨 회귀 원인과 검증 증거를 분리한다.
 
 ## 판단 기준과 선택
 
@@ -85,7 +99,8 @@ Java 17·Node 24 Dev Container의 `make check`에서 문서 정책과 여섯 음
 build, Compose, ShellCheck, actionlint와 233개 생성 test report의 비밀 검사가 통과했다.
 이 검증은 Mock만
 사용했으며 `.env.live.local`과 실제 Naver·Elice를 읽거나 호출하지 않았다. 실제 Provider의
-품질 전후 비교는 검색·이유 v2 구현 이후 별도 `live-quality-eval` 증거로 남긴다.
+품질 전후 비교는 검색·이유 v2 구현 이후 실행 명령부터 별도로 구현할
+실제 Provider 품질 campaign 증거로 남긴다.
 
 두 번째 PR은 첫 PR의 funnel을 근거로 검색 회수와 결과 계약을 변경한다.
 
@@ -163,8 +178,62 @@ Compose, ShellCheck, actionlint, production 프런트 build와 207개 생성 tes
 비밀·payload scan도 통과했다. 일반 `make check` 경로의 실제 Provider 호출은 0건이다.
 
 2026-07-16 CASE-0002의 실제 Provider 실행은 당시 v2 batch를 통과한 역사적 증거다. 이번
-v3의 자동 검증과 혼동하지 않으며, v3 실제 Provider 품질은 별도 `live-quality-eval`
-campaign을 실행하기 전까지 완료로 주장하지 않는다.
+v3의 자동 검증과 혼동하지 않으며, v3 실제 Provider 품질은 후속 실행 명령과
+campaign을 구현·실행하기 전까지 완료로 주장하지 않는다.
+
+네 번째 PR은 조건 추출 실패를 사용자가 복구할 수 있는 Draft와 Embedding shadow
+비승격 경계로 분리한다.
+
+- 조건 추출 LLM 출력에서 서버 계산 항목인 `warnings`를 제거하고, user message를
+  `{"requestText":"..."}` JSON data 문자열로 격리했다.
+- HTTP adapter retry는 계속 0회다. application은 JSON·Chat schema/구조 오류와
+  429·5xx·timeout만 한 번 재생성한다. 400·401·403, model·응답 크기 위반과 내부 예외는
+  성공으로 숨기지 않는다.
+- 필수 지역·유형이 없거나 두 번째 결과도 재생성 대상 실패이면 기존 `EXTRACTED` Draft에
+  부분 조건을 보존하고 `manualEntryRequired=true`를 반환한다. 인증·잘못된 요청·모델·
+  응답 크기 위반, refusal, timeout이 아닌 transport 장애와 내부 결함은 수동 복구로 숨기지
+  않는다. 사용자가 전체 조건을 확정하면 같은 Draft가 `CONFIRMED`,
+  `manualEntryRequired=false`가 된다.
+- 정식 API와 Live Playground가 같은 복구 service를 사용한다. 따라서 실제 개발 화면에서도
+  비어 있는 지역·유형을 직접 입력해 다음 Naver 검색 단계로 진행할 수 있다.
+- 정식 입력 화면은 React hydration이 끝나기 전까지 입력과 제출을 활성화하지 않는다.
+  초기 JavaScript가 붙기 전의 빠른 사용자 입력이 기본 예시와 합쳐지거나 덮어써지는 경계를
+  desktop·mobile Playwright 시나리오로 재현하고 차단했다.
+- `placepick.recommendation.condition.resolutions`는 최종 상태, 시도 수, 회복 여부와
+  폐쇄형 diagnostic만 기록한다. 자연어와 Provider 값은 label에 넣지 않는다.
+- Elice Embedding batch adapter는 최대 64개 입력, 정확한 model·index·usage와 각
+  1,536차원 finite vector를 검증하며 Spring runtime bean으로 등록되지 않는다.
+- `preference-embedding-shadow.v1`은 train 10개·holdout 10개 쌍의 40개 텍스트를 정확히
+  한 번의 batch로 평가한다. train threshold와 holdout F1·false positive gate만 계산하고
+  vector나 corpus 원문을 결과·로그·metric에 보존하지 않는다.
+- deterministic vector fixture에서 승격 gate가 동작한 것은 정책 구현 검증이다. 실제
+  Elice 모델이 품질 기준을 충족했다거나 runtime 랭킹이 개선됐다는 근거로 사용하지 않는다.
+
+네 번째 단계의 최종 검증에서는 Java 17 기준 `make check`가 성공했다. 단위 229개,
+Testcontainers·WireMock 통합 191개, Eval 8개와 프런트 Vitest 45개가 모두 0실패였고,
+문서 lint·정책 음성 fixture, Compose, ShellCheck, actionlint, Next.js production build,
+운영 JavaScript 의존성 감사와 생성 보고서 219개의 비밀·Provider payload scan도 통과했다.
+`make quality-eval`로 이유 정책과 Embedding shadow 승격 정책만 다시 실행해 성공했으며,
+lockfile은 `npm ci --dry-run`으로 재현 가능성을 확인했다. 브라우저 E2E 8개는 desktop과
+360px mobile에서 일반 추천·부분 대체 추천·두 세션 투표·최종 확정, Live Playground와
+정식 제품의 수동 조건 완성 흐름을 모두 통과했다. 초기 hydration 전에 사용자가 입력할 때
+기본 예시가 값을 덮어쓰던 결함도 재현한 뒤, hydration 완료 전 입력·제출을 비활성화해
+차단했다.
+
+완료 직전 계약 대조에서는 manual Draft와 `PUT` 이후 warning이 최초 응답에 고정되는
+불일치를 발견했다. 현재 condition에서 서버가 warning을 재계산하고 JDBC의 condition·
+warning JSON을 한 UPDATE로 교체하도록 수정했으며, 기존 stale snapshot도 조회 응답에서
+재계산한다. 조건 추출 관측 budget도 HTTP response timeout과 같은 12초 상수로 정렬했다.
+실제 HTTP 조합 테스트는 schema 오류 1회 뒤 성공하면 총 2회로 회복하고, 401은 1회만
+호출하며, timeout 두 번 뒤에는 두 누락 warning을 가진 manual Draft가 되는지 검증한다.
+보고서 검사는 219개 파일마다 프로세스를 반복 생성하지 않고 모든 금지 패턴을 한 번의
+`rg` 호출로 검사하도록 단순화했으며, 정상 report 통과와 금지 marker 음성 검사를 확인했다.
+
+Next.js 16.2.10의 optional image dependency가 끌어오던 취약한 `sharp` 0.34.5는 Node 24와
+호환되는 exact override `0.35.3`으로 교체했다. production build와 `npm audit`의
+`--omit=dev --audit-level=moderate` 검사에서 취약점 0건을 확인했다. 이 모든 자동 검증은 Mock과
+합성 vector만 사용했고 실제 Naver·Elice 호출은 0건이다. 따라서 실제 이유 v3 성공률,
+실제 Embedding 품질과 production telemetry 수집 완료를 의미하지 않는다.
 
 ## AI 사용과 사람의 검증
 
@@ -173,9 +242,9 @@ AI에는 코드 경로 감사, 진단 taxonomy와 테스트 초안을 위임한�
 
 ## 남은 위험과 재검토 조건
 
-검색·랭킹 v2와 부분·대체 추천, 후보별 이유 v3 자동 계약을 구현했지만 PP-044 전체가 끝난
-것은 아니다. 조건 추출의 schema·일시 장애 1회 복구와 manual Draft 경계, Embedding shadow
-평가, production OTLP와 Grafana Cloud, 실제 비개인성 시나리오 품질 campaign은 후속
-변경으로 남는다. 실제 campaign 전에는 이번 변경이 실제 후보 성공률·이유 생성률 목표를
-달성했다고 주장하지 않는다. Provider 계약, 데이터 이용 조건 또는 무료 관측 한도가
-바뀌면 호출 예산·telemetry 수집 범위를 재검토한다.
+검색·랭킹 v2, 부분·대체 추천, 후보별 이유 v3, 조건 추출 제한 복구와 Embedding shadow
+자동 계약을 구현했지만 PP-044 전체가 끝난 것은 아니다. production OTLP와 Grafana Cloud,
+실제 비개인성 30개 시나리오 품질 campaign은 후속 변경으로 남는다. 실제 campaign 전에는
+이번 변경이 실제 후보 성공률·이유 생성률 또는 Embedding 품질 목표를 달성했다고 주장하지
+않는다. Provider 계약, 데이터 이용 조건 또는 무료 관측 한도가 바뀌면 호출 예산·telemetry
+수집 범위를 재검토한다.

@@ -56,15 +56,42 @@ class ExtractionContractTest {
 
     @Test
     void acceptsOnlyClosedUnprocessableDiagnosticsWithoutAProviderFailureStage() {
-        ExtractionOutcome outcome = ExtractionOutcome.unprocessable(
+        DraftRecommendationCondition partial = new DraftRecommendationCondition(
+            null,
+            PlaceType.CAFE,
+            null,
+            null,
+            null,
+            null,
             List.of(),
-            ConditionExtractionDiagnosticCode.UNPROCESSABLE_DOMAIN_CONSTRAINT
+            List.of()
+        );
+        ExtractionOutcome outcome = ExtractionOutcome.unprocessable(
+            partial,
+            List.of(),
+            ConditionExtractionDiagnosticCode.UNPROCESSABLE_LOCATION_MISSING
         );
 
         assertThat(outcome.errorCode())
             .isEqualTo(ConditionExtractionErrorCode.UNPROCESSABLE_CONDITION);
         assertThat(outcome.failureStage()).isEqualTo(LlmFailureStage.NONE);
-        assertThat(outcome.condition()).isNull();
+        assertThat(outcome.condition()).isSameAs(partial);
+        assertThatThrownBy(() -> ExtractionOutcome.unprocessable(
+            new DraftRecommendationCondition(
+                "서울",
+                PlaceType.CAFE,
+                null,
+                null,
+                null,
+                null,
+                List.of(),
+                List.of()
+            ),
+            List.of(),
+            ConditionExtractionDiagnosticCode.UNPROCESSABLE_LOCATION_MISSING
+        )).hasMessage(
+            "Unprocessable extraction requires an incomplete condition and diagnostic."
+        );
     }
 
     @Test

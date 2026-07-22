@@ -17,6 +17,17 @@ export interface ProductCondition {
   exclusions: string[];
 }
 
+export interface ProductDraftCondition {
+  locationQuery: string | null;
+  placeType: ProductPlaceType | null;
+  placeTypeDetail: string | null;
+  partySize: number | null;
+  budgetPerPersonMin: number | null;
+  budgetPerPersonMax: number | null;
+  preferences: ProductPreference[];
+  exclusions: string[];
+}
+
 export interface AnonymousSession {
   csrfToken: string;
   expiresAt: string;
@@ -25,8 +36,9 @@ export interface AnonymousSession {
 export interface ProductDraft {
   draftId: string;
   status: "EXTRACTED" | "CONFIRMED" | "CONSUMED";
-  extractedCondition: ProductCondition;
+  extractedCondition: ProductDraftCondition;
   warnings: string[];
+  manualEntryRequired: boolean;
   expiresAt: string;
 }
 

@@ -162,6 +162,7 @@ class SessionDraftApiIntegrationTest {
                 "/api/v1/recommendation-drafts/"
             )))
             .andExpect(jsonPath("$.status").value("EXTRACTED"))
+            .andExpect(jsonPath("$.manualEntryRequired").value(false))
             .andExpect(jsonPath("$.extractedCondition.locationQuery").value("서울"))
             .andExpect(jsonPath("$.extractedCondition.placeType").value("CAFE"))
             .andReturn();
@@ -201,9 +202,70 @@ class SessionDraftApiIntegrationTest {
                     """))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.status").value("CONFIRMED"))
+            .andExpect(jsonPath("$.manualEntryRequired").value(false))
             .andExpect(jsonPath("$.extractedCondition.locationQuery").value("서울 강남"))
             .andExpect(jsonPath("$.extractedCondition.preferences", hasSize(1)))
             .andExpect(jsonPath("$.expiresAt").value(expiresAt.toString()));
+    }
+
+    @Test
+    void returnsAndRestoresAManualDraftWhenRequiredMeaningIsMissing() throws Exception {
+        SessionClient owner = createSession();
+
+        MvcResult created = mockMvc.perform(post("/api/v1/recommendation-drafts")
+                .cookie(owner.cookie())
+                .header(SessionAuthenticator.CSRF_HEADER, owner.csrfToken())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"requestText\":\"조용한 카페를 찾아줘\"}"))
+            .andExpect(status().isCreated())
+            .andExpect(jsonPath("$.status").value("EXTRACTED"))
+            .andExpect(jsonPath("$.manualEntryRequired").value(true))
+            .andExpect(jsonPath("$.extractedCondition.locationQuery").value(
+                org.hamcrest.Matchers.nullValue()
+            ))
+            .andExpect(jsonPath("$.extractedCondition.placeType").value("CAFE"))
+            .andExpect(jsonPath("$.warnings[0]").value("PARTY_SIZE_NOT_PROVIDED"))
+            .andExpect(jsonPath("$.warnings[1]").value("BUDGET_NOT_PROVIDED"))
+            .andReturn();
+        UUID draftId = UUID.fromString(
+            objectMapper.readTree(created.getResponse().getContentAsByteArray())
+                .path("draftId").asText()
+        );
+
+        mockMvc.perform(get("/api/v1/recommendation-drafts/{draftId}", draftId)
+                .cookie(owner.cookie()))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.manualEntryRequired").value(true))
+            .andExpect(jsonPath("$.warnings", hasSize(2)));
+
+        mockMvc.perform(put("/api/v1/recommendation-drafts/{draftId}", draftId)
+                .cookie(owner.cookie())
+                .header(SessionAuthenticator.CSRF_HEADER, owner.csrfToken())
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("""
+                    {
+                      "condition": {
+                        "locationQuery": "서울 성수",
+                        "placeType": "CAFE",
+                        "placeTypeDetail": null,
+                        "partySize": 2,
+                        "budgetPerPersonMin": 10000,
+                        "budgetPerPersonMax": 20000,
+                        "preferences": [{"value":"조용한","priority":8}],
+                        "exclusions": []
+                      }
+                    }
+                    """))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.status").value("CONFIRMED"))
+            .andExpect(jsonPath("$.manualEntryRequired").value(false))
+            .andExpect(jsonPath("$.extractedCondition.locationQuery").value("서울 성수"))
+            .andExpect(jsonPath("$.warnings", hasSize(0)));
+
+        mockMvc.perform(get("/api/v1/recommendation-drafts/{draftId}", draftId)
+                .cookie(owner.cookie()))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$.warnings", hasSize(0)));
     }
 
     @Test

@@ -25,6 +25,7 @@ export const mockDraft: DraftSnapshot = {
   status: "EXTRACTED",
   condition: mockCondition,
   warnings: ["BUDGET_EVIDENCE_UNAVAILABLE"],
+  manualEntryRequired: false,
   createdAt: FIXED_TIME,
   expiresAt: "2026-07-16T02:30:00.000Z",
 };

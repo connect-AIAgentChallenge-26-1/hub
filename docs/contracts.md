@@ -45,15 +45,16 @@ Mock·Testcontainers 자동 검증을 통과한 행만 `implemented`로 표시�
 ### 추천 조건 `RecommendationCondition`
 
 추출 직후의 `DraftRecommendationCondition`과 사용자가 검토·수정한
-`ConfirmedRecommendationCondition`은 같은 field 이름을 사용한다. Draft의
-`partySize`, 두 예산과 preference priority는 null일 수 있지만 확정 조건의 preference
-priority는 필수다. 추출 결과를 자동으로 추천에 연결하지 않으며 추천 core는 확정 조건만
-받는다.
+`ConfirmedRecommendationCondition`은 같은 field 이름을 사용한다. Draft는
+`manualEntryRequired=true`일 때 `locationQuery`와 `placeType`도 null일 수 있고,
+`partySize`, 두 예산과 preference priority는 항상 null을 허용한다. 확정 조건은 지역·유형과
+preference priority가 필수다. 추출 결과를 자동으로 추천에 연결하지 않으며 추천 core는
+확정 조건만 받는다.
 
 | field | 형식과 제약 |
 | --- | --- |
-| `locationQuery` | 1~100자의 검색 지역, 비어 있을 수 없음 |
-| `placeType` | `RESTAURANT`, `CAFE`, `BAR`, `OTHER` 중 하나 |
+| `locationQuery` | Draft는 manual 상태에서 nullable, 확정 조건은 1~100자의 필수 검색 지역 |
+| `placeType` | Draft는 manual 상태에서 nullable, 확정 조건은 `RESTAURANT`, `CAFE`, `BAR`, `OTHER` 중 하나 |
 | `placeTypeDetail` | `OTHER`일 때 필수인 1~30자 문자열; 알려진 유형의 Provider 값은 무시하고 null로 정규화 |
 | `partySize` | nullable, 값이 있으면 1~100 정수 |
 | `budgetPerPersonMin` | nullable, 값이 있으면 0~10,000,000 정수 |
@@ -137,7 +138,9 @@ TypeScript가 같은 conformance vector를 사용한다. encoded dot segment는 
 
 추천 core의 검색 호출 상한은 기본 Local 6회, 다른 추천 Local 8회와 후보당 Blog 1회다.
 조건 추출과 이유 생성 호출은 이 검색 예산과 별도로 기록한다. HTTP adapter의 자동
-retry와 redirect는 0회이며 재시도 정책은 Worker 한 계층에서만 적용한다.
+retry와 redirect는 0회다. 추천 검색·이유의 일시 장애 복구는 Worker/application 정책
+한 곳만 소유하고, 동기 조건 추출의 schema·구조·명시적 일시 장애만 application에서
+최대 한 번 재생성한다.
 
 ### 추천 Job `RecommendationJobView`
 
@@ -199,12 +202,24 @@ cookie는 재사용하지 않는다.
 ### 조건 draft
 
 `POST /api/v1/recommendation-drafts` body는 `{requestText}`이며 `requestText`는
-1~1,000자다. 응답은 `{draftId, status, extractedCondition, warnings, expiresAt}`이고
-status는 `EXTRACTED`다. 의미 있는 지역이나 장소 유형을 추출할 수 없으면 422
-`UNPROCESSABLE_CONDITION`을 반환한다.
+1~1,000자다. 응답은
+`{draftId, status, extractedCondition, warnings, manualEntryRequired, expiresAt}`이고
+status는 `EXTRACTED`다. `manualEntryRequired=false`이면 지역과 장소 유형이 모두
+추출된 초안이고, `true`이면 사용자가 비어 있는 필수 값을 직접 입력해야 하는 초안이다.
+
+조건 Provider의 JSON·schema·구조·불완전 종료와 HTTP 429·5xx·transport timeout은
+application 경계에서 정확히 한 번만 재생성한다. 명시적 refusal은 재호출하지 않는다.
+첫 응답에서 지역·유형이 누락되면 즉시, 두 번째 재생성도 retry 가능한 실패나 불완전 조건이면
+201 manual Draft를 저장한다.
+이때 Provider가 안전하게 추출한 부분 조건은 보존하고 추정하지 않은 값은 null 또는 빈
+목록으로 둔다. refusal, 400·401·403, 고정 model 불일치와 응답 크기 위반은 재시도하거나 manual로
+숨기지 않고 Provider 오류 계약으로 반환한다. null outcome과 예상하지 못한 내부 예외도
+manual 성공으로 바꾸지 않는다.
 
 `GET`은 같은 snapshot을 반환한다. `PUT` body는 `{condition}`이고 전체
-`RecommendationCondition`을 검증한 뒤 status를 `CONFIRMED`로 바꾼다. draft TTL은
+`RecommendationCondition`을 검증한 뒤 status를 `CONFIRMED`로 바꾼다. `warnings`는
+Provider 출력이나 최초 초안에 고정하지 않고 응답의 현재 condition에서 매번 서버가
+재계산하며, `PUT` 때 DB snapshot도 함께 교체한다. draft TTL은
 생성부터 30분이며 만료 뒤 모든 접근은 410 `DRAFT_EXPIRED`다. Job으로 전환된 draft는
 `CONSUMED`로 표시하며 다시 다른 Job을 만들 수 없다. 같은 idempotency key의 재요청은
 기존 Job을 반환한다.
@@ -297,10 +312,9 @@ SQL을 넣지 않는다.
 | 405 | `METHOD_NOT_ALLOWED` | 알려진 resource에 허용되지 않은 HTTP method, `Allow` 포함 |
 | 409 | `INVALID_STATE`, `IDEMPOTENCY_KEY_REUSED`, `FINAL_RESULT_CONFLICT`, `NO_ALTERNATIVE_CANDIDATES` | 상태·멱등성·탐색 소진 충돌 |
 | 410 | `DRAFT_EXPIRED`, `ROOM_EXPIRED`, `JOB_EXPIRED` | 존재했지만 보존 기간 종료 |
-| 422 | `UNPROCESSABLE_CONDITION` | 안전한 추천 조건을 만들 수 없음 |
 | 429 | `RATE_LIMITED`, `PROVIDER_QUOTA_PROTECTED` | 제한 초과, `Retry-After` 포함 |
 | 500 | `INTERNAL_ERROR` | 노출 가능한 원인이 없는 내부 실패 |
-| 502 | `PROVIDER_INVALID_RESPONSE` | 외부 응답 schema·근거 검증 실패 |
+| 502 | `PROVIDER_RESPONSE_INVALID` | 외부 응답 schema·근거 검증 실패 |
 | 503 | `PROVIDER_UNAVAILABLE`, `QUEUE_UNAVAILABLE` | 제한 재시도 뒤 일시 장애 |
 
 ## SSE 계약
@@ -345,11 +359,12 @@ claim, commit 전 ACK 금지, 제한 retry와 DLQ를 PostgreSQL·Redis Testconta
 | --- | --- | --- | --- |
 | `implemented` | Naver Local·Blog adapter | API HUB header·schema·오류 정규화와 Mock 계약 검증 | PP-013 |
 | `implemented` | Elice Chat adapter | 조건 추출·근거 이유 strict schema와 Mock·Eval 검증 | PP-009, PP-016 |
+| `implemented` | Embedding shadow 평가 기반 | 1회 batch adapter·고정 train/holdout·승격 gate 자동 검증, runtime 랭킹 미연결 | PP-044 |
 | `implemented` | 동기 추천 Core | 확정 조건부터 적응형 검색·근거·0~100 점수·최대 3개 결과·이유 fallback | PP-039, PP-044 |
 | `implemented` | 직접 실제 Core 연결 증거 | 직접 Java adapter의 세 합성 Naver→Elice 흐름; CASE-0002가 정본 | PP-040, PP-042 |
 | `implemented` | 제품 runtime wiring | production Elice·Naver bean과 Worker Core 연결; Mock pipeline·wiring 자동 검증 | PP-029 |
 | `implemented` | Live Playground | 개발 profile API·SSE·화면·TTL·삭제와 직접 Provider 실행 | PP-042 |
-| `implemented` | 로컬 정식 API→Worker→Provider E2E | 별도 주최자·참여자 세션, 202·Outbox·Redis Worker·추천/방 SSE·투표·확정을 실제 Provider로 검증 | PP-042, PP-043 |
+| `implemented` | 로컬 정식 API→Worker→Provider 역사적 E2E | 2026-07-16 이유 v2·이전 조건 계약에서 별도 두 세션, 202·Outbox·Worker·SSE·투표·확정을 실제 Provider로 검증; 현재 v3·조건 복구 actual 재검증 증거는 아님 | PP-042, PP-043 |
 | `planned` | 배포된 정식 API→Worker→Provider E2E | 실제 cloud runtime에서 제품 전체 경로 검증 | PP-043 |
 | `planned` | 무료 Cloud Demo | Render secret과 배포 E2E | PP-043 |
 
@@ -382,8 +397,21 @@ MVP LLM은 Elice OpenAI-compatible Chat Completions의
 Schema, `additionalProperties=false`, bounded output, timeout, retry 0과 tool 미사용을
 요구한다. 자유 text나 Responses API로 자동 fallback하지 않는다.
 
-Embedding `openai/text-embedding-3-small`은 과거 capability만 확인했으며 추천·검색·
-점수·중복 제거 runtime에는 사용하지 않는다.
+조건 추출 user message는 원문 명령 문자열이 아니라
+`{"requestText":"..."}` JSON data 문자열로 격리한다. LLM 출력 schema에는 서버가
+재계산하는 `warnings`를 포함하지 않는다. party size와 예산 누락 warning은 검증된 condition
+값으로 서버가 결정한다. HTTP adapter retry는 0이며 위의 1회 재생성은 application
+복구 서비스만 소유한다.
+
+Embedding `openai/text-embedding-3-small`은 1~64개 입력을 한 번의 batch로 요청하고,
+index·model·usage와 각 1,536차원 finite vector를 검증하는 명시적 adapter가 있다. 이
+adapter는 Spring runtime bean으로 자동 등록하지 않는다. 현재 고정 합성 corpus는 train
+10개와 holdout 10개이며, 40개 텍스트를 정확히 한 번의 batch로 메모리에서만 평가한다.
+threshold는 train에서만 선택하고 holdout Embedding F1이 lexical baseline보다 5%p 이상
+개선되면서 false positive가 증가하지 않을 때만 `promotionEligible=true`다. 이 값은
+평가 결과일 뿐 현재 추천 점수·검색·중복 제거·순위를 변경하지 않는다. 실제 Elice 모델의
+승격 여부는 후속 실제 Provider 품질 campaign의 명령과 증거를 별도로
+구현·검증하기 전까지 확정하지 않는다.
 
 이유 생성은 최종 후보마다 독립된 요청으로 실행한다. 각 요청에는 서버가 허용한 확정 조건
 `locationQuery`, `placeType`, `placeTypeDetail`, `preferences`, `exclusions`와 한 후보의
@@ -440,7 +468,8 @@ metric과 로컬 Live Playground trace에만 사용하며 prompt·completion·�
 `reasonFallback=false`를 확인했다. 실행 과정과 safe summary는
 [CASE-0002](case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)를 정본으로 삼는다.
 이 과거 증거는 현재 v3 후보별 요청의 실제 Provider 품질을 증명하지 않는다. v3의 Mock
-계약·회귀 검증과 향후 `live-quality-eval` 실제 campaign을 별도 증거로 구분한다.
+계약·회귀 검증과 향후 별도로 구현할 실제 Provider 품질 campaign을 다른
+증거로 구분한다.
 
 ### 실행과 비밀 경계
 

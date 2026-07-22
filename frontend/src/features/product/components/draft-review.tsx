@@ -3,17 +3,25 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ProductApi, withColdStartRetry } from "../api/client";
-import { PRODUCT_PLACE_TYPES, type ProductCondition, type ProductDraft } from "../api/types";
+import {
+  PRODUCT_PLACE_TYPES,
+  type ProductCondition,
+  type ProductDraft,
+  type ProductPlaceType,
+} from "../api/types";
 import { ErrorPanel, LoadingPanel } from "./product-shell";
 import { ArrowIcon, CheckIcon } from "@/features/live-playground/components/icons";
 
 const labels = { RESTAURANT: "음식점", CAFE: "카페", BAR: "주점", OTHER: "기타" } as const;
+type DraftFormCondition = Omit<ProductCondition, "placeType"> & {
+  placeType: ProductPlaceType | "";
+};
 
 export function DraftReview({ draftId }: { draftId: string }) {
   const api = useMemo(() => new ProductApi(), []);
   const router = useRouter();
   const [draft, setDraft] = useState<ProductDraft | null>(null);
-  const [condition, setCondition] = useState<ProductCondition | null>(null);
+  const [condition, setCondition] = useState<DraftFormCondition | null>(null);
   const [exclusions, setExclusions] = useState("");
   const [pending, setPending] = useState(false);
   const [coldStart, setColdStart] = useState(false);
@@ -31,6 +39,8 @@ export function DraftReview({ draftId }: { draftId: string }) {
       setDraft(value);
       setCondition({
         ...value.extractedCondition,
+        locationQuery: value.extractedCondition.locationQuery ?? "",
+        placeType: value.extractedCondition.placeType ?? "",
         preferences: value.extractedCondition.preferences.map((item) => ({ ...item, priority: item.priority ?? 5 })),
       });
       setExclusions(value.extractedCondition.exclusions.join(", "));
@@ -42,9 +52,12 @@ export function DraftReview({ draftId }: { draftId: string }) {
   if (!draft || !condition) return <LoadingPanel title={coldStart ? "무료 데모 서버를 깨우는 중" : "조건 초안을 불러오는 중"} detail={coldStart ? "Cold start를 최대 90초까지 제한적으로 재시도합니다." : "새로고침해도 익명 세션의 Draft를 복구합니다."} />;
 
   const validation = validateCondition(condition, exclusions);
-  const update = <K extends keyof ProductCondition>(field: K, value: ProductCondition[K]) =>
+  const update = <K extends keyof DraftFormCondition>(
+    field: K,
+    value: DraftFormCondition[K],
+  ) =>
     setCondition((current) => current == null ? current : { ...current, [field]: value });
-  const updatePlaceType = (placeType: ProductCondition["placeType"]) =>
+  const updatePlaceType = (placeType: DraftFormCondition["placeType"]) =>
     setCondition((current) => current == null ? current : {
       ...current,
       placeType,
@@ -52,14 +65,16 @@ export function DraftReview({ draftId }: { draftId: string }) {
     });
 
   async function confirm() {
-    if (validation || pending || !condition) return;
+    if (validation || pending || !condition || condition.placeType === "") return;
     setPending(true);
     setError(null);
     try {
-      const confirmed = await api.confirmDraft(draftId, {
+      const confirmedCondition: ProductCondition = {
         ...condition,
+        placeType: condition.placeType,
         exclusions: exclusions.split(",").map((item) => item.trim()).filter(Boolean),
-      });
+      };
+      const confirmed = await api.confirmDraft(draftId, confirmedCondition);
       const accepted = await api.startRecommendation(confirmed.draftId);
       router.push(`/recommendations/${accepted.jobId}/progress`);
     } catch (value) {
@@ -76,10 +91,11 @@ export function DraftReview({ draftId }: { draftId: string }) {
         <p className="mt-2 text-sm leading-6 text-slate-600">수정·확정 전에는 장소 검색과 추천 작업을 시작하지 않습니다.</p>
       </div>
       <form className="space-y-6 p-5 sm:p-8" onSubmit={(event) => { event.preventDefault(); void confirm(); }}>
+        {draft.manualEntryRequired && <div className="rounded-xl border border-sky-200 bg-sky-50 p-4 text-sm leading-6 text-sky-950" role="status"><strong>AI 초안을 완성하지 못했습니다.</strong><br />입력 내용은 유지됐으며, 비어 있는 필수 조건을 직접 선택하면 추천을 계속할 수 있습니다.</div>}
         {draft.warnings.length > 0 && <div className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900" role="note">AI가 추정하지 않은 항목: {draft.warnings.join(" · ")}</div>}
         <div className="grid gap-5 sm:grid-cols-2">
           <Field label="지역" id="product-location"><input id="product-location" className="field-control mt-2" value={condition.locationQuery} maxLength={100} onChange={(event) => update("locationQuery", event.target.value)} /></Field>
-          <Field label="장소 유형" id="product-place-type"><select id="product-place-type" className="field-control mt-2" value={condition.placeType} onChange={(event) => updatePlaceType(event.target.value as ProductCondition["placeType"])}>{PRODUCT_PLACE_TYPES.map((value) => <option key={value} value={value}>{labels[value]}</option>)}</select></Field>
+          <Field label="장소 유형" id="product-place-type"><select id="product-place-type" className="field-control mt-2" value={condition.placeType} onChange={(event) => updatePlaceType(event.target.value as DraftFormCondition["placeType"])}><option value="">장소 유형을 선택해 주세요</option>{PRODUCT_PLACE_TYPES.map((value) => <option key={value} value={value}>{labels[value]}</option>)}</select></Field>
           {condition.placeType === "OTHER" && <Field label="세부 유형" id="product-place-detail"><input id="product-place-detail" className="field-control mt-2" value={condition.placeTypeDetail ?? ""} maxLength={30} onChange={(event) => update("placeTypeDetail", event.target.value || null)} /></Field>}
         </div>
         <fieldset>
@@ -121,8 +137,9 @@ function NumberInput({ id, label, value, min = 0, max, onChange }: { id: string;
   return <Field label={label} id={id}><input id={id} type="number" min={min} max={max} step={1} className="field-control mt-2" value={value ?? ""} onChange={(event) => onChange(event.target.value ? Number(event.target.value) : null)} /></Field>;
 }
 
-function validateCondition(condition: ProductCondition, exclusionsText: string): string | null {
+function validateCondition(condition: DraftFormCondition, exclusionsText: string): string | null {
   if (!condition.locationQuery.trim()) return "지역을 입력해 주세요.";
+  if (!condition.placeType) return "장소 유형을 선택해 주세요.";
   if (condition.placeType === "OTHER" && !condition.placeTypeDetail?.trim()) return "세부 유형을 입력해 주세요.";
   if (condition.partySize != null && (!Number.isInteger(condition.partySize) || condition.partySize < 1 || condition.partySize > 100)) return "인원은 1~100명의 정수여야 합니다.";
   if ([condition.budgetPerPersonMin, condition.budgetPerPersonMax].some((value) => value != null && (!Number.isInteger(value) || value < 0 || value > 10_000_000))) return "예산은 0~10,000,000원의 정수여야 합니다.";

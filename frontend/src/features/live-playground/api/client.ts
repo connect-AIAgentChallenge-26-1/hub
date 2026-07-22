@@ -3,6 +3,7 @@ import {
   PLACE_TYPES,
   SAFE_DIAGNOSTIC_CODES,
   type CreateDraftRequest,
+  type DraftRecommendationCondition,
   type DraftSnapshot,
   type LlmFailureStage,
   type PlaygroundApi,
@@ -261,10 +262,45 @@ function parseDraft(source: unknown): DraftSnapshot {
   return {
     draftId: requiredNonBlankString(value.draftId, "draftId"),
     status,
-    condition: parseCondition(value.condition),
+    condition: parseDraftCondition(value.condition),
     warnings: stringArray(value.warnings, "warnings"),
+    manualEntryRequired: requiredBoolean(
+      value.manualEntryRequired,
+      "manualEntryRequired",
+    ),
     createdAt: requiredNonBlankString(value.createdAt, "createdAt"),
     expiresAt: requiredNonBlankString(value.expiresAt, "expiresAt"),
+  };
+}
+
+function parseDraftCondition(source: unknown): DraftRecommendationCondition {
+  const value = asRecord(source);
+  const rawPlaceType = nullableString(value.placeType, "condition.placeType");
+  if (rawPlaceType != null && !PLACE_TYPES.some((item) => item === rawPlaceType)) {
+    throw new PlaygroundContractError("condition.placeType 값이 계약과 다릅니다.");
+  }
+  const preferences = array(value.preferences, "condition.preferences").map((item) => {
+    const preference = asRecord(item);
+    return {
+      value: requiredNonBlankString(preference.value, "preference.value"),
+      priority: nullableInteger(preference.priority, "preference.priority"),
+    };
+  });
+  return {
+    locationQuery: nullableString(value.locationQuery, "condition.locationQuery"),
+    placeType: rawPlaceType as DraftRecommendationCondition["placeType"],
+    placeTypeDetail: nullableString(value.placeTypeDetail, "condition.placeTypeDetail"),
+    partySize: nullableInteger(value.partySize, "condition.partySize"),
+    budgetPerPersonMin: nullableInteger(
+      value.budgetPerPersonMin,
+      "condition.budgetPerPersonMin",
+    ),
+    budgetPerPersonMax: nullableInteger(
+      value.budgetPerPersonMax,
+      "condition.budgetPerPersonMax",
+    ),
+    preferences,
+    exclusions: stringArray(value.exclusions, "condition.exclusions"),
   };
 }
 
@@ -363,7 +399,7 @@ function tracePresentation(
       );
     }
     case "CONDITION_EXTRACTED": {
-      const condition = parseCondition(data.condition);
+      const condition = parseDraftCondition(data.condition);
       const warnings = stringArray(data.warnings, "data.warnings");
       return traceView(
         "Elice가 조건 초안을 추출했습니다",

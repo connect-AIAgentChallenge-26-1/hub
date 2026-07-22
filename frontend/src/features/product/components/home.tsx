@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
 import { ProductApi, withColdStartRetry } from "../api/client";
 import { ProductNotice } from "./product-shell";
@@ -10,9 +10,19 @@ const examples = [
   "성수에서 2명이 조용히 대화할 수 있는 카페를 찾아줘. 흡연 장소는 제외해줘.",
   "강남에서 4명이 갈 음식점을 찾아줘. 1인당 3만원 이하이고 웨이팅 긴 곳은 빼줘.",
 ];
+
+// Server-rendered controls stay inert until React owns their event handlers. This prevents
+// fast user input from being overwritten by the initial controlled value during hydration.
+const subscribeToHydration = () => () => undefined;
+
 export function ProductHome() {
   const api = useMemo(() => new ProductApi(), []);
   const router = useRouter();
+  const hydrated = useSyncExternalStore(
+    subscribeToHydration,
+    () => true,
+    () => false,
+  );
   const [requestText, setRequestText] = useState(examples[0]!);
   const [pending, setPending] = useState(false);
   const [wakingServer, setWakingServer] = useState(false);
@@ -56,13 +66,13 @@ export function ProductHome() {
           <div className="rounded-3xl border border-white/10 bg-white p-5 text-slate-950 shadow-2xl sm:p-7">
             <p className="eyebrow"><SparklesIcon className="h-4 w-4" /> 장소 조건 입력</p>
             <label htmlFor="product-request" className="mt-4 block text-lg font-black">어떤 장소를 찾고 있나요?</label>
-            <textarea id="product-request" className="field-control mt-3 min-h-36 resize-y leading-6" maxLength={1_000} value={requestText} onChange={(event) => setRequestText(event.target.value)} />
+            <textarea id="product-request" className="field-control mt-3 min-h-36 resize-y leading-6" maxLength={1_000} value={requestText} disabled={!hydrated || pending} onChange={(event) => setRequestText(event.target.value)} />
             <div className="mt-3 flex flex-wrap gap-2">
-              {examples.map((example, index) => <button key={example} type="button" className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-teal-50 hover:text-teal-800" onClick={() => setRequestText(example)}>예시 {index + 1}</button>)}
+              {examples.map((example, index) => <button key={example} type="button" className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:bg-teal-50 hover:text-teal-800" disabled={!hydrated || pending} onClick={() => setRequestText(example)}>예시 {index + 1}</button>)}
             </div>
             {error && <p className="mt-4 rounded-xl bg-rose-50 px-3 py-2 text-sm text-rose-800" role="alert">{error}</p>}
             {wakingServer && <p className="mt-4 rounded-xl bg-amber-50 px-3 py-2 text-sm text-amber-900" role="status">무료 데모 서버를 시작하고 있습니다. 최대 90초 동안 세션 연결만 제한적으로 재시도합니다.</p>}
-            <button type="button" className="primary-button mt-5 w-full justify-center" disabled={pending || !requestText.trim()} onClick={submit}>{wakingServer ? "무료 데모 서버 시작 중…" : pending ? "조건을 구조화하는 중…" : "AI 조건 초안 확인"}<ArrowIcon className="h-5 w-5" /></button>
+            <button type="button" className="primary-button mt-5 w-full justify-center" disabled={!hydrated || pending || !requestText.trim()} onClick={submit}>{wakingServer ? "무료 데모 서버 시작 중…" : pending ? "조건을 구조화하는 중…" : "AI 조건 초안 확인"}<ArrowIcon className="h-5 w-5" /></button>
             <p className="mt-4 flex items-start gap-2 text-xs leading-5 text-slate-500"><ShieldIcon className="mt-0.5 h-4 w-4 shrink-0" />개인정보나 민감한 내용을 입력하지 마세요. 입력 조건은 추천 처리에만 사용합니다.</p>
           </div>
         </div>

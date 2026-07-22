@@ -1,7 +1,9 @@
 package com.placepick.draft;
 
+import com.placepick.recommendation.condition.application.port.out.ConditionWarning;
 import com.placepick.recommendation.condition.domain.DraftRecommendationCondition;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,6 +19,7 @@ public interface RecommendationDraftRepository {
         UUID draftId,
         UUID sessionId,
         DraftRecommendationCondition condition,
+        List<ConditionWarning> warnings,
         Instant updatedAt
     );
 

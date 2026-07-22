@@ -10,6 +10,7 @@ related:
   - ../contracts.md
   - ../work-records/WI-0046-recommendation-quality-v2.md
   - ADR-0011-elice-chat-completions-provider-boundary.md
+  - ADR-0018-condition-recovery-embedding-shadow.md
 ---
 
 # ADR-0016 후보별 claim 기반 이유 v3와 제한된 복구
@@ -49,3 +50,6 @@ Embedding은 메모리 batch shadow 평가만 허용한다. 고정 holdout에서
 결과이며 현재 v3의 실제 품질을 대신하지 않는다. unsupported claim이 adversarial Eval에서
 한 건이라도 통과하거나 Provider latency·quota가 사용자 흐름을 훼손하면 claim 표현,
 병렬도와 재시도 예산을 재검토한다.
+
+Embedding 결정의 구현 계약은 ADR-0018에서 구체화했다. 자동 fixture가 승격 조건을
+통과하더라도 실제 모델 campaign과 별도 결정 전에는 runtime 랭킹에 연결하지 않는다.

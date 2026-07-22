@@ -107,19 +107,27 @@ describe("ProductApi", () => {
     expect(retried.get("X-CSRF-Token")).toBe("csrf-new");
   });
 
-  it("application/problem+json의 안전한 errorCode와 detail을 보존한다", async () => {
+  it("필수 조건 추출 실패도 수정 가능한 manual Draft 201로 복구한다", async () => {
+    const base = draftFixture();
+    const manual = {
+      ...base,
+      extractedCondition: {
+        ...base.extractedCondition,
+        locationQuery: null,
+        placeType: null,
+      },
+      manualEntryRequired: true,
+    };
     const fetcher = vi.fn<typeof fetch>()
       .mockResolvedValueOnce(json({ csrfToken: "csrf-test", expiresAt: now }, 201))
-      .mockResolvedValueOnce(json({
-        title: "Invalid condition",
-        status: 422,
-        detail: "위치가 필요합니다.",
-        errorCode: "UNPROCESSABLE_CONDITION",
-      }, 422, { "content-type": "application/problem+json" }));
-    const promise = new ProductApi(fetcher).createDraft("알아서 추천해줘");
-    await expect(promise).rejects.toMatchObject({
-      problem: { status: 422, errorCode: "UNPROCESSABLE_CONDITION" },
-    });
+      .mockResolvedValueOnce(json(manual, 201));
+
+    await expect(new ProductApi(fetcher).createDraft("알아서 추천해줘")).resolves
+      .toMatchObject({
+        status: "EXTRACTED",
+        manualEntryRequired: true,
+        extractedCondition: { locationQuery: null, placeType: null },
+      });
   });
 
   it("cookie가 사라진 첫 SESSION_REQUIRED에서 세션을 한 번만 재발급하고 같은 멱등 key로 재시도한다", async () => {
@@ -292,6 +300,7 @@ function draftFixture() {
       exclusions: [],
     },
     warnings: ["PARTY_SIZE_NOT_PROVIDED"],
+    manualEntryRequired: false,
     expiresAt: now,
   };
 }

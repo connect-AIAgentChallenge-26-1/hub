@@ -1,5 +1,6 @@
 package com.placepick.draft;
 
+import com.placepick.recommendation.condition.application.ConditionWarnings;
 import com.placepick.recommendation.condition.application.port.out.ConditionWarning;
 import com.placepick.recommendation.condition.domain.DraftRecommendationCondition;
 import java.time.Instant;
@@ -11,6 +12,7 @@ public record DraftView(
     DraftStatus status,
     DraftRecommendationCondition extractedCondition,
     List<ConditionWarning> warnings,
+    boolean manualEntryRequired,
     Instant expiresAt
 ) {
     public static DraftView from(RecommendationDraft draft) {
@@ -18,7 +20,8 @@ public record DraftView(
             draft.id(),
             draft.status(),
             draft.condition(),
-            draft.warnings(),
+            ConditionWarnings.from(draft.condition()),
+            draft.status() == DraftStatus.EXTRACTED && !draft.condition().isProcessable(),
             draft.expiresAt()
         );
     }

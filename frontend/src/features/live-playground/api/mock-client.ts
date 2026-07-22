@@ -20,9 +20,25 @@ export class MockPlaygroundApi implements PlaygroundApi {
   async createDraft(request: CreateDraftRequest): Promise<DraftSnapshot> {
     await delay(450);
     const draftId = `draft-mock-${++this.sequence}`;
-    const placeType = request.requestText.includes("음식점") ? "RESTAURANT" : "CAFE";
+    const locationQuery = request.requestText.includes("성수")
+      ? "서울 성수"
+      : request.requestText.includes("강남")
+        ? "서울 강남"
+        : request.requestText.includes("홍대")
+          ? "서울 홍대"
+          : request.requestText.includes("서울")
+            ? "서울"
+            : null;
+    const placeType = request.requestText.includes("음식점") || request.requestText.includes("식당")
+      ? "RESTAURANT"
+      : request.requestText.includes("술집") || request.requestText.includes("주점")
+        ? "BAR"
+        : request.requestText.includes("카페") || request.requestText.includes("커피")
+          ? "CAFE"
+          : null;
     const condition = {
       ...mockCondition,
+      locationQuery,
       placeType,
       partySize: request.requestText.includes("2명") ? 2 : null,
       budgetPerPersonMax: request.requestText.includes("20000") || request.requestText.includes("2만")
@@ -44,6 +60,7 @@ export class MockPlaygroundApi implements PlaygroundApi {
       draftId,
       condition,
       warnings,
+      manualEntryRequired: locationQuery == null || placeType == null,
     };
     this.drafts.set(draftId, draft);
     return structuredClone(draft);
@@ -57,6 +74,7 @@ export class MockPlaygroundApi implements PlaygroundApi {
       ...current,
       status: "CONFIRMED" as const,
       condition: structuredClone(request.condition),
+      manualEntryRequired: false,
     };
     this.drafts.set(draftId, updated);
     return structuredClone(updated);

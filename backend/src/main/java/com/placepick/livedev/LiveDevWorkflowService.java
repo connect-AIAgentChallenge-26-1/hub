@@ -9,9 +9,10 @@ import com.placepick.livedev.LiveDevApiDto.TraceEventView;
 import com.placepick.recommendation.application.port.out.SearchProviderException;
 import com.placepick.recommendation.application.scoring.InsufficientCandidatesException;
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionErrorCode;
-import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
+import com.placepick.recommendation.condition.application.ConditionExtractionRecoveryService;
+import com.placepick.recommendation.condition.application.ConditionExtractionResolution;
+import com.placepick.recommendation.condition.application.ConditionWarnings;
 import com.placepick.recommendation.condition.application.port.out.ExtractionCommand;
-import com.placepick.recommendation.condition.application.port.out.ExtractionOutcome;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
 import com.placepick.recommendation.condition.domain.DraftRecommendationCondition;
 import com.placepick.recommendation.workflow.application.RecommendationCoreResult;
@@ -41,7 +42,7 @@ public final class LiveDevWorkflowService {
 
     private static final String EVENT_NAME = "workflow-trace";
 
-    private final ConditionExtractionPort extractionPort;
+    private final ConditionExtractionRecoveryService extractionRecovery;
     private final LiveDevCoreFactory coreFactory;
     private final Clock clock;
     private final Duration ttl;
@@ -51,13 +52,16 @@ public final class LiveDevWorkflowService {
     private final Map<UUID, RunState> runs = new ConcurrentHashMap<>();
 
     public LiveDevWorkflowService(
-        ConditionExtractionPort extractionPort,
+        ConditionExtractionRecoveryService extractionRecovery,
         LiveDevCoreFactory coreFactory,
         Clock clock,
         Duration ttl,
         int maximumConcurrency
     ) {
-        this.extractionPort = Objects.requireNonNull(extractionPort, "extractionPort");
+        this.extractionRecovery = Objects.requireNonNull(
+            extractionRecovery,
+            "extractionRecovery"
+        );
         this.coreFactory = Objects.requireNonNull(coreFactory, "coreFactory");
         this.clock = Objects.requireNonNull(clock, "clock");
         this.ttl = requireTtl(ttl);
@@ -83,20 +87,17 @@ public final class LiveDevWorkflowService {
             throw failure(HttpStatus.BAD_REQUEST, "INVALID_REQUEST_TEXT", "요청 문장을 확인해 주세요.");
         }
 
-        ExtractionOutcome outcome = extractionPort.extract(command);
-        if (outcome == null) {
-            throw new IllegalStateException("Condition extraction port returned no outcome.");
-        }
-        if (!outcome.extracted()) {
-            throw extractionFailure(outcome);
+        ConditionExtractionResolution resolution = extractionRecovery.extract(command);
+        if (resolution.failed()) {
+            throw extractionFailure(resolution);
         }
 
         Instant createdAt = clock.instant();
         DraftState state = new DraftState(
             UUID.randomUUID(),
             command.requestText(),
-            outcome.condition(),
-            outcome.warnings().stream().map(Enum::name).toList(),
+            resolution.condition(),
+            resolution.warnings().stream().map(Enum::name).toList(),
             createdAt,
             createdAt.plus(ttl)
         );
@@ -116,6 +117,9 @@ public final class LiveDevWorkflowService {
         DraftState state = requireDraft(draftId);
         synchronized (state) {
             state.confirmed = condition;
+            state.currentWarnings = ConditionWarnings.from(condition).stream()
+                .map(Enum::name)
+                .toList();
             state.status = DraftStatus.CONFIRMED;
             return state.view();
         }
@@ -125,6 +129,7 @@ public final class LiveDevWorkflowService {
         cleanupExpired();
         DraftState draft = requireDraft(draftId);
         ConfirmedRecommendationCondition confirmed;
+        List<String> confirmedWarnings;
         synchronized (draft) {
             if (draft.status != DraftStatus.CONFIRMED || draft.confirmed == null) {
                 throw failure(
@@ -134,6 +139,7 @@ public final class LiveDevWorkflowService {
                 );
             }
             confirmed = draft.confirmed;
+            confirmedWarnings = draft.currentWarnings;
         }
 
         Instant createdAt = clock.instant();
@@ -149,10 +155,11 @@ public final class LiveDevWorkflowService {
         ));
         run.emit("CONDITION_EXTRACTED", "completed", Map.of(
             "condition", ConditionView.from(draft.extracted),
-            "warnings", draft.warnings
+            "warnings", draft.extractedWarnings
         ));
         run.emit("USER_CONDITION_CONFIRMED", "completed", Map.of(
-            "condition", ConditionView.from(confirmed)
+            "condition", ConditionView.from(confirmed),
+            "warnings", confirmedWarnings
         ));
 
         ConfirmedRecommendationCondition executionCondition = confirmed;
@@ -248,17 +255,11 @@ public final class LiveDevWorkflowService {
         return value;
     }
 
-    private static LiveDevWorkflowException extractionFailure(ExtractionOutcome outcome) {
-        ConditionExtractionErrorCode errorCode = outcome.errorCode();
-        String diagnosticCode = outcome.diagnosticCode().name();
-        if (errorCode == ConditionExtractionErrorCode.UNPROCESSABLE_CONDITION) {
-            return new LiveDevWorkflowException(
-                HttpStatus.UNPROCESSABLE_ENTITY,
-                errorCode.name(),
-                diagnosticCode,
-                "위치와 장소 유형을 포함해 요청해 주세요."
-            );
-        }
+    private static LiveDevWorkflowException extractionFailure(
+        ConditionExtractionResolution resolution
+    ) {
+        ConditionExtractionErrorCode errorCode = resolution.errorCode();
+        String diagnosticCode = resolution.diagnosticCode().name();
         return new LiveDevWorkflowException(
             HttpStatus.BAD_GATEWAY,
             "CONDITION_" + errorCode.name(),
@@ -328,7 +329,8 @@ public final class LiveDevWorkflowService {
         private final UUID id;
         private final String requestText;
         private final DraftRecommendationCondition extracted;
-        private final List<String> warnings;
+        private final List<String> extractedWarnings;
+        private List<String> currentWarnings;
         private final Instant createdAt;
         private final Instant expiresAt;
         private DraftStatus status = DraftStatus.EXTRACTED;
@@ -345,7 +347,8 @@ public final class LiveDevWorkflowService {
             this.id = id;
             this.requestText = requestText;
             this.extracted = extracted;
-            this.warnings = List.copyOf(warnings);
+            this.extractedWarnings = List.copyOf(warnings);
+            this.currentWarnings = this.extractedWarnings;
             this.createdAt = createdAt;
             this.expiresAt = expiresAt;
         }
@@ -357,7 +360,8 @@ public final class LiveDevWorkflowService {
                 confirmed == null
                     ? ConditionView.from(extracted)
                     : ConditionView.from(confirmed),
-                warnings,
+                currentWarnings,
+                status == DraftStatus.EXTRACTED && !extracted.isProcessable(),
                 createdAt,
                 expiresAt
             );

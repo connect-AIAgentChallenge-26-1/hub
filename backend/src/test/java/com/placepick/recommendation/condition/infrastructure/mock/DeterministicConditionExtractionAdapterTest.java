@@ -63,8 +63,12 @@ class DeterministicConditionExtractionAdapterTest {
 
     @Test
     void returnsUnprocessableWhenRequiredFactsAreMissingOrConflicting() {
-        assertThat(adapter.extract(command("조용한 카페를 찾아줘")).errorCode())
+        ExtractionOutcome missingLocation = adapter.extract(command("조용한 카페를 찾아줘"));
+        assertThat(missingLocation.errorCode())
             .isEqualTo(ConditionExtractionErrorCode.UNPROCESSABLE_CONDITION);
+        assertThat(missingLocation.condition()).isNotNull();
+        assertThat(missingLocation.condition().locationQuery()).isNull();
+        assertThat(missingLocation.condition().placeType()).isEqualTo(PlaceType.CAFE);
         assertThat(adapter.extract(command("서울에서 3명 5만원~2만원 식당")).errorCode())
             .isEqualTo(ConditionExtractionErrorCode.UNPROCESSABLE_CONDITION);
     }

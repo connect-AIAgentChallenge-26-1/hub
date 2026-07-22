@@ -22,12 +22,16 @@ Naver→Elice 직접 경로도 2026-07-16 세 합성 사용자 시나리오에�
 `linked=true`, 저하·이유 fallback 없이 통과했으며 report secret scan을 통과했다. 상세
 과정과 호출 수는
 [CASE-0002](docs/case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)가 정본이다.
+이 실행은 당시 조건 schema와 `reason-statements.v2` batch 계약의 역사적 증거다.
+현재 v3 후보별 이유, 조건 추출 복구·manual Draft와 Embedding 품질을 실제
+Provider로 재검증했다는 뜻은 아니며, 해당 campaign은 후속 증거로 남아 있다.
 
 같은 날 Live Playground 브라우저에서 실제 Draft를 사람이 보정한 뒤 Naver evidence,
 Top 3와 Elice 이유를 확인하고 삭제까지 완료했다. 이어 정식 same-origin API에서 별도
 주최자·참여자 세션, `202` Job, PostgreSQL Outbox, Redis Worker, 추천·방 SSE,
 `LIKE → DISLIKE → DELETE → LIKE`와 최종 결과 조회까지 실제 Provider로 통과했다. 이는
-로컬 정식 서비스 흐름의 실행 증거이며 cloud 배포 완료 증거는 아니다.
+당시 이유 v2·이전 조건 계약의 로컬 정식 서비스 흐름 증거다. 현재 이유 v3·조건 복구를
+actual 재검증했거나 cloud 배포를 완료했다는 증거는 아니다.
 
 Mock 자동 검증과 실제 Provider 검증은 분리한다. CI와 `make check`는 외부 API를
 호출하지 않는다. 실제 Naver·Elice 호출은 로컬의 Git 제외 파일
@@ -80,7 +84,7 @@ npm run test:e2e:live --workspace @placepick/frontend
 | `make test` | Docker 없는 Java·프런트 단위 테스트 |
 | `make integration` | Testcontainers·WireMock 통합/계약 테스트 |
 | `make eval` | 결정론적 추천·LLM 정책 Eval |
-| `make quality-eval` | 후보별 claim 기반 추천 이유 200개 이상 결정적 품질 corpus |
+| `make quality-eval` | 이유 27개 의미 fixture × 8개 안전 변형(216건)과 Embedding shadow 승격 gate Eval |
 | `make check` | 문서·Compose·프런트·Java 전체 자동 검증 |
 | `make live-evidence` | 고정 합성 시나리오의 실제 Naver→Elice 직접 검증 |
 | `make build-images` | Java 17 운영 이미지와 Next.js production build |
@@ -89,7 +93,8 @@ npm run test:e2e:live --workspace @placepick/frontend
 | `make reset` | 확인 후 로컬 데이터 볼륨 삭제 |
 
 실제 키, 인증 Header, Provider routing URL과 원문 응답은 Git·JUnit·일반 로그에
-기록하지 않는다. Embedding은 제품 추천 경로에서 사용하지 않는다.
+기록하지 않는다. Embedding은 deterministic fixture 기반 batch shadow 정책 비교만
+구현됐고, 실제 Provider 품질 campaign 전에는 제품 추천 점수·순위에 사용하지 않는다.
 
 ## 무료 클라우드 데모
 

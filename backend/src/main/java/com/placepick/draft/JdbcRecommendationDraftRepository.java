@@ -110,12 +110,14 @@ public class JdbcRecommendationDraftRepository implements RecommendationDraftRep
         UUID draftId,
         UUID sessionId,
         DraftRecommendationCondition condition,
+        List<ConditionWarning> warnings,
         Instant updatedAt
     ) {
         int changed = jdbcClient.sql("""
                 UPDATE recommendation_draft
                 SET status = 'CONFIRMED',
                     condition_json = CAST(:conditionJson AS jsonb),
+                    warnings_json = CAST(:warningsJson AS jsonb),
                     updated_at = :updatedAt
                 WHERE id = :id
                   AND session_id = :sessionId
@@ -124,6 +126,7 @@ public class JdbcRecommendationDraftRepository implements RecommendationDraftRep
             .param("id", draftId)
             .param("sessionId", sessionId)
             .param("conditionJson", writeJson(condition))
+            .param("warningsJson", writeJson(warnings))
             .param("updatedAt", timestamp(updatedAt))
             .update();
         return changed == 1;

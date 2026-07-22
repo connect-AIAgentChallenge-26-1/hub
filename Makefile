@@ -25,7 +25,7 @@ integration: ## Run Testcontainers and WireMock integration/contract tests.
 eval: ## Validate and run deterministic evaluation fixtures.
 	@bash scripts/test.sh eval
 
-quality-eval: ## Run the deterministic recommendation reason quality corpus.
+quality-eval: ## Run deterministic reason and embedding-shadow quality policies.
 	@bash scripts/test.sh quality-eval
 
 actionlint: ## Validate GitHub Actions workflows with the pinned actionlint image.

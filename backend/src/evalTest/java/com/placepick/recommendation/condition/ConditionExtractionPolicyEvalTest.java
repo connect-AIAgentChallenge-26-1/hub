@@ -56,8 +56,18 @@ class ConditionExtractionPolicyEvalTest {
                 assertThat(outcome.condition().budgetPerPersonMax())
                     .as(caseId)
                     .isEqualTo(nullableInteger(fixture.get("expectedBudgetMax")));
-            } else {
+            } else if (outcome.condition() == null) {
                 assertThat(outcome.condition()).as(caseId).isNull();
+            } else {
+                assertThat(outcome.condition().isProcessable()).as(caseId).isFalse();
+                assertThat(outcome.condition().locationQuery())
+                    .as(caseId)
+                    .isEqualTo(nullableText(fixture.get("expectedLocation")));
+                assertThat(outcome.condition().placeType() == null
+                    ? null
+                    : outcome.condition().placeType().name())
+                    .as(caseId)
+                    .isEqualTo(nullableText(fixture.get("expectedPlaceType")));
             }
         }
     }
