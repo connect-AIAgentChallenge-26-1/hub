@@ -68,6 +68,42 @@ const MOCK_RESTAURANTS: Restaurant[] = [
   { id: 'r5', name: '카페 아늑', category: '디저트/카페', rating: 4.5, distance: '서문 도보 1분', menu: '아인슈페너 & 와플', emoji: '☕' }
 ];
 
+interface PublicRoom {
+  id: string;
+  title: string;
+  foodCategory: string;
+  university: string;
+  hostMajor: string;
+  visibility: string;
+  maxMembers: number;
+  memberCount: number;
+  hostName: string;
+  createdAt: string;
+}
+
+const AVATARS = [
+  'https://api.dicebear.com/9.x/micah/svg?seed=Felix',
+  'https://api.dicebear.com/9.x/micah/svg?seed=Aneka',
+  'https://api.dicebear.com/9.x/micah/svg?seed=Leo',
+  'https://api.dicebear.com/9.x/micah/svg?seed=Mia',
+  'https://api.dicebear.com/9.x/micah/svg?seed=Oscar',
+  'https://api.dicebear.com/9.x/micah/svg?seed=Luna',
+  'https://api.dicebear.com/9.x/micah/svg?seed=Coco',
+  'https://api.dicebear.com/9.x/micah/svg?seed=Milo',
+  'https://api.dicebear.com/9.x/micah/svg?seed=Ruby',
+  'https://api.dicebear.com/9.x/micah/svg?seed=Jasper'
+];
+
+const timeAgo = (iso: string) => {
+  if (!iso) return '';
+  const diffMin = Math.floor((Date.now() - new Date(iso).getTime()) / 60000);
+  if (diffMin < 1) return '방금 전';
+  if (diffMin < 60) return `${diffMin}분 전`;
+  const diffHour = Math.floor(diffMin / 60);
+  if (diffHour < 24) return `${diffHour}시간 전`;
+  return `${Math.floor(diffHour / 24)}일 전`;
+};
+
 const DAYS = ['월', '화', '수', '목', '금'];
 const TIME_SLOTS: TimeSlot[] = [
   { id: 1, label: '09:00 - 10:00' },
@@ -120,7 +156,13 @@ export default function App() {
   const [isEverytimeSynced, setIsEverytimeSynced] = useState(false);
 
   // --- Manner Temperature State ---
-  const [temperature, setTemperature] = useState(37.5);
+  const [temperature, setTemperature] = useState(36.5);
+
+  // --- Public Rooms (same university / major) ---
+  const [publicRooms, setPublicRooms] = useState<PublicRoom[]>([]);
+  const [publicScope, setPublicScope] = useState<'university' | 'major'>('university');
+  const [isLoadingPublicRooms, setIsLoadingPublicRooms] = useState(false);
+  const [roomVisibility, setRoomVisibility] = useState<'private' | 'university' | 'major'>('university');
 
   // --- Bobyak Creation Wizard States ---
   const [wizardStep, setWizardStep] = useState<number>(1);
@@ -159,6 +201,34 @@ export default function App() {
     }, 3000);
   };
 
+  // --- Profile & Manner Temperature Persistence ---
+  const completeLogin = (email: string) => {
+    const savedTemp = localStorage.getItem(`itda_temp_${email}`);
+    if (savedTemp) setTemperature(Number(savedTemp));
+
+    const saved = localStorage.getItem(`itda_profile_${email}`);
+    if (saved) {
+      try {
+        setUserProfile(JSON.parse(saved));
+        setIsOnboarding(false);
+        setCurrentStep(3);
+        return;
+      } catch { /* corrupted profile -> re-onboard */ }
+    }
+    setIsOnboarding(true);
+    setCurrentStep(3);
+  };
+
+  const saveProfile = (email: string, profile: UserProfile) => {
+    if (email) localStorage.setItem(`itda_profile_${email}`, JSON.stringify(profile));
+  };
+
+  useEffect(() => {
+    if (verifiedEmail) {
+      localStorage.setItem(`itda_temp_${verifiedEmail}`, String(temperature));
+    }
+  }, [temperature, verifiedEmail]);
+
   // --- Google Redirect Result Handler ---
   useEffect(() => {
     getRedirectResult(auth).then((result) => {
@@ -176,8 +246,7 @@ export default function App() {
           setIsSyncing(true);
           fetchGoogleCalendarSchedules(token);
         }
-        setIsOnboarding(true);
-        setCurrentStep(3);
+        completeLogin(user.email || '');
       }
     }).catch((error) => {
       if (error.code !== 'auth/popup-blocked') {
@@ -411,10 +480,9 @@ export default function App() {
       if (data.success) {
         setIsVerified(true);
         setVerifiedEmail(userEmail);
-        showToastMsg('인증 성공! 프로필을 설정해 주세요.');
+        showToastMsg('인증 성공!');
         setTimeout(() => {
-          setIsOnboarding(true);
-          setCurrentStep(3);
+          completeLogin(userEmail);
         }, 1000);
       } else {
         showToastMsg(data.error || '인증에 실패했습니다.');
@@ -446,8 +514,7 @@ export default function App() {
           setIsSyncing(true);
           fetchGoogleCalendarSchedules(token);
         }
-        setIsOnboarding(true);
-        setCurrentStep(3);
+        completeLogin(user.email || '');
       } catch (popupError: any) {
         if (popupError.code === 'auth/popup-blocked' || popupError.code === 'auth/cancelled-popup-request') {
           await signInWithRedirect(auth, provider);
@@ -580,6 +647,31 @@ export default function App() {
     showToastMsg('🗑️ 밥약 약속이 취소되었습니다.');
   };
 
+  // Fetch public rooms for my university / major
+  const fetchPublicRooms = async () => {
+    if (!userProfile?.university) return;
+    setIsLoadingPublicRooms(true);
+    try {
+      const params = new URLSearchParams({ university: userProfile.university });
+      if (userProfile.major) params.append('major', userProfile.major);
+      const response = await fetch(`${API_BASE}/api/rooms/public?${params.toString()}`);
+      const data = await response.json();
+      if (data.success && data.rooms) {
+        setPublicRooms(data.rooms);
+      }
+    } catch (err) {
+      console.error('Failed to fetch public rooms', err);
+    } finally {
+      setIsLoadingPublicRooms(false);
+    }
+  };
+
+  useEffect(() => {
+    if (activeTab === 'home' && userProfile?.university && !isOnboarding) {
+      fetchPublicRooms();
+    }
+  }, [activeTab, userProfile?.university, isOnboarding]);
+
   // Create real room in DB
   const handleCreateRoomInDb = async () => {
     try {
@@ -589,8 +681,10 @@ export default function App() {
         body: JSON.stringify({
           title: roomTitle,
           foodCategory: foodCategory,
-          hostName: verifiedEmail || '이정훈',
-          hostMajor: '컴퓨터공학과',
+          hostName: verifiedEmail ? verifiedEmail.split('@')[0] : '호스트',
+          hostMajor: userProfile?.major || '',
+          university: userProfile?.university || '',
+          visibility: userProfile?.university ? roomVisibility : 'private',
           schedule: hostSchedule
         })
       });
@@ -1087,40 +1181,82 @@ export default function App() {
       </button>
 
       <div className="space-y-2.5">
-        <h4 className="text-[12px] font-bold text-slate-500">내 주변 모집 중</h4>
-        
-        <div className="space-y-2">
-          <div className="p-4 bg-white border border-slate-200 rounded-2xl flex justify-between items-center active:bg-slate-50 transition">
-            <div className="space-y-1.5 pr-3 flex-1 min-w-0">
-              <span className="text-[11px] bg-orange-100 text-orange-600 px-2 py-0.5 rounded-md font-bold">마라탕/중식</span>
-              <h5 className="text-[13px] font-bold text-slate-900 truncate">[후배] 꿔바로우 먹으러 가실 분!</h5>
-              <p className="text-[11px] text-slate-500 flex items-center">
-                <MapPin className="w-3.5 h-3.5 mr-1" /> 정문 도보 3분 · 2/4명
-              </p>
-            </div>
-            <button
-              onClick={() => handleJoinMockRoom('room1')}
-              className="px-4 py-2.5 bg-orange-500 active:bg-orange-600 text-white text-[13px] font-bold rounded-xl transition shrink-0"
-            >
-              참여
-            </button>
-          </div>
+        <div className="flex justify-between items-center">
+          <h4 className="text-[12px] font-bold text-slate-500">
+            🏫 {userProfile?.university || '우리 학교'} 모집 중
+          </h4>
+          <button
+            onClick={fetchPublicRooms}
+            className="text-[10px] bg-slate-100 text-slate-500 px-2 py-1 rounded-lg font-bold active:bg-slate-200 transition"
+          >
+            {isLoadingPublicRooms ? '불러오는 중...' : '🔄 새로고침'}
+          </button>
+        </div>
 
-          <div className="p-4 bg-white border border-slate-200 rounded-2xl flex justify-between items-center active:bg-slate-50 transition">
-            <div className="space-y-1.5 pr-3 flex-1 min-w-0">
-              <span className="text-[11px] bg-rose-100 text-rose-600 px-2 py-0.5 rounded-md font-bold">파스타/양식</span>
-              <h5 className="text-[13px] font-bold text-slate-900 truncate">[선배] 경영학 전공 팁 & 파스타</h5>
-              <p className="text-[11px] text-slate-500 flex items-center">
-                <MapPin className="w-3.5 h-3.5 mr-1" /> 동문 도보 7분 · 1/2명
+        <div className="flex space-x-1.5">
+          <button
+            onClick={() => setPublicScope('university')}
+            className={`px-3 py-1.5 rounded-full text-[10px] font-bold border transition ${
+              publicScope === 'university'
+                ? 'bg-orange-500 text-white border-orange-500'
+                : 'bg-white text-slate-500 border-slate-200'
+            }`}
+          >
+            우리 학교 전체
+          </button>
+          <button
+            onClick={() => setPublicScope('major')}
+            className={`px-3 py-1.5 rounded-full text-[10px] font-bold border transition ${
+              publicScope === 'major'
+                ? 'bg-orange-500 text-white border-orange-500'
+                : 'bg-white text-slate-500 border-slate-200'
+            }`}
+          >
+            같은 과 ({userProfile?.major || '학과'})
+          </button>
+        </div>
+
+        <div className="space-y-2">
+          {publicRooms
+            .filter(r => publicScope === 'university' || r.hostMajor === userProfile?.major)
+            .map(room => (
+              <div key={room.id} className="p-4 bg-white border border-slate-200 rounded-2xl flex justify-between items-center active:bg-slate-50 transition">
+                <div className="space-y-1.5 pr-3 flex-1 min-w-0">
+                  <div className="flex items-center space-x-1.5">
+                    <span className="text-[11px] bg-orange-100 text-orange-600 px-2 py-0.5 rounded-md font-bold">{room.foodCategory}</span>
+                    {room.visibility === 'major' && (
+                      <span className="text-[9px] bg-indigo-100 text-indigo-600 px-1.5 py-0.5 rounded-md font-bold">과 전용</span>
+                    )}
+                  </div>
+                  <h5 className="text-[13px] font-bold text-slate-900 truncate">{room.title}</h5>
+                  <p className="text-[11px] text-slate-500 flex items-center">
+                    <Users className="w-3.5 h-3.5 mr-1" />
+                    {room.hostName}{room.hostMajor ? ` (${room.hostMajor})` : ''} · {room.memberCount}/{room.maxMembers}명
+                    {room.createdAt && <span className="ml-1.5 text-slate-400">· {timeAgo(room.createdAt)}</span>}
+                  </p>
+                </div>
+                <button
+                  onClick={() => handleJoinMockRoom(room.id)}
+                  disabled={room.memberCount >= room.maxMembers}
+                  className={`px-4 py-2.5 text-white text-[13px] font-bold rounded-xl transition shrink-0 ${
+                    room.memberCount >= room.maxMembers
+                      ? 'bg-slate-300'
+                      : 'bg-orange-500 active:bg-orange-600'
+                  }`}
+                >
+                  {room.memberCount >= room.maxMembers ? '마감' : '참여'}
+                </button>
+              </div>
+            ))}
+
+          {publicRooms.filter(r => publicScope === 'university' || r.hostMajor === userProfile?.major).length === 0 && (
+            <div className="p-6 bg-slate-50 border border-dashed border-slate-200 rounded-2xl text-center space-y-1">
+              <p className="text-[12px] font-bold text-slate-400">
+                {publicScope === 'major' ? '같은 과에서 모집 중인 밥약이 아직 없어요' : '우리 학교에서 모집 중인 밥약이 아직 없어요'}
               </p>
+              <p className="text-[10px] text-slate-400">위의 '새로운 밥약 방 만들기'로 첫 공개 방을 올려보세요! 🍚</p>
             </div>
-            <button
-              onClick={() => handleJoinMockRoom('room2')}
-              className="px-4 py-2.5 bg-orange-500 active:bg-orange-600 text-white text-[13px] font-bold rounded-xl transition shrink-0"
-            >
-              참여
-            </button>
-          </div>
+          )}
         </div>
       </div>
 
@@ -1270,14 +1406,39 @@ export default function App() {
       </div>
 
       {userProfile && (
-        <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 flex items-center space-x-4">
-          <img src={userProfile.avatarUrl} alt="avatar" className="w-16 h-16 rounded-full border-2 border-orange-500 bg-white" />
-          <div>
-            <h4 className="text-sm font-black text-slate-900">{verifiedEmail.split('@')[0]}</h4>
-            <p className="text-[10px] text-slate-500 font-bold mt-0.5">{userProfile.major} • {userProfile.year}</p>
-            <span className="inline-block mt-1.5 text-[9px] bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full font-bold border border-orange-200">
-              {userProfile.mbti}
-            </span>
+        <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-3">
+          <div className="flex items-center space-x-4">
+            <img src={userProfile.avatarUrl} alt="avatar" className="w-16 h-16 rounded-full border-2 border-orange-500 bg-white" />
+            <div>
+              <h4 className="text-sm font-black text-slate-900">{verifiedEmail.split('@')[0]}</h4>
+              <p className="text-[10px] text-slate-500 font-bold mt-0.5">{userProfile.university} • {userProfile.major} • {userProfile.year}</p>
+              <span className="inline-block mt-1.5 text-[9px] bg-orange-100 text-orange-600 px-2 py-0.5 rounded-full font-bold border border-orange-200">
+                {userProfile.mbti}
+              </span>
+            </div>
+          </div>
+
+          <div className="pt-2 border-t border-slate-200/50 space-y-1.5">
+            <p className="text-[9px] font-extrabold text-slate-400">프로필 사진 변경</p>
+            <div className="flex space-x-1.5 overflow-x-auto pb-1">
+              {AVATARS.map((url) => (
+                <button
+                  key={url}
+                  type="button"
+                  onClick={() => {
+                    const updated = { ...userProfile, avatarUrl: url };
+                    setUserProfile(updated);
+                    saveProfile(verifiedEmail, updated);
+                    showToastMsg('✨ 프로필 사진이 변경되었습니다!');
+                  }}
+                  className={`w-10 h-10 rounded-full border-2 shrink-0 bg-white transition ${
+                    userProfile.avatarUrl === url ? 'border-orange-500 scale-110' : 'border-slate-200 opacity-70'
+                  }`}
+                >
+                  <img src={url} alt="avatar option" className="w-full h-full rounded-full" />
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}
@@ -1420,6 +1581,34 @@ export default function App() {
                     </button>
                   ))}
                 </div>
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-[10px] font-extrabold text-slate-400">공개 범위</label>
+                <div className="grid grid-cols-3 gap-1.5">
+                  {([
+                    { value: 'university', label: '🏫 우리 학교', desc: '학교 전체 공개' },
+                    { value: 'major', label: '🎓 같은 과만', desc: '같은 학과에만 공개' },
+                    { value: 'private', label: '🔒 비공개', desc: '초대 링크로만' }
+                  ] as const).map(opt => (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => setRoomVisibility(opt.value)}
+                      className={`py-2 px-1 rounded-xl border transition text-center ${
+                        roomVisibility === opt.value
+                          ? 'bg-orange-50 text-orange-600 border-orange-200'
+                          : 'bg-slate-50 text-slate-500 border-transparent hover:bg-slate-100'
+                      }`}
+                    >
+                      <span className="block text-[10px] font-bold">{opt.label}</span>
+                      <span className="block text-[8px] mt-0.5 opacity-70">{opt.desc}</span>
+                    </button>
+                  ))}
+                </div>
+                {roomVisibility !== 'private' && !userProfile?.university && (
+                  <p className="text-[9px] text-rose-500 font-bold">⚠️ 프로필에 학교 정보가 없어 공개 등록이 어려워요. 비공개로 만들어져요.</p>
+                )}
               </div>
 
               <div className="space-y-1.5">
@@ -1762,21 +1951,16 @@ export default function App() {
       showToastMsg('⚠️ 학과를 입력해 주세요!');
       return;
     }
-    const AVATARS = [
-      'https://api.dicebear.com/9.x/micah/svg?seed=Felix',
-      'https://api.dicebear.com/9.x/micah/svg?seed=Aneka',
-      'https://api.dicebear.com/9.x/micah/svg?seed=Leo',
-      'https://api.dicebear.com/9.x/micah/svg?seed=Mia',
-      'https://api.dicebear.com/9.x/micah/svg?seed=Oscar'
-    ];
     const randomAvatar = AVATARS[Math.floor(Math.random() * AVATARS.length)];
-    setUserProfile({
+    const profile: UserProfile = {
       university: onboardingUniversity,
       mbti: onboardingMbti,
       major: onboardingMajor,
       year: onboardingYear,
       avatarUrl: randomAvatar
-    });
+    };
+    setUserProfile(profile);
+    saveProfile(verifiedEmail || userEmail, profile);
     setIsOnboarding(false);
     showToastMsg('🎉 프로필 설정이 완료되었습니다!');
   };

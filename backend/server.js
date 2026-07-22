@@ -566,9 +566,9 @@ const IN_MEMORY_ROOMS = {};
 
 // 6. Create Room
 app.post('/api/rooms', async (req, res) => {
-  const { title, foodCategory, hostName, hostMajor, schedule } = req.body;
+  const { title, foodCategory, hostName, hostMajor, schedule, university, visibility, maxMembers } = req.body;
   const roomId = Math.random().toString(36).substring(2, 9);
-  
+
   const roomData = {
     id: roomId,
     title,
@@ -576,6 +576,11 @@ app.post('/api/rooms', async (req, res) => {
     status: 'matching',
     confirmedTime: '',
     confirmedRestaurant: null,
+    university: university || '',
+    hostMajor: hostMajor || '',
+    visibility: visibility || 'private',
+    maxMembers: maxMembers || 4,
+    createdAt: new Date().toISOString(),
     members: [
       { name: hostName, major: hostMajor, role: 'host', schedule }
     ]
@@ -600,6 +605,10 @@ app.post('/api/rooms', async (req, res) => {
         roomId,
         title,
         foodCategory,
+        university: roomData.university,
+        hostMajor: roomData.hostMajor,
+        visibility: roomData.visibility,
+        maxMembers: roomData.maxMembers,
         host: userObj._id,
         members: [{ user: userObj._id, role: 'host' }]
       });
@@ -655,6 +664,11 @@ async function loadRoom(id) {
           status: roomObj.status,
           confirmedTime: roomObj.confirmedTime || '',
           confirmedRestaurant: roomObj.confirmedRestaurant || null,
+          university: roomObj.university || '',
+          hostMajor: roomObj.hostMajor || '',
+          visibility: roomObj.visibility || 'private',
+          maxMembers: roomObj.maxMembers || 4,
+          createdAt: roomObj.createdAt ? roomObj.createdAt.toISOString() : '',
           members: membersList
         };
         IN_MEMORY_ROOMS[id] = room;
@@ -666,6 +680,83 @@ async function loadRoom(id) {
 
   return room;
 }
+
+// 6.5 Public Room Listing (same university / same major)
+// NOTE: must be registered before /api/rooms/:id so 'public' isn't matched as an id
+app.get('/api/rooms/public', async (req, res) => {
+  const { university, major } = req.query;
+  if (!university) {
+    return res.status(400).json({ success: false, error: 'university query param is required' });
+  }
+
+  // A room is visible if: visibility 'university' + same university,
+  // or visibility 'major' + same university + same major
+  const isVisible = (room) => {
+    if (room.status !== 'matching') return false;
+    if (room.university !== university) return false;
+    if (room.visibility === 'university') return true;
+    if (room.visibility === 'major') return !!major && room.hostMajor === major;
+    return false;
+  };
+
+  const results = {};
+
+  // From MongoDB (survives restarts)
+  if (mongoose.connection.readyState === 1) {
+    try {
+      const query = {
+        status: 'matching',
+        university,
+        $or: [{ visibility: 'university' }]
+      };
+      if (major) {
+        query.$or.push({ visibility: 'major', hostMajor: major });
+      }
+      const roomObjs = await Room.find(query).sort({ createdAt: -1 }).limit(30).populate('host');
+      roomObjs.forEach(r => {
+        if (!r.roomId) return;
+        results[r.roomId] = {
+          id: r.roomId,
+          title: r.title,
+          foodCategory: r.foodCategory,
+          university: r.university,
+          hostMajor: r.hostMajor,
+          visibility: r.visibility,
+          maxMembers: r.maxMembers || 4,
+          memberCount: (r.members || []).length,
+          hostName: r.host ? r.host.name : '',
+          createdAt: r.createdAt ? r.createdAt.toISOString() : ''
+        };
+      });
+    } catch (err) {
+      console.warn('⚠️ MongoDB public room lookup failed:', err.message);
+    }
+  }
+
+  // Merge in-memory rooms (covers DB-less mode and very fresh rooms)
+  Object.values(IN_MEMORY_ROOMS).forEach(room => {
+    if (isVisible(room)) {
+      results[room.id] = {
+        id: room.id,
+        title: room.title,
+        foodCategory: room.foodCategory,
+        university: room.university,
+        hostMajor: room.hostMajor,
+        visibility: room.visibility,
+        maxMembers: room.maxMembers || 4,
+        memberCount: (room.members || []).length,
+        hostName: room.members && room.members[0] ? room.members[0].name : '',
+        createdAt: room.createdAt || ''
+      };
+    }
+  });
+
+  const rooms = Object.values(results).sort((a, b) =>
+    (b.createdAt || '').localeCompare(a.createdAt || '')
+  );
+
+  res.json({ success: true, rooms });
+});
 
 // 7. Get Room Details
 app.get('/api/rooms/:id', async (req, res) => {
