@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
+import com.placepick.recommendation.condition.application.ConditionExtractionRecoveryService;
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionDiagnosticCode;
 import com.placepick.recommendation.condition.application.port.out.ConditionWarning;
 import com.placepick.recommendation.condition.application.port.out.ExtractionOutcome;
@@ -57,13 +58,17 @@ class RecommendationDraftServiceTest {
 
         assertThat(result.draftId().version()).isEqualTo(4);
         assertThat(result.status()).isEqualTo(DraftStatus.EXTRACTED);
+        assertThat(result.warnings()).containsExactly(
+            ConditionWarning.PARTY_SIZE_NOT_PROVIDED,
+            ConditionWarning.BUDGET_NOT_PROVIDED
+        );
         assertThat(result.expiresAt()).isEqualTo(NOW.plus(Duration.ofMinutes(30)));
         assertThat(stored.requestText()).isEqualTo("서울에서 조용한 카페");
         assertThat(stored.toString()).doesNotContain(stored.requestText());
     }
 
     @Test
-    void rejectsUnprocessableExtractionWithoutPersistingDraft() {
+    void persistsAnEditableManualDraftWhenRequiredFieldsCannotBeExtracted() {
         RecommendationDraftService service = service(command ->
             ExtractionOutcome.unprocessable(
                 List.of(),
@@ -71,12 +76,16 @@ class RecommendationDraftServiceTest {
             )
         );
 
-        assertThatThrownBy(() -> service.create(OWNER, "조건 없음"))
-            .isInstanceOfSatisfying(ApiException.class, exception -> {
-                assertThat(exception.status()).isEqualTo(HttpStatus.UNPROCESSABLE_ENTITY);
-                assertThat(exception.errorCode()).isEqualTo(ApiErrorCode.UNPROCESSABLE_CONDITION);
-            });
-        assertThat(repository.drafts).isEmpty();
+        DraftView result = service.create(OWNER, "조건 없음");
+
+        assertThat(result.status()).isEqualTo(DraftStatus.EXTRACTED);
+        assertThat(result.manualEntryRequired()).isTrue();
+        assertThat(result.extractedCondition().isProcessable()).isFalse();
+        assertThat(result.warnings()).containsExactly(
+            ConditionWarning.PARTY_SIZE_NOT_PROVIDED,
+            ConditionWarning.BUDGET_NOT_PROVIDED
+        );
+        assertThat(repository.drafts).containsKey(result.draftId());
     }
 
     @Test
@@ -111,7 +120,9 @@ class RecommendationDraftServiceTest {
 
         RecommendationDraftService expiredService = new RecommendationDraftService(
             repository,
-            command -> ExtractionOutcome.extracted(EXTRACTED, List.of()),
+            new ConditionExtractionRecoveryService(
+                command -> ExtractionOutcome.extracted(EXTRACTED, List.of())
+            ),
             tokenCodec,
             Clock.fixed(NOW.plusSeconds(2), ZoneOffset.UTC),
             Duration.ofMinutes(30)
@@ -145,13 +156,15 @@ class RecommendationDraftServiceTest {
 
         assertThat(result.status()).isEqualTo(DraftStatus.CONFIRMED);
         assertThat(result.extractedCondition().locationQuery()).isEqualTo("서울 강남");
+        assertThat(result.warnings()).isEmpty();
+        assertThat(repository.drafts.get(draft.id()).warnings()).isEmpty();
         assertThat(result.expiresAt()).isEqualTo(draft.expiresAt());
     }
 
     private RecommendationDraftService service(ConditionExtractionPort extractionPort) {
         return new RecommendationDraftService(
             repository,
-            extractionPort,
+            new ConditionExtractionRecoveryService(extractionPort),
             tokenCodec,
             Clock.fixed(NOW, ZoneOffset.UTC),
             Duration.ofMinutes(30)
@@ -198,6 +211,7 @@ class RecommendationDraftServiceTest {
             UUID draftId,
             UUID sessionId,
             DraftRecommendationCondition condition,
+            List<ConditionWarning> warnings,
             Instant updatedAt
         ) {
             Optional<RecommendationDraft> found = findOwned(draftId, sessionId);
@@ -211,7 +225,7 @@ class RecommendationDraftServiceTest {
                 DraftStatus.CONFIRMED,
                 current.requestText(),
                 condition,
-                current.warnings(),
+                warnings,
                 current.consumedJobId(),
                 current.createdAt(),
                 updatedAt,

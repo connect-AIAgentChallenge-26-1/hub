@@ -20,6 +20,7 @@ import com.placepick.recommendation.condition.application.port.out.ConditionExtr
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionErrorCode;
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
 import com.placepick.recommendation.condition.application.port.out.ExtractionOutcome;
+import com.placepick.recommendation.condition.application.ConditionExtractionRecoveryService;
 import com.placepick.recommendation.reason.application.GroundedReasonService;
 import com.placepick.recommendation.workflow.application.RecommendationCoreUseCase;
 import java.time.Clock;
@@ -37,12 +38,14 @@ import org.springframework.http.HttpStatus;
 class LiveDevWorkflowServiceTest {
 
     @Test
-    void preservesOnlyTheClosedConditionDiagnosticInDeveloperFailures() {
+    void exposesAManualDraftAfterTwoRegeneratableConditionFailures() {
         LiveDevWorkflowService service = new LiveDevWorkflowService(
-            command -> ExtractionOutcome.providerFailure(
-                ConditionExtractionErrorCode.PROVIDER_INVALID_RESPONSE,
-                ConditionExtractionDiagnosticCode.CONDITION_BUDGET_ORDER_INVALID,
-                LlmFailureStage.CHAT_CONTENT_CONDITION
+            new ConditionExtractionRecoveryService(
+                command -> ExtractionOutcome.providerFailure(
+                    ConditionExtractionErrorCode.PROVIDER_INVALID_RESPONSE,
+                    ConditionExtractionDiagnosticCode.CONDITION_BUDGET_ORDER_INVALID,
+                    LlmFailureStage.CHAT_CONTENT_CONDITION
+                )
             ),
             trace -> {
                 throw new AssertionError("Recommendation core must not be created.");
@@ -52,13 +55,42 @@ class LiveDevWorkflowServiceTest {
             2
         );
         try {
-            assertThatThrownBy(() -> service.createDraft("합성 조건"))
-                .isInstanceOfSatisfying(LiveDevWorkflowException.class, exception -> {
-                    assertThat(exception.errorCode())
-                        .isEqualTo("CONDITION_PROVIDER_INVALID_RESPONSE");
-                    assertThat(exception.diagnosticCode())
-                        .isEqualTo("CONDITION_BUDGET_ORDER_INVALID");
-                });
+            var draft = service.createDraft("합성 조건");
+
+            assertThat(draft.manualEntryRequired()).isTrue();
+            assertThat(draft.condition().locationQuery()).isNull();
+            assertThat(draft.condition().placeType()).isNull();
+        } finally {
+            service.close();
+        }
+    }
+
+    @Test
+    void recomputesWarningsFromTheConditionConfirmedByTheUser() {
+        InProcessLiveDevProvider provider = new InProcessLiveDevProvider();
+        LiveDevWorkflowService service = service(provider, provider, Clock.systemUTC(), 2);
+        try {
+            var draft = service.createDraft("서울 성수동에서 조용한 카페");
+            assertThat(draft.warnings()).containsExactly(
+                "PARTY_SIZE_NOT_PROVIDED",
+                "BUDGET_NOT_PROVIDED"
+            );
+
+            var confirmed = service.confirmDraft(
+                draft.draftId(),
+                new ConfirmedRecommendationCondition(
+                    "서울 성수동",
+                    PlaceType.CAFE,
+                    null,
+                    2,
+                    10_000,
+                    20_000,
+                    List.of(new Preference("조용한", 8)),
+                    List.of()
+                )
+            );
+
+            assertThat(confirmed.warnings()).isEmpty();
         } finally {
             service.close();
         }
@@ -195,7 +227,9 @@ class LiveDevWorkflowServiceTest {
             new GroundedReasonService(provider, trace)
         );
         return new LiveDevWorkflowService(
-            new DeterministicConditionExtractionAdapter(),
+            new ConditionExtractionRecoveryService(
+                new DeterministicConditionExtractionAdapter()
+            ),
             coreFactory,
             clock,
             Duration.ofMinutes(30),
@@ -207,7 +241,7 @@ class LiveDevWorkflowServiceTest {
         ConditionExtractionPort port
     ) {
         return new LiveDevWorkflowService(
-            port,
+            new ConditionExtractionRecoveryService(port),
             trace -> {
                 throw new AssertionError("Recommendation core must not be created.");
             },

@@ -64,27 +64,25 @@ public final class DeterministicConditionExtractionAdapter implements ConditionE
         List<Preference> preferences = findPreferences(lowerCaseText, exclusions);
         List<ConditionWarning> warnings = warnings(partySize, budget);
 
-        if (location == null || typeMatch.placeType() == null) {
-            return ExtractionOutcome.unprocessable(
-                warnings,
-                missingRequiredDiagnostic(location, typeMatch.placeType())
-            );
-        }
-
         try {
-            return ExtractionOutcome.extracted(
-                new DraftRecommendationCondition(
-                    location,
-                    typeMatch.placeType(),
-                    typeMatch.detail(),
-                    partySize,
-                    budget.minimum(),
-                    budget.maximum(),
-                    preferences,
-                    exclusions
-                ),
-                warnings
+            DraftRecommendationCondition condition = new DraftRecommendationCondition(
+                location,
+                typeMatch.placeType(),
+                typeMatch.detail(),
+                partySize,
+                budget.minimum(),
+                budget.maximum(),
+                preferences,
+                exclusions
             );
+            if (!condition.isProcessable()) {
+                return ExtractionOutcome.unprocessable(
+                    condition,
+                    warnings,
+                    missingRequiredDiagnostic(location, typeMatch.placeType())
+                );
+            }
+            return ExtractionOutcome.extracted(condition, warnings);
         } catch (IllegalArgumentException exception) {
             return ExtractionOutcome.unprocessable(
                 warnings,

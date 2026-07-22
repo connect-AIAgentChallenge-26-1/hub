@@ -8,6 +8,9 @@ owners:
   - placepick-team
 related:
   - ../architecture.md
+  - ../work-records/WI-0046-recommendation-quality-v2.md
+  - ../adr/ADR-0017-production-otlp-observability.md
+  - ../adr/ADR-0018-condition-recovery-embedding-shadow.md
   - RUN-0006-free-demo-deployment-and-rollback.md
 ---
 
@@ -87,6 +90,11 @@ Naver Local/Blog와 Elice condition/reason은 서로 독립된 공정한 semapho
 | 429/quota 보호 | `placepick_provider_quota_protected_total` | `provider` |
 | timeout budget 초과 | `placepick_provider_timeout_budget_exhausted_total` | `provider`, `operation` |
 
+조건 추출의 관측 budget은 HTTP response timeout과 같은 12초를 사용한다. 따라서 정상적인
+응답 timeout을 30초 budget 아래에서 누락하지 않는다. 이유 생성은 별도 30초 budget을
+사용하며, connect timeout처럼 각 operation 전체 budget보다 먼저 끝나는 장애는
+`outcome=unavailable`과 LLM failure stage로 구분한다.
+
 `rate_limited`, `concurrency_rejected`, `timeout`, `unavailable`이 증가하면 해당 Provider 신규
 호출을 늘리지 않는다. credential·request/response body·query는 로그나 metric에 넣지 않는다.
 Provider 콘솔 quota와 비교한 뒤 동시성 감소, 사용자 429, 기능의 명시적 degraded 처리를
@@ -109,8 +117,12 @@ permit 거부는 실제 Provider 호출 지연이 아니므로 `placepick_provid
 | 정상·부분·저하 결과 | `placepick_recommendation_results_total` | `partial`, `degraded` |
 | 최종 결과 수·점수 | `placepick_recommendation_result_count_*`, `placepick_recommendation_result_score_*` | `partial` |
 | LLM Provider 진단 | `placepick_provider_llm_outcomes_total` | `provider`, `operation`, `error`, `stage`, `diagnostic` |
+| 조건 추출 최종 해석 | `placepick_recommendation_condition_resolutions_total` | `status`, `attempts`, `recovered`, `diagnostic` |
 | 서버 이유 검증 거부 | `placepick_provider_llm_validation_failures_total` | `operation`, `code` |
 | 후보별 이유 결과·복구 | `placepick_recommendation_reason_candidates_total` | `source`, `attempts`, `recovered` |
+| Embedding shadow 결과(현재 비활성 계약) | `placepick_recommendation_preference_shadow_evaluations_total` | `status`, `eligible`, `failure` |
+| Shadow holdout F1(현재 비활성 계약) | `placepick_recommendation_preference_shadow_f1_*` | `matcher`, `split` |
+| Shadow holdout false positive(현재 비활성 계약) | `placepick_recommendation_preference_shadow_false_positives_*` | `matcher`, `split` |
 
 Grafana의 `Per-candidate reason outcomes (15m)` 패널은 후보별 generated/template,
 1·2회 시도와 재시도 회복 여부를 함께 보여 준다. 한 추천 전체의 `reasonFallback`만으로
@@ -132,6 +144,19 @@ Provider 후보 부족과 이미 노출한 후보 제외를 구분한다. `resul
 검색어, 장소와 candidate fingerprint를 label로 추가하지 않는다.
 
 LLM 진단은 envelope·usage·schema·slot/claim 소유권 같은 폐쇄형 코드만 기록한다.
+조건 추출은 attempt별 Provider outcome과 최종 `extracted|manual|failed` resolution을
+분리해 본다. `manual`은 사용자가 직접 조건을 완성할 수 있는 정상 복구 상태이며 Provider
+성공으로 합산하지 않는다. `attempts=2,recovered=true`는 두 번째 생성에서 안전한 초안을
+회복했다는 뜻이다.
+
+Embedding shadow metric observer와 메트릭 계약은 구현됐지만 현재 실행 가능한
+`make quality-eval`은 합성 vector로 정책 산식만 검증하며 observer를 운영 registry에
+연결하지 않는다. 실제 Provider campaign runner와 운영 metric 연결은 후속 PR에서
+구현한다.
+`eligible=true`는 승격 필요조건을 충족했다는 의미이지 runtime에 적용됐다는 뜻이 아니다.
+lexical/embedding holdout F1과 false positive gate를 함께 검토하고 별도 ADR 없이 점수
+정책에 연결하지 않는다. corpus 원문과 vector는 metric·log·trace에 넣지 않는다.
+
 `diagnostic=none`이 아닌 값과 서버 validation failure를 함께 확인한다. 후보별
 `source=generated|template`, `attempts=1|2`, `recovered=true|false`를 함께 보면 첫 실패 뒤
 회복과 최종 template 대체를 구분할 수 있다. 후보별 작업은 최대 세 개를 병렬로 제출하지만

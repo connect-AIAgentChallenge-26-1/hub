@@ -6,7 +6,6 @@ import com.placepick.infrastructure.observability.LlmProviderDiagnosticMetrics;
 import com.placepick.infrastructure.observability.ProviderCallMetrics;
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
 import java.net.URI;
-import java.time.Duration;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -36,7 +35,7 @@ public class ProductionConditionProviderConfiguration {
             metrics,
             diagnosticMetrics,
             "elice",
-            Duration.ofSeconds(30)
+            EliceConditionExtractionClient.RESPONSE_TIMEOUT
         );
     }
 }

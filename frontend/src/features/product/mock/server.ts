@@ -3,6 +3,7 @@ import type {
   FinalResult,
   ProductCondition,
   ProductDraft,
+  ProductDraftCondition,
   ProductJob,
   ProductPlace,
   ProductRoom,
@@ -97,6 +98,7 @@ export async function handleProductMock(
         const body = await jsonBody(request);
         draft.extractedCondition = validateCondition(body.condition);
         draft.status = "CONFIRMED";
+        draft.manualEntryRequired = false;
         return NextResponse.json(publicDraft(draft));
       }
     }
@@ -113,7 +115,10 @@ export async function handleProductMock(
         throw apiFailure(409, "DRAFT_NOT_CONFIRMED", "추천 전에 조건을 확정해 주세요.");
       }
       draft.status = "CONSUMED";
-      const job = createJobState(session.id, draft.extractedCondition);
+      const job = createJobState(
+        session.id,
+        confirmedCondition(draft.extractedCondition),
+      );
       store.jobs.set(job.jobId, job);
       rememberJob(scope, `draft:${draftId}`, job);
       scheduleJob(job);
@@ -276,7 +281,18 @@ function createDraftState(owner: string, requestText: string): DraftState {
     ? "RESTAURANT"
     : lower.includes("술") || lower.includes("바 ")
       ? "BAR"
-      : "CAFE";
+      : lower.includes("카페") || lower.includes("커피")
+        ? "CAFE"
+        : null;
+  const locationQuery = requestText.includes("성수")
+    ? "서울 성수"
+    : requestText.includes("강남")
+      ? "서울 강남"
+      : requestText.includes("홍대")
+        ? "서울 홍대"
+        : requestText.includes("서울")
+          ? "서울"
+          : null;
   const partyMatch = requestText.match(/(\d+)\s*명/);
   const budgetMatch = requestText.match(/(\d+)\s*만\s*원/);
   const preferences = ["조용", "디저트", "대화", "분위기"]
@@ -289,7 +305,7 @@ function createDraftState(owner: string, requestText: string): DraftState {
     draftId: crypto.randomUUID(),
     status: "EXTRACTED",
     extractedCondition: {
-      locationQuery: requestText.includes("성수") ? "서울 성수" : requestText.includes("강남") ? "서울 강남" : "서울",
+      locationQuery,
       placeType,
       placeTypeDetail: null,
       partySize: partyMatch ? Number(partyMatch[1]) : null,
@@ -302,6 +318,7 @@ function createDraftState(owner: string, requestText: string): DraftState {
       ...(partyMatch ? [] : ["PARTY_SIZE_NOT_PROVIDED"]),
       ...(budgetMatch ? [] : ["BUDGET_NOT_PROVIDED"]),
     ],
+    manualEntryRequired: locationQuery == null || placeType == null,
     expiresAt: futureIso(0.5),
   };
 }
@@ -333,6 +350,21 @@ function createJobState(
     createdAt: now,
     updatedAt: now,
     expiresAt: futureIso(1),
+  };
+}
+
+function confirmedCondition(source: ProductDraftCondition): ProductCondition {
+  if (source.locationQuery == null || source.placeType == null) {
+    throw apiFailure(
+      409,
+      "DRAFT_NOT_CONFIRMED",
+      "확정된 Draft의 필수 조건이 비어 있습니다.",
+    );
+  }
+  return {
+    ...source,
+    locationQuery: source.locationQuery,
+    placeType: source.placeType,
   };
 }
 

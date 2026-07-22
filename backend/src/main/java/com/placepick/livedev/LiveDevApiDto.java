@@ -44,6 +44,7 @@ public final class LiveDevApiDto {
         String status,
         ConditionView condition,
         List<String> warnings,
+        boolean manualEntryRequired,
         Instant createdAt,
         Instant expiresAt
     ) {

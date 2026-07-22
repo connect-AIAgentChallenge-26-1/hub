@@ -76,6 +76,11 @@ LLM은 점수와 순위를 결정하지 않는다. 예산 근거가 없으면 �
 최종 후보 선정 뒤 발급한다. 최종 후보가 1~2개면 실패가 아니라 부분 결과로 완료하고 0개만
 실패한다. 추출 Draft를 자동 확정하지 않는다.
 
+조건 추출의 JSON·schema·일시 장애는 application 경계에서 한 번만 재생성한다. 필수
+지역·유형이 없거나 두 번째 결과도 재생성 대상 실패이면 부분 추출값을 보존한 수동 입력
+Draft를 제공한다. 인증·잘못된 요청·모델·응답 크기 위반, refusal, timeout이 아닌 transport
+장애와 예상하지 못한 내부 결함은 수동 입력으로 숨기지 않는다.
+
 이유 생성에는 확정 조건 allowlist와 후보별 표시 identity·claim만 전달한다. DB UUID,
 내부 evidence ID, 점수·순위와 다른 후보 문맥은 Elice 요청에서 제외하고, 요청 로컬
 `p1`~`p3`와 `pN-cM`을 서버가 내부 ID에 다시 연결한다. 후보당 최대 두 번 호출하며
@@ -185,6 +190,9 @@ PP-043에서 실제 image, migration, secret scope, 배포 SHA, 대표 E2E, cold
   stage를 보존한다. 이유 생성은 후보별 `source`, 시도 횟수와 재시도 회복 여부를
   low-cardinality metric으로 구분하고 application validator의 예상 거부와 내부 결함을 같은
   fallback으로 합치지 않는다.
+- Embedding은 한 batch의 합성 train·holdout shadow 평가와 비활성 metric observer 계약만
+  구현돼 있다. 실제 Provider campaign runner와 운영 registry 연결, 별도 승격 ADR 전에는
+  검색·중복 제거·점수·순위에 연결하지 않는다.
 - Naver와 Elice는 각각 기본 6·4 permit의 독립 bulkhead를 사용하고 후보별 이유 요청은
   한 Job에서 최대 3개만 병렬 실행한다. permit 대기·거부와 실제 호출 latency를 분리해
   동시성 거부의 0초 표본이 Provider 지연 분포를 왜곡하지 않게 한다.

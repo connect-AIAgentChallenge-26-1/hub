@@ -19,9 +19,16 @@ report_manifest="$(mktemp)" || {
   printf 'Test report safety scan refused: a temporary manifest is required.\n' >&2
   exit 1
 }
-trap 'rm -f -- "${report_manifest}"' EXIT
+leak_manifest="$(mktemp)" || {
+  rm -f -- "${report_manifest}"
+  printf 'Test report safety scan refused: a second temporary manifest is required.\n' >&2
+  exit 1
+}
+trap 'rm -f -- "${report_manifest}" "${leak_manifest}"' EXIT
+report_roots=()
 for report_root in "$@"; do
   [[ -e "${report_root}" ]] || continue
+  report_roots+=("${report_root}")
   if ! find "${report_root}" -type f -print0 >> "${report_manifest}"; then
     printf 'Test report safety scan could not enumerate report files.\n' >&2
     exit 1
@@ -42,26 +49,28 @@ forbidden_patterns=(
   '연결된 블로그 근거를 함께 확인할 수 있습니다\.'
 )
 
-leaked_files=()
-for report_file in "${report_files[@]}"; do
-  for pattern in "${forbidden_patterns[@]}"; do
-    set +e
-    rg --text --quiet --ignore-case --pcre2 --regexp "${pattern}" "${report_file}"
-    scan_status=$?
-    set -e
-    case "${scan_status}" in
-      0)
-        leaked_files+=("${report_file}")
-        break
-        ;;
-      1) ;;
-      *)
-        printf 'Test report safety scan could not inspect: %s\n' "${report_file}" >&2
-        exit 1
-        ;;
-    esac
-  done
+pattern_arguments=()
+for pattern in "${forbidden_patterns[@]}"; do
+  pattern_arguments+=(--regexp "${pattern}")
 done
+
+scan_status=1
+if (( ${#report_roots[@]} > 0 )); then
+  set +e
+  rg --text --files-with-matches --null --no-ignore --hidden --ignore-case --pcre2 \
+    "${pattern_arguments[@]}" "${report_roots[@]}" > "${leak_manifest}"
+  scan_status=$?
+  set -e
+fi
+case "${scan_status}" in
+  0 | 1) ;;
+  *)
+    printf 'Test report safety scan could not inspect the generated reports.\n' >&2
+    exit 1
+    ;;
+esac
+
+mapfile -d '' -t leaked_files < "${leak_manifest}"
 
 if (( ${#leaked_files[@]} > 0 )); then
   printf 'Test report safety scan failed; blocked files:\n' >&2

@@ -5,6 +5,7 @@
 - Flyway가 스키마 정본이고 Hibernate는 `ddl-auto=validate`다.
 - 계층은 `web → application → domain` 방향을 지키며 외부 Provider·JDBC·Redis는 adapter에 둔다.
 - 외부 호출은 DB transaction 밖에서 수행하고, HTTP adapter의 자동 retry는 금지한다.
+  동기 조건 추출의 제한된 1회 재생성만 application 복구 정책이 소유한다.
 - `mock`은 in-process Provider와 테스트용 WireMock만 사용한다. CI는 실제 DNS·API를 호출하지 않는다.
 - `live-dev`와 `production`은 공통 direct adapter를 사용하되 각 환경에서 필요한 credential만 읽는다.
 - secret, cookie, 원문 Provider payload와 사용자 개인정보를 로그·예외·테스트 report에 남기지 않는다.

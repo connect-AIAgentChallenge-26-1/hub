@@ -1,9 +1,11 @@
 package com.placepick.draft;
 
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionErrorCode;
-import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
+import com.placepick.recommendation.condition.application.ConditionExtractionRecoveryService;
+import com.placepick.recommendation.condition.application.ConditionExtractionResolution;
+import com.placepick.recommendation.condition.application.ConditionWarnings;
+import com.placepick.recommendation.condition.application.port.out.ConditionWarning;
 import com.placepick.recommendation.condition.application.port.out.ExtractionCommand;
-import com.placepick.recommendation.condition.application.port.out.ExtractionOutcome;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
 import com.placepick.recommendation.condition.domain.DraftRecommendationCondition;
 import com.placepick.session.SessionTokenCodec;
@@ -13,6 +15,7 @@ import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class RecommendationDraftService {
 
     private final RecommendationDraftRepository repository;
-    private final ConditionExtractionPort extractionPort;
+    private final ConditionExtractionRecoveryService extractionRecovery;
     private final SessionTokenCodec tokenCodec;
     private final Clock clock;
     private final Duration draftTtl;
@@ -32,23 +35,23 @@ public class RecommendationDraftService {
     @Autowired
     public RecommendationDraftService(
         RecommendationDraftRepository repository,
-        ConditionExtractionPort extractionPort,
+        ConditionExtractionRecoveryService extractionRecovery,
         SessionTokenCodec tokenCodec,
         Clock clock,
         @Value("${placepick.draft.ttl:PT30M}") String draftTtl
     ) {
-        this(repository, extractionPort, tokenCodec, clock, Duration.parse(draftTtl));
+        this(repository, extractionRecovery, tokenCodec, clock, Duration.parse(draftTtl));
     }
 
     RecommendationDraftService(
         RecommendationDraftRepository repository,
-        ConditionExtractionPort extractionPort,
+        ConditionExtractionRecoveryService extractionRecovery,
         SessionTokenCodec tokenCodec,
         Clock clock,
         Duration draftTtl
     ) {
         this.repository = repository;
-        this.extractionPort = extractionPort;
+        this.extractionRecovery = extractionRecovery;
         this.tokenCodec = tokenCodec;
         this.clock = clock;
         this.draftTtl = draftTtl;
@@ -60,12 +63,9 @@ public class RecommendationDraftService {
             requestText,
             tokenCodec.safetyIdentifier(sessionId)
         );
-        ExtractionOutcome outcome = extractionPort.extract(command);
-        if (outcome == null) {
-            throw new IllegalStateException("Condition extraction port returned no outcome.");
-        }
-        if (!outcome.extracted()) {
-            throw extractionFailure(outcome.errorCode());
+        ConditionExtractionResolution resolution = extractionRecovery.extract(command);
+        if (resolution.failed()) {
+            throw extractionFailure(resolution.errorCode());
         }
 
         Instant now = databaseTime();
@@ -74,8 +74,8 @@ public class RecommendationDraftService {
             sessionId,
             DraftStatus.EXTRACTED,
             command.requestText(),
-            outcome.condition(),
-            outcome.warnings(),
+            resolution.condition(),
+            resolution.warnings(),
             null,
             now,
             now,
@@ -106,7 +106,14 @@ public class RecommendationDraftService {
         }
 
         DraftRecommendationCondition storedCondition = asDraft(condition);
-        if (!repository.confirm(draftId, sessionId, storedCondition, now)) {
+        List<ConditionWarning> currentWarnings = ConditionWarnings.from(storedCondition);
+        if (!repository.confirm(
+            draftId,
+            sessionId,
+            storedCondition,
+            currentWarnings,
+            now
+        )) {
             throw new ApiException(
                 HttpStatus.CONFLICT,
                 ApiErrorCode.INVALID_STATE,
@@ -119,7 +126,7 @@ public class RecommendationDraftService {
             DraftStatus.CONFIRMED,
             current.requestText(),
             storedCondition,
-            current.warnings(),
+            currentWarnings,
             current.consumedJobId(),
             current.createdAt(),
             now,
@@ -159,10 +166,8 @@ public class RecommendationDraftService {
 
     private ApiException extractionFailure(ConditionExtractionErrorCode errorCode) {
         return switch (errorCode) {
-            case UNPROCESSABLE_CONDITION -> new ApiException(
-                HttpStatus.UNPROCESSABLE_ENTITY,
-                ApiErrorCode.UNPROCESSABLE_CONDITION,
-                "A safe recommendation condition could not be extracted."
+            case UNPROCESSABLE_CONDITION -> throw new IllegalStateException(
+                "An unprocessable condition must be returned as a manual draft."
             );
             case PROVIDER_INVALID_REQUEST, PROVIDER_INVALID_RESPONSE -> new ApiException(
                 HttpStatus.BAD_GATEWAY,

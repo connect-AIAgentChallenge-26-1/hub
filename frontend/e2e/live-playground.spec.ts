@@ -23,3 +23,20 @@ test("자연어 입력부터 Draft 확인, trace와 근거 추천까지 완료�
   await expect(page.getByText("Elice 이유와 근거 관계를 검증했습니다")).toBeVisible();
   await expect(page.getByText("도보 시간", { exact: true })).toHaveCount(0);
 });
+
+test("필수 조건을 추출하지 못해도 직접 완성해 추천을 계속한다", async ({ page }) => {
+  await page.goto("/playground");
+  await page.getByLabel("장소 요청").fill("조용한 곳을 찾아 주세요.");
+  await page.getByRole("button", { name: "AI 조건 Draft 만들기" }).click();
+
+  await expect(page.getByRole("status")).toContainText("AI 조건 초안을 완성하지 못했습니다.");
+  await expect(page.getByLabel("지역")).toHaveValue("");
+  await expect(page.getByLabel("장소 유형")).toHaveValue("");
+
+  await page.getByLabel("지역").fill("서울");
+  await page.getByLabel("장소 유형").selectOption("CAFE");
+  await page.getByRole("button", { name: "조건 확정하고 추천 시작" }).click();
+
+  await expect(page.getByRole("heading", { name: "근거가 연결된 추천 3곳" }))
+    .toBeVisible({ timeout: 15_000 });
+});

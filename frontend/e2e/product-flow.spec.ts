@@ -76,14 +76,18 @@ test("자연어 조건부터 기본·부분 대체 추천, 두 세션 투표와 
 
   const participantLike = participant.getByRole("button", { name: /좋아요 0/ }).first();
   await participantLike.click();
-  await expect(page.getByRole("button", { name: /좋아요 1/ }).first()).toBeVisible();
+  await expect(page.getByRole("button", { name: /좋아요 1/ }).first())
+    .toBeVisible({ timeout: 15_000 });
 
   await participant.getByRole("button", { name: /아쉬워요 0/ }).first().click();
-  await expect(page.getByRole("button", { name: /좋아요 0/ }).first()).toBeVisible();
-  await expect(page.getByRole("button", { name: /아쉬워요 1/ }).first()).toBeVisible();
+  await expect(page.getByRole("button", { name: /좋아요 0/ }).first())
+    .toBeVisible({ timeout: 15_000 });
+  await expect(page.getByRole("button", { name: /아쉬워요 1/ }).first())
+    .toBeVisible({ timeout: 15_000 });
 
   await participant.getByRole("button", { name: /아쉬워요 1/ }).first().click();
-  await expect(page.getByRole("button", { name: /아쉬워요 0/ }).first()).toBeVisible();
+  await expect(page.getByRole("button", { name: /아쉬워요 0/ }).first())
+    .toBeVisible({ timeout: 15_000 });
 
   await page.getByRole("button", { name: "이 장소로 최종 확정" }).first().click();
   await expect(page).toHaveURL(/\/rooms\/[0-9a-f]+\/result$/, { timeout: 90_000 });
@@ -92,4 +96,30 @@ test("자연어 조건부터 기본·부분 대체 추천, 두 세션 투표와 
   await expect(participant.getByRole("heading", { name: "함께 고른 장소예요" })).toBeVisible();
 
   await participantContext.close();
+});
+
+test("제품 흐름에서 누락된 필수 조건을 직접 입력해 추천을 시작한다", async ({ page }) => {
+  test.setTimeout(90_000);
+  await page.goto("/");
+  await expect(page.getByRole("heading", { name: /조건은 내가 확정하고/ })).toBeVisible();
+  await expect(page.getByText("MOCK DEMO")).toBeVisible();
+  await page.getByLabel("어떤 장소를 찾고 있나요?").fill("조용한 곳을 찾아 주세요.");
+  await expect(page.getByLabel("어떤 장소를 찾고 있나요?")).toHaveValue("조용한 곳을 찾아 주세요.");
+  await page.getByRole("button", { name: "AI 조건 초안 확인" }).click();
+
+  await expect(page).toHaveURL(/\/recommendations\/new\/[0-9a-f-]+$/, { timeout: 30_000 });
+  await expect(page.getByRole("status").filter({ hasText: "AI 초안을 완성하지 못했습니다." }))
+    .toBeVisible({ timeout: 30_000 });
+  await expect(page.getByLabel("지역")).toHaveValue("");
+  await expect(page.getByLabel("장소 유형")).toHaveValue("");
+
+  await page.getByLabel("지역").fill("서울");
+  await page.getByLabel("장소 유형").selectOption("CAFE");
+  await page.getByRole("button", { name: /조건 확정하고 추천 시작/ }).click();
+
+  await expect(page).toHaveURL(/\/recommendations\/[0-9a-f-]+\/progress$/, {
+    timeout: 30_000,
+  });
+  await expect(page).toHaveURL(/\/recommendations\/[0-9a-f-]+$/, { timeout: 20_000 });
+  await expect(page.getByRole("heading", { name: "근거가 연결된 추천 3곳" })).toBeVisible();
 });

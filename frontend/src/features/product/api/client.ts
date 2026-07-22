@@ -4,6 +4,7 @@ import type {
   JobAccepted,
   JobStreamHandlers,
   ProductCondition,
+  ProductDraftCondition,
   ProductDraft,
   ProductJob,
   ProductProblem,
@@ -14,6 +15,7 @@ import type {
   VoteMutationResult,
   VoteValue,
 } from "./types";
+import { PRODUCT_PLACE_TYPES } from "./types";
 
 const mockMode = process.env.NEXT_PUBLIC_PRODUCT_API_MODE === "mock" ||
   (process.env.NEXT_PUBLIC_PRODUCT_API_MODE == null && process.env.NODE_ENV !== "production");
@@ -424,9 +426,38 @@ function parseDraft(source: unknown): ProductDraft {
   return {
     draftId: requiredString(value.draftId, "draftId"),
     status: value.status as ProductDraft["status"],
-    extractedCondition: parseCondition(value.extractedCondition),
+    extractedCondition: parseDraftCondition(value.extractedCondition),
     warnings: stringArray(value.warnings, "warnings"),
+    manualEntryRequired: requiredBoolean(
+      value.manualEntryRequired,
+      "manualEntryRequired",
+    ),
     expiresAt: requiredString(value.expiresAt, "expiresAt"),
+  };
+}
+
+function parseDraftCondition(source: unknown): ProductDraftCondition {
+  const value = asRecord(source);
+  const rawPlaceType = nullableString(value.placeType, "placeType");
+  if (rawPlaceType != null &&
+      !PRODUCT_PLACE_TYPES.some((candidate) => candidate === rawPlaceType)) {
+    throw new ProductContractError("draft placeType이 계약과 다릅니다.");
+  }
+  return {
+    locationQuery: nullableString(value.locationQuery, "locationQuery"),
+    placeType: rawPlaceType as ProductDraftCondition["placeType"],
+    placeTypeDetail: nullableString(value.placeTypeDetail, "placeTypeDetail"),
+    partySize: nullableInteger(value.partySize, "partySize"),
+    budgetPerPersonMin: nullableInteger(value.budgetPerPersonMin, "budgetPerPersonMin"),
+    budgetPerPersonMax: nullableInteger(value.budgetPerPersonMax, "budgetPerPersonMax"),
+    preferences: array(value.preferences, "preferences").map((item) => {
+      const preference = asRecord(item);
+      return {
+        value: requiredString(preference.value, "preference.value"),
+        priority: nullableInteger(preference.priority, "preference.priority"),
+      };
+    }),
+    exclusions: stringArray(value.exclusions, "exclusions"),
   };
 }
 

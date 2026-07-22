@@ -29,10 +29,11 @@ public record ExtractionOutcome(
             }
             requireNoFailureDiagnostic(diagnosticCode, failureStage);
         } else if (errorCode == ConditionExtractionErrorCode.UNPROCESSABLE_CONDITION) {
-            if (condition != null || !isUnprocessableDiagnostic(diagnosticCode) ||
+            if ((condition != null && condition.isProcessable()) ||
+                !isUnprocessableDiagnostic(diagnosticCode) ||
                 failureStage != LlmFailureStage.NONE) {
                 throw new IllegalArgumentException(
-                    "Unprocessable extraction requires a missing-required-field diagnostic."
+                    "Unprocessable extraction requires an incomplete condition and diagnostic."
                 );
             }
         } else if (condition != null) {
@@ -61,9 +62,17 @@ public record ExtractionOutcome(
         List<ConditionWarning> warnings,
         ConditionExtractionDiagnosticCode diagnosticCode
     ) {
+        return unprocessable(null, warnings, diagnosticCode);
+    }
+
+    public static ExtractionOutcome unprocessable(
+        DraftRecommendationCondition condition,
+        List<ConditionWarning> warnings,
+        ConditionExtractionDiagnosticCode diagnosticCode
+    ) {
         return new ExtractionOutcome(
             ConditionExtractionErrorCode.UNPROCESSABLE_CONDITION,
-            null,
+            condition,
             warnings,
             diagnosticCode,
             LlmFailureStage.NONE

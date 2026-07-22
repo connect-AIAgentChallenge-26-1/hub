@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import {
   PLACE_TYPES,
   type DraftSnapshot,
+  type PlaceType,
   type Preference,
   type RecommendationCondition,
 } from "../api/types";
@@ -21,10 +22,26 @@ const placeTypeLabels: Record<(typeof PLACE_TYPES)[number], string> = {
   BAR: "주점",
   OTHER: "기타",
 };
+type DraftFormCondition = Omit<RecommendationCondition, "placeType"> & {
+  placeType: PlaceType | "";
+};
+
+function withPlaceType(
+  current: DraftFormCondition,
+  placeType: DraftFormCondition["placeType"],
+): DraftFormCondition {
+  return {
+    ...current,
+    placeType,
+    placeTypeDetail: placeType === "OTHER" ? current.placeTypeDetail : null,
+  };
+}
 
 export function ConditionReview({ draft, pending, onConfirm }: ConditionReviewProps) {
-  const [condition, setCondition] = useState<RecommendationCondition>(() => ({
+  const [condition, setCondition] = useState<DraftFormCondition>(() => ({
     ...draft.condition,
+    locationQuery: draft.condition.locationQuery ?? "",
+    placeType: draft.condition.placeType ?? "",
     preferences: draft.condition.preferences.map((item) => ({
       ...item,
       priority: item.priority ?? 5,
@@ -33,10 +50,12 @@ export function ConditionReview({ draft, pending, onConfirm }: ConditionReviewPr
   const [exclusions, setExclusions] = useState(draft.condition.exclusions.join(", "));
   const error = useMemo(() => validate(condition), [condition]);
 
-  const update = <K extends keyof RecommendationCondition>(
+  const update = <K extends keyof DraftFormCondition>(
     field: K,
-    value: RecommendationCondition[K],
+    value: DraftFormCondition[K],
   ) => setCondition((current) => ({ ...current, [field]: value }));
+  const updatePlaceType = (placeType: DraftFormCondition["placeType"]) =>
+    setCondition((current) => withPlaceType(current, placeType));
 
   return (
     <section className="surface-card overflow-hidden" aria-labelledby="review-title">
@@ -54,14 +73,21 @@ export function ConditionReview({ draft, pending, onConfirm }: ConditionReviewPr
         className="space-y-6 p-5 sm:p-7"
         onSubmit={(event) => {
           event.preventDefault();
-          if (!error && !pending) {
+          if (!error && !pending && condition.placeType !== "") {
             onConfirm({
               ...condition,
+              placeType: condition.placeType,
               exclusions: exclusions.split(",").map((value) => value.trim()).filter(Boolean),
             });
           }
         }}
       >
+        {draft.manualEntryRequired && (
+          <div className="rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm leading-6 text-sky-950" role="status">
+            <strong>AI 조건 초안을 완성하지 못했습니다.</strong><br />
+            비어 있는 필수 값을 직접 입력하면 실제 Naver 검색 흐름을 계속 확인할 수 있습니다.
+          </div>
+        )}
         {draft.warnings.length > 0 && (
           <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3" role="note">
             <p className="text-sm font-semibold text-amber-950">추정하지 않고 남겨 둔 항목</p>
@@ -90,8 +116,9 @@ export function ConditionReview({ draft, pending, onConfirm }: ConditionReviewPr
               id="place-type"
               className="field-control mt-2"
               value={condition.placeType}
-              onChange={(event) => update("placeType", event.target.value as RecommendationCondition["placeType"])}
+              onChange={(event) => updatePlaceType(event.target.value as DraftFormCondition["placeType"])}
             >
+              <option value="">장소 유형을 선택해 주세요</option>
               {PLACE_TYPES.map((value) => <option key={value} value={value}>{placeTypeLabels[value]}</option>)}
             </select>
           </div>
@@ -212,13 +239,16 @@ function PreferenceRow({ index, preference, onChange, onRemove }: {
   );
 }
 
-function validate(condition: RecommendationCondition): string | null {
+function validate(condition: DraftFormCondition): string | null {
   if (!condition.locationQuery.trim()) return "지역을 입력해 주세요.";
+  if (!condition.placeType) return "장소 유형을 선택해 주세요.";
   if (condition.placeType === "OTHER" && !condition.placeTypeDetail?.trim()) return "기타 장소의 세부 유형을 입력해 주세요.";
   if (condition.budgetPerPersonMin != null && condition.budgetPerPersonMax != null && condition.budgetPerPersonMin > condition.budgetPerPersonMax) return "최소 예산은 최대 예산보다 클 수 없습니다.";
   if (condition.preferences.some((item) => !item.value.trim() || item.priority == null || item.priority < 1 || item.priority > 10)) return "모든 선호 값과 1~10 우선순위를 확인해 주세요.";
   return null;
 }
+
+export const __testing = { withPlaceType };
 
 function warningLabel(value: string): string {
   const labels: Record<string, string> = {

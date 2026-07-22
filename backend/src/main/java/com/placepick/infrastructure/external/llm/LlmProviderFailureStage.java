@@ -3,6 +3,7 @@ package com.placepick.infrastructure.external.llm;
 /** Safe diagnostic stage that never contains provider payload or credential data. */
 public enum LlmProviderFailureStage {
     HTTP_STATUS,
+    TRANSPORT_TIMEOUT,
     TRANSPORT,
     CLIENT,
     MEDIA_TYPE,
@@ -12,6 +13,8 @@ public enum LlmProviderFailureStage {
     CHAT_MODEL,
     CHAT_CHOICES,
     CHAT_MESSAGE,
+    CHAT_REFUSAL,
+    CHAT_INCOMPLETE,
     CHAT_CONTENT,
     CHAT_CONTENT_SCHEMA,
     CHAT_CONTENT_CONDITION,

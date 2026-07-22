@@ -12,6 +12,7 @@ related:
   - ../case-studies/CASE-0002-naver-elice-linked-live-user-flow.md
   - ADR-0012-recommendation-core-and-split-live-boundary.md
   - ADR-0014-mvp-direct-provider-and-simplified-trust-boundary.md
+  - ADR-0018-condition-recovery-embedding-shadow.md
 ---
 
 # ADR-0011 Elice Chat Completions MVP Provider와 데이터 경계
@@ -47,9 +48,11 @@ MVP LLM Provider는 Elice OpenAI-compatible Chat Completions와 exact model
 요청·재생성과 부분 fallback의 현재 계약은
 [ADR-0016](ADR-0016-grounded-reason-v3.md)을 따른다.
 
-Embedding `openai/text-embedding-3-small`은 과거 capability만 확인했으며 현재 추천·검색·
-중복 제거·점수 runtime에는 사용하지 않는다. 직접 OpenAI Responses API는 자동 fallback이
-아니라 별도 검토 대안이다.
+Embedding `openai/text-embedding-3-small`은 연결 capability와 batch 전송 계약을
+검증했고, 고정 합성 corpus의 shadow 평가 경계까지 구현했다. 그러나 실제 Provider
+campaign과 별도 승격 결정 전에는 추천·검색·중복 제거·점수 runtime에 사용하지 않는다.
+세부 비승격 기준은 [ADR-0018](ADR-0018-condition-recovery-embedding-shadow.md)을
+따른다. 직접 OpenAI Responses API는 자동 fallback이 아니라 별도 검토 대안이다.
 
 실제 자격과 실행 경계는 [ADR-0014](ADR-0014-mvp-direct-provider-and-simplified-trust-boundary.md)를
 따른다. `store=false` 요청만으로 Elice나 하위 Provider의 미보관·미학습을 보증하지 않는다.
@@ -74,4 +77,5 @@ CASE-0002의 이유 증거는 당시 v2 batch이며 현재 v3의 실제 Provider
 
 Elice가 strict output을 안정적으로 제공하지 못하거나 보관·비용·지역 정책이 요구와 맞지
 않으면 직접 OpenAI 또는 다른 Provider adapter를 비교한다. Embedding을 제품 기능에
-사용하려면 사용자 가치, vector 저장·수명, 품질 측정과 별도 ADR이 필요하다.
+사용하려면 실제 holdout 품질 검증, vector 저장·수명과 비용 검토 및 별도 승격 ADR이
+필요하다.

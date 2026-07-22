@@ -14,7 +14,9 @@
 - Node 24와 lockfile의 exact version을 사용한다.
 - DB 스키마의 정본은 Flyway이며 Hibernate는 `ddl-auto=validate`다.
 - Controller는 변환·위임만 하고 도메인은 HTTP, 외부 DTO, 영속성 구현에 의존하지 않는다.
-- 외부 HTTP 호출은 DB 트랜잭션 밖에서 실행하고 자동 retry는 Worker 한 계층에서만 한다.
+- 외부 HTTP 호출은 DB 트랜잭션 밖에서 실행하고 HTTP adapter 자동 retry는 금지한다.
+  추천 검색·이유의 일시 장애 retry는 Worker/application 정책 한 곳에서만 수행하며, 동기
+  조건 추출은 schema·구조·명시적 일시 장애에 한해 application에서 최대 한 번 재생성한다.
 
 ## 표준 명령
 

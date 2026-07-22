@@ -8,11 +8,17 @@ owners:
   - placepick-team
 related:
   - ../work-records/WI-0044-live-playground.md
+  - ../work-records/WI-0046-recommendation-quality-v2.md
   - ../adr/ADR-0014-mvp-direct-provider-and-simplified-trust-boundary.md
+  - ../adr/ADR-0018-condition-recovery-embedding-shadow.md
   - ../case-studies/CASE-0002-naver-elice-linked-live-user-flow.md
 ---
 
 # RUN-0005 직접 Provider 개발과 Live Playground
+
+`status: verified`는 2026-07-16 이유 v2·이전 조건 계약의 직접 Provider·정식 API 경로가
+실행됐다는 뜻이다. 현재 이유 v3와 새 조건 복구·manual 분기의 actual 검증까지 완료됐다는
+뜻은 아니며, 이 범위는 아래의 후속 품질 campaign 경계로 분리한다.
 
 ## 사전 조건
 
@@ -58,6 +64,13 @@ npm run test:e2e:live --workspace @placepick/frontend
 evidence 검증, 즉시 삭제까지 통과했다. 따라서 Draft는 Provider가 반환했다는 이유로 자동
 확정하지 않고 화면에서 반드시 검토한다.
 
+조건 추출에서 지역·유형이 비어 있으면 즉시, schema·구조·일시 장애는 1회 재생성까지
+실패하면 화면에 `manualEntryRequired` 안내와 비어 있는 입력란을 표시한다. 이는 추천
+실패가 아니라 사용자가 조건을 완성하기 위한 복구 상태다. 부분 추출 값은 보존되지만 임의
+장소 유형을 기본 선택하지 않는다. 지역과 유형을 직접 입력·선택해 확정한 뒤에만 Naver
+검색이 시작된다. 명시적 refusal과 인증·잘못된 요청은 재호출하거나 manual 성공으로
+바꾸지 않는다.
+
 ## 정식 제품 경로 로컬 검증
 
 `make dev-live`가 실행 중일 때 별도 Dev Container 터미널에서 다음을 실행하면 실제 값을
@@ -78,7 +91,8 @@ SSE 검증은 HTTP 200, `text/event-stream`과 body 연결 직후 mutation을 �
 rewrite가 작은 초기 frame을 다음 event까지 보류해도 client와 mutation이 상호 대기하지
 않게 하기 위함이다. 그와 별개로 첫 non-heartbeat 상태 event는 반드시 `snapshot`이어야
 하고, 방 stream에서 `voteUpdated`와 `finalized`를 모두 받아야 성공한다. 2026-07-16 Mock과
-실제 Provider 실행에서 이 흐름이 모두 통과했다.
+실제 Provider 실행에서 당시 이유 v2·이전 조건 계약의 이 흐름이 모두 통과했다. 현재 이유
+v3와 조건 복구·manual 분기를 actual 재검증한 결과로 사용하지 않는다.
 
 반복 가능한 고정 증거가 필요하면 서버·프런트를 종료한 뒤 다음을 별도로 실행한다.
 
@@ -92,11 +106,14 @@ safe summary로 남긴다. 성공 판정은 각 시나리오가 `linked=true`, �
 2026-07-16 검증에서는 당시 v2 batch 계약으로 세 시나리오가 각각 7·6·6회 호출로 통과했다.
 이는 현재 후보별 v3 호출 수의 합격 기준이 아니다. 사용자 여정별 역사적 해석은
 [CASE-0002](../case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)를 확인하고,
-v3 실제 품질은 별도 `live-quality-eval` campaign으로 확인한다.
+v3 실제 품질은 후속 PR에서 실행 명령과 안전한 증거 형식을 먼저 구현한 뒤
+별도 Provider campaign으로 확인한다. 현재 `make` 인터페이스에는 이 campaign 명령이 없다.
 
 ## 중단과 복구
 
 - 401·403: 자동 재시도하지 않고 해당 Provider console에서 자격 상태를 확인한다.
+- 조건 추출 JSON·schema와 429·5xx·timeout은 application이 한 번만 재생성한다. 이후
+  manual Draft가 표시되면 같은 요청을 반복 호출하지 말고 조건을 직접 완성한다.
 - 429·5xx·timeout: 후보별 application 재시도 한 번이 소진된 뒤에는 추가 호출을 중단하고
   quota·비용 한도와 Provider 상태를 분리 진단한다.
 - schema·slot·claim 실패: 응답 원문을 문서나 Issue에 붙이지 말고 안정적인 오류 코드와
@@ -117,5 +134,7 @@ v3 실제 품질은 별도 `live-quality-eval` campaign으로 확인한다.
 `Ctrl+C`로 프런트·백엔드를 종료하고 `make down`으로 인프라를 내린다. 일반 로그, Git diff,
 JUnit report에 key·token·routing UUID·Provider 원문이 없는지 확인한다. 2026-07-16의
 직접 Live Evidence, Live Playground 브라우저, 정식 제품 API 로컬 Live 흐름과 report
-secret scan으로 이 절차를 검증했다. Cloud Demo의 secret 주입·배포·rollback은 이
+secret scan으로 이 절차의 기존 경로를 검증했다. 2026-07-17 추가한 manual Draft 복구는
+Mock·API 자동 테스트까지 검증했으며 실제 Provider가 이 분기로 들어가는 수동 검증은
+후속 Live 품질 campaign에 남아 있다. Cloud Demo의 secret 주입·배포·rollback은 이
 Runbook이 아니라 RUN-0006의 `planned` 절차다.

@@ -42,6 +42,7 @@ Work Record에 같은 상태표를 복제하지 않는다. Work Record는 실제
 - [ADR-0015 적응형 검색·점수 v2와 부분 결과·다른 추천](adr/ADR-0015-retrieval-ranking-v2.md)
 - [ADR-0016 후보별 claim 기반 이유 v3와 제한된 복구](adr/ADR-0016-grounded-reason-v3.md)
 - [ADR-0017 Grafana Cloud OTLP 운영 관측과 민감정보 경계](adr/ADR-0017-production-otlp-observability.md)
+- [ADR-0018 조건 추출 제한 복구와 Embedding shadow 비승격 경계](adr/ADR-0018-condition-recovery-embedding-shadow.md)
 
 `superseded` ADR은 과거 결정의 이유를 보존하기 위해 인덱스에 남긴다. 현재 선택은
 가장 최근의 대체 ADR을 따른다.

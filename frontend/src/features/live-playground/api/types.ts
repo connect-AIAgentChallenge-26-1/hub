@@ -67,6 +67,8 @@ export const LLM_FAILURE_STAGES = [
   "CHAT_MODEL",
   "CHAT_CHOICES",
   "CHAT_MESSAGE",
+  "CHAT_REFUSAL",
+  "CHAT_INCOMPLETE",
   "CHAT_CONTENT",
   "CHAT_CONTENT_SCHEMA",
   "CHAT_CONTENT_CONDITION",
@@ -92,11 +94,23 @@ export interface RecommendationCondition {
   exclusions: string[];
 }
 
+export interface DraftRecommendationCondition {
+  locationQuery: string | null;
+  placeType: PlaceType | null;
+  placeTypeDetail: string | null;
+  partySize: number | null;
+  budgetPerPersonMin: number | null;
+  budgetPerPersonMax: number | null;
+  preferences: Preference[];
+  exclusions: string[];
+}
+
 export interface DraftSnapshot {
   draftId: string;
   status: "EXTRACTED" | "CONFIRMED";
-  condition: RecommendationCondition;
+  condition: DraftRecommendationCondition;
   warnings: string[];
+  manualEntryRequired: boolean;
   createdAt: string;
   expiresAt: string;
 }
