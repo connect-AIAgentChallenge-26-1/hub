@@ -7,6 +7,23 @@ const RoomSchema = new mongoose.Schema({
     sparse: true,
     index: true
   },
+  university: {
+    type: String,
+    default: ''
+  },
+  hostMajor: {
+    type: String,
+    default: ''
+  },
+  visibility: {
+    type: String,
+    enum: ['private', 'university', 'major'],
+    default: 'private'
+  },
+  maxMembers: {
+    type: Number,
+    default: 4
+  },
   title: {
     type: String,
     required: true,
