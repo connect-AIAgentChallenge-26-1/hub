@@ -1,6 +1,12 @@
 const mongoose = require('mongoose');
 
 const RoomSchema = new mongoose.Schema({
+  roomId: {
+    type: String,
+    unique: true,
+    sparse: true,
+    index: true
+  },
   title: {
     type: String,
     required: true,
