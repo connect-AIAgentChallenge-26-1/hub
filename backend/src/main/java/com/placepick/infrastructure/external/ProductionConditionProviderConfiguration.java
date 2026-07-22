@@ -4,8 +4,10 @@ import com.placepick.infrastructure.external.llm.EliceConditionExtractionClient;
 import com.placepick.infrastructure.observability.ObservedProviderPorts;
 import com.placepick.infrastructure.observability.LlmProviderDiagnosticMetrics;
 import com.placepick.infrastructure.observability.ProviderCallMetrics;
+import com.placepick.infrastructure.observability.SafeProviderTracing;
 import com.placepick.recommendation.condition.application.port.out.ConditionExtractionPort;
 import java.net.URI;
+import io.opentelemetry.api.OpenTelemetry;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -28,14 +30,23 @@ public class ProductionConditionProviderConfiguration {
         @Value("${PROXY_TOKEN}") String token,
         @Value("${OPENAI_MODEL:openai/gpt-4.1-mini}") String model,
         ProviderCallMetrics metrics,
-        LlmProviderDiagnosticMetrics diagnosticMetrics
+        LlmProviderDiagnosticMetrics diagnosticMetrics,
+        OpenTelemetry openTelemetry,
+        SafeProviderTracing tracing
     ) {
         return ObservedProviderPorts.condition(
-            EliceConditionExtractionClient.create(chatBaseUrl, token, model),
+            EliceConditionExtractionClient.createObserved(
+                chatBaseUrl,
+                token,
+                model,
+                openTelemetry,
+                diagnosticMetrics
+            ),
             metrics,
             diagnosticMetrics,
             "elice",
-            EliceConditionExtractionClient.RESPONSE_TIMEOUT
+            EliceConditionExtractionClient.RESPONSE_TIMEOUT,
+            tracing
         );
     }
 }

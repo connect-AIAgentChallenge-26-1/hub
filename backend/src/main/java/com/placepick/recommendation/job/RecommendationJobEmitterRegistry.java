@@ -2,6 +2,11 @@ package com.placepick.recommendation.job;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.placepick.infrastructure.observability.SseMetrics;
+import com.placepick.infrastructure.observability.SseMetrics.CloseReason;
+import com.placepick.infrastructure.observability.SseMetrics.ReplayKind;
+import com.placepick.infrastructure.observability.SseMetrics.SendKind;
+import com.placepick.infrastructure.observability.SseMetrics.Stream;
 import com.placepick.recommendation.job.infrastructure.PlacePickRoleCondition;
 import com.placepick.security.RateLimitExceededException;
 import jakarta.annotation.PreDestroy;
@@ -16,6 +21,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -35,9 +41,26 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
     private final RecommendationJobRepository repository;
     private final ObjectMapper objectMapper;
     private final Clock clock;
+    private final SseMetrics metrics;
     private final Map<UUID, CopyOnWriteArrayList<Registration>> registrations =
         new ConcurrentHashMap<>();
     private final Map<UUID, AtomicLong> sessionConnectionCounts = new ConcurrentHashMap<>();
+
+    @Autowired
+    public RecommendationJobEmitterRegistry(
+        RecommendationJobEventPublisher publisher,
+        RecommendationJobRepository repository,
+        ObjectMapper objectMapper,
+        Clock clock,
+        SseMetrics metrics
+    ) {
+        this.publisher = publisher;
+        this.repository = repository;
+        this.objectMapper = objectMapper;
+        this.clock = clock;
+        this.metrics = metrics;
+        publisher.addListener(this);
+    }
 
     public RecommendationJobEmitterRegistry(
         RecommendationJobEventPublisher publisher,
@@ -45,11 +68,7 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
         ObjectMapper objectMapper,
         Clock clock
     ) {
-        this.publisher = publisher;
-        this.repository = repository;
-        this.objectMapper = objectMapper;
-        this.clock = clock;
-        publisher.addListener(this);
+        this(publisher, repository, objectMapper, clock, SseMetrics.noop());
     }
 
     /** Reliable cross-process fallback when API and worker roles run in different JVMs. */
@@ -63,12 +82,12 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
                     PERSISTED_EVENT_BATCH_SIZE
                 );
                 for (RecommendationJobEvent event : events) {
-                    if (!registration.offerLive(toStreamEvent(event))) {
-                        remove(registration);
+                    if (!registration.offerReplay(toStreamEvent(event))) {
+                        remove(registration, CloseReason.SEND_FAILURE);
                         break;
                     }
                     if (registration.terminalDelivered()) {
-                        complete(registration);
+                        complete(registration, CloseReason.TERMINAL_EVENT);
                         break;
                     }
                 }
@@ -105,10 +124,11 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
             emitter,
             lastSequenceId
         );
+        registration.openedAtNanos = metrics.opened(Stream.RECOMMENDATION, lastSequenceId > 0);
         jobRegistrations.add(registration);
-        emitter.onCompletion(() -> remove(registration));
-        emitter.onTimeout(() -> remove(registration));
-        emitter.onError(ignored -> remove(registration));
+        emitter.onCompletion(() -> remove(registration, CloseReason.CLIENT_COMPLETE));
+        emitter.onTimeout(() -> remove(registration, CloseReason.TIMEOUT));
+        emitter.onError(ignored -> remove(registration, CloseReason.ERROR));
         return registration;
     }
 
@@ -117,7 +137,7 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
         RecommendationJobSnapshot snapshot
     ) {
         long sequenceId = registration.lastSequenceId.get();
-        return registration.send(
+        boolean sent = registration.send(
             "snapshot",
             Long.toString(sequenceId),
             new RecommendationJobStreamPayload(
@@ -125,8 +145,17 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
                 clock.instant(),
                 snapshot.jobId(),
                 RecommendationJobView.from(snapshot)
-            )
+            ),
+            SendKind.SNAPSHOT
         );
+        if (sent && registration.resumed()) {
+            metrics.replayed(Stream.RECOMMENDATION, ReplayKind.SNAPSHOT, 1L);
+        }
+        return sent;
+    }
+
+    public void markResumed(Registration registration) {
+        registration.markResumed();
     }
 
     /**
@@ -137,9 +166,9 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
     public boolean activate(Registration registration) {
         boolean activated = registration.activate();
         if (!activated) {
-            remove(registration);
+            remove(registration, CloseReason.SEND_FAILURE);
         } else if (registration.terminalDelivered()) {
-            complete(registration);
+            complete(registration, CloseReason.TERMINAL_EVENT);
         }
         return activated;
     }
@@ -149,8 +178,7 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
     }
 
     public void complete(Registration registration) {
-        remove(registration);
-        registration.emitter.complete();
+        complete(registration, CloseReason.SERVER_COMPLETE);
     }
 
     @Override
@@ -162,9 +190,9 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
         RecommendationJobStreamEvent streamEvent = toStreamEvent(event);
         for (Registration registration : listeners) {
             if (!registration.offerLive(streamEvent)) {
-                remove(registration);
+                remove(registration, CloseReason.SEND_FAILURE);
             } else if (registration.terminalDelivered()) {
-                complete(registration);
+                complete(registration, CloseReason.TERMINAL_EVENT);
             }
         }
     }
@@ -177,8 +205,8 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
                 "eventId", Long.toString(registration.lastSequenceId.get()),
                 "occurredAt", now,
                 "aggregateId", registration.jobId
-            ))) {
-                remove(registration);
+            ), SendKind.HEARTBEAT)) {
+                remove(registration, CloseReason.SEND_FAILURE);
             }
         }));
     }
@@ -187,7 +215,7 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
     public void close() {
         publisher.removeListener(this);
         registrations.values().forEach(list -> list.forEach(registration ->
-            registration.emitter.complete()
+            complete(registration, CloseReason.SHUTDOWN)
         ));
         registrations.clear();
         sessionConnectionCounts.clear();
@@ -224,7 +252,12 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
         }
     }
 
-    private void remove(Registration registration) {
+    private void complete(Registration registration, CloseReason reason) {
+        remove(registration, reason);
+        registration.emitter.complete();
+    }
+
+    private void remove(Registration registration, CloseReason reason) {
         boolean[] removed = new boolean[1];
         registrations.computeIfPresent(registration.jobId, (jobId, existing) -> {
             removed[0] = existing.remove(registration);
@@ -235,6 +268,7 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
                 registration.sessionId,
                 (sessionId, count) -> count.decrementAndGet() <= 0 ? null : count
             );
+            metrics.closed(Stream.RECOMMENDATION, reason, registration.openedAtNanos);
         }
     }
 
@@ -247,7 +281,9 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
         private final UUID sessionId;
         private final SseEmitter emitter;
         private final AtomicLong lastSequenceId;
-        private final List<RecommendationJobStreamEvent> pendingLiveEvents = new ArrayList<>();
+        private boolean resumed;
+        private final List<PendingDelivery> pendingLiveEvents = new ArrayList<>();
+        private long openedAtNanos;
         private boolean active;
         private boolean terminalDelivered;
 
@@ -261,25 +297,58 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
             this.sessionId = sessionId;
             this.emitter = emitter;
             this.lastSequenceId = new AtomicLong(lastSequenceId);
+            this.resumed = lastSequenceId > 0;
         }
 
         private synchronized boolean offerLive(RecommendationJobStreamEvent event) {
             if (!active) {
-                pendingLiveEvents.add(event);
+                pendingLiveEvents.add(new PendingDelivery(event, false));
                 return true;
             }
             return sendEvent(event);
         }
 
+        private synchronized boolean offerReplay(RecommendationJobStreamEvent event) {
+            if (!active) {
+                pendingLiveEvents.add(new PendingDelivery(event, true));
+                return true;
+            }
+            long cursor = lastSequenceId.get();
+            boolean sent = sendEvent(event);
+            if (sent && lastSequenceId.get() > cursor) {
+                metrics.replayed(Stream.RECOMMENDATION, ReplayKind.PERSISTED_EVENT, 1L);
+            }
+            return sent;
+        }
+
+        private synchronized boolean resumed() {
+            return resumed;
+        }
+
+        private synchronized void markResumed() {
+            if (!resumed) {
+                resumed = true;
+                metrics.resumed(Stream.RECOMMENDATION);
+            }
+        }
+
         private synchronized boolean activate() {
             active = true;
             pendingLiveEvents.sort(Comparator.comparingLong(
-                RecommendationJobStreamEvent::sequenceId
+                pending -> pending.event().sequenceId()
             ));
-            for (RecommendationJobStreamEvent event : pendingLiveEvents) {
-                if (!sendEvent(event)) {
+            for (PendingDelivery pending : pendingLiveEvents) {
+                long cursor = lastSequenceId.get();
+                if (!sendEvent(pending.event())) {
                     pendingLiveEvents.clear();
                     return false;
+                }
+                if (pending.replay() && lastSequenceId.get() > cursor) {
+                    metrics.replayed(
+                        Stream.RECOMMENDATION,
+                        ReplayKind.PERSISTED_EVENT,
+                        1L
+                    );
                 }
             }
             pendingLiveEvents.clear();
@@ -304,7 +373,8 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
             if (!send(
                 event.eventType(),
                 Long.toString(event.sequenceId()),
-                event.payload()
+                event.payload(),
+                SendKind.EVENT
             )) {
                 return false;
             }
@@ -313,7 +383,12 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
             return true;
         }
 
-        private synchronized boolean send(String name, String id, Object data) {
+        private synchronized boolean send(
+            String name,
+            String id,
+            Object data,
+            SendKind kind
+        ) {
             try {
                 SseEmitter.SseEventBuilder builder = SseEmitter.event().name(name).data(data);
                 if (id != null) {
@@ -322,9 +397,17 @@ public class RecommendationJobEmitterRegistry implements RecommendationJobEventL
                 emitter.send(builder);
                 return true;
             } catch (IOException | IllegalStateException exception) {
+                metrics.sendFailed(Stream.RECOMMENDATION, kind);
+                remove(this, CloseReason.SEND_FAILURE);
                 emitter.complete();
                 return false;
             }
+        }
+
+        private record PendingDelivery(
+            RecommendationJobStreamEvent event,
+            boolean replay
+        ) {
         }
     }
 }

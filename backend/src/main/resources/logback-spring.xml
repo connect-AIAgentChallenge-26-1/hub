@@ -6,10 +6,24 @@
 
   <springProfile name="production">
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-      <encoder>
-        <pattern>%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} %-5level [%thread] %logger{36} - %safeMsg%nopex%n</pattern>
+      <encoder class="org.springframework.boot.logging.logback.StructuredLogEncoder">
+        <format>${CONSOLE_LOG_STRUCTURED_FORMAT}</format>
+        <charset>UTF-8</charset>
       </encoder>
     </appender>
+    <appender
+      name="OTEL_SAFE"
+      class="io.opentelemetry.instrumentation.logback.appender.v1_0.OpenTelemetryAppender">
+      <captureCodeAttributes>false</captureCodeAttributes>
+      <captureExperimentalAttributes>false</captureExperimentalAttributes>
+      <captureKeyValuePairAttributes>true</captureKeyValuePairAttributes>
+      <captureMdcAttributes>traceId,spanId,releaseSha,role,eventCode,jobId,eventId</captureMdcAttributes>
+      <numLogsCapturedBeforeOtelInstall>64</numLogsCapturedBeforeOtelInstall>
+    </appender>
+    <logger name="com.placepick.telemetry.safe" level="INFO" additivity="false">
+      <appender-ref ref="STDOUT" />
+      <appender-ref ref="OTEL_SAFE" />
+    </logger>
     <root level="${LOG_LEVEL:-INFO}">
       <appender-ref ref="STDOUT" />
     </root>

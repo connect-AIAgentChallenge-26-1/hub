@@ -165,7 +165,7 @@ retry와 redirect는 0회다. 추천 검색·이유의 일시 장애 복구는 W
 | 상태 | 메서드·경로 | 권한 | 성공 계약 | 연결 Task |
 | --- | --- | --- | --- | --- |
 | `implemented` | `GET /actuator/health` | 공개 | 200과 프로세스·의존성 상태 | WI-0001 |
-| `implemented` | `GET /actuator/prometheus` | 공개 | 200 Prometheus text exposition | WI-0001 |
+| `implemented` | `GET /actuator/prometheus` | 로컬 관측 profile | 200 Prometheus text exposition; production에서는 비활성 | WI-0001, WI-0046 |
 | `implemented` | `POST /api/v1/anonymous-sessions` | 공개 | 201, session cookie, CSRF token·만료 | PP-008 |
 | `implemented` | `POST /api/v1/recommendation-drafts` | 익명 세션 | 201 조건 추출 draft | PP-009, PP-010 |
 | `implemented` | `GET /api/v1/recommendation-drafts/{draftId}` | draft 소유 세션 | 200 draft snapshot | PP-010 |
@@ -288,13 +288,29 @@ token은 동일한 404, 만료된 방은 410이다.
 ### 제품 이벤트
 
 `POST /api/v1/events` body는 `{eventId, name, occurredAt, context}`다. `eventId`는 UUID,
-name은 `draftCreated`, `recommendationViewed`, `roomShared`, `voteChanged`,
-`finalResultViewed`만 허용한다. context는 `draftId`, `jobId`, `roomId`, `placeId`,
-`viewportClass` 중 해당 값만 포함하며 자유 텍스트, 검색 문장, cookie, token과 PII를
-거부한다. body는 4 KiB 이하이고 중복 event ID는 다시 저장하지 않으면서 202를
-반환한다. 시스템 처리 event는 server가 직접 생성하며 이 endpoint로 받지 않는다.
-수집 endpoint·allowlist·중복 제거·보존 정리는 자동 검증됐지만 제품 화면에서 다섯 event를
-실제로 발행하는 instrumentation은 아직 연결 증거가 없어 별도 구현 범위로 남긴다.
+name은 기존 제품 event `draftCreated`, `recommendationViewed`, `roomShared`, `voteChanged`,
+`finalResultViewed`와 다음 비식별 진단 event만 허용한다.
+
+| event | 필수 context의 폐쇄형 값 |
+| --- | --- |
+| `webVital` | `metricName`은 LCP·INP·CLS·TTFB 중 하나, `metricRating`, `metricValueBucket`, `viewportClass` |
+| `sseRecovered` | `streamType`은 recommendation·room 중 하나, `recoveryMode`는 snapshot·stream 중 하나, `viewportClass` |
+| `partialRecommendationShown` | `resultCount`는 1·2 중 하나, `explorationRound`는 initial·alternative 중 하나, `viewportClass` |
+| `alternativeRecommendationRequested` | `explorationRound`는 initial·alternative 중 하나, `viewportClass` |
+| `conditionFieldChanged` | 허용된 `fieldName`, `viewportClass` |
+| `coldStartRecovered` | 허용된 `surface`, `durationBucket`, `viewportClass` |
+| `clientError` | 허용된 `surface`, `errorCategory`, `recoverable`은 true·false 중 하나, `viewportClass` |
+
+기존 제품 event context는 `draftId`, `jobId`, `roomId`, `placeId`, `viewportClass` 중 해당
+값만 포함한다. 진단 event는 표의 context를 모두 요구하며 값도 서버 allowlist 안에 있어야
+한다. 자유 텍스트, URL, 검색 문장, 오류 message·stack, cookie, token과 PII를 거부한다.
+body는 4 KiB 이하이고 중복 event ID는 다시 저장하지 않으면서 202를 반환한다. 시스템 처리
+event는 server가 직접 생성하며 이 endpoint로 받지 않는다.
+
+프런트는 Web Vitals, 추천·방 SSE 복구, 부분 결과 표시, 다른 추천 요청, 조건 field 변경,
+cold start 복구와 안전한 client 오류를 발행한다. 서버는 중복 제거·저장에 성공한 event만
+`placepick_client_events_total`로 집계하며 label은 event name, 폐쇄형 detail과 viewport뿐이다.
+실제 Grafana Cloud에서 이 metric을 수집했다는 증거는 배포 검증 전까지 별도다.
 
 ## 오류 계약
 
@@ -302,6 +318,9 @@ name은 `draftCreated`, `recommendationViewed`, `roomShared`, `voteChanged`,
 `traceId`를 가진다. 입력 오류는 `fieldErrors` 배열에 `{field, code, message}`를
 추가한다. `detail`과 message에는 secret, 원문 provider payload, stack trace와 내부
 SQL을 넣지 않는다.
+
+`traceId`와 응답 `X-Trace-Id`는 임의 상관 ID가 아니라 해당 HTTP 요청의 active span
+trace ID다. 유효한 W3C `traceparent`가 들어오면 server span은 그 context를 소비한다.
 
 | HTTP | 대표 error code | 의미 |
 | --- | --- | --- |
@@ -342,11 +361,19 @@ stream event는 `snapshot`, `voteUpdated`, `voteRemoved`, `finalized`, `heartbea
 | --- | --- | --- | --- | --- |
 | `implemented` | `recommendation.requested.v1` | 추천 application service | 추천 Worker | 저장·확정된 Job 처리 요청 |
 
-event envelope는 `eventId`, `eventType`, `version`, `aggregateId`, `idempotencyKey`,
-`occurredAt`, `traceId`, `payload`를 가진다. payload에는 `jobId`만 두고 draft 조건은
-Worker가 DB에서 읽어 event의 개인정보와 크기를 줄인다. relay는 outbox를 반복 publish할
-수 있고 Worker는 at-least-once delivery를 전제로 처리한다. DB commit 뒤에만 ACK하며
-제한 재시도 뒤에는 원본 event ID와 안전한 오류 code를 DLQ에 보존한다.
+현재 event envelope v2는 `eventId`, `eventType`, `version`, `aggregateId`,
+`idempotencyKey`, `occurredAt`, `traceId`, `traceparent`, 선택적인 `tracestate`, `payload`를
+가진다. `eventType=recommendation.requested.v1`은 event 의미의 version이고
+`version=2`는 envelope schema version이므로 서로 독립적이다. payload에는 `jobId`만 두고
+draft 조건은 Worker가 DB에서 읽어 event의 개인정보와 크기를 줄인다.
+
+Worker는 v2의 W3C carrier를 복원해 Redis consumer span을 만든다. Naver·Elice outbound
+adapter는 같은 context 아래에 Provider·operation·outcome만 있는 CLIENT span을 만들고 W3C
+header를 주입한다. URL·query·body와 예외 원문은 span에 넣지 않는다. 기존 envelope v1도
+계속 역직렬화하며 trace carrier가 없을 때는 독립 consumer span으로 처리한다. relay는
+outbox를 반복 publish할 수 있고 Worker는 at-least-once delivery를 전제로 처리한다. DB
+commit 뒤에만 ACK하며 제한 재시도 뒤에는 원본 event ID와 안전한 오류 code를 DLQ에
+보존한다.
 
 `RecommendationJobPipelineIntegrationTest`는 Job·outbox 원자성, 멱등 replay, pending
 claim, commit 전 ACK 금지, 제한 retry와 DLQ를 PostgreSQL·Redis Testcontainers로 검증한다.

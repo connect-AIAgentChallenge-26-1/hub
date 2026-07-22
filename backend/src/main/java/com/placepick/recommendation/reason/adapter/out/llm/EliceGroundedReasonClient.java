@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.placepick.infrastructure.external.http.DirectProviderRestClientFactory;
+import com.placepick.infrastructure.external.llm.LlmTokenUsageSink;
 import com.placepick.recommendation.application.port.out.LlmFailureStage;
 import com.placepick.recommendation.condition.domain.Preference;
 import com.placepick.recommendation.reason.application.port.out.GroundedReasonGenerationPort;
@@ -39,6 +40,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClient;
+import io.opentelemetry.api.OpenTelemetry;
 import org.springframework.web.client.RestClientException;
 
 /**
@@ -86,19 +88,22 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
     private final URI chatEndpoint;
     private final String model;
     private final int maxResponseBytes;
+    private final LlmTokenUsageSink tokenUsageSink;
 
     private EliceGroundedReasonClient(
         RestClient restClient,
         ObjectMapper objectMapper,
         URI chatEndpoint,
         String model,
-        int maxResponseBytes
+        int maxResponseBytes,
+        LlmTokenUsageSink tokenUsageSink
     ) {
         this.restClient = restClient;
         this.objectMapper = objectMapper;
         this.chatEndpoint = chatEndpoint;
         this.model = model;
         this.maxResponseBytes = maxResponseBytes;
+        this.tokenUsageSink = Objects.requireNonNull(tokenUsageSink, "tokenUsageSink");
     }
 
     public static EliceGroundedReasonClient create(
@@ -113,7 +118,29 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
             model,
             CONNECT_TIMEOUT,
             RESPONSE_TIMEOUT,
-            MAX_RESPONSE_BYTES
+            MAX_RESPONSE_BYTES,
+            null,
+            LlmTokenUsageSink.noop()
+        );
+    }
+
+    public static EliceGroundedReasonClient createObserved(
+        URI chatBaseUrl,
+        String token,
+        String model,
+        OpenTelemetry openTelemetry,
+        LlmTokenUsageSink tokenUsageSink
+    ) {
+        requireApprovedBaseUrl(chatBaseUrl);
+        return createValidated(
+            chatBaseUrl,
+            token,
+            model,
+            CONNECT_TIMEOUT,
+            RESPONSE_TIMEOUT,
+            MAX_RESPONSE_BYTES,
+            openTelemetry,
+            tokenUsageSink
         );
     }
 
@@ -132,7 +159,9 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
             model,
             connectTimeout,
             responseTimeout,
-            maxResponseBytes
+            maxResponseBytes,
+            null,
+            LlmTokenUsageSink.noop()
         );
     }
 
@@ -142,7 +171,9 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
         String model,
         Duration connectTimeout,
         Duration responseTimeout,
-        int maxResponseBytes
+        int maxResponseBytes,
+        OpenTelemetry openTelemetry,
+        LlmTokenUsageSink tokenUsageSink
     ) {
         requireCredential(token);
         if (!MODEL.equals(model)) {
@@ -153,17 +184,25 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
         if (maxResponseBytes < 1 || maxResponseBytes > MAX_RESPONSE_BYTES) {
             throw new IllegalArgumentException("LLM response byte limit is invalid.");
         }
-        RestClient client = DirectProviderRestClientFactory.bearerJson(
-            token,
-            connectTimeout,
-            responseTimeout
-        );
+        RestClient client = openTelemetry == null
+            ? DirectProviderRestClientFactory.bearerJson(
+                token,
+                connectTimeout,
+                responseTimeout
+            )
+            : DirectProviderRestClientFactory.bearerJson(
+                token,
+                connectTimeout,
+                responseTimeout,
+                openTelemetry
+            );
         return new EliceGroundedReasonClient(
             client,
             strictObjectMapper(),
             URI.create(chatBaseUrl.toString() + CHAT_SUFFIX),
             model,
-            maxResponseBytes
+            maxResponseBytes,
+            tokenUsageSink
         );
     }
 
@@ -384,7 +423,8 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
         if (content == null || !content.isTextual()) {
             throw invalidResponse(ReasonGenerationDiagnosticCode.REASON_ENVELOPE_CONTENT);
         }
-        validateUsage(root.get("usage"));
+        TokenUsage usage = validateUsage(root.get("usage"));
+        tokenUsageSink.record("reason", usage.input(), usage.output());
         return content.textValue();
     }
 
@@ -484,7 +524,7 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
         }
     }
 
-    private static void validateUsage(JsonNode usage) {
+    private static TokenUsage validateUsage(JsonNode usage) {
         if (usage == null || !usage.isObject()) {
             throw invalidResponse(ReasonGenerationDiagnosticCode.REASON_ENVELOPE_USAGE);
         }
@@ -494,6 +534,10 @@ public final class EliceGroundedReasonClient implements GroundedReasonGeneration
         if ((long) input + output != total) {
             throw invalidResponse(ReasonGenerationDiagnosticCode.REASON_ENVELOPE_USAGE);
         }
+        return new TokenUsage(input, output);
+    }
+
+    private record TokenUsage(int input, int output) {
     }
 
     private static Map<String, Object> objectSchema(

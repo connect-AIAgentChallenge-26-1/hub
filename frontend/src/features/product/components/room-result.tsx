@@ -7,6 +7,7 @@ import type { FinalResult } from "../api/types";
 import { ProductPlaceCard } from "./place-card";
 import { ErrorPanel, LoadingPanel } from "./product-shell";
 import { CheckIcon } from "@/features/live-playground/components/icons";
+import { reportClientError, reportColdStartRecovered } from "../telemetry/reporter";
 
 export function RoomResult({ shareToken }: { shareToken: string }) {
   const api = useMemo(() => new ProductApi(), []);
@@ -19,12 +20,18 @@ export function RoomResult({ shareToken }: { shareToken: string }) {
       () => api.getFinalResult(shareToken),
       () => active && setColdStart(true),
       () => active,
+      (elapsedMs) => reportColdStartRecovered(api, "roomResult", elapsedMs),
     ).then((value) => {
       if (active) {
         setColdStart(false);
         setResult(value);
       }
-    }).catch((value) => active && setError(value));
+    }).catch((value) => {
+      if (active) {
+        reportClientError(api, "roomResult", value);
+        setError(value);
+      }
+    });
     return () => { active = false; };
   }, [api, shareToken]);
   if (error) return <ErrorPanel error={error} />;

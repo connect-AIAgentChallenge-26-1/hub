@@ -6,6 +6,7 @@ import { ProductApi, withColdStartRetry } from "../api/client";
 import type { ProductPlace } from "../api/types";
 import { ScoreDetails } from "./place-card";
 import { ErrorPanel, LoadingPanel } from "./product-shell";
+import { reportClientError, reportColdStartRecovered } from "../telemetry/reporter";
 
 export function PlaceDetail({ jobId, placeId }: { jobId: string; placeId: string }) {
   const api = useMemo(() => new ProductApi(), []);
@@ -18,6 +19,7 @@ export function PlaceDetail({ jobId, placeId }: { jobId: string; placeId: string
       () => api.getRecommendation(jobId),
       () => active && setColdStart(true),
       () => active,
+      (elapsedMs) => reportColdStartRecovered(api, "place", elapsedMs),
     ).then((job) => {
       const found = job.places.find((value) => value.placeId === placeId);
       if (!found) throw new Error("추천 후보를 찾을 수 없습니다.");
@@ -25,7 +27,12 @@ export function PlaceDetail({ jobId, placeId }: { jobId: string; placeId: string
         setColdStart(false);
         setPlace(found);
       }
-    }).catch((value) => active && setError(value));
+    }).catch((value) => {
+      if (active) {
+        reportClientError(api, "place", value);
+        setError(value);
+      }
+    });
     return () => { active = false; };
   }, [api, jobId, placeId]);
 

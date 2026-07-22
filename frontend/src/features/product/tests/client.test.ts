@@ -256,14 +256,16 @@ describe("withColdStartRetry", () => {
         }))
         .mockResolvedValue("ready");
       const onRetry = vi.fn();
+      const onRecovered = vi.fn();
 
-      const result = withColdStartRetry(operation, onRetry);
+      const result = withColdStartRetry(operation, onRetry, () => true, onRecovered);
       await Promise.resolve();
       await vi.advanceTimersByTimeAsync(2_000);
 
       await expect(result).resolves.toBe("ready");
       expect(operation).toHaveBeenCalledTimes(2);
       expect(onRetry).toHaveBeenCalledTimes(1);
+      expect(onRecovered).toHaveBeenCalledWith(2_000);
     } finally {
       vi.useRealTimers();
     }

@@ -10,6 +10,8 @@ import com.placepick.infrastructure.observability.LlmProviderDiagnosticMetrics;
 import com.placepick.infrastructure.observability.PlacePickMetrics;
 import com.placepick.infrastructure.observability.ProviderCallMetrics;
 import com.placepick.infrastructure.observability.RecommendationRetrievalMetrics;
+import com.placepick.infrastructure.observability.SafeProviderTracing;
+import com.placepick.infrastructure.observability.SafeTelemetryLogger;
 import com.placepick.livedev.LiveDevConfiguration;
 import com.placepick.livedev.LiveDevCoreFactory;
 import com.placepick.outbox.OutboxRepository;
@@ -18,9 +20,13 @@ import com.placepick.recommendation.job.infrastructure.MockRecommendationProvide
 import com.placepick.recommendation.job.infrastructure.RecommendationJobInfrastructureConfiguration;
 import com.placepick.recommendation.reason.application.port.out.GroundedReasonGenerationPort;
 import java.time.Clock;
+import io.opentelemetry.api.OpenTelemetry;
+import io.micrometer.core.instrument.MeterRegistry;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.runner.ApplicationContextRunner;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.jdbc.core.simple.JdbcClient;
 
 class RecommendationJobProviderWiringTest {
 
@@ -106,7 +112,18 @@ class RecommendationJobProviderWiringTest {
             .withUserConfiguration(configurations)
             .withBean(ObjectMapper.class, ObjectMapper::new)
             .withBean(Clock.class, Clock::systemUTC)
+            .withBean(OpenTelemetry.class, OpenTelemetry::noop)
+            .withBean(
+                SafeProviderTracing.class,
+                () -> new SafeProviderTracing(OpenTelemetry.noop())
+            )
+            .withBean(
+                SafeTelemetryLogger.class,
+                () -> mock(SafeTelemetryLogger.class)
+            )
             .withBean(StringRedisTemplate.class, () -> mock(StringRedisTemplate.class))
+            .withBean(JdbcClient.class, () -> mock(JdbcClient.class))
+            .withBean(MeterRegistry.class, SimpleMeterRegistry::new)
             .withBean(OutboxRepository.class, () -> mock(OutboxRepository.class))
             .withBean(PlacePickMetrics.class, () -> mock(PlacePickMetrics.class))
             .withBean(CandidateFunnelMetrics.class, () -> mock(CandidateFunnelMetrics.class))

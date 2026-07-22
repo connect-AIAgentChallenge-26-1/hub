@@ -5,9 +5,14 @@ import com.placepick.infrastructure.external.naver.NaverApiHubAdapter;
 import com.placepick.infrastructure.observability.CandidateFunnelMetrics;
 import com.placepick.infrastructure.observability.ObservedProviderPorts;
 import com.placepick.infrastructure.observability.LlmProviderDiagnosticMetrics;
+import com.placepick.infrastructure.observability.OpenTelemetryRecommendationTraceContext;
+import com.placepick.infrastructure.observability.OpenTelemetryAsyncExecutionContext;
+import com.placepick.infrastructure.observability.OperationalBacklogMetrics;
 import com.placepick.infrastructure.observability.PlacePickMetrics;
 import com.placepick.infrastructure.observability.ProviderCallMetrics;
 import com.placepick.infrastructure.observability.RecommendationRetrievalMetrics;
+import com.placepick.infrastructure.observability.SafeTelemetryLogger;
+import com.placepick.infrastructure.observability.SafeProviderTracing;
 import com.placepick.outbox.OutboxRelay;
 import com.placepick.outbox.OutboxRepository;
 import com.placepick.recommendation.application.candidate.CandidateNormalizer;
@@ -26,10 +31,14 @@ import com.placepick.recommendation.job.RecommendationJobWorker;
 import com.placepick.recommendation.job.RecommendationWorkerCoreFactory;
 import com.placepick.recommendation.reason.adapter.out.llm.EliceGroundedReasonClient;
 import com.placepick.recommendation.reason.application.GroundedReasonService;
+import com.placepick.recommendation.reason.application.AsyncExecutionContext;
 import com.placepick.recommendation.reason.application.port.out.GroundedReasonGenerationPort;
 import com.placepick.recommendation.workflow.application.RecommendationCoreUseCase;
 import com.placepick.stream.RecommendationStreamConsumer;
 import com.placepick.stream.RecommendationStreamGateway;
+import com.placepick.stream.RecommendationTraceContext;
+import io.opentelemetry.api.OpenTelemetry;
+import io.micrometer.core.instrument.MeterRegistry;
 import java.net.URI;
 import java.time.Clock;
 import java.time.Duration;
@@ -44,6 +53,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.jdbc.core.simple.JdbcClient;
 
 @Configuration(proxyBeanMethods = false)
 public class RecommendationJobInfrastructureConfiguration {
@@ -73,14 +83,16 @@ public class RecommendationJobInfrastructureConfiguration {
     )
     NaverApiHubAdapter productionNaverAdapter(
         @Value("${NAVER_API_HUB_KEY_ID}") String keyId,
-        @Value("${NAVER_API_HUB_KEY}") String key
+        @Value("${NAVER_API_HUB_KEY}") String key,
+        OpenTelemetry openTelemetry
     ) {
-        return NaverApiHubAdapter.create(
+        return NaverApiHubAdapter.createObserved(
             NAVER_API_HUB,
             keyId,
             key,
             NAVER_CONNECT_TIMEOUT,
-            NAVER_RESPONSE_TIMEOUT
+            NAVER_RESPONSE_TIMEOUT,
+            openTelemetry
         );
     }
 
@@ -95,9 +107,17 @@ public class RecommendationJobInfrastructureConfiguration {
     GroundedReasonGenerationPort productionReasonGenerationPort(
         @Value("${CHAT_PROXY_URL}") URI chatBaseUrl,
         @Value("${PROXY_TOKEN}") String token,
-        @Value("${OPENAI_MODEL:openai/gpt-4.1-mini}") String model
+        @Value("${OPENAI_MODEL:openai/gpt-4.1-mini}") String model,
+        OpenTelemetry openTelemetry,
+        LlmProviderDiagnosticMetrics diagnosticMetrics
     ) {
-        return EliceGroundedReasonClient.create(chatBaseUrl, token, model);
+        return EliceGroundedReasonClient.createObserved(
+            chatBaseUrl,
+            token,
+            model,
+            openTelemetry,
+            diagnosticMetrics
+        );
     }
 
     @Bean
@@ -123,6 +143,11 @@ public class RecommendationJobInfrastructureConfiguration {
     }
 
     @Bean
+    AsyncExecutionContext recommendationAsyncExecutionContext() {
+        return new OpenTelemetryAsyncExecutionContext();
+    }
+
+    @Bean
     @Conditional(PlacePickRoleCondition.Worker.class)
     RecommendationWorkerCoreFactory recommendationWorkerCoreFactory(
         PlaceSearchPort placeSearchPort,
@@ -133,6 +158,8 @@ public class RecommendationJobInfrastructureConfiguration {
         CandidateFunnelMetrics candidateFunnelMetrics,
         RecommendationRetrievalMetrics retrievalMetrics,
         RetrievalPolicy retrievalPolicy,
+        SafeProviderTracing tracing,
+        AsyncExecutionContext asyncExecutionContext,
         @Value("${placepick.external.mode:mock}") String externalMode
     ) {
         boolean directProvider = Set.of("production", "live-dev").contains(externalMode);
@@ -142,20 +169,23 @@ public class RecommendationJobInfrastructureConfiguration {
             placeSearchPort,
             metrics,
             searchProvider,
-            NAVER_RESPONSE_TIMEOUT
+            NAVER_RESPONSE_TIMEOUT,
+            tracing
         );
         BlogSearchPort observedBlogs = ObservedProviderPorts.blogs(
             blogSearchPort,
             metrics,
             searchProvider,
-            NAVER_RESPONSE_TIMEOUT
+            NAVER_RESPONSE_TIMEOUT,
+            tracing
         );
         GroundedReasonGenerationPort observedReasons = ObservedProviderPorts.reasons(
             reasonGenerationPort,
             metrics,
             diagnosticMetrics,
             reasonProvider,
-            Duration.ofSeconds(30)
+            Duration.ofSeconds(30),
+            tracing
         );
         CategoryTaxonomy taxonomy = new CategoryTaxonomy();
         CandidateQueryPlanner planner = new CandidateQueryPlanner(taxonomy);
@@ -180,7 +210,11 @@ public class RecommendationJobInfrastructureConfiguration {
                     observedTrace,
                     retrievalPolicy
                 ),
-                new GroundedReasonService(observedReasons, observedTrace)
+                GroundedReasonService.withAsyncContext(
+                    observedReasons,
+                    observedTrace,
+                    asyncExecutionContext
+                )
             );
         };
     }
@@ -201,9 +235,10 @@ public class RecommendationJobInfrastructureConfiguration {
         OutboxRepository repository,
         RecommendationStreamGateway gateway,
         Clock clock,
-        @Value("${placepick.worker.outbox-batch-size:50}") int batchSize
+        @Value("${placepick.worker.outbox-batch-size:50}") int batchSize,
+        PlacePickMetrics metrics
     ) {
-        return new OutboxRelay(repository, gateway, clock, batchSize);
+        return new OutboxRelay(repository, gateway, clock, batchSize, metrics);
     }
 
     @Bean
@@ -219,9 +254,39 @@ public class RecommendationJobInfrastructureConfiguration {
     @Bean
     @Conditional(PlacePickRoleCondition.Worker.class)
     @ConditionalOnBean(RecommendationJobWorker.class)
+    RecommendationTraceContext recommendationTraceContext(
+        OpenTelemetry openTelemetry,
+        SafeTelemetryLogger logger,
+        PlacePickMetrics metrics
+    ) {
+        return new OpenTelemetryRecommendationTraceContext(openTelemetry, logger, metrics);
+    }
+
+    @Bean
+    @Conditional(PlacePickRoleCondition.Worker.class)
+    OperationalBacklogMetrics operationalBacklogMetrics(
+        JdbcClient jdbcClient,
+        RecommendationStreamGateway streamGateway,
+        MeterRegistry meterRegistry,
+        Clock clock,
+        @Value("${placepick.metrics.stuck-job-threshold:PT5M}") String stuckThreshold
+    ) {
+        return new OperationalBacklogMetrics(
+            jdbcClient,
+            streamGateway,
+            meterRegistry,
+            clock,
+            Duration.parse(stuckThreshold)
+        );
+    }
+
+    @Bean
+    @Conditional(PlacePickRoleCondition.Worker.class)
+    @ConditionalOnBean(RecommendationJobWorker.class)
     RecommendationStreamConsumer recommendationStreamConsumer(
         RecommendationStreamGateway gateway,
         RecommendationJobWorker worker,
+        RecommendationTraceContext traceContext,
         @Value("${placepick.worker.consumer-name:${HOSTNAME:local-worker}}") String consumerName,
         @Value("${placepick.worker.batch-size:10}") int batchSize,
         @Value("${placepick.worker.maximum-attempts:3}") int maximumAttempts,
@@ -233,7 +298,8 @@ public class RecommendationJobInfrastructureConfiguration {
             consumerName,
             batchSize,
             maximumAttempts,
-            Duration.parse(pendingIdle)
+            Duration.parse(pendingIdle),
+            traceContext
         );
     }
 

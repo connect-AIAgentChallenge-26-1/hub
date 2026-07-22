@@ -26,11 +26,28 @@ public final class ObservedProviderPorts {
         String provider,
         Duration timeout
     ) {
+        return condition(delegate, metrics, diagnosticMetrics, provider, timeout, null);
+    }
+
+    public static ConditionExtractionPort condition(
+        ConditionExtractionPort delegate,
+        ProviderCallMetrics metrics,
+        LlmProviderDiagnosticMetrics diagnosticMetrics,
+        String provider,
+        Duration timeout,
+        SafeProviderTracing tracing
+    ) {
         return command -> metrics.observe(
             provider,
             "condition",
             timeout,
-            () -> delegate.extract(command),
+            () -> traced(
+                tracing,
+                provider,
+                "condition",
+                () -> delegate.extract(command),
+                outcome -> extractionOutcome(outcome.errorCode())
+            ),
             outcome -> {
                 diagnosticMetrics.recordCondition(provider, outcome);
                 return extractionOutcome(outcome.errorCode());
@@ -45,11 +62,27 @@ public final class ObservedProviderPorts {
         String provider,
         Duration timeout
     ) {
+        return places(delegate, metrics, provider, timeout, null);
+    }
+
+    public static PlaceSearchPort places(
+        PlaceSearchPort delegate,
+        ProviderCallMetrics metrics,
+        String provider,
+        Duration timeout,
+        SafeProviderTracing tracing
+    ) {
         return query -> metrics.observe(
             provider,
             "local",
             timeout,
-            () -> delegate.searchPlaces(query),
+            () -> traced(
+                tracing,
+                provider,
+                "local",
+                () -> delegate.searchPlaces(query),
+                ignored -> "success"
+            ),
             ignored -> "success",
             ObservedProviderPorts::searchRejected
         );
@@ -61,11 +94,27 @@ public final class ObservedProviderPorts {
         String provider,
         Duration timeout
     ) {
+        return blogs(delegate, metrics, provider, timeout, null);
+    }
+
+    public static BlogSearchPort blogs(
+        BlogSearchPort delegate,
+        ProviderCallMetrics metrics,
+        String provider,
+        Duration timeout,
+        SafeProviderTracing tracing
+    ) {
         return query -> metrics.observe(
             provider,
             "blog",
             timeout,
-            () -> delegate.searchBlogs(query),
+            () -> traced(
+                tracing,
+                provider,
+                "blog",
+                () -> delegate.searchBlogs(query),
+                ignored -> "success"
+            ),
             ignored -> "success",
             ObservedProviderPorts::searchRejected
         );
@@ -78,17 +127,46 @@ public final class ObservedProviderPorts {
         String provider,
         Duration timeout
     ) {
+        return reasons(delegate, metrics, diagnosticMetrics, provider, timeout, null);
+    }
+
+    public static GroundedReasonGenerationPort reasons(
+        GroundedReasonGenerationPort delegate,
+        ProviderCallMetrics metrics,
+        LlmProviderDiagnosticMetrics diagnosticMetrics,
+        String provider,
+        Duration timeout,
+        SafeProviderTracing tracing
+    ) {
         return command -> metrics.observe(
             provider,
             "reason",
             timeout,
-            () -> delegate.generate(command),
+            () -> traced(
+                tracing,
+                provider,
+                "reason",
+                () -> delegate.generate(command),
+                outcome -> reasonOutcome(outcome.errorCode())
+            ),
             outcome -> {
                 diagnosticMetrics.recordReason(provider, outcome);
                 return reasonOutcome(outcome.errorCode());
             },
             () -> rejectedReason(diagnosticMetrics, provider)
         );
+    }
+
+    private static <T> T traced(
+        SafeProviderTracing tracing,
+        String provider,
+        String operation,
+        java.util.function.Supplier<T> invocation,
+        java.util.function.Function<T, String> outcomeClassifier
+    ) {
+        return tracing == null
+            ? invocation.get()
+            : tracing.within(provider, operation, invocation, outcomeClassifier);
     }
 
     private static ExtractionOutcome rejectedExtraction(

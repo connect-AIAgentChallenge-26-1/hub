@@ -6,6 +6,12 @@ import { ProductApi, withColdStartRetry } from "../api/client";
 import type { JobStage, ProductJob } from "../api/types";
 import { ErrorPanel, LoadingPanel } from "./product-shell";
 import { CheckIcon, LoaderIcon } from "@/features/live-playground/components/icons";
+import {
+  emitProductTelemetry,
+  reportClientError,
+  reportColdStartRecovered,
+} from "../telemetry/reporter";
+import { viewportClass } from "../telemetry/contract";
 
 const stages: Array<{ stage: JobStage; label: string; detail: string }> = [
   { stage: "QUEUED", label: "작업 접수", detail: "202 Accepted 작업을 안전한 queue에 등록합니다." },
@@ -32,6 +38,20 @@ export function RecommendationProgress({ jobId, sourceJobId }: {
     let active = true;
     let disconnect: (() => void) | null = null;
     let retryTimer: ReturnType<typeof setTimeout> | null = null;
+    let recoveryPending = false;
+
+    const recovered = (mode: "snapshot" | "stream") => {
+      if (!recoveryPending) return;
+      recoveryPending = false;
+      void emitProductTelemetry(api, {
+        name: "sseRecovered",
+        context: {
+          streamType: "recommendation",
+          recoveryMode: mode,
+          viewportClass: viewportClass(),
+        },
+      });
+    };
 
     const complete = (value: ProductJob) => {
       if (!active) return;
@@ -48,15 +68,20 @@ export function RecommendationProgress({ jobId, sourceJobId }: {
 
     const connect = () => {
       disconnect = api.subscribeRecommendation(jobId, {
-        onSnapshot: complete,
-        onProgress: complete,
-        onCompleted: complete,
-        onFailed: complete,
-        onHeartbeat: () => setReconnecting(false),
+        onSnapshot: (value) => { complete(value); recovered("stream"); },
+        onProgress: (value) => { complete(value); recovered("stream"); },
+        onCompleted: (value) => { complete(value); recovered("stream"); },
+        onFailed: (value) => { complete(value); recovered("stream"); },
+        onHeartbeat: () => { setReconnecting(false); recovered("stream"); },
         onConnectionError: () => {
           if (!active) return;
+          recoveryPending = true;
           setReconnecting(true);
-          void api.getRecommendation(jobId).then(complete).catch(() => {
+          void api.getRecommendation(jobId).then((value) => {
+            complete(value);
+            recovered("snapshot");
+          }).catch((value) => {
+            reportClientError(api, "progress", value, "sse");
             // EventSource는 Last-Event-ID를 유지해 자동 재연결하고 GET snapshot이 정본을 복구한다.
           });
         },
@@ -69,6 +94,7 @@ export function RecommendationProgress({ jobId, sourceJobId }: {
           () => api.getRecommendation(jobId),
           () => active && setColdStart(true),
           () => active,
+          (elapsedMs) => reportColdStartRecovered(api, "progress", elapsedMs),
         );
         if (!active) return;
         setColdStart(false);
@@ -76,6 +102,7 @@ export function RecommendationProgress({ jobId, sourceJobId }: {
         if (value.status !== "COMPLETED" && value.status !== "FAILED") connect();
       } catch (value) {
         if (!active) return;
+        reportClientError(api, "progress", value);
         setError(value);
       }
     };

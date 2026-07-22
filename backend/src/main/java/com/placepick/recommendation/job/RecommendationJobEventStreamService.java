@@ -38,6 +38,9 @@ public class RecommendationJobEventStreamService {
         );
         SseEmitter emitter = new SseEmitter(timeout);
         var registration = registry.register(jobId, sessionId, 0L, emitter);
+        if (lastEventId != null) {
+            registry.markResumed(registration);
+        }
         RecommendationJobSubscriptionState state;
         try {
             state = jobService.subscriptionState(jobId, sessionId);

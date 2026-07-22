@@ -6,6 +6,12 @@ import { ProductApi, withColdStartRetry } from "../api/client";
 import type { ProductRoom, VoteValue } from "../api/types";
 import { ErrorPanel, LoadingPanel } from "./product-shell";
 import { MapPinIcon } from "@/features/live-playground/components/icons";
+import {
+  emitProductTelemetry,
+  reportClientError,
+  reportColdStartRecovered,
+} from "../telemetry/reporter";
+import { viewportClass } from "../telemetry/contract";
 
 export function RoomView({ shareToken }: { shareToken: string }) {
   const api = useMemo(() => new ProductApi(), []);
@@ -20,10 +26,24 @@ export function RoomView({ shareToken }: { shareToken: string }) {
   useEffect(() => {
     let active = true;
     let disconnect: (() => void) | null = null;
+    let recoveryPending = false;
+    const recovered = (mode: "snapshot" | "stream") => {
+      if (!recoveryPending) return;
+      recoveryPending = false;
+      void emitProductTelemetry(api, {
+        name: "sseRecovered",
+        context: {
+          streamType: "room",
+          recoveryMode: mode,
+          viewportClass: viewportClass(),
+        },
+      });
+    };
     void withColdStartRetry(
       () => api.getRoom(shareToken),
       () => active && setColdStart(true),
       () => active,
+      (elapsedMs) => reportColdStartRecovered(api, "room", elapsedMs),
     ).then((value) => {
       if (!active) return;
       setColdStart(false);
@@ -33,18 +53,29 @@ export function RoomView({ shareToken }: { shareToken: string }) {
         return;
       }
       disconnect = api.subscribeRoom(shareToken, {
-        onSnapshot: (next) => { setRoom(next); setReconnecting(false); },
-        onChanged: (next) => { setRoom(next); setReconnecting(false); },
-        onFinalized: (next) => { setRoom(next); router.replace(`/rooms/${shareToken}/result`); },
-        onHeartbeat: () => setReconnecting(false),
+        onSnapshot: (next) => { setRoom(next); setReconnecting(false); recovered("stream"); },
+        onChanged: (next) => { setRoom(next); setReconnecting(false); recovered("stream"); },
+        onFinalized: (next) => {
+          setRoom(next);
+          recovered("stream");
+          router.replace(`/rooms/${shareToken}/result`);
+        },
+        onHeartbeat: () => { setReconnecting(false); recovered("stream"); },
         onConnectionError: () => {
+          if (!active) return;
+          recoveryPending = true;
           setReconnecting(true);
           void api.getRoom(shareToken).then((next) => {
-            if (active) { setRoom(next); setReconnecting(false); }
-          }).catch(() => undefined);
+            if (active) { setRoom(next); setReconnecting(false); recovered("snapshot"); }
+          }).catch((value) => reportClientError(api, "room", value, "sse"));
         },
       });
-    }).catch((value) => active && setError(value));
+    }).catch((value) => {
+      if (active) {
+        reportClientError(api, "room", value);
+        setError(value);
+      }
+    });
     return () => { active = false; disconnect?.(); };
   }, [api, router, shareToken]);
 
@@ -58,6 +89,7 @@ export function RoomView({ shareToken }: { shareToken: string }) {
       else await api.putVote(shareToken, placeId, value);
       setRoom(await api.getRoom(shareToken));
     } catch (cause) {
+      reportClientError(api, "room", cause);
       setError(cause);
     } finally {
       setPendingKey(null);
@@ -71,6 +103,7 @@ export function RoomView({ shareToken }: { shareToken: string }) {
       await api.finalizeRoom(shareToken, placeId);
       router.push(`/rooms/${shareToken}/result`);
     } catch (cause) {
+      reportClientError(api, "room", cause);
       setError(cause);
       setPendingKey(null);
     }

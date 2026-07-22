@@ -30,10 +30,79 @@ spring:
       thread-name-prefix: placepick-scheduler-
 
 management:
+  metrics:
+    tags:
+      application: placepick-backend
+      environment: production
+      role: ${PLACEPICK_ROLE:all}
+      release: ${RENDER_GIT_COMMIT}
+  tracing:
+    sampling:
+      probability: ${PLACEPICK_TRACE_SAMPLING_PROBABILITY:1.0}
+  opentelemetry:
+    resource-attributes:
+      service.namespace: placepick
+      service.version: ${RENDER_GIT_COMMIT}
+      deployment.environment: production
+      placepick.role: ${PLACEPICK_ROLE:all}
+  otlp:
+    logging:
+      endpoint: ${GRAFANA_OTLP_ENDPOINT}/v1/logs
+      headers:
+        Authorization: ${GRAFANA_OTLP_AUTHORIZATION}
+      connect-timeout: 2s
+      timeout: 5s
+      compression: gzip
+      export:
+        enabled: true
+    metrics:
+      export:
+        enabled: true
+        url: ${GRAFANA_OTLP_ENDPOINT}/v1/metrics
+        headers:
+          Authorization: ${GRAFANA_OTLP_AUTHORIZATION}
+        connect-timeout: 2s
+        read-timeout: 5s
+        step: ${PLACEPICK_OTLP_METRICS_STEP:30s}
+        base-time-unit: seconds
+    tracing:
+      endpoint: ${GRAFANA_OTLP_ENDPOINT}/v1/traces
+      headers:
+        Authorization: ${GRAFANA_OTLP_AUTHORIZATION}
+      connect-timeout: 2s
+      timeout: 5s
+      compression: gzip
+      export:
+        enabled: true
+  prometheus:
+    metrics:
+      export:
+        enabled: false
+  observations:
+    key-values:
+      application: placepick-backend
+      environment: production
+      role: ${PLACEPICK_ROLE:all}
+      release: ${RENDER_GIT_COMMIT}
   endpoints:
     web:
       exposure:
         include: health,info
+
+logging:
+  structured:
+    format:
+      console: ecs
+    json:
+      customizer: com.placepick.security.RedactingStructuredLoggingCustomizer
+    ecs:
+      service:
+        name: placepick-backend
+        version: ${RENDER_GIT_COMMIT}
+        environment: production
+  structured.json.stacktrace:
+    max-length: 2048
+    max-throwable-depth: 12
 
 placepick:
   role: ${PLACEPICK_ROLE:all}

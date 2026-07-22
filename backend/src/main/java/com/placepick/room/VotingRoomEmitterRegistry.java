@@ -1,5 +1,10 @@
 package com.placepick.room;
 
+import com.placepick.infrastructure.observability.SseMetrics;
+import com.placepick.infrastructure.observability.SseMetrics.CloseReason;
+import com.placepick.infrastructure.observability.SseMetrics.ReplayKind;
+import com.placepick.infrastructure.observability.SseMetrics.SendKind;
+import com.placepick.infrastructure.observability.SseMetrics.Stream;
 import com.placepick.recommendation.job.infrastructure.PlacePickRoleCondition;
 import com.placepick.security.RateLimitExceededException;
 import jakarta.annotation.PreDestroy;
@@ -14,6 +19,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicLong;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -30,19 +36,31 @@ public class VotingRoomEmitterRegistry implements VotingRoomEventListener {
     private final VotingRoomEventPublisher publisher;
     private final VotingRoomService roomService;
     private final Clock clock;
+    private final SseMetrics metrics;
     private final Map<UUID, CopyOnWriteArrayList<Registration>> registrations =
         new ConcurrentHashMap<>();
     private final Map<UUID, AtomicLong> sessionConnectionCounts = new ConcurrentHashMap<>();
+
+    @Autowired
+    public VotingRoomEmitterRegistry(
+        VotingRoomEventPublisher publisher,
+        VotingRoomService roomService,
+        Clock clock,
+        SseMetrics metrics
+    ) {
+        this.publisher = publisher;
+        this.roomService = roomService;
+        this.clock = clock;
+        this.metrics = metrics;
+        publisher.addListener(this);
+    }
 
     public VotingRoomEmitterRegistry(
         VotingRoomEventPublisher publisher,
         VotingRoomService roomService,
         Clock clock
     ) {
-        this.publisher = publisher;
-        this.roomService = roomService;
-        this.clock = clock;
-        publisher.addListener(this);
+        this(publisher, roomService, clock, SseMetrics.noop());
     }
 
     public Registration register(
@@ -59,16 +77,17 @@ public class VotingRoomEmitterRegistry implements VotingRoomEventListener {
         }
         incrementSession(context.sessionId());
         Registration registration = new Registration(context, emitter, lastSequenceId);
+        registration.openedAtNanos = metrics.opened(Stream.ROOM, lastSequenceId > 0);
         roomRegistrations.add(registration);
-        emitter.onCompletion(() -> remove(registration));
-        emitter.onTimeout(() -> remove(registration));
-        emitter.onError(ignored -> remove(registration));
+        emitter.onCompletion(() -> remove(registration, CloseReason.CLIENT_COMPLETE));
+        emitter.onTimeout(() -> remove(registration, CloseReason.TIMEOUT));
+        emitter.onError(ignored -> remove(registration, CloseReason.ERROR));
         return registration;
     }
 
     public boolean sendSnapshot(Registration registration, RoomView snapshot) {
         long sequenceId = registration.lastSequenceId.get();
-        return registration.send(
+        boolean sent = registration.send(
             "snapshot",
             Long.toString(sequenceId),
             new RoomStreamEnvelope(
@@ -76,8 +95,17 @@ public class VotingRoomEmitterRegistry implements VotingRoomEventListener {
                 clock.instant(),
                 registration.context.roomId(),
                 snapshot
-            )
+            ),
+            SendKind.SNAPSHOT
         );
+        if (sent && registration.resumed()) {
+            metrics.replayed(Stream.ROOM, ReplayKind.SNAPSHOT, 1L);
+        }
+        return sent;
+    }
+
+    public void markResumed(Registration registration) {
+        registration.markResumed();
     }
 
     public void synchronizeCursor(Registration registration, long sequenceId) {
@@ -87,16 +115,15 @@ public class VotingRoomEmitterRegistry implements VotingRoomEventListener {
     public boolean activate(Registration registration) {
         boolean activated = registration.activate();
         if (!activated) {
-            remove(registration);
+            remove(registration, CloseReason.SEND_FAILURE);
         } else if (registration.terminalDelivered()) {
-            complete(registration);
+            complete(registration, CloseReason.TERMINAL_EVENT);
         }
         return activated;
     }
 
     public void complete(Registration registration) {
-        remove(registration);
-        registration.emitter.complete();
+        complete(registration, CloseReason.SERVER_COMPLETE);
     }
 
     @Override
@@ -109,12 +136,12 @@ public class VotingRoomEmitterRegistry implements VotingRoomEventListener {
             try {
                 RoomView snapshot = roomService.refreshSubscription(registration.context);
                 if (!registration.offerLive(event, snapshot)) {
-                    remove(registration);
+                    remove(registration, CloseReason.SEND_FAILURE);
                 } else if (registration.terminalDelivered()) {
-                    complete(registration);
+                    complete(registration, CloseReason.TERMINAL_EVENT);
                 }
             } catch (RuntimeException exception) {
-                remove(registration);
+                remove(registration, CloseReason.UPSTREAM_FAILURE);
                 registration.emitter.complete();
             }
         }
@@ -131,8 +158,13 @@ public class VotingRoomEmitterRegistry implements VotingRoomEventListener {
                 registration.context.roomId(),
                 null
             );
-            if (!registration.send("heartbeat", sequenceId, envelope)) {
-                remove(registration);
+            if (!registration.send(
+                "heartbeat",
+                sequenceId,
+                envelope,
+                SendKind.HEARTBEAT
+            )) {
+                remove(registration, CloseReason.SEND_FAILURE);
             }
         }));
     }
@@ -141,7 +173,7 @@ public class VotingRoomEmitterRegistry implements VotingRoomEventListener {
     public void close() {
         publisher.removeListener(this);
         registrations.values().forEach(list -> list.forEach(registration ->
-            registration.emitter.complete()
+            complete(registration, CloseReason.SHUTDOWN)
         ));
         registrations.clear();
         sessionConnectionCounts.clear();
@@ -165,7 +197,12 @@ public class VotingRoomEmitterRegistry implements VotingRoomEventListener {
         }
     }
 
-    private void remove(Registration registration) {
+    private void complete(Registration registration, CloseReason reason) {
+        remove(registration, reason);
+        registration.emitter.complete();
+    }
+
+    private void remove(Registration registration, CloseReason reason) {
         boolean[] removed = new boolean[1];
         registrations.computeIfPresent(registration.context.roomId(), (roomId, existing) -> {
             removed[0] = existing.remove(registration);
@@ -178,6 +215,9 @@ public class VotingRoomEmitterRegistry implements VotingRoomEventListener {
                 (ignored, count) -> count.decrementAndGet() <= 0 ? null : count
             );
         }
+        if (removed[0]) {
+            metrics.closed(Stream.ROOM, reason, registration.openedAtNanos);
+        }
     }
 
     private static boolean terminal(String eventType) {
@@ -188,9 +228,11 @@ public class VotingRoomEmitterRegistry implements VotingRoomEventListener {
         private final VotingRoomService.RoomSubscriptionContext context;
         private final SseEmitter emitter;
         private final AtomicLong lastSequenceId;
+        private boolean resumed;
         private final List<PendingEvent> pendingLiveEvents = new ArrayList<>();
         private boolean active;
         private boolean terminalDelivered;
+        private long openedAtNanos;
 
         private Registration(
             VotingRoomService.RoomSubscriptionContext context,
@@ -200,6 +242,7 @@ public class VotingRoomEmitterRegistry implements VotingRoomEventListener {
             this.context = context;
             this.emitter = emitter;
             this.lastSequenceId = new AtomicLong(lastSequenceId);
+            this.resumed = lastSequenceId > 0;
         }
 
         private synchronized boolean offerLive(VotingRoomEvent event, RoomView snapshot) {
@@ -236,6 +279,17 @@ public class VotingRoomEmitterRegistry implements VotingRoomEventListener {
             return terminalDelivered;
         }
 
+        private synchronized boolean resumed() {
+            return resumed;
+        }
+
+        private synchronized void markResumed() {
+            if (!resumed) {
+                resumed = true;
+                metrics.resumed(Stream.ROOM);
+            }
+        }
+
         private boolean sendEvent(VotingRoomEvent event, RoomView snapshot) {
             if (event.sequenceId() <= lastSequenceId.get()) {
                 return true;
@@ -246,7 +300,12 @@ public class VotingRoomEmitterRegistry implements VotingRoomEventListener {
                 event.roomId(),
                 snapshot
             );
-            if (!send(event.eventType(), Long.toString(event.sequenceId()), envelope)) {
+            if (!send(
+                event.eventType(),
+                Long.toString(event.sequenceId()),
+                envelope,
+                SendKind.EVENT
+            )) {
                 return false;
             }
             lastSequenceId.set(event.sequenceId());
@@ -254,7 +313,12 @@ public class VotingRoomEmitterRegistry implements VotingRoomEventListener {
             return true;
         }
 
-        private synchronized boolean send(String name, String id, Object data) {
+        private synchronized boolean send(
+            String name,
+            String id,
+            Object data,
+            SendKind kind
+        ) {
             try {
                 SseEmitter.SseEventBuilder builder = SseEmitter.event().name(name).data(data);
                 if (id != null) {
@@ -263,6 +327,8 @@ public class VotingRoomEmitterRegistry implements VotingRoomEventListener {
                 emitter.send(builder);
                 return true;
             } catch (IOException | IllegalStateException exception) {
+                metrics.sendFailed(Stream.ROOM, kind);
+                remove(this, CloseReason.SEND_FAILURE);
                 emitter.complete();
                 return false;
             }

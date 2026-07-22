@@ -62,9 +62,10 @@ Naver Local은 공식 계약상 한 번에 최대 다섯 항목만 반환하지�
 - 검색어·장소·주소·URL·prompt·응답·비밀은 일반 telemetry와 test report에 남지 않는다.
 
 두 번째 단계에서는 다중 검색·부분 결과·다른 추천과 점수 v2를 구현했다. 세 번째 단계에서는
-후보별 이유 v3를 독립 변경으로 구현했다. 네 번째 단계는 조건 추출 복구와 Embedding
-shadow 평가 기반을 구현한다. production OTLP 운영 관측과 실제 Provider 품질 campaign은
-후속 변경으로 남겨 회귀 원인과 검증 증거를 분리한다.
+후보별 이유 v3, 네 번째 단계에서는 조건 추출 복구와 Embedding shadow 평가 기반을
+구현했다. 다섯 번째 단계에서는 production OTLP 코드·dashboard·alert 검증 기반을 구현한다.
+실제 Grafana Cloud 수집과 실제 Provider 품질 campaign은 별도 실증으로 남겨 코드 계약과
+외부 결과를 구분한다.
 
 ## 판단 기준과 선택
 
@@ -235,6 +236,47 @@ Next.js 16.2.10의 optional image dependency가 끌어오던 취약한 `sharp` 0
 합성 vector만 사용했고 실제 Naver·Elice 호출은 0건이다. 따라서 실제 이유 v3 성공률,
 실제 Embedding 품질과 production telemetry 수집 완료를 의미하지 않는다.
 
+다섯 번째 PR은 로컬 scrape와 production push의 책임을 분리하고 비동기 trace와 운영 신호를
+연결한다.
+
+- production은 Spring Boot·Micrometer·OpenTelemetry OTLP metric·trace·safe log exporter를
+  사용한다. endpoint·Basic authorization·정확한 release SHA·role은 시작 guard가 검증하고,
+  Prometheus registry와 `/actuator/prometheus`는 production에서 비활성화한다.
+- 응답 `X-Trace-Id`와 Problem Details는 active span의 실제 trace ID를 사용한다. Outbox
+  envelope v2는 W3C `traceparent`와 선택적인 `tracestate`를 보존하고 Redis Worker가 이를
+  복원해 consumer span을 만든다. 과거 v1 envelope도 context 없는 경로로 계속 읽는다.
+- Naver·Elice outbound 호출은 provider-neutral CLIENT span을 만들고 W3C carrier만 주입한다.
+  요청 URL·query·body, Provider 응답과 예외 원문은 span attribute·event에 넣지 않는다.
+- production console은 ECS JSON과 최종 redaction을 사용한다. OTLP log는 폐쇄형 event code,
+  release·role과 correlation ID만 쓰는 전용 safe logger로 한정한다. root application log를
+  통째로 OTLP에 복제하지 않는다.
+- readiness, 미발행 Outbox와 전달 후 ACK되지 않은 Stream PEL의 수·oldest age, stuck Job,
+  relay·Worker 결과, LLM input/output token과 중복 제거된 client event를 유한한 label로
+  계측한다. PEL을 아직 consumer에 전달되지 않은 전체 stream lag로 표현하지 않는다. snapshot 조회
+  실패는 마지막 gauge를 0으로 위장하지 않고 source별 success/failure counter로 드러낸다.
+- 프런트는 Web Vitals, SSE 복구, 부분 결과, 다른 추천, 조건 field 변경, cold start 복구와
+  client 오류를 폐쇄형 event로만 전송한다. URL, 오류 message·stack과 사용자 입력은 TypeScript
+  계약과 서버 validator 양쪽에서 거부한다.
+- Grafana dashboard를 일곱 운영 row로 재구성하고 즉시 신호 10개·최소 20표본 품질 신호
+  5개를 정의했다. dashboard query·metric 존재·민감 label·alert 표본 gate를 정적 검사하고
+  `promtool check rules`와 rule unit test를 `make check` 경로에 연결했다.
+
+이 단계의 자동 증거는 production 설정 guard, envelope v1/v2 호환, Worker parent/child context,
+client event allowlist·metric, dashboard·alert 계약의 결정적 fixture다. 실제 Grafana Cloud
+endpoint와 자격은 CI에 없으며 실제 Render revision의 metric·trace·log 수집, exporter 장애
+주입, Synthetic Monitoring과 notification 전송은 아직 실행 증거가 아니다. direct exporter는
+business path를 fail-open으로 유지하지만 collector 디스크 buffer가 없어 전송 장애 시
+telemetry 유실 가능성을 수용한다.
+
+최신 Java 17·Node 24 Dev Container에서 전체 `make check`를 다시 실행해 Java 단위·통합·Eval,
+프런트 53개 단위 테스트와 production build, 문서·Compose·ShellCheck·actionlint 및 생성된
+보고서 235개의 비밀·Provider payload scan이 모두 통과했다. 별도 Playwright는 개발 서버의
+Windows bind mount cold compile 지연을 재현한 뒤 E2E 전용 production standalone build로
+교체했다. 일반 production build에서는 Mock API와 Playground가 닫히고, E2E build의 명시적
+opt-in과 loopback Host에서만 열린다. 이 고정 bundle에서 desktop·360px mobile의 Playground,
+조건 직접 보완, 추천 Job·SSE, 부분·대체 추천, 두 세션 투표와 최종 확정 8개 시나리오가 모두
+통과했다.
+
 ## AI 사용과 사람의 검증
 
 AI에는 코드 경로 감사, 진단 taxonomy와 테스트 초안을 위임한다. 사람은 진단 코드의 공개
@@ -242,9 +284,10 @@ AI에는 코드 경로 감사, 진단 taxonomy와 테스트 초안을 위임한�
 
 ## 남은 위험과 재검토 조건
 
-검색·랭킹 v2, 부분·대체 추천, 후보별 이유 v3, 조건 추출 제한 복구와 Embedding shadow
-자동 계약을 구현했지만 PP-044 전체가 끝난 것은 아니다. production OTLP와 Grafana Cloud,
-실제 비개인성 30개 시나리오 품질 campaign은 후속 변경으로 남는다. 실제 campaign 전에는
-이번 변경이 실제 후보 성공률·이유 생성률 또는 Embedding 품질 목표를 달성했다고 주장하지
-않는다. Provider 계약, 데이터 이용 조건 또는 무료 관측 한도가 바뀌면 호출 예산·telemetry
-수집 범위를 재검토한다.
+검색·랭킹 v2, 부분·대체 추천, 후보별 이유 v3, 조건 추출 제한 복구, Embedding shadow와
+production OTLP 코드·로컬 운영 검증 계약을 구현했지만 PP-044 전체가 끝난 것은 아니다.
+실제 Grafana Cloud 수집과 exporter 장애 주입, 비개인성 30개 시나리오 품질 campaign은
+후속 증거로 남는다. 실제 campaign 전에는 이번 변경이 실제 후보 성공률·이유 생성률,
+Embedding 품질 또는 2분 내 telemetry 수집 목표를 달성했다고 주장하지 않는다. Provider
+계약, 데이터 이용 조건 또는 무료 관측 한도가 바뀌면 호출 예산·telemetry 수집 범위를
+재검토한다.

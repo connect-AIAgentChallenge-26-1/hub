@@ -90,6 +90,7 @@ class VotingRoomEventStreamServiceTest {
         InOrder delivery = inOrder(roomService, registry);
         delivery.verify(roomService).subscription("share-token", null, null);
         delivery.verify(registry).register(eq(initial), eq(0L), any(SseEmitter.class));
+        delivery.verify(registry).markResumed(registration);
         delivery.verify(roomService).subscription("share-token", null, null);
         delivery.verify(registry).synchronizeCursor(registration, 5L);
         delivery.verify(registry).sendSnapshot(registration, convergentSnapshot);

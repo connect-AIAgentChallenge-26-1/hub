@@ -14,6 +14,7 @@
 | 실행 | `mock`, 로컬 직접 연동 `live-dev`, 무료 데모 `production` |
 | 데이터 | PostgreSQL을 정본으로 사용하고 Redis Streams로 작업을 전달 |
 | 프런트 | Next.js 기반 제품 화면과 개발용 Live Playground |
+| 관측 | 로컬 Prometheus/Grafana, production Grafana Cloud OTLP direct exporter |
 | 배포 목표 | Vercel Hobby + Render Free + Neon Free + Upstash Free |
 
 정식 `/api/v1`의 익명 Session·Draft·202 Job·Outbox·Worker·결과, Room·Vote·최종 확정과
@@ -39,6 +40,13 @@ Mock 자동 검증과 실제 Provider 검증은 분리한다. CI와 `make check`
 무료 클라우드 데모는 Render의 sleep과 cold start가 있는 포트폴리오 환경이며 상시 가동
 SLA를 보장하지 않는다. 저장소에는 배포 구성과 workflow가 있지만 실제 cloud 리소스·
 secret 주입·배포 E2E는 아직 검증하지 않았다.
+
+production OTLP metric·trace·safe log 설정, 비동기 W3C context, 후보별 Provider span,
+SSE 수명주기와 backlog freshness, 7-row dashboard와 15개
+alert의 자동 검증 기반은 구현돼 있다. 실제 Grafana Cloud endpoint에서 세 signal이 수집됐거나
+경보 알림이 전달됐다는 증거는 아직 없다. direct exporter는 관측 장애가 사용자 흐름을
+막지 않지만 별도 collector buffer가 없어 장애 구간 telemetry가 유실될 수 있는 데모용
+fail-open 경계다.
 
 ## 로컬 실행
 
@@ -77,6 +85,17 @@ npm run test:e2e:live --workspace @placepick/frontend
 [RUN-0005](docs/runbooks/RUN-0005-direct-live-development.md), 실제 과정과 결과는
 [CASE-0002](docs/case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)를 따른다.
 
+로컬 metric·dashboard·alert를 확인하려면 다음 명령을 실행하고 Grafana
+`http://localhost:3001`과 Prometheus `http://localhost:9090`을 연다.
+
+```bash
+make observe
+```
+
+Dashboard query, metric 이름, 15개 alert와 표본 gate는 `make check`가 고정 Prometheus
+이미지의 `promtool check rules`·`promtool test rules`까지 검증한다. Grafana Cloud 자격은
+로컬 관측에 필요하지 않다.
+
 ## 검증 명령
 
 | 명령 | 목적 |
@@ -102,6 +121,20 @@ npm run test:e2e:live --workspace @placepick/frontend
 Desktop을 켜 둘 필요가 없다. Render에 Naver·Elice·DB·Redis 자격을 저장하고,
 GitHub `production` Environment에는 Vercel 배포 토큰과 Render Deploy Hook만 둔다.
 
+Grafana Cloud를 연결할 때도 다음 runtime 값은 Render secret/config에만 둔다.
+
+```text
+GRAFANA_OTLP_ENDPOINT
+GRAFANA_OTLP_AUTHORIZATION
+PLACEPICK_TRACE_SAMPLING_PROBABILITY=1.0
+PLACEPICK_OTLP_METRICS_STEP=30s
+```
+
+실제 endpoint·Authorization을 예시 값으로 복사하거나 GitHub·Vercel에 넣지 않는다.
+production 시작 시 HTTPS Grafana `/otlp` endpoint, Basic 형식, Render의 40자리 release SHA와
+`PLACEPICK_ROLE`을 검증한다. 자격 교체, 최초 수집, trace 검색과 backlog 대응은
+[RUN-0007](docs/runbooks/RUN-0007-mvp-protection-observability.md)을 따른다.
+
 `.github/workflows/deploy-demo.yml`은 수동으로 입력한 정확한 40자리 `main` SHA를
 검증하고, 같은 SHA의 테스트·빌드·Vercel 배포·Render 배포와 revision 확인을 수행한다.
 Vercel과 Render의 Git 자동 배포는 끈다. 이전 정상 SHA를 다시 입력하는 것이 데모
@@ -124,6 +157,11 @@ secret 생성과 대표 사용자 여정 검증은 저장소 밖에서 소유자
 허용하는 대신 처리 event ID를 기록해 멱등성을 지키고, 점수와 순위는 LLM이 아니라
 서버의 결정론적 규칙으로 확정한다.
 
+HTTP active span의 W3C context는 Outbox envelope v2와 Redis Streams를 지나 Worker consumer
+span으로 이어진다. Naver·Elice 호출은 URL·body·예외 원문 없이 안전한 CLIENT span과 W3C
+header만 사용한다. 응답 `X-Trace-Id`와 Problem Details의 `traceId`로 API부터 Worker까지
+같은 trace를 찾을 수 있다. 기존 envelope v1도 context 없는 호환 경로로 계속 처리한다.
+
 ## 문서
 
 - [문서 인덱스](docs/README.md)
@@ -133,6 +171,8 @@ secret 생성과 대표 사용자 여정 검증은 저장소 밖에서 소유자
 - [개발 환경](docs/development-environment.md)
 - [무료 데모 배포 결정](docs/adr/ADR-0010-free-demo-deployment-boundary.md)
 - [직접 Provider 단순화 결정](docs/adr/ADR-0014-mvp-direct-provider-and-simplified-trust-boundary.md)
+- [production OTLP 관측 결정](docs/adr/ADR-0017-production-otlp-observability.md)
+- [요청 보호·관측성 Runbook](docs/runbooks/RUN-0007-mvp-protection-observability.md)
 - [실제 Naver→Elice 사용자 여정 증거](docs/case-studies/CASE-0002-naver-elice-linked-live-user-flow.md)
 
 Task 상태와 담당자의 단일 정본은 `gdh0730/hub`의 GitHub Issue다. Work Record는

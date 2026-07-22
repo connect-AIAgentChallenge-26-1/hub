@@ -9,11 +9,17 @@ public final class SensitiveValueRedactor {
     private static final Pattern BEARER = Pattern.compile(
         "(?i)(Bearer\\s+)[^\\s,;]+"
     );
+    private static final Pattern BASIC = Pattern.compile(
+        "(?i)(Basic\\s+)[A-Za-z0-9+/=_-]{8,}"
+    );
     private static final Pattern SENSITIVE_ASSIGNMENT = Pattern.compile(
-        "(?i)(authorization|cookie|set-cookie|proxy_token|chat_proxy_url|"
-            + "embedding_proxy_url|api[_-]?key|"
-            + "x-ncp-apigw-api-key(?:-id)?|csrfToken|organizerCapability|sessionToken)"
-            + "(\\s*[=:]\\s*)(\\\"?)([^\\s,;\\\"}]+)(\\\"?)"
+        "(?i)([\\\"']?)(authorization|cookie|set-cookie|proxy_token|chat_proxy_url|"
+            + "embedding_proxy_url|api[_-]?key|naver_api_hub_key(?:_id)?|"
+            + "grafana_otlp_authorization|grafana_otlp_(?:endpoint|instance_id|access_token)|"
+            + "spring_datasource_(?:url|username|password)|spring_flyway_url|"
+            + "spring_data_redis_url|x-ncp-apigw-api-key(?:-id)?|csrfToken|"
+            + "organizerCapability|sessionToken)([\\\"']?)(\\s*[=:]\\s*)"
+            + "(\\\"[^\\\"]*\\\"|'[^']*'|[^\\s,;}]*)"
     );
     private static final Pattern ELICE_ROUTE = Pattern.compile(
         "(?i)(https://mlapi\\.run/)"
@@ -36,6 +42,7 @@ public final class SensitiveValueRedactor {
         String redacted = replaceUriUserInfo(message);
         redacted = ELICE_ROUTE.matcher(redacted).replaceAll("$1<redacted-route>");
         redacted = BEARER.matcher(redacted).replaceAll("$1<redacted>");
+        redacted = BASIC.matcher(redacted).replaceAll("$1<redacted>");
         redacted = replaceAssignments(redacted);
         return SESSION_TOKEN.matcher(redacted).replaceAll("<redacted-token>");
     }
@@ -57,11 +64,17 @@ public final class SensitiveValueRedactor {
         Matcher matcher = SENSITIVE_ASSIGNMENT.matcher(value);
         StringBuffer result = new StringBuffer();
         while (matcher.find()) {
-            String quote = matcher.group(3).isEmpty() ? matcher.group(5) : matcher.group(3);
+            String rawValue = matcher.group(5);
+            String quote = rawValue.length() >= 2
+                && ((rawValue.startsWith("\"") && rawValue.endsWith("\""))
+                    || (rawValue.startsWith("'") && rawValue.endsWith("'")))
+                ? rawValue.substring(0, 1)
+                : "";
             matcher.appendReplacement(
                 result,
                 Matcher.quoteReplacement(
-                    matcher.group(1) + matcher.group(2) + quote + "<redacted>" + quote
+                    matcher.group(1) + matcher.group(2) + matcher.group(3)
+                        + matcher.group(4) + quote + "<redacted>" + quote
                 )
             );
         }

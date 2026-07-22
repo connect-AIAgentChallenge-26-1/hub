@@ -212,6 +212,8 @@ public class RecommendationJobService {
             keyHash,
             requestHash,
             command.traceId(),
+            command.traceparent(),
+            command.tracestate(),
             now,
             jobExpiresAt
         );
@@ -325,6 +327,8 @@ public class RecommendationJobService {
             keyHash,
             requestHash,
             command.traceId(),
+            command.traceparent(),
+            command.tracestate(),
             now,
             source.expiresAt()
         );
@@ -337,6 +341,8 @@ public class RecommendationJobService {
         String keyHash,
         String requestHash,
         String traceId,
+        String traceparent,
+        String tracestate,
         Instant now,
         Instant jobExpiresAt
     ) {
@@ -344,11 +350,13 @@ public class RecommendationJobService {
         RecommendationRequestedEnvelope envelope = new RecommendationRequestedEnvelope(
             eventId,
             RecommendationRequestedEnvelope.EVENT_TYPE,
-            1,
+            RecommendationRequestedEnvelope.CURRENT_ENVELOPE_VERSION,
             jobId,
             keyHash,
             now,
             traceId,
+            traceparent,
+            tracestate,
             new RecommendationRequestedEnvelope.Payload(jobId)
         );
         outboxRepository.insert(new OutboxEvent(

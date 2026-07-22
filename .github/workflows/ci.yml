@@ -53,6 +53,9 @@ jobs:
       - name: Validate GitHub Actions workflows
         run: bash scripts/actionlint.sh
 
+      - name: Validate Grafana dashboards and Prometheus alerts
+        run: bash scripts/observability-check.sh
+
       - name: Validate documentation and traceability
         run: |
           mkdir -p reports/docs

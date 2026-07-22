@@ -8,6 +8,7 @@ import com.placepick.recommendation.embedding.domain.EmbeddingShadowEvaluationRe
 import com.placepick.recommendation.application.trace.RecommendationTraceSink;
 import com.placepick.recommendation.reason.application.ReasonBatchValidationCode;
 import com.placepick.recommendation.reason.application.port.out.ReasonGenerationOutcome;
+import com.placepick.infrastructure.external.llm.LlmTokenUsageSink;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.DistributionSummary;
 import java.util.Locale;
@@ -16,7 +17,7 @@ import java.util.Objects;
 /** Records only closed, provider-neutral LLM outcome diagnostics. */
 public final class LlmProviderDiagnosticMetrics
     implements RecommendationTraceSink, ConditionExtractionRecoveryObserver,
-    EmbeddingShadowEvaluationObserver {
+    EmbeddingShadowEvaluationObserver, LlmTokenUsageSink {
 
     private final MeterRegistry registry;
 
@@ -44,6 +45,24 @@ public final class LlmProviderDiagnosticMetrics
             outcome.failureStage().name(),
             outcome.diagnosticCode().name()
         );
+    }
+
+    @Override
+    public void record(String operation, int inputTokens, int outputTokens) {
+        String safeOperation = switch (operation) {
+            case "condition", "reason" -> operation;
+            default -> "unknown";
+        };
+        registry.counter(
+            "placepick.provider.llm.tokens",
+            "operation", safeOperation,
+            "direction", "input"
+        ).increment(inputTokens);
+        registry.counter(
+            "placepick.provider.llm.tokens",
+            "operation", safeOperation,
+            "direction", "output"
+        ).increment(outputTokens);
     }
 
     @Override

@@ -113,6 +113,71 @@ class ProductEventValidatorTest {
         assertInvalid(request("draftCreated", context), "body", "SIZE");
     }
 
+    @Test
+    void acceptsClosedWebVitalAndRecoveryDiagnosticsWithoutRawValues() throws Exception {
+        JsonNode webVital = objectMapper.readTree("""
+            {
+              "metricName": "LCP",
+              "metricRating": "good",
+              "metricValueBucket": "fast",
+              "viewportClass": "desktop"
+            }
+            """);
+        JsonNode recovered = objectMapper.readTree("""
+            {
+              "streamType": "recommendation",
+              "recoveryMode": "snapshot",
+              "viewportClass": "mobile"
+            }
+            """);
+
+        assertThat(validator.validate(request("webVital", webVital)).context())
+            .containsEntry("metricName", "LCP")
+            .doesNotContainKeys("url", "message", "stack", "requestText");
+        assertThat(validator.validate(request("sseRecovered", recovered)).context())
+            .containsEntry("recoveryMode", "snapshot");
+    }
+
+    @Test
+    void rejectsMissingFieldsFreeTextAndRawDiagnosticPayloads() throws Exception {
+        assertInvalid(
+            request("webVital", objectMapper.readTree("""
+                {
+                  "metricName": "LCP",
+                  "metricRating": "good",
+                  "viewportClass": "desktop"
+                }
+                """)),
+            "context",
+            "REQUIRED_FIELDS"
+        );
+        assertInvalid(
+            request("clientError", objectMapper.readTree("""
+                {
+                  "surface": "result",
+                  "errorCategory": "provider body",
+                  "recoverable": "true",
+                  "viewportClass": "desktop"
+                }
+                """)),
+            "context.errorCategory",
+            "NOT_ALLOWED"
+        );
+        assertInvalid(
+            request("clientError", objectMapper.readTree("""
+                {
+                  "surface": "result",
+                  "errorCategory": "api",
+                  "recoverable": "true",
+                  "viewportClass": "desktop",
+                  "stack": "secret"
+                }
+                """)),
+            "context.stack",
+            "NOT_ALLOWED"
+        );
+    }
+
     private ProductEventRequest request(String name, JsonNode context) {
         return new ProductEventRequest(
             UUID.randomUUID().toString(),

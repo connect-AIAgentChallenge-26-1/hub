@@ -44,6 +44,7 @@ public final class GroundedReasonService {
     private final ReasonBatchValidator validator;
     private final RecommendationTraceSink traceSink;
     private final RetryWaiter retryWaiter;
+    private final AsyncExecutionContext asyncExecutionContext;
 
     public GroundedReasonService(GroundedReasonGenerationPort generationPort) {
         this(generationPort, RecommendationTraceSink.none());
@@ -53,7 +54,25 @@ public final class GroundedReasonService {
         GroundedReasonGenerationPort generationPort,
         RecommendationTraceSink traceSink
     ) {
-        this(generationPort, traceSink, GroundedReasonService::sleep);
+        this(
+            generationPort,
+            traceSink,
+            GroundedReasonService::sleep,
+            AsyncExecutionContext.none()
+        );
+    }
+
+    public static GroundedReasonService withAsyncContext(
+        GroundedReasonGenerationPort generationPort,
+        RecommendationTraceSink traceSink,
+        AsyncExecutionContext asyncExecutionContext
+    ) {
+        return new GroundedReasonService(
+            generationPort,
+            traceSink,
+            GroundedReasonService::sleep,
+            asyncExecutionContext
+        );
     }
 
     GroundedReasonService(
@@ -61,11 +80,29 @@ public final class GroundedReasonService {
         RecommendationTraceSink traceSink,
         RetryWaiter retryWaiter
     ) {
+        this(
+            generationPort,
+            traceSink,
+            retryWaiter,
+            AsyncExecutionContext.none()
+        );
+    }
+
+    GroundedReasonService(
+        GroundedReasonGenerationPort generationPort,
+        RecommendationTraceSink traceSink,
+        RetryWaiter retryWaiter,
+        AsyncExecutionContext asyncExecutionContext
+    ) {
         this.generationPort = Objects.requireNonNull(generationPort, "generationPort");
         this.contextFactory = new ReasonContextFactory();
         this.validator = new ReasonBatchValidator(new ReasonStatementPolicy());
         this.traceSink = Objects.requireNonNull(traceSink, "traceSink");
         this.retryWaiter = Objects.requireNonNull(retryWaiter, "retryWaiter");
+        this.asyncExecutionContext = Objects.requireNonNull(
+            asyncExecutionContext,
+            "asyncExecutionContext"
+        );
     }
 
     public ReasonEnrichmentResult enrich(
@@ -121,9 +158,11 @@ public final class GroundedReasonService {
             List<Future<CandidateExecution>> futures = new ArrayList<>();
             for (int index = 0; index < commands.size(); index++) {
                 int candidateIndex = index;
-                futures.add(executor.submit(() -> executeForPlace(
-                    ranking.places().get(candidateIndex),
-                    commands.get(candidateIndex)
+                futures.add(executor.submit(asyncExecutionContext.wrap(
+                    () -> executeForPlace(
+                        ranking.places().get(candidateIndex),
+                        commands.get(candidateIndex)
+                    )
                 )));
             }
             List<CandidateExecution> executions = new ArrayList<>();

@@ -173,6 +173,7 @@ public final class ProviderCallMetrics {
         ).increment();
         Timer.builder("placepick.provider.latency")
             .tags("provider", safeProvider, "operation", safeOperation)
+            .publishPercentileHistogram()
             .register(registry)
             .record(elapsed);
         if ("rate_limited".equals(safeOutcome)) {
