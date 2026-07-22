@@ -46,43 +46,41 @@ const MOCK_RESTAURANTS = [
 // ==========================================
 // Scheduling & Free Slots Calculation Logic
 // ==========================================
+const KST_OFFSET_MS = 9 * 60 * 60 * 1000; // UTC+9
+
 function calculateFreeSlots(busyEvents) {
   const DAYS = ['월', '화', '수', '목', '금'];
-  const DAY_MAP = { 1: '월', 2: '화', 3: '수', 4: '목', 5: '금' }; // getDay() is 0 (Sun) to 6 (Sat)
+  const DAY_MAP = { 1: '월', 2: '화', 3: '수', 4: '목', 5: '금' };
   const SLOTS = [
-    { id: 1, start: '09:00', end: '10:00' },
-    { id: 2, start: '10:00', end: '11:00' },
-    { id: 3, start: '11:00', end: '12:00' },
-    { id: 4, start: '12:00', end: '13:00' },
-    { id: 5, start: '13:00', end: '14:00' },
-    { id: 6, start: '14:00', end: '15:00' },
-    { id: 7, start: '15:00', end: '16:00' },
-    { id: 8, start: '16:00', end: '17:00' },
-    { id: 9, start: '17:00', end: '18:00' },
+    { id: 1, start: 9 * 60, end: 10 * 60 },
+    { id: 2, start: 10 * 60, end: 11 * 60 },
+    { id: 3, start: 11 * 60, end: 12 * 60 },
+    { id: 4, start: 12 * 60, end: 13 * 60 },
+    { id: 5, start: 13 * 60, end: 14 * 60 },
+    { id: 6, start: 14 * 60, end: 15 * 60 },
+    { id: 7, start: 15 * 60, end: 16 * 60 },
+    { id: 8, start: 16 * 60, end: 17 * 60 },
+    { id: 9, start: 17 * 60, end: 18 * 60 },
   ];
 
   const busySlots = new Set();
 
   busyEvents.forEach(event => {
-    const start = new Date(event.start);
-    const end = new Date(event.end);
+    // All busyEvents are stored as proper UTC; convert to KST for slot matching
+    const startUTC = new Date(event.start);
+    const endUTC = new Date(event.end);
+    const startKST = new Date(startUTC.getTime() + KST_OFFSET_MS);
+    const endKST = new Date(endUTC.getTime() + KST_OFFSET_MS);
 
-    const dayNum = start.getDay(); // 0-6
-    if (dayNum < 1 || dayNum > 5) return; // Only Mon-Fri
+    const dayNum = startKST.getUTCDay(); // 0=Sun, 1=Mon, ... in KST
+    if (dayNum < 1 || dayNum > 5) return;
     const dayChar = DAY_MAP[dayNum];
 
-    // Minutes from midnight
-    const startMins = start.getHours() * 60 + start.getMinutes();
-    const endMins = end.getHours() * 60 + end.getMinutes();
+    const startMins = startKST.getUTCHours() * 60 + startKST.getUTCMinutes();
+    const endMins = endKST.getUTCHours() * 60 + endKST.getUTCMinutes();
 
     SLOTS.forEach(slot => {
-      const [sh, sm] = slot.start.split(':').map(Number);
-      const [eh, em] = slot.end.split(':').map(Number);
-      const slotStartMins = sh * 60 + sm;
-      const slotEndMins = eh * 60 + em;
-
-      // Overlap calculation
-      if (startMins < slotEndMins && endMins > slotStartMins) {
+      if (startMins < slot.end && endMins > slot.start) {
         busySlots.add(`${dayChar}-${slot.id}`);
       }
     });
@@ -390,10 +388,12 @@ app.post('/api/schedule/sync/everytime', async (req, res) => {
       weeklySchedule
         .filter(s => s.day === etDay)
         .forEach(s => {
-          const start = new Date(targetDate);
-          start.setHours(s.startHour, s.startMin, 0, 0);
-          const end = new Date(targetDate);
-          end.setHours(s.endHour, s.endMin, 0, 0);
+          // Class times are KST — store as proper UTC by subtracting 9 hours
+          const dayMidnightUTC = Date.UTC(
+            targetDate.getUTCFullYear(), targetDate.getUTCMonth(), targetDate.getUTCDate()
+          );
+          const start = new Date(dayMidnightUTC + s.startHour * 3600000 + s.startMin * 60000 - KST_OFFSET_MS);
+          const end = new Date(dayMidnightUTC + s.endHour * 3600000 + s.endMin * 60000 - KST_OFFSET_MS);
           busyEvents.push({ start, end });
         });
     }
@@ -566,9 +566,9 @@ const IN_MEMORY_ROOMS = {};
 
 // 6. Create Room
 app.post('/api/rooms', async (req, res) => {
-  const { title, foodCategory, hostName, hostMajor, schedule } = req.body;
+  const { title, foodCategory, hostName, hostMajor, schedule, university, visibility, maxMembers } = req.body;
   const roomId = Math.random().toString(36).substring(2, 9);
-  
+
   const roomData = {
     id: roomId,
     title,
@@ -576,6 +576,11 @@ app.post('/api/rooms', async (req, res) => {
     status: 'matching',
     confirmedTime: '',
     confirmedRestaurant: null,
+    university: university || '',
+    hostMajor: hostMajor || '',
+    visibility: visibility || 'private',
+    maxMembers: maxMembers || 4,
+    createdAt: new Date().toISOString(),
     members: [
       { name: hostName, major: hostMajor, role: 'host', schedule }
     ]
@@ -597,9 +602,13 @@ app.post('/api/rooms', async (req, res) => {
       }
 
       const roomObj = new Room({
-        _id: new mongoose.Types.ObjectId(roomId.padEnd(24, '0')),
+        roomId,
         title,
         foodCategory,
+        university: roomData.university,
+        hostMajor: roomData.hostMajor,
+        visibility: roomData.visibility,
+        maxMembers: roomData.maxMembers,
         host: userObj._id,
         members: [{ user: userObj._id, role: 'host' }]
       });
@@ -621,19 +630,18 @@ app.post('/api/rooms', async (req, res) => {
   res.json({ success: true, roomId, room: roomData });
 });
 
-// 7. Get Room Details
-app.get('/api/rooms/:id', async (req, res) => {
-  const { id } = req.params;
+// Load a room from memory, falling back to MongoDB (e.g. after a server restart)
+async function loadRoom(id) {
   let room = IN_MEMORY_ROOMS[id];
-  
+
   if (!room && mongoose.connection.readyState === 1) {
     try {
-      const roomObjectId = id.padEnd(24, '0');
-      const roomObj = await Room.findById(roomObjectId).populate('host').populate('members.user');
+      const roomObj = await Room.findOne({ roomId: id }).populate('host').populate('members.user');
       if (roomObj) {
         const membersList = [];
         for (const m of roomObj.members) {
           const userObj = m.user;
+          if (!userObj) continue;
           const schedObj = await Schedule.findOne({ user: userObj._id, room: roomObj._id });
           const scheduleMap = {};
           if (schedObj && schedObj.freeSlots) {
@@ -656,6 +664,11 @@ app.get('/api/rooms/:id', async (req, res) => {
           status: roomObj.status,
           confirmedTime: roomObj.confirmedTime || '',
           confirmedRestaurant: roomObj.confirmedRestaurant || null,
+          university: roomObj.university || '',
+          hostMajor: roomObj.hostMajor || '',
+          visibility: roomObj.visibility || 'private',
+          maxMembers: roomObj.maxMembers || 4,
+          createdAt: roomObj.createdAt ? roomObj.createdAt.toISOString() : '',
           members: membersList
         };
         IN_MEMORY_ROOMS[id] = room;
@@ -664,6 +677,91 @@ app.get('/api/rooms/:id', async (req, res) => {
       console.warn('⚠️ MongoDB lookup failed:', err.message);
     }
   }
+
+  return room;
+}
+
+// 6.5 Public Room Listing (same university / same major)
+// NOTE: must be registered before /api/rooms/:id so 'public' isn't matched as an id
+app.get('/api/rooms/public', async (req, res) => {
+  const { university, major } = req.query;
+  if (!university) {
+    return res.status(400).json({ success: false, error: 'university query param is required' });
+  }
+
+  // A room is visible if: visibility 'university' + same university,
+  // or visibility 'major' + same university + same major
+  const isVisible = (room) => {
+    if (room.status !== 'matching') return false;
+    if (room.university !== university) return false;
+    if (room.visibility === 'university') return true;
+    if (room.visibility === 'major') return !!major && room.hostMajor === major;
+    return false;
+  };
+
+  const results = {};
+
+  // From MongoDB (survives restarts)
+  if (mongoose.connection.readyState === 1) {
+    try {
+      const query = {
+        status: 'matching',
+        university,
+        $or: [{ visibility: 'university' }]
+      };
+      if (major) {
+        query.$or.push({ visibility: 'major', hostMajor: major });
+      }
+      const roomObjs = await Room.find(query).sort({ createdAt: -1 }).limit(30).populate('host');
+      roomObjs.forEach(r => {
+        if (!r.roomId) return;
+        results[r.roomId] = {
+          id: r.roomId,
+          title: r.title,
+          foodCategory: r.foodCategory,
+          university: r.university,
+          hostMajor: r.hostMajor,
+          visibility: r.visibility,
+          maxMembers: r.maxMembers || 4,
+          memberCount: (r.members || []).length,
+          hostName: r.host ? r.host.name : '',
+          createdAt: r.createdAt ? r.createdAt.toISOString() : ''
+        };
+      });
+    } catch (err) {
+      console.warn('⚠️ MongoDB public room lookup failed:', err.message);
+    }
+  }
+
+  // Merge in-memory rooms (covers DB-less mode and very fresh rooms)
+  Object.values(IN_MEMORY_ROOMS).forEach(room => {
+    if (isVisible(room)) {
+      results[room.id] = {
+        id: room.id,
+        title: room.title,
+        foodCategory: room.foodCategory,
+        university: room.university,
+        hostMajor: room.hostMajor,
+        visibility: room.visibility,
+        maxMembers: room.maxMembers || 4,
+        memberCount: (room.members || []).length,
+        hostName: room.members && room.members[0] ? room.members[0].name : '',
+        createdAt: room.createdAt || ''
+      };
+    }
+  });
+
+  const rooms = Object.values(results).sort((a, b) =>
+    (b.createdAt || '').localeCompare(a.createdAt || '')
+  );
+
+  res.json({ success: true, rooms });
+});
+
+// 7. Get Room Details
+app.get('/api/rooms/:id', async (req, res) => {
+  const { id } = req.params;
+  const room = await loadRoom(id);
 
   if (!room) {
     return res.status(404).json({ success: false, error: 'Room not found' });
@@ -677,7 +775,7 @@ app.post('/api/rooms/:id/join', async (req, res) => {
   const { id } = req.params;
   const { name, major, schedule } = req.body;
 
-  let room = IN_MEMORY_ROOMS[id];
+  const room = await loadRoom(id);
   if (!room) {
     return res.status(404).json({ success: false, error: 'Room not found' });
   }
@@ -691,7 +789,6 @@ app.post('/api/rooms/:id/join', async (req, res) => {
 
   if (mongoose.connection.readyState === 1) {
     try {
-      const roomObjectId = id.padEnd(24, '0');
       let userObj = await User.findOne({ name });
       if (!userObj) {
         userObj = new User({
@@ -703,18 +800,22 @@ app.post('/api/rooms/:id/join', async (req, res) => {
         await userObj.save();
       }
 
-      await Room.findByIdAndUpdate(roomObjectId, {
-        $addToSet: { members: { user: userObj._id, role: 'participant' } }
-      });
-
-      await Schedule.findOneAndUpdate(
-        { user: userObj._id, room: roomObjectId },
-        { 
-          freeSlots: Object.keys(schedule).filter(k => schedule[k]),
-          updatedAt: Date.now()
-        },
-        { upsert: true }
+      const roomObj = await Room.findOneAndUpdate(
+        { roomId: id },
+        { $addToSet: { members: { user: userObj._id, role: 'participant' } } },
+        { new: true }
       );
+
+      if (roomObj) {
+        await Schedule.findOneAndUpdate(
+          { user: userObj._id, room: roomObj._id },
+          {
+            freeSlots: Object.keys(schedule).filter(k => schedule[k]),
+            updatedAt: Date.now()
+          },
+          { upsert: true }
+        );
+      }
 
       console.log(`💾 Saved participant ${name} to MongoDB.`);
     } catch (err) {
@@ -730,7 +831,7 @@ app.post('/api/rooms/:id/confirm', async (req, res) => {
   const { id } = req.params;
   const { time, restaurant } = req.body;
 
-  let room = IN_MEMORY_ROOMS[id];
+  const room = await loadRoom(id);
   if (!room) {
     return res.status(404).json({ success: false, error: 'Room not found' });
   }
@@ -741,8 +842,7 @@ app.post('/api/rooms/:id/confirm', async (req, res) => {
 
   if (mongoose.connection.readyState === 1) {
     try {
-      const roomObjectId = id.padEnd(24, '0');
-      await Room.findByIdAndUpdate(roomObjectId, {
+      await Room.findOneAndUpdate({ roomId: id }, {
         status: 'confirmed',
         confirmedTime: time,
         confirmedRestaurant: restaurant
