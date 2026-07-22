@@ -597,7 +597,7 @@ app.post('/api/rooms', async (req, res) => {
       }
 
       const roomObj = new Room({
-        _id: new mongoose.Types.ObjectId(roomId.padEnd(24, '0')),
+        roomId,
         title,
         foodCategory,
         host: userObj._id,
@@ -621,19 +621,18 @@ app.post('/api/rooms', async (req, res) => {
   res.json({ success: true, roomId, room: roomData });
 });
 
-// 7. Get Room Details
-app.get('/api/rooms/:id', async (req, res) => {
-  const { id } = req.params;
+// Load a room from memory, falling back to MongoDB (e.g. after a server restart)
+async function loadRoom(id) {
   let room = IN_MEMORY_ROOMS[id];
-  
+
   if (!room && mongoose.connection.readyState === 1) {
     try {
-      const roomObjectId = id.padEnd(24, '0');
-      const roomObj = await Room.findById(roomObjectId).populate('host').populate('members.user');
+      const roomObj = await Room.findOne({ roomId: id }).populate('host').populate('members.user');
       if (roomObj) {
         const membersList = [];
         for (const m of roomObj.members) {
           const userObj = m.user;
+          if (!userObj) continue;
           const schedObj = await Schedule.findOne({ user: userObj._id, room: roomObj._id });
           const scheduleMap = {};
           if (schedObj && schedObj.freeSlots) {
@@ -665,6 +664,14 @@ app.get('/api/rooms/:id', async (req, res) => {
     }
   }
 
+  return room;
+}
+
+// 7. Get Room Details
+app.get('/api/rooms/:id', async (req, res) => {
+  const { id } = req.params;
+  const room = await loadRoom(id);
+
   if (!room) {
     return res.status(404).json({ success: false, error: 'Room not found' });
   }
@@ -677,7 +684,7 @@ app.post('/api/rooms/:id/join', async (req, res) => {
   const { id } = req.params;
   const { name, major, schedule } = req.body;
 
-  let room = IN_MEMORY_ROOMS[id];
+  const room = await loadRoom(id);
   if (!room) {
     return res.status(404).json({ success: false, error: 'Room not found' });
   }
@@ -691,7 +698,6 @@ app.post('/api/rooms/:id/join', async (req, res) => {
 
   if (mongoose.connection.readyState === 1) {
     try {
-      const roomObjectId = id.padEnd(24, '0');
       let userObj = await User.findOne({ name });
       if (!userObj) {
         userObj = new User({
@@ -703,18 +709,22 @@ app.post('/api/rooms/:id/join', async (req, res) => {
         await userObj.save();
       }
 
-      await Room.findByIdAndUpdate(roomObjectId, {
-        $addToSet: { members: { user: userObj._id, role: 'participant' } }
-      });
-
-      await Schedule.findOneAndUpdate(
-        { user: userObj._id, room: roomObjectId },
-        { 
-          freeSlots: Object.keys(schedule).filter(k => schedule[k]),
-          updatedAt: Date.now()
-        },
-        { upsert: true }
+      const roomObj = await Room.findOneAndUpdate(
+        { roomId: id },
+        { $addToSet: { members: { user: userObj._id, role: 'participant' } } },
+        { new: true }
       );
+
+      if (roomObj) {
+        await Schedule.findOneAndUpdate(
+          { user: userObj._id, room: roomObj._id },
+          {
+            freeSlots: Object.keys(schedule).filter(k => schedule[k]),
+            updatedAt: Date.now()
+          },
+          { upsert: true }
+        );
+      }
 
       console.log(`💾 Saved participant ${name} to MongoDB.`);
     } catch (err) {
@@ -730,7 +740,7 @@ app.post('/api/rooms/:id/confirm', async (req, res) => {
   const { id } = req.params;
   const { time, restaurant } = req.body;
 
-  let room = IN_MEMORY_ROOMS[id];
+  const room = await loadRoom(id);
   if (!room) {
     return res.status(404).json({ success: false, error: 'Room not found' });
   }
@@ -741,8 +751,7 @@ app.post('/api/rooms/:id/confirm', async (req, res) => {
 
   if (mongoose.connection.readyState === 1) {
     try {
-      const roomObjectId = id.padEnd(24, '0');
-      await Room.findByIdAndUpdate(roomObjectId, {
+      await Room.findOneAndUpdate({ roomId: id }, {
         status: 'confirmed',
         confirmedTime: time,
         confirmedRestaurant: restaurant
