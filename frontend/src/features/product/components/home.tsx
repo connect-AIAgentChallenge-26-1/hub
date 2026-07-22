@@ -5,6 +5,10 @@ import { useRouter } from "next/navigation";
 import { ProductApi, withColdStartRetry } from "../api/client";
 import { ProductNotice } from "./product-shell";
 import { ArrowIcon, ShieldIcon, SparklesIcon } from "@/features/live-playground/components/icons";
+import {
+  reportClientError,
+  reportColdStartRecovered,
+} from "../telemetry/reporter";
 
 const examples = [
   "성수에서 2명이 조용히 대화할 수 있는 카페를 찾아줘. 흡연 장소는 제외해줘.",
@@ -37,11 +41,14 @@ export function ProductHome() {
       await withColdStartRetry(
         () => api.ensureSession(),
         () => setWakingServer(true),
+        () => true,
+        (elapsedMs) => reportColdStartRecovered(api, "home", elapsedMs),
       );
       setWakingServer(false);
       const draft = await api.createDraft(requestText.trim());
       router.push(`/recommendations/new/${draft.draftId}`);
     } catch (value) {
+      reportClientError(api, "home", value);
       setError(value instanceof Error ? value.message : "조건 초안을 만들지 못했습니다.");
       setWakingServer(false);
       setPending(false);

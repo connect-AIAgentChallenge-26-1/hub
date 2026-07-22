@@ -7,10 +7,17 @@ import { isLivePlaygroundEnabled } from "@/features/live-playground/server-polic
 describe("제품 배포 표면 정책", () => {
   afterEach(() => vi.unstubAllEnvs());
 
-  it("Mock API는 development/test에서만 열리고 production에서는 열 수 없다", () => {
+  it("Mock API는 development/test에서 열리고 production 기본값에서는 닫힌다", () => {
     expect(isProductMockApiEnabled("development")).toBe(true);
     expect(isProductMockApiEnabled("test")).toBe(true);
     expect(isProductMockApiEnabled("production")).toBe(false);
+  });
+
+  it("production E2E Mock은 명시적 opt-in과 loopback host가 모두 필요하다", () => {
+    expect(isProductMockApiEnabled("production", "true", "127.0.0.1")).toBe(true);
+    expect(isProductMockApiEnabled("production", "true", "localhost")).toBe(true);
+    expect(isProductMockApiEnabled("production", "false", "127.0.0.1")).toBe(false);
+    expect(isProductMockApiEnabled("production", "true", "placepick.example.com")).toBe(false);
   });
 
   it("production Mock route는 opt-in이 없으면 실제로 404를 반환한다", async () => {
@@ -23,9 +30,10 @@ describe("제품 배포 표면 정책", () => {
     expect(response.status).toBe(404);
   });
 
-  it("Engineering Playground는 development 전용이고 production에서는 열 수 없다", () => {
+  it("Engineering Playground는 production 기본값에서 닫히고 E2E build에서만 열린다", () => {
     expect(isLivePlaygroundEnabled("development")).toBe(true);
     expect(isLivePlaygroundEnabled("production")).toBe(false);
+    expect(isLivePlaygroundEnabled("production", "true")).toBe(true);
   });
 
   it("build-info는 Vercel SHA를 gitSha로 우선 노출한다", async () => {

@@ -7,6 +7,12 @@ import type { ProductJob } from "../api/types";
 import { ProductPlaceCard } from "./place-card";
 import { ErrorPanel, LoadingPanel } from "./product-shell";
 import { CheckIcon } from "@/features/live-playground/components/icons";
+import {
+  emitProductTelemetry,
+  reportClientError,
+  reportColdStartRecovered,
+} from "../telemetry/reporter";
+import { explorationRound, viewportClass } from "../telemetry/contract";
 
 export function RecommendationResult({ jobId }: { jobId: string }) {
   const api = useMemo(() => new ProductApi(), []);
@@ -25,6 +31,7 @@ export function RecommendationResult({ jobId }: { jobId: string }) {
       () => api.getRecommendation(jobId),
       () => active && setColdStart(true),
       () => active,
+      (elapsedMs) => reportColdStartRecovered(api, "result", elapsedMs),
     ).then((value) => {
       if (!active) return;
       setColdStart(false);
@@ -33,7 +40,22 @@ export function RecommendationResult({ jobId }: { jobId: string }) {
         return;
       }
       setJob(value);
-    }).catch((value) => active && setLoadError(value));
+      if (value.partial) {
+        void emitProductTelemetry(api, {
+          name: "partialRecommendationShown",
+          context: {
+            resultCount: value.resultCount === 1 ? "1" : "2",
+            explorationRound: explorationRound(value.explorationRound),
+            viewportClass: viewportClass(),
+          },
+        });
+      }
+    }).catch((value) => {
+      if (active) {
+        reportClientError(api, "result", value);
+        setLoadError(value);
+      }
+    });
     return () => { active = false; };
   }, [api, jobId, router]);
 
@@ -59,11 +81,19 @@ export function RecommendationResult({ jobId }: { jobId: string }) {
     setAction("ALTERNATIVE");
     setActionError(null);
     try {
+      void emitProductTelemetry(api, {
+        name: "alternativeRecommendationRequested",
+        context: {
+          explorationRound: explorationRound(job?.explorationRound ?? 0),
+          viewportClass: viewportClass(),
+        },
+      });
       const accepted = await api.startAlternative(jobId);
       router.push(
         `/recommendations/${accepted.jobId}/progress?sourceJobId=${encodeURIComponent(jobId)}`,
       );
     } catch (value) {
+      reportClientError(api, "result", value);
       actionLock.current = false;
       setAction(null);
       setActionError(value);

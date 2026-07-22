@@ -36,6 +36,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestClient;
+import io.opentelemetry.api.OpenTelemetry;
 import org.springframework.web.client.RestClientException;
 
 /**
@@ -96,6 +97,7 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
     private final String model;
     private final int maxResponseBytes;
     private final boolean trustLinkedGatewayErrors;
+    private final LlmTokenUsageSink tokenUsageSink;
 
     private EliceConditionExtractionClient(
         RestClient restClient,
@@ -103,7 +105,8 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         URI chatEndpoint,
         String model,
         int maxResponseBytes,
-        boolean trustLinkedGatewayErrors
+        boolean trustLinkedGatewayErrors,
+        LlmTokenUsageSink tokenUsageSink
     ) {
         this.restClient = restClient;
         this.objectMapper = objectMapper;
@@ -111,6 +114,7 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         this.model = model;
         this.maxResponseBytes = maxResponseBytes;
         this.trustLinkedGatewayErrors = trustLinkedGatewayErrors;
+        this.tokenUsageSink = Objects.requireNonNull(tokenUsageSink, "tokenUsageSink");
     }
 
     public static EliceConditionExtractionClient create(
@@ -127,6 +131,27 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
             RESPONSE_TIMEOUT,
             MAX_RESPONSE_BYTES,
             false
+        );
+    }
+
+    public static EliceConditionExtractionClient createObserved(
+        URI chatBaseUrl,
+        String token,
+        String model,
+        OpenTelemetry openTelemetry,
+        LlmTokenUsageSink tokenUsageSink
+    ) {
+        requireApprovedBaseUrl(chatBaseUrl);
+        return createValidated(
+            chatBaseUrl,
+            token,
+            model,
+            CONNECT_TIMEOUT,
+            RESPONSE_TIMEOUT,
+            MAX_RESPONSE_BYTES,
+            false,
+            openTelemetry,
+            tokenUsageSink
         );
     }
 
@@ -159,6 +184,30 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         int maxResponseBytes,
         boolean trustLinkedGatewayErrors
     ) {
+        return createValidated(
+            chatBaseUrl,
+            token,
+            model,
+            connectTimeout,
+            responseTimeout,
+            maxResponseBytes,
+            trustLinkedGatewayErrors,
+            null,
+            LlmTokenUsageSink.noop()
+        );
+    }
+
+    private static EliceConditionExtractionClient createValidated(
+        URI chatBaseUrl,
+        String token,
+        String model,
+        Duration connectTimeout,
+        Duration responseTimeout,
+        int maxResponseBytes,
+        boolean trustLinkedGatewayErrors,
+        OpenTelemetry openTelemetry,
+        LlmTokenUsageSink tokenUsageSink
+    ) {
         requireCredential(token);
         if (!MODEL.equals(model)) {
             throw new IllegalArgumentException("Condition extraction model must match the pin.");
@@ -169,18 +218,26 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
             throw new IllegalArgumentException("LLM response byte limit is invalid.");
         }
 
-        RestClient restClient = DirectProviderRestClientFactory.bearerJson(
-            token,
-            connectTimeout,
-            responseTimeout
-        );
+        RestClient restClient = openTelemetry == null
+            ? DirectProviderRestClientFactory.bearerJson(
+                token,
+                connectTimeout,
+                responseTimeout
+            )
+            : DirectProviderRestClientFactory.bearerJson(
+                token,
+                connectTimeout,
+                responseTimeout,
+                openTelemetry
+            );
         return new EliceConditionExtractionClient(
             restClient,
             strictObjectMapper(),
             URI.create(chatBaseUrl.toString() + CHAT_SUFFIX),
             model,
             maxResponseBytes,
-            trustLinkedGatewayErrors
+            trustLinkedGatewayErrors,
+            tokenUsageSink
         );
     }
 
@@ -439,7 +496,8 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         if (content == null || !content.isTextual()) {
             throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_CONTENT);
         }
-        validateUsage(root.get("usage"), httpStatus);
+        TokenUsage usage = validateUsage(root.get("usage"), httpStatus);
+        tokenUsageSink.record("condition", usage.input(), usage.output());
         return content.textValue();
     }
 
@@ -562,7 +620,7 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         return List.copyOf(exclusions);
     }
 
-    private static void validateUsage(JsonNode usage, int httpStatus) {
+    private static TokenUsage validateUsage(JsonNode usage, int httpStatus) {
         if (usage == null || !usage.isObject()) {
             throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_USAGE);
         }
@@ -584,6 +642,10 @@ public final class EliceConditionExtractionClient implements ConditionExtraction
         if ((long) input + output != total) {
             throw invalidResponse(httpStatus, LlmProviderFailureStage.CHAT_USAGE);
         }
+        return new TokenUsage(input, output);
+    }
+
+    private record TokenUsage(int input, int output) {
     }
 
     private static Map<String, Object> objectSchema(

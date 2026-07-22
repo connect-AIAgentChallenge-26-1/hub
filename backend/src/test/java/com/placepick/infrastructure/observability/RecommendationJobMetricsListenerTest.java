@@ -79,6 +79,7 @@ class RecommendationJobMetricsListenerTest {
         metrics.jobStage(UUID.randomUUID().toString());
         metrics.jobOutcome("request-specific-value", false);
         metrics.rateLimitRejected("client-specific-value");
+        metrics.securityRejected("client-specific-value");
         metrics.deadLetter("provider-body-value");
 
         assertThat(registry.get("placepick.job.stage.events")
@@ -88,6 +89,8 @@ class RecommendationJobMetricsListenerTest {
             .counter().count()).isEqualTo(1.0);
         assertThat(registry.get("placepick.rate.limit.rejected")
             .tag("scope", "unknown").counter().count()).isEqualTo(1.0);
+        assertThat(registry.get("placepick.security.rejections")
+            .tag("reason", "unknown").counter().count()).isEqualTo(1.0);
         assertThat(registry.get("placepick.stream.dlq")
             .tag("reason", "unknown").counter().count()).isEqualTo(1.0);
     }

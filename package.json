@@ -15,9 +15,12 @@
     "docs:check": "npm run docs:lint && npm run docs:validate",
     "docs:test": "node --test tools/docs/tests/*.test.mjs",
     "docs:links:external": "node tools/docs/external-links.mjs",
+    "observability:validate": "node tools/observability/validate.mjs",
+    "observability:test": "node --test tools/observability/tests/*.test.mjs",
+    "observability:check": "npm run observability:validate && npm run observability:test",
     "frontend:check": "npm run check --workspace @placepick/frontend",
     "frontend:e2e": "npm run test:e2e --workspace @placepick/frontend",
-    "test": "npm run docs:test"
+    "test": "npm run docs:test && npm run observability:test"
   },
   "overrides": {
     "postcss": "8.5.19",

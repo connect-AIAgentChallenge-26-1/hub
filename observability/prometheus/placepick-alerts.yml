@@ -1,21 +1,32 @@
 groups:
-  - name: placepick-invariant-signals
+  - name: placepick-immediate-operational-signals
     rules:
-      - alert: PlacePickDlqDetected
-        expr: sum(increase(placepick_stream_dlq_total[10m])) > 0
-        for: 1m
+      - alert: PlacePickTelemetryMissing
+        expr: |
+          absent_over_time(process_uptime_seconds{application="placepick-backend"}[10m])
+          and on()
+          absent_over_time(process_uptime_seconds{service_name="placepick-backend"}[10m])
+        for: 2m
         labels:
-          severity: warning
+          severity: critical
         annotations:
-          summary: Recommendation stream event entered the DLQ
+          summary: 플레이스픽 백엔드 텔레메트리가 10분 동안 수집되지 않았습니다
+          runbook: RUN-0007
+      - alert: PlacePickReadinessDown
+        expr: placepick_readiness == 0
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: 플레이스픽 백엔드 readiness가 DOWN 상태입니다
           runbook: RUN-0007
       - alert: PlacePickProviderAuthenticationFailed
-        expr: sum(increase(placepick_provider_calls_total{outcome="authentication_failed"}[10m])) > 0
+        expr: sum(increase(placepick_provider_calls_total{outcome="authentication_failed"}[5m])) > 0
         for: 1m
         labels:
-          severity: warning
+          severity: critical
         annotations:
-          summary: A provider rejected the configured credential
+          summary: 외부 Provider가 설정된 자격증명을 거부했습니다
           runbook: RUN-0007
       - alert: PlacePickProviderQuotaPressure
         expr: sum(increase(placepick_provider_quota_protected_total[10m])) > 0
@@ -23,5 +34,135 @@ groups:
         labels:
           severity: warning
         annotations:
-          summary: A provider reported quota or rate-limit pressure
+          summary: 외부 Provider가 quota 또는 rate-limit 압력을 반환했습니다
+          runbook: RUN-0007
+      - alert: PlacePickDlqDetected
+        expr: sum(increase(placepick_stream_dlq_total[10m])) > 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: 추천 Stream 이벤트가 DLQ에 진입했습니다
+          runbook: RUN-0007
+      - alert: PlacePickOutboxBacklog
+        expr: placepick_outbox_pending > 0 and placepick_outbox_oldest_age_seconds > 120
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: 미발행 Outbox 이벤트의 가장 오래된 대기 시간이 2분을 넘었습니다
+          runbook: RUN-0007
+      - alert: PlacePickStreamBacklog
+        expr: placepick_stream_pending > 0 and placepick_stream_oldest_age_seconds > 120
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: Redis Stream pending 이벤트의 가장 오래된 대기 시간이 2분을 넘었습니다
+          runbook: RUN-0007
+      - alert: PlacePickRecommendationJobStuck
+        expr: placepick_job_stuck > 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: 처리 제한 시간을 넘긴 추천 Job이 존재합니다
+          runbook: RUN-0007
+      - alert: PlacePickTelemetrySnapshotFailed
+        expr: sum by (source) (increase(placepick_telemetry_snapshot_total{outcome="failure"}[5m])) > 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: 운영 backlog snapshot 수집이 실패했습니다
+          runbook: RUN-0007
+      - alert: PlacePickTelemetrySnapshotStale
+        expr: |
+          (
+            time() - placepick_telemetry_snapshot_last_success_timestamp_seconds
+          ) > 120
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: 운영 backlog snapshot이 2분 넘게 갱신되지 않았습니다
+          runbook: RUN-0007
+
+  - name: placepick-volume-gated-quality-signals
+    rules:
+      - alert: PlacePickCandidateZeroRateHigh
+        expr: |
+          (
+            sum(increase(placepick_recommendation_candidate_zero_total[15m]))
+            /
+            sum(increase(placepick_job_outcomes_total[15m]))
+          ) > 0.05
+          and sum(increase(placepick_job_outcomes_total[15m])) >= 20
+        for: 5m
+        labels:
+          severity: warning
+          sample_gate: "20"
+        annotations:
+          summary: 최근 15분 추천 중 후보 0건 비율이 5%를 넘었습니다
+          runbook: RUN-0007
+      - alert: PlacePickPartialRecommendationRateHigh
+        expr: |
+          (
+            sum(increase(placepick_recommendation_results_total{partial="true"}[15m]))
+            /
+            sum(increase(placepick_recommendation_results_total[15m]))
+          ) > 0.10
+          and sum(increase(placepick_recommendation_results_total[15m])) >= 20
+        for: 5m
+        labels:
+          severity: warning
+          sample_gate: "20"
+        annotations:
+          summary: 최근 15분 추천 중 부분 결과 비율이 10%를 넘었습니다
+          runbook: RUN-0007
+      - alert: PlacePickReasonFallbackRateHigh
+        expr: |
+          (
+            sum(increase(placepick_recommendation_reason_candidates_total{source="template"}[15m]))
+            /
+            sum(increase(placepick_recommendation_reason_candidates_total[15m]))
+          ) > 0.05
+          and sum(increase(placepick_recommendation_reason_candidates_total[15m])) >= 20
+        for: 5m
+        labels:
+          severity: warning
+          sample_gate: "20"
+        annotations:
+          summary: 최근 15분 추천 이유의 템플릿 대체 비율이 5%를 넘었습니다
+          runbook: RUN-0007
+      - alert: PlacePickProviderErrorRateHigh
+        expr: |
+          (
+            sum(increase(placepick_provider_calls_total{outcome=~"invalid_response|unavailable|timeout|provider_error|unexpected_error"}[15m]))
+            /
+            sum(increase(placepick_provider_calls_total[15m]))
+          ) > 0.10
+          and sum(increase(placepick_provider_calls_total[15m])) >= 20
+        for: 5m
+        labels:
+          severity: warning
+          sample_gate: "20"
+        annotations:
+          summary: 최근 15분 외부 Provider 오류 비율이 10%를 넘었습니다
+          runbook: RUN-0007
+      - alert: PlacePickHttpP95LatencyHigh
+        expr: |
+          histogram_quantile(
+            0.95,
+            sum by (le) (
+              rate(http_server_requests_seconds_bucket{uri!~"/actuator/.*"}[10m])
+            )
+          ) > 5
+          and sum(increase(http_server_requests_seconds_count{uri!~"/actuator/.*"}[10m])) >= 20
+        for: 5m
+        labels:
+          severity: warning
+          sample_gate: "20"
+        annotations:
+          summary: 최근 10분 사용자 HTTP 요청의 p95 지연이 5초를 넘었습니다
           runbook: RUN-0007

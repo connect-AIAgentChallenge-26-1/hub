@@ -66,7 +66,9 @@ public class RecommendationJobController {
                 session.id(),
                 body.draftId(),
                 idempotencyKey,
-                traceId(request)
+                traceId(request),
+                requestAttribute(request, TraceIdFilter.TRACEPARENT_ATTRIBUTE),
+                requestAttribute(request, TraceIdFilter.TRACESTATE_ATTRIBUTE)
             )
         );
         URI location = URI.create("/api/v1/recommendations/" + submission.jobId());
@@ -102,7 +104,9 @@ public class RecommendationJobController {
                 session.id(),
                 jobId,
                 idempotencyKey,
-                traceId(request)
+                traceId(request),
+                requestAttribute(request, TraceIdFilter.TRACEPARENT_ATTRIBUTE),
+                requestAttribute(request, TraceIdFilter.TRACESTATE_ATTRIBUTE)
             )
         );
         URI location = URI.create("/api/v1/recommendations/" + submission.jobId());
@@ -154,6 +158,11 @@ public class RecommendationJobController {
     private static String traceId(HttpServletRequest request) {
         Object value = request.getAttribute(TraceIdFilter.REQUEST_ATTRIBUTE);
         return value instanceof String traceId ? traceId : "unavailable";
+    }
+
+    private static String requestAttribute(HttpServletRequest request, String name) {
+        Object value = request.getAttribute(name);
+        return value instanceof String text && !text.isBlank() ? text : null;
     }
 
     public record CreateJobRequest(@NotNull UUID draftId) {

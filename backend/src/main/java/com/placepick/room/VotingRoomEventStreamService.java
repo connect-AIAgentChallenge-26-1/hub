@@ -50,6 +50,9 @@ public class VotingRoomEventStreamService {
             0L,
             emitter
         );
+        if (requestedLastEventId != null) {
+            registry.markResumed(registration);
+        }
         VotingRoomService.RoomSubscriptionContext state;
         try {
             state = roomService.subscription(shareToken, sessionId, organizerCapability);

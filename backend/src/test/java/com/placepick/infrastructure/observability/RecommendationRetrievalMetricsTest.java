@@ -71,14 +71,15 @@ class RecommendationRetrievalMetricsTest {
             false
         );
         metrics.previouslyExposedCandidatesExcluded(1);
-        new PlacePickMetrics(registry).jobResult(false, false, List.of(63));
+        new PlacePickMetrics(registry).jobResult(false, false, List.of(63, 58, 52));
 
         assertThat(registry.scrape())
             .contains("placepick_recommendation_retrieval_local_calls_total")
             .contains("placepick_recommendation_retrieval_local_items_count")
             .contains("placepick_recommendation_retrieval_previously_exposed_count")
             .contains("placepick_recommendation_results_total")
-            .contains("placepick_recommendation_result_score_count");
+            .contains("placepick_recommendation_result_score_count")
+            .contains("placepick_recommendation_result_score_margin_count");
     }
 
 }

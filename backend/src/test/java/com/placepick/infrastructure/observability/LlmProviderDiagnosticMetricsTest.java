@@ -100,6 +100,12 @@ class LlmProviderDiagnosticMetricsTest {
             .tag("attempts", "2")
             .tag("recovered", "true")
             .counter().count()).isEqualTo(1.0);
+
+        metrics.record("reason", 120, 30);
+        assertThat(registry.get("placepick.provider.llm.tokens")
+            .tag("operation", "reason")
+            .tag("direction", "input")
+            .counter().count()).isEqualTo(120.0);
     }
 
     @Test
@@ -154,6 +160,7 @@ class LlmProviderDiagnosticMetricsTest {
         LlmProviderDiagnosticMetrics metrics = new LlmProviderDiagnosticMetrics(registry);
 
         metrics.completed(successfulShadowResult());
+        metrics.record("condition", 42, 7);
 
         assertThat(registry.get("placepick.recommendation.preference.shadow.f1")
             .tag("matcher", "lexical")
@@ -192,6 +199,7 @@ class LlmProviderDiagnosticMetricsTest {
             metrics
         ).extract(new ExtractionCommand("합성 조건", "synthetic-session-0001"));
         metrics.completed(successfulShadowResult());
+        metrics.record("condition", 42, 7);
 
         assertThat(registry.scrape())
             .contains("placepick_provider_llm_outcomes_total")
@@ -201,6 +209,7 @@ class LlmProviderDiagnosticMetricsTest {
             .contains("placepick_recommendation_preference_shadow_evaluations_total")
             .contains("placepick_recommendation_preference_shadow_f1")
             .contains("placepick_recommendation_preference_shadow_false_positives");
+        assertThat(registry.scrape()).contains("placepick_provider_llm_tokens_total");
     }
 
     private static EmbeddingShadowEvaluationResult successfulShadowResult() {

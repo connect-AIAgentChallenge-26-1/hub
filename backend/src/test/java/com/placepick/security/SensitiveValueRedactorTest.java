@@ -61,4 +61,43 @@ class SensitiveValueRedactorTest {
             .doesNotContain(route)
             .contains("CHAT_PROXY_URL=<redacted>", "https://mlapi.run/<redacted-route>");
     }
+
+    @Test
+    void removesBasicGrafanaDatabaseRedisAndNaverProductionCredentials() {
+        String basic = "MTIzNDU2OnNlY3JldA==";
+        String message = "GRAFANA_OTLP_AUTHORIZATION=Basic " + basic
+            + " SPRING_DATASOURCE_PASSWORD=db-secret"
+            + " SPRING_DATASOURCE_URL=jdbc:postgresql://private-host/placepick"
+            + " SPRING_FLYWAY_URL='jdbc:postgresql://migration-host/placepick'"
+            + " SPRING_DATA_REDIS_URL=rediss://default:redis-secret@private-host:6379"
+            + " NAVER_API_HUB_KEY=naver-secret NAVER_API_HUB_KEY_ID=naver-id";
+
+        String redacted = SensitiveValueRedactor.redact(message);
+
+        assertThat(redacted)
+            .doesNotContain(
+                basic,
+                "db-secret",
+                "private-host",
+                "migration-host",
+                "redis-secret",
+                "naver-secret",
+                "naver-id"
+            )
+            .contains("GRAFANA_OTLP_AUTHORIZATION=<redacted>");
+    }
+
+    @Test
+    void removesCredentialWhenStructuredLoggerPassesOnlyTheValue() {
+        String basic = "MTIzNDU2OnNlY3JldA==";
+        String message = "{\"authorization\":\"Basic " + basic
+            + "\",\"proxy_token\":\"proxy secret with spaces\"}";
+
+        String redacted = SensitiveValueRedactor.redact(message);
+
+        assertThat(redacted)
+            .doesNotContain(basic, "proxy secret with spaces")
+            .contains("\"authorization\":\"<redacted>\"")
+            .contains("\"proxy_token\":\"<redacted>\"");
+    }
 }

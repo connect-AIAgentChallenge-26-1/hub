@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
+import { WebVitalsReporter } from "@/features/product/telemetry/web-vitals-reporter";
 
 export const metadata: Metadata = {
   title: "PlacePick AI · 근거 기반 장소 추천",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="ko" data-scroll-behavior="smooth">
       <body>
+        <WebVitalsReporter />
         <a className="skip-link" href="#main-content">본문으로 건너뛰기</a>
         {children}
       </body>

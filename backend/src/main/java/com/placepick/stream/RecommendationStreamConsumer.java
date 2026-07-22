@@ -15,6 +15,7 @@ public class RecommendationStreamConsumer {
     private final int batchSize;
     private final int maximumAttempts;
     private final Duration pendingIdle;
+    private final RecommendationTraceContext traceContext;
 
     public RecommendationStreamConsumer(
         RecommendationStreamGateway gateway,
@@ -23,6 +24,26 @@ public class RecommendationStreamConsumer {
         int batchSize,
         int maximumAttempts,
         Duration pendingIdle
+    ) {
+        this(
+            gateway,
+            worker,
+            consumerName,
+            batchSize,
+            maximumAttempts,
+            pendingIdle,
+            RecommendationTraceContext.noOp()
+        );
+    }
+
+    public RecommendationStreamConsumer(
+        RecommendationStreamGateway gateway,
+        RecommendationJobWorker worker,
+        String consumerName,
+        int batchSize,
+        int maximumAttempts,
+        Duration pendingIdle,
+        RecommendationTraceContext traceContext
     ) {
         this.gateway = Objects.requireNonNull(gateway, "gateway");
         this.worker = Objects.requireNonNull(worker, "worker");
@@ -36,6 +57,7 @@ public class RecommendationStreamConsumer {
         this.batchSize = batchSize;
         this.maximumAttempts = maximumAttempts;
         this.pendingIdle = Objects.requireNonNull(pendingIdle, "pendingIdle");
+        this.traceContext = Objects.requireNonNull(traceContext, "traceContext");
     }
 
     public int pollOnce() {
@@ -51,7 +73,7 @@ public class RecommendationStreamConsumer {
                 Duration.ofMillis(100)
             ));
         }
-        records.forEach(this::process);
+        records.forEach(record -> traceContext.within(record, () -> process(record)));
         return records.size();
     }
 

@@ -196,6 +196,39 @@ PP-043에서 실제 image, migration, secret scope, 배포 SHA, 대표 E2E, cold
 - Naver와 Elice는 각각 기본 6·4 permit의 독립 bulkhead를 사용하고 후보별 이유 요청은
   한 Job에서 최대 3개만 병렬 실행한다. permit 대기·거부와 실제 호출 latency를 분리해
   동시성 거부의 0초 표본이 Provider 지연 분포를 왜곡하지 않게 한다.
+- HTTP 요청의 W3C context와 active span은 다음 비동기 경로로 이어진다.
+
+  ```text
+  Browser / HTTP traceparent
+    -> Spring API server span -> X-Trace-Id / Problem Details
+      -> PostgreSQL Outbox envelope v2(traceparent, tracestate)
+        -> Redis Streams
+          -> Worker consumer span
+            -> Naver·Elice safe CLIENT span + W3C carrier
+  ```
+
+  새 event는 envelope v2를 쓰고 기존 v1은 context가 없는 독립 consumer span으로 계속
+  처리한다. `recommendation.requested.v1`은 event 의미의 version이므로 envelope schema
+  version과 별개다. Job ID와 event ID는 trace·safe log 상관관계에만 쓰며 metric label에는
+  넣지 않는다.
+- 로컬은 `/actuator/prometheus`를 Prometheus가 scrape하고 Grafana가 조회한다. production은
+  Prometheus registry와 endpoint를 끄고 Spring Boot OTLP exporter가 metric·trace와 전용
+  safe logger의 구조화 log를 Grafana Cloud로 직접 push한다. exporter 실패는 사용자 요청과
+  Worker 성공 여부를 바꾸지 않지만 collector buffer가 없어 장애 구간 telemetry 유실은
+  허용하는 데모용 fail-open 경계다.
+- 주기적 snapshot은 DB의 미발행 Outbox 수·oldest age·stuck Job과 Redis consumer group에서
+  이미 전달됐지만 ACK되지 않은 PEL(pending entries list)의 수·oldest age를 bounded gauge로
+  갱신한다. 아직 consumer에 전달되지 않은 전체 stream lag를 뜻하지 않는다. 조회 실패는
+  마지막 gauge를 유지하고
+  `source=database|redis`, `outcome=success|failure`와 마지막 성공 시각으로 드러낸다. readiness,
+  stage별 지연, score 간격, 근거 수준, relay·Worker 결과, LLM token, SSE 수명주기와 비식별
+  client event도 low-cardinality metric으로 수집한다.
+- Grafana dashboard는 사용자 여정, 후보 검색, Provider, Outbox·Worker, runtime,
+  SSE·투표·보안, 프런트의 일곱 row로 구성한다. 즉시 신호와 최소 20표본 품질 경보를
+  분리하고 dashboard query·15개 alert를 정적 검사와 `promtool`로 검증한다.
+- 자연어·검색어·장소·주소·링크·Provider URL/body, cookie와 token은 metric·log·trace에
+  넣지 않는다. 클라이언트 진단 event도 event별 폐쇄형 context만 수락한다. 실제 값은
+  로컬 Live Playground 화면에서만 확인한다.
 - `make check`는 실제 Provider를 호출하지 않고 문서·secret·정책까지 한 번 검증한다.
 - 직접 실제 Provider 세 시나리오와 로컬 정식 제품 사용자 여정은 CASE-0002로 검증했다.
   이 증거의 이유 생성 경계는 당시 v2 batch이며, 현재 후보별 v3의 실제 품질 campaign과

@@ -1,6 +1,7 @@
 package com.placepick.web;
 
 import com.placepick.web.ApiException.FieldViolation;
+import com.placepick.infrastructure.observability.PlacePickMetrics;
 import com.placepick.recommendation.job.RecommendationJobErrorCode;
 import com.placepick.recommendation.job.RecommendationJobException;
 import com.placepick.security.RateLimitExceededException;
@@ -9,8 +10,8 @@ import jakarta.validation.ConstraintViolationException;
 import java.net.URI;
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 import org.springframework.http.HttpHeaders;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -32,6 +33,16 @@ import org.springframework.web.servlet.resource.NoResourceFoundException;
 public final class ApiExceptionHandler {
 
     private static final String PROBLEM_BASE = "https://placepick.dev/problems/";
+    private final PlacePickMetrics metrics;
+
+    public ApiExceptionHandler() {
+        this.metrics = null;
+    }
+
+    @Autowired
+    public ApiExceptionHandler(PlacePickMetrics metrics) {
+        this.metrics = metrics;
+    }
 
     @ExceptionHandler(ApiException.class)
     ResponseEntity<ProblemDetail> handleApi(ApiException exception, HttpServletRequest request) {
@@ -185,6 +196,7 @@ public final class ApiExceptionHandler {
         List<FieldViolation> fieldErrors,
         HttpServletRequest request
     ) {
+        recordSecurityRejection(errorCode);
         ProblemDetail problem = ProblemDetail.forStatusAndDetail(status, detail);
         problem.setTitle(status.getReasonPhrase());
         problem.setType(URI.create(PROBLEM_BASE + problemSlug(errorCode)));
@@ -201,9 +213,24 @@ public final class ApiExceptionHandler {
             .body(problem);
     }
 
+    private void recordSecurityRejection(ApiErrorCode errorCode) {
+        if (metrics == null) {
+            return;
+        }
+        switch (errorCode) {
+            case SESSION_REQUIRED -> metrics.securityRejected("session");
+            case CSRF_INVALID -> metrics.securityRejected("csrf");
+            case ORIGIN_NOT_ALLOWED -> metrics.securityRejected("origin");
+            case ORGANIZER_REQUIRED -> metrics.securityRejected("organizer");
+            case IDEMPOTENCY_KEY_REUSED -> metrics.securityRejected("idempotency");
+            default -> {
+            }
+        }
+    }
+
     private String traceId(HttpServletRequest request) {
         Object traceId = request.getAttribute(TraceIdFilter.REQUEST_ATTRIBUTE);
-        return traceId instanceof String value ? value : UUID.randomUUID().toString();
+        return traceId instanceof String value ? value : "unavailable";
     }
 
     private String problemSlug(ApiErrorCode errorCode) {

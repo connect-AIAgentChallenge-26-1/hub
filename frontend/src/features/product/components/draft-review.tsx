@@ -11,6 +11,13 @@ import {
 } from "../api/types";
 import { ErrorPanel, LoadingPanel } from "./product-shell";
 import { ArrowIcon, CheckIcon } from "@/features/live-playground/components/icons";
+import {
+  changedConditionFields,
+  emitProductTelemetry,
+  reportClientError,
+  reportColdStartRecovered,
+} from "../telemetry/reporter";
+import { viewportClass } from "../telemetry/contract";
 
 const labels = { RESTAURANT: "음식점", CAFE: "카페", BAR: "주점", OTHER: "기타" } as const;
 type DraftFormCondition = Omit<ProductCondition, "placeType"> & {
@@ -33,6 +40,7 @@ export function DraftReview({ draftId }: { draftId: string }) {
       () => api.getDraft(draftId),
       () => active && setColdStart(true),
       () => active,
+      (elapsedMs) => reportColdStartRecovered(api, "draft", elapsedMs),
     ).then((value) => {
       if (!active) return;
       setColdStart(false);
@@ -65,7 +73,7 @@ export function DraftReview({ draftId }: { draftId: string }) {
     });
 
   async function confirm() {
-    if (validation || pending || !condition || condition.placeType === "") return;
+    if (validation || pending || !draft || !condition || condition.placeType === "") return;
     setPending(true);
     setError(null);
     try {
@@ -74,10 +82,17 @@ export function DraftReview({ draftId }: { draftId: string }) {
         placeType: condition.placeType,
         exclusions: exclusions.split(",").map((item) => item.trim()).filter(Boolean),
       };
+      for (const fieldName of changedConditionFields(draft.extractedCondition, confirmedCondition)) {
+        void emitProductTelemetry(api, {
+          name: "conditionFieldChanged",
+          context: { fieldName, viewportClass: viewportClass() },
+        });
+      }
       const confirmed = await api.confirmDraft(draftId, confirmedCondition);
       const accepted = await api.startRecommendation(confirmed.draftId);
       router.push(`/recommendations/${accepted.jobId}/progress`);
     } catch (value) {
+      reportClientError(api, "draft", value);
       setError(value);
       setPending(false);
     }

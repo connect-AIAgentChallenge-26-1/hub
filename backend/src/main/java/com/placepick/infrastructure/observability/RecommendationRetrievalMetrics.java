@@ -6,9 +6,11 @@ import com.placepick.recommendation.application.port.out.PlaceSearchQuery;
 import com.placepick.recommendation.application.port.out.PlaceSearchResult;
 import com.placepick.recommendation.application.trace.RecommendationTraceSink;
 import com.placepick.recommendation.domain.candidate.NormalizedCandidate;
+import com.placepick.recommendation.domain.scoring.RankedPlace;
 import io.micrometer.core.instrument.DistributionSummary;
 import io.micrometer.core.instrument.MeterRegistry;
 import java.util.Locale;
+import java.util.List;
 import org.springframework.stereotype.Component;
 
 /** Low-cardinality retrieval and ranking quality signals. Provider values are never labels. */
@@ -88,6 +90,22 @@ public final class RecommendationRetrievalMetrics implements RecommendationTrace
             .description("Previously exposed candidates excluded from an alternative search")
             .register(registry)
             .record(count);
+    }
+
+    @Override
+    public void finalRankingCompleted(List<RankedPlace> places, boolean degraded) {
+        String level = degraded ? "local_only" : "local_and_blog";
+        registry.counter(
+            "placepick.recommendation.evidence.candidates",
+            "level", level
+        ).increment(places.size());
+        DistributionSummary evidence = DistributionSummary.builder(
+                "placepick.recommendation.evidence.count"
+            )
+            .description("Validated Blog evidence count attached to one ranked candidate")
+            .tag("level", level)
+            .register(registry);
+        places.forEach(place -> evidence.record(place.evidence().size()));
     }
 
     private DistributionSummary summary(

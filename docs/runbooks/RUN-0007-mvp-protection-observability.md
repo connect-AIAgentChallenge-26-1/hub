@@ -28,6 +28,59 @@ retention delete 자체는 조건부 `DELETE`라 재실행에 멱등적이지만
 이 Runbook은 코드·Mock 검증 이후 실제 Prometheus/Grafana와 배포 프록시 경로를 확인하기
 전까지 `draft`다. 측정하지 않은 처리량과 경보 임계값은 성공 기준으로 주장하지 않는다.
 
+## production OTLP 설정과 자격 교체
+
+로컬 `make observe`는 `/actuator/prometheus`를 scrape한다. production은 Prometheus
+endpoint를 공개하지 않고 애플리케이션이 Grafana Cloud로 직접 OTLP push한다. Render
+secret에는 다음 값만 추가한다.
+
+| 변수 | 기준 |
+| --- | --- |
+| `GRAFANA_OTLP_ENDPOINT` | Grafana Cloud가 제공한 HTTPS `/otlp` base URL, query·userinfo 없음 |
+| `GRAFANA_OTLP_AUTHORIZATION` | Grafana Cloud가 제공한 `Basic ...` Authorization 전체 값 |
+| `PLACEPICK_TRACE_SAMPLING_PROBABILITY` | 0~1; 무료 데모 최초 확인은 기본 1.0, quota 확인 후 조정 |
+| `PLACEPICK_OTLP_METRICS_STEP` | 기본 30초; dashboard 지연과 무료 quota를 함께 보고 조정 |
+| `RENDER_GIT_COMMIT` | Render가 제공하는 정확한 40자리 배포 SHA |
+| `PLACEPICK_ROLE` | `api`, `worker`, `all` 중 하나; 무료 데모는 `all` |
+
+endpoint와 Authorization은 GitHub·Vercel·Git·Issue·PR·일반 로그에 복사하지 않는다.
+production 시작 guard는 endpoint·자격 형식·SHA·role을 검증하지만 Grafana Cloud 접속 성공을
+시작 조건으로 삼지는 않는다. exporter는 비동기로 동작하므로 전송 실패가 사용자 요청과
+Worker를 실패시키지 않는 대신, 별도 collector buffer가 없어 장애 구간 telemetry가 유실될
+수 있다.
+
+### 최초 수집 확인
+
+1. Render secret을 저장한 뒤 승인한 SHA를 배포하고 `/actuator/health/readiness`가 200인지
+   확인한다. production의 `/actuator/prometheus`가 노출되지 않는 것도 확인한다.
+2. Grafana Explore에서 `service.name=placepick-backend`, 실제 배포 SHA와 일치하는
+   `service.version`, `deployment.environment=production`, `placepick.role=all` resource로
+   검색한다.
+3. 합성 익명 세션 한 건으로 Draft와 추천 Job을 만든다. 응답 `X-Trace-Id`를 복사해 같은
+   trace의 API server span, Redis consumer span `placepick.recommendation.consume`, Naver·
+   Elice HTTP client span이 이어지는지 확인한다.
+4. Metrics에서 `placepick_readiness`, `placepick_outbox_pending`,
+   `placepick_stream_pending`, `placepick_job_stuck`, source별
+   `placepick_telemetry_snapshot_total`과
+   `placepick_telemetry_snapshot_last_success_timestamp_seconds`를 확인한다.
+5. Logs에서는 message가 `placepick.event`이고 event code가 폐쇄형인 Worker event만
+   OTLP로 들어오는지 확인한다. 자연어·검색어·장소·주소·URL·Provider body와 자격이 하나라도
+   보이면 검증을 중단하고 아래 사고 대응으로 이동한다.
+
+세 signal이 같은 release에서 2분 안에 보이지 않으면 운영 관측 완료로 표시하지 않는다.
+endpoint/auth 형식, Render outbound 통신, exporter timeout과 Grafana quota를 확인하되 사용자
+요청을 반복 실행해 quota를 늘리지 않는다.
+
+### Grafana 자격 교체
+
+1. Grafana Cloud에서 최소 telemetry write scope의 새 access policy token을 만든다.
+2. 원문을 터미널 history나 문서에 남기지 않고 Render의
+   `GRAFANA_OTLP_AUTHORIZATION`만 새 값으로 교체한다.
+3. 새 SHA를 배포해 위 최초 수집 확인을 수행한다.
+4. 새 signal의 release SHA와 시각을 확인한 뒤 이전 token을 폐기한다.
+5. 이전 token의 접근·사용 이력을 검토하고 유출 가능성이 있으면 관련 기간과 영향 범위를
+   남긴다. token 원문은 증거에 포함하지 않는다.
+
 ## 요청 rate limit
 
 - `/api/v1/**`의 `OPTIONS`를 제외한 요청에 session 기준 분당 60회와 IP 기준 분당
@@ -116,6 +169,8 @@ permit 거부는 실제 Provider 호출 지연이 아니므로 `placepick_provid
 | Blog 호출 결과 | `placepick_recommendation_retrieval_blog_*` | `outcome` |
 | 정상·부분·저하 결과 | `placepick_recommendation_results_total` | `partial`, `degraded` |
 | 최종 결과 수·점수 | `placepick_recommendation_result_count_*`, `placepick_recommendation_result_score_*` | `partial` |
+| Top 1·2 점수 간격 | `placepick_recommendation_result_score_margin_*` | 없음 |
+| 후보별 근거 수준·수 | `placepick_recommendation_evidence_candidates_total`, `placepick_recommendation_evidence_count_*` | `level` |
 | LLM Provider 진단 | `placepick_provider_llm_outcomes_total` | `provider`, `operation`, `error`, `stage`, `diagnostic` |
 | 조건 추출 최종 해석 | `placepick_recommendation_condition_resolutions_total` | `status`, `attempts`, `recovered`, `diagnostic` |
 | 서버 이유 검증 거부 | `placepick_provider_llm_validation_failures_total` | `operation`, `code` |
@@ -167,7 +222,17 @@ lexical/embedding holdout F1과 false positive gate를 함께 검토하고 별�
 
 ## 추천·Streams·SSE·투표 진단
 
-Grafana의 `PlacePick MVP Runtime` dashboard에서 다음 순서로 확인한다.
+Grafana의 `PlacePick MVP Runtime` dashboard는 다음 일곱 row를 이 순서로 제공한다.
+
+1. 사용자 여정과 품질 SLO
+2. 후보 검색 Funnel과 부분 결과
+3. Naver·Elice 호출·Token·Fallback
+4. Outbox·Redis·Worker
+5. DB·Redis·JVM·HTTP
+6. SSE·투표·보안
+7. 프런트 Web Vitals·Cold Start·Release SHA
+
+장애를 조사할 때는 다음 순서로 확인한다.
 
 1. `Job stage transitions`와 `Job outcomes and degraded completions`를 비교해 정체 stage와
    완료/실패/degraded 비율을 찾는다.
@@ -175,16 +240,41 @@ Grafana의 `PlacePick MVP Runtime` dashboard에서 다음 순서로 확인한다
 3. `DLQ events (15m)`가 0보다 크면 자동 재주입하지 않는다. poison reason, DB snapshot과
    처리 이력을 확인하고 원인을 수정한 새 SHA에서 event ID 멱등성을 검증한 뒤 재처리한다.
 4. `Active SSE connections`가 트래픽 종료 뒤 감소하지 않으면 emitter timeout·completion과
-   client reconnect 간격을 확인한다. resource ID를 metric label에 추가하지 않는다.
+   client reconnect 간격을 확인한다. opened·resumed·replayed·send failure·close reason과
+   connection lifetime p95를 같은 stream 종류 안에서 대조하고 resource ID를 metric label에
+   추가하지 않는다.
 5. `Vote contention (15m)`이 증가하면 `placepick_vote_write_seconds_*`와 DB lock 대기를 함께
    확인한다. DB unique constraint와 transaction을 우회하는 Redis 집계를 정본으로 만들지 않는다.
 
-초기에는 alert threshold를 임의 수치로 고정하지 않는다. 정상·장애 fixture 및 PP-034 부하
-실험에서 baseline을 얻은 뒤 연속 관측 구간, 최소 traffic 조건, false positive를 포함해
-성능·비율 경보 규칙을 별도 변경으로 승인한다. 현재 Prometheus에는 기준선이 필요 없는
-불변식 신호만 둔다. 10분 내 DLQ 유입, Provider 인증 실패, Provider quota/rate-limit 응답이
-각각 1분 이상 관측되면 warning 상태가 되고 이 Runbook으로 연결된다. Alertmanager와 외부
-메시지 전송은 아직 구성하지 않았으므로 `make observe`의 Prometheus Alerts 화면에서 확인한다.
+### Outbox·Stream backlog와 stuck Job
+
+- `placepick_outbox_pending > 0`이고 oldest age가 증가하면 DB에서 해당 event의 원문 payload를
+  출력하지 말고 relay 실행 여부, publish 결과 counter와 Redis 연결부터 확인한다. 원인을
+  수정하지 않은 채 outbox를 수동 published로 바꾸지 않는다.
+- `placepick_stream_pending > 0`이고 oldest age가 증가하면 consumer role·group, pending claim,
+  Worker 처리 시간과 DLQ를 확인한다. 이 값은 consumer group에 전달됐지만 ACK되지 않은 PEL이며
+  아직 전달되지 않은 전체 stream lag는 아니다. ACK를 먼저 보내거나 임의 새 event ID로
+  재발행하지 않는다.
+- `placepick_job_stuck > 0`이면 `ACCEPTED|PROCESSING` Job의 stage, outbox/stream 상태와 같은
+  trace를 대조한다. Job ID는 안전한 correlation 범위에서만 사용하고 metric label로 추가하지
+  않는다.
+- DB 또는 Redis snapshot counter의 `outcome=failure`가 증가하면 gauge는 마지막 성공값일 수
+  있다. `placepick_telemetry_snapshot_last_success_timestamp_seconds`의 source별 마지막 성공
+  시각도 함께 확인하며, 0으로 보인다는 이유만으로 backlog가 없다고 결론 내리지 않는다.
+
+원인을 수정한 새 SHA에서 event ID 멱등성, commit 뒤 ACK와 pending claim을 검증한 후에만
+재처리한다. DLQ는 자동 재주입하지 않는다.
+
+현재 15개 rule은 즉시 운영 신호와 표본 gate가 있는 품질 신호로 분리한다. 즉시 신호 10개는
+telemetry 중단, readiness DOWN, Provider 인증, quota 압력, DLQ, Outbox backlog, Stream
+backlog, stuck Job, snapshot 실패와 snapshot freshness 정체다. 품질 신호 5개는 후보 0건, 부분 결과, 이유 fallback, Provider 오류,
+HTTP p95이며 분모 표본이 최소 20개일 때만 평가한다. 이 비율과 5초 p95는 초기 데모 보호값이지
+실측 SLA가 아니다. 7일 또는 추천 100회 중 더 늦은 시점의 baseline과 false positive를 검토해
+조정한다.
+
+Alertmanager와 외부 메시지 전송은 아직 구성하지 않았으므로 로컬에서는 `make observe`의
+Prometheus Alerts 화면에서 확인한다. Grafana Cloud notification policy와 Synthetic
+Monitoring도 실제 계정에서 별도 구성·검증하기 전에는 완료로 표시하지 않는다.
 
 ## 만료 데이터 정리
 
@@ -211,12 +301,18 @@ API key 및 `rediss://user:password@host` 같은 URI userinfo를 최종 converte
 
 ## 검증과 rollback
 
-1. Java 17에서 `make check`로 단위·통합·문서·secret 검사를 통과시킨다.
-2. `make observe` 후 dashboard JSON provisioning과 Prometheus target을 확인한다.
+1. Java 17·Node 24에서 `make check`로 단위·통합·문서·secret 검사와 dashboard query,
+   15개 alert, `promtool check rules`·`promtool test rules`를 통과시킨다.
+2. `make observe` 후 7-row dashboard JSON provisioning, Prometheus target과 Alerts 화면을
+   확인한다.
 3. 합성 session으로 429·`Retry-After`, Provider Mock 오류, DLQ fixture, SSE 연결 해제와
    동시 투표를 재현한다. 실제 Provider 원문과 비밀은 사용하지 않는다.
-4. 실제 Vercel→Render 환경에서는 위 전달 주소 gate와 production origin/cookie/header를
-   별도로 확인한다.
-5. 회귀가 있으면 설정값만 무리하게 완화하지 말고 마지막 정상 SHA로 RUN-0006 롤백을 수행한다.
+4. 실제 Vercel→Render 환경에서는 위 전달 주소 gate, production origin/cookie/header와
+   production OTLP 최초 수집 절차를 별도로 확인한다.
+5. DB·Redis snapshot 조회 장애를 각각 주입해 source별 failure와 마지막 성공 시각 정체가
+   dashboard·alert에 나타나는지 확인한다. 별도로 exporter 장애를 주입해 사용자 요청·Worker는
+   성공하고 Grafana 수집 공백만 발생하는지 확인한다. 이는 telemetry 무손실을 검증하는 절차가
+   아니다.
+6. 회귀가 있으면 설정값만 무리하게 완화하지 말고 마지막 정상 SHA로 RUN-0006 롤백을 수행한다.
 
 검증 증거가 확보되기 전에는 이 문서를 `verified`로 변경하지 않는다.

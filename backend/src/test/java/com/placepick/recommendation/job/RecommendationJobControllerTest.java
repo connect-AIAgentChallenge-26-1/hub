@@ -40,12 +40,19 @@ class RecommendationJobControllerTest {
             sessionId,
             Instant.parse("2026-07-17T00:00:00Z")
         ));
-        when(request.getAttribute(TraceIdFilter.REQUEST_ATTRIBUTE)).thenReturn("trace-1");
+        when(request.getAttribute(TraceIdFilter.REQUEST_ATTRIBUTE))
+            .thenReturn("0123456789abcdef0123456789abcdef");
+        when(request.getAttribute(TraceIdFilter.TRACEPARENT_ATTRIBUTE))
+            .thenReturn("00-0123456789abcdef0123456789abcdef-0123456789abcdef-01");
+        when(request.getAttribute(TraceIdFilter.TRACESTATE_ATTRIBUTE))
+            .thenReturn("vendor=value");
         when(jobService.create(new CreateRecommendationJobCommand(
             sessionId,
             draftId,
             "idempotency-key-1",
-            "trace-1"
+            "0123456789abcdef0123456789abcdef",
+            "00-0123456789abcdef0123456789abcdef-0123456789abcdef-01",
+            "vendor=value"
         ))).thenReturn(new RecommendationJobSubmission(
             jobId,
             RecommendationJobStatus.ACCEPTED,
@@ -78,7 +85,9 @@ class RecommendationJobControllerTest {
             sessionId,
             draftId,
             "idempotency-key-1",
-            "trace-1"
+            "0123456789abcdef0123456789abcdef",
+            "00-0123456789abcdef0123456789abcdef-0123456789abcdef-01",
+            "vendor=value"
         ));
     }
 
@@ -97,12 +106,17 @@ class RecommendationJobControllerTest {
             sessionId,
             Instant.parse("2026-07-17T00:00:00Z")
         ));
-        when(request.getAttribute(TraceIdFilter.REQUEST_ATTRIBUTE)).thenReturn("trace-2");
+        when(request.getAttribute(TraceIdFilter.REQUEST_ATTRIBUTE))
+            .thenReturn("fedcba9876543210fedcba9876543210");
+        when(request.getAttribute(TraceIdFilter.TRACEPARENT_ATTRIBUTE))
+            .thenReturn("00-fedcba9876543210fedcba9876543210-fedcba9876543210-01");
         when(jobService.createAlternative(new CreateAlternativeRecommendationCommand(
             sessionId,
             sourceJobId,
             "alternative-key-1",
-            "trace-2"
+            "fedcba9876543210fedcba9876543210",
+            "00-fedcba9876543210fedcba9876543210-fedcba9876543210-01",
+            null
         ))).thenReturn(new RecommendationJobSubmission(
             alternativeJobId,
             RecommendationJobStatus.ACCEPTED,
@@ -135,7 +149,9 @@ class RecommendationJobControllerTest {
             sessionId,
             sourceJobId,
             "alternative-key-1",
-            "trace-2"
+            "fedcba9876543210fedcba9876543210",
+            "00-fedcba9876543210fedcba9876543210-fedcba9876543210-01",
+            null
         ));
     }
 

@@ -3,6 +3,8 @@ package com.placepick.web;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.placepick.security.RateLimitExceededException;
+import com.placepick.infrastructure.observability.PlacePickMetrics;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -49,6 +51,21 @@ class ApiExceptionHandlerRateLimitTest {
             .containsEntry("errorCode", "INTERNAL_ERROR")
             .containsEntry("traceId", "trace-safe");
         assertThat(response.getBody().getDetail()).doesNotContain("sensitive");
+    }
+
+    @Test
+    void recordsOnlyTheClosedSecurityReason() {
+        SimpleMeterRegistry meters = new SimpleMeterRegistry();
+        MockHttpServletRequest request = new MockHttpServletRequest("POST", "/api/v1/example");
+        request.setAttribute(TraceIdFilter.REQUEST_ATTRIBUTE, "trace-safe");
+
+        new ApiExceptionHandler(new PlacePickMetrics(meters)).handleApi(
+            new ApiException(HttpStatus.FORBIDDEN, ApiErrorCode.CSRF_INVALID, "safe"),
+            request
+        );
+
+        assertThat(meters.get("placepick.security.rejections")
+            .tag("reason", "csrf").counter().count()).isEqualTo(1.0);
     }
 
 }

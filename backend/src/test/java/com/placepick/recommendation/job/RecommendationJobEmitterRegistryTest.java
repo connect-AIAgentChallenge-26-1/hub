@@ -5,10 +5,12 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.Mockito.mock;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.placepick.infrastructure.observability.SseMetrics;
 import com.placepick.recommendation.condition.domain.ConfirmedRecommendationCondition;
 import com.placepick.recommendation.condition.domain.PlaceType;
 import com.placepick.recommendation.condition.domain.Preference;
 import com.placepick.security.RateLimitExceededException;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import java.io.IOException;
 import java.time.Clock;
 import java.time.Instant;
@@ -102,6 +104,48 @@ class RecommendationJobEmitterRegistryTest {
         registry.close();
     }
 
+    @Test
+    void recordsResumeSnapshotSendFailureCloseAndLifetime() {
+        SimpleMeterRegistry meters = new SimpleMeterRegistry();
+        RecommendationJobEventPublisher publisher = new RecommendationJobEventPublisher();
+        RecommendationJobEmitterRegistry registry = new RecommendationJobEmitterRegistry(
+            publisher,
+            mock(RecommendationJobRepository.class),
+            new ObjectMapper().findAndRegisterModules(),
+            Clock.fixed(NOW, ZoneOffset.UTC),
+            new SseMetrics(meters)
+        );
+        UUID jobId = UUID.randomUUID();
+        var registration = registry.register(
+            jobId,
+            UUID.randomUUID(),
+            4L,
+            new FailAfterFirstSseEmitter()
+        );
+
+        assertThat(registry.sendSnapshot(registration, snapshot(jobId))).isTrue();
+        registry.heartbeat();
+
+        assertThat(registry.activeConnectionCount()).isZero();
+        assertThat(meters.get("placepick.sse.connections.opened")
+            .tag("stream", "recommendation").counter().count()).isEqualTo(1.0d);
+        assertThat(meters.get("placepick.sse.connections.resumed")
+            .tag("stream", "recommendation").counter().count()).isEqualTo(1.0d);
+        assertThat(meters.get("placepick.sse.events.replayed")
+            .tag("stream", "recommendation").tag("kind", "snapshot")
+            .counter().count()).isEqualTo(1.0d);
+        assertThat(meters.get("placepick.sse.send.failures")
+            .tag("stream", "recommendation").tag("kind", "heartbeat")
+            .counter().count()).isEqualTo(1.0d);
+        assertThat(meters.get("placepick.sse.connections.closed")
+            .tag("stream", "recommendation").tag("reason", "send_failure")
+            .counter().count()).isEqualTo(1.0d);
+        assertThat(meters.get("placepick.sse.connection.lifetime")
+            .tag("stream", "recommendation").tag("reason", "send_failure")
+            .timer().count()).isEqualTo(1L);
+        registry.close();
+    }
+
     private String wireText(List<Object> event) {
         return event.stream()
             .filter(String.class::isInstance)
@@ -151,6 +195,17 @@ class RecommendationJobEmitterRegistryTest {
         public synchronized void send(SseEventBuilder builder) throws IOException {
             Set<DataWithMediaType> built = builder.build();
             events.add(built.stream().map(DataWithMediaType::getData).toList());
+        }
+    }
+
+    private static final class FailAfterFirstSseEmitter extends SseEmitter {
+        private int sends;
+
+        @Override
+        public void send(SseEventBuilder builder) throws IOException {
+            if (++sends > 1) {
+                throw new IOException("synthetic transport failure");
+            }
         }
     }
 }

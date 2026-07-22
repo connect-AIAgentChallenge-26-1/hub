@@ -72,7 +72,11 @@ export async function handleProductMock(
   method: string,
   path: string[],
 ): Promise<Response> {
-  if (!isProductMockApiEnabled()) {
+  if (!isProductMockApiEnabled(
+    process.env.NODE_ENV,
+    process.env.PLACEPICK_E2E_MOCK_API,
+    request.nextUrl.hostname,
+  )) {
     return new Response(null, { status: 404, headers: { "Cache-Control": "no-store" } });
   }
   try {
@@ -253,8 +257,17 @@ export async function handleProductMock(
 
 export function isProductMockApiEnabled(
   nodeEnvironment = process.env.NODE_ENV,
+  e2eOptIn = process.env.PLACEPICK_E2E_MOCK_API,
+  hostname?: string,
 ): boolean {
-  return nodeEnvironment === "development" || nodeEnvironment === "test";
+  if (nodeEnvironment === "development" || nodeEnvironment === "test") return true;
+  return nodeEnvironment === "production" &&
+    e2eOptIn === "true" &&
+    isLoopbackHost(hostname);
+}
+
+function isLoopbackHost(hostname: string | undefined): boolean {
+  return hostname === "127.0.0.1" || hostname === "localhost" || hostname === "::1";
 }
 
 function createSession(request: NextRequest): NextResponse {

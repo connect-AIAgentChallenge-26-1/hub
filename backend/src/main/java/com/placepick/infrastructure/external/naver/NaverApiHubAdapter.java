@@ -26,6 +26,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import io.opentelemetry.api.OpenTelemetry;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.web.client.ResourceAccessException;
@@ -65,6 +66,25 @@ public final class NaverApiHubAdapter implements PlaceSearchPort, BlogSearchPort
         return createWithValidatedBaseUrl(baseUrl, keyId, key, connectTimeout, readTimeout);
     }
 
+    public static NaverApiHubAdapter createObserved(
+        URI baseUrl,
+        String keyId,
+        String key,
+        Duration connectTimeout,
+        Duration readTimeout,
+        OpenTelemetry openTelemetry
+    ) {
+        requireOfficialBaseUrl(baseUrl);
+        return createWithValidatedBaseUrl(
+            baseUrl,
+            keyId,
+            key,
+            connectTimeout,
+            readTimeout,
+            openTelemetry
+        );
+    }
+
     static NaverApiHubAdapter createForTesting(
         URI baseUrl,
         String keyId,
@@ -83,13 +103,37 @@ public final class NaverApiHubAdapter implements PlaceSearchPort, BlogSearchPort
         Duration connectTimeout,
         Duration readTimeout
     ) {
+        return createWithValidatedBaseUrl(
+            baseUrl,
+            keyId,
+            key,
+            connectTimeout,
+            readTimeout,
+            null
+        );
+    }
+
+    private static NaverApiHubAdapter createWithValidatedBaseUrl(
+        URI baseUrl,
+        String keyId,
+        String key,
+        Duration connectTimeout,
+        Duration readTimeout,
+        OpenTelemetry openTelemetry
+    ) {
         requireCredential("NAVER API HUB key ID", keyId);
         requireCredential("NAVER API HUB key", key);
         requirePositiveTimeout("connect timeout", connectTimeout);
         requirePositiveTimeout("read timeout", readTimeout);
 
-        RestClient client = DirectProviderRestClientFactory
-            .jsonBuilder(connectTimeout, readTimeout)
+        RestClient.Builder builder = openTelemetry == null
+            ? DirectProviderRestClientFactory.jsonBuilder(connectTimeout, readTimeout)
+            : DirectProviderRestClientFactory.jsonBuilder(
+                connectTimeout,
+                readTimeout,
+                openTelemetry
+            );
+        RestClient client = builder
             .baseUrl(baseUrl.toString())
             .defaultHeader(KEY_ID_HEADER, keyId)
             .defaultHeader(KEY_HEADER, key)

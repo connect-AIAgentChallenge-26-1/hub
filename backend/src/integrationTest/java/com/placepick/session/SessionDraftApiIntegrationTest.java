@@ -113,6 +113,17 @@ class SessionDraftApiIntegrationTest {
     }
 
     @Test
+    void correlatesTheResponseWithAnIncomingW3cTrace() throws Exception {
+        String traceId = "0123456789abcdef0123456789abcdef";
+        String traceparent = "00-" + traceId + "-0123456789abcdef-01";
+
+        mockMvc.perform(post("/api/v1/anonymous-sessions")
+                .header("traceparent", traceparent))
+            .andExpect(status().isCreated())
+            .andExpect(header().string(TraceIdFilter.RESPONSE_HEADER, traceId));
+    }
+
+    @Test
     void enforcesCsrfAndReturnsRfc9457ProblemDetails() throws Exception {
         SessionClient session = createSession();
 

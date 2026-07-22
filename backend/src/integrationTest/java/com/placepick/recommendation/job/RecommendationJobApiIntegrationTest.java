@@ -13,6 +13,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.placepick.recommendation.job.infrastructure.RecommendationWorkerSchedules;
+import com.placepick.infrastructure.observability.OperationalBacklogMetrics;
+import io.micrometer.core.instrument.MeterRegistry;
 import com.placepick.session.SessionAuthenticator;
 import com.placepick.stream.RecommendationStreamGateway;
 import jakarta.servlet.http.Cookie;
@@ -28,6 +30,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.connection.stream.MapRecord;
+import org.springframework.data.redis.connection.stream.Consumer;
+import org.springframework.data.redis.connection.stream.StreamOffset;
+import org.springframework.data.redis.connection.stream.StreamReadOptions;
 import org.springframework.data.redis.connection.stream.ReadOffset;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.http.MediaType;
@@ -85,6 +90,12 @@ class RecommendationJobApiIntegrationTest {
 
     @Autowired
     private RecommendationWorkerSchedules workerSchedules;
+
+    @Autowired
+    private OperationalBacklogMetrics backlogMetrics;
+
+    @Autowired
+    private MeterRegistry meterRegistry;
 
     @DynamicPropertySource
     static void infrastructureProperties(DynamicPropertyRegistry registry) {
@@ -174,6 +185,81 @@ class RecommendationJobApiIntegrationTest {
         assertThat(id.find()).isTrue();
         assertThat(sse).contains("\"eventId\":\"" + id.group(1) + "\"");
         assertThat(sse).contains("\"status\":\"COMPLETED\"");
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    void exportsOutboxStreamAndStuckJobBacklogWithoutScrapeTimeIo() throws Exception {
+        String incomingTraceId = "abcdef0123456789abcdef0123456789";
+        SessionClient session = createSession();
+        UUID draftId = createAndConfirmDraft(session);
+        MvcResult accepted = mockMvc.perform(post("/api/v1/recommendations")
+                .cookie(session.cookie())
+                .header(SessionAuthenticator.CSRF_HEADER, session.csrfToken())
+                .header("Idempotency-Key", "backlog-metric-key-0001")
+                .header(
+                    "traceparent",
+                    "00-" + incomingTraceId + "-0123456789abcdef-01"
+                )
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"draftId\":\"" + draftId + "\"}"))
+            .andExpect(status().isAccepted())
+            .andReturn();
+        UUID jobId = UUID.fromString(objectMapper.readTree(
+            accepted.getResponse().getContentAsByteArray()
+        ).path("jobId").textValue());
+        JsonNode envelope = objectMapper.readTree(jdbcClient.sql("""
+                SELECT payload_json::text
+                FROM outbox_event
+                WHERE aggregate_id = :jobId
+                """)
+            .param("jobId", jobId)
+            .query(String.class)
+            .single());
+        assertThat(envelope.path("version").asInt()).isEqualTo(2);
+        assertThat(envelope.path("traceId").asText()).isEqualTo(incomingTraceId);
+        assertThat(envelope.path("traceparent").asText())
+            .startsWith("00-" + incomingTraceId + "-");
+        jdbcClient.sql("""
+                UPDATE recommendation_job
+                SET updated_at = CURRENT_TIMESTAMP - INTERVAL '10 minutes'
+                WHERE id = :jobId
+                """)
+            .param("jobId", jobId)
+            .update();
+        redisTemplate.opsForStream().add(MapRecord.create(
+            RecommendationStreamGateway.STREAM,
+            Map.of("eventJson", "{}", "attempt", "0")
+        ));
+        redisTemplate.opsForStream().read(
+            Consumer.from(RecommendationStreamGateway.GROUP, "metric-test-consumer"),
+            StreamReadOptions.empty().count(1),
+            StreamOffset.create(
+                RecommendationStreamGateway.STREAM,
+                ReadOffset.lastConsumed()
+            )
+        );
+
+        backlogMetrics.refresh();
+
+        assertThat(meterRegistry.get("placepick.outbox.pending").gauge().value())
+            .isEqualTo(1.0d);
+        assertThat(meterRegistry.get("placepick.stream.pending").gauge().value())
+            .isEqualTo(1.0d);
+        assertThat(meterRegistry.get("placepick.job.stuck").gauge().value())
+            .isEqualTo(1.0d);
+        assertThat(meterRegistry.get(
+                "placepick.telemetry.snapshot.last.success.timestamp.seconds"
+            )
+            .tag("source", "database")
+            .gauge()
+            .value()).isPositive();
+        assertThat(meterRegistry.get(
+                "placepick.telemetry.snapshot.last.success.timestamp.seconds"
+            )
+            .tag("source", "redis")
+            .gauge()
+            .value()).isPositive();
     }
 
     @Test

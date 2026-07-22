@@ -71,7 +71,11 @@ public class RecommendationStreamGateway {
             recoverMissingGroup(exception);
             records = readNewRecords(consumerName, count, block);
         }
-        return decode(records, consumerName);
+        List<RecommendationStreamRecord> decoded = decode(records, consumerName);
+        if (metrics != null && !decoded.isEmpty()) {
+            metrics.streamOperation("read");
+        }
+        return decoded;
     }
 
     public List<RecommendationStreamRecord> claimStale(
@@ -90,7 +94,7 @@ public class RecommendationStreamGateway {
         if (stale.isEmpty()) {
             return List.of();
         }
-        return decode(
+        List<RecommendationStreamRecord> decoded = decode(
             operations().claim(
                 STREAM,
                 GROUP,
@@ -100,14 +104,29 @@ public class RecommendationStreamGateway {
             ),
             consumerName
         );
+        if (metrics != null && !decoded.isEmpty()) {
+            metrics.streamOperation("claim");
+        }
+        return decoded;
     }
 
     public void acknowledge(String recordId) {
         operations().acknowledge(STREAM, GROUP, recordId);
+        if (metrics != null) {
+            metrics.streamOperation("ack");
+        }
     }
 
     public String retry(RecommendationStreamRecord record) {
-        return add(STREAM, writeJson(record.envelope()), record.attempt() + 1).getValue();
+        String recordId = add(
+            STREAM,
+            writeJson(record.envelope()),
+            record.attempt() + 1
+        ).getValue();
+        if (metrics != null) {
+            metrics.streamOperation("retry");
+        }
+        return recordId;
     }
 
     public String deadLetter(RecommendationStreamRecord record, String safeFailureCode) {
@@ -123,8 +142,34 @@ public class RecommendationStreamGateway {
         }
         if (metrics != null) {
             metrics.deadLetter("retry_exhausted");
+            metrics.streamOperation("dlq");
         }
         return id.getValue();
+    }
+
+    public StreamBacklogSnapshot backlog() {
+        ensureGroup();
+        var summary = operations().pending(STREAM, GROUP);
+        long total = summary.getTotalPendingMessages();
+        if (total == 0L) {
+            return new StreamBacklogSnapshot(0L, Duration.ZERO);
+        }
+        String oldestId = summary.minMessageId();
+        Duration oldestAge = Duration.ZERO;
+        var oldest = operations().pending(
+            STREAM,
+            GROUP,
+            Range.closed(oldestId, oldestId),
+            1L
+        );
+        for (var message : oldest) {
+            oldestAge = message.getElapsedTimeSinceLastDelivery();
+            break;
+        }
+        return new StreamBacklogSnapshot(total, oldestAge);
+    }
+
+    public record StreamBacklogSnapshot(long pending, Duration oldestAge) {
     }
 
     public void ensureGroup() {

@@ -24,16 +24,13 @@ export default defineConfig({
     },
   ],
   webServer: {
-    // Docker Desktop의 Windows bind mount에서는 Turbopack의 source map 쓰기가
-    // EPERM으로 실패할 수 있다. 브라우저 계약 검증은 동일한 Next 애플리케이션을
-    // 안정적인 Webpack 개발 서버로 기동한다.
-    command: "npm run dev:e2e",
+    // Windows bind mount에서 next dev의 cold compile이 동적 route 전환을 지연시킬 수
+    // 있으므로 E2E도 배포와 같은 고정 production standalone bundle로 검증한다.
+    command: "npm run serve:e2e",
     url: "http://127.0.0.1:3000",
-    reuseExistingServer: false,
-    // Windows bind mount의 최초 Webpack 컴파일 시간을 포함한다.
-    timeout: 240_000,
-    env: {
-      NEXT_PUBLIC_PLAYGROUND_API_MODE: "mock",
-    },
+    // 로컬에서 이미 동일한 Mock 개발 컨테이너를 실행 중일 때만 명시적으로 재사용한다.
+    // CI 기본값은 false여서 격리된 서버를 매번 새로 시작한다.
+    reuseExistingServer: process.env.PLAYWRIGHT_REUSE_SERVER === "true",
+    timeout: 300_000,
   },
 });

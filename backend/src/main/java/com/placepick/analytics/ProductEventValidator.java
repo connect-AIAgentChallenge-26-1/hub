@@ -22,7 +22,7 @@ import org.springframework.stereotype.Component;
 final class ProductEventValidator {
 
     static final int MAX_DECODED_JSON_BYTES = 4 * 1024;
-    private static final Set<String> CONTEXT_KEYS = Set.of(
+    private static final Set<String> RESOURCE_CONTEXT_KEYS = Set.of(
         "draftId",
         "jobId",
         "roomId",
@@ -30,6 +30,27 @@ final class ProductEventValidator {
         "viewportClass"
     );
     private static final Set<String> VIEWPORT_CLASSES = Set.of("mobile", "tablet", "desktop");
+    private static final Set<String> SURFACES = Set.of(
+        "home", "draft", "progress", "result", "place", "room", "roomResult"
+    );
+    private static final Map<String, Set<String>> CLOSED_VALUES = Map.ofEntries(
+        Map.entry("viewportClass", VIEWPORT_CLASSES),
+        Map.entry("metricName", Set.of("LCP", "INP", "CLS", "TTFB")),
+        Map.entry("metricRating", Set.of("good", "needs-improvement", "poor")),
+        Map.entry("metricValueBucket", Set.of("fast", "moderate", "slow")),
+        Map.entry("streamType", Set.of("recommendation", "room")),
+        Map.entry("recoveryMode", Set.of("snapshot", "stream")),
+        Map.entry("resultCount", Set.of("1", "2")),
+        Map.entry("explorationRound", Set.of("initial", "alternative")),
+        Map.entry("fieldName", Set.of(
+            "locationQuery", "placeType", "placeTypeDetail", "partySize",
+            "budgetRange", "preferences", "exclusions"
+        )),
+        Map.entry("surface", SURFACES),
+        Map.entry("durationBucket", Set.of("under10s", "10to30s", "30to90s")),
+        Map.entry("errorCategory", Set.of("api", "contract", "network", "sse", "unknown")),
+        Map.entry("recoverable", Set.of("true", "false"))
+    );
 
     private final ObjectMapper objectMapper;
 
@@ -51,7 +72,7 @@ final class ProductEventValidator {
                 "The product event name is not allowed."
             ));
         OffsetDateTime occurredAt = utcTimestamp(request.occurredAt());
-        Map<String, String> context = validatedContext(request.context());
+        Map<String, String> context = validatedContext(eventName, request.context());
         return new ValidatedProductEvent(eventId, eventName, occurredAt.toInstant(), context);
     }
 
@@ -74,15 +95,19 @@ final class ProductEventValidator {
         }
     }
 
-    private Map<String, String> validatedContext(JsonNode context) {
+    private Map<String, String> validatedContext(
+        ProductEventName eventName,
+        JsonNode context
+    ) {
         if (context == null || !context.isObject()) {
             throw invalid("context", "OBJECT_REQUIRED", "Context must be a JSON object.");
         }
 
         Map<String, String> validated = new LinkedHashMap<>();
+        Set<String> allowedKeys = allowedContextKeys(eventName);
         context.properties().forEach(entry -> {
             String key = entry.getKey();
-            if (!CONTEXT_KEYS.contains(key)) {
+            if (!allowedKeys.contains(key)) {
                 throw invalid(
                     "context." + key,
                     "NOT_ALLOWED",
@@ -98,12 +123,13 @@ final class ProductEventValidator {
                 );
             }
             String text = value.textValue();
-            if ("viewportClass".equals(key)) {
-                if (!VIEWPORT_CLASSES.contains(text)) {
+            Set<String> values = CLOSED_VALUES.get(key);
+            if (values != null) {
+                if (!values.contains(text)) {
                     throw invalid(
-                        "context.viewportClass",
+                        "context." + key,
                         "NOT_ALLOWED",
-                        "The viewport class is not allowed."
+                        "The context value is not allowed."
                     );
                 }
                 validated.put(key, text);
@@ -111,7 +137,46 @@ final class ProductEventValidator {
                 validated.put(key, canonicalUuidV4(text, "context." + key).toString());
             }
         });
+        if (isDiagnosticEvent(eventName) && !validated.keySet().equals(allowedKeys)) {
+            throw invalid(
+                "context",
+                "REQUIRED_FIELDS",
+                "All closed diagnostic context fields are required."
+            );
+        }
         return Map.copyOf(validated);
+    }
+
+    private static Set<String> allowedContextKeys(ProductEventName eventName) {
+        return switch (eventName) {
+            case WEB_VITAL -> Set.of(
+                "metricName", "metricRating", "metricValueBucket", "viewportClass"
+            );
+            case SSE_RECOVERED -> Set.of("streamType", "recoveryMode", "viewportClass");
+            case PARTIAL_RECOMMENDATION_SHOWN -> Set.of(
+                "resultCount", "explorationRound", "viewportClass"
+            );
+            case ALTERNATIVE_RECOMMENDATION_REQUESTED -> Set.of(
+                "explorationRound", "viewportClass"
+            );
+            case CONDITION_FIELD_CHANGED -> Set.of("fieldName", "viewportClass");
+            case COLD_START_RECOVERED -> Set.of(
+                "surface", "durationBucket", "viewportClass"
+            );
+            case CLIENT_ERROR -> Set.of(
+                "surface", "errorCategory", "recoverable", "viewportClass"
+            );
+            default -> RESOURCE_CONTEXT_KEYS;
+        };
+    }
+
+    private static boolean isDiagnosticEvent(ProductEventName eventName) {
+        return switch (eventName) {
+            case WEB_VITAL, SSE_RECOVERED, PARTIAL_RECOMMENDATION_SHOWN,
+                 ALTERNATIVE_RECOMMENDATION_REQUESTED, CONDITION_FIELD_CHANGED,
+                 COLD_START_RECOVERED, CLIENT_ERROR -> true;
+            default -> false;
+        };
     }
 
     private OffsetDateTime utcTimestamp(String value) {

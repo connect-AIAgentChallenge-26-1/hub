@@ -1,7 +1,5 @@
 {
-  "annotations": {
-    "list": []
-  },
+  "annotations": {"list": []},
   "editable": false,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
@@ -9,517 +7,307 @@
   "links": [],
   "panels": [
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "placepick-prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 0,
-        "y": 0
-      },
+      "collapsed": false,
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 0},
       "id": 1,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "targets": [
-        {
-          "expr": "process_uptime_seconds{application=\"placepick-backend\"}",
-          "legendFormat": "uptime",
-          "refId": "A"
-        }
-      ],
-      "title": "Process uptime",
-      "type": "stat"
+      "panels": [],
+      "title": "1. 사용자 여정과 품질 SLO",
+      "type": "row"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "placepick-prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "bytes"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 9,
-        "x": 6,
-        "y": 0
-      },
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "gridPos": {"h": 6, "w": 8, "x": 0, "y": 1},
       "id": 2,
-      "options": {
-        "legend": {
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
       "targets": [
-        {
-          "expr": "sum(jvm_memory_used_bytes{application=\"placepick-backend\",area=\"heap\"})",
-          "legendFormat": "heap used",
-          "refId": "A"
-        },
-        {
-          "expr": "sum(jvm_memory_max_bytes{application=\"placepick-backend\",area=\"heap\"})",
-          "legendFormat": "heap max",
-          "refId": "B"
-        }
+        {"expr": "sum by (outcome, degraded) (rate(placepick_job_outcomes_total[5m]))", "legendFormat": "{{outcome}} degraded={{degraded}}", "refId": "A"},
+        {"expr": "min(placepick_readiness)", "legendFormat": "readiness", "refId": "B"}
       ],
-      "title": "JVM heap",
+      "title": "추천 완료 결과율",
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "placepick-prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "reqps"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 9,
-        "x": 15,
-        "y": 0
-      },
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "gridPos": {"h": 6, "w": 8, "x": 8, "y": 1},
       "id": 3,
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
       "targets": [
-        {
-          "expr": "sum by (method, uri, status) (rate(http_server_requests_seconds_count{application=\"placepick-backend\"}[1m]))",
-          "legendFormat": "{{method}} {{uri}} {{status}}",
-          "refId": "A"
-        }
+        {"expr": "sum(rate(placepick_recommendation_results_total{partial=\"true\"}[5m])) / sum(rate(placepick_recommendation_results_total[5m]))", "legendFormat": "partial ratio", "refId": "A"},
+        {"expr": "sum(rate(placepick_recommendation_result_score_margin_sum[5m])) / sum(rate(placepick_recommendation_result_score_margin_count[5m]))", "legendFormat": "top1-top2 score margin", "refId": "B"}
       ],
-      "title": "HTTP request rate",
+      "title": "부분 추천 비율·점수 간격",
       "type": "timeseries"
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "placepick-prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "s"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 0,
-        "y": 6
-      },
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "gridPos": {"h": 6, "w": 8, "x": 16, "y": 1},
       "id": 4,
-      "options": {
-        "legend": {
-          "displayMode": "table",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "multi",
-          "sort": "desc"
-        }
-      },
-      "targets": [
-        {
-          "expr": "sum by (method, uri) (rate(http_server_requests_seconds_sum{application=\"placepick-backend\"}[1m])) / clamp_min(sum by (method, uri) (rate(http_server_requests_seconds_count{application=\"placepick-backend\"}[1m])), 0.000001)",
-          "legendFormat": "{{method}} {{uri}}",
-          "refId": "A"
-        }
-      ],
-      "title": "HTTP mean duration (measured)",
+      "targets": [{"expr": "histogram_quantile(0.95, sum by (le) (rate(http_server_requests_seconds_bucket{uri!~\"/actuator/.*\"}[5m])))", "legendFormat": "p95", "refId": "A"}],
+      "title": "사용자 HTTP p95 지연",
       "type": "timeseries"
     },
+
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "placepick-prometheus"
-      },
-      "fieldConfig": {
-        "defaults": {
-          "unit": "percentunit"
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 6
-      },
+      "collapsed": false,
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 7},
       "id": 5,
-      "options": {
-        "legend": {
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "targets": [
-        {
-          "expr": "system_cpu_usage{application=\"placepick-backend\"}",
-          "legendFormat": "system CPU",
-          "refId": "A"
-        },
-        {
-          "expr": "process_cpu_usage{application=\"placepick-backend\"}",
-          "legendFormat": "process CPU",
-          "refId": "B"
-        }
-      ],
-      "title": "CPU usage",
-      "type": "timeseries"
+      "panels": [],
+      "title": "2. 후보 검색 Funnel과 부분 결과",
+      "type": "row"
     },
     {
       "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
-      "fieldConfig": {"defaults": {"unit": "ops"}, "overrides": []},
-      "gridPos": {"h": 7, "w": 6, "x": 0, "y": 13},
+      "gridPos": {"h": 6, "w": 8, "x": 0, "y": 8},
       "id": 6,
-      "options": {
-        "legend": {"displayMode": "list", "placement": "bottom", "showLegend": true},
-        "tooltip": {"mode": "multi", "sort": "desc"}
-      },
-      "targets": [{
-        "expr": "sum by (stage) (rate(placepick_job_stage_events_total{application=\"placepick-backend\"}[5m]))",
-        "legendFormat": "{{stage}}",
-        "refId": "A"
-      }],
-      "title": "Job stage transitions",
+      "targets": [{"expr": "sum by (sort, expanded, outcome) (rate(placepick_recommendation_retrieval_local_calls_total[5m]))", "legendFormat": "{{sort}} expanded={{expanded}} {{outcome}}", "refId": "A"}],
+      "title": "Local 검색 변형·정렬·결과",
       "type": "timeseries"
     },
     {
       "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
-      "fieldConfig": {"defaults": {"unit": "ops"}, "overrides": []},
-      "gridPos": {"h": 7, "w": 6, "x": 6, "y": 13},
+      "gridPos": {"h": 6, "w": 8, "x": 8, "y": 8},
       "id": 7,
-      "options": {
-        "legend": {"displayMode": "list", "placement": "bottom", "showLegend": true},
-        "tooltip": {"mode": "multi", "sort": "desc"}
-      },
-      "targets": [{
-        "expr": "sum by (outcome, degraded) (rate(placepick_job_outcomes_total{application=\"placepick-backend\"}[5m]))",
-        "legendFormat": "{{outcome}} degraded={{degraded}}",
-        "refId": "A"
-      }],
-      "title": "Job outcomes and degraded completions",
+      "targets": [{"expr": "sum by (result, reason, relaxed) (rate(placepick_recommendation_candidate_funnel_sum[5m])) / sum by (result, reason, relaxed) (rate(placepick_recommendation_candidate_funnel_count[5m]))", "legendFormat": "{{result}}/{{reason}} relaxed={{relaxed}}", "refId": "A"}],
+      "title": "후보 Funnel 실행당 평균",
       "type": "timeseries"
     },
     {
       "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
-      "fieldConfig": {"defaults": {"unit": "ops"}, "overrides": []},
-      "gridPos": {"h": 7, "w": 6, "x": 12, "y": 13},
+      "gridPos": {"h": 6, "w": 8, "x": 16, "y": 8},
       "id": 8,
-      "options": {
-        "legend": {"displayMode": "table", "placement": "bottom", "showLegend": true},
-        "tooltip": {"mode": "multi", "sort": "desc"}
-      },
-      "targets": [{
-        "expr": "sum by (provider, operation, outcome) (rate(placepick_provider_calls_total{application=\"placepick-backend\"}[5m]))",
-        "legendFormat": "{{provider}}/{{operation}} {{outcome}}",
-        "refId": "A"
-      }],
-      "title": "Provider calls",
+      "targets": [
+        {"expr": "sum(rate(placepick_recommendation_candidate_zero_total[5m]))", "legendFormat": "candidate zero", "refId": "A"},
+        {"expr": "sum by (partial) (rate(placepick_recommendation_results_total[5m]))", "legendFormat": "partial={{partial}}", "refId": "B"},
+        {"expr": "sum by (level) (rate(placepick_recommendation_evidence_candidates_total[5m]))", "legendFormat": "evidence {{level}}", "refId": "C"}
+      ],
+      "title": "후보 0건·부분 결과",
       "type": "timeseries"
     },
+
     {
-      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
-      "fieldConfig": {"defaults": {"unit": "s"}, "overrides": []},
-      "gridPos": {"h": 7, "w": 6, "x": 18, "y": 13},
+      "collapsed": false,
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 14},
       "id": 9,
-      "options": {
-        "legend": {"displayMode": "table", "placement": "bottom", "showLegend": true},
-        "tooltip": {"mode": "multi", "sort": "desc"}
-      },
-      "targets": [{
-        "expr": "sum by (provider, operation) (rate(placepick_provider_latency_seconds_sum{application=\"placepick-backend\"}[5m])) / clamp_min(sum by (provider, operation) (rate(placepick_provider_latency_seconds_count{application=\"placepick-backend\"}[5m])), 0.000001)",
-        "legendFormat": "{{provider}}/{{operation}}",
-        "refId": "A"
-      }],
-      "title": "Provider mean latency",
-      "type": "timeseries"
+      "panels": [],
+      "title": "3. Naver·Elice 호출·Token·Fallback",
+      "type": "row"
     },
     {
       "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
-      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
-      "gridPos": {"h": 6, "w": 5, "x": 0, "y": 20},
+      "gridPos": {"h": 6, "w": 8, "x": 0, "y": 15},
       "id": 10,
-      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
-      "targets": [{
-        "expr": "sum(increase(placepick_stream_dlq_total{application=\"placepick-backend\"}[15m]))",
-        "legendFormat": "DLQ",
-        "refId": "A"
-      }],
-      "title": "DLQ events (15m)",
-      "type": "stat"
+      "targets": [{"expr": "sum by (provider, operation, outcome) (rate(placepick_provider_calls_total[5m]))", "legendFormat": "{{provider}}/{{operation}} {{outcome}}", "refId": "A"}],
+      "title": "Provider 호출 결과",
+      "type": "timeseries"
     },
     {
       "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
-      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
-      "gridPos": {"h": 6, "w": 5, "x": 5, "y": 20},
+      "gridPos": {"h": 6, "w": 8, "x": 8, "y": 15},
       "id": 11,
-      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
-      "targets": [{
-        "expr": "sum by (stream) (placepick_sse_connections{application=\"placepick-backend\"})",
-        "legendFormat": "{{stream}}",
-        "refId": "A"
-      }],
-      "title": "Active SSE connections",
-      "type": "stat"
+      "targets": [
+        {"expr": "histogram_quantile(0.95, sum by (le, provider, operation) (rate(placepick_provider_latency_seconds_bucket[5m])))", "legendFormat": "{{provider}}/{{operation}} p95", "refId": "A"},
+        {"expr": "histogram_quantile(0.95, sum by (le, provider, operation) (rate(placepick_provider_permit_wait_seconds_bucket[5m])))", "legendFormat": "{{provider}}/{{operation}} permit p95", "refId": "B"},
+        {"expr": "sum by (provider) (increase(placepick_provider_quota_protected_total[15m]))", "legendFormat": "{{provider}} quota 15m", "refId": "C"},
+        {"expr": "sum by (provider, operation) (increase(placepick_provider_permit_rejected_total[15m]))", "legendFormat": "{{provider}}/{{operation}} rejected", "refId": "D"}
+      ],
+      "title": "Provider·Permit p95 지연",
+      "type": "timeseries"
     },
     {
       "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
-      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
-      "gridPos": {"h": 6, "w": 5, "x": 10, "y": 20},
+      "gridPos": {"h": 6, "w": 8, "x": 16, "y": 15},
       "id": 12,
-      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
-      "targets": [{
-        "expr": "sum(increase(placepick_vote_contention_total{application=\"placepick-backend\"}[15m]))",
-        "legendFormat": "contention",
-        "refId": "A"
-      }],
-      "title": "Vote contention (15m)",
-      "type": "stat"
+      "targets": [
+        {"expr": "sum by (source, recovered) (rate(placepick_recommendation_reason_candidates_total[5m]))", "legendFormat": "{{source}} recovered={{recovered}}", "refId": "A"},
+        {"expr": "sum by (diagnostic) (rate(placepick_provider_llm_outcomes_total{operation=\"reason\"}[5m]))", "legendFormat": "{{diagnostic}}", "refId": "B"},
+        {"expr": "sum by (operation, direction) (increase(placepick_provider_llm_tokens_total[15m]))", "legendFormat": "{{operation}}/{{direction}} tokens", "refId": "C"}
+      ],
+      "title": "추천 이유 생성·Fallback·Token",
+      "type": "timeseries"
     },
+
     {
-      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
-      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
-      "gridPos": {"h": 6, "w": 5, "x": 15, "y": 20},
+      "collapsed": false,
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 21},
       "id": 13,
-      "options": {"colorMode": "value", "graphMode": "area", "justifyMode": "auto", "orientation": "auto", "reduceOptions": {"calcs": ["lastNotNull"], "fields": "", "values": false}, "textMode": "auto"},
-      "targets": [{
-        "expr": "sum by (scope) (increase(placepick_rate_limit_rejected_total{application=\"placepick-backend\"}[15m]))",
-        "legendFormat": "{{scope}}",
-        "refId": "A"
-      }],
-      "title": "API rate-limit rejects (15m)",
-      "type": "stat"
+      "panels": [],
+      "title": "4. Outbox·Redis·Worker",
+      "type": "row"
     },
     {
       "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
-      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
-      "gridPos": {"h": 6, "w": 4, "x": 20, "y": 20},
+      "gridPos": {"h": 6, "w": 8, "x": 0, "y": 22},
       "id": 14,
-      "options": {
-        "legend": {"displayMode": "list", "placement": "bottom", "showLegend": true},
-        "tooltip": {"mode": "multi", "sort": "desc"}
-      },
       "targets": [
-        {
-          "expr": "sum by (provider) (increase(placepick_provider_quota_protected_total{application=\"placepick-backend\"}[15m]))",
-          "legendFormat": "quota {{provider}}",
-          "refId": "A"
-        },
-        {
-          "expr": "sum by (provider) (increase(placepick_provider_timeout_budget_exhausted_total{application=\"placepick-backend\"}[15m]))",
-          "legendFormat": "timeout {{provider}}",
-          "refId": "B"
-        }
+        {"expr": "placepick_outbox_pending", "legendFormat": "pending", "refId": "A"},
+        {"expr": "placepick_outbox_oldest_age_seconds", "legendFormat": "oldest seconds", "refId": "B"},
+        {"expr": "sum by (outcome) (rate(placepick_outbox_publish_total[5m]))", "legendFormat": "publish {{outcome}}", "refId": "C"},
+        {"expr": "time() - placepick_telemetry_snapshot_last_success_timestamp_seconds{source=\"database\"}", "legendFormat": "snapshot age", "refId": "D"},
+        {"expr": "sum(increase(placepick_telemetry_snapshot_total{source=\"database\", outcome=\"failure\"}[15m]))", "legendFormat": "snapshot failures 15m", "refId": "E"}
       ],
-      "title": "Provider protection (15m)",
+      "title": "Transactional Outbox 적체",
       "type": "timeseries"
     },
     {
       "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
-      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
-      "gridPos": {"h": 7, "w": 8, "x": 0, "y": 26},
+      "gridPos": {"h": 6, "w": 8, "x": 8, "y": 22},
       "id": 15,
-      "options": {
-        "legend": {"displayMode": "table", "placement": "bottom", "showLegend": true},
-        "tooltip": {"mode": "multi", "sort": "desc"}
-      },
-      "targets": [{
-        "expr": "sum by (result, reason, relaxed) (rate(placepick_recommendation_candidate_funnel_sum{application=\"placepick-backend\"}[5m])) / clamp_min(sum by (result, reason, relaxed) (rate(placepick_recommendation_candidate_funnel_count{application=\"placepick-backend\"}[5m])), 0.000001)",
-        "legendFormat": "{{result}}/{{reason}} relaxed={{relaxed}}",
-        "refId": "A"
-      }],
-      "title": "Candidate funnel mean per run",
+      "targets": [
+        {"expr": "placepick_stream_pending", "legendFormat": "pending", "refId": "A"},
+        {"expr": "placepick_stream_oldest_age_seconds", "legendFormat": "oldest seconds", "refId": "B"},
+        {"expr": "sum(increase(placepick_stream_dlq_total[15m]))", "legendFormat": "DLQ 15m", "refId": "C"},
+        {"expr": "sum by (operation) (rate(placepick_stream_operations_total[5m]))", "legendFormat": "{{operation}}", "refId": "D"},
+        {"expr": "time() - placepick_telemetry_snapshot_last_success_timestamp_seconds{source=\"redis\"}", "legendFormat": "snapshot age", "refId": "E"},
+        {"expr": "sum(increase(placepick_telemetry_snapshot_total{source=\"redis\", outcome=\"failure\"}[15m]))", "legendFormat": "snapshot failures 15m", "refId": "F"}
+      ],
+      "title": "Redis Stream pending·DLQ",
       "type": "timeseries"
     },
     {
       "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
-      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
-      "gridPos": {"h": 7, "w": 8, "x": 8, "y": 26},
+      "gridPos": {"h": 6, "w": 8, "x": 16, "y": 22},
       "id": 16,
-      "options": {
-        "legend": {"displayMode": "table", "placement": "bottom", "showLegend": true},
-        "tooltip": {"mode": "multi", "sort": "desc"}
-      },
       "targets": [
-        {
-          "expr": "sum by (operation, diagnostic) (increase(placepick_provider_llm_outcomes_total{application=\"placepick-backend\", diagnostic!=\"none\"}[15m]))",
-          "legendFormat": "{{operation}}/{{diagnostic}}",
-          "refId": "A"
-        },
-        {
-          "expr": "sum by (code) (increase(placepick_provider_llm_validation_failures_total{application=\"placepick-backend\"}[15m]))",
-          "legendFormat": "server/{{code}}",
-          "refId": "B"
-        }
+        {"expr": "placepick_job_stuck", "legendFormat": "stuck", "refId": "A"},
+        {"expr": "sum by (stage) (rate(placepick_job_stage_events_total[5m]))", "legendFormat": "{{stage}}", "refId": "B"},
+        {"expr": "histogram_quantile(0.95, sum by (le, outcome) (rate(placepick_worker_processing_seconds_bucket[5m])))", "legendFormat": "worker {{outcome}} p95", "refId": "C"},
+        {"expr": "histogram_quantile(0.95, sum by (le, stage) (rate(placepick_job_stage_duration_seconds_bucket[5m])))", "legendFormat": "{{stage}} p95", "refId": "D"}
       ],
-      "title": "LLM safe diagnostics (15m)",
+      "title": "Worker 진행 단계·Stuck Job",
       "type": "timeseries"
     },
+
     {
-      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
-      "fieldConfig": {
-        "defaults": {"unit": "s"},
-        "overrides": [{
-          "matcher": {"id": "byFrameRefID", "options": "B"},
-          "properties": [{"id": "unit", "value": "short"}]
-        }]
-      },
-      "gridPos": {"h": 7, "w": 8, "x": 16, "y": 26},
+      "collapsed": false,
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 28},
       "id": 17,
-      "options": {
-        "legend": {"displayMode": "table", "placement": "bottom", "showLegend": true},
-        "tooltip": {"mode": "multi", "sort": "desc"}
-      },
-      "targets": [
-        {
-          "expr": "histogram_quantile(0.95, sum by (le, provider, operation) (rate(placepick_provider_permit_wait_seconds_bucket{application=\"placepick-backend\"}[5m])))",
-          "legendFormat": "p95 {{provider}}/{{operation}}",
-          "refId": "A"
-        },
-        {
-          "expr": "sum by (provider, operation) (increase(placepick_provider_permit_rejected_total{application=\"placepick-backend\"}[15m]))",
-          "legendFormat": "reject {{provider}}/{{operation}}",
-          "refId": "B"
-        }
-      ],
-      "title": "Provider permit wait and rejects",
-      "type": "timeseries"
+      "panels": [],
+      "title": "5. DB·Redis·JVM·HTTP",
+      "type": "row"
     },
     {
       "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
-      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
-      "gridPos": {"h": 7, "w": 12, "x": 0, "y": 33},
+      "gridPos": {"h": 6, "w": 8, "x": 0, "y": 29},
       "id": 18,
-      "options": {
-        "legend": {"displayMode": "table", "placement": "bottom", "showLegend": true},
-        "tooltip": {"mode": "multi", "sort": "desc"}
-      },
       "targets": [
-        {
-          "expr": "sum by (sort, expanded, outcome) (increase(placepick_recommendation_retrieval_local_calls_total{application=\"placepick-backend\"}[15m]))",
-          "legendFormat": "calls {{sort}} expanded={{expanded}} {{outcome}}",
-          "refId": "A"
-        },
-        {
-          "expr": "sum by (sort) (rate(placepick_recommendation_retrieval_local_items_sum{application=\"placepick-backend\"}[5m])) / clamp_min(sum by (sort) (rate(placepick_recommendation_retrieval_local_items_count{application=\"placepick-backend\"}[5m])), 0.000001)",
-          "legendFormat": "mean items {{sort}}",
-          "refId": "B"
-        },
-        {
-          "expr": "rate(placepick_recommendation_retrieval_previously_exposed_sum{application=\"placepick-backend\"}[5m]) / clamp_min(rate(placepick_recommendation_retrieval_previously_exposed_count{application=\"placepick-backend\"}[5m]), 0.000001)",
-          "legendFormat": "mean previously exposed exclusions",
-          "refId": "C"
-        }
+        {"expr": "sum(jvm_memory_used_bytes{area=\"heap\"})", "legendFormat": "heap used", "refId": "A"},
+        {"expr": "sum(jvm_memory_max_bytes{area=\"heap\"})", "legendFormat": "heap max", "refId": "B"}
       ],
-      "title": "Adaptive Local retrieval",
+      "title": "JVM Heap",
       "type": "timeseries"
     },
     {
       "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
-      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
-      "gridPos": {"h": 7, "w": 12, "x": 12, "y": 33},
+      "gridPos": {"h": 6, "w": 8, "x": 8, "y": 29},
       "id": 19,
-      "options": {
-        "legend": {"displayMode": "table", "placement": "bottom", "showLegend": true},
-        "tooltip": {"mode": "multi", "sort": "desc"}
-      },
       "targets": [
-        {
-          "expr": "sum by (partial, degraded) (increase(placepick_recommendation_results_total{application=\"placepick-backend\"}[15m]))",
-          "legendFormat": "results partial={{partial}} degraded={{degraded}}",
-          "refId": "A"
-        },
-        {
-          "expr": "sum by (partial) (rate(placepick_recommendation_result_score_sum{application=\"placepick-backend\"}[5m])) / clamp_min(sum by (partial) (rate(placepick_recommendation_result_score_count{application=\"placepick-backend\"}[5m])), 0.000001)",
-          "legendFormat": "mean score partial={{partial}}",
-          "refId": "B"
-        }
+        {"expr": "hikaricp_connections_active", "legendFormat": "active", "refId": "A"},
+        {"expr": "hikaricp_connections_pending", "legendFormat": "pending", "refId": "B"},
+        {"expr": "hikaricp_connections_max", "legendFormat": "max", "refId": "C"}
       ],
-      "title": "Result quality and partial outcomes",
+      "title": "PostgreSQL Connection Pool",
       "type": "timeseries"
     },
     {
       "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
-      "fieldConfig": {"defaults": {"unit": "short"}, "overrides": []},
-      "gridPos": {"h": 7, "w": 24, "x": 0, "y": 40},
+      "gridPos": {"h": 6, "w": 8, "x": 16, "y": 29},
       "id": 20,
-      "options": {
-        "legend": {"displayMode": "table", "placement": "bottom", "showLegend": true},
-        "tooltip": {"mode": "multi", "sort": "desc"}
-      },
       "targets": [
-        {
-          "expr": "sum by (source, attempts, recovered) (increase(placepick_recommendation_reason_candidates_total{application=\"placepick-backend\"}[15m]))",
-          "legendFormat": "{{source}} attempts={{attempts}} recovered={{recovered}}",
-          "refId": "A"
-        }
+        {"expr": "sum by (method, status) (rate(http_server_requests_seconds_count{uri!~\"/actuator/.*\"}[5m]))", "legendFormat": "{{method}} {{status}}", "refId": "A"},
+        {"expr": "process_cpu_usage", "legendFormat": "process CPU", "refId": "B"}
       ],
-      "title": "Per-candidate reason outcomes (15m)",
+      "title": "HTTP 처리량·CPU",
       "type": "timeseries"
+    },
+
+    {
+      "collapsed": false,
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 35},
+      "id": 21,
+      "panels": [],
+      "title": "6. SSE·투표·보안",
+      "type": "row"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "gridPos": {"h": 6, "w": 8, "x": 0, "y": 36},
+      "id": 22,
+      "targets": [
+        {"expr": "sum by (stream) (placepick_sse_connections)", "legendFormat": "open {{stream}}", "refId": "A"},
+        {"expr": "sum by (stream) (rate(placepick_sse_connections_opened_total[5m]))", "legendFormat": "opened {{stream}}", "refId": "B"},
+        {"expr": "sum by (stream) (rate(placepick_sse_connections_resumed_total[5m]))", "legendFormat": "resumed {{stream}}", "refId": "C"},
+        {"expr": "sum by (stream, kind) (rate(placepick_sse_events_replayed_total[5m]))", "legendFormat": "replayed {{stream}}/{{kind}}", "refId": "D"},
+        {"expr": "sum by (stream, kind) (increase(placepick_sse_send_failures_total[15m]))", "legendFormat": "send failure {{stream}}/{{kind}}", "refId": "E"},
+        {"expr": "sum by (stream, reason) (increase(placepick_sse_connections_closed_total[15m]))", "legendFormat": "closed {{stream}}/{{reason}}", "refId": "F"},
+        {"expr": "histogram_quantile(0.95, sum by (le, stream, reason) (rate(placepick_sse_connection_lifetime_seconds_bucket[5m])))", "legendFormat": "lifetime p95 {{stream}}/{{reason}}", "refId": "G"}
+      ],
+      "title": "SSE 연결·재개·Replay·종료",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "gridPos": {"h": 6, "w": 8, "x": 8, "y": 36},
+      "id": 23,
+      "targets": [
+        {"expr": "sum(rate(placepick_vote_write_seconds_count[5m]))", "legendFormat": "writes", "refId": "A"},
+        {"expr": "sum(increase(placepick_vote_contention_total[15m]))", "legendFormat": "contention 15m", "refId": "B"}
+      ],
+      "title": "투표 쓰기·경합",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "gridPos": {"h": 6, "w": 8, "x": 16, "y": 36},
+      "id": 24,
+      "targets": [
+        {"expr": "sum by (scope) (increase(placepick_rate_limit_rejected_total[15m]))", "legendFormat": "rate-limit {{scope}}", "refId": "A"},
+        {"expr": "sum(increase(http_server_requests_seconds_count{status=~\"401|403|409\"}[15m]))", "legendFormat": "401/403/409", "refId": "B"},
+        {"expr": "sum by (reason) (increase(placepick_security_rejections_total[15m]))", "legendFormat": "{{reason}}", "refId": "C"}
+      ],
+      "title": "보안·정합성 거부",
+      "type": "timeseries"
+    },
+
+    {
+      "collapsed": false,
+      "gridPos": {"h": 1, "w": 24, "x": 0, "y": 42},
+      "id": 25,
+      "panels": [],
+      "title": "7. 프런트 Web Vitals·Cold Start·Release SHA",
+      "type": "row"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "gridPos": {"h": 6, "w": 8, "x": 0, "y": 43},
+      "id": 26,
+      "targets": [{"expr": "sum by (detail, viewport) (rate(placepick_client_events_total{name=\"webVital\"}[5m]))", "legendFormat": "{{detail}}/{{viewport}}", "refId": "A"}],
+      "title": "Web Vitals 지표·등급·속도 Bucket",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "gridPos": {"h": 6, "w": 8, "x": 8, "y": 43},
+      "id": 27,
+      "targets": [{"expr": "sum by (name, detail, viewport) (rate(placepick_client_events_total{name=~\"coldStartRecovered|sseRecovered|clientError\"}[5m]))", "legendFormat": "{{name}}/{{detail}}/{{viewport}}", "refId": "A"}],
+      "title": "Cold Start·SSE 복구·Client Error",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {"type": "prometheus", "uid": "placepick-prometheus"},
+      "gridPos": {"h": 6, "w": 8, "x": 16, "y": 43},
+      "id": 28,
+      "targets": [{"expr": "count by (release) (process_uptime_seconds)", "legendFormat": "{{release}}", "refId": "A"}],
+      "title": "수집 중인 Release SHA",
+      "type": "stat"
     }
   ],
-  "refresh": "10s",
-  "schemaVersion": 41,
-  "tags": ["placepick", "runtime", "mvp"],
-  "templating": {
-    "list": []
-  },
-  "time": {
-    "from": "now-15m",
-    "to": "now"
-  },
+  "refresh": "30s",
+  "schemaVersion": 42,
+  "tags": ["placepick", "java17", "quality-v2", "observability"],
+  "templating": {"list": []},
+  "time": {"from": "now-6h", "to": "now"},
   "timepicker": {},
   "timezone": "browser",
-  "title": "PlacePick MVP Runtime",
+  "title": "PlacePick Runtime · Quality · Operations",
   "uid": "placepick-runtime",
-  "version": 5,
+  "version": 2,
   "weekStart": ""
 }

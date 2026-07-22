@@ -14,6 +14,27 @@ spring:
       add-mappings: false
 
 management:
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+    propagation:
+      produce: w3c
+      consume: w3c
+  otlp:
+    logging:
+      export:
+        enabled: false
+    metrics:
+      export:
+        enabled: false
+    tracing:
+      export:
+        enabled: false
   endpoints:
     access:
       default: none
@@ -62,6 +83,9 @@ placepick:
       blog-display-limit: ${PLACEPICK_RETRIEVAL_BLOG_DISPLAY_LIMIT:10}
   metrics:
     vote-contention-threshold: ${PLACEPICK_VOTE_CONTENTION_THRESHOLD:PT0.1S}
+    stuck-job-threshold: ${PLACEPICK_STUCK_JOB_THRESHOLD:PT5M}
+    backlog-initial-delay: ${PLACEPICK_BACKLOG_INITIAL_DELAY:PT10S}
+    backlog-refresh-delay: ${PLACEPICK_BACKLOG_REFRESH_DELAY:PT30S}
   retention:
     processed-event: ${PLACEPICK_PROCESSED_EVENT_RETENTION:PT24H}
     published-outbox: ${PLACEPICK_PUBLISHED_OUTBOX_RETENTION:PT24H}

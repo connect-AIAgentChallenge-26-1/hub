@@ -2,6 +2,14 @@ import { expect, test } from "@playwright/test";
 
 test("자연어 조건부터 기본·부분 대체 추천, 두 세션 투표와 확정까지 완료한다", async ({ browser, page }) => {
   test.setTimeout(180_000);
+  const telemetry: Array<{ name: string; context: Record<string, string> }> = [];
+  page.on("request", (request) => {
+    if (request.method() !== "POST" || !request.url().endsWith("/events")) return;
+    const body = request.postDataJSON() as { name?: unknown; context?: unknown };
+    if (typeof body.name === "string" && isStringRecord(body.context)) {
+      telemetry.push({ name: body.name, context: body.context });
+    }
+  });
   await page.goto("/");
   await expect(page.getByRole("heading", { name: /조건은 내가 확정하고/ })).toBeVisible();
   await expect(page.getByText("MOCK DEMO")).toBeVisible();
@@ -44,6 +52,15 @@ test("자연어 조건부터 기본·부분 대체 추천, 두 세션 투표와 
   await expect(page.getByText("직접 확인 링크 미제공")).toBeVisible();
   await expect(page.getByText("검증 템플릿 이유")).toBeVisible();
   expect(alternativeRequests).toBe(1);
+  await expect.poll(() => telemetry.map((event) => event.name)).toContain(
+    "alternativeRecommendationRequested",
+  );
+  await expect.poll(() => telemetry.map((event) => event.name)).toContain(
+    "partialRecommendationShown",
+  );
+  expect(telemetry.every((event) =>
+    !Object.keys(event.context).some((key) => /url|message|stack|requestText/i.test(key))))
+    .toBe(true);
 
   await page.getByRole("button", { name: "다른 추천 보기" }).click();
   await expect(page).toHaveURL(/\/recommendations\/[0-9a-f-]+\/progress\?sourceJobId=/, { timeout: 30_000 });
@@ -100,6 +117,14 @@ test("자연어 조건부터 기본·부분 대체 추천, 두 세션 투표와 
 
 test("제품 흐름에서 누락된 필수 조건을 직접 입력해 추천을 시작한다", async ({ page }) => {
   test.setTimeout(90_000);
+  const changedFields: string[] = [];
+  page.on("request", (request) => {
+    if (request.method() !== "POST" || !request.url().endsWith("/events")) return;
+    const body = request.postDataJSON() as { name?: unknown; context?: unknown };
+    if (body.name !== "conditionFieldChanged" || !isStringRecord(body.context)) return;
+    const fieldName = body.context.fieldName;
+    if (fieldName) changedFields.push(fieldName);
+  });
   await page.goto("/");
   await expect(page.getByRole("heading", { name: /조건은 내가 확정하고/ })).toBeVisible();
   await expect(page.getByText("MOCK DEMO")).toBeVisible();
@@ -122,4 +147,14 @@ test("제품 흐름에서 누락된 필수 조건을 직접 입력해 추천을 
   });
   await expect(page).toHaveURL(/\/recommendations\/[0-9a-f-]+$/, { timeout: 20_000 });
   await expect(page.getByRole("heading", { name: "근거가 연결된 추천 3곳" })).toBeVisible();
+  await expect.poll(() => changedFields.sort()).toEqual([
+    "locationQuery",
+    "placeType",
+    "preferences",
+  ]);
 });
+
+function isStringRecord(value: unknown): value is Record<string, string> {
+  return value != null && typeof value === "object" && !Array.isArray(value) &&
+    Object.values(value).every((item) => typeof item === "string");
+}

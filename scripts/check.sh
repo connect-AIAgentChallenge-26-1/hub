@@ -49,6 +49,9 @@ done < <(find \
 log 'validating GitHub Actions workflows'
 bash "${ROOT_DIR}/scripts/actionlint.sh"
 
+log 'validating Grafana dashboards and Prometheus alerts'
+bash "${ROOT_DIR}/scripts/observability-check.sh"
+
 log 'running documentation policy and negative fixtures'
 (cd "${ROOT_DIR}" && npm run docs:check && npm run docs:test)
 

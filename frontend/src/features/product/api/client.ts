@@ -16,6 +16,7 @@ import type {
   VoteValue,
 } from "./types";
 import { PRODUCT_PLACE_TYPES } from "./types";
+import type { ProductTelemetryRequest } from "../telemetry/contract";
 
 const mockMode = process.env.NEXT_PUBLIC_PRODUCT_API_MODE === "mock" ||
   (process.env.NEXT_PUBLIC_PRODUCT_API_MODE == null && process.env.NODE_ENV !== "production");
@@ -50,16 +51,21 @@ export async function withColdStartRetry<T>(
   operation: () => Promise<T>,
   onRetry: () => void = () => undefined,
   shouldContinue: () => boolean = () => true,
+  onRecovered: (elapsedMs: number) => void = () => undefined,
 ): Promise<T> {
   const startedAt = Date.now();
+  let retried = false;
   while (true) {
     try {
-      return await operation();
+      const result = await operation();
+      if (retried) onRecovered(Date.now() - startedAt);
+      return result;
     } catch (error) {
       if (!shouldContinue() || !isColdStartRetryable(error) ||
           Date.now() - startedAt >= COLD_START_LIMIT_MS) {
         throw error;
       }
+      retried = true;
       onRetry();
       await new Promise((resolve) => setTimeout(resolve, COLD_START_RETRY_MS));
     }
@@ -113,6 +119,18 @@ export class ProductApi {
       201,
       { csrf: true, idempotency: true },
     ));
+  }
+
+  async recordProductEvent(event: ProductTelemetryRequest): Promise<void> {
+    await this.ensureSession();
+    await this.request(
+      "/events",
+      "POST",
+      event,
+      202,
+      { csrf: true },
+      true,
+    );
   }
 
   async getDraft(draftId: string): Promise<ProductDraft> {
@@ -285,7 +303,7 @@ export class ProductApi {
     allowEmpty = false,
   ): Promise<unknown> {
     const response = await this.requestWithResponse(path, method, body, expectedStatus, security);
-    if (allowEmpty && response.status === 204) return null;
+    if (allowEmpty) return null;
     const contentType = response.headers.get("content-type") ?? "";
     if (!contentType.toLowerCase().includes("application/json")) {
       throw new ProductContractError("성공 응답이 application/json이 아닙니다.");

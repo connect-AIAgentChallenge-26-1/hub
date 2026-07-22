@@ -1,0 +1,157 @@
+rule_files:
+  - placepick-alerts.yml
+
+evaluation_interval: 1m
+
+tests:
+  - name: 두 OTLP metric 명명 규칙이 모두 없으면 telemetry missing 경보를 낸다
+    interval: 1m
+    alert_rule_test:
+      - eval_time: 3m
+        alertname: PlacePickTelemetryMissing
+        exp_alerts:
+          - exp_labels:
+              application: placepick-backend
+              severity: critical
+            exp_annotations:
+              summary: 플레이스픽 백엔드 텔레메트리가 10분 동안 수집되지 않았습니다
+              runbook: RUN-0007
+
+  - name: application 명명 규칙으로 uptime이 있으면 telemetry missing 경보를 내지 않는다
+    interval: 1m
+    input_series:
+      - series: 'process_uptime_seconds{application="placepick-backend"}'
+        values: '0 60 120 180'
+    alert_rule_test:
+      - eval_time: 3m
+        alertname: PlacePickTelemetryMissing
+        exp_alerts: []
+
+  - name: service name 명명 규칙으로 uptime이 있으면 telemetry missing 경보를 내지 않는다
+    interval: 1m
+    input_series:
+      - series: 'process_uptime_seconds{service_name="placepick-backend"}'
+        values: '0 60 120 180'
+    alert_rule_test:
+      - eval_time: 3m
+        alertname: PlacePickTelemetryMissing
+        exp_alerts: []
+
+  - name: readiness가 2분 이상 0이면 즉시 운영 경보로 연결된다
+    interval: 1m
+    input_series:
+      - series: 'placepick_readiness'
+        values: '1 0 0 0 0'
+    alert_rule_test:
+      - eval_time: 4m
+        alertname: PlacePickReadinessDown
+        exp_alerts:
+          - exp_labels:
+              severity: critical
+            exp_annotations:
+              summary: 플레이스픽 백엔드 readiness가 DOWN 상태입니다
+              runbook: RUN-0007
+
+  - name: 최근 2분 안에 readiness가 회복됐으면 DOWN 경보를 내지 않는다
+    interval: 1m
+    input_series:
+      - series: 'placepick_readiness'
+        values: '0 0 1 0'
+    alert_rule_test:
+      - eval_time: 3m
+        alertname: PlacePickReadinessDown
+        exp_alerts: []
+
+  - name: backlog snapshot 실패는 source별 운영 경보로 연결된다
+    interval: 1m
+    input_series:
+      - series: 'placepick_telemetry_snapshot_total{source="database", outcome="failure"}'
+        values: '0 1 1 1'
+    alert_rule_test:
+      - eval_time: 3m
+        alertname: PlacePickTelemetrySnapshotFailed
+        exp_alerts:
+          - exp_labels:
+              source: database
+              severity: warning
+            exp_annotations:
+              summary: 운영 backlog snapshot 수집이 실패했습니다
+              runbook: RUN-0007
+
+  - name: 마지막 성공 snapshot이 2분 넘게 갱신되지 않으면 source별 경보를 낸다
+    interval: 1m
+    input_series:
+      - series: 'placepick_telemetry_snapshot_last_success_timestamp_seconds{source="redis"}'
+        values: '1 1 1 1 1 1 1'
+    alert_rule_test:
+      - eval_time: 6m
+        alertname: PlacePickTelemetrySnapshotStale
+        exp_alerts:
+          - exp_labels:
+              source: redis
+              severity: warning
+            exp_annotations:
+              summary: 운영 backlog snapshot이 2분 넘게 갱신되지 않았습니다
+              runbook: RUN-0007
+
+  - name: DLQ 이벤트는 즉시 운영 경보로 연결된다
+    interval: 1m
+    input_series:
+      - series: 'placepick_stream_dlq_total{reason="retry_exhausted"}'
+        values: '0 0 1 1 1'
+    alert_rule_test:
+      - eval_time: 4m
+        alertname: PlacePickDlqDetected
+        exp_alerts:
+          - exp_labels:
+              severity: critical
+            exp_annotations:
+              summary: 추천 Stream 이벤트가 DLQ에 진입했습니다
+              runbook: RUN-0007
+
+  - name: 표본이 20개 미만이면 부분 결과 비율 경보를 내지 않는다
+    interval: 1m
+    input_series:
+      - series: 'placepick_recommendation_results_total{partial="true"}'
+        values: '0 1 2 3 4 5'
+      - series: 'placepick_recommendation_results_total{partial="false"}'
+        values: '0 2 4 6 8 10'
+    alert_rule_test:
+      - eval_time: 5m
+        alertname: PlacePickPartialRecommendationRateHigh
+        exp_alerts: []
+
+  - name: 표본이 20개 이상이고 부분 결과 비율이 높으면 경보를 낸다
+    interval: 1m
+    input_series:
+      - series: 'placepick_recommendation_results_total{partial="true"}'
+        values: '0 2 4 6 8 10 12 14 16 18 20'
+      - series: 'placepick_recommendation_results_total{partial="false"}'
+        values: '0 3 6 9 12 15 18 21 24 27 30'
+    alert_rule_test:
+      - eval_time: 10m
+        alertname: PlacePickPartialRecommendationRateHigh
+        exp_alerts:
+          - exp_labels:
+              severity: warning
+              sample_gate: "20"
+            exp_annotations:
+              summary: 최근 15분 추천 중 부분 결과 비율이 10%를 넘었습니다
+              runbook: RUN-0007
+
+  - name: 오래된 Outbox pending은 backlog 경보로 연결된다
+    interval: 1m
+    input_series:
+      - series: 'placepick_outbox_pending'
+        values: '1 1 1 1 1 1 1'
+      - series: 'placepick_outbox_oldest_age_seconds'
+        values: '180 180 180 180 180 180 180'
+    alert_rule_test:
+      - eval_time: 6m
+        alertname: PlacePickOutboxBacklog
+        exp_alerts:
+          - exp_labels:
+              severity: warning
+            exp_annotations:
+              summary: 미발행 Outbox 이벤트의 가장 오래된 대기 시간이 2분을 넘었습니다
+              runbook: RUN-0007

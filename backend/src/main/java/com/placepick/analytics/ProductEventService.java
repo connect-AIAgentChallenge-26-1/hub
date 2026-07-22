@@ -21,15 +21,17 @@ public class ProductEventService {
     private final ProductEventValidator validator;
     private final Clock clock;
     private final Duration retention;
+    private final ProductEventMetrics metrics;
 
     @Autowired
     public ProductEventService(
         ProductEventRepository repository,
         ProductEventValidator validator,
         Clock clock,
-        @Value("${placepick.analytics.retention:P30D}") String retention
+        @Value("${placepick.analytics.retention:P30D}") String retention,
+        ProductEventMetrics metrics
     ) {
-        this(repository, validator, clock, parseRetention(retention));
+        this(repository, validator, clock, parseRetention(retention), metrics);
     }
 
     ProductEventService(
@@ -38,17 +40,28 @@ public class ProductEventService {
         Clock clock,
         Duration retention
     ) {
+        this(repository, validator, clock, retention, null);
+    }
+
+    ProductEventService(
+        ProductEventRepository repository,
+        ProductEventValidator validator,
+        Clock clock,
+        Duration retention,
+        ProductEventMetrics metrics
+    ) {
         this.repository = repository;
         this.validator = validator;
         this.clock = clock;
         this.retention = requireRetention(retention);
+        this.metrics = metrics;
     }
 
     @Transactional
     public void accept(UUID sessionId, ProductEventRequest request) {
         ValidatedProductEvent validated = validator.validate(request);
         Instant receivedAt = databaseTime();
-        repository.insertIfAbsent(new ProductEvent(
+        boolean inserted = repository.insertIfAbsent(new ProductEvent(
             validated.eventId(),
             sessionId,
             validated.name(),
@@ -57,6 +70,9 @@ public class ProductEventService {
             receivedAt,
             receivedAt.plus(retention)
         ));
+        if (inserted && metrics != null) {
+            metrics.accepted(validated.name(), validated.context());
+        }
     }
 
     @Transactional

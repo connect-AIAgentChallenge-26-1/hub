@@ -9,7 +9,14 @@ public enum ProductEventName {
     RECOMMENDATION_VIEWED("recommendationViewed"),
     ROOM_SHARED("roomShared"),
     VOTE_CHANGED("voteChanged"),
-    FINAL_RESULT_VIEWED("finalResultViewed");
+    FINAL_RESULT_VIEWED("finalResultViewed"),
+    WEB_VITAL("webVital"),
+    SSE_RECOVERED("sseRecovered"),
+    PARTIAL_RECOMMENDATION_SHOWN("partialRecommendationShown"),
+    ALTERNATIVE_RECOMMENDATION_REQUESTED("alternativeRecommendationRequested"),
+    CONDITION_FIELD_CHANGED("conditionFieldChanged"),
+    COLD_START_RECOVERED("coldStartRecovered"),
+    CLIENT_ERROR("clientError");
 
     private final String wireName;
 
