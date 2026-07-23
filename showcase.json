@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "title": "GNU 통합 수강신청 AI 네비게이터",
+  "summary": "경상국립대학교 편입생 및 재학생을 위한 맞춤형 수강 신청 시간표 모의 설계, 성적표 OCR 이미지 분석 및 AI 학점 자가진단 서비스입니다.",
+  "githubUser": "kms-2002(김민성)",
+  "demoUrl": "http://localhost:3000",
+  "thumbnail": "thumbnail.webp",
+  "screenshots": [
+    "screenshots/portal.png",
+    "screenshots/timetable.png",
+    "screenshots/analytics.png"
+  ],
+  "problem": "편입생이나 다전공 수강생들의 경우, 각각 다르게 적용되는 복잡한 교양 및 전공 졸업 요건을 스스로 진단하기 매우 어렵고, 모의 수강신청 시간표 배정과 성적표 분석을 여러 시스템에서 분산 처리해야 하는 수고가 있습니다.",
+  "targetUsers": [
+    "경상국립대학교 편입생, 재학생, 다전공 신청생",
+    "맞춤형 수강 설계 및 잔여 학점 자가진단이 필요한 대학생"
+  ],
+  "features": [
+    "실시간 AI 학업 어드바이저 대화를 통해 남은 졸업 학점 및 교양/전필 요건 충족 여부를 대화식으로 지도하고 시간표를 자동 배정합니다.",
+    "성적표 캡처 이미지를 업로드하면 Tesseract.js OCR 엔진이 교과목명과 이수 학점을 자동으로 추출하여 누적 GPA를 계산하고 AI 재수강 전략을 제안합니다.",
+    "로그인한 실제 유저의 학적 정보(경영정보학과 등) 및 취득 평점을 프로필 카드, 과목 추천 리스트 및 대화 칩에 실시간 동적 바인딩합니다."
+  ],
+  "featureTags": [
+    "학점 자가진단",
+    "AI 시간표 설계",
+    "성적표 OCR 분석"
+  ],
+  "techStack": [
+    "React",
+    "Vite",
+    "Express",
+    "Tesseract.js",
+    "Supabase",
+    "Jest"
+  ],
+  "techHighlights": [
+    "Tesseract.js OCR 엔진을 로컬 백엔드에 결합해 성적표 이미지 텍스트로부터 교과목 및 원본 학점 수치를 자동으로 파싱합니다.",
+    "회원가입/로그인 정보의 백엔드 JSON 영속 저장을 구현하여 서버를 껐다 켜도 김민성 학생 고유 계정정보가 보존되도록 유지합니다.",
+    "Jest 및 Supertest를 구축하고 가입 중복 및 인증 예외 케이스에 대해 TDD(테스트 주도 개발) 방식의 방어 코드를 검증했습니다."
+  ],
+  "developmentWithAI": "기초 기획 단계에서 수강신청 격자 구조 설계안 및 경영정보학과 졸업 조건 규칙을 정의하고 AI와 협력하여 Express 라우터 및 데이터 파서 초안을 작성했습니다. 구현 과정에서는 AI 검증 에이전트가 탐지한 입력 누락 및 네트워크 단절 시나리오에 대해 Jest 단위 테스트를 먼저 작성(RED)하고, 이를 차례대로 통과시키는 코드 구현(GREEN)을 통해 완성도를 높였습니다.",
+  "agent": {
+    "summary": "기능 검증 QA 에이전트와 TDD 테스트 작성 스킬을 유기적으로 실행하여 가입 인증 처리 및 예외 상황 대응력을 검증하고 안정적인 서비스를 완료했습니다.",
+    "agentTools": [
+      {
+        "type": "agent",
+        "name": "기능 검증 QA Agent",
+        "purpose": "Express 백엔드 라우터 및 프론트엔드 API 흐름을 교차 점검하여 아키텍처 및 미처리된 엣지 케이스를 진단합니다."
+      },
+      {
+        "type": "skill",
+        "name": "TDD 테스트 작성 Skill",
+        "purpose": "Jest 및 Supertest를 사용해 인증 및 정보 연동 시나리오의 통과 여부를 보장합니다."
+      },
+      {
+        "type": "skill",
+        "name": "DB 데이터 영속화 Skill",
+        "purpose": "로컬 JSON 파일 쓰기 및 Supabase 연동 상태에 따른 회원 데이터 영구 보관 처리를 자동화합니다."
+      }
+    ],
+    "workflows": [
+      {
+        "name": "TDD 기반 API 개발 Workflow",
+        "steps": [
+          "회원 인증 관련 요건 및 필수 필드 명세 정의",
+          "auth.test.js 실패 테스트 작성 (RED 단계)",
+          "Express 라우터 및 예외 처리 추가 구현을 통한 테스트 해소 (GREEN 단계)",
+          "테스트 재가동 및 빌드 정합성 자동 점검"
+        ]
+      },
+      {
+        "name": "예외 대응 및 QA 점검 Workflow",
+        "steps": [
+          "QA Agent 분석에 의한 미입력 전송 및 서버 단절 시나리오 분석",
+          "공백 문자 입력 시 400 Bad Request 상태 코드 가로채기 방어선 구축",
+          "네트워크 오프라인 감지 시 로컬 오프라인 모드 안내 배너 및 자동 전환 팝업 연동",
+          "최종 검증 리포트(qa_verification_report.md) 자동 빌드"
+        ]
+      }
+    ]
+  }
+}

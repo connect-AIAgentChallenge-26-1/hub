@@ -2321,3 +2321,102 @@ body {
   border-color: #818CF8;
   transform: translateY(-1px);
 }
+
+/* ==========================================================================
+   Split Layout for Consulting & Diagnosis
+   ========================================================================== */
+.consulting-section-split {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 24px;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .consulting-section-split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.consulting-left-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.self-diagnosis-right-panel {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.self-diagnosis-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 12px;
+}
+
+.self-diagnosis-header h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.diagnosis-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.diagnosis-item-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-left: 5px solid #1e293b;
+  border-radius: 6px;
+  padding: 14px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: all 0.2s ease;
+}
+
+.diagnosis-item-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateX(4px);
+}
+
+.diagnosis-item-card.danger-left {
+  border-left-color: #ef4444;
+}
+
+.diagnosis-item-card.warning-left {
+  border-left-color: #f59e0b;
+}
+
+.diagnosis-item-card.info-left {
+  border-left-color: #3b82f6;
+}
+
+.diagnosis-item-card.success-left {
+  border-left-color: #10b981;
+}
+
+.diag-type {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.diag-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}

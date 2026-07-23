@@ -320,6 +320,104 @@ let inMemoryChatMessages = [
 ];
 let inMemorySavedGrades = null;
 
+const fs = require('fs');
+
+const USERS_FILE_PATH = path.join(__dirname, '../users.json');
+
+// Helper to load users from JSON file
+const loadUsers = () => {
+  try {
+    if (fs.existsSync(USERS_FILE_PATH)) {
+      const data = fs.readFileSync(USERS_FILE_PATH, 'utf8');
+      return JSON.parse(data);
+    }
+  } catch (e) {
+    console.error('Error loading users file, using defaults.', e);
+  }
+  return [
+    { studentId: '2021000001', name: '김경상', password: 'password123', studentType: 'transfer', department: '컴퓨터공학과', email: '2021000001@gnu.ac.kr' },
+    { studentId: '2021000002', name: '박경상', password: 'password123', studentType: 'general', department: '경영정보학과', email: '2021000002@gnu.ac.kr' },
+    { studentId: '2021000003', name: '이경상', password: 'password123', studentType: 'double-major', department: '통계학과', email: '2021098765@gnu.ac.kr' }
+  ];
+};
+
+// Helper to save users to JSON file
+const saveUsers = (users) => {
+  try {
+    fs.writeFileSync(USERS_FILE_PATH, JSON.stringify(users, null, 2), 'utf8');
+  } catch (e) {
+    console.error('Error saving users file.', e);
+  }
+};
+
+// Load users database
+let inMemoryUsers = loadUsers();
+
+// POST /api/auth/signup - Register user
+app.post('/api/auth/signup', async (req, res) => {
+  try {
+    const { studentId, name, password, studentType, department, email } = req.body;
+    if (!studentId || !password) {
+      return res.status(400).json({ error: '학번과 비밀번호는 필수 입력 항목입니다.' });
+    }
+
+    const exists = inMemoryUsers.some(u => u.studentId === studentId);
+    if (exists) {
+      return res.status(400).json({ error: '이미 존재하는 학번입니다.' });
+    }
+
+    const newUser = {
+      studentId,
+      name: name || '학생',
+      password,
+      studentType: studentType || 'general',
+      department: department || '컴퓨터공학과',
+      email: email || `${studentId}@gnu.ac.kr`
+    };
+
+    inMemoryUsers.push(newUser);
+    saveUsers(inMemoryUsers);
+
+    // Save to Supabase public.profiles if connected
+    if (supabase) {
+      try {
+        await supabase.from('profiles').insert([
+          { name: newUser.name, student_type: newUser.studentType, department: newUser.department }
+        ]).catch(() => {});
+      } catch (e) {}
+    }
+
+    res.status(201).json({ success: true, message: '회원가입이 완료되었습니다.', user: newUser });
+  } catch (error) {
+    console.error('Signup Error:', error);
+    res.status(500).json({ error: 'Internal server error during signup' });
+  }
+});
+
+// POST /api/auth/login - Authenticate user
+app.post('/api/auth/login', async (req, res) => {
+  try {
+    const { studentId, password } = req.body;
+    if (!studentId || !password) {
+      return res.status(400).json({ error: '학번과 비밀번호를 입력해주세요.' });
+    }
+
+    const user = inMemoryUsers.find(u => u.studentId === studentId);
+    if (!user) {
+      return res.status(404).json({ error: '존재하지 않는 학번입니다.' });
+    }
+
+    if (user.password !== password) {
+      return res.status(401).json({ error: '비밀번호가 일치하지 않습니다.' });
+    }
+
+    res.json({ success: true, message: '로그인에 성공했습니다.', user });
+  } catch (error) {
+    console.error('Login Error:', error);
+    res.status(500).json({ error: 'Internal server error during login' });
+  }
+});
+
 // POST /api/chat - Save user question & AI response to Supabase chat_messages
 app.post('/api/chat', async (req, res) => {
   try {

@@ -410,6 +410,41 @@ const COURSE_CATALOG = {
 
 // Student Profile Settings Templates
 const STUDENT_PROFILE_TEMPLATES = {
+  '2025080081': {
+    name: '김민성',
+    badge: '편입생',
+    major: '경영정보학과 | 4학년',
+    credits: {
+      total: 124.5,
+      totalGoal: 130,
+      majorReq: 15,
+      majorReqGoal: 18,
+      majorOpt: 57,
+      majorOptGoal: 60,
+      coreEdu: 9,
+      coreEduGoal: 9,
+      balanceEdu: 12,
+      balanceEduGoal: 12,
+      convergeEdu: 18,
+      convergeEduGoal: 18
+    },
+    initialCourses: ['db', 'management-bigdata'],
+    warningText: '졸업학점 부족(2.5)',
+    diagnosticBrief: '김민성님, 현재 총 취득학점은 124.5학점이며 졸업 요건(130학점) 충족을 위해 2.5학점 취득 및 졸업평가 통과가 필요합니다.',
+    diagnosticBullets: [
+      { type: 'red', text: '졸업학점 부족(2.5)' },
+      { type: 'red', text: '졸업평가 불합격(경영정보학과)' },
+      { type: 'yellow', text: '교양합계로만 체크(40)' },
+      { type: 'yellow', text: '마이크로디그리 대상자' },
+      { type: 'yellow', text: '트랙제 대상자' }
+    ],
+    welcomeMsg: '안녕하세요 김민성님! 경영정보학과 편입생 AI 네비게이터입니다. 현재 졸업을 위해 2.5학점 이수와 졸업평가 응시가 필요합니다. 수강 및 졸업 전략 추천을 시작할까요?',
+    chips: [
+      { label: '졸업 예시 시간표 보기', id: 'auto-schedule' },
+      { label: '전공선택 3학점 추천 과목 보기', id: 'major-req-list' },
+      { label: '교양 영역 이수 상태 확인', id: 'converge-list' }
+    ]
+  },
   'transfer': {
     name: '김경상',
     badge: '편입생',
@@ -509,14 +544,17 @@ const STUDENT_PROFILE_TEMPLATES = {
 
 function TimetableGenerator({ user, initialStudentType }) {
   const navigate = useNavigate();
-  const [studentType, setStudentType] = useState(initialStudentType || 'transfer');
+  const [studentType, setStudentType] = useState(() => {
+    if (user && user.studentId === '2025080081') return '2025080081';
+    return initialStudentType || 'transfer';
+  });
   
   // Clone profile templates so we can mutate state locally
   const [profiles, setProfiles] = useState(() => JSON.parse(JSON.stringify(STUDENT_PROFILE_TEMPLATES)));
-  const currentProfile = profiles[studentType];
+  const currentProfile = profiles[studentType] || profiles['transfer'];
 
   const studentName = user ? user.name : currentProfile.name;
-  const studentMajor = user && user.department ? `${user.department} | 3학년` : currentProfile.major;
+  const studentMajor = user && user.studentId === '2025080081' ? '경영정보학과 | 4학년' : user && user.department ? `${user.department} | 3학년` : currentProfile.major;
 
   const getDynamicText = (text) => {
     if (!text) return '';
@@ -861,7 +899,12 @@ function TimetableGenerator({ user, initialStudentType }) {
   const handleChatSend = async (e) => {
     e.preventDefault();
     const text = chatInput.trim();
-    if (!text) return;
+    
+    if (!text) {
+      console.warn('400 Bad Request: Empty input submitted.');
+      addMessage('bot', '⚠️ <strong>400 Bad Request:</strong> 전송할 메시지 내용을 입력해주세요.');
+      return;
+    }
 
     addMessage('user', text);
     setChatInput('');
@@ -895,7 +938,10 @@ function TimetableGenerator({ user, initialStudentType }) {
         aiResponse: botResponseText
       });
     } catch (err) {
-      console.warn('Backend server offline. Message saved locally.');
+      console.warn('Backend server offline. Message saved locally.', err);
+      setTimeout(() => {
+        addMessage('bot', '💡 <strong>알림:</strong> 백엔드 서버가 오프라인 상태이거나 네트워크 연결이 원활하지 않습니다. 대화 내역은 브라우저 로컬 세션에 임시 보관됩니다.');
+      }, 200);
     }
 
     setTimeout(() => {
@@ -1080,18 +1126,20 @@ function TimetableGenerator({ user, initialStudentType }) {
         </div>
         
         <div className="portal-user-menu">
-          <div className="profile-switcher-wrapper">
-            <span className="switcher-label">시뮬레이션 학적: </span>
-            <select 
-              value={studentType} 
-              onChange={(e) => setStudentType(e.target.value)}
-              className="student-type-select"
-            >
-              <option value="transfer">편입생</option>
-              <option value="general">재학생</option>
-              <option value="double-major">다전공자</option>
-            </select>
-          </div>
+          {!(user && user.studentId === '2025080081') && (
+            <div className="profile-switcher-wrapper">
+              <span className="switcher-label">시뮬레이션 학적: </span>
+              <select 
+                value={studentType} 
+                onChange={(e) => setStudentType(e.target.value)}
+                className="student-type-select"
+              >
+                <option value="transfer">편입생</option>
+                <option value="general">재학생</option>
+                <option value="double-major">다전공자</option>
+              </select>
+            </div>
+          )}
           
           <button onClick={() => navigate('/portal')} className="btn-logout">
             <span>메인 포털</span>
