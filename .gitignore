@@ -1,0 +1,36 @@
+# Local secrets
+.env
+.env.*
+!.env.example
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+work.env
+work/.env
+work/.env.*
+!work/.env.example
+supabase-work/.env
+supabase-work/.env.*
+
+# Runtime databases and private user data
+work/data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite3
+*.db
+
+# Local credential files
+*.pem
+*.key
+*service-account*.json
+firebase-admin*.json
+
+# Dependencies and Next.js output
+node_modules/
+.next/
+out/
+
+# Logs
+*.log

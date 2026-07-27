@@ -1,0 +1,27 @@
+# 비밀정보
+.env
+.env.*
+!.env.example
+work.env
+
+# 실행 중 생성되는 사용자 데이터
+backend/data/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+*.sqlite3
+*.db
+
+# 의존성·로그·빌드 결과
+node_modules/
+*.log
+.next/
+out/
+dist/
+
+# 인증서·서비스 계정
+*.pem
+*.key
+*service-account*.json
+firebase-admin*.json
+
