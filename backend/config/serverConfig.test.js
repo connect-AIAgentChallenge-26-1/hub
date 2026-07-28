@@ -16,7 +16,8 @@ describe("createServerConfig", () => {
         CLIENT_URL: "https://example.com, http://localhost:5173",
         API_RATE_LIMIT_WINDOW_MS: "60000",
         API_RATE_LIMIT_MAX: "25",
-        JSON_BODY_LIMIT: "200kb"
+        JSON_BODY_LIMIT: "200kb",
+        AGENT_INTERACTIONS_ENABLED: "true"
       })
     ).toMatchObject({
       port: 4100,
@@ -27,7 +28,8 @@ describe("createServerConfig", () => {
       ],
       rateLimitWindowMs: 60_000,
       rateLimitMaximum: 25,
-      jsonBodyLimit: "200kb"
+      jsonBodyLimit: "200kb",
+      agentInteractionsEnabled: true
     });
   });
 
@@ -38,7 +40,8 @@ describe("createServerConfig", () => {
         CLIENT_URL: "not-a-url,ftp://example.com",
         API_RATE_LIMIT_WINDOW_MS: "not-a-number",
         API_RATE_LIMIT_MAX: "0",
-        JSON_BODY_LIMIT: "unlimited"
+        JSON_BODY_LIMIT: "unlimited",
+        AGENT_INTERACTIONS_ENABLED: "yes"
       })
     ).toEqual(SERVER_DEFAULTS);
   });

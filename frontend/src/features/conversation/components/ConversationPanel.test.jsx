@@ -13,7 +13,9 @@ describe("ConversationPanel", () => {
       />
     );
 
-    const conversationLog = screen.getByRole("log", { name: "대화 내용" });
+    const conversationLog = screen.getByRole("log", {
+      name: "에이전트 상호작용 기록"
+    });
 
     expect(conversationLog).toHaveAttribute("aria-live", "polite");
     expect(conversationLog).toHaveAttribute("aria-relevant", "additions text");

@@ -11,13 +11,12 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:e2e": "vitest run frontend/src/e2e/screenServerDatabase.e2e.test.jsx",
-    "test:analysis": "node scripts/verify-emotion-analysis.mjs",
     "test:supabase": "node scripts/verify-supabase-connection.mjs",
-    "test:api": "node scripts/verify-emotion-analysis-api.mjs"
+    "test:agent-schema": "node scripts/verify-agent-state-schema.mjs"
   },
   "dependencies": {
-    "@mediapipe/tasks-vision": "^0.10.35",
     "@supabase/supabase-js": "^2.110.7",
+    "cobe": "^2.0.1",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",

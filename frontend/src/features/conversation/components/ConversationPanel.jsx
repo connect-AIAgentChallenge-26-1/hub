@@ -15,14 +15,16 @@ export default function ConversationPanel({ messages, children }) {
         className="messages"
         ref={scrollRef}
         role="log"
-        aria-label="대화 내용"
+        aria-label="에이전트 상호작용 기록"
         aria-live="polite"
         aria-relevant="additions text"
       >
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`message ${message.role === "user" ? "user" : "ai"}`}
+            className={`message ${
+              message.role === "user" ? "user" : "agent"
+            }`}
           >
             <div className="message-content">{message.content}</div>
           </div>

@@ -8,7 +8,8 @@ export const SERVER_DEFAULTS = Object.freeze({
   allowedOrigins: DEFAULT_ALLOWED_ORIGINS,
   rateLimitWindowMs: 15 * 60 * 1000,
   rateLimitMaximum: 100,
-  jsonBodyLimit: "100kb"
+  jsonBodyLimit: "100kb",
+  agentInteractionsEnabled: false
 });
 
 function readPositiveInteger(value, fallback) {
@@ -50,6 +51,15 @@ function readAllowedOrigins(value) {
   return [...new Set([...DEFAULT_ALLOWED_ORIGINS, ...configuredOrigins])];
 }
 
+function readBoolean(value, fallback) {
+  if (typeof value !== "string") return fallback;
+
+  const normalized = value.trim().toLowerCase();
+  if (normalized === "true") return true;
+  if (normalized === "false") return false;
+  return fallback;
+}
+
 export function createServerConfig(environment = {}) {
   return {
     port: readPositiveInteger(
@@ -65,6 +75,10 @@ export function createServerConfig(environment = {}) {
       environment.API_RATE_LIMIT_MAX,
       SERVER_DEFAULTS.rateLimitMaximum
     ),
-    jsonBodyLimit: readBodyLimit(environment.JSON_BODY_LIMIT)
+    jsonBodyLimit: readBodyLimit(environment.JSON_BODY_LIMIT),
+    agentInteractionsEnabled: readBoolean(
+      environment.AGENT_INTERACTIONS_ENABLED,
+      SERVER_DEFAULTS.agentInteractionsEnabled
+    )
   };
 }

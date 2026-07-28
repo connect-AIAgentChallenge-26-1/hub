@@ -1,47 +1,43 @@
 import React from "react";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor
+} from "@testing-library/react";
 import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 import { createApp } from "../../../server.js";
-import EmotionInputForm from "../features/emotion-input/components/EmotionInputForm.jsx";
 import {
-  createEmotionAnalysisApi
-} from "../features/emotion-session/api/emotionAnalysisApi.js";
+  createProcessAgentInteraction
+} from "../../../backend/features/agent-interactions/services/processAgentInteraction.js";
 import {
-  createManualAnalysisPayload
-} from "../../../test/fixtures/emotionAnalysisFixtures.js";
+  createInMemoryAgentInteractionRepository
+} from "../../../backend/features/agent-interactions/testing/createInMemoryAgentInteractionRepository.js";
+import AgentInputForm from "../features/agent-session/components/AgentInputForm.jsx";
+import {
+  createAgentInteractionApi
+} from "../features/agent-session/api/agentInteractionApi.js";
 
-const sessionId = "44c96b3d-c657-4a41-876b-a26b53178f59";
-const records = [];
+const browserBindingId = "44c96b3d-c657-4a41-876b-a26b53178f59";
 let server;
 let baseUrl;
-let analysisApi;
+let interactionApi;
+let repository;
 
-function createTestRecord(record) {
-  const savedRecord = {
-    id: crypto.randomUUID(),
-    ...record,
-    created_at: new Date().toISOString()
-  };
-  records.push(savedRecord);
-  return savedRecord;
-}
-
-describe("화면 → Express 서버 → DB 저장 경계 E2E", () => {
+describe("화면 → Express → 내부 상태 저장 경계 E2E", () => {
   beforeAll(async () => {
-    const app = createApp({
-      createAnalysis: async (record) => createTestRecord(record),
-      listAnalyses: async (requestedSessionId, limit) =>
-        records
-          .filter((record) => record.session_id === requestedSessionId)
-          .slice(0, limit)
+    repository = createInMemoryAgentInteractionRepository();
+    const processAgentInteraction = createProcessAgentInteraction({
+      repository,
+      now: () => new Date("2026-07-28T02:00:00.000Z")
     });
+    const app = createApp({ processAgentInteraction });
 
     await new Promise((resolve) => {
       server = app.listen(0, "127.0.0.1", resolve);
     });
-    const address = server.address();
-    baseUrl = `http://127.0.0.1:${address.port}`;
-    analysisApi = createEmotionAnalysisApi({ baseUrl });
+    baseUrl = `http://127.0.0.1:${server.address().port}`;
+    interactionApi = createAgentInteractionApi({ baseUrl });
   });
 
   afterAll(async () => {
@@ -50,63 +46,53 @@ describe("화면 → Express 서버 → DB 저장 경계 E2E", () => {
     });
   });
 
-  it("화면에서 제출한 제한 정보가 서버 검증을 거쳐 저장되고 응답으로 돌아온다", async () => {
-    let responseRecord;
-    const onAnalyze = vi.fn(async (input) => {
-      responseRecord = await analysisApi.createEmotionAnalysis(
-        createManualAnalysisPayload({
-          sessionId,
-          ...input,
-          selectedScenario: "normal",
-          aiResponse: "테스트 응답"
-        })
-      );
+  it("메시지가 상태 전이와 행동 선택을 거쳐 공개 응답으로 돌아온다", async () => {
+    let apiResult;
+    const onSend = vi.fn(async (messageText) => {
+      apiResult = await interactionApi.createInteraction({
+        browserBindingId,
+        clientRequestId: crypto.randomUUID(),
+        message: { text: messageText },
+        sensoryObservations: []
+      });
       return true;
     });
 
-    render(
-      <EmotionInputForm
-        scenarioPreset={{
-          faceSignal: "neutral",
-          voiceSignal: "normal"
-        }}
-        faceSignalMetadata={{
-          source: "manual",
-          confidence: null,
-          evidence: [],
-          heuristicVersion: null
-        }}
-        onAnalyze={onAnalyze}
-      />
+    render(<AgentInputForm onSend={onSend} />);
+    const input = screen.getByLabelText("에이전트에게 전달할 요청");
+
+    fireEvent.change(input, {
+      target: { value: "현재 작업의 다음 단계를 계속 진행해줘." }
+    });
+    fireEvent.submit(input.closest("form"));
+
+    await waitFor(() => expect(onSend).toHaveBeenCalledOnce());
+    await waitFor(() => expect(apiResult).toBeDefined());
+
+    const storedAgent = repository.inspectAgentByBinding(browserBindingId);
+
+    expect(storedAgent.stateVersion).toBe(1);
+    expect(storedAgent.currentState).toEqual(
+      expect.objectContaining({
+        predictionError: expect.any(Number),
+        resourcePressure: expect.any(Number),
+        goalConflict: expect.any(Number),
+        continuityIntegrity: expect.any(Number),
+        interactionSynchrony: expect.any(Number),
+        explorationDrive: expect.any(Number)
+      })
     );
-
-    fireEvent.change(document.querySelector("#situation-text"), {
-      target: { value: "오늘은 마음이 편안해요." }
+    expect(storedAgent.interactions).toHaveLength(1);
+    expect(apiResult.interaction).toMatchObject({
+      sequenceNumber: 1,
+      userMessage: "현재 작업의 다음 단계를 계속 진행해줘.",
+      response: {
+        actionType: expect.any(String),
+        text: expect.any(String)
+      }
     });
-    fireEvent.submit(document.querySelector("form"));
-
-    await waitFor(() => expect(onAnalyze).toHaveBeenCalledOnce());
-    await waitFor(() => expect(records).toHaveLength(1));
-
-    expect(records[0]).toMatchObject({
-      session_id: sessionId,
-      situation_text: "오늘은 마음이 편안해요.",
-      face_signal: "neutral",
-      face_signal_source: "manual",
-      face_signal_confidence: null,
-      face_signal_evidence: [],
-      face_signal_heuristic_version: null,
-      voice_signal: "normal",
-      selected_scenario: "normal"
-    });
-    expect(records[0]).not.toHaveProperty("image");
-    expect(records[0]).not.toHaveProperty("video");
-    expect(records[0]).not.toHaveProperty("landmarks");
-    expect(responseRecord).toMatchObject({
-      situationText: "오늘은 마음이 편안해요.",
-      faceSignalSource: "manual",
-      aiResponse: "테스트 응답"
-    });
-    expect(screen.getByDisplayValue("")).toBeInTheDocument();
+    expect(apiResult.interaction).not.toHaveProperty("internalState");
+    expect(apiResult.interaction).not.toHaveProperty("researchTrace");
+    expect(input).toHaveValue("");
   });
 });

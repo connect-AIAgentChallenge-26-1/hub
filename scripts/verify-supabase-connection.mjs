@@ -8,7 +8,7 @@ dotenv.config({ quiet: true });
 
 async function verifyConnection() {
   const { error } = await getSupabaseClient()
-    .from("emotion_analyses")
+    .from("agent_instances")
     .select("id")
     .limit(1);
 
@@ -16,7 +16,7 @@ async function verifyConnection() {
     throw new Error(`Supabase query failed: ${error.message}`);
   }
 
-  console.log("Supabase connection and emotion_analyses read check passed.");
+  console.log("Supabase connection and agent_instances read check passed.");
 }
 
 try {

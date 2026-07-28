@@ -9,10 +9,19 @@ import {
 } from "./backend/config/supabaseClient.js";
 import { createServerConfig } from "./backend/config/serverConfig.js";
 import {
-  createEmotionAnalysisRouter
-} from "./backend/features/emotion-analyses/emotionAnalysisRoutes.js";
-import { RequestValidationError } from "./backend/features/emotion-analyses/emotionAnalysisValidation.js";
-import { SupabaseRepositoryError } from "./backend/repositories/emotionAnalysisRepository.js";
+  createAgentInteractionRouter
+} from "./backend/features/agent-interactions/agentInteractionRoutes.js";
+import {
+  AgentInteractionValidationError
+} from "./backend/features/agent-interactions/agentInteractionValidation.js";
+import {
+  createProcessAgentInteraction
+} from "./backend/features/agent-interactions/services/processAgentInteraction.js";
+import {
+  AgentInteractionRepositoryError,
+  AgentStateVersionConflictError,
+  createSupabaseAgentInteractionRepository
+} from "./backend/repositories/agentInteractionRepository.js";
 
 dotenv.config({ quiet: true });
 
@@ -20,8 +29,7 @@ const serverConfig = createServerConfig(process.env);
 const allowedOrigins = new Set(serverConfig.allowedOrigins);
 
 export function createApp({
-  createAnalysis,
-  listAnalyses,
+  processAgentInteraction,
   rateLimitOptions = {}
 } = {}) {
   const app = express();
@@ -65,10 +73,14 @@ export function createApp({
   apiRateLimiter
 );
 
-  app.use(
-    "/api/emotion-analyses",
-    createEmotionAnalysisRouter({ createAnalysis, listAnalyses })
-  );
+  if (typeof processAgentInteraction === "function") {
+    app.use(
+      "/api/agent-interactions",
+      createAgentInteractionRouter({
+        processInteraction: processAgentInteraction
+      })
+    );
+  }
 
   app.use((request, response) => {
   response.status(404).json({
@@ -97,13 +109,48 @@ export function createApp({
     return;
   }
 
-  if (error instanceof RequestValidationError) {
+  if (error.status === 413 || error.type === "entity.too.large") {
+    response.status(413).json({
+      success: false,
+      error: {
+        code: "PAYLOAD_TOO_LARGE",
+        message: "The request body exceeds the allowed size."
+      }
+    });
+    return;
+  }
+
+  if (error instanceof AgentInteractionValidationError) {
     response.status(400).json({
       success: false,
       error: {
         code: error.code,
         message: error.message,
         details: error.details
+      }
+    });
+    return;
+  }
+
+  if (error instanceof AgentStateVersionConflictError) {
+    response.status(409).json({
+      success: false,
+      error: {
+        code: error.code,
+        message:
+          "The agent state changed during processing. Please retry the request."
+      }
+    });
+    return;
+  }
+
+  if (error instanceof AgentInteractionRepositoryError) {
+    console.error(error.cause ?? error);
+    response.status(502).json({
+      success: false,
+      error: {
+        code: error.code,
+        message: "The agent data operation failed."
       }
     });
     return;
@@ -116,18 +163,6 @@ export function createApp({
       error: {
         code: error.code,
         message: "The database service is not configured."
-      }
-    });
-    return;
-  }
-
-  if (error instanceof SupabaseRepositoryError) {
-    console.error(error.cause ?? error);
-    response.status(502).json({
-      success: false,
-      error: {
-        code: error.code,
-        message: "The database operation failed."
       }
     });
     return;
@@ -157,13 +192,26 @@ export function createApp({
   return app;
 }
 
-const app = createApp();
+const configuredAgentInteractionProcessor =
+  serverConfig.agentInteractionsEnabled
+    ? createProcessAgentInteraction({
+        repository: createSupabaseAgentInteractionRepository()
+      })
+    : undefined;
+const app = createApp({
+  processAgentInteraction: configuredAgentInteractionProcessor
+});
 
 if (process.env.NODE_ENV !== "test") {
   app.listen(serverConfig.port, () => {
     console.log(`Express server listening on http://localhost:${serverConfig.port}`);
     console.log(
       `Supabase configuration: ${isSupabaseConfigured() ? "ready" : "not configured"}`
+    );
+    console.log(
+      `Agent interaction API: ${
+        serverConfig.agentInteractionsEnabled ? "enabled" : "disabled"
+      }`
     );
   });
 }

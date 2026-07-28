@@ -1,53 +1,37 @@
 import React from "react";
 import { ConversationPanel } from "./features/conversation";
-import { AnalysisStatus } from "./features/emotion-analysis";
-import { EmotionInputForm } from "./features/emotion-input";
-import { EmotionResult } from "./features/emotion-result";
-import { useEmotionSession } from "./features/emotion-session";
-import { ObservationStatus } from "./features/observation-status";
-import { ScenarioSelector } from "./features/scenario-simulation";
+import {
+  AgentInputForm,
+  AgentStatePanel,
+  useAgentSession
+} from "./features/agent-session";
 import ServiceHeader from "./shared/components/ServiceHeader";
 
 export default function App() {
   const {
     messages,
-    aiStatus,
-    selectedScenario,
-    analysisStatus,
-    emotionResult,
-    faceSignalMetadata,
-    analysisError,
-    observation,
+    agentStatus,
+    lastInteraction,
+    interactionError,
     isInputDisabled,
-    handleScenarioChange,
-    handleAnalyze,
-    handleAnalyzeAgain
-  } = useEmotionSession();
+    handleSend
+  } = useAgentSession();
 
   return (
     <div className="app-root">
       <aside className="sidebar">
-        <ServiceHeader status={aiStatus} />
-        <ObservationStatus observation={observation} />
-        <ScenarioSelector
-          value={selectedScenario.value}
-          onChange={handleScenarioChange}
-          disabled={isInputDisabled}
-        />
-        <AnalysisStatus status={analysisStatus} error={analysisError} />
-        <EmotionResult
-          result={emotionResult}
-          onAnalyzeAgain={handleAnalyzeAgain}
-          disabled={isInputDisabled}
+        <ServiceHeader status={agentStatus} />
+        <AgentStatePanel
+          status={agentStatus}
+          interaction={lastInteraction}
+          error={interactionError}
         />
       </aside>
 
       <ConversationPanel messages={messages}>
-        <EmotionInputForm
-          scenarioPreset={selectedScenario}
-          faceSignalMetadata={faceSignalMetadata}
+        <AgentInputForm
           disabled={isInputDisabled}
-          onAnalyze={handleAnalyze}
+          onSend={handleSend}
         />
       </ConversationPanel>
     </div>
