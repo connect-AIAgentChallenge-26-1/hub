@@ -127,7 +127,16 @@ DB 마이그레이션과 스키마 검증이 끝난 뒤에만 Render에서
 적용 파일:
 
 ```text
-backend/migrations/20260728_add_agent_state_system.sql
+supabase/migrations/20260728000000_add_agent_state_system.sql
+```
+
+공식 CLI 흐름으로 원격 적용 대상을 확인한 뒤 마이그레이션을 배포합니다.
+
+```bash
+npx supabase login
+npx supabase link --project-ref <project-ref>
+npm run db:push:dry-run
+npm run db:push
 ```
 
 저장소에는 현재 내부 상태 스키마를 생성하는 마이그레이션만 유지합니다. 외부 DB에 남아
@@ -172,13 +181,15 @@ backend/
   features/internal-state/
   features/agent-interactions/
   repositories/agentInteractionRepository.js
-  migrations/20260728_add_agent_state_system.sql
 frontend/src/
   features/agent-session/
   features/conversation/
 shared/contracts/
   agentInteractionContract.js
   sensoryObservationContract.js
+supabase/
+  config.toml
+  migrations/20260728000000_add_agent_state_system.sql
 ```
 
 ## 현재 제한

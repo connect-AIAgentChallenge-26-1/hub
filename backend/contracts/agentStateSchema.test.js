@@ -7,7 +7,7 @@ import {
 
 const MIGRATION_PATH = resolve(
   process.cwd(),
-  "backend/migrations/20260728_add_agent_state_system.sql"
+  "supabase/migrations/20260728000000_add_agent_state_system.sql"
 );
 
 let migration;

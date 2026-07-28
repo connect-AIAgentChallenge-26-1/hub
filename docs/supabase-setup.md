@@ -13,11 +13,29 @@ SUPABASE_SECRET_KEY
 
 ## 마이그레이션
 
-Supabase Dashboard의 SQL Editor 또는 승인된 마이그레이션 실행기에서 다음 파일 전체를 한
-번 실행합니다.
+프로젝트에는 Supabase CLI `2.110.0`이 개발 의존성으로 고정되어 있습니다. 원격
+프로젝트에 적용하기 전에 CLI에 로그인하고 프로젝트를 연결합니다.
+
+```bash
+npx supabase login
+npx supabase link --project-ref <project-ref>
+```
+
+로그인에는 Supabase 개인 액세스 토큰, 프로젝트 연결에는 데이터베이스 비밀번호가
+필요합니다. 두 값은 Git이나 `.env.example`에 기록하지 않습니다.
+
+연결 후 원격 변경 없이 적용 대상을 먼저 확인하고, 결과가 맞을 때만 실제 적용합니다.
+
+```bash
+npm run db:push:dry-run
+npm run db:push
+```
+
+CLI는 다음 마이그레이션을 원격 마이그레이션 이력과 비교해 아직 적용되지 않은 경우에만
+실행합니다.
 
 ```text
-backend/migrations/20260728_add_agent_state_system.sql
+supabase/migrations/20260728000000_add_agent_state_system.sql
 ```
 
 이 마이그레이션은 다음 리소스를 추가합니다.
@@ -48,9 +66,3 @@ AGENT_INTERACTIONS_ENABLED=true
 ```
 
 그다음 서버를 재시작하고 `POST /api/agent-interactions`를 스모크 테스트합니다.
-
-## 데이터 보존
-
-과거 기능에서 생성된 테이블과 마이그레이션은 운영 데이터 보존을 위해 자동 삭제하지
-않습니다. 현재 에이전트 상태 스키마와 런타임은 과거 분석 테이블에 의존하지 않습니다.
-삭제가 필요하다면 별도 백업·보존 기간·복구 계획을 승인한 후 독립 작업으로 수행합니다.
