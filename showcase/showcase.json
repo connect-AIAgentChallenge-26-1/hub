@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "title": "모두의 뇌 (Modu Brain)",
+  "summary": "팀 회의록, 리서치, 피드백의 결정 이유와 관점 차이, 미결 질문을 100% 원문 근거 인용문과 함께 구조화하는 AI 맥락 지식 관리 SaaS 웹 앱입니다.",
+  "githubUser": "tjwnsdhfz(김서준)",
+  "demoUrl": "https://modu-brain-demo.onrender.com",
+  "thumbnail": "thumbnail.png",
+  "screenshots": [
+    "screenshots/home.png",
+    "screenshots/schema.png"
+  ],
+  "problem": "팀 회의, 사용자 피드백, 기술 리서치가 진행된 후 중요한 '결정 배경'과 '참여자 관점 차이', '미결 질문'이 카카오톡, 노션, 팀즈 등에 흩어져 잊혀지고 반복적인 재작업과 설명 소통 비용이 지속적으로 발생합니다.",
+  "targetUsers": [
+    "팀 회의록과 기술 리서치의 핵심 맥락을 빠르게 구조화해야 하는 개발팀 및 기획자",
+    "결정 이유와 원문 근거를 투명하게 인용하여 공유하고 싶은 프로젝트 리더",
+    "계정 생성 없이 외부 대화 기록(카카오톡 TXT, Teams/Notion JSON)을 로컬에서 안전하게 정규화하여 분석하려는 사용자"
+  ],
+  "features": [
+    "로그인 없이 카카오톡 TXT, Teams/Notion JSON, 텍스트를 바로 정규화하여 로컬 분석하는 공개 워크스페이스",
+    "결정 이유, 참여자 관점 차이, 미결 질문을 100% 원문 부분문자열(Substring Quote) 매칭 근거와 함께 구조화",
+    "Obsidian 스타일의 브레인 캔버스(지식맵 노드)와 원문 백링크(Backlinks) 바로가기 Drawer",
+    "이전 성공 분석과 최근 분석 결과 간의 결정 항목 차이(Diff: added/changed/resolved) 자동 계산",
+    "URL Fragment 기반 SHA-256 토큰 해시 검증을 통한 7일 자동 만료 및 즉시 폐기 가능한 읽기 전용 공유 뷰어"
+  ],
+  "featureTags": [
+    "100% 원문 근거 검증",
+    "Obsidian 지식맵",
+    "안전 만료 공유"
+  ],
+  "techStack": [
+    "React 19",
+    "Vite",
+    "TypeScript",
+    "Node.js",
+    "Express",
+    "Cloudflare Workers",
+    "Supabase Postgres",
+    "Supabase Auth",
+    "Vitest",
+    "Playwright"
+  ],
+  "techHighlights": [
+    "source_snapshot → provider_analysis → evidence_validation → result_persistence로 이어지는 4단계 AI 분석 트랜잭션 및 인용문 100% 검증 파이프라인 구축",
+    "전 테이블 Supabase RLS(auth.uid() = owner_id) 및 service-role isolation 적용으로 IDOR 및 데이터 유출 차단",
+    "ESLint, TypeScript Typecheck, Vitest 389개 유닛 테스트 100% 통과 및 DB 마이그레이션 스키마 불일치 자동 진단 품질 게이트 구축"
+  ],
+  "developmentWithAI": "프로젝트의 문제 정의, 3계층 아키텍처 경계, Notion warm-paper 디자인 토큰 시스템은 사람이 주도적으로 수립하고, 일일 Task 분해, 유닛 테스트 작성(Red-Green-Refactor), API 라우트 구현, 스키마 검사는 AI Agent(Antigravity)에 위임하여 개발했습니다. AI가 생성한 결과와 원문 간의 100% 매칭 여부를 검증하기 위한 4단계 파이프라인과 389개 Vitest 유닛 테스트를 자동화하여 'AI 거짓 답변(할루시네이션)'을 원천 차단했습니다.",
+  "agent": {
+    "summary": "계획 수립, UI/UX 디자인 단순화, 기능 테스트 검증을 위해 커스텀 스킬(ui-ux-pro-max)과 서브에이전트(ui-ux-designer, research)를 정의하여 활용했습니다. 개발 과정에서는 '만들기 전 실패 테스트부터 작성하는 TDD 사이클'을 고정하여 개발 퀄리티를 유지했습니다.",
+    "agentTools": [
+      {
+        "type": "agent",
+        "name": "디자인 전문 서브에이전트 (ui-ux-designer)",
+        "purpose": "Notion 스타일 warm-paper 디자인 가이드라인 준수, 불필요한 그라데이션 제거, 375px 모바일 반응형 가로 스크롤 방지 점검"
+      },
+      {
+        "type": "skill",
+        "name": "UI/UX 개선 커스텀 스킬 (ui-ux-pro-max)",
+        "purpose": "구조색(검정/warm paper/흰색/파랑) 유지 및 44px 터치 영역, 접근성(A11y), 로딩/오류 복구 UI 디자인 검증"
+      }
+    ],
+    "workflows": [
+      {
+        "name": "TDD 기능 개발 Workflow",
+        "steps": [
+          "주간 Task 및 검증 계약 확정",
+          "TDD Red Phase: 실패하는 Vitest 유닛 테스트 작성",
+          "TDD Green Phase: 최소 코드로 기능 구현 및 통과",
+          "TDD Refactor Phase: 코드 정비 및 커버리지 100% 달성",
+          "npm run check로 전체 품질 게이트 통과 검증"
+        ]
+      },
+      {
+        "name": "UI/UX 및 접근성 개선 Workflow",
+        "steps": [
+          "MASTER.md 및 ui-ux-pro-max 스킬 가이드 참조",
+          "375/768/1024/1440px 뷰포트 반응형 레이아웃 작성",
+          "Keyboard Navigation & Focus Visible 링 점검",
+          "E2E accessibility 테스트 검증"
+        ]
+      }
+    ]
+  }
+}
