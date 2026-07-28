@@ -1,4 +1,4 @@
-export const mockMessages = [
+export const initialMessages = [
   {
     id: "agent-ready",
     role: "agent",

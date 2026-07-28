@@ -24,6 +24,14 @@ afterEach(async () => {
 });
 
 describe("Express security baseline", () => {
+  it("exposes a dependency-free health check", async () => {
+    const baseUrl = await startServer();
+    const response = await fetch(`${baseUrl}/healthz`);
+
+    expect(response.status).toBe(200);
+    await expect(response.json()).resolves.toEqual({ status: "ok" });
+  });
+
   it("adds security headers without exposing Express", async () => {
     const baseUrl = await startServer();
     const response = await fetch(`${baseUrl}/missing`);

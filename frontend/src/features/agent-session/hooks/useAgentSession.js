@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { mockMessages } from "../../conversation";
+import { initialMessages } from "../../conversation";
 import { createInteraction } from "../api/agentInteractionApi";
 import { getOrCreateBrowserBindingId } from "../utils/browserBinding";
 import useManagedAsync from "./useManagedAsync";
@@ -14,7 +14,7 @@ const ERROR_MESSAGES = Object.freeze({
 
 export default function useAgentSession() {
   const [browserBindingId] = useState(getOrCreateBrowserBindingId);
-  const [messages, setMessages] = useState(mockMessages);
+  const [messages, setMessages] = useState(initialMessages);
   const [agentStatus, setAgentStatus] = useState("waiting");
   const [lastInteraction, setLastInteraction] = useState(null);
   const [interactionError, setInteractionError] = useState("");

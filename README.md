@@ -1,8 +1,7 @@
 # 로봇 내부 상태 에이전트
 
-사용자 감정을 분류하거나 공감 반응을 생성하는 시스템이 아닙니다. 이 프로젝트는 로봇
-고유의 내부 상태가 시간과 상호작용에 따라 변하고, 그 상태가 다음 행동 선택에 영향을 주는
-과정을 구현합니다.
+이 프로젝트는 로봇 고유의 내부 상태가 시간과 상호작용에 따라 변하고, 그 상태가 다음 행동
+선택에 영향을 주는 과정을 구현합니다.
 
 실제 생성형 AI API는 연결하지 않습니다. 현재 응답 문장은 선택된 행동에 대응하는 규칙
 기반 템플릿입니다.
@@ -43,8 +42,6 @@
 - JSON 크기 제한, CORS, 요청 횟수 제한, 보안 헤더
 - React 메시지 입력, 행동 결과, 시스템 상태 표시
 
-얼굴 영상, 감정 라벨, 감정 점수, 심리·의료 판단은 처리하지 않습니다.
-
 ## 실행
 
 ```bash
@@ -55,7 +52,7 @@ npm run dev
 API 서버는 별도 터미널에서 실행합니다.
 
 ```bash
-npm run server
+npm start
 ```
 
 프런트엔드 기본 주소는 `http://127.0.0.1:5173`, API 기본 주소는
@@ -80,6 +77,43 @@ npm run server
 신규 DB 마이그레이션을 적용하고 검증하기 전에는
 `AGENT_INTERACTIONS_ENABLED=false`를 유지합니다.
 
+## 배포
+
+프런트엔드는 Vercel, 백엔드는 Render에 배포합니다. 두 서비스 모두 저장소 루트를
+프로젝트 루트로 사용합니다.
+
+### Render
+
+루트 `render.yaml`을 Blueprint로 사용합니다.
+
+- 빌드 명령: `npm ci --omit=dev`
+- 시작 명령: `npm start`
+- 헬스체크: `GET /healthz`
+- 비밀 환경변수: `SUPABASE_URL`, `SUPABASE_SECRET_KEY`
+- CORS 환경변수: `CLIENT_URL=https://<Vercel 운영 도메인>`
+
+DB 마이그레이션과 스키마 검증이 끝난 뒤에만 Render에서
+`AGENT_INTERACTIONS_ENABLED=true`로 변경합니다. Render가 제공하는 `PORT`는 직접
+고정하지 않습니다.
+
+### Vercel
+
+루트 `vercel.json`이 Vite 빌드와 `dist` 출력 디렉터리를 지정합니다. Vercel에는 공개
+환경변수인 `VITE_API_BASE_URL=https://<Render 서비스 도메인>`만 설정합니다.
+`SUPABASE_SECRET_KEY`는 Vercel에 설정하지 않습니다.
+
+### 배포 순서
+
+1. Supabase에 현재 마이그레이션을 적용하고 검증합니다.
+2. Render 서비스를 생성하고 서버 전용 환경변수를 설정합니다.
+3. Render `/healthz`가 `200`을 반환하는지 확인합니다.
+4. Render URL을 Vercel의 `VITE_API_BASE_URL`에 설정하고 배포합니다.
+5. Vercel 운영 도메인을 Render의 `CLIENT_URL`에 설정합니다.
+6. Render에서 상호작용 기능 플래그를 활성화하고 실제 요청을 점검합니다.
+
+`main` push와 pull request에서는 GitHub Actions가 전체 테스트와 프런트엔드 빌드를
+실행합니다.
+
 ## 데이터베이스
 
 현재 스키마는 다음 네 테이블과 하나의 원자적 RPC를 사용합니다.
@@ -96,12 +130,18 @@ npm run server
 backend/migrations/20260728_add_agent_state_system.sql
 ```
 
-기존 데이터가 있을 수 있는 과거 마이그레이션은 삭제하거나 되돌리지 않습니다. 현재
-런타임은 과거 분석 테이블을 읽거나 쓰지 않습니다.
+저장소에는 현재 내부 상태 스키마를 생성하는 마이그레이션만 유지합니다. 외부 DB에 남아
+있는 과거 테이블이나 데이터는 코드 배포와 분리해 백업 및 삭제 승인을 거쳐 정리합니다.
 
 자세한 적용 순서는 [Supabase 설정](docs/supabase-setup.md)을 참고합니다.
 
 ## API
+
+```http
+GET /healthz
+```
+
+외부 의존성 없이 서버 프로세스의 생존 상태를 반환합니다.
 
 ```http
 POST /api/agent-interactions

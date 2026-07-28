@@ -7,7 +7,7 @@ import {
 import { selectAgentAction } from "../../internal-state/selectAgentAction.js";
 import { updateInternalState } from "../../internal-state/updateInternalState.js";
 import { deriveInteractionFactors } from "./deriveInteractionFactors.js";
-import { generateMockAgentResponse } from "./generateMockAgentResponse.js";
+import { generateAgentResponseTemplate } from "./generateAgentResponseTemplate.js";
 
 function requireRepositoryFunction(repository, name) {
   if (typeof repository?.[name] !== "function") {
@@ -36,7 +36,7 @@ export function createProcessAgentInteraction({
   stateProfile = DEFAULT_INTERNAL_STATE_PROFILE,
   actionProfile = DEFAULT_ACTION_SELECTION_PROFILE,
   factorInterpreter = deriveInteractionFactors,
-  responseGenerator = generateMockAgentResponse,
+  responseGenerator = generateAgentResponseTemplate,
   maximumStateConflictRetries = 1
 } = {}) {
   [

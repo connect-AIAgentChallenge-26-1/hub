@@ -16,7 +16,7 @@ const RESPONSE_TEMPLATES = Object.freeze({
     "새로운 관찰값을 확인했어. 다음 행동을 정하기 전에 변화 여부를 살펴볼게."
 });
 
-export function generateMockAgentResponse(actionType) {
+export function generateAgentResponseTemplate(actionType) {
   return (
     RESPONSE_TEMPLATES[actionType] ||
     "현재 입력을 기록하고 다음 행동 조건을 확인할게."

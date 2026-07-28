@@ -53,6 +53,9 @@ export function createApp({
   app.disable("x-powered-by");
   app.use(helmet());
   app.use(express.json({ limit: serverConfig.jsonBodyLimit }));
+  app.get("/healthz", (request, response) => {
+    response.status(200).json({ status: "ok" });
+  });
   app.use(
   "/api",
   cors({
@@ -203,7 +206,7 @@ const app = createApp({
 });
 
 if (process.env.NODE_ENV !== "test") {
-  app.listen(serverConfig.port, () => {
+  app.listen(serverConfig.port, "0.0.0.0", () => {
     console.log(`Express server listening on http://localhost:${serverConfig.port}`);
     console.log(
       `Supabase configuration: ${isSupabaseConfigured() ? "ready" : "not configured"}`

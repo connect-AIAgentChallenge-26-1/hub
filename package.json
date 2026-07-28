@@ -1,16 +1,20 @@
 {
-  "name": "hub",
+  "name": "robot-internal-state-agent",
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "dev": "vite",
+    "start": "node server.js",
     "server": "node server.js",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
     "test:run": "vitest run",
-    "test:e2e": "vitest run frontend/src/e2e/screenServerDatabase.e2e.test.jsx",
+    "test:e2e": "vitest run frontend/src/e2e/agentInteraction.e2e.test.jsx",
     "test:supabase": "node scripts/verify-supabase-connection.mjs",
     "test:agent-schema": "node scripts/verify-agent-state-schema.mjs"
   },
