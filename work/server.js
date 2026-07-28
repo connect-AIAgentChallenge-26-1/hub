@@ -11,6 +11,7 @@ const { promisify } = require('node:util');
 const { DatabaseSync } = require('node:sqlite');
 const { createCloudMemory } = require('./cloud-memory');
 const { createFcmSender } = require('./fcm-push');
+const { buildDecisionBatch, attachDecisionMetadata } = require('./autonomous-decision-engine');
 
 const execFileAsync = promisify(execFile);
 const ROOT_DIR = __dirname;
@@ -37,7 +38,31 @@ const DEFAULT_HTML_PATH = path.join(
   ROOT_DIR,
   '..',
   'frontend-work',
-  '플래너.html'
+  '갓생러 플래너.html'
+);
+const DEFAULT_COMPARISON_HTML_PATH = path.join(
+  ROOT_DIR,
+  '..',
+  'frontend-work',
+  '플래너_서비스완결성비교본.html'
+);
+const DEFAULT_GLOBAL_HTML_PATH = path.join(
+  ROOT_DIR,
+  '..',
+  'frontend-work',
+  '플래너_영미권비교본.html'
+);
+const DEFAULT_ADAPTIVE_HTML_PATH = path.join(
+  ROOT_DIR,
+  '..',
+  'frontend-work',
+  '플래너_상태적응형단일실행비교본.html'
+);
+const DEFAULT_RELEASE_HTML_PATH = path.join(
+  ROOT_DIR,
+  '..',
+  'frontend-work',
+  '갓생러 플래너_상태적응형 출시본.html'
 );
 const DEFAULT_CORE_PATH = path.join(ROOT_DIR, '..', 'frontend-work', 'planner-core.js');
 
@@ -114,6 +139,9 @@ const COACH_SYSTEM_PROMPT = [
   'source=upload 작업이 하나라도 있으면 일반적인 생산성 조언만 하지 말고, 추출된 항목을 사용자 지시에 맞춰 구체적인 순서 또는 실행안으로 변환하라. 서로 무관한 기존 작업은 추천에 끼워 넣지 마라.',
   '일정 정렬 요청이면 고정 시각, 마감/결재/의사결정 중요도, 이동·준비 버퍼, 에너지 적합도 순으로 재배치안을 제시하라.',
   '단순 설명보다 사용자가 승인하면 즉시 실행할 수 있는 일정 변경안을 recommendations에 우선 제시하라.',
+  'recommendations는 최대 3개만 제시하고, 각 metrics에는 판단 근거와 적용 시 기대 효과를 짧게 적어라. 페이로드에 없는 날짜·마감·근거를 지어내지 마라.',
+  '삭제·대량 이동·일정 전체 교체처럼 영향이 큰 실행은 사용자가 효과와 대상을 이해할 수 있게 명확히 표시하라. 불확실한 실행을 확정 사실처럼 말하지 마라.',
+  '같은 목표를 달성하는 방법이 여러 개면 사용자 시간을 가장 많이 절약하면서 되돌리기 쉬운 안을 우선하라.',
   'API 키, 토큰, 연락처, 이메일 등 민감정보는 답변에 재출력하지 마라.',
   '일정 관리에 직접 도움이 되는 내용만 reply에 담고, 모든 필드는 반드시 채워라. 추천이나 변경이 없으면 배열은 빈 배열로 반환한다.'
 ].join('\n');
@@ -572,6 +600,17 @@ function oauthProviderConfig(config, provider) {
       scope: 'profile_nickname,profile_image,account_email'
     };
   }
+  if (provider === 'naver') {
+    return {
+      provider,
+      clientId: config.naverClientId,
+      clientSecret: config.naverClientSecret,
+      authorizationUrl: 'https://nid.naver.com/oauth2.0/authorize',
+      tokenUrl: 'https://nid.naver.com/oauth2.0/token',
+      userInfoUrl: 'https://openapi.naver.com/v1/nid/me',
+      scope: ''
+    };
+  }
   throw createHttpError(400, '지원하지 않는 로그인 공급자입니다.');
 }
 
@@ -580,7 +619,8 @@ function createAuthorizationUrl(providerConfig, redirectUri, state, options = {}
   url.searchParams.set('client_id', providerConfig.clientId);
   url.searchParams.set('redirect_uri', redirectUri);
   url.searchParams.set('response_type', 'code');
-  url.searchParams.set('scope', options.scope || providerConfig.scope);
+  const requestedScope = options.scope || providerConfig.scope;
+  if (requestedScope) url.searchParams.set('scope', requestedScope);
   url.searchParams.set('state', state);
   if (providerConfig.provider === 'google') {
     url.searchParams.set('prompt', options.prompt || 'select_account');
@@ -591,7 +631,7 @@ function createAuthorizationUrl(providerConfig, redirectUri, state, options = {}
 }
 
 function createOAuthNetworkError(error, provider) {
-  const providerName = provider === 'kakao' ? '카카오' : 'Google';
+  const providerName = ({ google: 'Google', kakao: '카카오', naver: '네이버' })[provider] || 'OAuth';
   const errorCode = error?.cause?.code || error?.code || '';
 
   if (errorCode === 'EACCES' || errorCode === 'EPERM') {
@@ -608,7 +648,7 @@ function createOAuthNetworkError(error, provider) {
   );
 }
 
-async function fetchOAuthProfile({ fetchImpl, providerConfig, redirectUri, code }) {
+async function fetchOAuthProfile({ fetchImpl, providerConfig, redirectUri, code, state = '' }) {
   const tokenBody = new URLSearchParams({
     grant_type: 'authorization_code',
     client_id: providerConfig.clientId,
@@ -616,6 +656,7 @@ async function fetchOAuthProfile({ fetchImpl, providerConfig, redirectUri, code 
     code
   });
   if (providerConfig.clientSecret) tokenBody.set('client_secret', providerConfig.clientSecret);
+  if (providerConfig.provider === 'naver' && state) tokenBody.set('state', state);
 
   let tokenResponse;
   try {
@@ -658,6 +699,22 @@ async function fetchOAuthProfile({ fetchImpl, providerConfig, redirectUri, code 
         refreshToken: typeof tokenData.refresh_token === 'string' ? tokenData.refresh_token : '',
         expiresIn: Math.max(60, Number(tokenData.expires_in) || 3600)
       }
+    };
+  }
+
+  if (providerConfig.provider === 'naver') {
+    const naverProfile = profile && typeof profile.response === 'object' ? profile.response : null;
+    if (!naverProfile?.id) throw createHttpError(502, '네이버 계정 식별 정보를 확인할 수 없습니다.');
+    return {
+      provider: 'naver',
+      providerUserId: String(naverProfile.id),
+      email: typeof naverProfile.email === 'string' ? naverProfile.email : '',
+      name: typeof naverProfile.name === 'string' && naverProfile.name.trim()
+        ? naverProfile.name
+        : typeof naverProfile.nickname === 'string' && naverProfile.nickname.trim()
+          ? naverProfile.nickname
+          : '네이버 사용자',
+      avatarUrl: typeof naverProfile.profile_image === 'string' ? naverProfile.profile_image : ''
     };
   }
 
@@ -871,7 +928,7 @@ function createStore(dbPath) {
 
     CREATE TABLE IF NOT EXISTS auth_users (
       id TEXT PRIMARY KEY,
-      provider TEXT NOT NULL CHECK (provider IN ('google', 'kakao')),
+      provider TEXT NOT NULL CHECK (provider IN ('google', 'kakao', 'naver')),
       provider_user_id TEXT NOT NULL,
       email TEXT NOT NULL DEFAULT '',
       name TEXT NOT NULL,
@@ -883,8 +940,9 @@ function createStore(dbPath) {
 
     CREATE TABLE IF NOT EXISTS oauth_states (
       state_hash TEXT PRIMARY KEY,
-      provider TEXT NOT NULL CHECK (provider IN ('google', 'kakao')),
+      provider TEXT NOT NULL CHECK (provider IN ('google', 'kakao', 'naver')),
       redirect_uri TEXT NOT NULL,
+      purpose TEXT NOT NULL DEFAULT 'login',
       expires_at TEXT NOT NULL,
       created_at TEXT NOT NULL
     );
@@ -955,11 +1013,108 @@ function createStore(dbPath) {
       enabled INTEGER NOT NULL DEFAULT 1,
       updated_at TEXT NOT NULL
     );
+
+    CREATE TABLE IF NOT EXISTS assistant_decisions (
+      id TEXT PRIMARY KEY,
+      batch_id TEXT NOT NULL,
+      owner_id TEXT NOT NULL,
+      intent TEXT NOT NULL,
+      status TEXT NOT NULL CHECK (status IN ('proposed', 'applied', 'rolled_back', 'rejected')),
+      recommendation_json TEXT NOT NULL,
+      provenance_json TEXT NOT NULL DEFAULT '[]',
+      conflicts_json TEXT NOT NULL DEFAULT '[]',
+      reason_codes_json TEXT NOT NULL DEFAULT '[]',
+      confidence INTEGER NOT NULL,
+      action_value INTEGER NOT NULL,
+      risk_level TEXT NOT NULL CHECK (risk_level IN ('low', 'medium', 'high')),
+      expected_minutes_saved INTEGER NOT NULL DEFAULT 0,
+      reversible INTEGER NOT NULL DEFAULT 1,
+      requires_confirmation INTEGER NOT NULL DEFAULT 1,
+      notification_eligible INTEGER NOT NULL DEFAULT 0,
+      decision_signature TEXT NOT NULL,
+      action_kind TEXT NOT NULL DEFAULT '',
+      before_state_json TEXT,
+      after_state_json TEXT,
+      created_at TEXT NOT NULL,
+      applied_at TEXT,
+      rolled_back_at TEXT
+    );
+    CREATE INDEX IF NOT EXISTS assistant_decisions_owner_recent
+      ON assistant_decisions(owner_id, created_at DESC);
+
+    CREATE TABLE IF NOT EXISTS assistant_decision_feedback (
+      id TEXT PRIMARY KEY,
+      decision_id TEXT NOT NULL,
+      owner_id TEXT NOT NULL,
+      verdict TEXT NOT NULL CHECK (verdict IN ('helpful', 'not_helpful')),
+      outcome_json TEXT NOT NULL DEFAULT '{}',
+      created_at TEXT NOT NULL,
+      UNIQUE(decision_id, owner_id),
+      FOREIGN KEY (decision_id) REFERENCES assistant_decisions(id) ON DELETE CASCADE
+    );
+
+    CREATE TABLE IF NOT EXISTS assistant_notification_events (
+      id TEXT PRIMARY KEY,
+      owner_id TEXT NOT NULL,
+      decision_id TEXT,
+      local_date TEXT NOT NULL,
+      outcome TEXT NOT NULL,
+      created_at TEXT NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS assistant_notification_owner_day
+      ON assistant_notification_events(owner_id, local_date, created_at DESC);
   `);
 
   const personalizedBriefingColumns = db.prepare('PRAGMA table_info(personalized_briefings)').all();
   if (!personalizedBriefingColumns.some((column) => column.name === 'interests_json')) {
     db.exec("ALTER TABLE personalized_briefings ADD COLUMN interests_json TEXT NOT NULL DEFAULT '[]'");
+  }
+
+  const authUsersSchema = db.prepare("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'auth_users'").get()?.sql || '';
+  const oauthStatesSchema = db.prepare("SELECT sql FROM sqlite_master WHERE type = 'table' AND name = 'oauth_states'").get()?.sql || '';
+  if (!authUsersSchema.includes("'naver'") || !oauthStatesSchema.includes("'naver'")) {
+    const existingOAuthStateColumns = db.prepare('PRAGMA table_info(oauth_states)').all();
+    const hasOAuthPurpose = existingOAuthStateColumns.some((column) => column.name === 'purpose');
+    db.exec('PRAGMA foreign_keys = OFF');
+    try {
+      db.exec(`
+        BEGIN;
+        CREATE TABLE auth_users_next (
+          id TEXT PRIMARY KEY,
+          provider TEXT NOT NULL CHECK (provider IN ('google', 'kakao', 'naver')),
+          provider_user_id TEXT NOT NULL,
+          email TEXT NOT NULL DEFAULT '',
+          name TEXT NOT NULL,
+          avatar_url TEXT NOT NULL DEFAULT '',
+          created_at TEXT NOT NULL,
+          updated_at TEXT NOT NULL,
+          UNIQUE(provider, provider_user_id)
+        );
+        INSERT INTO auth_users_next
+          SELECT id, provider, provider_user_id, email, name, avatar_url, created_at, updated_at FROM auth_users;
+        DROP TABLE auth_users;
+        ALTER TABLE auth_users_next RENAME TO auth_users;
+
+        CREATE TABLE oauth_states_next (
+          state_hash TEXT PRIMARY KEY,
+          provider TEXT NOT NULL CHECK (provider IN ('google', 'kakao', 'naver')),
+          redirect_uri TEXT NOT NULL,
+          purpose TEXT NOT NULL DEFAULT 'login',
+          expires_at TEXT NOT NULL,
+          created_at TEXT NOT NULL
+        );
+        INSERT INTO oauth_states_next (state_hash, provider, redirect_uri, purpose, expires_at, created_at)
+          SELECT state_hash, provider, redirect_uri, ${hasOAuthPurpose ? 'purpose' : "'login'"}, expires_at, created_at FROM oauth_states;
+        DROP TABLE oauth_states;
+        ALTER TABLE oauth_states_next RENAME TO oauth_states;
+        COMMIT;
+      `);
+    } catch (error) {
+      try { db.exec('ROLLBACK'); } catch {}
+      throw error;
+    } finally {
+      db.exec('PRAGMA foreign_keys = ON');
+    }
   }
 
   const oauthStateColumns = db.prepare('PRAGMA table_info(oauth_states)').all();
@@ -1001,6 +1156,9 @@ function createStore(dbPath) {
   const deleteMemories = db.prepare('DELETE FROM planner_memories WHERE owner_id = ?');
   const deleteHousekeepingEvents = db.prepare('DELETE FROM housekeeping_events WHERE owner_id = ?');
   const deletePushTokens = db.prepare('DELETE FROM autonomous_push_tokens WHERE owner_id = ?');
+  const deleteDecisionFeedback = db.prepare('DELETE FROM assistant_decision_feedback WHERE owner_id = ?');
+  const deleteDecisions = db.prepare('DELETE FROM assistant_decisions WHERE owner_id = ?');
+  const deleteNotificationEvents = db.prepare('DELETE FROM assistant_notification_events WHERE owner_id = ?');
   const deleteExpiredOAuthStates = db.prepare('DELETE FROM oauth_states WHERE expires_at <= ?');
   const insertOAuthState = db.prepare(`
     INSERT INTO oauth_states (state_hash, provider, redirect_uri, purpose, expires_at, created_at)
@@ -1027,6 +1185,11 @@ function createStore(dbPath) {
     SELECT id, provider, provider_user_id, email, name, avatar_url
     FROM auth_users
     WHERE provider = ? AND provider_user_id = ?
+  `);
+  const updateAuthUserName = db.prepare(`
+    UPDATE auth_users
+    SET name = ?, updated_at = ?
+    WHERE id = ?
   `);
   const insertAuthSession = db.prepare(`
     INSERT INTO auth_sessions (token_hash, user_id, expires_at, created_at)
@@ -1111,6 +1274,55 @@ function createStore(dbPath) {
     ON CONFLICT(token) DO UPDATE SET owner_id = excluded.owner_id, platform = excluded.platform, enabled = 1, updated_at = excluded.updated_at
   `);
   const selectPushTokens = db.prepare(`SELECT token, platform FROM autonomous_push_tokens WHERE owner_id = ? AND enabled = 1 ORDER BY updated_at DESC LIMIT 20`);
+  const insertDecision = db.prepare(`
+    INSERT INTO assistant_decisions (
+      id, batch_id, owner_id, intent, status, recommendation_json, provenance_json,
+      conflicts_json, reason_codes_json, confidence, action_value, risk_level,
+      expected_minutes_saved, reversible, requires_confirmation, notification_eligible,
+      decision_signature, created_at
+    ) VALUES (?, ?, ?, ?, 'proposed', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+  const selectDecision = db.prepare(`
+    SELECT * FROM assistant_decisions WHERE id = ? AND owner_id = ?
+  `);
+  const selectDecisionHistory = db.prepare(`
+    SELECT id, batch_id, intent, status, recommendation_json, confidence, action_value,
+      risk_level, expected_minutes_saved, reversible, requires_confirmation,
+      notification_eligible, action_kind, created_at, applied_at, rolled_back_at
+    FROM assistant_decisions WHERE owner_id = ? ORDER BY created_at DESC LIMIT ?
+  `);
+  const applyDecisionStatement = db.prepare(`
+    UPDATE assistant_decisions
+    SET status = 'applied', action_kind = ?, before_state_json = ?, after_state_json = ?, applied_at = ?
+    WHERE id = ? AND owner_id = ? AND status = 'proposed' AND reversible = 1 AND decision_signature = ?
+  `);
+  const rollbackDecisionStatement = db.prepare(`
+    UPDATE assistant_decisions SET status = 'rolled_back', rolled_back_at = ?
+    WHERE id = ? AND owner_id = ? AND status = 'applied' AND reversible = 1
+  `);
+  const upsertDecisionFeedback = db.prepare(`
+    INSERT INTO assistant_decision_feedback (id, decision_id, owner_id, verdict, outcome_json, created_at)
+    VALUES (?, ?, ?, ?, ?, ?)
+    ON CONFLICT(decision_id, owner_id) DO UPDATE SET
+      verdict = excluded.verdict,
+      outcome_json = excluded.outcome_json,
+      created_at = excluded.created_at
+  `);
+  const selectFeedbackProfile = db.prepare(`
+    SELECT d.recommendation_json, f.verdict
+    FROM assistant_decision_feedback f
+    JOIN assistant_decisions d ON d.id = f.decision_id
+    WHERE f.owner_id = ?
+    ORDER BY f.created_at DESC LIMIT 200
+  `);
+  const countNotificationEvents = db.prepare(`
+    SELECT count(*) AS count FROM assistant_notification_events
+    WHERE owner_id = ? AND local_date = ? AND outcome = 'sent'
+  `);
+  const insertNotificationEvent = db.prepare(`
+    INSERT INTO assistant_notification_events (id, owner_id, decision_id, local_date, outcome, created_at)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `);
 
   function saveExchange(sessionId, payload, coachOutput) {
     const now = new Date().toISOString();
@@ -1206,6 +1418,144 @@ function createStore(dbPath) {
     return selectPushTokens.all(ownerId);
   }
 
+  function saveDecision(record, decisionSignature) {
+    insertDecision.run(
+      record.id,
+      record.batchId,
+      record.ownerId,
+      record.intent,
+      JSON.stringify(sanitizeForStorage(record.recommendation || {})),
+      JSON.stringify(sanitizeForStorage(record.provenance || [])),
+      JSON.stringify(sanitizeForStorage(record.conflicts || [])),
+      JSON.stringify(record.reasonCodes || []),
+      record.confidence,
+      record.actionValue,
+      record.riskLevel,
+      record.expectedMinutesSaved,
+      record.reversible ? 1 : 0,
+      record.requiresConfirmation ? 1 : 0,
+      record.notificationEligible ? 1 : 0,
+      decisionSignature,
+      record.createdAt
+    );
+    return record.id;
+  }
+
+  function getDecision(ownerId, decisionId) {
+    const row = selectDecision.get(decisionId, ownerId);
+    if (!row) return null;
+    return {
+      id: row.id,
+      batchId: row.batch_id,
+      status: row.status,
+      intent: row.intent,
+      recommendation: JSON.parse(row.recommendation_json),
+      provenance: JSON.parse(row.provenance_json || '[]'),
+      conflicts: JSON.parse(row.conflicts_json || '[]'),
+      confidence: row.confidence,
+      actionValue: row.action_value,
+      riskLevel: row.risk_level,
+      expectedMinutesSaved: row.expected_minutes_saved,
+      reversible: Boolean(row.reversible),
+      requiresConfirmation: Boolean(row.requires_confirmation),
+      notificationEligible: Boolean(row.notification_eligible),
+      decisionSignature: row.decision_signature,
+      actionKind: row.action_kind,
+      beforeState: row.before_state_json ? JSON.parse(row.before_state_json) : null,
+      afterState: row.after_state_json ? JSON.parse(row.after_state_json) : null,
+      createdAt: row.created_at,
+      appliedAt: row.applied_at,
+      rolledBackAt: row.rolled_back_at
+    };
+  }
+
+  function applyDecision(ownerId, input) {
+    const beforeState = sanitizeForStorage(input.beforeState || {});
+    const afterState = sanitizeForStorage(input.afterState || {});
+    const appliedAt = new Date().toISOString();
+    const result = applyDecisionStatement.run(
+      String(input.actionKind || '').slice(0, 80),
+      JSON.stringify(beforeState),
+      JSON.stringify(afterState),
+      appliedAt,
+      input.decisionId,
+      ownerId,
+      input.decisionSignature
+    );
+    if (!result.changes) return null;
+    savePlannerState(ownerId, afterState);
+    saveHousekeepingEvent(ownerId, `decision:${input.decisionId}`, beforeState, afterState);
+    return getDecision(ownerId, input.decisionId);
+  }
+
+  function rollbackDecision(ownerId, decisionId) {
+    const decision = getDecision(ownerId, decisionId);
+    if (!decision || decision.status !== 'applied' || !decision.reversible || !decision.beforeState) return null;
+    const current = getPlannerState(ownerId)?.state || decision.afterState;
+    const rolledBackAt = new Date().toISOString();
+    const result = rollbackDecisionStatement.run(rolledBackAt, decisionId, ownerId);
+    if (!result.changes) return null;
+    savePlannerState(ownerId, decision.beforeState);
+    saveHousekeepingEvent(ownerId, `decision-rollback:${decisionId}`, current, decision.beforeState);
+    return { decision: getDecision(ownerId, decisionId), state: decision.beforeState };
+  }
+
+  function saveDecisionFeedback(ownerId, decisionId, verdict, outcome = {}) {
+    if (!getDecision(ownerId, decisionId)) return null;
+    const createdAt = new Date().toISOString();
+    upsertDecisionFeedback.run(
+      crypto.randomUUID(), decisionId, ownerId, verdict,
+      JSON.stringify(sanitizeForStorage(outcome)), createdAt
+    );
+    return { decisionId, verdict, createdAt };
+  }
+
+  function getDecisionFeedbackProfile(ownerId) {
+    const profile = {};
+    selectFeedbackProfile.all(ownerId).forEach((row) => {
+      let type = 'none';
+      try { type = JSON.parse(row.recommendation_json)?.type || 'none'; } catch { type = 'none'; }
+      if (!profile[type]) profile[type] = { helpful: 0, notHelpful: 0, score: 0 };
+      if (row.verdict === 'helpful') profile[type].helpful += 1;
+      else profile[type].notHelpful += 1;
+      profile[type].score = Math.max(-12, Math.min(12, (profile[type].helpful - profile[type].notHelpful) * 2));
+    });
+    return profile;
+  }
+
+  function getDecisionHistory(ownerId, limit = 20) {
+    return selectDecisionHistory.all(ownerId, Math.max(1, Math.min(Number(limit) || 20, 100))).map((row) => ({
+      id: row.id,
+      batchId: row.batch_id,
+      intent: row.intent,
+      status: row.status,
+      recommendation: JSON.parse(row.recommendation_json),
+      confidence: row.confidence,
+      actionValue: row.action_value,
+      riskLevel: row.risk_level,
+      expectedMinutesSaved: row.expected_minutes_saved,
+      reversible: Boolean(row.reversible),
+      requiresConfirmation: Boolean(row.requires_confirmation),
+      notificationEligible: Boolean(row.notification_eligible),
+      actionKind: row.action_kind,
+      createdAt: row.created_at,
+      appliedAt: row.applied_at,
+      rolledBackAt: row.rolled_back_at
+    }));
+  }
+
+  function getNotificationBudget(ownerId, date = new Date()) {
+    const localDate = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul' }).format(date);
+    const used = Number(countNotificationEvents.get(ownerId, localDate)?.count) || 0;
+    return { localDate, used, limit: 3, remaining: Math.max(0, 3 - used) };
+  }
+
+  function recordNotification(ownerId, decisionId, outcome) {
+    const budget = getNotificationBudget(ownerId);
+    insertNotificationEvent.run(crypto.randomUUID(), ownerId, decisionId || null, budget.localDate, outcome, new Date().toISOString());
+    return getNotificationBudget(ownerId);
+  }
+
   function clearSession(sessionId) {
     db.exec('BEGIN IMMEDIATE');
     try {
@@ -1216,6 +1566,9 @@ function createStore(dbPath) {
       deleteMemories.run(sessionId);
       deleteHousekeepingEvents.run(sessionId);
       deletePushTokens.run(sessionId);
+      deleteDecisionFeedback.run(sessionId);
+      deleteDecisions.run(sessionId);
+      deleteNotificationEvents.run(sessionId);
       db.exec('COMMIT');
     } catch (error) {
       db.exec('ROLLBACK');
@@ -1252,12 +1605,18 @@ function createStore(dbPath) {
     const now = new Date().toISOString();
     const existing = selectAuthUserByProvider.get(profile.provider, profile.providerUserId);
     const id = existing?.id || crypto.randomUUID();
+    const providerFallbackNames = new Set(['Google 사용자', '카카오 사용자', '네이버 사용자']);
+    const receivedName = String(profile.name || '').trim();
+    const existingName = String(existing?.name || '').trim();
+    const name = providerFallbackNames.has(receivedName) && existingName && !providerFallbackNames.has(existingName)
+      ? existingName
+      : receivedName;
     upsertAuthUser.run(
       id,
       profile.provider,
       profile.providerUserId,
       profile.email,
-      profile.name,
+      name,
       profile.avatarUrl,
       now,
       now
@@ -1289,6 +1648,13 @@ function createStore(dbPath) {
       name: row.name,
       avatarUrl: row.avatar_url
     };
+  }
+
+  function setAuthUserName(userId, requestedName) {
+    const name = String(requestedName || '').trim().replace(/\s+/g, ' ').slice(0, 40);
+    if (!name) throw createHttpError(400, '표시할 사용자 이름을 입력해 주세요.');
+    updateAuthUserName.run(name, new Date().toISOString(), userId);
+    return name;
   }
 
   function revokeAuthSession(token) {
@@ -1373,6 +1739,7 @@ function createStore(dbPath) {
     saveAuthUser,
     createAuthSession,
     getAuthUserByToken,
+    setAuthUserName,
     revokeAuthSession,
     saveCalendarConnection,
     getCalendarConnection,
@@ -1386,6 +1753,15 @@ function createStore(dbPath) {
     getHousekeepingEvents,
     registerPushToken,
     getPushTokens,
+    saveDecision,
+    getDecision,
+    applyDecision,
+    rollbackDecision,
+    saveDecisionFeedback,
+    getDecisionFeedbackProfile,
+    getDecisionHistory,
+    getNotificationBudget,
+    recordNotification,
     close: () => db.close()
   };
 }
@@ -1408,7 +1784,7 @@ function analyzeRequestIntent(message) {
   const text = String(message || '').replace(/\s+/g, ' ').trim();
   const scheduleSort = /(일정|스케줄|시간표|타임테이블).*(정렬|재배치|조정|정리|최적화)|(정렬|재배치|조정|정리|최적화).*(일정|스케줄|시간표|타임테이블)/.test(text);
   const executive = /(기업|회사|임원|대표|사장|CEO|경영진|이사회|결재|업무)/i.test(text);
-  const delay = /(지연|늦|연기|미뤄|밀어)/.test(text);
+  const delay = /(지연|늦|연기|미뤄|밀어|밀리|밀렸)/.test(text);
   const atomize = /(쪼개|세분화|단계|작게|분해)/.test(text);
   return { text, scheduleSort, executive, delay, atomize };
 }
@@ -1480,10 +1856,9 @@ function createLocalCoachOutput(payload) {
       ? payload.requestContext.uploadedTaskTexts.filter((text) => typeof text === 'string')
       : []
   );
-  const uploaded = pending.filter((task) =>
-    task.source === 'upload'
-    && (!payload.requestContext?.hasAttachment || currentAttachmentTexts.has(task.text))
-  );
+  const uploaded = payload.requestContext?.hasAttachment
+    ? pending.filter((task) => task.source === 'upload' && currentAttachmentTexts.has(task.text))
+    : [];
   const recommendations = [];
   let reply;
 
@@ -2199,6 +2574,10 @@ function createApp(overrides = {}) {
   const config = {
     dbPath: overrides.dbPath || process.env.PLANNER_DB_PATH || path.join(ROOT_DIR, 'data', 'planner.sqlite'),
     htmlPath: overrides.htmlPath || process.env.PLANNER_HTML_PATH || DEFAULT_HTML_PATH,
+    comparisonHtmlPath: overrides.comparisonHtmlPath || process.env.PLANNER_COMPARISON_HTML_PATH || DEFAULT_COMPARISON_HTML_PATH,
+    globalHtmlPath: overrides.globalHtmlPath || process.env.PLANNER_GLOBAL_HTML_PATH || DEFAULT_GLOBAL_HTML_PATH,
+    adaptiveHtmlPath: overrides.adaptiveHtmlPath || process.env.PLANNER_ADAPTIVE_HTML_PATH || DEFAULT_ADAPTIVE_HTML_PATH,
+    releaseHtmlPath: overrides.releaseHtmlPath || process.env.PLANNER_RELEASE_HTML_PATH || DEFAULT_RELEASE_HTML_PATH,
     corePath: overrides.corePath || process.env.PLANNER_CORE_PATH || DEFAULT_CORE_PATH,
     openAiApiKey: overrides.openAiApiKey === undefined ? process.env.OPENAI_API_KEY : overrides.openAiApiKey,
     model: overrides.model || process.env.OPENAI_MODEL || 'gpt-5.6-luna',
@@ -2210,6 +2589,8 @@ function createApp(overrides = {}) {
     googleClientSecret: overrides.googleClientSecret === undefined ? process.env.GOOGLE_CLIENT_SECRET : overrides.googleClientSecret,
     kakaoClientId: overrides.kakaoClientId === undefined ? process.env.KAKAO_CLIENT_ID : overrides.kakaoClientId,
     kakaoClientSecret: overrides.kakaoClientSecret === undefined ? process.env.KAKAO_CLIENT_SECRET : overrides.kakaoClientSecret,
+    naverClientId: overrides.naverClientId === undefined ? process.env.NAVER_CLIENT_ID : overrides.naverClientId,
+    naverClientSecret: overrides.naverClientSecret === undefined ? process.env.NAVER_CLIENT_SECRET : overrides.naverClientSecret,
     supabaseUrl: overrides.supabaseUrl || process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || '',
     supabaseSecret: overrides.supabaseSecret || process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY || '',
     embeddingModel: overrides.embeddingModel || process.env.OPENAI_EMBEDDING_MODEL || 'text-embedding-3-small',
@@ -2255,7 +2636,12 @@ function createApp(overrides = {}) {
           model: config.model,
           cloud: cloudMemory.status(),
           push: fcmSender.status(),
-          capabilities: ['text', 'image', 'document', 'voice', 'personalized-briefing', 'long-term-memory', 'semantic-rag', 'housekeeping-history']
+          capabilities: [
+            'text', 'image', 'document', 'voice', 'personalized-briefing',
+            'long-term-memory', 'semantic-rag', 'housekeeping-history',
+            'evidence-linked-decisions', 'conflict-graph', 'reversible-actions',
+            'notification-budget', 'feedback-learning'
+          ]
         });
       }
 
@@ -2264,7 +2650,8 @@ function createApp(overrides = {}) {
           success: true,
           providers: {
             google: Boolean(config.googleClientId && config.googleClientSecret),
-            kakao: Boolean(config.kakaoClientId)
+            kakao: Boolean(config.kakaoClientId),
+            naver: Boolean(config.naverClientId && config.naverClientSecret)
           }
         });
       }
@@ -2282,14 +2669,26 @@ function createApp(overrides = {}) {
         return sendJson(res, 200, { success: true }, createAuthCookie('', origin, 0));
       }
 
+      if (req.method === 'PATCH' && pathname === '/api/auth/profile') {
+        const token = parseCookies(req.headers.cookie)[AUTH_COOKIE_NAME];
+        const user = store.getAuthUserByToken(token);
+        if (!user) throw createHttpError(401, '로그인 후 사용자 이름을 설정할 수 있습니다.');
+        const body = await readJson(req);
+        store.setAuthUserName(user.id, body?.name);
+        return sendJson(res, 200, {
+          success: true,
+          user: store.getAuthUserByToken(token)
+        });
+      }
+
       if (req.method === 'GET' && pathname === '/api/auth/start') {
         const provider = requestUrl.searchParams.get('provider');
         const providerConfig = oauthProviderConfig(config, provider);
-        if (!providerConfig.clientId || (provider === 'google' && !providerConfig.clientSecret)) {
+        if (!providerConfig.clientId || (['google', 'naver'].includes(provider) && !providerConfig.clientSecret)) {
           return sendHtml(res, 503, oauthPopupResultHtml({
             success: false,
             provider,
-            message: `${provider === 'google' ? 'Google' : '카카오'} 로그인 설정이 아직 완료되지 않았습니다.`
+            message: `${({ google: 'Google', kakao: '카카오', naver: '네이버' })[provider] || 'OAuth'} 로그인 설정이 아직 완료되지 않았습니다.`
           }));
         }
         const origin = getRequestOrigin(req, config.appBaseUrl);
@@ -2298,7 +2697,7 @@ function createApp(overrides = {}) {
         return sendRedirect(res, createAuthorizationUrl(providerConfig, redirectUri, state));
       }
 
-      const authCallbackMatch = pathname.match(/^\/api\/auth\/callback\/(google|kakao)$/);
+      const authCallbackMatch = pathname.match(/^\/api\/auth\/callback\/(google|kakao|naver)$/);
       if (req.method === 'GET' && authCallbackMatch) {
         const provider = authCallbackMatch[1];
         const code = requestUrl.searchParams.get('code');
@@ -2332,7 +2731,8 @@ function createApp(overrides = {}) {
             fetchImpl: config.fetchImpl,
             providerConfig,
             redirectUri: savedState.redirectUri,
-            code
+            code,
+            state
           });
           const user = store.saveAuthUser(profile);
           if (provider === 'google' && savedState.purpose === 'calendar') {
@@ -2734,6 +3134,69 @@ function createApp(overrides = {}) {
         return sendJson(res, 200, { success: true, state: target.previousState, ...saved, eventId: undoEvent.id }, session.cookie);
       }
 
+      if (req.method === 'GET' && pathname === '/api/assistant/decisions/history') {
+        const session = getSession(req, store);
+        const decisions = store.getDecisionHistory(session.id, requestUrl.searchParams.get('limit'));
+        const notificationBudget = store.getNotificationBudget(session.id);
+        return sendJson(res, 200, { success: true, decisions, notificationBudget }, session.cookie);
+      }
+
+      if (req.method === 'POST' && pathname === '/api/assistant/decisions/apply') {
+        const session = getSession(req, store);
+        const body = await readJson(req);
+        if (!isPlainObject(body) || typeof body.decisionId !== 'string' || typeof body.decisionSignature !== 'string') {
+          throw createHttpError(400, '검증할 의사결정 ID와 서명이 필요합니다.');
+        }
+        if (!isPlainObject(body.beforeState) || !isPlainObject(body.afterState)) {
+          throw createHttpError(400, '적용 전후 플래너 상태가 필요합니다.');
+        }
+        const applied = store.applyDecision(session.id, {
+          decisionId: body.decisionId,
+          decisionSignature: body.decisionSignature,
+          actionKind: typeof body.actionKind === 'string' ? body.actionKind : '',
+          beforeState: body.beforeState,
+          afterState: body.afterState
+        });
+        if (!applied) throw createHttpError(409, '이미 처리되었거나 검증할 수 없는 실행 제안입니다.');
+        void cloudMemory.mirrorPlannerState(session.id, sanitizeForStorage(body.afterState));
+        void cloudMemory.mirrorDecisionStatus(session.id, body.decisionId, {
+          status: 'applied',
+          action_kind: applied.actionKind,
+          before_state: sanitizeForStorage(body.beforeState),
+          after_state: sanitizeForStorage(body.afterState),
+          applied_at: applied.appliedAt
+        });
+        return sendJson(res, 200, { success: true, decision: applied }, session.cookie);
+      }
+
+      if (req.method === 'POST' && pathname === '/api/assistant/decisions/rollback') {
+        const session = getSession(req, store);
+        const body = await readJson(req);
+        if (!isPlainObject(body) || typeof body.decisionId !== 'string') {
+          throw createHttpError(400, '되돌릴 의사결정 ID가 필요합니다.');
+        }
+        const rolledBack = store.rollbackDecision(session.id, body.decisionId);
+        if (!rolledBack) throw createHttpError(409, '되돌릴 수 없거나 이미 되돌린 실행입니다.');
+        void cloudMemory.mirrorPlannerState(session.id, sanitizeForStorage(rolledBack.state));
+        void cloudMemory.mirrorDecisionStatus(session.id, body.decisionId, {
+          status: 'rolled_back',
+          rolled_back_at: rolledBack.decision.rolledBackAt
+        });
+        return sendJson(res, 200, { success: true, ...rolledBack }, session.cookie);
+      }
+
+      if (req.method === 'POST' && pathname === '/api/assistant/decisions/feedback') {
+        const session = getSession(req, store);
+        const body = await readJson(req);
+        if (!isPlainObject(body) || typeof body.decisionId !== 'string' || !['helpful', 'not_helpful'].includes(body.verdict)) {
+          throw createHttpError(400, '의사결정 ID와 유효한 피드백이 필요합니다.');
+        }
+        const feedback = store.saveDecisionFeedback(session.id, body.decisionId, body.verdict, isPlainObject(body.outcome) ? body.outcome : {});
+        if (!feedback) throw createHttpError(404, '피드백을 남길 실행 제안을 찾지 못했습니다.');
+        void cloudMemory.mirrorDecisionFeedback(session.id, feedback);
+        return sendJson(res, 200, { success: true, feedback }, session.cookie);
+      }
+
       if (req.method === 'POST' && pathname === '/api/assistant/notifications/register') {
         const session = getSession(req, store);
         const body = await readJson(req);
@@ -2751,13 +3214,26 @@ function createApp(overrides = {}) {
         const title = typeof body.title === 'string' ? body.title.trim().slice(0, 100) : '갓생러 플래너';
         const message = typeof body.message === 'string' ? body.message.trim().slice(0, 500) : '';
         if (!message) throw createHttpError(400, '푸시 알림 메시지가 필요합니다.');
+        const notificationBudget = store.getNotificationBudget(session.id);
+        if (notificationBudget.remaining <= 0) {
+          throw createHttpError(429, '오늘의 중요 알림 3회를 모두 사용했습니다. 추가 제안은 앱 안에서만 표시합니다.');
+        }
+        if (typeof body.decisionId === 'string' && body.decisionId) {
+          const decision = store.getDecision(session.id, body.decisionId);
+          if (!decision || !decision.notificationEligible) {
+            throw createHttpError(409, '중요도·신뢰도 기준을 통과하지 못한 제안은 푸시로 보내지 않습니다.');
+          }
+        }
         const tokens = store.getPushTokens(session.id);
         const results = await Promise.all(tokens.map(({ token }) => fcmSender.send(token, { title, body: message }, { type: String(body.type || 'planner-nudge') })));
+        const sent = results.filter((result) => result.ok).length;
+        const nextBudget = store.recordNotification(session.id, typeof body.decisionId === 'string' ? body.decisionId : null, sent ? 'sent' : 'failed');
         return sendJson(res, 200, {
           success: results.some((result) => result.ok),
           configured: fcmSender.status().configured,
-          sent: results.filter((result) => result.ok).length,
-          attempted: results.length
+          sent,
+          attempted: results.length,
+          notificationBudget: nextBudget
         }, session.cookie);
       }
 
@@ -2797,6 +3273,20 @@ function createApp(overrides = {}) {
           coachOutput = createLocalCoachOutput(payload);
           engine = 'server-fallback';
         }
+        const notificationBudget = store.getNotificationBudget(session.id);
+        const feedbackProfile = store.getDecisionFeedbackProfile(session.id);
+        const decisionBatch = buildDecisionBatch({
+          ownerId: session.id,
+          payload,
+          coachOutput,
+          notificationBudget,
+          feedbackProfile
+        });
+        decisionBatch.decisions.forEach((decision) => {
+          store.saveDecision(decision.record, decision.public.decisionSignature);
+          void cloudMemory.mirrorDecision(decision.record, decision.public.decisionSignature);
+        });
+        coachOutput = attachDecisionMetadata(coachOutput, decisionBatch);
         await store.saveExchange(session.id, sanitizeForStorage(payload), sanitizeForStorage(coachOutput));
         return sendJson(res, 200, { success: true, engine, ...coachOutput }, session.cookie);
       }
@@ -2812,6 +3302,62 @@ function createApp(overrides = {}) {
           return res.end(html);
         } catch {
           throw createHttpError(404, `프런트엔드 HTML을 찾을 수 없습니다. PLANNER_HTML_PATH를 확인해 주세요: ${config.htmlPath}`);
+        }
+      }
+
+      if (req.method === 'GET' && (pathname === '/service-complete' || pathname === '/service-complete/')) {
+        try {
+          const html = await fsp.readFile(config.comparisonHtmlPath);
+          res.writeHead(200, {
+            'Content-Type': 'text/html; charset=utf-8',
+            'Content-Length': html.length,
+            'Cache-Control': 'no-store'
+          });
+          return res.end(html);
+        } catch {
+          throw createHttpError(404, `서비스 완결성 비교본을 찾을 수 없습니다: ${config.comparisonHtmlPath}`);
+        }
+      }
+
+      if (req.method === 'GET' && (pathname === '/global-preview' || pathname === '/global-preview/')) {
+        try {
+          const html = await fsp.readFile(config.globalHtmlPath);
+          res.writeHead(200, {
+            'Content-Type': 'text/html; charset=utf-8',
+            'Content-Length': html.length,
+            'Cache-Control': 'no-store'
+          });
+          return res.end(html);
+        } catch {
+          throw createHttpError(404, `영미권 비교본을 찾을 수 없습니다: ${config.globalHtmlPath}`);
+        }
+      }
+
+      if (req.method === 'GET' && (pathname === '/adaptive-execution' || pathname === '/adaptive-execution/')) {
+        try {
+          const html = await fsp.readFile(config.adaptiveHtmlPath);
+          res.writeHead(200, {
+            'Content-Type': 'text/html; charset=utf-8',
+            'Content-Length': html.length,
+            'Cache-Control': 'no-store'
+          });
+          return res.end(html);
+        } catch {
+          throw createHttpError(404, `상태 적응형 단일 실행 비교본을 찾을 수 없습니다: ${config.adaptiveHtmlPath}`);
+        }
+      }
+
+      if (req.method === 'GET' && (pathname === '/release' || pathname === '/release/' || pathname === '/launch' || pathname === '/launch/')) {
+        try {
+          const html = await fsp.readFile(config.releaseHtmlPath);
+          res.writeHead(200, {
+            'Content-Type': 'text/html; charset=utf-8',
+            'Content-Length': html.length,
+            'Cache-Control': 'no-store'
+          });
+          return res.end(html);
+        } catch {
+          throw createHttpError(404, `상태 적응형 출시본을 찾을 수 없습니다: ${config.releaseHtmlPath}`);
         }
       }
 

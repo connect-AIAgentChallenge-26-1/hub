@@ -760,20 +760,79 @@ create table if not exists public.autonomous_push_tokens (
   updated_at timestamptz not null default now()
 );
 
+create table if not exists public.autonomous_decisions (
+  id uuid primary key,
+  batch_id uuid not null,
+  owner_id text not null,
+  intent text not null,
+  status text not null default 'proposed'
+    check (status in ('proposed', 'applied', 'rolled_back', 'rejected')),
+  recommendation jsonb not null default '{}'::jsonb,
+  provenance jsonb not null default '[]'::jsonb,
+  conflicts jsonb not null default '[]'::jsonb,
+  reason_codes jsonb not null default '[]'::jsonb,
+  confidence integer not null check (confidence between 0 and 100),
+  action_value integer not null check (action_value between 0 and 100),
+  risk_level text not null check (risk_level in ('low', 'medium', 'high')),
+  expected_minutes_saved integer not null default 0,
+  reversible boolean not null default true,
+  requires_confirmation boolean not null default true,
+  notification_eligible boolean not null default false,
+  decision_signature text not null,
+  action_kind text not null default '',
+  before_state jsonb,
+  after_state jsonb,
+  created_at timestamptz not null default now(),
+  applied_at timestamptz,
+  rolled_back_at timestamptz
+);
+create index if not exists autonomous_decisions_owner_recent_idx
+  on public.autonomous_decisions (owner_id, created_at desc);
+
+create table if not exists public.autonomous_decision_feedback (
+  id uuid primary key default gen_random_uuid(),
+  decision_id uuid not null references public.autonomous_decisions(id) on delete cascade,
+  owner_id text not null,
+  verdict text not null check (verdict in ('helpful', 'not_helpful')),
+  outcome jsonb not null default '{}'::jsonb,
+  created_at timestamptz not null default now(),
+  unique (decision_id, owner_id)
+);
+
+create table if not exists public.autonomous_notification_events (
+  id uuid primary key default gen_random_uuid(),
+  owner_id text not null,
+  decision_id uuid references public.autonomous_decisions(id) on delete set null,
+  local_date date not null,
+  outcome text not null,
+  created_at timestamptz not null default now()
+);
+create index if not exists autonomous_notification_owner_day_idx
+  on public.autonomous_notification_events (owner_id, local_date, created_at desc);
+
 alter table public.autonomous_planner_states enable row level security;
 alter table public.planner_memories enable row level security;
 alter table public.autonomous_housekeeping_events enable row level security;
 alter table public.autonomous_push_tokens enable row level security;
+alter table public.autonomous_decisions enable row level security;
+alter table public.autonomous_decision_feedback enable row level security;
+alter table public.autonomous_notification_events enable row level security;
 
 -- 이 네 테이블은 익명/브라우저 키로 직접 읽지 못하며 서버 secret/service_role만 접근합니다.
 revoke all on table public.autonomous_planner_states from anon, authenticated;
 revoke all on table public.planner_memories from anon, authenticated;
 revoke all on table public.autonomous_housekeeping_events from anon, authenticated;
 revoke all on table public.autonomous_push_tokens from anon, authenticated;
+revoke all on table public.autonomous_decisions from anon, authenticated;
+revoke all on table public.autonomous_decision_feedback from anon, authenticated;
+revoke all on table public.autonomous_notification_events from anon, authenticated;
 grant all on table public.autonomous_planner_states to service_role;
 grant all on table public.planner_memories to service_role;
 grant all on table public.autonomous_housekeeping_events to service_role;
 grant all on table public.autonomous_push_tokens to service_role;
+grant all on table public.autonomous_decisions to service_role;
+grant all on table public.autonomous_decision_feedback to service_role;
+grant all on table public.autonomous_notification_events to service_role;
 
 create or replace function public.match_planner_memories(
   query_owner_id text,
@@ -816,3 +875,7 @@ comment on table public.planner_memories is
   '첨부 문서·음성·계획에서 추출한 출처 포함 장기기억과 pgvector 임베딩';
 comment on table public.autonomous_housekeeping_events is
   'AI 일정 수습의 변경 전후 상태를 보존하는 감사·되돌리기 이력';
+comment on table public.autonomous_decisions is
+  '근거·충돌·신뢰도·실행가치를 함께 보존하는 AI 비서의 가역 의사결정 원장';
+comment on table public.autonomous_decision_feedback is
+  '사용자 평가를 다음 의사결정 점수에 반영하기 위한 실행 피드백';

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>갓생러 플래너</title>
+    <title>갓생러 플래너 | 상태 적응형 개인 실행 운영체제</title>
     <script>
         if (window.location.protocol === 'file:') {
             window.location.replace('http://127.0.0.1:3001/');
@@ -4439,6 +4439,768 @@
             .personal-profile-actions .mini-btn { width: 100%; }
         }
 
+        /* 출시본 기반: 흩어진 기능을 하나의 실행 흐름으로 압축한다. */
+        .completion-os {
+            margin: 20px 0 24px;
+            padding: clamp(20px, 3vw, 32px);
+            border: 1px solid rgba(125, 194, 211, 0.42);
+            border-radius: 28px;
+            background:
+                radial-gradient(circle at 92% 8%, rgba(151, 222, 240, 0.22), transparent 34%),
+                linear-gradient(145deg, rgba(255,255,255,0.96), rgba(241,251,253,0.94) 55%, rgba(255,250,236,0.86));
+            box-shadow: 0 24px 60px rgba(28, 86, 104, 0.12);
+        }
+        .completion-os-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+        }
+        .completion-os-eyebrow {
+            color: #087a98;
+            font-size: 0.72rem;
+            font-weight: 900;
+            letter-spacing: 0.11em;
+        }
+        .completion-os-head h2 {
+            margin: 7px 0 8px;
+            color: #102f40;
+            font-size: clamp(1.45rem, 2.3vw, 2rem);
+            letter-spacing: -0.04em;
+        }
+        .completion-os-definition {
+            max-width: 780px;
+            margin: 0;
+            color: #4d6d7c;
+            font-size: 0.92rem;
+            line-height: 1.72;
+        }
+        .completion-os-badge {
+            flex: 0 0 auto;
+            padding: 9px 13px;
+            border: 1px solid rgba(14, 143, 170, 0.2);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.76);
+            color: #0d6e85;
+            font-size: 0.72rem;
+            font-weight: 900;
+        }
+        .completion-view-nav {
+            display: inline-grid;
+            grid-template-columns: repeat(3, minmax(88px, 1fr));
+            gap: 5px;
+            margin-top: 22px;
+            padding: 5px;
+            border: 1px solid rgba(128, 188, 203, 0.32);
+            border-radius: 15px;
+            background: rgba(231, 246, 249, 0.78);
+        }
+        .completion-view-button {
+            min-height: 40px;
+            padding: 0 18px;
+            border: 0;
+            border-radius: 11px;
+            background: transparent;
+            color: #547382;
+            font: inherit;
+            font-size: 0.82rem;
+            font-weight: 900;
+            cursor: pointer;
+        }
+        .completion-view-button.is-active {
+            background: #fff;
+            color: #075f78;
+            box-shadow: 0 7px 18px rgba(25, 91, 108, 0.11);
+        }
+        .completion-view-panel { margin-top: 18px; }
+        .completion-view-panel[hidden] { display: none; }
+        .completion-phase-rail {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .completion-phase-step {
+            position: relative;
+            min-height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: rgba(224, 240, 244, 0.58);
+            color: #78909b;
+            font-size: 0.72rem;
+            font-weight: 900;
+        }
+        .completion-phase-step.is-done {
+            background: rgba(45, 180, 180, 0.1);
+            color: #138489;
+        }
+        .completion-phase-step.is-current {
+            background: linear-gradient(135deg, #087f9f, #14a8b3);
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(8, 127, 159, 0.2);
+        }
+        .completion-decision-card {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 26px;
+            align-items: center;
+            padding: clamp(20px, 3vw, 30px);
+            border: 1px solid rgba(138, 195, 209, 0.35);
+            border-radius: 22px;
+            background: rgba(255,255,255,0.91);
+        }
+        .completion-decision-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: #07809d;
+            font-size: 0.73rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+        }
+        .completion-decision-kicker::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #19b9b0;
+            box-shadow: 0 0 0 5px rgba(25,185,176,0.11);
+        }
+        .completion-decision-card h3 {
+            margin: 11px 0 7px;
+            color: #123246;
+            font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+            line-height: 1.28;
+            letter-spacing: -0.035em;
+        }
+        .completion-decision-copy {
+            max-width: 720px;
+            margin: 0;
+            color: #577281;
+            font-size: 0.88rem;
+            line-height: 1.65;
+        }
+        .completion-primary-action {
+            min-width: 190px;
+            min-height: 52px;
+            padding: 0 22px;
+            border: 0;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #087ea4, #49b9e1);
+            color: #fff;
+            font: inherit;
+            font-size: 0.9rem;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 13px 26px rgba(25, 136, 174, 0.22);
+        }
+        .completion-primary-action:hover { transform: translateY(-1px); }
+        .completion-signal-grid,
+        .completion-report-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .completion-signal,
+        .completion-report-card {
+            padding: 14px 16px;
+            border: 1px solid rgba(133, 192, 207, 0.28);
+            border-radius: 15px;
+            background: rgba(255,255,255,0.66);
+        }
+        .completion-signal span,
+        .completion-report-card span {
+            display: block;
+            color: #78909b;
+            font-size: 0.68rem;
+            font-weight: 800;
+        }
+        .completion-signal strong,
+        .completion-report-card strong {
+            display: block;
+            margin-top: 5px;
+            color: #16475c;
+            font-size: 0.98rem;
+        }
+        .completion-panel-title { margin: 0; color: #143c50; font-size: 1.05rem; }
+        .completion-panel-copy { margin: 6px 0 14px; color: #66808d; font-size: 0.82rem; line-height: 1.55; }
+        .completion-today-list { display: grid; gap: 8px; }
+        .completion-today-item {
+            display: grid;
+            grid-template-columns: 26px minmax(0,1fr) auto;
+            gap: 11px;
+            align-items: center;
+            padding: 12px 14px;
+            border: 1px solid rgba(128, 190, 204, 0.27);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.76);
+        }
+        .completion-today-index {
+            width: 25px;
+            height: 25px;
+            display: grid;
+            place-items: center;
+            border-radius: 8px;
+            background: #e5f6fa;
+            color: #087d99;
+            font-size: 0.68rem;
+            font-weight: 900;
+        }
+        .completion-today-item.is-done { opacity: 0.58; }
+        .completion-today-item.is-done strong { text-decoration: line-through; }
+        .completion-today-item strong { color: #24495b; font-size: 0.84rem; }
+        .completion-today-item small { color: #78909b; }
+        .completion-inline-button,
+        .completion-secondary-action {
+            padding: 8px 11px;
+            border: 1px solid rgba(103, 173, 191, 0.36);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.82);
+            color: #1d6177;
+            font: inherit;
+            font-size: 0.72rem;
+            font-weight: 900;
+            cursor: pointer;
+        }
+        .completion-evidence {
+            margin-top: 14px;
+            border: 1px solid rgba(131, 188, 202, 0.3);
+            border-radius: 15px;
+            background: rgba(255,255,255,0.6);
+            overflow: hidden;
+        }
+        .completion-evidence summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 16px;
+            color: #315b6d;
+            font-size: 0.78rem;
+            font-weight: 900;
+            cursor: pointer;
+        }
+        .completion-evidence summary::-webkit-details-marker { display: none; }
+        .completion-evidence summary::after { content: '⌄'; color: #0a86a1; }
+        .completion-evidence[open] summary::after { transform: rotate(180deg); }
+        .completion-evidence-body {
+            padding: 0 16px 16px;
+            color: #5d7987;
+            font-size: 0.78rem;
+            line-height: 1.65;
+        }
+        .completion-legacy-control {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(129, 187, 201, 0.22);
+            color: #708894;
+            font-size: 0.72rem;
+        }
+        .service-complete-variant .completion-legacy-shell { display: none; }
+        .service-complete-variant .completion-legacy-shell.is-open { display: block; }
+        .service-complete-variant .completion-legacy-shell.is-open {
+            animation: completionReveal 260ms ease-out;
+        }
+        @keyframes completionReveal {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 760px) {
+            .completion-os { padding: 17px; border-radius: 22px; }
+            .completion-os-head,
+            .completion-decision-card { grid-template-columns: 1fr; flex-direction: column; }
+            .completion-os-badge { align-self: flex-start; }
+            .completion-view-nav { display: grid; width: 100%; }
+            .completion-view-button { padding: 0 10px; }
+            .completion-primary-action { width: 100%; }
+            .completion-signal-grid,
+            .completion-report-grid { grid-template-columns: 1fr; }
+            .completion-phase-rail { gap: 4px; }
+            .completion-phase-step { font-size: 0.66rem; }
+            .completion-legacy-control { align-items: flex-start; flex-direction: column; }
+        }
+
+        /* 상태 적응형 단일 실행 출시본: 메뉴가 아니라 하루 상태가 화면을 결정한다. */
+        .adaptive-execution-variant .completion-os {
+            --adaptive-accent: #0788a6;
+            --adaptive-soft: rgba(217, 246, 250, 0.82);
+            overflow: hidden;
+            transition: background 320ms ease, border-color 320ms ease, box-shadow 320ms ease;
+        }
+        .adaptive-execution-variant .completion-os[data-adaptive-state="capture"] {
+            --adaptive-accent: #537f93;
+            --adaptive-soft: rgba(230, 242, 247, 0.9);
+        }
+        .adaptive-execution-variant .completion-os[data-adaptive-state="prepare"] {
+            --adaptive-accent: #5279b4;
+            --adaptive-soft: rgba(230, 239, 253, 0.9);
+        }
+        .adaptive-execution-variant .completion-os[data-adaptive-state="execute"] {
+            --adaptive-accent: #0788a6;
+            --adaptive-soft: rgba(217, 246, 250, 0.86);
+        }
+        .adaptive-execution-variant .completion-os[data-adaptive-state="recover"] {
+            --adaptive-accent: #b27824;
+            --adaptive-soft: rgba(255, 244, 218, 0.92);
+        }
+        .adaptive-execution-variant .completion-os[data-adaptive-state="finish"] {
+            --adaptive-accent: #22866f;
+            --adaptive-soft: rgba(221, 247, 237, 0.92);
+        }
+        .adaptive-auto-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 9px 13px;
+            border: 1px solid color-mix(in srgb, var(--adaptive-accent) 22%, transparent);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.78);
+            color: var(--adaptive-accent);
+            font-size: 0.72rem;
+            font-weight: 900;
+            white-space: nowrap;
+        }
+        .adaptive-auto-badge::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: currentColor;
+            box-shadow: 0 0 0 5px color-mix(in srgb, var(--adaptive-accent) 12%, transparent);
+        }
+        .adaptive-system-note {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            gap: 12px;
+            align-items: center;
+            margin-top: 20px;
+            padding: 13px 15px;
+            border-left: 3px solid var(--adaptive-accent);
+            border-radius: 0 14px 14px 0;
+            background: var(--adaptive-soft);
+            color: #466978;
+            font-size: 0.8rem;
+            line-height: 1.55;
+        }
+        .adaptive-system-note strong { color: var(--adaptive-accent); white-space: nowrap; }
+        .adaptive-stage-rail {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 7px;
+            margin: 14px 0 12px;
+        }
+        .adaptive-stage-chip {
+            position: relative;
+            min-height: 38px;
+            display: grid;
+            place-items: center;
+            border: 1px solid rgba(133, 188, 201, 0.22);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.58);
+            color: #8397a0;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.7rem;
+            font-weight: 900;
+            transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+        }
+        .adaptive-stage-chip:hover {
+            transform: translateY(-1px);
+            border-color: color-mix(in srgb, var(--adaptive-accent) 30%, transparent);
+            background: rgba(255,255,255,0.9);
+            color: #3e6f7e;
+        }
+        .adaptive-stage-chip:focus-visible {
+            outline: 3px solid color-mix(in srgb, var(--adaptive-accent) 18%, transparent);
+            outline-offset: 2px;
+        }
+        .adaptive-stage-chip.is-current {
+            border-color: transparent;
+            background: var(--adaptive-accent);
+            color: #fff;
+            box-shadow: 0 9px 20px color-mix(in srgb, var(--adaptive-accent) 23%, transparent);
+        }
+        .adaptive-live-card {
+            display: grid;
+            grid-template-columns: 62px minmax(0, 1fr) auto;
+            gap: 22px;
+            align-items: center;
+            padding: clamp(21px, 3vw, 31px);
+            border: 1px solid color-mix(in srgb, var(--adaptive-accent) 24%, transparent);
+            border-radius: 23px;
+            background: rgba(255,255,255,0.93);
+            box-shadow: 0 18px 38px color-mix(in srgb, var(--adaptive-accent) 10%, transparent);
+        }
+        .adaptive-state-icon {
+            width: 62px;
+            height: 62px;
+            display: grid;
+            place-items: center;
+            border-radius: 20px;
+            background: var(--adaptive-soft);
+            color: var(--adaptive-accent);
+            font-size: 1.45rem;
+            font-weight: 900;
+        }
+        .adaptive-live-card .completion-decision-kicker { color: var(--adaptive-accent); }
+        .adaptive-live-card .completion-decision-kicker::before { background: var(--adaptive-accent); }
+        .adaptive-live-card h3 {
+            margin: 9px 0 7px;
+            color: #123246;
+            font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+            line-height: 1.28;
+            letter-spacing: -0.035em;
+        }
+        .adaptive-state-reason {
+            margin-top: 13px;
+            color: #6a818d;
+            font-size: 0.75rem;
+            line-height: 1.5;
+        }
+        .adaptive-state-reason strong { color: var(--adaptive-accent); }
+        .adaptive-execution-variant .completion-primary-action {
+            background: linear-gradient(135deg, var(--adaptive-accent), color-mix(in srgb, var(--adaptive-accent) 62%, #72d7eb));
+        }
+        .adaptive-choice-list {
+            display: flex;
+            grid-column: 2 / 3;
+            flex-wrap: wrap;
+            gap: 7px;
+            margin-top: 14px;
+        }
+        .adaptive-choice-list:empty { display: none; }
+        .adaptive-task-choice {
+            max-width: min(100%, 290px);
+            overflow: hidden;
+            border: 1px solid color-mix(in srgb, var(--adaptive-accent) 20%, transparent);
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--adaptive-soft) 62%, #fff);
+            padding: 8px 12px;
+            color: #456b79;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            transition: border-color 160ms ease, background 160ms ease, color 160ms ease, transform 160ms ease;
+        }
+        .adaptive-task-choice:hover { transform: translateY(-1px); color: var(--adaptive-accent); }
+        .adaptive-task-choice.is-selected {
+            border-color: var(--adaptive-accent);
+            background: var(--adaptive-accent);
+            color: #fff;
+        }
+        .adaptive-progress {
+            height: 7px;
+            margin-top: 12px;
+            border-radius: 99px;
+            background: rgba(137, 187, 198, 0.2);
+            overflow: hidden;
+        }
+        .adaptive-progress-fill {
+            width: 0;
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--adaptive-accent), #5dcbd3);
+            transition: width 360ms ease;
+        }
+        .adaptive-context-line {
+            margin: 8px 2px 0;
+            color: #6d8792;
+            font-size: 0.7rem;
+            text-align: right;
+        }
+        .adaptive-guide {
+            margin-top: 10px;
+            border: 1px solid rgba(131, 188, 202, 0.28);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.58);
+            overflow: hidden;
+        }
+        .adaptive-guide summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 13px 15px;
+            color: #315b6d;
+            font-size: 0.76rem;
+            font-weight: 900;
+            cursor: pointer;
+        }
+        .adaptive-guide summary::-webkit-details-marker { display: none; }
+        .adaptive-guide summary::after { content: '⌄'; color: var(--adaptive-accent); }
+        .adaptive-guide[open] summary::after { transform: rotate(180deg); }
+        .adaptive-guide-body { padding: 0 16px 15px; color: #5d7885; font-size: 0.76rem; line-height: 1.7; }
+        .adaptive-guide-body ol { margin: 0; padding-left: 20px; }
+        @media (max-width: 760px) {
+            .adaptive-system-note { grid-template-columns: 1fr; }
+            .adaptive-stage-rail { grid-template-columns: repeat(5, minmax(56px, 1fr)); overflow-x: auto; padding-bottom: 3px; }
+            .adaptive-live-card { grid-template-columns: 50px minmax(0, 1fr); gap: 14px; }
+            .adaptive-state-icon { width: 50px; height: 50px; border-radius: 16px; }
+            .adaptive-choice-list { grid-column: 1 / -1; }
+            .adaptive-live-card .completion-primary-action { grid-column: 1 / -1; width: 100%; }
+            .adaptive-context-line { text-align: left; }
+        }
+
+        /* SKYWARD EXECUTIVE THEME
+           깊은 하늘의 개방감과 수직 상승감을 제품 화면에 맞게 절제해 적용한다. */
+        .adaptive-release-variant {
+            --bg-0: #eef5f8;
+            --bg-1: #e5eff4;
+            --ink-0: #10283b;
+            --ink-1: #28465b;
+            --ink-2: #587286;
+            --brand-0: #155f89;
+            --brand-1: #177c91;
+            --brand-2: #a67a33;
+            --soft-card: rgba(249, 252, 254, 0.92);
+            --glass-border: rgba(155, 192, 211, 0.34);
+            color: var(--ink-0);
+            font-family: 'Segoe UI Variable Display', 'Pretendard Variable', 'SUIT Variable', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+            background:
+                radial-gradient(circle at 82% 10%, rgba(245, 158, 11, 0.1), transparent 42%),
+                linear-gradient(112deg, #edf4f4 0%, #f4f4e9 54%, #f8eddb 100%);
+            transition: --week-flow-x 920ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .adaptive-release-variant::before {
+            position: fixed;
+            inset: 0;
+            width: auto;
+            height: auto;
+            transform: none;
+            opacity: 1;
+            filter: none;
+            background:
+                radial-gradient(
+                    ellipse 58% 110% at var(--week-flow-x) 38%,
+                    rgba(151, 218, 239, 0.5) 0%,
+                    rgba(188, 229, 239, 0.32) 42%,
+                    rgba(214, 239, 242, 0.1) 60%,
+                    transparent 74%
+                ),
+                radial-gradient(
+                    circle at var(--week-flow-x) 5%,
+                    rgba(255, 255, 255, 0.72) 0%,
+                    rgba(255, 255, 255, 0.2) 32%,
+                    transparent 58%
+                );
+            transition: --week-flow-x 920ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .adaptive-release-variant::after {
+            position: fixed;
+            top: -16vh;
+            bottom: -16vh;
+            left: var(--week-flow-x);
+            width: clamp(220px, 26vw, 500px);
+            height: auto;
+            transform: translateX(-50%) rotate(-4deg);
+            border-radius: 50%;
+            opacity: 0.9;
+            filter: blur(18px);
+            background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.22), transparent 68%);
+            transition: left 920ms cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .adaptive-release-variant .hero {
+            width: min(1240px, 100%);
+            min-height: 0;
+            margin: 0 auto;
+            padding: 28px 18px 14px;
+            text-align: left;
+        }
+        .adaptive-release-variant .hero::before {
+            display: none;
+        }
+        .adaptive-release-variant .hero h1 {
+            color: #10283b;
+            font-size: clamp(1.55rem, 2.4vw, 2rem);
+            font-weight: 820;
+            letter-spacing: -0.04em;
+            line-height: 1.12;
+            text-shadow: none;
+        }
+        .adaptive-release-variant .hero p {
+            margin: 6px 0 0;
+            color: #456175;
+            font-size: clamp(0.76rem, 1.2vw, 0.86rem);
+            font-weight: 650;
+            letter-spacing: 0.015em;
+            line-height: 1.55;
+            text-shadow: none;
+        }
+        .adaptive-release-variant .schedule {
+            max-width: 1240px;
+        }
+        .adaptive-release-variant :where(input, textarea, select, button:not(#generate-agent)) {
+            font-family: inherit;
+        }
+        .adaptive-release-variant #generate-agent {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Segoe UI', sans-serif;
+        }
+        .adaptive-release-variant :is(
+            .completion-os,
+            .mini-focus-card,
+            .daily-briefing,
+            .annual-pacer,
+            .personal-os,
+            .outcome-path,
+            .execution-checkpoint,
+            .time-checkout,
+            .result-leak-shield,
+            .optimal-shutdown-line,
+            .assistant-compose,
+            .panel,
+            .focus-stage,
+            .timeblock-section,
+            .aside-card,
+            .settings-modal,
+            .auth-modal,
+            .assistant-drawer
+        ) {
+            border-color: rgba(145, 184, 204, 0.34);
+            background:
+                linear-gradient(145deg, rgba(255,255,255,0.965), rgba(238, 246, 250, 0.92));
+            box-shadow:
+                0 28px 70px rgba(6, 35, 55, 0.13),
+                inset 0 1px 0 rgba(255,255,255,0.92);
+            backdrop-filter: blur(22px) saturate(114%);
+        }
+        .adaptive-release-variant .completion-os {
+            --adaptive-accent: #145f89;
+            --adaptive-soft: rgba(224, 240, 247, 0.88);
+            margin-top: 28px;
+            border-color: rgba(171, 210, 226, 0.54);
+            background:
+                radial-gradient(circle at 92% 8%, rgba(126, 194, 219, 0.16), transparent 29%),
+                linear-gradient(145deg, rgba(252,254,255,0.98), rgba(232,243,248,0.96));
+        }
+        .adaptive-release-variant .completion-os[data-adaptive-state="capture"],
+        .adaptive-release-variant .completion-os[data-adaptive-state="prepare"],
+        .adaptive-release-variant .completion-os[data-adaptive-state="execute"] {
+            --adaptive-accent: #145f89;
+            --adaptive-soft: rgba(224, 240, 247, 0.9);
+        }
+        .adaptive-release-variant .completion-os[data-adaptive-state="recover"] {
+            --adaptive-accent: #536f83;
+            --adaptive-soft: rgba(229, 238, 242, 0.92);
+        }
+        .adaptive-release-variant .completion-os[data-adaptive-state="finish"] {
+            --adaptive-accent: #236e72;
+            --adaptive-soft: rgba(225, 242, 239, 0.92);
+        }
+        .adaptive-release-variant .completion-os-eyebrow,
+        .adaptive-release-variant :is(.productivity-coach-eyebrow, .jit-delivery-kicker) {
+            color: #1a668c;
+            font-weight: 850;
+            letter-spacing: 0.13em;
+        }
+        .adaptive-release-variant .completion-os-head h2,
+        .adaptive-release-variant :is(.mini-focus-card, .daily-briefing, .annual-pacer, .personal-os, .outcome-path, .panel, .aside-card) :is(h2, h3, h4) {
+            color: #102d43;
+            font-weight: 790;
+            letter-spacing: -0.035em;
+        }
+        .adaptive-release-variant .completion-os-definition,
+        .adaptive-release-variant .completion-decision-copy,
+        .adaptive-release-variant :is(.mini-focus-card, .daily-briefing, .annual-pacer, .personal-os, .outcome-path, .panel, .aside-card) p {
+            color: #567286;
+            line-height: 1.72;
+        }
+        .adaptive-release-variant .adaptive-auto-badge {
+            border-color: rgba(100, 158, 187, 0.28);
+            background: rgba(248, 253, 255, 0.84);
+            color: #1a668c;
+            box-shadow: 0 12px 28px rgba(12, 56, 81, 0.08);
+        }
+        .adaptive-release-variant .adaptive-system-note {
+            border-left-color: #20769c;
+            background: linear-gradient(90deg, rgba(222, 241, 249, 0.92), rgba(244, 249, 251, 0.72));
+            color: #476a7e;
+        }
+        .adaptive-release-variant .adaptive-system-note strong { color: #155f89; }
+        .adaptive-release-variant .adaptive-stage-chip {
+            border-color: rgba(132, 178, 199, 0.3);
+            background: rgba(247, 251, 253, 0.82);
+            color: #587588;
+            box-shadow: inset 0 1px 0 #fff;
+        }
+        .adaptive-release-variant .adaptive-stage-chip.is-current {
+            border-color: rgba(226, 246, 255, 0.74);
+            background: linear-gradient(145deg, #0b3657, #176f99);
+            color: #fff;
+            box-shadow: 0 13px 28px rgba(5, 47, 74, 0.24), inset 0 1px 0 rgba(255,255,255,0.19);
+        }
+        .adaptive-release-variant .adaptive-live-card {
+            border-color: rgba(137, 180, 201, 0.36);
+            background: rgba(253, 254, 255, 0.91);
+            box-shadow: 0 22px 52px rgba(8, 43, 64, 0.11), inset 0 1px 0 #fff;
+        }
+        .adaptive-release-variant .adaptive-state-icon {
+            border: 1px solid rgba(125, 176, 199, 0.26);
+            background: linear-gradient(145deg, #edf7fb, #d7eaf2);
+            color: #145f89;
+            box-shadow: inset 0 1px 0 #fff;
+        }
+        .adaptive-release-variant .adaptive-task-choice {
+            border-color: rgba(116, 167, 191, 0.28);
+            background: #f4f9fb;
+            color: #476a7d;
+        }
+        .adaptive-release-variant .adaptive-task-choice.is-selected {
+            border-color: #155f89;
+            background: linear-gradient(145deg, #123e5d, #19739d);
+            color: #fff;
+        }
+        .adaptive-release-variant .completion-signal,
+        .adaptive-release-variant :is(.adaptive-guide, .completion-evidence, .completion-legacy-control) {
+            border-color: rgba(139, 181, 201, 0.3);
+            background: rgba(248, 252, 254, 0.78);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.96);
+        }
+        .adaptive-release-variant .completion-signal strong { color: #153c56; }
+        .adaptive-release-variant .completion-primary-action,
+        .adaptive-release-variant :is(.btn, .mini-btn, .completion-secondary-action):not(#generate-agent) {
+            border-color: rgba(118, 165, 187, 0.36);
+            background: linear-gradient(145deg, #f9fcfd, #e6f0f4);
+            color: #1a4d69;
+            box-shadow: 0 11px 25px rgba(9, 48, 71, 0.1), inset 0 1px 0 #fff;
+        }
+        .adaptive-release-variant .completion-primary-action,
+        .adaptive-release-variant :is(.btn.primary, .mini-btn.productivity-primary):not(#generate-agent) {
+            border-color: rgba(76, 142, 173, 0.46);
+            background: linear-gradient(145deg, #0a3657, #176f99);
+            color: #fff;
+            box-shadow: 0 16px 32px rgba(4, 43, 68, 0.22), inset 0 1px 0 rgba(255,255,255,0.18);
+        }
+        .adaptive-release-variant :where(input, textarea, select) {
+            border-color: rgba(127, 175, 198, 0.34);
+            background: rgba(252, 254, 255, 0.9);
+            color: #17374d;
+            box-shadow: inset 0 1px 0 #fff;
+        }
+        .adaptive-release-variant :where(input, textarea, select):focus {
+            border-color: rgba(35, 120, 158, 0.72);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(45, 139, 180, 0.12), inset 0 1px 0 #fff;
+        }
+
+        @media (max-width: 760px) {
+            .adaptive-release-variant::before { height: auto; }
+            .adaptive-release-variant::after { width: clamp(180px, 52vw, 320px); height: auto; }
+            .adaptive-release-variant .hero { min-height: 0; padding: 22px 16px 10px; }
+            .adaptive-release-variant .hero h1 { font-size: clamp(1.45rem, 7vw, 1.8rem); }
+            .adaptive-release-variant .hero p { letter-spacing: 0; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             body,
             body::before,
@@ -4448,7 +5210,7 @@
         }
     </style>
 </head>
-<body>
+<body class="service-complete-variant adaptive-execution-variant adaptive-release-variant" data-adaptive-state="execute">
     <section class="hero">
         <h1>갓생러 플래너</h1>
         <p>갓생러들을 위한 고기능 플래너</p>
@@ -4483,6 +5245,71 @@
             <button class="energy-btn" data-energy="low">🔋 방전</button>
         </div>
 
+        <section class="completion-os" id="completion-os" data-adaptive-state="execute" aria-labelledby="completion-os-title" aria-live="polite">
+            <div class="completion-os-head">
+                <div>
+                    <div class="completion-os-eyebrow">STATE-ADAPTIVE EXECUTION SYSTEM</div>
+                    <h2 id="completion-os-title">하루의 핵심 기능을 한 화면에서 선택하세요</h2>
+                    <p class="completion-os-definition">현재 상태를 분석해 각 기능의 활용 정보를 보여주며, 선택은 사용자가 합니다. 계획을 맡기고, 설계하고, 실행하고, 수습하고, 안전하게 마치는 전 과정을 이곳에서 바로 시작할 수 있습니다.</p>
+                </div>
+                <span class="adaptive-auto-badge" id="adaptive-auto-badge">현재 상태 분석</span>
+            </div>
+
+            <div class="adaptive-system-note">
+                <strong>필요한 기능을 직접 선택하세요.</strong>
+                <span>아래 메뉴에서 원하는 기능을 누르면 설명과 실행 위치가 즉시 바뀝니다.</span>
+            </div>
+
+            <div class="adaptive-stage-rail" aria-label="핵심 기능 바로가기">
+                <button class="adaptive-stage-chip" type="button" data-adaptive-stage="capture" aria-pressed="false">AI 비서</button>
+                <button class="adaptive-stage-chip" type="button" data-adaptive-stage="prepare" aria-pressed="false">시작 설계</button>
+                <button class="adaptive-stage-chip" type="button" data-adaptive-stage="execute" aria-pressed="false">집중 실행</button>
+                <button class="adaptive-stage-chip" type="button" data-adaptive-stage="recover" aria-pressed="false">지연 수습</button>
+                <button class="adaptive-stage-chip" type="button" data-adaptive-stage="finish" aria-pressed="false">안전 종료</button>
+            </div>
+
+            <div class="adaptive-live-card">
+                <div class="adaptive-state-icon" id="adaptive-state-icon" aria-hidden="true">→</div>
+                <div>
+                    <div class="completion-decision-kicker" id="completion-decision-kicker">핵심 기능 안내</div>
+                    <h3 id="completion-decision-title">원하는 기능을 선택하면 바로 안내해 드립니다.</h3>
+                    <p class="completion-decision-copy" id="completion-decision-copy">지금 필요한 기능과 실행할 작업을 직접 선택할 수 있습니다.</p>
+                    <div class="adaptive-state-reason"><strong>이 기능의 활용법</strong> · <span id="adaptive-state-reason">현재 일정과 컨디션을 분석하고 있습니다.</span></div>
+                    <div class="adaptive-choice-list" id="adaptive-choice-list" aria-label="실행할 작업 선택"></div>
+                </div>
+                <button class="completion-primary-action" id="completion-primary-action" type="button">선택한 기능 열기</button>
+            </div>
+
+            <div class="completion-signal-grid" aria-label="현재 운영 신호">
+                <div class="completion-signal"><span>선택한 기능</span><strong id="completion-current-phase">집중 실행</strong></div>
+                <div class="completion-signal"><span>오늘 남은 일</span><strong id="completion-pending-count">0개</strong></div>
+                <div class="completion-signal"><span>보호 가능한 개인 시간</span><strong id="completion-protected-time">0분</strong></div>
+            </div>
+
+            <div class="adaptive-progress" aria-hidden="true"><div class="adaptive-progress-fill" id="adaptive-progress-fill"></div></div>
+            <div class="adaptive-context-line" id="adaptive-context-line">현재 시간·컨디션·완료 기록을 실시간으로 반영합니다.</div>
+
+            <details class="adaptive-guide">
+                <summary>이 한 화면은 어떻게 사용하나요?</summary>
+                <div class="adaptive-guide-body">
+                    <ol>
+                        <li>상단 메뉴에서 지금 필요한 기능을 직접 선택합니다.</li>
+                        <li>집중 실행에서는 현재 가능한 작업 중 원하는 항목을 고를 수 있습니다.</li>
+                        <li>실행 버튼을 누르면 해당 기능이나 계획 위치로 부드럽게 이동합니다.</li>
+                    </ol>
+                </div>
+            </details>
+            <details class="completion-evidence" id="completion-evidence">
+                <summary>AI가 현재 상태를 분석한 근거</summary>
+                <div class="completion-evidence-body" id="completion-evidence-body">일정 중요도, 마감, 예상 시간, 컨디션, 완료 기록과 최소 성과선을 함께 계산합니다.</div>
+            </details>
+            <div class="completion-legacy-control">
+                <span>세부 일정과 고급 기능은 필요할 때만 펼치며, 평소에는 이 한 화면만 사용합니다.</span>
+                <button class="completion-secondary-action" id="completion-open-full" type="button" aria-expanded="false">세부 운영 화면 열기</button>
+            </div>
+        </section>
+
+        <div class="completion-legacy-shell" id="completion-legacy-shell">
         <section class="mini-focus-card" id="productivity-coach" aria-labelledby="productivity-coach-title">
             <div class="productivity-coach-head">
                 <div>
@@ -5080,6 +5907,7 @@
         <div class="layout">
             <section class="panel" id="plan-panel"></section>
             <aside class="summary-aside" id="summary-aside"></aside>
+        </div>
         </div>
 
         <div class="drawer-backdrop" id="drawer-backdrop"></div>
@@ -9322,6 +10150,387 @@
             };
         }
 
+        let completionPrimaryIntent = 'open-plan';
+        let adaptiveFeatureSelection = '';
+        let adaptiveSelectedTaskText = '';
+
+        function getCompletionOperatingState() {
+            const tasks = plans[currentDay]?.tasks || [];
+            const pending = tasks.filter((task) => !task.done);
+            const completed = tasks.filter((task) => task.done);
+            const shutdown = getOptimalShutdownAnalysis(currentDay);
+            const leak = getResultLeakData();
+            const protectedMinutes = Math.max(0, shutdown.protectedMinutes + leak.savedMinutes);
+            const completion = tasks.length ? Math.round((completed.length / tasks.length) * 100) : 0;
+
+            if (!tasks.length) {
+                return {
+                    phase: 'dump', phaseLabel: '담기', intent: 'open-assistant',
+                    kicker: 'ZERO INPUT · 자료만 전달하세요',
+                    title: '정리하지 말고 자료를 그대로 맡겨주세요.',
+                    copy: '회의록·PDF·사진·음성 메모를 전달하면 AI가 할 일, 마감, 우선순위와 예상 시간을 실행 가능한 일정으로 바꿉니다.',
+                    buttonLabel: 'AI 비서에게 자료 전달', tasks, pending, completed, shutdown, leak,
+                    protectedMinutes, completion
+                };
+            }
+
+            if (shutdown.reached) {
+                return {
+                    phase: 'finish', phaseLabel: '마치기', intent: 'finish-day',
+                    kicker: 'SAFE FINISH · 충분한 성과 확보',
+                    title: shutdown.pending.length ? '오늘의 핵심 성과는 충분합니다. 이제 안전하게 마치세요.' : '오늘 계획한 핵심 실행을 모두 마쳤습니다.',
+                    copy: `${shutdown.reason} 종료 후에는 내일 아침까지 업무 재진입을 막아 회복 시간을 보호합니다.`,
+                    buttonLabel: '오늘 일정 안전하게 마치기', tasks, pending, completed, shutdown, leak,
+                    protectedMinutes, completion
+                };
+            }
+
+            if (currentEnergy === 'low' || pending.length >= 7) {
+                return {
+                    phase: 'decide', phaseLabel: '수습', intent: 'recover-plan',
+                    kicker: 'AUTONOMOUS RECOVERY · 과부하 수습',
+                    title: `오늘은 '${shutdown.nextTask?.task?.text || pending[0]?.text}'까지 확보하면 됩니다.`,
+                    copy: `핵심 ${shutdown.remainingMinimum.length}개만 남기고 저우선순위 ${shutdown.deferCandidates.length}개는 안전한 날짜로 이동할 수 있습니다.`,
+                    buttonLabel: '최소 성과선으로 일정 정리', tasks, pending, completed, shutdown, leak,
+                    protectedMinutes, completion
+                };
+            }
+
+            return {
+                phase: 'execute', phaseLabel: '실행', intent: 'execute-next',
+                kicker: 'JUST-IN-TIME · 지금 필요한 단 1가지',
+                title: shutdown.nextTask?.task?.text || pending[0]?.text || '오늘의 핵심 작업을 확인하세요.',
+                copy: shutdown.nextTask
+                    ? `${shutdown.nextTask.duration}분을 확보하면 최소 성과선에 가까워집니다. 나머지 목록은 지금 확인하지 않아도 됩니다.`
+                    : '지금 실행할 위치를 열어 바로 시작할 수 있습니다.',
+                buttonLabel: '지금 한 가지 실행하기', tasks, pending, completed, shutdown, leak,
+                protectedMinutes, completion
+            };
+        }
+
+        function setCompletionView(viewName) {
+            const allowed = ['now', 'today', 'report'];
+            const nextView = allowed.includes(viewName) ? viewName : 'now';
+            document.body.dataset.completionView = nextView;
+            document.querySelectorAll('[data-completion-view-button]').forEach((button) => {
+                const active = button.dataset.completionViewButton === nextView;
+                button.classList.toggle('is-active', active);
+                button.setAttribute('aria-pressed', String(active));
+            });
+            document.querySelectorAll('[data-completion-view-panel]').forEach((panel) => {
+                panel.hidden = panel.dataset.completionViewPanel !== nextView;
+            });
+            renderCompletionOperatingSystem();
+        }
+
+        function setCompletionLegacyOpen(open, targetId = '') {
+            const shell = document.getElementById('completion-legacy-shell');
+            const button = document.getElementById('completion-open-full');
+            if (!shell || !button) return;
+            shell.classList.toggle('is-open', open);
+            button.setAttribute('aria-expanded', String(open));
+            button.textContent = open ? '세부 운영 화면 접기' : '세부 운영 화면 열기';
+            if (open && targetId) {
+                window.requestAnimationFrame(() => {
+                    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            }
+        }
+
+        function openCompletionAssistant(message) {
+            setCompletionLegacyOpen(true);
+            window.setTimeout(() => openPersonalOsAssistantRequest(message), 40);
+        }
+
+        function runCompletionPrimaryAction() {
+            const state = getCompletionOperatingState();
+            if (state.intent === 'open-assistant') {
+                openCompletionAssistant('자료에서 해야 할 일, 마감, 우선순위와 현실적인 예상 시간을 추출해 오늘 일정으로 정리해줘.');
+                return;
+            }
+            if (state.intent === 'finish-day' || state.intent === 'recover-plan') {
+                setCompletionLegacyOpen(true);
+                applyOptimalShutdownPlan();
+                return;
+            }
+            if (state.intent === 'execute-next') {
+                setCompletionLegacyOpen(true);
+                focusOptimalShutdownNextTask();
+                return;
+            }
+            setCompletionLegacyOpen(true, 'plan-panel');
+        }
+
+        function renderCompletionOperatingSystem() {
+            const root = document.getElementById('completion-os');
+            if (!root) return;
+            const state = getCompletionOperatingState();
+            completionPrimaryIntent = state.intent;
+
+            document.getElementById('completion-decision-kicker').textContent = state.kicker;
+            document.getElementById('completion-decision-title').textContent = state.title;
+            document.getElementById('completion-decision-copy').textContent = state.copy;
+            document.getElementById('completion-primary-action').textContent = state.buttonLabel;
+            document.getElementById('completion-current-phase').textContent = state.phaseLabel;
+            document.getElementById('completion-pending-count').textContent = `${state.pending.length}개`;
+            document.getElementById('completion-protected-time').textContent = `${state.protectedMinutes}분`;
+
+            const phaseOrder = ['dump', 'decide', 'execute', 'finish'];
+            const currentIndex = phaseOrder.indexOf(state.phase);
+            document.querySelectorAll('[data-completion-phase]').forEach((step) => {
+                const stepIndex = phaseOrder.indexOf(step.dataset.completionPhase);
+                step.classList.toggle('is-current', stepIndex === currentIndex);
+                step.classList.toggle('is-done', stepIndex < currentIndex);
+            });
+
+            const minimumKeys = new Set(state.shutdown.minimumTasks.map((item) => item.taskKey));
+            const sortedTasks = state.tasks.map((task, index) => ({ task, index })).sort((a, b) => {
+                const aKey = getExecutionTwinTaskKey(currentDay, a.task.text);
+                const bKey = getExecutionTwinTaskKey(currentDay, b.task.text);
+                return Number(a.task.done) - Number(b.task.done)
+                    || Number(minimumKeys.has(bKey)) - Number(minimumKeys.has(aKey));
+            });
+            const todayList = document.getElementById('completion-today-list');
+            todayList.innerHTML = sortedTasks.length ? sortedTasks.map(({ task, index }, order) => {
+                const taskKey = getExecutionTwinTaskKey(currentDay, task.text);
+                const duration = Math.max(5, Number(task.durationMinutes) || 30);
+                const status = task.done ? '완료' : minimumKeys.has(taskKey) ? '핵심 성과선' : '후순위';
+                return `<div class="completion-today-item ${task.done ? 'is-done' : ''}">
+                    <span class="completion-today-index">${String(order + 1).padStart(2, '0')}</span>
+                    <div><strong>${escaped(task.text)}</strong><br><small>${status} · 예상 ${duration}분</small></div>
+                    <button class="completion-inline-button" type="button" data-completion-task-index="${index}">${task.done ? '확인' : '열기'}</button>
+                </div>`;
+            }).join('') : '<div class="completion-today-item"><span class="completion-today-index">+</span><div><strong>아직 등록된 일정이 없습니다.</strong><br><small>자료만 전달하면 AI가 실행 큐를 만듭니다.</small></div><button class="completion-inline-button" type="button" data-completion-open-assistant="true">자료 전달</button></div>';
+
+            document.getElementById('completion-report-completion').textContent = `${state.completion}%`;
+            document.getElementById('completion-report-saved').textContent = `${state.leak.savedMinutes + (state.shutdown.activeToday?.protectedMinutes || 0)}분`;
+            document.getElementById('completion-report-confidence').textContent = `${state.shutdown.confidence}%`;
+            document.getElementById('completion-evidence-body').innerHTML = `
+                <strong>${escaped(state.shutdown.verdict)}</strong><br>
+                마감·긴급도·목표 영향·예상 소요 시간·현재 컨디션과 실제 실행 기록 ${state.shutdown.measuredCount}건을 함께 계산했습니다.
+                최소 성과선은 ${state.shutdown.targetCount}개이며, 지금 판단의 신뢰도는 ${state.shutdown.confidence}%입니다.
+                일정 변경은 승인 후 적용되고 기존 자동 정리 기록에서 되돌릴 수 있습니다.`;
+        }
+
+        function setupCompletionOperatingSystem() {
+            document.querySelectorAll('[data-completion-view-button]').forEach((button) => {
+                button.addEventListener('click', () => setCompletionView(button.dataset.completionViewButton));
+            });
+            document.getElementById('completion-primary-action')?.addEventListener('click', runCompletionPrimaryAction);
+            document.getElementById('completion-open-full')?.addEventListener('click', () => {
+                const shell = document.getElementById('completion-legacy-shell');
+                setCompletionLegacyOpen(!shell?.classList.contains('is-open'));
+            });
+            document.getElementById('completion-today-list')?.addEventListener('click', (event) => {
+                const assistantButton = event.target.closest('[data-completion-open-assistant]');
+                if (assistantButton) {
+                    openCompletionAssistant('자료를 분석해서 오늘 실행할 일정으로 정리해줘.');
+                    return;
+                }
+                const taskButton = event.target.closest('[data-completion-task-index]');
+                if (!taskButton) return;
+                const task = plans[currentDay]?.tasks?.[Number(taskButton.dataset.completionTaskIndex)];
+                setCompletionLegacyOpen(true);
+                if (task?.text) window.setTimeout(() => scrollToDailyBriefingAppliedLocation(task.text), 40);
+            });
+        }
+
+        function getAdaptiveTaskText(task) {
+            return String(task?.text || '오늘의 핵심 작업')
+                .replace(/저리합니다/g, '정리합니다')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function getAdaptiveExecutionState(requestedFeature = '') {
+            const tasks = plans[currentDay]?.tasks || [];
+            const pending = tasks.filter((task) => !task.done);
+            const completed = tasks.filter((task) => task.done);
+            const shutdown = getOptimalShutdownAnalysis(currentDay);
+            const leak = getResultLeakData();
+            const completion = tasks.length ? Math.round((completed.length / tasks.length) * 100) : 0;
+            const protectedMinutes = Math.max(0, shutdown.protectedMinutes + leak.savedMinutes);
+            let nextTask = shutdown.nextTask?.task || pending[0] || null;
+            const manuallySelectedTask = adaptiveSelectedTaskText
+                ? pending.find((task) => getAdaptiveTaskText(task) === adaptiveSelectedTaskText)
+                : null;
+            if (manuallySelectedTask) nextTask = manuallySelectedTask;
+            const nextTaskText = getAdaptiveTaskText(nextTask);
+            const nextDuration = Math.max(5, Number(manuallySelectedTask?.durationMinutes || shutdown.nextTask?.duration || nextTask?.durationMinutes) || 25);
+            const choiceTasks = [nextTask, ...pending]
+                .filter(Boolean)
+                .filter((task, index, list) => list.findIndex((item) => getAdaptiveTaskText(item) === getAdaptiveTaskText(task)) === index)
+                .slice(0, 3);
+            const hour = new Date().getHours();
+
+            let detectedState = 'execute';
+            if (!tasks.length) detectedState = 'capture';
+            else if (shutdown.reached) detectedState = 'finish';
+            else if (currentEnergy === 'low' || pending.length >= 7) detectedState = 'recover';
+            else if (!completed.length && hour < 12) detectedState = 'prepare';
+
+            const featureNames = ['capture', 'prepare', 'execute', 'recover', 'finish'];
+            const stateName = featureNames.includes(requestedFeature) ? requestedFeature : detectedState;
+            const shared = { stateName, detectedState, tasks, pending, completed, shutdown, leak, completion, protectedMinutes, nextTask, nextTaskText, nextDuration, choiceTasks };
+
+            if (stateName === 'capture') {
+                return {
+                    ...shared,
+                    phaseLabel: 'AI 비서', icon: '✦', intent: 'open-assistant',
+                    kicker: 'AI ASSISTANT · 자료와 요청을 맡기는 곳',
+                    title: '자료·메모·파일을 건네면 실행 가능한 계획으로 바꿉니다.',
+                    copy: '회의록·PDF·사진·음성 메모에서 할 일, 마감, 우선순위와 현실적인 소요 시간을 추출해 현재 일정에 연결합니다.',
+                    reason: '정리하지 않은 자료도 그대로 전달할 수 있으며, 적용 전 변경 내용을 먼저 확인합니다.',
+                    buttonLabel: 'AI 비서 위치로 이동'
+                };
+            }
+
+            if (stateName === 'prepare') {
+                return {
+                    ...shared,
+                    phaseLabel: '시작 설계', icon: '◇', intent: 'open-plan-start',
+                    kicker: 'START DESIGN · 하루를 시작하기 전',
+                    title: '월간 목표 3개부터 오늘 실행안까지 설계합니다.',
+                    copy: '큰 목표를 월간 목표, 주간 목표, 오늘 할 일과 소단위 작업으로 연결해 바로 시작할 수 있는 구조로 만듭니다.',
+                    reason: `현재 계획의 미완료 작업 ${pending.length}개를 확인하면서 직접 작성하거나 AI 제안을 적용할 수 있습니다.`,
+                    buttonLabel: '계획 작성 위치로 이동'
+                };
+            }
+
+            if (stateName === 'recover') {
+                const minimumCount = Math.max(1, shutdown.remainingMinimum.length || shutdown.targetCount || 1);
+                const deferCount = Math.max(0, shutdown.deferCandidates.length);
+                return {
+                    ...shared,
+                    phaseLabel: '지연 수습', icon: '↺', intent: 'recover-plan',
+                    kicker: 'AUTONOMOUS RECOVERY · 계획이 밀린 순간',
+                    title: '밀린 계획의 범위를 줄이거나 날짜를 옮길 수 있습니다.',
+                    copy: `핵심 ${minimumCount}개만 남기고 저우선순위 ${deferCount}개는 충돌 없는 날짜로 옮기는 수습안을 준비했습니다. 원래 계획과 변경 이력은 보존됩니다.`,
+                    reason: currentEnergy === 'low'
+                        ? '현재 컨디션을 고려한 축소안과 날짜 이동안을 비교한 뒤 선택할 수 있습니다.'
+                        : `현재 미완료 작업 ${pending.length}개를 기준으로 수습안을 확인하고 원하는 경우에만 적용합니다.`,
+                    buttonLabel: '지연 수습 위치로 이동'
+                };
+            }
+
+            if (stateName === 'finish') {
+                return {
+                    ...shared,
+                    phaseLabel: '안전 종료', icon: '✓', intent: 'finish-day',
+                    kicker: 'SAFE FINISH · 충분한 성과를 확보한 순간',
+                    title: pending.length ? '오늘의 핵심 성과는 충분합니다. 이제 안전하게 마치세요.' : '오늘 계획한 핵심 실행을 모두 마쳤습니다.',
+                    copy: '남은 저우선순위 일정은 내일의 실행 가능 시간으로 넘기고, 오늘 밤 다시 업무에 끌려 들어가지 않도록 개인 시간을 보호합니다.',
+                    reason: shutdown.reason || `현재 완료율 ${completion}%와 최소 성과선을 함께 계산했습니다.`,
+                    buttonLabel: '안전 종료 위치로 이동'
+                };
+            }
+
+            return {
+                ...shared,
+                phaseLabel: '집중 실행', icon: '→', intent: 'execute-next',
+                kicker: 'FOCUS EXECUTION · 실행할 작업을 직접 선택',
+                title: nextTaskText,
+                copy: `지금 가능한 작업을 직접 고를 수 있습니다. 선택한 작업의 예상 시간은 ${nextDuration}분입니다.`,
+                reason: `미완료 ${pending.length}개 중 최대 3개의 실행 후보를 보여줍니다. 원하는 항목을 선택하면 해당 위치로 이동합니다.`,
+                buttonLabel: '선택한 작업 위치로 이동'
+            };
+        }
+
+        function runCompletionPrimaryAction() {
+            const state = getAdaptiveExecutionState(adaptiveFeatureSelection);
+            if (state.intent === 'open-assistant') {
+                openCompletionAssistant('자료에서 해야 할 일, 마감, 우선순위와 현실적인 예상 시간을 추출해 오늘 실행안으로 정리해줘. 적용 전 변경 내용을 먼저 보여줘.');
+                return;
+            }
+            if (state.intent === 'open-plan-start') {
+                setCompletionLegacyOpen(true);
+                window.setTimeout(() => scrollToDailyBriefingAppliedLocation('월간 목표 3개'), 80);
+                return;
+            }
+            if (state.intent === 'finish-day' || state.intent === 'recover-plan') {
+                setCompletionLegacyOpen(true, 'optimal-shutdown-line');
+                return;
+            }
+            if (state.intent === 'execute-next') {
+                setCompletionLegacyOpen(true);
+                window.setTimeout(() => scrollToDailyBriefingAppliedLocation(state.nextTaskText), 80);
+                return;
+            }
+            setCompletionLegacyOpen(true, 'plan-panel');
+        }
+
+        function renderCompletionOperatingSystem() {
+            const root = document.getElementById('completion-os');
+            if (!root) return;
+            const state = getAdaptiveExecutionState(adaptiveFeatureSelection);
+            completionPrimaryIntent = state.intent;
+            root.dataset.adaptiveState = state.stateName;
+            document.body.dataset.adaptiveState = state.stateName;
+
+            document.getElementById('completion-decision-kicker').textContent = state.kicker;
+            document.getElementById('completion-decision-title').textContent = state.title;
+            document.getElementById('completion-decision-copy').textContent = state.copy;
+            document.getElementById('completion-primary-action').textContent = state.buttonLabel;
+            document.getElementById('completion-current-phase').textContent = state.phaseLabel;
+            document.getElementById('completion-pending-count').textContent = `${state.pending.length}개`;
+            document.getElementById('completion-protected-time').textContent = `${state.protectedMinutes}분`;
+            document.getElementById('adaptive-state-icon').textContent = state.icon;
+            document.getElementById('adaptive-state-reason').textContent = state.reason;
+            document.getElementById('adaptive-auto-badge').textContent = '현재 상태 분석 + 직접 선택';
+
+            const choiceList = document.getElementById('adaptive-choice-list');
+            choiceList.innerHTML = state.stateName === 'execute'
+                ? state.choiceTasks.map((task, index) => {
+                    const text = getAdaptiveTaskText(task);
+                    const duration = Math.max(5, Number(task.durationMinutes) || 25);
+                    const selected = text === state.nextTaskText;
+                    return `<button class="adaptive-task-choice ${selected ? 'is-selected' : ''}" type="button" data-adaptive-task-choice="${index}" aria-pressed="${selected}" title="${escaped(text)}">${escaped(text)} · ${duration}분</button>`;
+                }).join('')
+                : '';
+
+            document.querySelectorAll('[data-adaptive-stage]').forEach((chip) => {
+                const selected = chip.dataset.adaptiveStage === state.stateName;
+                chip.classList.toggle('is-current', selected);
+                chip.setAttribute('aria-pressed', String(selected));
+                chip.title = '이 기능 설명 보기';
+            });
+            const progress = state.stateName === 'finish' ? 100 : Math.max(3, state.completion);
+            document.getElementById('adaptive-progress-fill').style.width = `${progress}%`;
+            const now = new Date();
+            const dayLabel = ({ mon: '월요일', tue: '화요일', wed: '수요일', thu: '목요일', fri: '금요일' })[currentDay] || '오늘';
+            const energyLabel = currentEnergy === 'high' ? '최상' : currentEnergy === 'low' ? '방전' : '보통';
+            const analyzedFeatureLabel = ({ capture: 'AI 비서', prepare: '시작 설계', execute: '집중 실행', recover: '지연 수습', finish: '안전 종료' })[state.detectedState];
+            document.getElementById('adaptive-context-line').textContent = `${dayLabel} ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} · 컨디션 ${energyLabel} · 완료율 ${state.completion}% · 현재 상태 ${analyzedFeatureLabel}`;
+            document.getElementById('completion-evidence-body').innerHTML = `
+                <strong>${escaped(state.shutdown.verdict || '현재 하루 상태를 다시 계산했습니다.')}</strong><br>
+                미완료 ${state.pending.length}개, 완료 ${state.completed.length}개, 최소 성과선 ${state.shutdown.targetCount}개와 실제 실행 기록 ${state.shutdown.measuredCount}건을 함께 계산했습니다.
+                상태 분석은 일정과 컨디션이 바뀔 때 다시 계산되며, 원하는 기능은 언제든 직접 선택할 수 있습니다.`;
+        }
+
+        function setupCompletionOperatingSystem() {
+            document.getElementById('completion-primary-action')?.addEventListener('click', runCompletionPrimaryAction);
+            document.querySelectorAll('[data-adaptive-stage]').forEach((chip) => {
+                chip.addEventListener('click', () => {
+                    adaptiveFeatureSelection = chip.dataset.adaptiveStage;
+                    renderCompletionOperatingSystem();
+                });
+            });
+            document.getElementById('adaptive-choice-list')?.addEventListener('click', (event) => {
+                const button = event.target.closest('[data-adaptive-task-choice]');
+                if (!button) return;
+                const executeState = getAdaptiveExecutionState('execute');
+                const task = executeState.choiceTasks[Number(button.dataset.adaptiveTaskChoice)];
+                if (!task) return;
+                adaptiveSelectedTaskText = getAdaptiveTaskText(task);
+                adaptiveFeatureSelection = 'execute';
+                renderCompletionOperatingSystem();
+            });
+            document.getElementById('completion-open-full')?.addEventListener('click', () => {
+                const shell = document.getElementById('completion-legacy-shell');
+                setCompletionLegacyOpen(!shell?.classList.contains('is-open'));
+            });
+        }
+
         function getOptimalShutdownQuietUntil() {
             const nextMorning = new Date();
             nextMorning.setDate(nextMorning.getDate() + 1);
@@ -9993,7 +11202,8 @@
         function scrollToDailyBriefingAppliedLocation(taskText = '') {
             const rows = Array.from(panel.querySelectorAll('.task-item'));
             const target = rows.find((row) => {
-                const text = row.querySelector('[data-task-text]')?.textContent?.trim() || '';
+                const taskTextElement = row.querySelector('[data-task-text]');
+                const text = String(taskTextElement?.value || taskTextElement?.textContent || '').trim();
                 return taskText ? text === taskText : row.dataset.taskIndex === '0';
             }) || rows[0] || panel;
             target.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -11592,6 +12802,7 @@
             const focusMetrics = getFocusEfficiency(currentDay);
             const godMetrics = getGodScoreMetrics(currentDay);
             const fakeWorkWarning = getFakeWorkWarning(currentDay);
+            renderCompletionOperatingSystem();
             const hasMinimumRoutine = plans[currentDay].tasks.some((task) => task.done);
             const retrospectiveCard = latestRetrospective ? `
                 <section class="aside-card">
@@ -13713,6 +14924,7 @@
             renderCalendarPreview(lines, { expand: calendarPreview.classList.contains('expanded') });
         });
         updateModeHint();
+        setupCompletionOperatingSystem();
         updateDailyPlaceholder();
         updateWeekFlowBackground(currentDay);
         applyPersonalizedBriefingProfileToUI();

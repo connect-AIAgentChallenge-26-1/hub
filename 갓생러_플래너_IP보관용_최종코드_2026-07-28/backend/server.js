@@ -11,6 +11,7 @@ const { promisify } = require('node:util');
 const { DatabaseSync } = require('node:sqlite');
 const { createCloudMemory } = require('./cloud-memory');
 const { createFcmSender } = require('./fcm-push');
+const { buildDecisionBatch, attachDecisionMetadata } = require('./autonomous-decision-engine');
 
 const execFileAsync = promisify(execFile);
 const ROOT_DIR = __dirname;
@@ -114,6 +115,9 @@ const COACH_SYSTEM_PROMPT = [
   'source=upload 작업이 하나라도 있으면 일반적인 생산성 조언만 하지 말고, 추출된 항목을 사용자 지시에 맞춰 구체적인 순서 또는 실행안으로 변환하라. 서로 무관한 기존 작업은 추천에 끼워 넣지 마라.',
   '일정 정렬 요청이면 고정 시각, 마감/결재/의사결정 중요도, 이동·준비 버퍼, 에너지 적합도 순으로 재배치안을 제시하라.',
   '단순 설명보다 사용자가 승인하면 즉시 실행할 수 있는 일정 변경안을 recommendations에 우선 제시하라.',
+  'recommendations는 최대 3개만 제시하고, 각 metrics에는 판단 근거와 적용 시 기대 효과를 짧게 적어라. 페이로드에 없는 날짜·마감·근거를 지어내지 마라.',
+  '삭제·대량 이동·일정 전체 교체처럼 영향이 큰 실행은 사용자가 효과와 대상을 이해할 수 있게 명확히 표시하라. 불확실한 실행을 확정 사실처럼 말하지 마라.',
+  '같은 목표를 달성하는 방법이 여러 개면 사용자 시간을 가장 많이 절약하면서 되돌리기 쉬운 안을 우선하라.',
   'API 키, 토큰, 연락처, 이메일 등 민감정보는 답변에 재출력하지 마라.',
   '일정 관리에 직접 도움이 되는 내용만 reply에 담고, 모든 필드는 반드시 채워라. 추천이나 변경이 없으면 배열은 빈 배열로 반환한다.'
 ].join('\n');
@@ -955,6 +959,56 @@ function createStore(dbPath) {
       enabled INTEGER NOT NULL DEFAULT 1,
       updated_at TEXT NOT NULL
     );
+
+    CREATE TABLE IF NOT EXISTS assistant_decisions (
+      id TEXT PRIMARY KEY,
+      batch_id TEXT NOT NULL,
+      owner_id TEXT NOT NULL,
+      intent TEXT NOT NULL,
+      status TEXT NOT NULL CHECK (status IN ('proposed', 'applied', 'rolled_back', 'rejected')),
+      recommendation_json TEXT NOT NULL,
+      provenance_json TEXT NOT NULL DEFAULT '[]',
+      conflicts_json TEXT NOT NULL DEFAULT '[]',
+      reason_codes_json TEXT NOT NULL DEFAULT '[]',
+      confidence INTEGER NOT NULL,
+      action_value INTEGER NOT NULL,
+      risk_level TEXT NOT NULL CHECK (risk_level IN ('low', 'medium', 'high')),
+      expected_minutes_saved INTEGER NOT NULL DEFAULT 0,
+      reversible INTEGER NOT NULL DEFAULT 1,
+      requires_confirmation INTEGER NOT NULL DEFAULT 1,
+      notification_eligible INTEGER NOT NULL DEFAULT 0,
+      decision_signature TEXT NOT NULL,
+      action_kind TEXT NOT NULL DEFAULT '',
+      before_state_json TEXT,
+      after_state_json TEXT,
+      created_at TEXT NOT NULL,
+      applied_at TEXT,
+      rolled_back_at TEXT
+    );
+    CREATE INDEX IF NOT EXISTS assistant_decisions_owner_recent
+      ON assistant_decisions(owner_id, created_at DESC);
+
+    CREATE TABLE IF NOT EXISTS assistant_decision_feedback (
+      id TEXT PRIMARY KEY,
+      decision_id TEXT NOT NULL,
+      owner_id TEXT NOT NULL,
+      verdict TEXT NOT NULL CHECK (verdict IN ('helpful', 'not_helpful')),
+      outcome_json TEXT NOT NULL DEFAULT '{}',
+      created_at TEXT NOT NULL,
+      UNIQUE(decision_id, owner_id),
+      FOREIGN KEY (decision_id) REFERENCES assistant_decisions(id) ON DELETE CASCADE
+    );
+
+    CREATE TABLE IF NOT EXISTS assistant_notification_events (
+      id TEXT PRIMARY KEY,
+      owner_id TEXT NOT NULL,
+      decision_id TEXT,
+      local_date TEXT NOT NULL,
+      outcome TEXT NOT NULL,
+      created_at TEXT NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS assistant_notification_owner_day
+      ON assistant_notification_events(owner_id, local_date, created_at DESC);
   `);
 
   const personalizedBriefingColumns = db.prepare('PRAGMA table_info(personalized_briefings)').all();
@@ -1001,6 +1055,9 @@ function createStore(dbPath) {
   const deleteMemories = db.prepare('DELETE FROM planner_memories WHERE owner_id = ?');
   const deleteHousekeepingEvents = db.prepare('DELETE FROM housekeeping_events WHERE owner_id = ?');
   const deletePushTokens = db.prepare('DELETE FROM autonomous_push_tokens WHERE owner_id = ?');
+  const deleteDecisionFeedback = db.prepare('DELETE FROM assistant_decision_feedback WHERE owner_id = ?');
+  const deleteDecisions = db.prepare('DELETE FROM assistant_decisions WHERE owner_id = ?');
+  const deleteNotificationEvents = db.prepare('DELETE FROM assistant_notification_events WHERE owner_id = ?');
   const deleteExpiredOAuthStates = db.prepare('DELETE FROM oauth_states WHERE expires_at <= ?');
   const insertOAuthState = db.prepare(`
     INSERT INTO oauth_states (state_hash, provider, redirect_uri, purpose, expires_at, created_at)
@@ -1111,6 +1168,55 @@ function createStore(dbPath) {
     ON CONFLICT(token) DO UPDATE SET owner_id = excluded.owner_id, platform = excluded.platform, enabled = 1, updated_at = excluded.updated_at
   `);
   const selectPushTokens = db.prepare(`SELECT token, platform FROM autonomous_push_tokens WHERE owner_id = ? AND enabled = 1 ORDER BY updated_at DESC LIMIT 20`);
+  const insertDecision = db.prepare(`
+    INSERT INTO assistant_decisions (
+      id, batch_id, owner_id, intent, status, recommendation_json, provenance_json,
+      conflicts_json, reason_codes_json, confidence, action_value, risk_level,
+      expected_minutes_saved, reversible, requires_confirmation, notification_eligible,
+      decision_signature, created_at
+    ) VALUES (?, ?, ?, ?, 'proposed', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `);
+  const selectDecision = db.prepare(`
+    SELECT * FROM assistant_decisions WHERE id = ? AND owner_id = ?
+  `);
+  const selectDecisionHistory = db.prepare(`
+    SELECT id, batch_id, intent, status, recommendation_json, confidence, action_value,
+      risk_level, expected_minutes_saved, reversible, requires_confirmation,
+      notification_eligible, action_kind, created_at, applied_at, rolled_back_at
+    FROM assistant_decisions WHERE owner_id = ? ORDER BY created_at DESC LIMIT ?
+  `);
+  const applyDecisionStatement = db.prepare(`
+    UPDATE assistant_decisions
+    SET status = 'applied', action_kind = ?, before_state_json = ?, after_state_json = ?, applied_at = ?
+    WHERE id = ? AND owner_id = ? AND status = 'proposed' AND reversible = 1 AND decision_signature = ?
+  `);
+  const rollbackDecisionStatement = db.prepare(`
+    UPDATE assistant_decisions SET status = 'rolled_back', rolled_back_at = ?
+    WHERE id = ? AND owner_id = ? AND status = 'applied' AND reversible = 1
+  `);
+  const upsertDecisionFeedback = db.prepare(`
+    INSERT INTO assistant_decision_feedback (id, decision_id, owner_id, verdict, outcome_json, created_at)
+    VALUES (?, ?, ?, ?, ?, ?)
+    ON CONFLICT(decision_id, owner_id) DO UPDATE SET
+      verdict = excluded.verdict,
+      outcome_json = excluded.outcome_json,
+      created_at = excluded.created_at
+  `);
+  const selectFeedbackProfile = db.prepare(`
+    SELECT d.recommendation_json, f.verdict
+    FROM assistant_decision_feedback f
+    JOIN assistant_decisions d ON d.id = f.decision_id
+    WHERE f.owner_id = ?
+    ORDER BY f.created_at DESC LIMIT 200
+  `);
+  const countNotificationEvents = db.prepare(`
+    SELECT count(*) AS count FROM assistant_notification_events
+    WHERE owner_id = ? AND local_date = ? AND outcome = 'sent'
+  `);
+  const insertNotificationEvent = db.prepare(`
+    INSERT INTO assistant_notification_events (id, owner_id, decision_id, local_date, outcome, created_at)
+    VALUES (?, ?, ?, ?, ?, ?)
+  `);
 
   function saveExchange(sessionId, payload, coachOutput) {
     const now = new Date().toISOString();
@@ -1206,6 +1312,144 @@ function createStore(dbPath) {
     return selectPushTokens.all(ownerId);
   }
 
+  function saveDecision(record, decisionSignature) {
+    insertDecision.run(
+      record.id,
+      record.batchId,
+      record.ownerId,
+      record.intent,
+      JSON.stringify(sanitizeForStorage(record.recommendation || {})),
+      JSON.stringify(sanitizeForStorage(record.provenance || [])),
+      JSON.stringify(sanitizeForStorage(record.conflicts || [])),
+      JSON.stringify(record.reasonCodes || []),
+      record.confidence,
+      record.actionValue,
+      record.riskLevel,
+      record.expectedMinutesSaved,
+      record.reversible ? 1 : 0,
+      record.requiresConfirmation ? 1 : 0,
+      record.notificationEligible ? 1 : 0,
+      decisionSignature,
+      record.createdAt
+    );
+    return record.id;
+  }
+
+  function getDecision(ownerId, decisionId) {
+    const row = selectDecision.get(decisionId, ownerId);
+    if (!row) return null;
+    return {
+      id: row.id,
+      batchId: row.batch_id,
+      status: row.status,
+      intent: row.intent,
+      recommendation: JSON.parse(row.recommendation_json),
+      provenance: JSON.parse(row.provenance_json || '[]'),
+      conflicts: JSON.parse(row.conflicts_json || '[]'),
+      confidence: row.confidence,
+      actionValue: row.action_value,
+      riskLevel: row.risk_level,
+      expectedMinutesSaved: row.expected_minutes_saved,
+      reversible: Boolean(row.reversible),
+      requiresConfirmation: Boolean(row.requires_confirmation),
+      notificationEligible: Boolean(row.notification_eligible),
+      decisionSignature: row.decision_signature,
+      actionKind: row.action_kind,
+      beforeState: row.before_state_json ? JSON.parse(row.before_state_json) : null,
+      afterState: row.after_state_json ? JSON.parse(row.after_state_json) : null,
+      createdAt: row.created_at,
+      appliedAt: row.applied_at,
+      rolledBackAt: row.rolled_back_at
+    };
+  }
+
+  function applyDecision(ownerId, input) {
+    const beforeState = sanitizeForStorage(input.beforeState || {});
+    const afterState = sanitizeForStorage(input.afterState || {});
+    const appliedAt = new Date().toISOString();
+    const result = applyDecisionStatement.run(
+      String(input.actionKind || '').slice(0, 80),
+      JSON.stringify(beforeState),
+      JSON.stringify(afterState),
+      appliedAt,
+      input.decisionId,
+      ownerId,
+      input.decisionSignature
+    );
+    if (!result.changes) return null;
+    savePlannerState(ownerId, afterState);
+    saveHousekeepingEvent(ownerId, `decision:${input.decisionId}`, beforeState, afterState);
+    return getDecision(ownerId, input.decisionId);
+  }
+
+  function rollbackDecision(ownerId, decisionId) {
+    const decision = getDecision(ownerId, decisionId);
+    if (!decision || decision.status !== 'applied' || !decision.reversible || !decision.beforeState) return null;
+    const current = getPlannerState(ownerId)?.state || decision.afterState;
+    const rolledBackAt = new Date().toISOString();
+    const result = rollbackDecisionStatement.run(rolledBackAt, decisionId, ownerId);
+    if (!result.changes) return null;
+    savePlannerState(ownerId, decision.beforeState);
+    saveHousekeepingEvent(ownerId, `decision-rollback:${decisionId}`, current, decision.beforeState);
+    return { decision: getDecision(ownerId, decisionId), state: decision.beforeState };
+  }
+
+  function saveDecisionFeedback(ownerId, decisionId, verdict, outcome = {}) {
+    if (!getDecision(ownerId, decisionId)) return null;
+    const createdAt = new Date().toISOString();
+    upsertDecisionFeedback.run(
+      crypto.randomUUID(), decisionId, ownerId, verdict,
+      JSON.stringify(sanitizeForStorage(outcome)), createdAt
+    );
+    return { decisionId, verdict, createdAt };
+  }
+
+  function getDecisionFeedbackProfile(ownerId) {
+    const profile = {};
+    selectFeedbackProfile.all(ownerId).forEach((row) => {
+      let type = 'none';
+      try { type = JSON.parse(row.recommendation_json)?.type || 'none'; } catch { type = 'none'; }
+      if (!profile[type]) profile[type] = { helpful: 0, notHelpful: 0, score: 0 };
+      if (row.verdict === 'helpful') profile[type].helpful += 1;
+      else profile[type].notHelpful += 1;
+      profile[type].score = Math.max(-12, Math.min(12, (profile[type].helpful - profile[type].notHelpful) * 2));
+    });
+    return profile;
+  }
+
+  function getDecisionHistory(ownerId, limit = 20) {
+    return selectDecisionHistory.all(ownerId, Math.max(1, Math.min(Number(limit) || 20, 100))).map((row) => ({
+      id: row.id,
+      batchId: row.batch_id,
+      intent: row.intent,
+      status: row.status,
+      recommendation: JSON.parse(row.recommendation_json),
+      confidence: row.confidence,
+      actionValue: row.action_value,
+      riskLevel: row.risk_level,
+      expectedMinutesSaved: row.expected_minutes_saved,
+      reversible: Boolean(row.reversible),
+      requiresConfirmation: Boolean(row.requires_confirmation),
+      notificationEligible: Boolean(row.notification_eligible),
+      actionKind: row.action_kind,
+      createdAt: row.created_at,
+      appliedAt: row.applied_at,
+      rolledBackAt: row.rolled_back_at
+    }));
+  }
+
+  function getNotificationBudget(ownerId, date = new Date()) {
+    const localDate = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Seoul' }).format(date);
+    const used = Number(countNotificationEvents.get(ownerId, localDate)?.count) || 0;
+    return { localDate, used, limit: 3, remaining: Math.max(0, 3 - used) };
+  }
+
+  function recordNotification(ownerId, decisionId, outcome) {
+    const budget = getNotificationBudget(ownerId);
+    insertNotificationEvent.run(crypto.randomUUID(), ownerId, decisionId || null, budget.localDate, outcome, new Date().toISOString());
+    return getNotificationBudget(ownerId);
+  }
+
   function clearSession(sessionId) {
     db.exec('BEGIN IMMEDIATE');
     try {
@@ -1216,6 +1460,9 @@ function createStore(dbPath) {
       deleteMemories.run(sessionId);
       deleteHousekeepingEvents.run(sessionId);
       deletePushTokens.run(sessionId);
+      deleteDecisionFeedback.run(sessionId);
+      deleteDecisions.run(sessionId);
+      deleteNotificationEvents.run(sessionId);
       db.exec('COMMIT');
     } catch (error) {
       db.exec('ROLLBACK');
@@ -1386,6 +1633,15 @@ function createStore(dbPath) {
     getHousekeepingEvents,
     registerPushToken,
     getPushTokens,
+    saveDecision,
+    getDecision,
+    applyDecision,
+    rollbackDecision,
+    saveDecisionFeedback,
+    getDecisionFeedbackProfile,
+    getDecisionHistory,
+    getNotificationBudget,
+    recordNotification,
     close: () => db.close()
   };
 }
@@ -1408,7 +1664,7 @@ function analyzeRequestIntent(message) {
   const text = String(message || '').replace(/\s+/g, ' ').trim();
   const scheduleSort = /(일정|스케줄|시간표|타임테이블).*(정렬|재배치|조정|정리|최적화)|(정렬|재배치|조정|정리|최적화).*(일정|스케줄|시간표|타임테이블)/.test(text);
   const executive = /(기업|회사|임원|대표|사장|CEO|경영진|이사회|결재|업무)/i.test(text);
-  const delay = /(지연|늦|연기|미뤄|밀어)/.test(text);
+  const delay = /(지연|늦|연기|미뤄|밀어|밀리|밀렸)/.test(text);
   const atomize = /(쪼개|세분화|단계|작게|분해)/.test(text);
   return { text, scheduleSort, executive, delay, atomize };
 }
@@ -1480,10 +1736,9 @@ function createLocalCoachOutput(payload) {
       ? payload.requestContext.uploadedTaskTexts.filter((text) => typeof text === 'string')
       : []
   );
-  const uploaded = pending.filter((task) =>
-    task.source === 'upload'
-    && (!payload.requestContext?.hasAttachment || currentAttachmentTexts.has(task.text))
-  );
+  const uploaded = payload.requestContext?.hasAttachment
+    ? pending.filter((task) => task.source === 'upload' && currentAttachmentTexts.has(task.text))
+    : [];
   const recommendations = [];
   let reply;
 
@@ -2255,7 +2510,12 @@ function createApp(overrides = {}) {
           model: config.model,
           cloud: cloudMemory.status(),
           push: fcmSender.status(),
-          capabilities: ['text', 'image', 'document', 'voice', 'personalized-briefing', 'long-term-memory', 'semantic-rag', 'housekeeping-history']
+          capabilities: [
+            'text', 'image', 'document', 'voice', 'personalized-briefing',
+            'long-term-memory', 'semantic-rag', 'housekeeping-history',
+            'evidence-linked-decisions', 'conflict-graph', 'reversible-actions',
+            'notification-budget', 'feedback-learning'
+          ]
         });
       }
 
@@ -2734,6 +2994,69 @@ function createApp(overrides = {}) {
         return sendJson(res, 200, { success: true, state: target.previousState, ...saved, eventId: undoEvent.id }, session.cookie);
       }
 
+      if (req.method === 'GET' && pathname === '/api/assistant/decisions/history') {
+        const session = getSession(req, store);
+        const decisions = store.getDecisionHistory(session.id, requestUrl.searchParams.get('limit'));
+        const notificationBudget = store.getNotificationBudget(session.id);
+        return sendJson(res, 200, { success: true, decisions, notificationBudget }, session.cookie);
+      }
+
+      if (req.method === 'POST' && pathname === '/api/assistant/decisions/apply') {
+        const session = getSession(req, store);
+        const body = await readJson(req);
+        if (!isPlainObject(body) || typeof body.decisionId !== 'string' || typeof body.decisionSignature !== 'string') {
+          throw createHttpError(400, '검증할 의사결정 ID와 서명이 필요합니다.');
+        }
+        if (!isPlainObject(body.beforeState) || !isPlainObject(body.afterState)) {
+          throw createHttpError(400, '적용 전후 플래너 상태가 필요합니다.');
+        }
+        const applied = store.applyDecision(session.id, {
+          decisionId: body.decisionId,
+          decisionSignature: body.decisionSignature,
+          actionKind: typeof body.actionKind === 'string' ? body.actionKind : '',
+          beforeState: body.beforeState,
+          afterState: body.afterState
+        });
+        if (!applied) throw createHttpError(409, '이미 처리되었거나 검증할 수 없는 실행 제안입니다.');
+        void cloudMemory.mirrorPlannerState(session.id, sanitizeForStorage(body.afterState));
+        void cloudMemory.mirrorDecisionStatus(session.id, body.decisionId, {
+          status: 'applied',
+          action_kind: applied.actionKind,
+          before_state: sanitizeForStorage(body.beforeState),
+          after_state: sanitizeForStorage(body.afterState),
+          applied_at: applied.appliedAt
+        });
+        return sendJson(res, 200, { success: true, decision: applied }, session.cookie);
+      }
+
+      if (req.method === 'POST' && pathname === '/api/assistant/decisions/rollback') {
+        const session = getSession(req, store);
+        const body = await readJson(req);
+        if (!isPlainObject(body) || typeof body.decisionId !== 'string') {
+          throw createHttpError(400, '되돌릴 의사결정 ID가 필요합니다.');
+        }
+        const rolledBack = store.rollbackDecision(session.id, body.decisionId);
+        if (!rolledBack) throw createHttpError(409, '되돌릴 수 없거나 이미 되돌린 실행입니다.');
+        void cloudMemory.mirrorPlannerState(session.id, sanitizeForStorage(rolledBack.state));
+        void cloudMemory.mirrorDecisionStatus(session.id, body.decisionId, {
+          status: 'rolled_back',
+          rolled_back_at: rolledBack.decision.rolledBackAt
+        });
+        return sendJson(res, 200, { success: true, ...rolledBack }, session.cookie);
+      }
+
+      if (req.method === 'POST' && pathname === '/api/assistant/decisions/feedback') {
+        const session = getSession(req, store);
+        const body = await readJson(req);
+        if (!isPlainObject(body) || typeof body.decisionId !== 'string' || !['helpful', 'not_helpful'].includes(body.verdict)) {
+          throw createHttpError(400, '의사결정 ID와 유효한 피드백이 필요합니다.');
+        }
+        const feedback = store.saveDecisionFeedback(session.id, body.decisionId, body.verdict, isPlainObject(body.outcome) ? body.outcome : {});
+        if (!feedback) throw createHttpError(404, '피드백을 남길 실행 제안을 찾지 못했습니다.');
+        void cloudMemory.mirrorDecisionFeedback(session.id, feedback);
+        return sendJson(res, 200, { success: true, feedback }, session.cookie);
+      }
+
       if (req.method === 'POST' && pathname === '/api/assistant/notifications/register') {
         const session = getSession(req, store);
         const body = await readJson(req);
@@ -2751,13 +3074,26 @@ function createApp(overrides = {}) {
         const title = typeof body.title === 'string' ? body.title.trim().slice(0, 100) : '갓생러 플래너';
         const message = typeof body.message === 'string' ? body.message.trim().slice(0, 500) : '';
         if (!message) throw createHttpError(400, '푸시 알림 메시지가 필요합니다.');
+        const notificationBudget = store.getNotificationBudget(session.id);
+        if (notificationBudget.remaining <= 0) {
+          throw createHttpError(429, '오늘의 중요 알림 3회를 모두 사용했습니다. 추가 제안은 앱 안에서만 표시합니다.');
+        }
+        if (typeof body.decisionId === 'string' && body.decisionId) {
+          const decision = store.getDecision(session.id, body.decisionId);
+          if (!decision || !decision.notificationEligible) {
+            throw createHttpError(409, '중요도·신뢰도 기준을 통과하지 못한 제안은 푸시로 보내지 않습니다.');
+          }
+        }
         const tokens = store.getPushTokens(session.id);
         const results = await Promise.all(tokens.map(({ token }) => fcmSender.send(token, { title, body: message }, { type: String(body.type || 'planner-nudge') })));
+        const sent = results.filter((result) => result.ok).length;
+        const nextBudget = store.recordNotification(session.id, typeof body.decisionId === 'string' ? body.decisionId : null, sent ? 'sent' : 'failed');
         return sendJson(res, 200, {
           success: results.some((result) => result.ok),
           configured: fcmSender.status().configured,
-          sent: results.filter((result) => result.ok).length,
-          attempted: results.length
+          sent,
+          attempted: results.length,
+          notificationBudget: nextBudget
         }, session.cookie);
       }
 
@@ -2797,6 +3133,20 @@ function createApp(overrides = {}) {
           coachOutput = createLocalCoachOutput(payload);
           engine = 'server-fallback';
         }
+        const notificationBudget = store.getNotificationBudget(session.id);
+        const feedbackProfile = store.getDecisionFeedbackProfile(session.id);
+        const decisionBatch = buildDecisionBatch({
+          ownerId: session.id,
+          payload,
+          coachOutput,
+          notificationBudget,
+          feedbackProfile
+        });
+        decisionBatch.decisions.forEach((decision) => {
+          store.saveDecision(decision.record, decision.public.decisionSignature);
+          void cloudMemory.mirrorDecision(decision.record, decision.public.decisionSignature);
+        });
+        coachOutput = attachDecisionMetadata(coachOutput, decisionBatch);
         await store.saveExchange(session.id, sanitizeForStorage(payload), sanitizeForStorage(coachOutput));
         return sendJson(res, 200, { success: true, engine, ...coachOutput }, session.cookie);
       }

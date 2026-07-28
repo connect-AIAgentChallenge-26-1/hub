@@ -132,6 +132,52 @@ function createCloudMemory(options = {}) {
     });
   }
 
+  async function mirrorDecision(record, decisionSignature) {
+    return supabaseRequest('/rest/v1/autonomous_decisions?on_conflict=id', {
+      method: 'POST', preferRepresentation: true,
+      body: JSON.stringify([{
+        id: record.id,
+        batch_id: record.batchId,
+        owner_id: record.ownerId,
+        intent: record.intent,
+        status: record.status || 'proposed',
+        recommendation: record.recommendation || {},
+        provenance: record.provenance || [],
+        conflicts: record.conflicts || [],
+        reason_codes: record.reasonCodes || [],
+        confidence: record.confidence,
+        action_value: record.actionValue,
+        risk_level: record.riskLevel,
+        expected_minutes_saved: record.expectedMinutesSaved || 0,
+        reversible: Boolean(record.reversible),
+        requires_confirmation: Boolean(record.requiresConfirmation),
+        notification_eligible: Boolean(record.notificationEligible),
+        decision_signature: decisionSignature,
+        created_at: record.createdAt || new Date().toISOString()
+      }])
+    });
+  }
+
+  async function mirrorDecisionStatus(ownerId, decisionId, values) {
+    return supabaseRequest(`/rest/v1/autonomous_decisions?id=eq.${encodeURIComponent(decisionId)}&owner_id=eq.${encodeURIComponent(ownerId)}`, {
+      method: 'PATCH',
+      headers: { Prefer: 'return=minimal' },
+      body: JSON.stringify(values)
+    });
+  }
+
+  async function mirrorDecisionFeedback(ownerId, feedback) {
+    return supabaseRequest('/rest/v1/autonomous_decision_feedback?on_conflict=decision_id,owner_id', {
+      method: 'POST', preferRepresentation: true,
+      body: JSON.stringify([{
+        decision_id: feedback.decisionId,
+        owner_id: ownerId,
+        verdict: feedback.verdict,
+        created_at: feedback.createdAt
+      }])
+    });
+  }
+
   return {
     status: () => ({ supabaseConfigured, embeddingsConfigured, embeddingModel, embeddingDimensions }),
     createEmbedding,
@@ -139,7 +185,10 @@ function createCloudMemory(options = {}) {
     saveMemory,
     searchMemories,
     mirrorHousekeepingEvent,
-    registerPushToken
+    registerPushToken,
+    mirrorDecision,
+    mirrorDecisionStatus,
+    mirrorDecisionFeedback
   };
 }
 

@@ -4439,6 +4439,295 @@
             .personal-profile-actions .mini-btn { width: 100%; }
         }
 
+        /* 서비스 완결성 비교본: 흩어진 기능을 하나의 실행 흐름으로 압축한다. */
+        .completion-os {
+            margin: 20px 0 24px;
+            padding: clamp(20px, 3vw, 32px);
+            border: 1px solid rgba(125, 194, 211, 0.42);
+            border-radius: 28px;
+            background:
+                radial-gradient(circle at 92% 8%, rgba(151, 222, 240, 0.22), transparent 34%),
+                linear-gradient(145deg, rgba(255,255,255,0.96), rgba(241,251,253,0.94) 55%, rgba(255,250,236,0.86));
+            box-shadow: 0 24px 60px rgba(28, 86, 104, 0.12);
+        }
+        .completion-os-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+        }
+        .completion-os-eyebrow {
+            color: #087a98;
+            font-size: 0.72rem;
+            font-weight: 900;
+            letter-spacing: 0.11em;
+        }
+        .completion-os-head h2 {
+            margin: 7px 0 8px;
+            color: #102f40;
+            font-size: clamp(1.45rem, 2.3vw, 2rem);
+            letter-spacing: -0.04em;
+        }
+        .completion-os-definition {
+            max-width: 780px;
+            margin: 0;
+            color: #4d6d7c;
+            font-size: 0.92rem;
+            line-height: 1.72;
+        }
+        .completion-os-badge {
+            flex: 0 0 auto;
+            padding: 9px 13px;
+            border: 1px solid rgba(14, 143, 170, 0.2);
+            border-radius: 999px;
+            background: rgba(255,255,255,0.76);
+            color: #0d6e85;
+            font-size: 0.72rem;
+            font-weight: 900;
+        }
+        .completion-view-nav {
+            display: inline-grid;
+            grid-template-columns: repeat(3, minmax(88px, 1fr));
+            gap: 5px;
+            margin-top: 22px;
+            padding: 5px;
+            border: 1px solid rgba(128, 188, 203, 0.32);
+            border-radius: 15px;
+            background: rgba(231, 246, 249, 0.78);
+        }
+        .completion-view-button {
+            min-height: 40px;
+            padding: 0 18px;
+            border: 0;
+            border-radius: 11px;
+            background: transparent;
+            color: #547382;
+            font: inherit;
+            font-size: 0.82rem;
+            font-weight: 900;
+            cursor: pointer;
+        }
+        .completion-view-button.is-active {
+            background: #fff;
+            color: #075f78;
+            box-shadow: 0 7px 18px rgba(25, 91, 108, 0.11);
+        }
+        .completion-view-panel { margin-top: 18px; }
+        .completion-view-panel[hidden] { display: none; }
+        .completion-phase-rail {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+        .completion-phase-step {
+            position: relative;
+            min-height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            background: rgba(224, 240, 244, 0.58);
+            color: #78909b;
+            font-size: 0.72rem;
+            font-weight: 900;
+        }
+        .completion-phase-step.is-done {
+            background: rgba(45, 180, 180, 0.1);
+            color: #138489;
+        }
+        .completion-phase-step.is-current {
+            background: linear-gradient(135deg, #087f9f, #14a8b3);
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(8, 127, 159, 0.2);
+        }
+        .completion-decision-card {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 26px;
+            align-items: center;
+            padding: clamp(20px, 3vw, 30px);
+            border: 1px solid rgba(138, 195, 209, 0.35);
+            border-radius: 22px;
+            background: rgba(255,255,255,0.91);
+        }
+        .completion-decision-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: #07809d;
+            font-size: 0.73rem;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+        }
+        .completion-decision-kicker::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #19b9b0;
+            box-shadow: 0 0 0 5px rgba(25,185,176,0.11);
+        }
+        .completion-decision-card h3 {
+            margin: 11px 0 7px;
+            color: #123246;
+            font-size: clamp(1.25rem, 2.2vw, 1.8rem);
+            line-height: 1.28;
+            letter-spacing: -0.035em;
+        }
+        .completion-decision-copy {
+            max-width: 720px;
+            margin: 0;
+            color: #577281;
+            font-size: 0.88rem;
+            line-height: 1.65;
+        }
+        .completion-primary-action {
+            min-width: 190px;
+            min-height: 52px;
+            padding: 0 22px;
+            border: 0;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #087ea4, #49b9e1);
+            color: #fff;
+            font: inherit;
+            font-size: 0.9rem;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 13px 26px rgba(25, 136, 174, 0.22);
+        }
+        .completion-primary-action:hover { transform: translateY(-1px); }
+        .completion-signal-grid,
+        .completion-report-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+            margin-top: 12px;
+        }
+        .completion-signal,
+        .completion-report-card {
+            padding: 14px 16px;
+            border: 1px solid rgba(133, 192, 207, 0.28);
+            border-radius: 15px;
+            background: rgba(255,255,255,0.66);
+        }
+        .completion-signal span,
+        .completion-report-card span {
+            display: block;
+            color: #78909b;
+            font-size: 0.68rem;
+            font-weight: 800;
+        }
+        .completion-signal strong,
+        .completion-report-card strong {
+            display: block;
+            margin-top: 5px;
+            color: #16475c;
+            font-size: 0.98rem;
+        }
+        .completion-panel-title { margin: 0; color: #143c50; font-size: 1.05rem; }
+        .completion-panel-copy { margin: 6px 0 14px; color: #66808d; font-size: 0.82rem; line-height: 1.55; }
+        .completion-today-list { display: grid; gap: 8px; }
+        .completion-today-item {
+            display: grid;
+            grid-template-columns: 26px minmax(0,1fr) auto;
+            gap: 11px;
+            align-items: center;
+            padding: 12px 14px;
+            border: 1px solid rgba(128, 190, 204, 0.27);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.76);
+        }
+        .completion-today-index {
+            width: 25px;
+            height: 25px;
+            display: grid;
+            place-items: center;
+            border-radius: 8px;
+            background: #e5f6fa;
+            color: #087d99;
+            font-size: 0.68rem;
+            font-weight: 900;
+        }
+        .completion-today-item.is-done { opacity: 0.58; }
+        .completion-today-item.is-done strong { text-decoration: line-through; }
+        .completion-today-item strong { color: #24495b; font-size: 0.84rem; }
+        .completion-today-item small { color: #78909b; }
+        .completion-inline-button,
+        .completion-secondary-action {
+            padding: 8px 11px;
+            border: 1px solid rgba(103, 173, 191, 0.36);
+            border-radius: 10px;
+            background: rgba(255,255,255,0.82);
+            color: #1d6177;
+            font: inherit;
+            font-size: 0.72rem;
+            font-weight: 900;
+            cursor: pointer;
+        }
+        .completion-evidence {
+            margin-top: 14px;
+            border: 1px solid rgba(131, 188, 202, 0.3);
+            border-radius: 15px;
+            background: rgba(255,255,255,0.6);
+            overflow: hidden;
+        }
+        .completion-evidence summary {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 14px 16px;
+            color: #315b6d;
+            font-size: 0.78rem;
+            font-weight: 900;
+            cursor: pointer;
+        }
+        .completion-evidence summary::-webkit-details-marker { display: none; }
+        .completion-evidence summary::after { content: '⌄'; color: #0a86a1; }
+        .completion-evidence[open] summary::after { transform: rotate(180deg); }
+        .completion-evidence-body {
+            padding: 0 16px 16px;
+            color: #5d7987;
+            font-size: 0.78rem;
+            line-height: 1.65;
+        }
+        .completion-legacy-control {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-top: 14px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(129, 187, 201, 0.22);
+            color: #708894;
+            font-size: 0.72rem;
+        }
+        .service-complete-variant .completion-legacy-shell { display: none; }
+        .service-complete-variant .completion-legacy-shell.is-open { display: block; }
+        .service-complete-variant .completion-legacy-shell.is-open {
+            animation: completionReveal 260ms ease-out;
+        }
+        @keyframes completionReveal {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @media (max-width: 760px) {
+            .completion-os { padding: 17px; border-radius: 22px; }
+            .completion-os-head,
+            .completion-decision-card { grid-template-columns: 1fr; flex-direction: column; }
+            .completion-os-badge { align-self: flex-start; }
+            .completion-view-nav { display: grid; width: 100%; }
+            .completion-view-button { padding: 0 10px; }
+            .completion-primary-action { width: 100%; }
+            .completion-signal-grid,
+            .completion-report-grid { grid-template-columns: 1fr; }
+            .completion-phase-rail { gap: 4px; }
+            .completion-phase-step { font-size: 0.66rem; }
+            .completion-legacy-control { align-items: flex-start; flex-direction: column; }
+        }
+
         @media (prefers-reduced-motion: reduce) {
             body,
             body::before,
@@ -4448,7 +4737,7 @@
         }
     </style>
 </head>
-<body>
+<body class="service-complete-variant" data-completion-view="now">
     <section class="hero">
         <h1>갓생러 플래너</h1>
         <p>갓생러들을 위한 고기능 플래너</p>
@@ -4483,6 +4772,71 @@
             <button class="energy-btn" data-energy="low">🔋 방전</button>
         </div>
 
+        <section class="completion-os" id="completion-os" aria-labelledby="completion-os-title">
+            <div class="completion-os-head">
+                <div>
+                    <div class="completion-os-eyebrow">PERSONAL EXECUTION OPERATING SYSTEM</div>
+                    <h2 id="completion-os-title">오늘을 끝까지 운영하는 하나의 흐름</h2>
+                    <p class="completion-os-definition">자료를 전달하면 해야 할 일을 정리하고, 지금 할 한 가지를 실행시키며, 충분한 성과를 확보한 순간 하루를 안전하게 마쳐주는 개인 실행 운영체제입니다.</p>
+                </div>
+                <span class="completion-os-badge">서비스 완결성 비교본</span>
+            </div>
+
+            <nav class="completion-view-nav" aria-label="실행 운영 화면">
+                <button class="completion-view-button is-active" type="button" data-completion-view-button="now" aria-pressed="true">지금</button>
+                <button class="completion-view-button" type="button" data-completion-view-button="today" aria-pressed="false">오늘</button>
+                <button class="completion-view-button" type="button" data-completion-view-button="report" aria-pressed="false">리포트</button>
+            </nav>
+
+            <section class="completion-view-panel" data-completion-view-panel="now" aria-live="polite">
+                <div class="completion-phase-rail" aria-label="오늘의 실행 단계">
+                    <div class="completion-phase-step" data-completion-phase="dump">담기</div>
+                    <div class="completion-phase-step" data-completion-phase="decide">결정</div>
+                    <div class="completion-phase-step" data-completion-phase="execute">실행</div>
+                    <div class="completion-phase-step" data-completion-phase="finish">마치기</div>
+                </div>
+                <div class="completion-decision-card">
+                    <div>
+                        <div class="completion-decision-kicker" id="completion-decision-kicker">현재 상태 분석 중</div>
+                        <h3 id="completion-decision-title">지금 필요한 한 가지를 고르고 있습니다.</h3>
+                        <p class="completion-decision-copy" id="completion-decision-copy">목록 전체를 관리하지 않아도 되도록 다음 행동과 안전한 종료 시점을 함께 계산합니다.</p>
+                    </div>
+                    <button class="completion-primary-action" id="completion-primary-action" type="button">분석 결과 확인</button>
+                </div>
+                <div class="completion-signal-grid" aria-label="현재 운영 신호">
+                    <div class="completion-signal"><span>현재 단계</span><strong id="completion-current-phase">결정</strong></div>
+                    <div class="completion-signal"><span>오늘 남은 일</span><strong id="completion-pending-count">0개</strong></div>
+                    <div class="completion-signal"><span>안전하게 확보할 시간</span><strong id="completion-protected-time">0분</strong></div>
+                </div>
+            </section>
+
+            <section class="completion-view-panel" data-completion-view-panel="today" hidden>
+                <h3 class="completion-panel-title">오늘의 실행 큐</h3>
+                <p class="completion-panel-copy">완료를 위해 꼭 필요한 순서만 보여줍니다. 세부 관리가 필요할 때만 전체 운영 화면을 여세요.</p>
+                <div class="completion-today-list" id="completion-today-list"></div>
+            </section>
+
+            <section class="completion-view-panel" data-completion-view-panel="report" hidden>
+                <h3 class="completion-panel-title">오늘의 운영 리포트</h3>
+                <p class="completion-panel-copy">얼마나 많이 했는지가 아니라, 중요한 성과를 확보하고 회복 시간을 지켰는지를 보여줍니다.</p>
+                <div class="completion-report-grid">
+                    <div class="completion-report-card"><span>핵심 완료율</span><strong id="completion-report-completion">0%</strong></div>
+                    <div class="completion-report-card"><span>AI가 회수한 시간</span><strong id="completion-report-saved">0분</strong></div>
+                    <div class="completion-report-card"><span>종료 판단 신뢰도</span><strong id="completion-report-confidence">0%</strong></div>
+                </div>
+            </section>
+
+            <details class="completion-evidence" id="completion-evidence">
+                <summary>AI 판단 근거와 보호 기준</summary>
+                <div class="completion-evidence-body" id="completion-evidence-body">일정 중요도, 마감 신호, 예상 소요 시간, 현재 컨디션과 실제 실행 기록을 함께 확인합니다.</div>
+            </details>
+            <div class="completion-legacy-control">
+                <span>고급 분석·AI 요청·세부 일정은 필요할 때만 펼쳐 복잡도를 낮췄습니다.</span>
+                <button class="completion-secondary-action" id="completion-open-full" type="button" aria-expanded="false">전체 운영 화면 열기</button>
+            </div>
+        </section>
+
+        <div class="completion-legacy-shell" id="completion-legacy-shell">
         <section class="mini-focus-card" id="productivity-coach" aria-labelledby="productivity-coach-title">
             <div class="productivity-coach-head">
                 <div>
@@ -5080,6 +5434,7 @@
         <div class="layout">
             <section class="panel" id="plan-panel"></section>
             <aside class="summary-aside" id="summary-aside"></aside>
+        </div>
         </div>
 
         <div class="drawer-backdrop" id="drawer-backdrop"></div>
@@ -9322,6 +9677,189 @@
             };
         }
 
+        let completionPrimaryIntent = 'open-plan';
+
+        function getCompletionOperatingState() {
+            const tasks = plans[currentDay]?.tasks || [];
+            const pending = tasks.filter((task) => !task.done);
+            const completed = tasks.filter((task) => task.done);
+            const shutdown = getOptimalShutdownAnalysis(currentDay);
+            const leak = getResultLeakData();
+            const protectedMinutes = Math.max(0, shutdown.protectedMinutes + leak.savedMinutes);
+            const completion = tasks.length ? Math.round((completed.length / tasks.length) * 100) : 0;
+
+            if (!tasks.length) {
+                return {
+                    phase: 'dump', phaseLabel: '담기', intent: 'open-assistant',
+                    kicker: 'ZERO INPUT · 자료만 전달하세요',
+                    title: '정리하지 말고 자료를 그대로 맡겨주세요.',
+                    copy: '회의록·PDF·사진·음성 메모를 전달하면 AI가 할 일, 마감, 우선순위와 예상 시간을 실행 가능한 일정으로 바꿉니다.',
+                    buttonLabel: 'AI 비서에게 자료 전달', tasks, pending, completed, shutdown, leak,
+                    protectedMinutes, completion
+                };
+            }
+
+            if (shutdown.reached) {
+                return {
+                    phase: 'finish', phaseLabel: '마치기', intent: 'finish-day',
+                    kicker: 'SAFE FINISH · 충분한 성과 확보',
+                    title: shutdown.pending.length ? '오늘의 핵심 성과는 충분합니다. 이제 안전하게 마치세요.' : '오늘 계획한 핵심 실행을 모두 마쳤습니다.',
+                    copy: `${shutdown.reason} 종료 후에는 내일 아침까지 업무 재진입을 막아 회복 시간을 보호합니다.`,
+                    buttonLabel: '오늘 일정 안전하게 마치기', tasks, pending, completed, shutdown, leak,
+                    protectedMinutes, completion
+                };
+            }
+
+            if (currentEnergy === 'low' || pending.length >= 7) {
+                return {
+                    phase: 'decide', phaseLabel: '수습', intent: 'recover-plan',
+                    kicker: 'AUTONOMOUS RECOVERY · 과부하 수습',
+                    title: `오늘은 '${shutdown.nextTask?.task?.text || pending[0]?.text}'까지 확보하면 됩니다.`,
+                    copy: `핵심 ${shutdown.remainingMinimum.length}개만 남기고 저우선순위 ${shutdown.deferCandidates.length}개는 안전한 날짜로 이동할 수 있습니다.`,
+                    buttonLabel: '최소 성과선으로 일정 정리', tasks, pending, completed, shutdown, leak,
+                    protectedMinutes, completion
+                };
+            }
+
+            return {
+                phase: 'execute', phaseLabel: '실행', intent: 'execute-next',
+                kicker: 'JUST-IN-TIME · 지금 필요한 단 1가지',
+                title: shutdown.nextTask?.task?.text || pending[0]?.text || '오늘의 핵심 작업을 확인하세요.',
+                copy: shutdown.nextTask
+                    ? `${shutdown.nextTask.duration}분을 확보하면 최소 성과선에 가까워집니다. 나머지 목록은 지금 확인하지 않아도 됩니다.`
+                    : '지금 실행할 위치를 열어 바로 시작할 수 있습니다.',
+                buttonLabel: '지금 한 가지 실행하기', tasks, pending, completed, shutdown, leak,
+                protectedMinutes, completion
+            };
+        }
+
+        function setCompletionView(viewName) {
+            const allowed = ['now', 'today', 'report'];
+            const nextView = allowed.includes(viewName) ? viewName : 'now';
+            document.body.dataset.completionView = nextView;
+            document.querySelectorAll('[data-completion-view-button]').forEach((button) => {
+                const active = button.dataset.completionViewButton === nextView;
+                button.classList.toggle('is-active', active);
+                button.setAttribute('aria-pressed', String(active));
+            });
+            document.querySelectorAll('[data-completion-view-panel]').forEach((panel) => {
+                panel.hidden = panel.dataset.completionViewPanel !== nextView;
+            });
+            renderCompletionOperatingSystem();
+        }
+
+        function setCompletionLegacyOpen(open, targetId = '') {
+            const shell = document.getElementById('completion-legacy-shell');
+            const button = document.getElementById('completion-open-full');
+            if (!shell || !button) return;
+            shell.classList.toggle('is-open', open);
+            button.setAttribute('aria-expanded', String(open));
+            button.textContent = open ? '전체 운영 화면 접기' : '전체 운영 화면 열기';
+            if (open && targetId) {
+                window.requestAnimationFrame(() => {
+                    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            }
+        }
+
+        function openCompletionAssistant(message) {
+            setCompletionLegacyOpen(true);
+            window.setTimeout(() => openPersonalOsAssistantRequest(message), 40);
+        }
+
+        function runCompletionPrimaryAction() {
+            const state = getCompletionOperatingState();
+            if (state.intent === 'open-assistant') {
+                openCompletionAssistant('자료에서 해야 할 일, 마감, 우선순위와 현실적인 예상 시간을 추출해 오늘 일정으로 정리해줘.');
+                return;
+            }
+            if (state.intent === 'finish-day' || state.intent === 'recover-plan') {
+                setCompletionLegacyOpen(true);
+                applyOptimalShutdownPlan();
+                return;
+            }
+            if (state.intent === 'execute-next') {
+                setCompletionLegacyOpen(true);
+                focusOptimalShutdownNextTask();
+                return;
+            }
+            setCompletionLegacyOpen(true, 'plan-panel');
+        }
+
+        function renderCompletionOperatingSystem() {
+            const root = document.getElementById('completion-os');
+            if (!root) return;
+            const state = getCompletionOperatingState();
+            completionPrimaryIntent = state.intent;
+
+            document.getElementById('completion-decision-kicker').textContent = state.kicker;
+            document.getElementById('completion-decision-title').textContent = state.title;
+            document.getElementById('completion-decision-copy').textContent = state.copy;
+            document.getElementById('completion-primary-action').textContent = state.buttonLabel;
+            document.getElementById('completion-current-phase').textContent = state.phaseLabel;
+            document.getElementById('completion-pending-count').textContent = `${state.pending.length}개`;
+            document.getElementById('completion-protected-time').textContent = `${state.protectedMinutes}분`;
+
+            const phaseOrder = ['dump', 'decide', 'execute', 'finish'];
+            const currentIndex = phaseOrder.indexOf(state.phase);
+            document.querySelectorAll('[data-completion-phase]').forEach((step) => {
+                const stepIndex = phaseOrder.indexOf(step.dataset.completionPhase);
+                step.classList.toggle('is-current', stepIndex === currentIndex);
+                step.classList.toggle('is-done', stepIndex < currentIndex);
+            });
+
+            const minimumKeys = new Set(state.shutdown.minimumTasks.map((item) => item.taskKey));
+            const sortedTasks = state.tasks.map((task, index) => ({ task, index })).sort((a, b) => {
+                const aKey = getExecutionTwinTaskKey(currentDay, a.task.text);
+                const bKey = getExecutionTwinTaskKey(currentDay, b.task.text);
+                return Number(a.task.done) - Number(b.task.done)
+                    || Number(minimumKeys.has(bKey)) - Number(minimumKeys.has(aKey));
+            });
+            const todayList = document.getElementById('completion-today-list');
+            todayList.innerHTML = sortedTasks.length ? sortedTasks.map(({ task, index }, order) => {
+                const taskKey = getExecutionTwinTaskKey(currentDay, task.text);
+                const duration = Math.max(5, Number(task.durationMinutes) || 30);
+                const status = task.done ? '완료' : minimumKeys.has(taskKey) ? '핵심 성과선' : '후순위';
+                return `<div class="completion-today-item ${task.done ? 'is-done' : ''}">
+                    <span class="completion-today-index">${String(order + 1).padStart(2, '0')}</span>
+                    <div><strong>${escaped(task.text)}</strong><br><small>${status} · 예상 ${duration}분</small></div>
+                    <button class="completion-inline-button" type="button" data-completion-task-index="${index}">${task.done ? '확인' : '열기'}</button>
+                </div>`;
+            }).join('') : '<div class="completion-today-item"><span class="completion-today-index">+</span><div><strong>아직 등록된 일정이 없습니다.</strong><br><small>자료만 전달하면 AI가 실행 큐를 만듭니다.</small></div><button class="completion-inline-button" type="button" data-completion-open-assistant="true">자료 전달</button></div>';
+
+            document.getElementById('completion-report-completion').textContent = `${state.completion}%`;
+            document.getElementById('completion-report-saved').textContent = `${state.leak.savedMinutes + (state.shutdown.activeToday?.protectedMinutes || 0)}분`;
+            document.getElementById('completion-report-confidence').textContent = `${state.shutdown.confidence}%`;
+            document.getElementById('completion-evidence-body').innerHTML = `
+                <strong>${escaped(state.shutdown.verdict)}</strong><br>
+                마감·긴급도·목표 영향·예상 소요 시간·현재 컨디션과 실제 실행 기록 ${state.shutdown.measuredCount}건을 함께 계산했습니다.
+                최소 성과선은 ${state.shutdown.targetCount}개이며, 지금 판단의 신뢰도는 ${state.shutdown.confidence}%입니다.
+                일정 변경은 승인 후 적용되고 기존 자동 정리 기록에서 되돌릴 수 있습니다.`;
+        }
+
+        function setupCompletionOperatingSystem() {
+            document.querySelectorAll('[data-completion-view-button]').forEach((button) => {
+                button.addEventListener('click', () => setCompletionView(button.dataset.completionViewButton));
+            });
+            document.getElementById('completion-primary-action')?.addEventListener('click', runCompletionPrimaryAction);
+            document.getElementById('completion-open-full')?.addEventListener('click', () => {
+                const shell = document.getElementById('completion-legacy-shell');
+                setCompletionLegacyOpen(!shell?.classList.contains('is-open'));
+            });
+            document.getElementById('completion-today-list')?.addEventListener('click', (event) => {
+                const assistantButton = event.target.closest('[data-completion-open-assistant]');
+                if (assistantButton) {
+                    openCompletionAssistant('자료를 분석해서 오늘 실행할 일정으로 정리해줘.');
+                    return;
+                }
+                const taskButton = event.target.closest('[data-completion-task-index]');
+                if (!taskButton) return;
+                const task = plans[currentDay]?.tasks?.[Number(taskButton.dataset.completionTaskIndex)];
+                setCompletionLegacyOpen(true);
+                if (task?.text) window.setTimeout(() => scrollToDailyBriefingAppliedLocation(task.text), 40);
+            });
+        }
+
         function getOptimalShutdownQuietUntil() {
             const nextMorning = new Date();
             nextMorning.setDate(nextMorning.getDate() + 1);
@@ -11592,6 +12130,7 @@
             const focusMetrics = getFocusEfficiency(currentDay);
             const godMetrics = getGodScoreMetrics(currentDay);
             const fakeWorkWarning = getFakeWorkWarning(currentDay);
+            renderCompletionOperatingSystem();
             const hasMinimumRoutine = plans[currentDay].tasks.some((task) => task.done);
             const retrospectiveCard = latestRetrospective ? `
                 <section class="aside-card">
@@ -13713,6 +14252,7 @@
             renderCalendarPreview(lines, { expand: calendarPreview.classList.contains('expanded') });
         });
         updateModeHint();
+        setupCompletionOperatingSystem();
         updateDailyPlaceholder();
         updateWeekFlowBackground(currentDay);
         applyPersonalizedBriefingProfileToUI();
