@@ -36,6 +36,9 @@ export function CobeGlobeLabels({
   markers = defaultMarkers,
   className = "",
   speed = 0.0022,
+  expanded,
+  ariaLabel = "Noa 내부 상태 열기",
+  onActivate,
 }) {
   const canvasRef = useRef(null);
   const pointerStartRef = useRef(null);
@@ -45,34 +48,60 @@ export function CobeGlobeLabels({
   const [supportsAnchors, setSupportsAnchors] = useState(true);
 
   const handlePointerDown = useCallback((event) => {
-    pointerStartRef.current = { x: event.clientX, y: event.clientY };
+    pointerStartRef.current = {
+      x: event.clientX,
+      y: event.clientY,
+      moved: false,
+    };
     pausedRef.current = true;
     event.currentTarget.setPointerCapture?.(event.pointerId);
   }, []);
 
   const finishInteraction = useCallback((event) => {
-    if (pointerStartRef.current) {
+    const pointerStart = pointerStartRef.current;
+
+    if (pointerStart) {
       rotationRef.current.phi += dragRef.current.phi;
       rotationRef.current.theta = Math.max(
         -0.55,
         Math.min(0.55, rotationRef.current.theta + dragRef.current.theta),
       );
+
+      if (!pointerStart.moved && event?.type === "pointerup") {
+        onActivate?.();
+      }
     }
 
     dragRef.current = { phi: 0, theta: 0 };
     pointerStartRef.current = null;
     pausedRef.current = false;
     event?.currentTarget?.releasePointerCapture?.(event.pointerId);
-  }, []);
+  }, [onActivate]);
 
   const handlePointerMove = useCallback((event) => {
     if (!pointerStartRef.current) return;
 
+    const horizontalDistance = event.clientX - pointerStartRef.current.x;
+    const verticalDistance = event.clientY - pointerStartRef.current.y;
+    pointerStartRef.current.moved =
+      pointerStartRef.current.moved ||
+      Math.hypot(horizontalDistance, verticalDistance) > 7;
+
     dragRef.current = {
-      phi: (event.clientX - pointerStartRef.current.x) / 220,
-      theta: (event.clientY - pointerStartRef.current.y) / 500,
+      phi: horizontalDistance / 220,
+      theta: verticalDistance / 500,
     };
   }, []);
+
+  const handleKeyDown = useCallback(
+    (event) => {
+      if (!onActivate || (event.key !== "Enter" && event.key !== " ")) return;
+
+      event.preventDefault();
+      onActivate();
+    },
+    [onActivate],
+  );
 
   useEffect(() => {
     setSupportsAnchors(
@@ -156,7 +185,14 @@ export function CobeGlobeLabels({
   }, [markers, speed]);
 
   return (
-    <div className={`cobe-globe ${className}`.trim()}>
+    <div
+      className={`cobe-globe ${onActivate ? "cobe-globe-actionable" : ""} ${className}`.trim()}
+      role={onActivate ? "button" : undefined}
+      tabIndex={onActivate ? 0 : undefined}
+      aria-label={onActivate ? ariaLabel : undefined}
+      aria-expanded={onActivate ? expanded : undefined}
+      onKeyDown={handleKeyDown}
+    >
       <canvas
         ref={canvasRef}
         className="cobe-globe-canvas"

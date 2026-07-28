@@ -1,5 +1,5 @@
 {
-  "name": "robot-internal-state-agent",
+  "name": "noa-internal-state",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -14,7 +14,7 @@
     "preview": "vite preview",
     "test": "vitest",
     "test:run": "vitest run",
-    "test:e2e": "vitest run frontend/src/e2e/agentInteraction.e2e.test.jsx",
+    "test:e2e": "vitest run frontend/src/e2e/noaDashboard.e2e.test.jsx",
     "test:supabase": "node scripts/verify-supabase-connection.mjs",
     "test:agent-schema": "node scripts/verify-agent-state-schema.mjs",
     "db:push:dry-run": "supabase db push --dry-run",
