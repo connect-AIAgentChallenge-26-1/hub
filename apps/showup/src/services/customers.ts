@@ -10,6 +10,7 @@ import {
   where,
   orderBy,
   serverTimestamp,
+  Timestamp,
 } from 'firebase/firestore';
 import { db } from '../lib/firestore';
 import type { Customer, CustomerSearchResult, Incident, Reservation, RiskLevel } from '../types/schema';
@@ -28,14 +29,20 @@ interface CustomerCreateInput {
 function enrichCustomer(id: string, storeId: string, data: Partial<Customer>): CustomerSearchResult {
   const phone = data.phone || ''
   const name = data.name || ''
-  const riskStats = data.riskStats ?? {
-    totalVisits: 0,
-    noShowCount: 0,
-    lateCancelCount: 0,
-    incidentCounts: { abuse: 0, dispute: 0, late: 0, unreasonable: 0 },
-    score: 0,
-    lastNoShowAt: null,
-    updatedAt: null,
+  const riskStats = {
+    totalVisits: data.riskStats?.totalVisits ?? 0,
+    noShowCount: data.riskStats?.noShowCount ?? 0,
+    lateCancelCount: data.riskStats?.lateCancelCount ?? 0,
+    incidentCounts: {
+      abuse: data.riskStats?.incidentCounts?.abuse ?? 0,
+      dispute: data.riskStats?.incidentCounts?.dispute ?? 0,
+      late: data.riskStats?.incidentCounts?.late ?? 0,
+      unreasonable: data.riskStats?.incidentCounts?.unreasonable ?? 0,
+    },
+    score: data.riskStats?.score ?? 0,
+    lastNoShowAt: data.riskStats?.lastNoShowAt ?? null,
+    // Legacy documents may lack updatedAt. Keep returned shape type-safe.
+    updatedAt: data.riskStats?.updatedAt ?? Timestamp.fromMillis(0),
   }
   const riskLevel: RiskLevel = resolveRiskLevel(riskStats.score, riskStats.incidentCounts);
   const alert = createRiskAlertPayload(riskStats);
@@ -44,7 +51,7 @@ function enrichCustomer(id: string, storeId: string, data: Partial<Customer>): C
     storeId,
     name,
     phoneMasked: phone ? maskPhone(phone) : '',
-    riskStats: riskStats as Customer['riskStats'],
+    riskStats,
     riskLevel,
     alert: alert.show,
   };
