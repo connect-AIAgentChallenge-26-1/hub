@@ -1,8 +1,16 @@
 import { getDocument } from "./documents";
 import { getFileChanges } from "./fileChanges";
 
+export interface FileAgentContext {
+  text: string;
+  // path -> current full content, used both as prompt context ("here's what
+  // already exists") and as the baseline for the server-side diff computed
+  // in fileAgentChat.ts. Empty for a first-ever generation.
+  existingFiles: Record<string, string>;
+}
+
 export interface FileAgentPromptConfig {
-  gatherContext: () => Promise<string>;
+  gatherContext: () => Promise<FileAgentContext>;
   buildSystemInstruction: (context: string, questionCount: number) => string;
 }
 
@@ -18,8 +26,10 @@ const COMMON_RULES = `## 행동 지침
 - 아직 확인할 게 있으면 readyToGenerateFiles를 false로 두고 files는 비워두세요.
 - 준비되면 readyToGenerateFiles를 true로 설정하고, files 배열에 파일별로 분리해서
   응답하세요 — 하나의 뭉친 텍스트가 아니라 각 파일이 배열의 개별 항목이어야 합니다.
-- diff는 실제 unified diff 형식으로 작성하세요 (새 파일은 모든 줄이 +, 삭제는 모든 줄이 -,
-  수정은 변경된 줄만 +/-, 나머지는 공백 접두사).`;
+- newContent는 diff나 패치가 아니라 "그 파일의 새 전체 내용"이어야 합니다. 기존 파일을
+  수정하는 경우에도 바뀌지 않는 부분은 원본 내용 그대로 포함해서, 파일 전체가 그대로
+  덮어써도 되는 완결된 내용으로 응답하세요.
+- changeType이 "deleted"인 경우 newContent는 빈 문자열로 응답하세요.`;
 
 export const FILE_AGENT_PROMPTS: Record<string, FileAgentPromptConfig> = {
   "Code Generation Agent": {
@@ -29,7 +39,26 @@ export const FILE_AGENT_PROMPTS: Record<string, FileAgentPromptConfig> = {
         docContent(5),
         docContent(6),
       ]);
-      return `## 클래스 설계\n${classDesign || NO_DOC}\n\n## 프로젝트 구조 설계\n${projectStructure || NO_DOC}\n\n## ScriptableObject 설계\n${scriptableObjects || NO_DOC}`;
+
+      // Own step's prior turns (if any) act as "existing files" for follow-up
+      // edits within the same conversation — there is no real GitHub read
+      // here since these files haven't been committed anywhere yet (that's
+      // Day 13's job).
+      const priorFiles = await getFileChanges(7);
+      const existingFiles: Record<string, string> = {};
+      for (const f of priorFiles) existingFiles[f.path] = f.newContent;
+
+      const existingSection =
+        priorFiles.length > 0
+          ? `\n\n## 이전에 생성한 파일 (수정 요청이 없으면 그대로 유지)\n${priorFiles
+              .map((f) => `### ${f.path}\n${f.newContent}`)
+              .join("\n\n")}`
+          : "";
+
+      return {
+        text: `## 클래스 설계\n${classDesign || NO_DOC}\n\n## 프로젝트 구조 설계\n${projectStructure || NO_DOC}\n\n## ScriptableObject 설계\n${scriptableObjects || NO_DOC}${existingSection}`,
+        existingFiles,
+      };
     },
     buildSystemInstruction: (context, questionCount) => `당신은 GameForge Agent의 "Code Generation Agent"입니다.
 클래스 설계, 프로젝트 구조 설계, ScriptableObject 설계 문서를 바탕으로 실제 Unity C#
@@ -54,11 +83,18 @@ ${COMMON_RULES}`,
     gatherContext: async () => {
       const analysisReport = await docContent(0);
       const generatedFiles = await getFileChanges(7);
+      const existingFiles: Record<string, string> = {};
+      for (const f of generatedFiles) existingFiles[f.path] = f.newContent;
+
       const filesSummary =
         generatedFiles.length > 0
-          ? generatedFiles.map((f) => `### ${f.path} (${f.changeType})\n${f.diff}`).join("\n\n")
+          ? generatedFiles.map((f) => `### ${f.path} (${f.changeType})\n${f.newContent}`).join("\n\n")
           : "(7단계에서 생성된 코드가 아직 없습니다)";
-      return `## 정적 분석 리포트 (God Class / 중복 코드 블록)\n${analysisReport || NO_DOC}\n\n## 7단계에서 생성된 코드\n${filesSummary}`;
+
+      return {
+        text: `## 정적 분석 리포트 (God Class / 중복 코드 블록)\n${analysisReport || NO_DOC}\n\n## 7단계에서 생성된 코드 (현재 전체 내용)\n${filesSummary}`,
+        existingFiles,
+      };
     },
     buildSystemInstruction: (context, questionCount) => `당신은 GameForge Agent의 "Refactoring Agent"입니다.
 정적 분석 리포트(God Class 목록, 중복 코드 블록)와 7단계에서 생성된 코드를 바탕으로,
@@ -77,7 +113,8 @@ God Class를 어떤 기준으로 분리할지, 중복 블록을 공용 메서드
 - changeType은 "modified"(기존 파일 일부 변경) 또는 "deleted"(중복 제거로 파일
   자체가 필요 없어진 경우)를 사용하세요. 새 헬퍼 클래스가 꼭 필요하면 "new"도
   가능합니다.
-- diff는 7단계 코드를 기준으로 실제로 바뀌는 부분만 표현하세요.
+- newContent는 7단계 코드를 기준으로, 바뀌지 않는 부분까지 포함한 파일 전체 내용을
+  응답하세요.
 
 ${COMMON_RULES}`,
   },

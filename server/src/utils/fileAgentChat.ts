@@ -1,21 +1,36 @@
 import { GoogleGenAI, Type } from "@google/genai";
 import type { ChatMessage } from "./messages";
 import type { FileAgentPromptConfig } from "./fileAgentPrompts";
+import { computeUnifiedDiff } from "./diffCompute";
 
 const MODEL = "gemini-flash-latest";
 const MAX_RETRIES = 2; // total attempts = 1 + MAX_RETRIES
 
-export interface FileChangeDraft {
+// Raw shape the model itself produces — no diff, the model only ever states
+// the file's new full content.
+interface RawFileChangeDraft {
   path: string;
   changeType: "new" | "modified" | "deleted";
-  diff: string;
+  newContent: string;
   suggestedCommitMessage: string;
+}
+
+export interface FileChangeDraft extends RawFileChangeDraft {
+  // Computed here from (oldContent from gatherContext's existingFiles vs
+  // newContent) — never trusted from the model itself.
+  diff: string;
 }
 
 export interface FileAgentResult {
   reply: string;
   readyToGenerateFiles: boolean;
   files?: FileChangeDraft[];
+}
+
+interface RawFileAgentResult {
+  reply: string;
+  readyToGenerateFiles: boolean;
+  files?: RawFileChangeDraft[];
 }
 
 const RESPONSE_SCHEMA = {
@@ -31,10 +46,14 @@ const RESPONSE_SCHEMA = {
         properties: {
           path: { type: Type.STRING },
           changeType: { type: Type.STRING, enum: ["new", "modified", "deleted"] },
-          diff: { type: Type.STRING },
+          newContent: {
+            type: Type.STRING,
+            description:
+              "파일의 새 전체 내용 (패치나 일부분이 아니라 전체 파일 내용). deleted인 경우 빈 문자열.",
+          },
           suggestedCommitMessage: { type: Type.STRING },
         },
-        required: ["path", "changeType", "diff", "suggestedCommitMessage"],
+        required: ["path", "changeType", "newContent", "suggestedCommitMessage"],
       },
     },
   },
@@ -42,9 +61,10 @@ const RESPONSE_SCHEMA = {
 } as const;
 
 // Same structured-output approach as agentChat.ts, but the model has been
-// observed to occasionally truncate long multi-file JSON responses (diff
-// strings are long) — so unlike the single-document agents, this one retries
-// with an explicit "respond with valid JSON only" nudge before giving up.
+// observed to occasionally truncate long multi-file JSON responses (full
+// file contents are long) — so unlike the single-document agents, this one
+// retries with an explicit "respond with valid JSON only" nudge before
+// giving up.
 export async function askFileAgent(
   agentConfig: FileAgentPromptConfig,
   history: ChatMessage[],
@@ -57,8 +77,8 @@ export async function askFileAgent(
 
   const ai = new GoogleGenAI({ apiKey });
   const questionCount = history.filter((m) => m.from === "agent").length;
-  const context = await agentConfig.gatherContext();
-  const systemInstruction = agentConfig.buildSystemInstruction(context, questionCount);
+  const { text: contextText, existingFiles } = await agentConfig.gatherContext();
+  const systemInstruction = agentConfig.buildSystemInstruction(contextText, questionCount);
 
   const baseContents = [
     ...history.map((m) => ({
@@ -101,7 +121,13 @@ export async function askFileAgent(
         continue;
       }
 
-      return JSON.parse(response.text) as FileAgentResult;
+      const raw = JSON.parse(response.text) as RawFileAgentResult;
+      const files = raw.files?.map((f): FileChangeDraft => {
+        const oldContent = f.changeType === "new" ? "" : existingFiles[f.path] ?? "";
+        return { ...f, diff: computeUnifiedDiff(f.path, oldContent, f.newContent) };
+      });
+
+      return { reply: raw.reply, readyToGenerateFiles: raw.readyToGenerateFiles, files };
     } catch (err) {
       lastError = err;
     }
