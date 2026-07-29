@@ -133,38 +133,59 @@ def extract_date(text: str) -> Optional[str]:
     "마감", "접수 마감", "신청 마감" 키워드 근처 날짜를 우선 추출.
     범위 형식 (A ~ B)에서는 마지막 날짜 추출.
     """
-    # 패턴 1: "마감" 키워드 근처 날짜 찾기
-    deadline_pattern = r"[^.\n]*?마감[^.\n]*?(\d{4})-(\d{2})-(\d{2})|(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일"
-    for match in re.finditer(deadline_pattern, text, re.IGNORECASE):
-        if match.group(1):  # YYYY-MM-DD 형식
-            return f"{match.group(1)}-{match.group(2)}-{match.group(3)}"
-        elif match.group(4):  # YYYY년 MM월 DD일 형식
-            year, month, day = match.group(4), match.group(5), match.group(6)
-            return f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+    # 유효한 연도 범위 (2020-2030)
+    def is_valid_year(year: int) -> bool:
+        return 2020 <= year <= 2030
+
+    # 패턴 1: "마감" 키워드가 포함된 라인에서만 날짜 추출
+    lines = text.split('\n')
+    for line in lines:
+        if '마감' in line or '접수' in line or '신청' in line:
+            # YYYY-MM-DD 형식
+            match = re.search(r'(\d{4})-(\d{2})-(\d{2})', line)
+            if match:
+                year = int(match.group(1))
+                if is_valid_year(year):
+                    return f"{match.group(1)}-{match.group(2)}-{match.group(3)}"
+
+            # YYYY년 MM월 DD일 형식
+            match = re.search(r'(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일', line)
+            if match:
+                year = int(match.group(1))
+                if is_valid_year(year):
+                    month, day = match.group(2), match.group(3)
+                    return f"{year}-{month.zfill(2)}-{day.zfill(2)}"
 
     # 패턴 2: 범위 형식 (A ~ B에서 B 추출)
     range_matches = re.findall(r"(\d{4})-(\d{2})-(\d{2})\s*~\s*(\d{4})-(\d{2})-(\d{2})", text)
     if range_matches:
-        last_match = range_matches[-1]  # 마지막 범위
-        return f"{last_match[3]}-{last_match[4]}-{last_match[5]}"
+        # 유효한 범위 찾기 (마지막부터)
+        for match in reversed(range_matches):
+            year = int(match[3])
+            if is_valid_year(year):
+                return f"{match[3]}-{match[4]}-{match[5]}"
 
     # 패턴 3: 범위 형식 한글 (A년 B월 C일 ~ D년 E월 F일)
     range_matches = re.findall(r"(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일\s*~\s*(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일", text)
     if range_matches:
-        last_match = range_matches[-1]
-        year, month, day = last_match[3], last_match[4], last_match[5]
-        return f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+        # 유효한 범위 찾기 (마지막부터)
+        for match in reversed(range_matches):
+            year = int(match[3])
+            if is_valid_year(year):
+                return f"{year}-{match[4].zfill(2)}-{match[5].zfill(2)}"
 
-    # 패턴 4: 키워드 없으면 모든 날짜 중 첫 번째
-    match = re.search(r"(\d{4})-(\d{2})-(\d{2})", text)
-    if match:
-        return f"{match.group(1)}-{match.group(2)}-{match.group(3)}"
+    # 패턴 4: 일반 날짜 (2020-2030 범위의 첫 번째 유효한 날짜)
+    for match in re.finditer(r"(\d{4})-(\d{2})-(\d{2})", text):
+        year = int(match.group(1))
+        if is_valid_year(year):
+            return f"{match.group(1)}-{match.group(2)}-{match.group(3)}"
 
-    # 패턴 5: 한글 날짜 형식
-    match = re.search(r"(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일", text)
-    if match:
-        year, month, day = match.groups()
-        return f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+    # 패턴 5: 한글 날짜 형식 (유효한 연도만)
+    for match in re.finditer(r"(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일", text):
+        year = int(match.group(1))
+        if is_valid_year(year):
+            month, day = match.group(2), match.group(3)
+            return f"{year}-{month.zfill(2)}-{day.zfill(2)}"
 
     return None
 
