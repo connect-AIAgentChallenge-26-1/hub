@@ -7,7 +7,7 @@
 | # | 항목 | 상태 | 조치 |
 |---|------|------|------|
 | 1 | 수정 코드 프로덕션 미배포 | 미완료 | Hosting·Firestore Rules·Storage Rules 배포 후 핵심 플로우 재확인 |
-| 2 | 데모 영상·`demoVideoUrl` | 미완료 | 7/29 녹화·업로드 후 루트 `showcase/showcase.json` 갱신 |
+| 2 | 데모 영상·`demoVideoUrl` | ✅ 완료 | 4분 41초 영상 녹화·Google Drive 업로드·showcase.json 갱신 완료 |
 | 3 | 최종 push·PR | 미완료 | 7/29 밤 10시 전 제출 |
 
 ## P1 — 이번 감사에서 수정

@@ -111,12 +111,17 @@ stores/{storeId}/reservations/{reservationId}  ← customerId, date, time, statu
 - 전화번호 화면 표시는 항상 마스킹 (`010-****-1234`)
 - 가게 간 자동 공유 없음 — 고객 동의 기반 신뢰 프로필(Phase 2)로 설계
 
-## 제출 전 남은 작업 (7/29 밤 10시)
+## 데모 영상
 
-- 5분 미만 데모 영상 녹화·업로드
-- 루트 `showcase/showcase.json`의 빈 `demoVideoUrl` 갱신
+- **영상 URL**: https://drive.google.com/file/d/1LSXg9k79HuR2XfNzo5MOkky1zQopGHO0/view
+- 길이: 4분 41초 (5분 미만)
+- 음성 더빉 + 자막 burn-in 포함
+- 서비스 설명, 동작 시연, 기술적 특징, 문제해결 과정, Agent 활용 방식 포함
+
+## 남은 작업
+
 - 수정된 Hosting·Firestore Rules·Storage Rules 배포 후 프로덕션 재검증
-- 최종 push·PR 제출
+- 최종 push·PR 제출 (사용자 지시 시)
 
 ## 로드맵 (7/29 이후)
 
