@@ -1,8 +1,8 @@
 {
   "path": "docs/00_Analysis_Report.md",
-  "content": "# Analysis Report\n\n본 리포트는 정적 분석 기반 추정치이며, 완전한 컴파일 분석은 아닙니다.\n\n## 통계 요약\n- 클래스 의존성 수: 30\n- 중복 코드 블록 수: 1\n- 리팩토링 대상 수: 1\n\n## 상세 목록\n### 중복 코드 블록\n- PlayerController.Dash()와 EnemyController.Dash()가 거의 동일한 무적프레임 처리 로직을 중복 구현하고 있습니다.\n\n### 리팩토링 대상\n- PlayerController — God Class 의심, 메서드 35개 (기준: 30개 초과)",
-  "version": 3,
-  "updated_at": "2026-07-28T02:20:56.645Z",
+  "content": "# Analysis Report\n\n> 본 리포트는 정적 분석 기반 추정치이며, 완전한 컴파일 분석은 아닙니다.\n\n---\n\n## 통계 요약\n\n- **클래스 의존성 수 (참조/상속 관계 총합):** 26\n  - 상속 관계 (`baseTypes`): 총 2건 (`PlayerController`: 2건)\n  - 참조 관계 (`referencedTypes`): 총 24건 (`Broken`: 1건, `GameManager`: 8건, `PlayerController`: 15건)\n- **중복 코드 블록 수:** 0개\n- **리팩토링 대상 수:** 0개\n\n---\n\n## 상세 목록\n\n### 1. 중복 코드 블록\n- 탐지된 중복 코드 블록이 없습니다.\n\n### 2. 리팩토링 대상\n- 룰 기반으로 플래그된 리팩토링 대상이 없습니다.",
+  "version": 4,
+  "updated_at": "2026-07-29T12:34:57.078Z",
   "history": [
     {
       "content": "# Analysis Report\n\n본 리포트는 제공된 정적 분석 데이터를 바탕으로 작성되었습니다. 본 보고서에 포함된 내용은 정적 분석 기반 추정치이며, 완전한 컴파일 분석은 아닙니다.\n\n## 통계 요약\n\n- **클래스 의존성 수 (참조/상속 관계 총합)**: 26\n  - `Broken`: 1개 (참조 1)\n  - `GameManager`: 8개 (참조 8)\n  - `PlayerController`: 17개 (상속 2, 참조 15)\n- **중복 코드 블록 수**: 0개\n- **리팩토링 대상 수**: 0개\n\n## 상세 목록\n\n### 1. 중복 코드 블록\n- 탐지된 중복 코드 블록이 없습니다.\n\n### 2. 리팩토링 대상\n- 룰 기반으로 플래그된 리팩토링 대상이 없습니다.",
@@ -13,6 +13,11 @@
       "content": "# Analysis Report\n\n본 리포트는 정적 분석 기반 추정치이며, 완전한 컴파일 분석은 아닙니다.\n\n## 통계 요약\n\n- **클래스 의존성 수 (참조/상속 관계 총합)**: 26개 (상속 관계 2개 + 참조 관계 24개)\n  - `Broken`: 1개 (참조 1)\n  - `GameManager`: 8개 (참조 8)\n  - `PlayerController`: 17개 (상속 2, 참조 15)\n- **중복 코드 블록 수**: 0개\n- **리팩토링 대상 수**: 0개\n\n---\n\n## 상세 목록\n\n### 중복 코드 블록\n- 탐지된 중복 코드 블록이 없습니다.\n\n### 리팩토링 대상\n- 룰 기반으로 플래그된 리팩토링 대상이 없습니다.",
       "version": 2,
       "updated_at": "2026-07-26T02:37:27.659Z"
+    },
+    {
+      "content": "# Analysis Report\n\n본 리포트는 정적 분석 기반 추정치이며, 완전한 컴파일 분석은 아닙니다.\n\n## 통계 요약\n- 클래스 의존성 수: 30\n- 중복 코드 블록 수: 1\n- 리팩토링 대상 수: 1\n\n## 상세 목록\n### 중복 코드 블록\n- PlayerController.Dash()와 EnemyController.Dash()가 거의 동일한 무적프레임 처리 로직을 중복 구현하고 있습니다.\n\n### 리팩토링 대상\n- PlayerController — God Class 의심, 메서드 35개 (기준: 30개 초과)",
+      "version": 3,
+      "updated_at": "2026-07-28T02:20:56.645Z"
     }
   ]
 }

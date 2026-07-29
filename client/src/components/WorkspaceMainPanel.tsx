@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import ChatThread from "./ChatThread";
 import ChatInput from "./ChatInput";
 import MarkdownViewer from "./MarkdownViewer";
 import MarkdownEditor from "./MarkdownEditor";
-import { API_BASE_URL, type Step, type ChatMessage, type DocumentRecord } from "../lib/api";
+import FileChangeList from "./FileChangeList";
+import DiffViewer from "./DiffViewer";
+import { API_BASE_URL, type Step, type ChatMessage, type DocumentRecord, type FileChange } from "../lib/api";
 
 const STATUS_BADGE: Record<Step["status"], { label: string; className: string }> = {
   done: { label: "완료", className: "badge success" },
@@ -11,13 +13,21 @@ const STATUS_BADGE: Record<Step["status"], { label: string; className: string }>
   pending: { label: "대기", className: "badge" },
 };
 
+// Which Steps produce a file-change array instead of a single Markdown
+// document — mirrors the server's FILE_AGENT_PROMPTS registry key set
+// (fileAgentPrompts.ts). Branches on agent_name, never on step id.
+const FILE_AGENT_NAMES = new Set(["Code Generation Agent", "Refactoring Agent"]);
+
 interface Props {
   step: Step;
   onStepsRefreshNeeded: () => void;
 }
 
 export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props) {
+  const isFileAgent = FILE_AGENT_NAMES.has(step.agent_name);
+
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [document, setDocument] = useState<DocumentRecord | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [sending, setSending] = useState(false);
@@ -26,17 +36,54 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
   const [draft, setDraft] = useState("");
   const [approving, setApproving] = useState(false);
 
+  const [fileChanges, setFileChanges] = useState<FileChange[]>([]);
+  const [selectedPath, setSelectedPath] = useState<string | null>(null);
+  const [checkedPaths, setCheckedPaths] = useState<Set<string>>(new Set());
+  const [commitMsgDrafts, setCommitMsgDrafts] = useState<Record<string, string>>({});
+  const [committing, setCommitting] = useState(false);
+  const [commitError, setCommitError] = useState<string | null>(null);
+
+  function applyFileChanges(files: FileChange[]) {
+    setFileChanges(files);
+    setCheckedPaths(new Set(files.filter((f) => !f.approved).map((f) => f.path)));
+    setCommitMsgDrafts(Object.fromEntries(files.map((f) => [f.path, f.suggestedCommitMessage])));
+    setSelectedPath((prev) => (prev && files.some((f) => f.path === prev) ? prev : files[0]?.path ?? null));
+  }
+
   useEffect(() => {
     setLoading(true);
+    setLoadError(null);
+    if (isFileAgent) {
+      Promise.all([
+        fetch(`${API_BASE_URL}/api/steps/${step.id}/file-changes`).then((res) => res.json()),
+        fetch(`${API_BASE_URL}/api/chat/${step.id}/messages`).then((res) => res.json()),
+      ])
+        .then(([files, msgs]: [FileChange[], ChatMessage[]]) => {
+          applyFileChanges(files);
+          setMessages(msgs);
+        })
+        .catch(() => setLoadError("이 단계를 불러오지 못했습니다. 다시 시도해주세요."))
+        .finally(() => setLoading(false));
+      return;
+    }
+
     Promise.all([
       fetch(`${API_BASE_URL}/api/documents/${step.id}`).then((res) => (res.ok ? res.json() : null)),
       fetch(`${API_BASE_URL}/api/chat/${step.id}/messages`).then((res) => res.json()),
-    ]).then(([doc, msgs]: [DocumentRecord | null, ChatMessage[]]) => {
-      setDocument(doc);
-      setMessages(msgs);
-      setLoading(false);
-    });
+    ])
+      .then(([doc, msgs]: [DocumentRecord | null, ChatMessage[]]) => {
+        setDocument(doc);
+        setMessages(msgs);
+      })
+      .catch(() => setLoadError("이 단계를 불러오지 못했습니다. 다시 시도해주세요."))
+      .finally(() => setLoading(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step.id]);
+
+  const selectedFile = useMemo(
+    () => fileChanges.find((f) => f.path === selectedPath) ?? null,
+    [fileChanges, selectedPath]
+  );
 
   async function handleSend(text: string) {
     setChatError(null);
@@ -62,6 +109,10 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
       if (data.document) {
         setDocument(data.document);
         onStepsRefreshNeeded(); // progress_pct depends on the new document's checklist
+      }
+      if (data.files) {
+        applyFileChanges(data.files);
+        onStepsRefreshNeeded(); // progress_pct depends on the new files' approved count
       }
     } catch (err) {
       setChatError(
@@ -96,10 +147,61 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
   async function handleApprove() {
     setApproving(true);
     try {
-      await fetch(`${API_BASE_URL}/api/steps/${step.id}/approve`, { method: "POST" });
+      const res = await fetch(`${API_BASE_URL}/api/steps/${step.id}/approve`, { method: "POST" });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setChatError(data.error ?? "Approve에 실패했습니다.");
+        return;
+      }
       onStepsRefreshNeeded();
     } finally {
       setApproving(false);
+    }
+  }
+
+  function handleToggleFile(path: string) {
+    setCheckedPaths((prev) => {
+      const next = new Set(prev);
+      if (next.has(path)) next.delete(path);
+      else next.add(path);
+      return next;
+    });
+  }
+
+  function handleDeselectAll() {
+    setCheckedPaths(new Set());
+  }
+
+  async function handleCommitSelected() {
+    if (checkedPaths.size === 0) return;
+    setCommitting(true);
+    setCommitError(null);
+    try {
+      const files = Array.from(checkedPaths).map((path) => ({
+        path,
+        commitMessage: commitMsgDrafts[path] ?? "",
+      }));
+      const res = await fetch(`${API_BASE_URL}/api/repo/${step.id}/commit-batch`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ files }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "commit failed");
+
+      applyFileChanges(data.files);
+      if (data.failed?.length > 0) {
+        setCommitError(
+          `${data.failed.length}개 파일 커밋 실패: ${data.failed.map((f: { path: string; error: string }) => `${f.path} (${f.error})`).join(", ")}`
+        );
+      }
+      onStepsRefreshNeeded(); // progress_pct depends on the newly-approved files
+    } catch (err) {
+      setCommitError(
+        err instanceof Error && err.message !== "commit failed" ? err.message : "커밋에 실패했습니다. 다시 시도해주세요."
+      );
+    } finally {
+      setCommitting(false);
     }
   }
 
@@ -117,6 +219,23 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
 
       {loading ? (
         <div style={{ color: "var(--text-dim)" }}>불러오는 중…</div>
+      ) : loadError ? (
+        <div style={{ color: "var(--red)", fontSize: 13 }}>{loadError}</div>
+      ) : step.status === "done" && isFileAgent ? (
+        <div>
+          <label className="label-mono">커밋된 파일</label>
+          {fileChanges.length === 0 ? (
+            <div style={{ color: "var(--text-mute)", fontSize: 13 }}>파일이 없습니다.</div>
+          ) : (
+            <FileChangeList
+              files={fileChanges}
+              checkedPaths={new Set(fileChanges.filter((f) => f.approved).map((f) => f.path))}
+              selectedPath={selectedPath}
+              onToggle={() => {}}
+              onSelect={setSelectedPath}
+            />
+          )}
+        </div>
       ) : step.status === "done" ? (
         <div>
           <label className="label-mono">문서</label>
@@ -147,37 +266,67 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
           </div>
           {chatError && <div style={{ color: "var(--red)", fontSize: 12.5 }}>{chatError}</div>}
 
-          <div>
-            <div className="md-preview-head">
-              <span className="path">{document?.path ?? "문서 없음"}</span>
-              {document && !isEditing && (
-                <span
-                  onClick={handleEdit}
-                  style={{ color: "var(--text-dim)", cursor: "pointer" }}
-                  title="원문 수정"
-                >
-                  ✎ 수정
-                </span>
+          {isFileAgent ? (
+            fileChanges.length === 0 ? (
+              <div style={{ color: "var(--text-mute)", fontSize: 13 }}>
+                아직 제안된 파일이 없습니다. 대화를 통해 파일 생성을 요청해보세요.
+              </div>
+            ) : (
+              <div className="commit-shell">
+                <FileChangeList
+                  files={fileChanges}
+                  checkedPaths={checkedPaths}
+                  selectedPath={selectedPath}
+                  onToggle={handleToggleFile}
+                  onSelect={setSelectedPath}
+                />
+                <DiffViewer
+                  file={selectedFile}
+                  commitMessage={selectedFile ? commitMsgDrafts[selectedFile.path] ?? "" : ""}
+                  onCommitMessageChange={(value) =>
+                    selectedFile && setCommitMsgDrafts((prev) => ({ ...prev, [selectedFile.path]: value }))
+                  }
+                  checkedCount={checkedPaths.size}
+                  onDeselectAll={handleDeselectAll}
+                  onCommitSelected={handleCommitSelected}
+                  committing={committing}
+                  commitError={commitError}
+                />
+              </div>
+            )
+          ) : (
+            <div>
+              <div className="md-preview-head">
+                <span className="path">{document?.path ?? "문서 없음"}</span>
+                {document && !isEditing && (
+                  <span
+                    onClick={handleEdit}
+                    style={{ color: "var(--text-dim)", cursor: "pointer" }}
+                    title="원문 수정"
+                  >
+                    ✎ 수정
+                  </span>
+                )}
+              </div>
+              {!document ? (
+                <div style={{ color: "var(--text-mute)", fontSize: 13 }}>
+                  아직 문서가 없습니다. 대화를 통해 정보가 모이면 자동으로 생성됩니다.
+                </div>
+              ) : isEditing ? (
+                <>
+                  <MarkdownEditor value={draft} onChange={setDraft} />
+                  <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginTop: 8 }}>
+                    <button onClick={handleCancel}>취소</button>
+                    <button className="primary" onClick={handleSave}>
+                      저장
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <MarkdownViewer content={document.content} />
               )}
             </div>
-            {!document ? (
-              <div style={{ color: "var(--text-mute)", fontSize: 13 }}>
-                아직 문서가 없습니다. 대화를 통해 정보가 모이면 자동으로 생성됩니다.
-              </div>
-            ) : isEditing ? (
-              <>
-                <MarkdownEditor value={draft} onChange={setDraft} />
-                <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginTop: 8 }}>
-                  <button onClick={handleCancel}>취소</button>
-                  <button className="primary" onClick={handleSave}>
-                    저장
-                  </button>
-                </div>
-              </>
-            ) : (
-              <MarkdownViewer content={document.content} />
-            )}
-          </div>
+          )}
 
           <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginTop: "auto" }}>
             <button className="primary" disabled={approving} onClick={handleApprove}>

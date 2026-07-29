@@ -1,5 +1,7 @@
 import { Router } from "express";
 import { getSession } from "../utils/session";
+import { getRepoTarget, putFileContent, deleteFile } from "../utils/github";
+import { getFileChanges, updateFileChanges } from "../utils/fileChanges";
 
 const router = Router();
 
@@ -77,6 +79,74 @@ router.get("/:owner/:repo/branches", async (req, res) => {
 
   const branches = (await ghRes.json()) as GithubBranch[];
   res.json(branches.map((b) => b.name));
+});
+
+interface CommitBatchRequest {
+  files?: Array<{ path: string; commitMessage: string }>;
+}
+
+interface CommitResult {
+  path: string;
+  commitSha: string | null;
+}
+
+interface CommitFailure {
+  path: string;
+  error: string;
+}
+
+// Commits the caller's selected subset of a Step's file-changes to the
+// connected repo, one file per commit, in the order given. newContent is
+// always written in full (never a patch/diff application). Files left
+// unchecked simply aren't included in `files` and stay pending_changes —
+// nothing here needs to know about them.
+router.post("/:stepId/commit-batch", async (req, res) => {
+  const stepId = Number(req.params.stepId);
+  if (!Number.isInteger(stepId)) {
+    return res.status(400).json({ error: "Invalid step id." });
+  }
+
+  const { files } = req.body as CommitBatchRequest;
+  if (!files || files.length === 0) {
+    return res.status(400).json({ error: "files is required and must be a non-empty array." });
+  }
+
+  const target = await getRepoTarget();
+  if (!target) {
+    return res.status(401).json({ error: "Not logged in, or no repository connected yet." });
+  }
+
+  const stored = await getFileChanges(stepId);
+  const committed: CommitResult[] = [];
+  const failed: CommitFailure[] = [];
+
+  // Sequential on purpose — each commit builds on the repo state left by the
+  // previous one, and errors need to be attributable to a single file.
+  for (const { path, commitMessage } of files) {
+    const record = stored.find((f) => f.path === path);
+    if (!record) {
+      failed.push({ path, error: "이 단계의 file-changes 목록에서 해당 경로를 찾을 수 없습니다." });
+      continue;
+    }
+
+    try {
+      if (record.changeType === "deleted") {
+        const result = await deleteFile(target, path, commitMessage);
+        committed.push({ path, commitSha: result?.commitSha ?? null });
+      } else {
+        const result = await putFileContent(target, path, record.newContent, commitMessage);
+        committed.push({ path, commitSha: result.commitSha });
+      }
+    } catch (err) {
+      failed.push({ path, error: err instanceof Error ? err.message : String(err) });
+    }
+  }
+
+  const committedPaths = new Set(committed.map((c) => c.path));
+  const updatedFiles = stored.map((f) => (committedPaths.has(f.path) ? { ...f, approved: true } : f));
+  await updateFileChanges(stepId, updatedFiles);
+
+  res.json({ committed, failed, files: updatedFiles });
 });
 
 export default router;

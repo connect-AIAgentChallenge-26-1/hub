@@ -4,6 +4,8 @@ import { getDocument } from "../utils/documents";
 import { calculateChecklistProgress } from "../utils/checklist";
 import { getFileChanges } from "../utils/fileChanges";
 import { FILE_AGENT_PROMPTS } from "../utils/fileAgentPrompts";
+import { AGENT_PROMPTS } from "../utils/agentPrompts";
+import { getRepoTarget, putFileContent } from "../utils/github";
 import { getSteps, STEPS_FILE, type Step } from "../utils/steps";
 
 const router = Router();
@@ -37,7 +39,10 @@ router.get("/:stepId/file-changes", async (req, res) => {
   res.json(await getFileChanges(req.params.stepId));
 });
 
-// Local status transition only — no GitHub commit here (that's a later sprint).
+// For a document-producing Step, Approve now also commits the doc to the
+// repo before flipping local status — file-producing Steps (Code
+// Generation/Refactoring) are committed separately via
+// POST /api/repo/:stepId/commit-batch, so this is a no-op for those.
 router.post("/:stepId/approve", async (req, res) => {
   const stepId = Number(req.params.stepId);
   if (!Number.isInteger(stepId)) {
@@ -45,8 +50,25 @@ router.post("/:stepId/approve", async (req, res) => {
   }
 
   const steps = await getSteps();
-  if (!steps.some((s) => s.id === stepId)) {
+  const step = steps.find((s) => s.id === stepId);
+  if (!step) {
     return res.status(404).json({ error: "Step not found." });
+  }
+
+  const docAgentConfig = AGENT_PROMPTS[step.agent_name];
+  if (docAgentConfig) {
+    const doc = await getDocument(stepId);
+    if (doc) {
+      const target = await getRepoTarget();
+      if (!target) {
+        return res.status(401).json({ error: "Not logged in, or no repository connected yet." });
+      }
+      try {
+        await putFileContent(target, doc.path, doc.content, `docs: update ${doc.path}`);
+      } catch (err) {
+        return res.status(500).json({ error: err instanceof Error ? err.message : String(err) });
+      }
+    }
   }
 
   const updated = steps.map((s): Step => {

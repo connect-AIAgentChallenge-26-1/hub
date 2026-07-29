@@ -17,11 +17,13 @@ export default function WorkspacePage() {
   const [steps, setSteps] = useState<Step[]>([]);
   const [project, setProject] = useState<ProjectInfo | null>(null);
   const [selectedStepId, setSelectedStepId] = useState<number | null>(null);
+  const [stepsError, setStepsError] = useState<string | null>(null);
 
   const refreshSteps = useCallback(() => {
     fetch(`${API_BASE_URL}/api/steps`)
       .then((res) => res.json())
-      .then((data: Step[]) => setSteps(data));
+      .then((data: Step[]) => setSteps(data))
+      .catch(() => setStepsError("단계 목록을 불러오지 못했습니다. 새로고침 후 다시 시도해주세요."));
   }, []);
 
   useEffect(() => {
@@ -31,7 +33,8 @@ export default function WorkspacePage() {
         setSteps(data);
         const firstClickable = data.find((s) => s.status === "active" || s.status === "done");
         if (firstClickable) setSelectedStepId(firstClickable.id);
-      });
+      })
+      .catch(() => setStepsError("단계 목록을 불러오지 못했습니다. 새로고침 후 다시 시도해주세요."));
 
     fetch(`${API_BASE_URL}/api/analysis/project`)
       .then((res) => (res.ok ? res.json() : null))
@@ -53,7 +56,9 @@ export default function WorkspacePage() {
         />
 
         <div className="ws-main">
-          {!selectedStep ? (
+          {stepsError ? (
+            <div style={{ color: "var(--red)", fontSize: 13 }}>{stepsError}</div>
+          ) : !selectedStep ? (
             <div style={{ color: "var(--text-dim)" }}>표시할 단계가 없습니다.</div>
           ) : (
             // key forces a clean remount on step switch, so unsaved edits /

@@ -368,3 +368,143 @@ pre.code {
   font-size: 11px;
   color: var(--text-mute);
 }
+
+/* Commit review / diff screen */
+.commit-shell {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 420px;
+}
+.file-list {
+  width: 300px;
+  flex-shrink: 0;
+  background: var(--panel);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+}
+.file-list-head {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.file-row {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.file-row:hover {
+  background: var(--panel-3);
+}
+.file-row.selected-file {
+  background: var(--panel-3);
+  border-left: 2px solid var(--teal);
+}
+.file-row input[type="checkbox"] {
+  margin-top: 3px;
+  accent-color: var(--teal);
+}
+.file-row-main {
+  flex: 1;
+  min-width: 0;
+}
+.file-row-main .file-path {
+  font-family: var(--mono);
+  font-size: 12px;
+  word-break: break-all;
+}
+.file-commit-msg {
+  font-size: 11.5px;
+  color: var(--text-dim);
+  margin-top: 3px;
+}
+.change-badge {
+  font-size: 10px;
+  font-family: var(--mono);
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.change-badge.new {
+  background: var(--teal-bg);
+  color: var(--teal);
+}
+.change-badge.modified {
+  background: var(--amber-bg);
+  color: var(--amber);
+}
+.change-badge.deleted {
+  background: var(--red-bg);
+  color: var(--red);
+}
+.diff-pane {
+  flex: 1;
+  padding: 20px 24px;
+  background: var(--panel-2);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+.diff-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.diff-head .path {
+  font-family: var(--mono);
+  font-size: 13px;
+  word-break: break-all;
+}
+pre.diff {
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.7;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  margin: 0;
+  overflow-x: auto;
+  white-space: pre;
+}
+.diff-line {
+  display: block;
+  padding: 0 4px;
+}
+.diff-line.add {
+  background: var(--teal-bg);
+  color: var(--teal);
+}
+.diff-line.del {
+  background: var(--red-bg);
+  color: var(--red);
+}
+.diff-line.ctx {
+  color: var(--text-dim);
+}
+.commit-msg-edit {
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 12px;
+}
+.commit-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 4px;
+  margin-top: auto;
+  gap: 8px;
+}
+.commit-footer .count {
+  font-size: 12px;
+  color: var(--text-dim);
+}

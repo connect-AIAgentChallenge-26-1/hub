@@ -35,3 +35,14 @@ export interface DocumentRecord {
   updated_at: string;
   history: { content: string; version: number; updated_at: string }[];
 }
+
+export interface FileChange {
+  path: string;
+  changeType: "new" | "modified" | "deleted";
+  newContent: string;
+  // Unified diff computed server-side (oldContent vs newContent) — never
+  // Agent-authored, see Day 12's fileChanges.ts.
+  diff: string;
+  suggestedCommitMessage: string;
+  approved: boolean;
+}
