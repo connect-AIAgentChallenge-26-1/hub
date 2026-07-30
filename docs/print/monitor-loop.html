@@ -284,8 +284,9 @@
 </div>
 
 <script>
-  // 슬라이드별 노출 시간(ms). 합계 50초. 3번(데모)은 monitor-demo.html 한 바퀴(약 17.3초) + 로드 여유.
-  const DURATIONS = [4000, 6000, 7000, 18000, 10000, 5000];
+  // 슬라이드별 노출 시간(ms). 합계 53초. 3번(데모)은 monitor-demo.html 한 바퀴
+  // (신청 토스트 3.2초 노출 포함 약 19.4초) + 여유.
+  const DURATIONS = [4000, 6000, 7000, 21000, 10000, 5000];
 
   const slides = Array.from(document.querySelectorAll('.slide'));
   const dots = Array.from(document.querySelectorAll('.dot'));

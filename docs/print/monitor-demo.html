@@ -1205,7 +1205,7 @@
     const toast = document.getElementById('apply-toast');
     toast.classList.add('show');
     clearTimeout(applyToastTimer);
-    applyToastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+    applyToastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
   }
 
   // 구/군 목록 생성
@@ -1438,9 +1438,9 @@
       await sleep(1700);
       openDetail(0);
 
-      await sleep(2700);
+      await sleep(3000);
       document.querySelector('.btn-apply').click();
-      await sleep(1800);
+      await sleep(3200);
     }
   }
 
