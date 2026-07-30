@@ -476,38 +476,72 @@
     100% { left: 100%; opacity: 0; }
   }
 
-  /* ---- 5. AI 에이전트를 어떻게 활용했는가 — 4개 영역으로 구조화 ---- */
-  .agent-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.8vw 1.8vh;
-    width: 82vw;
-  }
-  .agent-area {
-    padding: 2.3vh 2vw;
+  /* ---- 5. AI 에이전트를 어떻게 활용했는가 — 상위 에이전트가 이슈별 하위
+     에이전트를 병렬로 다루고, 각 하위 에이전트가 스킬을 쓰는 조직도 ---- */
+  .agent-org { display: flex; flex-direction: column; align-items: center; gap: 0.8vh; }
+  .supervisor-box {
+    padding: 1.6vh 2.4vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.9vh;
-    text-align: center;
+    gap: 0.3vh;
   }
-  .area-tag {
-    display: inline-block;
-    border-radius: 999px;
-    padding: 0.5vh 1.5vw;
-    font-size: clamp(13px, 1.2vw, 18px);
+  .org-name { font-size: clamp(16px, 1.6vw, 22px); font-weight: 800; }
+  .org-desc { font-size: clamp(12px, 1.05vw, 15px); color: var(--text-sub); }
+
+  .agent-structure {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.7vh 1.6vw;
+    width: 88vw;
+  }
+  .sub-agent {
+    grid-row: 1;
+    padding: 1.6vh 1.4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5vh;
+  }
+  .skills-label {
+    margin-top: 0.3vh;
+    letter-spacing: 0.1em;
+    font-size: clamp(10px, 0.9vw, 12px);
     font-weight: 700;
+    color: var(--blue);
+    text-transform: uppercase;
   }
-  .agent-area.t1 .area-tag { background: rgba(34,197,94,0.18); color: #4ADE80; }
-  .agent-area.t2 .area-tag { background: rgba(245,158,11,0.18); color: #FBBF24; }
-  .agent-area.t3 .area-tag { background: rgba(6,182,212,0.18); color: #22D3EE; }
-  .agent-area.t4 .area-tag { background: rgba(168,85,247,0.18); color: #C4B5FD; }
-  .area-body {
-    font-size: clamp(14px, 1.25vw, 18px);
+  .skills-list {
+    font-size: clamp(11px, 1.05vw, 15px);
     color: var(--text-sub);
     line-height: 1.5;
-    font-weight: 500;
   }
+  .chain-cell {
+    grid-row: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35vh;
+  }
+  .merge-row {
+    grid-row: 3;
+    grid-column: 1 / 3;
+    display: flex;
+    justify-content: center;
+    gap: 3.5vw;
+    color: var(--text-sub);
+    font-size: 1.6vw;
+    line-height: 1;
+  }
+  .final-row {
+    grid-row: 4;
+    grid-column: 1 / 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5vh;
+  }
+  .mp-step.wide { width: 22vw; }
 
   /* ---- 데모(프로토타입 iframe) ---- */
   .slide-demo { gap: 2vh; }
@@ -740,27 +774,51 @@
     </div>
   </section>
 
-  <!-- 5. AI 에이전트를 어떻게 활용했는가 — 4개 영역으로 구조화 -->
+  <!-- 5. AI 에이전트를 어떻게 활용했는가 — 상위 에이전트 → 이슈별 하위 에이전트(스킬 사용)
+       → 부분 테스트에서 E2E까지 이어지는 조직도 -->
   <section class="slide slide-agent" data-idx="5">
     <div class="eyebrow">HOW WE BUILT IT</div>
     <h2 class="slide-h2">AI 에이전트를 어떻게 활용했는가</h2>
 
-    <div class="agent-grid">
-      <div class="agent-area t1 glass-card reveal" style="--i:0">
-        <div class="area-tag">부분 테스트</div>
-        <div class="area-body">라우트 · 컴포넌트 단위 20개<br>vi.mock으로 DB·네트워크 격리</div>
+    <div class="agent-org">
+      <div class="supervisor-box glass-card reveal" style="--i:0">
+        <div class="org-name">Supervisor Agent</div>
+        <div class="org-desc">이슈 선택 · 계획 문서 작성 · 워크트리 라우팅</div>
       </div>
-      <div class="agent-area t2 glass-card reveal" style="--i:1">
-        <div class="area-tag">E2E 전체 흐름</div>
-        <div class="area-body">웰컴→온보딩→완료→홈→상세→외부이동<br>골든패스 + 엣지케이스 수동 확인</div>
-      </div>
-      <div class="agent-area t3 glass-card reveal" style="--i:2">
-        <div class="area-tag">에이전트 병렬처리</div>
-        <div class="area-body">이슈마다 독립 워크트리<br>여러 이슈를 동시에, 파일 충돌 없이</div>
-      </div>
-      <div class="agent-area t4 glass-card reveal" style="--i:3">
-        <div class="area-tag">스킬 활용</div>
-        <div class="area-body">issue-workflow: 계획→구현→검증→PR<br>gov-subsidy-design: 디자인 일관성</div>
+      <div class="mp-arrow">↓</div>
+
+      <div class="agent-structure">
+        <div class="sub-agent glass-card reveal" style="--i:1">
+          <div class="org-name">Code Agent</div>
+          <div class="skills-label">Skills</div>
+          <div class="skills-list">issue-workflow<br>Explore · gov-subsidy-design</div>
+        </div>
+        <div class="sub-agent glass-card reveal" style="--i:2">
+          <div class="org-name">Test Agent</div>
+          <div class="skills-label">Skills</div>
+          <div class="skills-list">Vitest · oxlint<br>E2E 체크리스트</div>
+        </div>
+        <div class="sub-agent glass-card reveal" style="--i:3">
+          <div class="org-name">Docs Agent</div>
+          <div class="skills-label">Skills</div>
+          <div class="skills-list">PR 템플릿<br>커밋 컨벤션 · 계획 문서</div>
+        </div>
+
+        <div class="chain-cell"><div class="mp-arrow">↓</div></div>
+        <div class="chain-cell">
+          <div class="mp-step small">Component Test</div>
+          <div class="mp-arrow">↓</div>
+          <div class="mp-step small">Integration Test</div>
+        </div>
+        <div class="chain-cell"></div>
+
+        <div class="merge-row"><span>↘</span><span>↙</span></div>
+
+        <div class="final-row">
+          <div class="mp-step wide accent">End-to-End Test</div>
+          <div class="mp-arrow">↓</div>
+          <div class="mp-step wide accent">Final Validation</div>
+        </div>
       </div>
     </div>
   </section>
@@ -790,12 +848,13 @@
 </div>
 
 <script>
-  // 슬라이드별 노출 시간(ms) — 전체 루프 60초 이내 유지(합계 58.3초).
+  // 슬라이드별 노출 시간(ms) — 전체 루프 60초 이내 유지(합계 59.8초).
   // 4번(데모)은 monitor-demo.html 한 바퀴 실제 길이(초기 지연 0.8초 + 내부 시퀀스
-  // 18.6초 = 19.4초)에 딱 맞춰 19.8초로 뒀다 — 이보다 길게 주면 남는 시간 동안
-  // 두 번째 바퀴(웰컴 화면부터)가 다시 보여서 "반복되는" 것처럼 보인다.
-  // 2번·3번은 데모 슬롯을 늘리려고 덜어냈던 시간을 원래대로 되돌렸다.
-  const DURATIONS = [2500, 6500, 8500, 10000, 19800, 7500, 3500];
+  // 18.6초 = 19.4초)에 딱 맞춰 19.8초로 고정 — 이보다 길게 주면 두 번째 바퀴(웰컴
+  // 화면부터)가 다시 보여서 "반복되는" 것처럼 보인다.
+  // 5번(에이전트)이 상위/하위 에이전트 조직도 + 테스트 체인으로 내용이 크게 늘어나
+  // 7.5초 → 15초로 키웠고, 그만큼을 1·2·3·6번에서 조금씩 덜어냈다.
+  const DURATIONS = [2500, 5000, 7000, 8000, 19800, 15000, 2500];
 
   const slides = Array.from(document.querySelectorAll('.slide'));
   const dots = Array.from(document.querySelectorAll('.dot'));
