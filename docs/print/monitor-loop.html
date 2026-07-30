@@ -47,6 +47,8 @@
     z-index: 0;
   }
 
+  /* 슬라이드 공통 정렬 규칙 — 모든 슬라이드가 같은 구조(eyebrow → h2 → 본문)로
+     같은 위치에서 시작하도록 통일한다. */
   .slide {
     position: absolute;
     inset: 0;
@@ -54,7 +56,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2.6vh;
+    gap: 2.8vh;
     padding: 6vh 8vw;
     text-align: center;
     z-index: 1;
@@ -82,18 +84,18 @@
 
   .eyebrow {
     letter-spacing: 0.18em;
-    font-size: clamp(12px, 1vw, 15px);
+    font-size: clamp(13px, 1.1vw, 17px);
     font-weight: 700;
     color: var(--blue);
     text-transform: uppercase;
   }
   .slide-h2 {
-    font-size: clamp(26px, 3.2vw, 46px);
+    font-size: clamp(30px, 3.6vw, 52px);
     font-weight: 800;
     letter-spacing: -0.01em;
   }
   .slide-sub {
-    font-size: clamp(15px, 1.4vw, 21px);
+    font-size: clamp(16px, 1.5vw, 23px);
     color: var(--text-sub);
     margin-top: -1.2vh;
   }
@@ -101,17 +103,17 @@
   /* ---- 타이틀 ---- */
   .kicker {
     letter-spacing: 0.16em;
-    font-size: clamp(14px, 1.2vw, 18px);
+    font-size: clamp(15px, 1.3vw, 20px);
     color: var(--text-sub);
     font-weight: 600;
   }
   .slide-title h1 {
-    font-size: clamp(40px, 5.2vw, 76px);
+    font-size: clamp(44px, 5.6vw, 82px);
     font-weight: 800;
     line-height: 1.2;
   }
   .tagline {
-    font-size: clamp(18px, 1.8vw, 28px);
+    font-size: clamp(19px, 1.9vw, 30px);
     color: var(--text-sub);
     line-height: 1.6;
   }
@@ -140,9 +142,9 @@
     gap: 1.2vh 1vw;
   }
   .scatter-chip {
-    padding: 1.6vh 1.6vw;
+    padding: 1.8vh 1.8vw;
     border-radius: 14px;
-    font-size: clamp(14px, 1.3vw, 19px);
+    font-size: clamp(15px, 1.4vw, 21px);
     font-weight: 700;
     background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
     border: 1px solid rgba(255,255,255,0.12);
@@ -157,7 +159,7 @@
   @keyframes scatterIn3 { from { opacity:0; transform: translate(-50px,36px) rotate(8deg); } to { opacity:1; transform:none; } }
   @keyframes scatterIn4 { from { opacity:0; transform: translate(50px,36px) rotate(-8deg); } to { opacity:1; transform:none; } }
   .flow-caption {
-    font-size: clamp(13px, 1.2vw, 18px);
+    font-size: clamp(14px, 1.3vw, 19px);
     color: var(--text-sub);
     font-weight: 600;
     line-height: 1.4;
@@ -165,15 +167,15 @@
 
   /* 가운데: 화살표 + 실측 데이터 근거(작게) */
   .flow-center { gap: 1vh; }
-  .flow-arrow { color: var(--blue); font-size: 2.6vw; font-weight: 700; }
+  .flow-arrow { color: var(--blue); font-size: 3vw; font-weight: 700; }
   .proof-stats { display: flex; flex-direction: column; gap: 0.4vh; }
   .proof-line {
-    font-size: clamp(12px, 1.05vw, 15px);
+    font-size: clamp(13px, 1.15vw, 17px);
     color: var(--text-sub);
     font-weight: 600;
   }
   .proof-num {
-    font-size: clamp(16px, 1.5vw, 22px);
+    font-size: clamp(18px, 1.7vw, 25px);
     font-weight: 800;
     color: var(--blue);
     font-variant-numeric: tabular-nums;
@@ -185,16 +187,16 @@
   .cond-chip {
     background: var(--navy-soft);
     border-radius: 999px;
-    padding: 1vh 1.6vw;
-    font-size: clamp(13px, 1.2vw, 18px);
+    padding: 1.1vh 1.7vw;
+    font-size: clamp(14px, 1.3vw, 20px);
     font-weight: 700;
   }
   .resolve-box {
     background: rgba(37,99,235,0.18);
     border: 1px solid var(--blue);
     border-radius: 20px;
-    padding: 1.8vh 2.2vw;
-    font-size: clamp(16px, 1.7vw, 24px);
+    padding: 1.9vh 2.3vw;
+    font-size: clamp(18px, 1.9vw, 27px);
     font-weight: 700;
     line-height: 1.4;
   }
@@ -205,51 +207,51 @@
     background: var(--warn-bg);
     border: 1px solid var(--warn-border);
     border-radius: 999px;
-    padding: 1.6vh 2.4vw;
-    font-size: clamp(16px, 1.7vw, 25px);
+    padding: 1.7vh 2.5vw;
+    font-size: clamp(17px, 1.8vw, 27px);
     font-weight: 600;
   }
   .punchline b { color: #FCA5A5; }
 
   /* ---- 2. 핵심기능 — 좌우 두 박스 + 세로 파이프라인 도식 ---- */
   .slide-features { gap: 2vh; }
-  .feature-cols { display: flex; gap: 2.4vw; align-items: stretch; }
+  .feature-cols { display: flex; gap: 2.4vw; align-items: stretch; justify-content: center; }
   .feature-col {
-    width: 34vw;
-    padding: 2.4vh 2vw;
+    width: 36vw;
+    padding: 2.6vh 2.2vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.4vh;
+    gap: 1.5vh;
   }
   .feature-block-title {
-    font-size: clamp(17px, 1.8vw, 25px);
+    font-size: clamp(18px, 2vw, 28px);
     font-weight: 700;
     display: flex;
     align-items: center;
     gap: 10px;
   }
   .feature-tag {
-    width: 28px; height: 28px;
+    width: 32px; height: 32px;
     border-radius: 50%;
     background: var(--blue);
     display: inline-flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 800;
+    font-size: 15px; font-weight: 800;
     flex-shrink: 0;
   }
   .mini-pipeline {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.6vh;
+    gap: 0.7vh;
     width: 100%;
   }
   .mp-step {
     width: 100%;
     background: var(--navy-soft);
     border-radius: 12px;
-    padding: 1.1vh 1.2vw;
-    font-size: clamp(13px, 1.2vw, 17px);
+    padding: 1.2vh 1.3vw;
+    font-size: clamp(14px, 1.3vw, 19px);
     font-weight: 700;
     text-align: center;
   }
@@ -259,19 +261,19 @@
   }
   .mp-step.accent { background: var(--blue); }
   .mp-sub {
-    font-size: clamp(11px, 1vw, 14px);
+    font-size: clamp(12px, 1.1vw, 16px);
     color: var(--text-sub);
     font-weight: 500;
     margin-top: 0.4vh;
   }
-  .mp-arrow { color: var(--text-sub); font-size: 1.1vw; line-height: 1; }
-  /* 아키텍처 슬라이드처럼 4칸 한 줄에 들어가는 좁은 카드용 축소판 */
-  .mp-step.small { font-size: clamp(10px, 0.95vw, 13px); padding: 0.8vh 0.6vw; }
+  .mp-arrow { color: var(--text-sub); font-size: 1.2vw; line-height: 1; }
+  /* 아키텍처 슬라이드처럼 좁은 카드용 축소판 */
+  .mp-step.small { font-size: clamp(11px, 1.05vw, 15px); padding: 0.8vh 0.7vw; }
   .db-tables { display: flex; flex-direction: column; gap: 0.5vh; align-items: center; }
 
   .score-bar {
     width: 100%;
-    height: 12px;
+    height: 13px;
     border-radius: 999px;
     overflow: hidden;
     display: flex;
@@ -294,55 +296,172 @@
   .chip {
     background: rgba(255,255,255,0.08);
     border-radius: 999px;
-    padding: 0.6vh 1.1vw;
-    font-size: clamp(11px, 1vw, 14px);
+    padding: 0.7vh 1.2vw;
+    font-size: clamp(12px, 1.1vw, 16px);
     font-weight: 600;
   }
 
-  /* ---- 3. 어떻게 동작하는가 — 크롤링 → DB 저장 → 매칭 API → 프론트엔드,
-     왼쪽에서 오른쪽으로 읽히는 아키텍처 다이어그램 ---- */
+  /* ---- 3. 어떻게 동작하는가 — 크롤링 → DB 저장 → 매칭 API → 프론트 캐싱,
+     아이콘 대신 실제 데이터(문서 한 건)가 이동하는 모습을 직접 보여준다 ---- */
   .slide-arch { gap: 3vh; }
-  .pipeline-h { display: flex; align-items: flex-start; justify-content: center; width: 90vw; }
+  .pipeline-h { display: flex; align-items: center; justify-content: center; width: 92vw; }
   .stage-card {
     flex: 1 1 0;
     min-width: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.9vh;
+    gap: 1vh;
     opacity: 0;
     animation: riseIn 0.6s cubic-bezier(.16,.84,.44,1) forwards;
     animation-delay: calc(var(--i, 0) * 180ms + 250ms);
   }
-  .stage-icon {
-    width: clamp(46px, 4.6vw, 66px);
-    height: clamp(46px, 4.6vw, 66px);
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--blue), #60A5FA);
-    display: flex; align-items: center; justify-content: center;
-    font-size: clamp(20px, 2.2vw, 30px);
-    box-shadow: 0 10px 24px rgba(37,99,235,0.45);
-    animation: iconPulse 2.8s ease-in-out infinite;
-    animation-delay: calc(var(--i, 0) * 0.5s + 1s);
-  }
-  @keyframes iconPulse {
-    0%, 100% { box-shadow: 0 10px 24px rgba(37,99,235,0.45); transform: scale(1); }
-    50% { box-shadow: 0 10px 30px rgba(37,99,235,0.75); transform: scale(1.06); }
-  }
-  .stage-name { font-size: clamp(14px, 1.5vw, 20px); font-weight: 800; }
+  .stage-name { font-size: clamp(16px, 1.7vw, 23px); font-weight: 800; }
   .stage-desc {
-    font-size: clamp(11px, 1vw, 14px);
+    font-size: clamp(12px, 1.1vw, 16px);
     color: var(--text-sub);
     text-align: center;
     line-height: 1.4;
   }
-  /* 카드 사이를 잇는 연결선 — 아이콘 높이 중앙에 맞추고, 그 위로 신호가
-     계속 왼쪽에서 오른쪽으로 흘러가는 점이 지나간다 */
+
+  /* 데이터가 실제로 움직이는 미니 장면 — 왼쪽 사물 → 화살표 → 오른쪽 사물 */
+  .data-scene { display: flex; align-items: center; gap: 0.8vw; }
+  .scene-arrow { color: var(--text-sub); font-size: 1.4vw; }
+
+  /* 웹사이트(브라우저 목업) */
+  .web-mock {
+    width: clamp(48px, 4.8vw, 64px);
+    height: clamp(42px, 4.2vw, 56px);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 8px;
+    padding: 5px 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .web-bar { display: flex; gap: 3px; }
+  .web-bar span { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.3); }
+  .web-bar span:nth-child(1) { background: #F87171; }
+  .web-bar span:nth-child(2) { background: #FBBF24; }
+  .web-bar span:nth-child(3) { background: #4ADE80; }
+  .web-lines { display: flex; flex-direction: column; gap: 4px; margin-top: 2px; }
+  .web-lines span { display: block; height: 3px; border-radius: 2px; background: rgba(255,255,255,0.25); }
+  .web-lines span:nth-child(1) { width: 85%; }
+  .web-lines span:nth-child(2) { width: 55%; }
+
+  /* 추출된 데이터(문서 한 장) — 세 단계 내내 같은 모양으로 등장해서
+     "이 데이터가 파이프라인을 통과한다"는 걸 보여준다 */
+  .doc-chip {
+    width: clamp(36px, 3.6vw, 46px);
+    height: clamp(44px, 4.4vw, 56px);
+    background: linear-gradient(180deg, #ffffff, #EEF4FC);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    box-shadow: 0 6px 16px rgba(37,99,235,0.4);
+    animation: docPulse 2.4s ease-in-out infinite;
+    animation-delay: 1.2s;
+  }
+  .doc-chip .doc-line { display: block; height: 3px; width: 68%; border-radius: 2px; background: var(--blue); opacity: 0.7; }
+  @keyframes docPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 6px 16px rgba(37,99,235,0.4); }
+    50% { transform: scale(1.08); box-shadow: 0 9px 22px rgba(37,99,235,0.65); }
+  }
+  .ai-tag {
+    font-size: clamp(11px, 1vw, 13px);
+    font-weight: 700;
+    color: #C4B5FD;
+    background: rgba(168,85,247,0.14);
+    border: 1px solid rgba(168,85,247,0.4);
+    border-radius: 999px;
+    padding: 0.35vh 1vw;
+  }
+
+  /* DB(원통) 도식 */
+  .db-shape { display: flex; flex-direction: column; align-items: center; }
+  .db-top {
+    width: clamp(42px, 4.2vw, 56px);
+    height: 13px;
+    border-radius: 50%;
+    background: linear-gradient(180deg, #60A5FA, var(--blue));
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  .db-body {
+    width: clamp(42px, 4.2vw, 56px);
+    height: clamp(32px, 3.2vw, 42px);
+    background: linear-gradient(180deg, var(--blue), var(--navy-soft));
+    border: 1px solid rgba(255,255,255,0.2);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    margin-top: -6px;
+    animation: iconPulse 2.8s ease-in-out infinite;
+    animation-delay: 1.5s;
+  }
+  @keyframes iconPulse {
+    0%, 100% { box-shadow: 0 6px 16px rgba(37,99,235,0.3); }
+    50% { box-shadow: 0 8px 22px rgba(37,99,235,0.6); }
+  }
+
+  /* 캐시 메모리 도식 */
+  .cache-box { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .cache-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    width: clamp(38px, 3.8vw, 48px);
+  }
+  .cache-grid .cell {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.16);
+  }
+  .cache-grid .cell.filled {
+    background: var(--seg-emp);
+    border-color: var(--seg-emp);
+    animation: cellFill 2.6s ease-in-out infinite;
+  }
+  @keyframes cellFill {
+    0%, 100% { box-shadow: 0 0 0 rgba(34,197,94,0); }
+    50% { box-shadow: 0 0 12px 2px rgba(34,197,94,0.65); }
+  }
+  .cache-label { font-size: 10px; color: var(--text-sub); letter-spacing: 0.05em; }
+  .screen-mock {
+    width: clamp(38px, 3.8vw, 48px);
+    height: clamp(46px, 4.6vw, 58px);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  .screen-line {
+    display: block; width: 70%; height: 3px; border-radius: 2px;
+    background: var(--blue); opacity: 0;
+    animation: lineAppear 2.6s ease-in-out infinite;
+  }
+  .screen-line.short { width: 45%; }
+  @keyframes lineAppear {
+    0%, 30% { opacity: 0; }
+    50%, 90% { opacity: 0.85; }
+    100% { opacity: 0; }
+  }
+
+  /* 카드 사이를 잇는 연결선 — 각 카드 높이가 달라도 가운데 정렬되고,
+     그 위로 신호가 계속 왼쪽에서 오른쪽으로 흘러가는 점이 지나간다 */
   .pipe-connector {
     position: relative;
-    flex: 0 0 clamp(28px, 4vw, 60px);
+    flex: 0 0 clamp(28px, 4vw, 56px);
     height: 2px;
-    margin-top: clamp(23px, 2.3vw, 33px);
+    align-self: center;
     background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.25), rgba(255,255,255,0.05));
   }
   .pipe-connector .chevron {
@@ -374,50 +493,50 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 0.8vh 0.6vw;
+    gap: 0.9vh 0.6vw;
     width: 78vw;
   }
   .loop-node {
     background: var(--navy-soft);
     border-radius: 14px;
-    padding: 1.3vh 1.6vw;
-    font-size: clamp(13px, 1.25vw, 19px);
+    padding: 1.4vh 1.7vw;
+    font-size: clamp(14px, 1.35vw, 21px);
     font-weight: 700;
   }
   .loop-arrow { color: var(--text-sub); font-size: 1.3vw; }
   .loop-back {
     color: var(--blue);
-    font-size: clamp(13px, 1.1vw, 16px);
+    font-size: clamp(14px, 1.2vw, 17px);
     font-weight: 700;
   }
   .verify-split { display: flex; gap: 2vw; }
   .verify-col {
-    padding: 1.8vh 2.4vw;
+    padding: 1.9vh 2.5vw;
     min-width: 20vw;
   }
   .verify-tag {
     display: inline-block;
     border-radius: 999px;
-    padding: 0.4vh 1.2vw;
-    font-size: clamp(11px, 1vw, 14px);
+    padding: 0.4vh 1.3vw;
+    font-size: clamp(12px, 1.1vw, 16px);
     font-weight: 700;
     margin-bottom: 0.8vh;
   }
   .verify-col.auto .verify-tag { background: rgba(34,197,94,0.18); color: #4ADE80; }
   .verify-col.manual .verify-tag { background: rgba(245,158,11,0.18); color: #FBBF24; }
-  .verify-body { font-size: clamp(14px, 1.3vw, 19px); font-weight: 600; }
+  .verify-body { font-size: clamp(15px, 1.4vw, 21px); font-weight: 600; }
 
   /* ---- 데모(프로토타입 iframe) ---- */
   .slide-demo { gap: 2vh; }
   .demo-label {
-    font-size: clamp(18px, 1.8vw, 28px);
+    font-size: clamp(19px, 1.9vw, 29px);
     font-weight: 700;
     color: var(--text-sub);
   }
   .phone-shell {
     /* 화면 크기에 맞춰 줄어들도록 vh/vw 기반으로 계산하고, iframe 안의
-       데스크톱 프리뷰 분기(min-width:480px)로 안 넘어가게 430px로 상한을 둔다 */
-    width: min(430px, 36vh, 90vw);
+       데스크톱 프리뷰 분기(min-width:480px)로 안 넘어가게 460px로 상한을 둔다 */
+    width: min(460px, 38vh, 90vw);
     aspect-ratio: 390 / 844;
     border-radius: 36px;
     overflow: hidden;
@@ -427,8 +546,8 @@
   #demo-frame { width: 100%; height: 100%; border: 0; display: block; }
 
   /* ---- 마무리 CTA ---- */
-  .qr-big { width: clamp(160px, 16vw, 240px); height: auto; border-radius: 12px; }
-  .cta-url { font-size: clamp(18px, 1.8vw, 28px); color: var(--text-sub); letter-spacing: 0.02em; }
+  .qr-big { width: clamp(170px, 17vw, 250px); height: auto; border-radius: 12px; }
+  .cta-url { font-size: clamp(19px, 1.9vw, 30px); color: var(--text-sub); letter-spacing: 0.02em; }
 
   /* ---- 상시 요소: 진행 점 ---- */
   .dots {
@@ -567,38 +686,39 @@
     </div>
   </section>
 
-  <!-- 3. 어떻게 동작하는가 — 크롤링 → DB 저장 → 매칭 API → 프론트 캐싱,
-       데이터 한 건이 왼쪽에서 오른쪽으로 흘러가는 하나의 파이프라인 -->
+  <!-- 3. 어떻게 동작하는가 — 크롤링 → DB 저장 → 매칭 API → 프론트 캐싱.
+       아이콘 대신 데이터(문서 한 건)가 실제로 이동하는 모습을 보여준다 -->
   <section class="slide slide-arch" data-idx="3">
     <div class="eyebrow">ARCHITECTURE</div>
     <h2 class="slide-h2">어떻게 동작하는가</h2>
     <div class="pipeline-h">
       <div class="stage-card" style="--i:0">
-        <div class="stage-icon">🕸️</div>
         <div class="stage-name">크롤링</div>
-        <div class="mp-step small">기업마당 · K-Startup</div>
-        <div class="mp-arrow">↓</div>
-        <div class="mp-step small">신규만 AI 추출<div class="mp-sub">PDF·HWP 첨부파일</div></div>
-        <div class="mp-arrow">↓</div>
-        <div class="mp-step small">중복 제거 · 정규화</div>
-        <div class="stage-desc">매일 00:00 자동 실행</div>
+        <div class="data-scene">
+          <div class="web-mock">
+            <div class="web-bar"><span></span><span></span><span></span></div>
+            <div class="web-lines"><span></span><span></span></div>
+          </div>
+          <div class="scene-arrow">⟶</div>
+          <div class="doc-chip"><span class="doc-line"></span><span class="doc-line"></span><span class="doc-line"></span></div>
+        </div>
+        <div class="ai-tag">AI가 PDF 파싱</div>
+        <div class="stage-desc">기업마당 · K-Startup<br>매일 00:00 신규만 추출</div>
       </div>
       <div class="pipe-connector"><span class="pulse-dot" style="--d:0"></span><span class="chevron">›</span></div>
 
       <div class="stage-card" style="--i:1">
-        <div class="stage-icon">🗄️</div>
         <div class="stage-name">DB 저장</div>
-        <div class="db-tables">
-          <span class="chip">subsidies</span>
-          <span class="chip">document_extractions</span>
-          <span class="chip">match_requests</span>
+        <div class="data-scene">
+          <div class="doc-chip"><span class="doc-line"></span><span class="doc-line"></span><span class="doc-line"></span></div>
+          <div class="scene-arrow">⟶</div>
+          <div class="db-shape"><div class="db-top"></div><div class="db-body"></div></div>
         </div>
         <div class="stage-desc">pblancId로 upsert<br>마감 지난 공고 자동 삭제</div>
       </div>
       <div class="pipe-connector"><span class="pulse-dot" style="--d:1"></span><span class="chevron">›</span></div>
 
       <div class="stage-card" style="--i:2">
-        <div class="stage-icon">⚡</div>
         <div class="stage-name">매칭 API</div>
         <div class="mp-step warn-ish small">지역·지원분야<br>불일치 → 제외</div>
         <div class="mp-arrow">↓</div>
@@ -607,18 +727,24 @@
           <div class="score-seg s-region" style="--w:20"></div>
           <div class="score-seg s-bonus" style="--w:30"></div>
         </div>
-        <div class="mp-sub">기본50 + 지역20 + 가점30 = 최대100</div>
-        <div class="stage-desc">정렬 후 20건 응답<br>로그는 응답 뒤 백그라운드</div>
+        <div class="stage-desc">기본50+지역20+가점30=100<br>정렬 후 20건 응답</div>
       </div>
       <div class="pipe-connector"><span class="pulse-dot" style="--d:2"></span><span class="chevron">›</span></div>
 
       <div class="stage-card" style="--i:3">
-        <div class="stage-icon">📱</div>
         <div class="stage-name">프론트 캐싱</div>
-        <div class="mp-step small">완료 화면 유휴 시간<div class="mp-sub">미리 조회 → 캐시 저장</div></div>
-        <div class="mp-arrow">↓</div>
-        <div class="mp-step accent small">홈 진입 즉시 표시</div>
-        <div class="stage-desc">재요청 없이 캐시 그대로 사용</div>
+        <div class="data-scene">
+          <div class="cache-box">
+            <div class="cache-grid">
+              <span class="cell"></span><span class="cell filled"></span>
+              <span class="cell"></span><span class="cell"></span>
+            </div>
+            <div class="cache-label">CACHE</div>
+          </div>
+          <div class="scene-arrow">⟶</div>
+          <div class="screen-mock"><span class="screen-line"></span><span class="screen-line short"></span></div>
+        </div>
+        <div class="stage-desc">완료 화면 유휴 시간에 캐시<br>홈 진입 시 즉시 꺼내 표시</div>
       </div>
     </div>
   </section>
@@ -691,11 +817,10 @@
 </div>
 
 <script>
-  // 슬라이드별 노출 시간(ms) — 화면을 스쳐 지나가듯 보는 게 아니라 실제로 읽는 시간을
-  // 기준으로 잡았다(대략 90ms/글자 + 시각적으로 훑어보는 여유 시간). 합계 약 83초.
-  // 3번(아키텍처)은 4단계 파이프라인 각각에 미니 도식이 들어가 내용이 늘어난 만큼 18초로.
-  // 4번(데모)은 monitor-demo.html 한 바퀴(신청 토스트 3.2초 포함 약 19.4초) + 여유.
-  const DURATIONS = [4500, 9500, 12000, 18000, 21000, 13000, 5000];
+  // 슬라이드별 노출 시간(ms) — 전체 루프가 60초를 넘지 않도록 다시 맞췄다(합계 59.5초).
+  // 데모(4번, 21초)는 monitor-demo.html 실제 재생 시간에 묶여 있어 고정, 나머지 슬라이드를
+  // 그만큼 더 압축했다.
+  const DURATIONS = [2500, 6500, 8500, 10000, 21000, 7500, 3500];
 
   const slides = Array.from(document.querySelectorAll('.slide'));
   const dots = Array.from(document.querySelectorAll('.dot'));
