@@ -211,46 +211,69 @@
   }
   .punchline b { color: #FCA5A5; }
 
-  /* ---- 2. 핵심기능 — 구조 시각화 ---- */
-  .slide-features { gap: 1.8vh; }
-  .feature-block {
-    width: 74vw;
-    padding: 2.2vh 2.6vw;
+  /* ---- 2. 핵심기능 — 좌우 두 박스 + 세로 파이프라인 도식 ---- */
+  .slide-features { gap: 2vh; }
+  .feature-cols { display: flex; gap: 2.4vw; align-items: stretch; }
+  .feature-col {
+    width: 34vw;
+    padding: 2.4vh 2vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1.4vh;
   }
   .feature-block-title {
-    font-size: clamp(18px, 1.9vw, 27px);
+    font-size: clamp(17px, 1.8vw, 25px);
     font-weight: 700;
     display: flex;
     align-items: center;
     gap: 10px;
   }
   .feature-tag {
-    width: 30px; height: 30px;
+    width: 28px; height: 28px;
     border-radius: 50%;
     background: var(--blue);
     display: inline-flex; align-items: center; justify-content: center;
-    font-size: 15px; font-weight: 800;
+    font-size: 14px; font-weight: 800;
+    flex-shrink: 0;
   }
-  .algo-gate {
+  .mini-pipeline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6vh;
+    width: 100%;
+  }
+  .mp-step {
+    width: 100%;
+    background: var(--navy-soft);
+    border-radius: 12px;
+    padding: 1.1vh 1.2vw;
+    font-size: clamp(13px, 1.2vw, 17px);
+    font-weight: 700;
+    text-align: center;
+  }
+  .mp-step.warn-ish {
     background: var(--warn-bg);
     border: 1px solid var(--warn-border);
-    border-radius: 999px;
-    padding: 0.9vh 1.6vw;
-    font-size: clamp(12px, 1.1vw, 16px);
-    font-weight: 600;
   }
-  .algo-arrow { color: var(--text-sub); font-size: 1.4vw; }
+  .mp-step.accent { background: var(--blue); }
+  .mp-sub {
+    font-size: clamp(11px, 1vw, 14px);
+    color: var(--text-sub);
+    font-weight: 500;
+    margin-top: 0.4vh;
+  }
+  .mp-arrow { color: var(--text-sub); font-size: 1.1vw; line-height: 1; }
+
   .score-bar {
-    width: 56vw;
-    height: 16px;
+    width: 100%;
+    height: 12px;
     border-radius: 999px;
     overflow: hidden;
     display: flex;
-    background: rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.12);
+    margin-top: 0.6vh;
   }
   .score-seg {
     height: 100%;
@@ -261,48 +284,16 @@
   }
   .score-seg.filled { flex-basis: calc(var(--w) * 1%); }
   .score-seg.s-base { background: var(--seg-base); }
-  .score-seg.s-region { background: var(--seg-region); }
-  .score-seg.s-emp { background: var(--seg-emp); }
-  .score-seg.s-rev { background: var(--seg-rev); }
-  .score-seg.s-yr { background: var(--seg-yr); }
-  .score-legend {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.6vh 1.6vw;
-    font-size: clamp(12px, 1.05vw, 15px);
-    color: var(--text-sub);
-  }
-  .score-legend .dot {
-    display: inline-block;
-    width: 9px; height: 9px;
-    border-radius: 50%;
-    margin-right: 6px;
-  }
-  .dot.base { background: var(--seg-base); }
-  .dot.region { background: var(--seg-region); }
-  .dot.emp { background: var(--seg-emp); }
-  .dot.rev { background: var(--seg-rev); }
-  .dot.yr { background: var(--seg-yr); }
-  .score-legend .max { color: var(--white); font-weight: 700; }
-  .sort-chips { display: flex; gap: 0.8vw; flex-wrap: wrap; justify-content: center; }
+  .score-seg.s-bonus { background: var(--seg-emp); }
+
+  .sort-chips { display: flex; gap: 0.6vw; flex-wrap: wrap; justify-content: center; }
   .chip {
-    background: var(--navy-soft);
+    background: rgba(255,255,255,0.08);
     border-radius: 999px;
-    padding: 0.8vh 1.4vw;
-    font-size: clamp(12px, 1.05vw, 15px);
+    padding: 0.6vh 1.1vw;
+    font-size: clamp(11px, 1vw, 14px);
     font-weight: 600;
   }
-  .mini-flow { display: flex; align-items: center; gap: 0.8vw; flex-wrap: wrap; justify-content: center; }
-  .mini-step {
-    background: var(--navy-soft);
-    border-radius: 12px;
-    padding: 1vh 1.4vw;
-    font-size: clamp(13px, 1.15vw, 17px);
-    font-weight: 600;
-  }
-  .mini-step.accent { background: var(--blue); }
-  .mini-arrow { color: var(--text-sub); }
 
   /* ---- 3. 어떻게 동작하는가 — 아키텍처 파이프라인 ---- */
   .slide-arch { gap: 1.4vh; }
@@ -495,48 +486,51 @@
     </div>
   </section>
 
-  <!-- 2. 핵심기능 — 구조 시각화 -->
+  <!-- 2. 핵심기능 — 좌우 두 박스, 세로 파이프라인 도식 -->
   <section class="slide slide-features" data-idx="2">
     <div class="eyebrow">CORE FEATURES</div>
-    <h2 class="slide-h2">핵심 기능은 두 개</h2>
+    <h2 class="slide-h2">MVP 핵심 기능은 두 개</h2>
 
-    <div class="feature-block glass-card reveal" style="--i:0">
-      <div class="feature-block-title"><span class="feature-tag">A</span>조건 매칭 + 정렬</div>
-      <div class="algo-gate">지역 · 지원분야 불일치 → 제외</div>
-      <div class="algo-arrow">↓</div>
-      <div class="score-bar" id="score-bar">
-        <div class="score-seg s-base" style="--w:50"></div>
-        <div class="score-seg s-region" style="--w:10"></div>
-        <div class="score-seg s-emp" style="--w:10"></div>
-        <div class="score-seg s-rev" style="--w:10"></div>
-        <div class="score-seg s-yr" style="--w:10"></div>
+    <div class="feature-cols">
+      <div class="feature-col glass-card reveal" style="--i:0">
+        <div class="feature-block-title"><span class="feature-tag">A</span>조건 매칭 + 정렬</div>
+        <div class="mini-pipeline">
+          <div class="mp-step">조건 입력<div class="mp-sub">지원분야 · 지역 · 규모</div></div>
+          <div class="mp-arrow">↓</div>
+          <div class="mp-step warn-ish">불일치 조건 제외</div>
+          <div class="mp-arrow">↓</div>
+          <div class="mp-step">
+            점수 계산
+            <div class="score-bar" id="score-bar">
+              <div class="score-seg s-base" style="--w:50"></div>
+              <div class="score-seg s-bonus" style="--w:50"></div>
+            </div>
+            <div class="mp-sub">기본 50 + 가점(지역·직원·매출·업력) = 최대 100</div>
+          </div>
+          <div class="mp-arrow">↓</div>
+          <div class="mp-step">
+            정렬
+            <div class="sort-chips">
+              <span class="chip">매칭도순</span>
+              <span class="chip">마감임박순</span>
+              <span class="chip">지원금액순</span>
+              <span class="chip">신규</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="score-legend">
-        <span><i class="dot base"></i>기본 50</span>
-        <span><i class="dot region"></i>+지역 10</span>
-        <span><i class="dot emp"></i>+직원 10</span>
-        <span><i class="dot rev"></i>+매출 10</span>
-        <span><i class="dot yr"></i>+업력 10</span>
-        <span class="max">= 최대 100점</span>
-      </div>
-      <div class="sort-chips">
-        <span class="chip">매칭도순</span>
-        <span class="chip">마감임박순</span>
-        <span class="chip">지원금액순</span>
-        <span class="chip">신규</span>
-      </div>
-    </div>
 
-    <div class="feature-block glass-card reveal" style="--i:1">
-      <div class="feature-block-title"><span class="feature-tag">B</span>상세 + 신청 연결</div>
-      <div class="mini-flow">
-        <span class="mini-step">자격 확인</span>
-        <span class="mini-arrow">→</span>
-        <span class="mini-step">필요 서류</span>
-        <span class="mini-arrow">→</span>
-        <span class="mini-step">신청 방법</span>
-        <span class="mini-arrow">→</span>
-        <span class="mini-step accent">외부 기관 연결</span>
+      <div class="feature-col glass-card reveal" style="--i:1">
+        <div class="feature-block-title"><span class="feature-tag">B</span>상세 + 신청 연결</div>
+        <div class="mini-pipeline">
+          <div class="mp-step">자격 확인</div>
+          <div class="mp-arrow">↓</div>
+          <div class="mp-step">필요 서류</div>
+          <div class="mp-arrow">↓</div>
+          <div class="mp-step">신청 방법</div>
+          <div class="mp-arrow">↓</div>
+          <div class="mp-step accent">외부 기관 연결</div>
+        </div>
       </div>
     </div>
   </section>
