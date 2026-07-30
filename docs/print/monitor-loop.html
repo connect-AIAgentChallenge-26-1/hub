@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>부스 모니터 자동 루프 — 소상공인 정부 지원금 큐레이터</title>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+/>
+<style>
+  :root {
+    --navy: #0A2540;
+    --navy-soft: #1E4976;
+    --blue: #2563EB;
+    --blue-soft: #EEF4FC;
+    --white: #FFFFFF;
+    --text-sub: #9FB3CC;
+    --warn-bg: rgba(220, 38, 38, 0.16);
+    --warn-border: #F87171;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%;
+    height: 100%;
+    background: var(--navy);
+    color: var(--white);
+    overflow: hidden;
+    font-family: "Pretendard Variable", Pretendard, -apple-system,
+                 BlinkMacSystemFont, sans-serif;
+  }
+
+  .stage { position: relative; width: 100vw; height: 100vh; }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3vh;
+    padding: 6vh 8vw;
+    text-align: center;
+  }
+  .slide.active {
+    display: flex;
+    animation: fadeIn 0.7s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .slide-h2 {
+    font-size: clamp(28px, 3.4vw, 48px);
+    font-weight: 700;
+  }
+
+  /* ---- 타이틀 ---- */
+  .kicker {
+    letter-spacing: 0.16em;
+    font-size: clamp(14px, 1.2vw, 18px);
+    color: var(--text-sub);
+    font-weight: 600;
+  }
+  .slide-title h1 {
+    font-size: clamp(40px, 5.2vw, 76px);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .tagline {
+    font-size: clamp(18px, 1.8vw, 28px);
+    color: var(--text-sub);
+    line-height: 1.6;
+  }
+
+  /* ---- 문제정의 ---- */
+  .sources-row { display: flex; gap: 2vw; }
+  .source-box {
+    border: 2px dashed rgba(255,255,255,0.35);
+    border-radius: 16px;
+    padding: 2.2vh 2.2vw;
+    font-size: clamp(16px, 1.6vw, 24px);
+    font-weight: 600;
+    color: var(--text-sub);
+  }
+  .arrow-down { font-size: 3vw; color: var(--text-sub); }
+  .warn-box {
+    background: var(--warn-bg);
+    border: 2px solid var(--warn-border);
+    border-radius: 20px;
+    padding: 2.6vh 3vw;
+    font-size: clamp(20px, 2.2vw, 32px);
+    font-weight: 700;
+  }
+
+  /* ---- 핵심기능 ---- */
+  .feature-row { display: flex; gap: 3vw; }
+  .feature-card {
+    background: var(--navy-soft);
+    border-radius: 24px;
+    padding: 4vh 2.6vw;
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6vh;
+  }
+  .feature-badge {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: var(--blue);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; font-weight: 800;
+  }
+  .feature-title { font-size: clamp(20px, 2vw, 30px); font-weight: 700; }
+  .feature-desc { font-size: clamp(14px, 1.3vw, 20px); color: var(--text-sub); line-height: 1.6; }
+
+  /* ---- 데모(프로토타입 iframe) ---- */
+  .slide-demo { gap: 2vh; }
+  .demo-label {
+    font-size: clamp(18px, 1.8vw, 28px);
+    font-weight: 700;
+    color: var(--text-sub);
+  }
+  .phone-shell {
+    width: 390px;
+    height: 844px;
+    border-radius: 36px;
+    overflow: hidden;
+    border: 8px solid #111;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.55);
+    transform: scale(1.28);
+  }
+  #demo-frame { width: 100%; height: 100%; border: 0; display: block; }
+
+  /* ---- 에이전트 사용 방식 ---- */
+  .stat-row { display: flex; gap: 4vw; }
+  .stat-v { font-size: clamp(40px, 4.4vw, 64px); font-weight: 800; color: var(--blue); }
+  .stat-k { font-size: clamp(14px, 1.3vw, 20px); color: var(--text-sub); margin-top: 0.6vh; }
+  .loop-row { display: flex; align-items: center; gap: 1.4vw; }
+  .loop-step {
+    background: var(--navy-soft);
+    border-radius: 16px;
+    padding: 2vh 2.4vw;
+    font-size: clamp(18px, 1.8vw, 26px);
+    font-weight: 700;
+  }
+  .loop-arrow { font-size: 2vw; color: var(--text-sub); }
+
+  /* ---- 마무리 CTA ---- */
+  .qr-big { width: clamp(160px, 16vw, 240px); height: auto; border-radius: 12px; }
+  .cta-url { font-size: clamp(18px, 1.8vw, 28px); color: var(--text-sub); letter-spacing: 0.02em; }
+
+  /* ---- 상시 요소: 진행 점 ---- */
+  .dots {
+    position: fixed;
+    left: 3vw; bottom: 3vh;
+    display: flex; gap: 10px;
+    z-index: 10;
+  }
+  .dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  .dot.active { background: var(--blue); transform: scale(1.3); }
+
+  /* ---- 상시 요소: QR 배지 ---- */
+  .qr-badge {
+    position: fixed;
+    right: 3vw; bottom: 3vh;
+    background: var(--white);
+    color: var(--navy);
+    border-radius: 14px;
+    padding: 10px 14px;
+    display: flex; align-items: center; gap: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    z-index: 10;
+    transition: opacity 0.3s ease;
+  }
+  .qr-small { width: 56px; height: 56px; }
+  .qr-badge-text { font-size: 13px; font-weight: 700; line-height: 1.3; }
+
+  /* 데모/타이틀/CTA 슬라이드에서는 코너 배지를 숨긴다(각자 방식으로 이미 다룸) */
+  body[data-slide="0"] .qr-badge,
+  body[data-slide="3"] .qr-badge,
+  body[data-slide="5"] .qr-badge {
+    display: none;
+  }
+</style>
+</head>
+<body data-slide="0">
+
+<!-- QR 코드 벡터 정의 (오프라인에서도 동작하도록 인라인 SVG, 대상: https://syd348.github.io/hub/) -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="qr-code" viewBox="0 0 31 31">
+    <path fill="#ffffff" d="M0 0h31v31H0z"/>
+    <path stroke="#000000" d="M1 1.5h7m3 0h2m3 0h6m1 0h7M1 2.5h1m5 0h1m3 0h3m5 0h1m3 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h3m1 0h1m1 0h1m1 0h1m2 0h2m1 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m1 0h2m2 0h1m3 0h2m1 0h1m2 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h3m2 0h3m1 0h3m2 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m1 0h1m1 0h1m1 0h6m4 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 8.5h1m1 0h1m1 0h2m1 0h1m3 0h1M1 9.5h1m1 0h5m2 0h3m2 0h2m1 0h2m3 0h5M3 10.5h2m1 0h1m1 0h1m2 0h1m1 0h1m2 0h6m1 0h1m1 0h1m3 0h1M1 11.5h5m1 0h1m4 0h1m5 0h1m2 0h1m2 0h1M1 12.5h1m1 0h4m3 0h4m1 0h1m1 0h1m3 0h2m2 0h2m1 0h1M1 13.5h1m2 0h2m1 0h1m9 0h2m2 0h2m1 0h1m1 0h2M2 14.5h2m1 0h2m1 0h2m3 0h4m1 0h4m1 0h1m1 0h1m3 0h1M1 15.5h5m1 0h1m1 0h2m1 0h6m1 0h1m2 0h2m1 0h3M2 16.5h1m1 0h2m2 0h2m1 0h1m2 0h1m1 0h1m2 0h1m2 0h1m1 0h2m2 0h1M4 17.5h10m1 0h2m1 0h1m1 0h1m1 0h1m3 0h2M1 18.5h1m2 0h1m1 0h1m1 0h2m2 0h1m3 0h2m2 0h6m1 0h1m1 0h1M1 19.5h1m4 0h2m1 0h5m9 0h3m1 0h1M1 20.5h1m1 0h2m4 0h1m5 0h1m1 0h1m3 0h3m4 0h1M1 21.5h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m3 0h2m2 0h5m1 0h3M9 22.5h1m4 0h3m2 0h3m3 0h5M1 23.5h7m2 0h12m1 0h1m1 0h3M1 24.5h1m5 0h1m1 0h2m1 0h1m1 0h1m1 0h1m2 0h3m3 0h1M1 25.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h2m1 0h2m1 0h5m1 0h1m1 0h1M1 26.5h1m1 0h3m1 0h1m1 0h4m1 0h1m1 0h5m3 0h1m1 0h2M1 27.5h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h1m2 0h1m2 0h8M1 28.5h1m5 0h1m2 0h2m1 0h1m1 0h1m1 0h1m3 0h1m2 0h1m1 0h1m1 0h1M1 29.5h7m1 0h2m3 0h2m3 0h2m2 0h1m1 0h3"/>
+  </symbol>
+</svg>
+
+<div class="stage">
+
+  <!-- 0. 타이틀 -->
+  <section class="slide slide-title active" data-idx="0">
+    <div class="kicker">AI AGENT CHALLENGE</div>
+    <h1>소상공인 정부 지원금 큐레이터</h1>
+    <p class="tagline">업종 · 지역 · 규모를 입력하면<br>내 조건에 맞는 정부 지원금을 매칭해드립니다</p>
+  </section>
+
+  <!-- 1. 문제정의 -->
+  <section class="slide" data-idx="1">
+    <h2 class="slide-h2">무엇이 불편한가</h2>
+    <div class="sources-row">
+      <div class="source-box">정부24</div>
+      <div class="source-box">소진공</div>
+      <div class="source-box">지자체</div>
+      <div class="source-box">기업마당</div>
+    </div>
+    <div class="arrow-down">↓</div>
+    <div class="warn-box">사이트마다 따로 검색 · 조건 비교는 수작업</div>
+  </section>
+
+  <!-- 2. 핵심기능 -->
+  <section class="slide" data-idx="2">
+    <h2 class="slide-h2">핵심 기능은 두 개</h2>
+    <div class="feature-row">
+      <div class="feature-card">
+        <div class="feature-badge">A</div>
+        <div class="feature-title">조건 매칭 + 정렬</div>
+        <div class="feature-desc">업종 · 지역 · 규모로 후보를 걸러<br>매칭도 · 마감임박 · 금액 순으로 정렬</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-badge">B</div>
+        <div class="feature-title">상세 + 신청 연결</div>
+        <div class="feature-desc">자격 · 서류 · 기간을 정리해 보여주고<br>실제 신청은 외부 기관으로 연결</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 어떻게 동작하는가 (프로토타입 자동 시연) -->
+  <section class="slide slide-demo" data-idx="3">
+    <div class="demo-label">어떻게 동작하는가 — 실제 화면 자동 시연</div>
+    <div class="phone-shell">
+      <iframe id="demo-frame" title="자동 시연" src=""></iframe>
+    </div>
+  </section>
+
+  <!-- 4. 에이전트 사용 방식 -->
+  <section class="slide" data-idx="4">
+    <h2 class="slide-h2">AI 에이전트와 함께 개발했습니다</h2>
+    <div class="stat-row">
+      <div class="stat"><div class="stat-v">42</div><div class="stat-k">이슈</div></div>
+      <div class="stat"><div class="stat-v">61</div><div class="stat-k">PR</div></div>
+      <div class="stat"><div class="stat-v">4주</div><div class="stat-k">개발 기간</div></div>
+    </div>
+    <div class="loop-row">
+      <div class="loop-step">계획</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">구현</div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">검증</div>
+    </div>
+  </section>
+
+  <!-- 5. 마무리 CTA -->
+  <section class="slide slide-cta" data-idx="5">
+    <h2 class="slide-h2">지금 스캔해서 써보세요</h2>
+    <svg class="qr-big"><use href="#qr-code"/></svg>
+    <div class="cta-url">syd348.github.io/hub</div>
+  </section>
+
+</div>
+
+<div class="dots">
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</div>
+
+<div class="qr-badge">
+  <svg class="qr-small"><use href="#qr-code"/></svg>
+  <div class="qr-badge-text">지금 스캔해서<br>써보세요</div>
+</div>
+
+<script>
+  // 슬라이드별 노출 시간(ms). 3번(데모)은 monitor-demo.html 한 바퀴(약 21.1초) + 로드 여유.
+  const DURATIONS = [6000, 7000, 9000, 22000, 12000, 6000];
+
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dots = Array.from(document.querySelectorAll('.dot'));
+  const frame = document.getElementById('demo-frame');
+  let current = -1;
+
+  function activate(idx) {
+    slides.forEach((s) => s.classList.toggle('active', Number(s.dataset.idx) === idx));
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    document.body.dataset.slide = String(idx);
+
+    // 데모 슬라이드에 들어올 때마다 iframe을 새로 불러와 항상 웰컴 화면부터 시작한다.
+    if (idx === 3) {
+      frame.src = 'monitor-demo.html?t=' + Date.now();
+    }
+  }
+
+  function tick() {
+    current = (current + 1) % DURATIONS.length;
+    activate(current);
+    setTimeout(tick, DURATIONS[current]);
+  }
+
+  window.addEventListener('load', () => {
+    setTimeout(tick, 300);
+  });
+</script>
+
+</body>
+</html>
