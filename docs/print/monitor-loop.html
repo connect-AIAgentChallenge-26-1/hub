@@ -202,17 +202,6 @@
   }
   .resolve-box b { color: #93C5FD; }
 
-  /* 에이전트 슬라이드 마지막 강조 문구에서도 사용 */
-  .punchline {
-    background: var(--warn-bg);
-    border: 1px solid var(--warn-border);
-    border-radius: 999px;
-    padding: 1.7vh 2.5vw;
-    font-size: clamp(17px, 1.8vw, 27px);
-    font-weight: 600;
-  }
-  .punchline b { color: #FCA5A5; }
-
   /* ---- 2. 핵심기능 — 좌우 두 박스 + 세로 파이프라인 도식 ---- */
   .slide-features { gap: 2vh; }
   .feature-cols { display: flex; gap: 2.4vw; align-items: stretch; justify-content: center; }
@@ -487,44 +476,38 @@
     100% { left: 100%; opacity: 0; }
   }
 
-  /* ---- 5. 에이전트 사용 방식 ---- */
-  .loop-chain {
+  /* ---- 5. AI 에이전트를 어떻게 활용했는가 — 4개 영역으로 구조화 ---- */
+  .agent-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.8vw 1.8vh;
+    width: 82vw;
+  }
+  .agent-area {
+    padding: 2.3vh 2vw;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    gap: 0.9vh 0.6vw;
-    width: 78vw;
+    gap: 0.9vh;
+    text-align: center;
   }
-  .loop-node {
-    background: var(--navy-soft);
-    border-radius: 14px;
-    padding: 1.4vh 1.7vw;
-    font-size: clamp(14px, 1.35vw, 21px);
-    font-weight: 700;
-  }
-  .loop-arrow { color: var(--text-sub); font-size: 1.3vw; }
-  .loop-back {
-    color: var(--blue);
-    font-size: clamp(14px, 1.2vw, 17px);
-    font-weight: 700;
-  }
-  .verify-split { display: flex; gap: 2vw; }
-  .verify-col {
-    padding: 1.9vh 2.5vw;
-    min-width: 20vw;
-  }
-  .verify-tag {
+  .area-tag {
     display: inline-block;
     border-radius: 999px;
-    padding: 0.4vh 1.3vw;
-    font-size: clamp(12px, 1.1vw, 16px);
+    padding: 0.5vh 1.5vw;
+    font-size: clamp(13px, 1.2vw, 18px);
     font-weight: 700;
-    margin-bottom: 0.8vh;
   }
-  .verify-col.auto .verify-tag { background: rgba(34,197,94,0.18); color: #4ADE80; }
-  .verify-col.manual .verify-tag { background: rgba(245,158,11,0.18); color: #FBBF24; }
-  .verify-body { font-size: clamp(15px, 1.4vw, 21px); font-weight: 600; }
+  .agent-area.t1 .area-tag { background: rgba(34,197,94,0.18); color: #4ADE80; }
+  .agent-area.t2 .area-tag { background: rgba(245,158,11,0.18); color: #FBBF24; }
+  .agent-area.t3 .area-tag { background: rgba(6,182,212,0.18); color: #22D3EE; }
+  .agent-area.t4 .area-tag { background: rgba(168,85,247,0.18); color: #C4B5FD; }
+  .area-body {
+    font-size: clamp(14px, 1.25vw, 18px);
+    color: var(--text-sub);
+    line-height: 1.5;
+    font-weight: 500;
+  }
 
   /* ---- 데모(프로토타입 iframe) ---- */
   .slide-demo { gap: 2vh; }
@@ -757,39 +740,29 @@
     </div>
   </section>
 
-  <!-- 5. 에이전트 사용 방식 -->
+  <!-- 5. AI 에이전트를 어떻게 활용했는가 — 4개 영역으로 구조화 -->
   <section class="slide slide-agent" data-idx="5">
     <div class="eyebrow">HOW WE BUILT IT</div>
-    <h2 class="slide-h2">AI 에이전트와 함께 개발했습니다</h2>
+    <h2 class="slide-h2">AI 에이전트를 어떻게 활용했는가</h2>
 
-    <div class="loop-chain">
-      <span class="loop-node reveal" style="--i:0">① 할 일 고르기</span>
-      <span class="loop-arrow">→</span>
-      <span class="loop-node reveal" style="--i:1">② 계획 문서</span>
-      <span class="loop-arrow">→</span>
-      <span class="loop-node reveal" style="--i:2">③ 묶음 승인</span>
-      <span class="loop-arrow">→</span>
-      <span class="loop-node reveal" style="--i:3">④ 구현</span>
-      <span class="loop-arrow">→</span>
-      <span class="loop-node reveal" style="--i:4">⑤ 검증</span>
-      <span class="loop-arrow">→</span>
-      <span class="loop-node reveal" style="--i:5">⑥ 커밋 · PR</span>
-      <span class="loop-arrow">→</span>
-      <span class="loop-node reveal" style="--i:6">⑦ 정리</span>
-      <span class="loop-back reveal" style="--i:7">↺ 다시 ①로</span>
-    </div>
-
-    <div class="verify-split">
-      <div class="verify-col auto glass-card reveal" style="--i:8">
-        <div class="verify-tag">자동 검사</div>
-        <div class="verify-body">빌드 · 테스트 · 린트</div>
+    <div class="agent-grid">
+      <div class="agent-area t1 glass-card reveal" style="--i:0">
+        <div class="area-tag">부분 테스트</div>
+        <div class="area-body">라우트 · 컴포넌트 단위 20개<br>vi.mock으로 DB·네트워크 격리</div>
       </div>
-      <div class="verify-col manual glass-card reveal" style="--i:9">
-        <div class="verify-tag">수동 확인</div>
-        <div class="verify-body">API 호출 · DB 조회 · UI 클릭</div>
+      <div class="agent-area t2 glass-card reveal" style="--i:1">
+        <div class="area-tag">E2E 전체 흐름</div>
+        <div class="area-body">웰컴→온보딩→완료→홈→상세→외부이동<br>골든패스 + 엣지케이스 수동 확인</div>
+      </div>
+      <div class="agent-area t3 glass-card reveal" style="--i:2">
+        <div class="area-tag">에이전트 병렬처리</div>
+        <div class="area-body">이슈마다 독립 워크트리<br>여러 이슈를 동시에, 파일 충돌 없이</div>
+      </div>
+      <div class="agent-area t4 glass-card reveal" style="--i:3">
+        <div class="area-tag">스킬 활용</div>
+        <div class="area-body">issue-workflow: 계획→구현→검증→PR<br>gov-subsidy-design: 디자인 일관성</div>
       </div>
     </div>
-    <div class="punchline reveal" style="--i:10">되돌리기 어려운 작업은 항상 실측부터 — 삭제 전 1,554건 중 <b>86건</b> 먼저 확인</div>
   </section>
 
   <!-- 6. 마무리 CTA -->
