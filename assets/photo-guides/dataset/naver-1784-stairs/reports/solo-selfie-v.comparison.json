@@ -1,0 +1,40 @@
+{
+  "status": "ok",
+  "score": 51.48,
+  "classification": "different",
+  "components": {
+    "position": {
+      "score": 26.59,
+      "weight": 0.45,
+      "available": true
+    },
+    "size": {
+      "score": 96.27,
+      "weight": 0.25,
+      "available": true
+    },
+    "pose": {
+      "score": null,
+      "weight": 0.3,
+      "available": false
+    }
+  },
+  "people": [
+    {
+      "label": "Subject",
+      "positionDistance": 0.256942,
+      "positionScore": 26.59,
+      "sizeDistance": 0.014921,
+      "sizeScore": 96.27,
+      "sharedPoseKeypoints": [
+        "left_shoulder",
+        "nose",
+        "right_shoulder"
+      ],
+      "poseScore": null
+    }
+  ],
+  "warnings": [
+    "Person 1: fewer than four shared pose keypoints."
+  ]
+}

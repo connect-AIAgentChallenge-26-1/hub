@@ -29,6 +29,6 @@ The output PNG has the same dimensions as the source image and contains a buildi
 
 For a couple composition, add two frames: one for each person. Each frame is drawn with its own center line and label.
 
-`buildingOutline` and `backgroundLines` are both supported. The Vision web app uses `backgroundLines` because OpenCV detects separate long line segments rather than one continuous building contour.
+`buildingOutline` and `backgroundLines` are both supported. The interactive registration and comparison prototype is located at `prototype/vision-overlay-studio`; this folder remains a CLI-only PNG generator.
 
 Run `npm test` to validate image dimensions, alpha output, and invalid-coordinate handling.

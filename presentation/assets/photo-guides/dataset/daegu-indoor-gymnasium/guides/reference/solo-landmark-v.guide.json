@@ -1,0 +1,251 @@
+{
+  "kind": "pose_guide",
+  "version": 5,
+  "id": "pose_guide_daegu_indoor_gymnasium_01",
+  "backgroundGuideId": "background_guide_daegu_indoor_gymnasium_01",
+  "sourceImage": "solo-landmark-v.png",
+  "imageSize": {
+    "width": 1255,
+    "height": 936
+  },
+  "orientation": "landscape",
+  "personFrames": [
+    {
+      "x": 0.002689,
+      "y": 0.192038,
+      "width": 0.675701,
+      "height": 0.797168,
+      "label": "Person 1",
+      "confidence": 0.8597
+    }
+  ],
+  "personOutlines": [
+    {
+      "label": "Person 1",
+      "contours": [
+        [
+          [
+            0.094821,
+            0.29594
+          ],
+          [
+            0.078884,
+            0.344017
+          ],
+          [
+            0.080478,
+            0.455128
+          ],
+          [
+            0.117928,
+            0.607906
+          ],
+          [
+            0.132271,
+            0.622863
+          ],
+          [
+            0.148207,
+            0.752137
+          ],
+          [
+            0.141833,
+            0.785256
+          ],
+          [
+            0.086853,
+            0.805556
+          ],
+          [
+            0.079681,
+            0.898504
+          ],
+          [
+            0.075697,
+            0.801282
+          ],
+          [
+            0.055777,
+            0.850427
+          ],
+          [
+            0.060558,
+            0.876068
+          ],
+          [
+            0.00239,
+            0.924145
+          ],
+          [
+            0.0,
+            0.998932
+          ],
+          [
+            0.678088,
+            0.998932
+          ],
+          [
+            0.623108,
+            0.929487
+          ],
+          [
+            0.595219,
+            0.940171
+          ],
+          [
+            0.54741,
+            0.919872
+          ],
+          [
+            0.541036,
+            0.902778
+          ],
+          [
+            0.458964,
+            0.862179
+          ],
+          [
+            0.445418,
+            0.831197
+          ],
+          [
+            0.388048,
+            0.804487
+          ],
+          [
+            0.364143,
+            0.768162
+          ],
+          [
+            0.39761,
+            0.707265
+          ],
+          [
+            0.421514,
+            0.567308
+          ],
+          [
+            0.474104,
+            0.442308
+          ],
+          [
+            0.476494,
+            0.342949
+          ],
+          [
+            0.43506,
+            0.278846
+          ],
+          [
+            0.274104,
+            0.195513
+          ],
+          [
+            0.219124,
+            0.198718
+          ],
+          [
+            0.156972,
+            0.230769
+          ]
+        ]
+      ]
+    }
+  ],
+  "personPoses": [
+    {
+      "label": "Person 1",
+      "keypoints": {
+        "nose": [
+          0.316379,
+          0.569528
+        ],
+        "left_shoulder": [
+          0.545819,
+          0.975603
+        ]
+      },
+      "missingKeypoints": [
+        "right_shoulder",
+        "left_elbow",
+        "right_elbow",
+        "left_wrist",
+        "right_wrist",
+        "left_hip",
+        "right_hip",
+        "left_knee",
+        "right_knee",
+        "left_ankle",
+        "right_ankle"
+      ]
+    }
+  ],
+  "poseSegments": [
+    [
+      "left_shoulder",
+      "right_shoulder"
+    ],
+    [
+      "left_shoulder",
+      "left_elbow"
+    ],
+    [
+      "left_elbow",
+      "left_wrist"
+    ],
+    [
+      "right_shoulder",
+      "right_elbow"
+    ],
+    [
+      "right_elbow",
+      "right_wrist"
+    ],
+    [
+      "left_shoulder",
+      "left_hip"
+    ],
+    [
+      "right_shoulder",
+      "right_hip"
+    ],
+    [
+      "left_hip",
+      "right_hip"
+    ],
+    [
+      "left_hip",
+      "left_knee"
+    ],
+    [
+      "left_knee",
+      "left_ankle"
+    ],
+    [
+      "right_hip",
+      "right_knee"
+    ],
+    [
+      "right_knee",
+      "right_ankle"
+    ]
+  ],
+  "analysisMeta": {
+    "engine": "YOLO11s Pose + SAM2.1 Tiny",
+    "models": {
+      "detector": ".\\models\\yolo11s-pose.pt",
+      "segmenter": ".\\models\\sam2.1_t.pt"
+    },
+    "timingsMs": {
+      "yolo_load": 119.47,
+      "yolo_inference": 2871.34,
+      "sam2_load": 388.69,
+      "sam2_inference": 1619.33,
+      "render": 104.58,
+      "total": 5154.17
+    },
+    "warnings": [
+      "Low-light image: only confidence-qualified pose keypoints are stored."
+    ]
+  }
+}

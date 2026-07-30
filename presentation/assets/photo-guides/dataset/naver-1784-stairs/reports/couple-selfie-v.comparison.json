@@ -1,0 +1,54 @@
+{
+  "status": "ok",
+  "score": 63.17,
+  "classification": "similar",
+  "components": {
+    "position": {
+      "score": 54.25,
+      "weight": 0.45,
+      "available": true
+    },
+    "size": {
+      "score": 79.24,
+      "weight": 0.25,
+      "available": true
+    },
+    "pose": {
+      "score": null,
+      "weight": 0.3,
+      "available": false
+    }
+  },
+  "people": [
+    {
+      "label": "Left person",
+      "positionDistance": 0.069749,
+      "positionScore": 80.07,
+      "sizeDistance": 0.134827,
+      "sizeScore": 66.29,
+      "sharedPoseKeypoints": [
+        "left_shoulder",
+        "nose",
+        "right_shoulder"
+      ],
+      "poseScore": null
+    },
+    {
+      "label": "Right person",
+      "positionDistance": 0.250498,
+      "positionScore": 28.43,
+      "sizeDistance": 0.031288,
+      "sizeScore": 92.18,
+      "sharedPoseKeypoints": [
+        "left_shoulder",
+        "nose",
+        "right_shoulder"
+      ],
+      "poseScore": null
+    }
+  ],
+  "warnings": [
+    "Person 1: fewer than four shared pose keypoints.",
+    "Person 2: fewer than four shared pose keypoints."
+  ]
+}

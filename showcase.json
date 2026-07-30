@@ -1,0 +1,104 @@
+{
+  "project": {
+    "name": "Photo Navigation",
+    "owner": "N030 김병조",
+    "status": "week_3_in_development",
+    "summary": "지도에서 포토스팟과 촬영 프레임을 고르고, 인물 레이아웃 오버레이를 따라 원하는 구도의 사진을 찍도록 돕는 웹앱입니다.",
+    "core_hypothesis": "사용자는 사진을 못 찍는 것보다 어디에서 어떤 구도로 찍을지 몰라 원하는 결과를 얻지 못한다."
+  },
+  "user_flow": [
+    "지도에서 공식 또는 후보 포토스팟을 탐색한다.",
+    "장소 상세에서 예시 사진, 주소, 촬영 팁을 확인한다.",
+    "1인 또는 커플 프레임을 선택한다.",
+    "카메라에서 인물 배치와 관리자 등록 배경선을 오버레이로 맞춘다.",
+    "촬영 사진의 인물 배치를 비교하고 결과를 확인한다.",
+    "사용자는 새 장소와 사진을 후보 포토스팟으로 제안할 수 있다."
+  ],
+  "implemented_features": {
+    "map_and_spots": [
+      "Naver Maps JavaScript API 기반 지도와 포토스팟 마커",
+      "공식/후보 포토스팟 바텀시트 전환",
+      "장소 검색 결과 선택 후 지도 이동",
+      "현재 위치 이동 버튼과 바텀시트 위치 동기화",
+      "포토스팟 상세, 좋아요 UI, 프레임 선택"
+    ],
+    "camera_and_comparison": [
+      "브라우저 카메라 촬영과 셀카 좌우 반전",
+      "인물 윤곽, 인물 프레임, 관리자 등록 배경선 오버레이",
+      "빠른 비교: 촬영 사진의 YOLO Pose 기반 인물 배치 비교",
+      "정확 비교: 인물 배치와 ORB/RANSAC 배경선 비교",
+      "촬영 사진 다운로드"
+    ],
+    "candidate_submission": [
+      "후보 제안 지도에서 장소/주소 검색",
+      "검색 장소의 주소 Geocoding 후 지도 이동",
+      "지도 클릭으로 실제 촬영 위치 미세 조정",
+      "사진 업로드 후 YOLO Pose + SAM2 레이아웃 분석",
+      "제출 시 후보 포토스팟, 촬영 가이드, 사진 Storage 저장",
+      "성공 응답을 즉시 지도 마커와 후보 바텀시트에 반영"
+    ]
+  },
+  "agents": {
+    "overlay_agent": {
+      "role": "예시 사진을 촬영 가이드 데이터로 변환",
+      "input": "예시 사진과 관리자 검수",
+      "output": [
+        "인물 프레임",
+        "인물 윤곽",
+        "YOLO Pose 관절점",
+        "관리자 등록 배경선",
+        "overlay PNG",
+        "layout JSON"
+      ]
+    },
+    "composition_comparison": {
+      "role": "촬영 사진과 기준 레이아웃의 구도 비교",
+      "fast_mode": "촬영 사진에서 YOLO Pose만 실행해 인물 위치·크기·포즈를 비교",
+      "accurate_mode": "인물 비교에 더해 관리자 배경선 주변의 ORB 특징점과 RANSAC Homography를 비교",
+      "principle": "기준 사진은 등록 단계에서 한 번만 분석하고, 촬영 사진만 새로 분석한다."
+    }
+  },
+  "architecture": {
+    "frontend": "React + Vite + Naver Maps JavaScript API",
+    "api": "Express",
+    "database": "Supabase PostgreSQL",
+    "storage": "Supabase Storage photo-guides bucket",
+    "vision": "FastAPI + YOLO11 Pose + SAM2.1 Tiny + OpenCV ORB/RANSAC",
+    "data_flow": "React -> Express API -> Supabase PostgreSQL / Storage, React -> local FastAPI Vision server"
+  },
+  "data_model": {
+    "photo_spots": "장소명, 좌표, 상태(official/candidate), 설명, 촬영 팁을 저장한다.",
+    "photo_guides": "장소별 예시 사진, 오버레이, background_guide_json, pose_guide_json, 프레임 유형을 저장한다.",
+    "candidate_registration": "후보 제안은 photo_spots.status=candidate로 저장하고, 분석 완료 가이드는 photo_guides에 함께 저장한다.",
+    "assets": "원본 사진과 Overlay PNG는 Storage에 저장하고 DB에는 storage path 또는 URL만 저장한다."
+  },
+  "security": [
+    "Naver Maps Client ID는 허용 Web 서비스 URL 제한을 전제로 브라우저에서 사용한다.",
+    "Naver 지역 검색 Client Secret과 Supabase service_role 키는 Express 환경변수에만 저장한다.",
+    "VITE_ 접두사 환경변수에는 Secret을 넣지 않는다.",
+    "후보 사진 업로드는 Express에서 파일 크기와 이미지 MIME 타입을 제한한 뒤 Storage에 저장한다.",
+    "클라이언트는 Supabase service_role 키를 직접 사용하지 않는다."
+  ],
+  "current_scope": {
+    "complete": [
+      "지도, 공식/후보 탐색, 장소 상세, 프레임 선택, 카메라, 비교 화면",
+      "초기 포토스팟과 가이드 데이터의 Supabase 조회",
+      "후보 제안 사진 분석 및 후보 포토스팟 등록 API"
+    ],
+    "next": [
+      "후보 좋아요의 실제 DB 저장과 중복 좋아요 방지",
+      "관리자 검토와 후보의 공식 포토스팟 승격",
+      "네이버 로그인으로 제안자와 좋아요 사용자 연결",
+      "Vercel 프런트엔드와 별도 Express/Vision 서버 배포",
+      "실사용 사진 기준 분석 속도와 품질 검증"
+    ]
+  },
+  "repository_paths": {
+    "web": "apps/web",
+    "api": "apps/api",
+    "vision_server": "tools/yolo-sam2-overlay",
+    "overlay_tool": "tools/overlay-agent",
+    "photo_assets": "assets/photo-guides",
+    "database_migrations": "supabase/migrations"
+  }
+}

@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>photo_guide_preview</title>
+  <style>
+    :root { --green:#03c75a; --ink:#1f2521; --muted:#6c756e; --line:#dfe5e0; --bg:#f4f7f4; }
+    * { box-sizing:border-box; } body { margin:0; color:var(--ink); background:var(--bg); font-family:Arial,"Malgun Gothic",sans-serif; }
+    main { max-width:1280px; margin:0 auto; padding:32px; } h1,h2 { margin:0; } h1 { font-size:24px; } h2 { font-size:15px; }
+    .eyebrow { margin:0 0 6px; color:#009d4a; font-size:12px; font-weight:700; }.workspace { display:grid; grid-template-columns:210px minmax(0,1fr); gap:18px; margin-top:24px; }.selector { padding:16px; border:1px solid var(--line); border-radius:8px; background:#fff; }.selector h2 { margin:0 0 10px; font-size:14px; }.tabs { display:grid; gap:7px; margin-bottom:20px; }.tab { padding:10px 12px; border:1px solid var(--line); border-radius:7px; color:var(--ink); background:#fff; cursor:pointer; font-weight:700; text-align:left; }.tab.active { border-color:var(--green); color:#fff; background:var(--green); }.photo-tabs { display:grid; grid-template-columns:repeat(2,1fr); gap:7px; }.photo-tab { min-height:38px; border:1px solid var(--line); border-radius:6px; color:var(--ink); background:#fff; cursor:pointer; font-size:12px; font-weight:700; }.photo-tab.active { border-color:var(--green); color:#009d4a; background:#f2fff6; }.photo-tab.pending { color:#9aa39d; background:#fafbfa; }
+    .meta { display:flex; justify-content:space-between; gap:12px; margin-bottom:12px; color:var(--muted); font-size:13px; }.grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }.panel { overflow:hidden; border:1px solid var(--line); border-radius:8px; background:#fff; }.panel-head { padding:14px 16px; border-bottom:1px solid var(--line); }.panel-head p { margin:5px 0 0; color:var(--muted); font-size:12px; }.stage { display:grid; min-height:560px; place-items:center; background:#f6f8f6; }.stage img,.stage canvas { display:block; max-width:100%; max-height:650px; object-fit:contain; }.legend { display:flex; gap:14px; padding:12px 16px; border-top:1px solid var(--line); color:var(--muted); font-size:12px; }.dot { display:inline-block; width:9px; height:9px; margin-right:5px; border-radius:50%; }.yellow { background:#e1b800; }.green { background:#03c75a; }.cyan { background:#1485ff; }
+    .pending-stage { color:var(--muted); font-size:14px; text-align:center; }.pending-stage strong { display:block; margin-bottom:8px; color:#526159; } @media(max-width:720px){main{padding:20px 16px}.workspace,.grid{grid-template-columns:1fr}.selector{display:grid;grid-template-columns:1fr 1fr;gap:14px}.tabs{margin:0}.stage{min-height:350px}}
+  </style>
+</head>
+<body>
+  <main>
+    <p class="eyebrow">Photo Navigation · Guide Preview</p>
+    <h1>사진별 background_guide + pose_guide 확인</h1>
+    <section class="workspace">
+      <aside class="selector"><div><p class="eyebrow">background</p><h2>장소 선택</h2><div class="tabs" id="tabs"></div></div><div><p class="eyebrow">photo</p><h2>사진 01 ~ 10</h2><div class="photo-tabs" id="photo-tabs"></div></div></aside>
+      <section><div class="meta"><span id="photo-id"></span><span id="status">가이드 불러오는 중</span></div>
+        <section class="grid">
+          <article class="panel"><div class="panel-head"><h2>원본 사진</h2><p>등록 사진 1장</p></div><div class="stage" id="source-stage"><img id="source-image" alt="등록 사진" /></div></article>
+          <article class="panel"><div class="panel-head"><h2>사진 + 가이드</h2><p>background_guide와 pose_guide 합성</p></div><div class="stage" id="guide-stage"><canvas id="guide-canvas"></canvas></div><div class="legend"><span><i class="dot yellow"></i>background_guide</span><span><i class="dot green"></i>인물 실루엣</span><span><i class="dot cyan"></i>YOLO Pose</span></div></article>
+        </section>
+      </section>
+    </section>
+  </main>
+  <script>
+    const photos = [
+      { id:"daegu-modern-history-museum", guideId:"daegu_modern_history_museum", name:"대구 근대역사관" },
+      { id:"daegu-sparkland-wheel", guideId:"daegu_sparkland_wheel", name:"대구 스파크랜드 관람차" },
+      { id:"naver-1784-stairs", guideId:"naver_1784_stairs", name:"네이버 1784 계단" },
+      { id:"daegu-indoor-gymnasium", guideId:"daegu_indoor_gymnasium", name:"대구 실내 체육관", photoSlots:[{number:1,variant:"solo-landmark-v",kind:"reference",guide:true}] }
+    ];
+    const variants=["couple-landmark-v","couple-selfie-v","couple-wide-v","solo-selfie-v","solo-wide-v"];
+    const segments=[["left_shoulder","right_shoulder"],["left_shoulder","left_elbow"],["left_elbow","left_wrist"],["right_shoulder","right_elbow"],["right_elbow","right_wrist"],["left_shoulder","left_hip"],["right_shoulder","right_hip"],["left_hip","right_hip"],["left_hip","left_knee"],["left_knee","left_ankle"],["right_hip","right_knee"],["right_knee","right_ankle"]];
+    const tabs=document.querySelector("#tabs"), photoTabs=document.querySelector("#photo-tabs"), source=document.querySelector("#source-image"), canvas=document.querySelector("#guide-canvas"), ctx=canvas.getContext("2d");
+    let selected=0, selectedPhoto=1;
+    function draw(image,guide,backgroundGuide){
+      canvas.width=image.naturalWidth; canvas.height=image.naturalHeight; ctx.drawImage(image,0,0); const w=canvas.width,h=canvas.height,unit=Math.min(w,h);ctx.lineCap="round";ctx.lineJoin="round";
+      ctx.strokeStyle="#ffe94a";ctx.lineWidth=Math.max(3,unit*.006);(backgroundGuide.backgroundLines||[]).forEach(line=>{const [a,b]=[line.start,line.end];if(!a||!b)return;ctx.beginPath();ctx.moveTo(a[0]*w,a[1]*h);ctx.lineTo(b[0]*w,b[1]*h);ctx.stroke();});
+      ctx.strokeStyle="#3dffae";ctx.lineWidth=Math.max(3,unit*.005);(guide.personOutlines||[]).forEach(outline=>(outline.contours||[]).forEach(points=>{if(points.length<3)return;ctx.beginPath();ctx.moveTo(points[0][0]*w,points[0][1]*h);points.slice(1).forEach(p=>ctx.lineTo(p[0]*w,p[1]*h));ctx.closePath();ctx.stroke();}));
+      ctx.strokeStyle="#1485ff";ctx.lineWidth=Math.max(2,unit*.003);(guide.personPoses||[]).forEach(pose=>segments.forEach(([a,b])=>{const x=pose.keypoints?.[a],y=pose.keypoints?.[b];if(!x||!y)return;ctx.beginPath();ctx.moveTo(x[0]*w,x[1]*h);ctx.lineTo(y[0]*w,y[1]*h);ctx.stroke();}));
+    }
+    async function select(index, slot=1){
+      selected=index;selectedPhoto=slot;const place=photos[index],selection=place.photoSlots?.find(item=>item.number===slot) ?? {number:slot,variant:variants[(slot-1)%5],kind:slot<=5?"reference":"comparison",guide:true},variant=selection.variant,kind=selection.kind,base="assets/photo-guides/dataset/"+place.id,number=String(selection.number).padStart(2,"0");const photo={...place,id:place.id+"_"+number,image:base+"/images/"+kind+"/"+variant+".png",guide:selection.guide===null?null:base+"/guides/"+kind+"/"+variant+".guide.json",backgroundGuide:"assets/photo-guides/background-guides/"+place.guideId+"/background_guide_"+place.guideId+"_"+number+".json"};tabs.innerHTML=photos.map((item,i)=>`<button class="tab ${i===index?"active":""}" data-index="${i}">${item.name}</button>`).join("");document.querySelectorAll(".tab").forEach(button=>button.onclick=()=>select(Number(button.dataset.index),1));
+      const slots=place.photoSlots?.map(item=>item.number) ?? Array.from({length:10},(_,i)=>i+1);photoTabs.innerHTML=slots.map(n=>`<button class="photo-tab ${n===slot?"active":""}" data-slot="${n}">${String(n).padStart(2,"0")}</button>`).join("");document.querySelectorAll(".photo-tab").forEach(button=>button.onclick=()=>select(selected,Number(button.dataset.slot)));
+      document.querySelector("#photo-id").textContent=photo.id;document.querySelector("#status").textContent=kind+" · "+variant+" 가이드 불러오는 중";
+      document.querySelector("#source-stage").innerHTML='';document.querySelector("#source-stage").appendChild(source);document.querySelector("#guide-stage").innerHTML='';document.querySelector("#guide-stage").appendChild(canvas);source.style.display="block";canvas.style.display="block";
+      source.src=photo.image;
+      const freshJson=path=>fetch(path+"?v="+Date.now(),{cache:"no-store"}).then(r=>{if(!r.ok)throw new Error("guide not found");return r.json();});
+      const emptyPoseGuide={id:"pose_guide_pending",personFrames:[],personOutlines:[],personPoses:[]};const [guide,backgroundGuide,image]=await Promise.all([photo.guide?freshJson(photo.guide):Promise.resolve(emptyPoseGuide),freshJson(photo.backgroundGuide),new Promise((resolve,reject)=>{const x=new Image();x.onload=()=>resolve(x);x.onerror=reject;x.src=photo.image;})]);draw(image,guide,backgroundGuide);document.querySelector("#status").textContent=photo.guide?`${backgroundGuide.id} + ${guide.id||kind+" "+variant+" guide"}`:`${backgroundGuide.id} · pose_guide 생성 전`;
+    }
+    document.addEventListener("visibilitychange",()=>{if(!document.hidden)select(selected,selectedPhoto);});
+    select(selected);
+  </script>
+</body>
+</html>

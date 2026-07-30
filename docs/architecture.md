@@ -3,20 +3,22 @@
 ## Development Structure
 
 ```text
-apps/web  -> React user interface
-apps/api  -> Express API server
-Supabase  -> shooting-plan data storage
+apps/web                    -> React user interface
+apps/api                    -> Express API server
+tools/yolo-sam2-overlay     -> reference guide and composition analysis service
+prototype/vision-overlay-studio -> administrator registration and comparison prototype
+Supabase                    -> spot, frame, guide metadata and image URLs
+presentation                -> static project reports
 ```
 
 ## Next Vertical Slice
 
 ```text
-React frame selection
--> POST /shoot-plans
+React map
+-> GET /photo-spots
 -> Express validation
--> Supabase shoot_plans
--> GET /shoot-plans
--> saved-plan list UI
+-> Supabase photo_spots + photo_guides
+-> map marker and spot detail UI
 ```
 
-The map, camera overlay, and image similarity features remain outside the first vertical slice.
+The first data slice keeps camera analysis outside the request path. The registration prototype uses YOLO Pose + SAM2 once to prepare approved `guide_json` and Overlay PNG files. Later comparison uses stored pose data plus YOLO Pose on the captured photo; ORB/RANSAC is restricted to administrator-approved background-line corridors.

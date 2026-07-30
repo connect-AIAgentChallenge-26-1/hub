@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import os
 import threading
 import time
 from pathlib import Path
@@ -11,6 +12,7 @@ import cv2
 import numpy as np
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.concurrency import run_in_threadpool
+from fastapi.middleware.cors import CORSMiddleware
 from PIL import Image, ImageOps, UnidentifiedImageError
 from ultralytics import SAM, YOLO
 
@@ -26,18 +28,37 @@ MAX_GUIDE_BYTES = 512 * 1024
 ALLOWED_CONTENT_TYPES = {"image/jpeg", "image/png", "image/webp"}
 
 app = FastAPI(title="Photo Navigation YOLO + SAM2 API", version="0.1.0")
+allowed_origins = [
+    origin.strip()
+    for origin in os.getenv("VISION_ALLOWED_ORIGINS", "http://127.0.0.1:5173,http://localhost:5173").split(",")
+    if origin.strip()
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=False,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
+)
 model_lock = threading.Lock()
 inference_lock = threading.Lock()
 models: dict[str, Any] = {}
 
 
-def get_models() -> tuple[YOLO, SAM]:
+def get_yolo_model() -> YOLO:
     with model_lock:
-        if not models:
+        if "yolo" not in models:
             YOLO_MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
             models["yolo"] = YOLO(str(YOLO_MODEL_PATH))
+        return models["yolo"]
+
+
+def get_sam_model() -> SAM:
+    with model_lock:
+        if "sam" not in models:
+            SAM_MODEL_PATH.parent.mkdir(parents=True, exist_ok=True)
             models["sam"] = SAM(str(SAM_MODEL_PATH))
-        return models["yolo"], models["sam"]
+        return models["sam"]
 
 
 def mask_contours(mask: np.ndarray, width: int, height: int) -> list[list[list[float]]]:
@@ -58,12 +79,12 @@ def mask_contours(mask: np.ndarray, width: int, height: int) -> list[list[list[f
     return normalized
 
 
-def analyze_image(image_path: Path, max_people: int) -> dict[str, Any]:
+def analyze_image(image_path: Path, max_people: int, include_masks: bool = True) -> dict[str, Any]:
     started = time.perf_counter()
     with Image.open(image_path) as source:
         width, height = source.size
 
-    yolo, sam = get_models()
+    yolo = get_yolo_model()
     detect_started = time.perf_counter()
     with inference_lock:
         detections, prompts = detect_people_with_pose(
@@ -83,19 +104,26 @@ def analyze_image(image_path: Path, max_people: int) -> dict[str, Any]:
                 "required_people": max_people,
             }
 
-        segment_started = time.perf_counter()
-        sam_results = sam(str(image_path), bboxes=prompts, device="cpu", verbose=False)
-        masks = extract_masks(sam_results[0], width, height)
-        segment_ms = round((time.perf_counter() - segment_started) * 1000, 2)
+        if include_masks:
+            segment_started = time.perf_counter()
+            sam = get_sam_model()
+            sam_results = sam(str(image_path), bboxes=prompts, device="cpu", verbose=False)
+            masks = extract_masks(sam_results[0], width, height)
+            segment_ms = round((time.perf_counter() - segment_started) * 1000, 2)
+        else:
+            masks = []
+            segment_ms = 0.0
 
-    if len(masks) < max_people:
+    if include_masks and len(masks) < max_people:
         return {
             "status": "segmentation_failed",
             "detected_people": len(detections),
             "mask_count": len(masks),
         }
 
-    paired = sorted(zip(detections, masks, strict=False), key=lambda item: item[0].box_xyxy[0])
+    paired = sorted(zip(detections, masks, strict=False), key=lambda item: item[0].box_xyxy[0]) if include_masks else [
+        (detection, None) for detection in sorted(detections, key=lambda detection: detection.box_xyxy[0])
+    ]
     person_frames = []
     person_outlines = []
     person_poses = []
@@ -113,9 +141,10 @@ def analyze_image(image_path: Path, max_people: int) -> dict[str, Any]:
                 "confidence": detection.confidence,
             }
         )
-        person_outlines.append(
-            {"label": label, "contours": mask_contours(mask, width, height)}
-        )
+        if mask is not None:
+            person_outlines.append(
+                {"label": label, "contours": mask_contours(mask, width, height)}
+            )
         person_poses.append(
             {
                 "label": label,
@@ -135,7 +164,7 @@ def analyze_image(image_path: Path, max_people: int) -> dict[str, Any]:
         "personOutlines": person_outlines,
         "personPoses": person_poses,
         "warnings": warnings,
-        "models": {"detector": YOLO_MODEL_PATH.name, "segmenter": SAM_MODEL_PATH.name},
+        "models": {"detector": YOLO_MODEL_PATH.name, "segmenter": SAM_MODEL_PATH.name if include_masks else None},
         "timings_ms": {
             "yolo_inference": detect_ms,
             "sam2_inference": segment_ms,
@@ -191,6 +220,15 @@ async def read_guide(file: UploadFile) -> dict[str, Any]:
             raise HTTPException(status_code=422, detail="guide.json의 인물 프레임 좌표가 올바르지 않습니다.")
         if frame["x"] + frame["width"] > 1 or frame["y"] + frame["height"] > 1:
             raise HTTPException(status_code=422, detail="guide.json의 인물 프레임이 이미지 범위를 벗어났습니다.")
+
+    poses = guide.get("personPoses", [])
+    if poses and (not isinstance(poses, list) or len(poses) != len(frames)):
+        raise HTTPException(status_code=422, detail="guide.json의 인물 관절점 수가 인물 프레임과 일치하지 않습니다.")
+    for pose in poses:
+        if not isinstance(pose, dict) or not isinstance(pose.get("keypoints"), dict):
+            raise HTTPException(status_code=422, detail="guide.json의 인물 관절점 형식이 올바르지 않습니다.")
+        if not all(_is_unit_point(point) for point in pose["keypoints"].values()):
+            raise HTTPException(status_code=422, detail="guide.json의 인물 관절점 좌표가 올바르지 않습니다.")
 
     lines = guide.get("backgroundLines", [])
     if not isinstance(lines, list) or len(lines) > 5:
@@ -251,23 +289,38 @@ async def analyze(
 
 @app.post("/api/compare")
 async def compare(
-    reference_file: Annotated[UploadFile, File(...)],
     guide_file: Annotated[UploadFile, File(...)],
     captured_file: Annotated[UploadFile, File(...)],
+    reference_file: Annotated[UploadFile | None, File()] = None,
+    comparison_mode: Annotated[str, Form(pattern="^(fast|accurate)$")] = "fast",
 ) -> dict[str, Any]:
     guide = await read_guide(guide_file)
     expected_people = len(guide["personFrames"])
+    include_background = comparison_mode == "accurate"
+    if include_background and reference_file is None:
+        raise HTTPException(status_code=422, detail="정확 모드에서는 예시 사진이 필요합니다.")
 
     with TemporaryDirectory(prefix="photo-navigation-compare-") as temp_dir:
         directory = Path(temp_dir)
-        reference_path = await normalize_upload(reference_file, directory, "reference")
         captured_path = await normalize_upload(captured_file, directory, "captured")
-        reference_layout = await run_in_threadpool(analyze_image, reference_path, expected_people)
-        if reference_layout["status"] != "ok":
-            raise HTTPException(status_code=422, detail="예시 사진에서 guide.json과 같은 인물 수를 찾지 못했습니다.")
-        captured_layout = await run_in_threadpool(analyze_image, captured_path, expected_people)
+        # Comparison is intentionally YOLO Pose only. SAM2 belongs to guide registration,
+        # where its silhouette is approved and saved in guide.json.
+        captured_layout = await run_in_threadpool(analyze_image, captured_path, expected_people, False)
         if captured_layout["status"] != "ok":
-            raise HTTPException(status_code=422, detail="촬영 사진에서 guide.json과 같은 인물 수를 찾지 못했습니다.")
+            # A failed YOLO detection is a valid comparison result, not a
+            # request error. The composition scorer returns 0 for this case.
+            captured_layout = {"status": "not_detected", "personFrames": [], "personPoses": [], "personOutlines": []}
+
+        reference_path = None
+        reference_layout = None
+        if include_background and reference_file is not None:
+            reference_path = await normalize_upload(reference_file, directory, "reference")
+            # The approved guide already contains reference silhouettes and pose data.
+            # Do not re-run YOLO or SAM2 on the reference image during comparison.
+            reference_layout = guide
+            if reference_layout["status"] != "ok":
+                raise HTTPException(status_code=422, detail="예시 사진에서 guide.json과 같은 인물 수를 찾지 못했습니다.")
+
         result = await run_in_threadpool(
             compare_composition,
             reference_path,
@@ -275,5 +328,6 @@ async def compare(
             guide,
             reference_layout,
             captured_layout,
+            include_background,
         )
     return result

@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>background_guides_editor</title>
+  <style>
+    :root { --green:#03c75a; --ink:#1f2521; --muted:#6c756e; --line:#dfe5e0; --bg:#f4f7f4; }
+    * { box-sizing:border-box; } body { margin:0; color:var(--ink); background:var(--bg); font-family:Arial,"Malgun Gothic",sans-serif; }
+    .app { max-width:1500px; margin:0 auto; padding:34px; } header { display:flex; align-items:center; gap:12px; margin-bottom:26px; } .mark { display:grid; width:38px; height:38px; place-items:center; border-radius:8px; color:#fff; background:var(--green); font-weight:800; } .eyebrow { margin:0 0 4px; color:#009d4a; font-size:12px; font-weight:700; } h1 { margin:0; font-size:22px; } h2 { margin:0; font-size:18px; }
+    .layout { display:grid; grid-template-columns:240px minmax(0,1fr) 260px; gap:18px; align-items:start; } .panel { border:1px solid var(--line); border-radius:8px; background:#fff; }
+    .locations,.actions { padding:18px; } .locations h2,.actions h2 { margin-bottom:15px; font-size:16px; } .location { display:grid; width:100%; gap:5px; margin:8px 0; padding:13px; border:1px solid var(--line); border-radius:7px; color:var(--ink); background:#fff; cursor:pointer; text-align:left; } .location.active { border-color:var(--green); background:#f2fff6; } .location strong { font-size:13px; } .location span { color:var(--muted); font-size:12px; }.photo-picker{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:16px}.photo-picker button{min-height:34px;border:1px solid var(--line);border-radius:6px;color:var(--ink);background:#fff;cursor:pointer;font-size:12px;font-weight:700}.photo-picker button.active{border-color:var(--green);color:#009d4a;background:#f2fff6}
+    .canvas-head { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 18px; border-bottom:1px solid var(--line); }.canvas-head h2 { margin-top:2px; }.tag { padding:5px 9px; border:1px solid #a6e3bf; border-radius:999px; color:#009d4a; background:#f5fff8; font-size:12px; font-weight:700; }.description,.message { margin:0; padding:12px 18px; color:var(--muted); font-size:13px; }.stage { display:grid; min-height:550px; place-items:center; background:#f5f7f5; }.stage canvas { display:block; max-width:100%; max-height:650px; cursor:crosshair; }.message { border-top:1px solid var(--line); }
+    .actions { display:grid; gap:14px; }.result { display:grid; gap:12px; margin:0; padding:0; list-style:none; }.result li { display:grid; gap:4px; padding:12px; border-left:3px solid var(--green); background:#f5fff8; }.result strong { font-size:13px; }.result span,.actions p { color:var(--muted); font-size:12px; line-height:1.55; }.actions code { color:#009d4a; }.button { min-height:44px; border-radius:7px; cursor:pointer; font-weight:700; }.undo { border:1px solid #c5ccc7; color:#526159; background:#fff; }.save { border:1px solid var(--green); color:#fff; background:var(--green); }.button:disabled { cursor:not-allowed; opacity:.45; }
+    @media(max-width:980px){.layout{grid-template-columns:1fr}.locations{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.locations .eyebrow,.locations h2{grid-column:1/-1}.location{margin:0}.stage{min-height:400px}} @media(max-width:620px){.app{padding:20px 16px}.locations{grid-template-columns:1fr}.stage{min-height:300px}}
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header><div class="mark">P</div><div><p class="eyebrow">Photo Navigation · Background Guide</p><h1>사진별 배경선 등록</h1></div></header>
+    <section class="layout">
+      <aside class="panel locations"><p class="eyebrow">장소와 사진을 선택해 각각 등록</p><h2>배경 가이드 선택</h2><div id="location-list"></div><div class="photo-picker" id="photo-picker"></div></aside>
+      <section class="panel">
+        <div class="canvas-head"><div><p class="eyebrow" id="guide-id"></p><h2 id="location-title"></h2></div><span class="tag" id="line-count"></span></div>
+        <p class="description" id="location-description"></p><div class="stage"><canvas id="canvas"></canvas></div><p class="message" id="message"></p>
+      </section>
+      <aside class="panel actions"><h2>저장 결과</h2><ol class="result"><li><strong>선택한 사진의 background_guide 1개</strong><span id="background-name"></span></li></ol><p>이 페이지는 배경선만 저장합니다. pose_guide는 별도의 Overlay 분석 결과로 관리합니다.</p><button class="button undo" id="undo" disabled>최근 선 되돌리기</button><button class="button save" id="save" disabled>선택 사진 background_guide 저장</button></aside>
+    </section>
+  </main>
+  <script>
+    const locations = [
+      { id:"daegu-modern-history-museum", guideId:"daegu_modern_history_museum", name:"대구 근대역사관", description:"건물 외곽과 지붕선을 기준으로 등록" },
+      { id:"daegu-sparkland-wheel", guideId:"daegu_sparkland_wheel", name:"대구 스파크랜드 관람차", description:"관람차 원형과 난간선을 기준으로 등록" },
+      { id:"naver-1784-stairs", guideId:"naver_1784_stairs", name:"네이버 1784 계단", description:"계단 경계와 건물 수직선을 기준으로 등록" },
+      { id:"daegu-indoor-gymnasium", guideId:"daegu_indoor_gymnasium", name:"대구 실내 체육관", description:"돔 경기장 외곽과 주변 건물선을 기준으로 등록", photoSlots:[{number:1,variant:"solo-landmark-v",kind:"reference"}] }
+    ];
+    const variants=["couple-landmark-v","couple-selfie-v","couple-wide-v","solo-selfie-v","solo-wide-v"];
+    const state = { active:locations[0].id, slot:1, lines:{}, draft:null, image:null };
+    const $ = id => document.getElementById(id);
+    const active = () => locations.find(x=>x.id===state.active);
+    const guideKey = () => `${state.active}_${String(state.slot).padStart(2,"0")}`;
+    const lines = () => state.lines[guideKey()] || [];
+    const currentPhoto = () => { const place=active(),selected=place.photoSlots?.find(item=>item.number===state.slot) ?? {number:state.slot,variant:variants[(state.slot-1)%5],kind:state.slot<=5?"reference":"comparison"},number=String(selected.number).padStart(2,"0"),base=`assets/photo-guides/dataset/${place.id}`; return { image:`${base}/images/${selected.kind}/${selected.variant}.png`, guide:`assets/photo-guides/background-guides/${place.guideId}/background_guide_${place.guideId}_${number}.json`, number, variant:selected.variant, kind:selected.kind }; };
+    function draw() {
+      if (!state.image) return;
+      const canvas=$("canvas"), image=state.image, ctx=canvas.getContext("2d");
+      canvas.width=image.naturalWidth; canvas.height=image.naturalHeight; ctx.drawImage(image,0,0);
+      ctx.fillStyle="rgba(16,29,21,.15)"; ctx.fillRect(0,0,canvas.width,canvas.height);
+      ctx.strokeStyle="#ffe94a"; ctx.lineCap="round"; ctx.lineWidth=Math.max(4,Math.round(Math.min(canvas.width,canvas.height)*.006));
+      lines().forEach(line=>{ctx.beginPath();ctx.moveTo(line.start[0]*canvas.width,line.start[1]*canvas.height);ctx.lineTo(line.end[0]*canvas.width,line.end[1]*canvas.height);ctx.stroke();});
+      if(state.draft){ctx.fillStyle="#ff2da6";ctx.beginPath();ctx.arc(state.draft.x*canvas.width,state.draft.y*canvas.height,11,0,Math.PI*2);ctx.fill();}
+    }
+    function update(message="사진 위에서 시작점과 끝점을 차례로 클릭하세요.") {
+      const place=active(),photo=currentPhoto(); $("location-list").innerHTML=locations.map(item=>`<button class="location ${item.id===state.active?"active":""}" data-id="${item.id}"><strong>${item.name}</strong><span>사진별 배경선 등록</span></button>`).join("");
+      document.querySelectorAll(".location").forEach(button=>button.onclick=()=>{state.active=button.dataset.id;state.slot=1;state.draft=null;load();});
+      const slots=place.photoSlots?.map(item=>item.number) ?? Array.from({length:10},(_,i)=>i+1); $("photo-picker").innerHTML=slots.map(slot=>`<button class="${slot===state.slot?"active":""}" data-slot="${slot}">${String(slot).padStart(2,"0")}</button>`).join("");document.querySelectorAll("#photo-picker button").forEach(button=>button.onclick=()=>{state.slot=Number(button.dataset.slot);state.draft=null;load();});
+      $("guide-id").textContent=`background_guide: ${place.id} · 사진 ${photo.number}`; $("location-title").textContent=place.name; $("location-description").textContent=`${place.description} · ${photo.kind} / ${photo.variant}`; $("line-count").textContent=`배경선 ${lines().length}개`; $("background-name").textContent=`background_guide_${place.guideId}_${photo.number}.json`; $("message").textContent=message; $("undo").disabled=!state.draft&&!lines().length; $("save").disabled=!lines().length; draw();
+    }
+    async function load() { const photo=currentPhoto(),key=guideKey(); state.image=null;update("사진과 기존 배경 가이드를 불러오는 중입니다."); try{const response=await fetch(photo.guide+"?v="+Date.now(),{cache:"no-store"}); if(response.ok){const data=await response.json();state.lines[key]=data.backgroundLines||[];}else if(!state.lines[key]){state.lines[key]=[];}}catch{if(!state.lines[key])state.lines[key]=[];} const image=new Image(); image.onload=()=>{state.image=image;update();}; image.src=photo.image; }
+    function point(event) { const r=event.currentTarget.getBoundingClientRect(); return {x:Math.min(1,Math.max(0,(event.clientX-r.left)/r.width)),y:Math.min(1,Math.max(0,(event.clientY-r.top)/r.height))}; }
+    $("canvas").onclick=event=>{const p=point(event);if(!state.draft){state.draft=p;update("시작점을 저장했습니다. 배경선의 끝점을 클릭하세요.");return;}const dx=p.x-state.draft.x,dy=p.y-state.draft.y;if(Math.hypot(dx,dy)<.006){update("시작점과 충분히 떨어진 위치를 클릭하세요.");return;}lines().push({id:"line-"+(lines().length+1),start:[+state.draft.x.toFixed(6),+state.draft.y.toFixed(6)],end:[+p.x.toFixed(6),+p.y.toFixed(6)]});state.draft=null;update(active().name+" 배경선을 저장했습니다.");};
+    $("undo").onclick=()=>{if(state.draft)state.draft=null;else lines().pop();update("최근 선택을 되돌렸습니다.");};
+    $("save").onclick=async()=>{const place=active(),photo=currentPhoto(),id=`background_guide_${place.guideId}_${photo.number}`,fileName=id+".json",guide={kind:"background_guide",version:5,id,sceneId:place.id,sourceImage:photo.image.split("/").pop(),horizonY:.62,backgroundLines:lines()};$("save").disabled=true;update("프로젝트 가이드 파일을 저장하는 중입니다.");try{const response=await fetch("/api/background-guides",{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({fileName,guide})});if(!response.ok)throw new Error("save failed");state.lines[guideKey()]=guide.backgroundLines;update(`${place.name} 사진 ${photo.number}: 프로젝트 JSON을 교체했습니다. Preview 탭으로 돌아가면 자동 반영됩니다.`);}catch{update("저장에 실패했습니다. local-guide-server.mjs로 페이지를 열었는지 확인하세요.");}finally{$("save").disabled=!lines().length;}};
+    load();
+  </script>
+</body>
+</html>

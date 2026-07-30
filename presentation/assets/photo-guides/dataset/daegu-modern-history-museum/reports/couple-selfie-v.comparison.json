@@ -1,0 +1,55 @@
+{
+  "status": "ok",
+  "score": 82.64,
+  "classification": "high_similarity",
+  "components": {
+    "position": {
+      "score": 84.98,
+      "weight": 0.45,
+      "available": true
+    },
+    "size": {
+      "score": 73.71,
+      "weight": 0.25,
+      "available": true
+    },
+    "pose": {
+      "score": 86.58,
+      "weight": 0.3,
+      "available": true
+    }
+  },
+  "people": [
+    {
+      "label": "Left person",
+      "positionDistance": 0.060459,
+      "positionScore": 82.73,
+      "sizeDistance": 0.119437,
+      "sizeScore": 70.14,
+      "sharedPoseKeypoints": [
+        "left_elbow",
+        "left_shoulder",
+        "left_wrist",
+        "nose",
+        "right_shoulder"
+      ],
+      "poseScore": 89.31
+    },
+    {
+      "label": "Right person",
+      "positionDistance": 0.044674,
+      "positionScore": 87.24,
+      "sizeDistance": 0.090875,
+      "sizeScore": 77.28,
+      "sharedPoseKeypoints": [
+        "left_elbow",
+        "left_shoulder",
+        "left_wrist",
+        "nose",
+        "right_shoulder"
+      ],
+      "poseScore": 83.85
+    }
+  ],
+  "warnings": []
+}

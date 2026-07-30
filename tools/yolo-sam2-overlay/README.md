@@ -16,11 +16,11 @@ It is for preparing reference-frame data, not real-time user coaching. A person 
 
 ## Composition comparison module
 
-`src/composition_compare.py` is a reusable, model-independent comparison module. The FastAPI `POST /api/compare` route accepts a reference image, an approved `guide.json`, and a captured image.
+`src/composition_compare.py` is a reusable comparison module. The FastAPI `POST /api/compare` route uses `guide.json` as the approved reference layout.
 
-- Person layout: count, normalized center position, and height
-- Background layout: ORB feature matching outside person masks, RANSAC homography, and manually registered line endpoint and angle differences
-- If the background match is weak, the API returns `limited` without a final composition score.
+- Fast mode: stored YOLO pose keypoints versus newly detected pose keypoints. It compares people count, normalized placement, torso scale, and shared pose shape without re-analyzing the reference image.
+- Background-line mode: an optional reference image enables ORB feature matching only around administrator-approved background lines, RANSAC homography, and registered line endpoint and angle differences. The reference is not re-analyzed; its approved silhouettes come from `guide.json`.
+- If the background match is weak, the API still returns the fast pose score and marks the background result as limited.
 
 All uploaded images are normalized and processed inside a temporary directory, then removed before the response is returned.
 
@@ -82,6 +82,6 @@ Pose lines are an overall composition guide only. The tool does not analyse faci
 
 ## Integration boundary
 
-This tool is intentionally independent from the product React app. The local Studio calls the FastAPI endpoint and downloads approved `guide.json` and Overlay PNG files. A future registration module will upload those approved files to Supabase Storage and save their URLs and metadata in the database.
+This tool is intentionally independent from the product React app. The local Studio lives in `prototype/vision-overlay-studio`, calls this FastAPI endpoint, and downloads approved `guide.json` and Overlay PNG files. A future registration module will upload those approved files to Supabase Storage and save their URLs and metadata in the database.
 
 The first run needs internet access for model download. Input photos are processed locally and are not sent to an external Vision API.
