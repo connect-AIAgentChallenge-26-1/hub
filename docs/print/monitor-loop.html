@@ -427,17 +427,25 @@
   .org-name { font-size: clamp(16px, 1.6vw, 22px); font-weight: 800; }
   .org-desc { font-size: clamp(12px, 1.05vw, 15px); color: var(--text-sub); }
 
-  /* 3열(Code/Test/Docs) × 4행(에이전트/체인/병합/최종) 그리드 — 모든 칸을
-     grid-row·grid-column으로 명시해서 auto-placement로 인한 오배치를 막는다 */
+  /* 3열(Code/Test/Docs) × 5행(분기선/에이전트/체인/병합선/최종) 그리드 —
+     모든 칸을 grid-row·grid-column으로 명시해서 auto-placement로 인한
+     오배치를 막는다. 화살표 글자 대신 실선(.stem/.branch-*/.merge-*)으로
+     박스를 잇는다. */
   .agent-structure {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto auto auto auto;
-    gap: 1vh 1.6vw;
+    grid-template-rows: 1.4vh auto auto 1.4vh auto;
+    gap: 0 1.6vw;
     width: 88vw;
   }
+  .stem { width: 2px; height: 1.6vh; background: rgba(10,37,64,0.3); margin: 0 auto; }
+
+  /* 상위 → 3개 하위 에이전트로 갈라지는 분기선 */
+  .branch-bar { grid-row: 1; grid-column: 1 / 4; align-self: end; height: 2px; background: rgba(10,37,64,0.3); }
+  .branch-drop { grid-row: 1; width: 2px; height: 100%; justify-self: center; background: rgba(10,37,64,0.3); }
+
   .sub-agent {
-    grid-row: 1;
+    grid-row: 2;
     padding: 1.6vh 1.4vw;
     display: flex;
     flex-direction: column;
@@ -466,28 +474,25 @@
     line-height: 1.5;
   }
   .chain-cell {
-    grid-row: 2;
+    grid-row: 3;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: 0.35vh;
+    padding: 0.6vh 0;
   }
   .chain-cell.code { grid-column: 1; }
   .chain-cell.test { grid-column: 2; }
   .chain-cell.docs { grid-column: 3; }
-  .merge-row {
-    grid-row: 3;
-    grid-column: 1 / 3;
-    display: flex;
-    justify-content: center;
-    gap: 3.5vw;
-    color: var(--text-sub);
-    font-size: 1.6vw;
-    line-height: 1;
-  }
+  /* Code 열은 중간에 멈추지 않고 한 줄로 쭉 내려가야 하니, 셀 전체 높이를 채운다 */
+  .chain-cell.code .stem { flex: 1; height: auto; }
+
+  /* Code + Test 두 줄이 한 지점으로 합쳐지는 병합선(Docs는 참여하지 않음) */
+  .merge-bar { grid-row: 4; grid-column: 1 / 3; align-self: start; height: 2px; background: rgba(10,37,64,0.3); }
+  .merge-drop { grid-row: 4; grid-column: 1 / 3; width: 2px; height: 100%; justify-self: center; background: rgba(10,37,64,0.3); }
+
   .final-row {
-    grid-row: 4;
+    grid-row: 5;
     grid-column: 1 / 3;
     display: flex;
     flex-direction: column;
@@ -757,9 +762,14 @@
         <div class="org-name">Supervisor Agent</div>
         <div class="org-desc">이슈 선택 · 계획 문서 작성 · 워크트리 라우팅</div>
       </div>
-      <div class="mp-arrow">↓</div>
+      <div class="stem"></div>
 
       <div class="agent-structure">
+        <div class="branch-bar"></div>
+        <div class="branch-drop" style="grid-column:1"></div>
+        <div class="branch-drop" style="grid-column:2"></div>
+        <div class="branch-drop" style="grid-column:3"></div>
+
         <div class="sub-agent code glass-card reveal" style="--i:1">
           <div class="org-name">Code Agent</div>
           <div class="skills-label">Skills</div>
@@ -776,19 +786,20 @@
           <div class="skills-list">PR 템플릿<br>커밋 컨벤션 · 계획 문서</div>
         </div>
 
-        <div class="chain-cell code"><div class="mp-arrow">↓</div></div>
+        <div class="chain-cell code"><div class="stem"></div></div>
         <div class="chain-cell test">
           <div class="mp-step small">Component Test</div>
-          <div class="mp-arrow">↓</div>
+          <div class="stem"></div>
           <div class="mp-step small">Integration Test</div>
         </div>
         <div class="chain-cell docs"></div>
 
-        <div class="merge-row"><span>↘</span><span>↙</span></div>
+        <div class="merge-bar"></div>
+        <div class="merge-drop"></div>
 
         <div class="final-row">
           <div class="mp-step wide accent">End-to-End Test</div>
-          <div class="mp-arrow">↓</div>
+          <div class="stem"></div>
           <div class="mp-step wide accent">Final Validation</div>
         </div>
       </div>
