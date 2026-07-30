@@ -9,6 +9,7 @@ type Props = {
   selectedId?: string;
   focusKey?: number;
   sheetExpanded?: boolean;
+  hasBottomSheet?: boolean;
   mode: SpotKind;
   isActive?: boolean;
   selectable?: boolean;
@@ -27,7 +28,7 @@ type NaverMapInstance = {
 
 type NaverMarker = { setMap: (map: unknown | null) => void; setPosition?: (position: unknown) => void };
 
-export function NaverMap({ spots, selectedId, focusKey = 0, sheetExpanded = false, mode, isActive = true, selectable = false, locateOnMount = false, selectedCoordinate, onSelect, onCoordinateSelect }: Props) {
+export function NaverMap({ spots, selectedId, focusKey = 0, sheetExpanded = false, hasBottomSheet = true, mode, isActive = true, selectable = false, locateOnMount = false, selectedCoordinate, onSelect, onCoordinateSelect }: Props) {
   const elementRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<unknown>(null);
   const markerRefs = useRef<NaverMarker[]>([]);
@@ -173,7 +174,7 @@ export function NaverMap({ spots, selectedId, focusKey = 0, sheetExpanded = fals
   }, [selectedCoordinate?.latitude, selectedCoordinate?.longitude, selectable, status]);
 
   return (
-    <div className={`map-canvas ${sheetExpanded ? "sheet-expanded" : ""}`} aria-label="네이버 지도">
+    <div className={`map-canvas ${sheetExpanded ? "sheet-expanded" : ""} ${hasBottomSheet ? "with-bottom-sheet" : "without-bottom-sheet"}`} aria-label="네이버 지도">
       <div ref={elementRef} className="map-element" />
       {status !== "ready" && (
         <div className="map-status">
