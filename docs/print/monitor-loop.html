@@ -17,6 +17,11 @@
     --text-sub: #9FB3CC;
     --warn-bg: rgba(220, 38, 38, 0.16);
     --warn-border: #F87171;
+    --seg-base: #2563EB;
+    --seg-region: #06B6D4;
+    --seg-emp: #22C55E;
+    --seg-rev: #F59E0B;
+    --seg-yr: #A855F7;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body {
@@ -30,6 +35,17 @@
   }
 
   .stage { position: relative; width: 100vw; height: 100vh; }
+  /* 전체 배경에 은은한 글로우를 깔아 평면적인 남색 배경에 깊이감을 준다 */
+  .stage::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(37,99,235,0.22), transparent 65%),
+      radial-gradient(ellipse 50% 35% at 100% 100%, rgba(168,85,247,0.10), transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
 
   .slide {
     position: absolute;
@@ -38,9 +54,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3vh;
+    gap: 2.6vh;
     padding: 6vh 8vw;
     text-align: center;
+    z-index: 1;
   }
   .slide.active {
     display: flex;
@@ -51,9 +68,34 @@
     to { opacity: 1; transform: translateY(0); }
   }
 
-  .slide-h2 {
-    font-size: clamp(28px, 3.4vw, 48px);
+  /* 슬라이드 안 요소들이 순서대로 떠오르는 공통 등장 모션.
+     .slide가 display:none → flex로 바뀔 때마다 애니메이션이 자동으로 재시작된다. */
+  .reveal {
+    opacity: 0;
+    animation: riseIn 0.6s cubic-bezier(.16,.84,.44,1) forwards;
+    animation-delay: calc(var(--i, 0) * 120ms + 250ms);
+  }
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .eyebrow {
+    letter-spacing: 0.18em;
+    font-size: clamp(12px, 1vw, 15px);
     font-weight: 700;
+    color: var(--blue);
+    text-transform: uppercase;
+  }
+  .slide-h2 {
+    font-size: clamp(26px, 3.2vw, 46px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .slide-sub {
+    font-size: clamp(15px, 1.4vw, 21px);
+    color: var(--text-sub);
+    margin-top: -1.2vh;
   }
 
   /* ---- 타이틀 ---- */
@@ -74,47 +116,216 @@
     line-height: 1.6;
   }
 
-  /* ---- 문제정의 ---- */
-  .sources-row { display: flex; gap: 2vw; }
-  .source-box {
-    border: 2px dashed rgba(255,255,255,0.35);
-    border-radius: 16px;
-    padding: 2.2vh 2.2vw;
-    font-size: clamp(16px, 1.6vw, 24px);
-    font-weight: 600;
-    color: var(--text-sub);
-  }
-  .arrow-down { font-size: 3vw; color: var(--text-sub); }
-  .warn-box {
-    background: var(--warn-bg);
-    border: 2px solid var(--warn-border);
+  /* ---- 카드 공통(글래스 톤) ---- */
+  .glass-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.10);
     border-radius: 20px;
-    padding: 2.6vh 3vw;
-    font-size: clamp(20px, 2.2vw, 32px);
-    font-weight: 700;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.25);
   }
 
-  /* ---- 핵심기능 ---- */
-  .feature-row { display: flex; gap: 3vw; }
-  .feature-card {
-    background: var(--navy-soft);
-    border-radius: 24px;
-    padding: 4vh 2.6vw;
-    width: 30vw;
+  /* ---- 1. 문제정의 — 실측 데이터 ---- */
+  .stat-tiles { display: flex; gap: 2vw; }
+  .stat-tile {
+    padding: 2.6vh 2vw;
+    min-width: 15vw;
+  }
+  .stat-num {
+    font-size: clamp(32px, 3.6vw, 52px);
+    font-weight: 800;
+    color: var(--blue);
+    font-variant-numeric: tabular-nums;
+  }
+  .stat-tile.warn .stat-num { color: var(--warn-border); }
+  .stat-lbl {
+    margin-top: 0.8vh;
+    font-size: clamp(13px, 1.15vw, 17px);
+    color: var(--text-sub);
+    line-height: 1.4;
+  }
+  .punchline {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-radius: 999px;
+    padding: 1.6vh 2.4vw;
+    font-size: clamp(16px, 1.7vw, 25px);
+    font-weight: 600;
+  }
+  .punchline b { color: #FCA5A5; }
+
+  /* ---- 2. 핵심기능 — 구조 시각화 ---- */
+  .slide-features { gap: 1.8vh; }
+  .feature-block {
+    width: 74vw;
+    padding: 2.2vh 2.6vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.6vh;
+    gap: 1.4vh;
   }
-  .feature-badge {
-    width: 52px; height: 52px;
+  .feature-block-title {
+    font-size: clamp(18px, 1.9vw, 27px);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .feature-tag {
+    width: 30px; height: 30px;
     border-radius: 50%;
     background: var(--blue);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px; font-weight: 800;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 800;
   }
-  .feature-title { font-size: clamp(20px, 2vw, 30px); font-weight: 700; }
-  .feature-desc { font-size: clamp(14px, 1.3vw, 20px); color: var(--text-sub); line-height: 1.6; }
+  .algo-gate {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-radius: 999px;
+    padding: 0.9vh 1.6vw;
+    font-size: clamp(12px, 1.1vw, 16px);
+    font-weight: 600;
+  }
+  .algo-arrow { color: var(--text-sub); font-size: 1.4vw; }
+  .score-bar {
+    width: 56vw;
+    height: 16px;
+    border-radius: 999px;
+    overflow: hidden;
+    display: flex;
+    background: rgba(255,255,255,0.08);
+  }
+  .score-seg {
+    height: 100%;
+    flex-basis: 0%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    transition: flex-basis 0.7s cubic-bezier(.22,.9,.34,1);
+  }
+  .score-seg.filled { flex-basis: calc(var(--w) * 1%); }
+  .score-seg.s-base { background: var(--seg-base); }
+  .score-seg.s-region { background: var(--seg-region); }
+  .score-seg.s-emp { background: var(--seg-emp); }
+  .score-seg.s-rev { background: var(--seg-rev); }
+  .score-seg.s-yr { background: var(--seg-yr); }
+  .score-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6vh 1.6vw;
+    font-size: clamp(12px, 1.05vw, 15px);
+    color: var(--text-sub);
+  }
+  .score-legend .dot {
+    display: inline-block;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+  .dot.base { background: var(--seg-base); }
+  .dot.region { background: var(--seg-region); }
+  .dot.emp { background: var(--seg-emp); }
+  .dot.rev { background: var(--seg-rev); }
+  .dot.yr { background: var(--seg-yr); }
+  .score-legend .max { color: var(--white); font-weight: 700; }
+  .sort-chips { display: flex; gap: 0.8vw; flex-wrap: wrap; justify-content: center; }
+  .chip {
+    background: var(--navy-soft);
+    border-radius: 999px;
+    padding: 0.8vh 1.4vw;
+    font-size: clamp(12px, 1.05vw, 15px);
+    font-weight: 600;
+  }
+  .mini-flow { display: flex; align-items: center; gap: 0.8vw; flex-wrap: wrap; justify-content: center; }
+  .mini-step {
+    background: var(--navy-soft);
+    border-radius: 12px;
+    padding: 1vh 1.4vw;
+    font-size: clamp(13px, 1.15vw, 17px);
+    font-weight: 600;
+  }
+  .mini-step.accent { background: var(--blue); }
+  .mini-arrow { color: var(--text-sub); }
+
+  /* ---- 3. 어떻게 동작하는가 — 아키텍처 파이프라인 ---- */
+  .slide-arch { gap: 1.4vh; }
+  .pipeline { display: flex; flex-direction: column; align-items: center; gap: 0.8vh; }
+  .pipe-arrow { color: var(--text-sub); font-size: 1.6vw; line-height: 1; }
+  .stage-box {
+    width: 62vw;
+    padding: 1.6vh 2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8vh;
+    position: relative;
+    animation: riseIn 0.6s cubic-bezier(.16,.84,.44,1) forwards,
+               pulseGlow 3.2s ease-in-out infinite;
+    animation-delay: calc(var(--i, 0) * 150ms + 250ms), calc(var(--i, 0) * 500ms + 1.2s);
+    opacity: 0;
+  }
+  @keyframes pulseGlow {
+    0%, 100% { box-shadow: 0 12px 30px rgba(0,0,0,0.25); border-color: rgba(255,255,255,0.10); }
+    50% { box-shadow: 0 12px 34px rgba(37,99,235,0.35); border-color: rgba(37,99,235,0.55); }
+  }
+  .stage-num {
+    position: absolute;
+    left: 1.4vw; top: 50%; transform: translateY(-50%);
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--blue);
+    font-size: 13px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .stage-name { font-size: clamp(15px, 1.5vw, 21px); font-weight: 700; }
+  .substage-row { display: flex; gap: 1vw; margin-top: 0.4vh; }
+  .substage {
+    background: rgba(255,255,255,0.06);
+    border-radius: 12px;
+    padding: 0.8vh 1.2vw;
+    font-size: clamp(11px, 1vw, 14px);
+    color: var(--text-sub);
+    line-height: 1.4;
+  }
+  .substage.ai { color: #C4B5FD; border: 1px solid rgba(168,85,247,0.4); }
+
+  /* ---- 5. 에이전트 사용 방식 ---- */
+  .loop-chain {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8vh 0.6vw;
+    width: 78vw;
+  }
+  .loop-node {
+    background: var(--navy-soft);
+    border-radius: 14px;
+    padding: 1.3vh 1.6vw;
+    font-size: clamp(13px, 1.25vw, 19px);
+    font-weight: 700;
+  }
+  .loop-arrow { color: var(--text-sub); font-size: 1.3vw; }
+  .loop-back {
+    color: var(--blue);
+    font-size: clamp(13px, 1.1vw, 16px);
+    font-weight: 700;
+  }
+  .verify-split { display: flex; gap: 2vw; }
+  .verify-col {
+    padding: 1.8vh 2.4vw;
+    min-width: 20vw;
+  }
+  .verify-tag {
+    display: inline-block;
+    border-radius: 999px;
+    padding: 0.4vh 1.2vw;
+    font-size: clamp(11px, 1vw, 14px);
+    font-weight: 700;
+    margin-bottom: 0.8vh;
+  }
+  .verify-col.auto .verify-tag { background: rgba(34,197,94,0.18); color: #4ADE80; }
+  .verify-col.manual .verify-tag { background: rgba(245,158,11,0.18); color: #FBBF24; }
+  .verify-body { font-size: clamp(14px, 1.3vw, 19px); font-weight: 600; }
 
   /* ---- 데모(프로토타입 iframe) ---- */
   .slide-demo { gap: 2vh; }
@@ -134,20 +345,6 @@
     box-shadow: 0 24px 70px rgba(0,0,0,0.55);
   }
   #demo-frame { width: 100%; height: 100%; border: 0; display: block; }
-
-  /* ---- 에이전트 사용 방식 ---- */
-  .stat-row { display: flex; gap: 4vw; }
-  .stat-v { font-size: clamp(40px, 4.4vw, 64px); font-weight: 800; color: var(--blue); }
-  .stat-k { font-size: clamp(14px, 1.3vw, 20px); color: var(--text-sub); margin-top: 0.6vh; }
-  .loop-row { display: flex; align-items: center; gap: 1.4vw; }
-  .loop-step {
-    background: var(--navy-soft);
-    border-radius: 16px;
-    padding: 2vh 2.4vw;
-    font-size: clamp(18px, 1.8vw, 26px);
-    font-weight: 700;
-  }
-  .loop-arrow { font-size: 2vw; color: var(--text-sub); }
 
   /* ---- 마무리 CTA ---- */
   .qr-big { width: clamp(160px, 16vw, 240px); height: auto; border-radius: 12px; }
@@ -205,71 +402,159 @@
     <p class="tagline">업종 · 지역 · 규모를 입력하면<br>내 조건에 맞는 정부 지원금을 매칭해드립니다</p>
   </section>
 
-  <!-- 1. 문제정의 -->
-  <section class="slide" data-idx="1">
+  <!-- 1. 문제정의 — 실측 데이터 -->
+  <section class="slide slide-problem" data-idx="1">
+    <div class="eyebrow">PROBLEM</div>
     <h2 class="slide-h2">무엇이 불편한가</h2>
-    <div class="sources-row">
-      <div class="source-box">정부24</div>
-      <div class="source-box">소진공</div>
-      <div class="source-box">지자체</div>
-      <div class="source-box">기업마당</div>
+    <p class="slide-sub">정부24 · 소진공 · 지자체 · 기업마당 — 사이트마다 따로 찾아야 했다</p>
+    <div class="stat-tiles">
+      <div class="stat-tile glass-card reveal" style="--i:0">
+        <div class="stat-num" data-target="1500" data-suffix="+">0</div>
+        <div class="stat-lbl">건 수집<br>2개 공공 데이터 소스</div>
+      </div>
+      <div class="stat-tile glass-card reveal" style="--i:1">
+        <div class="stat-num" data-target="98" data-suffix="%">0</div>
+        <div class="stat-lbl">지역 정보가<br>구조화된 비율</div>
+      </div>
+      <div class="stat-tile glass-card warn reveal" style="--i:2">
+        <div class="stat-num" data-target="6.2" data-decimal="1" data-suffix="%">0</div>
+        <div class="stat-lbl">업종 정보를<br>확인할 수 있던 비율</div>
+      </div>
     </div>
-    <div class="arrow-down">↓</div>
-    <div class="warn-box">사이트마다 따로 검색 · 조건 비교는 수작업</div>
+    <div class="punchline reveal" style="--i:3">→ 그래서 "업종"이 아니라 <b>"지원분야"</b>를 묻기로 했다</div>
   </section>
 
-  <!-- 2. 핵심기능 -->
-  <section class="slide" data-idx="2">
+  <!-- 2. 핵심기능 — 구조 시각화 -->
+  <section class="slide slide-features" data-idx="2">
+    <div class="eyebrow">CORE FEATURES</div>
     <h2 class="slide-h2">핵심 기능은 두 개</h2>
-    <div class="feature-row">
-      <div class="feature-card">
-        <div class="feature-badge">A</div>
-        <div class="feature-title">조건 매칭 + 정렬</div>
-        <div class="feature-desc">업종 · 지역 · 규모로 후보를 걸러<br>매칭도 · 마감임박 · 금액 순으로 정렬</div>
+
+    <div class="feature-block glass-card reveal" style="--i:0">
+      <div class="feature-block-title"><span class="feature-tag">A</span>조건 매칭 + 정렬</div>
+      <div class="algo-gate">지역 · 지원분야 불일치 → 제외</div>
+      <div class="algo-arrow">↓</div>
+      <div class="score-bar" id="score-bar">
+        <div class="score-seg s-base" style="--w:50"></div>
+        <div class="score-seg s-region" style="--w:10"></div>
+        <div class="score-seg s-emp" style="--w:10"></div>
+        <div class="score-seg s-rev" style="--w:10"></div>
+        <div class="score-seg s-yr" style="--w:10"></div>
       </div>
-      <div class="feature-card">
-        <div class="feature-badge">B</div>
-        <div class="feature-title">상세 + 신청 연결</div>
-        <div class="feature-desc">자격 · 서류 · 기간을 정리해 보여주고<br>실제 신청은 외부 기관으로 연결</div>
+      <div class="score-legend">
+        <span><i class="dot base"></i>기본 50</span>
+        <span><i class="dot region"></i>+지역 10</span>
+        <span><i class="dot emp"></i>+직원 10</span>
+        <span><i class="dot rev"></i>+매출 10</span>
+        <span><i class="dot yr"></i>+업력 10</span>
+        <span class="max">= 최대 100점</span>
+      </div>
+      <div class="sort-chips">
+        <span class="chip">매칭도순</span>
+        <span class="chip">마감임박순</span>
+        <span class="chip">지원금액순</span>
+        <span class="chip">신규</span>
+      </div>
+    </div>
+
+    <div class="feature-block glass-card reveal" style="--i:1">
+      <div class="feature-block-title"><span class="feature-tag">B</span>상세 + 신청 연결</div>
+      <div class="mini-flow">
+        <span class="mini-step">자격 확인</span>
+        <span class="mini-arrow">→</span>
+        <span class="mini-step">필요 서류</span>
+        <span class="mini-arrow">→</span>
+        <span class="mini-step">신청 방법</span>
+        <span class="mini-arrow">→</span>
+        <span class="mini-step accent">외부 기관 연결</span>
       </div>
     </div>
   </section>
 
-  <!-- 3. 어떻게 동작하는가 (프로토타입 자동 시연) -->
-  <section class="slide slide-demo" data-idx="3">
-    <div class="demo-label">어떻게 동작하는가 — 실제 화면 자동 시연</div>
+  <!-- 3. 어떻게 동작하는가 — 아키텍처 + AI 문서추출 파이프라인 -->
+  <section class="slide slide-arch" data-idx="3">
+    <div class="eyebrow">ARCHITECTURE</div>
+    <h2 class="slide-h2">어떻게 동작하는가</h2>
+    <div class="pipeline">
+      <div class="stage-box glass-card" style="--i:0">
+        <div class="stage-num">1</div>
+        <div class="stage-name">수집 · 매일 자동</div>
+        <div class="substage-row">
+          <div class="substage">구조화 필드<br>자동 매핑</div>
+          <div class="substage ai">AI가 PDF·HWP에서<br>조건 추출</div>
+        </div>
+      </div>
+      <div class="pipe-arrow">↓</div>
+      <div class="stage-box glass-card" style="--i:1">
+        <div class="stage-num">2</div>
+        <div class="stage-name">저장 · PostgreSQL</div>
+      </div>
+      <div class="pipe-arrow">↓</div>
+      <div class="stage-box glass-card" style="--i:2">
+        <div class="stage-num">3</div>
+        <div class="stage-name">매칭 API · 조건 필터 + 점수 계산</div>
+      </div>
+      <div class="pipe-arrow">↓</div>
+      <div class="stage-box glass-card" style="--i:3">
+        <div class="stage-num">4</div>
+        <div class="stage-name">화면 · React 실시간 표시</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 실제 화면 자동 시연 (프로토타입) -->
+  <section class="slide slide-demo" data-idx="4">
+    <div class="demo-label">실제 화면 — 자동 시연</div>
     <div class="phone-shell">
       <iframe id="demo-frame" title="자동 시연" src=""></iframe>
     </div>
   </section>
 
-  <!-- 4. 에이전트 사용 방식 -->
-  <section class="slide" data-idx="4">
+  <!-- 5. 에이전트 사용 방식 -->
+  <section class="slide slide-agent" data-idx="5">
+    <div class="eyebrow">HOW WE BUILT IT</div>
     <h2 class="slide-h2">AI 에이전트와 함께 개발했습니다</h2>
-    <div class="stat-row">
-      <div class="stat"><div class="stat-v">42</div><div class="stat-k">이슈</div></div>
-      <div class="stat"><div class="stat-v">61</div><div class="stat-k">PR</div></div>
-      <div class="stat"><div class="stat-v">4주</div><div class="stat-k">개발 기간</div></div>
+
+    <div class="loop-chain">
+      <span class="loop-node reveal" style="--i:0">① 할 일 고르기</span>
+      <span class="loop-arrow">→</span>
+      <span class="loop-node reveal" style="--i:1">② 계획 문서</span>
+      <span class="loop-arrow">→</span>
+      <span class="loop-node reveal" style="--i:2">③ 묶음 승인</span>
+      <span class="loop-arrow">→</span>
+      <span class="loop-node reveal" style="--i:3">④ 구현</span>
+      <span class="loop-arrow">→</span>
+      <span class="loop-node reveal" style="--i:4">⑤ 검증</span>
+      <span class="loop-arrow">→</span>
+      <span class="loop-node reveal" style="--i:5">⑥ 커밋 · PR</span>
+      <span class="loop-arrow">→</span>
+      <span class="loop-node reveal" style="--i:6">⑦ 정리</span>
+      <span class="loop-back reveal" style="--i:7">↺ 다시 ①로</span>
     </div>
-    <div class="loop-row">
-      <div class="loop-step">계획</div>
-      <div class="loop-arrow">→</div>
-      <div class="loop-step">구현</div>
-      <div class="loop-arrow">→</div>
-      <div class="loop-step">검증</div>
+
+    <div class="verify-split">
+      <div class="verify-col auto glass-card reveal" style="--i:8">
+        <div class="verify-tag">자동 검사</div>
+        <div class="verify-body">빌드 · 테스트 · 린트</div>
+      </div>
+      <div class="verify-col manual glass-card reveal" style="--i:9">
+        <div class="verify-tag">수동 확인</div>
+        <div class="verify-body">API 호출 · DB 조회 · UI 클릭</div>
+      </div>
     </div>
+    <div class="punchline reveal" style="--i:10">되돌리기 어려운 작업은 항상 실측부터 — 삭제 전 1,554건 중 <b>86건</b> 먼저 확인</div>
   </section>
 
-  <!-- 5. 마무리 CTA -->
-  <section class="slide slide-cta" data-idx="5">
-    <h2 class="slide-h2">지금 스캔해서 써보세요</h2>
-    <svg class="qr-big"><use href="#qr-code"/></svg>
-    <div class="cta-url">syd348.github.io/hub</div>
+  <!-- 6. 마무리 CTA -->
+  <section class="slide slide-cta" data-idx="6">
+    <h2 class="slide-h2 reveal" style="--i:0">지금 스캔해서 써보세요</h2>
+    <svg class="qr-big reveal" style="--i:1"><use href="#qr-code"/></svg>
+    <div class="cta-url reveal" style="--i:2">syd348.github.io/hub</div>
   </section>
 
 </div>
 
 <div class="dots">
+  <span class="dot"></span>
   <span class="dot"></span>
   <span class="dot"></span>
   <span class="dot"></span>
@@ -284,22 +569,59 @@
 </div>
 
 <script>
-  // 슬라이드별 노출 시간(ms). 합계 53초. 3번(데모)은 monitor-demo.html 한 바퀴
-  // (신청 토스트 3.2초 노출 포함 약 19.4초) + 여유.
-  const DURATIONS = [4000, 6000, 7000, 21000, 10000, 5000];
+  // 슬라이드별 노출 시간(ms) — 화면을 스쳐 지나가듯 보는 게 아니라 실제로 읽는 시간을
+  // 기준으로 잡았다(대략 90ms/글자 + 시각적으로 훑어보는 여유 시간). 합계 약 75.5초.
+  // 4번(데모)은 monitor-demo.html 한 바퀴(신청 토스트 3.2초 포함 약 19.4초) + 여유.
+  const DURATIONS = [4500, 9500, 12000, 10500, 21000, 13000, 5000];
 
   const slides = Array.from(document.querySelectorAll('.slide'));
   const dots = Array.from(document.querySelectorAll('.dot'));
   const frame = document.getElementById('demo-frame');
   let current = -1;
 
+  // 숫자를 0에서 목표값까지 부드럽게 세는 카운트업 애니메이션
+  function animateCount(el, duration) {
+    const target = parseFloat(el.dataset.target);
+    const decimals = Number(el.dataset.decimal || 0);
+    const suffix = el.dataset.suffix || '';
+    const start = performance.now();
+    function step(now) {
+      const p = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = target * eased;
+      el.textContent = (decimals ? val.toFixed(decimals) : Math.round(val).toLocaleString('ko-KR')) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function runCountUps(root) {
+    root.querySelectorAll('.stat-num').forEach((el, i) => {
+      setTimeout(() => animateCount(el, 1100), 300 + i * 150);
+    });
+  }
+
+  // 매칭 점수 막대가 왼쪽부터 순서대로 차오르는 애니메이션. 슬라이드에 다시 들어올
+  // 때마다 처음부터 다시 차오르도록 클래스를 지웠다가 리플로우 후 다시 붙인다.
+  function runScoreBar(root) {
+    const segs = Array.from(root.querySelectorAll('.score-seg'));
+    segs.forEach((seg) => seg.classList.remove('filled'));
+    void root.offsetWidth;
+    segs.forEach((seg, i) => {
+      setTimeout(() => seg.classList.add('filled'), 200 + i * 220);
+    });
+  }
+
   function activate(idx) {
     slides.forEach((s) => s.classList.toggle('active', Number(s.dataset.idx) === idx));
     dots.forEach((d, i) => d.classList.toggle('active', i === idx));
     document.body.dataset.slide = String(idx);
 
+    if (idx === 1) runCountUps(slides[1]);
+    if (idx === 2) runScoreBar(slides[2]);
+
     // 데모 슬라이드에 들어올 때마다 iframe을 새로 불러와 항상 웰컴 화면부터 시작한다.
-    if (idx === 3) {
+    if (idx === 4) {
       frame.src = 'monitor-demo.html?t=' + Date.now();
     }
   }
