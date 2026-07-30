@@ -404,22 +404,6 @@
     color: rgba(10,37,64,0.35);
     font-size: 14px;
   }
-  .pipe-connector .pulse-dot {
-    position: absolute; top: 50%; left: 0;
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: var(--acc-slate);
-    box-shadow: 0 0 10px 2px rgba(71,85,105,0.55);
-    transform: translateY(-50%);
-    animation: flowDot 1.8s linear infinite;
-    animation-delay: calc(var(--d, 0) * 0.45s);
-  }
-  @keyframes flowDot {
-    0% { left: 0%; opacity: 0; }
-    12% { opacity: 1; }
-    88% { opacity: 1; }
-    100% { left: 100%; opacity: 0; }
-  }
 
   /* ---- 5. AI 에이전트를 어떻게 활용했는가 — 상위 에이전트가 이슈별 하위
      에이전트를 병렬로 다루고, 각 하위 에이전트가 스킬을 쓰는 조직도.
@@ -682,7 +666,7 @@
             <div class="sys-node">K-Startup API</div>
           </div>
         </div>
-        <div class="pipe-connector"><span class="pulse-dot" style="--d:0"></span><span class="chevron">›</span></div>
+        <div class="pipe-connector"><span class="chevron">›</span></div>
 
         <div class="sys-col c-crawl" style="--i:1">
           <div class="sys-title">② Crawler<span class="sys-caption">GitHub Actions cron · 00:00 KST</span></div>
@@ -700,7 +684,7 @@
             <div class="sys-node">만료 sweep</div>
           </div>
         </div>
-        <div class="pipe-connector"><span class="pulse-dot" style="--d:1"></span><span class="chevron">›</span></div>
+        <div class="pipe-connector"><span class="chevron">›</span></div>
 
         <div class="sys-col c-db" style="--i:2">
           <div class="sys-title">③ Supabase</div>
@@ -733,7 +717,7 @@
             </div>
           </div>
         </div>
-        <div class="pipe-connector"><span class="pulse-dot" style="--d:3"></span><span class="chevron">›</span></div>
+        <div class="pipe-connector"><span class="chevron">›</span></div>
 
         <div class="sys-col c-fe" style="--i:4">
           <div class="sys-title">⑤ React<span class="sys-caption">+ TanStack Query</span></div>
