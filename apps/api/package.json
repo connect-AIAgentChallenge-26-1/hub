@@ -8,7 +8,8 @@
     "start": "node src/server.js",
     "storage:upload-guides": "node scripts/upload-photo-guide-assets.mjs",
     "db:seed-photo-guides": "node scripts/seed-photo-guides.mjs",
-    "db:register-daegu-indoor-gymnasium": "node scripts/register-daegu-indoor-gymnasium.mjs"
+    "db:register-daegu-indoor-gymnasium": "node scripts/register-daegu-indoor-gymnasium.mjs",
+    "db:remove-daegu-rooftop-pending": "node scripts/remove-daegu-rooftop-pending.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.111.0",

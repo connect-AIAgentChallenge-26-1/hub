@@ -213,21 +213,33 @@ function App() {
 
 function MapScreen({ mapActive, mode, spots, visibleSpots, selectedSpot, dataState, onMode, onSelect, onDetail, onPropose }: { mapActive: boolean; mode: SpotKind; spots: PhotoSpot[]; visibleSpots: PhotoSpot[]; selectedSpot?: PhotoSpot; dataState: "loading" | "ready" | "error"; onMode: (mode: SpotKind) => void; onSelect: (spot: PhotoSpot) => void; onDetail: () => void; onPropose: () => void }) {
   const [query, setQuery] = useState("");
+  const [searchMessage, setSearchMessage] = useState<string | null>(null);
+  const [searchCoordinate, setSearchCoordinate] = useState<{ latitude: number; longitude: number } | undefined>();
   const [searchFocusKey, setSearchFocusKey] = useState(0);
   const [markerSelectionKey, setMarkerSelectionKey] = useState(0);
   const [sheetExpanded, setSheetExpanded] = useState(false);
-  const searchResults = useMemo(() => {
-    const keyword = query.trim().toLowerCase();
-    if (!keyword) return [];
-    return spots.filter((spot) => [spot.name, spot.area, spot.address, spot.placeCategory].some((value) => value.toLowerCase().includes(keyword)));
-  }, [query, spots]);
   useEffect(() => {
     if (mode === "candidate" && selectedSpot?.kind === "candidate") setSheetExpanded(true);
   }, [mode, selectedSpot?.id, selectedSpot?.kind]);
   const setTab = (next: SpotKind) => { onMode(next); onSelect(spots.find((spot) => spot.kind === next)!); };
-  const selectSearchResult = (spot: PhotoSpot) => { onSelect(spot); setQuery(spot.name); setSearchFocusKey((current) => current + 1); };
-  const submitSearch = (event: FormEvent<HTMLFormElement>) => { event.preventDefault(); if (searchResults[0]) selectSearchResult(searchResults[0]); };
-  return <><header className="map-header"><form className="search-form" onSubmit={submitSearch}><label className="search-box"><Search size={21} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="장소 검색" aria-label="장소 검색" /><button type="submit" aria-label="검색">검색</button></label>{searchResults.length > 0 && <div className="search-results">{searchResults.map((spot) => <button type="button" key={spot.id} onClick={() => selectSearchResult(spot)}><span><b>{spot.name}</b><small>{spot.placeCategory} · {spot.address}</small></span><MapPin size={17} /></button>)}</div>}</form></header>{dataState !== "ready" && <p className="data-status">{dataState === "loading" ? "공식 포토스팟을 불러오는 중이에요." : "DB 연결에 실패해 임시 데이터를 보여주고 있어요."}</p>}<NaverMap spots={visibleSpots} selectedId={selectedSpot?.id} focusKey={searchFocusKey} sheetExpanded={sheetExpanded} mode={mode} isActive={mapActive} onSelect={(spot) => { onSelect(spot); setMarkerSelectionKey((current) => current + 1); }} /><BottomSheet mode={mode} spots={visibleSpots} candidateCount={spots.filter((spot) => spot.kind === "candidate").length} selectedId={selectedSpot?.id} selectionKey={markerSelectionKey} expanded={sheetExpanded} onExpandedChange={setSheetExpanded} onTab={setTab} onSelect={onSelect} onDetail={onDetail} onPropose={onPropose} /></>;
+  const submitSearch = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const keyword = query.trim();
+    if (keyword.length < 2) {
+      setSearchMessage("두 글자 이상 입력해 주세요.");
+      return;
+    }
+    setSearchMessage("네이버 지도에서 위치를 찾고 있어요.");
+    try {
+      const coordinate = await geocodeAddress(keyword);
+      setSearchCoordinate(coordinate);
+      setSearchMessage(null);
+      setSearchFocusKey((current) => current + 1);
+    } catch {
+      setSearchMessage("네이버 지도에서 위치를 찾지 못했어요. 도로명 주소나 장소명을 다시 확인해 주세요.");
+    }
+  };
+  return <><header className="map-header"><form className="search-form" onSubmit={(event) => void submitSearch(event)}><label className="search-box"><Search size={21} /><input value={query} onChange={(event) => { setQuery(event.target.value); setSearchMessage(null); }} placeholder="장소 또는 주소 검색" aria-label="장소 또는 주소 검색" /><button type="submit" aria-label="검색">검색</button></label>{searchMessage && <p className="map-search-message">{searchMessage}</p>}</form></header>{dataState !== "ready" && <p className="data-status">{dataState === "loading" ? "공식 포토스팟을 불러오는 중이에요." : "DB 연결에 실패해 임시 데이터를 보여주고 있어요."}</p>}<NaverMap spots={visibleSpots} selectedId={selectedSpot?.id} focusKey={searchFocusKey} focusCoordinate={searchCoordinate} sheetExpanded={sheetExpanded} mode={mode} isActive={mapActive} onSelect={(spot) => { onSelect(spot); setMarkerSelectionKey((current) => current + 1); }} /><BottomSheet mode={mode} spots={visibleSpots} candidateCount={spots.filter((spot) => spot.kind === "candidate").length} selectedId={selectedSpot?.id} selectionKey={markerSelectionKey} expanded={sheetExpanded} onExpandedChange={setSheetExpanded} onTab={setTab} onSelect={onSelect} onDetail={onDetail} onPropose={onPropose} /></>;
 }
 
 function BottomSheet({ mode, spots, candidateCount, selectedId, selectionKey, expanded, onExpandedChange, onTab, onSelect, onDetail, onPropose }: { mode: SpotKind; spots: PhotoSpot[]; candidateCount: number; selectedId?: string; selectionKey: number; expanded: boolean; onExpandedChange: (expanded: boolean) => void; onTab: (mode: SpotKind) => void; onSelect: (spot: PhotoSpot) => void; onDetail: () => void; onPropose: () => void }) {

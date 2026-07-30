@@ -15,6 +15,7 @@ type Props = {
   selectable?: boolean;
   locateOnMount?: boolean;
   selectedCoordinate?: { latitude: number; longitude: number };
+  focusCoordinate?: { latitude: number; longitude: number };
   onSelect: (spot: PhotoSpot) => void;
   onCoordinateSelect?: (coordinate: { latitude: number; longitude: number }) => void;
 };
@@ -28,7 +29,7 @@ type NaverMapInstance = {
 
 type NaverMarker = { setMap: (map: unknown | null) => void; setPosition?: (position: unknown) => void };
 
-export function NaverMap({ spots, selectedId, focusKey = 0, sheetExpanded = false, hasBottomSheet = true, mode, isActive = true, selectable = false, locateOnMount = false, selectedCoordinate, onSelect, onCoordinateSelect }: Props) {
+export function NaverMap({ spots, selectedId, focusKey = 0, sheetExpanded = false, hasBottomSheet = true, mode, isActive = true, selectable = false, locateOnMount = false, selectedCoordinate, focusCoordinate, onSelect, onCoordinateSelect }: Props) {
   const elementRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<unknown>(null);
   const markerRefs = useRef<NaverMarker[]>([]);
@@ -115,6 +116,18 @@ export function NaverMap({ spots, selectedId, focusKey = 0, sheetExpanded = fals
       map?.setZoom?.(16);
     });
   }, [selectedId, spots, status, focusKey]);
+
+  useEffect(() => {
+    if (status !== "ready" || !mapRef.current || !focusCoordinate) return;
+
+    void loadNaverMaps().then((maps) => {
+      const map = mapRef.current as NaverMapInstance | null;
+      const coordinate = new maps.LatLng(focusCoordinate.latitude, focusCoordinate.longitude);
+      if (typeof map?.panTo === "function") map.panTo(coordinate);
+      else map?.setCenter?.(coordinate);
+      map?.setZoom?.(16);
+    });
+  }, [focusCoordinate, focusKey, status]);
 
   const moveToCurrentLocation = (selectCoordinate = false) => {
     if (!navigator.geolocation) {

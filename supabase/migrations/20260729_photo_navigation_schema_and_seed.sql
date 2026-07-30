@@ -230,15 +230,13 @@ set external_key = case name
   when 'NAVER 1784 2-3층 계단' then 'naver-1784-stairs'
   when '스파크랜드 관람차 포토존' then 'daegu-sparkland-wheel'
   when '대구근대역사관 앞' then 'daegu-modern-history-museum'
-  when '대구 옥상 포토스팟 (사진 등록 예정)' then 'daegu-rooftop-pending'
   else external_key
 end
 where external_key like 'legacy-%'
   and name in (
     'NAVER 1784 2-3층 계단',
     '스파크랜드 관람차 포토존',
-    '대구근대역사관 앞',
-    '대구 옥상 포토스팟 (사진 등록 예정)'
+    '대구근대역사관 앞'
   );
 
 insert into public.photo_spots (
@@ -297,20 +295,6 @@ values
     'official',
     'plaza',
     '{"source":"admin_coordinate_picker","dataset":"daegu-modern-history-museum"}'::jsonb
-  ),
-  (
-    'daegu-rooftop-pending',
-    '대구 옥상 포토스팟 (사진 등록 예정)',
-    '대구광역시',
-    '옥상에서 도시 풍경을 배경으로 촬영할 후보 포토스팟입니다. 예시 사진과 프레임 등록 전 단계입니다.',
-    '후보 · 옥상 · 전망',
-    '촬영 지점 좌표로 등록',
-    '예시 사진, 배경선, 인물 프레임을 검수한 뒤 공식 포토스팟으로 전환합니다.',
-    35.894076,
-    128.605574,
-    'candidate',
-    'plaza',
-    '{"source":"admin_coordinate_picker","dataset":null}'::jsonb
   )
 on conflict (external_key) do update
 set
@@ -332,7 +316,6 @@ from public.photo_spots
 where external_key in (
   'naver-1784-stairs',
   'daegu-sparkland-wheel',
-  'daegu-modern-history-museum',
-  'daegu-rooftop-pending'
+  'daegu-modern-history-museum'
 )
 order by external_key;
