@@ -817,10 +817,11 @@
 </div>
 
 <script>
-  // 슬라이드별 노출 시간(ms) — 전체 루프가 60초를 넘지 않도록 다시 맞췄다(합계 59.5초).
-  // 데모(4번, 21초)는 monitor-demo.html 실제 재생 시간에 묶여 있어 고정, 나머지 슬라이드를
-  // 그만큼 더 압축했다.
-  const DURATIONS = [2500, 6500, 8500, 10000, 21000, 7500, 3500];
+  // 슬라이드별 노출 시간(ms) — 전체 루프 60초 이내 유지(합계 59.5초는 그대로).
+  // 2번(핵심기능)·3번(아키텍처)에서 조금씩 덜어내 4번(데모)에 더 줬다 — 데모는
+  // monitor-demo.html이 자체적으로 무한 반복하니, 늘어난 시간만큼 두 번째 바퀴를
+  // 더 보여주다가 넘어간다.
+  const DURATIONS = [2500, 6500, 7000, 8500, 24000, 7500, 3500];
 
   const slides = Array.from(document.querySelectorAll('.slide'));
   const dots = Array.from(document.querySelectorAll('.dot'));
