@@ -295,47 +295,86 @@
     font-weight: 600;
   }
 
-  /* ---- 3. 어떻게 동작하는가 — 아키텍처 파이프라인 ---- */
-  .slide-arch { gap: 1.4vh; }
-  .pipeline { display: flex; flex-direction: column; align-items: center; gap: 0.8vh; }
-  .pipe-arrow { color: var(--text-sub); font-size: 1.6vw; line-height: 1; }
-  .stage-box {
-    width: 62vw;
-    padding: 1.6vh 2vw;
+  /* ---- 3. 어떻게 동작하는가 — 크롤링 → DB 저장 → 매칭 API → 프론트엔드,
+     왼쪽에서 오른쪽으로 읽히는 아키텍처 다이어그램 ---- */
+  .slide-arch { gap: 3vh; }
+  .pipeline-h { display: flex; align-items: flex-start; justify-content: center; width: 90vw; }
+  .stage-card {
+    flex: 1 1 0;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.8vh;
-    position: relative;
-    animation: riseIn 0.6s cubic-bezier(.16,.84,.44,1) forwards,
-               pulseGlow 3.2s ease-in-out infinite;
-    animation-delay: calc(var(--i, 0) * 150ms + 250ms), calc(var(--i, 0) * 500ms + 1.2s);
+    gap: 0.9vh;
     opacity: 0;
+    animation: riseIn 0.6s cubic-bezier(.16,.84,.44,1) forwards;
+    animation-delay: calc(var(--i, 0) * 180ms + 250ms);
   }
-  @keyframes pulseGlow {
-    0%, 100% { box-shadow: 0 12px 30px rgba(0,0,0,0.25); border-color: rgba(255,255,255,0.10); }
-    50% { box-shadow: 0 12px 34px rgba(37,99,235,0.35); border-color: rgba(37,99,235,0.55); }
-  }
-  .stage-num {
-    position: absolute;
-    left: 1.4vw; top: 50%; transform: translateY(-50%);
-    width: 26px; height: 26px;
+  .stage-icon {
+    width: clamp(46px, 4.6vw, 66px);
+    height: clamp(46px, 4.6vw, 66px);
     border-radius: 50%;
-    background: var(--blue);
-    font-size: 13px; font-weight: 800;
+    background: linear-gradient(135deg, var(--blue), #60A5FA);
     display: flex; align-items: center; justify-content: center;
+    font-size: clamp(20px, 2.2vw, 30px);
+    box-shadow: 0 10px 24px rgba(37,99,235,0.45);
+    animation: iconPulse 2.8s ease-in-out infinite;
+    animation-delay: calc(var(--i, 0) * 0.5s + 1s);
   }
-  .stage-name { font-size: clamp(15px, 1.5vw, 21px); font-weight: 700; }
-  .substage-row { display: flex; gap: 1vw; margin-top: 0.4vh; }
-  .substage {
-    background: rgba(255,255,255,0.06);
-    border-radius: 12px;
-    padding: 0.8vh 1.2vw;
+  @keyframes iconPulse {
+    0%, 100% { box-shadow: 0 10px 24px rgba(37,99,235,0.45); transform: scale(1); }
+    50% { box-shadow: 0 10px 30px rgba(37,99,235,0.75); transform: scale(1.06); }
+  }
+  .stage-name { font-size: clamp(14px, 1.5vw, 20px); font-weight: 800; }
+  .stage-desc {
     font-size: clamp(11px, 1vw, 14px);
     color: var(--text-sub);
+    text-align: center;
     line-height: 1.4;
   }
-  .substage.ai { color: #C4B5FD; border: 1px solid rgba(168,85,247,0.4); }
+  .stage-sub {
+    font-size: clamp(10px, 0.85vw, 12px);
+    color: #C4B5FD;
+    text-align: center;
+    line-height: 1.4;
+    background: rgba(168,85,247,0.10);
+    border: 1px solid rgba(168,85,247,0.35);
+    border-radius: 10px;
+    padding: 0.6vh 0.8vw;
+    margin-top: 0.2vh;
+  }
+
+  /* 카드 사이를 잇는 연결선 — 아이콘 높이 중앙에 맞추고, 그 위로 신호가
+     계속 왼쪽에서 오른쪽으로 흘러가는 점이 지나간다 */
+  .pipe-connector {
+    position: relative;
+    flex: 0 0 clamp(28px, 4vw, 60px);
+    height: 2px;
+    margin-top: clamp(23px, 2.3vw, 33px);
+    background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.25), rgba(255,255,255,0.05));
+  }
+  .pipe-connector .chevron {
+    position: absolute; right: -2px; top: 50%;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.4);
+    font-size: 14px;
+  }
+  .pipe-connector .pulse-dot {
+    position: absolute; top: 50%; left: 0;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--blue);
+    box-shadow: 0 0 10px 2px rgba(37,99,235,0.9);
+    transform: translateY(-50%);
+    animation: flowDot 1.8s linear infinite;
+    animation-delay: calc(var(--d, 0) * 0.45s);
+  }
+  @keyframes flowDot {
+    0% { left: 0%; opacity: 0; }
+    12% { opacity: 1; }
+    88% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+  }
 
   /* ---- 5. 에이전트 사용 방식 ---- */
   .loop-chain {
@@ -535,33 +574,37 @@
     </div>
   </section>
 
-  <!-- 3. 어떻게 동작하는가 — 아키텍처 + AI 문서추출 파이프라인 -->
+  <!-- 3. 어떻게 동작하는가 — 크롤링 → DB 저장 → 매칭 API → 프론트엔드 UI -->
   <section class="slide slide-arch" data-idx="3">
     <div class="eyebrow">ARCHITECTURE</div>
     <h2 class="slide-h2">어떻게 동작하는가</h2>
-    <div class="pipeline">
-      <div class="stage-box glass-card" style="--i:0">
-        <div class="stage-num">1</div>
-        <div class="stage-name">수집 · 매일 자동</div>
-        <div class="substage-row">
-          <div class="substage">구조화 필드<br>자동 매핑</div>
-          <div class="substage ai">AI가 PDF·HWP에서<br>조건 추출</div>
-        </div>
+    <div class="pipeline-h">
+      <div class="stage-card" style="--i:0">
+        <div class="stage-icon">🕷️</div>
+        <div class="stage-name">크롤링</div>
+        <div class="stage-desc">매일 자동 수집</div>
+        <div class="stage-sub">AI가 PDF·HWP 첨부파일에서<br>조건 추가 추출</div>
       </div>
-      <div class="pipe-arrow">↓</div>
-      <div class="stage-box glass-card" style="--i:1">
-        <div class="stage-num">2</div>
-        <div class="stage-name">저장 · PostgreSQL</div>
+      <div class="pipe-connector"><span class="pulse-dot" style="--d:0"></span><span class="chevron">›</span></div>
+
+      <div class="stage-card" style="--i:1">
+        <div class="stage-icon">🗄️</div>
+        <div class="stage-name">DB 저장</div>
+        <div class="stage-desc">PostgreSQL</div>
       </div>
-      <div class="pipe-arrow">↓</div>
-      <div class="stage-box glass-card" style="--i:2">
-        <div class="stage-num">3</div>
-        <div class="stage-name">매칭 API · 조건 필터 + 점수 계산</div>
+      <div class="pipe-connector"><span class="pulse-dot" style="--d:1"></span><span class="chevron">›</span></div>
+
+      <div class="stage-card" style="--i:2">
+        <div class="stage-icon">⚡</div>
+        <div class="stage-name">매칭 API</div>
+        <div class="stage-desc">조건 필터 + 점수 계산</div>
       </div>
-      <div class="pipe-arrow">↓</div>
-      <div class="stage-box glass-card" style="--i:3">
-        <div class="stage-num">4</div>
-        <div class="stage-name">화면 · React 실시간 표시</div>
+      <div class="pipe-connector"><span class="pulse-dot" style="--d:2"></span><span class="chevron">›</span></div>
+
+      <div class="stage-card" style="--i:3">
+        <div class="stage-icon">📱</div>
+        <div class="stage-name">프론트엔드 UI</div>
+        <div class="stage-desc">React 실시간 표시</div>
       </div>
     </div>
   </section>
