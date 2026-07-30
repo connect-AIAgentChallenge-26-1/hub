@@ -1438,7 +1438,11 @@
       await sleep(1700);
       openDetail(0);
 
-      await sleep(3000);
+      await sleep(1600);
+      // 신청 버튼이 화면 아래에 있어 스크롤해야 보일 수 있으니, 클릭 전에
+      // 버튼이 보이는 위치까지 스크롤해서 토스트도 같이 눈에 들어오게 한다.
+      document.querySelector('.btn-apply').scrollIntoView({ behavior: 'smooth', block: 'end' });
+      await sleep(1400);
       document.querySelector('.btn-apply').click();
       await sleep(3200);
     }
