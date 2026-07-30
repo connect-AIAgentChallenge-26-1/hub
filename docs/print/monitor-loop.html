@@ -427,10 +427,13 @@
   .org-name { font-size: clamp(16px, 1.6vw, 22px); font-weight: 800; }
   .org-desc { font-size: clamp(12px, 1.05vw, 15px); color: var(--text-sub); }
 
+  /* 3열(Code/Test/Docs) × 4행(에이전트/체인/병합/최종) 그리드 — 모든 칸을
+     grid-row·grid-column으로 명시해서 auto-placement로 인한 오배치를 막는다 */
   .agent-structure {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0.7vh 1.6vw;
+    grid-template-rows: auto auto auto auto;
+    gap: 1vh 1.6vw;
     width: 88vw;
   }
   .sub-agent {
@@ -440,10 +443,13 @@
     flex-direction: column;
     align-items: center;
     gap: 0.5vh;
-    border-top: 4px solid var(--blue);
   }
-  .sub-agent.test { border-top-color: var(--seg-emp); }
-  .sub-agent.docs { border-top-color: var(--seg-yr); }
+  .sub-agent.code { grid-column: 1; }
+  .sub-agent.test { grid-column: 2; }
+  .sub-agent.docs { grid-column: 3; }
+  .sub-agent .org-name { color: var(--blue); }
+  .sub-agent.test .org-name { color: var(--acc-green); }
+  .sub-agent.docs .org-name { color: var(--acc-purple); }
   .skills-label {
     margin-top: 0.3vh;
     letter-spacing: 0.1em;
@@ -464,8 +470,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 0.35vh;
   }
+  .chain-cell.code { grid-column: 1; }
+  .chain-cell.test { grid-column: 2; }
+  .chain-cell.docs { grid-column: 3; }
   .merge-row {
     grid-row: 3;
     grid-column: 1 / 3;
@@ -766,13 +776,13 @@
           <div class="skills-list">PR 템플릿<br>커밋 컨벤션 · 계획 문서</div>
         </div>
 
-        <div class="chain-cell"><div class="mp-arrow">↓</div></div>
-        <div class="chain-cell">
+        <div class="chain-cell code"><div class="mp-arrow">↓</div></div>
+        <div class="chain-cell test">
           <div class="mp-step small">Component Test</div>
           <div class="mp-arrow">↓</div>
           <div class="mp-step small">Integration Test</div>
         </div>
-        <div class="chain-cell"></div>
+        <div class="chain-cell docs"></div>
 
         <div class="merge-row"><span>↘</span><span>↙</span></div>
 
