@@ -87,7 +87,7 @@ app.get("/api/photo-spots", requireSupabase, async (request, response) => {
   const spotIds = data.map((spot) => spot.id);
   const { data: guides, error: guideError } = await supabase
     .from("photo_guides")
-    .select("spot_id, reference_image_url, created_at")
+    .select("spot_id, reference_image_url, like_count, created_at")
     .in("spot_id", spotIds)
     .eq("status", "approved")
     .order("created_at", { ascending: true });
@@ -97,16 +97,24 @@ app.get("/api/photo-spots", requireSupabase, async (request, response) => {
     return response.status(502).json({ message: "포토스팟 대표 사진을 불러오지 못했어요." });
   }
 
-  const thumbnailBySpotId = new Map();
+  const guideStatsBySpotId = new Map();
   for (const guide of guides) {
-    if (!thumbnailBySpotId.has(guide.spot_id)) thumbnailBySpotId.set(guide.spot_id, guide.reference_image_url);
+    const stats = guideStatsBySpotId.get(guide.spot_id) ?? { thumbnail: null, likeCount: 0 };
+    if (!stats.thumbnail) stats.thumbnail = guide.reference_image_url;
+    stats.likeCount += Number(guide.like_count ?? 0);
+    guideStatsBySpotId.set(guide.spot_id, stats);
   }
 
   try {
-    const items = await Promise.all(data.map(async (spot) => ({
-      ...spot,
-      thumbnail_image_url: await toSignedGuideAssetUrl(thumbnailBySpotId.get(spot.id)),
-    })));
+    const items = await Promise.all(data.map(async (spot) => {
+      const stats = guideStatsBySpotId.get(spot.id) ?? { thumbnail: null, likeCount: 0 };
+      return {
+        ...spot,
+        like_count: stats.likeCount,
+        thumbnail_image_url: await toSignedGuideAssetUrl(stats.thumbnail),
+      };
+    }));
+    items.sort((left, right) => right.like_count - left.like_count || left.name.localeCompare(right.name, "ko"));
     return response.json({ items });
   } catch (assetError) {
     console.error("Failed to sign photo spot thumbnails", assetError.message);
@@ -249,6 +257,7 @@ app.post("/api/candidate-spots", requireSupabase, proposalUpload.single("image")
     pose_guide_json: poseGuide,
     analysis_metadata: { source: "candidate_proposal", generated_by: "yolo_pose_sam2" },
     shooting_tip: spotRow.place_tip,
+    like_count: 0,
     // The spot remains a candidate. Its generated guide is publishable so the
     // candidate can immediately reuse the same frame and camera flow.
     status: "approved",
@@ -267,7 +276,7 @@ app.post("/api/candidate-spots", requireSupabase, proposalUpload.single("image")
 
   try {
     return response.status(201).json({
-      item: { ...spot, thumbnail_image_url: await toSignedGuideAssetUrl(storageUrl) },
+      item: { ...spot, like_count: 0, thumbnail_image_url: await toSignedGuideAssetUrl(storageUrl) },
       photo_guides: [await withSignedGuideAssets(guide)],
     });
   } catch (assetError) {

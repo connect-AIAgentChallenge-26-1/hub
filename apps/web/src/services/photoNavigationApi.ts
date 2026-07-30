@@ -12,6 +12,7 @@ type ApiPhotoSpot = {
   longitude: number | string;
   status: "official" | "candidate" | "rejected";
   image_tone: string;
+  like_count?: number;
   thumbnail_image_url?: string | null;
 };
 
@@ -53,6 +54,8 @@ function toPhotoSpot(spot: ApiPhotoSpot): PhotoSpot {
     thumbnailImageUrl: spot.thumbnail_image_url,
     latitude: Number(spot.latitude),
     longitude: Number(spot.longitude),
+    likes: Number(spot.like_count ?? 0),
+    threshold: spot.status === "candidate" ? 10 : undefined,
     imageTone: imageTones.has(spot.image_tone as PhotoSpot["imageTone"])
       ? spot.image_tone as PhotoSpot["imageTone"]
       : "plaza",
