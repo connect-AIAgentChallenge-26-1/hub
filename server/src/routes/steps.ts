@@ -7,6 +7,7 @@ import { FILE_AGENT_PROMPTS } from "../utils/fileAgentPrompts";
 import { AGENT_PROMPTS } from "../utils/agentPrompts";
 import { getRepoTarget, putFileContent } from "../utils/github";
 import { getSteps, STEPS_FILE, type Step } from "../utils/steps";
+import { isDemoMode, demoDelay } from "../utils/demoMode";
 
 const router = Router();
 
@@ -59,14 +60,21 @@ router.post("/:stepId/approve", async (req, res) => {
   if (docAgentConfig) {
     const doc = await getDocument(stepId);
     if (doc) {
-      const target = await getRepoTarget();
-      if (!target) {
-        return res.status(401).json({ error: "Not logged in, or no repository connected yet." });
-      }
-      try {
-        await putFileContent(target, doc.path, doc.content, `docs: update ${doc.path}`);
-      } catch (err) {
-        return res.status(500).json({ error: err instanceof Error ? err.message : String(err) });
+      // Same demo safety net as commit-batch: Approve is part of every demo
+      // run (chat -> doc -> Approve), so without this a re-recorded take
+      // would still push a real commit on every single pass.
+      if (isDemoMode()) {
+        await demoDelay();
+      } else {
+        const target = await getRepoTarget();
+        if (!target) {
+          return res.status(401).json({ error: "Not logged in, or no repository connected yet." });
+        }
+        try {
+          await putFileContent(target, doc.path, doc.content, `docs: update ${doc.path}`);
+        } catch (err) {
+          return res.status(500).json({ error: err instanceof Error ? err.message : String(err) });
+        }
       }
     }
   }

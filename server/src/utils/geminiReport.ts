@@ -2,6 +2,7 @@ import { GoogleGenAI } from "@google/genai";
 import type { AnalyzedClass } from "./analyzer";
 import type { DuplicateBlock } from "./jscpd";
 import type { RefactorTarget } from "./refactorTargets";
+import { toAiRequestError } from "./geminiError";
 
 const MODEL = "gemini-flash-latest";
 
@@ -46,14 +47,19 @@ export async function generateAnalysisReport(inputs: ReportInputs): Promise<stri
   }
 
   const ai = new GoogleGenAI({ apiKey });
-  const response = await ai.models.generateContent({
-    model: MODEL,
-    contents: buildPrompt(inputs),
-    config: { systemInstruction: SYSTEM_INSTRUCTION },
-  });
 
-  if (!response.text) {
-    throw new Error("Gemini returned an empty response.");
+  try {
+    const response = await ai.models.generateContent({
+      model: MODEL,
+      contents: buildPrompt(inputs),
+      config: { systemInstruction: SYSTEM_INSTRUCTION },
+    });
+
+    if (!response.text) {
+      throw new Error("Gemini returned an empty response.");
+    }
+    return response.text;
+  } catch (err) {
+    throw toAiRequestError(err);
   }
-  return response.text;
 }

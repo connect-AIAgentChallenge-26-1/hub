@@ -2,6 +2,7 @@ import { Router } from "express";
 import { getSession } from "../utils/session";
 import { getRepoTarget, putFileContent, deleteFile } from "../utils/github";
 import { getFileChanges, updateFileChanges } from "../utils/fileChanges";
+import { isDemoMode, demoDelay } from "../utils/demoMode";
 
 const router = Router();
 
@@ -109,6 +110,19 @@ router.post("/:stepId/commit-batch", async (req, res) => {
   const { files } = req.body as CommitBatchRequest;
   if (!files || files.length === 0) {
     return res.status(400).json({ error: "files is required and must be a non-empty array." });
+  }
+
+  // Demo mode never writes to a real repo — every requested file is reported
+  // as committed with a placeholder sha, so a recording never leaves behind
+  // real commits from take after take.
+  if (isDemoMode()) {
+    await demoDelay();
+    const stored = await getFileChanges(stepId);
+    const committedPaths = new Set(files.map((f) => f.path));
+    const committed: CommitResult[] = files.map(({ path }) => ({ path, commitSha: "demo0000000" }));
+    const updatedFiles = stored.map((f) => (committedPaths.has(f.path) ? { ...f, approved: true } : f));
+    await updateFileChanges(stepId, updatedFiles);
+    return res.json({ committed, failed: [], files: updatedFiles });
   }
 
   const target = await getRepoTarget();

@@ -2,6 +2,9 @@ import { GoogleGenAI, Type } from "@google/genai";
 import type { ChatMessage } from "./messages";
 import type { FileAgentPromptConfig } from "./fileAgentPrompts";
 import { computeUnifiedDiff } from "./diffCompute";
+import { isQuotaExceededError, toAiRequestError } from "./geminiError";
+import { isDemoMode, demoDelay } from "./demoMode";
+import { getMockFileAgentResponse } from "../demoData/mockFileAgent";
 
 const MODEL = "gemini-flash-latest";
 const MAX_RETRIES = 2; // total attempts = 1 + MAX_RETRIES
@@ -68,15 +71,22 @@ const RESPONSE_SCHEMA = {
 export async function askFileAgent(
   agentConfig: FileAgentPromptConfig,
   history: ChatMessage[],
-  userMessage: string
+  userMessage: string,
+  agentName: string
 ): Promise<FileAgentResult> {
+  const questionCount = history.filter((m) => m.from === "agent").length;
+
+  if (isDemoMode()) {
+    await demoDelay();
+    return getMockFileAgentResponse(agentName, questionCount);
+  }
+
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) {
     throw new Error("GEMINI_API_KEY is not configured on the server.");
   }
 
   const ai = new GoogleGenAI({ apiKey });
-  const questionCount = history.filter((m) => m.from === "agent").length;
   const { text: contextText, existingFiles } = await agentConfig.gatherContext();
   const systemInstruction = agentConfig.buildSystemInstruction(contextText, questionCount);
 
@@ -129,13 +139,15 @@ export async function askFileAgent(
 
       return { reply: raw.reply, readyToGenerateFiles: raw.readyToGenerateFiles, files };
     } catch (err) {
+      // A quota error won't be fixed by retrying with a "respond with JSON
+      // only" nudge — it'll just fail again and burn more quota, so this
+      // skips the remaining attempts entirely instead of looping.
+      if (isQuotaExceededError(err)) {
+        throw toAiRequestError(err);
+      }
       lastError = err;
     }
   }
 
-  throw new Error(
-    `Gemini structured output failed after ${MAX_RETRIES + 1} attempts: ${
-      lastError instanceof Error ? lastError.message : String(lastError)
-    }`
-  );
+  throw toAiRequestError(lastError);
 }

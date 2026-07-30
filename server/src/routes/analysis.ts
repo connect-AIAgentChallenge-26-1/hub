@@ -7,6 +7,9 @@ import { runJscpd } from "../utils/jscpd";
 import { findRefactorTargets } from "../utils/refactorTargets";
 import { generateAnalysisReport } from "../utils/geminiReport";
 import { saveDocument, getDocument } from "../utils/documents";
+import { AiRequestError, toErrorResponseBody } from "../utils/geminiError";
+import { isDemoMode, demoDelay } from "../utils/demoMode";
+import { MOCK_ANALYSIS_STATS, MOCK_ANALYSIS_REPORT } from "../demoData/mockAnalysisReport";
 
 const router = Router();
 
@@ -63,6 +66,18 @@ router.post("/start", async (req, res) => {
   await writeJson(PROJECT_FILE, project);
 
   try {
+    // Demo mode skips the whole real pipeline (Roslyn/jscpd aren't Gemini
+    // calls, but their real numbers on the sample fixtures wouldn't match
+    // the mock report's prose — keeping stats and report text consistent
+    // matters more here than only gating the literal Gemini call).
+    if (isDemoMode()) {
+      await demoDelay();
+      await saveDocument(ANALYSIS_STEP_ID, "docs/00_Analysis_Report.md", MOCK_ANALYSIS_REPORT);
+      project = { ...project, status: "completed", stats: MOCK_ANALYSIS_STATS };
+      await writeJson(PROJECT_FILE, project);
+      return res.json({ ...project, classes: [], duplicates: [], refactorTargets: [], report: MOCK_ANALYSIS_REPORT });
+    }
+
     const { classes } = await runAnalyzer(ANALYSIS_TARGET);
     const { duplicates } = await runJscpd(ANALYSIS_TARGET);
     const refactorTargets = findRefactorTargets(classes);
@@ -83,10 +98,8 @@ router.post("/start", async (req, res) => {
     project = { ...project, status: "failed" };
     await writeJson(PROJECT_FILE, project);
 
-    res.status(500).json({
-      ...project,
-      error: err instanceof Error ? err.message : String(err),
-    });
+    const status = err instanceof AiRequestError ? err.status : 500;
+    res.status(status).json({ ...project, ...toErrorResponseBody(err) });
   }
 });
 

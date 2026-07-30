@@ -8,6 +8,7 @@ import { AGENT_PROMPTS } from "../utils/agentPrompts";
 import { askAgent } from "../utils/agentChat";
 import { FILE_AGENT_PROMPTS } from "../utils/fileAgentPrompts";
 import { askFileAgent } from "../utils/fileAgentChat";
+import { AiRequestError, toErrorResponseBody } from "../utils/geminiError";
 
 const router = Router();
 
@@ -57,7 +58,7 @@ router.post("/:stepId/message", async (req, res) => {
 
   try {
     if (docAgentConfig) {
-      const result = await askAgent(docAgentConfig, historyBefore, text);
+      const result = await askAgent(docAgentConfig, historyBefore, text, step.agent_name);
 
       const agentMessage: ChatMessage = {
         id: randomUUID(),
@@ -75,7 +76,7 @@ router.post("/:stepId/message", async (req, res) => {
       return res.json({ messages, document, files: null });
     }
 
-    const result = await askFileAgent(fileAgentConfig, historyBefore, text);
+    const result = await askFileAgent(fileAgentConfig, historyBefore, text, step.agent_name);
 
     const agentMessage: ChatMessage = {
       id: randomUUID(),
@@ -92,7 +93,57 @@ router.post("/:stepId/message", async (req, res) => {
 
     res.json({ messages, document: null, files });
   } catch (err) {
-    res.status(500).json({ error: err instanceof Error ? err.message : String(err) });
+    const status = err instanceof AiRequestError ? err.status : 500;
+    res.status(status).json(toErrorResponseBody(err));
+  }
+});
+
+// Manual "지금까지 내용으로 문서 만들기" — lets the user cut a doc-Agent
+// conversation short instead of waiting for the Agent to decide it has asked
+// enough questions. Only doc Agents support this; Code Generation/Refactoring
+// (Step 7-8) have a completely different flow (file arrays, commit review)
+// and are out of scope here.
+router.post("/:stepId/finalize", async (req, res) => {
+  const stepId = Number(req.params.stepId);
+  if (!Number.isInteger(stepId)) {
+    return res.status(400).json({ error: "Invalid step id." });
+  }
+
+  const step = await getStep(stepId);
+  if (!step) {
+    return res.status(404).json({ error: "Step not found." });
+  }
+
+  const docAgentConfig = AGENT_PROMPTS[step.agent_name];
+  if (!docAgentConfig) {
+    return res.status(400).json({ error: "이 단계는 지금 바로 문서 생성을 지원하지 않습니다." });
+  }
+
+  const historyBefore = await getMessages(stepId);
+
+  try {
+    const result = await askAgent(
+      docAgentConfig,
+      historyBefore,
+      "(사용자가 지금까지의 내용만으로 문서 생성을 요청했습니다. 질문을 더 하지 말고 지금 바로 문서를 작성해주세요.)",
+      step.agent_name,
+      { finalize: true }
+    );
+
+    const agentMessage: ChatMessage = {
+      id: randomUUID(),
+      from: "agent",
+      text: result.reply,
+      created_at: new Date().toISOString(),
+    };
+    const messages = await appendMessages(stepId, [agentMessage]);
+
+    const document = result.document ? await saveDocument(stepId, docAgentConfig.docPath, result.document) : null;
+
+    res.json({ messages, document });
+  } catch (err) {
+    const status = err instanceof AiRequestError ? err.status : 500;
+    res.status(status).json(toErrorResponseBody(err));
   }
 });
 

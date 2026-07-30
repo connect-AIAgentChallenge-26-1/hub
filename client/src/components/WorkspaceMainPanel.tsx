@@ -31,7 +31,9 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
   const [document, setDocument] = useState<DocumentRecord | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [sending, setSending] = useState(false);
+  const [finalizing, setFinalizing] = useState(false);
   const [chatError, setChatError] = useState<string | null>(null);
+  const [chatErrorCode, setChatErrorCode] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState(false);
   const [draft, setDraft] = useState("");
   const [approving, setApproving] = useState(false);
@@ -87,6 +89,7 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
 
   async function handleSend(text: string) {
     setChatError(null);
+    setChatErrorCode(null);
     const optimisticUser: ChatMessage = {
       id: `local-${Date.now()}`,
       from: "user",
@@ -103,7 +106,14 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
         body: JSON.stringify({ text }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "chat failed");
+      if (!res.ok) {
+        // AI_QUOTA_EXCEEDED (Gemini 429) arrives with an already human-readable
+        // `error` message from the server — no retry here on purpose, since a
+        // daily quota won't recover within this request.
+        setChatError(data.error ?? "메시지 전송에 실패했습니다. 다시 시도해주세요.");
+        setChatErrorCode(data.code ?? null);
+        return;
+      }
 
       setMessages(data.messages);
       if (data.document) {
@@ -114,14 +124,41 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
         applyFileChanges(data.files);
         onStepsRefreshNeeded(); // progress_pct depends on the new files' approved count
       }
-    } catch (err) {
-      setChatError(
-        err instanceof Error && err.message !== "chat failed"
-          ? err.message
-          : "메시지 전송에 실패했습니다. 다시 시도해주세요."
-      );
+    } catch {
+      setChatError("메시지 전송에 실패했습니다. 다시 시도해주세요.");
     } finally {
       setSending(false);
+    }
+  }
+
+  async function handleFinalize() {
+    const userMessageCount = messages.filter((m) => m.from === "user").length;
+    if (userMessageCount < 1 && !window.confirm("아직 대화가 별로 없는데 지금 문서를 만들까요?")) {
+      return;
+    }
+
+    setChatError(null);
+    setChatErrorCode(null);
+    setFinalizing(true);
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/chat/${step.id}/finalize`, { method: "POST" });
+      const data = await res.json();
+      if (!res.ok) {
+        setChatError(data.error ?? "문서 생성에 실패했습니다. 다시 시도해주세요.");
+        setChatErrorCode(data.code ?? null);
+        return;
+      }
+
+      setMessages(data.messages);
+      if (data.document) {
+        setDocument(data.document);
+        onStepsRefreshNeeded(); // progress_pct depends on the new document's checklist
+      }
+    } catch {
+      setChatError("문서 생성에 실패했습니다. 다시 시도해주세요.");
+    } finally {
+      setFinalizing(false);
     }
   }
 
@@ -255,16 +292,39 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
               <span>{step.agent_name}</span>
               <span>{messages.length}개 메시지</span>
             </div>
-            {messages.length === 0 && !sending ? (
+            {messages.length === 0 && !sending && !finalizing ? (
               <div style={{ color: "var(--text-mute)", fontSize: 13 }}>
                 아직 대화가 없습니다. 메시지를 보내 대화를 시작해보세요.
               </div>
             ) : (
-              <ChatThread messages={messages} sending={sending} />
+              <ChatThread messages={messages} sending={sending || finalizing} />
             )}
-            <ChatInput onSend={handleSend} disabled={sending} />
+            <ChatInput onSend={handleSend} disabled={sending || finalizing} />
+            {!isFileAgent && (
+              <button
+                disabled={sending || finalizing}
+                onClick={handleFinalize}
+                style={{ alignSelf: "flex-end" }}
+              >
+                지금까지 내용으로 문서 만들기
+              </button>
+            )}
           </div>
-          {chatError && <div style={{ color: "var(--red)", fontSize: 12.5 }}>{chatError}</div>}
+          {chatError && chatErrorCode === "AI_QUOTA_EXCEEDED" ? (
+            <div
+              style={{
+                background: "var(--red-bg)",
+                color: "var(--red)",
+                borderRadius: 8,
+                padding: "10px 12px",
+                fontSize: 12.5,
+              }}
+            >
+              {chatError}
+            </div>
+          ) : (
+            chatError && <div style={{ color: "var(--red)", fontSize: 12.5 }}>{chatError}</div>
+          )}
 
           {isFileAgent ? (
             fileChanges.length === 0 ? (
