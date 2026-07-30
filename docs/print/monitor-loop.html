@@ -312,11 +312,11 @@
   /* 5개 컬럼을 한 줄에 다 욱여넣으면 너무 작아져서, 2줄(①②③ / ④⑤)로 나누고
      그만큼 컬럼 하나하나는 크게 키웠다. 다만 위아래 여백이 남게 전체적으로
      살짝 눌러서(패딩·줄간격 축소) 화면에 꽉 차 보이지 않게 했다 */
-  .sys-rows { display: flex; flex-direction: column; align-items: center; gap: 0.5vh; }
+  .sys-rows { display: flex; flex-direction: column; align-items: center; gap: 0.65vh; }
   .sys-row { display: flex; align-items: flex-start; justify-content: center; gap: 2.4vw; width: 94vw; }
   .row-connector {
     color: rgba(10,37,64,0.35);
-    font-size: clamp(16px, 1.8vw, 24px);
+    font-size: clamp(17px, 1.9vw, 26px);
     line-height: 1;
   }
   .sys-col {
@@ -325,13 +325,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.85vh;
+    gap: 1vh;
     opacity: 0;
     animation: riseIn 0.6s cubic-bezier(.16,.84,.44,1) forwards;
     animation-delay: calc(var(--i, 0) * 180ms + 250ms);
   }
   .sys-title {
-    font-size: clamp(15px, 1.55vw, 21px);
+    font-size: clamp(16px, 1.65vw, 22.5px);
     font-weight: 800;
     text-align: center;
     line-height: 1.3;
@@ -343,27 +343,27 @@
   .sys-col.c-fe .sys-title { color: var(--acc-cyan); }
   .sys-caption {
     display: block;
-    font-size: clamp(10.5px, 0.95vw, 13px);
+    font-size: clamp(11px, 1vw, 14px);
     color: var(--text-sub);
     font-weight: 500;
     margin-top: 3px;
   }
-  .sys-body { display: flex; flex-direction: column; align-items: center; gap: 0.55vh; width: 100%; }
+  .sys-body { display: flex; flex-direction: column; align-items: center; gap: 0.65vh; width: 100%; }
   .sys-node {
     width: 100%;
     background: var(--navy-soft);
     border-radius: 12px;
-    padding: 0.9vh 1vw;
-    font-size: clamp(13px, 1.35vw, 17.5px);
+    padding: 1.05vh 1vw;
+    font-size: clamp(14px, 1.45vw, 18.5px);
     font-weight: 700;
     text-align: center;
   }
   .sys-node.highlight { background: var(--blue); color: #fff; }
   .sys-col.c-db .sys-node.highlight { background: var(--seg-emp); }
   .sys-node.dim { background: rgba(10,37,64,0.05); font-weight: 600; color: var(--text-sub); }
-  .sys-node.small { font-size: clamp(11.5px, 1.15vw, 15px); padding: 0.75vh 0.7vw; }
+  .sys-node.small { font-size: clamp(12px, 1.25vw, 16px); padding: 0.85vh 0.7vw; }
   .sys-note {
-    font-size: clamp(10.5px, 0.95vw, 13px);
+    font-size: clamp(11px, 1vw, 14px);
     color: var(--text-sub);
     font-weight: 500;
     margin-top: 3px;
@@ -372,12 +372,12 @@
   .side-tag {
     margin-top: 4px;
     display: inline-block;
-    font-size: clamp(10px, 0.9vw, 12.5px);
+    font-size: clamp(10.5px, 0.95vw, 13px);
     color: var(--acc-purple);
     background: rgba(147,51,234,0.08);
     border: 1px dashed rgba(147,51,234,0.4);
     border-radius: 8px;
-    padding: 3px 8px;
+    padding: 3px 9px;
   }
   .sys-fork {
     color: var(--text-sub);
