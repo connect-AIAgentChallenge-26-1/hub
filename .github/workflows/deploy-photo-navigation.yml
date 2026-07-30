@@ -1,0 +1,54 @@
+name: Deploy Photo Navigation
+
+on:
+  push:
+    branches: [week4-photo-navigation]
+    paths:
+      - "apps/web/**"
+      - "docs/deployment.md"
+      - "scripts/check-secrets.mjs"
+      - ".github/workflows/deploy-photo-navigation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: apps/web/package-lock.json
+      - name: Install dependencies
+        working-directory: apps/web
+        run: npm ci
+      - name: Check tracked files for secrets
+        run: |
+          git diff --check HEAD^ HEAD
+          npm --prefix apps/web run security:check
+      - name: Build static app
+        working-directory: apps/web
+        env:
+          VITE_BASE_PATH: /hub/photo-navigation/
+          VITE_NAVER_MAPS_CLIENT_ID: ${{ secrets.VITE_NAVER_MAPS_CLIENT_ID }}
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+          VITE_VISION_API_BASE_URL: ${{ secrets.VITE_VISION_API_BASE_URL }}
+        run: npm run build
+      - name: Publish below the existing Pages site
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: apps/web/dist
+          destination_dir: photo-navigation
+          keep_files: true
