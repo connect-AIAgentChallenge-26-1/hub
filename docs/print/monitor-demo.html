@@ -1376,41 +1376,41 @@
   async function runAutoDemo() {
     while (true) {
       goTo('screen-welcome');
-      await sleep(2500);
+      await sleep(2000);
 
       goTo('screen-step1');
-      await sleep(1200);
+      await sleep(900);
       clickByText('options-step1', '카페·베이커리');
-      await sleep(1000);
+      await sleep(800);
       document.getElementById('btn-next1').click();
 
-      await sleep(900);
+      await sleep(700);
       clickByText('options-step2', '서울');
-      await sleep(1000);
+      await sleep(800);
       document.getElementById('btn-next2').click();
 
-      await sleep(900);
+      await sleep(700);
       clickByText('options-step3', '마포구');
-      await sleep(1000);
+      await sleep(800);
       document.getElementById('btn-next3').click();
 
-      await sleep(900);
+      await sleep(700);
       clickByText('options-employees', '1~4명');
-      await sleep(600);
+      await sleep(500);
       const revenueSelect = document.getElementById('revenue-select');
       revenueSelect.value = '1억원 ~ 3억원';
       onRevenueChange();
-      await sleep(1200);
+      await sleep(900);
       document.getElementById('btn-next4').click();
 
-      await sleep(2200);
+      await sleep(1800);
       document.querySelector('.btn-go-home').click();
 
-      await sleep(2500);
+      await sleep(2000);
       openDetail(0);
 
-      await sleep(4000);
-      await sleep(1200);
+      await sleep(3200);
+      await sleep(700);
     }
   }
 
