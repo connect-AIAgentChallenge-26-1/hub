@@ -366,6 +366,7 @@
     text-align: center;
   }
   .sys-node.highlight { background: var(--blue); color: #fff; }
+  .sys-node.highlight .sys-note { color: rgba(255,255,255,0.85); }
   .sys-col.c-db .sys-node.highlight { background: var(--seg-emp); }
   .sys-node.dim { background: rgba(10,37,64,0.05); font-weight: 600; color: var(--text-sub); }
   .sys-node.small { font-size: clamp(12px, 1.25vw, 16px); padding: 0.85vh 0.7vw; }
@@ -653,8 +654,14 @@
         <div class="sys-col c-source" style="--i:0">
           <div class="sys-title">① 외부 소스</div>
           <div class="sys-body">
-            <div class="sys-node">기업마당 Open API</div>
-            <div class="sys-node">K-Startup API</div>
+            <div class="sys-node">
+              기업마당 Open API
+              <div class="sys-note">활성 공고 약 1,500건 · 인증키 필요</div>
+            </div>
+            <div class="sys-node">
+              K-Startup Open API
+              <div class="sys-note">전체 29,568건 보유 · 인증키 불필요</div>
+            </div>
           </div>
         </div>
 
@@ -678,9 +685,18 @@
         <div class="sys-col c-db" style="--i:2">
           <div class="sys-title">③ Supabase</div>
           <div class="sys-body">
-            <div class="sys-node highlight">subsidies</div>
-            <div class="sys-node dim small">document_extractions</div>
-            <div class="sys-node dim small">match_requests</div>
+            <div class="sys-node highlight">
+              subsidies
+              <div class="sys-note">26개 컬럼 · 활성 공고 약 1,500건</div>
+            </div>
+            <div class="sys-node dim small">
+              document_extractions
+              <div class="sys-note">4개 컬럼 · Gemini 추출 캐시</div>
+            </div>
+            <div class="sys-node dim small">
+              match_requests
+              <div class="sys-note">11개 컬럼 · 온보딩 조건 저장</div>
+            </div>
           </div>
         </div>
       </div>
