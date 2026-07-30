@@ -1,7 +1,7 @@
 {
   "path": "docs/09_Documentation.md",
-  "content": "# Documentation\n\n## Requirements Summary\n- [ ] 장르: PC 플랫폼 기반 2D 로그라이크 액션 게임 (키보드 및 마우스 조작)\n- [ ] WASD 8방향 이동 및 마우스 방향 대시 기능\n- [ ] 마우스 좌클릭 근접 검 공격 및 우클릭 원거리 투척 무기 공격\n- [ ] 메인 메뉴, 인게임 HUD(체력 및 골드), 게임오버 화면 제공\n- [ ] 싱글플레이 전용 (멀티플레이 기능 Scope 제외)\n\n## Game Design Summary\n- [ ] 저주받은 성을 배경으로 한 판타지 세계관 및 탐험 스토리\n- [ ] 던전을 순차적으로 클리어하며 진행하는 구조 및 스테이지 클리어 시 능력치 강화 아이템 선택 빌드업 시스템\n- [ ] 캐릭터 구성: 이름 없는 검객(주인공), 근접형 몬스터, 원거리형 몬스터\n- [ ] UI 구성: 메인 메뉴, 인게임 HUD, 스테이지 클리어 아이템 선택 화면, 게임오버 화면\n\n## System Design Summary\n- [ ] 대시 동작 쿨다운 1.2초, 대시 시작 후 0.3초간 무적 판정 적용\n- [ ] 근접 공격 히트박스 생성, 원거리 투사체 오브젝트 발사 및 피격 시 체력 감소/넉백 적용 메커니즘\n- [ ] 몬스터 처치 시 골드 획득 및 골드 차감을 통한 아이템 구매/능력치 강화 적용 데이터 흐름\n- [ ] PlayerController, DashComponent, HealthComponent, BaseEnemy(Melee/Ranged), InventoryComponent, ItemData/StatBoostEffect 등 핵심 클래스 구조 설계\n- [ ] Game.Core, Game.Item, Game.Player, Game.Enemy, Game.UI 등의 모듈화된 폴더 및 Assembly Definition 구조 구성\n- [ ] PlayerData, EnemyData, ItemData, ProjectileData 스크립터블 오브젝트(ScriptableObject)를 통한 데이터 관리",
+  "content": "# Documentation\n\n## Requirements Summary\n- [ ] 2D 로그라이크 액션 장르\n- [ ] PC 플랫폼 및 키보드/마우스 조작 지원\n- [ ] WASD 키를 이용한 8방향 이동\n- [ ] 마우스 커서 방향 대시 이동\n- [ ] 마우스 좌클릭 근접 검 공격\n- [ ] 마우스 우클릭 원거리 투척 무기 공격\n- [ ] 메인 메뉴 화면\n- [ ] 인게임 HUD (플레이어 체력 및 골드 표시)\n- [ ] 게임오버 화면\n- [ ] 싱글플레이어 전용 (멀티플레이어 제외)\n\n## Game Design Summary\n- [ ] 2D 로그라이크 액션 던전 클리어 루프 구조\n- [ ] 저주받은 성 배경의 세계관\n- [ ] 주인공: 이름 없는 검객\n- [ ] 주요 적 및 보스 몬스터 콘셉트 (추후 보완 필요)\n- [ ] NPC 및 기타 등장인물 (추후 보완 필요)\n\n## System Design Summary\n- [ ] 플레이어 컨트롤러 및 조작 입력 처리 시스템 (추후 보완 필요)\n- [ ] 근접/원거리 공격 및 대시 액션 처리 시스템 (추후 보완 필요)\n- [ ] 인게임 UI/HUD 데이터 연동 시스템 (추후 보완 필요)\n- [ ] 던전 상태 및 진행 루프 관리 시스템 (추후 보완 필요)",
   "version": 1,
-  "updated_at": "2026-07-29T09:44:51.052Z",
+  "updated_at": "2026-07-30T08:17:14.400Z",
   "history": []
 }
