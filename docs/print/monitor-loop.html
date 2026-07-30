@@ -308,14 +308,15 @@
   /* ---- 3. 어떻게 동작하는가 — 외부소스 → Crawler → Supabase → Express →
      React+TanStack Query, 5개 스윔레인. 컬럼마다 성격에 맞는 색을 준다
      (Supabase=초록, Crawler=주황, React=청록, 외부소스=슬레이트, Express=파랑) ---- */
-  .slide-arch { gap: 1.6vh; }
+  .slide-arch { gap: 1.2vh; }
   /* 5개 컬럼을 한 줄에 다 욱여넣으면 너무 작아져서, 2줄(①②③ / ④⑤)로 나누고
-     그만큼 컬럼 하나하나는 훨씬 크게 키웠다 */
-  .sys-rows { display: flex; flex-direction: column; align-items: center; gap: 1vh; }
-  .sys-row { display: flex; align-items: flex-start; justify-content: center; width: 94vw; }
+     그만큼 컬럼 하나하나는 크게 키웠다. 다만 위아래 여백이 남게 전체적으로
+     살짝 눌러서(패딩·줄간격 축소) 화면에 꽉 차 보이지 않게 했다 */
+  .sys-rows { display: flex; flex-direction: column; align-items: center; gap: 0.5vh; }
+  .sys-row { display: flex; align-items: flex-start; justify-content: center; gap: 2.4vw; width: 94vw; }
   .row-connector {
     color: rgba(10,37,64,0.35);
-    font-size: clamp(18px, 2vw, 28px);
+    font-size: clamp(16px, 1.8vw, 24px);
     line-height: 1;
   }
   .sys-col {
@@ -324,13 +325,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.1vh;
+    gap: 0.85vh;
     opacity: 0;
     animation: riseIn 0.6s cubic-bezier(.16,.84,.44,1) forwards;
     animation-delay: calc(var(--i, 0) * 180ms + 250ms);
   }
   .sys-title {
-    font-size: clamp(16px, 1.7vw, 23px);
+    font-size: clamp(15px, 1.55vw, 21px);
     font-weight: 800;
     text-align: center;
     line-height: 1.3;
@@ -342,41 +343,41 @@
   .sys-col.c-fe .sys-title { color: var(--acc-cyan); }
   .sys-caption {
     display: block;
-    font-size: clamp(11px, 1vw, 14px);
+    font-size: clamp(10.5px, 0.95vw, 13px);
     color: var(--text-sub);
     font-weight: 500;
     margin-top: 3px;
   }
-  .sys-body { display: flex; flex-direction: column; align-items: center; gap: 0.7vh; width: 100%; }
+  .sys-body { display: flex; flex-direction: column; align-items: center; gap: 0.55vh; width: 100%; }
   .sys-node {
     width: 100%;
     background: var(--navy-soft);
     border-radius: 12px;
-    padding: 1.15vh 1vw;
-    font-size: clamp(14px, 1.5vw, 19px);
+    padding: 0.9vh 1vw;
+    font-size: clamp(13px, 1.35vw, 17.5px);
     font-weight: 700;
     text-align: center;
   }
   .sys-node.highlight { background: var(--blue); color: #fff; }
   .sys-col.c-db .sys-node.highlight { background: var(--seg-emp); }
   .sys-node.dim { background: rgba(10,37,64,0.05); font-weight: 600; color: var(--text-sub); }
-  .sys-node.small { font-size: clamp(12.5px, 1.3vw, 16.5px); padding: 0.95vh 0.7vw; }
+  .sys-node.small { font-size: clamp(11.5px, 1.15vw, 15px); padding: 0.75vh 0.7vw; }
   .sys-note {
-    font-size: clamp(11px, 1vw, 14px);
+    font-size: clamp(10.5px, 0.95vw, 13px);
     color: var(--text-sub);
     font-weight: 500;
-    margin-top: 4px;
-    line-height: 1.4;
+    margin-top: 3px;
+    line-height: 1.35;
   }
   .side-tag {
-    margin-top: 5px;
+    margin-top: 4px;
     display: inline-block;
-    font-size: clamp(10.5px, 0.95vw, 13px);
+    font-size: clamp(10px, 0.9vw, 12.5px);
     color: var(--acc-purple);
     background: rgba(147,51,234,0.08);
     border: 1px dashed rgba(147,51,234,0.4);
     border-radius: 8px;
-    padding: 3px 9px;
+    padding: 3px 8px;
   }
   .sys-fork {
     color: var(--text-sub);
@@ -387,23 +388,6 @@
   }
   .sys-branch { display: flex; gap: 0.6vw; width: 100%; }
   .sys-branch .sys-node { flex: 1 1 0; }
-
-  /* 카드 사이를 잇는 연결선 — 각 카드 높이가 달라도 가운데 정렬되고,
-     그 위로 신호가 계속 왼쪽에서 오른쪽으로 흘러가는 점이 지나간다.
-     연결선 자체는 특정 섹션 색에 치우치지 않도록 중립 슬레이트 톤을 쓴다. */
-  .pipe-connector {
-    position: relative;
-    flex: 0 0 clamp(32px, 4.5vw, 64px);
-    height: 2px;
-    align-self: center;
-    background: linear-gradient(90deg, rgba(10,37,64,0.05), rgba(10,37,64,0.28), rgba(10,37,64,0.05));
-  }
-  .pipe-connector .chevron {
-    position: absolute; right: -2px; top: 50%;
-    transform: translateY(-50%);
-    color: rgba(10,37,64,0.35);
-    font-size: 14px;
-  }
 
   /* ---- 5. AI 에이전트를 어떻게 활용했는가 — 상위 에이전트가 이슈별 하위
      에이전트를 병렬로 다루고, 각 하위 에이전트가 스킬을 쓰는 조직도.
@@ -666,7 +650,6 @@
             <div class="sys-node">K-Startup API</div>
           </div>
         </div>
-        <div class="pipe-connector"><span class="chevron">›</span></div>
 
         <div class="sys-col c-crawl" style="--i:1">
           <div class="sys-title">② Crawler<span class="sys-caption">GitHub Actions cron · 00:00 KST</span></div>
@@ -684,7 +667,6 @@
             <div class="sys-node">만료 sweep</div>
           </div>
         </div>
-        <div class="pipe-connector"><span class="chevron">›</span></div>
 
         <div class="sys-col c-db" style="--i:2">
           <div class="sys-title">③ Supabase</div>
@@ -717,7 +699,6 @@
             </div>
           </div>
         </div>
-        <div class="pipe-connector"><span class="chevron">›</span></div>
 
         <div class="sys-col c-fe" style="--i:4">
           <div class="sys-title">⑤ React<span class="sys-caption">+ TanStack Query</span></div>
