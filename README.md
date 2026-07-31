@@ -2,6 +2,10 @@
 
 **배포된 서비스**: [hub-two-rosy.vercel.app](https://hub-two-rosy.vercel.app) (Frontend, Vercel) · [hub-071a.onrender.com](https://hub-071a.onrender.com) (Backend, Render)
 
+> 무단 API 호출로 인한 Claude 비용 발생을 막기 위해 단일 계정 로그인 게이트가 걸려 있습니다. 직접 체험해보시려면 아래 계정으로 로그인해주세요(평가 기간 이후 비활성화 예정입니다).
+> - 아이디: `admin`
+> - 비밀번호: `1234`
+
 ## 문제 정의
 
 대학생은 신입 공채·인턴십·공모전·대외활동 공고 중 자신에게 맞는 것을 고르기 어렵고, 자기소개서 문항에 맞춰 자기 경험을 정리해 쓰는 데도 어려움을 겪는다.
