@@ -7,9 +7,17 @@ interface Props {
   onSelectStep: (id: number) => void;
   repoFullName: string | null;
   branch: string | null;
+  onExpandFeature: () => void;
 }
 
-export default function StepSidebar({ steps, selectedStepId, onSelectStep, repoFullName, branch }: Props) {
+export default function StepSidebar({
+  steps,
+  selectedStepId,
+  onSelectStep,
+  repoFullName,
+  branch,
+  onExpandFeature,
+}: Props) {
   return (
     <div className="sidebar">
       <div className="sidebar-head">
@@ -28,6 +36,12 @@ export default function StepSidebar({ steps, selectedStepId, onSelectStep, repoF
             onSelect={onSelectStep}
           />
         ))}
+      </div>
+      {/* Entry point for the (separate, Day 19+) Feature Expansion Workflow —
+          adding a feature to an already-existing project, independent of the
+          9-step new-project workflow above. */}
+      <div className="sidebar-foot">
+        <button onClick={onExpandFeature}>+ 기능 추가</button>
       </div>
     </div>
   );

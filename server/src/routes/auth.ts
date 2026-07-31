@@ -1,8 +1,8 @@
 import { Router } from "express";
 import crypto from "crypto";
-import { promises as fs } from "fs";
-import { writeJson } from "../utils/jsonStore";
-import { getSession, SESSION_FILE, StoredSession } from "../utils/session";
+import { createSession, deleteSession } from "../utils/session";
+import { ensureUserInitialized } from "../utils/userInit";
+import { SESSION_COOKIE } from "../middleware/auth";
 
 const router = Router();
 
@@ -11,6 +11,10 @@ const SERVER_BASE_URL = process.env.SERVER_BASE_URL ?? `http://localhost:${PORT}
 const CLIENT_URL = process.env.CLIENT_URL ?? "http://localhost:5173";
 const CALLBACK_URL = `${SERVER_BASE_URL}/api/auth/github/callback`;
 const OAUTH_STATE_COOKIE = "oauth_state";
+// GitHub OAuth Apps normally issue non-expiring tokens (no expires_in) —
+// the session cookie still needs some lifetime, so it defaults to 30 days
+// and is only ever shortened when GitHub actually reports an expiry.
+const DEFAULT_SESSION_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;
 
 interface GithubTokenResponse {
   access_token?: string;
@@ -20,6 +24,7 @@ interface GithubTokenResponse {
 }
 
 interface GithubUserResponse {
+  id: number;
   login: string;
   avatar_url: string;
 }
@@ -90,38 +95,49 @@ router.get("/github/callback", async (req, res) => {
   });
   const userData = (await userRes.json()) as GithubUserResponse;
 
-  const session: StoredSession = {
+  const expiresAt = tokenData.expires_in
+    ? new Date(Date.now() + tokenData.expires_in * 1000).toISOString()
+    : null;
+  const maxAge = tokenData.expires_in ? tokenData.expires_in * 1000 : DEFAULT_SESSION_MAX_AGE_MS;
+
+  const { sessionId } = await createSession({
+    github_user_id: userData.id,
     github_login: userData.login,
     github_avatar_url: userData.avatar_url,
     access_token: tokenData.access_token,
-    expires_at: tokenData.expires_in
-      ? new Date(Date.now() + tokenData.expires_in * 1000).toISOString()
-      : null,
-  };
+    expires_at: expiresAt,
+  });
 
-  await writeJson(SESSION_FILE, session);
-  // Best-effort: restricts session.json (holds the plaintext access token) to the
-  // owner account only. No-op on Windows filesystems that don't enforce POSIX bits,
-  // but takes effect wherever the app is later run on Linux/macOS.
-  await fs.chmod(SESSION_FILE, 0o600).catch(() => {});
+  await ensureUserInitialized(userData.id);
+
+  res.cookie(SESSION_COOKIE, sessionId, {
+    httpOnly: true,
+    signed: true,
+    maxAge,
+    sameSite: "lax",
+  });
 
   res.redirect(`${CLIENT_URL}/repo`);
 });
 
-router.get("/session", async (_req, res) => {
-  const session = await getSession();
-  if (!session) {
+// Mounted behind the global resolveSession middleware (not requireAuth), so
+// a missing/invalid session lands here as req.userId === undefined rather
+// than a 401 — this endpoint's whole purpose is answering "am I logged in?".
+router.get("/session", async (req, res) => {
+  if (!req.authSession) {
     return res.json({ loggedIn: false });
   }
   res.json({
     loggedIn: true,
-    github_login: session.github_login,
-    github_avatar_url: session.github_avatar_url,
+    github_login: req.authSession.github_login,
+    github_avatar_url: req.authSession.github_avatar_url,
   });
 });
 
-router.post("/logout", async (_req, res) => {
-  await fs.rm(SESSION_FILE, { force: true });
+router.post("/logout", async (req, res) => {
+  const sessionId = req.signedCookies?.[SESSION_COOKIE];
+  await deleteSession(sessionId);
+  res.clearCookie(SESSION_COOKIE);
   res.json({ loggedIn: false });
 });
 

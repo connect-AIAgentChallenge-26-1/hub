@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import ChatThread from "./ChatThread";
 import ChatInput from "./ChatInput";
 import MarkdownViewer from "./MarkdownViewer";
@@ -18,6 +18,15 @@ const STATUS_BADGE: Record<Step["status"], { label: string; className: string }>
 // (fileAgentPrompts.ts). Branches on agent_name, never on step id.
 const FILE_AGENT_NAMES = new Set(["Code Generation Agent", "Refactoring Agent"]);
 
+// v5: these two Steps no longer have a chat UI at all — entering the Step
+// (with nothing generated yet) auto-calls the same /finalize endpoint the
+// manual button uses elsewhere, instead of waiting for a chat message.
+const AUTO_GENERATE_AGENT_NAMES = new Set(["Code Generation Agent", "Documentation Agent"]);
+const AUTO_GENERATE_LOADING_TEXT: Record<string, string> = {
+  "Code Generation Agent": "코드를 생성하는 중…",
+  "Documentation Agent": "문서를 정리하는 중…",
+};
+
 interface Props {
   step: Step;
   onStepsRefreshNeeded: () => void;
@@ -25,6 +34,7 @@ interface Props {
 
 export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props) {
   const isFileAgent = FILE_AGENT_NAMES.has(step.agent_name);
+  const isAutoGenerate = AUTO_GENERATE_AGENT_NAMES.has(step.agent_name);
 
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -47,22 +57,82 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
 
   function applyFileChanges(files: FileChange[]) {
     setFileChanges(files);
-    setCheckedPaths(new Set(files.filter((f) => !f.approved).map((f) => f.path)));
+    // Syntax-invalid files stay unchecked by default (not blocked — the user
+    // can still check and commit them) so an obviously broken generation
+    // doesn't get committed by accident just by clicking "선택 항목 커밋".
+    setCheckedPaths(new Set(files.filter((f) => !f.approved && f.syntaxValid).map((f) => f.path)));
     setCommitMsgDrafts(Object.fromEntries(files.map((f) => [f.path, f.suggestedCommitMessage])));
     setSelectedPath((prev) => (prev && files.some((f) => f.path === prev) ? prev : files[0]?.path ?? null));
   }
+
+  // Shared by the manual "지금까지 내용으로 문서 만들기" button (which confirms
+  // first when there's barely any conversation) and v5's auto-generate Steps
+  // (which call this immediately on entry, no confirm — there's no chat to
+  // judge "barely any" against).
+  async function runFinalize() {
+    setChatError(null);
+    setChatErrorCode(null);
+    setFinalizing(true);
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/chat/${step.id}/finalize`, {
+        method: "POST",
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setChatError(data.error ?? "생성에 실패했습니다. 다시 시도해주세요.");
+        setChatErrorCode(data.code ?? null);
+        return;
+      }
+
+      setMessages(data.messages);
+      if (data.document) {
+        setDocument(data.document);
+        onStepsRefreshNeeded(); // progress_pct depends on the new document's checklist
+      }
+      if (data.files) {
+        applyFileChanges(data.files);
+        onStepsRefreshNeeded(); // progress_pct depends on the new files' approved count
+      }
+    } catch {
+      setChatError("생성에 실패했습니다. 다시 시도해주세요.");
+    } finally {
+      setFinalizing(false);
+    }
+  }
+
+  // Guards against React 18 StrictMode's dev-only double-invoke of this
+  // effect (mount -> cleanup -> mount again) firing runFinalize() twice for
+  // the same Step — WorkspaceMainPanel is remounted fresh (key={step.id}) on
+  // a real step switch, which resets this ref, so a genuine revisit can still
+  // auto-trigger again if nothing was generated yet.
+  const autoGenerateTriggeredForStepRef = useRef<number | null>(null);
 
   useEffect(() => {
     setLoading(true);
     setLoadError(null);
     if (isFileAgent) {
       Promise.all([
-        fetch(`${API_BASE_URL}/api/steps/${step.id}/file-changes`).then((res) => res.json()),
-        fetch(`${API_BASE_URL}/api/chat/${step.id}/messages`).then((res) => res.json()),
+        fetch(`${API_BASE_URL}/api/steps/${step.id}/file-changes`, { credentials: "include" }).then((res) =>
+          res.json()
+        ),
+        fetch(`${API_BASE_URL}/api/chat/${step.id}/messages`, { credentials: "include" }).then((res) =>
+          res.json()
+        ),
       ])
         .then(([files, msgs]: [FileChange[], ChatMessage[]]) => {
           applyFileChanges(files);
           setMessages(msgs);
+          if (
+            isAutoGenerate &&
+            step.status === "active" &&
+            files.length === 0 &&
+            autoGenerateTriggeredForStepRef.current !== step.id
+          ) {
+            autoGenerateTriggeredForStepRef.current = step.id;
+            runFinalize();
+          }
         })
         .catch(() => setLoadError("이 단계를 불러오지 못했습니다. 다시 시도해주세요."))
         .finally(() => setLoading(false));
@@ -70,12 +140,25 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
     }
 
     Promise.all([
-      fetch(`${API_BASE_URL}/api/documents/${step.id}`).then((res) => (res.ok ? res.json() : null)),
-      fetch(`${API_BASE_URL}/api/chat/${step.id}/messages`).then((res) => res.json()),
+      fetch(`${API_BASE_URL}/api/documents/${step.id}`, { credentials: "include" }).then((res) =>
+        res.ok ? res.json() : null
+      ),
+      fetch(`${API_BASE_URL}/api/chat/${step.id}/messages`, { credentials: "include" }).then((res) =>
+        res.json()
+      ),
     ])
       .then(([doc, msgs]: [DocumentRecord | null, ChatMessage[]]) => {
         setDocument(doc);
         setMessages(msgs);
+        if (
+          isAutoGenerate &&
+          step.status !== "done" &&
+          !doc &&
+          autoGenerateTriggeredForStepRef.current !== step.id
+        ) {
+          autoGenerateTriggeredForStepRef.current = step.id;
+          runFinalize();
+        }
       })
       .catch(() => setLoadError("이 단계를 불러오지 못했습니다. 다시 시도해주세요."))
       .finally(() => setLoading(false));
@@ -104,6 +187,7 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text }),
+        credentials: "include",
       });
       const data = await res.json();
       if (!res.ok) {
@@ -136,30 +220,7 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
     if (userMessageCount < 1 && !window.confirm("아직 대화가 별로 없는데 지금 문서를 만들까요?")) {
       return;
     }
-
-    setChatError(null);
-    setChatErrorCode(null);
-    setFinalizing(true);
-
-    try {
-      const res = await fetch(`${API_BASE_URL}/api/chat/${step.id}/finalize`, { method: "POST" });
-      const data = await res.json();
-      if (!res.ok) {
-        setChatError(data.error ?? "문서 생성에 실패했습니다. 다시 시도해주세요.");
-        setChatErrorCode(data.code ?? null);
-        return;
-      }
-
-      setMessages(data.messages);
-      if (data.document) {
-        setDocument(data.document);
-        onStepsRefreshNeeded(); // progress_pct depends on the new document's checklist
-      }
-    } catch {
-      setChatError("문서 생성에 실패했습니다. 다시 시도해주세요.");
-    } finally {
-      setFinalizing(false);
-    }
+    await runFinalize();
   }
 
   function handleEdit() {
@@ -174,6 +235,7 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ content: draft, path: document?.path }),
+      credentials: "include",
     });
     const updated: DocumentRecord = await res.json();
     setDocument(updated);
@@ -184,7 +246,10 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
   async function handleApprove() {
     setApproving(true);
     try {
-      const res = await fetch(`${API_BASE_URL}/api/steps/${step.id}/approve`, { method: "POST" });
+      const res = await fetch(`${API_BASE_URL}/api/steps/${step.id}/approve`, {
+        method: "POST",
+        credentials: "include",
+      });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
         setChatError(data.error ?? "Approve에 실패했습니다.");
@@ -222,6 +287,7 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ files }),
+        credentials: "include",
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "commit failed");
@@ -284,52 +350,86 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
         </div>
       ) : (
         <>
-          {/* Which Step has a working chat is entirely up to the backend (AGENT_PROMPTS
-              in agentPrompts.ts) — Steps without a registered agent just get a clear
-              error from the first send attempt via chatError below, no hardcoding here. */}
-          <div className="qa-box">
-            <div className="chat-head">
-              <span>{step.agent_name}</span>
-              <span>{messages.length}개 메시지</span>
-            </div>
-            {messages.length === 0 && !sending && !finalizing ? (
-              <div style={{ color: "var(--text-mute)", fontSize: 13 }}>
-                아직 대화가 없습니다. 메시지를 보내 대화를 시작해보세요.
+          {/* v5: Code Generation/Documentation Agent have no chat UI at all —
+              Step entry auto-triggers runFinalize() (see the mount effect),
+              so there's no message history to show or type into. */}
+          {!isAutoGenerate && (
+            <>
+              {/* Which Step has a working chat is entirely up to the backend (AGENT_PROMPTS
+                  in agentPrompts.ts) — Steps without a registered agent just get a clear
+                  error from the first send attempt via chatError below, no hardcoding here. */}
+              <div className="qa-box">
+                <div className="chat-head">
+                  <span>{step.agent_name}</span>
+                  <span>{messages.length}개 메시지</span>
+                </div>
+                {messages.length === 0 && !sending && !finalizing ? (
+                  <div style={{ color: "var(--text-mute)", fontSize: 13 }}>
+                    아직 대화가 없습니다. 메시지를 보내 대화를 시작해보세요.
+                  </div>
+                ) : (
+                  <ChatThread messages={messages} sending={sending || finalizing} />
+                )}
+                <ChatInput onSend={handleSend} disabled={sending || finalizing} />
+                {!isFileAgent && (
+                  <button
+                    disabled={sending || finalizing}
+                    onClick={handleFinalize}
+                    style={{ alignSelf: "flex-end" }}
+                  >
+                    지금까지 내용으로 문서 만들기
+                  </button>
+                )}
               </div>
-            ) : (
-              <ChatThread messages={messages} sending={sending || finalizing} />
-            )}
-            <ChatInput onSend={handleSend} disabled={sending || finalizing} />
-            {!isFileAgent && (
-              <button
-                disabled={sending || finalizing}
-                onClick={handleFinalize}
-                style={{ alignSelf: "flex-end" }}
-              >
-                지금까지 내용으로 문서 만들기
-              </button>
-            )}
-          </div>
-          {chatError && chatErrorCode === "AI_QUOTA_EXCEEDED" ? (
-            <div
-              style={{
-                background: "var(--red-bg)",
-                color: "var(--red)",
-                borderRadius: 8,
-                padding: "10px 12px",
-                fontSize: 12.5,
-              }}
-            >
-              {chatError}
-            </div>
-          ) : (
-            chatError && <div style={{ color: "var(--red)", fontSize: 12.5 }}>{chatError}</div>
+              {chatError && chatErrorCode === "AI_QUOTA_EXCEEDED" ? (
+                <div
+                  style={{
+                    background: "var(--red-bg)",
+                    color: "var(--red)",
+                    borderRadius: 8,
+                    padding: "10px 12px",
+                    fontSize: 12.5,
+                  }}
+                >
+                  {chatError}
+                </div>
+              ) : (
+                chatError && <div style={{ color: "var(--red)", fontSize: 12.5 }}>{chatError}</div>
+              )}
+            </>
           )}
 
-          {isFileAgent ? (
+          {isAutoGenerate && finalizing ? (
+            <div style={{ color: "var(--text-dim)" }}>
+              {AUTO_GENERATE_LOADING_TEXT[step.agent_name] ?? "생성하는 중…"}
+            </div>
+          ) : isAutoGenerate && chatError ? (
+            <div>
+              {chatErrorCode === "AI_QUOTA_EXCEEDED" ? (
+                <div
+                  style={{
+                    background: "var(--red-bg)",
+                    color: "var(--red)",
+                    borderRadius: 8,
+                    padding: "10px 12px",
+                    fontSize: 12.5,
+                  }}
+                >
+                  {chatError}
+                </div>
+              ) : (
+                <div style={{ color: "var(--red)", fontSize: 12.5 }}>{chatError}</div>
+              )}
+              <button style={{ marginTop: 8 }} onClick={runFinalize}>
+                다시 시도
+              </button>
+            </div>
+          ) : isFileAgent ? (
             fileChanges.length === 0 ? (
               <div style={{ color: "var(--text-mute)", fontSize: 13 }}>
-                아직 제안된 파일이 없습니다. 대화를 통해 파일 생성을 요청해보세요.
+                {isAutoGenerate
+                  ? "생성된 파일이 없습니다."
+                  : "아직 제안된 파일이 없습니다. 대화를 통해 파일 생성을 요청해보세요."}
               </div>
             ) : (
               <div className="commit-shell">
@@ -370,7 +470,9 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
               </div>
               {!document ? (
                 <div style={{ color: "var(--text-mute)", fontSize: 13 }}>
-                  아직 문서가 없습니다. 대화를 통해 정보가 모이면 자동으로 생성됩니다.
+                  {isAutoGenerate
+                    ? "생성된 문서가 없습니다."
+                    : "아직 문서가 없습니다. 대화를 통해 정보가 모이면 자동으로 생성됩니다."}
                 </div>
               ) : isEditing ? (
                 <>
@@ -389,7 +491,7 @@ export default function WorkspaceMainPanel({ step, onStepsRefreshNeeded }: Props
           )}
 
           <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginTop: "auto" }}>
-            <button className="primary" disabled={approving} onClick={handleApprove}>
+            <button className="primary" disabled={approving || finalizing} onClick={handleApprove}>
               Approve ✓
             </button>
           </div>

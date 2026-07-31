@@ -5,6 +5,15 @@ export const MOCK_ANALYSIS_STATS = {
   dependencyCount: 128,
   duplicateCount: 14,
   refactorTargetCount: 6,
+  namespaces: ["GameForge.Core", "GameForge.Player", "GameForge.Enemy"],
+  // v9: matches the PlayerController/EnemyController names already used by
+  // the duplicate-code finding below and by mockDocAgent.ts's Class Design
+  // doc, so the (name, filePath) shape stays consistent even though demo
+  // mode's scripted chat never actually calls gatherContext to read it.
+  classes: [
+    { name: "PlayerController", filePath: "Assets/Scripts/Player/PlayerController.cs" },
+    { name: "EnemyController", filePath: "Assets/Scripts/Enemy/EnemyController.cs" },
+  ],
 };
 
 export const MOCK_ANALYSIS_REPORT = `# Analysis Report

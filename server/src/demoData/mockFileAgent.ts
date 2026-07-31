@@ -76,10 +76,11 @@ public class PlayerController : MonoBehaviour, IDashable
   },
 ];
 
-// Refactoring Agent only acts on what the (mock) analysis report already
-// flagged — see mockAnalysisReport.ts's "PlayerController.Move()와
-// EnemyController.Move()가 거의 동일한..." duplicate-code finding. This
-// extracts both into a shared IMovable-based approach.
+// Demo-mode script only, independent of the real gatherContext (demo mode
+// never calls it) — mirrors mockAnalysisReport.ts's "PlayerController.Move()와
+// EnemyController.Move()가 거의 동일한..." duplicate-code finding for a
+// consistent demo storyline. Extracts both into a shared IMovable-based
+// approach.
 const REFACTORING_FILES: MockFile[] = [
   {
     path: "Assets/Scripts/Core/IMovable.cs",
@@ -190,10 +191,14 @@ function genericScript(agentName: string): FileAgentScript {
   };
 }
 
-export function getMockFileAgentResponse(agentName: string, questionCount: number): FileAgentResult {
+export function getMockFileAgentResponse(
+  agentName: string,
+  questionCount: number,
+  finalize = false
+): FileAgentResult {
   const script = SCRIPTS[agentName] ?? genericScript(agentName);
 
-  if (questionCount < script.turns.length) {
+  if (!finalize && questionCount < script.turns.length) {
     return { reply: script.turns[questionCount], readyToGenerateFiles: false };
   }
 

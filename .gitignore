@@ -6,8 +6,10 @@ node_modules/
 .env.*
 !.env.example
 
-# Holds the live GitHub access token after OAuth login — never commit this
-data/session.json
+# Holds live GitHub access tokens after OAuth login — never commit these.
+# v7 replaced the single data/session.json with per-session files under
+# data/sessions/ (one per logged-in browser session).
+data/sessions/
 
 # Claude Code local config/skills — not shared with the team
 .claude/

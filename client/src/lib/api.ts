@@ -44,5 +44,9 @@ export interface FileChange {
   // Agent-authored, see Day 12's fileChanges.ts.
   diff: string;
   suggestedCommitMessage: string;
+  // v6: Syntax-only pre-commit check (no compilation/type-check) — always
+  // true/empty for "deleted" files.
+  syntaxValid: boolean;
+  syntaxErrors: string[];
   approved: boolean;
 }

@@ -1,0 +1,35 @@
+[
+  {
+    "path": "Assets/Scripts/Player/IDashable.cs",
+    "changeType": "new",
+    "newContent": "public interface IDashable\n{\n    void Dash(Vector2 direction);\n    bool IsInvincible { get; }\n}",
+    "suggestedCommitMessage": "feat: add IDashable interface",
+    "diff": "Index: Assets/Scripts/Player/IDashable.cs\n===================================================================\n--- Assets/Scripts/Player/IDashable.cs\n+++ Assets/Scripts/Player/IDashable.cs\n@@ -0,0 +1,5 @@\n+public interface IDashable\n+{\n+    void Dash(Vector2 direction);\n+    bool IsInvincible { get; }\n+}\n\\ No newline at end of file\n",
+    "syntaxValid": true,
+    "syntaxErrors": [],
+    "approved": false
+  },
+  {
+    "path": "Assets/Scripts/Player/PlayerController.cs",
+    "changeType": "modified",
+    "newContent": "using UnityEngine;\n\npublic class PlayerController : MonoBehaviour, IDashable\n{\n    [SerializeField] private DashConfig dashConfig;\n    private bool isInvincible;\n\n    public bool IsInvincible => isInvincible;\n\n    public void Dash(Vector2 direction)\n    {\n        // dash movement logic\n    }\n}\n\npublic class BrokenExtra { public void Foo() { int x = } }",
+    "suggestedCommitMessage": "refactor: extract dash cooldown into IDashable",
+    "diff": "Index: Assets/Scripts/Player/PlayerController.cs\n===================================================================\n--- Assets/Scripts/Player/PlayerController.cs\n+++ Assets/Scripts/Player/PlayerController.cs\n@@ -2,9 +2,11 @@\n \n public class PlayerController : MonoBehaviour, IDashable\n {\n-    private float dashCooldown = 1.2f;\n+    [SerializeField] private DashConfig dashConfig;\n     private bool isInvincible;\n \n+    public bool IsInvincible => isInvincible;\n+\n     public void Dash(Vector2 direction)\n     {\n         // dash movement logic\n",
+    "syntaxValid": false,
+    "syntaxErrors": [
+      "(16,56): error CS1525: 잘못된 식의 항 '}'입니다.",
+      "(16,56): error CS1002: ;이 필요합니다."
+    ],
+    "approved": false
+  },
+  {
+    "path": "Assets/Scripts/Legacy/OldDashHelper.cs",
+    "changeType": "deleted",
+    "newContent": "",
+    "suggestedCommitMessage": "chore: remove unused OldDashHelper (duplicate of PlayerController.Dash)",
+    "diff": "Index: Assets/Scripts/Legacy/OldDashHelper.cs\n===================================================================\n--- Assets/Scripts/Legacy/OldDashHelper.cs\n+++ Assets/Scripts/Legacy/OldDashHelper.cs\n@@ -1,4 +0,0 @@\n-public static class OldDashHelper\n-{\n-    public static void DoDash(Transform t) { /* ... */ }\n-}\n\\ No newline at end of file\n",
+    "syntaxValid": true,
+    "syntaxErrors": [],
+    "approved": false
+  }
+]

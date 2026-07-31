@@ -63,6 +63,23 @@ const RESPONSE_SCHEMA = {
   required: ["reply", "readyToGenerateFiles"],
 } as const;
 
+// Appended on top of the Agent's own buildSystemInstruction for v5's
+// chat-less Steps (Code Generation) — same idea as agentChat.ts's
+// FINALIZE_INSTRUCTION, shared across whichever file Agent needs it instead
+// of duplicated per-agent prompt text.
+const FINALIZE_INSTRUCTION = `
+
+## 지금 바로 파일을 생성해야 합니다
+채팅 없이 자동으로 호출되었습니다. 질문하지 말고 readyToGenerateFiles를
+반드시 true로 설정한 뒤, 입력된 문서만으로 최선을 다해 files를 채우세요.`;
+
+interface AskFileAgentOptions {
+  // Forces immediate file generation — shares this exact function/call path
+  // with the normal Q&A flow (Refactoring Agent still uses that), only the
+  // system instruction changes.
+  finalize?: boolean;
+}
+
 // Same structured-output approach as agentChat.ts, but the model has been
 // observed to occasionally truncate long multi-file JSON responses (full
 // file contents are long) — so unlike the single-document agents, this one
@@ -72,13 +89,16 @@ export async function askFileAgent(
   agentConfig: FileAgentPromptConfig,
   history: ChatMessage[],
   userMessage: string,
-  agentName: string
+  agentName: string,
+  userId: number,
+  accessToken: string,
+  options: AskFileAgentOptions = {}
 ): Promise<FileAgentResult> {
   const questionCount = history.filter((m) => m.from === "agent").length;
 
   if (isDemoMode()) {
     await demoDelay();
-    return getMockFileAgentResponse(agentName, questionCount);
+    return getMockFileAgentResponse(agentName, questionCount, options.finalize ?? false);
   }
 
   const apiKey = process.env.GEMINI_API_KEY;
@@ -87,8 +107,9 @@ export async function askFileAgent(
   }
 
   const ai = new GoogleGenAI({ apiKey });
-  const { text: contextText, existingFiles } = await agentConfig.gatherContext();
-  const systemInstruction = agentConfig.buildSystemInstruction(contextText, questionCount);
+  const { text: contextText, existingFiles } = await agentConfig.gatherContext(userId, accessToken);
+  const baseInstruction = agentConfig.buildSystemInstruction(contextText, questionCount);
+  const systemInstruction = options.finalize ? baseInstruction + FINALIZE_INSTRUCTION : baseInstruction;
 
   const baseContents = [
     ...history.map((m) => ({

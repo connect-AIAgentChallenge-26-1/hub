@@ -42,6 +42,7 @@ export async function askAgent(
   history: ChatMessage[],
   userMessage: string,
   agentName: string,
+  userId: number,
   options: AskAgentOptions = {}
 ): Promise<AgentChatResult> {
   const questionCount = history.filter((m) => m.from === "agent").length;
@@ -57,7 +58,7 @@ export async function askAgent(
   }
 
   const ai = new GoogleGenAI({ apiKey });
-  const context = await agentConfig.gatherContext();
+  const context = await agentConfig.gatherContext(userId);
 
   const contents = [
     ...history.map((m) => ({

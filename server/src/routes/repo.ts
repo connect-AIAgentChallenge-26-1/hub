@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { getSession } from "../utils/session";
 import { getRepoTarget, putFileContent, deleteFile } from "../utils/github";
 import { getFileChanges, updateFileChanges } from "../utils/fileChanges";
 import { isDemoMode, demoDelay } from "../utils/demoMode";
@@ -33,17 +32,15 @@ function githubHeaders(accessToken: string) {
 }
 
 router.get("/list", async (req, res) => {
-  const session = await getSession();
-  if (!session) {
-    return res.status(401).json({ error: "Not logged in." });
-  }
+  // requireAuth (mounted in index.ts) already guarantees req.authSession here.
+  const accessToken = req.authSession!.access_token;
 
   const page = req.query.page ? Number(req.query.page) : 1;
   const perPage = req.query.per_page ? Number(req.query.per_page) : 100;
 
   const ghRes = await fetch(
     `https://api.github.com/user/repos?per_page=${perPage}&page=${page}&sort=updated`,
-    { headers: githubHeaders(session.access_token) }
+    { headers: githubHeaders(accessToken) }
   );
 
   if (!ghRes.ok) {
@@ -63,15 +60,12 @@ router.get("/list", async (req, res) => {
 // Spec says GET /api/repo/:fullName/branches, but a "/" inside a single Express
 // param doesn't match — split "owner/repo" into two params instead.
 router.get("/:owner/:repo/branches", async (req, res) => {
-  const session = await getSession();
-  if (!session) {
-    return res.status(401).json({ error: "Not logged in." });
-  }
+  const accessToken = req.authSession!.access_token;
 
   const { owner, repo } = req.params;
   const ghRes = await fetch(
     `https://api.github.com/repos/${owner}/${repo}/branches?per_page=100`,
-    { headers: githubHeaders(session.access_token) }
+    { headers: githubHeaders(accessToken) }
   );
 
   if (!ghRes.ok) {
@@ -102,6 +96,7 @@ interface CommitFailure {
 // unchecked simply aren't included in `files` and stay pending_changes —
 // nothing here needs to know about them.
 router.post("/:stepId/commit-batch", async (req, res) => {
+  const userId = req.userId!;
   const stepId = Number(req.params.stepId);
   if (!Number.isInteger(stepId)) {
     return res.status(400).json({ error: "Invalid step id." });
@@ -117,20 +112,20 @@ router.post("/:stepId/commit-batch", async (req, res) => {
   // real commits from take after take.
   if (isDemoMode()) {
     await demoDelay();
-    const stored = await getFileChanges(stepId);
+    const stored = await getFileChanges(userId, stepId);
     const committedPaths = new Set(files.map((f) => f.path));
     const committed: CommitResult[] = files.map(({ path }) => ({ path, commitSha: "demo0000000" }));
     const updatedFiles = stored.map((f) => (committedPaths.has(f.path) ? { ...f, approved: true } : f));
-    await updateFileChanges(stepId, updatedFiles);
+    await updateFileChanges(userId, stepId, updatedFiles);
     return res.json({ committed, failed: [], files: updatedFiles });
   }
 
-  const target = await getRepoTarget();
+  const target = await getRepoTarget(userId, req.authSession!.access_token);
   if (!target) {
     return res.status(401).json({ error: "Not logged in, or no repository connected yet." });
   }
 
-  const stored = await getFileChanges(stepId);
+  const stored = await getFileChanges(userId, stepId);
   const committed: CommitResult[] = [];
   const failed: CommitFailure[] = [];
 
@@ -158,7 +153,7 @@ router.post("/:stepId/commit-batch", async (req, res) => {
 
   const committedPaths = new Set(committed.map((c) => c.path));
   const updatedFiles = stored.map((f) => (committedPaths.has(f.path) ? { ...f, approved: true } : f));
-  await updateFileChanges(stepId, updatedFiles);
+  await updateFileChanges(userId, stepId, updatedFiles);
 
   res.json({ committed, failed, files: updatedFiles });
 });

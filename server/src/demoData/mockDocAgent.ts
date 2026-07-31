@@ -107,7 +107,12 @@ const DOCUMENTATION_DOCUMENT = `# Documentation
 - [ ] 저주받은 성을 배경으로 한 로그라이크 던전 탐험, 대시 무적 프레임 적용
 
 ## System Design Summary
-- [ ] 대시 쿨다운 1.2초, 피격 시 넉백/체력 감소, 골드 기반 아이템 구매`;
+- [ ] 대시 쿨다운 1.2초, 피격 시 넉백/체력 감소, 골드 기반 아이템 구매
+
+## Code Changes Summary
+- [ ] IDashable.cs 추가 — 대시 가능한 대상이 구현하는 공용 인터페이스
+- [ ] PlayerController.cs 수정 — 대시 쿨다운을 IDashable 기반으로 정리
+- [ ] OldDashHelper.cs 제거 — PlayerController.Dash()와 중복되던 로직 정리`;
 
 const SCRIPTS: Record<string, DocAgentScript> = {
   "Requirements Agent": {

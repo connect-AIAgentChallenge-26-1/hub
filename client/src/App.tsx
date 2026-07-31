@@ -3,6 +3,8 @@ import RepoConnectPage from "./pages/RepoConnectPage";
 import AnalysisReportPage from "./pages/AnalysisReportPage";
 import WorkspacePage from "./pages/WorkspacePage";
 import CommitReviewPage from "./pages/CommitReviewPage";
+import FeatureRequestPage from "./pages/FeatureRequestPage";
+import ExpansionWorkspacePage from "./pages/ExpansionWorkspacePage";
 import { DemoModeProvider, useDemoMode } from "./lib/DemoModeContext";
 
 function DemoModeBadge() {
@@ -42,6 +44,8 @@ function App() {
           <Route path="/analysis" element={<AnalysisReportPage />} />
           <Route path="/workspace" element={<WorkspacePage />} />
           <Route path="/commit-review" element={<CommitReviewPage />} />
+          <Route path="/expansions/new" element={<FeatureRequestPage />} />
+          <Route path="/expansions/:expansionId" element={<ExpansionWorkspacePage />} />
         </Routes>
       </BrowserRouter>
     </DemoModeProvider>

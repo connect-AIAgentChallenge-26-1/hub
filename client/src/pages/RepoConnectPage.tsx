@@ -105,7 +105,7 @@ export default function RepoConnectPage() {
   }, []);
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/api/auth/session`)
+    fetch(`${API_BASE_URL}/api/auth/session`, { credentials: "include" })
       .then((res) => res.json())
       .then((session: SessionState) => dispatch({ type: "SESSION_LOADED", session }))
       .catch(() => dispatch({ type: "SESSION_LOADED", session: { loggedIn: false } }));
@@ -114,7 +114,7 @@ export default function RepoConnectPage() {
   useEffect(() => {
     if (!state.session.loggedIn) return;
     dispatch({ type: "REPOS_LOADING" });
-    fetch(`${API_BASE_URL}/api/repo/list`)
+    fetch(`${API_BASE_URL}/api/repo/list`, { credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error();
         return res.json();
@@ -126,7 +126,7 @@ export default function RepoConnectPage() {
   useEffect(() => {
     if (!state.selectedRepo) return;
     dispatch({ type: "BRANCHES_LOADING" });
-    fetch(`${API_BASE_URL}/api/repo/${state.selectedRepo}/branches`)
+    fetch(`${API_BASE_URL}/api/repo/${state.selectedRepo}/branches`, { credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error();
         return res.json();
@@ -140,7 +140,7 @@ export default function RepoConnectPage() {
   }
 
   async function handleLogout() {
-    await fetch(`${API_BASE_URL}/api/auth/logout`, { method: "POST" });
+    await fetch(`${API_BASE_URL}/api/auth/logout`, { method: "POST", credentials: "include" });
     dispatch({ type: "LOGOUT" });
   }
 
@@ -155,6 +155,7 @@ export default function RepoConnectPage() {
           branch: state.selectedBranch,
           preset: state.selectedPreset,
         }),
+        credentials: "include",
       });
       if (!res.ok) {
         // AI_QUOTA_EXCEEDED (Gemini 429 during report generation) comes back
@@ -196,7 +197,7 @@ export default function RepoConnectPage() {
     setResetting(true);
     setDevToolsMessage(null);
     try {
-      const res = await fetch(`${API_BASE_URL}/api/dev/reset`, { method: "POST" });
+      const res = await fetch(`${API_BASE_URL}/api/dev/reset`, { method: "POST", credentials: "include" });
       if (!res.ok) throw new Error();
       setDevToolsMessage("이전 데이터를 삭제했습니다. 1단계부터 다시 시작할 수 있습니다.");
     } catch {

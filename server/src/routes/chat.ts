@@ -13,11 +13,12 @@ import { AiRequestError, toErrorResponseBody } from "../utils/geminiError";
 const router = Router();
 
 router.get("/:stepId/messages", async (req, res) => {
-  const messages = await getMessages(req.params.stepId);
+  const messages = await getMessages(req.userId!, req.params.stepId);
   res.json(messages);
 });
 
 router.post("/:stepId/message", async (req, res) => {
+  const userId = req.userId!;
   const stepId = Number(req.params.stepId);
   const { text } = req.body as { text?: string };
 
@@ -28,7 +29,7 @@ router.post("/:stepId/message", async (req, res) => {
     return res.status(400).json({ error: "text is required." });
   }
 
-  const step = await getStep(stepId);
+  const step = await getStep(userId, stepId);
   if (!step) {
     return res.status(404).json({ error: "Step not found." });
   }
@@ -46,7 +47,7 @@ router.post("/:stepId/message", async (req, res) => {
     });
   }
 
-  const historyBefore = await getMessages(stepId);
+  const historyBefore = await getMessages(userId, stepId);
 
   const userMessage: ChatMessage = {
     id: randomUUID(),
@@ -54,11 +55,11 @@ router.post("/:stepId/message", async (req, res) => {
     text,
     created_at: new Date().toISOString(),
   };
-  await appendMessages(stepId, [userMessage]);
+  await appendMessages(userId, stepId, [userMessage]);
 
   try {
     if (docAgentConfig) {
-      const result = await askAgent(docAgentConfig, historyBefore, text, step.agent_name);
+      const result = await askAgent(docAgentConfig, historyBefore, text, step.agent_name, userId);
 
       const agentMessage: ChatMessage = {
         id: randomUUID(),
@@ -66,17 +67,24 @@ router.post("/:stepId/message", async (req, res) => {
         text: result.reply,
         created_at: new Date().toISOString(),
       };
-      const messages = await appendMessages(stepId, [agentMessage]);
+      const messages = await appendMessages(userId, stepId, [agentMessage]);
 
       const document =
         result.readyToGenerateDoc && result.document
-          ? await saveDocument(stepId, docAgentConfig.docPath, result.document)
+          ? await saveDocument(userId, stepId, docAgentConfig.docPath, result.document)
           : null;
 
       return res.json({ messages, document, files: null });
     }
 
-    const result = await askFileAgent(fileAgentConfig, historyBefore, text, step.agent_name);
+    const result = await askFileAgent(
+      fileAgentConfig,
+      historyBefore,
+      text,
+      step.agent_name,
+      userId,
+      req.authSession!.access_token
+    );
 
     const agentMessage: ChatMessage = {
       id: randomUUID(),
@@ -84,11 +92,11 @@ router.post("/:stepId/message", async (req, res) => {
       text: result.reply,
       created_at: new Date().toISOString(),
     };
-    const messages = await appendMessages(stepId, [agentMessage]);
+    const messages = await appendMessages(userId, stepId, [agentMessage]);
 
     const files =
       result.readyToGenerateFiles && result.files
-        ? await saveFileChanges(stepId, result.files)
+        ? await saveFileChanges(userId, stepId, result.files)
         : null;
 
     res.json({ messages, document: null, files });
@@ -98,35 +106,64 @@ router.post("/:stepId/message", async (req, res) => {
   }
 });
 
-// Manual "지금까지 내용으로 문서 만들기" — lets the user cut a doc-Agent
-// conversation short instead of waiting for the Agent to decide it has asked
-// enough questions. Only doc Agents support this; Code Generation/Refactoring
-// (Step 7-8) have a completely different flow (file arrays, commit review)
-// and are out of scope here.
+// Forces immediate generation instead of waiting for the Agent to decide
+// it's asked enough questions (or, for v5's chat-less Steps 7/9, instead of
+// there being any chat at all). Doc Agents (1,3-6,9 + Game Design) and file
+// Agents (Code Generation/Refactoring) both go through here — same idea,
+// different save step at the end (saveDocument vs saveFileChanges).
 router.post("/:stepId/finalize", async (req, res) => {
+  const userId = req.userId!;
   const stepId = Number(req.params.stepId);
   if (!Number.isInteger(stepId)) {
     return res.status(400).json({ error: "Invalid step id." });
   }
 
-  const step = await getStep(stepId);
+  const step = await getStep(userId, stepId);
   if (!step) {
     return res.status(404).json({ error: "Step not found." });
   }
 
   const docAgentConfig = AGENT_PROMPTS[step.agent_name];
-  if (!docAgentConfig) {
-    return res.status(400).json({ error: "이 단계는 지금 바로 문서 생성을 지원하지 않습니다." });
+  const fileAgentConfig = FILE_AGENT_PROMPTS[step.agent_name];
+  if (!docAgentConfig && !fileAgentConfig) {
+    return res.status(400).json({ error: "이 단계는 지금 바로 생성하기를 지원하지 않습니다." });
   }
 
-  const historyBefore = await getMessages(stepId);
+  const historyBefore = await getMessages(userId, stepId);
 
   try {
-    const result = await askAgent(
-      docAgentConfig,
+    if (docAgentConfig) {
+      const result = await askAgent(
+        docAgentConfig,
+        historyBefore,
+        "(사용자가 지금까지의 내용만으로 문서 생성을 요청했습니다. 질문을 더 하지 말고 지금 바로 문서를 작성해주세요.)",
+        step.agent_name,
+        userId,
+        { finalize: true }
+      );
+
+      const agentMessage: ChatMessage = {
+        id: randomUUID(),
+        from: "agent",
+        text: result.reply,
+        created_at: new Date().toISOString(),
+      };
+      const messages = await appendMessages(userId, stepId, [agentMessage]);
+
+      const document = result.document
+        ? await saveDocument(userId, stepId, docAgentConfig.docPath, result.document)
+        : null;
+
+      return res.json({ messages, document, files: null });
+    }
+
+    const result = await askFileAgent(
+      fileAgentConfig,
       historyBefore,
-      "(사용자가 지금까지의 내용만으로 문서 생성을 요청했습니다. 질문을 더 하지 말고 지금 바로 문서를 작성해주세요.)",
+      "(사용자 개입 없이 자동으로 호출되었습니다. 입력 문서만으로 지금 바로 파일을 생성해주세요.)",
       step.agent_name,
+      userId,
+      req.authSession!.access_token,
       { finalize: true }
     );
 
@@ -136,11 +173,11 @@ router.post("/:stepId/finalize", async (req, res) => {
       text: result.reply,
       created_at: new Date().toISOString(),
     };
-    const messages = await appendMessages(stepId, [agentMessage]);
+    const messages = await appendMessages(userId, stepId, [agentMessage]);
 
-    const document = result.document ? await saveDocument(stepId, docAgentConfig.docPath, result.document) : null;
+    const files = result.files ? await saveFileChanges(userId, stepId, result.files) : null;
 
-    res.json({ messages, document });
+    res.json({ messages, document: null, files });
   } catch (err) {
     const status = err instanceof AiRequestError ? err.status : 500;
     res.status(status).json(toErrorResponseBody(err));

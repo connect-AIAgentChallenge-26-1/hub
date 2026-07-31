@@ -1,7 +1,0 @@
-{
-  "path": "docs/00_Analysis_Report.md",
-  "content": "# Analysis Report\n\n> 본 리포트는 정적 분석 기반 추정치이며, 완전한 컴파일 분석은 아닙니다.\n\n## 통계 요약\n- 클래스 의존성 수: 128\n- 중복 코드 블록 수: 14\n- 리팩토링 대상 수: 6\n\n## 상세 목록\n\n### 중복 코드 블록\n- PlayerController.Move()와 EnemyController.Move()가 거의 동일한 이동 처리 로직을 중복 구현하고 있습니다.\n- InventoryUI.Refresh()가 3곳에서 거의 동일하게 반복 구현되어 있습니다.\n\n### 리팩토링 대상\n- GameManager — God Class 의심, 메서드 42개 (기준 초과)\n- SaveSystem — UI와 지나치게 강하게 결합되어 있어 책임 분리가 필요합니다.",
-  "version": 1,
-  "updated_at": "2026-07-29T19:53:22.393Z",
-  "history": []
-}

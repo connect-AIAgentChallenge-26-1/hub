@@ -1,7 +1,7 @@
 import { Router } from "express";
 import path from "path";
 import { readJson, writeJson } from "../utils/jsonStore";
-import { dataPath, ANALYZER_DIR } from "../utils/paths";
+import { getUserDataPath, ANALYZER_DIR } from "../utils/paths";
 import { runAnalyzer } from "../utils/analyzer";
 import { runJscpd } from "../utils/jscpd";
 import { findRefactorTargets } from "../utils/refactorTargets";
@@ -13,7 +13,6 @@ import { MOCK_ANALYSIS_STATS, MOCK_ANALYSIS_REPORT } from "../demoData/mockAnaly
 
 const router = Router();
 
-const PROJECT_FILE = dataPath("project.json");
 // We don't clone the target GitHub repo locally yet (that's still ahead of us), so
 // there's no real checkout to point the analyzer/jscpd at — the bundled sample
 // fixtures stand in for it until repo cloning exists.
@@ -30,7 +29,20 @@ interface AnalysisStats {
   dependencyCount: number;
   duplicateCount: number;
   refactorTargetCount: number;
+  // v5: distinct namespaces actually observed in the repo — Code Generation
+  // Agent uses this to follow the repo's real convention instead of guessing.
+  namespaces: string[];
+  // v9: name+filePath only (not the full AnalyzedClass shape — baseTypes/
+  // referencedTypes/methodCount aren't needed here) so Code Generation Agent
+  // can match a class-design doc's class names back to a real file already in
+  // the repo. TTL'd rather than kept forever: the longer this sits, the more
+  // likely the repo has moved on and a stale path would mislead Code
+  // Generation into "modifying" a file that's since changed or been removed.
+  classes: { name: string; filePath: string }[];
+  classesExpiresAt: string;
 }
+
+const CLASSES_TTL_MS = 24 * 60 * 60 * 1000;
 
 interface StoredProject {
   repo_url: string;
@@ -41,20 +53,23 @@ interface StoredProject {
   stats?: AnalysisStats;
 }
 
-async function readProjectSafely(): Promise<StoredProject | null> {
+async function readProjectSafely(userId: number): Promise<StoredProject | null> {
   try {
-    return await readJson<StoredProject>(PROJECT_FILE);
+    return await readJson<StoredProject>(getUserDataPath(userId, "project.json"));
   } catch {
     return null;
   }
 }
 
 router.post("/start", async (req, res) => {
+  const userId = req.userId!;
   const { repoId, branch, preset } = req.body as StartAnalysisRequest;
 
   if (!repoId || !branch || !preset) {
     return res.status(400).json({ error: "repoId, branch, and preset are all required." });
   }
+
+  const projectFile = getUserDataPath(userId, "project.json");
 
   let project: StoredProject = {
     repo_url: `https://github.com/${repoId}`,
@@ -63,7 +78,7 @@ router.post("/start", async (req, res) => {
     connected_at: new Date().toISOString(),
     status: "queued",
   };
-  await writeJson(PROJECT_FILE, project);
+  await writeJson(projectFile, project);
 
   try {
     // Demo mode skips the whole real pipeline (Roslyn/jscpd aren't Gemini
@@ -72,9 +87,13 @@ router.post("/start", async (req, res) => {
     // matters more here than only gating the literal Gemini call).
     if (isDemoMode()) {
       await demoDelay();
-      await saveDocument(ANALYSIS_STEP_ID, "docs/00_Analysis_Report.md", MOCK_ANALYSIS_REPORT);
-      project = { ...project, status: "completed", stats: MOCK_ANALYSIS_STATS };
-      await writeJson(PROJECT_FILE, project);
+      await saveDocument(userId, ANALYSIS_STEP_ID, "docs/00_Analysis_Report.md", MOCK_ANALYSIS_REPORT);
+      project = {
+        ...project,
+        status: "completed",
+        stats: { ...MOCK_ANALYSIS_STATS, classesExpiresAt: new Date(Date.now() + CLASSES_TTL_MS).toISOString() },
+      };
+      await writeJson(projectFile, project);
       return res.json({ ...project, classes: [], duplicates: [], refactorTargets: [], report: MOCK_ANALYSIS_REPORT });
     }
 
@@ -83,41 +102,45 @@ router.post("/start", async (req, res) => {
     const refactorTargets = findRefactorTargets(classes);
     const report = await generateAnalysisReport({ classes, duplicates, refactorTargets });
 
-    await saveDocument(ANALYSIS_STEP_ID, "docs/00_Analysis_Report.md", report);
+    await saveDocument(userId, ANALYSIS_STEP_ID, "docs/00_Analysis_Report.md", report);
 
     const stats: AnalysisStats = {
       dependencyCount: classes.reduce((sum, c) => sum + c.baseTypes.length + c.referencedTypes.length, 0),
       duplicateCount: duplicates.length,
       refactorTargetCount: refactorTargets.length,
+      namespaces: Array.from(new Set(classes.map((c) => c.namespaceName).filter(Boolean))),
+      classes: classes.map((c) => ({ name: c.name, filePath: c.filePath })),
+      classesExpiresAt: new Date(Date.now() + CLASSES_TTL_MS).toISOString(),
     };
     project = { ...project, status: "completed", stats };
-    await writeJson(PROJECT_FILE, project);
+    await writeJson(projectFile, project);
 
     res.json({ ...project, classes, duplicates, refactorTargets, report });
   } catch (err) {
     project = { ...project, status: "failed" };
-    await writeJson(PROJECT_FILE, project);
+    await writeJson(projectFile, project);
 
     const status = err instanceof AiRequestError ? err.status : 500;
     res.status(status).json({ ...project, ...toErrorResponseBody(err) });
   }
 });
 
-router.get("/project", async (_req, res) => {
-  const project = await readProjectSafely();
+router.get("/project", async (req, res) => {
+  const project = await readProjectSafely(req.userId!);
   if (!project) {
     return res.status(404).json({ error: "No project connected yet." });
   }
   res.json({ repo_url: project.repo_url, branch: project.branch });
 });
 
-router.get("/report", async (_req, res) => {
-  const project = await readProjectSafely();
+router.get("/report", async (req, res) => {
+  const userId = req.userId!;
+  const project = await readProjectSafely(userId);
   if (!project || project.status !== "completed" || !project.stats) {
     return res.status(404).json({ error: "No completed analysis report available." });
   }
 
-  const doc = await getDocument(ANALYSIS_STEP_ID);
+  const doc = await getDocument(userId, ANALYSIS_STEP_ID);
   if (!doc) {
     return res.status(404).json({ error: "No completed analysis report available." });
   }

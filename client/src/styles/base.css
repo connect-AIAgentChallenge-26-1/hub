@@ -68,6 +68,22 @@ select:disabled {
   margin-bottom: 16px;
 }
 
+textarea.free-text {
+  font-family: inherit;
+  font-size: 13px;
+  width: 100%;
+  background: var(--panel-3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 9px 10px;
+  color: var(--text);
+  outline: none;
+  resize: vertical;
+}
+textarea.free-text:focus {
+  border-color: var(--border-strong);
+}
+
 .card {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -229,6 +245,13 @@ pre.code {
 }
 .steps {
   padding: 8px 6px;
+}
+.sidebar-foot {
+  padding: 10px;
+  border-top: 1px solid var(--border);
+}
+.sidebar-foot button {
+  width: 100%;
 }
 .step-row {
   display: flex;
@@ -441,6 +464,10 @@ pre.code {
   color: var(--amber);
 }
 .change-badge.deleted {
+  background: var(--red-bg);
+  color: var(--red);
+}
+.change-badge.syntax-error {
   background: var(--red-bg);
   color: var(--red);
 }
