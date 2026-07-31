@@ -113,10 +113,10 @@ def fetch_posting(posting_id: int, section: str = "find") -> Optional[Dict]:
         posting = {
             "source_url": url,
             "raw_title": title,
-            "raw_text": raw_text[:5000],  # 텍스트 길이 제한
+            "raw_text": raw_text,
             "reception_end_date": reception_end_date,
             "host_org": host_org,
-            "wevity_fields": wevity_fields,  # 파싱에 사용될 구조화 필드
+            "wevity_fields": wevity_fields,
         }
 
         print(f"  ✅ ID {posting_id}: {title[:50]}...")
@@ -137,10 +137,11 @@ def extract_date(text: str) -> Optional[str]:
     def is_valid_year(year: int) -> bool:
         return 2020 <= year <= 2030
 
-    # 패턴 1: "마감" 키워드가 포함된 라인에서만 날짜 추출
+    # 패턴 1: 마감 관련 키워드가 포함된 라인에서만 날짜 추출
     lines = text.split('\n')
+    deadline_keywords = ['마감', '접수', '신청', '응모', '지원', '기간', '마감일', '접수기간', '응모기간', '지원기간']
     for line in lines:
-        if '마감' in line or '접수' in line or '신청' in line:
+        if any(kw in line for kw in deadline_keywords):
             # YYYY-MM-DD 형식
             match = re.search(r'(\d{4})-(\d{2})-(\d{2})', line)
             if match:
