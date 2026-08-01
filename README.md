@@ -1,7 +1,119 @@
-# hub
+# Letter&Co
 
-Letter&Co — 소모임 초대부터 시간대·장소·역할 조율까지 한 곳에서 끝내는 모임 조율 서비스입니다.
-(Naver Connect Foundation·서울대 주최 AI Agent Challenge 2026, N025 김민솔)
+소모임 초대부터 시간대·장소·역할 조율까지 한 곳에서 끝내는 모임 조율 서비스입니다.
+
+## 프로젝트 소개
+
+카톡방·설문 앱·메모에 흩어져서 진행되던 모임 조율(시간·장소 정하기, 역할 나누기, 진행 상황 챙기기, 비용 정산)을 한 곳으로 모았습니다. 참여자들의 응답을 다수결로 집계해 시간·장소를 정하고, 동점일 때만 AI가 판단을 보탭니다. 필요한 역할은 참여자가 직접 만들고, 그 역할에 누가 어울릴지는 AI가 배정을 추천합니다.
+
+> Naver Connect Foundation·서울대 주최 AI Agent Challenge 2026 개인 프로젝트 (N025 김민솔)
+
+## 배포
+
+| | URL |
+|---|---|
+| 프론트엔드 (Vercel) | https://letterandco.vercel.app |
+| 백엔드 API (Render) | https://letterandco.onrender.com |
+
+Render 무료 인스턴스는 일정 시간 요청이 없으면 슬립 상태가 되어 첫 요청 응답이 몇십 초 걸릴 수 있습니다.
+
+## 주요 기능
+
+- 모임을 만들고 참여 링크를 공유합니다.
+- 참여자가 링크로 접속해 이름, 가능한 시간대, 선호 장소를 입력합니다.
+- 시간·장소는 참여자 다수결로 정해지고, 동점일 때만 AI가 판단을 보탭니다.
+- 필요한 역할은 참여자가 직접 만들고, 그 역할에 누가 어울릴지는 AI가 배정을 추천합니다.
+- 진행 상황을 체크리스트로 관리하며, 항목은 AI 추천과 직접 추가 중 선택할 수 있습니다.
+- 모임 종료 후 결산 리뷰와 비용 정산(지출 등록, 1/N 자동 분배)을 확인합니다.
+
+## Tech Stack
+
+### Frontend
+- React (Vite)
+- React Router
+- 순수 CSS 변수 기반 디자인 시스템 (Tailwind 등 UI 라이브러리 미사용)
+- Vitest + Testing Library (컴포넌트/유닛 테스트)
+
+### Backend
+- Node.js / Express
+- API 응답은 `{ data, error }` 형태로 고정 래핑
+
+### Database
+- Supabase (Postgres)
+- 모임(letters) · 참여자 응답(responses) · 역할(roles) · 역할별 업무(role_tasks) · 결산(harvest_reviews) · 정산(expenses) 테이블
+- 스키마 변경은 `server/migrations/`에 SQL 파일로 작성 후 Supabase 대시보드에서 수동 실행 (DB 비밀번호를 코드/env에 노출하지 않기 위함)
+
+### AI
+- Groq API (OpenAI 호환, llama-3.3-70b-versatile) — 무료로 사용 가능해 선택
+- 시간·장소 동점 시 판단 보조, 역할 배정 추천에 사용. 호출은 사용자가 버튼을 눌렀을 때만 발생하며(자동 확정 없음), 실패 시 폴백과 10초 타임아웃 처리
+
+### Deployment
+- Vercel (프론트엔드)
+- Render (백엔드)
+
+## 아키텍처 / 데이터 흐름
+
+기능별로 화면(React) · 서버(Express) · DB의 데이터 흐름을 정리했습니다.
+
+### ① 모임 조율 흐름 (생성 → 응답 → 다수결 확정)
+
+```mermaid
+flowchart LR
+  subgraph React["React (화면)"]
+    Compose["InviteCompose : 모임 생성"]
+    Join["InviteJoin : 이름·시간대·장소 응답"]
+    Confirm["CoordinateConfirm : 다수결 집계·확정"]
+  end
+  subgraph Express["Express (서버)"]
+    PostLetter["POST /api/letters"]
+    PostResp["POST /:token/responses"]
+    PatchConfirm["PATCH /:token/confirm"]
+    PostSuggest["POST /:token/suggest"]
+  end
+  DB[("Supabase\nletters / responses")]
+
+  Compose -->|생성| PostLetter --> DB
+  Join -->|응답 제출| PostResp --> DB
+  Confirm -->|응답 집계 조회| DB
+  Confirm -->|동점 시에만| PostSuggest
+  Confirm -->|최종 확정| PatchConfirm --> DB
+```
+
+동점이 아니면 AI 호출 없이 참여자 응답만으로 확정됩니다. 최종 확정은 참여자 전원이 응답을 마쳐야 버튼이 활성화됩니다.
+
+### ② 역할 배정 · 체크리스트 흐름
+
+```mermaid
+flowchart LR
+  subgraph React["React (화면)"]
+    Assign["Assign : 역할 추가"]
+    Progress["ProgressChecklist : 업무 체크리스트"]
+  end
+  subgraph Express["Express (서버)"]
+    PostRole["POST /:token/roles"]
+    PatchRole["PATCH /:token/roles/:roleId"]
+    PostSuggest2["POST /:token/suggest"]
+    Tasks["/:token/roles/:roleId/tasks (GET/POST/PATCH/DELETE)"]
+  end
+  DB2[("Supabase\nroles / role_tasks")]
+
+  Assign -->|역할 생성| PostRole --> DB2
+  Assign -->|배정 추천 요청| PostSuggest2
+  Assign -->|배정 반영| PatchRole --> DB2
+  Progress -->|AI추천 또는 직접추가| Tasks --> DB2
+```
+
+역할은 항상 참여자가 먼저 만들고, AI는 이미 만들어진 역할에 누가 어울릴지만 추천합니다. 추천이 실패해도 역할 목록 자체는 이미 있어 흐름이 막히지 않습니다.
+
+## API 문서
+
+엔드포인트별 요청/응답은 [`docs/api.md`](docs/api.md)에 정리되어 있습니다.
+
+## 기획서
+
+프로젝트 기획서·개발 task·주간 계획은 아래 링크에서 확인할 수 있습니다.
+
+👉 [기획서·task·주간계획 보기](https://app.notion.com/p/angelnumb8r/3986bcbf066983a487bf81d1af95d0d4?source=copy_link)
 
 ## 나만의 워크플로우
 
