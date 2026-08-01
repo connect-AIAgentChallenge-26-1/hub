@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabaseClient.js'
 // CLIENT_ORIGIN을 재사용 — 카카오톡 등 메신저 크롤러가 붙는 배포 도메인과
 // 실제 사람이 이동할 SPA 도메인이 로컬/운영에서 항상 같으므로 별도 env를 두지 않는다.
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN ?? 'https://letterandco.vercel.app'
-const OG_IMAGE_URL = `${CLIENT_ORIGIN}/og-image.png`
+const OG_IMAGE_URL = `${CLIENT_ORIGIN}/og-image.jpg`
 const DEFAULT_TITLE = '모임에 초대되셨어요'
 
 function escapeHtml(value) {
