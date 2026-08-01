@@ -23,6 +23,7 @@ export function InviteCompose() {
   const navigate = useNavigate()
   const [title, setTitle] = useState('')
   const [note, setNote] = useState('')
+  const [dueDate, setDueDate] = useState('')
   const [members, setMembers] = useState([])
   const [memberDraft, setMemberDraft] = useState(null) // null: 입력 없음, string: 입력 중
   const [slots, setSlots] = useState(() => [{ id: uid(), label: '' }])
@@ -81,6 +82,7 @@ export function InviteCompose() {
         candidate_slots: slots.filter((s) => s.label.trim()).map((s) => ({ id: s.id, label: s.label.trim() })),
         candidate_locations: locations.filter((l) => l.name.trim()).map((l) => ({ id: l.id, name: l.name.trim() })),
         participant_names: members,
+        responses_due_at: dueDate ? new Date(dueDate).toISOString() : null,
       }),
       wait(900),
     ])
@@ -147,6 +149,7 @@ export function InviteCompose() {
               <div style={{ position: 'relative', padding: '34px 30px 44px', boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: '24px' }}>
                 <Input variant="underline" label="모임 이름" placeholder="예: 한강 피크닉 모임" value={title} onChange={(e) => setTitle(e.target.value)} />
                 <Input variant="underline" label="함께 전할 한마디" placeholder="예: 오랜만에 다 같이 모여요" value={note} onChange={(e) => setNote(e.target.value)} />
+                <Input variant="underline" type="date" label="응답 마감일 (선택)" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
 
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                   <div style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-caption-size)', color: 'var(--text-caption)' }}>후보 시간대</div>

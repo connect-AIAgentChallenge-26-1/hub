@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { SectionTitle } from '../../components/identity/SectionTitle.jsx'
+import { DueDateBanner } from '../../components/feedback/DueDateBanner.jsx'
 import { Input } from '../../components/forms/Input.jsx'
 import { InfoCard } from '../../components/cards/InfoCard.jsx'
 import { Checkbox } from '../../components/forms/Checkbox.jsx'
@@ -171,6 +172,7 @@ export function InviteJoin() {
         {status === 'ready' && phase !== 'done' ? (
           <>
             <SectionTitle script="Join" title={`${letter.title}에 초대됐어요`} align="left" />
+            <DueDateBanner dueAt={letter.responses_due_at} closed={letter.responses_closed} />
 
             <div
               style={{

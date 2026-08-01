@@ -4,6 +4,7 @@ import { Avatar } from '../../components/identity/Avatar.jsx'
 import { Chip } from '../../components/forms/Chip.jsx'
 import { InfoCard } from '../../components/cards/InfoCard.jsx'
 import { EmptyState } from '../../components/feedback/EmptyState.jsx'
+import { DueDateBanner } from '../../components/feedback/DueDateBanner.jsx'
 import { Button } from '../../components/forms/Button.jsx'
 import { SidebarNav } from '../../components/layout/SidebarNav.jsx'
 import { getLetterByToken, getResponses, closeResponses } from '../../lib/api.js'
@@ -138,6 +139,8 @@ export function ParticipantsStatus() {
             {errorMsg}
           </div>
         ) : null}
+
+        {status === 'ready' ? <DueDateBanner dueAt={letter?.responses_due_at} closed={letter?.responses_closed} /> : null}
 
         {status === 'ready' && total === 0 ? <EmptyState message="아직 참가자가 없어요, 초대장을 보내볼까요?" /> : null}
 

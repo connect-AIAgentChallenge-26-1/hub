@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabaseClient.js'
 
 // POST /api/letters — 모임 생성 (호스트가 초대장 작성, 참가자 예정 명단 포함)
 export async function createLetter(req, res) {
-  const { title, host_name, topic, candidate_slots, candidate_locations, participant_names } = req.body
+  const { title, host_name, topic, candidate_slots, candidate_locations, participant_names, responses_due_at } = req.body
 
   if (!title || !host_name || !candidate_slots?.length) {
     return res.status(400).json({ data: null, error: '필수 항목이 비어있어요' })
@@ -13,7 +13,7 @@ export async function createLetter(req, res) {
 
   const { data: letter, error: letterError } = await supabase
     .from('letters')
-    .insert({ title, host_name, topic, candidate_slots, candidate_locations, link_token })
+    .insert({ title, host_name, topic, candidate_slots, candidate_locations, link_token, responses_due_at: responses_due_at || null })
     .select()
     .single()
 
