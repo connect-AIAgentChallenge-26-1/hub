@@ -266,6 +266,7 @@ export function InviteCompose() {
               />
             </div>
             <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink-soft)' }}>편지를 접어 보내는 중…</div>
+            <div style={{ fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--ink-soft)' }}>초대장 생성 중… 최대 1분 정도 소요됩니다</div>
           </div>
         ) : null}
 

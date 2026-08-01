@@ -3,15 +3,23 @@
 
 const API_BASE = import.meta.env.VITE_API_BASE ?? 'http://localhost:4000'
 
+// Render 무료 플랜은 슬립 상태에서 깨어나는 데 최대 1분 정도 걸릴 수 있어
+// 넉넉히 90초로 잡는다 (콜드 스타트를 정상 실패로 오인하지 않도록).
+const REQUEST_TIMEOUT_MS = 90000
+
 async function request(path, options) {
   let res
   try {
     res = await fetch(`${API_BASE}${path}`, {
       headers: { 'Content-Type': 'application/json' },
+      signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
       ...options,
     })
-  } catch {
-    return { data: null, error: '서버에 연결할 수 없어요' }
+  } catch (err) {
+    if (err.name === 'TimeoutError') {
+      return { data: null, error: '응답이 늦어지고 있어요. 잠시 후 다시 시도해 주세요' }
+    }
+    return { data: null, error: '서버에 연결할 수 없어요. 잠시 후 다시 시도해 주세요' }
   }
 
   const body = await res.json().catch(() => ({ data: null, error: '응답을 읽을 수 없어요' }))
