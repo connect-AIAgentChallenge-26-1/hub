@@ -8,6 +8,7 @@ import { Input } from '../../components/forms/Input.jsx'
 import { Button } from '../../components/forms/Button.jsx'
 import { SidebarNav } from '../../components/layout/SidebarNav.jsx'
 import { getLetterByToken, getResponses, getExpenses, createExpense } from '../../lib/api.js'
+import { renderSettlementImage, shareOrDownloadImage } from '../../lib/settlementImage.js'
 import bgVineWash from '../../assets/bg-vine-wash.jpg'
 import laceTrimStrip from '../../assets/vintage-lace-trim-strip.png'
 
@@ -23,6 +24,7 @@ export function Settlement() {
 
   const [loadStatus, setLoadStatus] = useState('loading') // loading | error | ready
   const [errorMsg, setErrorMsg] = useState('')
+  const [letter, setLetter] = useState(null)
   const [participants, setParticipants] = useState([])
   const [expenses, setExpenses] = useState([])
 
@@ -31,6 +33,7 @@ export function Settlement() {
   const [paidBy, setPaidBy] = useState(null)
   const [addStatus, setAddStatus] = useState('idle') // idle | saving | error
   const [addErrorMsg, setAddErrorMsg] = useState('')
+  const [shareStatus, setShareStatus] = useState('idle') // idle | rendering | error
 
   useEffect(() => {
     let cancelled = false
@@ -56,6 +59,7 @@ export function Settlement() {
         setErrorMsg(expensesResult.error)
         return
       }
+      setLetter(letterResult.data)
       setParticipants(responsesResult.data ?? [])
       setExpenses(expensesResult.data ?? [])
       setLoadStatus('ready')
@@ -86,6 +90,17 @@ export function Settlement() {
     setAmount('')
     setPaidBy(null)
     setAddStatus('idle')
+  }
+
+  async function handleShareImage() {
+    setShareStatus('rendering')
+    try {
+      const blob = await renderSettlementImage({ title: letter?.title, total, perPerson, balances })
+      await shareOrDownloadImage(blob, `${letter?.title || 'settlement'}-정산.png`)
+      setShareStatus('idle')
+    } catch {
+      setShareStatus('error')
+    }
   }
 
   const total = expenses.reduce((sum, e) => sum + e.amount, 0)
@@ -237,6 +252,16 @@ export function Settlement() {
                 </div>
               ))}
             </div>
+
+            {expenses.length > 0 ? (
+              <Button variant="accent" disabled={shareStatus === 'rendering'} onClick={handleShareImage}>
+                {shareStatus === 'rendering' ? '이미지 만드는 중…' : '이미지로 공유'}
+              </Button>
+            ) : null}
+
+            {shareStatus === 'error' ? (
+              <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink-soft)' }}>이미지를 만들지 못했어요. 잠시 후 다시 시도해 주세요</div>
+            ) : null}
           </>
         ) : null}
       </main>
