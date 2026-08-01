@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { Avatar } from '../../components/identity/Avatar.jsx'
 import { Icon } from '../../components/decor/Icon.jsx'
 import { InfoCard } from '../../components/cards/InfoCard.jsx'
+import { EmptyState } from '../../components/feedback/EmptyState.jsx'
 import { Chip } from '../../components/forms/Chip.jsx'
 import { NAV_ITEMS } from '../../mocks/mockData.js'
 import { getLetterByToken } from '../../lib/api.js'
@@ -210,9 +211,7 @@ export function Profile() {
         ) : null}
 
         {loadStatus === 'ready' && !name ? (
-          <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink-soft)' }}>
-            아직 참여한 모임이 없어요 — 초대 링크로 들어오면 여기에 이름이 표시돼요
-          </div>
+          <EmptyState message="아직 참여한 모임이 없어요, 초대 링크로 들어오면 여기에 이름이 표시돼요" />
         ) : null}
 
         {loadStatus === 'ready' && name ? (

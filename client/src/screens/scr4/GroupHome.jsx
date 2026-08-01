@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { Avatar } from '../../components/identity/Avatar.jsx'
 import { Icon } from '../../components/decor/Icon.jsx'
 import { InfoCard } from '../../components/cards/InfoCard.jsx'
+import { EmptyState } from '../../components/feedback/EmptyState.jsx'
 import { Chip } from '../../components/forms/Chip.jsx'
 import { Button } from '../../components/forms/Button.jsx'
 import { NAV_ITEMS } from '../../mocks/mockData.js'
@@ -260,7 +261,7 @@ export function GroupHome() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <div style={{ fontFamily: 'var(--font-caption-alt)', fontSize: '12px', letterSpacing: '0.15em', color: 'var(--ink-soft)', textTransform: 'uppercase' }}>지난 모임</div>
               {history.length === 0 ? (
-                <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink-soft)' }}>아직 다른 모임에 참여한 적이 없어요</div>
+                <EmptyState message="아직 다른 모임에 참여한 적이 없어요, 새 모임에 초대되면 여기에 모여요" style={{ padding: '8px 0' }} />
               ) : (
                 history.map((h) => (
                   <InfoCard key={h.token}>

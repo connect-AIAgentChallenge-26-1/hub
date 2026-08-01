@@ -341,9 +341,7 @@ export function Assign() {
                 </div>
 
                 {roles.length === 0 ? (
-                  <div style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-body-size)', color: 'var(--text-caption)', textAlign: 'center', padding: '8px 0' }}>
-                    아직 추가된 역할이 없어요 — 위에서 역할을 추가해보세요
-                  </div>
+                  <EmptyState message="아직 추가된 역할이 없어요, 위에서 역할을 추가해볼까요?" style={{ padding: '8px 0' }} />
                 ) : (
                   roles.map((role) => (
                     <InfoCard key={role.id} title={role.name}>

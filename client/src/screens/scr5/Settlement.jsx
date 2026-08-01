@@ -3,6 +3,7 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { Avatar } from '../../components/identity/Avatar.jsx'
 import { Icon } from '../../components/decor/Icon.jsx'
 import { InfoCard } from '../../components/cards/InfoCard.jsx'
+import { EmptyState } from '../../components/feedback/EmptyState.jsx'
 import { Chip } from '../../components/forms/Chip.jsx'
 import { Input } from '../../components/forms/Input.jsx'
 import { Button } from '../../components/forms/Button.jsx'
@@ -243,6 +244,8 @@ export function Settlement() {
 
         {loadStatus === 'ready' ? (
           <>
+            {expenses.length === 0 ? <EmptyState message="아직 등록된 지출이 없어요, 첫 지출을 추가해볼까요?" /> : null}
+
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
               {expenses.map((e) => (
                 <InfoCard key={e.id}>
