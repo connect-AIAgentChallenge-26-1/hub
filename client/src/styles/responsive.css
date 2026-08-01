@@ -1,0 +1,75 @@
+/* 모임 화면 공통 사이드바 반응형 — SidebarNav.jsx와 짝을 이룬다.
+   768px 이상: 항상 펼쳐진 고정(sticky) 사이드바.
+   768px 미만: 햄버거로 여닫는 오프캔버스 서랍. 폭이 좁아 아이콘·글자가
+   한 글자씩 줄바뀜되는 걸 막는다 — 원본 디자인 자체가 반응형 규칙이 없어
+   이 프로젝트에서 처음 도입한다. */
+
+.lco-aside {
+  width: 240px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  align-self: flex-start;
+  z-index: 1;
+}
+
+.lco-hamburger {
+  display: none;
+}
+
+.lco-scrim {
+  display: none;
+}
+
+/* PC 와이드 화면에서 사이드바 옆 본문이 한쪽으로 쏠리지 않고
+   남는 공간 안에서 카드형으로 중앙에 놓이도록 한다. */
+.lco-main {
+  margin: 0 auto;
+}
+
+@media (max-width: 767px) {
+  .lco-hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-pill);
+    background: var(--surface-card);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-fold);
+    z-index: 50;
+    cursor: pointer;
+  }
+
+  .lco-lace-strip {
+    display: none;
+  }
+
+  .lco-aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 40;
+    transform: translateX(-100%);
+    transition: transform 0.25s ease;
+    box-shadow: 4px 0 16px rgba(74, 68, 56, 0.14);
+  }
+
+  .lco-aside--open {
+    transform: translateX(0);
+  }
+
+  .lco-scrim {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(74, 68, 56, 0.28);
+    z-index: 30;
+  }
+}

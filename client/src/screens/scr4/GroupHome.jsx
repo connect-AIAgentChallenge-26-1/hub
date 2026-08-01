@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { Avatar } from '../../components/identity/Avatar.jsx'
-import { Icon } from '../../components/decor/Icon.jsx'
 import { InfoCard } from '../../components/cards/InfoCard.jsx'
 import { EmptyState } from '../../components/feedback/EmptyState.jsx'
 import { Chip } from '../../components/forms/Chip.jsx'
 import { Button } from '../../components/forms/Button.jsx'
-import { NAV_ITEMS } from '../../mocks/mockData.js'
+import { SidebarNav } from '../../components/layout/SidebarNav.jsx'
 import { getLetterByToken, getResponses } from '../../lib/api.js'
 import bgVineWash from '../../assets/bg-vine-wash.jpg'
-import laceDoily from '../../assets/vintage-lace-doily.png'
 import laceTrimStrip from '../../assets/vintage-lace-trim-strip.png'
 
 // SCR4 · 그룹홈(GroupHome) — docs/design 「Letter&Co Design System.zip」
@@ -115,93 +113,11 @@ export function GroupHome() {
         position: 'relative',
       }}
     >
-      <aside
-        style={{
-          width: '240px',
-          flexShrink: 0,
-          background: 'var(--paper-cool)',
-          padding: '24px 16px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '24px',
-          boxSizing: 'border-box',
-          position: 'sticky',
-          top: 0,
-          height: '100vh',
-          alignSelf: 'flex-start',
-        }}
-      >
-        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px 8px 0', overflow: 'visible', height: '150px', flexShrink: 0 }}>
-          <img
-            src={laceDoily}
-            alt=""
-            style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)', width: '190px', height: '190px', opacity: 0.95, pointerEvents: 'none', zIndex: 0 }}
-          />
-          <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'baseline', gap: 0 }}>
-            <span style={{ fontFamily: "'Narony', var(--font-script-ornate)", fontSize: '48px', color: 'var(--wedgwood-deep)' }}>L</span>
-            <span style={{ fontFamily: "'Signatie', var(--font-script-signature)", fontSize: '21px', color: 'var(--wedgwood-deep)' }}>etter</span>
-            <span style={{ fontFamily: "'Narony', var(--font-script-ornate)", fontSize: '48px', color: 'var(--wedgwood-deep)' }}>&amp;</span>
-            <span style={{ fontFamily: "'Narony', var(--font-script-ornate)", fontSize: '48px', color: 'var(--wedgwood-deep)' }}>C</span>
-            <span style={{ fontFamily: "'Signatie', var(--font-script-signature)", fontSize: '21px', color: 'var(--wedgwood-deep)' }}>o</span>
-          </div>
-        </div>
-
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-          {NAV_ITEMS.map((item) => {
-            const active = item.key === ACTIVE_NAV_KEY
-            const itemStyle = {
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              padding: '10px 12px',
-              borderRadius: 'var(--radius-md)',
-              textDecoration: 'none',
-              color: 'var(--ink)',
-              fontFamily: 'var(--font-body)',
-              fontSize: '14px',
-              background: active ? 'var(--surface-raised)' : 'transparent',
-              fontWeight: active ? 600 : 400,
-              cursor: 'pointer',
-            }
-            const content = (
-              <>
-                <Icon name={item.icon} size={20} />
-                {item.label}
-              </>
-            )
-            const href =
-              item.key === 'home'
-                ? `${item.href}${token ? `?token=${token}` : ''}`
-                : item.key === 'participants'
-                  ? `${item.href}${token ? `?token=${token}` : ''}`
-                  : item.key === 'coordinate'
-                    ? `/scr2/roles${token ? `?token=${token}` : ''}`
-                    : item.key === 'progress'
-                      ? `/scr4/workspace${token ? `?token=${token}` : ''}`
-                      : item.key === 'harvest'
-                        ? `/scr5/review${token ? `?token=${token}` : ''}`
-                        : item.key === 'settlement'
-                          ? `/scr5/settlement${token ? `?token=${token}` : ''}`
-                          : item.key === 'notifications'
-                            ? `/notifications${token ? `?token=${token}` : ''}`
-                            : item.key === 'profile'
-                              ? `/profile${token ? `?token=${token}` : ''}`
-                              : null
-            return href ? (
-              <Link key={item.key} to={href} style={itemStyle}>
-                {content}
-              </Link>
-            ) : (
-              <div key={item.key} style={itemStyle}>
-                {content}
-              </div>
-            )
-          })}
-        </nav>
-      </aside>
+      <SidebarNav activeKey={ACTIVE_NAV_KEY} token={token} />
 
       <div
         aria-hidden="true"
+        className="lco-lace-strip"
         style={{
           width: '140px',
           flexShrink: 0,
@@ -217,7 +133,7 @@ export function GroupHome() {
         }}
       />
 
-      <main style={{ flex: 1, padding: '56px 48px', boxSizing: 'border-box', maxWidth: '820px', display: 'flex', flexDirection: 'column', gap: '40px' }}>
+      <main className="lco-main" style={{ flex: 1, padding: '56px 48px', boxSizing: 'border-box', maxWidth: '820px', display: 'flex', flexDirection: 'column', gap: '40px' }}>
         <div style={{ fontFamily: "'Whispering Signature', var(--font-script)", fontWeight: 400, fontSize: '88px', lineHeight: 0.85, color: 'oklch(0.995 0.006 165)' }}>Home</div>
 
         {loadStatus === 'loading' ? (

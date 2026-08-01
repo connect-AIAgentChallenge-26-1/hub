@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { Icon } from '../../components/decor/Icon.jsx'
 import { Input } from '../../components/forms/Input.jsx'
 import { Checkbox } from '../../components/forms/Checkbox.jsx'
 import { Button } from '../../components/forms/Button.jsx'
-import { NAV_ITEMS } from '../../mocks/mockData.js'
+import { SidebarNav } from '../../components/layout/SidebarNav.jsx'
 import { getLetterByToken, getRoles, createRoleTasks, updateRoleTask, deleteRoleTask, updateRole, getSuggestions } from '../../lib/api.js'
 import letterBgFloralLace from '../../assets/letter-bg-floral-lace.jpg'
-import laceDoily from '../../assets/vintage-lace-doily.png'
 import laceTrimStrip from '../../assets/vintage-lace-trim-strip.png'
 
 // SCR4 · 역할 상세·업무 체크리스트(ProgressChecklist) — docs/design 「Letter&Co Design System.zip」
@@ -170,94 +168,11 @@ export function ProgressChecklist() {
         }}
       />
 
-      <aside
-        style={{
-          width: '240px',
-          flexShrink: 0,
-          background: 'var(--paper-cool)',
-          padding: '24px 16px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '24px',
-          boxSizing: 'border-box',
-          position: 'sticky',
-          top: 0,
-          height: '100vh',
-          alignSelf: 'flex-start',
-          zIndex: 1,
-        }}
-      >
-        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px 8px 0', overflow: 'visible', height: '150px', flexShrink: 0 }}>
-          <img
-            src={laceDoily}
-            alt=""
-            style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)', width: '190px', height: '190px', opacity: 0.95, pointerEvents: 'none', zIndex: 0 }}
-          />
-          <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'baseline', gap: 0 }}>
-            <span style={{ fontFamily: "'Narony', var(--font-script-ornate)", fontSize: '48px', color: 'var(--wedgwood-deep)' }}>L</span>
-            <span style={{ fontFamily: "'Signatie', var(--font-script-signature)", fontSize: '21px', color: 'var(--wedgwood-deep)' }}>etter</span>
-            <span style={{ fontFamily: "'Narony', var(--font-script-ornate)", fontSize: '48px', color: 'var(--wedgwood-deep)' }}>&amp;</span>
-            <span style={{ fontFamily: "'Narony', var(--font-script-ornate)", fontSize: '48px', color: 'var(--wedgwood-deep)' }}>C</span>
-            <span style={{ fontFamily: "'Signatie', var(--font-script-signature)", fontSize: '21px', color: 'var(--wedgwood-deep)' }}>o</span>
-          </div>
-        </div>
-
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-          {NAV_ITEMS.map((item) => {
-            const active = item.key === ACTIVE_NAV_KEY
-            const itemStyle = {
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              padding: '10px 12px',
-              borderRadius: 'var(--radius-md)',
-              textDecoration: 'none',
-              color: 'var(--ink)',
-              fontFamily: 'var(--font-body)',
-              fontSize: '14px',
-              background: active ? 'var(--surface-raised)' : 'transparent',
-              fontWeight: active ? 600 : 400,
-              cursor: 'pointer',
-            }
-            const content = (
-              <>
-                <Icon name={item.icon} size={20} />
-                {item.label}
-              </>
-            )
-            const href =
-              item.key === 'home'
-                ? `${item.href}${token ? `?token=${token}` : ''}`
-                : item.key === 'participants'
-                  ? `${item.href}${token ? `?token=${token}` : ''}`
-                  : item.key === 'coordinate'
-                    ? `/scr2/roles${token ? `?token=${token}` : ''}`
-                    : item.key === 'progress'
-                      ? `/scr4/workspace${token ? `?token=${token}` : ''}`
-                      : item.key === 'harvest'
-                        ? `/scr5/review${token ? `?token=${token}` : ''}`
-                        : item.key === 'settlement'
-                          ? `/scr5/settlement${token ? `?token=${token}` : ''}`
-                          : item.key === 'notifications'
-                            ? `/notifications${token ? `?token=${token}` : ''}`
-                            : item.key === 'profile'
-                              ? `/profile${token ? `?token=${token}` : ''}`
-                              : null
-            return href ? (
-              <Link key={item.key} to={href} style={itemStyle}>
-                {content}
-              </Link>
-            ) : (
-              <div key={item.key} style={itemStyle}>
-                {content}
-              </div>
-            )
-          })}
-        </nav>
-      </aside>
+      <SidebarNav activeKey={ACTIVE_NAV_KEY} token={token} />
 
       <div
         aria-hidden="true"
+        className="lco-lace-strip"
         style={{
           width: '140px',
           flexShrink: 0,
@@ -273,7 +188,7 @@ export function ProgressChecklist() {
         }}
       />
 
-      <main style={{ flex: 1, padding: '56px 48px', boxSizing: 'border-box', maxWidth: '920px', display: 'flex', flexDirection: 'column', gap: '32px', alignItems: 'center', position: 'relative', zIndex: 1 }}>
+      <main className="lco-main" style={{ flex: 1, padding: '56px 48px', boxSizing: 'border-box', maxWidth: '920px', display: 'flex', flexDirection: 'column', gap: '32px', alignItems: 'center', position: 'relative', zIndex: 1 }}>
         {loadStatus === 'loading' ? (
           <div style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-body-size)', color: 'var(--text-caption)' }}>불러오는 중…</div>
         ) : null}

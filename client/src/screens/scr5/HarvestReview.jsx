@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { Icon } from '../../components/decor/Icon.jsx'
 import { LeafRating } from '../../components/feedback/LeafRating.jsx'
 import { Input } from '../../components/forms/Input.jsx'
 import { Button } from '../../components/forms/Button.jsx'
-import { NAV_ITEMS } from '../../mocks/mockData.js'
+import { SidebarNav } from '../../components/layout/SidebarNav.jsx'
 import { getLetterByToken, createHarvestReview } from '../../lib/api.js'
 import bgVineWash from '../../assets/bg-vine-wash.jpg'
-import laceDoily from '../../assets/vintage-lace-doily.png'
 import laceTrimStrip from '../../assets/vintage-lace-trim-strip.png'
 
 // SCR5 · 4-1 결산 평가 화면(HarvestReview) — docs/design 「Letter&Co Design System.zip」
@@ -100,93 +98,11 @@ export function HarvestReview() {
         position: 'relative',
       }}
     >
-      <aside
-        style={{
-          width: '240px',
-          flexShrink: 0,
-          background: 'var(--paper-cool)',
-          padding: '24px 16px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '24px',
-          boxSizing: 'border-box',
-          position: 'sticky',
-          top: 0,
-          height: '100vh',
-          alignSelf: 'flex-start',
-        }}
-      >
-        <div style={{ position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '8px 8px 0', overflow: 'visible', height: '150px', flexShrink: 0 }}>
-          <img
-            src={laceDoily}
-            alt=""
-            style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)', width: '190px', height: '190px', opacity: 0.95, pointerEvents: 'none', zIndex: 0 }}
-          />
-          <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'baseline', gap: 0 }}>
-            <span style={{ fontFamily: "'Narony', var(--font-script-ornate)", fontSize: '48px', color: 'var(--wedgwood-deep)' }}>L</span>
-            <span style={{ fontFamily: "'Signatie', var(--font-script-signature)", fontSize: '21px', color: 'var(--wedgwood-deep)' }}>etter</span>
-            <span style={{ fontFamily: "'Narony', var(--font-script-ornate)", fontSize: '48px', color: 'var(--wedgwood-deep)' }}>&amp;</span>
-            <span style={{ fontFamily: "'Narony', var(--font-script-ornate)", fontSize: '48px', color: 'var(--wedgwood-deep)' }}>C</span>
-            <span style={{ fontFamily: "'Signatie', var(--font-script-signature)", fontSize: '21px', color: 'var(--wedgwood-deep)' }}>o</span>
-          </div>
-        </div>
-
-        <nav style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-          {NAV_ITEMS.map((item) => {
-            const active = item.key === ACTIVE_NAV_KEY
-            const itemStyle = {
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              padding: '10px 12px',
-              borderRadius: 'var(--radius-md)',
-              textDecoration: 'none',
-              color: 'var(--ink)',
-              fontFamily: 'var(--font-body)',
-              fontSize: '14px',
-              background: active ? 'var(--surface-raised)' : 'transparent',
-              fontWeight: active ? 600 : 400,
-              cursor: 'pointer',
-            }
-            const content = (
-              <>
-                <Icon name={item.icon} size={20} />
-                {item.label}
-              </>
-            )
-            const href =
-              item.key === 'home'
-                ? `${item.href}${token ? `?token=${token}` : ''}`
-                : item.key === 'participants'
-                  ? `${item.href}${token ? `?token=${token}` : ''}`
-                  : item.key === 'coordinate'
-                    ? `/scr2/roles${token ? `?token=${token}` : ''}`
-                    : item.key === 'progress'
-                      ? `/scr4/workspace${token ? `?token=${token}` : ''}`
-                      : item.key === 'harvest'
-                        ? `/scr5/review${token ? `?token=${token}` : ''}`
-                        : item.key === 'settlement'
-                          ? `/scr5/settlement${token ? `?token=${token}` : ''}`
-                          : item.key === 'notifications'
-                            ? `/notifications${token ? `?token=${token}` : ''}`
-                            : item.key === 'profile'
-                              ? `/profile${token ? `?token=${token}` : ''}`
-                              : null
-            return href ? (
-              <Link key={item.key} to={href} style={itemStyle}>
-                {content}
-              </Link>
-            ) : (
-              <div key={item.key} style={itemStyle}>
-                {content}
-              </div>
-            )
-          })}
-        </nav>
-      </aside>
+      <SidebarNav activeKey={ACTIVE_NAV_KEY} token={token} />
 
       <div
         aria-hidden="true"
+        className="lco-lace-strip"
         style={{
           width: '140px',
           flexShrink: 0,
@@ -202,7 +118,7 @@ export function HarvestReview() {
         }}
       />
 
-      <main style={{ flex: 1, padding: '40px', boxSizing: 'border-box', maxWidth: '560px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
+      <main className="lco-main" style={{ flex: 1, padding: '40px', boxSizing: 'border-box', maxWidth: '560px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
         <div>
           <div style={{ fontFamily: 'var(--font-script)', fontWeight: 700, fontSize: 'var(--text-script-lg)', color: 'oklch(0.995 0.006 165)', lineHeight: 1.2 }}>Harvest</div>
           <h2 style={{ fontFamily: 'var(--font-body)', fontSize: 'var(--text-h2)', color: 'var(--ink)', margin: '4px 0 0', fontWeight: 700 }}>이번 모임, 어땠나요</h2>
