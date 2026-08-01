@@ -67,7 +67,7 @@ export default function SwipeActionCard({
     if (!drag.current) return;
     const next = Math.max(
       0,
-      Math.min(ACTION_WIDTH, drag.current.startOffset + event.clientX - drag.current.startX),
+      Math.min(ACTION_WIDTH, drag.current.startOffset + drag.current.startX - event.clientX),
     );
     drag.current.currentOffset = next;
     setOffset(next);
@@ -108,7 +108,7 @@ export default function SwipeActionCard({
           onPointerMove={moveDrag}
           onPointerUp={endDrag}
           onPointerCancel={endDrag}
-          style={{ transform: `translateX(${offset}px)`, touchAction: "pan-y" }}
+          style={{ transform: `translateX(-${offset}px)`, touchAction: "pan-y" }}
           className="absolute inset-0 flex cursor-grab select-none items-center gap-4 rounded-[17px] bg-white px-4 transition-transform duration-200 ease-out active:cursor-grabbing"
         >
           {item.image_url ? (
