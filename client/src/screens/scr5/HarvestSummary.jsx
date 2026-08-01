@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { Avatar } from '../../components/identity/Avatar.jsx'
 import { Icon } from '../../components/decor/Icon.jsx'
 import { PostcardCard, PostcardRow } from '../../components/cards/PostcardCard.jsx'
 import { Button } from '../../components/forms/Button.jsx'
@@ -174,11 +173,6 @@ export function HarvestSummary() {
             )
           })}
         </nav>
-
-        <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px' }}>
-          <Avatar name={letter?.host_name || ''} index={0} size={32} />
-          <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink)' }}>{letter?.host_name || '호스트'}</div>
-        </div>
       </aside>
 
       <div

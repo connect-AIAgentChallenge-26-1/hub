@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
-import { Avatar } from '../../components/identity/Avatar.jsx'
 import { Icon } from '../../components/decor/Icon.jsx'
 import { Chip } from '../../components/forms/Chip.jsx'
 import { EmptyState } from '../../components/feedback/EmptyState.jsx'
@@ -40,7 +39,6 @@ export function Notifications() {
 
   const [loadStatus, setLoadStatus] = useState('loading') // loading | error | ready
   const [errorMsg, setErrorMsg] = useState('')
-  const [letter, setLetter] = useState(null)
   const [items, setItems] = useState([])
   const [filter, setFilter] = useState('all')
 
@@ -92,7 +90,6 @@ export function Notifications() {
       }
       derived.sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime())
 
-      setLetter(letterResult.data)
       setItems(derived)
       setLoadStatus('ready')
     })
@@ -198,11 +195,6 @@ export function Notifications() {
             )
           })}
         </nav>
-
-        <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px' }}>
-          <Avatar name={letter?.host_name || ''} index={0} size={32} />
-          <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink)' }}>{letter?.host_name || '호스트'}</div>
-        </div>
       </aside>
 
       <div

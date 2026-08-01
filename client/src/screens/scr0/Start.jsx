@@ -5,6 +5,22 @@ import { Input } from '../../components/forms/Input.jsx'
 import doily from '../../assets/vintage-lace-doily.png'
 import waxSeal from '../../assets/vintage-wax-seal-swan.png'
 
+// 전체 공유 URL(https://…/share/{token}, …/scr0/join?token=…)이나 토큰 코드만
+// 입력해도 모임 화면(그룹 홈)으로 보낼 수 있게 토큰만 뽑아낸다.
+function extractToken(raw) {
+  const trimmed = raw.trim()
+  if (!trimmed) return ''
+  try {
+    const url = new URL(trimmed)
+    const fromQuery = url.searchParams.get('token')
+    if (fromQuery) return fromQuery
+    const segments = url.pathname.split('/').filter(Boolean)
+    return segments[segments.length - 1] ?? ''
+  } catch {
+    return trimmed
+  }
+}
+
 // SCR0 · 0 시작 화면 — docs/design 「Letter&Co Design System.zip」templates/start/Start.dc.html 이식.
 // 도일리 오벌 프레임 + 왁스씰, 미스트 배경. 장식 요소는 도일리 프레임 1계열만 사용.
 export function Start() {
@@ -12,6 +28,11 @@ export function Start() {
   const [showJoin, setShowJoin] = useState(false)
   const [joinCode, setJoinCode] = useState('')
   const joinDisabled = joinCode.trim().length === 0
+
+  function join() {
+    if (joinDisabled) return
+    navigate(`/scr4/home?token=${extractToken(joinCode)}`)
+  }
 
   return (
     <div
@@ -107,9 +128,11 @@ export function Start() {
               placeholder="예: hangang-picnic-4x9k"
               value={joinCode}
               onChange={(e) => setJoinCode(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') join()
+              }}
             />
-            {/* InviteJoin 화면은 오늘 작업 범위 밖 — 버튼/비활성 상태만 디자인대로 유지 */}
-            <Button variant="primary" block disabled={joinDisabled} style={{ height: '44px' }}>
+            <Button variant="primary" block disabled={joinDisabled} style={{ height: '44px' }} onClick={join}>
               입장하기
             </Button>
           </div>

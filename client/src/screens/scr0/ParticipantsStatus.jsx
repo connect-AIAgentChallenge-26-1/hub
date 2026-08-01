@@ -178,12 +178,6 @@ export function ParticipantsStatus() {
             )
           })}
         </nav>
-
-        <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px' }}>
-          <Avatar name={letter?.host_name || ''} index={0} size={32} />
-          {/* TODO: 실제 값으로 교체 (로그인/프로필 화면 완성 후) */}
-          <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink)' }}>{letter?.host_name || '호스트'}</div>
-        </div>
       </aside>
 
       <div

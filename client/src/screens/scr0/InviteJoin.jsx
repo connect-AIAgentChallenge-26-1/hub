@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { useEffect, useRef, useState } from 'react'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { SectionTitle } from '../../components/identity/SectionTitle.jsx'
 import { Input } from '../../components/forms/Input.jsx'
 import { InfoCard } from '../../components/cards/InfoCard.jsx'
@@ -15,6 +15,8 @@ const MBTI_TYPES = [
   'ISTJ', 'ISFJ', 'ESTJ', 'ESFJ',
   'ISTP', 'ISFP', 'ESTP', 'ESFP',
 ]
+
+const GROUP_HOME_COUNTDOWN_SECONDS = 5
 
 const submissionKey = (token) => `letterco:invite-join:${token}`
 
@@ -35,8 +37,10 @@ function readSubmission(token) {
 // 제출 완료 여부는 localStorage에 token별로 기록해, 새로고침해도 완료 상태가 유지되게 한다.
 export function InviteJoin() {
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
   const token = searchParams.get('token') ?? ''
   const initialSubmission = readSubmission(token)
+  const groupHomeHref = `/scr4/home?token=${token}`
 
   const [status, setStatus] = useState('loading') // loading | error | ready
   const [loadErrorMsg, setLoadErrorMsg] = useState('')
@@ -47,6 +51,30 @@ export function InviteJoin() {
   const [mbti, setMbti] = useState('')
   const [phase, setPhase] = useState(initialSubmission ? 'done' : 'form') // form | sending | done
   const [submitErrorMsg, setSubmitErrorMsg] = useState('')
+  const [secondsLeft, setSecondsLeft] = useState(GROUP_HOME_COUNTDOWN_SECONDS)
+  const countdownRef = useRef(null)
+
+  // 제출 완료 상태(첫 제출 직후 또는 이미 제출한 사람의 재진입)에 들어서면
+  // 카운트다운을 시작해 모임 화면(그룹 홈)으로 자동 이동한다.
+  useEffect(() => {
+    if (phase !== 'done') return
+    setSecondsLeft(GROUP_HOME_COUNTDOWN_SECONDS)
+    countdownRef.current = setInterval(() => {
+      setSecondsLeft((s) => (s <= 1 ? 0 : s - 1))
+    }, 1000)
+    return () => clearInterval(countdownRef.current)
+  }, [phase, token])
+
+  useEffect(() => {
+    if (phase === 'done' && secondsLeft === 0) {
+      navigate(groupHomeHref, { replace: true })
+    }
+  }, [phase, secondsLeft, groupHomeHref, navigate])
+
+  function goToGroupHome() {
+    clearInterval(countdownRef.current)
+    navigate(groupHomeHref, { replace: true })
+  }
 
   useEffect(() => {
     let cancelled = false
@@ -204,6 +232,13 @@ export function InviteJoin() {
             </Button>
 
             {submitErrorMsg ? <Toast icon="leaf">{submitErrorMsg}</Toast> : null}
+
+            <Link
+              to={groupHomeHref}
+              style={{ textAlign: 'center', fontFamily: 'var(--font-body)', fontSize: '12px', color: 'var(--ink-soft)' }}
+            >
+              이미 참여 중이라면 모임 화면 보기
+            </Link>
           </>
         ) : null}
 
@@ -211,6 +246,10 @@ export function InviteJoin() {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', padding: '40px 0' }}>
             <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: 'var(--text-h2)', color: 'var(--ink)' }}>참가 정보를 보냈어요</div>
             <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink-soft)' }}>{name}님의 응답이 저장됐어요</div>
+            <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink-soft)', marginTop: '8px' }}>
+              {secondsLeft}초 후 모임 화면으로 이동합니다
+            </div>
+            <Button variant="primary" onClick={goToGroupHome}>모임 화면으로 이동</Button>
           </div>
         ) : null}
       </div>

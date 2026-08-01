@@ -24,7 +24,6 @@ export function Settlement() {
 
   const [loadStatus, setLoadStatus] = useState('loading') // loading | error | ready
   const [errorMsg, setErrorMsg] = useState('')
-  const [letter, setLetter] = useState(null)
   const [participants, setParticipants] = useState([])
   const [expenses, setExpenses] = useState([])
 
@@ -58,7 +57,6 @@ export function Settlement() {
         setErrorMsg(expensesResult.error)
         return
       }
-      setLetter(letterResult.data)
       setParticipants(responsesResult.data ?? [])
       setExpenses(expensesResult.data ?? [])
       setLoadStatus('ready')
@@ -197,11 +195,6 @@ export function Settlement() {
             )
           })}
         </nav>
-
-        <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px' }}>
-          <Avatar name={letter?.host_name || ''} index={0} size={32} />
-          <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink)' }}>{letter?.host_name || '호스트'}</div>
-        </div>
       </aside>
 
       <div

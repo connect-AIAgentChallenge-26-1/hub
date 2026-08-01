@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { Avatar } from '../../components/identity/Avatar.jsx'
 import { Icon } from '../../components/decor/Icon.jsx'
 import { Input } from '../../components/forms/Input.jsx'
 import { Checkbox } from '../../components/forms/Checkbox.jsx'
@@ -28,7 +27,6 @@ export function ProgressChecklist() {
 
   const [loadStatus, setLoadStatus] = useState('loading') // loading | error | ready
   const [errorMsg, setErrorMsg] = useState('')
-  const [letter, setLetter] = useState(null)
   const [role, setRole] = useState(null)
   const [tasks, setTasks] = useState([])
   const [newLabel, setNewLabel] = useState('')
@@ -60,7 +58,6 @@ export function ProgressChecklist() {
         setErrorMsg('역할을 찾을 수 없어요')
         return
       }
-      setLetter(letterResult.data)
       setRole(found)
       setTasks(found.role_tasks ?? [])
       setLoadStatus('ready')
@@ -257,12 +254,6 @@ export function ProgressChecklist() {
             )
           })}
         </nav>
-
-        <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px' }}>
-          <Avatar name={letter?.host_name || ''} index={0} size={32} />
-          {/* TODO: 실제 값으로 교체 (로그인/프로필 화면 완성 후) */}
-          <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink)' }}>{letter?.host_name || '호스트'}</div>
-        </div>
       </aside>
 
       <div

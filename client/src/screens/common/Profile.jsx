@@ -183,11 +183,6 @@ export function Profile() {
             )
           })}
         </nav>
-
-        <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px' }}>
-          <Avatar name={name} index={0} size={32} />
-          <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink)' }}>{name || '호스트'}</div>
-        </div>
       </aside>
 
       <div

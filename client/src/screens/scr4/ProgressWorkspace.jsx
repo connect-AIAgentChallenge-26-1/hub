@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { Avatar } from '../../components/identity/Avatar.jsx'
 import { Icon } from '../../components/decor/Icon.jsx'
 import { Chip } from '../../components/forms/Chip.jsx'
 import { Button } from '../../components/forms/Button.jsx'
@@ -60,7 +59,6 @@ export function ProgressWorkspace() {
 
   const [loadStatus, setLoadStatus] = useState('loading') // loading | error | ready
   const [errorMsg, setErrorMsg] = useState('')
-  const [letter, setLetter] = useState(null)
   const [participantNameById, setParticipantNameById] = useState({})
   const [roles, setRoles] = useState([])
   const [index, setIndex] = useState(0)
@@ -94,7 +92,6 @@ export function ProgressWorkspace() {
         nameById[p.id] = p.name
       }
       setParticipantNameById(nameById)
-      setLetter(letterResult.data)
       setRoles(rolesResult.data ?? [])
       setLoadStatus('ready')
     })
@@ -204,12 +201,6 @@ export function ProgressWorkspace() {
             )
           })}
         </nav>
-
-        <div style={{ marginTop: 'auto', display: 'flex', alignItems: 'center', gap: '8px', padding: '8px' }}>
-          <Avatar name={letter?.host_name || ''} index={0} size={32} />
-          {/* TODO: 실제 값으로 교체 (로그인/프로필 화면 완성 후) */}
-          <div style={{ fontFamily: 'var(--font-body)', fontSize: '13px', color: 'var(--ink)' }}>{letter?.host_name || '호스트'}</div>
-        </div>
       </aside>
 
       <div
