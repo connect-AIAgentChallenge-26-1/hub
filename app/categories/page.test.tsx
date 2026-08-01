@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 
 import "@testing-library/jest-dom/vitest";
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import React from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import CategoriesPage from "./page";
@@ -59,5 +59,27 @@ describe("CategoriesPage search", () => {
 
     fireEvent.click(screen.getByRole("button", { name: "공부 1" }));
     expect(screen.getByText("검색 결과가 없어요.")).toBeInTheDocument();
+  });
+
+  it("완료 액션으로 항목을 아카이브에 보관한다", async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce({ ok: true, json: async () => [items[0]] })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ ...items[0], is_archived: true, archived_at: new Date().toISOString() }),
+      });
+    vi.stubGlobal("fetch", fetchMock);
+    render(<CategoriesPage />);
+
+    expect(await screen.findByText("AWS 자격증 준비")).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: "AWS 자격증 준비 완료" }));
+
+    await waitFor(() => expect(screen.queryByText("AWS 자격증 준비")).not.toBeInTheDocument());
+    expect(fetchMock).toHaveBeenNthCalledWith(
+      2,
+      "http://localhost:4000/api/items/1/archive",
+      expect.objectContaining({ method: "PATCH", body: JSON.stringify({ archived: true }) }),
+    );
   });
 });

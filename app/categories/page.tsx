@@ -2,13 +2,12 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import ItemCard from "../ItemCard";
+import SwipeActionCard from "../SwipeActionCard";
 import {
   apiBaseUrl,
   getRequestErrorMessage,
   matchesItemSearch,
   readApiError,
-  type DeleteItemResponse,
   type ArchiveItemResponse,
   type Item,
 } from "../../lib/items";
@@ -95,33 +94,16 @@ export default function CategoriesPage() {
     setSelectedSub("전체");
   }
 
-  async function deleteItem(id: number) {
-    try {
-      const response = await fetch(`${apiBaseUrl}/api/items/${id}`, {
-        method: "DELETE",
-      });
-      if (!response.ok) throw new Error(await readApiError(response));
-      const result: DeleteItemResponse = await response.json();
-      setItems((currentItems) => currentItems.filter((item) => item.id !== result.id));
-    } catch (requestError) {
-      throw new Error(getRequestErrorMessage(requestError, "항목을 삭제하지 못했습니다."));
-    }
-  }
-
-  async function changeArchiveState(id: number, archived: boolean) {
+  async function archiveItem(id: number) {
     try {
       const response = await fetch(`${apiBaseUrl}/api/items/${id}/archive`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ archived }),
+        body: JSON.stringify({ archived: true }),
       });
       if (!response.ok) throw new Error(await readApiError(response));
       const result: ArchiveItemResponse = await response.json();
-      setItems((currentItems) =>
-        archived
-          ? currentItems.filter((item) => item.id !== result.id)
-          : currentItems.map((item) => (item.id === result.id ? result : item))
-      );
+      setItems((currentItems) => currentItems.filter((item) => item.id !== result.id));
     } catch (requestError) {
       throw new Error(
         getRequestErrorMessage(requestError, "항목을 보관하지 못했습니다.")
@@ -245,11 +227,12 @@ export default function CategoriesPage() {
             ) : (
               <ul className="space-y-3">
                 {filteredItems.map((item) => (
-                  <ItemCard
+                  <SwipeActionCard
                     key={item.id}
                     item={item}
-                    onDelete={deleteItem}
-                    onArchive={changeArchiveState}
+                    actionLabel="완료"
+                    pendingLabel="보관 중"
+                    onAction={archiveItem}
                   />
                 ))}
               </ul>

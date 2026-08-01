@@ -16,8 +16,8 @@ const item = {
   source_platform: "instagram",
   category_main: "쇼핑",
   category_sub: "패션",
-  is_archived: false,
-  archived_at: null,
+  is_archived: true,
+  archived_at: new Date().toISOString(),
   created_at: new Date().toISOString(),
 };
 
@@ -27,13 +27,13 @@ describe("ArchivePage", () => {
     vi.unstubAllGlobals();
   });
 
-  it("미완료 항목을 불러와 완료하면 아카이브에 보관한다", async () => {
+  it("아카이브 항목을 불러와 스와이프 액션으로 삭제한다", async () => {
     const fetchMock = vi
       .fn()
       .mockResolvedValueOnce({ ok: true, json: async () => [item] })
       .mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ ...item, is_archived: true, archived_at: new Date().toISOString() }),
+        json: async () => ({ success: true, id: item.id }),
       });
     vi.stubGlobal("fetch", fetchMock);
 
@@ -42,17 +42,17 @@ describe("ArchivePage", () => {
     expect(await screen.findByText("겨울 코트 추천")).toBeInTheDocument();
     expect(fetchMock).toHaveBeenNthCalledWith(
       1,
-      "http://localhost:4000/api/items?archived=false",
+      "http://localhost:4000/api/items?archived=true",
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "겨울 코트 추천 완료" }));
-    await waitFor(() => expect(screen.getByText("모두 확인했어요.")).toBeInTheDocument());
+    vi.spyOn(window, "confirm").mockReturnValue(true);
+    fireEvent.click(screen.getByRole("button", { name: "겨울 코트 추천 삭제" }));
+    await waitFor(() => expect(screen.getByText("아카이브가 비어 있어요.")).toBeInTheDocument());
     expect(fetchMock).toHaveBeenNthCalledWith(
       2,
-      "http://localhost:4000/api/items/1/archive",
+      "http://localhost:4000/api/items/1",
       expect.objectContaining({
-        method: "PATCH",
-        body: JSON.stringify({ archived: true }),
+        method: "DELETE",
       }),
     );
   });
@@ -64,7 +64,7 @@ describe("ArchivePage", () => {
     );
     render(<ArchivePage />);
 
-    expect(await screen.findByText("모두 확인했어요.")).toBeInTheDocument();
-    expect(screen.getByText("새로 저장한 콘텐츠가 여기에 나타나요.")).toBeInTheDocument();
+    expect(await screen.findByText("아카이브가 비어 있어요.")).toBeInTheDocument();
+    expect(screen.getByText("카테고리에서 다 본 콘텐츠를 밀어보세요.")).toBeInTheDocument();
   });
 });
