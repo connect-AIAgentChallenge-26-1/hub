@@ -243,16 +243,19 @@ export default function CategoriesPage() {
                 </p>
               </div>
             ) : (
-              <ul className="space-y-3">
-                {filteredItems.map((item) => (
-                  <ItemCard
-                    key={item.id}
-                    item={item}
-                    onDelete={deleteItem}
-                    onArchive={changeArchiveState}
-                  />
-                ))}
-              </ul>
+              <>
+                <ul className="space-y-3">
+                  {filteredItems.map((item) => (
+                    <ItemCard
+                      key={item.id}
+                      item={item}
+                      onDelete={deleteItem}
+                      onArchive={changeArchiveState}
+                    />
+                  ))}
+                </ul>
+                <p className="mt-4 text-center text-xs text-muted">← 밀어서 완료</p>
+              </>
             )}
           </section>
         </>

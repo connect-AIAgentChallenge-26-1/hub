@@ -6,6 +6,15 @@ import React from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import ItemCard from "./ItemCard";
 
+// jsdom has no PointerEvent constructor, so fireEvent.pointerDown/Move/Up
+// silently drop clientX. Dispatch a plain Event with clientX attached instead.
+function firePointer(element: Element, type: string, clientX: number) {
+  const event = new Event(type, { bubbles: true, cancelable: true });
+  Object.defineProperty(event, "clientX", { value: clientX, configurable: true });
+  Object.defineProperty(event, "pointerId", { value: 1, configurable: true });
+  fireEvent(element, event);
+}
+
 const item = {
   id: 1,
   title: "AWS SAA-C03 자격증 준비 가이드",
@@ -61,30 +70,38 @@ describe("ItemCard", () => {
     expect(screen.getByText("클라우드 관련 콘텐츠")).toBeInTheDocument();
   });
 
-  it("활성 항목을 보관하고 아카이브 항목을 복원할 수 있다", async () => {
+  it("카드를 왼쪽으로 충분히 스와이프하면 활성 항목을 보관 처리한다", async () => {
     const onArchive = vi.fn().mockResolvedValue(undefined);
-    const { rerender } = render(
+    render(
       <ul>
         <ItemCard item={item} onDelete={vi.fn()} onArchive={onArchive} />
       </ul>
     );
 
-    fireEvent.click(screen.getByRole("button", { name: "보관" }));
-    expect(onArchive).toHaveBeenCalledWith(item.id, true);
-    await waitFor(() =>
-      expect(screen.getByRole("button", { name: "보관" })).toBeEnabled()
-    );
+    const card = screen.getByRole("button", { expanded: false });
+    firePointer(card, "pointerdown", 300);
+    firePointer(card, "pointermove", 300);
+    firePointer(card, "pointermove", 150);
+    firePointer(card, "pointerup", 150);
 
-    rerender(
+    await waitFor(() => expect(onArchive).toHaveBeenCalledWith(item.id, true));
+  });
+
+  it("스와이프 거리가 짧으면 보관 처리를 하지 않고 탭으로 처리한다", () => {
+    const onArchive = vi.fn().mockResolvedValue(undefined);
+    render(
       <ul>
-        <ItemCard
-          item={{ ...item, is_archived: true, archived_at: "2026-07-26T00:00:00.000Z" }}
-          onDelete={vi.fn()}
-          onArchive={onArchive}
-        />
+        <ItemCard item={item} onDelete={vi.fn()} onArchive={onArchive} />
       </ul>
     );
-    fireEvent.click(screen.getByRole("button", { name: "복원" }));
-    expect(onArchive).toHaveBeenCalledWith(item.id, false);
+
+    const card = screen.getByRole("button", { expanded: false });
+    firePointer(card, "pointerdown", 300);
+    firePointer(card, "pointermove", 295);
+    firePointer(card, "pointerup", 295);
+
+    expect(onArchive).not.toHaveBeenCalled();
+    fireEvent.click(card);
+    expect(screen.getByText(item.summary)).toBeInTheDocument();
   });
 });

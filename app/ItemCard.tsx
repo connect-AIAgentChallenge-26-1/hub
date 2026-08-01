@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import type { Item } from "../lib/items";
 
 type ItemCardProps = {
@@ -18,10 +18,20 @@ function getDisplayTitle(item: Item) {
   return item.image_url ? "저장한 이미지" : "저장한 웹 콘텐츠";
 }
 
+const SWIPE_MAX = 140;
+const SWIPE_TAP_TOLERANCE = 8;
+
 export default function ItemCard({ item, onDelete, onArchive }: ItemCardProps) {
   const [expanded, setExpanded] = useState(false);
   const [pendingAction, setPendingAction] = useState<"delete" | "archive" | null>(null);
   const [actionError, setActionError] = useState<string | null>(null);
+  const [dragX, setDragX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const cardRef = useRef<HTMLLIElement>(null);
+  const dragStartXRef = useRef<number | null>(null);
+  const draggedRef = useRef(false);
+
+  const isPending = pendingAction !== null;
 
   async function deleteItem() {
     if (!window.confirm("이 항목을 삭제할까요? 삭제 후에는 되돌릴 수 없습니다.")) return;
@@ -43,31 +53,94 @@ export default function ItemCard({ item, onDelete, onArchive }: ItemCardProps) {
     try {
       await onArchive(item.id, !item.is_archived);
       setPendingAction(null);
+      setDragX(0);
     } catch (error) {
       setActionError(
         error instanceof Error ? error.message : "아카이브 상태를 변경하지 못했습니다."
       );
       setPendingAction(null);
+      setDragX(0);
     }
   }
 
-  const isPending = pendingAction !== null;
+  function getSwipeThreshold() {
+    const width = cardRef.current?.offsetWidth ?? 320;
+    return Math.min(160, Math.max(64, width * 0.35));
+  }
+
+  function handlePointerDown(event: React.PointerEvent<HTMLDivElement>) {
+    if (!onArchive || isPending) return;
+    dragStartXRef.current = event.clientX;
+    draggedRef.current = false;
+    setIsDragging(true);
+    event.currentTarget.setPointerCapture?.(event.pointerId);
+  }
+
+  function handlePointerMove(event: React.PointerEvent<HTMLDivElement>) {
+    if (dragStartXRef.current === null) return;
+    const delta = event.clientX - dragStartXRef.current;
+    if (Math.abs(delta) > SWIPE_TAP_TOLERANCE) draggedRef.current = true;
+    setDragX(Math.max(-SWIPE_MAX, Math.min(0, delta)));
+  }
+
+  function handlePointerUp() {
+    if (dragStartXRef.current === null) return;
+    dragStartXRef.current = null;
+    setIsDragging(false);
+    if (dragX <= -getSwipeThreshold()) {
+      setDragX(-SWIPE_MAX);
+      void changeArchiveState();
+    } else {
+      setDragX(0);
+    }
+  }
+
+  function handleCardClick() {
+    if (draggedRef.current) {
+      draggedRef.current = false;
+      return;
+    }
+    setExpanded((current) => !current);
+  }
+
   const summary = item.summary?.trim() || "아직 생성된 요약이 없습니다.";
+  const archiveLabel = item.is_archived ? "복원" : "완료";
 
   return (
-    <li className="bg-white/60 rounded-xl px-3 py-3 transition-colors hover:bg-white/80">
+    <li ref={cardRef} className="relative overflow-hidden rounded-xl">
+      {onArchive && (
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 flex items-center justify-end gap-2 rounded-xl bg-accent px-6 text-white"
+        >
+          <span className="flex flex-col items-center gap-1 text-xs font-medium">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-accentDark">
+              ✓
+            </span>
+            {archiveLabel}
+          </span>
+        </div>
+      )}
       <div
         role="button"
         tabIndex={0}
         aria-expanded={expanded}
-        onClick={() => setExpanded((current) => !current)}
+        onClick={handleCardClick}
         onKeyDown={(event) => {
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
             setExpanded((current) => !current);
           }
         }}
-        className="cursor-pointer outline-none"
+        onPointerDown={handlePointerDown}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
+        onPointerCancel={handlePointerUp}
+        style={{
+          transform: `translateX(${dragX}px)`,
+          transition: isDragging ? "none" : "transform 200ms ease-out",
+        }}
+        className="relative touch-pan-y select-none cursor-pointer bg-white/60 px-3 py-3 outline-none transition-colors hover:bg-white/80"
       >
         {item.image_url && (
           <img
@@ -87,38 +160,17 @@ export default function ItemCard({ item, onDelete, onArchive }: ItemCardProps) {
             </p>
           </div>
           <div className="flex shrink-0 flex-col items-end gap-2">
-            <div className="flex gap-2">
-              {onArchive && (
-                <button
-                  type="button"
-                  onClick={(event) => {
-                    event.stopPropagation();
-                    void changeArchiveState();
-                  }}
-                  disabled={isPending}
-                  className="text-xs text-accentDark hover:text-accent disabled:opacity-50"
-                >
-                  {pendingAction === "archive"
-                    ? item.is_archived
-                      ? "복원 중..."
-                      : "보관 중..."
-                    : item.is_archived
-                      ? "복원"
-                      : "보관"}
-                </button>
-              )}
-              <button
-                type="button"
-                onClick={(event) => {
-                  event.stopPropagation();
-                  void deleteItem();
-                }}
-                disabled={isPending}
-                className="text-xs text-red-500 hover:text-red-700 disabled:opacity-50"
-              >
-                {pendingAction === "delete" ? "삭제 중..." : "삭제"}
-              </button>
-            </div>
+            <button
+              type="button"
+              onClick={(event) => {
+                event.stopPropagation();
+                void deleteItem();
+              }}
+              disabled={isPending}
+              className="text-xs text-red-500 hover:text-red-700 disabled:opacity-50"
+            >
+              {pendingAction === "delete" ? "삭제 중..." : "삭제"}
+            </button>
           </div>
         </div>
         {expanded && (
@@ -142,7 +194,7 @@ export default function ItemCard({ item, onDelete, onArchive }: ItemCardProps) {
           </div>
         )}
       </div>
-      {actionError && <p className="mt-2 text-xs text-red-600">{actionError}</p>}
+      {actionError && <p className="mt-2 px-3 text-xs text-red-600">{actionError}</p>}
     </li>
   );
 }
