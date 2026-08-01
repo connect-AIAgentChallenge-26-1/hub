@@ -160,10 +160,10 @@ export function CoordinateConfirm() {
     }
     setSuggestion(data)
     setSuggestStatus('done')
-    if (data.suggested_slot_id && (letter.candidate_slots ?? []).some((s) => s.id === data.suggested_slot_id)) {
+    if (data?.suggested_slot_id && (letter.candidate_slots ?? []).some((s) => s.id === data.suggested_slot_id)) {
       setSelectedSlotId(data.suggested_slot_id)
     }
-    if (data.suggested_location_id && (letter.candidate_locations ?? []).some((l) => l.id === data.suggested_location_id)) {
+    if (data?.suggested_location_id && (letter.candidate_locations ?? []).some((l) => l.id === data.suggested_location_id)) {
       setSelectedLocationId(data.suggested_location_id)
     }
   }

@@ -112,7 +112,7 @@ export function ProgressChecklist() {
       setSuggestNote(data.reason || '추천을 만들 수 없어요')
       return
     }
-    const match = (data.role_suggestions ?? []).find((s) => s.role_id === roleId)
+    const match = (data?.role_suggestions ?? []).find((s) => s.role_id === roleId)
     if (!match?.tasks?.length) {
       setSuggestStatus('fallback')
       setSuggestNote('추천할 업무가 없어요')
