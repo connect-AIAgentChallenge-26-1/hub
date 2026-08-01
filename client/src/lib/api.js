@@ -36,6 +36,12 @@ export function getLetterByToken(token) {
   return request(`/api/letters/${token}`)
 }
 
+// 사람이 여는 공유 링크 — 서버 GET /share/:token 을 가리킨다.
+// 카톡 등에서 열면 그룹명이 반영된 og 미리보기를 보여준 뒤 /scr0/join으로 리다이렉트된다.
+export function shareLinkFor(token) {
+  return `${API_BASE}/share/${token}`
+}
+
 // POST /api/letters/:token/responses — 참여자 응답(이름·가능 시간대) 저장
 export function createResponse(token, payload) {
   return request(`/api/letters/${token}/responses`, { method: 'POST', body: JSON.stringify(payload) })

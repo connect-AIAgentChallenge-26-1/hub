@@ -4,6 +4,7 @@ import { SectionTitle } from '../../components/identity/SectionTitle.jsx'
 import { Button } from '../../components/forms/Button.jsx'
 import { Toast } from '../../components/feedback/Toast.jsx'
 import silverTray from '../../assets/vintage-silver-tray.png'
+import { shareLinkFor } from '../../lib/api.js'
 
 // SCR0 · 1-1 초대장 공유 화면 — docs/design 「Letter&Co Design System.zip」
 // templates/invite-share/InviteShare.dc.html 이식.
@@ -11,7 +12,7 @@ export function InviteShare() {
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const token = searchParams.get('token') ?? ''
-  const joinUrl = `${window.location.origin}/scr0/join?token=${token}`
+  const shareUrl = shareLinkFor(token)
 
   const [copied, setCopied] = useState(false)
   const timerRef = useRef(null)
@@ -19,7 +20,7 @@ export function InviteShare() {
   useEffect(() => () => clearTimeout(timerRef.current), [])
 
   function copyLink() {
-    navigator.clipboard?.writeText(joinUrl).catch(() => {})
+    navigator.clipboard?.writeText(shareUrl).catch(() => {})
     setCopied(true)
     clearTimeout(timerRef.current)
     timerRef.current = setTimeout(() => setCopied(false), 2000)
@@ -55,7 +56,7 @@ export function InviteShare() {
             }}
           >
             <div style={{ flex: 1, fontFamily: 'var(--font-mono)', fontSize: '12px', color: 'var(--ink-soft)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
-              {joinUrl}
+              {shareUrl}
             </div>
             <Button variant="primary" size="sm" onClick={copyLink}>
               {copied ? '복사됨' : '복사'}

@@ -9,6 +9,7 @@ import confirmRouter from './routes/confirm.js'
 import suggestRouter from './routes/suggest.js'
 import harvestRouter from './routes/harvest.js'
 import expensesRouter from './routes/expenses.js'
+import shareRouter from './routes/share.js'
 
 dotenv.config()
 const app = express()
@@ -23,5 +24,6 @@ app.use('/api/letters', confirmRouter)
 app.use('/api/letters', suggestRouter)
 app.use('/api/letters', harvestRouter)
 app.use('/api/letters', expensesRouter)
+app.use('/share', shareRouter)
 
 app.listen(process.env.PORT, () => console.log(`서버 실행 중: ${process.env.PORT}`))
