@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useNavigate, Link, useSearchParams } from 'react-router-dom'
 import { InfoCard } from '../../components/cards/InfoCard.jsx'
+import { Input } from '../../components/forms/Input.jsx'
 import { Button } from '../../components/forms/Button.jsx'
 import { SidebarNav } from '../../components/layout/SidebarNav.jsx'
 import { getLetterByToken, getRoles, getResponses, getSuggestions, confirmLetter } from '../../lib/api.js'
 import { countResponded, getSelectedLocationIds, getSelectedSlotIds, tallyVotes } from '../../lib/participantStatus.js'
+import { buildIcsContent, downloadIcs } from '../../lib/ics.js'
 import bgVineWash from '../../assets/bg-vine-wash.jpg'
 import laceTrimStrip from '../../assets/vintage-lace-trim-strip.png'
 import laceFrameRect from '../../assets/lace-frame-rect.png'
@@ -14,6 +16,13 @@ import laceFrameRect from '../../assets/lace-frame-rect.png'
 // 화면 진입 시 자동으로 추천을 부르지 않는다(자동확정 UI 금지) — "추천받기"를 눌러야 POST /suggest 호출.
 // 추천은 시간·장소 후보 선택값을 채워줄 뿐이고, 최종 저장은 "확정하기" 클릭으로 PATCH /confirm 호출.
 const ACTIVE_NAV_KEY = 'coordinate'
+
+// <input type="datetime-local">가 요구하는 "YYYY-MM-DDTHH:mm"(로컬 시간 기준) 형식으로 변환.
+function toDatetimeLocalValue(iso) {
+  const d = new Date(iso)
+  const pad = (n) => String(n).padStart(2, '0')
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`
+}
 
 export function CoordinateConfirm() {
   const navigate = useNavigate()
@@ -29,6 +38,7 @@ export function CoordinateConfirm() {
 
   const [selectedSlotId, setSelectedSlotId] = useState(null)
   const [selectedLocationId, setSelectedLocationId] = useState(null)
+  const [confirmedDatetime, setConfirmedDatetime] = useState('')
   const [slotVoteCounts, setSlotVoteCounts] = useState({})
   const [locationVoteCounts, setLocationVoteCounts] = useState({})
   const [slotTieBroken, setSlotTieBroken] = useState(false)
@@ -83,6 +93,7 @@ export function CoordinateConfirm() {
       if (letterData.confirmed_slot_id || letterData.confirmed_location_id) {
         setSelectedSlotId(letterData.confirmed_slot_id ?? null)
         setSelectedLocationId(letterData.confirmed_location_id ?? null)
+        if (letterData.confirmed_datetime) setConfirmedDatetime(toDatetimeLocalValue(letterData.confirmed_datetime))
         setLoadStatus('ready')
         return
       }
@@ -167,12 +178,13 @@ export function CoordinateConfirm() {
   }
 
   async function confirm() {
-    if (!selectedSlotId || !selectedLocationId || !letter?.responses_closed || saveStatus === 'saving') return
+    if (!selectedSlotId || !selectedLocationId || !confirmedDatetime || !letter?.responses_closed || saveStatus === 'saving') return
     setSaveStatus('saving')
     setSaveErrorMsg('')
     const result = await confirmLetter(token, {
       confirmed_slot_id: selectedSlotId,
       confirmed_location_id: selectedLocationId,
+      confirmed_datetime: new Date(confirmedDatetime).toISOString(),
     })
     if (result.error) {
       setSaveStatus('error')
@@ -192,7 +204,18 @@ export function CoordinateConfirm() {
   const totalParticipants = participants.length
   const respondedCount = countResponded(participants)
   const responsesClosed = Boolean(letter?.responses_closed)
-  const canConfirm = Boolean(selectedSlotId && selectedLocationId) && responsesClosed
+  const canConfirm = Boolean(selectedSlotId && selectedLocationId && confirmedDatetime) && responsesClosed
+
+  function addToCalendar() {
+    const content = buildIcsContent({
+      uid: token,
+      title: letter?.title || '모임',
+      description: [selectedSlot?.label, letter?.topic].filter(Boolean).join(' · '),
+      location: selectedLocation?.name || '',
+      start: letter?.confirmed_datetime,
+    })
+    downloadIcs(`${letter?.title || 'letterandco'}.ics`, content)
+  }
 
   return (
     <div
@@ -337,6 +360,14 @@ export function CoordinateConfirm() {
                   </div>
                 ) : null}
 
+                <Input
+                  variant="box"
+                  type="datetime-local"
+                  label="확정 날짜·시간 (캘린더에 추가할 때 쓰여요)"
+                  value={confirmedDatetime}
+                  onChange={(e) => setConfirmedDatetime(e.target.value)}
+                />
+
                 <Button variant="primary" block disabled={!canConfirm || saveStatus === 'saving'} soundType="finish" onClick={confirm}>
                   {saveStatus === 'saving' ? '확정하는 중…' : '확정하기'}
                 </Button>
@@ -382,6 +413,11 @@ export function CoordinateConfirm() {
                   />
                 </div>
                 <div style={{ fontFamily: 'var(--font-body)', fontSize: '14px', color: 'var(--ink-soft)' }}>모두에게 확정 소식을 전했어요</div>
+                {letter?.confirmed_datetime ? (
+                  <Button variant="accent" onClick={addToCalendar}>
+                    캘린더에 추가
+                  </Button>
+                ) : null}
                 <Button variant="accent" onClick={() => navigate(`/scr4/workspace${token ? `?token=${token}` : ''}`)}>
                   진행 화면으로
                 </Button>
