@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { writeJson } from "./jsonStore";
+import { readJson, writeJson } from "./jsonStore";
 import { getUserDataPath } from "./paths";
 
 // Data model for the Feature Expansion Workflow (원 기획서 11번) — a
@@ -7,17 +7,17 @@ import { getUserDataPath } from "./paths";
 // One user can have many expansions (data/users/{userId}/expansions/{id}/),
 // each independent of the others and of the 9-step workflow's state.
 //
-// Only request.json is written today (Day 19 — entry point + data model).
-// The other files this directory will eventually hold — design.json (step 1,
-// reuses documents.ts's DocumentRecord shape), scriptable-objects.json (step
-// 2, same shape), file-changes.json (steps 3-4, reuses fileChanges.ts's
-// FileChange shape), docs.json (step 5, DocumentRecord shape again) — are
-// each written by their own Agent step starting Day 20; nothing here creates
-// placeholders for them ahead of time.
+// request.json (this file) holds the request itself + workflow status.
+// design.json (step 1) and scriptable-objects.json (step 2) — both reusing
+// documents.ts's DocumentRecord shape — are handled by expansionDocuments.ts
+// instead of here, since that shape is shared across every doc this
+// directory holds; design-messages.json (step 1's chat log) is handled by
+// expansionMessages.ts likewise. file-changes.json/docs.json (Day 21+ steps)
+// aren't created yet.
 export interface ExpansionRequest {
   description: string;
-  // "design_pending" is the only status this Day assigns; later Agent steps
-  // (Day 20+) will introduce whatever further statuses they need.
+  // "design_pending" (Day 19) -> "scriptable_objects_pending" (design
+  // approved) -> "code_pending" (SO approved, Day 21+ takes it from here).
   status: string;
   created_at: string;
 }
@@ -38,4 +38,27 @@ export async function createExpansion(
   };
   await writeJson(expansionRequestFile(userId, expansionId), request);
   return { expansionId, request };
+}
+
+export async function getExpansionRequest(
+  userId: number,
+  expansionId: string
+): Promise<ExpansionRequest | null> {
+  try {
+    return await readJson<ExpansionRequest>(expansionRequestFile(userId, expansionId));
+  } catch {
+    return null;
+  }
+}
+
+export async function updateExpansionStatus(
+  userId: number,
+  expansionId: string,
+  status: string
+): Promise<ExpansionRequest | null> {
+  const current = await getExpansionRequest(userId, expansionId);
+  if (!current) return null;
+  const updated: ExpansionRequest = { ...current, status };
+  await writeJson(expansionRequestFile(userId, expansionId), updated);
+  return updated;
 }

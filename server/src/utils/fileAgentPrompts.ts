@@ -30,7 +30,7 @@ async function docContent(userId: number, stepId: number): Promise<string> {
 
 // v5: real namespace convention detected by the analyzer, so Code Generation
 // Agent follows what the repo actually uses instead of guessing one.
-async function detectedNamespaces(userId: number): Promise<string[]> {
+export async function detectedNamespaces(userId: number): Promise<string[]> {
   try {
     const project = await readJson<{ stats?: { namespaces?: string[] } }>(
       getUserDataPath(userId, "project.json")
@@ -41,7 +41,7 @@ async function detectedNamespaces(userId: number): Promise<string[]> {
   }
 }
 
-interface AnalyzedClassRef {
+export interface AnalyzedClassRef {
   name: string;
   filePath: string;
 }
@@ -51,7 +51,7 @@ interface AnalyzedClassRef {
 // (or if analysis was never run in demo/real mode) this just returns [],
 // which naturally makes every class-design match below fail closed and fall
 // back to "new" — no special-casing needed at the call site.
-async function analyzedClasses(userId: number): Promise<AnalyzedClassRef[]> {
+export async function analyzedClasses(userId: number): Promise<AnalyzedClassRef[]> {
   try {
     const project = await readJson<{
       stats?: { classes?: AnalyzedClassRef[]; classesExpiresAt?: string };
@@ -71,19 +71,43 @@ async function analyzedClasses(userId: number): Promise<AnalyzedClassRef[]> {
 // intentionally simple here, not a real Markdown parser. Matches the doc
 // format Class Design Agent is prompted to produce (see agentPrompts.ts):
 // "- [ ] ClassName — 설명...".
-function parseClassNamesFromDesignDoc(doc: string): string[] {
+//
+// v21: some design docs (Feature Expansion's design.json — see
+// expansionAgentPrompts.ts) don't have a dedicated "## Classes" section at
+// all (its sections are Overview/Changes/Data); class names there are
+// mentioned inline within whatever checklist bullets exist. When no
+// "## Classes" header is found, this falls back to scanning every checklist
+// bullet in the whole document for PascalCase-looking identifiers — same
+// "good enough, not a real parser" bar as the strict path above. Existing
+// callers (the 9-step Code Generation Agent, whose Class Design doc always
+// has "## Classes") are unaffected — the fallback only ever runs when the
+// strict section is absent.
+export function parseClassNamesFromDesignDoc(doc: string): string[] {
   const sectionMatch = doc.match(/##\s*Classes\s*\n([\s\S]*?)(?=\n##\s|$)/i);
-  const section = sectionMatch?.[1] ?? "";
   const names = new Set<string>();
-  const lineRegex = /^[-*]\s*\[[ xX]\]\s*([A-Za-z_][A-Za-z0-9_]*)/gm;
-  let match: RegExpExecArray | null;
-  while ((match = lineRegex.exec(section))) {
-    names.add(match[1]);
+
+  if (sectionMatch) {
+    const lineRegex = /^[-*]\s*\[[ xX]\]\s*([A-Za-z_][A-Za-z0-9_]*)/gm;
+    let match: RegExpExecArray | null;
+    while ((match = lineRegex.exec(sectionMatch[1]))) {
+      names.add(match[1]);
+    }
+    return Array.from(names);
+  }
+
+  const bulletRegex = /^[-*]\s*\[[ xX]\]\s*(.+)$/gm;
+  let bulletMatch: RegExpExecArray | null;
+  while ((bulletMatch = bulletRegex.exec(doc))) {
+    const identifierRegex = /\b[A-Z][A-Za-z0-9_]*\b/g;
+    let idMatch: RegExpExecArray | null;
+    while ((idMatch = identifierRegex.exec(bulletMatch[1]))) {
+      names.add(idMatch[0]);
+    }
   }
   return Array.from(names);
 }
 
-const COMMON_RULES = `## 행동 지침
+export const COMMON_RULES = `## 행동 지침
 - 한 번에 한 가지만 질문하세요. 입력 문서가 이미 충분히 구체적이면 질문 없이 바로 생성해도 됩니다.
 - 아직 확인할 게 있으면 readyToGenerateFiles를 false로 두고 files는 비워두세요.
 - 준비되면 readyToGenerateFiles를 true로 설정하고, files 배열에 파일별로 분리해서
