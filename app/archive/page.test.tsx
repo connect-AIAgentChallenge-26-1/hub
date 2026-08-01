@@ -6,15 +6,6 @@ import React from "react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import ArchivePage from "./page";
 
-// jsdom has no PointerEvent constructor, so fireEvent.pointerDown/Move/Up
-// silently drop clientX. Dispatch a plain Event with clientX attached instead.
-function firePointer(element: Element, type: string, clientX: number) {
-  const event = new Event(type, { bubbles: true, cancelable: true });
-  Object.defineProperty(event, "clientX", { value: clientX, configurable: true });
-  Object.defineProperty(event, "pointerId", { value: 1, configurable: true });
-  fireEvent(element, event);
-}
-
 const archivedItem = {
   id: 1,
   title: "보관한 콘텐츠",
@@ -68,11 +59,7 @@ describe("ArchivePage", () => {
       "http://localhost:4000/api/items?archived=true"
     );
 
-    const card = screen.getByRole("button", { expanded: false });
-    firePointer(card, "pointerdown", 300);
-    firePointer(card, "pointermove", 300);
-    firePointer(card, "pointermove", 150);
-    firePointer(card, "pointerup", 150);
+    fireEvent.click(screen.getByRole("button", { name: "복원" }));
     await waitFor(() =>
       expect(screen.getByText("아직 보관한 콘텐츠가 없어요.")).toBeInTheDocument()
     );
