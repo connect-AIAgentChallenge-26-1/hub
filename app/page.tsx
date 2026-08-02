@@ -93,7 +93,7 @@ export default function Home() {
 
       {/* 저장 입력 영역 */}
       <section className="mb-10">
-        <h1 className="mb-6 text-[32px] font-bold leading-[1.12] tracking-[-0.05em] text-ink">
+        <h1 className="mb-7 text-[34px] font-bold leading-[1.18] tracking-[-0.035em] text-ink sm:text-[36px]">
           무엇을
           <br />
           저장할까요?

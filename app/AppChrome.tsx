@@ -3,7 +3,7 @@ import Link from "next/link";
 export function AppHeader() {
   return (
     <header className="mb-12 flex items-center justify-between">
-      <Link href="/" className="text-[22px] font-extrabold tracking-[-0.055em] text-ink">
+      <Link href="/" className="text-[26px] font-extrabold tracking-[-0.055em] text-ink">
         later<span className="text-[#e51c2b]">.</span>
       </Link>
       <div aria-hidden="true" className="h-9 w-9 rounded-full border border-creamDeep bg-white" />
