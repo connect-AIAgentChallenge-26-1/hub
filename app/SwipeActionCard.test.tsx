@@ -43,6 +43,8 @@ describe("SwipeActionCard", () => {
 
     const card = screen.getByText(item.title).closest("div.absolute.inset-0");
     expect(card).not.toBeNull();
+    expect(card).toHaveClass("bg-white");
+    expect(card).not.toHaveClass("bg-white/80");
     Object.defineProperty(card, "setPointerCapture", { value: vi.fn() });
     Object.defineProperty(card, "hasPointerCapture", { value: vi.fn(() => false) });
 

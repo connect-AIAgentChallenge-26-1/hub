@@ -126,7 +126,7 @@ export default function SwipeActionCard({
           onPointerUp={endDrag}
           onPointerCancel={endDrag}
           style={{ transform: `translateX(-${offset}px)`, touchAction: "pan-y" }}
-          className="absolute inset-0 flex cursor-grab select-none items-center gap-4 rounded-xl2 border border-creamDeep bg-white/80 px-3 transition-transform duration-200 ease-out active:cursor-grabbing"
+          className="absolute inset-0 flex cursor-grab select-none items-center gap-4 rounded-xl2 border border-creamDeep bg-white px-3 transition-transform duration-200 ease-out active:cursor-grabbing"
         >
           {item.image_url ? (
             <img src={item.image_url} alt="" draggable={false} className="h-[68px] w-[68px] shrink-0 rounded-xl object-cover" />
