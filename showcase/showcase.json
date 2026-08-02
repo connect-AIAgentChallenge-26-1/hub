@@ -5,9 +5,11 @@
   "githubUser": "surleun(정문영)",
   "demoUrl": "https://github.com/surleun/hub",
   "demoVideoUrl": "",
-  "thumbnail": "thumbnail.webp",
+  "thumbnail": "thumbnail.png",
   "screenshots": [
-    "screenshots/home.webp"
+    "screenshots/documents.png",
+    "screenshots/tbd-handling.png",
+    "screenshots/conflict-handling.png"
   ],
   "problem": "혼자 게임을 기획할 때 아이디어, 확정 설정, 변경 요청과 결정 근거가 여러 문서에 흩어지기 쉽고, AI가 확정 문서를 바로 수정하면 무엇이 왜 바뀌었는지 추적하기 어렵습니다.",
   "targetUsers": [
@@ -17,15 +19,15 @@
   "features": [
     "프로젝트마다 Brief, 확정 문서, 아이디어, 승인 큐, 결정과 버전 기록을 분리해 관리합니다.",
     "AI가 만든 초안과 창작 제안을 명시적 승인 전까지 확정 문서와 분리합니다.",
-    "일반 기획, 시나리오와 인게임 스크립트를 전문 Agent가 작성하고 독립 Reviewer가 출처와 범위를 검수합니다.",
-    "Project Creative Agent Rule로 프로젝트별 창작 방향과 허용 범위를 재현 가능하게 관리합니다.",
+    "일반 기획, 시나리오와 인게임 스크립트를 역할별 전문 Agent가 작성하고 독립 Reviewer가 출처와 범위를 검수합니다.",
+    "기존 역할로 표현할 수 없는 새로운 작업 책임에는 전문 Agent를 확장하고, 각 프로젝트에는 필요한 분야별 Project Creative Agent Rule(PCA)을 추가해 공용 Agent를 프로젝트 전용 전문가로 적응시킵니다.",
     "Python 검증기로 프로젝트 격리, 링크, 승인 참조, 출처와 창작 규칙 무결성을 점검합니다."
   ],
   "featureTags": [
     "Human in the Loop",
     "게임 기획 문서",
     "승인·버전 추적",
-    "전문 Agent 협업",
+    "확장형 전문 Agent",
     "출처 추적"
   ],
   "techStack": [
@@ -37,13 +39,14 @@
   ],
   "techHighlights": [
     "AGENTS.md와 역할별 Workflow·Template·Skill이 요청 분기와 문서 소유권, 승인 경계를 명시합니다.",
-    "5개의 전문 Agent를 Specialist Task Packet으로 호출하고 시나리오와 고위험 창작 결과를 독립 검수합니다.",
+    "기존 역할로 처리할 수 없는 새로운 작업 책임에는 전문 Agent를 확장하고, 프로젝트별 창작 요구에는 필요한 시점에 분야별 PCA를 설계·구현하는 이중 확장 구조를 사용합니다.",
+    "전문 Agent를 Specialist Task Packet으로 호출하고 시나리오와 고위험 창작 결과를 독립 검수합니다.",
     "Python 표준 라이브러리 기반 검증과 unittest로 프로젝트 구조, 승인 연결, provenance와 Project Creative Agent Rule 무결성을 검사합니다.",
     "프로젝트별 canonical 문서와 제안·결정·버전 기록을 분리해 AI 작업의 근거와 변경 과정을 추적할 수 있습니다."
   ],
   "developmentWithAI": "저는 게임 기획 작업장의 목표와 Human in the Loop 승인 원칙을 정했습니다. AI와 함께 요구사항을 역할별 규칙, Workflow, Template과 Skill로 구체화하고, 검증 코드와 테스트로 프로젝트 격리와 추적성 규칙을 점검했습니다.",
   "agent": {
-    "summary": "전문 Agent와 저장소 로컬 Skill을 연결해 기획 초안, 창작 보완, 독립 검수와 승인 적용 준비를 수행합니다.",
+    "summary": "고정된 Agent 목록에 머물지 않고 새로운 작업 책임에는 전문 Agent를 확장하며, 프로젝트마다 필요한 분야별 PCA를 추가해 공용 Agent를 해당 게임의 창작 방향과 허용 범위에 맞는 전용 전문가로 적응시킵니다.",
     "agentTools": [
       {
         "type": "agent",
@@ -107,6 +110,16 @@
       }
     ],
     "workflows": [
+      {
+        "name": "전문 역량 확장 Workflow",
+        "steps": [
+          "사용자 요청이 기존 전문 역할과 PCA로 처리 가능한지 판정",
+          "기존 역할과 본질적으로 다른 작업 책임이면 새 전문 Agent 확장 검토",
+          "프로젝트별 차이는 분야별 PCA 설정 계획으로 구체화",
+          "사용자의 명시적 구현 요청 후 필요한 PCA만 활성화",
+          "규칙 ID·버전·SHA-256과 검수 계약을 기록해 재현성 확보"
+        ]
+      },
       {
         "name": "비시나리오 기획 창작 Workflow",
         "steps": [
