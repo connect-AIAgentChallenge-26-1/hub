@@ -44,7 +44,7 @@ export type GeminiRequest = (input: ClassificationInput) => Promise<unknown>;
 
 const MAX_SUBCATEGORY_LENGTH = 30;
 const MAX_DISPLAY_TITLE_LENGTH = 60;
-const MAX_SUMMARY_LENGTH = 500;
+const MAX_SUMMARY_LENGTH = 280;
 const koreanSubcategoryPattern = /^[가-힣][가-힣0-9 ()·/&+-]*$/;
 const displayTitlePattern = /[가-힣A-Za-z0-9]/;
 const koreanTextPattern = /[가-힣]{2,}/;
@@ -197,9 +197,11 @@ When text and an image are both provided, consider both together.
 Prefer Later's existing broad category system and avoid overly specific categories.
 Select exactly one main category and a short Korean subcategory, or null when the subcategory is unclear.
 Create displayTitle as a concise, natural Korean card title that summarizes the subject and content type.
-Create summary as a useful Korean summary of the key content in 1 to 3 short sentences.
-Summarize the actual takeaways, examples, steps, expressions, or conclusions present in the source.
-When concrete details are available, do not merely say that the content "introduces", "explains", or "organizes" a topic.
+Create summary as a compact Korean answer to "What should I remember from this content?" in 2 to 3 short sentences and at most 180 Korean-readable characters when possible.
+Start directly with the most important fact, conclusion, method, recommendation, or warning. Then include only the strongest supporting point or immediately useful action.
+Summarize the actual takeaways, examples, steps, expressions, or conclusions present in the source. Prefer concrete nouns, numbers, conditions, comparisons, and actions that the source supports.
+Never write a generic content introduction such as "~을 소개합니다", "~을 설명합니다", "~을 다룹니다", "~에 관한 영상입니다", or "도움을 줍니다". A summary must reveal the takeaway itself, not describe what the source talks about.
+Do not repeat displayTitle in different words and do not add praise, audience descriptions, or vague benefits.
 For language-learning content, preserve 2 to 5 representative original expressions such as "I'm upset" and explain their Korean meanings when those expressions and meanings are supported by the input.
 For lists, tutorials, and comparisons, include the most useful representative items instead of only describing the format or number of items.
 Always write displayTitle and summary in Korean, translating English source content into Korean.
@@ -224,7 +226,8 @@ const classificationSchema = {
     },
     summary: {
       type: "string",
-      description: "영어 원문도 한국어로 번역해 핵심만 정리한 1~3문장 요약",
+      description:
+        "원문의 결론·방법·주의점 등 실제 핵심 정보를 바로 전달하는 2~3문장의 짧은 한국어 요약. 콘텐츠 소개문 금지",
     },
   },
   required: ["categoryMain", "categorySub", "displayTitle", "summary"],
@@ -263,6 +266,7 @@ export function createGeminiClassifier(
     })
 ): GeminiRequest {
   return async (input) => {
+    const sourceUrl = input.metadata?.url ?? (/^https?:\/\//i.test(input.content) ? input.content : null);
     const contents: Array<
       { text: string } | { inlineData: { data: string; mimeType: SupportedImageType } }
     > = [{ text: formatInput(input) }];
@@ -284,6 +288,7 @@ export function createGeminiClassifier(
             systemInstruction,
             responseMimeType: "application/json",
             responseJsonSchema: classificationSchema,
+            ...(sourceUrl ? { tools: [{ urlContext: {} }] } : {}),
           },
         });
         break;
