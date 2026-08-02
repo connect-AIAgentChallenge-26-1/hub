@@ -1,38 +1,37 @@
-## 1주차 - 기획 & 기본 저장 플로우
-- [x] 프로젝트 세팅 (Next.js + Tailwind + PWA)
-- [x] 홈 화면 헤더 (로고, 프로필 아이콘)
-- [x] 저장 입력 카드 컴포넌트 (텍스트 붙여넣기 + 이미지 첨부 버튼)
-- [x] 저장 버튼 (로딩 상태 포함)
-- [x] 최근 저장 리스트 (카드형, 카테고리 뱃지)
-- [x] 하단 네비게이션 (홈/카테고리/아카이브/설정)
-- [x] 기획서(plan.md) / 작업 체크리스트(checklist.md) 작성
-- [x] Supabase 프로젝트 연결 코드 및 URL/키 환경변수 구성
-- [x] items 테이블 및 Storage migration 작성
-- [x] 저장 버튼 → Express → Supabase insert 연결
+# Later 완료 현황
 
-## 2주차 - 자동 분류 & 카테고리 뷰
-- [x] 도메인 기반 분류 규칙 설계
-- [x] 키워드 기반 분류 규칙
-- [x] 저장 시 Gemini + 규칙 fallback 자동 분류 연결
-- [x] 카테고리 트리 뷰 페이지 (대분류 > 소분류, 카운트 표시)
-- [x] 카테고리별 필터링된 카드 리스트
-- [x] 카드 클릭 → 원본 링크로 이동
+최종 갱신: 2026-08-02 KST
 
-## 3주차 - 완료 처리 & 리마인더 & 이미지
-- [x] 버튼 완료 처리 → 아카이브 이동
-- [x] 아카이브 페이지
-- [ ] Firebase Cloud Messaging 설정 (푸시 알림)
-- [ ] 저장 후 N일 경과 시 리마인더 알림 로직
-- [x] 이미지 업로드 → Supabase Storage 및 Gemini Vision 연동
-- [x] 이미지 기반 자동 분류
+## 운영 버전 완료
 
-## 4주차 - 마무리 & iOS 실사용 & 발표 준비
-- [x] 제목·요약·원문·카테고리 통합 검색
-- [ ] Apple 단축어(Shortcuts) 제작 - 공유 시트 → API POST
-- [x] PWA 아이콘/manifest 확정
-- [ ] Vercel Frontend 및 Render Backend production 배포
-- [ ] 배포 전체 플로우 QA (저장 → 분류 → 확인 → 완료 처리)
-- [ ] 버그 수정 및 UI 다듬기
-- [x] 데모 시나리오 및 Agent 관계도 문서 작성
-- [x] README 개발·배포 문서 링크 정리
-- [ ] 5분 미만 영상 업로드 및 showcase `demoVideoUrl` 추가
+- [x] Next.js·Tailwind·PWA 기본 구성과 반응형 UI
+- [x] URL·텍스트·JPEG·PNG·WebP 저장
+- [x] Express API와 Supabase Database·Storage 연동
+- [x] Gemini 한국어 제목·핵심 요약·대분류·소분류
+- [x] URL Context와 안전한 메타데이터 수집
+- [x] 이미지 멀티모달 분석
+- [x] Gemini 실패 시 규칙 기반 fallback
+- [x] 제목·요약·원문·출처·카테고리 통합 검색
+- [x] 카테고리 필터와 펼침형 요약·원문 링크
+- [x] 스와이프 아카이브, 복원·삭제
+- [x] YouTube·Instagram·X 및 일반 도메인 출처 표시
+- [x] Vercel Production 배포와 `/api/health` 확인
+- [x] 데모 영상, 대표 이미지, PDF 기반 스크린샷 11장
+- [x] 쇼케이스 JSON과 소개 문서
+- [x] Vitest·TypeScript·Production build 검증
+
+## 현재 미구현
+
+- [ ] 로그인과 사용자별 데이터 격리
+- [ ] 리마인더 알림 실제 발송
+- [ ] 모바일 공유 시트·Apple 단축어
+- [ ] Instagram Reel 영상 원문 직접 분석
+- [ ] 사용자 지정 분류와 시맨틱 검색
+- [ ] ESLint 비대화형 구성
+
+## 제출 전 확인
+
+- [x] 운영 주소: <https://later-theta-fawn.vercel.app>
+- [x] 데모 영상: <https://youtu.be/Gy70h9Bd3eM>
+- [x] 쇼케이스 PR에 `showcase.json`, 썸네일, 스크린샷 포함
+- [ ] 중앙 쇼케이스 저장소 PR 병합

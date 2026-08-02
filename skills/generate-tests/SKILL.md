@@ -53,9 +53,15 @@ Apply only checks relevant to the change:
   `created_at` fixture fields aligned with `lib/items.ts`.
 - Image tests cover JPEG, PNG, WebP, the 5 MB limit, and Storage failure when those paths change.
 - Classification tests reject malformed Gemini output and preserve rule-based fallback.
+- URL analysis tests verify that URL Context is enabled only for HTTP/HTTPS inputs and that
+  ordinary text requests do not enable external retrieval tools.
 - Metadata tests block unsafe destinations and enforce redirect, timeout, size, and content-type
   limits when request handling changes.
 - Archive tests distinguish active and archived queries and cover both archive and restore.
+- Source-label tests cover YouTube, Instagram, X, Naver, manual input, and generic hostname
+  fallbacks without asserting decorative Tailwind classes.
+- Do not treat public caption metadata as proof that an Instagram or other social video itself was
+  retrieved. Test and document the evidence level separately when provenance behavior changes.
 
 ## Commands
 
