@@ -518,7 +518,7 @@ describe('AuthenticatedWorkspace', () => {
     });
 
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: '아직 저장한 인사이트가 없어요',
       })
     ).not.toBeNull();
@@ -661,7 +661,12 @@ describe('AuthenticatedWorkspace', () => {
       </DesignSystemProvider>
     );
 
-    await user.click(screen.getByRole('button', { name: '저장하기' }));
+    const saveButton = screen.getByRole('button', { name: '저장하기' });
+    await waitFor(() =>
+      expect((saveButton as HTMLButtonElement).disabled).toBe(false)
+    );
+
+    await user.click(saveButton);
     expect(screen.getByRole('status').textContent).toContain(
       '인사이트를 저장했어요'
     );
@@ -1152,7 +1157,7 @@ describe('AuthenticatedWorkspace', () => {
     ).toBeNull();
   });
 
-  it('returns to the full library when recovering from no search results', async () => {
+  it('검색 결과에서 검색어만 지우고 현재 카테고리를 유지한다', async () => {
     const user = userEvent.setup();
     const repository: InsightRepository = {
       load: () => ({
@@ -1192,17 +1197,24 @@ describe('AuthenticatedWorkspace', () => {
         name: '이 검색어로 찾은 인사이트가 없어요',
       })
     ).not.toBeNull();
-    expect(screen.getByRole('status').textContent).toBe('검색 결과 없음');
+    expect(screen.getByRole('status').textContent).toBe('검색 결과 0개');
 
     await user.click(screen.getByRole('button', { name: '검색어 지우기' }));
 
     expect((search as HTMLInputElement).value).toBe('');
-    expect(
-      screen.getByRole('button', { name: '전체' }).getAttribute('aria-pressed')
-    ).toBe('true');
-    expect(screen.getAllByRole('article')).toHaveLength(2);
-    expect(screen.queryByRole('status')).toBeNull();
     expect(document.activeElement).toBe(search);
+    await waitFor(() => {
+      expect(
+        screen
+          .getByRole('button', { name: '개발' })
+          .getAttribute('aria-pressed')
+      ).toBe('true');
+      expect(screen.getAllByRole('article')).toHaveLength(1);
+      expect(screen.getByText('개발 자료')).not.toBeNull();
+      expect(screen.queryByText('디자인 자료')).toBeNull();
+      expect(screen.queryByText('검색 결과 0개')).toBeNull();
+      expect(screen.getByRole('status').textContent).toBe('개발 1개');
+    });
   });
 
   it('moves focus to the next card when an edited category leaves the active filter', async () => {

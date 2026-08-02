@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useId, useMemo, useRef, useState } from 'react';
 import type { FormEvent, ReactNode } from 'react';
 
 import type {
@@ -46,6 +46,7 @@ import {
   type SaveInsightFailureReason,
   type SaveInsightInput,
 } from './model/use_insight_workspace';
+import { WorkspaceQueryProvider } from './providers/workspace_query_provider';
 import './styles/authenticated_workspace.css';
 
 const EMPTY_CONTEXT_DRAFT: SaveContextDraft = {
@@ -155,7 +156,22 @@ export type AuthenticatedWorkspaceProps = {
   userId?: string;
 };
 
-export function AuthenticatedWorkspace({
+export function AuthenticatedWorkspace(props: AuthenticatedWorkspaceProps) {
+  const generatedScope = useId();
+  const queryScope = props.userId ?? `injected-${generatedScope}`;
+
+  return (
+    <WorkspaceQueryProvider key={queryScope}>
+      <AuthenticatedWorkspaceContent {...props} queryScope={queryScope} />
+    </WorkspaceQueryProvider>
+  );
+}
+
+type AuthenticatedWorkspaceContentProps = AuthenticatedWorkspaceProps & {
+  queryScope: string;
+};
+
+function AuthenticatedWorkspaceContent({
   accountControl,
   captureService,
   categoryRepository,
@@ -164,10 +180,11 @@ export function AuthenticatedWorkspace({
   notionImportApi,
   notionImportCallback,
   notionOpenWeb,
+  queryScope,
   repository,
   retrieveService,
   userId,
-}: AuthenticatedWorkspaceProps) {
+}: AuthenticatedWorkspaceContentProps) {
   const [initialNotionCallback, setInitialNotionCallback] = useState(() =>
     readNotionCallback(globalThis.location?.search ?? '')
   );
@@ -226,6 +243,7 @@ export function AuthenticatedWorkspace({
     updateInsightContext,
   } = useInsightWorkspace({
     captureService: workspaceCaptureService,
+    queryScope,
     repository: workspaceRepository,
   });
   const {
@@ -293,6 +311,7 @@ export function AuthenticatedWorkspace({
     updateCategory,
   } = useCategoryWorkspace({
     onCategoryDeleted: handleCategoryDeleted,
+    queryScope,
     repository: workspaceCategoryRepository,
   });
   const categoryNameById = useMemo(

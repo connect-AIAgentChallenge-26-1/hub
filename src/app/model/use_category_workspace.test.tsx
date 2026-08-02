@@ -1,14 +1,25 @@
 /* @vitest-environment jsdom */
+import type { PropsWithChildren } from 'react';
+
 import { act, renderHook, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
 import type {
   Category,
   CategoryRepository,
+  CategoryRepositoryDeleteResult,
+  CategoryRepositoryLoadResult,
   CategoryRepositoryWriteResult,
 } from '@/entities/category';
 
+import {
+  createWorkspaceQueryClient,
+  WorkspaceQueryProvider,
+} from '../providers/workspace_query_provider';
 import { useCategoryWorkspace } from './use_category_workspace';
+import { workspaceQueryKeys } from './workspace_query_keys';
+
+const CATEGORY_QUERY_SCOPE = 'category-workspace-test';
 
 const DEVELOPMENT_CATEGORY = createCategory({
   colorKey: 'green-2',
@@ -53,7 +64,9 @@ describe('useCategoryWorkspace', () => {
       { colorKey: 'green-2', name: '개발' },
       0
     );
-    expect(result.current.categories).toEqual([DEVELOPMENT_CATEGORY]);
+    await waitFor(() =>
+      expect(result.current.categories).toEqual([DEVELOPMENT_CATEGORY])
+    );
 
     await act(async () => {
       await expect(
@@ -63,14 +76,16 @@ describe('useCategoryWorkspace', () => {
         })
       ).resolves.toEqual({ category: FRONTEND_CATEGORY, ok: true });
     });
-    expect(result.current.categories).toEqual([FRONTEND_CATEGORY]);
+    await waitFor(() =>
+      expect(result.current.categories).toEqual([FRONTEND_CATEGORY])
+    );
 
     await act(async () => {
       await expect(
         result.current.deleteCategory(FRONTEND_CATEGORY.id)
       ).resolves.toEqual({ ok: true });
     });
-    expect(result.current.categories).toEqual([]);
+    await waitFor(() => expect(result.current.categories).toEqual([]));
     expect(onCategoryDeleted).toHaveBeenCalledWith(FRONTEND_CATEGORY.id);
   });
 
@@ -204,7 +219,224 @@ describe('useCategoryWorkspace', () => {
       deferred.resolve({ category: DEVELOPMENT_CATEGORY, ok: true });
       await firstMutation;
     });
-    expect(result.current.isMutating).toBe(false);
+    await waitFor(() => expect(result.current.isMutating).toBe(false));
+  });
+
+  it.each([
+    { mutationKind: 'create', mutationLabel: '생성' },
+    { mutationKind: 'update', mutationLabel: '수정' },
+    { mutationKind: 'delete', mutationLabel: '삭제' },
+  ] as const)(
+    '$mutationLabel mutation 중 요청한 재조회를 종료 뒤 한 번 실행한다',
+    async ({ mutationKind }) => {
+      const existingCategory = createCategory({ id: 'existing-category' });
+      const createdCategory = createCategory({
+        id: 'created-category',
+        name: '새 카테고리',
+      });
+      const updatedCategory = createCategory({
+        id: existingCategory.id,
+        name: '수정된 카테고리',
+      });
+      const canonicalCategory = createCategory({ id: 'canonical-category' });
+      const callOrder: string[] = [];
+      const pendingCreate =
+        createDeferred<Awaited<ReturnType<CategoryRepository['create']>>>();
+      const pendingUpdate =
+        createDeferred<Awaited<ReturnType<CategoryRepository['update']>>>();
+      const pendingDelete =
+        createDeferred<Awaited<ReturnType<CategoryRepository['delete']>>>();
+      const list = vi
+        .fn<CategoryRepository['list']>()
+        .mockImplementationOnce(async () => {
+          callOrder.push('list:initial');
+          return {
+            categories: [existingCategory],
+            warnings: [],
+          };
+        })
+        .mockImplementationOnce(async () => {
+          callOrder.push('list:canonical');
+          return {
+            categories: [canonicalCategory],
+            warnings: [],
+          };
+        });
+      const repository = createRepository({
+        create: vi.fn(() => {
+          callOrder.push('mutation:start');
+          return pendingCreate.promise.then((result) => {
+            callOrder.push('mutation:end');
+            return result;
+          });
+        }),
+        delete: vi.fn(() => {
+          callOrder.push('mutation:start');
+          return pendingDelete.promise.then((result) => {
+            callOrder.push('mutation:end');
+            return result;
+          });
+        }),
+        list,
+        update: vi.fn(() => {
+          callOrder.push('mutation:start');
+          return pendingUpdate.promise.then((result) => {
+            callOrder.push('mutation:end');
+            return result;
+          });
+        }),
+      });
+      const { result } = await renderReadyWorkspace(repository);
+      let mutationRequest!: Promise<
+        CategoryRepositoryDeleteResult | CategoryRepositoryWriteResult
+      >;
+      let reloadRequest!: Promise<void>;
+
+      act(() => {
+        if (mutationKind === 'create') {
+          mutationRequest = result.current.createCategory({
+            colorKey: createdCategory.colorKey,
+            name: createdCategory.name,
+          });
+        } else if (mutationKind === 'update') {
+          mutationRequest = result.current.updateCategory(existingCategory.id, {
+            colorKey: updatedCategory.colorKey,
+            name: updatedCategory.name,
+          });
+        } else {
+          mutationRequest = result.current.deleteCategory(existingCategory.id);
+        }
+      });
+      await waitFor(() => expect(result.current.isMutating).toBe(true));
+
+      act(() => {
+        reloadRequest = result.current.reloadCategories();
+      });
+      expect(list).toHaveBeenCalledOnce();
+      expect(callOrder).toEqual(['list:initial', 'mutation:start']);
+
+      await act(async () => {
+        if (mutationKind === 'create') {
+          pendingCreate.resolve({ category: createdCategory, ok: true });
+          await expect(mutationRequest).resolves.toEqual({
+            category: createdCategory,
+            ok: true,
+          });
+        } else if (mutationKind === 'update') {
+          pendingUpdate.resolve({ category: updatedCategory, ok: true });
+          await expect(mutationRequest).resolves.toEqual({
+            category: updatedCategory,
+            ok: true,
+          });
+        } else {
+          pendingDelete.resolve({ ok: true });
+          await expect(mutationRequest).resolves.toEqual({ ok: true });
+        }
+        await reloadRequest;
+      });
+
+      expect(list).toHaveBeenCalledTimes(2);
+      expect(callOrder).toEqual([
+        'list:initial',
+        'mutation:start',
+        'mutation:end',
+        'list:canonical',
+      ]);
+      await waitFor(() =>
+        expect(result.current.categories).toEqual([canonicalCategory])
+      );
+    }
+  );
+
+  it('재조회가 진행 중이면 mutation을 즉시 거절한다', async () => {
+    const pendingReload =
+      createDeferred<Awaited<ReturnType<CategoryRepository['list']>>>();
+    const create = vi
+      .fn<CategoryRepository['create']>()
+      .mockResolvedValue({ category: DEVELOPMENT_CATEGORY, ok: true });
+    const list = vi
+      .fn<CategoryRepository['list']>()
+      .mockResolvedValueOnce({ categories: [], warnings: [] })
+      .mockReturnValueOnce(pendingReload.promise);
+    const { result } = await renderReadyWorkspace(
+      createRepository({ create, list })
+    );
+    let reloadRequest!: Promise<void>;
+    let mutationRequest!: Promise<CategoryRepositoryWriteResult>;
+
+    act(() => {
+      reloadRequest = result.current.reloadCategories();
+      mutationRequest = result.current.createCategory({
+        colorKey: 'green-2',
+        name: '개발',
+      });
+    });
+
+    await expect(mutationRequest).resolves.toEqual({
+      ok: false,
+      reason: 'write-failed',
+    });
+    expect(create).not.toHaveBeenCalled();
+
+    await act(async () => {
+      pendingReload.resolve({ categories: [], warnings: [] });
+      await reloadRequest;
+    });
+  });
+
+  it('생성 성공 시 mutation 중 외부에서 추가된 cache 항목을 보존한다', async () => {
+    const createdCategory = createCategory({ id: 'created-category' });
+    const externalCategory = createCategory({ id: 'external-category' });
+    const pendingCreate =
+      createDeferred<Awaited<ReturnType<CategoryRepository['create']>>>();
+    const repository = createRepository({
+      create: vi.fn(() => pendingCreate.promise),
+    });
+    const client = createTestQueryClient();
+    const { result } = renderHook(
+      () =>
+        useCategoryWorkspace({
+          onCategoryDeleted: vi.fn(),
+          queryScope: CATEGORY_QUERY_SCOPE,
+          repository,
+        }),
+      { wrapper: createQueryWrapper(client) }
+    );
+    await waitFor(() => expect(result.current.isLoading).toBe(false));
+    let createRequest!: Promise<CategoryRepositoryWriteResult>;
+
+    act(() => {
+      createRequest = result.current.createCategory({
+        colorKey: createdCategory.colorKey,
+        name: createdCategory.name,
+      });
+    });
+    await waitFor(() => expect(result.current.isMutating).toBe(true));
+
+    act(() => {
+      client.setQueryData<CategoryRepositoryLoadResult>(
+        workspaceQueryKeys.categories(CATEGORY_QUERY_SCOPE),
+        { categories: [externalCategory], warnings: [] }
+      );
+    });
+    await waitFor(() =>
+      expect(result.current.categories).toEqual([externalCategory])
+    );
+
+    await act(async () => {
+      pendingCreate.resolve({ category: createdCategory, ok: true });
+      await expect(createRequest).resolves.toEqual({
+        category: createdCategory,
+        ok: true,
+      });
+    });
+
+    await waitFor(() =>
+      expect(result.current.categories).toEqual([
+        externalCategory,
+        createdCategory,
+      ])
+    );
   });
 
   it('재조회는 가장 늦게 시작한 요청 결과만 반영한다', async () => {
@@ -241,7 +473,9 @@ describe('useCategoryWorkspace', () => {
       });
       await secondRequest;
     });
-    expect(result.current.categories).toEqual([latestCategory]);
+    await waitFor(() =>
+      expect(result.current.categories).toEqual([latestCategory])
+    );
 
     await act(async () => {
       firstReload.resolve({
@@ -255,7 +489,7 @@ describe('useCategoryWorkspace', () => {
     expect(list).toHaveBeenCalledTimes(3);
   });
 
-  it('저장소가 바뀌면 새 목록만 반영한다', async () => {
+  it('같은 scope에서 저장소가 바뀌면 이전 지연 응답을 무시하고 새 목록만 반영한다', async () => {
     const oldList =
       createDeferred<Awaited<ReturnType<CategoryRepository['list']>>>();
     const oldRepository = createRepository({
@@ -271,13 +505,22 @@ describe('useCategoryWorkspace', () => {
     const onCategoryDeleted = vi.fn();
     const { result, rerender } = renderHook(
       ({ repository }) =>
-        useCategoryWorkspace({ onCategoryDeleted, repository }),
-      { initialProps: { repository: oldRepository } }
+        useCategoryWorkspace({
+          onCategoryDeleted,
+          queryScope: CATEGORY_QUERY_SCOPE,
+          repository,
+        }),
+      {
+        initialProps: { repository: oldRepository },
+        wrapper: createQueryWrapper(),
+      }
     );
 
     rerender({ repository: newRepository });
-    await waitFor(() => expect(result.current.isLoading).toBe(false));
-    expect(result.current.categories).toEqual([newCategory]);
+    await waitFor(() => expect(newRepository.list).toHaveBeenCalledOnce());
+    await waitFor(() =>
+      expect(result.current.categories).toEqual([newCategory])
+    );
 
     await act(async () => {
       oldList.resolve({
@@ -289,18 +532,125 @@ describe('useCategoryWorkspace', () => {
 
     expect(result.current.categories).toEqual([newCategory]);
   });
+
+  it('이전 저장소에서 시작한 mutation 응답을 같은 scope의 새 cache에 쓰지 않는다', async () => {
+    const oldCategory = createCategory({ id: 'old-category' });
+    const updatedOldCategory = createCategory({
+      id: oldCategory.id,
+      name: '이전 저장소 수정',
+    });
+    const newCategory = createCategory({ id: 'new-category' });
+    const pendingUpdate =
+      createDeferred<Awaited<ReturnType<CategoryRepository['update']>>>();
+    const oldRepository = createRepository({
+      list: vi.fn().mockResolvedValue({
+        categories: [oldCategory],
+        warnings: [],
+      }),
+      update: vi.fn(() => pendingUpdate.promise),
+    });
+    const newRepository = createRepository({
+      list: vi.fn().mockResolvedValue({
+        categories: [newCategory],
+        warnings: [],
+      }),
+    });
+    const { result, rerender } = renderHook(
+      ({ repository }) =>
+        useCategoryWorkspace({
+          onCategoryDeleted: vi.fn(),
+          queryScope: CATEGORY_QUERY_SCOPE,
+          repository,
+        }),
+      {
+        initialProps: { repository: oldRepository },
+        wrapper: createQueryWrapper(),
+      }
+    );
+    await waitFor(() =>
+      expect(result.current.categories).toEqual([oldCategory])
+    );
+    let updateRequest!: Promise<CategoryRepositoryWriteResult>;
+
+    act(() => {
+      updateRequest = result.current.updateCategory(oldCategory.id, {
+        colorKey: updatedOldCategory.colorKey,
+        name: updatedOldCategory.name,
+      });
+    });
+    await waitFor(() => expect(result.current.isMutating).toBe(true));
+
+    rerender({ repository: newRepository });
+    await waitFor(() => expect(newRepository.list).toHaveBeenCalledOnce());
+    await waitFor(() =>
+      expect(result.current.categories).toEqual([newCategory])
+    );
+
+    await act(async () => {
+      pendingUpdate.resolve({ category: updatedOldCategory, ok: true });
+      await expect(updateRequest).resolves.toEqual({
+        ok: false,
+        reason: 'write-failed',
+      });
+    });
+
+    expect(result.current.categories).toEqual([newCategory]);
+  });
+
+  it('조회 결과를 사용자 scope의 Query 캐시에 저장한다', async () => {
+    const restoredCategory = createCategory({ id: 'query-cached' });
+    const repository = createRepository({
+      list: vi.fn().mockResolvedValue({
+        categories: [restoredCategory],
+        warnings: [],
+      }),
+    });
+    const client = createTestQueryClient();
+    const view = renderHook(
+      () =>
+        useCategoryWorkspace({
+          onCategoryDeleted: vi.fn(),
+          queryScope: CATEGORY_QUERY_SCOPE,
+          repository,
+        }),
+      { wrapper: createQueryWrapper(client) }
+    );
+
+    await waitFor(() => expect(view.result.current.isLoading).toBe(false));
+    expect(
+      client.getQueryData(workspaceQueryKeys.categories(CATEGORY_QUERY_SCOPE))
+    ).toEqual({ categories: [restoredCategory], warnings: [] });
+  });
 });
 
 async function renderReadyWorkspace(
   repository: CategoryRepository,
-  onCategoryDeleted: (categoryId: string) => void = () => undefined
+  onCategoryDeleted: (categoryId: string) => void = () => undefined,
+  queryScope = CATEGORY_QUERY_SCOPE
 ) {
-  const view = renderHook(() =>
-    useCategoryWorkspace({ onCategoryDeleted, repository })
+  const view = renderHook(
+    () => useCategoryWorkspace({ onCategoryDeleted, queryScope, repository }),
+    { wrapper: createQueryWrapper() }
   );
 
   await waitFor(() => expect(view.result.current.isLoading).toBe(false));
   return view;
+}
+
+function createTestQueryClient() {
+  return createWorkspaceQueryClient({
+    defaultOptions: { queries: { gcTime: 0, retry: false } },
+  });
+}
+
+function createQueryWrapper(client = createTestQueryClient()) {
+  return function QueryWrapper({ children }: PropsWithChildren) {
+    return (
+      <WorkspaceQueryProvider client={client}>
+        {children}
+      </WorkspaceQueryProvider>
+    );
+  };
 }
 
 function createRepository(

@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import {
   normalizeCategoryInput,
@@ -9,235 +10,388 @@ import {
   type CategoryRepositoryDeleteResult,
   type CategoryRepositoryLoadResult,
   type CategoryRepositoryWriteResult,
-  type CategoryRepositoryWarning,
 } from '@/entities/category';
+
+import { workspaceQueryKeys } from './workspace_query_keys';
 
 export type UseCategoryWorkspaceOptions = {
   onCategoryDeleted: (categoryId: string) => void;
+  queryScope: string;
   repository: CategoryRepository;
 };
 
-type CategoryWorkspaceState = {
-  categories: Category[];
-  loadWarnings: CategoryRepositoryWarning[];
+type QueuedReload = {
+  promise: Promise<void>;
+  reject: (reason?: unknown) => void;
+  resolve: () => void;
+};
+
+type RepositoryIdentity = {
+  queryScope: string;
   repository: CategoryRepository;
-  status: 'loading' | 'ready';
 };
 
 export function useCategoryWorkspace({
   onCategoryDeleted,
+  queryScope,
   repository,
 }: UseCategoryWorkspaceOptions) {
-  const [workspaceState, setWorkspaceState] = useState<CategoryWorkspaceState>(
-    () => createLoadingState(repository)
+  const queryClient = useQueryClient();
+  const queryKey = useMemo(
+    () => workspaceQueryKeys.categories(queryScope),
+    [queryScope]
   );
-  const [isMutating, setIsMutating] = useState(false);
-  const workspaceStateRef = useRef(workspaceState);
+  const mutationKey = useMemo(
+    () => workspaceQueryKeys.categoryMutations(queryScope),
+    [queryScope]
+  );
+  const categoryQuery = useQuery({
+    queryKey,
+    queryFn: () => loadCategories(repository),
+  });
+  const { refetch: refetchCategories } = categoryQuery;
+  const currentRepositoryRef = useRef(repository);
+  const observedRepositoryIdentityRef = useRef<RepositoryIdentity>({
+    queryScope,
+    repository,
+  });
   const mutationInFlightRef = useRef(false);
-  const loadRevisionRef = useRef(0);
-  const mountedRef = useRef(false);
+  const queuedReloadRef = useRef<QueuedReload | null>(null);
+  const reloadInFlightCountRef = useRef(0);
 
-  const reloadCategories = useCallback(async () => {
-    const revision = ++loadRevisionRef.current;
-    const currentState = workspaceStateRef.current;
-    const loadingState =
-      currentState.repository === repository
-        ? { ...currentState, status: 'loading' as const }
-        : createLoadingState(repository);
+  useEffect(() => {
+    currentRepositoryRef.current = repository;
+  }, [repository]);
 
-    workspaceStateRef.current = loadingState;
-    setWorkspaceState(loadingState);
+  const refetchCategoriesNow = useCallback(async () => {
+    reloadInFlightCountRef.current += 1;
+    try {
+      await queryClient.invalidateQueries({
+        exact: true,
+        queryKey,
+        refetchType: 'none',
+      });
+      await refetchCategories({ cancelRefetch: true });
+    } finally {
+      reloadInFlightCountRef.current -= 1;
+    }
+  }, [queryClient, queryKey, refetchCategories]);
 
-    const loadResult = await loadCategories(repository);
+  useEffect(() => {
+    const previousIdentity = observedRepositoryIdentityRef.current;
+    observedRepositoryIdentityRef.current = { queryScope, repository };
 
-    if (!mountedRef.current || loadRevisionRef.current !== revision) {
+    if (
+      previousIdentity.repository === repository ||
+      previousIdentity.queryScope !== queryScope
+    ) {
       return;
     }
 
-    const readyState: CategoryWorkspaceState = {
-      categories: loadResult.categories,
-      loadWarnings: loadResult.warnings,
-      repository,
-      status: 'ready',
-    };
-    workspaceStateRef.current = readyState;
-    setWorkspaceState(readyState);
-  }, [repository]);
+    const currentRepository = repository;
+    reloadInFlightCountRef.current += 1;
+    void (async () => {
+      try {
+        await queryClient.cancelQueries({ exact: true, queryKey });
+        if (currentRepositoryRef.current !== currentRepository) {
+          return;
+        }
+        await refetchCategoriesNow();
+      } finally {
+        reloadInFlightCountRef.current -= 1;
+      }
+    })();
+  }, [queryClient, queryKey, queryScope, refetchCategoriesNow, repository]);
 
-  useEffect(() => {
-    mountedRef.current = true;
-    void reloadCategories();
+  const reloadCategories = useCallback((): Promise<void> => {
+    if (!mutationInFlightRef.current) {
+      return refetchCategoriesNow();
+    }
 
-    return () => {
-      mountedRef.current = false;
-      loadRevisionRef.current += 1;
-    };
-  }, [reloadCategories]);
+    if (queuedReloadRef.current) {
+      return queuedReloadRef.current.promise;
+    }
+
+    let reject!: (reason?: unknown) => void;
+    let resolve!: () => void;
+    const promise = new Promise<void>((resolvePromise, rejectPromise) => {
+      reject = rejectPromise;
+      resolve = resolvePromise;
+    });
+    queuedReloadRef.current = { promise, reject, resolve };
+    return promise;
+  }, [refetchCategoriesNow]);
+
+  const flushQueuedReload = useCallback(async () => {
+    const queuedReload = queuedReloadRef.current;
+    if (!queuedReload) {
+      return;
+    }
+
+    queuedReloadRef.current = null;
+    try {
+      await refetchCategoriesNow();
+      queuedReload.resolve();
+    } catch (error) {
+      queuedReload.reject(error);
+    }
+  }, [refetchCategoriesNow]);
+
+  const readCurrentState = useCallback(
+    () =>
+      queryClient.getQueryData<CategoryRepositoryLoadResult>(queryKey) ?? {
+        categories: [],
+        warnings: [],
+      },
+    [queryClient, queryKey]
+  );
+
+  const updateCurrentState = useCallback(
+    (
+      repositoryAtStart: CategoryRepository,
+      updater: (
+        currentState: CategoryRepositoryLoadResult
+      ) => CategoryRepositoryLoadResult
+    ) => {
+      if (currentRepositoryRef.current !== repositoryAtStart) {
+        return;
+      }
+
+      queryClient.setQueryData<CategoryRepositoryLoadResult>(
+        queryKey,
+        (currentState) =>
+          currentState && currentRepositoryRef.current === repositoryAtStart
+            ? updater(currentState)
+            : currentState
+      );
+    },
+    [queryClient, queryKey]
+  );
 
   const runMutation = useCallback(
-    async <T>(command: () => Promise<T>, failure: T): Promise<T> => {
-      const currentState = workspaceStateRef.current;
-
+    async <T>(
+      repositoryAtStart: CategoryRepository,
+      command: () => Promise<T>,
+      failure: T
+    ): Promise<T> => {
       if (
-        currentState.repository !== repository ||
-        currentState.status !== 'ready' ||
+        currentRepositoryRef.current !== repositoryAtStart ||
+        !categoryQuery.isSuccess ||
+        categoryQuery.isFetching ||
+        reloadInFlightCountRef.current > 0 ||
         mutationInFlightRef.current
       ) {
         return failure;
       }
 
       mutationInFlightRef.current = true;
-      setIsMutating(true);
-
       try {
         return await command();
       } finally {
         mutationInFlightRef.current = false;
-        setIsMutating(false);
+        await flushQueuedReload();
       }
     },
-    [repository]
+    [categoryQuery.isFetching, categoryQuery.isSuccess, flushQueuedReload]
   );
+
+  const createMutation = useMutation({
+    mutationKey,
+    mutationFn: async ({
+      input,
+      repositoryAtStart,
+    }: {
+      input: CategoryInput;
+      repositoryAtStart: CategoryRepository;
+    }): Promise<CategoryRepositoryWriteResult> => {
+      const currentState = readCurrentState();
+      const normalizedInput = normalizeCategoryInput(input);
+
+      if (!normalizedInput) {
+        return { ok: false, reason: 'invalid-input' };
+      }
+
+      if (hasDuplicateName(currentState.categories, normalizedInput.name)) {
+        return { ok: false, reason: 'duplicate' };
+      }
+
+      const sortOrder =
+        Math.max(
+          -1,
+          ...currentState.categories.map((category) => category.sortOrder)
+        ) + 1;
+      const createResult = await repositoryAtStart.create(
+        normalizedInput,
+        sortOrder
+      );
+
+      if (currentRepositoryRef.current !== repositoryAtStart) {
+        return { ok: false, reason: 'write-failed' };
+      }
+
+      if (createResult.ok) {
+        updateCurrentState(repositoryAtStart, (latestState) => ({
+          categories: [...latestState.categories, createResult.category],
+          warnings: latestState.warnings,
+        }));
+      }
+
+      return createResult;
+    },
+  });
+  const { isPending: isCreating, mutateAsync: mutateCreate } = createMutation;
 
   const createCategory = useCallback(
-    async (input: CategoryInput): Promise<CategoryRepositoryWriteResult> =>
-      runMutation<CategoryRepositoryWriteResult>(
-        async () => {
-          const currentState = workspaceStateRef.current;
-          const normalizedInput = normalizeCategoryInput(input);
-
-          if (!normalizedInput) {
-            return { ok: false, reason: 'invalid-input' };
-          }
-
-          if (hasDuplicateName(currentState.categories, normalizedInput.name)) {
-            return { ok: false, reason: 'duplicate' };
-          }
-
-          const sortOrder =
-            Math.max(
-              -1,
-              ...currentState.categories.map((category) => category.sortOrder)
-            ) + 1;
-          const createResult = await repository.create(
-            normalizedInput,
-            sortOrder
-          );
-
-          if (!createResult.ok) {
-            return createResult;
-          }
-
-          updateReadyState(repository, setWorkspaceState, workspaceStateRef, {
-            categories: [...currentState.categories, createResult.category],
-            loadWarnings: currentState.loadWarnings,
-          });
-
-          return createResult;
-        },
-        { ok: false, reason: 'write-failed' }
+    (input: CategoryInput) =>
+      runMutation(
+        repository,
+        () => mutateCreate({ input, repositoryAtStart: repository }),
+        {
+          ok: false,
+          reason: 'write-failed',
+        }
       ),
-    [repository, runMutation]
+    [mutateCreate, repository, runMutation]
   );
+
+  const updateMutation = useMutation({
+    mutationKey,
+    mutationFn: async ({
+      categoryId,
+      input,
+      repositoryAtStart,
+    }: {
+      categoryId: string;
+      input: CategoryInput;
+      repositoryAtStart: CategoryRepository;
+    }): Promise<CategoryRepositoryWriteResult> => {
+      const currentState = readCurrentState();
+      const categoryExists = currentState.categories.some(
+        (category) => category.id === categoryId
+      );
+
+      if (!categoryExists) {
+        return { ok: false, reason: 'not-found' };
+      }
+
+      const normalizedInput = normalizeCategoryInput(input);
+
+      if (!normalizedInput) {
+        return { ok: false, reason: 'invalid-input' };
+      }
+
+      if (
+        hasDuplicateName(
+          currentState.categories,
+          normalizedInput.name,
+          categoryId
+        )
+      ) {
+        return { ok: false, reason: 'duplicate' };
+      }
+
+      const updateResult = await repositoryAtStart.update(
+        categoryId,
+        normalizedInput
+      );
+
+      if (currentRepositoryRef.current !== repositoryAtStart) {
+        return { ok: false, reason: 'write-failed' };
+      }
+
+      if (updateResult.ok) {
+        updateCurrentState(repositoryAtStart, (latestState) => ({
+          categories: latestState.categories.map((category) =>
+            category.id === categoryId ? updateResult.category : category
+          ),
+          warnings: latestState.warnings,
+        }));
+      }
+
+      return updateResult;
+    },
+  });
+  const { isPending: isUpdating, mutateAsync: mutateUpdate } = updateMutation;
 
   const updateCategory = useCallback(
-    async (
-      categoryId: string,
-      input: CategoryInput
-    ): Promise<CategoryRepositoryWriteResult> =>
-      runMutation<CategoryRepositoryWriteResult>(
-        async () => {
-          const currentState = workspaceStateRef.current;
-          const categoryIndex = currentState.categories.findIndex(
-            (category) => category.id === categoryId
-          );
-
-          if (categoryIndex === -1) {
-            return { ok: false, reason: 'not-found' };
-          }
-
-          const normalizedInput = normalizeCategoryInput(input);
-
-          if (!normalizedInput) {
-            return { ok: false, reason: 'invalid-input' };
-          }
-
-          if (
-            hasDuplicateName(
-              currentState.categories,
-              normalizedInput.name,
-              categoryId
-            )
-          ) {
-            return { ok: false, reason: 'duplicate' };
-          }
-
-          const updateResult = await repository.update(
+    (categoryId: string, input: CategoryInput) =>
+      runMutation(
+        repository,
+        () =>
+          mutateUpdate({
             categoryId,
-            normalizedInput
-          );
-
-          if (!updateResult.ok) {
-            return updateResult;
-          }
-
-          const nextCategories = [...currentState.categories];
-          nextCategories[categoryIndex] = updateResult.category;
-          updateReadyState(repository, setWorkspaceState, workspaceStateRef, {
-            categories: nextCategories,
-            loadWarnings: currentState.loadWarnings,
-          });
-
-          return updateResult;
-        },
-        { ok: false, reason: 'write-failed' }
+            input,
+            repositoryAtStart: repository,
+          }),
+        {
+          ok: false,
+          reason: 'write-failed',
+        }
       ),
-    [repository, runMutation]
+    [mutateUpdate, repository, runMutation]
   );
+
+  const deleteMutation = useMutation({
+    mutationKey,
+    mutationFn: async ({
+      categoryId,
+      repositoryAtStart,
+    }: {
+      categoryId: string;
+      repositoryAtStart: CategoryRepository;
+    }): Promise<CategoryRepositoryDeleteResult> => {
+      const currentState = readCurrentState();
+      const categoryExists = currentState.categories.some(
+        (category) => category.id === categoryId
+      );
+
+      if (!categoryExists) {
+        return { ok: false, reason: 'not-found' };
+      }
+
+      const deleteResult = await repositoryAtStart.delete(categoryId);
+
+      if (currentRepositoryRef.current !== repositoryAtStart) {
+        return { ok: false, reason: 'write-failed' };
+      }
+
+      if (!deleteResult.ok) {
+        return deleteResult;
+      }
+
+      updateCurrentState(repositoryAtStart, (latestState) => ({
+        categories: latestState.categories.filter(
+          (category) => category.id !== categoryId
+        ),
+        warnings: latestState.warnings,
+      }));
+      onCategoryDeleted(categoryId);
+
+      return deleteResult;
+    },
+  });
+  const { isPending: isDeleting, mutateAsync: mutateDelete } = deleteMutation;
 
   const deleteCategory = useCallback(
-    async (categoryId: string): Promise<CategoryRepositoryDeleteResult> =>
-      runMutation<CategoryRepositoryDeleteResult>(
-        async () => {
-          const currentState = workspaceStateRef.current;
-          const categoryIndex = currentState.categories.findIndex(
-            (category) => category.id === categoryId
-          );
-
-          if (categoryIndex === -1) {
-            return { ok: false, reason: 'not-found' };
-          }
-
-          const deleteResult = await repository.delete(categoryId);
-
-          if (!deleteResult.ok) {
-            return deleteResult;
-          }
-
-          const nextCategories = [...currentState.categories];
-          nextCategories.splice(categoryIndex, 1);
-          updateReadyState(repository, setWorkspaceState, workspaceStateRef, {
-            categories: nextCategories,
-            loadWarnings: currentState.loadWarnings,
-          });
-          onCategoryDeleted(categoryId);
-
-          return deleteResult;
-        },
-        { ok: false, reason: 'write-failed' }
+    (categoryId: string) =>
+      runMutation(
+        repository,
+        () => mutateDelete({ categoryId, repositoryAtStart: repository }),
+        {
+          ok: false,
+          reason: 'write-failed',
+        }
       ),
-    [onCategoryDeleted, repository, runMutation]
+    [mutateDelete, repository, runMutation]
   );
 
-  const isCurrentRepository = workspaceState.repository === repository;
-
   return {
-    categories: isCurrentRepository ? workspaceState.categories : [],
+    categories: categoryQuery.data?.categories ?? [],
     createCategory,
     deleteCategory,
-    isLoading: !isCurrentRepository || workspaceState.status === 'loading',
-    isMutating,
-    loadWarnings: isCurrentRepository ? workspaceState.loadWarnings : [],
+    isLoading: categoryQuery.isFetching,
+    isMutating: isCreating || isUpdating || isDeleting,
+    loadWarnings: categoryQuery.data?.warnings ?? [],
     reloadCategories,
     updateCategory,
   };
@@ -251,38 +405,6 @@ async function loadCategories(
   } catch {
     return { categories: [], warnings: ['read-failed'] };
   }
-}
-
-function createLoadingState(
-  repository: CategoryRepository
-): CategoryWorkspaceState {
-  return {
-    categories: [],
-    loadWarnings: [],
-    repository,
-    status: 'loading',
-  };
-}
-
-function updateReadyState(
-  repository: CategoryRepository,
-  setWorkspaceState: React.Dispatch<
-    React.SetStateAction<CategoryWorkspaceState>
-  >,
-  workspaceStateRef: React.MutableRefObject<CategoryWorkspaceState>,
-  values: Pick<CategoryWorkspaceState, 'categories' | 'loadWarnings'>
-) {
-  if (workspaceStateRef.current.repository !== repository) {
-    return;
-  }
-
-  const nextState: CategoryWorkspaceState = {
-    ...workspaceStateRef.current,
-    ...values,
-    status: 'ready',
-  };
-  workspaceStateRef.current = nextState;
-  setWorkspaceState(nextState);
 }
 
 function hasDuplicateName(
