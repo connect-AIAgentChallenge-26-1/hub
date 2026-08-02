@@ -21,7 +21,7 @@
 | 인덱싱 파이프라인 | Helper Pipeline | A0 | `cs_pipe_index` |
 | 집계 파이프라인 | Helper Pipeline | A0 | `cs_pipe_aggregate` |
 | 계보 기록 파이프라인 | Helper Pipeline | A0 | `cs_pipe_lineage` |
-| 검증 파이프라인 | Helper Pipeline | A0 + A1 | `cs_pipe_verify` |
+| 통합 검증 | Verification | A0 + A1 | `cs_pipe_verify` |
 | 서빙 파이프라인 | Helper Pipeline | A0 | `cs_serving` |
 | Express | 사용자 런타임 | A0 | Supabase `service_role` |
 | 평가 실행기 | 평가 | A0 | `cs_eval_runner` |
@@ -133,7 +133,7 @@ CREATE POLICY knowledge_derived ON knowledge_edges
 
 ### 5.3 `research_requests`
 
-네 에이전트와 검증 파이프라인이 INSERT하고 오케스트레이터가 상태를 갱신한다.
+네 에이전트와 통합 검증이 INSERT하고 오케스트레이터가 상태를 갱신한다.
 
 ```sql
 GRANT INSERT ON research_requests TO

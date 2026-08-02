@@ -25,7 +25,7 @@
 | `fetch_source` | 허용된 공개 원문과 메타데이터 수집 |
 | `embed_chunks` | 청크 임베딩 생성 |
 | `store_claims` | 주장과 근거 연결 저장 |
-| `verify_claims` | 검증 파이프라인 호출 |
+| `verify_claims` | 통합 검증 호출 |
 | `request_research` | 조사 요청 발행 |
 
 웹 검색과 외부 수집은 데이터 수집 에이전트만 수행한다. 다른 에이전트는 `request_research`로 조사 목표를 전달하고 갱신된 저장소를 다시 조회한다.
@@ -113,7 +113,7 @@ flowchart LR
 ```json
 {
   "objective_id": "obj_intp_backend_cluster_fintech",
-  "objective": "backend cluster 범위의 기준선과 편차 해석",
+  "objective": "backend cluster 범위의 직무 공통 기대치와 추가 요구 해석",
   "required_evidence_slots": [
     { "slot": "overall_baseline", "support_type": "statistic_fact", "minimum": 1 },
     { "slot": "cluster_support", "support_type": "chunk", "minimum": 1,
@@ -135,7 +135,7 @@ flowchart LR
 
 필수 슬롯이 모두 채워지면 조사를 종료한다. 계약은 채워진 슬롯 수를 받아 미충족 필수 슬롯의 이름을 돌려주고, 그 목록이 비면 실행이 완료된다. 미충족 슬롯이 남으면 판정은 `insufficient_evidence`다. 선택 슬롯이 비어 있으면 주장은 성립하되 신뢰도가 낮아진다.
 
-슬롯 구성은 범위에 따라 달라진다. 직무 전체는 기준선 통계만으로 성립하고, 기업군과 공고 범위는 그 위에 공고 근거를 더 요구한다. 기업군 일반화는 독립 회사 수의 최솟값을 함께 갖는다.
+슬롯 구성은 범위에 따라 달라진다. 직무 전체는 직무 공통 기대치 통계만으로 성립하고, 기업군과 공고 범위는 그 위에 공고 근거를 더 요구한다. 내부 슬롯 이름 `overall_baseline`은 직무 공통 기대치 통계를 뜻한다. 기업군 일반화는 독립 회사 수의 최솟값을 함께 갖는다.
 
 ### 5.2 Plan
 
@@ -208,9 +208,9 @@ Wiki는 역량의 깊이 기준을 정의한다. 생성 조건과 필드별 허�
 | `inferred_requirement` | 공고 표현을 근거로 해석한 요구 | 미반영 |
 | `company_context_signal` | 회사 공식 자료에 반복되나 공고에는 없는 맥락 | 미반영 |
 
-`company_context_signal`은 해당 공고의 명시 요구사항이 아님을 함께 표시한다. 포트폴리오 강조 순서와 면접 준비 후보에는 영향을 주고, 통계·직무 기준선·필수 체크리스트에는 영향을 주지 않는다.
+`company_context_signal`은 화면에서 회사 특징으로 설명하며, 해당 공고의 명시 요구사항이 아님을 함께 표시한다. 포트폴리오 강조 순서와 면접 준비 후보에는 영향을 주고, 통계·직무 공통 기대치·필수 체크리스트에는 영향을 주지 않는다.
 
-편차 없음 주장은 `coverage_assertions`의 `coverage_complete`가 참일 때만 출력한다. 거짓이면 판단 근거 부족을 출력한다. 근거를 찾지 못한 것과 부재를 확인한 것을 구분한다.
+추가 요구 없음 주장은 `coverage_assertions`의 `coverage_complete`가 참일 때만 출력한다. 거짓이면 판단 근거 부족을 출력한다. 근거를 찾지 못한 것과 부재를 확인한 것을 구분한다.
 
 ### 7.5 합격 전략
 
@@ -232,7 +232,7 @@ Wiki는 역량의 깊이 기준을 정의한다. 생성 조건과 필드별 허�
 | 추론 요구 | 공고 근거와 회사 공식·공공 표준 보강, 과잉 일반화 검사 |
 | 회사 맥락 신호 | 회사 공식 자료의 반복과 요구사항 아님 표시 |
 | 합격 전략 | 요구 연결과 허용된 전략 자료 근거 |
-| 편차 없음 | 닫힌 대상 집합의 전수 검사와 0건 확인 |
+| 추가 요구 없음 | 닫힌 대상 집합의 전수 검사와 0건 확인 |
 
 저장은 단일 등급이 아니라 구성값으로 한다.
 
@@ -336,7 +336,7 @@ flowchart LR
 | 외부 전문가 자료를 근거로 사용한 전략 | 적용 |
 | 상충 근거가 존재하는 주장 | 적용 |
 | 신뢰도 경계에 있는 주장 | 적용 |
-| 편차 없음 주장 | 적용 |
+| 추가 요구 없음 주장 | 적용 |
 | 새 프롬프트·모델 버전의 첫 실행 | 적용 |
 
 ### 9.2 검사 결과 기록
@@ -405,7 +405,7 @@ flowchart LR
 | `schema_invalid` | 스키마 검사 실패 |
 | `needs_research` | 외부 자료 확보가 필요 |
 
-`needs_research` 판정은 검증 파이프라인이 `research_requests`에 요청을 발행한다. 에이전트의 `request_research`와 같은 테이블을 쓰고 오케스트레이터가 상태를 갱신한다.
+`needs_research` 판정은 통합 검증이 `research_requests`에 요청을 발행한다. 에이전트의 `request_research`와 같은 테이블을 쓰고 오케스트레이터가 상태를 갱신한다.
 
 공개 여부는 [아키텍처](architecture.md) 8장의 공개 정책을 따른다.
 
@@ -571,7 +571,7 @@ explicit_failure
 | 차원 배정 | `DimensionAssigner` | `agents/statistics/assigner.py` |
 | 관계 판정 | `RelationJudge` | `agents/statistics/judge.py` |
 | Wiki 필드 작성 | `WikiWriter` | `agents/knowledge/` |
-| 편차 서술 | `DeviationInterpreter` | `agents/interpretation/` |
+| 추가 요구 서술 | `DeviationInterpreter` | `agents/interpretation/` |
 | 체크리스트 문구 | `StrategyWriter` | `agents/strategy/` |
 | 단계 서술 | `StepNarrator` | `agents/roadmap/` |
 | 청크 임베딩 | `EmbeddingClient` | `providers/embeddings.py` |

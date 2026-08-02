@@ -165,7 +165,7 @@ CHECK (starts_on <= ends_on)
 
 MVP는 두 기간을 사용한다. `y2026`은 2026년이고 `y2024_2025`는 2024년과 2025년이다. `temporal_delta`는 이 두 기간을 비교한다. `is_baseline`이 참인 기간이 화면의 기본 표시 기간이며, 그 `ends_on`은 기준일보다 뒤에 있어 해가 끝날 때까지 분모가 늘어난다.
 
-이전 기간의 하한은 2024-01-01이다. 그보다 앞선 공고는 기술 구성이 달라 기준선 비교에 쓰지 않는다.
+이전 기간의 하한은 2024-01-01이다. 그보다 앞선 공고는 기술 구성이 달라 기간 비교에 쓰지 않는다.
 
 기간 정의를 수정하지 않고 새 `period_id`를 추가해 확장한다. `statistics_facts.period_id`가 이 표를 참조하므로, 기존 행의 `starts_on`과 `ends_on`을 바꾸면 이미 저장된 지표가 다른 기간을 가리킨다.
 
@@ -951,7 +951,7 @@ CREATE INDEX ON statistics_facts (dimension_id);
 
 `overall`은 직무 모집단을 더 좁히지 않는다. 컬럼이 NOT NULL이므로 어느 직무의 전체인지를 담는다. `scope_level`별 모집단 조건은 [지표 명세](metric-spec.md) 2.1에 있다.
 
-`entry_segment`는 지표의 대상군 축이다. `all`은 대상군으로 제한하지 않은 모집단 전체이며 화면의 기준선이다. 정의와 `entry_label` 대응은 [지표 명세](metric-spec.md) 2.7에 있다. 마지막 `CHECK`는 분모에 이미 대상군이 반영된 지표가 다른 대상군으로 저장되는 것을 막는다.
+`entry_segment`는 지표의 대상군 축이다. `all`은 대상군으로 제한하지 않은 모집단 전체이며 화면에서 직무 공통 기대치를 계산하는 범위다. 정의와 `entry_label` 대응은 [지표 명세](metric-spec.md) 2.7에 있다. 마지막 `CHECK`는 분모에 이미 대상군이 반영된 지표가 다른 대상군으로 저장되는 것을 막는다.
 
 `numerator`와 `denominator`는 정수 카운트만 담는다. `cluster_contrast`처럼 비율에서 파생하는 지표는 `measure`를 나눠 저장하고 `numerator`·`denominator`에는 원본 카운트를 담는다. 수식은 [지표 명세](metric-spec.md)에 있다.
 
@@ -1120,7 +1120,7 @@ CHECK (checked_n <= population_n AND matched_n <= checked_n)
 CHECK (coverage_complete = (checked_n = population_n))
 ```
 
-`coverage_complete`를 계산식으로 강제한다. 편차 없음 주장은 이 값이 참일 때만 출력한다.
+`coverage_complete`를 계산식으로 강제한다. 추가 요구 없음 주장은 이 값이 참일 때만 출력한다.
 
 ### 11.7 체크리스트와 로드맵
 

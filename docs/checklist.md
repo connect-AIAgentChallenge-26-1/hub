@@ -65,7 +65,7 @@
 - [x] 분류체계 버전 발행 시 해당 데이터셋의 할당이 전량 재계산된다. (코드: `agent/tests/unit/test_publication.py`, `agent/tests/unit/test_assignment.py`)
 - [x] 지표 적용 가능성이 정의되고 적용 불가 조합이 계산되지 않는다. (코드: `agent/tests/unit/test_metric_expansion.py`)
 - [x] 모든 지표 행이 표본 수, 기간, 범위, 불확실성을 함께 저장한다. (코드: `agent/tests/unit/test_metric_runner.py`)
-- [x] 모든 지표 행이 대상군을 가지며 서로 다른 대상군의 수치를 하나의 기준선으로 비교하지 않는다. (코드: `agent/tests/unit/test_segment.py`, `agent/tests/integration/test_entry_segment.py`)
+- [x] 모든 지표 행이 대상군을 가지며 서로 다른 대상군의 수치를 같은 비교 기준에 놓지 않는다. (코드: `agent/tests/unit/test_segment.py`, `agent/tests/integration/test_entry_segment.py`)
 - [x] 표본 상태가 정책 버전의 임계값과 일치한다. (코드: `agent/tests/unit/test_metric_policy.py`)
 - [x] 표본이 모자란 값이 행을 남긴 채로 억제된다. (코드: `agent/tests/unit/test_metric_runner.py`)
 - [x] 기간 비교가 두 기간 모두 비교 가능한 표본 상태일 때만 생성된다. (코드: `agent/tests/unit/test_metric_temporal.py`)
@@ -103,7 +103,7 @@
 - [x] 통계의 분모, 표본, 중복 제거, 재계산이 일치한다. (코드: `agent/tests/unit/test_metric_verification.py`)
 - [ ] 근거 함의 검사가 모든 공개 후보 주장에 적용된다. (코드: `agent/tests/unit/test_checks_semantic.py`)
 - [ ] 교차 모델 감사가 위험 기반 표본에 적용된다. (코드: `agent/tests/unit/test_checks_semantic.py`)
-- [x] 편차 없음 주장이 범위 전수 확인을 근거로 가진다. (코드: `agent/tests/unit/test_interpretation_agent.py`)
+- [x] 추가 요구 없음 주장이 범위 전수 확인을 근거로 가진다. (코드: `agent/tests/unit/test_interpretation_agent.py`)
 - [x] 범위 전수 확인이 없으면 판단 근거 부족을 출력한다. (코드: `agent/tests/unit/test_interpretation_agent.py`)
 - [x] 신뢰도가 주장 유형별 정책과 구성값으로 판정된다. (코드: `agent/tests/unit/test_domain.py`)
 - [x] 생성 모델의 자기 보고를 신뢰도로 사용하지 않는다. (코드: `agent/tests/unit/test_domain.py`)
@@ -175,19 +175,24 @@
 - [x] 배포 환경에서 체크 상태와 재조합이 검증된다. (사람)
 - [x] 장애 시 활성 분석 버전이 유지되고 안전한 오류가 표시된다. (코드: `server/src/index.test.js`, `agent/tests/unit/test_activation.py`)
 - [ ] 베타 피드백 Issue 템플릿과 분류 기준이 준비된다. (사람: `.github/`)
-- [ ] 배포 URL과 데모 시나리오가 문서에 연결된다. (사람: `README.md`, `showcase/showcase.json`)
+- [x] 배포 URL과 데모 시나리오가 문서에 연결된다. (사람: `README.md`, `docs/plan.md`)
+- [ ] FastAPI 배포 환경이 NVIDIA 교차 검사용 키를 받는다. (사람: `server/render.yaml`, Render 환경변수)
+- [ ] 공개 정적 프로토타입이 로컬 최신 화면과 같은 문구·디자인을 표시한다. (사람)
 
-두 항목의 미달 조건은 다음과 같다. `.github/`는 `pull_request_template.md`와 `workflows/`만 갖고 Issue 템플릿을 갖지 않는다. `showcase/showcase.json`은 서술과 기술 스택을 담고 `demoVideoUrl`·`thumbnail`·`screenshots`가 빈 값이며 `showcase/screenshots/`가 비어 있다. 배포 주소는 `README.md`와 `AGENTS.md`에 있다.
+베타 피드백 항목의 미달 조건은 `.github/`가 `pull_request_template.md`와 `workflows/`만 갖고 Issue 템플릿을 갖지 않는다는 점이다. 배포 주소는 `README.md`와 `AGENTS.md`에 있다.
 
 ## 14. 확장과 최종 결과물
 
 - [ ] 베타에서 재현된 P0 문제와 발표를 막는 P1 문제가 수정·회귀 검증된다. (사람)
 - [ ] 허용된 출처의 공고 변경이 데이터 버전과 재실행 범위에 반영된다. (코드: `agent/tests/unit/test_orchestration.py`)
 - [ ] 추가 직무가 파이프라인과 화면 계약을 재사용하고 분류체계를 데이터로 추가해 분석된다. (사람: 직무별 실 표본)
-- [x] 사용자 공고 입력이 입력 검증, 동일 분석 캐시, 통계 분리 원칙을 지킨다. (코드: `agent/tests/unit/test_user_posting.py`, `agent/tests/unit/test_api_routes.py`)
+- [ ] 사용자 공고 입력이 캐시 미적중 시 해석·전략·로드맵 체인을 실행하고 검증 결과를 저장한다. (코드: `agent/src/careersignal/api/routes_user_posting.py`)
+- [ ] Express용 service role이 `legacy_posting_samples`에 조회 권한만 가진다. (코드: `agent/migrations/sql/0025_legacy_posting_samples.sql`)
+- [ ] 생성 CSV의 사용자 문구가 공개 용어를 사용하고 런타임 정규화는 방어 계층으로만 남는다. (사람: `agent/data/demo_seed/`)
+- [ ] 의미색과 글래스 효과가 공통 디자인 토큰을 사용한다. (사람: `product/src/index.css`, `prototype/style.css`)
 - [ ] 관측 화면이 수작업 데이터 없이 운영 테이블에서 파생된다. (사람)
 - [ ] 데모가 저장 결과 조회, 범위 변경, 체크 상태 조합, 근거 경로 추적을 재현한다. (사람)
-- [ ] 발표 자료가 문제, 자료 정책, 여섯 에이전트, 분류체계 발견, 검증, 계측 결과를 설명한다. (사람: `showcase/showcase.json`)
+- [ ] 발표 자료가 문제, 자료 정책, 여섯 에이전트, 분류체계 발견, 검증, 계측 결과를 설명한다. (사람)
 - [ ] GitHub Projects의 최종 범위 Issue가 완료 조건과 검증 근거를 가진다. (사람)
 
 공고 변경 항목의 미달 조건은 실 데이터다. 영향 범위 계산은 `orchestration/impact.py`에 있고, 갱신 대상이 되는 실 공고 확보는 Phase 27이다.
