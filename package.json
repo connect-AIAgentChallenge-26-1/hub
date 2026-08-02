@@ -14,7 +14,7 @@
     "build": "npm run build --workspace client",
     "preview": "npm run preview --workspace client",
     "lint": "oxlint",
-    "check:mocks": "node client/src/mocks/validate.js"
+    "test": "npm run test --workspaces --if-present"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",
