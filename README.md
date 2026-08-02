@@ -65,16 +65,16 @@ URL · Text · Image → Title · Summary · Category → Search · Filter · Ar
 
 ```mermaid
 flowchart LR
-  U[Browser / PWA] --> UI[Next.js App Router]
-  UI --> API[/api Serverless Route]
-  API --> E[Express]
-  E --> META[Safe Metadata Extractor]
-  META --> WEB[Web / SNS]
-  E --> GEM[Gemini URL Context / Vision]
-  GEM --> VAL[Schema + Runtime Validation]
-  VAL -. failure .-> RULE[Rule-based Fallback]
-  E --> DB[(Supabase PostgreSQL)]
-  E --> ST[(Supabase Storage)]
+  U["Browser · PWA"] --> UI["Next.js App Router"]
+  UI --> API["/api Serverless Route"]
+  API --> E["Express API"]
+  E --> META["Safe Metadata Extractor"]
+  META --> WEB["Web · SNS"]
+  E --> GEM["Gemini URL Context · Vision"]
+  GEM --> VAL["Schema · Runtime Validation"]
+  VAL -. "failure" .-> RULE["Rule-based Fallback"]
+  E --> DB[("Supabase PostgreSQL")]
+  E --> ST[("Supabase Storage")]
 ```
 
 ### Save pipeline
