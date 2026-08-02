@@ -73,7 +73,8 @@ export async function mergeExpansionFileChanges(
 }
 
 // Same as fileChanges.ts's updateFileChanges — writes back an already-loaded
-// array as-is (Day 22's commit-batch will use this to flip `approved`).
+// array as-is (routes/expansions.ts's docs/approve uses this to flip
+// `approved` after committing).
 export async function updateExpansionFileChanges(
   userId: number,
   expansionId: string,

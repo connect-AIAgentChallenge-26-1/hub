@@ -163,6 +163,162 @@ public static class MovementUtility
   },
 ];
 
+// Feature Expansion Workflow's demo storyline (see mockDocAgent.ts's
+// FEATURE_DESIGN_DOCUMENT) — adding a shop system to the already-built
+// dash-roguelike above. GameManager.cs is deliberately touched by both
+// Steps 3 and 4 here, same "review refines what generation just wrote"
+// relationship CODE_GEN_FILES/REFACTORING_FILES have above, just within one
+// expansion instead of across two separate 9-step Steps: Step 3 (Code
+// Generation) adds a naive SpendGold(), then Step 4 (Code Review) notices
+// ShopController comparing the raw Gold value itself and extracts that
+// check into GameManager.CanAfford() instead.
+const FEATURE_CODE_GEN_FILES: MockFile[] = [
+  {
+    path: "Assets/Scripts/Core/GameManager.cs",
+    changeType: "modified",
+    oldContent: `using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager Instance { get; private set; }
+
+    [SerializeField] private int gold;
+
+    public int Gold => gold;
+
+    public void AddGold(int amount)
+    {
+        gold += amount;
+    }
+}`,
+    newContent: `using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager Instance { get; private set; }
+
+    [SerializeField] private int gold;
+
+    public int Gold => gold;
+
+    public void AddGold(int amount)
+    {
+        gold += amount;
+    }
+
+    public void SpendGold(int amount)
+    {
+        gold -= amount;
+    }
+}`,
+    suggestedCommitMessage: "feat: add GameManager.SpendGold for the shop system",
+  },
+  {
+    path: "Assets/Scripts/Shop/ShopController.cs",
+    changeType: "new",
+    oldContent: "",
+    newContent: `using UnityEngine;
+
+public class ShopController : MonoBehaviour
+{
+    [SerializeField] private ShopInventoryData inventory;
+
+    public void Purchase(ItemData item)
+    {
+        if (GameManager.Instance.Gold < item.Price)
+        {
+            return;
+        }
+
+        GameManager.Instance.SpendGold(item.Price);
+        // TODO: grant item to player inventory
+    }
+}`,
+    suggestedCommitMessage: "feat: add ShopController purchase flow",
+  },
+  {
+    path: "Assets/Scripts/Shop/MerchantNPC.cs",
+    changeType: "new",
+    oldContent: "",
+    newContent: `using UnityEngine;
+
+public class MerchantNPC : MonoBehaviour
+{
+    [SerializeField] private ShopController shop;
+    [SerializeField] private GameObject shopUI;
+
+    public void OnInteract()
+    {
+        shopUI.SetActive(true);
+    }
+}`,
+    suggestedCommitMessage: "feat: add MerchantNPC interaction",
+  },
+];
+
+const FEATURE_CODE_REVIEW_FILES: MockFile[] = [
+  {
+    path: "Assets/Scripts/Core/GameManager.cs",
+    changeType: "modified",
+    oldContent: FEATURE_CODE_GEN_FILES[0].newContent,
+    newContent: `using UnityEngine;
+
+public class GameManager : MonoBehaviour
+{
+    public static GameManager Instance { get; private set; }
+
+    [SerializeField] private int gold;
+
+    public int Gold => gold;
+
+    public void AddGold(int amount)
+    {
+        gold += amount;
+    }
+
+    public bool CanAfford(int amount)
+    {
+        return gold >= amount;
+    }
+
+    public void SpendGold(int amount)
+    {
+        gold -= amount;
+    }
+}`,
+    suggestedCommitMessage: "refactor: extract GameManager.CanAfford for gold checks",
+  },
+  {
+    path: "Assets/Scripts/Shop/ShopController.cs",
+    // Still "new" here even though this is Step 4's pass over it — Step 3
+    // only just created this file in this same expansion, so relative to
+    // the actual repo (what changeType describes) it has never existed
+    // there before. mergeExpansionFileChanges replaces the whole record by
+    // path, so whatever changeType Step 4 states here is what the commit
+    // review screen ends up showing.
+    changeType: "new",
+    oldContent: "",
+    newContent: `using UnityEngine;
+
+public class ShopController : MonoBehaviour
+{
+    [SerializeField] private ShopInventoryData inventory;
+
+    public void Purchase(ItemData item)
+    {
+        if (!GameManager.Instance.CanAfford(item.Price))
+        {
+            return;
+        }
+
+        GameManager.Instance.SpendGold(item.Price);
+        // TODO: grant item to player inventory
+    }
+}`,
+    suggestedCommitMessage: "refactor: use GameManager.CanAfford in ShopController",
+  },
+];
+
 const SCRIPTS: Record<string, FileAgentScript> = {
   "Code Generation Agent": {
     turns: ["네임스페이스는 기존 프로젝트 컨벤션을 그대로 따르면 될까요?"],
@@ -173,6 +329,14 @@ const SCRIPTS: Record<string, FileAgentScript> = {
       "PlayerController.Move()와 EnemyController.Move()의 중복 로직을 공용 유틸리티로 뺄까요, 아니면 별도 컴포넌트로 분리할까요?",
     ],
     files: REFACTORING_FILES,
+  },
+  "Feature Code Generation Agent": {
+    turns: ["(자동 호출) 승인된 설계안을 바탕으로 코드를 생성하고 있습니다."],
+    files: FEATURE_CODE_GEN_FILES,
+  },
+  "Feature Code Review Agent": {
+    turns: ["(자동 호출) 방금 생성된 코드를 검토하고 있습니다."],
+    files: FEATURE_CODE_REVIEW_FILES,
   },
 };
 

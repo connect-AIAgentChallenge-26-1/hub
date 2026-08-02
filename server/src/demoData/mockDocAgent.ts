@@ -114,6 +114,43 @@ const DOCUMENTATION_DOCUMENT = `# Documentation
 - [ ] PlayerController.cs 수정 — 대시 쿨다운을 IDashable 기반으로 정리
 - [ ] OldDashHelper.cs 제거 — PlayerController.Dash()와 중복되던 로직 정리`;
 
+// Feature Expansion Workflow's demo storyline — adding a shop system to the
+// already-built dash-roguelike above, told across its own 3 chat-less/
+// chat-based agents (Design -> ScriptableObject -> Documentation). Reuses
+// the existing GameManager/ItemData/골드 concepts already established by the
+// 9-step story above instead of inventing an unrelated feature, so a demo
+// that runs both workflows back to back reads as one consistent game.
+const FEATURE_DESIGN_DOCUMENT = `# Feature Design
+
+## Overview
+- [ ] 저주받은 성의 세이프룸에 상인 NPC를 배치하고, 골드로 아이템을 구매할 수 있는 상점 시스템을 추가한다.
+- [ ] 새로운 아이템 종류를 따로 만들지 않고, 기존 ItemData 자산을 상점에서도 그대로 판매한다.
+
+## Changes
+- [ ] 세이프룸에 MerchantNPC를 배치하고, 상호작용 키로 상점 UI를 연다.
+- [ ] ShopController가 구매 요청을 받아 GameManager가 관리하는 골드를 확인하고 차감한다.
+- [ ] 골드가 부족하면 구매를 막고, UI에서 부족하다는 안내를 보여준다.
+
+## Data
+- [ ] ItemData에 판매 가격(price) 필드를 추가한다.
+- [ ] 상점이 판매하는 아이템 목록은 별도의 ScriptableObject로 관리한다.`;
+
+const FEATURE_SO_DOCUMENT = `# ScriptableObjects
+
+## Data Assets
+- [ ] ShopInventoryData — 상점이 판매하는 ItemData 목록과 각 아이템의 판매 가격, MerchantNPC/ShopController가 참조`;
+
+const FEATURE_DOCS_DOCUMENT = `# Feature Change Log: 상점 시스템
+
+## Summary
+- [ ] 세이프룸에 상인 NPC를 배치하고, 골드로 아이템을 구매할 수 있는 상점 시스템을 추가했다.
+- [ ] 새 아이템 데이터를 따로 만들지 않고 기존 ItemData 자산을 그대로 재사용했다.
+
+## Changes
+- [ ] MerchantNPC.cs 추가 — 상호작용 시 상점 UI를 연다.
+- [ ] ShopController.cs 추가 — 구매 요청을 받아 골드 확인 및 차감을 처리한다.
+- [ ] GameManager.cs 수정 — 골드가 충분한지 확인하는 CanAfford()를 추가하고, ShopController가 직접 골드 값을 비교하던 부분을 이를 재사용하도록 정리했다.`;
+
 const SCRIPTS: Record<string, DocAgentScript> = {
   "Requirements Agent": {
     turns: [
@@ -170,6 +207,22 @@ const SCRIPTS: Record<string, DocAgentScript> = {
       "혹시 누락된 내용이 있다면 알려주세요.",
     ],
     document: DOCUMENTATION_DOCUMENT,
+  },
+  "Feature Design Agent": {
+    turns: [
+      "이 상점은 어디서, 누구를 통해 접근할 수 있나요? (예: NPC와 상호작용, 특정 구역 진입 등)",
+      "상점에서 파는 아이템은 새로 만드시나요, 아니면 이미 있는 ItemData를 그대로 파시나요?",
+      "골드가 부족할 때는 어떻게 처리할까요?",
+    ],
+    document: FEATURE_DESIGN_DOCUMENT,
+  },
+  "Feature ScriptableObject Agent": {
+    turns: ["(자동 호출) 승인된 설계안을 바탕으로 ScriptableObject를 정리하고 있습니다."],
+    document: FEATURE_SO_DOCUMENT,
+  },
+  "Feature Documentation Agent": {
+    turns: ["(자동 호출) 지금까지의 산출물을 바탕으로 변경 로그를 정리하고 있습니다."],
+    document: FEATURE_DOCS_DOCUMENT,
   },
 };
 
