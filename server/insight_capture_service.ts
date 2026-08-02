@@ -1,12 +1,12 @@
 import {
   isInsightCaptureSource,
-  type CapturedInsight,
+  normalizeInsightUrl,
+  type Insight,
   type InsightCaptureFailureReason,
   type InsightCaptureRequest,
   type InsightCaptureResult,
   type InsightTitleOrigin,
-} from '../src/entities/insight/model/insight_capture.js';
-import { normalizeInsightUrl } from '../src/entities/insight/model/normalize_insight_url.js';
+} from '@amadda/domain/insight';
 
 const MAX_URL_LENGTH = 4096;
 const MAX_TITLE_LENGTH = 500;
@@ -37,7 +37,7 @@ export type InsightCaptureStoreInput = {
 };
 
 export type InsightCaptureStoreResult =
-  | { insight: CapturedInsight; status: 'created' }
+  | { insight: Insight; status: 'created' }
   | {
       status:
         | Exclude<
@@ -48,7 +48,7 @@ export type InsightCaptureStoreResult =
     };
 
 export type InsightCaptureStoreLookupResult =
-  | { insight: CapturedInsight; status: 'found' }
+  | { insight: Insight; status: 'found' }
   | { status: 'not-found' | 'permission-denied' | 'write-failed' };
 
 export type ServerInsightCaptureService = {
