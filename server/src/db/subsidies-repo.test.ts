@@ -24,7 +24,7 @@ vi.mock('./supabase.js', () => ({
   },
 }))
 
-import { __resetFindByIdCacheForTests, __resetLoadAllCacheForTests, findById, match } from './subsidies-repo.js'
+import { __resetFindByIdCacheForTests, __resetLoadAllCacheForTests, findAll, findById, match } from './subsidies-repo.js'
 
 beforeEach(() => {
   __resetLoadAllCacheForTests()
@@ -291,5 +291,29 @@ describe('findById — 프로필 기반 재계산 (이슈 #61)', () => {
     state.single = makeRow({ id: '1', region: [], match_score: 999 })
     const second = await findById('1', { region: '부산', supportRealm: ['금융'] })
     expect(second?.match).toBe(50) // 캐시된 원본(match_score 50) 기준, region 불일치라 가점 없음
+  })
+})
+
+describe('findAll — sort: amount 금액 파싱 (콤마/단위 없는 금액)', () => {
+  beforeEach(() => {
+    state.rows = []
+  })
+
+  it('AI 추출로 콤마가 낀 "만원" 표기("6,000만원")도 콤마 없는 값과 동일하게 정렬한다', async () => {
+    state.rows = [
+      makeRow({ id: '1', amount: '최대 6,000만원' }),
+      makeRow({ id: '2', amount: '최대 5000만원' }),
+    ]
+    const result = await findAll('amount')
+    expect(result.items.map((item) => item.id)).toEqual(['1', '2']) // 6,000만원(6000) > 5000만원
+  })
+
+  it('억/천만/백만/만 단위 표기가 없는 원 단위 금액("60,000,000원")도 만원 단위로 환산해 정렬한다', async () => {
+    state.rows = [
+      makeRow({ id: '1', amount: '최대 5000만원' }), // 5000
+      makeRow({ id: '2', amount: '최대 60,000,000원' }), // 6000만원 상당
+    ]
+    const result = await findAll('amount')
+    expect(result.items.map((item) => item.id)).toEqual(['2', '1'])
   })
 })

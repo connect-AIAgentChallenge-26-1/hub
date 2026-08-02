@@ -84,16 +84,22 @@ const FALLBACK: Subsidy[] = sampleSubsidies as Subsidy[]
  * '최대 5천만원' → 5000, '최대 300만원' → 300, '최대 40억원' → 400000 (정렬용 상대 크기, 만원 단위).
  * FE sortSubsidies와 규칙 통일. 크롤러 extractAmount(#44)가 백만/억/소수점 단위도 뽑아내므로
  * 이 네 단위를 모두 인식해야 금액순 정렬이 깨지지 않는다.
+ * 콤마는 매칭 전에 제거한다 — AI 추출(#67)은 원문 표현을 그대로 보존하므로 '6,000만원'처럼
+ * 콤마가 낀 값이 들어올 수 있고, 콤마를 두면 '000만'만 잡혀 0으로 계산돼 정렬이 깨진다.
+ * 억/천만/백만/만 단위 표기가 전혀 없는 원 단위 금액('60,000,000원')에도 fallback으로 대응한다.
  */
 function parseAmountForSort(amount: string): number {
-  const eok = amount.match(/(\d+(?:\.\d+)?)\s*억/)
+  const normalized = amount.replace(/,/g, '')
+  const eok = normalized.match(/(\d+(?:\.\d+)?)\s*억/)
   if (eok) return Number(eok[1]) * 10000
-  const cheonMan = amount.match(/(\d+(?:\.\d+)?)\s*천만/)
+  const cheonMan = normalized.match(/(\d+(?:\.\d+)?)\s*천만/)
   if (cheonMan) return Number(cheonMan[1]) * 1000
-  const baekMan = amount.match(/(\d+(?:\.\d+)?)\s*백만/)
+  const baekMan = normalized.match(/(\d+(?:\.\d+)?)\s*백만/)
   if (baekMan) return Number(baekMan[1]) * 100
-  const man = amount.match(/(\d+(?:\.\d+)?)\s*만/)
+  const man = normalized.match(/(\d+(?:\.\d+)?)\s*만/)
   if (man) return Number(man[1])
+  const won = normalized.match(/(\d+)\s*원/)
+  if (won) return Number(won[1]) / 10000
   return 0
 }
 
