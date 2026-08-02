@@ -191,16 +191,20 @@ export const MOCK_SUBSIDIES: Subsidy[] = [
 
 /**
  * server/subsidies-repo.ts parseAmountForSort와 규칙 통일 — 억/천만/백만/만 단위, 소수점 인식.
+ * 콤마 제거 + 단위 표기 없는 원 단위 금액 fallback도 서버와 동일하게 맞춘다.
  */
 function parseAmountForSort(amount: string): number {
-  const eok = amount.match(/(\d+(?:\.\d+)?)\s*억/)
+  const normalized = amount.replace(/,/g, '')
+  const eok = normalized.match(/(\d+(?:\.\d+)?)\s*억/)
   if (eok) return Number(eok[1]) * 10000
-  const cheonMan = amount.match(/(\d+(?:\.\d+)?)\s*천만/)
+  const cheonMan = normalized.match(/(\d+(?:\.\d+)?)\s*천만/)
   if (cheonMan) return Number(cheonMan[1]) * 1000
-  const baekMan = amount.match(/(\d+(?:\.\d+)?)\s*백만/)
+  const baekMan = normalized.match(/(\d+(?:\.\d+)?)\s*백만/)
   if (baekMan) return Number(baekMan[1]) * 100
-  const man = amount.match(/(\d+(?:\.\d+)?)\s*만/)
+  const man = normalized.match(/(\d+(?:\.\d+)?)\s*만/)
   if (man) return Number(man[1])
+  const won = normalized.match(/(\d+)\s*원/)
+  if (won) return Number(won[1]) / 10000
   return 0
 }
 
