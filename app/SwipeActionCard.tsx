@@ -132,7 +132,9 @@ export default function SwipeActionCard({
             }
           }}
           style={{ transform: `translateX(-${offset}px)`, touchAction: "pan-y" }}
-          className="relative min-h-24 cursor-grab select-none rounded-xl2 border border-creamDeep bg-white px-5 py-5 transition-transform duration-200 ease-out active:cursor-grabbing"
+          className={`relative cursor-grab select-none rounded-xl2 border border-creamDeep bg-white px-5 transition-transform duration-200 ease-out active:cursor-grabbing ${
+            showDetails ? "min-h-24 py-5" : "min-h-[72px] py-3.5"
+          }`}
         >
           <div className="min-w-0">
             <p className="truncate text-[15px] font-semibold text-ink">{title}</p>

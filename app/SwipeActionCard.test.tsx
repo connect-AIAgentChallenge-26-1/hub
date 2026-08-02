@@ -43,6 +43,7 @@ describe("SwipeActionCard", () => {
 
     const card = screen.getByTestId(`swipe-card-${item.id}`);
     expect(card).toHaveClass("bg-white");
+    expect(card).toHaveClass("min-h-[72px]");
     expect(card).not.toHaveClass("bg-white/80");
     expect(card?.querySelector("img")).not.toBeInTheDocument();
     Object.defineProperty(card, "setPointerCapture", { value: vi.fn() });
