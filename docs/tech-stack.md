@@ -1,6 +1,6 @@
 # 기술 스택 및 라이브러리
 
-이 문서는 아맞다 프로젝트에서 사용할 기술 스택과 후보 라이브러리를 정리한다. 버전은 2026-07-26 기준 `package-lock.json`을 기준으로 한다.
+이 문서는 아맞다 프로젝트에서 사용할 기술 스택과 후보 라이브러리를 정리한다. 버전은 2026-08-03 기준 `package-lock.json`을 기준으로 한다.
 
 ## 결정 기준
 
@@ -16,6 +16,7 @@
 | --------------------------- | ------------------------------------------------ | -------------------- | -------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | React                       | 19.2.7                                           | UI 라이브러리        | 사용 중        | 컴포넌트 기반 설계로 화면을 재사용하기 쉽고, 생태계가 넓어 협업과 유지보수에 유리하다.                   | Vue, Svelte, Solid                                       | 현재 Vite React 앱의 기본 런타임이다.                                                                                 |
 | TypeScript                  | 6.0.3                                            | 개발 언어            | 사용 중        | 타입 안정성으로 오류를 초기에 발견하고, 도메인 타입과 API 응답을 명확하게 표현할 수 있다.                | JavaScript                                               | npm 최신은 7.0.2지만 현재 프로젝트는 6.0.3을 사용한다.                                                                |
+| @amadda/domain              | workspace 0.1.0                                  | 공용 도메인 Module   | 사용 중        | 브라우저와 서버가 같은 인사이트·가져오기 제품 규칙을 사용하도록 런타임 중립 Interface를 제공한다.        | 프론트엔드 내부 경로 공유, 별도 저장소                   | npm 비공개 workspace이며 `insight`, `insight-import` 두 공개 진입점만 사용한다.                                       |
 | Vite                        | 8.1.3                                            | 빌드 툴              | 사용 중        | 빠른 개발 서버와 HMR을 제공하고 설정이 단순하다.                                                         | Webpack, Parcel, Rollup, Next.js                         | npm 최신은 8.1.4다. 현재 버전을 유지해도 무방하다.                                                                    |
 | Capacitor                   | core/cli/android 8.4.2, app 8.1.1, browser 8.0.4 | Android 앱 셸        | 사용 중        | 기존 React 앱을 Android에서 실행하고 공유 Intent·딥링크·시스템 브라우저를 작은 네이티브 경계로 연결한다. | React Native, Kotlin·Compose                             | `shared/capacitor`와 Kotlin AndroidShare 플러그인에 연결되어 있으며 상세 절차는 `docs/android-capacitor.md`를 따른다. |
 | Express                     | 5.2.1                                            | API 서버             | 사용 중        | 여러 저장 채널이 공유하는 인증·입력 검증과 안전한 오류 응답 경계를 제공한다.                             | Fastify, Hono, NestJS                                    | `/api/health`, 인증된 캡처 API와 Chrome 확장 메모 API를 제공한다.                                                     |
@@ -63,6 +64,7 @@
 ## 현재 런타임과 배포 경계
 
 - 브라우저 앱은 `VITE_SUPABASE_URL`과 `VITE_SUPABASE_PUBLISHABLE_KEY`로 Supabase 공개 클라이언트를 만들고 Google OAuth 세션을 구독한다.
+- 인사이트 저장·캡처와 가져오기 후보 분석의 제품 규칙은 `@amadda/domain` workspace가 소유한다. 브라우저 FSD와 Express 서버는 같은 패키지 Interface를 사용하고 런타임별 Adapter만 각 경계에 둔다.
 - Android 앱은 같은 React 런타임과 Supabase 클라이언트를 사용하고, `VITE_CAPACITOR_API_ORIGIN`의 HTTPS API에 캡처·메모 요청을 보낸다. 시스템 브라우저 PKCE 콜백만 Capacitor 딥링크 어댑터가 처리한다.
 - 로그인한 사용자 ID에 묶인 Supabase 인사이트 저장 어댑터가 원격 목록과 수정·삭제를 담당한다.
 - 웹·PWA·Chrome 확장의 저장은 Express 캡처 API를 거쳐 같은 Supabase 테이블과 RLS 경계를 사용한다. Chrome 확장 메모도 별도 인증 API로 같은 인사이트를 갱신한다.

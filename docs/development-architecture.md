@@ -158,6 +158,16 @@ src/
 - 원본 파일은 브라우저에서만 읽으며 Notion OAuth와 Provider 호출은 `server/insight_import`에 둔다.
 - `pages/library`는 feature를 직접 import하지 않고 진입 callback만 노출하며 `app`이 다이얼로그와 원격 목록 재조회를 조합한다.
 
+### 런타임 중립 도메인 Module
+
+`packages/domain`은 프론트엔드 FSD와 Express 서버가 함께 사용하는 제품 규칙을 소유하는 비공개 npm workspace다. 공개 진입점은 `@amadda/domain/insight`와 `@amadda/domain/insight-import`뿐이다.
+
+- `@amadda/domain/insight`는 인사이트 저장 모델, 캡처 계약, URL 정규화와 런타임 파서를 소유한다.
+- `@amadda/domain/insight-import`는 표준 후보, URL 안전성 검사, 제한, 중복 분류와 분석 요약을 소유하며 `insight` Module만 의존할 수 있다.
+- 도메인 Module은 `src`, `server`, `api`, `extension`, React, Supabase와 Node 전용 모듈을 import하지 않는다.
+- `entities/insight`와 `features/insight-import`는 기존 FSD public API를 유지하며 공용 도메인 계약을 재노출한다.
+- Supabase 행 변환, 브라우저 파일 입력, 화면 상태와 네트워크 오류 변환은 각 Adapter에 남긴다.
+
 ## import 경계
 
 - 외부 사용자는 slice의 `index.ts` public API만 import한다.
@@ -169,6 +179,8 @@ src/
 - 같은 레이어의 다른 slice 내부 경로를 직접 import하지 않는다.
 - alias는 `@/*`만 사용한다.
 - 화면과 domain UI는 외부 UI 패키지를 직접 import하지 않고 `@/shared/ui` adapter를 사용한다.
+- 브라우저와 서버가 공유하는 제품 규칙은 `@amadda/domain`의 공개 진입점만 import한다.
+- 서버 생산 코드는 `src/entities`와 `src/features` 내부를 직접 import하지 않는다.
 - `export default`를 사용하지 않는다.
 
 `src/main.tsx`는 token injector를 실행하고 `DesignSystemProvider`로 `App`을 감싸는 bootstrap만 담당한다. `tokens.ts`가 값의 단일 원천이며 `apply_design_tokens.ts`만 DOM에 CSS custom property를 주입한다.
@@ -186,7 +198,7 @@ src/
 
 Express 서버는 FSD 대상이 아니므로 `server/`에 둔다. `/api/health` 외에 모바일·웹·Chrome 확장이 공유하는 인증된 캡처 API와 확장 메모 API를 제공한다. 캡처 API는 Bearer access token을 검증 경계로 사용하며 Supabase RLS가 최종 사용자 데이터 경계를 강제한다.
 
-- 인사이트 타입과 비동기 `InsightRepository` 인터페이스는 `entities/insight`가 소유한다.
+- 인사이트 저장 타입과 캡처 계약은 `@amadda/domain/insight`가 소유한다. 비동기 `InsightRepository` Interface와 표시·검색 책임은 `entities/insight`가 소유한다.
 - 브라우저 앱은 로그인한 사용자 ID로 `createBrowserInsightRepository`를 만들고, page와 widget은 Supabase나 Web Storage를 직접 호출하지 않는다.
 - Supabase 공개 URL과 publishable key는 `shared/config`에서 검증한다. 브라우저·확장 코드에 secret key 또는 service role key를 넣지 않는다.
 - `insights.user_id`와 RLS 정책은 조회·생성·수정·삭제를 현재 사용자 데이터로 제한한다. 클라이언트의 `user_id` 필터는 RLS를 대체하지 않는다.
