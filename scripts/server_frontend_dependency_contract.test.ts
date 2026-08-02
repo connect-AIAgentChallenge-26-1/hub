@@ -41,4 +41,8 @@ describe('서버와 프론트엔드 의존 경계', () => {
   it('서버 생산 코드가 src/entities를 직접 import하지 않는다', () => {
     expect(findForbiddenImports('/src/entities/')).toEqual([]);
   });
+
+  it('서버 생산 코드가 src/features를 직접 import하지 않는다', () => {
+    expect(findForbiddenImports('/src/features/')).toEqual([]);
+  });
 });
