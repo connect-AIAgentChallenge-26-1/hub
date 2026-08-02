@@ -1,4 +1,17 @@
+import type {
+  AnalyzedImportItem,
+  ImportSummary,
+} from '@amadda/domain/insight-import';
+
 import type { CategoryColorKey } from '../../../shared/config/design-system/tokens.js';
+
+export type {
+  AnalyzedImportItem,
+  ImportCandidate,
+  ImportExclusionCode,
+  ImportSummary,
+  ImportWarningCode,
+} from '@amadda/domain/insight-import';
 
 export const IMPORT_INPUT_KINDS = [
   'pasted-text',
@@ -24,30 +37,6 @@ export type ImportInput =
   | { kind: 'connected-account'; connectionId: string }
   | { kind: 'file'; file: File; mappings?: ImportFieldMapping[] }
   | { kind: 'pasted-text'; text: string };
-
-export type ImportWarningCode =
-  'missing-title' | 'trimmed-title' | 'trimmed-memo' | 'ambiguous-field';
-
-export type ImportCandidate = {
-  candidateId: string;
-  capturedAtCandidate: string | null;
-  collectionPath: string[];
-  explicitMemoCandidate: string | null;
-  originalUrl: string;
-  sourceLocation: string;
-  titleCandidate: string | null;
-  warnings: ImportWarningCode[];
-};
-
-export type ImportExclusionCode =
-  'invalid-url' | 'unsupported-protocol' | 'private-address' | 'limit-exceeded';
-
-export type AnalyzedImportItem = ImportCandidate & {
-  classification: 'candidate' | 'excluded' | 'input_duplicate';
-  domain: string | null;
-  exclusionCode: ImportExclusionCode | null;
-  normalizedUrl: string | null;
-};
 
 export type PreparedImportItem = Omit<AnalyzedImportItem, 'classification'> & {
   classification: 'new' | 'existing_duplicate' | 'input_duplicate' | 'excluded';
@@ -76,15 +65,6 @@ export type ImportCollectionMapping = {
 
 export type ImportJobStatus =
   'analyzing' | 'ready' | 'committing' | 'completed' | 'failed' | 'undone';
-
-export type ImportSummary = {
-  createdCount: number;
-  duplicateCount: number;
-  excludedCount: number;
-  inputDuplicateCount: number;
-  newCount: number;
-  totalCount: number;
-};
 
 export type PreparedImport = {
   adapterKey: ImportAdapterKey;
