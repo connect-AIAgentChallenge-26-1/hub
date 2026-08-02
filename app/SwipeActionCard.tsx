@@ -2,6 +2,7 @@
 
 import { useRef, useState, type PointerEvent } from "react";
 import type { Item } from "../lib/items";
+import SourceLabel from "./SourceLabel";
 
 const ACTION_WIDTH = 132;
 const SWIPE_THRESHOLD = 104;
@@ -136,8 +137,10 @@ export default function SwipeActionCard({
         >
           <div className="min-w-0">
             <p className="truncate text-[15px] font-semibold text-ink">{title}</p>
-            <p className="mt-1 truncate text-xs text-muted">
-              {item.source_platform ?? "manual"} · {relativeDate(item.created_at)}
+            <p className="mt-1 flex min-w-0 items-center gap-1.5 text-xs text-muted">
+              <SourceLabel item={item} />
+              <span aria-hidden="true">·</span>
+              <span className="shrink-0">{relativeDate(item.created_at)}</span>
             </p>
             {showDetails && expanded && (
               <div className="mt-5 border-t border-creamDeep pt-4">

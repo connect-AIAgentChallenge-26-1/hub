@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Item } from "../lib/items";
+import SourceLabel from "./SourceLabel";
 
 type ItemCardProps = {
   item: Item;
@@ -81,9 +82,10 @@ export default function ItemCard({ item, onDelete, onArchive }: ItemCardProps) {
             <p className="text-sm text-ink font-medium break-words">
               {getDisplayTitle(item)}
             </p>
-            <p className="text-xs text-muted">
-              {item.source_platform ?? "manual"} ·{" "}
-              {new Date(item.created_at).toLocaleDateString("ko-KR")}
+            <p className="mt-1 flex min-w-0 items-center gap-1.5 text-xs text-muted">
+              <SourceLabel item={item} />
+              <span aria-hidden="true">·</span>
+              <span className="shrink-0">{new Date(item.created_at).toLocaleDateString("ko-KR")}</span>
             </p>
           </div>
           <div className="flex shrink-0 flex-col items-end gap-2">
