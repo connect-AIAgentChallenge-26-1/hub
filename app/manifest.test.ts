@@ -31,8 +31,8 @@ describe("PWA manifest", () => {
       short_name: "later.",
       start_url: "/",
       display: "standalone",
-      background_color: "#FBF3E7",
-      theme_color: "#E8935A",
+      background_color: "#FFFFFF",
+      theme_color: "#17171B",
     });
   });
 

@@ -37,6 +37,7 @@ describe("SwipeActionCard", () => {
           actionLabel="완료"
           pendingLabel="보관 중"
           onAction={onAction}
+          showDetails
         />
       </ul>,
     );
