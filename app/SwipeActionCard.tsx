@@ -25,6 +25,7 @@ type SwipeActionCardProps = {
   pendingLabel: string;
   onAction: (id: number) => Promise<void>;
   confirmMessage?: string;
+  showDetails?: boolean;
 };
 
 export default function SwipeActionCard({
@@ -33,11 +34,14 @@ export default function SwipeActionCard({
   pendingLabel,
   onAction,
   confirmMessage,
+  showDetails = false,
 }: SwipeActionCardProps) {
   const [offset, setOffset] = useState(0);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [expanded, setExpanded] = useState(false);
   const drag = useRef<{ startX: number; startOffset: number; currentOffset: number } | null>(null);
+  const didDrag = useRef(false);
 
   async function runAction() {
     if (pending) return;
@@ -59,6 +63,7 @@ export default function SwipeActionCard({
 
   function startDrag(event: PointerEvent<HTMLDivElement>) {
     if (pending || event.button !== 0) return;
+    didDrag.current = false;
     drag.current = { startX: event.clientX, startOffset: offset, currentOffset: offset };
     event.currentTarget.setPointerCapture(event.pointerId);
   }
@@ -70,6 +75,7 @@ export default function SwipeActionCard({
       Math.min(ACTION_WIDTH, drag.current.startOffset + drag.current.startX - event.clientX),
     );
     drag.current.currentOffset = next;
+    if (Math.abs(event.clientX - drag.current.startX) > 5) didDrag.current = true;
     setOffset(next);
   }
 
@@ -88,7 +94,7 @@ export default function SwipeActionCard({
 
   return (
     <li>
-      <div className="relative h-24 overflow-hidden rounded-xl2 bg-accent">
+      <div className="relative overflow-hidden rounded-xl2 bg-accent">
         <div className="absolute inset-y-0 right-0 w-[132px]">
           <button
             type="button"
@@ -104,18 +110,54 @@ export default function SwipeActionCard({
           </button>
         </div>
         <div
+          data-testid={`swipe-card-${item.id}`}
           onPointerDown={startDrag}
           onPointerMove={moveDrag}
           onPointerUp={endDrag}
           onPointerCancel={endDrag}
+          onClick={() => {
+            if (didDrag.current) {
+              didDrag.current = false;
+              return;
+            }
+            if (showDetails) setExpanded((current) => !current);
+          }}
+          role={showDetails ? "button" : undefined}
+          tabIndex={showDetails ? 0 : undefined}
+          aria-expanded={showDetails ? expanded : undefined}
+          onKeyDown={(event) => {
+            if (showDetails && (event.key === "Enter" || event.key === " ")) {
+              event.preventDefault();
+              setExpanded((current) => !current);
+            }
+          }}
           style={{ transform: `translateX(-${offset}px)`, touchAction: "pan-y" }}
-          className="absolute inset-0 flex cursor-grab select-none items-center rounded-xl2 border border-creamDeep bg-white px-5 transition-transform duration-200 ease-out active:cursor-grabbing"
+          className="relative min-h-24 cursor-grab select-none rounded-xl2 border border-creamDeep bg-white px-5 py-5 transition-transform duration-200 ease-out active:cursor-grabbing"
         >
           <div className="min-w-0">
-            <p className="truncate text-sm font-medium text-ink">{title}</p>
+            <p className="truncate text-[15px] font-semibold text-ink">{title}</p>
             <p className="mt-1 truncate text-xs text-muted">
               {item.source_platform ?? "manual"} · {relativeDate(item.created_at)}
             </p>
+            {showDetails && expanded && (
+              <div className="mt-5 border-t border-creamDeep pt-4">
+                <p className="text-xs font-semibold text-muted">AI 요약</p>
+                <p className="mt-2 whitespace-pre-line text-sm leading-6 text-ink">
+                  {item.summary?.trim() || "아직 생성된 요약이 없습니다."}
+                </p>
+                {item.original_url && (
+                  <a
+                    href={item.original_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(event) => event.stopPropagation()}
+                    className="mt-4 block border-t border-creamDeep pt-4 text-sm font-medium text-ink underline underline-offset-4"
+                  >
+                    원본 링크 열기 ↗
+                  </a>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

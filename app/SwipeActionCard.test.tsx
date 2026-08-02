@@ -41,8 +41,7 @@ describe("SwipeActionCard", () => {
       </ul>,
     );
 
-    const card = screen.getByText(item.title).closest("div.absolute.inset-0");
-    expect(card).not.toBeNull();
+    const card = screen.getByTestId(`swipe-card-${item.id}`);
     expect(card).toHaveClass("bg-white");
     expect(card).not.toHaveClass("bg-white/80");
     expect(card?.querySelector("img")).not.toBeInTheDocument();

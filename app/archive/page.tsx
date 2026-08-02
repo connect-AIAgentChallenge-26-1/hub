@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import { AppHeader, BottomNav } from "../AppChrome";
 import SwipeActionCard from "../SwipeActionCard";
 import {
   apiBaseUrl,
@@ -41,15 +41,12 @@ export default function ArchivePage() {
   }
 
   return (
-    <main className="mx-auto flex min-h-screen max-w-md flex-col bg-cream px-5 pb-24 pt-6">
-      <header className="mb-8 flex items-center justify-between">
-        <Link href="/" className="text-xl font-semibold tracking-tight text-ink">later.</Link>
-        <div className="h-8 w-8 rounded-full border border-creamDeep bg-white" />
-      </header>
+    <main className="mx-auto flex min-h-screen max-w-md flex-col bg-white px-6 pb-24 pt-8 sm:px-7">
+      <AppHeader />
 
-      <section className="mb-7">
-        <h1 className="mb-1 text-2xl font-bold text-ink">아카이브</h1>
-        <p className="text-sm text-muted">다 본 콘텐츠를 모아두었어요. 밀어서 삭제할 수 있어요.</p>
+      <section className="mb-8">
+        <h1 className="text-[28px] font-bold tracking-[-0.04em] text-ink">아카이브</h1>
+        <p className="mt-2 text-sm text-muted">다 본 콘텐츠를 모아두었어요. 밀어서 삭제해요.</p>
       </section>
 
       <section aria-label="아카이브 콘텐츠">
@@ -79,14 +76,7 @@ export default function ArchivePage() {
 
       <p className="mt-auto pt-10 text-center text-xs text-muted/60" aria-hidden="true">←&nbsp; 밀어서&nbsp; 삭제</p>
 
-      <nav className="fixed bottom-0 left-0 right-0 border-t border-creamDeep bg-white">
-        <div className="mx-auto flex max-w-md justify-around pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 text-xs text-muted">
-          <Link href="/">홈</Link>
-          <Link href="/categories">카테고리</Link>
-          <Link href="/archive" className="font-medium text-accentDark">아카이브</Link>
-          <span>설정</span>
-        </div>
-      </nav>
+      <BottomNav active="archive" />
     </main>
   );
 }

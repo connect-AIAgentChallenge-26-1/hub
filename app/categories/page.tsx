@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import { AppHeader, BottomNav } from "../AppChrome";
 import SwipeActionCard from "../SwipeActionCard";
 import {
   apiBaseUrl,
@@ -23,6 +23,15 @@ function getMainCategory(item: Item) {
 
 function getSubCategory(item: Item) {
   return item.category_sub ?? "기타";
+}
+
+function categoryPillClass(name: string) {
+  if (/쇼핑|패션/.test(name)) return "bg-[#f4e8df] text-[#a86d48]";
+  if (/뷰티/.test(name)) return "bg-[#f7dfec] text-[#bf2874]";
+  if (/영상|콘텐츠/.test(name)) return "bg-[#e9def3] text-[#7042b4]";
+  if (/여행|뉴스/.test(name)) return "bg-[#dff0f7] text-[#2c7898]";
+  if (/공부|개발|취업/.test(name)) return "bg-[#e1f1e3] text-[#367a4b]";
+  return "bg-[#f1f1f3] text-[#66656b]";
 }
 
 export default function CategoriesPage() {
@@ -112,17 +121,12 @@ export default function CategoriesPage() {
   }
 
   return (
-    <main className="min-h-screen bg-cream flex flex-col max-w-md mx-auto px-5 pt-6 pb-24">
-      <header className="flex items-center justify-between mb-8">
-        <Link href="/" className="text-xl font-semibold tracking-tight text-ink">
-          later.
-        </Link>
-        <div className="w-8 h-8 rounded-full bg-white border border-creamDeep" />
-      </header>
+    <main className="mx-auto flex min-h-screen max-w-md flex-col bg-white px-6 pb-24 pt-8 sm:px-7">
+      <AppHeader />
 
-      <section className="mb-7">
-        <h1 className="text-2xl font-bold text-ink mb-1">카테고리</h1>
-        <p className="text-sm text-muted">저장한 항목을 관심사별로 모아보세요.</p>
+      <section className="mb-8">
+        <h1 className="text-[28px] font-bold tracking-[-0.04em] text-ink">카테고리</h1>
+        <p className="mt-2 text-sm text-muted">저장한 항목을 관심사별로 모아보세요.</p>
       </section>
 
       {loading && <p className="text-sm text-muted">불러오는 중...</p>}
@@ -130,7 +134,7 @@ export default function CategoriesPage() {
 
       {!loading && !error && (
         <>
-          <section className="mb-6">
+          <section className="mb-5">
             <label htmlFor="content-search" className="sr-only">
               저장 콘텐츠 검색
             </label>
@@ -140,20 +144,19 @@ export default function CategoriesPage() {
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
               placeholder="제목, 요약, 원문, 카테고리 검색"
-              className="w-full rounded-xl border border-creamDeep bg-white px-4 py-3 text-sm text-ink outline-none transition-colors placeholder:text-muted focus:border-accent"
+            className="w-full rounded-xl2 border border-creamDeep bg-[#f7f7f8] px-4 py-3.5 text-sm text-ink outline-none transition-colors placeholder:text-muted focus:border-ink"
             />
           </section>
 
           <section className="mb-6">
-            <h2 className="text-sm font-medium text-muted mb-3">대분류</h2>
             <div className="flex flex-wrap gap-2">
               <button
                 type="button"
                 onClick={() => selectMainCategory("전체")}
-                className={`text-xs rounded-full px-3 py-2 font-medium transition-colors ${
+                className={`rounded-full px-3.5 py-2 text-xs font-semibold transition-colors ${
                   selectedMain === "전체"
-                    ? "bg-accent text-white"
-                    : "border border-creamDeep bg-white text-muted hover:border-accent hover:text-accentDark"
+                    ? "bg-ink text-white"
+                    : "bg-[#f1f1f3] text-[#66656b]"
                 }`}
               >
                 전체 {items.length}
@@ -163,10 +166,10 @@ export default function CategoriesPage() {
                   key={category.name}
                   type="button"
                   onClick={() => selectMainCategory(category.name)}
-                  className={`text-xs rounded-full px-3 py-2 font-medium transition-colors ${
+                  className={`rounded-full px-3.5 py-2 text-xs font-semibold transition-colors ${
                     selectedMain === category.name
-                      ? "bg-accent text-white"
-                      : "border border-creamDeep bg-white text-muted hover:border-accent hover:text-accentDark"
+                      ? "bg-ink text-white"
+                      : categoryPillClass(category.name)
                   }`}
                 >
                   {category.name} {category.count}
@@ -177,15 +180,14 @@ export default function CategoriesPage() {
 
           {selectedMain !== "전체" && subCategories.length > 0 && (
             <section className="mb-6">
-              <h2 className="text-sm font-medium text-muted mb-3">소분류</h2>
               <div className="flex flex-wrap gap-2">
                 <button
                   type="button"
                   onClick={() => setSelectedSub("전체")}
-                  className={`text-xs rounded-full px-3 py-1.5 font-medium border transition-colors ${
+                  className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
                     selectedSub === "전체"
-                      ? "border-accent bg-accent text-white"
-                      : "border-creamDeep bg-white text-muted hover:border-accent hover:text-accentDark"
+                      ? "bg-ink text-white"
+                      : "bg-[#f1f1f3] text-[#66656b]"
                   }`}
                 >
                   전체
@@ -195,10 +197,10 @@ export default function CategoriesPage() {
                     key={category.name}
                     type="button"
                     onClick={() => setSelectedSub(category.name)}
-                    className={`text-xs rounded-full px-3 py-1.5 font-medium border transition-colors ${
+                    className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
                       selectedSub === category.name
-                        ? "border-accent bg-accent text-white"
-                        : "border-creamDeep bg-white text-muted hover:border-accent hover:text-accentDark"
+                        ? "bg-ink text-white"
+                        : categoryPillClass(category.name)
                     }`}
                   >
                     {category.name} {category.count}
@@ -233,6 +235,7 @@ export default function CategoriesPage() {
                     actionLabel="완료"
                     pendingLabel="보관 중"
                     onAction={archiveItem}
+                    showDetails
                   />
                 ))}
               </ul>
@@ -241,16 +244,7 @@ export default function CategoriesPage() {
         </>
       )}
 
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-creamDeep">
-        <div className="max-w-md mx-auto flex justify-around pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-xs text-muted">
-          <Link href="/">홈</Link>
-          <Link href="/categories" className="text-accentDark font-medium">
-            카테고리
-          </Link>
-          <Link href="/archive">아카이브</Link>
-          <span>설정</span>
-        </div>
-      </nav>
+      <BottomNav active="categories" />
     </main>
   );
 }

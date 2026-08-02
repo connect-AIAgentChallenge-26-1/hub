@@ -8,12 +8,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        cream: "#FBF3E7",
-        creamDeep: "#F5E9D8",
-        accent: "#E8935A",
-        accentDark: "#D97D42",
-        ink: "#2B2620",
-        muted: "#8C8375",
+        cream: "#FFFFFF",
+        creamDeep: "#E7E7EB",
+        accent: "#2B2A2F",
+        accentDark: "#17171A",
+        ink: "#17171A",
+        muted: "#A5A4AB",
       },
       fontFamily: {
         sans: ["Pretendard", "system-ui", "sans-serif"],
