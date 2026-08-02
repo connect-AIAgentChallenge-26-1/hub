@@ -4,6 +4,17 @@
 
 ---
 
+## 🔗 쇼케이스 제출 필수 링크 (Showcase Links)
+
+| 항목 | 링크 |
+| :--- | :--- |
+| 🌐 **1) 서비스 배포 링크** | [https://dropcast-ten.vercel.app](https://dropcast-ten.vercel.app) |
+| 🎬 **2) 시연 영상 링크** | [https://drive.google.com/file/d/1Z3qEqDU4mKhX0HT7dopBvQLEy8obTGp9/view?usp=drive_link](https://drive.google.com/file/d/1Z3qEqDU4mKhX0HT7dopBvQLEy8obTGp9/view?usp=drive_link) |
+| 💻 **3) 소스 코드 링크** | [https://github.com/Qkdgodchl/hub](https://github.com/Qkdgodchl/hub) |
+| 📄 **4) 프로젝트 소개 자료** | [https://github.com/Qkdgodchl/hub/blob/main/README.md](https://github.com/Qkdgodchl/hub/blob/main/README.md) (`showcase/showcase.json`) |
+
+---
+
 ## 📐 1. 시스템 데이터 흐름 및 아키텍처 (Architecture Diagram)
 
 프로젝트는 프론트엔드(React + Vite)와 백엔드(Express + Prisma ORM + MySQL)로 분리(Separated)되어 있으며, 다음과 같은 데이터 흐름을 가집니다.
