@@ -7,7 +7,7 @@ Later는 인터넷과 SNS에서 발견한 URL·텍스트·이미지를 한곳에
 자료는 검색과 카테고리로 다시 찾고, 다 본 항목은 스와이프로 아카이브할 수 있습니다.
 
 - 운영 서비스: <https://later-theta-fawn.vercel.app>
-- 데모 영상: <https://youtu.be/Gy70h9Bd3eM>
+- 데모 영상: <https://youtu.be/XdP8OuCMOWs>
 - 쇼케이스 자료: [`showcase/showcase.json`](showcase/showcase.json)
 
 ## 현재 제공 기능

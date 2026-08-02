@@ -47,7 +47,7 @@ Later는 인터넷과 SNS에서 발견한 URL·텍스트·이미지 꿀팁을 �
 ## 링크
 
 - [서비스 사용하기](https://later-theta-fawn.vercel.app)
-- [데모 영상](https://youtu.be/Gy70h9Bd3eM)
+- [데모 영상](https://youtu.be/XdP8OuCMOWs)
 - [소스 코드](https://github.com/jennienn/hub)
 - [쇼케이스 제출 데이터](../showcase/showcase.json)
 - [기술 구조와 실행 방법](../README.md)

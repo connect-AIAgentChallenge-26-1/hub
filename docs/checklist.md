@@ -32,6 +32,6 @@
 ## 제출 전 확인
 
 - [x] 운영 주소: <https://later-theta-fawn.vercel.app>
-- [x] 데모 영상: <https://youtu.be/Gy70h9Bd3eM>
+- [x] 데모 영상: <https://youtu.be/XdP8OuCMOWs>
 - [x] 쇼케이스 PR에 `showcase.json`, 썸네일, 스크린샷 포함
 - [ ] 중앙 쇼케이스 저장소 PR 병합
