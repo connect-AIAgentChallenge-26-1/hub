@@ -12,7 +12,7 @@
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
   /* 잔소리봇 디자인 Skill(nagging-bot-design) — 일반 화면(랜딩/홈/등록/히스토리) 토큰.
-     docs/prototype.html의 :root 확정값을 그대로 옮긴 것. 개입 팝업 전용 색은 여기 두지 않는다
+     docs/initial-prototype.html의 :root 확정값을 그대로 옮긴 것. 개입 팝업 전용 색은 여기 두지 않는다
      (NudgeModal.css/FocusMode.css가 의도적으로 self-contained하게 유지). */
   --panel-bg: #ffffff;
   --ink: #1e2430;
@@ -72,7 +72,7 @@
   }
 }
 
-/* prototype.html에는 있었지만 실제 React 앱엔 이식되지 않았던 전역 reset.
+/* initial-prototype.html에는 있었지만 실제 React 앱엔 이식되지 않았던 전역 reset.
    이게 없으면 padding을 쓰는 요소(.navbar-inner, .page, .stat-chip 등)가
    content-box 기준으로 커져서 뷰포트 폭을 살짝 넘길 수 있다 — Navbar 추가 후
    보고된 "배경이 스크롤바 근처에서 끊기고 흰 여백이 남는" 문제의 유력 원인. */
@@ -142,7 +142,7 @@ code {
   background: var(--code-bg);
 }
 
-/* 공통 버튼 — docs/prototype.html .btn/.btn-primary/.btn-block 이식.
+/* 공통 버튼 — docs/initial-prototype.html .btn/.btn-primary/.btn-block 이식.
    여러 컴포넌트(EmptyState, RegisterPage 등)가 이미 className="btn btn-primary"를
    쓰고 있었지만 정의가 없어 스타일이 전혀 먹지 않던 상태였다. */
 .btn {

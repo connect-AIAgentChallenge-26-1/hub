@@ -6,6 +6,12 @@
 시작하도록 돕습니다. 할 일과 회피 이유를 확인하고, 상황에 맞는 작은 첫
 행동을 제안한 뒤 Focus Mode와 완료 기록까지 연결합니다.
 
+## 바로 확인하기
+
+- 🌐 [실제 서비스](https://hub-nine-beta.vercel.app)
+- 🎬 [최종 데모 영상](https://drive.google.com/file/d/1_tKh2aWoZt9ywHCqrCNtarDGJgTCTJ9s/view?usp=sharing)
+- 📖 [GitHub Wiki](https://github.com/minsss42/hub/wiki)
+
 ## 문제 정의
 
 대학생은 과제, 시험공부, 발표 준비처럼 해야 할 일을 알고 계획도 세우지만
@@ -52,29 +58,35 @@ Landing
 | Shared Journey UI   | 개입 레벨에 따라 캐릭터 표정과 날씨 배경이 달라지며, Focus와 Completion까지 여정을 이어갑니다.        |
 | 완료 피드백         | 완료 후 `도움됐어요` 또는 `아쉬웠어요`를 선택해 저장합니다. 현재 자동 개인화에는 사용하지 않습니다.   |
 
-## 화면
+## 주요 화면
 
-### Lv3 첫 행동 제안
+잔소리봇은 할 일 등록부터 단계별 개입, Focus, 완료와 History까지 하나의 흐름으로 연결됩니다.
 
-![Lv3에서 회피 이유와 첫 행동을 제안하는 잔소리봇 모달](./showcase/screenshots/microtask_lv3.webp)
+| 할 일 등록                                                                           | Lv1 첫 개입                                                                               |
+| ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| ![할 일과 회피 이유를 입력하는 등록 화면](./showcase/screenshots/task-register.webp) | ![부드럽게 시작을 권하는 Lv1 개입과 Web Push 알림](./showcase/screenshots/nudge-lv1.webp) |
 
-### Shared Journey Focus Mode
+| Home · Lv2 첫 행동                                                                         | Lv3 강화 개입                                                                                     |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------- |
+| ![Shared Journey와 Lv2 첫 행동을 보여주는 Home 화면](./showcase/screenshots/home-lv2.webp) | ![회피 이유를 다시 확인하고 다른 행동을 제안하는 Lv3 개입](./showcase/screenshots/nudge-lv3.webp) |
 
-![캐릭터와 Journey 배경을 사용하는 Focus Mode](./showcase/screenshots/focus_mode.webp)
+| Focus Mode                                                                                | Completion                                                                               |
+| ----------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| ![Lv4 Shared Journey 배경에서 진행하는 Focus Mode](./showcase/screenshots/focus-lv4.webp) | ![작업 완료와 피드백을 보여주는 Completion 화면](./showcase/screenshots/completion.webp) |
 
-### History
+| History                                                                                    |
+| ------------------------------------------------------------------------------------------ |
+| ![완료 기록과 최근 실행 추이를 확인하는 History 화면](./showcase/screenshots/history.webp) |
 
-![완료 기록과 Insight를 확인하는 History 화면](./showcase/screenshots/history_page.webp)
+각 화면의 역할은 다음과 같습니다.
 
-구현 화면은 다음 일곱 영역으로 구성됩니다.
-
-- **Landing**: 문제와 서비스 사용 흐름 소개
-- **Register**: 할 일, 일정, 예상 회피 이유 등록
-- **Home**: 현재 통계, Journey Hero, 상태별 Task 확인
-- **Nudge Modal**: Lv1~Lv4 개입과 첫 행동 제안
-- **Focus Mode**: 진입 레벨별 Shared Journey와 집중 시간 기록
-- **Completion**: 완료 결과와 피드백
-- **History**: 완료 리스트·캘린더·최근 Insight
+- **Landing**: 문제와 서비스 사용 흐름을 소개합니다.
+- **Register**: 할 일, 일정과 예상 회피 이유를 등록합니다.
+- **Home**: 현재 통계, Shared Journey와 상태별 할 일을 확인합니다.
+- **Nudge Modal**: Lv1~Lv4 개입과 첫 행동 제안을 제공합니다.
+- **Focus Mode**: 진입 레벨에 맞는 여정에서 집중 시간을 기록합니다.
+- **Completion**: 완료 결과를 확인하고 피드백을 남깁니다.
+- **History**: 완료 기록, 캘린더와 최근 실행 추이를 확인합니다.
 
 ## 기술 스택
 
@@ -99,29 +111,83 @@ flowchart LR
     Prisma --> DB[("Supabase PostgreSQL")]
 ```
 
-### 첫 행동 생성
+### Vercel 배포와 API 요청
 
 ```mermaid
-flowchart LR
-    Request["할 일·회피 이유·현재 레벨"] --> Gemini["Gemini 생성"]
-    Gemini --> Validator{"응답 형식·품질 검증"}
-    Validator -->|통과| Result["마이크로태스크"]
-    Validator -->|실패| Fallback["rule-based fallback"]
+flowchart TB
+    Browser["사용자 브라우저"]
+
+    subgraph Vercel["Vercel"]
+        Static["React · Vite 정적 파일"]
+        Rewrite["/api/* rewrite"]
+        Function["Vercel Function<br/>api/index.js"]
+        Express["Express App<br/>server/dist/app.js"]
+    end
+
+    Prisma["Prisma"]
+    DB[("Supabase PostgreSQL")]
+    Gemini["Gemini API"]
+    PushProvider["Web Push Provider"]
+
+    Browser -->|화면 요청| Static
+    Browser -->|/api 요청| Rewrite
+    Rewrite --> Function
+    Function --> Express
+    Express --> Prisma
+    Prisma --> DB
+    Express --> Gemini
+    Express --> PushProvider
 ```
 
-### Web Push
+Vercel은 정적 프런트엔드를 제공하고, `/api/*` 요청은 rewrite를 통해
+`api/index.js`의 Serverless Function으로 전달되어 Express가 처리합니다.
+
+### 개입과 Web Push 실행 흐름
 
 ```mermaid
-flowchart LR
-    Subscribe["브라우저 Push 구독"] --> SubscriptionDB[("구독 DB 저장")]
-    LevelUp["레벨 상승"] --> Send["VAPID 발송"]
-    SubscriptionDB --> Send
-    Send --> SW["Service Worker 수신"]
-    SW --> Notification["시스템 알림"]
+flowchart TB
+    Timer["Home 브라우저 타이머"]
+    EventAPI["POST /api/tasks/:id/events"]
+    Update["skipCount · level · TaskEvent 갱신"]
+    LevelUp{"실제 레벨 상승?"}
+    Modal["Nudge Modal"]
+
+    MicrotaskAPI["POST /api/microtasks"]
+    Gemini["Gemini 생성"]
+    Validator{"응답 형식·품질 검증"}
+    Fallback["rule-based fallback"]
+    Action["첫 행동 제안"]
+
+    Subscribe["사용자 알림 허용 · Push 구독"]
+    PushAPI["POST /api/push-subscriptions"]
+    SubscriptionDB[("PushSubscription 저장")]
+    Push["VAPID Web Push"]
+    SW["Service Worker"]
+    Notification["시스템 알림"]
+
+    Timer -->|만료| EventAPI
+    EventAPI --> Update
+    Update --> LevelUp
+    LevelUp -->|예| Modal
+    LevelUp -->|예| Push
+
+    Modal -->|Lv2 · Lv3 첫 행동 요청| MicrotaskAPI
+    MicrotaskAPI --> Gemini
+    Gemini --> Validator
+    Gemini -->|호출 실패| Fallback
+    Validator -->|통과| Action
+    Validator -->|실패| Fallback
+    Fallback --> Action
+
+    Subscribe --> PushAPI
+    PushAPI --> SubscriptionDB
+    SubscriptionDB --> Push
+    Push --> SW
+    SW -->|showNotification| Notification
 ```
 
-현재 다음 알림 시각은 프런트에서 계산합니다. `nextNudgeAt` 영속화와 외부
-Cron 기반 서버 스케줄러는 아직 구현되지 않았습니다.
+현재 개입 시각은 열린 Home 화면의 브라우저 타이머가 결정합니다.
+`nextNudgeAt` 영속화와 외부 Cron 기반 서버 스케줄러는 아직 구현되지 않았습니다.
 
 ## 로컬 실행
 
@@ -232,11 +298,12 @@ npm run dev:all
 
 ## 배포와 데모
 
-- **배포**: Vercel Production에서 프런트와 Express serverless API를 제공합니다.
-- **데모 영상**: [잔소리봇 시연 영상](https://drive.google.com/file/d/16sl1Tjt1vYiOhui5PHGLSIc_a8QaJ4ze/view?usp=sharing)
+- **실제 서비스**: [잔소리봇 Production](https://hub-nine-beta.vercel.app)
+- **최종 데모 영상**: [문제 정의, 핵심 기능, 실제 시연과 AI Agent 협업 과정](https://drive.google.com/file/d/1_tKh2aWoZt9ywHCqrCNtarDGJgTCTJ9s/view?usp=sharing)
+- **배포 환경**: Vercel에서 React 정적 프런트엔드와 Express Serverless API를 함께 제공합니다.
 
-저장소에 최종 Production URL이 확정된 형태로 기록돼 있지 않아 Preview 또는
-추정 주소를 대표 데모 링크로 싣지 않았습니다.
+전시와 빠른 기능 검증에는 개입 간격이 짧은 Preview 환경을 사용하고,
+최종 공개 링크에는 실제 사용자 간격이 적용된 Production 환경을 사용합니다.
 
 ## AI와 함께한 개발
 
@@ -267,9 +334,17 @@ npm run dev:all
 
 ## 상세 문서
 
+### 프로젝트 문서
+
 - [기획서](./docs/plan.md)
 - [화면 단위 와이어프레임](./docs/wireframe.md)
 - [현재 상태와 개발 기록](./docs/checklist.md)
-- [Shared Journey 디자인 컨셉](./docs/design-concept.md)
+- [Shared Journey 디자인 콘셉트](./docs/design-concept.md)
+- [디자인 리서치](./docs/design-research.md)
 - [AI Agent 협업 워크플로우](./docs/workflow.md)
-- [위키]
+- [GitHub Wiki](https://github.com/minsss42/hub/wiki)
+
+### 최종 소개 자료
+
+- [프로젝트 소개 A3](./docs/경북대학교_김민서%20-%20프로젝트%20소개.pdf)
+- [AI Agent Workflow A3](./docs/경북대학교_김민서%20-%20AI%20Agent.pdf)
