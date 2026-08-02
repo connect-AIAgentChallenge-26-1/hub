@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
   "title": "아맞다! (Amadda)",
-  "summary": "저장한 인사이트를 현재 상황에 맞춰 다시 꺼내고, 원문을 바로 열어 실제 작업에 활용하도록 돕는 개인 인사이트 저장소입니다.",
-  "githubUser": "ppre1ude",
+  "summary": "저장한 링크를 필요한 순간 다시 꺼내 쓸 수 있도록, 저장부터 검색과 재활용까지 이어주는 개인 인사이트 저장소입니다.",
+  "githubUser": "ppre1ude(최재원)",
   "demoUrl": "https://hub-ppre1udes-projects.vercel.app",
   "thumbnail": "thumbnail.png",
   "screenshots": [
@@ -13,18 +13,18 @@
     "screenshots/capture-6.png",
     "screenshots/capture-7.png"
   ],
-  "problem": "대학생과 개인 창작자는 과제, 프로젝트, 공부, 개발과 디자인에 필요한 자료를 여러 서비스에 저장합니다. 시간이 지나면 저장 위치와 정확한 제목뿐 아니라 왜 저장했는지, 언제 쓰려 했는지도 잊습니다. 결국 유용했던 자료가 필요한 순간의 행동으로 이어지지 않습니다. 아맞다는 저장 마찰을 낮추고 개인이 남긴 메모·카테고리·출처를 다시 찾기의 단서로 연결해, 현재 하려는 일에 맞는 인사이트를 다시 꺼내 원문을 활용하게 합니다.",
+  "problem": "유용한 링크를 저장해도 시간이 지나면 어디에 뒀는지, 왜 저장했는지 잊기 쉽습니다. 특히 과제, 개발, 디자인처럼 여러 자료를 오가는 작업에서는 다시 찾는 데 드는 비용 때문에 저장한 자료가 실제 행동으로 이어지지 않습니다. 아맞다는 제목, 메모, 카테고리, 출처를 다시 찾기의 단서로 연결하고, 지금 하려는 일을 입력하면 관련 인사이트와 원문을 바로 꺼내볼 수 있게 합니다. 기획서: https://github.com/ppre1ude/hub/wiki/제품-개요",
   "targetUsers": [
-    "과제·팀 프로젝트·공부를 위해 웹 자료를 모으는 대학생",
-    "개발·디자인·창작 과정에서 참고 자료를 반복해서 찾는 개인 창작자",
-    "브라우저·Notion·파일 등에 흩어진 저장물을 한곳으로 옮겨 활용하려는 개인"
+    "과제, 팀 프로젝트, 공부를 위해 웹 자료를 모으는 대학생",
+    "개발, 디자인, 창작 과정에서 참고 자료를 반복해서 찾는 개인 창작자",
+    "브라우저, Notion, 파일 등에 흩어진 저장물을 한곳으로 옮겨 활용하려는 개인"
   ],
   "features": [
-    "모바일 공유, Chrome 확장과 웹 URL 입력으로 발견한 링크를 흐름을 끊지 않고 같은 개인 보관함에 저장합니다.",
-    "URL을 먼저 저장하고 제목, 한 줄 메모와 카테고리는 선택적으로 덧붙여 저장 부담을 낮춥니다.",
-    "기억나는 단서는 보관함 검색으로 찾고, 현재 상황이나 목적을 입력하면 관련 인사이트를 최대 6개의 작업팩으로 꺼내봅니다.",
-    "Chrome 북마크와 CSV·JSON·HTML·Markdown·텍스트·ZIP 파일, Notion 보관함을 분석해 신규·중복·오류를 확인한 뒤 가져옵니다.",
-    "연결 단서를 확인하고 원문을 바로 열며, 보관함에서 인사이트를 수정·삭제하거나 가져오기를 24시간 안에 되돌립니다."
+    "웹, Chrome 확장, Android 공유 메뉴에서 발견한 링크를 같은 보관함에 바로 저장합니다.",
+    "URL만 먼저 저장한 뒤 제목, 한 줄 메모, 카테고리를 필요할 때 덧붙입니다.",
+    "제목, 메모, 카테고리로 검색하거나 지금 하려는 일을 입력해 관련 인사이트를 꺼냅니다.",
+    "Chrome 북마크, Notion, CSV, JSON, HTML, Markdown, ZIP을 분석해 신규, 중복, 오류를 확인하고 가져옵니다.",
+    "원문을 바로 열고, 잘못 가져온 항목은 24시간 안에 한 번에 되돌립니다."
   ],
   "featureTags": [
     "상황 기반 꺼내보기",
@@ -35,106 +35,75 @@
     "React",
     "TypeScript",
     "Vite",
-    "Express",
-    "Supabase",
-    "Capacitor",
-    "Kotlin",
+    "GSAP",
     "WDS",
+    "Capacitor",
+    "Supabase",
     "Vitest",
+    "Testing Library",
+    "zip.js",
+    "Express",
+    "Kotlin",
     "Vercel"
   ],
   "techHighlights": [
-    "웹·Android·Chrome 확장이 Express 캡처 API와 Supabase RLS 저장 계약을 공유해, 채널이 달라도 같은 계정·중복 판정·보관함 결과를 유지합니다.",
-    "범용 파일은 브라우저에서만 파싱하고 Notion OAuth 토큰은 서버에서 암호화하며, 반영과 24시간 되돌리기를 Supabase RPC로 원자적으로 처리합니다.",
-    "React 앱은 FSD 경계와 WDS 어댑터·디자인 토큰으로 구성하고, Vitest·Testing Library·Supertest·pgTAP과 Vercel Preview로 회귀와 배포를 검증합니다."
+    "React와 TypeScript 기반의 FSD 구조로 페이지, 기능, 도메인과 공통 UI의 책임을 나누고, WDS를 공통 UI 계층으로 감싸 외부 라이브러리 의존성을 분리했습니다.",
+    "디자인 토큰과 공통 UI 컴포넌트로 색상, 타이포그래피와 상태 표현을 통일하고, 반응형 디자인과 GSAP을 활용해 화면 크기와 사용자 흐름에 맞는 경험을 구현했습니다.",
+    "React Hooks, useReducer와 커스텀 Workspace Hook으로 화면 상태와 Supabase 데이터를 관리하고, 늦게 끝난 요청과 중복 변경이 현재 화면을 덮지 않도록 처리했습니다.",
+    "zip.js, csv-parse와 htmlparser2를 활용해 여러 형식의 파일을 브라우저에서 분석하고, 반영 전에 신규, 중복과 오류를 확인하는 가져오기 흐름을 구현했습니다.",
+    "Capacitor와 Kotlin 플러그인으로 React 앱을 Android 공유 기능과 연결하고, 웹, Chrome 확장과 모바일에서 같은 저장 경험이 이어지도록 구성했습니다.",
+    "Vitest와 Testing Library로 저장, 검색, 수정, 오류 복구와 키보드 상호작용을 검증하고 실제 브라우저에서 반응형 화면을 확인했습니다.",
+    "기술 스택: https://github.com/ppre1ude/hub/blob/main/docs/tech-stack.md"
   ],
-  "developmentWithAI": "저는 문제 정의, 제품 원칙, 기능 우선순위, 디자인 선택과 최종 병합을 직접 결정했습니다. Codex는 저장소·Wiki·GitHub 상태를 바탕으로 설계와 구현 계획을 작성하고, 승인된 범위를 TDD와 서브에이전트 분업으로 구현했습니다. Office Hours와 grill-me로 제품 가정을 압박 검토하고, plan review로 디자인·기술·실행 계획을 구현 전에 재검토했습니다. 직접 만든 작업반장 Skill은 이슈 선택, 브랜치, 한국어 PR, 리뷰 반영, 병합 후 Project 정리를 상태 기반으로 이어갑니다. gstack 브라우저 QA와 CodeRabbit 리뷰로 반응형 화면·접근성·회귀를 확인했으며, 저는 각 단계의 결과와 실제 화면을 검수하고 최종 의사결정을 유지했습니다.",
+  "developmentWithAI": "저는 아맞다의 문제 정의와 서비스 방향부터 기능 기획, UX/UI 설계, 프론트엔드 아키텍처, 디자인 시스템, 반응형 기준과 품질 기준까지 프로젝트 전 과정을 총괄했습니다. Agent는 제가 정한 목표와 승인한 계획에 따라 조사, 구현, 테스트와 리뷰를 수행했습니다. 구현 Agent, 명세 검토 Agent와 코드 품질 검토 Agent로 역할을 나누어 결과를 교차 확인했으며, 모든 리뷰의 반영 여부와 최종 의사결정은 제가 맡았습니다. 또한 저장소 전용 작업반장 Skill을 설계해 이슈 선택부터 브랜치, PR, 리뷰 반영과 병합 후 정리까지 개발 흐름을 일관되게 운영했습니다. 개발 과정: https://github.com/ppre1ude/hub/blob/main/docs/ai-development-workflow.md",
   "agent": {
-    "summary": "제품 판단은 사람이 유지하고, Agent와 Skill은 문제 탐색, 설계 검증, 구현, 테스트, 시각 QA, 리뷰와 GitHub 운영을 역할별로 나누어 담당했습니다. 단일 프롬프트로 코드를 생성하지 않고, 제품 가설 검토부터 설계·계획·TDD 구현·독립 검토·실제 브라우저 QA·PR 리뷰까지 증거 기반 흐름을 반복했습니다. 저장소 전용 작업반장 Skill을 직접 만들어 GitHub Issues와 Project 상태를 읽고 올바른 단계에서 개발 사이클을 재개하도록 했으며, 제품 결정과 최종 병합은 항상 사람에게 남겼습니다.",
+    "summary": "사람이 프로젝트 전체를 지휘하고 서비스 방향과 최종 결정을 맡았습니다. Agent는 승인된 목표를 실행하며, Skill은 기획, 설계, 구현, 검증, 배포 단계의 질문과 검증 절차를 재사용했습니다.",
     "agentTools": [
       {
         "type": "agent",
-        "name": "Codex",
-        "purpose": "저장소·Wiki·GitHub 상태를 조사하고, 승인된 제품 결정에 따라 설계·구현·검증·문서와 PR 작업을 이어갑니다."
+        "name": "구현 Agent",
+        "purpose": "승인된 명세와 계획에 따라 필요한 코드를 구현합니다."
       },
       {
         "type": "agent",
-        "name": "구현·명세·품질 서브에이전트",
-        "purpose": "구현, 요구사항 일치 검토와 코드 품질 검토를 분리해 같은 작성자가 자신의 결과만 확인하는 편향을 줄입니다."
+        "name": "명세 검토 Agent",
+        "purpose": "구현 결과가 승인된 요구사항과 완료 조건을 충족하는지 확인합니다."
       },
       {
         "type": "agent",
-        "name": "CodeRabbit",
-        "purpose": "Pull Request 변경을 자동 검토하고, 제안은 코드와 제품 계약에 대조해 타당한 항목만 반영합니다."
+        "name": "코드 품질 검토 Agent",
+        "purpose": "구현 결과의 구조, 유지보수성과 오류 가능성을 독립적으로 검토합니다."
       },
       {
         "type": "skill",
-        "name": "작업반장",
-        "purpose": "GitHub Issues와 Project 상태를 읽어 다음 작업 선택부터 브랜치·한국어 PR·리뷰 반영·병합 후 정리까지 올바른 단계에서 재개합니다."
+        "name": "Office Hours, grill-me, brainstorming",
+        "purpose": "구현 전에 사용자 문제, 성공 기준과 선택지의 장단점을 확인합니다."
       },
       {
         "type": "skill",
-        "name": "Office Hours·grill-me",
-        "purpose": "사용자 문제, 제품 가설, 성공 기준과 숨은 전제를 구현 전에 질문하고 반박해 제품 판단을 선명하게 만듭니다."
+        "name": "Plan Review, writing-plans",
+        "purpose": "제품, 디자인, 기술 관점에서 계획을 검토하고 구현 순서를 구체화합니다."
       },
       {
         "type": "skill",
-        "name": "brainstorming·writing-plans",
-        "purpose": "여러 접근의 장단점을 비교해 설계를 승인받고, 승인된 명세를 파일·단계·검증 기준이 분명한 구현 계획으로 바꿉니다."
+        "name": "작업반장, subagent-driven-development",
+        "purpose": "GitHub 상태에 맞춰 다음 단계를 선택하고 독립적인 작업을 나눕니다."
       },
       {
         "type": "skill",
-        "name": "plan-ceo-review·plan-design-review·plan-eng-review",
-        "purpose": "제품 가치, 사용자 경험과 기술 실행 가능성의 서로 다른 관점에서 계획을 구현 전에 검토합니다."
-      },
-      {
-        "type": "skill",
-        "name": "subagent-driven-development",
-        "purpose": "계획을 독립적인 작업으로 나누고 구현 뒤 명세 검토와 품질 검토를 순서대로 통과시킵니다."
-      },
-      {
-        "type": "skill",
-        "name": "test-driven-development",
-        "purpose": "실패를 재현하는 테스트를 먼저 확인하고 최소 구현으로 통과시킨 뒤, 필요한 범위에서만 회귀를 검증합니다."
-      },
-      {
-        "type": "skill",
-        "name": "gstack QA·Review",
-        "purpose": "실제 브라우저에서 반응형 화면, 접근성, 핵심 사용자 흐름과 회귀를 확인하고 PR 전후 품질을 점검합니다."
+        "name": "TDD, gstack QA/Review",
+        "purpose": "기대 결과를 테스트로 확인하고 실제 화면, 접근성과 회귀를 점검합니다."
       }
     ],
     "workflows": [
       {
-        "name": "제품 발견과 설계 Workflow",
+        "name": "기획 → 설계 → 구현 → 검증 → 배포",
         "steps": [
-          "Office Hours와 grill-me로 문제·가설·성공 기준 압박 검토",
-          "brainstorming으로 제품과 UI 접근 2~3개 비교",
-          "CEO·디자인·엔지니어링 관점의 plan review 수행",
-          "사용자가 제품 결정과 설계 명세 승인",
-          "writing-plans로 구현 순서와 검증 범위 확정"
-        ]
-      },
-      {
-        "name": "이슈 기반 구현 Workflow",
-        "steps": [
-          "작업반장이 GitHub Project에서 실행 가능한 이슈와 현재 단계 확인",
-          "최신 main에서 격리된 브랜치와 worktree 준비",
-          "변경 행동을 재현하는 실패 테스트 또는 기존 검증 확인",
-          "구현 서브에이전트가 승인 범위의 최소 코드 작성",
-          "명세 검토와 코드 품질 검토를 독립적으로 수행",
-          "변경 범위에 필요한 테스트·정적 검사·빌드만 실행",
-          "한국어 PR을 만들고 Project 상태를 검토 중으로 전환"
-        ]
-      },
-      {
-        "name": "리뷰·시각 QA·마무리 Workflow",
-        "steps": [
-          "CodeRabbit 의견을 코드와 제품 계약에 대조",
-          "유효한 리뷰만 최소 수정하고 관련 검증 재실행",
-          "gstack으로 390px·768px·1280px 실제 화면과 핵심 흐름 확인",
-          "Vercel Preview와 필수 CI 결과 확인",
-          "사용자가 실제 화면과 변경 내용을 검수하고 최종 병합",
-          "작업반장이 이슈·Project·로컬 브랜치와 다음 작업 상태 정리"
+          "기획 — Office Hours와 grill-me로 사용자 문제와 성공 기준 확인",
+          "설계 — brainstorming과 Plan Review로 선택지를 비교하고 사람이 승인",
+          "구현 — 작업반장이 이슈를 고르고 구현 Agent가 승인된 범위를 구현",
+          "검증 — TDD, 브라우저 QA, CodeRabbit으로 동작, 화면, PR 점검",
+          "배포 — GitHub Actions, Vercel, Supabase 상태 확인 후 사람이 최종 병합"
         ]
       }
     ]
