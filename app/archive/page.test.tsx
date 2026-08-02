@@ -57,6 +57,33 @@ describe("ArchivePage", () => {
     );
   });
 
+  it("아카이브 항목을 누르면 AI 요약과 원본 링크를 표시한다", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({ ok: true, json: async () => [item] }),
+    );
+
+    render(<ArchivePage />);
+
+    await screen.findByText("겨울 코트 추천");
+    const card = screen.getByRole("button", { expanded: false });
+    expect(card).toHaveAttribute("aria-expanded", "false");
+    expect(screen.queryByText(item.summary)).not.toBeInTheDocument();
+
+    fireEvent.click(card);
+
+    expect(card).toHaveAttribute("aria-expanded", "true");
+    expect(screen.getByText(item.summary)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /원본 링크 열기/ })).toHaveAttribute(
+      "href",
+      item.original_url,
+    );
+    expect(screen.getByRole("link", { name: /원본 링크 열기/ })).toHaveAttribute(
+      "target",
+      "_blank",
+    );
+  });
+
   it("빈 목록 안내를 표시한다", async () => {
     vi.stubGlobal(
       "fetch",

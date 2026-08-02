@@ -68,6 +68,7 @@ export default function ArchivePage() {
                 pendingLabel="삭제 중"
                 onAction={deleteItem}
                 confirmMessage="이 콘텐츠를 영구 삭제할까요?"
+                showDetails
               />
             ))}
           </ul>
