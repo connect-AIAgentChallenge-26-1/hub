@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState, useSyncExternalStore } from "react";
+import { kstDateString } from "./lib/date";
 import BrainDumpInput from "./components/BrainDumpInput";
 import MicrostepReview from "./components/MicrostepReview";
 import TaskPreview from "./components/TaskPreview";
@@ -78,8 +79,11 @@ export default function Home() {
   const [brainDumpNotice, setBrainDumpNotice] = useState(null);
   // T17: 검토 화면(review). pendingBrainDumpParams는 지금 microsteps를 만든 원래 요청값
   // ({text, turn, clarifications}) - "전부 다시 쪼개기"가 같은 값으로 재호출하는 데 쓴다.
-  // 새로고침으로 사라져도(재적용 안 됨) 화면 자체는 review로 복원되므로 삭제/확인은 그대로 된다.
-  const [pendingBrainDumpParams, setPendingBrainDumpParams] = useState(null);
+  // kok-session에 같이 저장되므로 새로고침 후에도 "전부 다시 쪼개기"가 그대로 동작한다
+  // (리뷰 발견: 복원 안 되던 버그, 208-02).
+  const [pendingBrainDumpParams, setPendingBrainDumpParams] = useState(
+    () => readSavedSession()?.pendingBrainDumpParams ?? null
+  );
   const [isReshuffling, setIsReshuffling] = useState(false);
   const [isSavingSteps, setIsSavingSteps] = useState(false);
   const [saveStepsError, setSaveStepsError] = useState(null);
@@ -180,7 +184,10 @@ export default function Home() {
   // localStorage에 남겨두고, 오늘과 날짜만(시간 무시) 비교한다.
   const [returningMessage, setReturningMessage] = useState(null);
   useEffect(() => {
-    const todayStr = new Date().toISOString().slice(0, 10);
+    // 리뷰 발견: toISOString()은 UTC 날짜라서 한국 시간 자정~오전 9시엔 실제보다 하루 이전
+    // 값이 나왔다(예: 한국 시간 2026-08-02 00:30 → UTC로는 아직 2026-08-01). kstDateString은
+    // 이 시각차를 보정해 항상 한국 날짜를 돌려준다.
+    const todayStr = kstDateString();
     const lastVisit = localStorage.getItem("kok-last-visit");
     if (lastVisit) {
       const gapDays = Math.round(
@@ -253,9 +260,10 @@ export default function Home() {
         currentIndex,
         microsteps,
         stepStartedAt: stepStartedAt?.toISOString() ?? null,
+        pendingBrainDumpParams,
       })
     );
-  }, [step, currentIndex, microsteps, stepStartedAt]);
+  }, [step, currentIndex, microsteps, stepStartedAt, pendingBrainDumpParams]);
 
   // 최초 Brain Dump 제출과, 기한을 되물었을 때의 답변 제출을 모두 처리한다(T14).
   // followUpQuestion이 떠 있는 상태면 이번 입력은 새 Brain Dump가 아니라 그 질문의 답이다.
@@ -672,11 +680,34 @@ export default function Home() {
       logDecision(true);
       setStruggleLoading(true);
       try {
-        await fetch("/api/brain-dump", {
+        // 리뷰 발견(T17 회귀): T17로 /api/brain-dump가 더 이상 저장하지 않게 됐는데, 이 분기는
+        // 응답을 무시하고 바로 원본을 archive해서 결과가 저장 안 된 채 원본만 사라졌었다.
+        // 새로 쪼갠 결과를 먼저 저장하고, 저장이 확인된 뒤에만 원본을 archive한다.
+        // turn:2로 보내 기한을 되묻지 않고 바로 확정하게 한다 — 스텝 제목만으로는 기한 문구가
+        // 없어 되물을 수 있는데, 아래서 scheduledDate를 원본 값으로 덮어쓸 거라 필요 없다.
+        const splitResponse = await fetch("/api/brain-dump", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ text: current.title }),
+          body: JSON.stringify({ text: current.title, turn: 2, clarifications: [] }),
         });
+        if (!splitResponse.ok) throw new Error("재분할에 실패했어요, 다시 시도해줘");
+        const splitData = await splitResponse.json();
+        if (!splitData.microsteps) {
+          throw new Error("재분할에 실패했어요, 다시 시도해줘");
+        }
+        // 새 스텝은 원본의 예정일을 그대로 물려받는다(오늘 목록에서 안 사라지게).
+        const newSteps = splitData.microsteps.map((step) => ({
+          ...step,
+          scheduledDate: current.scheduledDate ?? step.scheduledDate,
+        }));
+
+        const saveResponse = await fetch("/api/steps/save", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ microsteps: newSteps }),
+        });
+        if (!saveResponse.ok) throw new Error("재분할 결과 저장에 실패했어요, 다시 시도해줘");
+
         await fetch("/api/steps/archive", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -689,7 +720,7 @@ export default function Home() {
         resetStruggleState();
         setStep("preview");
       } catch (err) {
-        setStruggleError("재분할에 실패했어요, 다시 시도해줘");
+        setStruggleError(err.message);
       } finally {
         setStruggleLoading(false);
       }

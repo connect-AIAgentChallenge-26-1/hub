@@ -1,9 +1,10 @@
 import { queryDatabase } from "@/app/lib/notion";
+import { kstDateString } from "@/app/lib/date";
 
 function dateStringFromDaysAgo(daysAgo) {
   const date = new Date();
   date.setDate(date.getDate() - daysAgo);
-  return date.toISOString().slice(0, 10);
+  return kstDateString(date);
 }
 
 // 이번 주(최근 7일, 오늘 포함) 중 완료 기록(Done=true, CompletedAt)이 있는 날이 며칠인지,
@@ -25,7 +26,7 @@ export async function GET() {
     rows
       .map((row) => row.properties?.CompletedAt?.date?.start)
       .filter(Boolean)
-      .map((iso) => iso.slice(0, 10))
+      .map((iso) => kstDateString(new Date(iso)))
   );
 
   const week = [];

@@ -59,10 +59,9 @@ input → review(다시 쪼개기 가능) → (이대로 시작하기: Notion �
 
 ## 새로고침 내구성(T04)
 
-`Home`은 `step`/`currentIndex`/`microsteps`/`stepStartedAt`을 localStorage(`kok-session`)에 저장하고 마운트 시 복원한다. `review`(T17)도 복원 대상이라, 저장 전 검토 화면에서 새로고침해도 그 목록 그대로 돌아온다(단, 다시 쪼개기용 `pendingBrainDumpParams`는 저장되지 않아 새로고침 후엔 삭제만 가능하고 다시 쪼개기는 원래 텍스트를 다시 입력해야 한다). `reason`/`proposal`(힘들어 루프 중)은 재구성에 필요한 정보(이유 칩, 제안 내용)를 저장하지 않으므로 새로고침 시 `focus`로 되돌아간다. `timer-confirm`도 마찬가지로 복원 대상이 아니라 `focus`로 되돌아간다. 서버-클라이언트 하이드레이션 불일치를 피하려고 `useSyncExternalStore`로 마운트 완료 전엔 항상 `input`을 그린다.
+`Home`은 `step`/`currentIndex`/`microsteps`/`stepStartedAt`을 localStorage(`kok-session`)에 저장하고 마운트 시 복원한다. `review`(T17)도 복원 대상이라, 저장 전 검토 화면에서 새로고침해도 그 목록 그대로 돌아오고 `pendingBrainDumpParams`도 같이 저장돼 "전부 다시 쪼개기"까지 그대로 동작한다(리뷰 발견으로 260802 수정). `reason`/`proposal`(힘들어 루프 중)은 재구성에 필요한 정보(이유 칩, 제안 내용)를 저장하지 않으므로 새로고침 시 `focus`로 되돌아간다. `timer-confirm`도 마찬가지로 복원 대상이 아니라 `focus`로 되돌아간다. 서버-클라이언트 하이드레이션 불일치를 피하려고 `useSyncExternalStore`로 마운트 완료 전엔 항상 `input`을 그린다.
 
 ## 지금은 mock/미완인 부분 (설계 시 참고)
 
 - 타이머 연장(T15) 도중 새로고침하면 연장된 시간(`timerDurationMinutes`)은 저장되지 않아 원래 예상 시간 기준으로 복원된다. C04/C15 어느 쪽에도 명시된 요구사항은 아니라 지금은 그대로 둔다.
 - 소리 on/off(T24)는 값 자체는 새로고침해도 유지되지만, 새로고침 직후 실제 재생은 브라우저 자동재생 정책 때문에 사용자 동작(스피커 아이콘 클릭) 없이는 시작되지 않는다. `ThemeSound`가 `play()` 실패를 조용히 무시하므로 에러는 안 나고, 스피커 아이콘을 다시 누르면 정상 재생된다.
-- `review`(T17) 화면에서 새로고침하면 목록 자체는 복원되지만 `pendingBrainDumpParams`는 저장되지 않아 "전부 다시 쪼개기"가 그 시점부턴 동작하지 않는다(삭제·확인은 그대로 됨). C17에 명시된 요구사항은 아니라 지금은 그대로 둔다.
