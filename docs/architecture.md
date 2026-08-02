@@ -31,7 +31,7 @@ CareerSignal은 채용공고와 근거 자료를 직무 단위로 분석해 통�
 | 범위 | 식별자 | 의미 |
 | --- | --- | --- |
 | 직무 전체 | `job_role_id` | 동일 직무 공고 전체의 공통 요구와 통계 |
-| 기업군 | `company_cluster_id` | 동일 직무 안에서 기업군이 보이는 편차 |
+| 기업군 | `company_cluster_id` | 동일 직무 안에서 기업군이 보이는 추가 요구 |
 | 개별 공고 | `posting_id` | 특정 공고의 요구사항과 회사 맥락 |
 
 정적 프로토타입은 `prototype/`, React 화면은 `product/`, Express API는 `server/`, Python·FastAPI 에이전트 서비스는 `agent/`, 저장소는 Supabase(Postgres + pgvector)가 담당한다.
@@ -51,13 +51,14 @@ CareerSignal은 채용공고와 근거 자료를 직무 단위로 분석해 통�
 
 ### 2.2 구성요소 분류
 
-구성요소를 세 계층으로 나눈다.
+구성요소를 네 계층으로 나눈다.
 
 | 계층 | 구성요소 | 판별 기준 |
 | --- | --- | --- |
 | Control Plane | 분석 오케스트레이터 | 실행 계획에 따라 에이전트를 스케줄링한다 |
 | Domain Agents | 데이터 수집, 지식 구축, 통계 분석, 채용공고 해석, 합격 전략, 준비 로드맵 | 불확실성 속에서 검색과 충분성을 판단한다 |
-| Helper Pipelines | 적재, 인덱싱, 집계, 계보 기록, 검증, 서빙 | 결과를 재계산으로 검증할 수 있다 |
+| Helper Pipelines | 적재, 인덱싱, 집계, 계보 기록, 서빙 | 결정적 처리를 수행해 결과를 재계산할 수 있다 |
+| Verification | 통합 검증 | 규칙 검사와 모델 판정을 결합해 공개·수리·차단을 판정한다 |
 
 세 가지 규칙이 계층의 경계를 정의한다.
 
@@ -68,82 +69,59 @@ CareerSignal은 채용공고와 근거 자료를 직무 단위로 분석해 통�
 ## 3. 전체 시스템 구성
 
 ```mermaid
-flowchart TB
-    subgraph SRC["원본 자료"]
-        SA[/"기업 공식 채용공고"/]
-        SB[/"회사 공식 채용·기술 자료"/]
-        SC[/"공공·직무 표준"/]
-        SD[/"검증된 외부 전문가 자료"/]
+flowchart LR
+    subgraph INPUT["외부 입력"]
+        SRC[/"채용공고·공식 자료·공공 자료·전문가 자료"/]
+        EVENT[/"정기 수집 일정·운영자 자료 갱신"/]
+        USER[/"사용자 요청"/]
     end
 
-    subgraph CTRL["Control Plane"]
-        CHANGE[/"데이터 변경 이벤트"/]
-        ORCH{{"분석 오케스트레이터<br/>영향 범위 · 실행 순서 · 버전 활성화"}}
-    end
-
-    subgraph AGENTS["Domain Agents"]
-        COL{{"데이터 수집 · A3"}}
-        KB{{"지식 구축 · A2"}}
-        STAT{{"통계 분석 · A2 발견 + A0 집계"}}
-        INTER{{"채용공고 해석 · A2"}}
-        STRAT{{"합격 전략 · A2"}}
-        ROAD{{"준비 로드맵 · A2"}}
-    end
-
-    subgraph PIPE["Helper Pipelines"]
-        P1[["적재"]]
-        P2[["인덱싱"]]
-        P3[["집계"]]
-        P6[["계보 기록"]]
-        P4[["검증"]]
-        P5[["서빙"]]
-    end
-
-    subgraph BB["Supabase 블랙보드"]
-        RAW[("원본 스냅샷·관찰·평가")]
-        IDX[("청크·임베딩·키워드 인덱스")]
-        FACT[("mention·할당·분류체계")]
-        GRAPH[("지식 그래프·Wiki")]
-        OUT[("분석 산출물")]
-        REQ[("research_requests")]
-        TRACE[("검색·도구·검증 궤적")]
-        ACTIVE[("활성 분석 버전")]
-    end
-
-    subgraph RT["사용자 런타임"]
-        API[["Express API"]]
+    subgraph VERCEL["Vercel"]
         UI(["React 5화면"])
     end
 
+    subgraph RENDER["Render"]
+        API[["Express API"]]
+
+        subgraph FASTAPI["FastAPI 에이전트 서비스"]
+            ORCH{{"분석 오케스트레이터<br/>영향 범위 · 실행 순서 · 버전 활성화"}}
+            COL{{"데이터 수집 에이전트 · A3"}}
+            DOMAIN{{"지식 구축 · 통계 분석 · 채용공고 해석<br/>합격 전략 · 준비 로드맵 에이전트 · A2"}}
+            PIPE[["적재 · 인덱싱 · 집계 · 계보 기록"]]
+            VERIFY{{"통합 검증"}}
+        end
+    end
+
+    DB[("Supabase 블랙보드<br/>원본 · 인덱스 · 통계 · 그래프 · 산출물 · 실행 궤적")]
+
+    subgraph PROVIDERS["외부 모델 제공자"]
+        MODEL[/"OpenAI 생성·임베딩"/]
+        AUDIT[/"NVIDIA 교차 검사"/]
+    end
+
     SRC --> COL
-    CHANGE --> ORCH
+    EVENT --> ORCH
+    USER --> UI
+    UI -->|"조회·공고 입력"| API
+    API -->|"활성 결과·온디맨드 결과"| UI
+    API -->|"캐시 미적중 공고"| ORCH
+
     ORCH --> COL
-    ORCH --> KB
-    ORCH --> STAT
-    ORCH --> INTER
-    ORCH --> STRAT
-    ORCH --> ROAD
+    ORCH --> DOMAIN
+    COL --> PIPE
+    DOMAIN --> PIPE
+    PIPE --> DB
+    DB -->|"활성 통계·지식 자산"| DOMAIN
+    DOMAIN --> VERIFY
+    VERIFY -->|"검증 통과 버전 활성화"| DB
+    DB -->|"활성 분석 결과"| API
 
-    COL --> P1 --> RAW
-    RAW --> P2 --> IDX
-    IDX --> STAT --> FACT
-    FACT --> P3 --> OUT
-    FACT --> KB
-    OUT --> KB --> GRAPH
-    GRAPH --> INTER
-    OUT --> INTER --> OUT
-    OUT --> STRAT --> OUT
-    OUT --> ROAD --> OUT
-    OUT --> P6 --> GRAPH
-
-    INTER --> REQ
-    STRAT --> REQ
-    ROAD --> REQ
-    REQ --> ORCH
-
-    AGENTS --> TRACE
-    OUT --> P4 --> ACTIVE
-    ACTIVE --> P5 --> API --> UI
+    COL -.-> MODEL
+    DOMAIN -.-> MODEL
+    VERIFY -.-> AUDIT
+    ORCH -.->|"실행 기록"| DB
+    DOMAIN -.->|"검색·도구 기록"| DB
+    VERIFY -.->|"검사별 판정"| DB
 ```
 
 도형은 구성요소의 성격을 나타낸다.
@@ -151,7 +129,7 @@ flowchart TB
 | 도형 | 의미 |
 | --- | --- |
 | 평행사변형 | 외부 자료와 입력 이벤트 |
-| 육각형 | 판단하는 구성요소. 오케스트레이터와 도메인 에이전트 |
+| 육각형 | 판단하는 구성요소. 오케스트레이터·도메인 에이전트·통합 검증 |
 | 서브루틴 | 결정적 helper 파이프라인 |
 | 원통 | 저장소의 논리 영역 |
 | 스타디움 | 사용자 접점 |
@@ -168,14 +146,14 @@ flowchart TB
 | 데이터 수집 에이전트 | 자료 발견·수집·평가, 원본과 출처 평가 저장 | A3 | 데이터 변경, 조사 요청 | `agent/` |
 | 지식 구축 에이전트 | 지식 그래프와 Wiki 구축 | A2 | 데이터 변경 | `agent/` |
 | 통계 분석 에이전트 | mention 추출, 차원 발견과 승격, 할당 | A2 | 데이터 변경 | `agent/` |
-| 채용공고 해석 에이전트 | 직무 기준선, 기업군·공고 편차, 회사 맥락 신호 | A2 | 데이터 변경 | `agent/` |
+| 채용공고 해석 에이전트 | 직무 공통 기대치, 기업군·공고 추가 요구, 회사 특징 | A2 | 데이터 변경 | `agent/` |
 | 합격 전략 에이전트 | 체크리스트와 포트폴리오·자소서·면접 전략 | A2 | 데이터 변경 | `agent/` |
 | 준비 로드맵 에이전트 | 기본 프로젝트 로드맵, 학습 전략, 선수 관계 | A2 | 데이터 변경 | `agent/` |
 | 적재 파이프라인 | 해시, 중복 판정, 스냅샷·관찰·평가 기록 | A0 | 수집 직후 | `agent/` |
 | 인덱싱 파이프라인 | 청크 분할, 문맥 부착, 임베딩, 키워드 인덱스 | A0 | 적재 직후 | `agent/` |
 | 집계 파이프라인 | 지표 실행, 표본 판정, 불확실성 계산, 깊이 프로파일 산출 | A0 | 할당 직후 | `agent/` |
 | 계보 기록 파이프라인 | Provenance 엣지와 사후 semantic 엣지 기록, 경로 캐시 갱신 | A0 | 각 산출물 저장 직후 | `agent/` |
-| 검증 파이프라인 | 규칙·의미 검증, 판정 기록 | A0 + A1 | 각 산출물 직후 | `agent/` |
+| 통합 검증 | 규칙·의미 검증, 공개·수리·차단 판정 | A0 + A1 | 각 산출물 직후 | `agent/` |
 | 서빙 파이프라인 | 활성 분석 버전 조회, 저장된 payload 반환, 범위 폴백 | A0 | 사용자 요청 | `agent/`, `server/` |
 
 ## 5. 블랙보드와 실행 봉투
@@ -244,7 +222,7 @@ flowchart TB
 
 ```mermaid
 sequenceDiagram
-    participant Source as 데이터 변경
+    participant Source as 정기 일정·데이터 변경
     participant Orch as 오케스트레이터
     participant Collector as 수집 에이전트
     participant Pipe as Helper Pipelines
@@ -256,7 +234,7 @@ sequenceDiagram
     participant Verify as 검증
     participant DB as Supabase
 
-    Source->>Orch: 변경 이벤트와 데이터 버전
+    Source->>Orch: 실행 이벤트와 데이터 버전
     Orch->>Orch: 영향 직무·기업군·공고 계산
     Orch->>DB: 분석 버전 생성
     Orch->>Collector: 영향 자료 수집
@@ -286,6 +264,11 @@ sequenceDiagram
     Orch->>Verify: 분석 버전 전체 검증
     Verify->>DB: 검사별 판정 기록
     Verify-->>Orch: 활성화 가능 여부
+    alt 검증과 수용 평가 통과
+        Orch->>DB: 새 분석 버전 활성화
+    else 차단 판정 또는 수용 평가 미달
+        Orch->>DB: 기존 활성 버전 유지
+    end
 ```
 
 이 순서는 채용공고 변경으로 모든 단계가 필요한 실행을 나타낸다. 오케스트레이터는 변경 유형에 따라 영향이 없는 단계를 생략한다.
@@ -456,7 +439,7 @@ Express가 부르는 것은 `/extract`와 `/postings/analyze` 둘이다. 브라�
 
 ## 11. 사용자 공고 직접 입력
 
-사용자가 입력한 공고는 통계와 직무 기준선에 포함하지 않는다.
+사용자가 입력한 공고는 통계와 직무 공통 기대치에 포함하지 않는다.
 
 Express는 입력 길이와 요청 빈도를 제한하고 원문을 정규화한다. 정규화는 개인정보 패턴 제거를 포함하며, 규칙 본문은 [데모 시드 계약](../agent/data/demo_seed/CONTRACT.md) 6.2가 소유한다. Express와 FastAPI가 같은 규칙을 쓰므로 같은 원문이 양쪽에서 같은 SHA-256을 낸다.
 
@@ -470,6 +453,7 @@ sequenceDiagram
     participant UI as React
     participant API as Express
     participant Agent as FastAPI 온디맨드 체인
+    participant Verify as 통합 검증
     participant DB as Supabase
 
     User->>UI: 공고 원문 입력
@@ -482,8 +466,16 @@ sequenceDiagram
         API->>Agent: 정규화 원문·해시·직무 전달
         Agent->>Agent: 정규화와 해시 재계산 후 대조
         Agent->>DB: 활성 버전의 통계와 지식 자산 조회
-        Agent->>DB: 개별 분석 결과 저장
-        Agent-->>API: 개별 분석 결과
+        Agent->>Agent: 해석 → 전략 → 로드맵 실행
+        Agent->>Verify: 개별 분석 결과 검증
+        alt 검증 통과
+            Verify-->>Agent: 저장 가능
+            Agent->>DB: 개별 분석 결과 저장
+            Agent-->>API: 개별 분석 결과
+        else 실행 불가 또는 검증 실패
+            Verify-->>Agent: 차단 판정
+            Agent-->>API: 오류와 직무 일반 결과
+        end
     end
     API-->>UI: 해석·전략·로드맵
 ```

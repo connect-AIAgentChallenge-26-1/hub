@@ -1,6 +1,6 @@
 ## 프로젝트
 
-CareerSignal은 채용공고의 기준선과 편차를 해석해, 직무·기업군이 실제로 원하는 수준과 준비 방법을 알려주는 대학생 진로탐색 리서치 에이전트다.
+CareerSignal은 채용공고의 직무 공통 기대치와 기업군·개별 공고의 추가 요구를 해석해, 실제로 원하는 수준과 준비 방법을 알려주는 대학생 진로탐색 리서치 에이전트다.
 
 네이버 AI Agent Challenge에서 진행하는 개인 프로젝트다.
 
@@ -16,6 +16,7 @@ CareerSignal은 채용공고의 기준선과 편차를 해석해, 직무·기업
 - `prototype/`, `project-intro/`, `product/`, `server/`는 서로 다른 실행 환경이라 코드를 공유하지 않는다. 두 개 이상에서 실제 재사용이 필요해지면 그때 공유 방법(예: 워크스페이스, 패키지 추출)을 별도로 검토한다.
 - `agent/`: AI 에이전트용 Python·FastAPI 서비스. 실행 순서·상태 공유·재시도는 `orchestration/`이 직접 정의하고(docs/adr/0016-no-orchestration-framework.md), Express가 내부 HTTP로 호출한다.
 - DB: Supabase(Postgres + pgvector). 일반 화면은 사전 생성된 활성 분석 결과를 조회하고, 에이전트는 데이터 갱신과 사용자 공고 직접 입력 때 실행한다. `server/data/`의 JSON 파일은 샘플 데이터의 원본 fixture다.
+- 최종 서비스는 이용 조건을 확인한 실제 자료를 직무별로 축적하고 정기 갱신·사용자 공고 입력 때 배포된 FastAPI 에이전트를 실행한다. 생성 데이터 우선 적용은 이 목표를 바꾸지 않고 자료 확보와 서비스 완성의 순서만 분리한다.
 
 ### `agent/` 내부 구조
 
@@ -204,7 +205,7 @@ Mermaid flowchart의 도형은 구성요소의 성격을 나타낸다. 모든 �
 - 디자인 토큰: docs/design-tokens.md
 - 개발 백로그: docs/backlog.md
 - 검증 체크리스트: docs/checklist.md
-- 결정 기록: docs/adr/ (0001~0016)
+- 결정 기록: docs/adr/ (0001~0017)
 - 평가 세트: docs/eval/
 
 새 작업을 시작할 때는 `AGENTS.md`와 함께 `docs/knowledge-schema.md`, `docs/statistics-model.md`, `docs/architecture.md`, `docs/agent-design.md`를 읽는다.

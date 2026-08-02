@@ -1,11 +1,10 @@
-# 데모 시드 계약 (B0)
+# 데모 시드 계약
 
-이 문서는 병렬 갈래가 서로 어긋나지 않도록 식별자, 테이블, 컬럼 순서, 응답 형태를 고정한다.
-모든 트랙 A·B 갈래는 이 계약을 기준으로 작업한다. 계약과 다른 결정을 내리지 않는다.
+이 문서는 생성 데이터의 식별자, 테이블, 컬럼 순서, 응답 형태와 검증 규칙을 고정한다.
 
 ## 0. 원칙
 
-1. 필요한 모든 코드와 스키마를 구현한다. 데이터만 생성한다.
+1. 서비스 코드와 스키마를 바꾸지 않고 같은 계약을 따르는 데이터만 생성한다.
 2. 생성 스크립트는 데이터베이스에 접속하지 않는다. 메모리에서 계산하고 CSV 로만 낸다.
 3. 모델(OpenAI) 호출은 0회다. 어댑터는 `Protocol` + `OpenAI*` + `Stub*` 3종 세트로 만들고
    데모 경로는 항상 `Stub*` 또는 저장된 결과를 쓴다.
@@ -49,19 +48,19 @@
 
 ## 2. 직무 아홉 종
 
-| `job_role_id` | 표시명 | 담당 갈래 | 깊이 |
-| --- | --- | --- | --- |
-| `backend` | 백엔드 개발자 | A1 | 산출물 4종 · 차원 15 |
-| `frontend` | 프론트엔드 개발자 | A2 | 산출물 4종 · 차원 8 |
-| `ai_engineer` | AI 엔지니어 | A3 | 산출물 4종 · 차원 5 |
-| `data_engineer` | 데이터 엔지니어 | A4 | 산출물 4종 · 차원 5 |
-| `fullstack` | 풀스택 개발자 | A5 | 산출물 4종 · 차원 5 |
-| `devops` | DevOps 엔지니어 | A6 | 산출물 4종 · 차원 5 |
-| `mobile` | 모바일 개발자 | A7 | 산출물 4종 · 차원 5 |
-| `security` | 정보보안 | A8 | 산출물 4종 · 차원 5 |
-| `game_client` | 게임 개발자 | A9 | 산출물 4종 · 차원 5 |
+| `job_role_id` | 표시명 | 깊이 |
+| --- | --- | --- |
+| `backend` | 백엔드 개발자 | 산출물 4종 · 차원 15 |
+| `frontend` | 프론트엔드 개발자 | 산출물 4종 · 차원 8 |
+| `ai_engineer` | AI 엔지니어 | 산출물 4종 · 차원 5 |
+| `data_engineer` | 데이터 엔지니어 | 산출물 4종 · 차원 5 |
+| `fullstack` | 풀스택 개발자 | 산출물 4종 · 차원 5 |
+| `devops` | DevOps 엔지니어 | 산출물 4종 · 차원 5 |
+| `mobile` | 모바일 개발자 | 산출물 4종 · 차원 5 |
+| `security` | 정보보안 | 산출물 4종 · 차원 5 |
+| `game_client` | 게임 개발자 | 산출물 4종 · 차원 5 |
 
-아홉 직무 전부 `is_active = true` 로 올린다 (B1).
+아홉 직무 전부 `is_active = true`로 둔다.
 
 직무당 공고 30건. `recent` 18건은 `period_id = 'y2026'`, `prev` 12건은 `y2024_2025`.
 아홉 직무의 전체 공고 수는 270건이다.
@@ -94,7 +93,7 @@ prev 는 기업군마다 2건씩 총 12건이다. 기업군 범위 산출물은 
 `meta.snapshots.recent.label`·`prev.label` 도 이 표의 값과 같다.
 정의는 `docs/erd.md` 3.5 가 소유한다.
 
-## 4. 서빙 경로 (Phase 22)
+## 4. 서빙 경로
 
 화면 조회는 **활성 분석 버전의 `analysis_outputs.payload` 를 그대로 반환**한다.
 에이전트를 호출하지 않고 집계도 하지 않는다.
@@ -132,7 +131,7 @@ React → Express /api/{stats,reverse,conditions,roadmap}
 `interpretation` 37 · `strategy` 7 · `roadmap` 7)이고, posting 범위 `strategy`·`roadmap`
 60행은 `build_demo_seed.py` 가 만든다.
 
-**posting 범위의 `strategy`·`roadmap` 파생 (B17)**
+**posting 범위의 `strategy`·`roadmap` 파생**
 
 공고 범위 전략·로드맵은 직무 조각(`scripts/demo_seed/<job>.py`)이 아니라 조각을 합치는
 `scripts/build_demo_seed.py` 가 한 번에 만든다. 규칙을 아홉 직무 모듈에 흩어 두면 직무마다
@@ -151,7 +150,7 @@ React → Express /api/{stats,reverse,conditions,roadmap}
 - `checklist_items`·`roadmap_items`·`roadmap_item_fills`·`study_tracks` 에 같은 범위
   (`scope_level='posting'`, `scope_id=<posting_id>`)의 행을 함께 만든다. `analysis_claims` 는 늘리지 않는다.
 
-Express 의 폴백 규칙(posting 범위 요청을 그 공고가 속한 기업군 행으로 떨어뜨린다, B13)은
+Express의 폴백 규칙은 posting 범위 요청을 그 공고가 속한 기업군 행으로 낮춘다. 이 규칙은
 안전망으로 남긴다. 정상 경로에서는 아홉 직무 전부 posting 범위 행이 있으므로 닿지 않는다.
 
 평면 `postings` 표를 읽던 경로는 `legacy_posting_samples` 로 이름을 바꿔 폴백으로 남긴다.
@@ -159,8 +158,8 @@ Express 의 폴백 규칙(posting 범위 요청을 그 공고가 속한 기업�
 
 ## 5. payload 스키마
 
-**현재 화면이 소비하는 형태를 그대로 유지한다.** 키를 바꾸지 않는다.
-아래는 각 payload 의 최상위 키다. 세부 필드는 현재 `server/src/stats.js` 의 `aggregate` 반환값과
+**화면이 소비하는 형태를 유지한다.** 키를 바꾸지 않는다.
+아래는 각 payload 의 최상위 키다. 세부 필드는 `server/src/stats.js` 의 `aggregate` 반환값과
 `agent/main.py` 의 응답 모델을 기준으로 한다.
 
 ### A. `statistics` payload
@@ -194,7 +193,7 @@ Express 의 폴백 규칙(posting 범위 요청을 그 공고가 속한 기업�
 
 `scope_expansion[].tag`, `advanced[].type`, `combos[].id`, `reality[].tag`, `cluster_axes.axes` 는
 **직무마다 다르다.** 백엔드 전용 상수를 다른 직무에 쓰지 않는다.
-라벨은 payload 안에 함께 담으므로 서버 코드에 상수를 두지 않는다 (B13 이 상수 표를 제거한다).
+라벨은 payload 안에 함께 담으므로 서버 코드에 별도 상수를 두지 않는다.
 
 `cluster_axes.rows[].cluster` 는 기업군 **표시명**(`company_clusters.display_name`)을 쓴다.
 `cells[].level` 은 `강`(100) · `중`(21~99) · `약`(0~20)이며, `—`는
@@ -265,7 +264,7 @@ Express 의 폴백 규칙(posting 범위 요청을 그 공고가 속한 기업�
 
 ## 6. 공고 직접 입력
 
-### 6.1 새 테이블 (B1)
+### 6.1 사용자 공고 테이블
 
 통계 테이블과 외래키로 연결하지 않는다. 사용자 입력이 모집단에 섞이면 모든 지표가 오염된다.
 
@@ -323,11 +322,11 @@ Express POST /api/postings/analyze  { raw_text, job }
   → { interpretation, strategy, roadmap, source, job, matched }
 ```
 
-데모에서는 항상 적중한다. A10 이 샘플 공고 3건과 그 결과를 시드에 넣는다.
+생성 시드는 샘플 공고 3건과 해석·전략·로드맵 결과를 함께 넣어 해당 요청이 캐시에 적중하도록 한다.
 
-## 7. FastAPI 라우터 (B11)
+## 7. FastAPI 라우터
 
-`agent/main.py` 는 세 줄로 줄인다.
+`agent/main.py`는 `careersignal.api`의 앱을 재노출하는 진입점이다.
 
 ```python
 from careersignal.api import app
@@ -340,18 +339,18 @@ __all__ = ["app"]
 | 파일 | 내용 |
 | --- | --- |
 | `__init__.py` | `app` 생성, 라우터 등록, `/health` |
-| `schemas.py` | 요청·응답 Pydantic 모델 전량 (현 `main.py` 의 모델을 그대로 옮긴다) |
+| `schemas.py` | 요청·응답 Pydantic 모델 |
 | `deps.py` | `unit_of_work` 를 여는 의존성, 저장소 조립 |
 | `routes_analysis.py` | `POST /reverse` `/conditions` `/roadmap` `/extract` |
 | `routes_user_posting.py` | `POST /postings/analyze` |
 
-기존 4개 라우트의 **요청·응답 형태를 바꾸지 않는다.** 다만 fixture 대신 저장소를 읽는다.
+분석 라우트 4개의 **요청·응답 형태를 유지한다.** fixture 대신 저장소를 읽는다.
 저장된 활성 결과가 없으면 `503` 과 `{"error":{"code":"NO_ACTIVE_ANALYSIS","message":...}}` 을 낸다.
 조용히 빈 배열을 반환하지 않는다.
 
-## 8. 에이전트 4종 계약 (B2·B3·B4·B5)
+## 8. 에이전트 4종 계약
 
-`agents/statistics/` 의 패턴을 그대로 따른다. 각 에이전트 디렉터리는 다음을 갖는다.
+각 에이전트 디렉터리는 `agents/statistics/`와 같은 구조를 갖는다.
 
 ```
 agents/<name>/
@@ -382,15 +381,15 @@ agents/<name>/
 
 ### 9.1 파일 위치
 
-각 A 갈래는 자기 몫만 쓴다.
+각 직무 모듈은 자기 직무의 조각만 쓴다.
 
 ```
-agent/data/demo_seed/parts/<job_role_id>/<table>.csv     A1~A9
-agent/data/demo_seed/parts/user_postings/<table>.csv     A10
+agent/data/demo_seed/parts/<job_role_id>/<table>.csv
+agent/data/demo_seed/parts/user_postings/<table>.csv
 ```
 
 `agent/scripts/build_demo_seed.py` 가 조각을 합쳐 `agent/data/demo_seed/<table>.csv` 를 만든다.
-병렬 전환 중 일반 빌드는 직무별 15건 또는 30건 상태만 허용한다. 최종 산출 전에는
+일반 빌드는 직무별 15건 또는 30건 상태만 허용한다. 최종 산출 전에는
 `python scripts/build_demo_seed.py --check --final` 로 모든 직무가 30건이고 직무별
 `analysis_outputs` 가 112행인지 검사한다.
 
@@ -515,12 +514,11 @@ prev 12건 중 6건이 `entry_junior`, 6건이 `experienced`.
 2. **자료 정책** — 주장의 근거 계층이 `allowed_uses` 안에 있다.
 3. **근거 위치** — `requirement_mentions.evidence_span_start/end` 가
    `source_chunks.text` 의 실제 위치와 일치하고, 잘라낸 문자열이 `raw_expression` 과 같다.
-   **A 갈래는 공고 본문에 그 문장을 실제로 심고 오프셋을 계산해서 넣는다.**
+   공고 본문에 해당 문장을 두고 오프셋을 계산해 넣는다.
 4. **수치** — `statistics_facts` 의 `numerator`·`denominator` 가 할당 행을 다시 세어 나온 값과 같다.
 
-검사 5·6·7 은 판정자를 주입하지 않으므로 `skip` + `CHECK_NOT_REGISTERED` 가 아니라
-`not_applicable` 로 기록한다. B6 이 세 검사의 구현을 넣되 판정자 포트가 비면
-`not_applicable` 을 내도록 만든다.
+검사 5·6·7은 판정자 포트가 비어 있으면 `skip`과 `CHECK_NOT_REGISTERED`가 아니라
+`not_applicable`로 기록한다. 판정자를 주입한 실행에서는 등록된 검사가 실제 판정을 저장한다.
 
 `confidence_components` 7개 키:
 `evidence_count`, `independent_companies`, `source_tier_score`, `sample_status_score`,
@@ -555,41 +553,10 @@ prev 12건 중 6건이 `entry_junior`, 6건이 `experienced`.
 10. 실 데이터가 이미 가진 신원은 `load_demo_seed.py` 가 채택한다. `requirement_taxonomies`
     의 `taxonomy_id` 와 참조 노드·엣지가 여기에 해당하며, 모듈은 계약이 정한 값을 그대로 쓴다.
 
-## 13. 갈래 목록
+## 부록 A. 회사 카탈로그 확대분
 
-### 트랙 A — 데이터
-
-| 갈래 | 범위 |
-| --- | --- |
-| A1~A9 | 직무 하나. 차원·어휘 설계 → 공고 30건 본문 작성 → 표현·할당 → 지표 → 산출물 4종 → CSV 조각 |
-| A10 | 샘플 공고 3건과 해석·전략·로드맵 결과 |
-
-### 트랙 B — 코드
-
-| 갈래 | 범위 |
-| --- | --- |
-| B1 | 마이그레이션 0023~ : 9직무 활성화, 회사 카탈로그 확대, `legacy_posting_samples`, `user_postings`, `user_posting_analyses` |
-| B2 | Phase 14 Wiki 에이전트 |
-| B3 | Phase 15 채용공고 해석 에이전트 |
-| B4 | Phase 16 합격 전략 에이전트 |
-| B5 | Phase 17 준비 로드맵 에이전트 |
-| B6 | Phase 18 검사 5·6·7 과 통합 Verifier |
-| B7 | Phase 19 오케스트레이터 |
-| B8 | Phase 20 채점기와 릴리스 게이트 |
-| B9 | Phase 21-2 · 21-3 활성화 실패 복구와 공개 정책 |
-| B10 | Phase 6 평가 세트 정답 3종 확장 |
-| B11 | FastAPI 재작성 |
-| B12 | Phase 29 공고 입력 백엔드 |
-| B13 | Phase 22 Express 전환 |
-| B14 | React 9직무 |
-| B15 | React 공고 직접 입력 |
-| B16 | Phase 12-4 근거 집합 · Phase 7-4 검색 계측 · Phase 24 계측 |
-| B17 | Phase 23 배포 설정과 `build_demo_seed.py` · `load_demo_seed.py` |
-
-## 부록 A. 회사 카탈로그 확대분 (B1 이 마이그레이션으로 넣고 A1~A9 가 사용한다)
-
-기존 24개(`0013_backend_company_catalog.sql`, `0014_enki_company.sql`)는 그대로 둔다.
-아래 18개를 더한다. `company_cluster_memberships` 의 `valid_from` 은 `2024-01-01`,
+마이그레이션의 회사 카탈로그 24개(`0013_backend_company_catalog.sql`, `0014_enki_company.sql`)와
+아래 18개를 사용한다. `company_cluster_memberships` 의 `valid_from` 은 `2024-01-01`,
 `valid_to` 는 NULL, `assigned_by` 는 `operator` 다. `membership_id` 는 `mem_<슬러그>_<기업군 약칭>`.
 
 | `company_id` | `display_name` | `cluster_id` | `careers_url` |
@@ -618,7 +585,7 @@ prev 12건 중 6건이 `entry_junior`, 6건이 `experienced`.
 
 ## 부록 B. 생성 모듈 인터페이스
 
-각 A 갈래는 아래 형태의 모듈 하나를 만든다.
+각 직무는 아래 형태의 생성 모듈 하나를 사용한다.
 
 ```python
 # agent/scripts/demo_seed/<job_role_id>.py
@@ -638,7 +605,7 @@ if __name__ == "__main__":
 ```
 
 실행은 `cd agent` 후 `python -m scripts.demo_seed.<job_role_id>` 다.
-A10 은 `part` 이름으로 `user_postings` 를 쓴다.
+사용자 공고 조각은 `part` 이름으로 `user_postings`를 쓴다.
 
 각 모듈은 `main()` 에서 자기 검사를 수행하고 실패하면 `SystemExit(1)` 로 끝낸다.
 

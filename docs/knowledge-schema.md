@@ -536,7 +536,7 @@ coverage_assertions
 
 `analysis_outputs.payload`는 화면 계약 형태의 JSONB다. 검증·검색·연결에 필요한 값은 정규 테이블에 함께 저장한다.
 
-`coverage_assertions`는 편차 없음 주장의 근거다. `coverage_complete`가 참이 아니면 편차 없음을 출력하지 않고 판단 근거 부족을 출력한다.
+`coverage_assertions`는 추가 요구 없음 주장의 근거다. `coverage_complete`가 참이 아니면 추가 요구 없음을 출력하지 않고 판단 근거 부족을 출력한다.
 
 ### 9.1 체크리스트와 로드맵
 
