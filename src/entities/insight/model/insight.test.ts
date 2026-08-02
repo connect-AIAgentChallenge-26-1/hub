@@ -5,6 +5,7 @@ import {
   type Insight,
   type InsightTitleOrigin,
 } from './insight';
+import type { CapturedInsight } from './insight_capture';
 
 const insights: Insight[] = [
   {
@@ -81,5 +82,9 @@ describe('Insight', () => {
       createdAt: string;
       updatedAt: string;
     }>();
+  });
+
+  it('기존 CapturedInsight 이름을 공용 Insight 별칭으로 유지한다', () => {
+    expectTypeOf<CapturedInsight>().toEqualTypeOf<Insight>();
   });
 });

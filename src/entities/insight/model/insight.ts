@@ -1,20 +1,9 @@
+import type { Insight as DomainInsight } from '@amadda/domain/insight';
+
 import { searchInsights, type SearchInsightsOptions } from './search_insights';
-import type { InsightTitleOrigin } from './insight_capture';
 
-export type { InsightTitleOrigin } from './insight_capture';
-
-export type Insight = {
-  id: string;
-  originalUrl: string;
-  normalizedUrl: string;
-  domain: string;
-  title: string;
-  titleOrigin: InsightTitleOrigin;
-  memo: string | null;
-  categoryId: string | null;
-  createdAt: string;
-  updatedAt: string;
-};
+export type { InsightTitleOrigin } from '@amadda/domain/insight';
+export type Insight = DomainInsight;
 
 export type InsightContextInput = {
   categoryId: string | null;
