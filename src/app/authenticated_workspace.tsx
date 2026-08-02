@@ -40,6 +40,10 @@ import { createBrowserCategoryRepository } from './model/create_browser_category
 import { createBrowserInsightRepository } from './model/create_browser_insight_repository';
 import { createRepositoryInsightCaptureService } from './model/create_repository_insight_capture_service';
 import { useCategoryWorkspace } from './model/use_category_workspace';
+import {
+  useWorkspaceUiStore,
+  WorkspaceUiProvider,
+} from './model/workspace_ui_store';
 import { SUGGESTED_SITUATIONS } from './model/workspace_seed';
 import {
   useInsightWorkspace,
@@ -162,7 +166,9 @@ export function AuthenticatedWorkspace(props: AuthenticatedWorkspaceProps) {
 
   return (
     <WorkspaceQueryProvider key={queryScope}>
-      <AuthenticatedWorkspaceContent {...props} queryScope={queryScope} />
+      <WorkspaceUiProvider>
+        <AuthenticatedWorkspaceContent {...props} queryScope={queryScope} />
+      </WorkspaceUiProvider>
     </WorkspaceQueryProvider>
   );
 }
@@ -257,10 +263,22 @@ function AuthenticatedWorkspaceContent({
   const [activeTab, setActiveTab] = useState<WorkspaceTab>(() =>
     initialSaveDraft ? 'save' : 'home'
   );
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [globalQuery, setGlobalQuery] = useState('');
-  const [retrieveQuery, setRetrieveQuery] = useState('');
-  const [selectedSituation, setSelectedSituation] = useState('');
+  const activeCategory = useWorkspaceUiStore((state) => state.activeCategory);
+  const setActiveCategory = useWorkspaceUiStore(
+    (state) => state.setActiveCategory
+  );
+  const globalQuery = useWorkspaceUiStore((state) => state.globalQuery);
+  const setGlobalQuery = useWorkspaceUiStore((state) => state.setGlobalQuery);
+  const retrieveQuery = useWorkspaceUiStore((state) => state.retrieveQuery);
+  const setRetrieveQuery = useWorkspaceUiStore(
+    (state) => state.setRetrieveQuery
+  );
+  const selectedSituation = useWorkspaceUiStore(
+    (state) => state.selectedSituation
+  );
+  const setSelectedSituation = useWorkspaceUiStore(
+    (state) => state.setSelectedSituation
+  );
   const [saveDraft, setSaveDraft] = useState<SaveInsightInput>(
     () => initialSaveDraft ?? { source: 'web', url: '' }
   );
@@ -289,16 +307,16 @@ function AuthenticatedWorkspaceContent({
   const handleCategoryDeleted = useCallback(
     (categoryId: string) => {
       detachCategory(categoryId);
-      setActiveCategory((currentCategory) =>
-        currentCategory === categoryId ? 'all' : currentCategory
-      );
+      if (activeCategory === categoryId) {
+        setActiveCategory('all');
+      }
       setContextDraft((currentDraft) =>
         currentDraft.categoryId === categoryId
           ? { ...currentDraft, categoryId: null }
           : currentDraft
       );
     },
-    [detachCategory]
+    [activeCategory, detachCategory, setActiveCategory]
   );
   const {
     categories,

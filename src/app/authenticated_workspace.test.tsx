@@ -113,6 +113,78 @@ afterEach(() => {
 });
 
 describe('AuthenticatedWorkspace', () => {
+  it('화면을 이동해도 보관함 검색 조건과 꺼내보기 입력을 유지한다', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <DesignSystemProvider>
+        <AuthenticatedWorkspace
+          repository={toAsyncRepository(createRepository())}
+        />
+      </DesignSystemProvider>
+    );
+
+    await user.click(screen.getByRole('button', { name: '보관함' }));
+    await user.type(
+      screen.getByRole('searchbox', { name: '보관함 검색' }),
+      '리액트'
+    );
+    await user.click(screen.getByRole('button', { name: '홈' }));
+    await user.type(
+      screen.getByRole('textbox', { name: '지금 꺼내 보고 싶은 상황' }),
+      '발표 준비'
+    );
+    await user.click(screen.getByRole('button', { name: '보관함' }));
+
+    expect(
+      (
+        screen.getByRole('searchbox', {
+          name: '보관함 검색',
+        }) as HTMLInputElement
+      ).value
+    ).toBe('리액트');
+
+    await user.click(screen.getByRole('button', { name: '홈' }));
+    expect(
+      (
+        screen.getByRole('textbox', {
+          name: '지금 꺼내 보고 싶은 상황',
+        }) as HTMLInputElement
+      ).value
+    ).toBe('발표 준비');
+  });
+
+  it('사용자 scope가 바뀌면 workspace UI 상태를 초기화한다', async () => {
+    const user = userEvent.setup();
+    const repository = toAsyncRepository(createRepository());
+    const view = render(
+      <DesignSystemProvider>
+        <AuthenticatedWorkspace repository={repository} userId="user-a" />
+      </DesignSystemProvider>
+    );
+
+    await user.click(screen.getByRole('button', { name: '보관함' }));
+    await user.type(
+      screen.getByRole('searchbox', { name: '보관함 검색' }),
+      '사용자 A 검색'
+    );
+
+    view.rerender(
+      <DesignSystemProvider>
+        <AuthenticatedWorkspace repository={repository} userId="user-b" />
+      </DesignSystemProvider>
+    );
+
+    await user.click(screen.getByRole('button', { name: '보관함' }));
+    expect(
+      (
+        screen.getByRole('searchbox', {
+          name: '보관함 검색',
+        }) as HTMLInputElement
+      ).value
+    ).toBe('');
+  });
+
   it('Notion callback query가 있으면 가져오기 창을 열고 연결 분석을 재개한다', async () => {
     const connectionId = '10000000-0000-4000-8000-000000000099';
     window.history.replaceState(
