@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import {
   type Insight,
@@ -7,8 +8,11 @@ import {
   type InsightContextInput,
   type InsightMutationResult,
   type InsightRepository,
+  type InsightRepositoryLoadResult,
   type InsightRepositoryWarning,
 } from '@/entities/insight';
+
+import { workspaceQueryKeys } from './workspace_query_keys';
 
 export type SaveInsightFailureReason =
   'invalid-url' | 'permission-denied' | 'unsupported-protocol' | 'write-failed';
@@ -31,304 +35,479 @@ export type DeleteInsightsResult = InsightMutationResult;
 export type UseInsightWorkspaceOptions = {
   captureService: InsightCaptureService;
   now?: () => string;
+  queryScope: string;
   repository: InsightRepository;
 };
 
-type InsightWorkspaceState = {
-  insights: Insight[];
-  loadWarnings: InsightRepositoryWarning[];
+type QueuedReload = {
+  promise: Promise<void>;
+  reject: (reason?: unknown) => void;
+  resolve: () => void;
+};
+
+type RepositoryIdentity = {
+  queryScope: string;
   repository: InsightRepository;
-  status: 'loading' | 'ready';
 };
 
 export function useInsightWorkspace({
   captureService,
   now = () => new Date().toISOString(),
+  queryScope,
   repository,
 }: UseInsightWorkspaceOptions) {
-  const [workspaceState, setWorkspaceState] = useState<InsightWorkspaceState>(
-    () => createLoadingState(repository)
+  const queryClient = useQueryClient();
+  const queryKey = useMemo(
+    () => workspaceQueryKeys.insights(queryScope),
+    [queryScope]
   );
-  const [isMutating, setIsMutating] = useState(false);
-  const workspaceStateRef = useRef(workspaceState);
+  const mutationKey = useMemo(
+    () => workspaceQueryKeys.insightMutations(queryScope),
+    [queryScope]
+  );
+  const insightQuery = useQuery({
+    queryKey,
+    queryFn: () => loadInsights(repository),
+  });
+  const { refetch: refetchInsights } = insightQuery;
+  const currentRepositoryRef = useRef(repository);
+  const observedRepositoryIdentityRef = useRef<RepositoryIdentity>({
+    queryScope,
+    repository,
+  });
   const mutationInFlightRef = useRef(false);
-  const loadRevisionRef = useRef(0);
-  const mountedRef = useRef(false);
+  const queuedReloadRef = useRef<QueuedReload | null>(null);
+  const reloadInFlightCountRef = useRef(0);
 
-  const reloadInsights = useCallback(async () => {
-    const revision = ++loadRevisionRef.current;
-    const currentState = workspaceStateRef.current;
-    const loadingState =
-      currentState.repository === repository
-        ? { ...currentState, status: 'loading' as const }
-        : createLoadingState(repository);
+  useEffect(() => {
+    currentRepositoryRef.current = repository;
+  }, [repository]);
 
-    workspaceStateRef.current = loadingState;
-    setWorkspaceState(loadingState);
+  const refetchInsightsNow = useCallback(async () => {
+    reloadInFlightCountRef.current += 1;
+    try {
+      await queryClient.invalidateQueries({
+        exact: true,
+        queryKey,
+        refetchType: 'none',
+      });
+      await refetchInsights({ cancelRefetch: true });
+    } finally {
+      reloadInFlightCountRef.current -= 1;
+    }
+  }, [queryClient, queryKey, refetchInsights]);
 
-    const loadResult = await loadInsights(repository);
+  useEffect(() => {
+    const previousIdentity = observedRepositoryIdentityRef.current;
+    observedRepositoryIdentityRef.current = { queryScope, repository };
 
-    if (!mountedRef.current || loadRevisionRef.current !== revision) {
+    if (
+      previousIdentity.repository === repository ||
+      previousIdentity.queryScope !== queryScope
+    ) {
       return;
     }
 
-    const readyState: InsightWorkspaceState = {
-      insights: loadResult.insights,
-      loadWarnings: loadResult.warnings,
-      repository,
-      status: 'ready',
-    };
-    workspaceStateRef.current = readyState;
-    setWorkspaceState(readyState);
-  }, [repository]);
+    const currentRepository = repository;
+    reloadInFlightCountRef.current += 1;
+    void (async () => {
+      try {
+        await queryClient.cancelQueries({ exact: true, queryKey });
+        if (currentRepositoryRef.current !== currentRepository) {
+          return;
+        }
+        await refetchInsightsNow();
+      } finally {
+        reloadInFlightCountRef.current -= 1;
+      }
+    })();
+  }, [queryClient, queryKey, queryScope, refetchInsightsNow, repository]);
 
-  useEffect(() => {
-    mountedRef.current = true;
-    void reloadInsights();
+  const reloadInsights = useCallback((): Promise<void> => {
+    if (!mutationInFlightRef.current) {
+      return refetchInsightsNow();
+    }
 
-    return () => {
-      mountedRef.current = false;
-      loadRevisionRef.current += 1;
-    };
-  }, [reloadInsights]);
+    if (queuedReloadRef.current) {
+      return queuedReloadRef.current.promise;
+    }
+
+    let reject!: (reason?: unknown) => void;
+    let resolve!: () => void;
+    const promise = new Promise<void>((resolvePromise, rejectPromise) => {
+      reject = rejectPromise;
+      resolve = resolvePromise;
+    });
+    queuedReloadRef.current = { promise, reject, resolve };
+    return promise;
+  }, [refetchInsightsNow]);
+
+  const flushQueuedReload = useCallback(async () => {
+    const queuedReload = queuedReloadRef.current;
+    if (!queuedReload) {
+      return;
+    }
+
+    queuedReloadRef.current = null;
+    try {
+      await refetchInsightsNow();
+      queuedReload.resolve();
+    } catch (error) {
+      queuedReload.reject(error);
+    }
+  }, [refetchInsightsNow]);
+
+  const readCurrentState = useCallback(
+    () =>
+      queryClient.getQueryData<InsightRepositoryLoadResult>(queryKey) ?? {
+        insights: [],
+        warnings: [],
+      },
+    [queryClient, queryKey]
+  );
+
+  const updateCurrentState = useCallback(
+    (
+      repositoryAtStart: InsightRepository,
+      updater: (
+        currentState: InsightRepositoryLoadResult
+      ) => InsightRepositoryLoadResult
+    ) => {
+      if (currentRepositoryRef.current !== repositoryAtStart) {
+        return;
+      }
+
+      queryClient.setQueryData<InsightRepositoryLoadResult>(
+        queryKey,
+        (currentState) =>
+          currentState && currentRepositoryRef.current === repositoryAtStart
+            ? updater(currentState)
+            : currentState
+      );
+    },
+    [queryClient, queryKey]
+  );
 
   const runMutation = useCallback(
-    async <T>(command: () => Promise<T>, failure: T): Promise<T> => {
-      const currentState = workspaceStateRef.current;
-
+    async <T>(
+      repositoryAtStart: InsightRepository,
+      command: () => Promise<T>,
+      failure: T
+    ): Promise<T> => {
       if (
-        currentState.repository !== repository ||
-        currentState.status !== 'ready' ||
+        currentRepositoryRef.current !== repositoryAtStart ||
+        !insightQuery.isSuccess ||
+        insightQuery.isFetching ||
+        reloadInFlightCountRef.current > 0 ||
         mutationInFlightRef.current
       ) {
         return failure;
       }
 
       mutationInFlightRef.current = true;
-      setIsMutating(true);
-
       try {
         return await command();
       } finally {
         mutationInFlightRef.current = false;
-        setIsMutating(false);
+        await flushQueuedReload();
       }
     },
-    [repository]
+    [flushQueuedReload, insightQuery.isFetching, insightQuery.isSuccess]
   );
+
+  const saveMutation = useMutation({
+    mutationKey,
+    mutationFn: async ({
+      input,
+      repositoryAtStart,
+    }: {
+      input: SaveInsightInput | string;
+      repositoryAtStart: InsightRepository;
+    }): Promise<SaveInsightResult> => {
+      const captureResult = await captureService.capture(
+        toInsightCaptureRequest(input)
+      );
+
+      if (currentRepositoryRef.current !== repositoryAtStart) {
+        return { ok: false, reason: 'write-failed' };
+      }
+
+      if (!captureResult.ok) {
+        return {
+          ok: false,
+          reason: toSaveFailureReason(captureResult.reason),
+        };
+      }
+
+      updateCurrentState(repositoryAtStart, (currentState) => ({
+        insights: upsertInsight(currentState.insights, captureResult.insight),
+        warnings: clearRecoverableWarnings(currentState.warnings),
+      }));
+      return { ok: true, insightId: captureResult.insight.id };
+    },
+  });
+  const { isPending: isSaving, mutateAsync: mutateSave } = saveMutation;
 
   const saveInsight = useCallback(
-    async (input: SaveInsightInput | string): Promise<SaveInsightResult> => {
-      return runMutation<SaveInsightResult>(
-        async () => {
-          const currentState = workspaceStateRef.current;
-          const captureResult = await captureService.capture(
-            toInsightCaptureRequest(input)
-          );
-
-          if (!captureResult.ok) {
-            return {
-              ok: false,
-              reason: toSaveFailureReason(captureResult.reason),
-            };
-          }
-
-          const nextInsights = upsertInsight(
-            currentState.insights,
-            captureResult.insight
-          );
-
-          updateReadyState(repository, setWorkspaceState, workspaceStateRef, {
-            insights: nextInsights,
-            loadWarnings: clearRecoverableWarnings(currentState.loadWarnings),
-          });
-          return { ok: true, insightId: captureResult.insight.id };
-        },
-        { ok: false, reason: 'write-failed' }
-      );
-    },
-    [captureService, repository, runMutation]
+    (input: SaveInsightInput | string) =>
+      runMutation(
+        repository,
+        () => mutateSave({ input, repositoryAtStart: repository }),
+        {
+          ok: false,
+          reason: 'write-failed',
+        }
+      ),
+    [mutateSave, repository, runMutation]
   );
+
+  const updateMutation = useMutation({
+    mutationKey,
+    mutationFn: async ({
+      context,
+      insightId,
+      repositoryAtStart,
+    }: {
+      context: InsightContextInput;
+      insightId: string;
+      repositoryAtStart: InsightRepository;
+    }): Promise<UpdateInsightContextResult> => {
+      const currentState = readCurrentState();
+      const insightIndex = currentState.insights.findIndex(
+        (candidate) => candidate.id === insightId
+      );
+      const insight = currentState.insights[insightIndex];
+
+      if (!insight) {
+        return { ok: false, reason: 'not-found' };
+      }
+
+      const normalizedTitle = normalizeOptionalText(context.title);
+      const candidate: Insight = {
+        ...insight,
+        categoryId: context.categoryId,
+        memo: normalizeOptionalText(context.memo),
+        title: normalizedTitle ?? insight.title,
+        titleOrigin: normalizedTitle ? 'user' : insight.titleOrigin,
+        updatedAt: getNextUpdatedAt(insight, now()),
+      };
+      const updateResult = await repositoryAtStart.update(candidate);
+
+      if (currentRepositoryRef.current !== repositoryAtStart) {
+        return { ok: false, reason: 'write-failed' };
+      }
+
+      if (!updateResult.ok) {
+        return {
+          ok: false,
+          reason:
+            updateResult.reason === 'not-found' ||
+            updateResult.reason === 'permission-denied'
+              ? updateResult.reason
+              : 'write-failed',
+        };
+      }
+
+      updateCurrentState(repositoryAtStart, (latestState) => ({
+        insights: latestState.insights.map((insight) =>
+          insight.id === insightId ? updateResult.insight : insight
+        ),
+        warnings: clearRecoverableWarnings(latestState.warnings),
+      }));
+      return { ok: true };
+    },
+  });
+  const { isPending: isUpdating, mutateAsync: mutateUpdate } = updateMutation;
 
   const updateInsightContext = useCallback(
-    async (
-      insightId: string,
-      context: InsightContextInput
-    ): Promise<UpdateInsightContextResult> =>
-      runMutation<UpdateInsightContextResult>(
-        async () => {
-          const currentState = workspaceStateRef.current;
-          const insightIndex = currentState.insights.findIndex(
-            (candidate) => candidate.id === insightId
-          );
-          const insight = currentState.insights[insightIndex];
-
-          if (!insight) {
-            return { ok: false, reason: 'not-found' };
-          }
-
-          const normalizedTitle = normalizeOptionalText(context.title);
-          const candidate: Insight = {
-            ...insight,
-            categoryId: context.categoryId,
-            memo: normalizeOptionalText(context.memo),
-            title: normalizedTitle ?? insight.title,
-            titleOrigin: normalizedTitle ? 'user' : insight.titleOrigin,
-            updatedAt: getNextUpdatedAt(insight, now()),
-          };
-          const updateResult = await repository.update(candidate);
-
-          if (!updateResult.ok) {
-            return {
-              ok: false,
-              reason:
-                updateResult.reason === 'not-found' ||
-                updateResult.reason === 'permission-denied'
-                  ? updateResult.reason
-                  : 'write-failed',
-            };
-          }
-
-          const nextInsights = [...currentState.insights];
-          nextInsights[insightIndex] = updateResult.insight;
-          updateReadyState(repository, setWorkspaceState, workspaceStateRef, {
-            insights: nextInsights,
-            loadWarnings: clearRecoverableWarnings(currentState.loadWarnings),
-          });
-          return { ok: true };
-        },
-        { ok: false, reason: 'write-failed' }
+    (insightId: string, context: InsightContextInput) =>
+      runMutation(
+        repository,
+        () =>
+          mutateUpdate({
+            context,
+            insightId,
+            repositoryAtStart: repository,
+          }),
+        {
+          ok: false,
+          reason: 'write-failed',
+        }
       ),
-    [now, repository, runMutation]
+    [mutateUpdate, repository, runMutation]
   );
+
+  const deleteMutation = useMutation({
+    mutationKey,
+    mutationFn: async ({
+      insightId,
+      repositoryAtStart,
+    }: {
+      insightId: string;
+      repositoryAtStart: InsightRepository;
+    }): Promise<DeleteInsightResult> => {
+      const currentState = readCurrentState();
+      const insightIndex = currentState.insights.findIndex(
+        (candidate) => candidate.id === insightId
+      );
+
+      if (insightIndex === -1) {
+        return { ok: false, reason: 'not-found' };
+      }
+
+      const deleteResult = await repositoryAtStart.delete(insightId);
+
+      if (currentRepositoryRef.current !== repositoryAtStart) {
+        return { ok: false, reason: 'write-failed' };
+      }
+
+      if (!deleteResult.ok) {
+        return deleteResult;
+      }
+
+      updateCurrentState(repositoryAtStart, (latestState) => ({
+        insights: latestState.insights.filter(
+          (insight) => insight.id !== insightId
+        ),
+        warnings: clearRecoverableWarnings(latestState.warnings),
+      }));
+      return { ok: true };
+    },
+  });
+  const { isPending: isDeleting, mutateAsync: mutateDelete } = deleteMutation;
 
   const deleteInsight = useCallback(
-    async (insightId: string): Promise<DeleteInsightResult> =>
-      runMutation<DeleteInsightResult>(
-        async () => {
-          const currentState = workspaceStateRef.current;
-          const insightIndex = currentState.insights.findIndex(
-            (candidate) => candidate.id === insightId
-          );
-
-          if (insightIndex === -1) {
-            return { ok: false, reason: 'not-found' };
-          }
-
-          const deleteResult = await repository.delete(insightId);
-
-          if (!deleteResult.ok) {
-            return deleteResult;
-          }
-
-          const nextInsights = [...currentState.insights];
-          nextInsights.splice(insightIndex, 1);
-          updateReadyState(repository, setWorkspaceState, workspaceStateRef, {
-            insights: nextInsights,
-            loadWarnings: clearRecoverableWarnings(currentState.loadWarnings),
-          });
-          return { ok: true };
-        },
-        { ok: false, reason: 'write-failed' }
+    (insightId: string) =>
+      runMutation(
+        repository,
+        () => mutateDelete({ insightId, repositoryAtStart: repository }),
+        {
+          ok: false,
+          reason: 'write-failed',
+        }
       ),
-    [repository, runMutation]
+    [mutateDelete, repository, runMutation]
   );
 
+  const deleteManyMutation = useMutation({
+    mutationKey,
+    mutationFn: async ({
+      insightIds,
+      repositoryAtStart,
+    }: {
+      insightIds: readonly string[];
+      repositoryAtStart: InsightRepository;
+    }): Promise<DeleteInsightsResult> => {
+      const currentState = readCurrentState();
+      const uniqueInsightIds = [...new Set(insightIds)];
+      const currentInsightIdSet = new Set(
+        currentState.insights.map(({ id }) => id)
+      );
+
+      if (
+        uniqueInsightIds.length === 0 ||
+        uniqueInsightIds.some((id) => !currentInsightIdSet.has(id))
+      ) {
+        return { ok: false, reason: 'not-found' };
+      }
+
+      const deleteResult = await repositoryAtStart.deleteMany(uniqueInsightIds);
+
+      if (currentRepositoryRef.current !== repositoryAtStart) {
+        return { ok: false, reason: 'write-failed' };
+      }
+
+      if (!deleteResult.ok) {
+        return {
+          ok: false,
+          reason:
+            deleteResult.reason === 'permission-denied' ||
+            deleteResult.reason === 'not-found'
+              ? deleteResult.reason
+              : 'write-failed',
+        };
+      }
+
+      const deletedIdSet = new Set(deleteResult.deletedIds);
+
+      if (
+        deletedIdSet.size !== uniqueInsightIds.length ||
+        uniqueInsightIds.some((id) => !deletedIdSet.has(id))
+      ) {
+        await refetchInsightsNow();
+        return { ok: false, reason: 'write-failed' };
+      }
+
+      updateCurrentState(repositoryAtStart, (latestState) => ({
+        insights: latestState.insights.filter(
+          ({ id }) => !deletedIdSet.has(id)
+        ),
+        warnings: clearRecoverableWarnings(latestState.warnings),
+      }));
+      return { ok: true };
+    },
+  });
+  const { isPending: isDeletingMany, mutateAsync: mutateDeleteMany } =
+    deleteManyMutation;
+
   const deleteInsights = useCallback(
-    async (insightIds: readonly string[]): Promise<DeleteInsightsResult> =>
-      runMutation<DeleteInsightsResult>(
-        async () => {
-          const currentState = workspaceStateRef.current;
-          const uniqueInsightIds = [...new Set(insightIds)];
-          const currentInsightIdSet = new Set(
-            currentState.insights.map(({ id }) => id)
-          );
-
-          if (
-            uniqueInsightIds.length === 0 ||
-            uniqueInsightIds.some((id) => !currentInsightIdSet.has(id))
-          ) {
-            return { ok: false, reason: 'not-found' };
-          }
-
-          const deleteResult = await repository.deleteMany(uniqueInsightIds);
-
-          if (!deleteResult.ok) {
-            return {
-              ok: false,
-              reason:
-                deleteResult.reason === 'permission-denied' ||
-                deleteResult.reason === 'not-found'
-                  ? deleteResult.reason
-                  : 'write-failed',
-            };
-          }
-
-          const deletedIdSet = new Set(deleteResult.deletedIds);
-
-          if (
-            deletedIdSet.size !== uniqueInsightIds.length ||
-            uniqueInsightIds.some((id) => !deletedIdSet.has(id))
-          ) {
-            await reloadInsights();
-            return { ok: false, reason: 'write-failed' };
-          }
-
-          updateReadyState(repository, setWorkspaceState, workspaceStateRef, {
-            insights: currentState.insights.filter(
-              ({ id }) => !deletedIdSet.has(id)
-            ),
-            loadWarnings: clearRecoverableWarnings(currentState.loadWarnings),
-          });
-          return { ok: true };
-        },
-        { ok: false, reason: 'write-failed' }
+    (insightIds: readonly string[]) =>
+      runMutation(
+        repository,
+        () =>
+          mutateDeleteMany({
+            insightIds,
+            repositoryAtStart: repository,
+          }),
+        {
+          ok: false,
+          reason: 'write-failed',
+        }
       ),
-    [reloadInsights, repository, runMutation]
+    [mutateDeleteMany, repository, runMutation]
   );
 
   const detachCategory = useCallback(
     (categoryId: string) => {
-      const currentState = workspaceStateRef.current;
-
-      if (
-        currentState.repository !== repository ||
-        currentState.status !== 'ready'
-      ) {
+      if (!insightQuery.isSuccess || insightQuery.isFetching) {
         return;
       }
 
-      const nextInsights = currentState.insights.map((insight) =>
-        insight.categoryId === categoryId
-          ? { ...insight, categoryId: null }
-          : insight
+      queryClient.setQueryData<InsightRepositoryLoadResult>(
+        queryKey,
+        (currentState) =>
+          currentState
+            ? {
+                ...currentState,
+                insights: currentState.insights.map((insight) =>
+                  insight.categoryId === categoryId
+                    ? { ...insight, categoryId: null }
+                    : insight
+                ),
+              }
+            : currentState
       );
-
-      updateReadyState(repository, setWorkspaceState, workspaceStateRef, {
-        insights: nextInsights,
-        loadWarnings: currentState.loadWarnings,
-      });
     },
-    [repository]
+    [insightQuery.isFetching, insightQuery.isSuccess, queryClient, queryKey]
   );
-
-  const isCurrentRepository = workspaceState.repository === repository;
 
   return {
     deleteInsight,
     deleteInsights,
     detachCategory,
-    insights: isCurrentRepository ? workspaceState.insights : [],
-    isLoading: !isCurrentRepository || workspaceState.status === 'loading',
-    isMutating,
-    loadWarnings: isCurrentRepository ? workspaceState.loadWarnings : [],
+    insights: insightQuery.data?.insights ?? [],
+    isLoading: insightQuery.isFetching,
+    isMutating: isSaving || isUpdating || isDeleting || isDeletingMany,
+    loadWarnings: insightQuery.data?.warnings ?? [],
     reloadInsights,
     saveInsight,
     updateInsightContext,
   };
 }
 
-async function loadInsights(repository: InsightRepository) {
+async function loadInsights(
+  repository: InsightRepository
+): Promise<InsightRepositoryLoadResult> {
   try {
     return await repository.list();
   } catch {
@@ -337,38 +516,6 @@ async function loadInsights(repository: InsightRepository) {
       warnings: ['read-failed'] as InsightRepositoryWarning[],
     };
   }
-}
-
-function createLoadingState(
-  repository: InsightRepository
-): InsightWorkspaceState {
-  return {
-    insights: [],
-    loadWarnings: [],
-    repository,
-    status: 'loading',
-  };
-}
-
-function updateReadyState(
-  repository: InsightRepository,
-  setWorkspaceState: React.Dispatch<
-    React.SetStateAction<InsightWorkspaceState>
-  >,
-  workspaceStateRef: React.MutableRefObject<InsightWorkspaceState>,
-  values: Pick<InsightWorkspaceState, 'insights' | 'loadWarnings'>
-) {
-  if (workspaceStateRef.current.repository !== repository) {
-    return;
-  }
-
-  const nextState: InsightWorkspaceState = {
-    ...workspaceStateRef.current,
-    ...values,
-    status: 'ready',
-  };
-  workspaceStateRef.current = nextState;
-  setWorkspaceState(nextState);
 }
 
 function clearRecoverableWarnings(warnings: InsightRepositoryWarning[]) {

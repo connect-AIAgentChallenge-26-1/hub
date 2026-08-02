@@ -10,9 +10,15 @@ src/
     app.tsx
     authenticated_workspace.tsx
     model/
+      create_browser_category_repository.ts
       create_browser_insight_repository.ts
+      use_category_workspace.ts
       use_insight_workspace.ts
+      workspace_query_keys.ts
       workspace_seed.ts
+      workspace_ui_store.tsx
+    providers/
+      workspace_query_provider.tsx
     styles/
       authenticated_workspace.css
       global.css
@@ -137,14 +143,14 @@ src/
 
 ## 레이어 책임
 
-| 레이어     | 책임                                                               |
-| ---------- | ------------------------------------------------------------------ |
-| `app`      | 앱 진입 상태, provider/token 조합, authenticated shell, 전역 reset |
-| `features` | 사용자 행동 단위의 상태 정책과 UI 조합                             |
-| `pages`    | 라우트 또는 주요 화면 단위 조합                                    |
-| `widgets`  | 여러 화면에서 독립적으로 배치되는 큰 UI 블록                       |
-| `entities` | 도메인 타입, 도메인 연산, 도메인 표시 UI                           |
-| `shared`   | 비즈니스 규칙이 없는 config, UI adapter, 범용 도구                 |
+| 레이어     | 책임                                                                                                  |
+| ---------- | ----------------------------------------------------------------------------------------------------- |
+| `app`      | 앱 진입 상태, 로그인 workspace의 Query Provider·scoped Zustand Store, authenticated shell, 전역 reset |
+| `features` | 사용자 행동 단위의 상태 정책과 UI 조합                                                                |
+| `pages`    | 라우트 또는 주요 화면 단위 조합                                                                       |
+| `widgets`  | 여러 화면에서 독립적으로 배치되는 큰 UI 블록                                                          |
+| `entities` | 도메인 타입, 도메인 연산, 도메인 표시 UI                                                              |
+| `shared`   | 비즈니스 규칙이 없는 config, UI adapter, 범용 도구                                                    |
 
 현재 도메인 모델·Supabase 저장 어댑터·목록 UI는 `entities/insight`, Android 공유의 URL 추출·상태·결과 화면은 `features/android-share`, Google 로그인 정책은 `features/auth`, PWA 설치 안내 정책은 `features/pwa-install`, 고정 앱 내비게이션은 `widgets/app-navigation`, Supabase 공통 클라이언트는 `shared/api`, Capacitor 런타임·공유 플러그인·모바일 OAuth 어댑터는 `shared/capacitor`, 공개 환경 검증은 `shared/config`, PWA 브라우저 수명 주기 어댑터는 `shared/pwa`, 런타임 토큰은 `shared/config/design-system`, 공통 UI 경계는 `shared/ui`가 소유한다.
 
@@ -166,6 +172,8 @@ src/
 - `export default`를 사용하지 않는다.
 
 `src/main.tsx`는 token injector를 실행하고 `DesignSystemProvider`로 `App`을 감싸는 bootstrap만 담당한다. `tokens.ts`가 값의 단일 원천이며 `apply_design_tokens.ts`만 DOM에 CSS custom property를 주입한다.
+
+로그인한 workspace는 `app` 계층의 `WorkspaceQueryProvider`와 scoped `WorkspaceUiProvider` 안에서 동작한다. 인사이트·카테고리의 서버 상태와 mutation 결과, 가져오기 뒤 무효화·재조회는 TanStack Query가 소유한다. Query key는 Repository 객체를 넣지 않고 사용자 scope와 도메인 이름으로 구성한다. 보관함의 선택 카테고리·검색어, 꺼내보기 입력·추천 상황처럼 화면 이동 뒤에도 유지할 UI 상태만 Zustand가 소유한다.
 
 ## 스타일 경계
 

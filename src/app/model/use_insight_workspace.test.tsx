@@ -1,4 +1,5 @@
 /* @vitest-environment jsdom */
+import type { PropsWithChildren } from 'react';
 import { act, renderHook, waitFor } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
@@ -8,7 +9,17 @@ import type {
   InsightRepository,
 } from '@/entities/insight';
 
-import { useInsightWorkspace } from './use_insight_workspace';
+import {
+  createWorkspaceQueryClient,
+  WorkspaceQueryProvider,
+} from '../providers/workspace_query_provider';
+import {
+  useInsightWorkspace,
+  type UseInsightWorkspaceOptions,
+} from './use_insight_workspace';
+import { workspaceQueryKeys } from './workspace_query_keys';
+
+const INSIGHT_QUERY_SCOPE = 'insight-workspace-test';
 
 describe('useInsightWorkspace', () => {
   it('원격 목록을 기다리는 동안 로딩 상태를 보이고 완료 후 복원한다', async () => {
@@ -16,11 +27,14 @@ describe('useInsightWorkspace', () => {
     const list =
       createDeferred<Awaited<ReturnType<InsightRepository['list']>>>();
     const repository = createRepository({ list: vi.fn(() => list.promise) });
-    const { result } = renderHook(() =>
-      useInsightWorkspace({
-        captureService: UNAVAILABLE_CAPTURE_SERVICE,
-        repository,
-      })
+    const { result } = renderHook(
+      () =>
+        useInsightWorkspace({
+          captureService: UNAVAILABLE_CAPTURE_SERVICE,
+          queryScope: INSIGHT_QUERY_SCOPE,
+          repository,
+        }),
+      { wrapper: createQueryWrapper() }
     );
 
     expect(result.current.isLoading).toBe(true);
@@ -31,8 +45,35 @@ describe('useInsightWorkspace', () => {
       await list.promise;
     });
 
-    expect(result.current.isLoading).toBe(false);
-    expect(result.current.insights).toEqual([restoredInsight]);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+      expect(result.current.insights).toEqual([restoredInsight]);
+    });
+  });
+
+  it('조회 결과를 사용자 scope의 Query 캐시에 저장한다', async () => {
+    const restoredInsight = createInsight({ id: 'query-cached' });
+    const repository = createRepository({
+      list: vi.fn().mockResolvedValue({
+        insights: [restoredInsight],
+        warnings: [],
+      }),
+    });
+    const client = createTestQueryClient();
+    const view = renderHook(
+      () =>
+        useInsightWorkspace({
+          captureService: UNAVAILABLE_CAPTURE_SERVICE,
+          queryScope: INSIGHT_QUERY_SCOPE,
+          repository,
+        }),
+      { wrapper: createQueryWrapper(client) }
+    );
+
+    await waitFor(() => expect(view.result.current.isLoading).toBe(false));
+    expect(
+      client.getQueryData(workspaceQueryKeys.insights(INSIGHT_QUERY_SCOPE))
+    ).toEqual({ insights: [restoredInsight], warnings: [] });
   });
 
   it('원격 생성이 성공한 뒤 서버가 반환한 인사이트를 노출한다', async () => {
@@ -68,7 +109,9 @@ describe('useInsightWorkspace', () => {
       url: ' https://Example.com/article#details ',
     });
     expect(create).not.toHaveBeenCalled();
-    expect(result.current.insights).toEqual([serverInsight]);
+    await waitFor(() =>
+      expect(result.current.insights).toEqual([serverInsight])
+    );
   });
 
   it('Android 공유 저장의 소스와 제목을 공통 캡처 요청에 보존한다', async () => {
@@ -170,7 +213,7 @@ describe('useInsightWorkspace', () => {
       firstSave = result.current.saveInsight('https://first.example/article');
     });
 
-    expect(result.current.isMutating).toBe(true);
+    await waitFor(() => expect(result.current.isMutating).toBe(true));
     await expect(
       result.current.saveInsight('https://second.example/article')
     ).resolves.toEqual({ ok: false, reason: 'write-failed' });
@@ -190,7 +233,134 @@ describe('useInsightWorkspace', () => {
       await firstSave!;
     });
 
-    expect(result.current.isMutating).toBe(false);
+    await waitFor(() => expect(result.current.isMutating).toBe(false));
+  });
+
+  it('mutation 중 요청한 재조회를 종료 뒤 한 번 실행해 서버 목록을 반영한다', async () => {
+    const existingInsight = createInsight({ id: 'existing' });
+    const importedInsight = createInsight({ id: 'imported' });
+    const savedInsight = createInsight({ id: 'saved' });
+    const pendingCapture =
+      createDeferred<Awaited<ReturnType<InsightCaptureService['capture']>>>();
+    const callOrder: string[] = [];
+    const list = vi
+      .fn<InsightRepository['list']>()
+      .mockImplementationOnce(async () => {
+        callOrder.push('list:initial');
+        return { insights: [existingInsight], warnings: [] };
+      })
+      .mockImplementationOnce(async () => {
+        callOrder.push('list:queued');
+        return {
+          insights: [existingInsight, importedInsight, savedInsight],
+          warnings: [],
+        };
+      });
+    const capture = vi.fn(() => {
+      callOrder.push('capture:start');
+      return pendingCapture.promise.then((result) => {
+        callOrder.push('capture:end');
+        return result;
+      });
+    });
+    const { result } = await renderReadyWorkspace(createRepository({ list }), {
+      captureService: { capture },
+    });
+    let saveRequest!: ReturnType<typeof result.current.saveInsight>;
+    let reloadRequest!: ReturnType<typeof result.current.reloadInsights>;
+
+    act(() => {
+      saveRequest = result.current.saveInsight('https://saved.example');
+    });
+    await waitFor(() => expect(result.current.isMutating).toBe(true));
+
+    act(() => {
+      reloadRequest = result.current.reloadInsights();
+    });
+    expect(list).toHaveBeenCalledOnce();
+    expect(callOrder).toEqual(['list:initial', 'capture:start']);
+
+    await act(async () => {
+      pendingCapture.resolve({
+        created: true,
+        insight: savedInsight,
+        ok: true,
+      });
+      await expect(saveRequest).resolves.toEqual({
+        insightId: savedInsight.id,
+        ok: true,
+      });
+      await reloadRequest;
+    });
+
+    expect(list).toHaveBeenCalledTimes(2);
+    expect(callOrder).toEqual([
+      'list:initial',
+      'capture:start',
+      'capture:end',
+      'list:queued',
+    ]);
+    await waitFor(() =>
+      expect(result.current.insights).toEqual([
+        existingInsight,
+        importedInsight,
+        savedInsight,
+      ])
+    );
+  });
+
+  it('mutation 성공 시 그동안 적용된 functional cache 변경을 보존한다', async () => {
+    const categoryId = '10000000-0000-4000-8000-000000000001';
+    const existingInsight = createInsight({
+      id: 'existing',
+      categoryId,
+    });
+    const savedInsight = createInsight({ id: 'saved' });
+    const pendingCapture =
+      createDeferred<Awaited<ReturnType<InsightCaptureService['capture']>>>();
+    const repository = createRepository({
+      list: vi.fn().mockResolvedValue({
+        insights: [existingInsight],
+        warnings: [],
+      }),
+    });
+    const { result } = await renderReadyWorkspace(repository, {
+      captureService: { capture: vi.fn(() => pendingCapture.promise) },
+    });
+    let saveRequest!: ReturnType<typeof result.current.saveInsight>;
+
+    act(() => {
+      saveRequest = result.current.saveInsight('https://saved.example');
+    });
+    await waitFor(() => expect(result.current.isMutating).toBe(true));
+
+    act(() => {
+      result.current.detachCategory(categoryId);
+    });
+    await waitFor(() =>
+      expect(result.current.insights).toEqual([
+        { ...existingInsight, categoryId: null },
+      ])
+    );
+
+    await act(async () => {
+      pendingCapture.resolve({
+        created: true,
+        insight: savedInsight,
+        ok: true,
+      });
+      await expect(saveRequest).resolves.toEqual({
+        insightId: savedInsight.id,
+        ok: true,
+      });
+    });
+
+    await waitFor(() =>
+      expect(result.current.insights).toEqual([
+        savedInsight,
+        { ...existingInsight, categoryId: null },
+      ])
+    );
   });
 
   it('개인 맥락을 원격 수정 성공 후 반영한다', async () => {
@@ -228,7 +398,9 @@ describe('useInsightWorkspace', () => {
       title: '새 제목',
       updatedAt: '2026-07-15T01:00:00.000Z',
     });
-    expect(result.current.insights[0]).toEqual(update.mock.calls[0]?.[0]);
+    await waitFor(() =>
+      expect(result.current.insights[0]).toEqual(update.mock.calls[0]?.[0])
+    );
   });
 
   it('keeps a captured title when only memo or category is saved', async () => {
@@ -368,7 +540,9 @@ describe('useInsightWorkspace', () => {
         result.current.deleteInsight(firstInsight.id)
       ).resolves.toEqual({ ok: true });
     });
-    expect(result.current.insights).toEqual([secondInsight]);
+    await waitFor(() =>
+      expect(result.current.insights).toEqual([secondInsight])
+    );
   });
 
   it('일괄 삭제가 성공한 뒤 대상만 제거하고 실패하면 목록을 유지한다', async () => {
@@ -407,7 +581,9 @@ describe('useInsightWorkspace', () => {
         result.current.deleteInsights([firstInsight.id, thirdInsight.id])
       ).resolves.toEqual({ ok: true });
     });
-    expect(result.current.insights).toEqual([secondInsight]);
+    await waitFor(() =>
+      expect(result.current.insights).toEqual([secondInsight])
+    );
   });
 
   it('일괄 삭제 결과 ID가 요청과 다르면 저장소 목록을 다시 불러온다', async () => {
@@ -440,7 +616,9 @@ describe('useInsightWorkspace', () => {
     });
 
     expect(list).toHaveBeenCalledTimes(2);
-    expect(result.current.insights).toEqual([secondInsight]);
+    await waitFor(() =>
+      expect(result.current.insights).toEqual([secondInsight])
+    );
   });
 
   it('삭제된 카테고리를 참조하던 인사이트를 미분류로 동기화한다', async () => {
@@ -460,10 +638,12 @@ describe('useInsightWorkspace', () => {
       result.current.detachCategory(deletedCategoryId);
     });
 
-    expect(result.current.insights).toEqual([
-      createInsight({ id: 'linked', categoryId: null }),
-      createInsight({ id: 'unlinked', categoryId: null }),
-    ]);
+    await waitFor(() =>
+      expect(result.current.insights).toEqual([
+        createInsight({ id: 'linked', categoryId: null }),
+        createInsight({ id: 'unlinked', categoryId: null }),
+      ])
+    );
   });
 
   it('재조회는 가장 늦게 시작한 요청 결과만 반영한다', async () => {
@@ -496,7 +676,7 @@ describe('useInsightWorkspace', () => {
       });
       await secondRequest;
     });
-    expect(result.current.insights[0]?.id).toBe('latest');
+    await waitFor(() => expect(result.current.insights[0]?.id).toBe('latest'));
 
     await act(async () => {
       firstReload.resolve({
@@ -510,7 +690,7 @@ describe('useInsightWorkspace', () => {
     expect(list).toHaveBeenCalledTimes(3);
   });
 
-  it('저장소가 바뀌면 이전 지연 응답을 무시하고 새 목록만 노출한다', async () => {
+  it('같은 scope에서 저장소가 바뀌면 이전 지연 응답을 무시하고 새 목록만 노출한다', async () => {
     const oldList =
       createDeferred<Awaited<ReturnType<InsightRepository['list']>>>();
     const repositoryA = createRepository({
@@ -526,14 +706,20 @@ describe('useInsightWorkspace', () => {
       ({ repository }) =>
         useInsightWorkspace({
           captureService: UNAVAILABLE_CAPTURE_SERVICE,
+          queryScope: INSIGHT_QUERY_SCOPE,
           repository,
         }),
-      { initialProps: { repository: repositoryA } }
+      {
+        initialProps: { repository: repositoryA },
+        wrapper: createQueryWrapper(),
+      }
     );
 
     rerender({ repository: repositoryB });
-    await waitFor(() => expect(result.current.isLoading).toBe(false));
-    expect(result.current.insights[0]?.id).toBe('new-repository');
+    await waitFor(() => expect(repositoryB.list).toHaveBeenCalledOnce());
+    await waitFor(() =>
+      expect(result.current.insights[0]?.id).toBe('new-repository')
+    );
 
     await act(async () => {
       oldList.resolve({
@@ -545,25 +731,101 @@ describe('useInsightWorkspace', () => {
 
     expect(result.current.insights[0]?.id).toBe('new-repository');
   });
+
+  it('이전 저장소에서 시작된 mutation 응답을 같은 scope의 새 cache에 쓰지 않는다', async () => {
+    const oldInsight = createInsight({ id: 'old-insight' });
+    const newInsight = createInsight({ id: 'new-insight' });
+    const pendingUpdate =
+      createDeferred<Awaited<ReturnType<InsightRepository['update']>>>();
+    const repositoryA = createRepository({
+      list: vi.fn().mockResolvedValue({
+        insights: [oldInsight],
+        warnings: [],
+      }),
+      update: vi.fn(() => pendingUpdate.promise),
+    });
+    const repositoryB = createRepository({
+      list: vi.fn().mockResolvedValue({
+        insights: [newInsight],
+        warnings: [],
+      }),
+    });
+    const { result, rerender } = renderHook(
+      ({ repository }) =>
+        useInsightWorkspace({
+          captureService: UNAVAILABLE_CAPTURE_SERVICE,
+          queryScope: INSIGHT_QUERY_SCOPE,
+          repository,
+        }),
+      {
+        initialProps: { repository: repositoryA },
+        wrapper: createQueryWrapper(),
+      }
+    );
+    await waitFor(() => expect(result.current.insights).toEqual([oldInsight]));
+    let updateRequest!: ReturnType<typeof result.current.updateInsightContext>;
+
+    act(() => {
+      updateRequest = result.current.updateInsightContext(oldInsight.id, {
+        categoryId: null,
+        memo: '이전 저장소 수정',
+        title: oldInsight.title,
+      });
+    });
+    await waitFor(() => expect(result.current.isMutating).toBe(true));
+
+    rerender({ repository: repositoryB });
+    await waitFor(() => expect(repositoryB.list).toHaveBeenCalledOnce());
+    await waitFor(() => expect(result.current.insights).toEqual([newInsight]));
+
+    await act(async () => {
+      pendingUpdate.resolve({
+        insight: { ...oldInsight, memo: '이전 저장소 수정' },
+        ok: true,
+      });
+      await expect(updateRequest).resolves.toEqual({
+        ok: false,
+        reason: 'write-failed',
+      });
+    });
+
+    expect(result.current.insights).toEqual([newInsight]);
+  });
 });
 
 async function renderReadyWorkspace(
   repository: InsightRepository,
-  options: Partial<{
-    captureService: InsightCaptureService;
-    now: () => string;
-  }> = {}
+  options: Partial<UseInsightWorkspaceOptions> = {}
 ) {
-  const view = renderHook(() =>
-    useInsightWorkspace({
-      captureService: options.captureService ?? UNAVAILABLE_CAPTURE_SERVICE,
-      now: options.now,
-      repository,
-    })
+  const view = renderHook(
+    () =>
+      useInsightWorkspace({
+        captureService: UNAVAILABLE_CAPTURE_SERVICE,
+        queryScope: INSIGHT_QUERY_SCOPE,
+        repository,
+        ...options,
+      }),
+    { wrapper: createQueryWrapper() }
   );
 
   await waitFor(() => expect(view.result.current.isLoading).toBe(false));
   return view;
+}
+
+function createTestQueryClient() {
+  return createWorkspaceQueryClient({
+    defaultOptions: { queries: { gcTime: 0, retry: false } },
+  });
+}
+
+function createQueryWrapper(client = createTestQueryClient()) {
+  return function QueryWrapper({ children }: PropsWithChildren) {
+    return (
+      <WorkspaceQueryProvider client={client}>
+        {children}
+      </WorkspaceQueryProvider>
+    );
+  };
 }
 
 const UNAVAILABLE_CAPTURE_SERVICE: InsightCaptureService = {
