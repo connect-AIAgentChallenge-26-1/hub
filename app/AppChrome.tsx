@@ -23,15 +23,15 @@ export function BottomNav({ active }: BottomNavProps) {
     <nav className="fixed bottom-0 left-0 right-0 z-20 border-t border-creamDeep bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-md justify-around pb-[calc(0.8rem+env(safe-area-inset-bottom))] pt-3 text-xs">
         <Link href="/" className={linkClass("home")}>
-          {active === "home" && <span className="absolute -top-1.5 h-1.5 w-1.5 rounded-full bg-ink" />}
+          {active === "home" && <span className="absolute -top-1 h-1 w-1 rounded-full bg-[#e51c2b]" />}
           홈
         </Link>
         <Link href="/categories" className={linkClass("categories")}>
-          {active === "categories" && <span className="absolute -top-1.5 h-1.5 w-1.5 rounded-full bg-ink" />}
+          {active === "categories" && <span className="absolute -top-1 h-1 w-1 rounded-full bg-[#e51c2b]" />}
           카테고리
         </Link>
         <Link href="/archive" className={linkClass("archive")}>
-          {active === "archive" && <span className="absolute -top-1.5 h-1.5 w-1.5 rounded-full bg-ink" />}
+          {active === "archive" && <span className="absolute -top-1 h-1 w-1 rounded-full bg-[#e51c2b]" />}
           아카이브
         </Link>
         <span className="min-w-16 text-center text-muted">설정</span>
