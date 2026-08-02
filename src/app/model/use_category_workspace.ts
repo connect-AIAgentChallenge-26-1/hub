@@ -365,7 +365,6 @@ export function useCategoryWorkspace({
         ),
         warnings: latestState.warnings,
       }));
-      onCategoryDeleted(categoryId);
 
       return deleteResult;
     },
@@ -373,16 +372,27 @@ export function useCategoryWorkspace({
   const { isPending: isDeleting, mutateAsync: mutateDelete } = deleteMutation;
 
   const deleteCategory = useCallback(
-    (categoryId: string) =>
-      runMutation(
+    async (categoryId: string) => {
+      const deleteResult = await runMutation(
         repository,
         () => mutateDelete({ categoryId, repositoryAtStart: repository }),
         {
           ok: false,
           reason: 'write-failed',
         }
-      ),
-    [mutateDelete, repository, runMutation]
+      );
+
+      if (deleteResult.ok) {
+        try {
+          onCategoryDeleted(categoryId);
+        } catch {
+          // 소비자 콜백 실패가 이미 완료된 삭제 결과를 바꾸지 않게 한다.
+        }
+      }
+
+      return deleteResult;
+    },
+    [mutateDelete, onCategoryDeleted, repository, runMutation]
   );
 
   return {

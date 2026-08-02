@@ -39,7 +39,7 @@ Zustand, TanStack Query, React Router, React Hook Form, Zod와 resolver는 이�
 
 ### Query Provider
 
-`app` 계층에 `QueryClientProvider`를 둔다. Query Client는 앱 수명 주기 동안 한 번만 생성하고 테스트에서는 매 테스트마다 새 인스턴스를 사용한다. 테스트 Query Client는 자동 재시도를 끄고 캐시 수명을 짧게 설정해 테스트 간 상태가 섞이지 않게 한다.
+`app` 계층에 `QueryClientProvider`를 둔다. Query Client는 마운트된 workspace scope 수명 주기 동안 한 번만 생성한다. `authenticated_workspace`가 `queryScope` 변경 시 Provider를 다시 마운트하므로 사용자나 scope가 바뀌면 이전 Query Client와 캐시를 폐기한다. 테스트에서는 매 테스트마다 새 인스턴스를 사용하고, 자동 재시도를 끄고 캐시 수명을 짧게 설정해 테스트 간 상태가 섞이지 않게 한다.
 
 쿼리 키는 직렬화할 수 있는 값만 사용한다.
 

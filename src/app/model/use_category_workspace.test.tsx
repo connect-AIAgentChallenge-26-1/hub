@@ -89,6 +89,26 @@ describe('useCategoryWorkspace', () => {
     expect(onCategoryDeleted).toHaveBeenCalledWith(FRONTEND_CATEGORY.id);
   });
 
+  it('삭제 후 콜백이 실패해도 성공 결과 계약을 유지한다', async () => {
+    const repository = createRepository({
+      delete: vi.fn().mockResolvedValue({ ok: true }),
+      list: vi.fn().mockResolvedValue({
+        categories: [DEVELOPMENT_CATEGORY],
+        warnings: [],
+      }),
+    });
+    const { result } = await renderReadyWorkspace(repository, () => {
+      throw new Error('콜백 실패');
+    });
+
+    await act(async () => {
+      await expect(
+        result.current.deleteCategory(DEVELOPMENT_CATEGORY.id)
+      ).resolves.toEqual({ ok: true });
+    });
+    await waitFor(() => expect(result.current.categories).toEqual([]));
+  });
+
   it('현재 목록의 최댓값 다음 sortOrder로 생성한다', async () => {
     const create = vi
       .fn<CategoryRepository['create']>()

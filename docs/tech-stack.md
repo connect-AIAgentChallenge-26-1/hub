@@ -89,7 +89,7 @@
 - `Tailwind CSS`, `@tailwindcss/vite`: 설치되어 있지만 아직 Vite 설정과 CSS 엔트리에 연결하지 않았다.
 - `shadcn/ui`: CLI는 설치되어 있지만 컴포넌트 생성과 `components.json` 초기화는 하지 않았다.
 - `MiniSearch`, `Fuse.js`: 아직 설치하지 않았다. 현재 검색의 실패 데이터와 비교 실험이 생긴 뒤에만 선택한다.
-- `React Router`, `Motion`, `dnd-kit`, `React Hook Form`, `Sonner`: 설치되어 있지만 현재 코드에 연결하지 않았다.
+- `class-variance-authority`, `tailwind-merge`, `React Router`, `Zod`, `React Hook Form`, `@hookform/resolvers`, `Motion`, `dnd-kit`, `Sonner`: 설치되어 있지만 현재 코드에 연결하지 않았다.
 
 ## 참고 자료
 
