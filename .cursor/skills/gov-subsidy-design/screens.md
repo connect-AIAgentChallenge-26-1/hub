@@ -1,6 +1,6 @@
 # Screen Specifications
 
-출처: `prototype/gov_subsidy_home_wireframe.html` + `docs/plan.md`
+출처: `src/prototype/gov_subsidy_home_wireframe.html` + `docs/plan.md`
 
 ## Screen Inventory
 

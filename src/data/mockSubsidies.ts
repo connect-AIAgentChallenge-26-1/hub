@@ -3,7 +3,7 @@ import { REGIONS, type OnboardingProfile, type SortOption, type Subsidy } from '
 /** 전국 대상 기관 — 크롤러가 hashtags 16개 전부를 담는 것과 동일한 규칙(이슈 #43) */
 const NATIONWIDE = [...REGIONS]
 
-/** prototype/gov_subsidy_home_wireframe.html subsidies 배열 (8건) */
+/** src/prototype/gov_subsidy_home_wireframe.html subsidies 배열 (8건) */
 export const MOCK_SUBSIDIES: Subsidy[] = [
   {
     id: '1',

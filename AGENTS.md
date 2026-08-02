@@ -33,10 +33,10 @@
 ```
 hub/
 ├── src/                    # React 클라이언트 (Vite)
+│   └── prototype/          # HTML 와이어프레임 (수정 시 Skill도 갱신)
 ├── server/                 # Express API
 ├── shared/                 # 프론트·백 공유 타입
 ├── crawler/                # 기업마당 크롤러 (Week 3 구축 완료)
-├── prototype/              # HTML 와이어프레임 (수정 시 Skill도 갱신)
 ├── supabase/schema.sql     # DB 스키마
 ├── docs/                   # 기획·주차별 계획/회고/검증 문서
 │   └── exhibition/         # 부스 전시 자료 (posters/monitor/final)

@@ -62,7 +62,7 @@ flowchart TD
 | [`docs/plan.md`](./docs/plan.md) | 기획서 — 문제 정의, MVP 범위, 화면 흐름 (제품 스펙 단일 소스) |
 | [`docs/user-stories.md`](./docs/user-stories.md) | Epic·유저 스토리·인수 조건 |
 | [`docs/week2_plan.md`](./docs/week2_plan.md) / [`docs/week3_plan.md`](./docs/week3_plan.md) | 주차별 계획·이슈 진행 현황 (유일한 상태 소스) |
-| [`prototype/gov_subsidy_home_wireframe.html`](./prototype/gov_subsidy_home_wireframe.html) | UI/UX 와이어프레임 |
+| [`src/prototype/gov_subsidy_home_wireframe.html`](./src/prototype/gov_subsidy_home_wireframe.html) | UI/UX 와이어프레임 |
 | [`.cursor/skills/gov-subsidy-design/`](./.cursor/skills/gov-subsidy-design/) | 디자인 구현 Skill |
 | [`.cursor/skills/issue-workflow/`](./.cursor/skills/issue-workflow/) | 이슈 계획→구현→PR 워크플로우 Skill |
 | [`docs/exhibition/`](./docs/exhibition/) | 부스 전시 자료 — `posters/`(A3 포스터 2종), `monitor/`(자동 시연·루프 HTML), `final/`(제출용 PDF) |

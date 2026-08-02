@@ -1,6 +1,6 @@
 # Design Tokens — 소상공인 정부지원금 큐레이터
 
-출처: `prototype/gov_subsidy_home_wireframe.html`
+출처: `src/prototype/gov_subsidy_home_wireframe.html`
 
 ## Color
 
