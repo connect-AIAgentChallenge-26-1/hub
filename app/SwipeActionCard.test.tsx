@@ -12,7 +12,7 @@ const item = {
   summary: null,
   content: "내용",
   original_url: null,
-  image_url: null,
+  image_url: "https://example.com/thumbnail.jpg",
   source_platform: "manual",
   category_main: "기타",
   category_sub: null,
@@ -45,6 +45,7 @@ describe("SwipeActionCard", () => {
     expect(card).not.toBeNull();
     expect(card).toHaveClass("bg-white");
     expect(card).not.toHaveClass("bg-white/80");
+    expect(card?.querySelector("img")).not.toBeInTheDocument();
     Object.defineProperty(card, "setPointerCapture", { value: vi.fn() });
     Object.defineProperty(card, "hasPointerCapture", { value: vi.fn(() => false) });
 
