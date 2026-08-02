@@ -6,6 +6,21 @@
 
 ![아맞다 온보딩 화면](docs/assets/amadda-onboarding-hero.png)
 
+## 프로젝트 링크
+
+| 구분          | 링크                                                                                                                                                         |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 서비스 배포   | [아맞다 Production](https://hub-ppre1udes-projects.vercel.app)                                                                                               |
+| 부스 슬라이드 | [Figma](https://www.figma.com/deck/VSnnmq8V2lNaXvjN4QblGS/%EC%95%84%EB%A7%9E%EB%8B%A4--%EB%B6%80%EC%8A%A4-%EC%8A%AC%EB%9D%BC%EC%9D%B4%EB%93%9C?node-id=1-42) |
+| 데모 영상     | 준비 중                                                                                                                                                      |
+| 프로젝트 관리 | [Notion](https://semicolon-master.notion.site/AI-Agent-Challenge-396f551ebf238005a7fcfbe20555c4bd)                                                           |
+| 소스 코드     | [GitHub 저장소](https://github.com/ppre1ude/hub)                                                                                                             |
+| 제품 문서     | [Wiki](https://github.com/ppre1ude/hub/wiki)                                                                                                                 |
+| 작업 이슈     | [GitHub Issues](https://github.com/ppre1ude/hub/issues)                                                                                                      |
+| 백로그        | [GitHub Project](https://github.com/users/ppre1ude/projects/3)                                                                                               |
+| 쇼케이스      | [showcase.json](https://github.com/ppre1ude/hub/blob/main/showcase/showcase.json)                                                                            |
+| 개발 방식     | [AI Agent Workflow](https://github.com/ppre1ude/hub/blob/main/docs/ai-development-workflow.md)                                                               |
+
 ## 프로젝트 목적
 
 유용한 링크를 저장해 두어도 시간이 지나면 왜 저장했는지, 어디에 두었는지 잊기 쉽습니다. 아맞다는 웹 URL 입력, Chrome 확장, Android 공유로 발견한 링크를 같은 개인 보관함에 저장하고, 필요한 순간 다시 꺼내 쓸 수 있게 합니다.
