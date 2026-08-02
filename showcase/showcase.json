@@ -35,6 +35,8 @@
     "React",
     "TypeScript",
     "Vite",
+    "TanStack Query",
+    "Zustand",
     "GSAP",
     "WDS",
     "Capacitor",
@@ -49,7 +51,7 @@
   "techHighlights": [
     "React와 TypeScript 기반의 FSD 구조로 페이지, 기능, 도메인과 공통 UI의 책임을 나누고, WDS를 공통 UI 계층으로 감싸 외부 라이브러리 의존성을 분리했습니다.",
     "디자인 토큰과 공통 UI 컴포넌트로 색상, 타이포그래피와 상태 표현을 통일하고, 반응형 디자인과 GSAP을 활용해 화면 크기와 사용자 흐름에 맞는 경험을 구현했습니다.",
-    "React Hooks, useReducer와 커스텀 Workspace Hook으로 화면 상태와 Supabase 데이터를 관리하고, 늦게 끝난 요청과 중복 변경이 현재 화면을 덮지 않도록 처리했습니다.",
+    "TanStack Query로 인사이트와 카테고리의 서버 상태, 사용자별 캐시와 변경 경쟁을 관리하고, scoped Zustand Store로 검색 조건과 꺼내보기 입력 같은 화면 상태를 분리했습니다.",
     "zip.js, csv-parse와 htmlparser2를 활용해 여러 형식의 파일을 브라우저에서 분석하고, 반영 전에 신규, 중복과 오류를 확인하는 가져오기 흐름을 구현했습니다.",
     "Capacitor와 Kotlin 플러그인으로 React 앱을 Android 공유 기능과 연결하고, 웹, Chrome 확장과 모바일에서 같은 저장 경험이 이어지도록 구성했습니다.",
     "Vitest와 Testing Library로 저장, 검색, 수정, 오류 복구와 키보드 상호작용을 검증하고 실제 브라우저에서 반응형 화면을 확인했습니다.",
