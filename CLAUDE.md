@@ -92,7 +92,8 @@ client/             # React (Vite) — 5173
     components/
     styles/         # tokens.css (디자인 토큰)
     utils/          # 화면 공용 함수 (시각 표시·경과 시간·진행률)
-    mocks/          # mock 데이터 (구조는 아래 Data Model과 동일)
+    constants.js    # 화면 공용 도메인 상수 (알림 5종 등)
+                    # mocks/ 는 T-17에서 실제 API로 교체 완료 후 제거 (2026-08-03)
 server/             # Express — 3000
   index.js
   routes/
@@ -100,7 +101,7 @@ server/             # Express — 3000
   scripts/          # 센서 폴링, 시뮬레이터
   lib/              # supabase 클라이언트 초기화
 docs/               # plan.md, backlog.md, prototype.html
-assets/             # 마스코트, 로고
+assets/             # 발표용 다이어그램 (마스코트 이미지는 client/public/mascot/ 하나만 둔다)
 ```
 
 client의 `/api`·`/ingest` 요청은 Vite 프록시가 server로 넘긴다. 프론트는 상대 경로로 호출한다.

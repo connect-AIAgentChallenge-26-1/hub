@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NOTIFICATION_TYPE } from "../../mocks/notifications.js";
+import { NOTIFICATION_TYPE } from "../../constants.js";
 import OwnerNav from "../../components/OwnerNav.jsx";
 import StatusBadge from "../../components/StatusBadge.jsx";
 import { formatElapsed, formatRange, formatTime, progressPercent } from "../../utils/time.js";

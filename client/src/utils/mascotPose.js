@@ -1,5 +1,5 @@
 /* 6상태 → 마스코트 포즈 이미지 경로.
-   포즈 원본은 assets/mascot/ (스프라이트 시트를 상태별로 자른 것), 서빙본은 client/public/mascot/.
+   이미지는 client/public/mascot/ (스프라이트 시트를 상태별로 자른 것).
    public 아래라 / 기준 절대경로로 부른다.
 
    SPIN은 RUNNING과 같은 "단안경 스캔" 포즈를 쓴다 — 세탁·탈수는 같은 "돌아가는 중" 계열이라
