@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<title>부스 모니터 자동 루프 — 소상공인 정부 지원금 큐레이터</title>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+/>
+<style>
+  :root {
+    /* 옅은 회색-블루 라이트 테마. 남색은 배경이 아니라 이제 본문 텍스트 색으로 쓴다. */
+    --bg: #F1F4F8;
+    --navy: #0A2540;
+    --navy-soft: #E2E9F3;
+    --blue: #2563EB;
+    --blue-soft: #EEF4FC;
+    --white: #FFFFFF;
+    --text-sub: #5B6B82;
+    --warn-bg: rgba(220, 38, 38, 0.10);
+    --warn-border: #EF4444;
+
+    /* 채도 높은 버전 — 색이 있는 배경(막대·배지)에 쓴다 */
+    --seg-base: #2563EB;
+    --seg-region: #06B6D4;
+    --seg-emp: #16A34A;
+    --seg-rev: #D97706;
+    --seg-yr: #9333EA;
+
+    /* 텍스트/테두리용 — 밝은 배경에서도 읽히도록 더 진하게 뺀 버전 */
+    --acc-blue: #2563EB;
+    --acc-cyan: #0E7490;
+    --acc-green: #15803D;
+    --acc-amber: #B45309;
+    --acc-purple: #7E22CE;
+    --acc-slate: #475569;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 100%;
+    height: 100%;
+    background: var(--bg);
+    color: var(--navy);
+    overflow: hidden;
+    font-family: "Pretendard Variable", Pretendard, -apple-system,
+                 BlinkMacSystemFont, sans-serif;
+  }
+
+  .stage { position: relative; width: 100vw; height: 100vh; }
+  /* 전체 배경에 아주 은은한 색 글로우만 깔아 밋밋하지 않게 한다(라이트 테마라 저농도) */
+  .stage::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 40% at 50% 0%, rgba(37,99,235,0.09), transparent 65%),
+      radial-gradient(ellipse 50% 35% at 100% 100%, rgba(147,51,234,0.06), transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* 슬라이드 공통 정렬 규칙 — 모든 슬라이드가 같은 구조(eyebrow → h2 → 본문)로
+     같은 위치에서 시작하도록 통일한다. */
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.8vh;
+    padding: 6vh 8vw;
+    text-align: center;
+    z-index: 1;
+  }
+  .slide.active {
+    display: flex;
+    animation: fadeIn 0.7s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 슬라이드 안 요소들이 순서대로 떠오르는 공통 등장 모션.
+     .slide가 display:none → flex로 바뀔 때마다 애니메이션이 자동으로 재시작된다. */
+  .reveal {
+    opacity: 0;
+    animation: riseIn 0.6s cubic-bezier(.16,.84,.44,1) forwards;
+    animation-delay: calc(var(--i, 0) * 120ms + 250ms);
+  }
+  @keyframes riseIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .eyebrow {
+    letter-spacing: 0.18em;
+    font-size: clamp(13px, 1.1vw, 17px);
+    font-weight: 700;
+    color: var(--blue);
+    text-transform: uppercase;
+  }
+  .slide-h2 {
+    font-size: clamp(30px, 3.6vw, 52px);
+    font-weight: 800;
+    letter-spacing: -0.01em;
+  }
+  .slide-sub {
+    font-size: clamp(16px, 1.5vw, 23px);
+    color: var(--text-sub);
+    margin-top: -1.2vh;
+  }
+
+  /* ---- 타이틀 ---- */
+  .kicker {
+    letter-spacing: 0.16em;
+    font-size: clamp(15px, 1.3vw, 20px);
+    color: var(--text-sub);
+    font-weight: 600;
+  }
+  .slide-title h1 {
+    font-size: clamp(44px, 5.6vw, 82px);
+    font-weight: 800;
+    line-height: 1.2;
+  }
+  .tagline {
+    font-size: clamp(19px, 1.9vw, 30px);
+    color: var(--text-sub);
+    line-height: 1.6;
+  }
+
+  /* ---- 카드 공통(라이트 톤 — 흰 카드 + 옅은 테두리/그림자) ---- */
+  .glass-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(10,37,64,0.08);
+    border-radius: 20px;
+    box-shadow: 0 10px 26px rgba(10,37,64,0.08);
+  }
+
+  /* ---- 1. 문제정의 — 왼쪽(문제) → 가운데(실측 근거) → 오른쪽(해결) 한 화면 구성 ---- */
+  .flow-row { display: flex; align-items: center; justify-content: center; gap: 3.4vw; }
+  .flow-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.6vh;
+  }
+
+  /* 왼쪽: 사이트마다 따로 — 4곳에서 제각각 날아와 흩어져 있는 느낌 */
+  .scatter-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2vh 1vw;
+  }
+  .scatter-chip {
+    padding: 1.8vh 1.8vw;
+    border-radius: 14px;
+    font-size: clamp(15px, 1.4vw, 21px);
+    font-weight: 700;
+    background: #FFFFFF;
+    border: 1px solid rgba(10,37,64,0.10);
+    box-shadow: 0 6px 16px rgba(10,37,64,0.06);
+    opacity: 0;
+  }
+  .scatter-chip.c1 { animation: scatterIn1 0.6s cubic-bezier(.2,.8,.3,1) 0.4s forwards; }
+  .scatter-chip.c2 { animation: scatterIn2 0.6s cubic-bezier(.2,.8,.3,1) 0.52s forwards; }
+  .scatter-chip.c3 { animation: scatterIn3 0.6s cubic-bezier(.2,.8,.3,1) 0.64s forwards; }
+  .scatter-chip.c4 { animation: scatterIn4 0.6s cubic-bezier(.2,.8,.3,1) 0.76s forwards; }
+  @keyframes scatterIn1 { from { opacity:0; transform: translate(-50px,-36px) rotate(-10deg); } to { opacity:1; transform:none; } }
+  @keyframes scatterIn2 { from { opacity:0; transform: translate(50px,-36px) rotate(10deg); } to { opacity:1; transform:none; } }
+  @keyframes scatterIn3 { from { opacity:0; transform: translate(-50px,36px) rotate(8deg); } to { opacity:1; transform:none; } }
+  @keyframes scatterIn4 { from { opacity:0; transform: translate(50px,36px) rotate(-8deg); } to { opacity:1; transform:none; } }
+  .flow-caption {
+    font-size: clamp(14px, 1.3vw, 19px);
+    color: var(--text-sub);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  /* 가운데: 화살표 + 실측 데이터 근거(작게) */
+  .flow-center { gap: 1vh; }
+  .flow-arrow { color: var(--blue); font-size: 3vw; font-weight: 700; }
+  .proof-stats { display: flex; flex-direction: column; gap: 0.4vh; }
+  .proof-line {
+    font-size: clamp(13px, 1.15vw, 17px);
+    color: var(--text-sub);
+    font-weight: 600;
+  }
+  .proof-num {
+    font-size: clamp(18px, 1.7vw, 25px);
+    font-weight: 800;
+    color: var(--blue);
+    font-variant-numeric: tabular-nums;
+    margin-right: 2px;
+  }
+
+  /* 오른쪽: 해결 — 조건으로 한 번에 */
+  .condition-row { display: flex; gap: 0.8vw; flex-wrap: wrap; justify-content: center; }
+  .cond-chip {
+    background: var(--navy-soft);
+    border-radius: 999px;
+    padding: 1.1vh 1.7vw;
+    font-size: clamp(14px, 1.3vw, 20px);
+    font-weight: 700;
+  }
+  .resolve-box {
+    background: rgba(37,99,235,0.10);
+    border: 1px solid var(--blue);
+    border-radius: 20px;
+    padding: 1.9vh 2.3vw;
+    font-size: clamp(18px, 1.9vw, 27px);
+    font-weight: 700;
+    line-height: 1.4;
+  }
+  .resolve-box b { color: var(--blue); }
+
+  /* ---- 2. 핵심기능 — 좌우 두 박스 + 세로 파이프라인 도식 ---- */
+  .slide-features { gap: 2vh; }
+  .feature-cols { display: flex; gap: 2.4vw; align-items: stretch; justify-content: center; }
+  .feature-col {
+    width: 36vw;
+    padding: 2.6vh 2.2vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5vh;
+    background: rgba(255,255,255,0.28);
+    border: 1px solid rgba(255,255,255,0.5);
+    box-shadow: 0 10px 30px rgba(10,37,64,0.10);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+  .feature-block-title {
+    font-size: clamp(18px, 2vw, 28px);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .feature-tag {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 15px; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .feature-tag.b { background: var(--seg-yr); }
+  .mini-pipeline {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.7vh;
+    width: 100%;
+  }
+  .mp-step {
+    width: 100%;
+    background: var(--navy-soft);
+    border-radius: 12px;
+    padding: 1.2vh 1.3vw;
+    font-size: clamp(14px, 1.3vw, 19px);
+    font-weight: 700;
+    text-align: center;
+  }
+  .mp-step.warn-ish {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+  }
+  .mp-step.accent { background: var(--blue); color: #fff; }
+  .mp-sub {
+    font-size: clamp(12px, 1.1vw, 16px);
+    color: var(--text-sub);
+    font-weight: 500;
+    margin-top: 0.4vh;
+  }
+  .mp-arrow { color: var(--text-sub); font-size: 1.2vw; line-height: 1; }
+  /* 아키텍처 슬라이드처럼 좁은 카드용 축소판 */
+  .mp-step.small { font-size: clamp(11px, 1.05vw, 15px); padding: 0.8vh 0.7vw; }
+  .db-tables { display: flex; flex-direction: column; gap: 0.5vh; align-items: center; }
+
+  .score-bar {
+    width: 100%;
+    height: 13px;
+    border-radius: 999px;
+    overflow: hidden;
+    display: flex;
+    background: rgba(10,37,64,0.08);
+    margin-top: 0.6vh;
+  }
+  .score-seg {
+    height: 100%;
+    flex-basis: 0%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    transition: flex-basis 0.7s cubic-bezier(.22,.9,.34,1);
+  }
+  .score-seg.filled { flex-basis: calc(var(--w) * 1%); }
+  .score-seg.s-base { background: var(--seg-base); }
+  .score-seg.s-region { background: var(--seg-region); }
+  .score-seg.s-bonus { background: var(--seg-emp); }
+
+  .sort-chips { display: flex; gap: 0.6vw; flex-wrap: wrap; justify-content: center; }
+  .chip {
+    background: rgba(10,37,64,0.06);
+    border-radius: 999px;
+    padding: 0.7vh 1.2vw;
+    font-size: clamp(12px, 1.1vw, 16px);
+    font-weight: 600;
+  }
+
+  /* ---- 3. 어떻게 동작하는가 — 외부소스 → Crawler → Supabase → Express →
+     React+TanStack Query, 5개 스윔레인. 컬럼마다 성격에 맞는 색을 준다
+     (Supabase=초록, Crawler=주황, React=청록, 외부소스=슬레이트, Express=파랑) ---- */
+  .slide-arch { gap: 1.2vh; }
+  /* 5개 컬럼을 한 줄에 다 욱여넣으면 너무 작아져서, 2줄(①②③ / ④⑤)로 나누고
+     그만큼 컬럼 하나하나는 크게 키웠다. 다만 위아래 여백이 남게 전체적으로
+     살짝 눌러서(패딩·줄간격 축소) 화면에 꽉 차 보이지 않게 했다 */
+  .sys-rows { display: flex; flex-direction: column; align-items: center; gap: 0.65vh; }
+  .sys-row { display: flex; align-items: flex-start; justify-content: center; gap: 2.4vw; width: 94vw; }
+  .row-connector {
+    color: rgba(10,37,64,0.35);
+    font-size: clamp(17px, 1.9vw, 26px);
+    line-height: 1;
+  }
+  .sys-col {
+    flex: 0 1 27vw;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1vh;
+    opacity: 0;
+    animation: riseIn 0.6s cubic-bezier(.16,.84,.44,1) forwards;
+    animation-delay: calc(var(--i, 0) * 180ms + 250ms);
+  }
+  .sys-title {
+    font-size: clamp(16px, 1.65vw, 22.5px);
+    font-weight: 800;
+    text-align: center;
+    line-height: 1.3;
+    color: var(--acc-slate);
+  }
+  .sys-col.c-crawl .sys-title { color: var(--acc-amber); }
+  .sys-col.c-db .sys-title { color: var(--acc-green); }
+  .sys-col.c-api .sys-title { color: var(--blue); }
+  .sys-col.c-fe .sys-title { color: var(--acc-cyan); }
+  .sys-caption {
+    display: block;
+    font-size: clamp(11px, 1vw, 14px);
+    color: var(--text-sub);
+    font-weight: 500;
+    margin-top: 3px;
+  }
+  .sys-body { display: flex; flex-direction: column; align-items: center; gap: 0.65vh; width: 100%; }
+  .sys-node {
+    width: 100%;
+    background: var(--navy-soft);
+    border-radius: 12px;
+    padding: 1.05vh 1vw;
+    font-size: clamp(14px, 1.45vw, 18.5px);
+    font-weight: 700;
+    text-align: center;
+  }
+  .sys-node.highlight { background: var(--blue); color: #fff; }
+  .sys-node.highlight .sys-note { color: rgba(255,255,255,0.85); }
+  .sys-col.c-db .sys-node.highlight { background: var(--seg-emp); }
+  .sys-node.dim { background: rgba(10,37,64,0.05); font-weight: 600; color: var(--text-sub); }
+  .sys-node.small { font-size: clamp(12px, 1.25vw, 16px); padding: 0.85vh 0.7vw; }
+  .sys-note {
+    font-size: clamp(11px, 1vw, 14px);
+    color: var(--text-sub);
+    font-weight: 500;
+    margin-top: 3px;
+    line-height: 1.35;
+  }
+  .side-tag {
+    margin-top: 4px;
+    display: inline-block;
+    font-size: clamp(10.5px, 0.95vw, 13px);
+    color: var(--acc-purple);
+    background: rgba(147,51,234,0.08);
+    border: 1px dashed rgba(147,51,234,0.4);
+    border-radius: 8px;
+    padding: 3px 9px;
+  }
+  .sys-fork {
+    color: var(--text-sub);
+    font-size: 1.4vw;
+    display: flex;
+    gap: 2.6vw;
+    line-height: 1;
+  }
+  .sys-branch { display: flex; gap: 0.6vw; width: 100%; }
+  .sys-branch .sys-node { flex: 1 1 0; }
+
+  /* ---- 5. AI 에이전트를 어떻게 활용했는가 — 상위 에이전트가 이슈별 하위
+     에이전트를 병렬로 다루고, 각 하위 에이전트가 스킬을 쓰는 조직도.
+     역할별로 색을 다르게 준다(Code=파랑, Test=초록, Docs=보라) ---- */
+  .agent-org { display: flex; flex-direction: column; align-items: center; gap: 0.8vh; }
+  .supervisor-box {
+    padding: 1.6vh 2.4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3vh;
+  }
+  .org-name { font-size: clamp(16px, 1.6vw, 22px); font-weight: 800; }
+  .org-desc { font-size: clamp(12px, 1.05vw, 15px); color: var(--text-sub); }
+
+  /* Code/Test/Docs 3열을 CSS Grid 대신 순수 flexbox로만 구성한다 — 반복
+     재생 중 슬라이드가 display:none↔flex로 여러 번 전환될 때 CSS Grid +
+     애니메이션 조합에서 열 배치가 깨지는(3열이 세로로 쌓이는) 크롬 버그를
+     겪어서, 훨씬 더 안정적인 flexbox 구조로 다시 짰다. */
+  .stem { width: 2px; height: 16px; background: rgba(10,37,64,0.3); margin: 0 auto; }
+  .branch-bar { width: 88vw; height: 2px; background: rgba(10,37,64,0.3); margin-bottom: 16px; }
+  .branch-drop { width: 2px; height: 16px; background: rgba(10,37,64,0.3); margin-bottom: 6px; }
+
+  .agents-row { display: flex; align-items: flex-start; gap: 1.6vw; width: 88vw; }
+  /* Code+Test를 한 묶음으로 감싸서, 그 묶음 너비(전체의 2/3)를 기준으로
+     병합선·최종 단계를 정확히 그 아래 중앙에 둘 수 있게 한다 */
+  .chain-group { flex: 2 1 0; display: flex; flex-direction: column; align-items: center; min-width: 0; }
+  .agents-pair { display: flex; width: 100%; gap: 1.6vw; }
+  .agent-col { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; min-width: 0; }
+
+  .sub-agent {
+    width: 100%;
+    padding: 1.6vh 1.4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5vh;
+  }
+  .sub-agent .org-name { color: var(--blue); }
+  .sub-agent.test .org-name { color: var(--acc-green); }
+  .sub-agent.docs .org-name { color: var(--acc-purple); }
+  .skills-label {
+    margin-top: 0.3vh;
+    letter-spacing: 0.1em;
+    font-size: clamp(10px, 0.9vw, 12px);
+    font-weight: 700;
+    color: var(--blue);
+    text-transform: uppercase;
+  }
+  .sub-agent.test .skills-label { color: var(--acc-green); }
+  .sub-agent.docs .skills-label { color: var(--acc-purple); }
+  .skills-list {
+    font-size: clamp(11px, 1.05vw, 15px);
+    color: var(--text-sub);
+    line-height: 1.5;
+  }
+  /* 96px 고정 높이 — Code는 이 높이를 꽉 채우는 실선 하나로, Test는 이 칸의
+     아래쪽에 붙여서(justify-content:flex-end) 두 열의 바닥이 같은 y에서 만난다 */
+  .chain-cell {
+    width: 100%;
+    height: 96px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    margin-top: 8px;
+  }
+  .chain-cell .stem { flex: 1; height: auto; }
+
+  /* Code + Test 두 줄이 한 지점으로 합쳐지는 병합선(Docs는 이 묶음 밖에 있어 참여하지 않음) */
+  .merge-bar { width: 100%; height: 2px; background: rgba(10,37,64,0.3); margin-top: 8px; }
+  .merge-drop { width: 2px; height: 16px; background: rgba(10,37,64,0.3); }
+
+  .final-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .final-row .mp-step.accent { background: var(--seg-rev); }
+  .mp-step.wide { width: 22vw; }
+
+  /* ---- 데모(프로토타입 iframe) ---- */
+  .slide-demo { gap: 2vh; }
+  .demo-label {
+    font-size: clamp(19px, 1.9vw, 29px);
+    font-weight: 700;
+    color: var(--text-sub);
+  }
+  .phone-shell {
+    /* 화면 크기에 맞춰 줄어들도록 vh/vw 기반으로 계산하고, iframe 안의
+       데스크톱 프리뷰 분기(min-width:480px)로 안 넘어가게 460px로 상한을 둔다 */
+    width: min(460px, 38vh, 90vw);
+    aspect-ratio: 390 / 844;
+    border-radius: 36px;
+    overflow: hidden;
+    border: 8px solid #111;
+    box-shadow: 0 24px 60px rgba(10,37,64,0.30);
+  }
+  #demo-frame { width: 100%; height: 100%; border: 0; display: block; }
+
+  /* ---- 마무리 CTA ---- */
+  .qr-big { width: clamp(170px, 17vw, 250px); height: auto; border-radius: 12px; }
+  .cta-url { font-size: clamp(19px, 1.9vw, 30px); color: var(--text-sub); letter-spacing: 0.02em; }
+  .cta-credit {
+    margin-top: -0.6vh;
+    font-size: clamp(13px, 1.15vw, 17px);
+    color: var(--text-sub);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+
+  /* ---- 상시 요소: 진행 점(클릭하면 해당 슬라이드로 바로 이동) ---- */
+  .dots {
+    position: fixed;
+    left: 50%; bottom: 3vh;
+    transform: translateX(-50%);
+    display: flex; gap: 10px;
+    z-index: 10;
+  }
+  .dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: rgba(10,37,64,0.18);
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+  }
+  .dot.active { background: var(--blue); transform: scale(1.3); }
+
+  /* ---- 상시 요소: QR 배지 ---- */
+  .qr-badge {
+    position: fixed;
+    right: 3vw; bottom: 3vh;
+    background: var(--white);
+    color: var(--navy);
+    border: 1px solid rgba(10,37,64,0.08);
+    border-radius: 18px;
+    padding: 14px 20px;
+    display: flex; align-items: center; gap: 14px;
+    box-shadow: 0 8px 20px rgba(10,37,64,0.18);
+    z-index: 10;
+    transition: opacity 0.3s ease;
+  }
+  .qr-small { width: 76px; height: 76px; }
+  .qr-badge-text { font-size: 16px; font-weight: 700; line-height: 1.35; }
+
+</style>
+</head>
+<body data-slide="0">
+
+<!-- QR 코드 벡터 정의 (오프라인에서도 동작하도록 인라인 SVG, 대상: https://syd348.github.io/hub/) -->
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="qr-code" viewBox="0 0 31 31">
+    <path fill="#ffffff" d="M0 0h31v31H0z"/>
+    <path stroke="#000000" d="M1 1.5h7m3 0h2m3 0h6m1 0h7M1 2.5h1m5 0h1m3 0h3m5 0h1m3 0h1m5 0h1M1 3.5h1m1 0h3m1 0h1m1 0h3m1 0h1m1 0h1m1 0h1m2 0h2m1 0h1m1 0h3m1 0h1M1 4.5h1m1 0h3m1 0h1m1 0h2m2 0h1m3 0h2m1 0h1m2 0h1m1 0h3m1 0h1M1 5.5h1m1 0h3m1 0h1m1 0h3m2 0h3m1 0h3m2 0h1m1 0h3m1 0h1M1 6.5h1m5 0h1m1 0h1m1 0h1m1 0h6m4 0h1m5 0h1M1 7.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M9 8.5h1m1 0h1m1 0h2m1 0h1m3 0h1M1 9.5h1m1 0h5m2 0h3m2 0h2m1 0h2m3 0h5M3 10.5h2m1 0h1m1 0h1m2 0h1m1 0h1m2 0h6m1 0h1m1 0h1m3 0h1M1 11.5h5m1 0h1m4 0h1m5 0h1m2 0h1m2 0h1M1 12.5h1m1 0h4m3 0h4m1 0h1m1 0h1m3 0h2m2 0h2m1 0h1M1 13.5h1m2 0h2m1 0h1m9 0h2m2 0h2m1 0h1m1 0h2M2 14.5h2m1 0h2m1 0h2m3 0h4m1 0h4m1 0h1m1 0h1m3 0h1M1 15.5h5m1 0h1m1 0h2m1 0h6m1 0h1m2 0h2m1 0h3M2 16.5h1m1 0h2m2 0h2m1 0h1m2 0h1m1 0h1m2 0h1m2 0h1m1 0h2m2 0h1M4 17.5h10m1 0h2m1 0h1m1 0h1m1 0h1m3 0h2M1 18.5h1m2 0h1m1 0h1m1 0h2m2 0h1m3 0h2m2 0h6m1 0h1m1 0h1M1 19.5h1m4 0h2m1 0h5m9 0h3m1 0h1M1 20.5h1m1 0h2m4 0h1m5 0h1m1 0h1m3 0h3m4 0h1M1 21.5h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m3 0h2m2 0h5m1 0h3M9 22.5h1m4 0h3m2 0h3m3 0h5M1 23.5h7m2 0h12m1 0h1m1 0h3M1 24.5h1m5 0h1m1 0h2m1 0h1m1 0h1m1 0h1m2 0h3m3 0h1M1 25.5h1m1 0h3m1 0h1m1 0h1m1 0h1m1 0h1m1 0h2m1 0h2m1 0h5m1 0h1m1 0h1M1 26.5h1m1 0h3m1 0h1m1 0h4m1 0h1m1 0h5m3 0h1m1 0h2M1 27.5h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h1m2 0h1m2 0h8M1 28.5h1m5 0h1m2 0h2m1 0h1m1 0h1m1 0h1m3 0h1m2 0h1m1 0h1m1 0h1M1 29.5h7m1 0h2m3 0h2m3 0h2m2 0h1m1 0h3"/>
+  </symbol>
+</svg>
+
+<div class="stage">
+
+  <!-- 0. 타이틀 -->
+  <section class="slide slide-title active" data-idx="0">
+    <div class="kicker">AI AGENT CHALLENGE</div>
+    <h1>소상공인 정부 지원금 큐레이터</h1>
+    <p class="tagline">업종 · 지역 · 규모를 입력하면<br>내 조건에 맞는 정부 지원금을 매칭해드립니다</p>
+    <div class="cta-credit">신서연 · 경북대학교</div>
+  </section>
+
+  <!-- 1. 문제정의 — 왼쪽(문제) → 가운데(실측 근거) → 오른쪽(해결), 한 화면 -->
+  <section class="slide slide-problem" data-idx="1">
+    <div class="eyebrow">PROBLEM → SOLUTION</div>
+    <h2 class="slide-h2">따로 찾던 걸, 조건 하나로</h2>
+
+    <div class="flow-row">
+      <div class="flow-col">
+        <div class="scatter-grid">
+          <span class="scatter-chip c1">정부24</span>
+          <span class="scatter-chip c2">소진공</span>
+          <span class="scatter-chip c3">지자체</span>
+          <span class="scatter-chip c4">기업마당</span>
+        </div>
+        <div class="flow-caption reveal" style="--i:5">사이트마다 따로<br>비교해야 했다</div>
+      </div>
+
+      <div class="flow-col flow-center reveal" style="--i:6">
+        <div class="flow-arrow">→</div>
+        <div class="proof-stats">
+          <div class="proof-line"><span class="proof-num" data-target="1500" data-suffix="+">0</span>건 수집</div>
+          <div class="proof-line"><span class="proof-num" data-target="98" data-suffix="%">0</span> 구조화</div>
+        </div>
+      </div>
+
+      <div class="flow-col">
+        <div class="condition-row">
+          <span class="cond-chip reveal" style="--i:7">지원분야</span>
+          <span class="cond-chip reveal" style="--i:8">지역</span>
+          <span class="cond-chip reveal" style="--i:9">규모</span>
+        </div>
+        <div class="resolve-box reveal" style="--i:10">조건 하나로<br><b>맞춤 지원금</b>을 한 번에</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 핵심기능 — 좌우 두 박스, 세로 파이프라인 도식 -->
+  <section class="slide slide-features" data-idx="2">
+    <div class="eyebrow">CORE FEATURES</div>
+    <h2 class="slide-h2">MVP 핵심 기능은 두 개</h2>
+
+    <div class="feature-cols">
+      <div class="feature-col glass-card reveal" style="--i:0">
+        <div class="feature-block-title"><span class="feature-tag">A</span>조건 매칭 + 정렬</div>
+        <div class="mini-pipeline">
+          <div class="mp-step">조건 입력<div class="mp-sub">지원분야 · 지역 · 규모</div></div>
+          <div class="mp-arrow">↓</div>
+          <div class="mp-step warn-ish">불일치 조건 제외</div>
+          <div class="mp-arrow">↓</div>
+          <div class="mp-step">
+            점수 계산
+            <div class="score-bar" id="score-bar">
+              <div class="score-seg s-base" style="--w:50"></div>
+              <div class="score-seg s-region" style="--w:20"></div>
+              <div class="score-seg s-bonus" style="--w:30"></div>
+            </div>
+            <div class="mp-sub">기본 50 + 지역 20 + 직원·매출·업력 각 10 = 최대 100</div>
+          </div>
+          <div class="mp-arrow">↓</div>
+          <div class="mp-step">
+            정렬
+            <div class="sort-chips">
+              <span class="chip">매칭도순</span>
+              <span class="chip">마감임박순</span>
+              <span class="chip">지원금액순</span>
+              <span class="chip">신규</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="feature-col glass-card reveal" style="--i:1">
+        <div class="feature-block-title"><span class="feature-tag b">B</span>상세 + 신청 연결</div>
+        <div class="mini-pipeline">
+          <div class="mp-step">자격 확인</div>
+          <div class="mp-arrow">↓</div>
+          <div class="mp-step">필요 서류</div>
+          <div class="mp-arrow">↓</div>
+          <div class="mp-step">신청 방법</div>
+          <div class="mp-arrow">↓</div>
+          <div class="mp-step accent">외부 기관 연결</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 어떻게 동작하는가 — 외부소스 → Crawler → Supabase → Express →
+       React+TanStack Query, 5개 스윔레인 시스템 다이어그램 -->
+  <section class="slide slide-arch" data-idx="3">
+    <div class="eyebrow">ARCHITECTURE</div>
+    <h2 class="slide-h2">어떻게 동작하는가</h2>
+    <div class="sys-rows">
+      <div class="sys-row">
+
+        <div class="sys-col c-source" style="--i:0">
+          <div class="sys-title">① 외부 소스</div>
+          <div class="sys-body">
+            <div class="sys-node">
+              기업마당 Open API
+              <div class="sys-note">활성 공고 약 1,500건 · 인증키 필요</div>
+            </div>
+            <div class="sys-node">
+              K-Startup Open API
+              <div class="sys-note">전체 29,568건 보유 · 인증키 불필요</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sys-col c-crawl" style="--i:1">
+          <div class="sys-title">② Crawler<span class="sys-caption">GitHub Actions cron · 00:00 KST</span></div>
+          <div class="sys-body">
+            <div class="sys-node">fetch → map</div>
+            <div class="mp-arrow">↓</div>
+            <div class="sys-node">
+              AI enrich
+              <div class="sys-note">신규 ID만</div>
+              <div class="side-tag">⇢ document_extractions</div>
+            </div>
+            <div class="mp-arrow">↓</div>
+            <div class="sys-node">upsert by id</div>
+            <div class="mp-arrow">↓</div>
+            <div class="sys-node">만료 sweep</div>
+          </div>
+        </div>
+
+        <div class="sys-col c-db" style="--i:2">
+          <div class="sys-title">③ Supabase</div>
+          <div class="sys-body">
+            <div class="sys-node highlight">
+              subsidies
+              <div class="sys-note">26개 컬럼 · 활성 공고 약 1,500건</div>
+            </div>
+            <div class="sys-node dim small">
+              document_extractions
+              <div class="sys-note">4개 컬럼 · Gemini 추출 캐시</div>
+            </div>
+            <div class="sys-node dim small">
+              match_requests
+              <div class="sys-note">11개 컬럼 · 온보딩 조건 저장</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row-connector">↓</div>
+
+      <div class="sys-row">
+
+        <div class="sys-col c-api" style="--i:3">
+          <div class="sys-title">④ Express</div>
+          <div class="sys-body">
+            <div class="sys-node">
+              loadAll
+              <div class="sys-note">filter · score · sort · paginate</div>
+            </div>
+            <div class="sys-fork"><span>↙</span><span>↘</span></div>
+            <div class="sys-branch">
+              <div class="sys-node small">
+                POST /api/match
+                <div class="side-tag">⇢ match_requests</div>
+              </div>
+              <div class="sys-node small">GET /subsidies/:id</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sys-col c-fe" style="--i:4">
+          <div class="sys-title">⑤ React<span class="sys-caption">+ TanStack Query</span></div>
+          <div class="sys-body">
+            <div class="sys-node">
+              useSubsidies
+              <div class="sys-note">key: subsidies+profile+sort<br>staleTime 60s(전역 기본값)</div>
+            </div>
+            <div class="sys-node">
+              useSubsidy
+              <div class="sys-note">단건 상세 조회<br>staleTime 60s(전역 기본값)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 실제 화면 자동 시연 (프로토타입) -->
+  <section class="slide slide-demo" data-idx="4">
+    <div class="demo-label">실제 화면 — 자동 시연</div>
+    <div class="phone-shell">
+      <iframe id="demo-frame" title="자동 시연" src=""></iframe>
+    </div>
+  </section>
+
+  <!-- 5. AI 에이전트를 어떻게 활용했는가 — 상위 에이전트 → 이슈별 하위 에이전트(스킬 사용)
+       → 부분 테스트에서 E2E까지 이어지는 조직도 -->
+  <section class="slide slide-agent" data-idx="5">
+    <div class="eyebrow">HOW WE BUILT IT</div>
+    <h2 class="slide-h2">AI 에이전트를 어떻게 활용했는가</h2>
+
+    <div class="agent-org">
+      <div class="supervisor-box glass-card reveal" style="--i:0">
+        <div class="org-name">Supervisor Agent</div>
+        <div class="org-desc">이슈 선택 · 계획 문서 작성 · 워크트리 라우팅</div>
+      </div>
+      <div class="stem"></div>
+
+      <div class="branch-bar"></div>
+      <div class="agents-row">
+        <div class="chain-group">
+          <div class="agents-pair">
+            <div class="agent-col">
+              <div class="branch-drop"></div>
+              <div class="sub-agent code glass-card reveal" style="--i:1">
+                <div class="org-name">Code Agent</div>
+                <div class="skills-label">Skills</div>
+                <div class="skills-list">issue-workflow<br>Explore · gov-subsidy-design</div>
+              </div>
+              <div class="chain-cell"><div class="stem"></div></div>
+            </div>
+            <div class="agent-col">
+              <div class="branch-drop"></div>
+              <div class="sub-agent test glass-card reveal" style="--i:2">
+                <div class="org-name">Test Agent</div>
+                <div class="skills-label">Skills</div>
+                <div class="skills-list">Vitest · oxlint<br>E2E 체크리스트</div>
+              </div>
+              <div class="chain-cell">
+                <div class="mp-step small">Component Test</div>
+                <div class="stem"></div>
+                <div class="mp-step small">Integration Test</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="merge-bar"></div>
+          <div class="merge-drop"></div>
+
+          <div class="final-row">
+            <div class="mp-step wide accent">End-to-End Test</div>
+            <div class="stem"></div>
+            <div class="mp-step wide accent">Final Validation</div>
+          </div>
+        </div>
+
+        <div class="agent-col">
+          <div class="branch-drop"></div>
+          <div class="sub-agent docs glass-card reveal" style="--i:3">
+            <div class="org-name">Docs Agent</div>
+            <div class="skills-label">Skills</div>
+            <div class="skills-list">PR 템플릿<br>커밋 컨벤션 · 계획 문서</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 마무리 CTA -->
+  <section class="slide slide-cta" data-idx="6">
+    <h2 class="slide-h2 reveal" style="--i:0">QR을 스캔하여 나에게 맞는 정부 지원금을 확인해보세요</h2>
+    <svg class="qr-big reveal" style="--i:1"><use href="#qr-code"/></svg>
+    <div class="cta-url reveal" style="--i:2">syd348.github.io/hub</div>
+    <div class="cta-credit reveal" style="--i:3">신서연 · 경북대학교</div>
+  </section>
+
+</div>
+
+<div class="dots">
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+  <span class="dot"></span>
+</div>
+
+<div class="qr-badge">
+  <svg class="qr-small"><use href="#qr-code"/></svg>
+  <div class="qr-badge-text">QR을 스캔하여 나에게 맞는<br>정부 지원금을 확인해보세요</div>
+</div>
+
+<script>
+  // 슬라이드별 노출 시간(ms) — 전체 루프 60초 이내 유지(합계 59.5초).
+  // 4번(데모)은 monitor-demo.html 한 바퀴 실제 길이(초기 지연 0.8초 + 내부 시퀀스
+  // 18.6초 = 19.4초)보다 짧게(19.0초) 잘라서 컷 — 19.4초보다 길게 주면 두 번째
+  // 바퀴(웰컴 화면부터)가 다시 보여서 "반복되는" 것처럼 보인다.
+  // 3번(아키텍처)이 5개 스윔레인 시스템 다이어그램으로 내용이 크게 늘어나 8초→13초로
+  // 키웠고, 0·1·2·5·6번에서 조금씩(500~1500ms) 덜어내 맞췄다.
+  const DURATIONS = [3000, 4000, 5500, 13000, 19000, 12000, 3000];
+
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const dots = Array.from(document.querySelectorAll('.dot'));
+  const frame = document.getElementById('demo-frame');
+  let current = -1;
+
+  // 숫자를 0에서 목표값까지 부드럽게 세는 카운트업 애니메이션
+  function animateCount(el, duration) {
+    const target = parseFloat(el.dataset.target);
+    const decimals = Number(el.dataset.decimal || 0);
+    const suffix = el.dataset.suffix || '';
+    const start = performance.now();
+    function step(now) {
+      const p = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const val = target * eased;
+      el.textContent = (decimals ? val.toFixed(decimals) : Math.round(val).toLocaleString('ko-KR')) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function runCountUps(root) {
+    root.querySelectorAll('.stat-num, .proof-num').forEach((el, i) => {
+      setTimeout(() => animateCount(el, 1100), 500 + i * 150);
+    });
+  }
+
+  // 매칭 점수 막대가 왼쪽부터 순서대로 차오르는 애니메이션. 슬라이드에 다시 들어올
+  // 때마다 처음부터 다시 차오르도록 클래스를 지웠다가 리플로우 후 다시 붙인다.
+  function runScoreBar(root) {
+    const segs = Array.from(root.querySelectorAll('.score-seg'));
+    segs.forEach((seg) => seg.classList.remove('filled'));
+    void root.offsetWidth;
+    segs.forEach((seg, i) => {
+      setTimeout(() => seg.classList.add('filled'), 200 + i * 220);
+    });
+  }
+
+  function activate(idx) {
+    slides.forEach((s) => s.classList.toggle('active', Number(s.dataset.idx) === idx));
+    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+    document.body.dataset.slide = String(idx);
+
+    if (idx === 1) runCountUps(slides[1]);
+    if (idx === 2) runScoreBar(slides[2]);
+
+    // 데모 슬라이드에 들어올 때마다 iframe을 새로 불러와 항상 웰컴 화면부터 시작한다.
+    if (idx === 4) {
+      frame.src = 'monitor-demo.html?t=' + Date.now();
+    }
+  }
+
+  let tickTimer = null;
+
+  function tick() {
+    current = (current + 1) % DURATIONS.length;
+    activate(current);
+    tickTimer = setTimeout(tick, DURATIONS[current]);
+  }
+
+  // 진행 점을 클릭하면 예정돼 있던 자동 전환을 취소하고 그 슬라이드로 바로
+  // 이동한 뒤, 거기서부터 자동 루프를 이어간다.
+  function goToSlide(idx) {
+    clearTimeout(tickTimer);
+    current = idx;
+    activate(current);
+    tickTimer = setTimeout(tick, DURATIONS[current]);
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => goToSlide(i));
+  });
+
+  // window의 load 이벤트는 외부 폰트(Pretendard CDN) 로딩까지 기다리기 때문에
+  // 와이파이 상태에 따라 시작 시점이 밀릴 수 있다. 이 스크립트는 body 맨 끝에 있어
+  // 실행 시점에 이미 DOM이 준비돼 있으므로 load를 기다리지 않고 바로 시작한다.
+  setTimeout(tick, 300);
+</script>
+
+</body>
+</html>
