@@ -175,7 +175,7 @@
 - `CompleteScreen`: `task`(마지막 완료 텍스트) prop을 `completedCount`(그 배치의 전체 완료 개수, `microsteps.length`)로 교체.
 - 검증: `npm run verify` 통과. 실제 동작 확인 — (1) `/api/brain-dump` 호출 후 `/api/steps` 조회로 저장 안 됨 확인, (2) 12개 중 2개만 남기고 `/api/steps/save` 호출 → Notion에 정확히 2개만 추가됨을 API로 확인, (3) 실제 화면에서 삭제 시 총 시간 합계 재계산(17분→15분) 스크린샷 확인, (4) "전부 다시 쪼개기" 클릭 시 목록·합계가 다른 결과로 교체되는 것 확인, (5) "이대로 시작하기" 클릭 후 저장 + `preview` 전환 확인, (6) localStorage로 `complete` 상태를 재현해 "N개 해냈다" 렌더 확인. 테스트 중 생성된 Notion 행은 전부 정리(archive)해 실제 데이터(영상 촬영분 10개)는 그대로 유지했다.
 - 문서: `docs/checklist.md` C17 전체 체크, `docs/backlog.md` T17 완료 처리, `docs/etc/component-tree.md`에 `review` step·`MicrostepReview` 반영, `CLAUDE.md` 현재 구현 상태 갱신.
-- 확인: [ ]
+- 확인: [x] 2026-08-02 22:31 GPT — 수정요청: 새로고침 후 재분할 무반응, split_node 저장 회귀, S1-save 검증 누락.
 
 ## 2026-08-02 | T22 | 화이트노이즈 테마 (낮/밤 동기화·숲·카페) 구현
 - Phase 2 백로그 항목을 우선순위(A→B→D→E→C)를 벗어나 먼저 진행(사용자 결정, 디자인 작업 우선). GitHub 이슈 #56 등록 후 backlog.md/checklist.md/dev-prompts.md 문서 먼저 갱신.
@@ -186,7 +186,7 @@
 - `app/page.js`: `theme` state 추가, `localStorage`(`kok-theme`)로 새로고침해도 유지.
 - 검증: `npm run verify` 통과. 실제 화면에서 Date를 14시/22시로 모킹해 낮/밤 배경·장식·텍스트 전환 확인, 숲/카페 토글 클릭으로 배경·장식·캐릭터 색 전환 확인, 숲 테마 선택 후 새로고침해도 유지되는 것 확인. 검증 중 밤 배경에서 기본 텍스트 색 대비가 나쁜 실제 버그를 발견해 `themeTextColor`로 수정.
 - 문서: checklist.md C22 전체 체크, backlog.md T22 완료 처리, component-tree.md props 표 갱신, CLAUDE.md 현재 구현 상태 갱신, README.md/CLAUDE.md/instructions.md/commit-rules.md의 Task/Checklist 총 개수 표기를 T01~T22/C01~C22로 갱신.
-- 확인: [ ]
+- 확인: [x] 2026-08-02 22:31 GPT — 승인: C22 테마 선택·경계·화면 적용·영속 및 verify 통과 확인.
 
 ## 2026-08-02 | T21, T23 | T21 이슈 등록·완료조건 정의 + T23 복귀 환영 메시지 구현
 - T21(Notion Public Integration + OAuth): GitHub 이슈 #57 등록, docs/backlog.md에 이슈 번호·선행조건(T18 완료) 반영, docs/checklist.md C21 정의(4항목). 실제 구현(OAuth 코드 작성)은 Phase 2 백로그 완료 후 별도 진행하기로 결정(260802) — 지금은 착수 절차만 완료.
@@ -194,7 +194,7 @@
 - 검증: `npm run verify` 통과. 실제 화면에서 (1) 첫 방문(기록 없음) → 기본 문구, (2) localStorage에 3일 전 방문 기록 주입 → "3일 만이네, 반가워" 노출, (3) 같은 날 재방문(새로고침) → 기본 문구로 복귀, 3가지 케이스 스크린샷으로 확인.
 - 겸사겸사 dev-plan.md의 "2분 스타터" 백로그 항목을 T02(Brain Dump 분할)+T03(One-Focus View)로 이미 충족된 것으로 판단해 제외 처리(사용자 확인 후).
 - 문서: checklist.md C21(미체크, 착수 전)·C23(전체 체크) 반영, backlog.md T21/T23 반영, CLAUDE.md 현재 구현 상태 갱신.
-- 확인: [ ]
+- 확인: [x] 2026-08-02 22:31 GPT — T21 수정요청(미구현·계약 미정), T23 수정요청(한국 시간 자정대 날짜 오차).
 
 ## 2026-08-02 | T24 | 감각 강도 조절 + 테마별 배경음 구현
 - 디자인 근거: `docs/prototype/feature-proposals.html` 03번 프레임(다이얼+색상 견본). 사용자 판단으로 다이얼(색+움직임 통합)과 소리(별도 스피커 아이콘)를 분리해서 컨트롤 디테일을 높임.
@@ -206,7 +206,7 @@
 - `app/page.js`: `intensity`(기본 60)·`soundEnabled` state + localStorage(`kok-intensity`, `kok-sound-enabled`) 유지.
 - 검증: `npm run verify` 통과. 실제 화면에서 (1) 패널 열기·다이얼 드래그(10→95) 시 캐릭터 채도·캡션 변화 스크린샷 확인, (2) intensity=15에서 타이머 water-fill div의 `transition` 값이 `none`인 것 코드 레벨로 확인, (3) 스피커 토글 클릭 시 `<audio>`가 올바른 테마 파일로 `paused:false` 재생되고 `volume`이 intensity와 일치하는 것 확인, (4) localStorage 값이 새로고침 후에도 유지되는 것 확인(단 오디오 자동재생 자체는 브라우저 정책상 별도 동작 필요 — 알려진 제한으로 문서화).
 - 문서: checklist.md C24 전체 체크, backlog.md T24 완료 처리, component-tree.md props·알려진 제한 반영, CLAUDE.md 현재 구현 상태 갱신.
-- 확인: [ ]
+- 확인: [x] 2026-08-02 22:31 GPT — 승인: C24 강도·애니메이션·테마 음원·볼륨·영속 및 verify 통과 확인.
 
 ## 2026-08-02 | T25 | 같이 있어요 (장식용 동시접속 표시) 구현
 - 디자인 근거: `docs/prototype/feature-proposals.html` 04번 프레임(헤드라인+점 묶음+"혼자 할래요" 링크, 화면 중앙 배치).
@@ -215,7 +215,7 @@
 - `app/page.js`: `presenceDismissed` state + localStorage(`kok-presence-dismissed`) 유지.
 - 검증: `npm run verify` 통과. 실제 화면에서 (1) 기본 노출 스크린샷, (2) × 클릭 후 사라짐, (3) 새로고침 후에도 계속 안 보이는 것 확인.
 - 문서: checklist.md C25 전체 체크, backlog.md T25 완료 처리(프로토타입 대비 레이아웃 변경 사유 기록), component-tree.md props 반영, CLAUDE.md 현재 구현 상태 갱신.
-- 확인: [ ]
+- 확인: [x] 2026-08-02 22:31 GPT — 승인: C25 장식 표시·안내·숨김 영속 및 verify 통과 확인.
 
 ## 2026-08-02 | T26 | 통계 화면 (이번 주 완료 현황) 구현
 - 디자인 근거: `docs/prototype/design-board.html` 07번 프레임("대시보드 대신 숫자 하나") — 큰 숫자 + 캡션 + 요일별 점 7개, 그래프/표 없음.
@@ -223,4 +223,14 @@
 - `app/components/StatsScreen.js` 신규, `app/components/BrainDumpInput.js`에 `onViewStats` 링크("이번 주 통계 보기") 추가. `app/page.js`에 `"stats"` step + `handleViewStats`(진입 시 조회) 추가.
 - 검증: `npm run verify` 통과. 실제 Notion 데이터로 먼저 확인(현재 0/7, 실제로 완료 기록이 없어서 정확), 이후 임시로 완료 기록 3개(오늘·2일 전·5일 전)를 만들어 `daysCompleted:3`과 정확한 위치의 점이 채워지는 것을 API 응답과 스크린샷 둘 다로 확인 → 즉시 정리(archive)해 실제 데이터는 원래 0/7 상태로 복원. 화면 진입("이번 주 통계 보기")과 복귀(홈 버튼)도 스크린샷으로 확인.
 - 문서: checklist.md C26 전체 체크, backlog.md T26 완료 처리, component-tree.md에 `stats` step·`StatsScreen` 반영, CLAUDE.md 갱신. 겸사겸사 dev-plan.md의 Phase 2 백로그 목록 중 이미 완료된 항목(T18·T22~T26)을 취소선으로 정리(그동안 미반영이었던 것 포함).
+- 확인: [x] 2026-08-02 22:31 GPT — 수정요청: 한국 시간 자정대 최근 7일 오차 및 요일 식별 정보 누락.
+
+## 2026-08-02 | T17·T23·T26 | GPT 리뷰 수정요청 반영
+- T17 발견 1(높음) 반영: `pendingBrainDumpParams`를 `kok-session`(localStorage)에 같이 저장하도록 수정. 검토 화면에서 새로고침해도 "전부 다시 쪼개기"가 정상적으로 `/api/brain-dump`를 재호출함(이전엔 값이 사라져 조용히 아무 일도 안 일어났음).
+- T17 발견 2(높음, split_node 회귀) 반영: `app/page.js`의 `split_node` 분기가 `/api/brain-dump` 응답을 무시하고 바로 원본을 archive하던 것을 수정 — 이제 분할 결과를 `scheduledDate`(원본 값 상속)와 함께 `/api/steps/save`로 먼저 저장하고, 저장이 성공한 뒤에만 원본을 archive한다. 되묻기를 피하려고 `turn:2`로 호출(스텝 제목만으로는 기한 문구가 없어 되물을 수 있는데, 저장 시 원본 scheduledDate로 덮어쓰므로 불필요).
+- T17 발견 3(중간) 반영: `app/api/steps/save/route.js`에 S1과 동일한 MicroStep Zod 스키마(title·estimatedMinutes 1~25·category enum·scheduledDate) 검증 추가.
+- T23·T26 UTC 날짜 오차 반영: `app/lib/date.js`에 `kstDateString` 신설(서버 타임존과 무관하게 항상 KST 기준 날짜 반환). `app/page.js`(복귀 환영)와 `app/api/stats/route.js`(통계, CompletedAt 비교 포함)에 적용.
+- T26 접근성 보완: `StatsScreen`의 점 7개에 요일 라벨(`aria-label`/`title`) 추가.
+- 검증: `npm run verify` 통과. (1) 리뷰가 제시한 반례(UTC 2026-08-01T15:30 = KST 2026-08-02 00:30)로 `kstDateString` 정확성 확인. (2) 실제 화면에서 검토 목록 제출 → 새로고침 → "전부 다시 쪼개기" 클릭 시 로딩 상태가 뜨고 목록이 바뀌는 것 확인. (3) `/api/struggle`을 반복 호출해 실제로 `split_node`를 받아낸 뒤, 그 시퀀스(brain-dump turn:2 → steps/save → steps/archive)를 그대로 재현해 원본이 사라지고 분할된 새 스텝들이 저장되는 것 확인(테스트 데이터는 이후 정리). (4) `/api/steps/save`에 잘못된 category·범위 밖 시간 보내 400 응답 확인, 정상 입력은 그대로 저장되는 것 확인. (5) 통계 화면에서 요일 라벨이 실제 요일과 일치하는 것 확인.
+- T21은 검토대로 미구현 상태 유지(의도적 보류, 이번 라운드에서 손대지 않음).
 - 확인: [ ]
