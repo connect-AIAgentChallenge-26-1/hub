@@ -6,6 +6,9 @@ import { API_BASE_URL, type DocumentRecord } from "../lib/api";
 interface Props {
   expansionId: string;
   onApproved: () => void;
+  // See ExpansionDesignPanel's readOnly doc — same "already done, just
+  // revisiting" contract.
+  readOnly?: boolean;
 }
 
 // Feature Expansion Workflow's Step 2 (ScriptableObject 생성) — chat-less,
@@ -13,7 +16,7 @@ interface Props {
 // Generation/Documentation Steps, built fresh against
 // /api/expansions/:id/scriptable-objects/* instead of reusing
 // WorkspaceMainPanel. Only MarkdownViewer/MarkdownEditor are reused as-is.
-export default function ExpansionScriptableObjectPanel({ expansionId, onApproved }: Props) {
+export default function ExpansionScriptableObjectPanel({ expansionId, onApproved, readOnly = false }: Props) {
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [document, setDocument] = useState<DocumentRecord | null>(null);
@@ -56,7 +59,7 @@ export default function ExpansionScriptableObjectPanel({ expansionId, onApproved
       .then((res) => (res.ok ? res.json() : null))
       .then((doc: DocumentRecord | null) => {
         setDocument(doc);
-        if (!doc && !autoGenerateTriggeredRef.current) {
+        if (!doc && !readOnly && !autoGenerateTriggeredRef.current) {
           autoGenerateTriggeredRef.current = true;
           runGenerate();
         }
@@ -105,6 +108,19 @@ export default function ExpansionScriptableObjectPanel({ expansionId, onApproved
 
   if (loading) return <div style={{ color: "var(--text-dim)" }}>불러오는 중…</div>;
   if (loadError) return <div style={{ color: "var(--red)", fontSize: 13 }}>{loadError}</div>;
+
+  if (readOnly) {
+    return (
+      <div>
+        <label className="label-mono">문서</label>
+        {document ? (
+          <MarkdownViewer content={document.content} />
+        ) : (
+          <div style={{ color: "var(--text-mute)", fontSize: 13 }}>문서가 없습니다.</div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <>

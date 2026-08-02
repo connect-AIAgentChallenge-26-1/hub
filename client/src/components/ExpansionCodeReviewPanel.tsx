@@ -6,16 +6,23 @@ import { API_BASE_URL, type FileChange } from "../lib/api";
 interface Props {
   expansionId: string;
   onApproved: () => void;
+  // See ExpansionDesignPanel's readOnly doc — same "already done, just
+  // revisiting" contract. Mirrors WorkspaceMainPanel's done+file-agent branch:
+  // just the file list (checked = already-approved), no diff/commit controls.
+  readOnly?: boolean;
 }
 
 // Feature Expansion Workflow's Steps 3-4 (코드 생성 + 코드 리뷰) — chat-less,
 // same "auto-generate on entry" idea as the 9-step workflow's file-agent
 // Steps, built fresh against /api/expansions/:id/code/* and
 // /api/expansions/:id/file-changes instead of reusing WorkspaceMainPanel.
-// FileChangeList/DiffViewer are reused as-is (unmodified) — real commits
-// aren't wired up yet (Day 22's job), so the commit button here just
-// explains that instead of calling a commit-batch endpoint.
-export default function ExpansionCodeReviewPanel({ expansionId, onApproved }: Props) {
+// FileChangeList/DiffViewer are reused as-is (unmodified). This screen's own
+// checkbox selection never drives a real commit, by design — Step 6's
+// approve (ExpansionDocsPanel) commits every syntax-valid file from this
+// step in one shot regardless of what's checked here, since there's no
+// state to carry a partial selection across the two screens. The commit
+// button here just explains that instead of pretending to commit.
+export default function ExpansionCodeReviewPanel({ expansionId, onApproved, readOnly = false }: Props) {
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [generating, setGenerating] = useState(false);
@@ -67,7 +74,7 @@ export default function ExpansionCodeReviewPanel({ expansionId, onApproved }: Pr
       .then((res) => res.json())
       .then((files: FileChange[]) => {
         applyFileChanges(files);
-        if (files.length === 0 && !autoGenerateTriggeredRef.current) {
+        if (files.length === 0 && !readOnly && !autoGenerateTriggeredRef.current) {
           autoGenerateTriggeredRef.current = true;
           runGenerate();
         }
@@ -95,11 +102,13 @@ export default function ExpansionCodeReviewPanel({ expansionId, onApproved }: Pr
     setCheckedPaths(new Set());
   }
 
-  // Day 22 wires this up to a real commit-batch endpoint — for now this just
-  // tells the user honestly that committing isn't available yet, rather than
-  // pretending to commit or silently doing nothing.
+  // No commit-batch call here on purpose (see the component-level comment
+  // above) — this just tells the user honestly what actually happens,
+  // instead of pretending this button commits anything.
   function handleCommitSelected() {
-    setCommitNotice("커밋은 다음 작업(Day 22)에서 지원될 예정입니다.");
+    setCommitNotice(
+      "이 화면의 선택 항목은 실제 커밋에 반영되지 않습니다 — 5~6단계(문서화) 승인 시 문법 검증을 통과한 파일이 전부 자동으로 커밋됩니다."
+    );
   }
 
   async function handleApprove() {
@@ -122,6 +131,25 @@ export default function ExpansionCodeReviewPanel({ expansionId, onApproved }: Pr
 
   if (loading) return <div style={{ color: "var(--text-dim)" }}>불러오는 중…</div>;
   if (loadError) return <div style={{ color: "var(--red)", fontSize: 13 }}>{loadError}</div>;
+
+  if (readOnly) {
+    return (
+      <div>
+        <label className="label-mono">커밋된 파일</label>
+        {fileChanges.length === 0 ? (
+          <div style={{ color: "var(--text-mute)", fontSize: 13 }}>파일이 없습니다.</div>
+        ) : (
+          <FileChangeList
+            files={fileChanges}
+            checkedPaths={new Set(fileChanges.filter((f) => f.approved).map((f) => f.path))}
+            selectedPath={selectedPath}
+            onToggle={() => {}}
+            onSelect={setSelectedPath}
+          />
+        )}
+      </div>
+    );
+  }
 
   return (
     <>

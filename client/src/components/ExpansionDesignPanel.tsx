@@ -8,6 +8,12 @@ import { API_BASE_URL, type ChatMessage, type DocumentRecord } from "../lib/api"
 interface Props {
   expansionId: string;
   onApproved: () => void;
+  // True when this step is already "done" and the sidebar is just revisiting
+  // it (not the workflow's current active step) — mirrors WorkspaceMainPanel's
+  // step.status==="done" branch: show the document only, no chat/edit/Approve,
+  // so re-opening a finished step can never re-trigger generation or regress
+  // request.status by re-approving it.
+  readOnly?: boolean;
 }
 
 // Feature Expansion Workflow's Step 1 (설계 변경 제안) — chat-based, same
@@ -15,7 +21,7 @@ interface Props {
 // but built fresh against the /api/expansions/:id/design/* endpoints instead
 // of reusing WorkspaceMainPanel itself. Only the smaller shared pieces
 // (ChatThread/ChatInput/MarkdownViewer/MarkdownEditor) are reused as-is.
-export default function ExpansionDesignPanel({ expansionId, onApproved }: Props) {
+export default function ExpansionDesignPanel({ expansionId, onApproved, readOnly = false }: Props) {
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [document, setDocument] = useState<DocumentRecord | null>(null);
@@ -147,6 +153,19 @@ export default function ExpansionDesignPanel({ expansionId, onApproved }: Props)
 
   if (loading) return <div style={{ color: "var(--text-dim)" }}>불러오는 중…</div>;
   if (loadError) return <div style={{ color: "var(--red)", fontSize: 13 }}>{loadError}</div>;
+
+  if (readOnly) {
+    return (
+      <div>
+        <label className="label-mono">문서</label>
+        {document ? (
+          <MarkdownViewer content={document.content} />
+        ) : (
+          <div style={{ color: "var(--text-mute)", fontSize: 13 }}>문서가 없습니다.</div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <>

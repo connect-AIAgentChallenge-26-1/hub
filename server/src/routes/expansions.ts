@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { randomUUID } from "crypto";
 import { createExpansion, getExpansionRequest, updateExpansionStatus } from "../utils/expansions";
+import { createExpansionSteps, getExpansionSteps, advanceExpansionSteps } from "../utils/expansionSteps";
 import { getExpansionDocument, saveExpansionDocument } from "../utils/expansionDocuments";
 import { getExpansionMessages, appendExpansionMessages } from "../utils/expansionMessages";
 import {
@@ -21,6 +22,7 @@ import {
   updateExpansionFileChanges,
 } from "../utils/expansionFileChanges";
 import { getRepoTarget, putFileContent, deleteFile } from "../utils/github";
+import { calculateChecklistProgress } from "../utils/checklist";
 import { isDemoMode, demoDelay } from "../utils/demoMode";
 import type { ChatMessage } from "../utils/messages";
 import { AiRequestError, toErrorResponseBody } from "../utils/geminiError";
@@ -43,6 +45,7 @@ router.post("/", async (req, res) => {
   }
 
   const { expansionId, request } = await createExpansion(req.userId!, description.trim());
+  await createExpansionSteps(req.userId!, expansionId);
   res.status(201).json({ expansionId, ...request });
 });
 
@@ -52,6 +55,55 @@ router.get("/:expansionId", async (req, res) => {
     return res.status(404).json({ error: "Expansion not found." });
   }
   res.json(request);
+});
+
+// Sidebar progress display — mirrors routes/steps.ts's withFreshProgress:
+// status (pending/active/done) is persisted in steps.json and only mutated
+// by the approve endpoints below, but progress_pct is always recomputed
+// fresh here so it never goes stale between saves.
+router.get("/:expansionId/steps", async (req, res) => {
+  const userId = req.userId!;
+  const expansionId = req.params.expansionId;
+  const steps = await getExpansionSteps(userId, expansionId);
+  if (steps.length === 0) {
+    return res.status(404).json({ error: "Expansion not found." });
+  }
+
+  const [designDoc, soDoc, docsDoc, files] = await Promise.all([
+    getExpansionDocument(userId, expansionId, DESIGN_DOC_FILE),
+    getExpansionDocument(userId, expansionId, SO_DOC_FILE),
+    getExpansionDocument(userId, expansionId, DOCS_DOC_FILE),
+    getExpansionFileChanges(userId, expansionId),
+  ]);
+
+  // Steps 3-4 (코드 생성/코드 리뷰) share one file-changes.json — same
+  // "approved / total" ratio the 9-step workflow uses for its own file-agent
+  // Steps (7-8), just read from the shared list instead of a per-step one
+  // since Code Generation and Code Review are chained into a single call.
+  const fileProgress =
+    files.length === 0 ? 0 : Math.round((files.filter((f) => f.approved).length / files.length) * 100);
+
+  const withProgress = steps.map((step) => {
+    switch (step.id) {
+      case 1:
+        return { ...step, progress_pct: designDoc ? calculateChecklistProgress(designDoc.content) : 0 };
+      case 2:
+        return { ...step, progress_pct: soDoc ? calculateChecklistProgress(soDoc.content) : 0 };
+      case 3:
+      case 4:
+        return { ...step, progress_pct: fileProgress };
+      case 5:
+        return { ...step, progress_pct: docsDoc ? calculateChecklistProgress(docsDoc.content) : 0 };
+      case 6:
+        // No standalone checklist/file list of its own — Step 6 is a single
+        // commit action triggered together with Step 5's approve.
+        return { ...step, progress_pct: step.status === "done" ? 100 : 0 };
+      default:
+        return step;
+    }
+  });
+
+  res.json(withProgress);
 });
 
 // ---- Step 1: 설계 변경 제안 (chat-based, mirrors /api/chat + /api/documents) ----
@@ -179,6 +231,7 @@ router.post("/:expansionId/design/approve", async (req, res) => {
   if (!updated) {
     return res.status(404).json({ error: "Expansion not found." });
   }
+  await advanceExpansionSteps(req.userId!, req.params.expansionId, [1], [2]);
   res.json(updated);
 });
 
@@ -247,6 +300,9 @@ router.post("/:expansionId/scriptable-objects/approve", async (req, res) => {
   if (!updated) {
     return res.status(404).json({ error: "Expansion not found." });
   }
+  // Steps 3-4 share one screen (code/generate chains Code Generation then
+  // Code Review) — both become active together the moment that screen opens.
+  await advanceExpansionSteps(req.userId!, req.params.expansionId, [2], [3, 4]);
   res.json(updated);
 });
 
@@ -317,6 +373,9 @@ router.post("/:expansionId/code/approve", async (req, res) => {
   if (!updated) {
     return res.status(404).json({ error: "Expansion not found." });
   }
+  // Steps 5-6 likewise share one screen (docs/approve both saves the change
+  // log and triggers the real commit) — both become active together.
+  await advanceExpansionSteps(req.userId!, req.params.expansionId, [3, 4], [5, 6]);
   res.json(updated);
 });
 
@@ -429,6 +488,7 @@ router.post("/:expansionId/docs/approve", async (req, res) => {
     const updatedFiles = storedFiles.map((f) => (f.syntaxValid ? { ...f, approved: true } : f));
     await updateExpansionFileChanges(userId, expansionId, updatedFiles);
     const updatedRequest = await updateExpansionStatus(userId, expansionId, "completed");
+    await advanceExpansionSteps(userId, expansionId, [5, 6], []);
 
     return res.json({ committed, failed: [], skipped, request: updatedRequest });
   }
@@ -472,6 +532,9 @@ router.post("/:expansionId/docs/approve", async (req, res) => {
 
   const updatedRequest =
     failed.length === 0 ? await updateExpansionStatus(userId, expansionId, "completed") : request;
+  if (failed.length === 0) {
+    await advanceExpansionSteps(userId, expansionId, [5, 6], []);
+  }
 
   res.json({ committed, failed, skipped, request: updatedRequest });
 });

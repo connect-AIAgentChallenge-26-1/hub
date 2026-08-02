@@ -6,6 +6,11 @@ import { API_BASE_URL, type DocumentRecord } from "../lib/api";
 interface Props {
   expansionId: string;
   onApproved: () => void;
+  // See ExpansionDesignPanel's readOnly doc — same "already done, just
+  // revisiting" contract. Note: Step 6 (커밋) has no document of its own, so
+  // when revisiting it the sidebar routes here too and this still shows
+  // Step 5's change-log doc, same as the active screen already covers both.
+  readOnly?: boolean;
 }
 
 interface CommitOutcome {
@@ -28,7 +33,7 @@ interface ApproveResponse {
 // here also triggers Step 6's real commit (reusing the same GitHub-writing
 // pipeline as the 9-step workflow's commit-batch) and shows the result
 // before finishing.
-export default function ExpansionDocsPanel({ expansionId, onApproved }: Props) {
+export default function ExpansionDocsPanel({ expansionId, onApproved, readOnly = false }: Props) {
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [document, setDocument] = useState<DocumentRecord | null>(null);
@@ -69,7 +74,7 @@ export default function ExpansionDocsPanel({ expansionId, onApproved }: Props) {
       .then((res) => (res.ok ? res.json() : null))
       .then((doc: DocumentRecord | null) => {
         setDocument(doc);
-        if (!doc && !autoGenerateTriggeredRef.current) {
+        if (!doc && !readOnly && !autoGenerateTriggeredRef.current) {
           autoGenerateTriggeredRef.current = true;
           runGenerate();
         }
@@ -121,6 +126,19 @@ export default function ExpansionDocsPanel({ expansionId, onApproved }: Props) {
 
   if (loading) return <div style={{ color: "var(--text-dim)" }}>불러오는 중…</div>;
   if (loadError) return <div style={{ color: "var(--red)", fontSize: 13 }}>{loadError}</div>;
+
+  if (readOnly) {
+    return (
+      <div>
+        <label className="label-mono">문서</label>
+        {document ? (
+          <MarkdownViewer content={document.content} />
+        ) : (
+          <div style={{ color: "var(--text-mute)", fontSize: 13 }}>문서가 없습니다.</div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <>
