@@ -21,7 +21,15 @@ server/data/
 # 센서 실측 원본 · Python 가상환경 (커밋 금지)
 *.csv
 server/scripts/.venv/
+.venv/
 __pycache__/
+
+# 데모 영상 원본 (용량 — 편집본은 YouTube/Drive 링크로만 제출한다)
+*.mp4
+*.mov
+
+# Office 임시 잠금 파일
+~$*
 
 # Editor directories and files
 .vscode/*
