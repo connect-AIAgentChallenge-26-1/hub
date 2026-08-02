@@ -41,23 +41,28 @@ export default function ArchivePage() {
   }
 
   return (
-    <main className="mx-auto flex min-h-[100dvh] max-w-md flex-col bg-[#faf7f2] px-6 pb-[calc(5rem+env(safe-area-inset-bottom))] pt-16 text-[#252322]">
-      <header>
-        <h1 className="text-[26px] font-bold leading-tight tracking-[-0.035em]">다 본 콘텐츠</h1>
-        <p className="mt-3 text-[14px] text-[#9b9798]">밀어서 아카이브에서 정리할 수 있어요.</p>
+    <main className="mx-auto flex min-h-screen max-w-md flex-col bg-cream px-5 pb-24 pt-6">
+      <header className="mb-8 flex items-center justify-between">
+        <Link href="/" className="text-xl font-semibold tracking-tight text-ink">later.</Link>
+        <div className="h-8 w-8 rounded-full border border-creamDeep bg-white" />
       </header>
 
-      <section aria-label="아카이브 콘텐츠" className="mt-7">
-        {loading && <p className="text-sm text-[#9b9798]">불러오는 중...</p>}
+      <section className="mb-7">
+        <h1 className="mb-1 text-2xl font-bold text-ink">아카이브</h1>
+        <p className="text-sm text-muted">다 본 콘텐츠를 모아두었어요. 밀어서 삭제할 수 있어요.</p>
+      </section>
+
+      <section aria-label="아카이브 콘텐츠">
+        {loading && <p className="text-sm text-muted">불러오는 중...</p>}
         {error && <p className="text-sm text-red-600">{error}</p>}
         {!loading && !error && items.length === 0 && (
-          <div className="rounded-[18px] border border-[#eee9e2] bg-white px-5 py-10 text-center">
+          <div className="rounded-xl bg-white/60 px-4 py-10 text-center">
             <p className="text-sm font-medium">아카이브가 비어 있어요.</p>
-            <p className="mt-1 text-xs text-[#9b9798]">카테고리에서 다 본 콘텐츠를 밀어보세요.</p>
+            <p className="mt-1 text-xs text-muted">카테고리에서 다 본 콘텐츠를 밀어보세요.</p>
           </div>
         )}
         {!loading && !error && items.length > 0 && (
-          <ul className="space-y-4">
+          <ul className="space-y-3">
             {items.map((item) => (
               <SwipeActionCard
                 key={item.id}
@@ -72,7 +77,7 @@ export default function ArchivePage() {
         )}
       </section>
 
-      <p className="mt-auto pt-10 text-center text-xs text-[#b6b2b5]" aria-hidden="true">←&nbsp; 밀어서&nbsp; 삭제</p>
+      <p className="mt-auto pt-10 text-center text-xs text-muted/60" aria-hidden="true">←&nbsp; 밀어서&nbsp; 삭제</p>
 
       <nav className="fixed bottom-0 left-0 right-0 border-t border-creamDeep bg-white">
         <div className="mx-auto flex max-w-md justify-around pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 text-xs text-muted">

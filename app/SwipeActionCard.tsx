@@ -19,6 +19,22 @@ function relativeDate(value: string) {
   return `${days}일 전`;
 }
 
+function categoryVisual(category: string | null) {
+  switch (category) {
+    case "공부":
+    case "개발":
+      return { icon: "✦", className: "bg-[#e9eee5] text-[#68735f]" };
+    case "여행":
+      return { icon: "⌁", className: "bg-[#e7eef1] text-[#607783]" };
+    case "쇼핑":
+      return { icon: "◌", className: "bg-[#f4e8df] text-[#ad7552]" };
+    case "음식":
+      return { icon: "●", className: "bg-[#f2ead8] text-[#9b7b42]" };
+    default:
+      return { icon: "＋", className: "bg-[#eeeae4] text-[#8c8375]" };
+  }
+}
+
 type SwipeActionCardProps = {
   item: Item;
   actionLabel: "완료" | "삭제";
@@ -85,10 +101,11 @@ export default function SwipeActionCard({
   }
 
   const title = displayTitle(item);
+  const visual = categoryVisual(item.category_main);
 
   return (
     <li>
-      <div className="relative h-[100px] overflow-hidden rounded-[18px] border border-[#eee9e2] bg-[#f7a258]">
+      <div className="relative h-24 overflow-hidden rounded-xl2 bg-accent">
         <div className="absolute inset-y-0 right-0 w-[132px]">
           <button
             type="button"
@@ -109,16 +126,21 @@ export default function SwipeActionCard({
           onPointerUp={endDrag}
           onPointerCancel={endDrag}
           style={{ transform: `translateX(-${offset}px)`, touchAction: "pan-y" }}
-          className="absolute inset-0 flex cursor-grab select-none items-center gap-4 rounded-[17px] bg-white px-4 transition-transform duration-200 ease-out active:cursor-grabbing"
+          className="absolute inset-0 flex cursor-grab select-none items-center gap-4 rounded-xl2 border border-creamDeep bg-white/80 px-3 transition-transform duration-200 ease-out active:cursor-grabbing"
         >
           {item.image_url ? (
-            <img src={item.image_url} alt="" draggable={false} className="h-16 w-16 shrink-0 rounded-[14px] object-cover" />
+            <img src={item.image_url} alt="" draggable={false} className="h-[68px] w-[68px] shrink-0 rounded-xl object-cover" />
           ) : (
-            <div aria-hidden="true" className="archive-placeholder h-16 w-16 shrink-0 rounded-[14px]" />
+            <div
+              aria-hidden="true"
+              className={`flex h-[68px] w-[68px] shrink-0 items-center justify-center rounded-xl text-2xl ${visual.className}`}
+            >
+              {visual.icon}
+            </div>
           )}
           <div className="min-w-0">
-            <p className="truncate text-[15px] font-semibold text-[#252322]">{title}</p>
-            <p className="mt-1 truncate text-xs text-[#aaa7aa]">
+            <p className="truncate text-sm font-medium text-ink">{title}</p>
+            <p className="mt-1 truncate text-xs text-muted">
               {item.source_platform ?? "manual"} · {relativeDate(item.created_at)}
             </p>
           </div>
