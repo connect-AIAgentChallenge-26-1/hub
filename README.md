@@ -65,7 +65,7 @@ flowchart TD
 | [`prototype/gov_subsidy_home_wireframe.html`](./prototype/gov_subsidy_home_wireframe.html) | UI/UX 와이어프레임 |
 | [`.cursor/skills/gov-subsidy-design/`](./.cursor/skills/gov-subsidy-design/) | 디자인 구현 Skill |
 | [`.cursor/skills/issue-workflow/`](./.cursor/skills/issue-workflow/) | 이슈 계획→구현→PR 워크플로우 Skill |
-| [`docs/print/`](./docs/print/) | 부스 전시 자료 — A3 포스터 2종(기획·주제 / AI 워크플로우), 모니터 자동 시연·루프 HTML |
+| [`docs/exhibition/`](./docs/exhibition/) | 부스 전시 자료 — `posters/`(A3 포스터 2종), `monitor/`(자동 시연·루프 HTML), `final/`(제출용 PDF) |
 
 ## 로컬 실행
 
