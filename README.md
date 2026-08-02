@@ -2,6 +2,20 @@
 
 **무인빨래방의 방치 세탁물을 스스로 감지하고 대응하는 AI 운영 에이전트**
 
+AI Agent Challenge · 팀 도원결의 (전북대학교 문도경 · 최서원)
+
+## 제출 링크
+
+| | 링크 |
+|---|---|
+| 🖥️ **서비스 배포** | https://aiagentchallenge.onrender.com/ |
+| 🎬 **시연 영상** (4분 34초) | https://youtu.be/bliuKhtgmkI |
+| 💻 **소스** | https://github.com/connect-AIAgentChallenge-26-1/hub/tree/N174_최서원 |
+| 📑 **프로젝트 소개** | [빨래집사_프로젝트 소개 자료.pdf](docs/demo/빨래집사_프로젝트%20소개%20자료.pdf) |
+
+> 배포 주소(`/`)는 사장님 대시보드이며 패스코드로 잠겨 있습니다. **체험용 패스코드는 `1234`** 입니다.
+> 고객 화면은 `/m/store`에서 패스코드 없이 바로 볼 수 있습니다.
+
 ## 문서
 
 | 문서 | 답하는 질문 |
@@ -63,19 +77,19 @@ stateDiagram-v2
     IDLE --> RUNNING : 전력 급상승 (세탁 시작 + 세션 생성)
     RUNNING --> SPIN : 탈수 스파이크
     SPIN --> DONE : 전력 20W 이하 60초 유지
-    DONE --> COLLECTED : 도어 열림 / 다음 세탁 시작 / 고객 수거 탭
-    DONE --> ABANDONED : 종료 후 30분간 수거 신호 없음
+    DONE --> COLLECTED : 도어 열림 / 다음 세탁 시작
+    DONE --> ABANDONED : 종료 후 15분간 수거 신호 없음
     ABANDONED --> COLLECTED : 뒤늦게 수거됨
     COLLECTED --> [*]
 ```
 
-전이 트리거는 전력 패턴(시작·탈수·종료), 도어 센서(열림), 타이머(30분 → 방치)입니다.
+전이 트리거는 전력 패턴(시작·탈수·종료), 도어 센서(열림), 타이머(15분 → 방치)입니다. 수거 판정은 **문 열림으로만** 합니다 — 고객이 "수거했어요"를 미리 눌러 생기는 오탐을 막기 위해 수거 탭은 제거했습니다(2026-07-27 결정).
 
 **1차·2차 수거 알림은 상태가 아닙니다.** `ABANDONED` 상태에서 발생하는 *행동*이며, 발송 이력은 `notification` 테이블에 남아 중복 발송을 막는 근거가 됩니다. 상태를 늘리지 않는 이유는 전이 경우의 수와 테스트가 그만큼 불어나기 때문입니다.
 
 | ABANDONED 이후 | 조건 | 행동 |
 |---|---|---|
-| 알림 채널 있음 | QR 알림 신청함 | 1차 수거 알림 → (+30분) 2차 수거 알림 |
+| 알림 채널 있음 | QR 알림 신청함 | 1차 수거 알림 → (+15분) 2차 수거 알림 |
 | 알림 채널 없음 | QR 미신청 | 사장님 알림 + QR 랜딩을 방치 안내 모드로 전환 |
 
 센서·전력 이상 같은 예외 상황은 상태값이 아니라 대시보드의 **예외 상황** 영역에 표시합니다.
@@ -172,15 +186,24 @@ flowchart LR
 npm workspaces 모노레포입니다. **루트에서 한 번만 설치하면 `client`와 `server`가 함께** 잡힙니다.
 
 ```bash
-npm install     # 의존성 설치 (루트 한 번으로 client·server 모두)
-npm run dev     # client(5173) + server(3000) 동시 실행
-npm run lint    # 린트 검사 (Oxlint)
-npm run build   # 프로덕션 빌드
+npm install                 # 의존성 설치 (루트 한 번으로 client·server 모두)
+cp server/.env.example server/.env   # Supabase·VAPID 키를 채운다 — 없으면 서버가 못 뜬다
+cp client/.env.example client/.env   # VAPID 공개키 (server/.env의 VAPID_PUBLIC과 같은 값)
+npm run dev                 # client(5173) + server(3000) 동시 실행
+npm test                    # 테스트 (vitest)
+npm run lint                # 린트 (Oxlint)
+npm run build               # 프로덕션 빌드
 ```
 
 한쪽만 띄우려면 `npm run dev:client` / `npm run dev:server`를 씁니다.
 
 개발 중 client의 `/api`·`/ingest` 요청은 Vite 프록시가 server(3000)로 넘깁니다. 프론트에서는 그냥 `fetch('/api/machines')`처럼 상대 경로로 부르면 됩니다.
+
+전력 데이터는 시뮬레이터로 넣습니다 — 실제 세탁기 없이도 상태 전이와 알림을 전부 재현할 수 있습니다.
+
+```bash
+node server/scripts/simulate.mjs --machine-name "세탁기 3" --scenario abandoned
+```
 
 ## 디렉토리 구조
 
@@ -194,7 +217,7 @@ npm run build   # 프로덕션 빌드
       /owner               # 사장님 — 대시보드(/owner)
     /components
     /styles/tokens.css     # 디자인 토큰 (색·타이포·라운드·8pt 그리드)
-    /mocks                 # mock 데이터 — 구조는 CLAUDE.md의 Data Model과 동일하게
+    constants.js           # 화면 공용 도메인 상수 (알림 5종)
 /server                    # Express — 포트 3000
   index.js
   /routes                  # POST /ingest/:machineId · GET /api/machines 등
