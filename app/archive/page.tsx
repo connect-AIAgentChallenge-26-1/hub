@@ -6,6 +6,7 @@ import SwipeActionCard from "../SwipeActionCard";
 import {
   apiBaseUrl,
   getRequestErrorMessage,
+  matchesItemSearch,
   readApiError,
   type DeleteItemResponse,
   type Item,
@@ -15,6 +16,9 @@ export default function ArchivePage() {
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredItems = items.filter((item) => matchesItemSearch(item, searchQuery));
 
   useEffect(() => {
     async function fetchArchivedItems() {
@@ -49,6 +53,22 @@ export default function ArchivePage() {
         <p className="mt-2 text-sm text-muted">다 본 콘텐츠를 모아두었어요. 밀어서 삭제해요.</p>
       </section>
 
+      {!loading && !error && items.length > 0 && (
+        <section className="mb-5">
+          <label htmlFor="archive-search" className="sr-only">
+            아카이브 콘텐츠 검색
+          </label>
+          <input
+            id="archive-search"
+            type="search"
+            value={searchQuery}
+            onChange={(event) => setSearchQuery(event.target.value)}
+            placeholder="제목, 요약, 원문, 카테고리 검색"
+            className="w-full rounded-xl2 border border-creamDeep bg-[#f7f7f8] px-4 py-3.5 text-sm text-ink outline-none transition-colors placeholder:text-muted focus:border-ink"
+          />
+        </section>
+      )}
+
       <section aria-label="아카이브 콘텐츠">
         {loading && <p className="text-sm text-muted">불러오는 중...</p>}
         {error && <p className="text-sm text-red-600">{error}</p>}
@@ -58,9 +78,15 @@ export default function ArchivePage() {
             <p className="mt-1 text-xs text-muted">카테고리에서 다 본 콘텐츠를 밀어보세요.</p>
           </div>
         )}
-        {!loading && !error && items.length > 0 && (
+        {!loading && !error && items.length > 0 && filteredItems.length === 0 && (
+          <div className="rounded-xl bg-white/60 px-4 py-10 text-center">
+            <p className="text-sm font-medium">검색 결과가 없어요.</p>
+            <p className="mt-1 text-xs text-muted">다른 검색어로 다시 찾아보세요.</p>
+          </div>
+        )}
+        {!loading && !error && filteredItems.length > 0 && (
           <ul className="space-y-2.5">
-            {items.map((item) => (
+            {filteredItems.map((item) => (
               <SwipeActionCard
                 key={item.id}
                 item={item}

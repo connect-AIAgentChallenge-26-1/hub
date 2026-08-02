@@ -21,6 +21,16 @@ const item = {
   created_at: new Date().toISOString(),
 };
 
+const secondItem = {
+  ...item,
+  id: 2,
+  title: "데이터베이스 학습 자료",
+  summary: "인덱스와 저장소의 차이를 정리합니다.",
+  source_platform: "youtube",
+  category_main: "공부",
+  category_sub: "프로그래밍",
+};
+
 describe("ArchivePage", () => {
   afterEach(() => {
     cleanup();
@@ -93,5 +103,21 @@ describe("ArchivePage", () => {
 
     expect(await screen.findByText("아카이브가 비어 있어요.")).toBeInTheDocument();
     expect(screen.getByText("카테고리에서 다 본 콘텐츠를 밀어보세요.")).toBeInTheDocument();
+  });
+
+  it("제목·요약·출처·카테고리로 아카이브 항목을 검색한다", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({ ok: true, json: async () => [item, secondItem] }),
+    );
+    render(<ArchivePage />);
+
+    const search = await screen.findByRole("searchbox", { name: "아카이브 콘텐츠 검색" });
+    fireEvent.change(search, { target: { value: "프로그래밍" } });
+    expect(screen.getByText("데이터베이스 학습 자료")).toBeInTheDocument();
+    expect(screen.queryByText("겨울 코트 추천")).not.toBeInTheDocument();
+
+    fireEvent.change(search, { target: { value: "없는 검색어" } });
+    expect(screen.getByText("검색 결과가 없어요.")).toBeInTheDocument();
   });
 });
