@@ -30,6 +30,53 @@ Save                 Understand                    Rediscover
 URL · Text · Image → Title · Summary · Category → Search · Filter · Archive
 ```
 
+## Onboarding Flow
+
+Later의 온보딩은 사용자가 별도의 정리 규칙을 배우지 않아도 **저장 → AI 이해 → 자동 분류
+→ 재발견**의 가치를 짧은 흐름 안에서 이해하도록 설계했습니다.
+
+<table>
+  <tr>
+    <td align="center" width="25%">
+      <img src="showcase/screenshots/04-onboarding-welcome.png" alt="Later 온보딩 시작" />
+      <br /><strong>1. Welcome</strong><br />서비스가 해결하는 문제를 소개합니다.
+    </td>
+    <td align="center" width="25%">
+      <img src="showcase/screenshots/05-onboarding-save.png" alt="링크와 이미지 저장" />
+      <br /><strong>2. Save</strong><br />링크·텍스트·이미지를 한곳에 저장합니다.
+    </td>
+    <td align="center" width="25%">
+      <img src="showcase/screenshots/06-onboarding-share.png" alt="공유 화면에서 저장" />
+      <br /><strong>3. Share</strong><br />발견한 콘텐츠를 저장 흐름으로 연결합니다.
+    </td>
+    <td align="center" width="25%">
+      <img src="showcase/screenshots/07-onboarding-ocr.png" alt="이미지 내용 이해" />
+      <br /><strong>4. Understand</strong><br />텍스트와 이미지의 맥락을 함께 이해합니다.
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="25%">
+      <img src="showcase/screenshots/08-onboarding-classify.png" alt="AI 자동 분류" />
+      <br /><strong>5. Classify</strong><br />AI가 제목·요약·카테고리를 생성합니다.
+    </td>
+    <td align="center" width="25%">
+      <img src="showcase/screenshots/09-onboarding-detail.png" alt="저장 콘텐츠 상세 확인" />
+      <br /><strong>6. Review</strong><br />핵심 요약과 원문을 함께 확인합니다.
+    </td>
+    <td align="center" width="25%">
+      <img src="showcase/screenshots/10-onboarding-archive.png" alt="콘텐츠 아카이브" />
+      <br /><strong>7. Rediscover</strong><br />검색하고, 다 본 콘텐츠는 아카이브합니다.
+    </td>
+    <td align="center" width="25%">
+      <img src="showcase/screenshots/11-onboarding-notification.png" alt="리마인더 알림" />
+      <br /><strong>8. Remind</strong><br />저장한 정보를 다시 볼 시점을 안내합니다.
+    </td>
+  </tr>
+</table>
+
+> 리마인더 알림과 OS 공유 시트 연동은 온보딩에 제시된 제품 방향이며, 현재 운영
+> 버전에서는 후속 로드맵으로 관리합니다.
+
 ## Features
 
 ### Capture
