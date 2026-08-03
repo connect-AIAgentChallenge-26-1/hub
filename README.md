@@ -46,6 +46,15 @@ Later는 웹과 SNS에서 발견한 URL·텍스트·이미지를 저장하면 Ge
 이미지의 맥락을 읽어 제목·요약·카테고리로 구조화하고, 검색과 아카이브를 통해 다시 찾을
 수 있게 합니다.
 
+### Core Screens
+
+<p align="center">
+  <img src="showcase/app-screens.webp" alt="Later core screens — capture, explore, review and archive" width="100%" />
+</p>
+
+홈에서 콘텐츠를 저장하고, 카테고리와 통합 검색으로 탐색한 뒤 AI가 만든 핵심 요약과
+원문을 확인합니다. 확인을 마친 콘텐츠는 아카이브에서 복원하거나 삭제할 수 있습니다.
+
 <details>
   <summary><strong>온보딩 전체 화면 보기</strong></summary>
   <br />
