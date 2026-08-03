@@ -187,11 +187,14 @@ pre.code {
   color: var(--text-dim);
   white-space: pre-wrap;
   overflow-x: auto;
+  overflow-y: auto;
+  max-height: 60vh;
   margin: 0;
 }
 .code-editor {
   width: 100%;
   min-height: 140px;
+  max-height: 60vh;
   resize: vertical;
   font-family: var(--mono);
   font-size: 12px;
@@ -202,6 +205,40 @@ pre.code {
   padding: 14px;
   color: var(--text);
   outline: none;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+/* Thin dark-themed scrollbars for the code/diff preview areas above and
+   below (pre.diff) — the browser default light scrollbar stands out badly
+   against this app's dark panels. */
+pre.code,
+.code-editor,
+pre.diff {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+pre.code::-webkit-scrollbar,
+.code-editor::-webkit-scrollbar,
+pre.diff::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+pre.code::-webkit-scrollbar-track,
+.code-editor::-webkit-scrollbar-track,
+pre.diff::-webkit-scrollbar-track {
+  background: transparent;
+}
+pre.code::-webkit-scrollbar-thumb,
+.code-editor::-webkit-scrollbar-thumb,
+pre.diff::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+pre.code::-webkit-scrollbar-thumb:hover,
+.code-editor::-webkit-scrollbar-thumb:hover,
+pre.diff::-webkit-scrollbar-thumb:hover {
+  background: var(--text-mute);
 }
 
 .spinner {
@@ -297,6 +334,7 @@ pre.code {
 
 .ws-main {
   flex: 1;
+  min-width: 0;
   padding: 22px 26px;
   background: var(--panel-2);
   display: flex;
@@ -501,6 +539,8 @@ pre.diff {
   padding: 14px;
   margin: 0;
   overflow-x: auto;
+  overflow-y: auto;
+  max-height: 60vh;
   white-space: pre;
 }
 .diff-line {
