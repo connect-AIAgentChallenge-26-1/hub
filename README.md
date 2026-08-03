@@ -1,5 +1,12 @@
 # 유닉스 & Git 명령어 사전
 
+| | |
+| --- | --- |
+| **서비스 배포** | https://c-dict.vercel.app |
+| **시연 영상** | https://drive.google.com/file/d/1oeWlIk5HfCXvdG8A6K_mB5vbXs7oWWo8/view?usp=sharing |
+| **소스 코드** | https://github.com/connect-AIAgentChallenge-26-1/hub/tree/N80_%EB%B0%95%EC%84%B1%EB%AF%BC |
+| **프로젝트 소개 자료** | 이 문서 |
+
 CS 실습을 듣는 대학생이 유닉스/git 명령어를 몰라 헤매는 문제를 해결하기 위한 검색형 명령어 사전입니다. 명령어/카테고리/상황별 묶음 데이터는 Supabase(Postgres)에 저장되고, 검색은 Meilisearch로 처리하며, FE는 Express 백엔드(`server/`)를 거쳐 이 데이터를 가져옵니다. AI 챗봇 등 추가 확장 기능은 아직 미정입니다.
 
 우분투 터미널을 흉내 낸 화면(터미널 창 프레임, 컬러 프롬프트, 깜빡이는 커서) 안에서 카테고리를 고르고, 명령어를 검색하고, 클릭해서 상세 설명을 보는 흐름으로 동작합니다.
@@ -106,4 +113,5 @@ server/
 
 - [기획서](docs/plan.md) · [작업 체크리스트(완료 이력)](docs/checklist.md) · [Task 관리(백로그/로드맵)](docs/tasks.md)
 - [디자인 시스템](docs/design-system/DESIGN.md)
+- [개발 워크플로우](docs/workflow.md)
 - GitHub Project 칸반 보드: [Week2 - 검색 수직슬라이스](https://github.com/users/ParkSeong-min/projects/2) · [Week3 - 백로그/확장 기능](https://github.com/users/ParkSeong-min/projects/1)

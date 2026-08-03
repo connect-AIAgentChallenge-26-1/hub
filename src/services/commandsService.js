@@ -32,6 +32,12 @@ async function requestJson(path) {
 // GET /api/commands — 전체 명령어 목록 (CategoryHomePage의 카테고리별 개수 계산에 씀)
 export async function fetchCommands() {
     const data = await requestJson(COMMANDS_PATH);
+    // 목록 조회는 fetchCommandById와 달리 "존재하지 않는 id"라는 개념이 없어서, 404(=data가 null)는
+    // 정상적인 케이스가 아니라 라우팅/배포 설정 문제 같은 진짜 오류다. 여기서 안 걸러내면 아래
+    // data.results가 null.results로 터져서 사용자에게 내부 JS 에러 메시지가 그대로 노출된다.
+    if (!data) {
+        throw new Error('요청 중 서버에서 오류가 발생했습니다.');
+    }
     return data.results;
 }
 

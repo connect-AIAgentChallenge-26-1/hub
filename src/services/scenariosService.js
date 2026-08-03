@@ -31,6 +31,12 @@ async function requestJson(path) {
 // "관련 상황" 역방향 조회에도 씀 — command_ids.includes(id)로 FE에서 필터링)
 export async function fetchScenarios() {
     const data = await requestJson(SCENARIOS_PATH);
+    // 목록 조회는 fetchScenarioById와 달리 "존재하지 않는 id"라는 개념이 없어서, 404(=data가 null)는
+    // 정상적인 케이스가 아니라 라우팅/배포 설정 문제 같은 진짜 오류다. 여기서 안 걸러내면 아래
+    // data.results가 null.results로 터져서 사용자에게 내부 JS 에러 메시지가 그대로 노출된다.
+    if (!data) {
+        throw new Error('요청 중 서버에서 오류가 발생했습니다.');
+    }
     return data.results;
 }
 
