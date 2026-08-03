@@ -16,7 +16,7 @@ flowchart TD
     CHECK{{"Feature Verifier · Code Reviewer<br/>기능 검증 · 코드 리뷰"}}
     RESULT(["사용자 피드백<br/>최종 판단"])
 
-    USER -->|"요구사항"| RULE
+    USER -->|"요구사항"| PLAN
     RULE -->|"공통 규칙 적용"| PLAN
     PLAN -->|"사용자가 계획 승인"| MAIN
     MAIN -->|"필요 시 사용"| SKILL
@@ -47,6 +47,12 @@ flowchart LR
     COMMON --> CLAUDE
     COMMON --> CODEX
 ```
+
+| 도형 | 의미 |
+| --- | --- |
+| 평행사변형 | 프로젝트 규칙 문서 |
+| 원통 | 공통 Agent·Skill 정의 저장 위치 |
+| 사각형 | 도구별 어댑터와 사용 주체 |
 
 Claude와 Codex의 파일 형식은 다르지만 역할, 절차, 출력 형식은 `.agents`의 공통 정의를 따른다. `CLAUDE.md`는 `AGENTS.md`를 참조하고 `.claude`의 파일은 대응하는 `.agents` 정의를 불러온다.
 
