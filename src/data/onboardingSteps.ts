@@ -1,6 +1,6 @@
 /**
  * 온보딩 스텝 메타 및 선택지.
- * 출처: prototype/gov_subsidy_home_wireframe.html
+ * 출처: src/prototype/gov_subsidy_home_wireframe.html
  */
 import type { OnboardingField } from '../context/OnboardingContext'
 

@@ -5,7 +5,7 @@ description: >-
   디자인 시스템, 와이어프레임 화면(온보딩·홈·상세)을 React 컴포넌트로 옮길 때 사용.
   Use when implementing UI, creating screens, matching wireframe design, styling
   components, or when the user mentions gov subsidy curator, 정부지원금, wireframe,
-  or prototype/gov_subsidy_home_wireframe.html.
+  or src/prototype/gov_subsidy_home_wireframe.html.
 ---
 
 # 소상공인 정부지원금 큐레이터 — 디자인 제작
@@ -16,7 +16,7 @@ description: >-
 
 | 파일 | 용도 |
 |------|------|
-| `prototype/gov_subsidy_home_wireframe.html` | 화면·CSS·인터랙션 단일 소스 |
+| `src/prototype/gov_subsidy_home_wireframe.html` | 화면·CSS·인터랙션 단일 소스 |
 | `docs/plan.md` | 기능 범위, MVP 제외 항목, 입력 조건 |
 | [design-tokens.md](design-tokens.md) | 색상·타이포·간격·컴포넌트 토큰 |
 | [screens.md](screens.md) | 화면별 구조·상태·데이터 필드 |

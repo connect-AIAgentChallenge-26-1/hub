@@ -21,8 +21,8 @@
           <div class="kicker">AI AGENT CHALLENGE · 시연 자료 2 / 2 · 개발 방식</div>
           <h1>AI 에이전트를 어떻게 일하게 했는가</h1>
           <p class="lede">
-            코드를 맡긴 게 아니라 <b>일하는 순서와 검증 기준</b>을 파일로 고정했다 — 이슈 하나가
-            계획서 한 장, PR 한 개로 끝나는 루프
+            AI를 믿은 게 아니라, <b>검증되는 절차</b>를 믿었다 — 이슈 하나가 계획서 한 장, PR 한
+            개로 끝나는 루프
           </p>
         </div>
         <div class="head-side">
@@ -197,7 +197,7 @@
             </section>
 
             <section class="panel">
-              <h2><span class="n">5</span>제품 안에서 일하는 AI<small>개발 도구와 다른 역할</small></h2>
+              <h2><span class="n">5</span>AI 기반 첨부문서 조건 추출 파이프라인<small>개발 도구와 다른 역할</small></h2>
               <div class="colflow">
                 <div class="box">
                   <div class="t">공고 첨부파일</div>
@@ -230,32 +230,33 @@
         <!-- ============ 하단 : 숫자 + 교훈 ============ -->
         <section class="panel tint">
           <h2><span class="n">6</span>실패에서 배운 것</h2>
-          <div class="row top">
+          <div class="row stretch">
             <div class="box">
-              <div class="t">문서보다 실제 응답</div>
+              <div class="t">문서보다 실측</div>
               <div class="s">
-                검색으로 짐작한 필드명으로 코드를 짰다가 전부 어긋났다 →
-                <b>직접 호출해 응답을 보고</b> 고쳤다
+                공개된 API 문서와 실제 응답이 달랐다 →
+                <b>직접 호출해 검증한 뒤</b> 반영했다
               </div>
             </div>
             <div class="box">
-              <div class="t">AI 한도를 먼저 재본다</div>
+              <div class="t">제약 조건을 먼저 실측한다</div>
               <div class="s">
-                전체 공고에 AI를 돌릴 계획이었지만 무료 한도를 먼저 측정 →
-                <b>신규 공고만</b>으로 설계 변경
+                전체 데이터에 AI를 적용할 계획이었지만 무료 사용량 한도부터 측정 →
+                <b>신규 데이터만</b> 처리하도록 범위를 조정했다
               </div>
             </div>
             <div class="box">
-              <div class="t">지우기 전에 세어본다</div>
+              <div class="t">실행 전 영향 범위를 정량화한다</div>
               <div class="s">
-                삭제·정리 작업은 항상 <b>건수만 먼저 출력</b>해 눈으로 확인한 뒤 실행
+                삭제·정리처럼 되돌리기 어려운 작업은 <b>영향받는 건수를 먼저 산출</b>해
+                확인한 뒤 실행
               </div>
             </div>
           <div class="box">
-              <div class="t">데이터가 없는 축은 버린다</div>
+              <div class="t">신뢰도가 낮은 지표는 배제한다</div>
               <div class="s">
-                업종은 6.2%만 확보 →
-                <b>결측 0%인 지원분야로 온보딩 질문을 교체</b>하고 매칭 축을 옮겼다
+                업종 정보는 확보율 6.2%로 신뢰할 수 없었다 →
+                <b>결측률 0%인 지원분야로 매칭 기준을 전환</b>했다
               </div>
             </div>
           </div>
