@@ -1,6 +1,17 @@
-# Later
+<p align="center">
+  <img src="public/icons/later-icon-192.png" alt="Later logo" width="76" />
+</p>
 
-> 저장만 해두면, AI가 다시 찾기 좋게.
+<h1 align="center">Later</h1>
+
+<p align="center"><strong>저장만 해두면, AI가 다시 찾기 좋게.</strong></p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-14-000000?style=flat-square&logo=nextdotjs" alt="Next.js 14" />
+  <img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript 5" />
+  <img src="https://img.shields.io/badge/Gemini-Multimodal-8E75B2?style=flat-square&logo=googlegemini&logoColor=white" alt="Gemini" />
+  <img src="https://img.shields.io/badge/Supabase-Database%20%2B%20Storage-3FCF8E?style=flat-square&logo=supabase&logoColor=white" alt="Supabase" />
+</p>
 
 <p align="center">
   <img src="showcase/thumbnail.webp" alt="Later — AI 콘텐츠 인박스" width="100%" />
@@ -19,63 +30,28 @@ Later는 웹과 SNS에서 발견한 URL·텍스트·이미지를 저장하면 Ge
 저장하는 데서 끝내지 않고, 검색·분류·아카이브를 통해 필요한 순간에 다시 찾는 경험을
 제공합니다.
 
-## Why Later?
+## Overview
 
 브라우저 북마크, 메신저, SNS 저장함과 스크린샷에는 유용한 정보가 계속 쌓이지만,
 시간이 지나면 무엇을 왜 저장했는지 기억하기 어렵습니다. Later는 저장 순간에 콘텐츠의
 맥락을 구조화해 **저장 비용은 낮추고 재발견 가능성은 높이는 것**을 목표로 합니다.
 
-```text
-Save                 Understand                    Rediscover
-URL · Text · Image → Title · Summary · Category → Search · Filter · Archive
-```
+## Product Tour
 
-## Onboarding Flow
+<p align="center">
+  <img src="showcase/onboarding-flow.webp" alt="Later product flow — save, understand, organize and rediscover" width="100%" />
+</p>
 
-Later의 온보딩은 사용자가 별도의 정리 규칙을 배우지 않아도 **저장 → AI 이해 → 자동 분류
-→ 재발견**의 가치를 짧은 흐름 안에서 이해하도록 설계했습니다.
+사용자는 별도의 폴더 규칙을 만들지 않아도 콘텐츠를 저장할 수 있습니다. Later가 원문과
+이미지의 맥락을 읽어 제목·요약·카테고리로 구조화하고, 검색과 아카이브를 통해 다시 찾을
+수 있게 합니다.
 
-<table>
-  <tr>
-    <td align="center" width="25%">
-      <img src="showcase/screenshots/04-onboarding-welcome.png" alt="Later 온보딩 시작" />
-      <br /><strong>1. Welcome</strong><br />서비스가 해결하는 문제를 소개합니다.
-    </td>
-    <td align="center" width="25%">
-      <img src="showcase/screenshots/05-onboarding-save.png" alt="링크와 이미지 저장" />
-      <br /><strong>2. Save</strong><br />링크·텍스트·이미지를 한곳에 저장합니다.
-    </td>
-    <td align="center" width="25%">
-      <img src="showcase/screenshots/06-onboarding-share.png" alt="공유 화면에서 저장" />
-      <br /><strong>3. Share</strong><br />발견한 콘텐츠를 저장 흐름으로 연결합니다.
-    </td>
-    <td align="center" width="25%">
-      <img src="showcase/screenshots/07-onboarding-ocr.png" alt="이미지 내용 이해" />
-      <br /><strong>4. Understand</strong><br />텍스트와 이미지의 맥락을 함께 이해합니다.
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="25%">
-      <img src="showcase/screenshots/08-onboarding-classify.png" alt="AI 자동 분류" />
-      <br /><strong>5. Classify</strong><br />AI가 제목·요약·카테고리를 생성합니다.
-    </td>
-    <td align="center" width="25%">
-      <img src="showcase/screenshots/09-onboarding-detail.png" alt="저장 콘텐츠 상세 확인" />
-      <br /><strong>6. Review</strong><br />핵심 요약과 원문을 함께 확인합니다.
-    </td>
-    <td align="center" width="25%">
-      <img src="showcase/screenshots/10-onboarding-archive.png" alt="콘텐츠 아카이브" />
-      <br /><strong>7. Rediscover</strong><br />검색하고, 다 본 콘텐츠는 아카이브합니다.
-    </td>
-    <td align="center" width="25%">
-      <img src="showcase/screenshots/11-onboarding-notification.png" alt="리마인더 알림" />
-      <br /><strong>8. Remind</strong><br />저장한 정보를 다시 볼 시점을 안내합니다.
-    </td>
-  </tr>
-</table>
-
-> 리마인더 알림과 OS 공유 시트 연동은 온보딩에 제시된 제품 방향이며, 현재 운영
-> 버전에서는 후속 로드맵으로 관리합니다.
+<details>
+  <summary><strong>온보딩 전체 화면 보기</strong></summary>
+  <br />
+  전체 온보딩 시안은 <a href="showcase/showcase.json">쇼케이스 갤러리</a>의 4–11번
+  스크린샷에서 확인할 수 있습니다. 공유 시트와 리마인더 알림은 현재 후속 로드맵입니다.
+</details>
 
 ## Features
 
