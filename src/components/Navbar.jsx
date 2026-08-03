@@ -91,7 +91,7 @@ function Navbar() {
       return;
     }
 
-    // prototype.html의 Notification.requestPermission() 패턴 재사용 — Promise 형태로 받아 상태 반영.
+    // initial-prototype.html의 Notification.requestPermission() 패턴 재사용 — Promise 형태로 받아 상태 반영.
     const result = await Notification.requestPermission();
     setPermission(result);
 

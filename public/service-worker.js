@@ -14,13 +14,15 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("activate", (event) => {
   event.waitUntil(
-    caches.keys().then((keys) =>
-      Promise.all(
-        keys
-          .filter((key) => key !== CACHE_NAME)
-          .map((key) => caches.delete(key)),
+    caches
+      .keys()
+      .then((keys) =>
+        Promise.all(
+          keys
+            .filter((key) => key !== CACHE_NAME)
+            .map((key) => caches.delete(key)),
+        ),
       ),
-    ),
   );
 });
 
@@ -42,8 +44,8 @@ self.addEventListener("fetch", (event) => {
   );
 });
 
-// #33: send-push(발송 쪽)가 아직 없어 payload 스키마가 확정되지 않았다 —
-// title/body 정도만 기대하고, 그 밖의 필드 검증은 하지 않는다.
+// 서버가 전달하는 Push payload에서 title과 body를 사용한다.
+// 값이 없거나 JSON 파싱에 실패하면 기본 알림 문구로 폴백한다.
 const DEFAULT_NOTIFICATION_TITLE = "잔소리봇";
 const DEFAULT_NOTIFICATION_BODY = "확인할 게 있어요!";
 const NOTIFICATION_ICON = "/icons/nagbot-app-icon-192.png";
@@ -52,7 +54,10 @@ const NOTIFICATION_ICON = "/icons/nagbot-app-icon-192.png";
 // (스펙상 스트림이 아니라 바이트 시퀀스 래퍼) — json() 실패 시 text()로 그대로 폴백한다.
 function parsePushPayload(data) {
   if (!data) {
-    return { title: DEFAULT_NOTIFICATION_TITLE, body: DEFAULT_NOTIFICATION_BODY };
+    return {
+      title: DEFAULT_NOTIFICATION_TITLE,
+      body: DEFAULT_NOTIFICATION_BODY,
+    };
   }
   try {
     const json = data.json();
@@ -61,14 +66,20 @@ function parsePushPayload(data) {
       body: json.body || DEFAULT_NOTIFICATION_BODY,
     };
   } catch {
-    return { title: DEFAULT_NOTIFICATION_TITLE, body: data.text() || DEFAULT_NOTIFICATION_BODY };
+    return {
+      title: DEFAULT_NOTIFICATION_TITLE,
+      body: data.text() || DEFAULT_NOTIFICATION_BODY,
+    };
   }
 }
 
 self.addEventListener("push", (event) => {
   const { title, body } = parsePushPayload(event.data);
   event.waitUntil(
-    self.registration.showNotification(title, { body, icon: NOTIFICATION_ICON }),
+    self.registration.showNotification(title, {
+      body,
+      icon: NOTIFICATION_ICON,
+    }),
   );
 });
 
