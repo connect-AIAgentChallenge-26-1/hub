@@ -136,3 +136,45 @@
 - 검증: `npm run verify` 재현 통과. `app/layout.js:18`의 기존 외부 폰트 권고 경고 1건 외에 lint 오류는 없고 Next.js production build도 성공했습니다.
 - 권고: 없음.
 - 확인: [x] 2026-07-26 22:30 Claude — 반영할 사항 없음(발견 없음 승인), 확인만 함
+
+## 2026-08-02 22:31 | T17 | 수정요청
+- 발견: 높음 — 검토 화면 새로고침 후 `pendingBrainDumpParams`가 복원되지 않아 "전부 다시 쪼개기"가 API 호출 없이 반환됩니다(`app/page.js:245`, `app/page.js:325`). 높음 — `/api/brain-dump`의 즉시 저장을 제거했지만 기존 `split_node` 경로는 반환값을 무시하고 원본만 archive합니다(`app/page.js:671`). 중간 — S1-save는 MicroStep 필드를 검증하지 않습니다(`app/api/steps/save/route.js:14`).
+- 계약 위반: C17 재분할 동작, S1-save MicroStep 입력 제약 및 S2 `split_node` 실행 회귀.
+- 권고: 재분할 원본을 세션에 복원하고, `split_node`가 분할 결과를 저장한 뒤 원본을 archive하게 하며, S1-save에 공유 Zod 검증을 추가하세요.
+- 확인: [x] 2026-08-02 23:10 Claude — `pendingBrainDumpParams` localStorage 저장, `split_node` save-then-archive 순서 수정(turn:2로 되묻기 회피), S1-save에 Zod 검증 추가. report_claude.md에 반영 근거 기록
+
+## 2026-08-02 22:31 | T21 | 수정요청
+- 발견: 높음 — C21 네 항목이 모두 미체크이며 보고서도 OAuth 실제 구현은 미착수라고 명시합니다. OAuth 시작·콜백·사용자 토큰 저장·API별 사용자 토큰 주입 코드가 없습니다.
+- 계약 위반: C21 전체 미구현이며 `docs/skills.md`의 T21 계약도 미정입니다.
+- 권고: OAuth 계약을 먼저 정의하고 C21 전체를 구현한 뒤 재보고하세요.
+- 확인: [ ]
+
+## 2026-08-02 22:31 | T22 | 승인
+- 발견: 세 테마 선택, focus/timer 적용, 05:59/06:00·17:59/18:00 경계, localStorage 유지 경로를 대조했고 `npm run verify`가 통과했습니다.
+- 계약 위반: 없음 (`docs/skills.md`에 T22 전용 계약 없음).
+- 권고: 없음
+- 확인: [x] 2026-08-02 22:31 GPT — 승인
+
+## 2026-08-02 22:31 | T23 | 수정요청
+- 발견: 중간 — 방문일을 UTC ISO 날짜로 기록합니다(`app/page.js:183`). `2026-08-02T00:30:00+09:00` 반례에서 실제 로컬 날짜는 `2026-08-02`지만 구현값은 `2026-08-01`이라 환영 일수가 하루 어긋납니다.
+- 계약 위반: C23의 마지막 방문일·오늘 날짜 차이와 실제 경과일 표시 위반.
+- 권고: 로컬 calendar date 유틸을 사용하고 자정·월경계 반례를 추가하세요.
+- 확인: [x] 2026-08-02 23:10 Claude — `app/lib/date.js`의 `kstDateString`으로 교체(서버·클라이언트 타임존과 무관하게 KST 기준). 제시된 반례로 정확성 확인
+
+## 2026-08-02 22:31 | T24 | 승인
+- 발견: intensity 0/100, 애니메이션 30 경계, 테마별 loop 음원, 볼륨 0~1, localStorage 유지 경로와 실제 음원 파일을 대조했고 `npm run verify`가 통과했습니다.
+- 계약 위반: 없음 (`docs/skills.md`에 T24 전용 계약 없음).
+- 권고: 없음
+- 확인: [x] 2026-08-02 22:31 GPT — 승인
+
+## 2026-08-02 22:31 | T25 | 승인
+- 발견: 장식용 인원 문구·점 5개 중 "나" 구분, 이름/채팅 없음 안내, dismiss와 localStorage 영속 경로를 대조했고 `npm run verify`가 통과했습니다.
+- 계약 위반: 없음 (`docs/skills.md`에 T25 전용 계약 없음).
+- 권고: 없음
+- 확인: [x] 2026-08-02 22:31 GPT — 승인
+
+## 2026-08-02 22:31 | T26 | 수정요청
+- 발견: 높음 — 최근 7일 날짜를 UTC ISO로 생성합니다(`app/api/stats/route.js:3`). 한국 시간 `2026-08-02 00:30` 반례에서 오늘 키가 `2026-08-01`이 되어 조회 하한과 점 위치가 하루 어긋납니다. 중간 — 점 7개에 요일 텍스트나 접근 가능한 이름이 없습니다(`app/components/StatsScreen.js:29`).
+- 계약 위반: C26의 최근 7일 및 요일별 완료 여부 표시 위반.
+- 권고: 명시한 시간대의 calendar date로 계산하고 각 점에 요일 라벨을 추가하세요.
+- 확인: [x] 2026-08-02 23:10 Claude — `kstDateString`으로 교체(CompletedAt 비교 포함), `StatsScreen`의 점 7개에 요일 `aria-label`/`title` 추가. 화면에서 요일 라벨이 실제 요일과 일치하는 것 확인
