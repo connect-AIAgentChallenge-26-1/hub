@@ -10,9 +10,15 @@ src/
     app.tsx
     authenticated_workspace.tsx
     model/
+      create_browser_category_repository.ts
       create_browser_insight_repository.ts
+      use_category_workspace.ts
       use_insight_workspace.ts
+      workspace_query_keys.ts
       workspace_seed.ts
+      workspace_ui_store.tsx
+    providers/
+      workspace_query_provider.tsx
     styles/
       authenticated_workspace.css
       global.css
@@ -137,20 +143,30 @@ src/
 
 ## 레이어 책임
 
-| 레이어     | 책임                                                               |
-| ---------- | ------------------------------------------------------------------ |
-| `app`      | 앱 진입 상태, provider/token 조합, authenticated shell, 전역 reset |
-| `features` | 사용자 행동 단위의 상태 정책과 UI 조합                             |
-| `pages`    | 라우트 또는 주요 화면 단위 조합                                    |
-| `widgets`  | 여러 화면에서 독립적으로 배치되는 큰 UI 블록                       |
-| `entities` | 도메인 타입, 도메인 연산, 도메인 표시 UI                           |
-| `shared`   | 비즈니스 규칙이 없는 config, UI adapter, 범용 도구                 |
+| 레이어     | 책임                                                                                                  |
+| ---------- | ----------------------------------------------------------------------------------------------------- |
+| `app`      | 앱 진입 상태, 로그인 workspace의 Query Provider·scoped Zustand Store, authenticated shell, 전역 reset |
+| `features` | 사용자 행동 단위의 상태 정책과 UI 조합                                                                |
+| `pages`    | 라우트 또는 주요 화면 단위 조합                                                                       |
+| `widgets`  | 여러 화면에서 독립적으로 배치되는 큰 UI 블록                                                          |
+| `entities` | 도메인 타입, 도메인 연산, 도메인 표시 UI                                                              |
+| `shared`   | 비즈니스 규칙이 없는 config, UI adapter, 범용 도구                                                    |
 
 현재 도메인 모델·Supabase 저장 어댑터·목록 UI는 `entities/insight`, Android 공유의 URL 추출·상태·결과 화면은 `features/android-share`, Google 로그인 정책은 `features/auth`, PWA 설치 안내 정책은 `features/pwa-install`, 고정 앱 내비게이션은 `widgets/app-navigation`, Supabase 공통 클라이언트는 `shared/api`, Capacitor 런타임·공유 플러그인·모바일 OAuth 어댑터는 `shared/capacitor`, 공개 환경 검증은 `shared/config`, PWA 브라우저 수명 주기 어댑터는 `shared/pwa`, 런타임 토큰은 `shared/config/design-system`, 공통 UI 경계는 `shared/ui`가 소유한다.
 
 - `features/insight-import`는 출처별 입력을 표준 후보로 바꾸는 어댑터, 분석·반영·Undo 사용자 행동과 UI를 소유한다.
 - 원본 파일은 브라우저에서만 읽으며 Notion OAuth와 Provider 호출은 `server/insight_import`에 둔다.
 - `pages/library`는 feature를 직접 import하지 않고 진입 callback만 노출하며 `app`이 다이얼로그와 원격 목록 재조회를 조합한다.
+
+### 런타임 중립 도메인 Module
+
+`packages/domain`은 프론트엔드 FSD와 Express 서버가 함께 사용하는 제품 규칙을 소유하는 비공개 npm workspace다. 공개 진입점은 `@amadda/domain/insight`와 `@amadda/domain/insight-import`뿐이다.
+
+- `@amadda/domain/insight`는 인사이트 저장 모델, 캡처 계약, URL 정규화와 런타임 파서를 소유한다.
+- `@amadda/domain/insight-import`는 표준 후보, URL 안전성 검사, 제한, 중복 분류와 분석 요약을 소유하며 `insight` Module만 의존할 수 있다.
+- 도메인 Module은 `src`, `server`, `api`, `extension`, React, Supabase와 Node 전용 모듈을 import하지 않는다.
+- `entities/insight`와 `features/insight-import`는 기존 FSD public API를 유지하며 공용 도메인 계약을 재노출한다.
+- Supabase 행 변환, 브라우저 파일 입력, 화면 상태와 네트워크 오류 변환은 각 Adapter에 남긴다.
 
 ## import 경계
 
@@ -163,9 +179,13 @@ src/
 - 같은 레이어의 다른 slice 내부 경로를 직접 import하지 않는다.
 - alias는 `@/*`만 사용한다.
 - 화면과 domain UI는 외부 UI 패키지를 직접 import하지 않고 `@/shared/ui` adapter를 사용한다.
+- 브라우저와 서버가 공유하는 제품 규칙은 `@amadda/domain`의 공개 진입점만 import한다.
+- 서버 생산 코드는 `src/entities`와 `src/features` 내부를 직접 import하지 않는다.
 - `export default`를 사용하지 않는다.
 
 `src/main.tsx`는 token injector를 실행하고 `DesignSystemProvider`로 `App`을 감싸는 bootstrap만 담당한다. `tokens.ts`가 값의 단일 원천이며 `apply_design_tokens.ts`만 DOM에 CSS custom property를 주입한다.
+
+로그인한 workspace는 `app` 계층의 `WorkspaceQueryProvider`와 scoped `WorkspaceUiProvider` 안에서 동작한다. 인사이트·카테고리의 서버 상태와 mutation 결과, 가져오기 뒤 무효화·재조회는 TanStack Query가 소유한다. Query key는 Repository 객체를 넣지 않고 사용자 scope와 도메인 이름으로 구성한다. 보관함의 선택 카테고리·검색어, 꺼내보기 입력·추천 상황처럼 화면 이동 뒤에도 유지할 UI 상태만 Zustand가 소유한다.
 
 ## 스타일 경계
 
@@ -178,7 +198,7 @@ src/
 
 Express 서버는 FSD 대상이 아니므로 `server/`에 둔다. `/api/health` 외에 모바일·웹·Chrome 확장이 공유하는 인증된 캡처 API와 확장 메모 API를 제공한다. 캡처 API는 Bearer access token을 검증 경계로 사용하며 Supabase RLS가 최종 사용자 데이터 경계를 강제한다.
 
-- 인사이트 타입과 비동기 `InsightRepository` 인터페이스는 `entities/insight`가 소유한다.
+- 인사이트 저장 타입과 캡처 계약은 `@amadda/domain/insight`가 소유한다. 비동기 `InsightRepository` Interface와 표시·검색 책임은 `entities/insight`가 소유한다.
 - 브라우저 앱은 로그인한 사용자 ID로 `createBrowserInsightRepository`를 만들고, page와 widget은 Supabase나 Web Storage를 직접 호출하지 않는다.
 - Supabase 공개 URL과 publishable key는 `shared/config`에서 검증한다. 브라우저·확장 코드에 secret key 또는 service role key를 넣지 않는다.
 - `insights.user_id`와 RLS 정책은 조회·생성·수정·삭제를 현재 사용자 데이터로 제한한다. 클라이언트의 `user_id` 필터는 RLS를 대체하지 않는다.

@@ -1,6 +1,6 @@
 # 기술 스택 및 라이브러리
 
-이 문서는 아맞다 프로젝트에서 사용할 기술 스택과 후보 라이브러리를 정리한다. 버전은 2026-07-26 기준 `package-lock.json`을 기준으로 한다.
+이 문서는 아맞다 프로젝트에서 사용할 기술 스택과 후보 라이브러리를 정리한다. 버전은 2026-08-03 기준 `package-lock.json`을 기준으로 한다.
 
 ## 결정 기준
 
@@ -16,6 +16,7 @@
 | --------------------------- | ------------------------------------------------ | -------------------- | -------------- | -------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
 | React                       | 19.2.7                                           | UI 라이브러리        | 사용 중        | 컴포넌트 기반 설계로 화면을 재사용하기 쉽고, 생태계가 넓어 협업과 유지보수에 유리하다.                   | Vue, Svelte, Solid                                       | 현재 Vite React 앱의 기본 런타임이다.                                                                                 |
 | TypeScript                  | 6.0.3                                            | 개발 언어            | 사용 중        | 타입 안정성으로 오류를 초기에 발견하고, 도메인 타입과 API 응답을 명확하게 표현할 수 있다.                | JavaScript                                               | npm 최신은 7.0.2지만 현재 프로젝트는 6.0.3을 사용한다.                                                                |
+| @amadda/domain              | workspace 0.1.0                                  | 공용 도메인 Module   | 사용 중        | 브라우저와 서버가 같은 인사이트·가져오기 제품 규칙을 사용하도록 런타임 중립 Interface를 제공한다.        | 프론트엔드 내부 경로 공유, 별도 저장소                   | npm 비공개 workspace이며 `insight`, `insight-import` 두 공개 진입점만 사용한다.                                       |
 | Vite                        | 8.1.3                                            | 빌드 툴              | 사용 중        | 빠른 개발 서버와 HMR을 제공하고 설정이 단순하다.                                                         | Webpack, Parcel, Rollup, Next.js                         | npm 최신은 8.1.4다. 현재 버전을 유지해도 무방하다.                                                                    |
 | Capacitor                   | core/cli/android 8.4.2, app 8.1.1, browser 8.0.4 | Android 앱 셸        | 사용 중        | 기존 React 앱을 Android에서 실행하고 공유 Intent·딥링크·시스템 브라우저를 작은 네이티브 경계로 연결한다. | React Native, Kotlin·Compose                             | `shared/capacitor`와 Kotlin AndroidShare 플러그인에 연결되어 있으며 상세 절차는 `docs/android-capacitor.md`를 따른다. |
 | Express                     | 5.2.1                                            | API 서버             | 사용 중        | 여러 저장 채널이 공유하는 인증·입력 검증과 안전한 오류 응답 경계를 제공한다.                             | Fastify, Hono, NestJS                                    | `/api/health`, 인증된 캡처 API와 Chrome 확장 메모 API를 제공한다.                                                     |
@@ -26,12 +27,12 @@
 | @tailwindcss/vite           | 4.3.2                                            | Tailwind/Vite 연동   | 설치됨, 미연동 | Tailwind CSS v4의 Vite 공식 플러그인으로 설정을 단순화한다.                                              | PostCSS plugin                                           | 아직 `vite.config.ts`에는 연결하지 않았다.                                                                            |
 | shadcn/ui                   | CLI 4.13.0                                       | UI 컴포넌트 소스     | 설치됨, 미연동 | 컴포넌트를 패키지처럼 숨기지 않고 프로젝트 코드로 가져와 커스터마이징하기 쉽다.                          | WDS, MUI, Chakra UI, Ant Design                          | `shadcn` CLI만 설치했으며 컴포넌트 생성은 별도 작업이다.                                                              |
 | class-variance-authority    | 0.7.1                                            | 스타일 variant 유틸  | 설치됨, 미연동 | shadcn UI 컴포넌트의 variant 구성을 명확하게 관리한다.                                                   | tailwind-variants                                        | shadcn 컴포넌트 추가 시 함께 사용할 수 있다.                                                                          |
-| clsx                        | 2.1.1                                            | className 유틸       | 설치됨, 미연동 | 조건부 className 조합을 간결하게 작성할 수 있다.                                                         | classnames                                               | `tailwind-merge`와 함께 `cn()` 유틸로 묶는 패턴을 쓴다.                                                               |
+| clsx                        | 2.1.1                                            | className 유틸       | 사용 중        | 조건부 className 조합을 간결하게 작성할 수 있다.                                                         | classnames                                               | 공통 UI와 인사이트·보관함 화면의 조건부 className 조합에 사용한다.                                                    |
 | tailwind-merge              | 3.6.0                                            | Tailwind class 병합  | 설치됨, 미연동 | 충돌하는 Tailwind 클래스를 안전하게 병합한다.                                                            | 직접 병합                                                | shadcn UI와 Tailwind CSS를 쓴다면 사실상 기본 유틸이다.                                                               |
-| lucide-react                | 1.23.0                                           | 아이콘               | 설치됨, 미연동 | shadcn UI 예제와 궁합이 좋고, 아이콘 품질이 안정적이다.                                                  | WDS Icon, React Icons                                    | WDS Icon과 중복되므로 UI 기준 확정 후 선택한다.                                                                       |
-| Zustand                     | 5.0.14                                           | 클라이언트 상태 관리 | 설치됨, 미연동 | 간단한 전역 UI 상태나 사용자 설정을 적은 보일러플레이트로 관리할 수 있다.                                | Redux Toolkit, Jotai, Recoil, Context API                | 서버 데이터 캐시는 TanStack Query에 맡기고, Zustand는 클라이언트 상태로 제한한다.                                     |
-| TanStack Query              | 5.101.2                                          | 서버 상태 관리       | 설치됨, 미연동 | API 요청, 캐싱, 로딩/에러 상태, refetch를 표준화할 수 있다.                                              | SWR, 직접 fetch, Apollo Client                           | Supabase 또는 Express API 호출이 늘어나는 시점에 연결한다.                                                            |
-| TanStack Query Devtools     | 5.101.2                                          | 개발 도구            | 설치됨, 미연동 | 쿼리 캐시와 refetch 상태를 개발 중 확인하기 쉽다.                                                        | 브라우저 로그                                            | 프로덕션 번들에 노출되지 않도록 개발 환경에서만 연결한다.                                                             |
+| lucide-react                | 1.23.0                                           | 아이콘               | 사용 중        | 일관된 SVG 아이콘을 React 컴포넌트로 제공한다.                                                           | WDS Icon, React Icons                                    | 앱 내비게이션, 공통 UI, 저장·보관함 화면에 사용한다.                                                                  |
+| Zustand                     | 5.0.14                                           | 클라이언트 상태 관리 | 사용 중        | 화면 이동 뒤에도 유지할 UI 상태를 적은 보일러플레이트로 관리할 수 있다.                                  | Redux Toolkit, Jotai, Recoil, Context API                | 선택 카테고리·검색어, 꺼내보기 입력·추천 상황 등 클라이언트 UI 상태만 소유한다.                                       |
+| TanStack Query              | 5.101.2                                          | 서버 상태 관리       | 사용 중        | API 요청, 캐싱, 로딩/에러 상태, refetch를 표준화할 수 있다.                                              | SWR, 직접 fetch, Apollo Client                           | Supabase Repository의 목록·mutation 캐시와 가져오기 뒤 무효화·재조회를 소유한다.                                      |
+| TanStack Query Devtools     | 5.101.2                                          | 개발 도구            | 사용 중        | 쿼리 캐시와 refetch 상태를 개발 중 확인하기 쉽다.                                                        | 브라우저 로그                                            | 개발 환경에서만 지연 로드한다.                                                                                        |
 | Motion                      | 12.42.2                                          | UI 애니메이션        | 설치됨, 미연동 | 화면 전환, 버튼 인터랙션, 등장 애니메이션을 React 컴포넌트 상태와 함께 선언적으로 구현할 수 있다.        | CSS transition, GSAP                                     | 앱 내부 micro interaction 기본값이다. 로그인 전 서비스 온보딩의 브랜드 시퀀스에는 사용하지 않는다.                    |
 | GSAP                        | 3.15.0                                           | 온보딩 애니메이션    | 사용 중        | 로그인 전 Hero의 핵심 문구와 시작 행동을 첫 진입 때 한 번 순서대로 보여준다.                             | Motion, CSS keyframes                                    | 로그인 전 Hero 시퀀스 한 곳에만 사용한다. 앱 내부 UI 전환에는 연결하지 않는다.                                        |
 | @gsap/react                 | 2.1.2                                            | GSAP React 연동      | 사용 중        | React 컴포넌트 안에서 Hero timeline의 범위와 해제 시 정리를 관리한다.                                    | 직접 `gsap.context()` 사용                               | `useGSAP()`과 `gsap.matchMedia()`로 데스크톱에서만 재생하고 모바일과 `prefers-reduced-motion`은 정적으로 보여준다.    |
@@ -63,6 +64,7 @@
 ## 현재 런타임과 배포 경계
 
 - 브라우저 앱은 `VITE_SUPABASE_URL`과 `VITE_SUPABASE_PUBLISHABLE_KEY`로 Supabase 공개 클라이언트를 만들고 Google OAuth 세션을 구독한다.
+- 인사이트 저장·캡처와 가져오기 후보 분석의 제품 규칙은 `@amadda/domain` workspace가 소유한다. 브라우저 FSD와 Express 서버는 같은 패키지 Interface를 사용하고 런타임별 Adapter만 각 경계에 둔다.
 - Android 앱은 같은 React 런타임과 Supabase 클라이언트를 사용하고, `VITE_CAPACITOR_API_ORIGIN`의 HTTPS API에 캡처·메모 요청을 보낸다. 시스템 브라우저 PKCE 콜백만 Capacitor 딥링크 어댑터가 처리한다.
 - 로그인한 사용자 ID에 묶인 Supabase 인사이트 저장 어댑터가 원격 목록과 수정·삭제를 담당한다.
 - 웹·PWA·Chrome 확장의 저장은 Express 캡처 API를 거쳐 같은 Supabase 테이블과 RLS 경계를 사용한다. Chrome 확장 메모도 별도 인증 API로 같은 인사이트를 갱신한다.
@@ -80,8 +82,8 @@
 2. `Testing Library`, `jsdom`, `Supertest`, Supabase SQL 테스트: 인증, 사용자 격리, 저장 채널과 재발견 회귀를 사용자 행동과 계약 기준으로 검증한다.
 3. `@wanteddev/wds`: 현재 화면과 디자인 토큰을 유지한다. MVP 중 UI 시스템 전환 작업은 만들지 않는다.
 4. `MiniSearch`, `Fuse.js`: 실제 사용자 검증에서 현재 결정적 검색이 실패한 원인을 측정한 뒤 비교한다.
-5. `TanStack Query`, `Zod`: 현재 직접 만든 저장·검증 경계에서 반복 비용이 확인될 때 별도 이슈로 연결한다.
-6. `GSAP`, `Motion`, `Zustand`, `dnd-kit`: 현재 구현을 유지하되 MVP 핵심 흐름에 새 요구가 생기지 않으면 범위를 확장하지 않는다.
+5. `TanStack Query`: 로그인한 workspace의 목록·mutation 상태와 가져오기 뒤 재조회를 유지한다. `Zod`는 현재 검증 경계에 도입하지 않고 별도 이슈로 검토한다.
+6. `GSAP`, `Motion`, `dnd-kit`: 현재 구현을 유지하되 MVP 핵심 흐름에 새 요구가 생기지 않으면 범위를 확장하지 않는다.
 
 ## 아직 코드에 연결하지 않은 항목
 
@@ -89,7 +91,7 @@
 - `Tailwind CSS`, `@tailwindcss/vite`: 설치되어 있지만 아직 Vite 설정과 CSS 엔트리에 연결하지 않았다.
 - `shadcn/ui`: CLI는 설치되어 있지만 컴포넌트 생성과 `components.json` 초기화는 하지 않았다.
 - `MiniSearch`, `Fuse.js`: 아직 설치하지 않았다. 현재 검색의 실패 데이터와 비교 실험이 생긴 뒤에만 선택한다.
-- `React Router`, `TanStack Query`, `Zustand`, `Motion`, `dnd-kit`, `React Hook Form`, `Sonner`: 설치되어 있지만 현재 코드에 연결하지 않았다.
+- `class-variance-authority`, `tailwind-merge`, `React Router`, `Zod`, `React Hook Form`, `@hookform/resolvers`, `Motion`, `dnd-kit`, `Sonner`: 설치되어 있지만 현재 코드에 연결하지 않았다.
 
 ## 참고 자료
 

@@ -1,0 +1,16 @@
+{
+  "name": "@amadda/domain",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./insight": {
+      "types": "./src/insight/index.ts",
+      "default": "./src/insight/index.ts"
+    },
+    "./insight-import": {
+      "types": "./src/insight-import/index.ts",
+      "default": "./src/insight-import/index.ts"
+    }
+  }
+}

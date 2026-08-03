@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useId, useMemo, useRef, useState } from 'react';
 import type { FormEvent, ReactNode } from 'react';
 
 import type {
@@ -40,12 +40,17 @@ import { createBrowserCategoryRepository } from './model/create_browser_category
 import { createBrowserInsightRepository } from './model/create_browser_insight_repository';
 import { createRepositoryInsightCaptureService } from './model/create_repository_insight_capture_service';
 import { useCategoryWorkspace } from './model/use_category_workspace';
+import {
+  useWorkspaceUiStore,
+  WorkspaceUiProvider,
+} from './model/workspace_ui_store';
 import { SUGGESTED_SITUATIONS } from './model/workspace_seed';
 import {
   useInsightWorkspace,
   type SaveInsightFailureReason,
   type SaveInsightInput,
 } from './model/use_insight_workspace';
+import { WorkspaceQueryProvider } from './providers/workspace_query_provider';
 import './styles/authenticated_workspace.css';
 
 const EMPTY_CONTEXT_DRAFT: SaveContextDraft = {
@@ -155,7 +160,24 @@ export type AuthenticatedWorkspaceProps = {
   userId?: string;
 };
 
-export function AuthenticatedWorkspace({
+export function AuthenticatedWorkspace(props: AuthenticatedWorkspaceProps) {
+  const generatedScope = useId();
+  const queryScope = props.userId ?? `injected-${generatedScope}`;
+
+  return (
+    <WorkspaceQueryProvider key={queryScope}>
+      <WorkspaceUiProvider>
+        <AuthenticatedWorkspaceContent {...props} queryScope={queryScope} />
+      </WorkspaceUiProvider>
+    </WorkspaceQueryProvider>
+  );
+}
+
+type AuthenticatedWorkspaceContentProps = AuthenticatedWorkspaceProps & {
+  queryScope: string;
+};
+
+function AuthenticatedWorkspaceContent({
   accountControl,
   captureService,
   categoryRepository,
@@ -164,10 +186,11 @@ export function AuthenticatedWorkspace({
   notionImportApi,
   notionImportCallback,
   notionOpenWeb,
+  queryScope,
   repository,
   retrieveService,
   userId,
-}: AuthenticatedWorkspaceProps) {
+}: AuthenticatedWorkspaceContentProps) {
   const [initialNotionCallback, setInitialNotionCallback] = useState(() =>
     readNotionCallback(globalThis.location?.search ?? '')
   );
@@ -226,6 +249,7 @@ export function AuthenticatedWorkspace({
     updateInsightContext,
   } = useInsightWorkspace({
     captureService: workspaceCaptureService,
+    queryScope,
     repository: workspaceRepository,
   });
   const {
@@ -239,10 +263,22 @@ export function AuthenticatedWorkspace({
   const [activeTab, setActiveTab] = useState<WorkspaceTab>(() =>
     initialSaveDraft ? 'save' : 'home'
   );
-  const [activeCategory, setActiveCategory] = useState('all');
-  const [globalQuery, setGlobalQuery] = useState('');
-  const [retrieveQuery, setRetrieveQuery] = useState('');
-  const [selectedSituation, setSelectedSituation] = useState('');
+  const activeCategory = useWorkspaceUiStore((state) => state.activeCategory);
+  const setActiveCategory = useWorkspaceUiStore(
+    (state) => state.setActiveCategory
+  );
+  const globalQuery = useWorkspaceUiStore((state) => state.globalQuery);
+  const setGlobalQuery = useWorkspaceUiStore((state) => state.setGlobalQuery);
+  const retrieveQuery = useWorkspaceUiStore((state) => state.retrieveQuery);
+  const setRetrieveQuery = useWorkspaceUiStore(
+    (state) => state.setRetrieveQuery
+  );
+  const selectedSituation = useWorkspaceUiStore(
+    (state) => state.selectedSituation
+  );
+  const setSelectedSituation = useWorkspaceUiStore(
+    (state) => state.setSelectedSituation
+  );
   const [saveDraft, setSaveDraft] = useState<SaveInsightInput>(
     () => initialSaveDraft ?? { source: 'web', url: '' }
   );
@@ -271,16 +307,16 @@ export function AuthenticatedWorkspace({
   const handleCategoryDeleted = useCallback(
     (categoryId: string) => {
       detachCategory(categoryId);
-      setActiveCategory((currentCategory) =>
-        currentCategory === categoryId ? 'all' : currentCategory
-      );
+      if (activeCategory === categoryId) {
+        setActiveCategory('all');
+      }
       setContextDraft((currentDraft) =>
         currentDraft.categoryId === categoryId
           ? { ...currentDraft, categoryId: null }
           : currentDraft
       );
     },
-    [detachCategory]
+    [activeCategory, detachCategory, setActiveCategory]
   );
   const {
     categories,
@@ -293,6 +329,7 @@ export function AuthenticatedWorkspace({
     updateCategory,
   } = useCategoryWorkspace({
     onCategoryDeleted: handleCategoryDeleted,
+    queryScope,
     repository: workspaceCategoryRepository,
   });
   const categoryNameById = useMemo(

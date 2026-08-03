@@ -113,6 +113,78 @@ afterEach(() => {
 });
 
 describe('AuthenticatedWorkspace', () => {
+  it('화면을 이동해도 보관함 검색 조건과 꺼내보기 입력을 유지한다', async () => {
+    const user = userEvent.setup();
+
+    render(
+      <DesignSystemProvider>
+        <AuthenticatedWorkspace
+          repository={toAsyncRepository(createRepository())}
+        />
+      </DesignSystemProvider>
+    );
+
+    await user.click(screen.getByRole('button', { name: '보관함' }));
+    await user.type(
+      screen.getByRole('searchbox', { name: '보관함 검색' }),
+      '리액트'
+    );
+    await user.click(screen.getByRole('button', { name: '홈' }));
+    await user.type(
+      screen.getByRole('textbox', { name: '지금 꺼내 보고 싶은 상황' }),
+      '발표 준비'
+    );
+    await user.click(screen.getByRole('button', { name: '보관함' }));
+
+    expect(
+      (
+        screen.getByRole('searchbox', {
+          name: '보관함 검색',
+        }) as HTMLInputElement
+      ).value
+    ).toBe('리액트');
+
+    await user.click(screen.getByRole('button', { name: '홈' }));
+    expect(
+      (
+        screen.getByRole('textbox', {
+          name: '지금 꺼내 보고 싶은 상황',
+        }) as HTMLInputElement
+      ).value
+    ).toBe('발표 준비');
+  });
+
+  it('사용자 scope가 바뀌면 workspace UI 상태를 초기화한다', async () => {
+    const user = userEvent.setup();
+    const repository = toAsyncRepository(createRepository());
+    const view = render(
+      <DesignSystemProvider>
+        <AuthenticatedWorkspace repository={repository} userId="user-a" />
+      </DesignSystemProvider>
+    );
+
+    await user.click(screen.getByRole('button', { name: '보관함' }));
+    await user.type(
+      screen.getByRole('searchbox', { name: '보관함 검색' }),
+      '사용자 A 검색'
+    );
+
+    view.rerender(
+      <DesignSystemProvider>
+        <AuthenticatedWorkspace repository={repository} userId="user-b" />
+      </DesignSystemProvider>
+    );
+
+    await user.click(screen.getByRole('button', { name: '보관함' }));
+    expect(
+      (
+        screen.getByRole('searchbox', {
+          name: '보관함 검색',
+        }) as HTMLInputElement
+      ).value
+    ).toBe('');
+  });
+
   it('Notion callback query가 있으면 가져오기 창을 열고 연결 분석을 재개한다', async () => {
     const connectionId = '10000000-0000-4000-8000-000000000099';
     window.history.replaceState(
@@ -518,7 +590,7 @@ describe('AuthenticatedWorkspace', () => {
     });
 
     expect(
-      screen.getByRole('heading', {
+      await screen.findByRole('heading', {
         name: '아직 저장한 인사이트가 없어요',
       })
     ).not.toBeNull();
@@ -661,7 +733,12 @@ describe('AuthenticatedWorkspace', () => {
       </DesignSystemProvider>
     );
 
-    await user.click(screen.getByRole('button', { name: '저장하기' }));
+    const saveButton = screen.getByRole('button', { name: '저장하기' });
+    await waitFor(() =>
+      expect((saveButton as HTMLButtonElement).disabled).toBe(false)
+    );
+
+    await user.click(saveButton);
     expect(screen.getByRole('status').textContent).toContain(
       '인사이트를 저장했어요'
     );
@@ -1152,7 +1229,7 @@ describe('AuthenticatedWorkspace', () => {
     ).toBeNull();
   });
 
-  it('returns to the full library when recovering from no search results', async () => {
+  it('검색 결과에서 검색어만 지우고 현재 카테고리를 유지한다', async () => {
     const user = userEvent.setup();
     const repository: InsightRepository = {
       load: () => ({
@@ -1192,17 +1269,24 @@ describe('AuthenticatedWorkspace', () => {
         name: '이 검색어로 찾은 인사이트가 없어요',
       })
     ).not.toBeNull();
-    expect(screen.getByRole('status').textContent).toBe('검색 결과 없음');
+    expect(screen.getByRole('status').textContent).toBe('검색 결과 0개');
 
     await user.click(screen.getByRole('button', { name: '검색어 지우기' }));
 
     expect((search as HTMLInputElement).value).toBe('');
-    expect(
-      screen.getByRole('button', { name: '전체' }).getAttribute('aria-pressed')
-    ).toBe('true');
-    expect(screen.getAllByRole('article')).toHaveLength(2);
-    expect(screen.queryByRole('status')).toBeNull();
     expect(document.activeElement).toBe(search);
+    await waitFor(() => {
+      expect(
+        screen
+          .getByRole('button', { name: '개발' })
+          .getAttribute('aria-pressed')
+      ).toBe('true');
+      expect(screen.getAllByRole('article')).toHaveLength(1);
+      expect(screen.getByText('개발 자료')).not.toBeNull();
+      expect(screen.queryByText('디자인 자료')).toBeNull();
+      expect(screen.queryByText('검색 결과 0개')).toBeNull();
+      expect(screen.getByRole('status').textContent).toBe('개발 1개');
+    });
   });
 
   it('moves focus to the next card when an edited category leaves the active filter', async () => {

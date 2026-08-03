@@ -1,9 +1,11 @@
 import { createHash, randomBytes, randomUUID } from 'node:crypto';
 
+import {
+  analyzeImportCandidates,
+  type AnalyzedImportItem,
+} from '@amadda/domain/insight-import';
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-import { analyzeImportCandidates } from '../../src/features/insight-import/model/import_analysis.js';
-import type { AnalyzedImportItem } from '../../src/features/insight-import/model/import_types.js';
 import {
   appendNotionPropertyRequest,
   createInitialNotionAnalysisCursor,

@@ -1,11 +1,11 @@
 import { createHash, timingSafeEqual } from 'node:crypto';
 
+import type { InsightCaptureResult } from '@amadda/domain/insight';
 import express, {
   type ErrorRequestHandler,
   type RequestHandler,
 } from 'express';
 
-import type { InsightCaptureResult } from '../src/entities/insight/model/insight_capture.js';
 import type { ServerInsightCaptureService } from './insight_capture_service.js';
 import type {
   InsightMemoResult,

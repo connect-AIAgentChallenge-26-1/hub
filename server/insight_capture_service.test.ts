@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import type { CapturedInsight } from '../src/entities/insight/model/insight_capture';
+import type { Insight } from '@amadda/domain/insight';
 import {
   createInsightCaptureService,
   type InsightCaptureAuthenticator,
@@ -163,9 +163,7 @@ describe('createInsightCaptureService', () => {
   });
 });
 
-function createInsight(
-  overrides: Partial<CapturedInsight> = {}
-): CapturedInsight {
+function createInsight(overrides: Partial<Insight> = {}): Insight {
   return {
     categoryId: null,
     createdAt: '2026-07-16T00:00:00.000Z',

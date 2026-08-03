@@ -1,6 +1,6 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js';
 
-import type { CapturedInsight } from '../src/entities/insight/model/insight_capture.js';
+import { parseInsight, type Insight } from '@amadda/domain/insight';
 import {
   createInsightCaptureService,
   type InsightCaptureAuthenticator,
@@ -158,10 +158,7 @@ function toCreateFailure(errorCode: unknown): InsightCaptureStoreResult {
   };
 }
 
-function parseCapturedInsight(
-  value: unknown,
-  userId: string
-): CapturedInsight | null {
+function parseCapturedInsight(value: unknown, userId: string): Insight | null {
   if (
     !isRecord(value) ||
     value.user_id !== userId ||
@@ -170,83 +167,18 @@ function parseCapturedInsight(
     return null;
   }
 
-  if (
-    !hasTextFields(value, [
-      'id',
-      'original_url',
-      'normalized_url',
-      'domain',
-      'title',
-      'created_at',
-      'updated_at',
-    ]) ||
-    !isTitleOrigin(value.title_origin) ||
-    !isNullableString(value.memo) ||
-    !isNullableUuid(value.category_id)
-  ) {
-    return null;
-  }
-
-  const row = value as {
-    category_id: string | null;
-    created_at: string;
-    domain: string;
-    id: string;
-    memo: string | null;
-    normalized_url: string;
-    original_url: string;
-    title: string;
-    title_origin: CapturedInsight['titleOrigin'];
-    updated_at: string;
-  };
-
-  return {
-    categoryId: row.category_id,
-    createdAt: row.created_at,
-    domain: row.domain,
-    id: row.id,
-    memo: row.memo,
-    normalizedUrl: row.normalized_url,
-    originalUrl: row.original_url,
-    title: row.title,
-    titleOrigin: row.title_origin,
-    updatedAt: row.updated_at,
-  };
-}
-
-function hasTextFields(
-  value: Record<string, unknown>,
-  fields: readonly string[]
-) {
-  return fields.every(
-    (field) =>
-      typeof value[field] === 'string' && (value[field] as string).trim() !== ''
-  );
-}
-
-function isTitleOrigin(
-  value: unknown
-): value is CapturedInsight['titleOrigin'] {
-  return (
-    value === 'capture' ||
-    value === 'fallback' ||
-    value === 'metadata' ||
-    value === 'user'
-  );
-}
-
-function isNullableString(value: unknown): value is string | null {
-  return value === null || typeof value === 'string';
-}
-
-function isNullableUuid(value: unknown): value is string | null {
-  return (
-    value === null ||
-    (typeof value === 'string' &&
-      /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/iu.test(
-        value
-      ))
-  );
+  return parseInsight({
+    categoryId: value.category_id,
+    createdAt: value.created_at,
+    domain: value.domain,
+    id: value.id,
+    memo: value.memo,
+    normalizedUrl: value.normalized_url,
+    originalUrl: value.original_url,
+    title: value.title,
+    titleOrigin: value.title_origin,
+    updatedAt: value.updated_at,
+  });
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

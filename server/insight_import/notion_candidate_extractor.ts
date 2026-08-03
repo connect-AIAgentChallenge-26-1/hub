@@ -1,4 +1,4 @@
-import type { ImportCandidate } from '../../src/features/insight-import/model/import_types.js';
+import type { ImportCandidate } from '@amadda/domain/insight-import';
 
 const RICH_TEXT_BLOCK_TYPES = new Set([
   'paragraph',

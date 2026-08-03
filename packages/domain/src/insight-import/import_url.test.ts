@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { analyzeImportUrl } from './import_url';
+import { analyzeImportUrl } from './index.js';
 
 describe('가져오기 URL 분석', () => {
   it.each([
