@@ -1,0 +1,32 @@
+{
+  "title": "지금리뷰",
+  "description": "지도에서 식당과 카페를 찾고, 영수증 인증을 통과한 방문 리뷰를 확인하고 작성하는 장소 리뷰 서비스입니다.",
+  "githubUser": "Mureung1",
+  "repositoryUrl": "https://github.com/Mureung1/hub",
+  "demoUrl": "https://jigeum-review.onrender.com",
+  "demoVideoUrl": "https://drive.google.com/file/d/18L4RufvlPZF7G3dYT6KUAQGOGvYv4r7N/view?usp=drive_link",
+  "thumbnail": "thumbnail.png",
+  "screenshots": [
+    "screenshots/home.png",
+    "screenshots/mobile.png"
+  ],
+  "problem": "기존 장소 리뷰는 실제 방문 여부를 구분하기 어렵고, 많은 리뷰를 빠르게 읽으며 업체의 전반적인 평가를 파악하기 어렵습니다.",
+  "solution": "영수증 OCR로 상호명과 결제일을 검증한 리뷰만 등록하고, 리뷰 텍스트를 다섯 단계의 방문 경험으로 분석해 업체별 분포로 보여줍니다.",
+  "features": [
+    "현재 지도와 주변을 기준으로 식당·카페 검색",
+    "CLOVA OCR 기반 영수증 상호명·결제일 검증",
+    "이미지 해시와 승인번호를 이용한 중복 영수증 방지",
+    "영수증 상호명으로 업체를 찾아 리뷰 작성 화면까지 자동 이동",
+    "OpenAI 기반 리뷰 텍스트 5단계 분류 및 그래프 표시",
+    "Supabase 로그인·프로필·관심 장소·리뷰 데이터 저장"
+  ],
+  "techStack": [
+    "React",
+    "Express",
+    "Supabase",
+    "Kakao Maps API",
+    "CLOVA OCR",
+    "OpenAI API",
+    "Render"
+  ]
+}

@@ -1,0 +1,365 @@
+{"kind":"deck","id":"pr/lvvvlj","name":"Deck"}
+{"kind":"layout","layoutId":"15b1474f-1553-4543-ba15-9e1c110454c5","name":"Master","type":"master"}
+{"kind":"layout","layoutId":"7ce98896-b8dd-4204-b6cc-35876a1d0a52","name":"Title Slide","type":"title"}
+{"kind":"slide","id":"sl/flye8x","slide":1,"title":"AI AGENT CHALLENGE · WEEK 3","textShapes":14}
+{"kind":"textbox","id":"sh/eh83md4f","slide":1,"text":"AI AGENT CHALLENGE · WEEK 3","textPreview":"AI AGENT CHALLENGE · WEEK 3","textChars":27,"textLines":1,"bbox":[64,26,420,24]}
+{"kind":"textbox","id":"sh/1kzmhsnq","slide":1,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[1160,26,56,24]}
+{"kind":"shape","id":"sh/0jqlonm5","slide":1,"bbox":[64,112,220,34]}
+{"kind":"textbox","id":"sh/rehkbi5o","slide":1,"text":"3주차 발표 · LIVE DEMO","textPreview":"3주차 발표 · LIVE DEMO","textChars":18,"textLines":1,"bbox":[64,112,220,34]}
+{"kind":"textbox","id":"sh/qd83id43","slide":1,"text":"지금리뷰","textPreview":"지금리뷰","textChars":4,"textLines":1,"bbox":[64,178,620,84]}
+{"kind":"textbox","id":"sh/dgzmdsnu","slide":1,"text":"지도 검색에서 AI 리뷰 분석까지","textPreview":"지도 검색에서 AI 리뷰 분석까지","textChars":18,"textLines":1,"bbox":[64,268,760,58]}
+{"kind":"textbox","id":"sh/sfqlknm9","slide":1,"text":"처음의 문제 정의가 실제로 동작하는 모바일 MVP가 되기까지","textPreview":"처음의 문제 정의가 실제로 동작하는 모바일 MVP가 되기까지","textChars":33,"textLines":1,"bbox":[64,346,700,42]}
+{"kind":"shape","id":"sh/3qxk7y5s","slide":1,"bbox":[850,126,322,450]}
+{"kind":"shape","id":"sh/ipo3et47","slide":1,"bbox":[886,169,250,58]}
+{"kind":"textbox","id":"sh/gbmlkjql","slide":1,"text":"지금리뷰","textPreview":"지금리뷰","textChars":4,"textLines":1,"bbox":[908,178,180,38]}
+{"kind":"shape","id":"sh/hcv2t476","slide":1,"bbox":[886,250,250,72]}
+{"kind":"textbox","id":"sh/up43i98f","slide":1,"text":"장소 검색","textPreview":"장소 검색","textChars":5,"textLines":1,"bbox":[912,258,190,28]}
+{"kind":"textbox","id":"sh/vqdkrep0","slide":1,"text":"현재 지도 주변부터","textPreview":"현재 지도 주변부터","textChars":10,"textLines":1,"bbox":[912,286,190,23]}
+{"kind":"shape","id":"sh/8n2lgzq9","slide":1,"bbox":[886,342,250,72]}
+{"kind":"textbox","id":"sh/tob2p47u","slide":1,"text":"리뷰 작성","textPreview":"리뷰 작성","textChars":5,"textLines":1,"bbox":[912,350,190,28]}
+{"kind":"textbox","id":"sh/6lk3ep8j","slide":1,"text":"로그인 후 작성","textPreview":"로그인 후 작성","textChars":8,"textLines":1,"bbox":[912,378,190,23]}
+{"kind":"shape","id":"sh/7mtknupo","slide":1,"bbox":[886,434,250,100]}
+{"kind":"textbox","id":"sh/sj6ls3qt","slide":1,"text":"AI 분석","textPreview":"AI 분석","textChars":5,"textLines":1,"bbox":[912,442,190,28]}
+{"kind":"textbox","id":"sh/dkfm1o7y","slide":1,"text":"5단계 감정 분류\n막대그래프 반영","textPreview":"5단계 감정 분류 | 막대그래프 반영","textChars":18,"textLines":2,"bbox":[912,474,190,48]}
+{"kind":"textbox","id":"sh/1orup4v6","slide":1,"text":"2026. 07. 24","textPreview":"2026. 07. 24","textChars":12,"textLines":1,"bbox":[64,642,250,24]}
+{"kind":"notes","id":"nt/flye8x","slide":1,"text":""}
+{"kind":"slide","id":"sl/4r8zx8","slide":2,"title":"PROBLEM","textShapes":14}
+{"kind":"textbox","id":"sh/ax8bytc7","slide":2,"text":"PROBLEM","textPreview":"PROBLEM","textChars":7,"textLines":1,"bbox":[64,26,420,24]}
+{"kind":"textbox","id":"sh/x0jatovy","slide":2,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[1160,26,56,24]}
+{"kind":"textbox","id":"sh/wzqtkjud","slide":2,"text":"리뷰는 많지만, 믿고 선택하기는 어렵다","textPreview":"리뷰는 많지만, 믿고 선택하기는 어렵다","textChars":21,"textLines":1,"bbox":[64,72,1120,70]}
+{"kind":"textbox","id":"sh/nuhsnedw","slide":2,"text":"지금리뷰는 ‘리뷰의 양’보다 방문 근거와 해석 가능성에 집중했다.","textPreview":"지금리뷰는 ‘리뷰의 양’보다 방문 근거와 해석 가능성에 집중했다.","textChars":36,"textLines":1,"bbox":[64,145,1120,40]}
+{"kind":"shape","id":"sh/mt8ru9cb","slide":2,"bbox":[64,218,530,356]}
+{"kind":"shape","id":"sh/9wzapovm","slide":2,"bbox":[64,218,8,356]}
+{"kind":"shape","id":"sh/ovqtwju1","slide":2,"bbox":[94,246,120,34]}
+{"kind":"textbox","id":"sh/z6xsjedk","slide":2,"text":"기존 경험","textPreview":"기존 경험","textChars":5,"textLines":1,"bbox":[94,246,120,34]}
+{"kind":"textbox","id":"sh/e5orq9cz","slide":2,"text":"리뷰 신뢰의 기준이 모호하다","textPreview":"리뷰 신뢰의 기준이 모호하다","textChars":15,"textLines":1,"bbox":[94,302,440,48]}
+{"kind":"shape","id":"sh/kjupkv29","slide":2,"bbox":[94,386,8,8]}
+{"kind":"textbox","id":"sh/lk36d03u","slide":2,"text":"실제 방문 여부를 바로 판단하기 어렵다","textPreview":"실제 방문 여부를 바로 판단하기 어렵다","textChars":21,"textLines":1,"bbox":[114,376,420,40]}
+{"kind":"shape","id":"sh/yhcnilk3","slide":2,"bbox":[94,436,8,8]}
+{"kind":"textbox","id":"sh/zilobqlo","slide":2,"text":"텍스트가 많아 전체 분위기를 빠르게 파악하기 어렵다","textPreview":"텍스트가 많아 전체 분위기를 빠르게 파악하기 어렵다","textChars":28,"textLines":1,"bbox":[114,426,420,40]}
+{"kind":"shape","id":"sh/cfa5gb2x","slide":2,"bbox":[94,486,8,8]}
+{"kind":"textbox","id":"sh/xg369g3i","slide":2,"text":"처음 가는 동네일수록 선택 비용이 커진다","textPreview":"처음 가는 동네일수록 선택 비용이 커진다","textChars":22,"textLines":1,"bbox":[114,476,420,40]}
+{"kind":"shape","id":"sh/adsnelk7","slide":2,"bbox":[626,218,590,356]}
+{"kind":"shape","id":"sh/be1o7qls","slide":2,"bbox":[626,218,8,356]}
+{"kind":"shape","id":"sh/wbepsf2h","slide":2,"bbox":[656,246,160,34]}
+{"kind":"textbox","id":"sh/hcn6lk32","slide":2,"text":"지금리뷰의 기준","textPreview":"지금리뷰의 기준","textChars":8,"textLines":1,"bbox":[656,246,160,34]}
+{"kind":"textbox","id":"sh/5gjypgru","slide":2,"text":"방문 근거 + 한눈에 보는 해석","textPreview":"방문 근거 + 한눈에 보는 해석","textChars":17,"textLines":1,"bbox":[656,302,500,48]}
+{"kind":"shape","id":"sh/4vqxgbq9","slide":2,"bbox":[656,386,8,8]}
+{"kind":"textbox","id":"sh/juhwn69o","slide":2,"text":"영수증 인증 리뷰만 집계하는 구조","textPreview":"영수증 인증 리뷰만 집계하는 구조","textChars":18,"textLines":1,"bbox":[676,376,480,40]}
+{"kind":"shape","id":"sh/it8fe183","slide":2,"bbox":[656,436,8,8]}
+{"kind":"textbox","id":"sh/hszelgry","slide":2,"text":"리뷰 한 건을 5단계 감정으로 분류","textPreview":"리뷰 한 건을 5단계 감정으로 분류","textChars":19,"textLines":1,"bbox":[676,426,480,40]}
+{"kind":"shape","id":"sh/wrqxcbqd","slide":2,"bbox":[656,486,8,8]}
+{"kind":"textbox","id":"sh/vqhwj69s","slide":2,"text":"지도 탐색부터 업체 상세·리뷰까지 한 흐름","textPreview":"지도 탐색부터 업체 상세·리뷰까지 한 흐름","textChars":23,"textLines":1,"bbox":[676,476,480,40]}
+{"kind":"notes","id":"nt/4r8zx8","slide":2,"text":""}
+{"kind":"slide","id":"sl/eyyofn","slide":3,"title":"PRODUCT","textShapes":18}
+{"kind":"textbox","id":"sh/wbil47il","slide":3,"text":"PRODUCT","textPreview":"PRODUCT","textChars":7,"textLines":1,"bbox":[64,26,420,24]}
+{"kind":"textbox","id":"sh/vap4v2h0","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[1160,26,56,24]}
+{"kind":"textbox","id":"sh/u9g32x0f","slide":3,"text":"검색 → 업체 → 리뷰 → AI 요약을 한 흐름으로","textPreview":"검색 → 업체 → 리뷰 → AI 요약을 한 흐름으로","textChars":28,"textLines":1,"bbox":[64,72,1120,70]}
+{"kind":"textbox","id":"sh/5grm1cz2","slide":3,"text":"사용자가 장소를 찾고 판단하는 순간에 필요한 정보만 이어 붙였다.","textPreview":"사용자가 장소를 찾고 판단하는 순간에 필요한 정보만 이어 붙였다.","textChars":36,"textLines":1,"bbox":[64,145,1120,40]}
+{"kind":"shape","id":"sh/4fi58rih","slide":3,"bbox":[64,244,252,274]}
+{"kind":"shape","id":"sh/je94zmhw","slide":3,"bbox":[64,244,8,274]}
+{"kind":"textbox","id":"sh/id036h0b","slide":3,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[88,266,64,34]}
+{"kind":"textbox","id":"sh/t4bm5wzy","slide":3,"text":"현재 지도에서 검색","textPreview":"현재 지도에서 검색","textChars":10,"textLines":1,"bbox":[88,326,204,60]}
+{"kind":"textbox","id":"sh/sj25crit","slide":3,"text":"현 위치·지도 영역을 우선","textPreview":"현 위치·지도 영역을 우선","textChars":14,"textLines":1,"bbox":[88,410,204,62]}
+{"kind":"shape","id":"sh/y5gvydsn","slide":3,"bbox":[316,370,28,3]}
+{"kind":"shape","id":"sh/z6pw7i98","slide":3,"bbox":[341,363,15,17]}
+{"kind":"shape","id":"sh/07yd0nat","slide":3,"bbox":[356,244,252,274]}
+{"kind":"shape","id":"sh/l87e9sry","slide":3,"bbox":[356,244,8,274]}
+{"kind":"textbox","id":"sh/m90v2xsj","slide":3,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[380,266,64,34]}
+{"kind":"textbox","id":"sh/na9wb294","slide":3,"text":"업체 상세 확인","textPreview":"업체 상세 확인","textChars":8,"textLines":1,"bbox":[380,326,204,60]}
+{"kind":"textbox","id":"sh/8vid47ap","slide":3,"text":"정보와 리뷰를 한 화면에","textPreview":"정보와 리뷰를 한 화면에","textChars":13,"textLines":1,"bbox":[380,410,204,62]}
+{"kind":"shape","id":"sh/9wredcra","slide":3,"bbox":[608,370,28,3]}
+{"kind":"shape","id":"sh/2dwvqtsf","slide":3,"bbox":[633,363,15,17]}
+{"kind":"shape","id":"sh/3e5wzy90","slide":3,"bbox":[648,244,252,274]}
+{"kind":"shape","id":"sh/ri1s7ups","slide":3,"bbox":[648,244,8,274]}
+{"kind":"textbox","id":"sh/6hsbyp87","slide":3,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[672,266,64,34]}
+{"kind":"textbox","id":"sh/tk3a947y","slide":3,"text":"로그인 후 리뷰 작성","textPreview":"로그인 후 리뷰 작성","textChars":11,"textLines":1,"bbox":[672,326,204,60]}
+{"kind":"textbox","id":"sh/sjut0zqd","slide":3,"text":"비로그인은 검색 가능","textPreview":"비로그인은 검색 가능","textChars":11,"textLines":1,"bbox":[672,410,204,62]}
+{"kind":"shape","id":"sh/je1s3upg","slide":3,"bbox":[900,370,28,3]}
+{"kind":"shape","id":"sh/idsbup8b","slide":3,"bbox":[925,363,15,17]}
+{"kind":"shape","id":"sh/5gja547m","slide":3,"bbox":[940,244,252,274]}
+{"kind":"shape","id":"sh/4fatwzq1","slide":3,"bbox":[940,244,8,274]}
+{"kind":"textbox","id":"sh/3a5cfep0","slide":3,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[964,266,64,34]}
+{"kind":"textbox","id":"sh/29cb6t8f","slide":3,"text":"5단계 분석 반영","textPreview":"5단계 분석 반영","textChars":9,"textLines":1,"bbox":[964,326,204,60]}
+{"kind":"textbox","id":"sh/0jmhkr2l","slide":3,"text":"별점 없이 텍스트를 분류","textPreview":"별점 없이 텍스트를 분류","textChars":13,"textLines":1,"bbox":[964,410,204,62]}
+{"kind":"shape","id":"sh/14vydwj6","slide":3,"bbox":[64,572,112,34]}
+{"kind":"textbox","id":"sh/eh4zihkf","slide":3,"text":"핵심 가설","textPreview":"핵심 가설","textChars":5,"textLines":1,"bbox":[64,572,112,34]}
+{"kind":"textbox","id":"sh/zidgbm10","slide":3,"text":"신뢰할 수 있는 입력과 쉬운 해석을 함께 제공하면, 장소 선택이 빨라진다.","textPreview":"신뢰할 수 있는 입력과 쉬운 해석을 함께 제공하면, 장소 선택이 빨라진다.","textChars":41,"textLines":1,"bbox":[194,568,980,42]}
+{"kind":"notes","id":"nt/eyyofn","slide":3,"text":""}
+{"kind":"slide","id":"sl/a1sca1","slide":4,"title":"WEEK 1","textShapes":18}
+{"kind":"textbox","id":"sh/4judgfy9","slide":4,"text":"WEEK 1","textPreview":"WEEK 1","textChars":6,"textLines":1,"bbox":[64,26,420,24]}
+{"kind":"textbox","id":"sh/3ilc7axo","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[1160,26,56,24]}
+{"kind":"textbox","id":"sh/2xcve5g3","slide":4,"text":"1주차에는 구현보다 기준을 먼저 세웠다","textPreview":"1주차에는 구현보다 기준을 먼저 세웠다","textChars":21,"textLines":1,"bbox":[64,72,1120,70]}
+{"kind":"textbox","id":"sh/hw3u50zi","slide":4,"text":"기능을 늘리기 전에 서비스가 지켜야 할 신뢰 규칙과 화면 원칙을 문서화했다.","textPreview":"기능을 늘리기 전에 서비스가 지켜야 할 신뢰 규칙과 화면 원칙을 문서화했다.","textChars":42,"textLines":1,"bbox":[64,145,1120,40]}
+{"kind":"shape","id":"sh/gvudcvyx","slide":4,"bbox":[64,220,1152,68]}
+{"kind":"shape","id":"sh/fulc3qhs","slide":4,"bbox":[64,220,8,68]}
+{"kind":"shape","id":"sh/utsvalg7","slide":4,"bbox":[84,237,54,34]}
+{"kind":"textbox","id":"sh/1sneh4f2","slide":4,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[84,237,54,34]}
+{"kind":"textbox","id":"sh/0redozyh","slide":4,"text":"문제 정의","textPreview":"문제 정의","textChars":5,"textLines":1,"bbox":[160,233,210,42]}
+{"kind":"textbox","id":"sh/u9k32h4z","slide":4,"text":"리뷰 신뢰 문제와 핵심 사용자 가치 정리","textPreview":"리뷰 신뢰 문제와 핵심 사용자 가치 정리","textChars":22,"textLines":1,"bbox":[390,233,786,42]}
+{"kind":"shape","id":"sh/fat4bmlk","slide":4,"bbox":[64,308,1152,68]}
+{"kind":"shape","id":"sh/gv2l4rm5","slide":4,"bbox":[64,308,8,68]}
+{"kind":"shape","id":"sh/hwbmdw3q","slide":4,"bbox":[84,325,54,34]}
+{"kind":"textbox","id":"sh/6503yx43","slide":4,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[84,325,54,34]}
+{"kind":"textbox","id":"sh/76947258","slide":4,"text":"도메인 규칙","textPreview":"도메인 규칙","textChars":6,"textLines":1,"bbox":[160,321,210,42]}
+{"kind":"textbox","id":"sh/s7il07mt","slide":4,"text":"영수증·결제일 30일·중복 방지·90일 가중치 설계","textPreview":"영수증·결제일 30일·중복 방지·90일 가중치 설계","textChars":28,"textLines":1,"bbox":[390,321,786,42]}
+{"kind":"shape","id":"sh/t8rm9c3e","slide":4,"bbox":[64,396,1152,68]}
+{"kind":"shape","id":"sh/q143a147","slide":4,"bbox":[64,396,8,68]}
+{"kind":"shape","id":"sh/r2d4j6ls","slide":4,"bbox":[84,413,54,34]}
+{"kind":"textbox","id":"sh/n650byl4","slide":4,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[84,413,54,34]}
+{"kind":"textbox","id":"sh/mlwj2tkj","slide":4,"text":"개발 구조","textPreview":"개발 구조","textChars":5,"textLines":1,"bbox":[160,409,210,42]}
+{"kind":"textbox","id":"sh/98nid83a","slide":4,"text":"React + Express + Supabase 구조 결정","textPreview":"React + Express + Supabase 구조 결정","textChars":32,"textLines":1,"bbox":[390,409,786,42]}
+{"kind":"shape","id":"sh/87e1432p","slide":4,"bbox":[64,484,1152,68]}
+{"kind":"shape","id":"sh/vap0fy10","slide":4,"bbox":[64,484,8,68]}
+{"kind":"shape","id":"sh/a9gj6tkv","slide":4,"bbox":[84,501,54,34]}
+{"kind":"textbox","id":"sh/xc7ih8j6","slide":4,"text":"04","textPreview":"04","textChars":2,"textLines":1,"bbox":[84,501,54,34]}
+{"kind":"textbox","id":"sh/wby1832l","slide":4,"text":"디자인 시스템","textPreview":"디자인 시스템","textChars":7,"textLines":1,"bbox":[160,497,210,42]}
+{"kind":"textbox","id":"sh/jep0ji1c","slide":4,"text":"모바일 우선·지도 중심·초록=신뢰·파랑=행동","textPreview":"모바일 우선·지도 중심·초록=신뢰·파랑=행동","textChars":24,"textLines":1,"bbox":[390,497,786,42]}
+{"kind":"textbox","id":"sh/idgjadkr","slide":4,"text":"결과","textPreview":"결과","textChars":2,"textLines":1,"bbox":[64,610,72,28]}
+{"kind":"textbox","id":"sh/g3ih0ni5","slide":4,"text":"이후 구현에서 무엇을 만들고, 무엇을 아직 완료라고 말하면 안 되는지 기준이 생겼다.","textPreview":"이후 구현에서 무엇을 만들고, 무엇을 아직 완료라고 말하면 안 되는지 기준이 생겼다.","textChars":47,"textLines":1,"bbox":[136,602,1050,42]}
+{"kind":"notes","id":"nt/a1sca1","slide":4,"text":""}
+{"kind":"slide","id":"sl/miytz0","slide":5,"title":"WEEK 2","textShapes":15}
+{"kind":"textbox","id":"sh/x4nihcr6","slide":5,"text":"WEEK 2","textPreview":"WEEK 2","textChars":6,"textLines":1,"bbox":[64,26,420,24]}
+{"kind":"textbox","id":"sh/ahwzmx8f","slide":5,"text":"05","textPreview":"05","textChars":2,"textLines":1,"bbox":[1160,26,56,24]}
+{"kind":"textbox","id":"sh/b250f290","slide":5,"text":"2주차에는 실제 지도를 서비스 흐름으로 연결했다","textPreview":"2주차에는 실제 지도를 서비스 흐름으로 연결했다","textChars":26,"textLines":1,"bbox":[64,72,1120,70]}
+{"kind":"textbox","id":"sh/k7y1s7qx","slide":5,"text":"예시 데이터 화면을 걷어내고 실제 장소 검색과 상태 유지에 집중했다.","textPreview":"예시 데이터 화면을 걷어내고 실제 장소 검색과 상태 유지에 집중했다.","textChars":38,"textLines":1,"bbox":[64,145,1120,40]}
+{"kind":"shape","id":"sh/l87ilcr2","slide":5,"bbox":[64,230,352,310]}
+{"kind":"shape","id":"sh/y5gjqh8r","slide":5,"bbox":[64,230,8,310]}
+{"kind":"shape","id":"sh/z6p0jm9c","slide":5,"bbox":[90,256,52,34]}
+{"kind":"textbox","id":"sh/8by1wrqt","slide":5,"text":"01","textPreview":"01","textChars":2,"textLines":1,"bbox":[90,256,52,34]}
+{"kind":"textbox","id":"sh/9cripwre","slide":5,"text":"지도·검색","textPreview":"지도·검색","textChars":5,"textLines":1,"bbox":[90,312,300,42]}
+{"kind":"textbox","id":"sh/l87a14z2","slide":5,"text":"Kakao Maps JS\nLocal REST API\n현재 지도 주변 우선 검색","textPreview":"Kakao Maps JS | Local REST API | 현재 지도 주변 우선 검색","textChars":43,"textLines":3,"bbox":[90,378,300,116]}
+{"kind":"shape","id":"sh/k7ytszih","slide":5,"bbox":[448,230,352,310]}
+{"kind":"shape","id":"sh/jmpszuhw","slide":5,"bbox":[448,230,8,310]}
+{"kind":"shape","id":"sh/ylgbq90b","slide":5,"bbox":[474,256,52,34]}
+{"kind":"textbox","id":"sh/tcru5ozy","slide":5,"text":"02","textPreview":"02","textChars":2,"textLines":1,"bbox":[474,256,52,34]}
+{"kind":"textbox","id":"sh/8bytwjyt","slide":5,"text":"탐색 경험","textPreview":"탐색 경험","textChars":5,"textLines":1,"bbox":[474,312,300,42]}
+{"kind":"textbox","id":"sh/7aps3eh8","slide":5,"text":"자동완성\n검색 후 지도 위치 유지\n상세 → 지도 복귀 상태 유지","textPreview":"자동완성 | 검색 후 지도 위치 유지 | 상세 → 지도 복귀 상태 유지","textChars":35,"textLines":3,"bbox":[474,378,300,116]}
+{"kind":"shape","id":"sh/69gbu9gn","slide":5,"bbox":[832,230,352,310]}
+{"kind":"shape","id":"sh/9gnatkzu","slide":5,"bbox":[832,230,8,310]}
+{"kind":"shape","id":"sh/ofetkfi9","slide":5,"bbox":[858,256,52,34]}
+{"kind":"textbox","id":"sh/gzit0fq5","slide":5,"text":"03","textPreview":"03","textChars":2,"textLines":1,"bbox":[858,256,52,34]}
+{"kind":"textbox","id":"sh/10ra9k7q","slide":5,"text":"사용자 흐름","textPreview":"사용자 흐름","textChars":6,"textLines":1,"bbox":[858,312,300,42]}
+{"kind":"textbox","id":"sh/exgbyp8z","slide":5,"text":"Supabase 로그인\n비로그인 검색 허용\n리뷰 작성 시 로그인 요구","textPreview":"Supabase 로그인 | 비로그인 검색 허용 | 리뷰 작성 시 로그인 요구","textChars":38,"textLines":3,"bbox":[858,378,300,116]}
+{"kind":"shape","id":"sh/fy9s7upk","slide":5,"bbox":[64,585,106,34]}
+{"kind":"textbox","id":"sh/onit4zqh","slide":5,"text":"배운 점","textPreview":"배운 점","textChars":4,"textLines":1,"bbox":[64,585,106,34]}
+{"kind":"textbox","id":"sh/porud47m","slide":5,"text":"지도 앱은 페이지 이동보다 ‘사용자가 보고 있던 맥락을 잃지 않는 것’이 더 중요했다.","textPreview":"지도 앱은 페이지 이동보다 ‘사용자가 보고 있던 맥락을 잃지 않는 것’이 더 중요했다.","textChars":48,"textLines":1,"bbox":[188,578,1000,44]}
+{"kind":"notes","id":"nt/miytz0","slide":5,"text":""}
+{"kind":"slide","id":"sl/a2vrgh","slide":6,"title":"WEEK 3","textShapes":20}
+{"kind":"textbox","id":"sh/i9gvi9o3","slide":6,"text":"WEEK 3","textPreview":"WEEK 3","textChars":6,"textLines":1,"bbox":[64,26,420,24]}
+{"kind":"textbox","id":"sh/5c7utone","slide":6,"text":"06","textPreview":"06","textChars":2,"textLines":1,"bbox":[1160,26,56,24]}
+{"kind":"textbox","id":"sh/4bydkjm9","slide":6,"text":"3주차에는 데이터와 AI를 붙여 MVP를 증명했다","textPreview":"3주차에는 데이터와 AI를 붙여 MVP를 증명했다","textChars":27,"textLines":1,"bbox":[64,72,1120,70]}
+{"kind":"textbox","id":"sh/repcve5k","slide":6,"text":"리뷰 텍스트가 실제 분석 결과와 그래프로 이어지는 최소 흐름을 완성했다.","textPreview":"리뷰 텍스트가 실제 분석 결과와 그래프로 이어지는 최소 흐름을 완성했다.","textChars":40,"textLines":1,"bbox":[64,145,1120,40]}
+{"kind":"shape","id":"sh/qdgvmt4z","slide":6,"bbox":[64,218,256,120]}
+{"kind":"shape","id":"sh/dgruxonq","slide":6,"bbox":[64,218,8,120]}
+{"kind":"textbox","id":"sh/sfidojm5","slide":6,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[86,230,84,58]}
+{"kind":"textbox","id":"sh/f29czy5w","slide":6,"text":"감정 단계","textPreview":"감정 단계","textChars":5,"textLines":1,"bbox":[168,240,128,44]}
+{"kind":"shape","id":"sh/e10vqt4b","slide":6,"bbox":[352,218,256,120]}
+{"kind":"shape","id":"sh/8fq50fex","slide":6,"bbox":[352,218,8,120]}
+{"kind":"textbox","id":"sh/90zmtkfi","slide":6,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[374,230,84,58]}
+{"kind":"textbox","id":"sh/md83ypwr","slide":6,"text":"DB 마이그레이션","textPreview":"DB 마이그레이션","textChars":9,"textLines":1,"bbox":[456,240,128,44]}
+{"kind":"shape","id":"sh/7eh4raxc","slide":6,"bbox":[640,218,256,120]}
+{"kind":"shape","id":"sh/w3a54ze9","slide":6,"bbox":[640,218,8,120]}
+{"kind":"textbox","id":"sh/h4jmx4fe","slide":6,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[662,230,84,58]}
+{"kind":"textbox","id":"sh/u1sn2pw3","slide":6,"text":"프론트 테스트","textPreview":"프론트 테스트","textChars":7,"textLines":1,"bbox":[744,240,128,44]}
+{"kind":"shape","id":"sh/v214vuxo","slide":6,"bbox":[928,218,256,120]}
+{"kind":"shape","id":"sh/47a58ze5","slide":6,"bbox":[928,218,8,120]}
+{"kind":"textbox","id":"sh/583m14fq","slide":6,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[950,230,84,58]}
+{"kind":"textbox","id":"sh/tcfe503i","slide":6,"text":"서버 테스트","textPreview":"서버 테스트","textChars":6,"textLines":1,"bbox":[1032,240,128,44]}
+{"kind":"shape","id":"sh/sb6dwf2x","slide":6,"bbox":[64,370,556,226]}
+{"kind":"shape","id":"sh/raxc3alc","slide":6,"bbox":[64,370,8,226]}
+{"kind":"textbox","id":"sh/6p4vu5k7","slide":6,"text":"데이터 기반","textPreview":"데이터 기반","textChars":6,"textLines":1,"bbox":[92,394,200,34]}
+{"kind":"shape","id":"sh/1gfe9kju","slide":6,"bbox":[92,452,8,8]}
+{"kind":"textbox","id":"sh/gf6d0f29","slide":6,"text":"profiles · places · receipts · reviews · likes","textPreview":"profiles · places · receipts · reviews · likes","textChars":46,"textLines":1,"bbox":[112,442,460,40]}
+{"kind":"shape","id":"sh/fexw7a1o","slide":6,"bbox":[92,502,8,8]}
+{"kind":"textbox","id":"sh/edovy5k3","slide":6,"text":"Supabase Auth 세션과 마이페이지 흐름","textPreview":"Supabase Auth 세션과 마이페이지 흐름","textChars":26,"textLines":1,"bbox":[112,492,460,40]}
+{"kind":"shape","id":"sh/hkvuxg3a","slide":6,"bbox":[92,552,8,8]}
+{"kind":"textbox","id":"sh/wjmdov2p","slide":6,"text":"중복 영수증·인증 리뷰 검증용 DB 구조","textPreview":"중복 영수증·인증 리뷰 검증용 DB 구조","textChars":22,"textLines":1,"bbox":[112,542,460,40]}
+{"kind":"shape","id":"sh/mp0byh0n","slide":6,"bbox":[648,370,568,226]}
+{"kind":"shape","id":"sh/7q9s7m18","slide":6,"bbox":[648,370,8,226]}
+{"kind":"textbox","id":"sh/8r2t0rit","slide":6,"text":"AI 기반","textPreview":"AI 기반","textChars":5,"textLines":1,"bbox":[676,394,200,34]}
+{"kind":"shape","id":"sh/9sba9wje","slide":6,"bbox":[676,452,8,8]}
+{"kind":"textbox","id":"sh/utkb210z","slide":6,"text":"OpenAI Responses API 서버 연동","textPreview":"OpenAI Responses API 서버 연동","textChars":26,"textLines":1,"bbox":[696,442,472,40]}
+{"kind":"shape","id":"sh/vutsb614","slide":6,"bbox":[676,502,8,8]}
+{"kind":"textbox","id":"sh/wv2t4bip","slide":6,"text":"5단계 분류 + confidence + keywords","textPreview":"5단계 분류 + confidence + keywords","textChars":30,"textLines":1,"bbox":[696,492,472,40]}
+{"kind":"shape","id":"sh/hgbadgza","slide":6,"bbox":[676,552,8,8]}
+{"kind":"textbox","id":"sh/axgrqx0f","slide":6,"text":"테스트 리뷰를 즉시 그래프에 반영","textPreview":"테스트 리뷰를 즉시 그래프에 반영","textChars":18,"textLines":1,"bbox":[696,542,472,40]}
+{"kind":"notes","id":"nt/a2vrgh","slide":6,"text":""}
+{"kind":"slide","id":"sl/nq8ze1","slide":7,"title":"CURRENT PRODUCT","textShapes":5}
+{"kind":"textbox","id":"sh/x0365knm","slide":7,"text":"CURRENT PRODUCT","textPreview":"CURRENT PRODUCT","textChars":15,"textLines":1,"bbox":[64,26,420,24]}
+{"kind":"textbox","id":"sh/axsnu5ov","slide":7,"text":"07","textPreview":"07","textChars":2,"textLines":1,"bbox":[1160,26,56,24]}
+{"kind":"textbox","id":"sh/vylo3a5g","slide":7,"text":"PC와 모바일에서 같은 탐색 흐름이 동작한다","textPreview":"PC와 모바일에서 같은 탐색 흐름이 동작한다","textChars":24,"textLines":1,"bbox":[64,72,1120,62]}
+{"kind":"textbox","id":"sh/8va5sf65","slide":7,"text":"지도 중심 구조는 유지하고, 화면 크기에 따라 사이드바와 하단 탐색으로 바뀐다.","textPreview":"지도 중심 구조는 유지하고, 화면 크기에 따라 사이드바와 하단 탐색으로 바뀐다.","textChars":44,"textLines":1,"bbox":[64,142,1050,36]}
+{"kind":"shape","id":"sh/nu14zapk","slide":7,"bbox":[880,184,286,482]}
+{"kind":"shape","id":"sh/07a5ov6t","slide":7,"bbox":[672,610,164,34]}
+{"kind":"textbox","id":"sh/lsjmx07e","slide":7,"text":"실제 localhost 화면","textPreview":"실제 localhost 화면","textChars":15,"textLines":1,"bbox":[672,610,164,34]}
+{"kind":"image","id":"im/k7itwj21","slide":7,"name":"","geometry":"roundRect","alt":"지금리뷰 데스크톱 홈 화면","bbox":[64,212,790,444]}
+{"kind":"image","id":"im/z69cne1g","slide":7,"name":"","geometry":"roundRect","alt":"지금리뷰 모바일 홈 화면","bbox":[900,194,246,462]}
+{"kind":"notes","id":"nt/nq8ze1","slide":7,"text":""}
+{"kind":"slide","id":"sl/5jd3rt","slide":8,"title":"TECH STACK","textShapes":18}
+{"kind":"textbox","id":"sh/mxkjehwr","slide":8,"text":"TECH STACK","textPreview":"TECH STACK","textChars":10,"textLines":1,"bbox":[64,26,420,24]}
+{"kind":"textbox","id":"sh/9kb29cvi","slide":8,"text":"08","textPreview":"08","textChars":2,"textLines":1,"bbox":[1160,26,56,24]}
+{"kind":"textbox","id":"sh/8z21grex","slide":8,"text":"프론트·API·데이터를 역할별로 분리했다","textPreview":"프론트·API·데이터를 역할별로 분리했다","textChars":22,"textLines":1,"bbox":[64,72,1120,70]}
+{"kind":"textbox","id":"sh/vmtkbmd8","slide":8,"text":"브라우저에는 공개 키만 두고, 외부 API와 비밀 키는 Express 서버가 담당한다.","textPreview":"브라우저에는 공개 키만 두고, 외부 API와 비밀 키는 Express 서버가 담당한다.","textChars":48,"textLines":1,"bbox":[64,145,1120,40]}
+{"kind":"shape","id":"sh/alkjihw3","slide":8,"bbox":[314,366,48,3]}
+{"kind":"shape","id":"sh/xov2dwve","slide":8,"bbox":[359,359,15,17]}
+{"kind":"shape","id":"sh/wnmlkret","slide":8,"bbox":[624,366,48,3]}
+{"kind":"shape","id":"sh/rq9kz2d4","slide":8,"bbox":[669,359,15,17]}
+{"kind":"shape","id":"sh/qp0j6xwj","slide":8,"bbox":[934,366,48,3]}
+{"kind":"shape","id":"sh/8na5s7m1","slide":8,"bbox":[979,359,15,17]}
+{"kind":"shape","id":"sh/toj6lc3m","slide":8,"bbox":[64,256,250,214]}
+{"kind":"shape","id":"sh/6l8nqx4v","slide":8,"bbox":[64,256,8,214]}
+{"kind":"shape","id":"sh/7mhoj2lg","slide":8,"bbox":[86,282,206,34]}
+{"kind":"textbox","id":"sh/grapg7mx","slide":8,"text":"React / CRA","textPreview":"React / CRA","textChars":11,"textLines":1,"bbox":[86,282,206,34]}
+{"kind":"textbox","id":"sh/hsj6pc3i","slide":8,"text":"지도 UI · 라우팅 · 반응형\n로그인 상태 · 리뷰 화면","textPreview":"지도 UI · 라우팅 · 반응형 | 로그인 상태 · 리뷰 화면","textChars":32,"textLines":2,"bbox":[88,348,202,88]}
+{"kind":"shape","id":"sh/ups7uh47","slide":8,"bbox":[374,256,250,214]}
+{"kind":"shape","id":"sh/vq1on2ls","slide":8,"bbox":[374,256,8,214]}
+{"kind":"shape","id":"sh/wv65knmt","slide":8,"bbox":[396,282,206,34]}
+{"kind":"textbox","id":"sh/xwz6ds3e","slide":8,"text":"Express API","textPreview":"Express API","textChars":11,"textLines":1,"bbox":[396,282,206,34]}
+{"kind":"textbox","id":"sh/dg7u1kr6","slide":8,"text":"검색 프록시 · 입력 검증\nAI 요청 · 비밀 키 보호","textPreview":"검색 프록시 · 입력 검증 | AI 요청 · 비밀 키 보호","textChars":30,"textLines":2,"bbox":[398,348,202,88]}
+{"kind":"shape","id":"sh/sfydsfal","slide":8,"bbox":[684,256,250,214]}
+{"kind":"shape","id":"sh/re5cza90","slide":8,"bbox":[684,256,8,214]}
+{"kind":"shape","id":"sh/qdwvq5sf","slide":8,"bbox":[706,282,206,34]}
+{"kind":"textbox","id":"sh/147u5kr2","slide":8,"text":"외부 API","textPreview":"외부 API","textChars":6,"textLines":1,"bbox":[706,282,206,34]}
+{"kind":"textbox","id":"sh/03ydwzah","slide":8,"text":"Kakao Maps / Local\nOpenAI Responses","textPreview":"Kakao Maps / Local | OpenAI Responses","textChars":35,"textLines":2,"bbox":[708,348,202,88]}
+{"kind":"shape","id":"sh/f2pc3u9w","slide":8,"bbox":[994,256,222,214]}
+{"kind":"shape","id":"sh/ehgvupsb","slide":8,"bbox":[994,256,8,214]}
+{"kind":"shape","id":"sh/p8re94ry","slide":8,"bbox":[1016,282,178,34]}
+{"kind":"textbox","id":"sh/o7id0zat","slide":8,"text":"Supabase","textPreview":"Supabase","textChars":8,"textLines":1,"bbox":[1016,282,178,34]}
+{"kind":"textbox","id":"sh/6dsru18b","slide":8,"text":"Auth · Postgres\nRLS 기반 데이터","textPreview":"Auth · Postgres | RLS 기반 데이터","textChars":26,"textLines":2,"bbox":[1018,348,174,88]}
+{"kind":"shape","id":"sh/7e1sn6pg","slide":8,"bbox":[64,540,180,34]}
+{"kind":"textbox","id":"sh/8fu9wbq1","slide":8,"text":"React 19","textPreview":"React 19","textChars":8,"textLines":1,"bbox":[64,540,180,34]}
+{"kind":"shape","id":"sh/tg3apw7m","slide":8,"bbox":[274,540,180,34]}
+{"kind":"textbox","id":"sh/uhcry187","slide":8,"text":"Express 5","textPreview":"Express 5","textChars":9,"textLines":1,"bbox":[274,540,180,34]}
+{"kind":"shape","id":"sh/vilsr6ps","slide":8,"bbox":[484,540,180,34]}
+{"kind":"textbox","id":"sh/gjut0bqd","slide":8,"text":"Supabase JS","textPreview":"Supabase JS","textChars":11,"textLines":1,"bbox":[484,540,180,34]}
+{"kind":"shape","id":"sh/hk3atg7y","slide":8,"bbox":[694,540,180,34]}
+{"kind":"textbox","id":"sh/ilcb2l83","slide":8,"text":"OpenAI 6","textPreview":"OpenAI 6","textChars":8,"textLines":1,"bbox":[694,540,180,34]}
+{"kind":"shape","id":"sh/3mlsvqpo","slide":8,"bbox":[904,540,180,34]}
+{"kind":"textbox","id":"sh/r21sfqhs","slide":8,"text":"Jest / node:test","textPreview":"Jest / node:test","textChars":16,"textLines":1,"bbox":[904,540,180,34]}
+{"kind":"textbox","id":"sh/q18rml0n","slide":8,"text":"현재 지도는 Kakao API로 동작하며, 네이버지도는 비교·확장 후보로 유지하고 있다.","textPreview":"현재 지도는 Kakao API로 동작하며, 네이버지도는 비교·확장 후보로 유지하고 있다.","textChars":49,"textLines":1,"bbox":[64,618,1100,30]}
+{"kind":"notes","id":"nt/5jd3rt","slide":8,"text":""}
+{"kind":"slide","id":"sl/z5pyrq","slide":9,"title":"AI WORKFLOW","textShapes":17}
+{"kind":"textbox","id":"sh/net4zet0","slide":9,"text":"AI WORKFLOW","textPreview":"AI WORKFLOW","textChars":11,"textLines":1,"bbox":[64,26,420,24]}
+{"kind":"textbox","id":"sh/ofm5sjul","slide":9,"text":"09","textPreview":"09","textChars":2,"textLines":1,"bbox":[1160,26,56,24]}
+{"kind":"textbox","id":"sh/pgv61ob6","slide":9,"text":"리뷰 한 건을 ‘별점’ 대신 5단계로 분류한다","textPreview":"리뷰 한 건을 ‘별점’ 대신 5단계로 분류한다","textChars":25,"textLines":1,"bbox":[64,72,1120,70]}
+{"kind":"textbox","id":"sh/ah4nutcr","slide":9,"text":"자유로운 텍스트를 일관된 구조로 바꿔 전체 분위기를 막대그래프로 보여준다.","textPreview":"자유로운 텍스트를 일관된 구조로 바꿔 전체 분위기를 막대그래프로 보여준다.","textChars":41,"textLines":1,"bbox":[64,145,1120,40]}
+{"kind":"shape","id":"sh/bidonytw","slide":9,"bbox":[248,288,30,3]}
+{"kind":"shape","id":"sh/cjm5w3uh","slide":9,"bbox":[275,281,15,17]}
+{"kind":"shape","id":"sh/xkv6p8b2","slide":9,"bbox":[64,240,184,92]}
+{"kind":"shape","id":"sh/ql0nipc7","slide":9,"bbox":[64,240,8,92]}
+{"kind":"textbox","id":"sh/rm94ruds","slide":9,"text":"리뷰 입력","textPreview":"리뷰 입력","textChars":5,"textLines":1,"bbox":[76,258,160,52]}
+{"kind":"shape","id":"sh/jutczmpk","slide":9,"bbox":[474,288,30,3]}
+{"kind":"shape","id":"sh/itkvqh8z","slide":9,"bbox":[501,281,15,17]}
+{"kind":"shape","id":"sh/5wvu1w7q","slide":9,"bbox":[290,240,184,92]}
+{"kind":"shape","id":"sh/4vmdsrq5","slide":9,"bbox":[290,240,8,92]}
+{"kind":"textbox","id":"sh/vqtcvmpo","slide":9,"text":"서버 검증","textPreview":"서버 검증","textChars":5,"textLines":1,"bbox":[302,258,160,52]}
+{"kind":"shape","id":"sh/upkbmh83","slide":9,"bbox":[700,288,30,3]}
+{"kind":"shape","id":"sh/hsbuxw7u","slide":9,"bbox":[727,281,15,17]}
+{"kind":"shape","id":"sh/wr2dorq9","slide":9,"bbox":[516,240,184,92]}
+{"kind":"shape","id":"sh/729cr2pc","slide":9,"bbox":[516,240,8,92]}
+{"kind":"textbox","id":"sh/m10bix87","slide":9,"text":"GPT-5.6 Luna","textPreview":"GPT-5.6 Luna","textChars":12,"textLines":1,"bbox":[528,258,160,52]}
+{"kind":"shape","id":"sh/ax0vaxsz","slide":9,"bbox":[926,288,30,3]}
+{"kind":"shape","id":"sh/by9w32tk","slide":9,"bbox":[953,281,15,17]}
+{"kind":"shape","id":"sh/czidc7a5","slide":9,"bbox":[742,240,184,92]}
+{"kind":"shape","id":"sh/x0re5cba","slide":9,"bbox":[742,240,8,92]}
+{"kind":"textbox","id":"sh/y10vyhsv","slide":9,"text":"구조화 결과","textPreview":"구조화 결과","textChars":6,"textLines":1,"bbox":[754,258,160,52]}
+{"kind":"shape","id":"sh/z29w7m9g","slide":9,"bbox":[968,240,184,92]}
+{"kind":"shape","id":"sh/k3id0ra1","slide":9,"bbox":[968,240,8,92]}
+{"kind":"textbox","id":"sh/lobe9crm","slide":9,"text":"그래프 반영","textPreview":"그래프 반영","textChars":6,"textLines":1,"bbox":[980,258,160,52]}
+{"kind":"textbox","id":"sh/mpkv2hs7","slide":9,"text":"응답 스키마","textPreview":"응답 스키마","textChars":6,"textLines":1,"bbox":[64,374,170,30]}
+{"kind":"shape","id":"sh/7qtwbm9s","slide":9,"bbox":[64,410,470,190]}
+{"kind":"shape","id":"sh/hwf6hkz6","slide":9,"bbox":[64,410,8,190]}
+{"kind":"textbox","id":"sh/gv6pofyl","slide":9,"text":"label: \"positive\"\nconfidence: 0.91\nkeywords: [\"친절\", \"분위기\"]","textPreview":"label: \"positive\" | confidence: 0.91 | keywords: [\"친절\", \"분위기\"]","textChars":58,"textLines":3,"bbox":[94,438,410,130]}
+{"kind":"textbox","id":"sh/vuxofah0","slide":9,"text":"매우 좋음","textPreview":"매우 좋음","textChars":5,"textLines":1,"bbox":[588,408,124,28]}
+{"kind":"shape","id":"sh/uto7m5gf","slide":9,"bbox":[718,413,386.4,18]}
+{"kind":"textbox","id":"sh/50zqlkf2","slide":9,"text":"좋음","textPreview":"좋음","textChars":2,"textLines":1,"bbox":[588,450,124,28]}
+{"kind":"shape","id":"sh/4z6pszyh","slide":9,"bbox":[718,455,319.2,18]}
+{"kind":"textbox","id":"sh/3yx8juxw","slide":9,"text":"보통","textPreview":"보통","textChars":2,"textLines":1,"bbox":[588,492,124,28]}
+{"kind":"shape","id":"sh/ixo7qpgb","slide":9,"bbox":[718,497,201.6,18]}
+{"kind":"textbox","id":"sh/d4zqp4fe","slide":9,"text":"아쉬움","textPreview":"아쉬움","textChars":3,"textLines":1,"bbox":[588,534,124,28]}
+{"kind":"shape","id":"sh/s3qpwzyt","slide":9,"bbox":[718,539,117.6,18]}
+{"kind":"textbox","id":"sh/oju9o3i1","slide":9,"text":"매우 아쉬움","textPreview":"매우 아쉬움","textChars":6,"textLines":1,"bbox":[588,576,124,28]}
+{"kind":"shape","id":"sh/9k3ax8zm","slide":9,"bbox":[718,581,58.8,18]}
+{"kind":"textbox","id":"sh/mxsrmt0v","slide":9,"text":"분류 결과만 저장하는 것이 아니라 confidence와 키워드도 함께 받아 이후 설명 가능한 요약으로 확장할 수 있다.","textPreview":"분류 결과만 저장하는 것이 아니라 confidence와 키워드도 함께 받아 이후 설명 가능한 요약으로 확장할 수 있다.","textChars":66,"textLines":1,"bbox":[64,636,1130,30]}
+{"kind":"notes","id":"nt/z5pyrq","slide":9,"text":""}
+{"kind":"slide","id":"sl/pavbq4","slide":10,"title":"LIVE DEMO","textShapes":20}
+{"kind":"textbox","id":"sh/8f6xkr2x","slide":10,"text":"LIVE DEMO","textPreview":"LIVE DEMO","textChars":9,"textLines":1,"bbox":[64,26,420,24]}
+{"kind":"textbox","id":"sh/7exwbm1c","slide":10,"text":"10","textPreview":"10","textChars":2,"textLines":1,"bbox":[1160,26,56,24]}
+{"kind":"textbox","id":"sh/mdovihkr","slide":10,"text":"오늘 데모는 다섯 장면만 보여준다","textPreview":"오늘 데모는 다섯 장면만 보여준다","textChars":18,"textLines":1,"bbox":[64,72,1120,62]}
+{"kind":"textbox","id":"sh/lcfe9cj6","slide":10,"text":"기능을 나열하기보다 한 사용자의 장소 선택 흐름을 그대로 따라간다.","textPreview":"기능을 나열하기보다 한 사용자의 장소 선택 흐름을 그대로 따라간다.","textChars":37,"textLines":1,"bbox":[64,142,1050,36]}
+{"kind":"shape","id":"sh/krmdg72l","slide":10,"bbox":[64,218,48,48]}
+{"kind":"textbox","id":"sh/zqdw7210","slide":10,"text":"1","textPreview":"1","textChars":1,"textLines":1,"bbox":[64,218,48,48]}
+{"kind":"textbox","id":"sh/yp4vexkf","slide":10,"text":"홈","textPreview":"홈","textChars":1,"textLines":1,"bbox":[138,216,130,34]}
+{"kind":"textbox","id":"sh/xove5sju","slide":10,"text":"현재 위치와 검색창 초기화","textPreview":"현재 위치와 검색창 초기화","textChars":14,"textLines":1,"bbox":[282,216,820,34]}
+{"kind":"shape","id":"sh/cnmdc72p","slide":10,"bbox":[87,268,3,34]}
+{"kind":"shape","id":"sh/yhgruhwr","slide":10,"bbox":[64,302,48,48]}
+{"kind":"textbox","id":"sh/jips3mxc","slide":10,"text":"2","textPreview":"2","textChars":1,"textLines":1,"bbox":[64,302,48,48]}
+{"kind":"textbox","id":"sh/k3y9wrex","slide":10,"text":"검색","textPreview":"검색","textChars":2,"textLines":1,"bbox":[138,300,130,34]}
+{"kind":"textbox","id":"sh/l47a5wfi","slide":10,"text":"자동완성과 주변 우선 결과","textPreview":"자동완성과 주변 우선 결과","textChars":14,"textLines":1,"bbox":[282,300,820,34]}
+{"kind":"shape","id":"sh/adwrqhwv","slide":10,"bbox":[87,352,3,34]}
+{"kind":"shape","id":"sh/bep8zmx0","slide":10,"bbox":[64,386,48,48]}
+{"kind":"textbox","id":"sh/wfy9s7el","slide":10,"text":"3","textPreview":"3","textChars":1,"textLines":1,"bbox":[64,386,48,48]}
+{"kind":"textbox","id":"sh/xg7q1cf6","slide":10,"text":"상세","textPreview":"상세","textChars":2,"textLines":1,"bbox":[138,384,130,34]}
+{"kind":"textbox","id":"sh/m9wrmxwj","slide":10,"text":"업체 탭에서 정보·리뷰 확인","textPreview":"업체 탭에서 정보·리뷰 확인","textChars":15,"textLines":1,"bbox":[282,384,820,34]}
+{"kind":"shape","id":"sh/na58v2x4","slide":10,"bbox":[87,436,3,34]}
+{"kind":"shape","id":"sh/re1o3ydw","slide":10,"bbox":[64,470,48,48]}
+{"kind":"textbox","id":"sh/qts7utcb","slide":10,"text":"4","textPreview":"4","textChars":1,"textLines":1,"bbox":[64,470,48,48]}
+{"kind":"textbox","id":"sh/dg3658v2","slide":10,"text":"작성","textPreview":"작성","textChars":2,"textLines":1,"bbox":[138,468,130,34]}
+{"kind":"textbox","id":"sh/cfupw3uh","slide":10,"text":"로그인 후 텍스트 리뷰 입력","textPreview":"로그인 후 텍스트 리뷰 입력","textChars":15,"textLines":1,"bbox":[282,468,820,34]}
+{"kind":"shape","id":"sh/zilo7ids","slide":10,"bbox":[87,520,3,34]}
+{"kind":"shape","id":"sh/ehc7ydcn","slide":10,"bbox":[64,554,48,48]}
+{"kind":"textbox","id":"sh/1k3698vy","slide":10,"text":"5","textPreview":"5","textChars":1,"textLines":1,"bbox":[64,554,48,48]}
+{"kind":"textbox","id":"sh/0jup03ud","slide":10,"text":"분석","textPreview":"분석","textChars":2,"textLines":1,"bbox":[138,552,130,34]}
+{"kind":"textbox","id":"sh/vmhovedo","slide":10,"text":"5단계 그래프와 마이페이지 확인","textPreview":"5단계 그래프와 마이페이지 확인","textChars":17,"textLines":1,"bbox":[282,552,820,34]}
+{"kind":"shape","id":"sh/ul8nm9c3","slide":10,"bbox":[880,622,292,34]}
+{"kind":"textbox","id":"sh/kr6lwfa1","slide":10,"text":"데모 주소  localhost:3000","textPreview":"데모 주소  localhost:3000","textChars":21,"textLines":1,"bbox":[880,622,292,34]}
+{"kind":"notes","id":"nt/pavbq4","slide":10,"text":""}
+{"kind":"slide","id":"sl/ndil5j","slide":11,"title":"STATUS & NEXT","textShapes":17}
+{"kind":"textbox","id":"sh/adsnuhsj","slide":11,"text":"STATUS & NEXT","textPreview":"STATUS & NEXT","textChars":13,"textLines":1,"bbox":[64,26,420,24]}
+{"kind":"textbox","id":"sh/x0j65cra","slide":11,"text":"11","textPreview":"11","textChars":2,"textLines":1,"bbox":[1160,26,56,24]}
+{"kind":"textbox","id":"sh/wfa5wrap","slide":11,"text":"핵심 가설은 확인했고, 이제 ‘인증’을 실제 데이터로 닫는다","textPreview":"핵심 가설은 확인했고, 이제 ‘인증’을 실제 데이터로 닫는다","textChars":33,"textLines":1,"bbox":[64,72,1120,70]}
+{"kind":"textbox","id":"sh/na1oz298","slide":11,"text":"현재 데모 가능한 범위와 다음 구현 범위를 분명히 구분했다.","textPreview":"현재 데모 가능한 범위와 다음 구현 범위를 분명히 구분했다.","textChars":33,"textLines":1,"bbox":[64,145,1120,40]}
+{"kind":"shape","id":"sh/m98nqxsn","slide":11,"bbox":[64,220,548,350]}
+{"kind":"shape","id":"sh/9cj61cre","slide":11,"bbox":[64,220,8,350]}
+{"kind":"shape","id":"sh/oba5s7at","slide":11,"bbox":[94,248,132,34]}
+{"kind":"textbox","id":"sh/z6hov29w","slide":11,"text":"지금 동작함","textPreview":"지금 동작함","textChars":6,"textLines":1,"bbox":[94,248,132,34]}
+{"kind":"shape","id":"sh/e58nmxsr","slide":11,"bbox":[94,320,8,8]}
+{"kind":"textbox","id":"sh/s769sfih","slide":11,"text":"실제 지도·장소 검색과 자동완성","textPreview":"실제 지도·장소 검색과 자동완성","textChars":17,"textLines":1,"bbox":[114,310,450,40]}
+{"kind":"shape","id":"sh/t8zalkzm","slide":11,"bbox":[94,372,8,8]}
+{"kind":"textbox","id":"sh/65orq50b","slide":11,"text":"로그인·세션·마이페이지 화면","textPreview":"로그인·세션·마이페이지 화면","textChars":15,"textLines":1,"bbox":[114,362,450,40]}
+{"kind":"shape","id":"sh/r6xsjahw","slide":11,"bbox":[94,424,8,8]}
+{"kind":"textbox","id":"sh/4369ofi5","slide":11,"text":"텍스트 리뷰 AI 5단계 분석","textPreview":"텍스트 리뷰 AI 5단계 분석","textChars":16,"textLines":1,"bbox":[114,414,450,40]}
+{"kind":"shape","id":"sh/54fahkjq","slide":11,"bbox":[94,476,8,8]}
+{"kind":"textbox","id":"sh/i1orm50z","slide":11,"text":"PC·모바일 반응형 UI","textPreview":"PC·모바일 반응형 UI","textChars":13,"textLines":1,"bbox":[114,466,450,40]}
+{"kind":"shape","id":"sh/j2xsfa1k","slide":11,"bbox":[94,528,8,8]}
+{"kind":"textbox","id":"sh/ozqt0zi9","slide":11,"text":"프론트·서버 자동 테스트","textPreview":"프론트·서버 자동 테스트","textChars":13,"textLines":1,"bbox":[114,518,450,40]}
+{"kind":"shape","id":"sh/p0jat4zu","slide":11,"bbox":[640,220,576,350]}
+{"kind":"shape","id":"sh/d4vix0n2","slide":11,"bbox":[640,220,8,350]}
+{"kind":"shape","id":"sh/c3m1of6h","slide":11,"bbox":[670,248,120,34]}
+{"kind":"textbox","id":"sh/bid0va5w","slide":11,"text":"다음 구현","textPreview":"다음 구현","textChars":5,"textLines":1,"bbox":[670,248,120,34]}
+{"kind":"shape","id":"sh/qh4jm5ob","slide":11,"bbox":[670,320,8,8]}
+{"kind":"textbox","id":"sh/pgbit0nq","slide":11,"text":"영수증 이미지 Supabase Storage 저장","textPreview":"영수증 이미지 Supabase Storage 저장","textChars":27,"textLines":1,"bbox":[690,310,480,40]}
+{"kind":"shape","id":"sh/of21kv65","slide":11,"bbox":[670,372,8,8]}
+{"kind":"textbox","id":"sh/3et0rq5k","slide":11,"text":"CLOVA OCR로 상호명·결제일 검증","textPreview":"CLOVA OCR로 상호명·결제일 검증","textChars":21,"textLines":1,"bbox":[690,362,480,40]}
+{"kind":"shape","id":"sh/2dkjilof","slide":11,"bbox":[670,424,8,8]}
+{"kind":"textbox","id":"sh/1cbipgnu","slide":11,"text":"인증 통과 리뷰만 DB에 최종 저장","textPreview":"인증 통과 리뷰만 DB에 최종 저장","textChars":19,"textLines":1,"bbox":[690,414,480,40]}
+{"kind":"shape","id":"sh/gb21gv69","slide":11,"bbox":[670,476,8,8]}
+{"kind":"textbox","id":"sh/6hgfqh47","slide":11,"text":"이미지 해시·승인번호 중복 차단","textPreview":"이미지 해시·승인번호 중복 차단","textChars":17,"textLines":1,"bbox":[690,466,480,40]}
+{"kind":"shape","id":"sh/ri9gjmlc","slide":11,"bbox":[670,528,8,8]}
+{"kind":"textbox","id":"sh/sjixsrmx","slide":11,"text":"실데이터 집계·배포 환경 검증","textPreview":"실데이터 집계·배포 환경 검증","textChars":16,"textLines":1,"bbox":[690,518,480,40]}
+{"kind":"textbox","id":"sh/tkrylw3i","slide":11,"text":"현재 AI 분석 데모는 개발 검증을 위해 영수증 인증을 우회한 테스트 리뷰를 사용한다.","textPreview":"현재 AI 분석 데모는 개발 검증을 위해 영수증 인증을 우회한 테스트 리뷰를 사용한다.","textChars":48,"textLines":1,"bbox":[64,616,1140,32]}
+{"kind":"notes","id":"nt/ndil5j","slide":11,"text":""}
+{"kind":"slide","id":"sl/wt7vsk","slide":12,"title":"CLOSING","textShapes":8}
+{"kind":"textbox","id":"sh/u1gfixkj","slide":12,"text":"CLOSING","textPreview":"CLOSING","textChars":7,"textLines":1,"bbox":[64,26,420,24]}
+{"kind":"textbox","id":"sh/h47ytcja","slide":12,"text":"12","textPreview":"12","textChars":2,"textLines":1,"bbox":[1160,26,56,24]}
+{"kind":"shape","id":"sh/g3yhk72p","slide":12,"bbox":[64,126,114,34]}
+{"kind":"textbox","id":"sh/7y5gn218","slide":12,"text":"TAKEAWAY","textPreview":"TAKEAWAY","textChars":8,"textLines":1,"bbox":[64,126,114,34]}
+{"kind":"textbox","id":"sh/6dwfexkn","slide":12,"text":"지금리뷰는 리뷰의 양보다\n방문 근거와 해석을 먼저 보여준다","textPreview":"지금리뷰는 리뷰의 양보다 | 방문 근거와 해석을 먼저 보여준다","textChars":32,"textLines":2,"bbox":[64,194,860,150]}
+{"kind":"textbox","id":"sh/t0nypsjy","slide":12,"text":"3주 동안 기획 문서에서 출발해 지도 탐색, 사용자 흐름, 데이터 구조, AI 분석까지 이어지는 MVP를 만들었다.","textPreview":"3주 동안 기획 문서에서 출발해 지도 탐색, 사용자 흐름, 데이터 구조, AI 분석까지 이어지는 MVP를 만들었다.","textChars":64,"textLines":1,"bbox":[64,374,900,74]}
+{"kind":"shape","id":"sh/szexgn2t","slide":12,"bbox":[64,508,1110,112]}
+{"kind":"shape","id":"sh/ru9gzm1c","slide":12,"bbox":[64,508,8,112]}
+{"kind":"textbox","id":"sh/q90zqhkr","slide":12,"text":"피드백 받고 싶은 것","textPreview":"피드백 받고 싶은 것","textChars":11,"textLines":1,"bbox":[92,530,250,28]}
+{"kind":"textbox","id":"sh/gfyh0b25","slide":12,"text":"① 5단계 표현이 직관적인가?   ② 인증 리뷰를 어디에서 가장 강조해야 하는가?   ③ 실제 사용 시 빠진 판단 정보는 무엇인가?","textPreview":"① 5단계 표현이 직관적인가?   ② 인증 리뷰를 어디에서 가장 강조해야 하는가?   ③ 실제 사용 시 빠진 판단 정보는 무엇인가?","textChars":73,"textLines":1,"bbox":[92,564,1030,34]}
+{"kind":"textbox","id":"sh/1g7y9gjq","slide":12,"text":"감사합니다","textPreview":"감사합니다","textChars":5,"textLines":1,"bbox":[1030,654,144,24]}
+{"kind":"notes","id":"nt/wt7vsk","slide":12,"text":""}
