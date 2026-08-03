@@ -1,9 +1,0 @@
-[
-  {
-    "path": "Assets/Scripts/Player/PlayerController.cs",
-    "changeType": "modified",
-    "diff": "--- a/Assets/Scripts/Player/PlayerController.cs\n+++ b/Assets/Scripts/Player/PlayerController.cs\n@@ -1,7 +1,8 @@\n using UnityEngine;\n+using GameForge.Core;\n \n namespace GameForge.Player\n {\n     [RequireComponent(typeof(DashComponent), typeof(HealthComponent))]\n-    public class PlayerController : MonoBehaviour\n+    public class PlayerController : MonoBehaviour, IDashable\n     {\n@@ -13,2 +14,6 @@\n             HealthComponent = GetComponent<HealthComponent>();\n         }\n+\n+        public bool IsDashing => DashComponent != null && DashComponent.IsDashing;\n+        public bool CanDash => DashComponent != null && DashComponent.CanDash;\n+        public void Dash() => DashComponent?.Dash();\n \n         private void Update()\n",
-    "suggestedCommitMessage": "refactor(player): Delegate IDashable handling to DashComponent in PlayerController",
-    "approved": false
-  }
-]

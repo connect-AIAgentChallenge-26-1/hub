@@ -1,7 +1,0 @@
-{
-  "path": "docs/09_Documentation.md",
-  "content": "# Documentation\n\n## Requirements Summary\n- [ ] 2D 로그라이크 액션 장르 (탑뷰/쿼터뷰 방식)\n- [ ] PC 플랫폼 대상, WASD 8방향 이동 및 마우스 커서 방향 대시 지원\n- [ ] 마우스 좌클릭 근접 검 공격 및 우클릭 원거리 투척 무기 공격\n- [ ] 메인 메뉴, 인게임 HUD(체력/골드 표시), 게임오버 화면 제공\n- [ ] 싱글플레이어 전용 (멀티플레이어/코옵 Scope 제외)\n\n## Game Design Summary\n- [ ] 하데스 스타일의 2D 액션 전투 및 대시 이동 구현\n- [ ] 매 런마다 무작위 아이템으로 빌드가 변화하는 로그라이크 시스템\n- [ ] 다크 판타지 배경의 무너진 성 탐험 세계관\n- [ ] 말 없는 기사 주인공 캐릭터\n\n## System Design Summary\n- [ ] 대시 무적 시간 0.3초 및 쿨다운 1.2초 시스템 규칙 적용\n- [ ] 총 3칸의 체력 시스템 및 피격 시 화면 흔들림/넉백 피드백 연출\n- [ ] 런 시작 및 방 클리어 시 3개의 아이템 선택지 제공 및 빌드 데이터 반영\n- [ ] PlayerController, DashComponent, HealthComponent, FeedbackManager, BuildManager 핵심 클래스 설계\n- [ ] Assets/Scripts 하위 모듈화된 폴더 구조 및 Assembly Definition(Core, Player, Item) 구성\n- [ ] ScriptableObject(PlayerData, DashData, ItemData, FeedbackData) 기반 데이터 관리",
-  "version": 1,
-  "updated_at": "2026-07-27T09:31:15.409Z",
-  "history": []
-}

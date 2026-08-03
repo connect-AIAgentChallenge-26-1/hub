@@ -1,7 +1,0 @@
-{
-  "path": "docs/04_Class_Design.md",
-  "content": "# Class Design\n\n## Classes\n- [ ] PlayerController — 플레이어의 전체적인 입력 및 핵심 컴포넌트(대시, 체력 등) 총괄 관리\n- [ ] DashComponent — 무적 시간(0.3초) 및 쿨다운(1.2초) 로직 담당, IDashable 인터페이스 구현\n- [ ] IDashable — 대시 동작 및 대시 상태 확인을 위한 인터페이스\n- [ ] HealthComponent — 체력(3칸) 관리 및 피격 시 피격 이벤트(OnDamaged) 발생\n- [ ] FeedbackManager — 피격 이벤트를 구독하여 화면 흔들림 연출 및 넉백 처리 실행\n- [ ] BuildManager — 런 시작 및 방 클리어 시 3개의 아이템 선택지 생성, 캐싱 및 플레이어 빌드 반영\n- [ ] ItemData — 아이템 데이터 정보 및 적용할 IItemEffect 목록 보유\n- [ ] IItemEffect — 다양한 빌드 아이템 효과 조립을 위한 인터페이스\n\n## Relationships\n- [ ] PlayerController는 DashComponent와 HealthComponent를 소유한다 (컴포지션)\n- [ ] DashComponent는 IDashable 인터페이스를 구현한다\n- [ ] HealthComponent의 피격 이벤트(OnDamaged)를 FeedbackManager가 구독하여 연출을 수행한다\n- [ ] ItemData는 여러 IItemEffect 구현체를 포함하는 구조로 효과를 조합한다\n- [ ] BuildManager는 생성된 ItemData의 IItemEffect를 PlayerController/BuildData에 적용한다",
-  "version": 1,
-  "updated_at": "2026-07-27T05:45:13.355Z",
-  "history": []
-}

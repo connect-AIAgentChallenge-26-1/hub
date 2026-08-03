@@ -5,6 +5,7 @@ import RepoSelect from "../components/RepoSelect";
 import BranchSelect from "../components/BranchSelect";
 import AnalysisPresetPicker, { type AnalysisPreset } from "../components/AnalysisPresetPicker";
 import { API_BASE_URL, type RepoSummary, type SessionState } from "../lib/api";
+import { useDemoMode } from "../lib/DemoModeContext";
 
 interface State {
   session: SessionState;
@@ -87,6 +88,10 @@ export default function RepoConnectPage() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [starting, setStarting] = useState(false);
   const navigate = useNavigate();
+  const { demoMode, setDemoMode } = useDemoMode();
+  const [demoModeToggling, setDemoModeToggling] = useState(false);
+  const [resetting, setResetting] = useState(false);
+  const [devToolsMessage, setDevToolsMessage] = useState<string | null>(null);
 
   // Surfaces OAuth failures (denied/cancelled login, token exchange errors) that the
   // backend reports via a redirect to /repo?error=... instead of a raw error page.
@@ -100,7 +105,7 @@ export default function RepoConnectPage() {
   }, []);
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/api/auth/session`)
+    fetch(`${API_BASE_URL}/api/auth/session`, { credentials: "include" })
       .then((res) => res.json())
       .then((session: SessionState) => dispatch({ type: "SESSION_LOADED", session }))
       .catch(() => dispatch({ type: "SESSION_LOADED", session: { loggedIn: false } }));
@@ -109,7 +114,7 @@ export default function RepoConnectPage() {
   useEffect(() => {
     if (!state.session.loggedIn) return;
     dispatch({ type: "REPOS_LOADING" });
-    fetch(`${API_BASE_URL}/api/repo/list`)
+    fetch(`${API_BASE_URL}/api/repo/list`, { credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error();
         return res.json();
@@ -121,7 +126,7 @@ export default function RepoConnectPage() {
   useEffect(() => {
     if (!state.selectedRepo) return;
     dispatch({ type: "BRANCHES_LOADING" });
-    fetch(`${API_BASE_URL}/api/repo/${state.selectedRepo}/branches`)
+    fetch(`${API_BASE_URL}/api/repo/${state.selectedRepo}/branches`, { credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error();
         return res.json();
@@ -135,7 +140,7 @@ export default function RepoConnectPage() {
   }
 
   async function handleLogout() {
-    await fetch(`${API_BASE_URL}/api/auth/logout`, { method: "POST" });
+    await fetch(`${API_BASE_URL}/api/auth/logout`, { method: "POST", credentials: "include" });
     dispatch({ type: "LOGOUT" });
   }
 
@@ -150,12 +155,55 @@ export default function RepoConnectPage() {
           branch: state.selectedBranch,
           preset: state.selectedPreset,
         }),
+        credentials: "include",
       });
-      if (!res.ok) throw new Error("analysis start failed");
+      if (!res.ok) {
+        // AI_QUOTA_EXCEEDED (Gemini 429 during report generation) comes back
+        // with an already human-readable `error` — reusing it here instead of
+        // a generic message is the whole point, not a case to special-case
+        // further; no retry, a daily quota won't recover within this request.
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error ?? "analysis start failed");
+      }
       navigate("/analysis");
-    } catch {
+    } catch (err) {
       setStarting(false);
-      dispatch({ type: "ERROR", message: "분석 시작에 실패했습니다. 다시 시도해주세요." });
+      dispatch({
+        type: "ERROR",
+        message:
+          err instanceof Error && err.message !== "analysis start failed"
+            ? err.message
+            : "분석 시작에 실패했습니다. 다시 시도해주세요.",
+      });
+    }
+  }
+
+  async function handleToggleDemoMode() {
+    setDemoModeToggling(true);
+    setDevToolsMessage(null);
+    try {
+      await setDemoMode(!demoMode);
+    } catch {
+      setDevToolsMessage("데모 모드 전환에 실패했습니다. 다시 시도해주세요.");
+    } finally {
+      setDemoModeToggling(false);
+    }
+  }
+
+  async function handleResetData() {
+    if (!window.confirm("1~9단계의 대화·문서·파일 변경 내역을 모두 삭제하고 1단계부터 다시 시작합니다. 계속할까요?")) {
+      return;
+    }
+    setResetting(true);
+    setDevToolsMessage(null);
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/dev/reset`, { method: "POST", credentials: "include" });
+      if (!res.ok) throw new Error();
+      setDevToolsMessage("이전 데이터를 삭제했습니다. 1단계부터 다시 시작할 수 있습니다.");
+    } catch {
+      setDevToolsMessage("데이터 삭제에 실패했습니다. 다시 시도해주세요.");
+    } finally {
+      setResetting(false);
     }
   }
 
@@ -213,6 +261,30 @@ export default function RepoConnectPage() {
         <div className="card-foot">
           <button className="primary" disabled={!canStart} onClick={handleStart}>
             연결 및 분석 시작 →
+          </button>
+        </div>
+      </div>
+
+      <div className="card" style={{ maxWidth: 520, margin: "16px auto 0" }}>
+        <div className="card-body">
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12 }}>
+            <div>
+              <div style={{ fontSize: 13, fontWeight: 500 }}>데모 모드</div>
+              <div style={{ fontSize: 12, color: "var(--text-dim)", marginTop: 2 }}>
+                켜면 Gemini/GitHub 호출 없이 준비된 응답만 보여줍니다.
+              </div>
+            </div>
+            <button disabled={demoModeToggling} onClick={handleToggleDemoMode}>
+              {demoMode ? "DEMO MODE: ON" : "DEMO MODE: OFF"}
+            </button>
+          </div>
+          {devToolsMessage && (
+            <div style={{ marginTop: 12, fontSize: 12.5, color: "var(--text-dim)" }}>{devToolsMessage}</div>
+          )}
+        </div>
+        <div className="card-foot">
+          <button disabled={resetting} onClick={handleResetData}>
+            이전 데이터 삭제
           </button>
         </div>
       </div>

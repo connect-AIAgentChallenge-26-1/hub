@@ -1,5 +1,5 @@
 import { readJson, writeJson } from "./jsonStore";
-import { dataPath } from "./paths";
+import { getUserDataPath } from "./paths";
 
 export interface ChatMessage {
   id: string;
@@ -8,24 +8,25 @@ export interface ChatMessage {
   created_at: string;
 }
 
-function messagesFile(stepId: number | string): string {
-  return dataPath("messages", `${stepId}.json`);
+function messagesFile(userId: number, stepId: number | string): string {
+  return getUserDataPath(userId, "messages", `${stepId}.json`);
 }
 
-export async function getMessages(stepId: number | string): Promise<ChatMessage[]> {
+export async function getMessages(userId: number, stepId: number | string): Promise<ChatMessage[]> {
   try {
-    return await readJson<ChatMessage[]>(messagesFile(stepId));
+    return await readJson<ChatMessage[]>(messagesFile(userId, stepId));
   } catch {
     return [];
   }
 }
 
 export async function appendMessages(
+  userId: number,
   stepId: number | string,
   newMessages: ChatMessage[]
 ): Promise<ChatMessage[]> {
-  const existing = await getMessages(stepId);
+  const existing = await getMessages(userId, stepId);
   const updated = [...existing, ...newMessages];
-  await writeJson(messagesFile(stepId), updated);
+  await writeJson(messagesFile(userId, stepId), updated);
   return updated;
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AnalysisReportCard, { type AnalysisStats } from "../components/AnalysisReportCard";
 import { API_BASE_URL } from "../lib/api";
+import { useDemoMode } from "../lib/DemoModeContext";
 
 type State =
   | { status: "loading" }
@@ -11,9 +12,10 @@ type State =
 export default function AnalysisReportPage() {
   const [state, setState] = useState<State>({ status: "loading" });
   const navigate = useNavigate();
+  const { enableNewProjectWorkflow } = useDemoMode();
 
   useEffect(() => {
-    fetch(`${API_BASE_URL}/api/analysis/report`)
+    fetch(`${API_BASE_URL}/api/analysis/report`, { credentials: "include" })
       .then((res) => {
         if (!res.ok) throw new Error("report fetch failed");
         return res.json();
@@ -26,8 +28,11 @@ export default function AnalysisReportPage() {
 
   function handleApprove() {
     // Step[1] is already "active" from the seed data — sidebar/step state
-    // management itself is Day 9's job, not this screen's.
-    navigate("/workspace");
+    // management itself is Day 9's job, not this screen's. When the 9-step
+    // workflow is feature-flagged off, route straight into the Feature
+    // Expansion Workflow's entry point instead (null treated as "off", the
+    // same safe default as the server's own flag default).
+    navigate(enableNewProjectWorkflow ? "/workspace" : "/expansions/new");
   }
 
   return (
