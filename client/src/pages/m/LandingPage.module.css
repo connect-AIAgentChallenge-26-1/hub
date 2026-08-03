@@ -207,33 +207,39 @@
   margin-top: 40px;
 }
 
-/* 진행 바 위를 진행률만큼 이동하며 통통 뛰는 집사 마스코트(장식).
-   원본 이미지 1장을 그대로 쓰고 비율은 건드리지 않는다(마스코트 변형 금지). */
+/* 진행 바 위를 진행률만큼 이동하며 빨랫감을 들고 달리는 집사 마스코트(장식).
+   포즈 이미지 그대로 쓰고 비율은 건드리지 않는다(마스코트 변형 금지). */
 .runner {
   position: absolute;
   bottom: 100%;
   left: 6%;
-  width: 32px;
-  height: auto;
-  margin-bottom: 6px;
+  width: 46px;
+  height: 42px;
+  margin-bottom: 0;
   transform: translateX(-50%);
+  /* 위치(left)는 진행률따라 앞으로 미끄러진다 */
   transition: left 0.6s ease;
-  animation: runnerHop 0.7s ease-in-out infinite;
+  /* 다리는 2프레임 스프라이트를 번갈아 보여줘 움직인다 (위아래로 튀지 않는다) */
+  background-image: url(/mascot/mascot-run-strip.png);
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  background-position-x: 0%;
+  animation: runLegs 0.34s steps(2, jump-none) infinite;
   pointer-events: none;
   filter: drop-shadow(0 2px 3px rgba(15, 23, 42, 0.15));
 }
 
-@keyframes runnerHop {
-  0%,
-  100% {
-    transform: translateX(-50%) translateY(0);
+/* 스트립의 두 컷(다리 펼침 ↔ 다리 모음)을 번갈아 — 걸음 리듬 */
+@keyframes runLegs {
+  from {
+    background-position-x: 0%;
   }
-  50% {
-    transform: translateX(-50%) translateY(-5px);
+  to {
+    background-position-x: 100%;
   }
 }
 
-/* 움직임 최소화를 원하는 사용자에겐 뜀 애니메이션을 끈다(위치 이동은 유지) */
+/* 움직임 최소화를 원하면 다리 애니메이션을 멈춘다(위치 이동은 유지) */
 @media (prefers-reduced-motion: reduce) {
   .runner {
     animation: none;
@@ -297,6 +303,13 @@
 .doneIcon {
   font-size: 44px;
   line-height: 1;
+}
+
+/* 완료 시 따봉 집사 — 축하 느낌으로 아이콘보다 크게 */
+.doneMascot {
+  width: 128px;
+  height: auto;
+  filter: drop-shadow(0 4px 8px rgba(15, 23, 42, 0.14));
 }
 
 .doneTitle {

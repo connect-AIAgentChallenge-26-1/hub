@@ -10,6 +10,7 @@ import machinesRouter from "./routes/machines.js";
 import notificationsRouter from "./routes/notifications.js";
 import ingestRouter from "./routes/ingest.js";
 import subscriptionsRouter from "./routes/subscriptions.js";
+import ownerRouter from "./routes/owner.js";
 import { initDb } from "./services/db.js";
 import { initPush } from "./services/push.js";
 
@@ -40,6 +41,8 @@ app.use("/api/subscriptions", subscriptionsRouter);
 // 조회 API (T-13)
 app.use("/api/machines", machinesRouter);
 app.use("/api/notifications", notificationsRouter);
+// 사장님 대시보드 패스코드 잠금 검증
+app.use("/api/owner", ownerRouter);
 
 // 배포 시 client 빌드 결과물을 같은 서버에서 정적 서빙한다 (T-25).
 // dev에서는 client/dist가 없어 express.static이 그냥 next()로 넘긴다.

@@ -28,9 +28,9 @@ const LAYERS = [
 
 const WEEKS = [
   { week: "1주차", goal: "기획 · 프로토타입 · Agent 지침", state: "done" },
-  { week: "2주차", goal: "모노레포 뼈대 · 전력 곡선 실측 · 화면 3개(mock)", state: "now" },
-  { week: "3주차", goal: "상태 머신 · 방치 자동 대응 · Web Push" },
-  { week: "4주차", goal: "통합 테스트 · 실매장 검증 · 배포 · 데모" },
+  { week: "2주차", goal: "모노레포 뼈대 · 전력 곡선 실측 · 화면 3개(mock)", state: "done" },
+  { week: "3주차", goal: "상태 머신 · 방치 자동 대응 · Web Push", state: "done" },
+  { week: "4주차", goal: "통합 테스트 · 실매장 검증 · 배포 · 데모", state: "done" },
 ];
 
 export default function ProjectIntro() {
@@ -88,9 +88,10 @@ export default function ProjectIntro() {
         ))}
 
         <p className={styles.risk}>
-          <strong>검증 중인 리스크</strong> — 세탁기 정격 전류가 16A를 넘거나 직결
-          배선이면 스마트플러그 방식을 쓸 수 없습니다. 2주차에 명판을 확인해 검증하고,
-          막히면 CT 센서로 우회합니다.
+          <strong>해소된 리스크</strong> — 세탁기 정격 전류가 16A를 넘거나 직결 배선이면
+          스마트플러그 방식을 쓸 수 없다는 리스크가 있었습니다. 실매장 20kg 세탁기에서
+          P110M 스마트플러그로 전력 수집부터 알림까지 전체 파이프라인을 구동해
+          해소했습니다. 28kg 세탁기 지원은 추후 과제입니다.
         </p>
 
         <nav className={styles.links}>

@@ -1,0 +1,105 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4) var(--space-3);
+}
+
+.card {
+  width: 100%;
+  max-width: 380px;
+  padding: var(--space-6) var(--space-4) var(--space-5);
+  border-radius: var(--radius-card);
+  background: var(--color-card);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.mascot {
+  height: 96px;
+  width: auto;
+}
+
+.title {
+  margin: var(--space-3) 0 var(--space-1);
+  font-size: var(--text-heading);
+  font-weight: 800;
+}
+
+.tagline {
+  margin: 0 auto var(--space-4);
+  max-width: 26ch;
+  color: var(--color-text-sub);
+  font-size: var(--text-caption);
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-input);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+  text-align: center;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  background: var(--color-card);
+}
+
+.error {
+  margin: var(--space-2) 0 0;
+  color: var(--color-text-sub);
+  font-size: var(--text-caption);
+}
+
+.submit {
+  width: 100%;
+  margin-top: var(--space-3);
+  padding: var(--space-3);
+  border: none;
+  border-radius: var(--radius-button);
+  background: var(--color-primary);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.submit:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+}
+
+.submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 잠금(로그아웃) — 대시보드 위에 작게 얹는다. 운영 화면을 가리지 않게 우하단 고정. */
+.lock {
+  position: fixed;
+  right: var(--space-3);
+  bottom: var(--space-3);
+  z-index: 20;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-badge);
+  background: var(--color-card);
+  color: var(--color-text-sub);
+  font: inherit;
+  font-size: var(--text-caption);
+  font-weight: 600;
+  box-shadow: var(--shadow-card);
+  cursor: pointer;
+}
+
+.lock:hover {
+  color: var(--color-text);
+  border-color: var(--color-primary);
+}

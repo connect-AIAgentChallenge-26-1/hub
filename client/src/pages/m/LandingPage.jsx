@@ -307,13 +307,12 @@ function Progress({ session, status }) {
         <p className={styles.etaNote}>진행되면서 범위가 점점 좁혀져요</p>
       </div>
 
-      {/* 진행 바 위에서 집사 마스코트가 진행률만큼 이동하며 통통 뛴다(장식). */}
+      {/* 집사가 빨랫감을 들고 진행 바 위를 달린다 — 진행률만큼 앞으로 이동하고,
+          2프레임 스프라이트(다리 펼침·모음)를 번갈아 보여줘 실제로 다리를 저으며 달린다. */}
       <div className={styles.track}>
-        <img
-          src="/mascot.png"
-          alt=""
-          aria-hidden="true"
+        <span
           className={styles.runner}
+          aria-hidden="true"
           style={{ left: `${runnerLeft}%` }}
         />
         <div className={styles.bar}>
@@ -354,7 +353,17 @@ function Finished({ name, session, waiting, subscribed }) {
     <>
       <div className={styles.card}>
         <div className={styles.doneHero}>
-          <span className={styles.doneIcon}>🧺</span>
+          {/* 다 끝나면 집사가 따봉 — 방치(waiting)일 땐 아직 못 끝낸 일이라 바구니 아이콘 유지 */}
+          {waiting ? (
+            <span className={styles.doneIcon}>🧺</span>
+          ) : (
+            <img
+              src="/mascot/mascot-collected.png"
+              alt=""
+              aria-hidden="true"
+              className={styles.doneMascot}
+            />
+          )}
           <h2 className={styles.doneTitle}>세탁이 끝났어요</h2>
           <p className={styles.sub}>
             {name} · {formatTime(session.endedAt)} 종료
@@ -427,7 +436,7 @@ function Shell({ children }) {
           <p className={styles.brand}>
             <img src="/mascot.png" alt="" aria-hidden="true" className={styles.mascot} /> 빨래집사
           </p>
-          <p className={styles.store}>○○빨래방 역삼점</p>
+          <p className={styles.store}>워시엔조이 혁신점</p>
         </header>
         {children}
       </div>

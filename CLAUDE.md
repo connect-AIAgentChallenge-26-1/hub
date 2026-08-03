@@ -26,7 +26,7 @@ Task·우선순위·4주 로드맵·진행 상태: `docs/backlog.md`
 |---|---|---|
 | **R — Rules** | 팀의 약속 (반드시 이렇게 작업한다) | 이 문서 `CLAUDE.md` |
 | **S — Skills** | 자주 하는 일 버튼 (복잡한 절차를 한 줄로) | 규칙집은 `.claude/skills/`(`laundry-design`), 사용자 명령은 `.claude/commands/`(`/오늘`, `/팀`, `/pr`) |
-| **A — Agent** | 역할별 전문 AI (분석·구현·검증 분업) | `.claude/agents/` — 아래 4종 |
+| **A — Agent** | 역할별 전문 AI (분석·구현·검증 분업) | `.claude/agents/` — 아래 5종 |
 | **K — KB** | AI용 팀 교과서 (기획·정책·용어) | `docs/` — `plan.md`(기획·왜), `backlog.md`(태스크·누가·언제) |
 
 서브에이전트 (`.claude/agents/`)
@@ -34,6 +34,7 @@ Task·우선순위·4주 로드맵·진행 상태: `docs/backlog.md`
 - `client-builder` — 구현 담당(화면, 서원 영역). `client/` React 화면
 - `server-builder` — 구현 담당(서버, 도경 영역). 상태머신·API·알림
 - `rule-reviewer` — 검증 담당. 변경 diff를 이 문서 규칙과 대조
+- `test-verifier` — 검증 담당. TDD로 만든 기능의 테스트를 실제로 돌려 green 확인 (client·server 공통, 대상 파일 경로로 워크스페이스 판별)
 
 원칙: 에이전트·스킬은 규칙을 새로 쓰지 않고 이 문서·`docs/`·`design-system.md`를 **참조**만 한다 (단일 진실 원천).
 
@@ -91,7 +92,8 @@ client/             # React (Vite) — 5173
     components/
     styles/         # tokens.css (디자인 토큰)
     utils/          # 화면 공용 함수 (시각 표시·경과 시간·진행률)
-    mocks/          # mock 데이터 (구조는 아래 Data Model과 동일)
+    constants.js    # 화면 공용 도메인 상수 (알림 5종 등)
+                    # mocks/ 는 T-17에서 실제 API로 교체 완료 후 제거 (2026-08-03)
 server/             # Express — 3000
   index.js
   routes/
@@ -99,7 +101,7 @@ server/             # Express — 3000
   scripts/          # 센서 폴링, 시뮬레이터
   lib/              # supabase 클라이언트 초기화
 docs/               # plan.md, backlog.md, prototype.html
-assets/             # 마스코트, 로고
+assets/             # 발표용 다이어그램 (마스코트 이미지는 client/public/mascot/ 하나만 둔다)
 ```
 
 client의 `/api`·`/ingest` 요청은 Vite 프록시가 server로 넘긴다. 프론트는 상대 경로로 호출한다.

@@ -172,7 +172,7 @@ function Shell({ children }) {
           <p className={styles.brand}>
             <img src="/mascot.png" alt="" aria-hidden="true" className={styles.mascot} /> 빨래집사
           </p>
-          <p className={styles.store}>○○빨래방 역삼점</p>
+          <p className={styles.store}>워시엔조이 혁신점</p>
         </header>
         <h1 className={styles.title}>매장 현황</h1>
         {children}

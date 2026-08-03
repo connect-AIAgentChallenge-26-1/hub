@@ -283,6 +283,48 @@
   gap: var(--space-1);
 }
 
+/* 기계 이름 왼쪽에 상태별 마스코트를 작게 — 카드가 4개라 32px로 눌러 정보(배지)를 안 가린다 */
+.machineTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.cardMascot {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+/* 세탁 중 카드 — 2프레임 스프라이트(다리 펼침↔모음)를 번갈아 달리게 한다 */
+.cardRunner {
+  flex: none;
+  width: 38px;
+  height: 35px;
+  background-image: url(/mascot/mascot-run-strip.png);
+  background-repeat: no-repeat;
+  background-size: 200% 100%;
+  background-position-x: 0%;
+  animation: cardRun 0.34s steps(2, jump-none) infinite;
+}
+
+@keyframes cardRun {
+  from {
+    background-position-x: 0%;
+  }
+  to {
+    background-position-x: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardRunner {
+    animation: none;
+  }
+}
+
 .machineName {
   margin: 0;
   font-size: var(--text-body);

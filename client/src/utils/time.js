@@ -1,8 +1,6 @@
 /* 화면이 쓰는 시간 계산. 서버는 ISO 문자열만 내려주고, 표시는 전부 여기서 만든다.
    세 화면이 같은 함수를 써야 "방치 32분"이 화면마다 다르게 나오지 않는다. */
 
-export const ABANDON_AFTER_MIN = 30; // CLAUDE.md — DONE → ABANDONED 타이머
-
 /* "18:45" */
 export function formatTime(iso) {
   if (!iso) return "";

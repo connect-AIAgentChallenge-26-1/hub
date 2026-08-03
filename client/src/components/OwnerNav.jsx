@@ -31,7 +31,7 @@ export default function OwnerNav() {
         <p className={styles.brandName}>
           <img src="/mascot.png" alt="" aria-hidden="true" className={styles.mascot} /> 빨래집사
         </p>
-        <p className={styles.store}>○○빨래방 역삼점</p>
+        <p className={styles.store}>워시엔조이 혁신점</p>
       </div>
 
       <nav className={styles.group}>
