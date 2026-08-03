@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import GithubLoginButton from "../components/GithubLoginButton";
 import RepoSelect from "../components/RepoSelect";
 import BranchSelect from "../components/BranchSelect";
-import AnalysisPresetPicker, { type AnalysisPreset } from "../components/AnalysisPresetPicker";
 import { API_BASE_URL, type RepoSummary, type SessionState } from "../lib/api";
 import { useDemoMode } from "../lib/DemoModeContext";
 
@@ -16,7 +15,6 @@ interface State {
   branches: string[];
   branchesLoading: boolean;
   selectedBranch: string;
-  selectedPreset: AnalysisPreset | "";
   errorMessage: string | null;
 }
 
@@ -29,7 +27,6 @@ type Action =
   | { type: "BRANCHES_LOADING" }
   | { type: "BRANCHES_LOADED"; branches: string[] }
   | { type: "SELECT_BRANCH"; branch: string }
-  | { type: "SELECT_PRESET"; preset: AnalysisPreset }
   | { type: "ERROR"; message: string };
 
 const initialState: State = {
@@ -41,7 +38,6 @@ const initialState: State = {
   branches: [],
   branchesLoading: false,
   selectedBranch: "",
-  selectedPreset: "",
   errorMessage: null,
 };
 
@@ -56,13 +52,12 @@ function reducer(state: State, action: Action): State {
     case "REPOS_LOADED":
       return { ...state, repos: action.repos, reposLoading: false };
     case "SELECT_REPO":
-      // Picking a different repo invalidates whatever branch/preset was chosen for the old one.
+      // Picking a different repo invalidates whatever branch was chosen for the old one.
       return {
         ...state,
         selectedRepo: action.fullName,
         branches: [],
         selectedBranch: "",
-        selectedPreset: "",
         errorMessage: null,
       };
     case "BRANCHES_LOADING":
@@ -70,9 +65,7 @@ function reducer(state: State, action: Action): State {
     case "BRANCHES_LOADED":
       return { ...state, branches: action.branches, branchesLoading: false };
     case "SELECT_BRANCH":
-      return { ...state, selectedBranch: action.branch, selectedPreset: "" };
-    case "SELECT_PRESET":
-      return { ...state, selectedPreset: action.preset };
+      return { ...state, selectedBranch: action.branch };
     case "ERROR":
       // Deliberately not cleared by REPOS_LOADED/BRANCHES_LOADED: those fire
       // automatically right after login, which would wipe an OAuth-callback
@@ -88,7 +81,7 @@ export default function RepoConnectPage() {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [starting, setStarting] = useState(false);
   const navigate = useNavigate();
-  const { demoMode, setDemoMode } = useDemoMode();
+  const { demoMode, setDemoMode, enableNewProjectWorkflow } = useDemoMode();
   const [demoModeToggling, setDemoModeToggling] = useState(false);
   const [resetting, setResetting] = useState(false);
   const [devToolsMessage, setDevToolsMessage] = useState<string | null>(null);
@@ -153,19 +146,17 @@ export default function RepoConnectPage() {
         body: JSON.stringify({
           repoId: state.selectedRepo,
           branch: state.selectedBranch,
-          preset: state.selectedPreset,
         }),
         credentials: "include",
       });
       if (!res.ok) {
-        // AI_QUOTA_EXCEEDED (Gemini 429 during report generation) comes back
-        // with an already human-readable `error` — reusing it here instead of
-        // a generic message is the whole point, not a case to special-case
-        // further; no retry, a daily quota won't recover within this request.
         const data = await res.json().catch(() => ({}));
         throw new Error(data.error ?? "analysis start failed");
       }
-      navigate("/analysis");
+      // Analysis is Roslyn/jscpd only now (no Gemini report step), so there's
+      // no prose report left to review on /analysis — go straight to the
+      // next stage, same routing AnalysisReportPage's own Approve used.
+      navigate(enableNewProjectWorkflow ? "/workspace" : "/expansions/new");
     } catch (err) {
       setStarting(false);
       dispatch({
@@ -209,7 +200,7 @@ export default function RepoConnectPage() {
 
   if (state.sessionLoading) return null;
 
-  const canStart = state.selectedBranch !== "" && state.selectedPreset !== "" && !starting;
+  const canStart = state.selectedBranch !== "" && !starting;
 
   return (
     <section style={{ padding: "32px 24px", maxWidth: 1080, margin: "0 auto" }}>
@@ -251,16 +242,10 @@ export default function RepoConnectPage() {
               onChange={(branch) => dispatch({ type: "SELECT_BRANCH", branch })}
             />
           </div>
-
-          <AnalysisPresetPicker
-            value={state.selectedPreset}
-            disabled={!state.selectedBranch}
-            onChange={(preset) => dispatch({ type: "SELECT_PRESET", preset })}
-          />
         </div>
         <div className="card-foot">
           <button className="primary" disabled={!canStart} onClick={handleStart}>
-            연결 및 분석 시작 →
+            시작하기 →
           </button>
         </div>
       </div>

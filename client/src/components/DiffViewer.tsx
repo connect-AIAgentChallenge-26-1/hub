@@ -7,6 +7,10 @@ const CHANGE_LABEL: Record<FileChange["changeType"], string> = {
   deleted: "삭제",
 };
 
+// Same threshold/reasoning as MarkdownViewer's — past this many lines the
+// diff pane scrolls internally (see pre.diff's max-height in base.css).
+const LONG_CONTENT_LINE_THRESHOLD = 200;
+
 interface Props {
   file: FileChange | null;
   commitMessage: string;
@@ -33,8 +37,15 @@ export default function DiffViewer({
   return (
     <div className="diff-pane">
       <div className="diff-head">
-        <span className="path">{file ? file.path : "선택된 파일이 없습니다"}</span>
-        {file && <span className={`badge change-badge ${file.changeType}`}>{CHANGE_LABEL[file.changeType]}</span>}
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span className="path">{file ? file.path : "선택된 파일이 없습니다"}</span>
+          {file && <span className={`badge change-badge ${file.changeType}`}>{CHANGE_LABEL[file.changeType]}</span>}
+        </div>
+        {diffLines.length > LONG_CONTENT_LINE_THRESHOLD && (
+          <span className="label-mono" style={{ margin: 0 }}>
+            총 {diffLines.length}줄
+          </span>
+        )}
       </div>
 
       <pre className="diff">

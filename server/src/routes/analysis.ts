@@ -5,7 +5,10 @@ import { getUserDataPath, ANALYZER_DIR } from "../utils/paths";
 import { runAnalyzer } from "../utils/analyzer";
 import { runJscpd } from "../utils/jscpd";
 import { findRefactorTargets } from "../utils/refactorTargets";
-import { generateAnalysisReport } from "../utils/geminiReport";
+// generateAnalysisReport (Roslyn/jscpd 결과 -> Gemini 산문 리포트) is kept
+// in geminiReport.ts for when the 9-step workflow's report screen is back in
+// use, but the analysis pipeline itself no longer calls it — see analysis
+// route's POST /start below.
 import { saveDocument, getDocument } from "../utils/documents";
 import { AiRequestError, toErrorResponseBody } from "../utils/geminiError";
 import { isDemoMode, demoDelay } from "../utils/demoMode";
@@ -19,10 +22,18 @@ const router = Router();
 const ANALYSIS_TARGET = path.join(ANALYZER_DIR, "samples");
 const ANALYSIS_STEP_ID = 0; // 00_Analysis_Report.md sits ahead of the 9-step workflow proper.
 
+// The preset picker UI (빠름/기본/상세) was removed from RepoConnectPage, so
+// the client no longer sends a preset. There was never any actual branching
+// on preset value in this pipeline — runAnalyzer/runJscpd always ran the
+// same way regardless of what was stored in analysis_preset — so fixing it
+// here doesn't drop any real behavior, only the no-longer-collected label.
+// "standard" is picked because that's the option the old UI itself marked
+// "권장"(recommended).
+const DEFAULT_ANALYSIS_PRESET = "standard";
+
 interface StartAnalysisRequest {
   repoId?: string;
   branch?: string;
-  preset?: string;
 }
 
 interface AnalysisStats {
@@ -63,10 +74,10 @@ async function readProjectSafely(userId: number): Promise<StoredProject | null> 
 
 router.post("/start", async (req, res) => {
   const userId = req.userId!;
-  const { repoId, branch, preset } = req.body as StartAnalysisRequest;
+  const { repoId, branch } = req.body as StartAnalysisRequest;
 
-  if (!repoId || !branch || !preset) {
-    return res.status(400).json({ error: "repoId, branch, and preset are all required." });
+  if (!repoId || !branch) {
+    return res.status(400).json({ error: "repoId and branch are both required." });
   }
 
   const projectFile = getUserDataPath(userId, "project.json");
@@ -74,7 +85,7 @@ router.post("/start", async (req, res) => {
   let project: StoredProject = {
     repo_url: `https://github.com/${repoId}`,
     branch,
-    analysis_preset: preset,
+    analysis_preset: DEFAULT_ANALYSIS_PRESET,
     connected_at: new Date().toISOString(),
     status: "queued",
   };
@@ -97,12 +108,13 @@ router.post("/start", async (req, res) => {
       return res.json({ ...project, classes: [], duplicates: [], refactorTargets: [], report: MOCK_ANALYSIS_REPORT });
     }
 
+    // Roslyn + jscpd only — the Gemini call that used to turn this into
+    // 00_Analysis_Report.md prose has been removed from this pipeline (see
+    // geminiReport.ts). analysis_status flips to "completed" as soon as this
+    // structured data is saved, without waiting on an AI call.
     const { classes } = await runAnalyzer(ANALYSIS_TARGET);
     const { duplicates } = await runJscpd(ANALYSIS_TARGET);
     const refactorTargets = findRefactorTargets(classes);
-    const report = await generateAnalysisReport({ classes, duplicates, refactorTargets });
-
-    await saveDocument(userId, ANALYSIS_STEP_ID, "docs/00_Analysis_Report.md", report);
 
     const stats: AnalysisStats = {
       dependencyCount: classes.reduce((sum, c) => sum + c.baseTypes.length + c.referencedTypes.length, 0),
@@ -115,7 +127,7 @@ router.post("/start", async (req, res) => {
     project = { ...project, status: "completed", stats };
     await writeJson(projectFile, project);
 
-    res.json({ ...project, classes, duplicates, refactorTargets, report });
+    res.json({ ...project, classes, duplicates, refactorTargets });
   } catch (err) {
     project = { ...project, status: "failed" };
     await writeJson(projectFile, project);

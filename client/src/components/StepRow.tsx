@@ -1,7 +1,7 @@
-import type { Step } from "../lib/api";
+import type { SidebarStep } from "../lib/api";
 
 interface Props {
-  step: Step;
+  step: SidebarStep;
   isSelected: boolean;
   onSelect: (id: number) => void;
 }

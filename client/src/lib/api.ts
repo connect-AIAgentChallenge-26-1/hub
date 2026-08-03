@@ -21,6 +21,17 @@ export interface Step {
   agent_name: string;
 }
 
+// Minimal shape StepSidebar/StepRow actually need — Step (9-step workflow)
+// structurally satisfies this as-is, and the Feature Expansion Workflow's
+// own steps (no agent_name) satisfy it too, so both sidebars can share the
+// exact same components without a cast.
+export interface SidebarStep {
+  id: number;
+  name: string;
+  status: "pending" | "active" | "done";
+  progress_pct: number;
+}
+
 export interface ChatMessage {
   id: string;
   from: "user" | "agent";

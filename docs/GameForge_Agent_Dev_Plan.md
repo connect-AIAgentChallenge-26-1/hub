@@ -11,7 +11,7 @@
 - 대상 저장소: 사용자가 소유/쓰기 권한을 가진 GitHub Repository
 - AI: Google Gemini API — Agent별로 system prompt만 다르고 동일 모델 사용 (원 기획서 6번 원칙)
 - **[v7] 사용자 범위**: 하나의 서버 인스턴스에 **여러 명이 로그인해도 데이터가 서로 격리**된다 (GitHub 계정 = 사용자 식별자). 단, 이번 스코프는 **유저 1명당 프로젝트 1개**로 제한 — 프로젝트 목록·전환 UI는 다음 단계
-- 이번 계획의 목표 범위: **UI Spec 문서에 정의된 3개 화면(Repo 연결 / 분석 리포트 / Agent 워크스페이스)까지 동작하는 MVP**. Feature Expansion Workflow(기존 프로젝트에 기능 추가)는 다음 단계로 미룬다.
+- 이번 계획의 목표 범위: **UI Spec 문서에 정의된 3개 화면(Repo 연결 / 분석 리포트 / Agent 워크스페이스)까지 동작하는 MVP**. Feature Expansion Workflow(기존 프로젝트에 기능 추가)는 다음 단계로 미룬다. (**이후 Week 5(Day 19~22)에서 실제로 구현 완료**)
 
 ---
 
@@ -366,7 +366,6 @@ Approve 시: 계산된 새 전체 내용을 GitHub Contents API로 그대로 PUT
 
 ## 8. 이번 계획에서 제외한 것 (다음 단계)
 
-- Feature Expansion Workflow (기존 프로젝트에 새 기능 추가, 원 기획서 11번)
 - 반려 사유 입력 UI
 - UML 자동 생성/시각화, Unity Scene 분석 (Future Work 16번)
 - GitHub Pull Request 자동 생성
