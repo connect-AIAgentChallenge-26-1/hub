@@ -1,0 +1,166 @@
+{
+  "schemaVersion": 1,
+  "title": "GamePM: 승인 기반 게임 기획 작업장",
+  "summary": "Codex와 저장소 로컬 규칙을 결합해 게임 기획 문서, 창작 제안, 승인·결정·버전 이력을 안전하게 관리하는 문서형 작업장입니다.",
+  "githubUser": "surleun(정문영)",
+  "demoUrl": "https://github.com/surleun/hub",
+  "demoVideoUrl": "",
+  "thumbnail": "thumbnail.png",
+  "screenshots": [
+    "screenshots/documents.png",
+    "screenshots/tbd-handling.png",
+    "screenshots/conflict-handling.png"
+  ],
+  "problem": "혼자 게임을 기획할 때 아이디어, 확정 설정, 변경 요청과 결정 근거가 여러 문서에 흩어지기 쉽고, AI가 확정 문서를 바로 수정하면 무엇이 왜 바뀌었는지 추적하기 어렵습니다.",
+  "targetUsers": [
+    "게임 기획 자료를 Markdown으로 관리하는 개인 게임 기획자",
+    "AI 초안을 활용하면서 확정 변경 권한과 이력을 직접 통제하려는 게임 기획자"
+  ],
+  "features": [
+    "프로젝트마다 Brief, 확정 문서, 아이디어, 승인 큐, 결정과 버전 기록을 분리해 관리합니다.",
+    "AI가 만든 초안과 창작 제안을 명시적 승인 전까지 확정 문서와 분리합니다.",
+    "일반 기획, 시나리오와 인게임 스크립트를 역할별 전문 Agent가 작성하고 독립 Reviewer가 출처와 범위를 검수합니다.",
+    "기존 역할로 표현할 수 없는 새로운 작업 책임에는 전문 Agent를 확장하고, 각 프로젝트에는 필요한 분야별 Project Creative Agent Rule(PCA)을 추가해 공용 Agent를 프로젝트 전용 전문가로 적응시킵니다.",
+    "Python 검증기로 프로젝트 격리, 링크, 승인 참조, 출처와 창작 규칙 무결성을 점검합니다."
+  ],
+  "featureTags": [
+    "Human in the Loop",
+    "게임 기획 문서",
+    "승인·버전 추적",
+    "확장형 전문 Agent",
+    "출처 추적"
+  ],
+  "techStack": [
+    "Codex",
+    "Markdown",
+    "Python",
+    "unittest",
+    "GitHub Actions"
+  ],
+  "techHighlights": [
+    "AGENTS.md와 역할별 Workflow·Template·Skill이 요청 분기와 문서 소유권, 승인 경계를 명시합니다.",
+    "기존 역할로 처리할 수 없는 새로운 작업 책임에는 전문 Agent를 확장하고, 프로젝트별 창작 요구에는 필요한 시점에 분야별 PCA를 설계·구현하는 이중 확장 구조를 사용합니다.",
+    "전문 Agent를 Specialist Task Packet으로 호출하고 시나리오와 고위험 창작 결과를 독립 검수합니다.",
+    "Python 표준 라이브러리 기반 검증과 unittest로 프로젝트 구조, 승인 연결, provenance와 Project Creative Agent Rule 무결성을 검사합니다.",
+    "프로젝트별 canonical 문서와 제안·결정·버전 기록을 분리해 AI 작업의 근거와 변경 과정을 추적할 수 있습니다."
+  ],
+  "developmentWithAI": "저는 게임 기획 작업장의 목표와 Human in the Loop 승인 원칙을 정했습니다. AI와 함께 요구사항을 역할별 규칙, Workflow, Template과 Skill로 구체화하고, 검증 코드와 테스트로 프로젝트 격리와 추적성 규칙을 점검했습니다.",
+  "agent": {
+    "summary": "고정된 Agent 목록에 머물지 않고 새로운 작업 책임에는 전문 Agent를 확장하며, 프로젝트마다 필요한 분야별 PCA를 추가해 공용 Agent를 해당 게임의 창작 방향과 허용 범위에 맞는 전용 전문가로 적응시킵니다.",
+    "agentTools": [
+      {
+        "type": "agent",
+        "name": "design_creative_planner",
+        "purpose": "비시나리오 기획의 누락을 분류하고 사용자가 허가한 GAP에 복수 대안과 추천안을 만듭니다."
+      },
+      {
+        "type": "agent",
+        "name": "design_creative_reviewer",
+        "purpose": "비시나리오 창작 결과의 출처 충실도, 범위, 위험과 검증 조건을 독립 검수합니다."
+      },
+      {
+        "type": "agent",
+        "name": "scenario_designer",
+        "purpose": "일반 시나리오의 원안 기반 Draft와 별도 구조 개선안을 작성합니다."
+      },
+      {
+        "type": "agent",
+        "name": "scenario_writer",
+        "purpose": "확정 시나리오를 플레이어 노출 대사·지문·선택지와 Scene 구현 명세로 작성합니다."
+      },
+      {
+        "type": "agent",
+        "name": "scenario_reviewer",
+        "purpose": "시나리오와 인게임 스크립트의 원본 충실도, 서사 품질과 플레이 가능성을 독립 검수합니다."
+      },
+      {
+        "type": "skill",
+        "name": "planning_assistant",
+        "purpose": "게임 기획 요청을 분석하고 필요한 산출물과 질문을 구조화합니다."
+      },
+      {
+        "type": "skill",
+        "name": "conflict_review",
+        "purpose": "기획 변경안과 기존 확정 자료 사이의 충돌과 영향 범위를 검토합니다."
+      },
+      {
+        "type": "skill",
+        "name": "document_completion",
+        "purpose": "기획 Draft의 누락을 사용자 사실, 의존성 또는 창작 가능한 GAP으로 분류합니다."
+      },
+      {
+        "type": "skill",
+        "name": "design_creative_completion",
+        "purpose": "허가된 비시나리오 GAP에 출처 기반 대안과 추천안을 생성하고 창작 provenance를 남깁니다."
+      },
+      {
+        "type": "skill",
+        "name": "korean_game_design_style",
+        "purpose": "한국어 게임 기획 문서를 간결하고 검토하기 쉬운 형식으로 작성합니다."
+      },
+      {
+        "type": "skill",
+        "name": "scenario_review",
+        "purpose": "사건 인과, 인물 동기, 정보 공개, 선택과 분기 구조를 검토합니다."
+      },
+      {
+        "type": "skill",
+        "name": "scenario_writing",
+        "purpose": "플레이어 주도권, Scene 데이터와 창작 각주를 갖춘 인게임 스크립트를 구성합니다."
+      }
+    ],
+    "workflows": [
+      {
+        "name": "전문 역량 확장 Workflow",
+        "steps": [
+          "사용자 요청이 기존 전문 역할과 PCA로 처리 가능한지 판정",
+          "기존 역할과 본질적으로 다른 작업 책임이면 새 전문 Agent 확장 검토",
+          "프로젝트별 차이는 분야별 PCA 설정 계획으로 구체화",
+          "사용자의 명시적 구현 요청 후 필요한 PCA만 활성화",
+          "규칙 ID·버전·SHA-256과 검수 계약을 기록해 재현성 확보"
+        ]
+      },
+      {
+        "name": "비시나리오 기획 창작 Workflow",
+        "steps": [
+          "대상 프로젝트와 canonical 문서 확인",
+          "Draft의 GAP 분류",
+          "사용자에게 창작 가능한 GAP 허가 확인",
+          "허가된 GAP의 복수 대안과 추천안 생성",
+          "필요한 독립 검수 수행",
+          "선택안을 pending 승인 초안으로 정리"
+        ]
+      },
+      {
+        "name": "일반 시나리오 작성 Workflow",
+        "steps": [
+          "프로젝트 창작 규칙과 근거 문서 확인",
+          "Specialist Task Packet 작성",
+          "scenario_designer가 Draft와 개선안을 분리 작성",
+          "scenario_reviewer가 원본과 직접 대조",
+          "필수 수정 해소 후 pending 승인 초안 준비"
+        ]
+      },
+      {
+        "name": "인게임 스크립트 작성 Workflow",
+        "steps": [
+          "프로젝트 자료로 Writer's Brief 구성",
+          "scenario_writer가 대사·지문·선택지와 Scene 명세 작성",
+          "CW와 NR provenance로 창작과 서사 변경 공개",
+          "scenario_reviewer 독립 검수",
+          "연결된 문서 변경을 원자적 승인 초안으로 정리"
+        ]
+      },
+      {
+        "name": "승인 적용 Workflow",
+        "steps": [
+          "명시적 승인 ID 확인",
+          "대상 원본과 기준 정보 재확인",
+          "승인된 변경만 확정 문서에 적용",
+          "Decision Log와 Version History 갱신",
+          "Approval Queue 상태를 applied로 변경"
+        ]
+      }
+    ]
+  }
+}
