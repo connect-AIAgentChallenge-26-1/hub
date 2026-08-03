@@ -2,6 +2,8 @@
 
 모든 엔드포인트는 `/api/letters` 아래에 마운트되어 있습니다. 모든 응답은 `{ data, error }` 형태로 고정 래핑됩니다(성공 시 `error: null`, 실패 시 `data: null`).
 
+`/api/letters` 하위 쓰기 요청은 IP당 60초에 30회로 제한됩니다.
+
 ## 모임(Letter)
 
 | Method | Path | 설명 |
@@ -54,6 +56,12 @@
 |---|---|---|
 | POST | `/api/letters/:token/expenses` | 지출 항목 등록 |
 | GET | `/api/letters/:token/expenses` | 지출 목록 및 정산(분배) 결과 조회 |
+
+## 공유 미리보기(Share)
+
+| Method | Path | 설명 |
+|---|---|---|
+| GET | `/share/:token` | 메신저(카카오톡 등) 크롤러용 정적 미리보기 HTML. `{ data, error }` 래핑의 유일한 예외 — og 태그가 채워진 HTML을 직접 반환한다. 사람이 열면 즉시 `/scr0/join?token=...`으로 리다이렉트된다. |
 
 ---
 

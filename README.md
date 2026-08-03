@@ -25,18 +25,25 @@ Render 무료 인스턴스는 일정 시간 요청이 없으면 슬립 상태가
 - 필요한 역할은 참여자가 직접 만들고, 그 역할에 누가 어울릴지는 AI가 배정을 추천합니다.
 - 진행 상황을 체크리스트로 관리하며, 항목은 AI 추천과 직접 추가 중 선택할 수 있습니다.
 - 모임 종료 후 결산 리뷰와 비용 정산(지출 등록, 1/N 자동 분배)을 확인합니다.
+- 응답 마감일을 정해두면 마감이 가까울 때 배너로 알려줍니다.
+- 확정된 일정을 `.ics` 파일로 내려받아 캘린더 앱에 바로 추가할 수 있습니다.
+- 정산 결과를 이미지로 저장해 공유할 수 있습니다.
+- 공유 링크를 메신저에 붙여넣으면 모임명이 담긴 미리보기 카드로 표시됩니다.
 
 ## Tech Stack
 
 ### Frontend
-- React (Vite)
-- React Router
+- React 19.2 (Vite 8.1)
+- React Router 7.18
+- Howler.js 2.2 (사운드)
 - 순수 CSS 변수 기반 디자인 시스템 (Tailwind 등 UI 라이브러리 미사용)
-- Vitest + Testing Library (컴포넌트/유닛 테스트)
+- Vitest 4.1 + Testing Library 16.3 (컴포넌트/유닛 테스트), oxlint 1.71 (lint)
 
 ### Backend
-- Node.js / Express
+- Node.js (ESM) / Express 5.2
+- @supabase/supabase-js 2.110, nanoid 6.0 (그룹 링크 토큰), cors 2.8, dotenv 17.4
 - API 응답은 `{ data, error }` 형태로 고정 래핑
+- `/api/letters` 하위 쓰기 요청은 자체 rate limit 미들웨어로 IP당 60초에 30회 제한 (Render 프록시 뒤에서도 실제 클라이언트 IP를 보도록 `trust proxy` 설정)
 
 ### Database
 - Supabase (Postgres)
@@ -70,7 +77,7 @@ flowchart LR
     PatchConfirm["PATCH /:token/confirm"]
     PostSuggest["POST /:token/suggest"]
   end
-  DB[("Supabase\nletters / responses")]
+  DB[("Supabase<br/>letters / responses")]
 
   Compose -->|생성| PostLetter --> DB
   Join -->|응답 제출| PostResp --> DB
@@ -95,7 +102,7 @@ flowchart LR
     PostSuggest2["POST /:token/suggest"]
     Tasks["/:token/roles/:roleId/tasks (GET/POST/PATCH/DELETE)"]
   end
-  DB2[("Supabase\nroles / role_tasks")]
+  DB2[("Supabase<br/>roles / role_tasks")]
 
   Assign -->|역할 생성| PostRole --> DB2
   Assign -->|배정 추천 요청| PostSuggest2
