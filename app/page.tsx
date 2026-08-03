@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { AppHeader, BottomNav } from "./AppChrome";
 import {
   apiBaseUrl,
   getRequestErrorMessage,
@@ -87,24 +88,18 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-cream flex flex-col max-w-md mx-auto px-5 pt-6 pb-24">
-      {/* 헤더 */}
-      <header className="flex items-center justify-between mb-8">
-        <span className="text-xl font-semibold tracking-tight text-ink">
-          later.
-        </span>
-        <div className="w-8 h-8 rounded-full bg-white border border-creamDeep" />
-      </header>
+    <main className="mx-auto flex min-h-screen max-w-md flex-col bg-white px-6 pb-24 pt-8 sm:px-7">
+      <AppHeader />
 
       {/* 저장 입력 영역 */}
-      <section className="mb-8">
-        <h1 className="text-2xl font-bold leading-snug text-ink mb-4">
+      <section className="mb-10">
+        <h1 className="mb-7 text-[34px] font-bold leading-[1.18] tracking-[-0.035em] text-ink sm:text-[36px]">
           무엇을
           <br />
           저장할까요?
         </h1>
 
-        <div className="bg-white rounded-xl2 p-4 shadow-sm border border-creamDeep">
+        <div className="rounded-[22px] border border-creamDeep bg-white p-5 shadow-[0_14px_32px_rgba(20,20,25,0.06)]">
           <textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -117,14 +112,14 @@ export default function Home() {
             }}
             placeholder="링크나 텍스트를 붙여넣으세요"
             rows={3}
-            className="w-full resize-none outline-none text-sm text-ink placeholder:text-muted bg-transparent"
+            className="w-full resize-none bg-transparent text-[15px] leading-6 text-ink outline-none placeholder:text-muted"
           />
           {imagePreviewUrl && selectedImage && (
             <div className="mt-3 rounded-xl border border-creamDeep bg-cream/40 p-2">
               <img
                 src={imagePreviewUrl}
                 alt="선택한 이미지 미리보기"
-                className="max-h-48 w-full rounded-lg object-cover"
+              className="max-h-48 w-full rounded-xl object-cover"
               />
               <div className="mt-2 flex items-center justify-between gap-2">
                 <span className="truncate text-xs text-muted">
@@ -153,12 +148,12 @@ export default function Home() {
             />
             <button
               type="button"
-              className="flex items-center gap-1 text-xs text-muted border border-creamDeep rounded-full px-3 py-1.5"
+              className="flex items-center gap-1 rounded-full bg-[#f1f1f3] px-3 py-2 text-xs font-medium text-ink"
               onClick={() => imageInputRef.current?.click()}
             >
               📎 {selectedImage ? "이미지 변경" : "이미지"}
             </button>
-            <span className="text-xs text-muted">스크린샷도 저장돼요</span>
+            <span className="max-w-[8rem] text-right text-xs leading-4 text-muted">스크린샷도 저장돼요</span>
           </div>
         </div>
 
@@ -166,7 +161,7 @@ export default function Home() {
           type="button"
           onClick={handleSave}
           disabled={saving || (!input.trim() && !selectedImage)}
-          className="w-full mt-4 bg-accent hover:bg-accentDark disabled:opacity-50 text-white font-medium rounded-xl2 py-3.5 transition-colors"
+          className="mt-5 w-full rounded-xl2 bg-ink py-4 font-semibold text-white shadow-[0_12px_28px_rgba(20,20,25,0.12)] transition-colors hover:bg-[#303036] disabled:opacity-40"
         >
           {saving ? "저장하는 중..." : "저장"}
         </button>
@@ -176,7 +171,7 @@ export default function Home() {
       {savedItem && (
         <section
           role="status"
-          className="mb-4 rounded-xl border border-accent/30 bg-white px-4 py-3"
+          className="mb-4 rounded-xl2 border border-creamDeep bg-[#f7f7f8] px-5 py-4"
         >
           <p className="text-sm font-medium text-ink">
             &lsquo;{savedItem.title ?? "저장한 항목"}&rsquo;을 저장했어요.
@@ -187,24 +182,14 @@ export default function Home() {
           </p>
           <Link
             href="/categories"
-            className="mt-2 inline-block text-sm font-medium text-accentDark"
+            className="mt-3 inline-block text-sm font-semibold text-ink underline underline-offset-4"
           >
             분류 결과 확인하기 →
           </Link>
         </section>
       )}
 
-      {/* 하단 네비게이션 */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white border-t border-creamDeep">
-        <div className="max-w-md mx-auto flex justify-around pt-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-xs text-muted">
-          <Link href="/" className="text-accentDark font-medium">
-            홈
-          </Link>
-          <Link href="/categories">카테고리</Link>
-          <Link href="/archive">아카이브</Link>
-          <span>설정</span>
-        </div>
-      </nav>
+      <BottomNav active="home" />
     </main>
   );
 }

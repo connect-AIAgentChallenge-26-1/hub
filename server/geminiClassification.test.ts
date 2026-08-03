@@ -128,8 +128,33 @@ describe("createGeminiClassifier", () => {
         ),
         responseMimeType: "application/json",
         responseJsonSchema: expect.any(Object),
+        tools: [{ urlContext: {} }],
       }),
     });
+  });
+
+  it("일반 텍스트 분석에는 URL Context를 활성화하지 않는다", async () => {
+    const generateContent = vi.fn().mockResolvedValue({
+      text: JSON.stringify({
+        categoryMain: "공부",
+        categorySub: "프로그래밍",
+        displayTitle: "데이터베이스 인덱스 핵심",
+        summary: "인덱스는 조회 범위를 줄여 읽기 속도를 높이지만, 쓰기 비용과 저장 공간을 늘리므로 자주 조회하는 열에 선별적으로 적용해야 합니다.",
+      }),
+    });
+    const classifier = createGeminiClassifier(
+      "test-key",
+      "test-model",
+      { models: { generateContent } } as never
+    );
+
+    await classifier({ content: "데이터베이스 인덱스는 조회 성능과 쓰기 비용을 함께 고려해야 한다." });
+
+    expect(generateContent).toHaveBeenCalledWith(
+      expect.objectContaining({
+        config: expect.not.objectContaining({ tools: expect.anything() }),
+      })
+    );
   });
 
   it("이미지와 텍스트를 Gemini inline data 요청에 함께 전달한다", async () => {
