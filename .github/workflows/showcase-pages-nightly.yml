@@ -1,0 +1,16 @@
+name: Nightly Showcase Pages
+
+on:
+  schedule:
+    # 매일 한국 시간 오후 11시
+    - cron: '0 14 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    uses: connect-AIAgentChallenge-26-1/hub/.github/workflows/showcase-pages.yml@dashboard-page

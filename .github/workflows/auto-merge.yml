@@ -1,8 +1,9 @@
-name: "PR merge on time v3.3 by crong"
+name: "PR merge on time v3.4 by crong"
 
 on:
   schedule:
     - cron: "0 13 * * *"
+    - cron: "30 13 * * *"
   workflow_dispatch:
 
 permissions:
@@ -18,6 +19,8 @@ jobs:
     steps:
       - name: "Merge pull request"
         uses: "actions/github-script@v7"
+        env:
+          AUTO_MERGE_MEMBER_LOGINS: ${{ vars.AUTO_MERGE_MEMBER_LOGINS }}
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
@@ -41,6 +44,18 @@ jobs:
             }`
 
             const repo = { owner: context.repo.owner, repo: context.repo.repo };
+            const memberLogins = new Set(
+              (process.env.AUTO_MERGE_MEMBER_LOGINS || "")
+                .split(",")
+                .map(login => login.trim().toLowerCase())
+                .filter(Boolean)
+            );
+
+            if (memberLogins.size === 0) {
+              throw new Error("AUTO_MERGE_MEMBER_LOGINS 저장소 변수가 비어 있습니다.");
+            }
+
+            console.log(`자동 병합 허용 멤버 ${memberLogins.size}명 확인`);
 
             // ---------- low-level API helpers ----------
             async function comment(pr, body) {
@@ -61,18 +76,40 @@ jobs:
             }
 
             // ---------- predicates ----------
-            const isTargetingMain     = (pr) => pr.baseRefName === "main";
-            const hasReviewLabel      = (pr) => pr.labels.nodes.some(l => l.name.toLowerCase() === "review");
-            const isChangesRequested  = (pr) => pr.reviews?.nodes?.[0]?.state === "CHANGES_REQUESTED";
-            const isConflicting       = (pr) => pr.mergeable === "CONFLICTING";
+            const hasLabel = (pr, labelName) =>
+              pr.labels.nodes.some(l => l.name.toLowerCase() === labelName);
+
+            const hasAllowMainLabel  = (pr) => hasLabel(pr, "allow-main");
+            const isTargetingMain    = (pr) => pr.baseRefName === "main" && !hasAllowMainLabel(pr);
+            const hasReviewLabel     = (pr) => hasLabel(pr, "review");
+            const isChangesRequested = (pr) => pr.reviews?.nodes?.[0]?.state === "CHANGES_REQUESTED";
+            const isConflicting      = (pr) => pr.mergeable === "CONFLICTING";
+            const isUnknown          = (pr) => pr.mergeable === "UNKNOWN";
+            const isMember           = (pr) => memberLogins.has(pr.author?.login?.toLowerCase());
 
             // ---------- actions ----------
-            async function skipMain(pr) {
-              await comment(pr, "main 브랜치로 병합 시도");
+            async function closeMain(pr) {
+              try {
+                await closePR(pr);
+                await comment(
+                  pr,
+                  "main 브랜치 대상 PR은 자동 병합 대상이 아닙니다. 본인 브랜치/지정된 제출 흐름으로 다시 PR을 보내주세요."
+                );
+              } catch (e) {
+                console.log(`PR #${pr.number} main 대상 close 처리 실패:`, e);
+              }
             }
 
             async function skipReviewLabel(pr) {
               // 코멘트 없이 로그만 (기존 동작 유지)
+            }
+
+            async function skipExternal(pr) {
+              await comment(pr, "조직 멤버가 작성한 PR만 자동 병합합니다. 작성자 확인 후 수동으로 병합해주세요.");
+            }
+
+            async function skipUnknown(pr) {
+              await comment(pr, "머지 가능 여부 확인 중이라 다음 실행에서 재시도합니다.");
             }
 
             async function deferChangesRequested(pr) {
@@ -99,10 +136,12 @@ jobs:
 
             // ---------- rules (배열 순서 = 우선순위) ----------
             const rules = [
-              { name: "main 브랜치 타겟 → 스킵",   match: isTargetingMain,     run: skipMain              },
-              { name: "review 라벨 → 스킵",        match: hasReviewLabel,      run: skipReviewLabel       },
-              { name: "변경 요청 상태 → 연기",     match: isChangesRequested,  run: deferChangesRequested },
-              { name: "충돌 → close",              match: isConflicting,       run: closeOnConflict       },
+              { name: "외부 작성자 → 스킵", match: (pr) => !isMember(pr), run: skipExternal },
+              { name: "main 브랜치 타겟 → close", match: isTargetingMain, run: closeMain },
+              { name: "review 라벨 → 스킵", match: hasReviewLabel, run: skipReviewLabel },
+              { name: "변경 요청 상태 → 연기", match: isChangesRequested, run: deferChangesRequested },
+              { name: "머지 상태 확인 중 → 스킵", match: isUnknown, run: skipUnknown },
+              { name: "충돌 → close", match: isConflicting, run: closeOnConflict }
             ];
             const defaultRule = { name: "조건 통과 → 머지", match: () => true, run: mergeIfReady };
 
