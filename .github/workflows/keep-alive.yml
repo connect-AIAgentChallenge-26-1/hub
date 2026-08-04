@@ -1,0 +1,18 @@
+name: Keep Server Alive
+
+on:
+  schedule:
+    # 10분 간격 — Render 무료 플랜은 통상 15분 유휴 시 슬립되므로 그보다 짧은 주기로 핑을
+    # 보내 콜드스타트(수십 초 지연)를 방지한다 (이슈 #142). GitHub Actions 크론 최소 간격은
+    # 5분이나, 실제 실행은 예약 시각보다 지연될 수 있어 여유를 두고 10분으로 설정.
+    - cron: '*/10 * * * *'
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping /api/health
+        run: |
+          curl -sf -o /dev/null -w "status=%{http_code} time=%{time_total}s\n" \
+            https://hub-server-vers.onrender.com/api/health
