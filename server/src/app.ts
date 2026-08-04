@@ -2,6 +2,7 @@ import 'dotenv/config'
 import cors from 'cors'
 import express from 'express'
 import helmet from 'helmet'
+import { matchRateLimiter, subsidiesRateLimiter } from './middleware/rate-limit.js'
 import { healthRouter } from './routes/health.js'
 import { matchRouter } from './routes/match.js'
 import { subsidiesRouter } from './routes/subsidies.js'
@@ -13,5 +14,5 @@ app.use(cors({ origin: process.env.CLIENT_ORIGIN ?? 'http://localhost:5173' }))
 app.use(express.json())
 
 app.use('/api/health', healthRouter)
-app.use('/api/subsidies', subsidiesRouter)
-app.use('/api/match', matchRouter)
+app.use('/api/subsidies', subsidiesRateLimiter, subsidiesRouter)
+app.use('/api/match', matchRateLimiter, matchRouter)
