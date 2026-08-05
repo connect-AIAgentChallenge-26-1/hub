@@ -415,12 +415,19 @@ function matchesRegion(subsidy: MatchCandidate, profile: OnboardingProfile): boo
 
 /**
  * 이슈 #92: profile.supportRealm(복수선택)과 subsidy.supportRealm(단일값)을 hard filter로
- * 비교한다 — region과 달리 subsidy.supportRealm은 실측 결측 0%라 "정보 없음" 예외가 없다.
- * profile.supportRealm이 비어있으면(zod가 min(1)로 막아 실제로는 안 생기지만 방어적으로)
- * 필터링하지 않는다.
+ * 비교한다. 이슈 #92 도입 당시 실측 300건 표본에선 결측 0%였으나, 이슈 #125에서 전체
+ * 데이터(1,515건) 기준 0.26%(4건) 결측이 확인됨 — bizinfo API가 해당 필드를 비워서
+ * 내려주는 경우로, subsidy.supportRealm이 빈 문자열이면 region(matchesRegion)과 동일하게
+ * "정보 없음"으로 간주해 하드 필터를 건너뛴다(하드 필터로 영원히 매칭 결과에서 사라지는
+ * 것을 방지). profile.supportRealm이 비어있으면(zod가 min(1)로 막아 실제로는 안 생기지만
+ * 방어적으로) 필터링하지 않는다.
  */
 function matchesSupportRealm(subsidy: MatchCandidate, profile: OnboardingProfile): boolean {
-  return profile.supportRealm.length === 0 || profile.supportRealm.includes(subsidy.supportRealm)
+  return (
+    profile.supportRealm.length === 0 ||
+    subsidy.supportRealm === '' ||
+    profile.supportRealm.includes(subsidy.supportRealm)
+  )
 }
 
 /**

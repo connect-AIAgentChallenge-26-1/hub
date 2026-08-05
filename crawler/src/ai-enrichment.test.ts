@@ -9,6 +9,7 @@ const state = vi.hoisted(() => ({
   extractStructuredFields: vi.fn(),
   isBudgetExhausted: vi.fn(),
   extractHwpxText: vi.fn(),
+  extractPdfText: vi.fn(),
 }))
 
 vi.mock('./attachment.js', () => ({
@@ -24,6 +25,7 @@ vi.mock('./gemini-extract.js', () => ({
   isBudgetExhausted: state.isBudgetExhausted,
 }))
 vi.mock('./hwpx.js', () => ({ extractHwpxText: state.extractHwpxText }))
+vi.mock('./pdf-text.js', () => ({ extractPdfText: state.extractPdfText }))
 
 import { enrichAnnouncement } from './ai-enrichment.js'
 
@@ -42,6 +44,7 @@ describe('enrichAnnouncement', () => {
   beforeEach(() => {
     vi.clearAllMocks()
     state.isBudgetExhausted.mockReturnValue(false)
+    state.extractPdfText.mockResolvedValue('')
   })
 
   afterEach(() => {
@@ -72,10 +75,41 @@ describe('enrichAnnouncement', () => {
     expect(state.extractStructuredFields).not.toHaveBeenCalled()
   })
 
-  it('PDF는 base64로 변환해 extractStructuredFields에 전달하고 결과를 캐싱한다', async () => {
+  it('PDF는 pdfjs-dist로 로컬 텍스트 추출 후 텍스트로 extractStructuredFields에 전달한다', async () => {
     state.parseAttachment.mockReturnValue({ atchFileId: 'F1', format: 'pdf', downloadUrl: 'https://x/f.pdf' })
     state.getCachedExtraction.mockResolvedValue(null)
     state.downloadAttachment.mockResolvedValue(Buffer.from([1, 2, 3]))
+    state.extractPdfText.mockResolvedValue('PDF에서 추출된 본문')
+    state.extractStructuredFields.mockResolvedValue({ model: 'gemini-2.5-flash', fields: FIELDS })
+
+    await run()
+
+    expect(state.extractPdfText).toHaveBeenCalledWith(Buffer.from([1, 2, 3]))
+    expect(state.extractStructuredFields).toHaveBeenCalledWith({ type: 'text', text: 'PDF에서 추출된 본문' })
+    expect(state.saveExtraction).toHaveBeenCalledWith('F1', 'gemini-2.5-flash', FIELDS)
+  })
+
+  it('PDF 텍스트 레이어가 없으면(빈 문자열) base64 멀티모달 경로로 폴백한다', async () => {
+    state.parseAttachment.mockReturnValue({ atchFileId: 'F1', format: 'pdf', downloadUrl: 'https://x/f.pdf' })
+    state.getCachedExtraction.mockResolvedValue(null)
+    state.downloadAttachment.mockResolvedValue(Buffer.from([1, 2, 3]))
+    state.extractPdfText.mockResolvedValue('')
+    state.extractStructuredFields.mockResolvedValue({ model: 'gemini-2.5-flash', fields: FIELDS })
+
+    await run()
+
+    expect(state.extractStructuredFields).toHaveBeenCalledWith({
+      type: 'pdf',
+      base64: Buffer.from([1, 2, 3]).toString('base64'),
+    })
+    expect(state.saveExtraction).toHaveBeenCalledWith('F1', 'gemini-2.5-flash', FIELDS)
+  })
+
+  it('PDF 텍스트 추출이 예외를 던지면 base64 멀티모달 경로로 폴백한다(추출 실패로 완전히 막히지 않음)', async () => {
+    state.parseAttachment.mockReturnValue({ atchFileId: 'F1', format: 'pdf', downloadUrl: 'https://x/f.pdf' })
+    state.getCachedExtraction.mockResolvedValue(null)
+    state.downloadAttachment.mockResolvedValue(Buffer.from([1, 2, 3]))
+    state.extractPdfText.mockRejectedValue(new Error('손상된 PDF'))
     state.extractStructuredFields.mockResolvedValue({ model: 'gemini-2.5-flash', fields: FIELDS })
 
     await run()
