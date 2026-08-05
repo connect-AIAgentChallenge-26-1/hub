@@ -152,6 +152,13 @@ describe('match — supportRealm hard filter (이슈 #92)', () => {
     expect(items).toHaveLength(1)
   })
 
+  it('subsidy.supportRealm이 빈 문자열(bizinfo 결측)이면 어떤 profile.supportRealm으로도 제외되지 않는다 (이슈 #125)', async () => {
+    state.rows = [makeRow({ id: '1', support_realm: '' })]
+    const { items, total } = await match(profile) // profile.supportRealm = ['경영']
+    expect(items).toHaveLength(1)
+    expect(total).toBe(1)
+  })
+
   it('region 필터와 supportRealm 필터가 함께 적용된다', async () => {
     state.rows = [
       makeRow({ id: 'match', region: ['서울'], support_realm: '경영' }),
