@@ -1,8 +1,11 @@
+import type { AttachmentFormat } from './attachment.js'
 import { downloadAttachment, parseAttachment } from './attachment.js'
 import type { BizinfoAnnouncement } from './bizinfo-client.js'
 import { getCachedExtraction, saveExtraction } from './document-cache.js'
+import type { ExtractionDocument } from './gemini-extract.js'
 import { extractStructuredFields, isBudgetExhausted } from './gemini-extract.js'
 import { extractHwpxText } from './hwpx.js'
+import { extractPdfText } from './pdf-text.js'
 
 /**
  * bizinfo API 호출과 무관하게 Gemini 자체에 RPM 제한이 있어(이슈 #67 묶음 1),
@@ -12,6 +15,30 @@ const CALL_DELAY_MS = 4000
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+/**
+ * PDF는 로컬 `pdfjs-dist` 텍스트 추출을 우선 시도한다(이슈 #132) — bizinfo 공고문 PDF는
+ * 실측상 스캔 이미지가 아니라 글꼴이 임베딩된 텍스트 PDF였다. 추출 결과가 빈 문자열이면
+ * (텍스트 레이어 없는 스캔본 등) 기존 base64 멀티모달 경로로 폴백해 Gemini가 직접 읽게
+ * 한다 — 완전히 처리 불가 상태가 되는 것을 막기 위한 안전망.
+ */
+async function buildExtractionDocument(
+  format: Exclude<AttachmentFormat, 'unsupported'>,
+  buffer: Buffer,
+): Promise<ExtractionDocument> {
+  if (format === 'hwpx') {
+    return { type: 'text', text: extractHwpxText(buffer) }
+  }
+
+  try {
+    const text = await extractPdfText(buffer)
+    if (text.length > 0) return { type: 'text', text }
+    console.warn('[crawler] PDF 텍스트 레이어 없음 — base64 멀티모달 경로로 폴백')
+  } catch (err) {
+    console.warn(`[crawler] PDF 텍스트 추출 실패, base64 멀티모달 경로로 폴백: ${(err as Error).message}`)
+  }
+  return { type: 'pdf', base64: buffer.toString('base64') }
 }
 
 /**
@@ -32,10 +59,7 @@ export async function enrichAnnouncement(item: BizinfoAnnouncement): Promise<voi
     if (cached) return // 이미 처리된 첨부파일 — Gemini 재호출 없이 skip
 
     const buffer = await downloadAttachment(attachment.downloadUrl)
-    const document =
-      attachment.format === 'pdf'
-        ? ({ type: 'pdf', base64: buffer.toString('base64') } as const)
-        : ({ type: 'text', text: extractHwpxText(buffer) } as const)
+    const document = await buildExtractionDocument(attachment.format, buffer)
 
     calledGemini = true
     const { model, fields } = await extractStructuredFields(document)
