@@ -1,17 +1,21 @@
-import type { ManagerGoalPlan, ManagerPlanRebalance } from "../contracts/managerLlm.js";
+import type { ManagerGoalPlan, ManagerPlanRebalance, ManagerTone } from "../contracts/managerLlm.js";
 
 export interface SaveManagerGoalPlanInput {
-  goal: string;
-  category: string;
+  rawGoalText: string;
+  dailyMinutes: number;
+  targetDate: string | null;
+  managerTone: ManagerTone;
+  nickname: string;
+  clarificationAnswer?: string;
   source: "llm" | "rule_fallback";
   fallbackReason?: string;
   promptVersion: string;
-  plan: ManagerGoalPlan;
+  goalPlan: ManagerGoalPlan;
 }
 
 export interface SaveManagerPlanRevisionInput {
   planId?: string | null;
-  goal: string;
+  rawGoalText: string;
   triggerEventId?: string | null;
   source: "llm" | "rule_fallback";
   fallbackReason?: string;

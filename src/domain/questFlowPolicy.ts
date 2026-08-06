@@ -1,16 +1,31 @@
 import type { WindowId } from "../data/windowRegistry";
 import type { ManagerStatEvaluation } from "./statGrowth";
+import type { ManagerBehaviorIntent } from "./managerBehaviorIntent";
 import type { Difficulty, Quest, QuestType } from "./questLogic";
 
 export type QuestStatus = "draft" | "active" | "success" | "failed" | "recovery";
 
 export type QuestCompletionResult = "success" | "recovery";
+export type QuestWindowView = QuestStatus | "planning" | "empty";
+export interface QuestPlanningLock { current: boolean }
 
 export interface QuestAcceptancePreview {
+  finalizedQuest?: {
+    displayTitle: string;
+    instruction: string;
+    estimatedMinutes: number;
+    tracking: {
+      mode: "timer" | "counter" | "check";
+      targetAmount?: number;
+      targetUnit?: string;
+    };
+  };
   difficulty: Difficulty;
   rewardExp: number;
   statEvaluation: ManagerStatEvaluation;
   reason: string;
+  managerLine?: string;
+  behaviorIntent?: ManagerBehaviorIntent;
 }
 
 export interface QuestAcceptancePreviewState {
@@ -28,6 +43,22 @@ export function getQuestWorkflowWindows(status: QuestStatus): WindowId[] | null 
 
 export function getQuestCompletionResult(status: QuestStatus): QuestCompletionResult {
   return status === "recovery" ? "recovery" : "success";
+}
+
+export function getQuestWindowView(input: { status: QuestStatus; hasQuestSpec: boolean; isPlanning: boolean }): QuestWindowView {
+  if (input.isPlanning) return "planning";
+  if (input.status === "draft" && !input.hasQuestSpec) return "empty";
+  return input.status;
+}
+
+export function acquireQuestPlanningLock(lock: QuestPlanningLock): boolean {
+  if (lock.current) return false;
+  lock.current = true;
+  return true;
+}
+
+export function releaseQuestPlanningLock(lock: QuestPlanningLock): void {
+  lock.current = false;
 }
 
 export function getQuestUnit(type: QuestType) {
@@ -85,8 +116,23 @@ export function isQuestAcceptancePreviewCurrent(quest: Quest, previewState: Ques
 }
 
 export function applyQuestAcceptancePreviewToQuest(quest: Quest, preview: QuestAcceptancePreview): Quest {
+  const finalized = preview.finalizedQuest;
+  const type: QuestType = finalized?.tracking.mode === "counter"
+    ? "quantity"
+    : finalized?.tracking.mode === "check"
+      ? "action"
+      : "time";
+  const amount = finalized
+    ? Math.max(1, Math.round(finalized.tracking.targetAmount ?? (type === "time" ? finalized.estimatedMinutes : 1)))
+    : quest.amount;
   return {
     ...quest,
+    ...(finalized ? {
+      title: finalized.displayTitle,
+      type,
+      amount,
+      unit: finalized.tracking.targetUnit ?? getQuestUnit(type),
+    } : {}),
     difficulty: preview.difficulty,
     rewardExp: preview.rewardExp,
   };

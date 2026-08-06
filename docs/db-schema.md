@@ -56,7 +56,7 @@ Expansion notes:
 
 ## manager_goal_plans
 
-Created by `supabase/migrations/002_create_manager_goal_plans.sql`.
+`supabase/migrations/002_create_manager_goal_plans.sql`이 기본 테이블을 만들고, `supabase/migrations/004_manager_goal_plan_v2.sql`이 v2 입력과 GoalBrief 필드를 추가한다. 마이그레이션 파일은 저장소에만 추가되어 있으며 원격 Supabase에는 별도 승인 후 적용해야 한다.
 
 Fields:
 
@@ -65,14 +65,14 @@ Fields:
 | `id` | uuid | primary key |
 | `user_id` | uuid nullable | future auth link |
 | `anonymous_session_id` | text nullable | MVP anonymous session |
-| `goal` | text | profile goal at plan creation time |
-| `category` | text | `study`, `exercise`, `hobby`, `career`, `habit` |
+| `goal` | text | v1 호환용 목표 문자열 |
+| `category` | text nullable | v1 호환용 분류; v2에서는 사용자 입력으로 받지 않음 |
 | `status` | text | default `active` |
 | `source` | text | `llm` or `rule_fallback` |
 | `fallback_reason` | text nullable | fallback reason when applicable |
-| `prompt_version` | text | e.g. `manager-api-v1` |
-| `plan_version` | integer | default `1` |
-| `plan_json` | jsonb | bounded `goalPlan` contract output |
+| `prompt_version` | text | v2 신규 row는 `manager-api-v2` |
+| `plan_version` | integer | v1 기본값 `1`; migration 004 적용 후 기본값 `2` |
+| `plan_json` | jsonb | 최신 전체 `ManagerGoalPlan` snapshot |
 | `created_at` | timestamptz | server insert time |
 | `updated_at` | timestamptz | future update marker |
 
@@ -82,9 +82,23 @@ Indexes:
 - `(user_id, created_at desc)`
 - `(anonymous_session_id, created_at desc)`
 
+### Migration 004 추가 필드
+
+| Table | Field | Type | Notes |
+|---|---|---|---|
+| `manager_goal_plans` | `raw_goal_text` | text | 사용자가 입력한 자연어 목표. raw provider prompt가 아님 |
+| `manager_goal_plans` | `daily_minutes` | integer | 사용자가 입력한 하루 가능 시간 |
+| `manager_goal_plans` | `target_date` | date nullable | 사용자가 선택한 목표일 |
+| `manager_goal_plans` | `manager_tone` | text | `calm`, `friendly`, `firm` |
+| `manager_goal_plans` | `nickname` | text | manager line에 사용할 표시 이름 |
+| `manager_goal_plans` | `clarification_answer` | text nullable | 최초 계획 보완 질문에 대한 선택 답변 |
+| `manager_goal_plans` | `goal_brief_json` | jsonb | 수락된 `GoalBrief`; 추론 영역, 가정, 불확실성, confidence 포함 |
+
+`plan_json`은 현재 상태를 빠르게 읽기 위한 materialized snapshot이다. v2 row의 `plan_version` 기본값은 `2`다. 계획 변경은 `append_manager_plan_revision_v2` RPC에서 revision 추가와 snapshot 갱신을 한 트랜잭션으로 처리한다.
+
 ## manager_plan_revisions
 
-Created by `supabase/migrations/002_create_manager_goal_plans.sql`; existing databases that already applied `002` receive `next_quest_json` through `supabase/migrations/003_add_manager_plan_revision_next_quest.sql`.
+`002`가 기본 테이블을 만들고, 이미 예전 `002`를 적용한 DB에는 `003`이 `next_quest_json`을 보강한다. `004`는 v2 원문 목표와 revision version, 중복 trigger 방지 RPC를 추가한다.
 
 Fields:
 
@@ -96,17 +110,41 @@ Fields:
 | `goal` | text | goal at rebalance time |
 | `source` | text | `llm` or `rule_fallback` |
 | `fallback_reason` | text nullable | fallback reason when applicable |
-| `prompt_version` | text | e.g. `manager-api-v1` |
+| `prompt_version` | text | v2 신규 row는 `manager-api-v2` |
 | `revision_reason` | text | first change reason |
 | `changes_json` | jsonb | bounded `planRebalance.changes` |
-| `after_plan_json` | jsonb | bounded `planRebalance.rebalancedPlan` |
+| `after_plan_json` | jsonb | v1 호환용 rebalance 결과 |
 | `next_quest_json` | jsonb | bounded `planRebalance.nextQuest` shown to the user after rebalancing |
+| `raw_goal_text` | text nullable | 재조정 당시 사용한 자연어 목표 |
+| `revision_version` | integer | v2 revision schema version, default `2` |
 | `created_at` | timestamptz | server insert time |
 
 Indexes:
 
 - `(plan_id, created_at desc)`
 - `trigger_event_id`
+
+Revision row는 append-only다. `trigger_event_id`가 있는 row에는 partial unique index를 두어 같은 이벤트 재처리를 막는다. 리밸런싱은 전체 미래 horizon을 검토할 수 있지만 완료된 goal, milestone, weekly, daily node를 바꾸는 provider 출력은 서버 contract에서 거부한다. `next_quest_json`은 화면에 표시할 현재 퀘스트 하나만 담고, 전체 계획은 `after_plan_json`에 둔다.
+
+권장 index:
+
+- `(plan_id, created_at desc)`
+- unique partial `(trigger_event_id) where trigger_event_id is not null`
+
+## Manager LLM v3 저장 경계
+
+- 최초 수락: `goal_brief_json`과 `plan_json`을 함께 저장한다. clarification 질문만 있는 미수락 응답은 계획 row로 확정하지 않는다.
+- 리밸런싱: 변경 후 snapshot과 변경 이유를 revision에 append하고 같은 RPC에서 최신 `plan_json`을 갱신한다.
+- 실패/복구는 즉시 revision을 만들 수 있고, 3회 성공·주간 경계·anomaly는 해당 trigger가 성립할 때만 만든다.
+- `quest-acceptance-preview`의 finalized quest, difficulty, EXP, stats, manager line, behavior는 현재 퀘스트 결정에만 사용한다. 미래 퀘스트별 보상을 미리 화면에 노출하거나 별도 비정규화 row로 대량 저장하지 않는다.
+- raw prompt, provider 응답 원문, API key, Supabase key, token 또는 다른 secret은 어떤 JSONB에도 저장하지 않는다.
+- 저장 가능한 provenance는 `prompt_version`, `source`, `fallback_reason`과 최종 사용자 표시 결과로 제한한다.
+
+### Migration 005
+
+`005_manager_goal_plan_v3.sql`은 새 테이블을 만들지 않는다. goal plan과 revision 기본 version을 `3`으로 올리고 `append_manager_plan_revision_v3` RPC를 추가한다. 기존 v1/v2 row와 `004` RPC는 보존한다.
+
+일일 완주 보너스는 기존 `quest_logs`의 `reward_unlocked` event로 저장한다. metadata에는 `rewardKind=daily_capacity_completed`, `localDate`, `dailyBaselineMinutes`, `successfulMinutes`, `bonusExp`만 저장한다. `(user 또는 anonymous session, localDate, rewardKind)` partial unique index가 하루 한 번 지급을 보장한다.
 
 ## Normalization Plan For Remaining Features
 

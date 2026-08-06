@@ -33,10 +33,9 @@ describe("Vercel API entry", () => {
           },
           profile: {
             nickname: "Demo",
-            goal: "Verify deployment",
-            category: "study",
+            rawGoalText: "Verify deployment",
             dailyMinutes: 30,
-            questSize: "balanced",
+            targetDate: null,
             managerTone: "friendly",
           },
           persona: {
@@ -45,6 +44,10 @@ describe("Vercel API entry", () => {
             questStyle: "balanced",
             feedbackStyle: "playful",
             behaviorStyle: "balanced",
+          },
+          managerProgress: {
+            level: 1,
+            stats: { diligence: 0, persistence: 0, creativity: 0, knowledge: 0, strength: 0, agility: 0, stamina: 0, charm: 0 },
           },
           questState: {
             status: "draft",
@@ -59,6 +62,18 @@ describe("Vercel API entry", () => {
             },
           },
           recentEvents: [],
+          dailyCapacity: {
+            localDate: "2026-08-07",
+            baselineMinutes: 30,
+            reservedMinutes: 0,
+            usedMinutes: 0,
+            successfulMinutes: 0,
+            remainingMinutes: 30,
+            varianceMinutes: -30,
+            utilizationRatio: 0,
+            status: "no_activity",
+            bonusAwarded: false,
+          },
         }),
       }),
     );

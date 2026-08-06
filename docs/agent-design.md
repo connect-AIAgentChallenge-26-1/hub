@@ -1,152 +1,165 @@
-﻿# AI Agent 설계
+# AI Agent 설계
 
 ## Summary
 
-MVP v1에서는 규칙 기반 Agent 흐름을 기본값으로 유지하되, Hono 서버의 Manager LLM API를 통해 제한된 schema 출력만 선택적으로 받는다. 이후 확장 시 목표 해석, 퀘스트 생성, 실패 리밸런싱, 피드백 문장 생성을 더 넓은 LLM 또는 개인화 모델로 교체할 수 있게 한다.
+Manager LLM v3는 사용자의 자연어 목표를 실행 가능한 장기 계획과 현재 퀘스트로 변환하는 제한형 planning agent다. prompt version은 `manager-api-v3`이며, provider가 없어도 같은 계약을 따르는 strict rule fallback으로 핵심 flow가 계속되어야 한다.
 
-중요한 원칙은 매니저의 성격, 기억, 사용자 목표 데이터를 LLM 안에 묻지 않고 앱 데이터로 분리하는 것이다.
+매니저의 성격, 기억, 목표, 계획 상태는 LLM 내부 기억이 아니라 앱 데이터와 snapshot으로 관리한다. LLM은 제안자이며, 서버 schema 검증과 도메인 규칙이 최종 권위다.
+
+## 사용자 입력과 추론 경계
+
+사용자가 계획 생성에 입력하는 값:
+
+- 자연어 목표
+- 하루 가능 시간(분)
+- 목표일(선택)
+- 매니저 말투: 차분함, 친구 같음, 단호함
+
+LLM 또는 fallback이 추론하는 값:
+
+- 목표 영역과 하위 영역
+- 목표일까지의 pacing 또는 목표일이 없을 때의 지속 가능한 pacing
+- 퀘스트별 difficulty
+- milestone, weekly plan, rolling 7-day daily plan
+- 수락 시 EXP와 능력치 보상
+
+사용자에게 category, quest size, difficulty를 별도 설정값으로 요구하지 않는다. 추론값은 `GoalBrief`, plan snapshot, quest acceptance decision에 구조화해 남긴다.
 
 ## Agent 역할
 
-### 1. 목표 해석 Agent
+### 1. GoalBrief 생성
 
-사용자의 장기 목표를 읽고 더 구체적인 실행 목표로 바꾼다.
+자연어 목표를 `finalGoal`, `inferredDomains`, `assumptions`, `uncertainties`, `confidence`로 정리한다. 목표가 모호해 계획 품질에 큰 영향을 주는 경우에만 clarification 질문을 하나 만들 수 있다.
 
-예시:
+Clarification 규칙:
 
-```text
-입력: 정보처리기사 따고 싶어
-출력: 정보처리기사 필기 시험 대비를 위한 6주 학습 목표
-```
+- 계획이 수락되기 전에만 질문한다.
+- 전체 목표 생성 흐름에서 최대 한 번만 질문한다.
+- 사용자가 답한 재요청에는 `clarificationAnswer`를 포함한다.
+- 답변 이후 다시 질문하는 provider 출력은 schema 오류로 처리하고 fallback한다.
+- 사소한 불확실성은 `assumptions`에 명시하고 계획을 계속 만든다.
 
-목표가 추상적이면 바로 퀘스트를 만들지 않고 질문을 유도한다.
+### 2. 전체 계획 생성
 
-### 2. 퀘스트 생성 Agent
-
-장기 목표를 주간/일일 퀘스트로 분해한다.
-
-예시:
-
-```json
-{
-  "goal": "정보처리기사 취득",
-  "weeklyQuest": "데이터베이스 과목 1회독",
-  "dailyQuest": "오늘 데이터베이스 개념 15분 공부",
-  "questType": "time",
-  "difficulty": "easy",
-  "rewardExp": 20
-}
-```
-
-### 3. 리밸런싱 Agent
-
-완료/실패 기록과 실패 이유를 보고 다음 퀘스트의 분량을 조절한다.
-
-예시:
+확정된 GoalBrief를 다음 계층으로 분해한다.
 
 ```text
-실패 이유: 시간이 부족했다
-다음 제안: 공부 60분 -> 공부 20분 + 핵심 개념 3개 정리
+final goal
+└─ milestones
+   └─ weekly plans for the whole horizon
+      └─ rolling focus for the next 7 days
 ```
 
-### 4. 퀘스트 평가 Agent
+- Final goal은 성공 여부를 판단할 기준을 가진다.
+- Milestone은 전체 horizon의 중간 성과다.
+- Weekly plan은 전체 기간을 검토하되, 주차별 초점과 목표 결과 중심으로 유지한다.
+- Rolling day는 다음 7일의 focus만 유지하고 구체적인 퀘스트는 현재 하나만 만든다.
+- 7일 이후는 weekly/milestone 수준으로 유지하고 리밸런싱 때 다시 구체화한다.
 
-퀘스트의 내용과 조정된 난이도를 보고 EXP와 능력치 분배를 제안한다. LLM은 값을 제안하지만 앱과 서버는 검증 규칙을 통과한 값만 저장한다.
+화면에는 전체 계획을 펼쳐 보이지 않는다. 사용자가 실행할 현재 퀘스트 하나와 그 퀘스트의 보상만 보여 준다.
 
-평가 기준:
+현재 퀘스트가 끝난 뒤 사용자가 요청할 때만 `next-quest`가 다음 `QuestSpec` 하나를 생성한다. 하루 가능 시간은 계획 기준이지 하드 제한이 아니므로 기준 시간 도달·초과 뒤에도 요청이 있으면 퀘스트를 반환한다. 요청이 없으면 미래 퀘스트나 LLM 호출을 만들지 않는다.
 
-- easy/normal/hard는 서로 다른 EXP 구간을 가진다.
-- 능력치 총합은 난이도별 budget과 같아야 한다.
-- 주요 능력치는 총합의 60% 이상을 받아야 한다.
-- 한 능력치에 몰아줄 수 있는 최대치는 총합의 80% 이하로 제한한다.
-- 복구 퀘스트는 별도 보상 구간이 아니라 조정된 easy/normal/hard 난이도로 다시 평가한다.
+### 3. 통합 퀘스트 수락 결정
 
-예시:
+`questAcceptancePreview`는 편집된 현재 퀘스트를 수락하기 직전에 호출하는 단일 권위 결정이다. 다음 값을 한 응답으로 확정한다.
 
-```json
-{
-  "difficulty": "hard",
-  "statBudget": 15,
-  "primaryStats": ["stamina"],
-  "statDeltas": [
-    { "stat": "stamina", "amount": 12 },
-    { "stat": "strength", "amount": 2 },
-    { "stat": "persistence", "amount": 1 }
-  ],
-  "reason": "운동 퀘스트라 체력 중심으로 분배한다."
-}
-```
+- finalized quest
+- difficulty
+- EXP
+- stat evaluation
+- manager line
+- behavior intent
 
-### 5. 피드백 Agent
+난이도와 보상은 서버의 고정 범위를 통과해야 한다.
 
-매니저의 반응 문장을 생성한다. 말투는 사용자의 선택에 따라 차분함, 친구 같음, 단호한 페이스메이커 중 하나를 따른다.
+| difficulty | EXP | stat budget |
+|---|---:|---:|
+| easy | 5..15 | 3 |
+| normal | 16..35 | 7 |
+| hard | 36..60 | 15 |
 
-피해야 할 반응:
+Top-level 난이도와 stat evaluation 난이도는 같아야 한다. Finalized quest는 난이도와 보상을 섞지 않은 의미 중심 입력으로 유지한다. `managerLine`과 `behaviorIntent.line`도 같아야 한다. 일부 필드만 유효할 경우 유효한 부분을 섞지 않고 통합 결정 전체를 fallback으로 교체한다.
 
-- 비난
+### 4. 리밸런싱
+
+리밸런싱은 매 render가 아니라 다음 trigger에서만 실행한다.
+
+- 실패 또는 복구 직후: 즉시
+- 3회 연속 성공
+- 주간 경계
+- 계획 대비 시간, 성공률, 난이도 반응이 크게 벗어난 anomaly
+- 하루 기준 시간 미달·최초 도달·초과와 프로필 변경
+
+실패 시에는 원인을 우선 반영한다.
+
+- 시간 부족: 다음 퀘스트를 더 짧게 만들고 남은 작업을 재배치한다.
+- 너무 어려움: prerequisite를 추가하거나 퀘스트를 더 작은 단계로 나눈다.
+- 건너뜀: 무리한 누적을 만들지 않고 rolling 7-day plan을 다시 배치한다.
+- 복구 완료: 회복 퀘스트의 결과를 반영해 원래 pacing으로 점진 복귀한다.
+
+매 리밸런싱은 전체 미래 horizon을 검토한다. 다만 완료된 goal, milestone, weekly, daily node는 immutable이다. 완료 node의 id, 내용, 성공 기준, 완료 상태를 바꾸지 않고 현재 진행 중인 node와 미래 node만 조정한다.
+
+응답은 전체 `rebalancedPlan`과 changes를 내부 저장용으로 반환하고, 사용자에게는 다음 current quest와 reward만 보여 준다.
+
+### 5. 피드백과 행동
+
+Manager line과 behavior intent는 같은 현재 상황을 표현해야 한다. 말투는 사용자가 고른 manager tone을 따르되 다음 반응을 금지한다.
+
+- 비난 또는 실패를 벌로 표현
 - 과한 감정적 압박
-- 실패를 벌처럼 표현
+- 근거 없는 성공 보장
+- 미래 계획 전체를 한꺼번에 노출해 부담을 주는 표현
 
-좋은 반응:
+실패 후 EXP를 차감하지 않는다. 매니저는 실패 이유를 기록으로 사용하고 즉시 더 실행 가능한 다음 퀘스트를 제안한다.
+
+## 상태와 저장 모델
+
+`manager_goal_plans`는 수락된 `GoalBrief`를 `goal_brief_json`에, 최신 전체 plan snapshot을 `plan_json`에 가진다. `manager_plan_revisions`는 trigger event id, 변경 이유, 변경 후 snapshot을 append-only로 저장한다.
 
 ```text
-이번 기록을 보고 다음 분량을 다시 맞춰볼게.
-끝까지 기다릴게. 네 속도로 해.
-오늘은 더 작은 분량으로 다시 시작하자.
+accepted GoalBrief + plan snapshot
+              │
+              ├─ failure/recovery → immediate revision
+              ├─ 3 successes     → revision
+              ├─ weekly boundary → revision
+              └─ anomaly         → revision
 ```
 
-## MVP v1 LLM 연결 원칙
+Snapshot은 현재 상태를 빠르게 읽기 위한 값이고 revision은 변경 이력의 근거다. `append_manager_plan_revision_v3` RPC가 revision 추가와 `plan_json` 갱신을 한 트랜잭션에서 수행한다. 완료 node 불변은 서버 contract가 provider 출력을 수락하기 전에 검사한다.
 
-- React는 OpenAI나 다른 LLM provider를 직접 호출하지 않는다.
+`dailyMinutes`는 그날 첫 퀘스트 수락 때 snapshot으로 고정한다. 사용량에는 성공·실패·복구의 실제 시간이 포함되지만 완주 인정 시간은 성공·복구에 대해서만 `min(actualMinutes, acceptedEstimatedMinutes)`로 계산한다. 인정 시간이 기준에 처음 도달하면 `daily_capacity_completed` 보너스를 하루 한 번 지급하고, 이후 퀘스트는 일반 보상을 계속 받는다.
+
+DB 필드와 `005` 마이그레이션 계약은 [DB Schema](db-schema.md)를 따른다.
+
+## Fallback과 비용 통제
+
 - React는 `/api/manager/*` Hono route만 호출한다.
-- API key는 server env에만 둔다.
-- prompt version은 `manager-api-v1`로 시작한다.
-- 기본 모델은 비용과 latency를 우선해 `gpt-5-nano`를 사용하고, 계획 생성/리밸런싱/수락 preview처럼 추론 품질이 필요한 route는 `OPENAI_FALLBACK_MODEL` 기본값인 `gpt-5-mini`를 사용한다.
-- LLM 출력은 `managerLine`, `questSuggestion`, `difficultyEvaluation`, `statEvaluation`, `behaviorIntent`, `goalPlan`, `planRebalance`, `questAcceptancePreview` 중 하나의 제한 schema로만 받는다.
-- React 연결 지점은 `managerLine`/`behaviorIntent`는 manager context 갱신, `questSuggestion`은 사용자가 새 퀘스트 추천을 누를 때, `difficultyEvaluation`은 사용자가 편집한 퀘스트를 수락하기 직전, `statEvaluation`은 Quest Event 저장 직전으로 제한한다.
-- `goalPlan`은 profile 생성 또는 목표 변경 시 호출하고, 장기 목표를 월간/주간/일간/milestone 구조로 분해한다.
-- `planRebalance`는 실패, 복구 완료, 연속 성공처럼 의미 있는 이벤트 이후에만 호출한다.
-- `planRebalance`는 전체 계획을 재조정하되 화면에는 `nextQuest` 하나와 짧은 `recoveryReason`만 노출한다. 월간/주간/milestone 계획은 내부 저장과 다음 추천 근거로 사용한다.
-- `questAcceptancePreview`는 수락 직전 난이도, EXP, stat reward를 한 번에 확정하는 route이며, 기존 `difficultyEvaluation`/`statEvaluation`은 세부 route로 유지한다.
-- 비용 제한은 server-side daily cap과 output kind별 minimum interval로 적용한다.
-- React client도 output kind별 60초 throttle을 적용해 dev remount, context sync 반복, 버튼 연타가 실제 provider 호출로 곧장 이어지지 않게 한다.
-- 저장 성공 후 manager context 반영은 `managerLine`만 갱신하고, `behaviorIntent`는 초기 context load 같은 큰 맥락 갱신에서만 호출한다.
-- 매니저 창 문구는 한두 줄만 사용하며 서버/도메인 정규화에서 최대 2줄, 줄당 48자 이내로 제한한다.
-- `questSuggestion`은 장기 목표를 그대로 제목으로 쓰지 않고 오늘 할 수 있는 작은 다음 행동으로 분해한다.
-- 추천 퀘스트의 `type`, `amount`, `difficulty`, `rewardExp`는 profile의 `questSize`, `dailyMinutes`, 최근 이벤트, 현재 퀘스트 상태에 맞춰 조정한다.
-- `questSize`는 내부 계약명으로 유지하지만 visible UI에서는 사용자가 이해하기 쉬운 `진행 강도`로 표시한다.
-- `questSuggestion`의 EXP도 난이도별 범위를 통과해야 한다: `easy=5..15`, `normal=16..35`, `hard=36..60`.
-- `difficultyEvaluation`의 EXP는 난이도별 범위로 검증한다: `easy=5..15`, `normal=16..35`, `hard=36..60`.
-- schema 검증에 실패하거나 provider 호출이 실패하면 rule fallback을 사용한다.
-- 실패해도 퀘스트 수락, 완료, 실패, 복구 flow는 중단되지 않아야 한다.
-- raw prompt는 DB에 장기 저장하지 않는다. 필요하면 최종 출력, `promptVersion`, `source`, `fallbackReason`만 저장한다.
-- Supabase가 설정된 서버는 `manager_goal_plans`와 `manager_plan_revisions`에 bounded plan output과 revision metadata를 저장한다. 저장 실패는 UI flow를 중단하지 않는다.
+- API key와 provider secret은 server env에만 둔다.
+- 기본 모델은 `gpt-5-nano`이며, planning-heavy route만 `OPENAI_FALLBACK_MODEL` 기본값 `gpt-5-mini`를 사용할 수 있다.
+- server는 output kind별 minimum interval과 일일 호출 cap을 적용한다.
+- client는 동일 request snapshot을 60초 동안 재사용한다.
+- provider 비활성화, rate limit, provider 오류, invalid schema는 모두 strict `rule_fallback`으로 전환한다.
+- fallback도 GoalBrief, 최대 1회 clarification, 7-day 제한, 완료 node 불변, EXP/stat budget 규칙을 지킨다.
+- 저장 실패나 LLM 실패 때문에 퀘스트 수락, 완료, 실패, 복구 flow가 중단되어서는 안 된다.
 
-## MVP 규칙 기반 동작
+## 개인정보와 prompt 정책
 
-- 목표가 너무 짧거나 추상적이면 구체화 질문을 보여준다.
-- 하루 가능 시간이 작으면 퀘스트 분량을 낮춘다.
-- 쉬운 난이도는 낮은 EXP를 지급한다.
-- 어려운 난이도는 높은 EXP를 지급한다.
-- 실패 후 복구 퀘스트는 기존 분량보다 작게 만든다.
-- 실패 후 EXP는 감소하지 않는다.
-- LLM API가 비활성화됐거나 실패하면 `rule_fallback` 평가로 stat budget과 능력치 분배를 만들고, LLM 출력도 같은 검증 규칙을 통과해야 한다.
+다음 값은 LLM에 보내거나 DB에 저장하지 않는다.
 
-## 확장 계획
+- API key, Supabase key, token, password
+- raw provider prompt와 provider 응답 원문
+- raw DB row, DOM state, sprite path, 화면 좌표
+- 학교, 위치, 개인 일정 같은 불필요한 민감 정보
 
-- `LLMAgentAdapter`를 고도화해 LLM 기반 문장 생성, 퀘스트 제안, 능력치 평가를 route별로 점진 적용한다.
-- `ManagerMemory`를 추가해 사용자의 선호 난이도, 실패 이유, 자주 가능한 시간대를 저장한다.
-- 개인 LLM 또는 브라우저 모델은 MVP 이후 실험 모듈로 둔다.
-- 음성 입력, 웹캠 제스처, 소셜 탐색 기능은 [MVP 이후 확장 계획](future-expansion-plan.md)에서 관리한다.
+저장 가능한 LLM provenance는 `promptVersion`, `source`, `fallbackReason`과 사용자가 실제로 본 최종 결과로 제한한다. 자연어 목표는 계획 입력 데이터로 저장할 수 있지만 provider용 raw prompt 문자열과 혼동하지 않는다.
 
 ## Agent처럼 보이기 위한 기준
 
-단순 입력 폼이 아니라 다음 행동을 해야 한다.
-
-- 목표를 해석한다.
-- 오늘 할 수 있는 퀘스트로 제안한다.
-- 사용자의 수정을 허용한다.
-- 성공/실패 결과를 기억한다.
-- 실패 이유에 맞춰 다음 퀘스트를 조정한다.
-- 매니저의 대사를 현재 상황에 맞게 바꾼다.
-
+- 자연어 목표를 해석하고 불확실성을 드러낸다.
+- 꼭 필요한 경우에만 한 번 질문한다.
+- 전체 목표를 milestone과 주간 계획으로 조직한다.
+- 다음 7일만 구체화하고 현재 퀘스트 하나에 집중시킨다.
+- 퀘스트 수락 시 난이도, EXP, stats, 대사, 행동을 일관되게 결정한다.
+- 실패와 복구에 즉시 반응하고, 누적 성공·주간 경계·anomaly에서 다시 조정한다.
+- 완료된 기록은 바꾸지 않고 미래 계획만 적응시킨다.

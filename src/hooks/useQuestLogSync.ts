@@ -33,7 +33,7 @@ export function useQuestLogSync({ enabled, ignoreLogsBefore = null, onLogsLoaded
 
     let cancelled = false;
     setLogSync({ status: "loading", message: questLogSyncMessages.loading });
-    Promise.all([fetchQuestEventsViaApi(), fetchManagerContextViaApi()])
+    Promise.all([fetchQuestEventsViaApi(100), fetchManagerContextViaApi()])
       .then(([serverLogs, managerContext]) => {
         if (cancelled) return;
         onLogsLoaded(filterQuestLogsAtOrAfter(serverLogs, ignoreLogsBefore));

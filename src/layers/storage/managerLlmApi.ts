@@ -1,33 +1,26 @@
+import type { DailyCapacityContext } from "../../domain/dailyCapacityPolicy";
 import type { ManagerBehaviorIntent } from "../../domain/managerBehaviorIntent";
 import type { ManagerPersona } from "../../domain/managerPersonaPolicy";
-import type { ManagerStatEvaluation } from "../../domain/statGrowth";
+import type { ManagerStatEvaluation, ManagerStats } from "../../domain/statGrowth";
 import type { Quest } from "../../domain/questLogic";
 import type { ManagerContext, QuestEventType } from "./questLogApi";
 
-export const managerLlmPromptVersion = "manager-api-v1";
+export const managerLlmPromptVersion = "manager-api-v3";
 
-export type ManagerLlmOutputKind =
-  | "managerLine"
-  | "questSuggestion"
-  | "difficultyEvaluation"
-  | "statEvaluation"
-  | "behaviorIntent"
-  | "goalPlan"
-  | "planRebalance"
-  | "questAcceptancePreview";
+export type ManagerLlmOutputKind = "managerLine" | "questSuggestion" | "difficultyEvaluation" | "statEvaluation" | "behaviorIntent" | "goalPlan" | "nextQuest" | "planRebalance" | "questAcceptancePreview";
+export type ManagerLlmDomain = "study" | "exam" | "exercise" | "cooking" | "creative" | "career" | "habit" | "general";
+export type ManagerPlanNodeStatus = "planned" | "active" | "completed" | "adjusted" | "skipped";
 
 export interface ManagerLlmProfileInput {
   nickname: string;
-  goal: string;
-  category: "study" | "exercise" | "hobby" | "career" | "habit";
+  rawGoalText: string;
   dailyMinutes: number;
-  questSize: "tiny" | "balanced" | "challenge";
+  targetDate?: string | null;
   managerTone: "calm" | "friendly" | "firm";
+  clarificationAnswer?: string;
 }
 
-export interface ManagerLlmPersonaInput extends ManagerPersona {
-  petId: string;
-}
+export interface ManagerLlmPersonaInput extends ManagerPersona { petId: string }
 
 export interface ManagerLlmQuestStateInput {
   status: "draft" | "active" | "success" | "failed" | "recovery";
@@ -42,62 +35,96 @@ export interface ManagerLlmRecentEventInput {
   result: "success" | "failed" | "recovery" | null;
   difficulty: "easy" | "normal" | "hard";
   createdAt: string;
+  failureReason?: string | null;
+  actualDurationMinutes?: number;
+  plannedEstimatedMinutes?: number;
+  completionCriteria: string[];
+  evaluationReason?: string;
 }
 
-export interface ManagerLlmQuestSeed extends Quest {
+export interface ManagerGoalBrief {
+  normalizedGoal: string;
+  targetOutcome?: string;
+  currentState?: string;
+  deadline?: string;
+  constraints: string[];
+  preferences: string[];
+  inferredDomains: ManagerLlmDomain[];
+  assumptions: string[];
+  uncertainties: string[];
+  confidence: number;
+  clarificationQuestion?: { question: string; options: string[] };
+}
+
+export interface ManagerLlmQuestSpec {
+  id: string;
+  displayTitle: string;
+  instruction: string;
+  purpose: string;
+  completionCriteria: string[];
+  estimatedMinutes: number;
+  expectedOutput?: string;
+  environmentConstraints: string[];
+  prerequisites: string[];
   linkedMilestoneId: string;
+  linkedWeeklyPlanId: string;
+  adaptationReason?: string;
+  status: ManagerPlanNodeStatus;
+  tracking: { mode: "timer" | "counter" | "check"; targetAmount?: number; targetUnit?: string };
 }
 
-export interface ManagerLlmRecoveryQuest extends ManagerLlmQuestSeed {
-  recoveryReason: string;
-}
+export interface ManagerLlmRecoveryQuest extends ManagerLlmQuestSpec { recoveryReason: string }
 
 export interface ManagerGoalPlan {
-  goalSummary: string;
+  schemaVersion: "goal-plan-v3";
   horizon: "month" | "quarter";
-  milestones: Array<{
-    id: string;
-    title: string;
-    targetWeek: number;
-    successCriteria: string[];
-  }>;
-  monthlyPlan: Array<{
-    monthIndex: number;
-    focus: string;
-    milestoneIds: string[];
-  }>;
-  weeklyPlan: Array<{
-    weekIndex: number;
-    focus: string;
-    targetOutcome: string;
-    suggestedQuestThemes: string[];
-  }>;
-  dailySeeds: ManagerLlmQuestSeed[];
+  goalBrief: ManagerGoalBrief;
+  finalGoal: { id: string; statement: string; successCriteria: string[]; status: ManagerPlanNodeStatus };
+  milestones: Array<{ id: string; parentGoalId: string; statement: string; targetWeek: number; successCriteria: string[]; status: ManagerPlanNodeStatus }>;
+  weeklyPlans: Array<{ id: string; weekIndex: number; milestoneIds: string[]; statement: string; targetOutcome: string; successCriteria: string[]; status: ManagerPlanNodeStatus }>;
+  rollingDays: Array<{ dayOffset: number; focus: string; intendedOutcome: string; status: ManagerPlanNodeStatus }>;
+  currentQuest: ManagerLlmQuestSpec;
   risks: string[];
-  rebalancingPolicy: {
-    onSuccess: string;
-    onFailureTimeShortage: string;
-    onFailureTooHard: string;
-    onSkippedDays: string;
-  };
+  rebalancingPolicy: { onSuccess: string; onFailureTimeShortage: string; onFailureTooHard: string; onSkippedDays: string; onAnomaly: string };
 }
 
 export interface ManagerPlanRebalance {
   rebalancedPlan: ManagerGoalPlan;
   changes: Array<{
-    scope: "daily" | "weekly" | "milestone";
-    reason: "success_streak" | "failure_time_shortage" | "failure_too_hard" | "skipped_days";
+    scope: "daily" | "weekly" | "milestone" | "goal";
+    reason: "success_streak" | "failure_time_shortage" | "failure_too_hard" | "skipped_days" | "weekly_boundary" | "anomaly" | "recovery_completed" | "daily_under_capacity" | "daily_capacity_reached" | "daily_over_capacity" | "profile_changed";
     before: string;
     after: string;
   }>;
   nextQuest: ManagerLlmRecoveryQuest;
 }
 
+export interface ManagerNextQuestDecision {
+  nextQuest: ManagerLlmQuestSpec;
+  updatedPlan: ManagerGoalPlan;
+  capacityAssessment: DailyCapacityContext;
+  managerLine: string;
+  behaviorIntent: ManagerBehaviorIntent;
+}
+
 export interface ManagerQuestAcceptancePreview {
+  finalizedQuest: ManagerLlmQuestSpec;
   difficulty: "easy" | "normal" | "hard";
   rewardExp: number;
   statEvaluation: ManagerStatEvaluation;
   reason: string;
+  assessment: {
+    taskDomains: ManagerLlmDomain[];
+    timeLoad: 1 | 2 | 3 | 4 | 5;
+    cognitiveLoad: 1 | 2 | 3 | 4 | 5;
+    physicalLoad: 1 | 2 | 3 | 4 | 5;
+    skillNovelty: 1 | 2 | 3 | 4 | 5;
+    outputComplexity: 1 | 2 | 3 | 4 | 5;
+    recoveryRisk: 1 | 2 | 3 | 4 | 5;
+    reason: string;
+  };
+  managerLine: string;
+  behaviorIntent: ManagerBehaviorIntent;
 }
 
 export interface ManagerLlmRequest {
@@ -106,8 +133,12 @@ export interface ManagerLlmRequest {
   managerContext: ManagerContext;
   profile: ManagerLlmProfileInput;
   persona: ManagerLlmPersonaInput;
+  managerProgress: { level: number; stats: ManagerStats };
   questState: ManagerLlmQuestStateInput;
   recentEvents: ManagerLlmRecentEventInput[];
+  dailyCapacity: DailyCapacityContext;
+  questDraft?: ManagerLlmQuestSpec;
+  triggerEventId?: string;
   activePlanId?: string | null;
   activePlan?: ManagerGoalPlan;
 }
@@ -115,14 +146,11 @@ export interface ManagerLlmRequest {
 export interface ManagerLlmOutput {
   managerLine?: string;
   questSuggestion?: Quest;
-  difficultyEvaluation?: {
-    difficulty: "easy" | "normal" | "hard";
-    rewardExp: number;
-    reason: string;
-  };
+  difficultyEvaluation?: { difficulty: "easy" | "normal" | "hard"; rewardExp: number; reason: string };
   statEvaluation?: ManagerStatEvaluation;
   behaviorIntent?: ManagerBehaviorIntent;
   goalPlan?: ManagerGoalPlan;
+  nextQuest?: ManagerNextQuestDecision;
   planRebalance?: ManagerPlanRebalance;
   questAcceptancePreview?: ManagerQuestAcceptancePreview;
   source: "llm" | "rule_fallback";
@@ -132,128 +160,47 @@ export interface ManagerLlmOutput {
   storedRevisionId?: string;
 }
 
-interface ManagerLlmSuccessResponse {
-  ok: true;
-  data: ManagerLlmOutput;
-}
-
-interface ManagerLlmErrorResponse {
-  ok: false;
-  error: {
-    code: string;
-    message: string;
-    details?: Record<string, unknown>;
-  };
-}
-
+interface ManagerLlmSuccessResponse { ok: true; data: ManagerLlmOutput }
+interface ManagerLlmErrorResponse { ok: false; error: { code: string; message: string; details?: Record<string, unknown> } }
 type ManagerLlmApiResponse = ManagerLlmSuccessResponse | ManagerLlmErrorResponse;
 
 const routeByKind: Record<ManagerLlmOutputKind, string> = {
-  managerLine: "/api/manager/line",
-  questSuggestion: "/api/manager/quest-suggestion",
-  difficultyEvaluation: "/api/manager/difficulty-evaluation",
-  statEvaluation: "/api/manager/stat-evaluation",
-  behaviorIntent: "/api/manager/behavior-intent",
-  goalPlan: "/api/manager/goal-plan",
-  planRebalance: "/api/manager/plan-rebalance",
-  questAcceptancePreview: "/api/manager/quest-acceptance-preview",
+  managerLine: "/api/manager/line", questSuggestion: "/api/manager/quest-suggestion", difficultyEvaluation: "/api/manager/difficulty-evaluation",
+  statEvaluation: "/api/manager/stat-evaluation", behaviorIntent: "/api/manager/behavior-intent", goalPlan: "/api/manager/goal-plan",
+  nextQuest: "/api/manager/next-quest", planRebalance: "/api/manager/plan-rebalance", questAcceptancePreview: "/api/manager/quest-acceptance-preview",
 };
 
 const defaultClientThrottleMs = 60_000;
-const lastOutputByKind: Partial<Record<ManagerLlmOutputKind, { requestedAtMs: number; output: ManagerLlmOutput }>> = {};
+const lastOutputByRequest = new Map<string, { requestedAtMs: number; output: ManagerLlmOutput }>();
+export interface ManagerLlmClientOptions { nowMs?: number; throttleMs?: number }
 
-export interface ManagerLlmClientOptions {
-  nowMs?: number;
-  throttleMs?: number;
+async function requireOutput<K extends keyof ManagerLlmOutput>(input: ManagerLlmRequest, kind: ManagerLlmOutputKind, key: K, fetchFn: typeof fetch, options?: ManagerLlmClientOptions): Promise<ManagerLlmOutput & Required<Pick<ManagerLlmOutput, K>>> {
+  const output = await requestManagerLlmOutputViaApi({ ...input, outputKind: kind }, fetchFn, options);
+  if (output[key] === undefined) throw new Error(`Manager ${String(key)} response was empty.`);
+  return output as ManagerLlmOutput & Required<Pick<ManagerLlmOutput, K>>;
 }
 
-export async function requestManagerBehaviorIntentViaApi(input: ManagerLlmRequest, fetchFn: typeof fetch = fetch) {
-  const output = await requestManagerLlmOutputViaApi({ ...input, outputKind: "behaviorIntent" }, fetchFn);
-  if (!output.behaviorIntent) throw new Error("Manager behavior intent response was empty.");
-  return { ...output, behaviorIntent: output.behaviorIntent };
-}
+export const requestManagerBehaviorIntentViaApi = (input: ManagerLlmRequest, fetchFn: typeof fetch = fetch) => requireOutput(input, "behaviorIntent", "behaviorIntent", fetchFn);
+export const requestManagerLineViaApi = (input: ManagerLlmRequest, fetchFn: typeof fetch = fetch) => requireOutput(input, "managerLine", "managerLine", fetchFn);
+export const requestManagerQuestSuggestionViaApi = (input: ManagerLlmRequest, fetchFn: typeof fetch = fetch) => requireOutput(input, "questSuggestion", "questSuggestion", fetchFn);
+export const requestManagerDifficultyEvaluationViaApi = (input: ManagerLlmRequest, fetchFn: typeof fetch = fetch) => requireOutput(input, "difficultyEvaluation", "difficultyEvaluation", fetchFn);
+export const requestManagerStatEvaluationViaApi = (input: ManagerLlmRequest, fetchFn: typeof fetch = fetch) => requireOutput(input, "statEvaluation", "statEvaluation", fetchFn);
+export const requestManagerGoalPlanViaApi = (input: ManagerLlmRequest, fetchFn: typeof fetch = fetch, options?: ManagerLlmClientOptions) => requireOutput(input, "goalPlan", "goalPlan", fetchFn, options);
+export const requestManagerNextQuestViaApi = (input: ManagerLlmRequest, fetchFn: typeof fetch = fetch, options?: ManagerLlmClientOptions) => requireOutput(input, "nextQuest", "nextQuest", fetchFn, options);
+export const requestManagerPlanRebalanceViaApi = (input: ManagerLlmRequest, fetchFn: typeof fetch = fetch, options?: ManagerLlmClientOptions) => requireOutput(input, "planRebalance", "planRebalance", fetchFn, options);
+export const requestManagerQuestAcceptancePreviewViaApi = (input: ManagerLlmRequest, fetchFn: typeof fetch = fetch, options?: ManagerLlmClientOptions) => requireOutput(input, "questAcceptancePreview", "questAcceptancePreview", fetchFn, options);
 
-export async function requestManagerLineViaApi(input: ManagerLlmRequest, fetchFn: typeof fetch = fetch) {
-  const output = await requestManagerLlmOutputViaApi({ ...input, outputKind: "managerLine" }, fetchFn);
-  if (!output.managerLine) throw new Error("Manager line response was empty.");
-  return { ...output, managerLine: output.managerLine };
-}
-
-export async function requestManagerQuestSuggestionViaApi(input: ManagerLlmRequest, fetchFn: typeof fetch = fetch) {
-  const output = await requestManagerLlmOutputViaApi({ ...input, outputKind: "questSuggestion" }, fetchFn);
-  if (!output.questSuggestion) throw new Error("Manager quest suggestion response was empty.");
-  return { ...output, questSuggestion: output.questSuggestion };
-}
-
-export async function requestManagerDifficultyEvaluationViaApi(input: ManagerLlmRequest, fetchFn: typeof fetch = fetch) {
-  const output = await requestManagerLlmOutputViaApi({ ...input, outputKind: "difficultyEvaluation" }, fetchFn);
-  if (!output.difficultyEvaluation) throw new Error("Manager difficulty evaluation response was empty.");
-  return { ...output, difficultyEvaluation: output.difficultyEvaluation };
-}
-
-export async function requestManagerStatEvaluationViaApi(input: ManagerLlmRequest, fetchFn: typeof fetch = fetch) {
-  const output = await requestManagerLlmOutputViaApi({ ...input, outputKind: "statEvaluation" }, fetchFn);
-  if (!output.statEvaluation) throw new Error("Manager stat evaluation response was empty.");
-  return { ...output, statEvaluation: output.statEvaluation };
-}
-
-export async function requestManagerGoalPlanViaApi(
-  input: ManagerLlmRequest,
-  fetchFn: typeof fetch = fetch,
-  options?: ManagerLlmClientOptions,
-) {
-  const output = await requestManagerLlmOutputViaApi({ ...input, outputKind: "goalPlan" }, fetchFn, options);
-  if (!output.goalPlan) throw new Error("Manager goal plan response was empty.");
-  return { ...output, goalPlan: output.goalPlan };
-}
-
-export async function requestManagerPlanRebalanceViaApi(
-  input: ManagerLlmRequest,
-  fetchFn: typeof fetch = fetch,
-  options?: ManagerLlmClientOptions,
-) {
-  const output = await requestManagerLlmOutputViaApi({ ...input, outputKind: "planRebalance" }, fetchFn, options);
-  if (!output.planRebalance) throw new Error("Manager plan rebalance response was empty.");
-  return { ...output, planRebalance: output.planRebalance };
-}
-
-export async function requestManagerQuestAcceptancePreviewViaApi(
-  input: ManagerLlmRequest,
-  fetchFn: typeof fetch = fetch,
-  options?: ManagerLlmClientOptions,
-) {
-  const output = await requestManagerLlmOutputViaApi({ ...input, outputKind: "questAcceptancePreview" }, fetchFn, options);
-  if (!output.questAcceptancePreview) throw new Error("Manager quest acceptance preview response was empty.");
-  return { ...output, questAcceptancePreview: output.questAcceptancePreview };
-}
-
-export async function requestManagerLlmOutputViaApi(
-  input: ManagerLlmRequest,
-  fetchFn: typeof fetch = fetch,
-  options: ManagerLlmClientOptions = {},
-): Promise<ManagerLlmOutput> {
+export async function requestManagerLlmOutputViaApi(input: ManagerLlmRequest, fetchFn: typeof fetch = fetch, options: ManagerLlmClientOptions = {}): Promise<ManagerLlmOutput> {
   const nowMs = options.nowMs ?? Date.now();
   const throttleMs = options.throttleMs ?? defaultClientThrottleMs;
-  const previous = lastOutputByKind[input.outputKind];
+  const requestKey = JSON.stringify(input);
+  const previous = lastOutputByRequest.get(requestKey);
   if (previous && nowMs >= previous.requestedAtMs && nowMs - previous.requestedAtMs < throttleMs) {
-    return {
-      ...previous.output,
-      source: "rule_fallback",
-      fallbackReason: "CLIENT_THROTTLED",
-    };
+    return { ...previous.output, source: "rule_fallback", fallbackReason: "CLIENT_THROTTLED" };
   }
-
-  const response = await fetchFn(routeByKind[input.outputKind], {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(input),
-  });
+  const response = await fetchFn(routeByKind[input.outputKind], { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(input) });
   const payload = (await response.json()) as ManagerLlmApiResponse;
-
-  if (!response.ok || !payload.ok) {
-    throw new Error(payload.ok ? "Manager LLM request failed." : payload.error.message);
-  }
-
-  lastOutputByKind[input.outputKind] = { requestedAtMs: nowMs, output: payload.data };
+  if (!response.ok || !payload.ok) throw new Error(payload.ok ? "Manager LLM request failed." : payload.error.message);
+  lastOutputByRequest.set(requestKey, { requestedAtMs: nowMs, output: payload.data });
   return payload.data;
 }
