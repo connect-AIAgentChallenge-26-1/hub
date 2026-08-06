@@ -42,7 +42,7 @@
     "Vercel Functions, Hono contract parser, Supabase quest_logs와 manager plan store를 연결해 배포 환경에서도 API와 기록 저장을 유지합니다.",
     "Manager LLM API는 OpenAI provider, strict contract parser, rate limit, rule fallback을 분리해 데모 flow가 API 실패에도 끊기지 않도록 설계했습니다."
   ],
-  "developmentWithAI": "저는 서비스 컨셉, 핵심 사용자 흐름, 확장 우선순위, 수동 검증 결과를 결정했습니다. AI Agent는 현재 저장소를 조사하고 구현 계획을 나눈 뒤, 승인된 범위에서 코드와 문서를 수정했습니다. 구현 후에는 typecheck, build, 하네스 검증, 브라우저 Network 확인 시나리오를 분리해 검증했습니다.",
+  "developmentWithAI": "저는 서비스 컨셉, 핵심 사용자 흐름, 확장 우선순위, 수동 검증 결과를 결정했습니다. AI Agent는 현재 저장소를 조사하고 구현 계획을 나눈 뒤, 승인된 범위에서 코드와 문서를 수정했습니다. 구현 후에는 typecheck, build, 하네스 검증, 브라우저 Network 확인 시나리오를 분리해 검증했습니다. 소스 링크: https://github.com/YIFNEN/hub / 프로젝트 소개 자료: https://drive.google.com/file/d/1t7uKzMX8ghds2MRocJeNctKTsNmbuhMW/view?usp=drive_link / AI Agent Workflow 자료: https://drive.google.com/file/d/1ykVqOgO75LrUaDwRsP-UU2TUpCw5pWfh/view?usp=drive_link / 부스 루프 소개 영상: https://drive.google.com/file/d/18NBeLkIkoAW5gV5-Pq0XHJxuLrELXsPe/view?usp=drive_link",
   "agent": {
     "summary": "기획, 구현, TDD, 검증, Wiki와 학습 문서 정리를 Agent와 Skill로 나누어 진행했습니다.",
     "agentTools": [

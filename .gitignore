@@ -10,3 +10,13 @@ dist/
 
 .vercel
 .env*
+
+# Local presentation exports and generated review artifacts
+.codex-ppt-build/
+outputs/*.inspect.ndjson
+outputs/*booth*.pptx
+outputs/*booth*.pdf
+outputs/*booth*.png
+
+# Local sound candidate packs are not part of the final showcase PR.
+public/assets/fx/
