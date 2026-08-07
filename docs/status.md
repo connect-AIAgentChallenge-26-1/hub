@@ -1,8 +1,22 @@
 ﻿# 현재 진행 상황
 
-마지막 갱신: 2026-07-30
+마지막 갱신: 2026-08-07
 
 ## 완료
+
+- 2026-08-07 기본 데스크톱 창 정리: 새 진입, 설치 마법사 완료, 서비스 다시 시작 시 퀘스트·매니저 창만 열고 사다리·평지는 바탕화면 아이콘에서 사용자가 직접 열도록 변경
+- 2026-08-07 다음 퀘스트 로딩 UI 개선: LLM 응답 대기 중 이전 퀘스트를 숨기고 퀘스트 창 중앙에 `⌛`만 표시한 뒤 성공·fallback 응답으로 교체하도록 planning 표시 우선순위와 React 상태를 연결하고, 단일 요청 잠금으로 빠른 중복 호출을 차단
+- 2026-08-07 Manager LLM v3 런타임 수정: 보상 미확정 draft의 `rewardExp=0`을 request contract에서 허용하되 수락 이후 난이도별 EXP 검증은 유지하고, `next-quest`/수락 미리보기의 중복 출력 필드를 서버 기준으로 정규화해 400 오류를 제거. 빈 계획 화면 버튼도 실제 `goal-plan` 호출에 연결했으며 브라우저에서 수락 미리보기와 완료 후 `next-quest` 응답을 확인
+- 2026-08-07 Manager LLM v3 구현: 하루 가능 시간을 soft baseline으로 사용하고, 숨은 전체 계획과 현재 퀘스트 하나를 유지하며 사용자 요청 시 `next-quest`가 다음 퀘스트와 plan revision을 통합 반환하도록 연결
+- 2026-08-07 시간 상태·완주 보너스 구현: 미달·도달·초과 context, 실패 시간 제외 인정 규칙, 수락 시 baseline snapshot, 하루 한 번 `daily_capacity_completed` EXP와 DB 중복 방지 migration 005 추가
+- 2026-08-07 UI 입력·표시 개선: 시간 select를 정수 시간/분 입력으로 교체하고 LLM `displayTitle`, 수행 지시, 완료 기준, 예상 시간, 결과물, 추적값과 예상 보상을 기존 XP 테마 안에 표시
+- 2026-08-07 로컬 검증: 전체 80 files / 403 tests, client/server TypeScript 검사 통과. `005_manager_goal_plan_v3.sql` 원격 적용과 build는 아직 실행하지 않음
+
+- 2026-08-06 Manager LLM v2 교체: 자연어 목표·하루 가능 시간·선택 목표일·매니저 말투를 `GoalBrief`로 정리하고, 전체 milestone/weekly horizon과 숨은 7일 `dailyPlan`을 생성하도록 계약·provider·fallback을 통합
+- 2026-08-06 퀘스트 수락 통합 결정: 의미 중심 `QuestSpec`을 수락 직전에 평가해 난이도, 범위 제한 EXP, 능력치 예산, 짧은 manager line, behavior intent를 한 응답으로 확정하고 전체 schema 실패 시 rule fallback하도록 연결
+- 2026-08-06 계획 재조정 연결: 실패·복구 즉시, 3회 연속 성공, 주간 경계, 시간 이상치에서 전체 미래 계획을 검토하고 현재 퀘스트만 표시하며, 완료 node 변경 응답은 서버 contract에서 거부하도록 보강
+- 2026-08-06 Supabase v2 마이그레이션 파일과 revision RPC 추가: `supabase/migrations/004_manager_goal_plan_v2.sql`. 원격 DB에는 아직 적용하지 않음
+- 2026-08-06 Manager LLM v2 검증: 전체 회귀 78 files / 395 tests와 client/server TypeScript 검사 통과
 
 - 문서형 Agent를 Codex skill로 변환: project-planning-agent, project-verification-agent, project-document-manager
 - 학습 정리용 repo-side Codex skill 추가: project-learning-agent

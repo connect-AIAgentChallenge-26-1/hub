@@ -134,7 +134,7 @@ export const windowRegistry: Record<WindowId, WindowSpec> = {
 
 export const windowIds = Object.keys(windowRegistry) as WindowId[];
 export const workflowWindowIds = windowIds.filter((id) => windowRegistry[id].workflow);
-export const defaultOpenWindowIds = ["quest", "manager", "ladderObject", "platformObject"] as const satisfies readonly WindowId[];
+export const defaultOpenWindowIds = ["quest", "manager"] as const satisfies readonly WindowId[];
 export const desktopShortcutWindowIds = [
   "quest",
   "manager",

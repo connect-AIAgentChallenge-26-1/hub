@@ -113,6 +113,15 @@ export async function fetchQuestEventsViaApi(limit = 20) {
   return payload.data.filter(hasJournalResult).map(toQuestLog);
 }
 
+export async function fetchDailyCapacityBonusDatesViaApi() {
+  const response = await fetch("/api/quest-events?limit=100&type=reward_unlocked");
+  const payload = (await response.json()) as QuestEventApiResponse<GetQuestEventsResponse>;
+  if (!response.ok || !payload.ok) throw new Error(getApiErrorMessage(payload, "Reward events load failed."));
+  return payload.data.flatMap((event) => event.metadata.rewardKind === "daily_capacity_completed" && typeof event.metadata.localDate === "string"
+    ? [event.metadata.localDate]
+    : []);
+}
+
 export async function fetchManagerContextViaApi() {
   const response = await fetch("/api/manager-context");
   const payload = (await response.json()) as QuestEventApiResponse<ManagerContextResponse>;

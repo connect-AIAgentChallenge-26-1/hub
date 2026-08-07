@@ -12,6 +12,7 @@ export interface UserProfile {
   goal: string;
   category: "study" | "exercise" | "hobby" | "career" | "habit";
   goalPeriod: string;
+  targetDate: string;
   dailyMinutes: number;
   questSize: QuestSize;
   managerTone: ManagerTone;

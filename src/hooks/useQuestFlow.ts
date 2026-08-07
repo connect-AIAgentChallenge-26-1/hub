@@ -28,7 +28,6 @@ export interface UseQuestFlowInput {
   setWorkflowWindows: (nextWindows: WindowId[]) => void;
   resetOpenWindows: (nextWindows: WindowId[]) => void;
   openWindow: (id: WindowId) => void;
-  createQuest: (profile: UserProfile) => Quest;
   addExp: (manager: ManagerState, exp: number, line: string) => ManagerState;
   getManagerPersona: (manager: ManagerState, profile: UserProfile) => Parameters<typeof getPersonaLine>[1];
   recordOutcomeStreak: (result: "success" | "failed") => void;
@@ -39,6 +38,8 @@ export interface UseQuestFlowInput {
   setAcceptancePreview: Dispatch<SetStateAction<QuestAcceptancePreviewState | null>>;
   setAcceptedPreview: Dispatch<SetStateAction<QuestAcceptancePreviewState | null>>;
   onAcceptNeedsPreview?: () => void;
+  onQuestAccepted?: () => void;
+  onQuestStopped?: () => void;
   createQuestEventRequest: (
     quest: Quest,
     result: NonNullable<CreateQuestEventRequest["result"]>,
@@ -54,6 +55,9 @@ export interface UseQuestFlowInput {
       statEvaluation?: QuestAcceptancePreviewState["preview"]["statEvaluation"];
       statEvaluationSource?: "llm" | "rule_fallback" | "quest_acceptance_preview";
       questAcceptancePreviewReason?: string;
+      actualDurationMinutes?: number;
+      plannedEstimatedMinutes?: number;
+      plannedTargetAmount?: number;
     },
   ) => CreateQuestEventRequest;
 }
@@ -71,7 +75,6 @@ export function useQuestFlow({
   setWorkflowWindows,
   resetOpenWindows,
   openWindow,
-  createQuest,
   addExp,
   getManagerPersona,
   recordOutcomeStreak,
@@ -82,11 +85,12 @@ export function useQuestFlow({
   setAcceptancePreview,
   setAcceptedPreview,
   onAcceptNeedsPreview,
+  onQuestAccepted,
+  onQuestStopped,
   createQuestEventRequest,
 }: UseQuestFlowInput) {
   function openTodayQuest() {
     if (questStatus === "success") {
-      setQuest(createQuest(profile));
       setQuestStatus("draft");
       setPreviousQuestTitle("");
       setAcceptancePreview(null);
@@ -125,11 +129,19 @@ export function useQuestFlow({
       preview: currentPreview.preview,
     });
     setQuestStatus("active");
+    onQuestAccepted?.();
     setWorkflowWindows(["runner", "manager"]);
-    setManager((current) => ({ ...current, mood: "focused", line: getPersonaLine("quest_started", getManagerPersona(current, profile)) }));
+    setManager((current) => ({
+      ...current,
+      mood: "focused",
+      line: currentPreview.preview.managerLine || getPersonaLine("quest_started", getManagerPersona(current, profile)),
+      behaviorStyle: currentPreview.preview.behaviorIntent?.behaviorStyle ?? current.behaviorStyle,
+      behaviorIntent: currentPreview.preview.behaviorIntent ?? current.behaviorIntent,
+    }));
   }
 
   function completeQuest() {
+    onQuestStopped?.();
     const result = getQuestCompletionResult(questStatus);
     recordOutcomeStreak("success");
     const eventLine = getPersonaLine("quest_completed", getManagerPersona(manager, profile));
@@ -152,6 +164,7 @@ export function useQuestFlow({
   }
 
   function startFailureFlow() {
+    onQuestStopped?.();
     setQuestStatus("failed");
     setManager((current) => ({ ...current, mood: "recovering", line: getPersonaLine("quest_failed", getManagerPersona(current, profile)) }));
     setWorkflowWindows(["failure", "manager"]);

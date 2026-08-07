@@ -3,11 +3,14 @@ import {
   applyDifficultyEvaluationToQuest,
   applyQuestAcceptancePreviewToQuest,
   applyQuestPatch,
+  acquireQuestPlanningLock,
   calculateQuestReward,
   createQuestDraftSnapshotKey,
   getQuestWorkflowWindows,
   getQuestCompletionResult,
+  getQuestWindowView,
   isQuestAcceptancePreviewCurrent,
+  releaseQuestPlanningLock,
 } from "./questFlowPolicy";
 import type { Quest } from "./questLogic";
 
@@ -33,6 +36,21 @@ describe("quest flow policy", () => {
   it("records recovery completion separately from normal success", () => {
     expect(getQuestCompletionResult("recovery")).toBe("recovery");
     expect(getQuestCompletionResult("active")).toBe("success");
+  });
+
+  it("shows only the planning view while the next quest is being prepared", () => {
+    expect(getQuestWindowView({ status: "success", hasQuestSpec: true, isPlanning: true })).toBe("planning");
+    expect(getQuestWindowView({ status: "draft", hasQuestSpec: true, isPlanning: false })).toBe("draft");
+    expect(getQuestWindowView({ status: "draft", hasQuestSpec: false, isPlanning: false })).toBe("empty");
+  });
+
+  it("allows only one quest planning request at a time", () => {
+    const lock = { current: false };
+
+    expect(acquireQuestPlanningLock(lock)).toBe(true);
+    expect(acquireQuestPlanningLock(lock)).toBe(false);
+    releaseQuestPlanningLock(lock);
+    expect(acquireQuestPlanningLock(lock)).toBe(true);
   });
 
   it("recalculates reward and unit when a quest draft changes", () => {
@@ -142,6 +160,35 @@ describe("quest flow policy", () => {
       ...quest,
       difficulty: "hard",
       rewardExp: 48,
+    });
+  });
+
+  it("applies the complete finalized quest before acceptance", () => {
+    expect(applyQuestAcceptancePreviewToQuest(quest, {
+      finalizedQuest: {
+        displayTitle: "오답 세 문제의 풀이 근거 적기",
+        instruction: "오답 세 문제의 풀이 근거를 적는다.",
+        estimatedMinutes: 25,
+        tracking: { mode: "counter", targetAmount: 3, targetUnit: "문제" },
+      },
+      difficulty: "hard",
+      rewardExp: 45,
+      statEvaluation: {
+        difficulty: "hard",
+        statBudget: 15,
+        primaryStats: ["knowledge"],
+        statDeltas: [{ stat: "knowledge", amount: 15 }],
+        reason: "오답 분석",
+      },
+      reason: "의미 중심 통합 평가",
+    })).toEqual({
+      ...quest,
+      title: "오답 세 문제의 풀이 근거 적기",
+      type: "quantity",
+      amount: 3,
+      unit: "문제",
+      difficulty: "hard",
+      rewardExp: 45,
     });
   });
 });

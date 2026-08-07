@@ -33,6 +33,7 @@ const routeKinds: Array<{ path: string; outputKind: ManagerLlmOutputKind }> = [
   { path: "/api/manager/stat-evaluation", outputKind: "statEvaluation" },
   { path: "/api/manager/behavior-intent", outputKind: "behaviorIntent" },
   { path: "/api/manager/goal-plan", outputKind: "goalPlan" },
+  { path: "/api/manager/next-quest", outputKind: "nextQuest" },
   { path: "/api/manager/plan-rebalance", outputKind: "planRebalance" },
   { path: "/api/manager/quest-acceptance-preview", outputKind: "questAcceptancePreview" },
 ];
@@ -83,7 +84,8 @@ export function registerManagerLlmRoutes(
         const persisted = await persistManagerPlanOutput(planStore, parsed.data, response.data);
         response.data = { ...response.data, ...persisted };
         return context.json(response);
-      } catch {
+      } catch (error) {
+        console.warn(`[manager-llm] ${route.outputKind}: ${error instanceof Error ? error.message : "Unknown provider error"}`);
         const output = createFallbackOutput(route.outputKind, fallback, "LLM_PROVIDER_ERROR" satisfies ManagerLlmFallbackReason);
         const persisted = await persistManagerPlanOutput(planStore, parsed.data, output);
         return context.json({
@@ -103,25 +105,51 @@ async function persistManagerPlanOutput(
   if (!planStore) return {};
 
   try {
-    if (output.goalPlan) {
+    if (output.goalPlan && !output.goalPlan.goalBrief.clarificationQuestion) {
       const stored = await planStore.saveGoalPlan({
-        goal: request.profile.goal,
-        category: request.profile.category,
+        rawGoalText: request.profile.rawGoalText,
+        dailyMinutes: request.profile.dailyMinutes,
+        targetDate: request.profile.targetDate ?? null,
+        managerTone: request.profile.managerTone,
+        nickname: request.profile.nickname,
+        clarificationAnswer: request.profile.clarificationAnswer,
         source: output.source,
         fallbackReason: output.fallbackReason,
         promptVersion: output.promptVersion,
-        plan: output.goalPlan,
+        goalPlan: output.goalPlan,
       });
       return { storedPlanId: stored.id };
     }
     if (output.planRebalance) {
       const stored = await planStore.savePlanRevision({
         planId: request.activePlanId ?? null,
-        goal: request.profile.goal,
+        rawGoalText: request.profile.rawGoalText,
+        triggerEventId: request.triggerEventId ?? null,
         source: output.source,
         fallbackReason: output.fallbackReason,
         promptVersion: output.promptVersion,
         rebalance: output.planRebalance,
+      });
+      return { storedRevisionId: stored.id };
+    }
+    if (output.nextQuest) {
+      const capacityReason = output.nextQuest.capacityAssessment.status === "over_capacity"
+        ? "daily_over_capacity" as const
+        : output.nextQuest.capacityAssessment.status === "capacity_reached"
+          ? "daily_capacity_reached" as const
+          : "daily_under_capacity" as const;
+      const stored = await planStore.savePlanRevision({
+        planId: request.activePlanId ?? null,
+        rawGoalText: request.profile.rawGoalText,
+        triggerEventId: request.triggerEventId ?? null,
+        source: output.source,
+        fallbackReason: output.fallbackReason,
+        promptVersion: output.promptVersion,
+        rebalance: {
+          rebalancedPlan: output.nextQuest.updatedPlan,
+          changes: [{ scope: "daily", reason: capacityReason, before: request.activePlan?.currentQuest.displayTitle ?? "현재 퀘스트", after: output.nextQuest.nextQuest.displayTitle }],
+          nextQuest: { ...output.nextQuest.nextQuest, recoveryReason: "사용자 요청과 오늘 시간 기록을 반영한 다음 퀘스트입니다." },
+        },
       });
       return { storedRevisionId: stored.id };
     }

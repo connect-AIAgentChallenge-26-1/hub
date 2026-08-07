@@ -45,17 +45,19 @@ import {
   type WindowPosition,
   type WindowSize,
 } from "./data/windowRegistry";
-import { createQuestEventViaApi } from "./layers/storage/questLogApi";
+import { createQuestEventViaApi, fetchDailyCapacityBonusDatesViaApi } from "./layers/storage/questLogApi";
 import type { CreateQuestEventRequest, ManagerContext, QuestEventType } from "./layers/storage/questLogApi";
 import {
   managerLlmPromptVersion,
-  requestManagerBehaviorIntentViaApi,
-  requestManagerLineViaApi,
+  requestManagerGoalPlanViaApi,
+  requestManagerNextQuestViaApi,
+  requestManagerPlanRebalanceViaApi,
   requestManagerQuestAcceptancePreviewViaApi,
-  requestManagerQuestSuggestionViaApi,
   requestManagerStatEvaluationViaApi,
   type ManagerLlmOutputKind,
   type ManagerLlmRequest,
+  type ManagerGoalPlan,
+  type ManagerLlmQuestSpec,
 } from "./layers/storage/managerLlmApi";
 import { createQuestLogRepository } from "./layers/storage/questLogRepository";
 import { usePixelTvMode } from "./hooks/usePixelTvMode";
@@ -65,7 +67,8 @@ import { useWindowPetPlacementProfile } from "./hooks/useWindowPetPlacementDraft
 import { useOutsidePetRuntime } from "./hooks/useOutsidePetRuntime";
 import { useQuestFlow } from "./hooks/useQuestFlow";
 import { getRestartServiceTarget } from "./domain/appLifecyclePolicy";
-import type { ManagerState, ManagerTone, QuestOutcomeStreak, QuestSize, UserProfile } from "./domain/appState";
+import type { ManagerState, ManagerTone, QuestOutcomeStreak, UserProfile } from "./domain/appState";
+import { getDailyCapacityBonusExp, splitDailyMinutes, summarizeDailyCapacity, toDailyMinutes, toLocalDate, type DailyCapacityContext } from "./domain/dailyCapacityPolicy";
 import { resolveManagerWindowInteraction, shouldShowManagerWindowInteraction, type ManagerWindowInteractionState } from "./domain/managerRuntimePriority";
 import { resolveBlinkFocusEffect, type BlinkEntryReason, type BlinkFocusMode } from "./domain/blinkFocusPolicy";
 import { getClimbPosition, type InteractionObject, type ResizeAxis } from "./domain/interactionObjects";
@@ -100,8 +103,11 @@ import {
   type PixelTvPhotoCaptureRect,
 } from "./domain/pixelizer";
 import {
+  acquireQuestPlanningLock,
   calculateQuestReward,
   createQuestDraftSnapshotKey,
+  getQuestWindowView,
+  releaseQuestPlanningLock,
   type QuestAcceptancePreviewState,
   type QuestStatus,
 } from "./domain/questFlowPolicy";
@@ -199,12 +205,17 @@ interface ManagerSelectWindowProps {
 interface ProfileSetupWizardProps {
   draft: UserProfile;
   needsClarify: boolean;
+  clarificationQuestion?: string;
+  clarificationOptions?: string[];
+  isPlanning: boolean;
   onChange: (profile: UserProfile) => void;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }
 
 interface QuestWindowProps {
   quest: Quest;
+  questSpec: ManagerLlmQuestSpec | null;
+  isPlanning: boolean;
   status: QuestStatus;
   rewardPreviewState: QuestRewardPreviewUiState;
   rewardPreview: QuestAcceptancePreviewState | null;
@@ -325,6 +336,9 @@ interface DesktopPetProps {
 const profileKey = "manager-xp.profile.v1";
 const managerKey = "manager-xp.manager.v1";
 const lifecycleResetAtKey = "manager-xp.lifecycle-reset-at.v1";
+const managerPlanKey = "manager-xp.goal-plan.v3";
+const managerPlanIdKey = "manager-xp.goal-plan-id.v3";
+const dailyCapacityBonusDatesKey = "manager-xp.daily-capacity-bonus-dates.v1";
 const questLogRepository = createQuestLogRepository();
 
 const categoryLabels: Record<UserProfile["category"], string> = {
@@ -402,6 +416,7 @@ const defaultProfile: UserProfile = {
   goal: "정보처리기사 자격증 취득",
   category: "study",
   goalPeriod: "6주",
+  targetDate: "",
   dailyMinutes: 30,
   questSize: "balanced",
   managerTone: "calm",
@@ -505,30 +520,76 @@ function createRuleFallbackManagerIntent(
   };
 }
 
-function isGoalAbstract(goal: string) {
-  const normalized = goal.trim();
-  const vagueWords = ["성장", "공부", "운동", "열심히", "잘하기", "자기계발"];
-  return normalized.length < 8 || vagueWords.some((word) => normalized === word);
+function createEmptyQuest(): Quest {
+  return { title: "다음 퀘스트 준비 중", type: "action", amount: 1, unit: "회", difficulty: "easy", deadline: "오늘 23:59", rewardExp: 0 };
 }
 
-function getDifficultyFromSize(size: QuestSize): Difficulty {
-  if (size === "tiny") return "easy";
-  if (size === "challenge") return "hard";
-  return "normal";
+function toQuestSpec(quest: Quest, activePlan?: ManagerGoalPlan | null): ManagerLlmQuestSpec {
+  const planned = activePlan?.currentQuest.displayTitle === quest.title ? activePlan.currentQuest : activePlan?.currentQuest;
+  if (planned) {
+    return {
+      ...planned,
+      displayTitle: quest.title,
+      instruction: planned.instruction,
+      estimatedMinutes: quest.type === "time" ? quest.amount : planned.estimatedMinutes,
+      tracking: {
+        mode: quest.type === "time" ? "timer" : quest.type === "quantity" ? "counter" : "check",
+        targetAmount: quest.amount,
+        targetUnit: quest.unit,
+      },
+    };
+  }
+
+  return {
+    id: "daily-current",
+    displayTitle: quest.title,
+    instruction: quest.title,
+    purpose: activePlan?.goalBrief.normalizedGoal ?? "현재 목표를 향한 다음 행동",
+    completionCriteria: [`${quest.amount}${quest.unit} 완료`],
+    estimatedMinutes: quest.type === "time" ? quest.amount : 15,
+    environmentConstraints: [],
+    prerequisites: [],
+    linkedMilestoneId: activePlan?.milestones[0]?.id ?? "milestone-1",
+    linkedWeeklyPlanId: activePlan?.weeklyPlans[0]?.id ?? "week-1",
+    status: "planned",
+    tracking: {
+      mode: quest.type === "time" ? "timer" : quest.type === "quantity" ? "counter" : "check",
+      targetAmount: quest.amount,
+      targetUnit: quest.unit,
+    },
+  };
 }
 
-function getAmountFromProfile(profile: UserProfile) {
-  if (profile.questSize === "tiny") return Math.max(5, Math.round(profile.dailyMinutes / 3));
-  if (profile.questSize === "challenge") return Math.max(30, profile.dailyMinutes);
-  return Math.max(15, Math.round(profile.dailyMinutes / 2));
+function toQuestFromSpec(spec: ManagerLlmQuestSpec): Quest {
+  const type: QuestType = spec.tracking.mode === "timer" ? "time" : spec.tracking.mode === "counter" ? "quantity" : "action";
+  const amount = spec.tracking.targetAmount ?? (type === "time" ? spec.estimatedMinutes : 1);
+  const unit = spec.tracking.targetUnit ?? (type === "time" ? "분" : type === "quantity" ? "개" : "회");
+  return {
+    title: spec.displayTitle,
+    type,
+    amount,
+    unit,
+    difficulty: "easy",
+    deadline: "오늘 23:59",
+    rewardExp: 0,
+  };
 }
 
-function createQuest(profile: UserProfile): Quest {
-  const amount = getAmountFromProfile(profile);
-  const difficulty = getDifficultyFromSize(profile.questSize);
-  const focus = profile.focusAnswer ? `${profile.focusAnswer} ` : "";
-  const target = profile.goal.replace("자격증 취득", "").replace("완성", "").trim() || categoryLabels[profile.category];
-  return { title: `${target} ${focus}핵심 정리 ${amount}분`, type: "time", amount, unit: "분", difficulty, deadline: "오늘 23:59", rewardExp: calculateQuestReward(difficulty, amount, "time") };
+function createClientFallbackQuestSpec(plan: ManagerGoalPlan): ManagerLlmQuestSpec {
+  const previous = plan.currentQuest;
+  const weeklyFocus = plan.weeklyPlans.find((item) => item.status === "active") ?? plan.weeklyPlans[0];
+  return {
+    ...previous,
+    id: `fallback-${Date.now()}`,
+    displayTitle: "직전 단계 이어서 진행하기",
+    instruction: previous.instruction,
+    purpose: weeklyFocus?.statement ?? previous.purpose,
+    completionCriteria: previous.completionCriteria.slice(0, 1),
+    estimatedMinutes: Math.min(15, previous.estimatedMinutes),
+    adaptationReason: "LLM 연결 실패로 직전 수행 맥락을 유지한 최소 퀘스트",
+    status: "planned",
+    tracking: { ...previous.tracking, targetAmount: previous.tracking.mode === "timer" ? Math.min(15, previous.estimatedMinutes) : previous.tracking.targetAmount },
+  };
 }
 
 function addExp(manager: ManagerState, exp: number, line: string): ManagerState {
@@ -568,6 +629,13 @@ function createQuestEventRequest(
     statEvaluationSource?: "llm" | "rule_fallback" | "quest_acceptance_preview";
     statEvaluationFallbackReason?: string;
     questAcceptancePreviewReason?: string;
+    actualDurationMinutes?: number;
+    plannedEstimatedMinutes?: number;
+    plannedTargetAmount?: number;
+    acceptedEstimatedMinutes?: number;
+    dailyBaselineMinutes?: number;
+    localDate?: string;
+    completionCriteria?: string[];
   } = {},
 ): CreateQuestEventRequest {
   const eventType = getQuestEventType(result);
@@ -610,6 +678,13 @@ function createQuestEventRequest(
       statEvaluationFallbackReason: options.statEvaluationFallbackReason,
       llmPromptVersion: options.statEvaluationSource === "llm" ? managerLlmPromptVersion : undefined,
       questAcceptancePreviewReason: options.questAcceptancePreviewReason,
+      actualDurationMinutes: options.actualDurationMinutes,
+      plannedEstimatedMinutes: options.plannedEstimatedMinutes,
+      plannedTargetAmount: options.plannedTargetAmount,
+      acceptedEstimatedMinutes: options.acceptedEstimatedMinutes,
+      dailyBaselineMinutes: options.dailyBaselineMinutes,
+      localDate: options.localDate,
+      completionCriteria: options.completionCriteria,
       rewardCandidates: [...new Set([...rewardCandidates, ...recoveryRewardCandidates])],
       unlockedStagesAfter,
       stageUnlocked,
@@ -703,37 +778,52 @@ function createManagerLlmRequest(
     managerContext: ManagerContext;
     profile: UserProfile;
     manager: ManagerState;
-    quest: Quest;
+    quest?: Quest;
     questStatus: QuestStatus;
     previousQuestTitle: string;
     selectedFailureReason: string;
     logs: QuestLog[];
+    activePlan?: ManagerGoalPlan | null;
+    activePlanId?: string | null;
+    questSpec?: ManagerLlmQuestSpec | null;
+    clarificationAnswer?: string;
+    triggerEventId?: string;
   },
 ): ManagerLlmRequest {
   const persona = getManagerPersona(input.manager, input.profile);
+  const dailyCapacity = getDailyCapacityContext(input.profile, input.logs, input.questStatus === "active" ? input.questSpec ?? null : null);
   return {
     promptVersion: managerLlmPromptVersion,
     outputKind,
     managerContext: input.managerContext,
     profile: {
       nickname: input.profile.nickname || "사용자",
-      goal: input.profile.goal,
-      category: input.profile.category,
+      rawGoalText: input.profile.goal,
       dailyMinutes: input.profile.dailyMinutes,
-      questSize: input.profile.questSize,
+      targetDate: input.profile.targetDate || null,
       managerTone: input.profile.managerTone,
+      clarificationAnswer: input.clarificationAnswer || undefined,
     },
     persona: {
       petId: input.manager.petId,
       ...persona,
     },
+    managerProgress: {
+      level: input.manager.level,
+      stats: input.manager.stats,
+    },
     questState: {
       status: input.questStatus,
-      currentQuest: input.quest,
+      ...(input.quest ? { currentQuest: input.quest } : {}),
       previousQuestTitle: input.previousQuestTitle || null,
       failureReason: input.questStatus === "failed" ? input.selectedFailureReason : null,
     },
-    recentEvents: input.logs.slice(0, 8).map(toManagerLlmRecentEvent),
+    recentEvents: input.logs.slice(0, 12).map(toManagerLlmRecentEvent),
+    dailyCapacity,
+    activePlan: input.activePlan ?? undefined,
+    activePlanId: input.activePlanId ?? undefined,
+    questDraft: input.questSpec ?? undefined,
+    triggerEventId: input.triggerEventId,
   };
 }
 
@@ -744,6 +834,105 @@ function toManagerLlmRecentEvent(log: QuestLog) {
     result: log.result,
     difficulty: getQuestLogDifficulty(log),
     createdAt: log.createdAt,
+    failureReason: log.reason ?? null,
+    actualDurationMinutes: getPositiveMetadataNumber(log.metadata, "actualDurationMinutes"),
+    plannedEstimatedMinutes: getPositiveMetadataNumber(log.metadata, "plannedEstimatedMinutes"),
+    completionCriteria: getStringArrayMetadata(log.metadata, "completionCriteria"),
+    evaluationReason: getStringMetadata(log.metadata, "questAcceptancePreviewReason"),
+  };
+}
+
+function getDailyCapacityContext(profile: UserProfile, logs: QuestLog[], activeQuest: ManagerLlmQuestSpec | null): DailyCapacityContext {
+  const localDate = toLocalDate(new Date());
+  const bonusAwardedDates = readStorage<string[]>(dailyCapacityBonusDatesKey, []);
+  return summarizeDailyCapacity({
+    baselineMinutes: profile.dailyMinutes,
+    localDate,
+    records: bonusAwardedDates.includes(localDate)
+      ? [...logs, { result: null, metadata: { localDate, rewardKind: "daily_capacity_completed" } }]
+      : logs,
+    reservedMinutes: activeQuest?.estimatedMinutes ?? 0,
+  });
+}
+
+function getPositiveMetadataNumber(metadata: Record<string, unknown> | undefined, key: string): number | undefined {
+  const value = metadata?.[key];
+  return typeof value === "number" && Number.isFinite(value) && value > 0 ? value : undefined;
+}
+
+function getStringMetadata(metadata: Record<string, unknown> | undefined, key: string): string | undefined {
+  const value = metadata?.[key];
+  return typeof value === "string" && value.trim() ? value : undefined;
+}
+
+function getStringArrayMetadata(metadata: Record<string, unknown> | undefined, key: string): string[] {
+  const value = metadata?.[key];
+  return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
+}
+
+function getPlanRebalanceTrigger(request: CreateQuestEventRequest, recentLogs: QuestLog[], plannedQuest: ManagerLlmQuestSpec | null, isWeeklyBoundary: boolean) {
+  if (request.result === "failed") return "failure";
+  if (request.result === "recovery") return "recovery_completed";
+
+  const localDate = getStringMetadata(request.metadata, "localDate") ?? toLocalDate(new Date());
+  const baselineMinutes = getPositiveMetadataNumber(request.metadata, "dailyBaselineMinutes") ?? 1;
+  const previousCapacity = summarizeDailyCapacity({ baselineMinutes, localDate, records: recentLogs });
+  const currentCapacity = summarizeDailyCapacity({
+    baselineMinutes,
+    localDate,
+    records: [...recentLogs, { result: request.result ?? null, metadata: request.metadata }],
+  });
+  if (previousCapacity.successfulMinutes < baselineMinutes && currentCapacity.successfulMinutes >= baselineMinutes) return "daily_capacity_reached";
+
+  const recentResults = [request.result, ...recentLogs.map((log) => log.result)].filter((result): result is "success" | "failed" | "recovery" => Boolean(result));
+  const successStreak = recentResults.findIndex((result) => result !== "success");
+  const normalizedSuccessStreak = successStreak === -1 ? recentResults.length : successStreak;
+  if (normalizedSuccessStreak >= 3) return "success_streak";
+  if (isWeeklyBoundary) return "weekly_boundary";
+
+  const plannedAmount = plannedQuest?.tracking.targetAmount;
+  if (plannedAmount && (request.quest.amount <= plannedAmount * 0.5 || request.quest.amount >= plannedAmount * 1.5)) return "amount_anomaly";
+
+  const currentDuration = Number(request.metadata?.actualDurationMinutes);
+  const currentEstimate = Number(request.metadata?.plannedEstimatedMinutes);
+  const currentDurationIsAnomaly = currentDuration > 0 && currentEstimate > 0 && (currentDuration <= currentEstimate * 0.5 || currentDuration >= currentEstimate * 1.5);
+  const previousDurationAnomalies = recentLogs.filter((log) => {
+    const duration = Number(log.metadata?.actualDurationMinutes);
+    const estimate = Number(log.metadata?.plannedEstimatedMinutes);
+    return duration > 0 && estimate > 0 && (duration <= estimate * 0.5 || duration >= estimate * 1.5);
+  }).length;
+  if (currentDurationIsAnomaly && previousDurationAnomalies >= 1) return "duration_anomaly";
+  return null;
+}
+
+function getPreviousDailyCapacitySignal(profile: UserProfile, logs: QuestLog[]): string {
+  const today = toLocalDate(new Date());
+  const previousDate = logs.map((log) => getStringMetadata(log.metadata, "localDate")).find((date) => Boolean(date && date !== today));
+  if (!previousDate) return "none";
+  const previous = summarizeDailyCapacity({ baselineMinutes: profile.dailyMinutes, localDate: previousDate, records: logs });
+  return previous.usedMinutes > 0 && previous.usedMinutes < previous.baselineMinutes ? "daily_under_capacity" : previous.status;
+}
+
+function getCalendarWeekKey(now: Date) {
+  const monday = new Date(now);
+  const dayOffset = (now.getDay() + 6) % 7;
+  monday.setDate(now.getDate() - dayOffset);
+  return monday.toISOString().slice(0, 10);
+}
+
+function applyQuestResultToPlan(plan: ManagerGoalPlan, questSpec: ManagerLlmQuestSpec | null, result: CreateQuestEventRequest["result"]): ManagerGoalPlan {
+  if (!questSpec) return plan;
+  const status = result === "failed" ? "adjusted" : result === "success" || result === "recovery" ? "completed" : questSpec.status;
+  return {
+    ...plan,
+    currentQuest: plan.currentQuest.id === questSpec.id ? { ...questSpec, status } : plan.currentQuest,
+  };
+}
+
+function applyFinalizedQuestToPlan(plan: ManagerGoalPlan, finalizedQuest: ManagerLlmQuestSpec): ManagerGoalPlan {
+  return {
+    ...plan,
+    currentQuest: plan.currentQuest.id === finalizedQuest.id ? finalizedQuest : plan.currentQuest,
   };
 }
 
@@ -781,14 +970,21 @@ function usePrefersReducedMotion() {
 
 export default function App() {
   const storedProfile = useMemo(() => readStorage<UserProfile | null>(profileKey, null), []);
-  const [screen, setScreen] = useState<AppScreen>(storedProfile ? "desktop" : "manager-select");
-  const [profile, setProfile] = useState<UserProfile>(storedProfile ?? defaultProfile);
-  const [wizardDraft, setWizardDraft] = useState<UserProfile>(storedProfile ?? defaultProfile);
+  const hydratedProfile = useMemo(() => storedProfile ? { ...defaultProfile, ...storedProfile, questSize: "balanced" as const } : null, [storedProfile]);
+  const [screen, setScreen] = useState<AppScreen>(hydratedProfile ? "desktop" : "manager-select");
+  const [profile, setProfile] = useState<UserProfile>(hydratedProfile ?? defaultProfile);
+  const [wizardDraft, setWizardDraft] = useState<UserProfile>(hydratedProfile ?? defaultProfile);
   const [manager, setManager] = useState<ManagerState>(() => normalizeManager(readStorage(managerKey, defaultManager)));
   const [serverLogCutoffIso, setServerLogCutoffIso] = useState<string | null>(() => readStorage<string | null>(lifecycleResetAtKey, null));
   const [selectedPetId, setSelectedPetId] = useState<PetId>(() => normalizeManager(readStorage(managerKey, defaultManager)).petId);
   const [logs, setLogs] = useState<QuestLog[]>(() => questLogRepository.get());
-  const [quest, setQuest] = useState<Quest>(() => createQuest(storedProfile ?? defaultProfile));
+  const [quest, setQuest] = useState<Quest>(() => {
+    const storedPlan = readStorage<ManagerGoalPlan | null>(managerPlanKey, null);
+    return storedPlan?.currentQuest ? toQuestFromSpec(storedPlan.currentQuest) : createEmptyQuest();
+  });
+  const [activePlan, setActivePlan] = useState<ManagerGoalPlan | null>(() => readStorage<ManagerGoalPlan | null>(managerPlanKey, null));
+  const [activePlanId, setActivePlanId] = useState<string | null>(() => readStorage<string | null>(managerPlanIdKey, null));
+  const [activeQuestSpec, setActiveQuestSpec] = useState<ManagerLlmQuestSpec | null>(() => readStorage<ManagerGoalPlan | null>(managerPlanKey, null)?.currentQuest ?? null);
   const [questStatus, setQuestStatus] = useState<QuestStatus>("draft");
   const {
     activeWindow,
@@ -806,6 +1002,10 @@ export default function App() {
     windowRects,
   } = useWindowManager([...defaultOpenWindowIds], initialWindowPositions, initialWindowSizes);
   const [needsClarify, setNeedsClarify] = useState(false);
+  const [goalClarification, setGoalClarification] = useState<{ question: string; options: string[] } | null>(null);
+  const [isPlanningGoal, setIsPlanningGoal] = useState(false);
+  const [isPlanningQuest, setIsPlanningQuest] = useState(false);
+  const questPlanningLockRef = useRef(false);
   const [selectedFailureReason, setSelectedFailureReason] = useState(failureReasons[0]);
   const [previousQuestTitle, setPreviousQuestTitle] = useState("");
   const [rewardPreview, setRewardPreview] = useState<QuestAcceptancePreviewState | null>(null);
@@ -813,6 +1013,11 @@ export default function App() {
   const [rewardPreviewState, setRewardPreviewState] = useState<QuestRewardPreviewUiState>({ status: "idle", message: "" });
   const [startOpen, setStartOpen] = useState(false);
   const [questOutcomeStreak, setQuestOutcomeStreak] = useState<QuestOutcomeStreak>({ result: null, count: 0 });
+  const questStartedAtRef = useRef<number | null>(null);
+  const questElapsedMinutesRef = useRef<number | null>(null);
+  const acceptedDailyBaselineRef = useRef<number | null>(null);
+  const lastWeeklyRebalanceKeyRef = useRef<string | null>(null);
+  const lastRebalancedEventIdRef = useRef<string | null>(null);
   const [blinkFocus, setBlinkFocus] = useState<BlinkFocusState | null>(null);
   const { pixelTvConnected, resetPixelTvMode, togglePixelTvMode } = usePixelTvMode();
   const [pixelTvContextMenu, setPixelTvContextMenu] = useState<DesktopContextMenuState | null>(null);
@@ -822,67 +1027,33 @@ export default function App() {
     () => createInteractionObjectsFromWindows(windowPositions, windowSizes, openWindows),
     [openWindows, windowPositions, windowSizes],
   );
-  const managerLlmStateRef = useRef({ profile, manager, quest, questStatus, previousQuestTitle, selectedFailureReason, logs });
+  const managerLlmStateRef = useRef({ profile, manager, quest, questStatus, previousQuestTitle, selectedFailureReason, logs, activePlan, activePlanId, activeQuestSpec });
   useEffect(() => {
-    managerLlmStateRef.current = { profile, manager, quest, questStatus, previousQuestTitle, selectedFailureReason, logs };
-  }, [logs, manager, previousQuestTitle, profile, quest, questStatus, selectedFailureReason]);
-  const refreshManagerBehaviorIntent = useCallback(async (context: ManagerContext, options: { includeBehaviorIntent: boolean }) => {
-    const snapshot = managerLlmStateRef.current;
-    try {
-      const lineOutput = await requestManagerLineViaApi(createManagerLlmRequest("managerLine", {
-        managerContext: context,
-        profile: snapshot.profile,
-        manager: snapshot.manager,
-        quest: snapshot.quest,
-        questStatus: snapshot.questStatus,
-        previousQuestTitle: snapshot.previousQuestTitle,
-        selectedFailureReason: snapshot.selectedFailureReason,
-        logs: snapshot.logs,
-      }));
-      setManager((current) => ({ ...current, line: lineOutput.managerLine }));
-    } catch {
-      // Rule fallback already updated the visible manager line.
-    }
-
-    if (!options.includeBehaviorIntent) return;
-
-    try {
-      const behaviorOutput = await requestManagerBehaviorIntentViaApi(createManagerLlmRequest("behaviorIntent", {
-        managerContext: context,
-        profile: snapshot.profile,
-        manager: snapshot.manager,
-        quest: snapshot.quest,
-        questStatus: snapshot.questStatus,
-        previousQuestTitle: snapshot.previousQuestTitle,
-        selectedFailureReason: snapshot.selectedFailureReason,
-        logs: snapshot.logs,
-      }));
-      setManager((current) => ({
-        ...current,
-        behaviorStyle: behaviorOutput.behaviorIntent.behaviorStyle,
-        behaviorIntent: behaviorOutput.behaviorIntent,
-        line: behaviorOutput.behaviorIntent.line || current.line,
-      }));
-    } catch {
-      // Rule fallback already updated the visible manager behavior state.
-    }
-  }, []);
-  const applyManagerContext = useCallback((context: ManagerContext, options: { includeBehaviorIntent?: boolean } = {}) => {
+    managerLlmStateRef.current = { profile, manager, quest, questStatus, previousQuestTitle, selectedFailureReason, logs, activePlan, activePlanId, activeQuestSpec };
+  }, [activePlan, activePlanId, activeQuestSpec, logs, manager, previousQuestTitle, profile, quest, questStatus, selectedFailureReason]);
+  const applyManagerContext = useCallback((context: ManagerContext) => {
     setManager((current) => ({ ...current, mood: context.currentMood, line: createManagerContextLine(context, getManagerPersona(current, profile)) }));
-    void refreshManagerBehaviorIntent(context, { includeBehaviorIntent: options.includeBehaviorIntent === true });
-  }, [profile, refreshManagerBehaviorIntent]);
-  const loadManagerContextWithBehaviorIntent = useCallback((context: ManagerContext) => {
-    applyManagerContext(context, { includeBehaviorIntent: true });
+  }, [profile]);
+  const loadManagerContext = useCallback((context: ManagerContext) => {
+    applyManagerContext(context);
   }, [applyManagerContext]);
   const { logSync, setLogSync } = useQuestLogSync({
     enabled: screen === "desktop",
     ignoreLogsBefore: serverLogCutoffIso,
     onLogsLoaded: setLogs,
-    onManagerContextLoaded: loadManagerContextWithBehaviorIntent,
+    onManagerContextLoaded: loadManagerContext,
   });
+  useEffect(() => {
+    if (screen !== "desktop") return;
+    void fetchDailyCapacityBonusDatesViaApi()
+      .then((dates) => writeStorage(dailyCapacityBonusDatesKey, [...new Set(dates)]))
+      .catch(() => undefined);
+  }, [screen]);
 
   useEffect(() => { if (screen === "desktop" || screen === "manager-created") writeStorage(profileKey, profile); }, [profile, screen]);
   useEffect(() => { writeStorage(managerKey, manager); }, [manager]);
+  useEffect(() => { if (activePlan) writeStorage(managerPlanKey, activePlan); else window.localStorage.removeItem(managerPlanKey); }, [activePlan]);
+  useEffect(() => { if (activePlanId) writeStorage(managerPlanIdKey, activePlanId); else window.localStorage.removeItem(managerPlanIdKey); }, [activePlanId]);
   useEffect(() => { questLogRepository.set(logs); }, [logs]);
 
   const managerDisplayStage = getManagerDisplayStage(manager);
@@ -953,6 +1124,9 @@ export default function App() {
     const resetAt = new Date().toISOString();
     window.localStorage.removeItem(profileKey);
     window.localStorage.removeItem(managerKey);
+    window.localStorage.removeItem(managerPlanKey);
+    window.localStorage.removeItem(managerPlanIdKey);
+    window.localStorage.removeItem(dailyCapacityBonusDatesKey);
     writeStorage(lifecycleResetAtKey, resetAt);
     questLogRepository.set([]);
     setServerLogCutoffIso(resetAt);
@@ -963,7 +1137,10 @@ export default function App() {
     setManager(createInitialManagerState());
     setSelectedPetId(defaultManagerCandidatePetId);
     setLogs([]);
-    setQuest(createQuest(defaultProfile));
+    setQuest(createEmptyQuest());
+    setActivePlan(null);
+    setActivePlanId(null);
+    setActiveQuestSpec(null);
     setQuestStatus("draft");
     setPreviousQuestTitle("");
     setRewardPreview(null);
@@ -971,6 +1148,8 @@ export default function App() {
     setRewardPreviewState({ status: "idle", message: "" });
     setSelectedFailureReason(failureReasons[0]);
     setQuestOutcomeStreak({ result: null, count: 0 });
+    questStartedAtRef.current = null;
+    questElapsedMinutesRef.current = null;
     setOutsidePet(outsidePetInitialState);
     setBlinkFocus(null);
     setPixelTvContextMenu(null);
@@ -1044,7 +1223,7 @@ export default function App() {
     nextUrl.searchParams.set("projection", "pepper");
     window.location.href = `${nextUrl.pathname}${nextUrl.search}${nextUrl.hash}`;
   }
-  function recordQuestLog(log: QuestLog) { setLogs((current) => prependQuestLog(current, log)); }
+  function recordQuestLog(log: QuestLog) { setLogs((current) => prependQuestLog(current, log, 100)); }
   function recordOutcomeStreak(result: "success" | "failed") {
     setQuestOutcomeStreak((current) => ({
       result,
@@ -1052,6 +1231,7 @@ export default function App() {
     }));
   }
   async function enrichQuestEventWithLlmStatEvaluation(request: CreateQuestEventRequest): Promise<CreateQuestEventRequest> {
+    if (request.result === "failed") return request;
     if (request.metadata?.statEvaluationSource === "quest_acceptance_preview") return request;
 
     const snapshot = managerLlmStateRef.current;
@@ -1062,7 +1242,7 @@ export default function App() {
           currentMood: request.managerMoodAfter ?? snapshot.manager.mood,
           recentEventCount: snapshot.logs.length,
           lastQuestResult: request.result ?? null,
-          memorySummary: `recent events ${snapshot.logs.length}`,
+          memorySummary: `recent events ${snapshot.logs.length}; previous day signal: ${getPreviousDailyCapacitySignal(snapshot.profile, snapshot.logs)}`,
           rewardHints: [],
         },
         profile: snapshot.profile,
@@ -1103,24 +1283,150 @@ export default function App() {
       }
       const savedEvent = await createQuestEventViaApi(enrichedRequest);
       if (savedEvent.log) recordQuestLog(savedEvent.log);
+      await awardDailyCapacityBonusIfEligible(enrichedRequest, savedEvent.log ? [savedEvent.log, ...logs] : logs);
+      setActivePlan((current) => current ? applyQuestResultToPlan(current, activeQuestSpec, request.result) : current);
       applyManagerContext(savedEvent.managerContext);
       setLogSync({ status: "success", message: questLogSyncMessages.saveSuccess });
+      void rebalancePlanAfterEvent(enrichedRequest, savedEvent.event.id, savedEvent.log ? [savedEvent.log, ...logs] : logs);
     } catch {
       setLogSync({ status: "error", message: questLogSyncMessages.saveError });
       setManager((current) => ({ ...current, line: getPersonaLine("api_error", getManagerPersona(current, profile)) }));
     }
   }
 
-  const recommendQuestWithLlm = useCallback(async () => {
+  async function awardDailyCapacityBonusIfEligible(request: CreateQuestEventRequest, recentLogs: QuestLog[]) {
+    if (request.result !== "success" && request.result !== "recovery") return;
+    const localDate = getStringMetadata(request.metadata, "localDate") ?? toLocalDate(new Date());
+    const baselineMinutes = getPositiveMetadataNumber(request.metadata, "dailyBaselineMinutes") ?? profile.dailyMinutes;
+    const bonusDates = readStorage<string[]>(dailyCapacityBonusDatesKey, []);
+    const context = summarizeDailyCapacity({
+      baselineMinutes,
+      localDate,
+      records: bonusDates.includes(localDate)
+        ? [...recentLogs, { result: null, metadata: { localDate, rewardKind: "daily_capacity_completed" } }]
+        : recentLogs,
+    });
+    if (context.bonusAwarded || context.successfulMinutes < context.baselineMinutes) return;
+
+    const bonusExp = getDailyCapacityBonusExp(context.baselineMinutes);
+    try {
+      await createQuestEventViaApi({
+        type: "reward_unlocked",
+        quest: request.quest,
+        expDelta: bonusExp,
+        managerMoodAfter: "happy",
+        managerLine: "오늘 기준 시간을 완주했어. 보너스를 받았어.",
+        clientCreatedAt: new Date().toISOString(),
+        metadata: {
+          rewardKind: "daily_capacity_completed",
+          localDate,
+          dailyBaselineMinutes: context.baselineMinutes,
+          successfulMinutes: context.successfulMinutes,
+          bonusExp,
+        },
+      });
+      writeStorage(dailyCapacityBonusDatesKey, [...new Set([...bonusDates, localDate])]);
+      setManager((current) => addExp(current, bonusExp, `오늘 기준 시간 완주 보너스 +${bonusExp} EXP`));
+    } catch {
+      // The quest completion stays valid; the database uniqueness rule remains authoritative.
+    }
+  }
+
+  async function rebalancePlanAfterEvent(request: CreateQuestEventRequest, eventId: string, recentLogs: QuestLog[]) {
     const snapshot = managerLlmStateRef.current;
+    if (!snapshot.activePlan || lastRebalancedEventIdRef.current === eventId) return;
+
+    const eventPlan = applyQuestResultToPlan(snapshot.activePlan, snapshot.activeQuestSpec, request.result);
+    const now = new Date();
+    const weekKey = getCalendarWeekKey(now);
+    const isWeeklyBoundary = now.getDay() === 1 && lastWeeklyRebalanceKeyRef.current !== weekKey;
+    const plannedBaseline = snapshot.activeQuestSpec ?? snapshot.activePlan.currentQuest;
+    const trigger = getPlanRebalanceTrigger(request, recentLogs.slice(1), plannedBaseline, isWeeklyBoundary);
+    if (!trigger) return;
+    lastRebalancedEventIdRef.current = eventId;
+    if (isWeeklyBoundary) lastWeeklyRebalanceKeyRef.current = weekKey;
 
     try {
-      const output = await requestManagerQuestSuggestionViaApi(createManagerLlmRequest("questSuggestion", {
+      const output = await requestManagerPlanRebalanceViaApi(createManagerLlmRequest("planRebalance", {
+        managerContext: {
+          currentMood: request.managerMoodAfter ?? snapshot.manager.mood,
+          recentEventCount: recentLogs.length,
+          lastQuestResult: request.result ?? null,
+          memorySummary: `plan trigger: ${trigger}`,
+          rewardHints: [],
+        },
+        profile: snapshot.profile,
+        manager: snapshot.manager,
+        quest: snapshot.quest,
+        questStatus: request.result === "failed" ? "failed" : request.result === "recovery" ? "recovery" : "success",
+        previousQuestTitle: snapshot.previousQuestTitle,
+        selectedFailureReason: request.failureReason ?? snapshot.selectedFailureReason,
+        logs: recentLogs,
+        activePlan: eventPlan,
+        activePlanId: snapshot.activePlanId,
+        questSpec: snapshot.activeQuestSpec ?? toQuestSpec(snapshot.quest, snapshot.activePlan),
+        triggerEventId: eventId,
+      }));
+
+      setActivePlan(output.planRebalance.rebalancedPlan);
+      setActiveQuestSpec(output.planRebalance.nextQuest);
+      if (request.result === "failed" || request.result === "recovery") {
+        setQuest(toQuestFromSpec(output.planRebalance.nextQuest));
+        setManager((current) => ({ ...current, line: output.planRebalance.nextQuest.recoveryReason.slice(0, 96) }));
+      }
+    } catch {
+      // The local recovery and quest flow remain usable when rebalancing fails.
+    }
+  }
+
+  const recommendQuestWithLlm = useCallback(async () => {
+    if (!acquireQuestPlanningLock(questPlanningLockRef)) return;
+    const snapshot = managerLlmStateRef.current;
+    setIsPlanningQuest(true);
+    setActiveQuestSpec(null);
+    setQuest(createEmptyQuest());
+    setRewardPreview(null);
+    setAcceptedRewardPreview(null);
+    setRewardPreviewState({ status: "idle", message: "" });
+
+    if (!snapshot.activePlan) {
+      try {
+        const output = await requestManagerGoalPlanViaApi(createManagerLlmRequest("goalPlan", {
+          managerContext: {
+            currentMood: snapshot.manager.mood,
+            recentEventCount: snapshot.logs.length,
+            lastQuestResult: snapshot.logs[0]?.result ?? null,
+            memorySummary: "v3 계획이 없어 사용자 요청으로 새 계획을 생성",
+            rewardHints: [],
+          },
+          profile: snapshot.profile,
+          manager: snapshot.manager,
+          questStatus: "draft",
+          previousQuestTitle: snapshot.previousQuestTitle,
+          selectedFailureReason: snapshot.selectedFailureReason,
+          logs: snapshot.logs,
+        }), fetch, { throttleMs: 0 });
+        setActivePlan(output.goalPlan);
+        setActivePlanId(output.storedPlanId ?? null);
+        setActiveQuestSpec(output.goalPlan.currentQuest);
+        setQuest(toQuestFromSpec(output.goalPlan.currentQuest));
+        setQuestStatus("draft");
+      } catch {
+        setManager((current) => ({ ...current, line: "계획을 불러오지 못했어. 잠시 후 다시 요청해줘." }));
+      } finally {
+        setIsPlanningQuest(false);
+        releaseQuestPlanningLock(questPlanningLockRef);
+      }
+      return;
+    }
+
+    try {
+      const output = await requestManagerNextQuestViaApi(createManagerLlmRequest("nextQuest", {
         managerContext: {
           currentMood: snapshot.manager.mood,
           recentEventCount: snapshot.logs.length,
           lastQuestResult: snapshot.logs[0]?.result ?? null,
-          memorySummary: `recent events ${snapshot.logs.length}`,
+          memorySummary: `recent events ${snapshot.logs.length}; previous day signal: ${getPreviousDailyCapacitySignal(snapshot.profile, snapshot.logs)}`,
           rewardHints: [],
         },
         profile: snapshot.profile,
@@ -1130,13 +1436,33 @@ export default function App() {
         previousQuestTitle: snapshot.previousQuestTitle,
         selectedFailureReason: snapshot.selectedFailureReason,
         logs: snapshot.logs,
+        activePlan: snapshot.activePlan,
+        activePlanId: snapshot.activePlanId,
+        questSpec: snapshot.activeQuestSpec ?? toQuestSpec(snapshot.quest, snapshot.activePlan),
       }));
-      setQuest(output.questSuggestion);
-      if (output.managerLine) {
-        setManager((current) => ({ ...current, line: output.managerLine ?? current.line }));
-      }
+      setActivePlan(output.nextQuest.updatedPlan);
+      setActiveQuestSpec(output.nextQuest.nextQuest);
+      setQuest(toQuestFromSpec(output.nextQuest.nextQuest));
+      setQuestStatus("draft");
+      setRewardPreview(null);
+      setAcceptedRewardPreview(null);
+      setRewardPreviewState({ status: "idle", message: "" });
+      setManager((current) => ({
+        ...current,
+        line: output.nextQuest.managerLine,
+        behaviorStyle: output.nextQuest.behaviorIntent.behaviorStyle,
+        behaviorIntent: output.nextQuest.behaviorIntent,
+      }));
     } catch {
-      // The rule-created quest draft is already visible.
+      const fallback = createClientFallbackQuestSpec(snapshot.activePlan);
+      setActiveQuestSpec(fallback);
+      setActivePlan({ ...snapshot.activePlan, currentQuest: fallback });
+      setQuest(toQuestFromSpec(fallback));
+      setQuestStatus("draft");
+      setManager((current) => ({ ...current, line: "연결이 불안정해서 직전 흐름을 짧게 이어갈게." }));
+    } finally {
+      setIsPlanningQuest(false);
+      releaseQuestPlanningLock(questPlanningLockRef);
     }
   }, []);
 
@@ -1162,10 +1488,23 @@ export default function App() {
         previousQuestTitle: snapshot.previousQuestTitle,
         selectedFailureReason: snapshot.selectedFailureReason,
         logs: snapshot.logs,
-      }), undefined, { throttleMs: 0 });
+        activePlan: snapshot.activePlan,
+        activePlanId: snapshot.activePlanId,
+        questSpec: toQuestSpec(snapshot.quest, snapshot.activePlan),
+      }));
+      setActiveQuestSpec(output.questAcceptancePreview.finalizedQuest);
+      setActivePlan((current) => current ? applyFinalizedQuestToPlan(current, output.questAcceptancePreview.finalizedQuest) : current);
       setRewardPreview({ snapshotKey, preview: output.questAcceptancePreview });
       setRewardPreviewState({ status: "ready", message: "" });
     } catch {
+      const fallbackSpec = toQuestSpec(snapshot.quest, snapshot.activePlan);
+      const fallbackPersona = getManagerPersona(snapshot.manager, snapshot.profile);
+      const fallbackBehaviorIntent = snapshot.manager.behaviorIntent ?? {
+        behaviorStyle: fallbackPersona.behaviorStyle,
+        tone: fallbackPersona.tone,
+        line: snapshot.manager.line,
+        suggestedBehaviorBias: [],
+      };
       const fallbackStatEvaluation = createRuleFallbackStatEvaluation({
         questType: snapshot.questStatus === "recovery" ? "recovery" : snapshot.quest.type,
         eventType: snapshot.questStatus === "recovery" ? "recovery_completed" : "quest_completed",
@@ -1174,12 +1513,17 @@ export default function App() {
       setRewardPreview({
         snapshotKey,
         preview: {
+          finalizedQuest: fallbackSpec,
           difficulty: snapshot.quest.difficulty,
           rewardExp: calculateQuestReward(snapshot.quest.difficulty, snapshot.quest.amount, snapshot.quest.type),
           statEvaluation: fallbackStatEvaluation,
           reason: "client rule fallback reward preview",
+          managerLine: fallbackBehaviorIntent.line,
+          behaviorIntent: fallbackBehaviorIntent,
         },
       });
+      setActiveQuestSpec(fallbackSpec);
+      setActivePlan((current) => current ? applyFinalizedQuestToPlan(current, fallbackSpec) : current);
       setRewardPreviewState({ status: "ready", message: "⚠ 임시 계산" });
     }
   }, []);
@@ -1205,7 +1549,6 @@ export default function App() {
     setWorkflowWindows,
     resetOpenWindows,
     openWindow,
-    createQuest,
     addExp,
     getManagerPersona,
     recordOutcomeStreak,
@@ -1216,33 +1559,133 @@ export default function App() {
     setAcceptancePreview: setRewardPreview,
     setAcceptedPreview: setAcceptedRewardPreview,
     onAcceptNeedsPreview: () => setRewardPreviewState({ status: "stale", message: "↻ 재계산 필요" }),
-    createQuestEventRequest,
+    onQuestAccepted: () => {
+      questStartedAtRef.current = Date.now();
+      questElapsedMinutesRef.current = null;
+      acceptedDailyBaselineRef.current = profile.dailyMinutes;
+    },
+    onQuestStopped: () => {
+      if (questStartedAtRef.current !== null) {
+        questElapsedMinutesRef.current = Math.max(1, Math.round((Date.now() - questStartedAtRef.current) / 60_000));
+      }
+    },
+    createQuestEventRequest: (acceptedQuest, result, expDelta, mood, options) => {
+      const actualDurationMinutes = questElapsedMinutesRef.current ?? (questStartedAtRef.current === null ? undefined : Math.max(1, Math.round((Date.now() - questStartedAtRef.current) / 60_000)));
+      const plannedBaseline = activeQuestSpec ?? activePlan?.currentQuest ?? null;
+      if (result !== "failed" || questStatus !== "active") questStartedAtRef.current = null;
+      questElapsedMinutesRef.current = null;
+      return createQuestEventRequest(acceptedQuest, result, expDelta, mood, {
+        ...options,
+        actualDurationMinutes,
+        plannedEstimatedMinutes: plannedBaseline?.estimatedMinutes,
+        plannedTargetAmount: plannedBaseline?.tracking.targetAmount,
+        acceptedEstimatedMinutes: plannedBaseline?.estimatedMinutes ?? (acceptedQuest.type === "time" ? acceptedQuest.amount : undefined),
+        dailyBaselineMinutes: acceptedDailyBaselineRef.current ?? profile.dailyMinutes,
+        localDate: toLocalDate(new Date()),
+        completionCriteria: plannedBaseline?.completionCriteria ?? [],
+      });
+    },
   });
 
-  function submitWizard(event: FormEvent<HTMLFormElement>) {
+  async function submitWizard(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (isGoalAbstract(wizardDraft.goal) && !wizardDraft.focusAnswer) { setNeedsClarify(true); return; }
     const savedProfile: UserProfile = { ...wizardDraft, name: wizardDraft.name.trim() || "사용자", nickname: wizardDraft.nickname.trim() || "루카스", goal: wizardDraft.goal.trim() || defaultProfile.goal };
     const selectedPet = managerCandidates.find((pet) => pet.petId === selectedPetId);
     const selectedPersona = resolveManagerPersona({ petId: selectedPetId, tone: savedProfile.managerTone, questStyle: savedProfile.questSize });
+    const nextManager = normalizeManager(applyManagerSpriteSelection({ ...defaultManager, name: selectedPet?.name ?? defaultManager.name, behaviorStyle: selectedPersona.behaviorStyle, line: getPersonaLine("quest_recommended", selectedPersona) }, selectedPetId));
+    let plannedQuest = createEmptyQuest();
+
+    setIsPlanningGoal(true);
+    try {
+      const output = await requestManagerGoalPlanViaApi(createManagerLlmRequest("goalPlan", {
+        managerContext: {
+          currentMood: "waiting",
+          recentEventCount: 0,
+          lastQuestResult: null,
+          memorySummary: "새 목표를 시작하는 중",
+          rewardHints: [],
+        },
+        profile: savedProfile,
+        manager: nextManager,
+        questStatus: "draft",
+        previousQuestTitle: "",
+        selectedFailureReason: "",
+        logs: [],
+        activePlan: null,
+        activePlanId: null,
+        clarificationAnswer: savedProfile.focusAnswer,
+      }));
+
+      const clarification = output.goalPlan.goalBrief.clarificationQuestion;
+      if (clarification && !savedProfile.focusAnswer) {
+        setWizardDraft(savedProfile);
+        setGoalClarification(clarification);
+        setNeedsClarify(true);
+        return;
+      }
+
+      setActivePlan(output.goalPlan);
+      setActivePlanId(output.storedPlanId ?? null);
+      const nextSpec = output.goalPlan.currentQuest;
+      setActiveQuestSpec(nextSpec);
+      if (nextSpec) plannedQuest = toQuestFromSpec(nextSpec);
+    } catch {
+      setActivePlan(null);
+      setActivePlanId(null);
+      setActiveQuestSpec(null);
+    } finally {
+      setIsPlanningGoal(false);
+    }
+
     setProfile(savedProfile);
-    setQuest(createQuest(savedProfile));
+    setQuest(plannedQuest);
     setQuestStatus("draft");
     setRewardPreview(null);
     setAcceptedRewardPreview(null);
     setRewardPreviewState({ status: "idle", message: "" });
-    setManager(normalizeManager(applyManagerSpriteSelection({ ...defaultManager, name: selectedPet?.name ?? defaultManager.name, behaviorStyle: selectedPersona.behaviorStyle, line: getPersonaLine("quest_recommended", selectedPersona) }, selectedPetId)));
+    setManager(nextManager);
     setLogs([]);
-    resetOpenWindows(["quest", "manager", "ladderObject", "platformObject"]);
+    resetOpenWindows([...defaultOpenWindowIds]);
     resetWindowPositions();
     setNeedsClarify(false);
+    setGoalClarification(null);
     setScreen("manager-created");
   }
 
   function saveProfile(nextProfile: UserProfile) {
     setProfile(nextProfile);
     setWizardDraft(nextProfile);
-    if (questStatus === "draft") setQuest(createQuest(nextProfile));
+    void rebalancePlanForProfileChange(nextProfile);
+  }
+
+  async function rebalancePlanForProfileChange(nextProfile: UserProfile) {
+    const snapshot = managerLlmStateRef.current;
+    if (!snapshot.activePlan) return;
+    try {
+      const output = await requestManagerPlanRebalanceViaApi(createManagerLlmRequest("planRebalance", {
+        managerContext: {
+          currentMood: snapshot.manager.mood,
+          recentEventCount: snapshot.logs.length,
+          lastQuestResult: snapshot.logs[0]?.result ?? null,
+          memorySummary: "profile_changed: 이후 숨은 계획만 새 프로필 기준으로 재검토",
+          rewardHints: [],
+        },
+        profile: nextProfile,
+        manager: snapshot.manager,
+        quest: snapshot.quest,
+        questStatus: snapshot.questStatus,
+        previousQuestTitle: snapshot.previousQuestTitle,
+        selectedFailureReason: snapshot.selectedFailureReason,
+        logs: snapshot.logs,
+        activePlan: snapshot.activePlan,
+        activePlanId: snapshot.activePlanId,
+        questSpec: snapshot.activeQuestSpec,
+        triggerEventId: `profile-${Date.now()}`,
+      }), fetch, { throttleMs: 0 });
+      setActivePlan(output.planRebalance.rebalancedPlan);
+    } catch {
+      // Profile saving is local-first; the next on-demand request carries the new profile again.
+    }
   }
 
   function selectManagerStage(stage: PetStageId) {
@@ -1306,7 +1749,7 @@ export default function App() {
   };
 
   if (screen === "manager-select") return <main className="xp-boot-screen"><ManagerSelectWindow selectedPetId={selectedPetId} onSelect={setSelectedPetId} onContinue={continueWithSelectedManager} /></main>;
-  if (screen === "wizard") return <main className="xp-boot-screen"><ProfileSetupWizard draft={wizardDraft} needsClarify={needsClarify} onChange={setWizardDraft} onSubmit={submitWizard} /></main>;
+  if (screen === "wizard") return <main className="xp-boot-screen"><ProfileSetupWizard draft={wizardDraft} needsClarify={needsClarify} clarificationQuestion={goalClarification?.question} clarificationOptions={goalClarification?.options} isPlanning={isPlanningGoal} onChange={setWizardDraft} onSubmit={submitWizard} /></main>;
   if (screen === "manager-created") return <main className="xp-boot-screen"><XpWindow className="created-window" title="Manager Created" titlebarIcon="◇" onClose={undefined}><p className="created-lead">매니저가 깨어났어요.</p><div className="created-card"><DesktopPet mood="happy" petId={manager.petId} stage={managerDisplayStage} large /><div><strong>◇ {manager.name} ◇</strong><span>전자 생물형 페이스메이커</span><small>목표를 오늘의 퀘스트로 나누고 실패하면 다음 분량을 다시 맞춰요.</small></div></div><div className="window-actions"><button className="xp-button primary" type="button" onClick={enterDesktop}>데스크톱으로 이동</button></div></XpWindow></main>;
 
   return (
@@ -1351,7 +1794,7 @@ export default function App() {
         />
       )}
 
-      {isWindowVisible("quest") && <XpWindow className="quest-window" title={questStatus === "recovery" ? "복구 퀘스트" : "오늘의 퀘스트"} {...questWindowChrome}><QuestWindow quest={quest} status={questStatus} rewardPreviewState={rewardPreviewState} rewardPreview={rewardPreview} onQuestChange={updateQuest} onPreviewReward={() => void previewQuestAcceptanceReward()} onAccept={acceptQuest} onOpenRunner={() => openWindow("runner")} onRecommendNext={openTodayQuest} /></XpWindow>}
+      {isWindowVisible("quest") && <XpWindow className="quest-window" title={questStatus === "recovery" ? "복구 퀘스트" : "오늘의 퀘스트"} {...questWindowChrome}><QuestWindow quest={quest} questSpec={activeQuestSpec} isPlanning={isPlanningQuest} status={questStatus} rewardPreviewState={rewardPreviewState} rewardPreview={rewardPreview} onQuestChange={updateQuest} onPreviewReward={() => void previewQuestAcceptanceReward()} onAccept={acceptQuest} onOpenRunner={() => openWindow("runner")} onRecommendNext={activeQuestSpec ? openTodayQuest : () => void recommendQuestWithLlm()} /></XpWindow>}
       {managerRuntimeState.windowInteraction === "quest_hanging" && <WindowPetInteraction state="hanging" petId={manager.petId} stage={managerRuntimeState.stage} placement="below-quest" position={windowPositions.quest} measuredRect={windowRects.quest} zIndex={questWindowChrome.zIndex} />}
       {managerRuntimeState.windowInteraction === "pixel_tv_watching" && <PixelTvWatchingPet petId={manager.petId} stage={managerRuntimeState.stage} position={windowPositions.pixelTv} measuredRect={windowRects.pixelTv} zIndex={pixelTvWindowChrome.zIndex} />}
       {isWindowVisible("runner") && <XpWindow className="runner-window" title="QuestRunner.exe" {...windowChrome("runner")}><QuestRunnerWindow quest={quest} onComplete={completeQuest} onFail={startFailureFlow} /></XpWindow>}
@@ -1821,20 +2264,29 @@ function BlinkFocusOverlay({ effect, onDone }: BlinkFocusOverlayProps) {
   );
 }
 
-function ProfileSetupWizard({ draft, needsClarify, onChange, onSubmit }: ProfileSetupWizardProps) {
-  return <XpWindow className="setup-window" title="Manager.exe 설치 마법사" onClose={undefined}><form className="setup-form" onSubmit={onSubmit}><p className="wizard-lead">전자 생물 매니저를 깨울 준비를 할게요</p><div className="wizard-grid"><label htmlFor="profile-name">이름</label><input id="profile-name" value={draft.name} onChange={(event) => onChange({ ...draft, name: event.target.value })} placeholder="김동민" /><label htmlFor="profile-nickname">닉네임</label><input id="profile-nickname" value={draft.nickname} onChange={(event) => onChange({ ...draft, nickname: event.target.value })} placeholder="루카스" /><label htmlFor="profile-goal">함께 키울 목표</label><textarea id="profile-goal" value={draft.goal} onChange={(event) => onChange({ ...draft, goal: event.target.value })} placeholder="예: 수능 수학 1등급. 확통이 약하고 하루 40분 가능. 오답이 쌓이면 쉽게 지쳐요." /><label htmlFor="daily-minutes">하루 가능 시간</label><select id="daily-minutes" value={draft.dailyMinutes} onChange={(event) => onChange({ ...draft, dailyMinutes: Number(event.target.value) })}><option value={15}>15분</option><option value={30}>30분</option><option value={45}>45분</option><option value={60}>60분</option></select><span>진행 강도</span><div className="segmented-control">{(["tiny", "balanced", "challenge"] as QuestSize[]).map((size) => <button className={draft.questSize === size ? "selected" : ""} key={size} type="button" onClick={() => onChange({ ...draft, questSize: size })}>{size === "tiny" ? "가볍게" : size === "balanced" ? "보통" : "도전적으로"}</button>)}</div><span>매니저 말투</span><div className="segmented-control">{(["calm", "friendly", "firm"] as ManagerTone[]).map((tone) => <button className={draft.managerTone === tone ? "selected" : ""} key={tone} type="button" onClick={() => onChange({ ...draft, managerTone: tone })}>{tone === "calm" ? "차분함" : tone === "friendly" ? "친구 같음" : "단호함"}</button>)}</div></div>{needsClarify && <div className="clarify-box"><strong>목표를 조금 더 구체화해볼게</strong><span>먼저 어떤 부분부터 시작할까?</span><div className="clarify-options">{["개념 읽기", "기출 문제", "오답 정리", "아직 모르겠음"].map((answer) => <label key={answer}><input type="radio" name="focus" checked={draft.focusAnswer === answer} onChange={() => onChange({ ...draft, focusAnswer: answer })} />{answer}</label>)}</div></div>}<div className="window-actions"><button className="xp-button" type="button" disabled>이전</button><button className="xp-button primary" type="submit">매니저 깨우기</button></div></form></XpWindow>;
+function ProfileSetupWizard({ draft, needsClarify, clarificationQuestion, clarificationOptions = [], isPlanning, onChange, onSubmit }: ProfileSetupWizardProps) {
+  return <XpWindow className="setup-window" title="Manager.exe 설치 마법사" onClose={undefined}><form className="setup-form" onSubmit={onSubmit}><p className="wizard-lead">전자 생물 매니저를 깨울 준비를 할게요</p><div className="wizard-grid"><label htmlFor="profile-name">이름</label><input id="profile-name" value={draft.name} onChange={(event) => onChange({ ...draft, name: event.target.value })} placeholder="김동민" /><label htmlFor="profile-nickname">닉네임</label><input id="profile-nickname" value={draft.nickname} onChange={(event) => onChange({ ...draft, nickname: event.target.value })} placeholder="루카스" /><label htmlFor="profile-goal">함께 키울 목표</label><textarea id="profile-goal" value={draft.goal} onChange={(event) => onChange({ ...draft, goal: event.target.value, focusAnswer: "" })} placeholder="예: 수능 수학 1등급. 확통이 약하고 오답이 쌓이면 쉽게 지쳐요." /><span>하루 가능 시간</span><DailyTimeInputs idPrefix="setup-daily" totalMinutes={draft.dailyMinutes} onChange={(dailyMinutes) => onChange({ ...draft, dailyMinutes })} /><label htmlFor="target-date">목표 기한</label><input id="target-date" type="date" value={draft.targetDate} onChange={(event) => onChange({ ...draft, targetDate: event.target.value })} /><span>매니저 말투</span><div className="segmented-control">{(["calm", "friendly", "firm"] as ManagerTone[]).map((tone) => <button className={draft.managerTone === tone ? "selected" : ""} key={tone} type="button" onClick={() => onChange({ ...draft, managerTone: tone })}>{tone === "calm" ? "차분함" : tone === "friendly" ? "친구 같음" : "단호함"}</button>)}</div></div>{needsClarify && clarificationQuestion && <div className="clarify-box"><strong>목표를 조금 더 구체화해볼게</strong><span>{clarificationQuestion}</span><div className="clarify-options">{clarificationOptions.map((answer) => <label key={answer}><input type="radio" name="focus" checked={draft.focusAnswer === answer} onChange={() => onChange({ ...draft, focusAnswer: answer })} />{answer}</label>)}</div></div>}<div className="window-actions"><button className="xp-button" type="button" disabled>이전</button><button className="xp-button primary" type="submit" disabled={draft.dailyMinutes < 1 || isPlanning || (needsClarify && !draft.focusAnswer)}>{isPlanning ? "계획 만드는 중" : needsClarify ? "답변하고 시작" : "매니저 깨우기"}</button></div></form></XpWindow>;
 }
 
-function QuestWindow({ quest, status, rewardPreviewState, rewardPreview, onQuestChange, onPreviewReward, onAccept, onOpenRunner, onRecommendNext }: QuestWindowProps) {
-  if (status === "active") return <section className="quest-program-link"><div className="program-icon" aria-hidden="true">EXE</div><h2>퀘스트가 실행 중이야</h2><p>완료, 실패, 복구 흐름은 QuestRunner.exe 창에서 처리해.</p><strong>{quest.title}</strong><div className="window-actions"><button className="xp-button primary" type="button" onClick={onOpenRunner}>실행창 앞으로</button></div></section>;
-  if (status === "success") return <section className="quest-program-link"><div className="program-icon" aria-hidden="true">OK</div><h2>오늘의 퀘스트를 완료했어</h2><p>기록은 저장됐고, 다음 오늘의 퀘스트를 추천할 수 있어.</p><strong>{quest.title}</strong><div className="window-actions"><button className="xp-button primary" type="button" onClick={onRecommendNext}>새 퀘스트 추천</button></div></section>;
-  if (status === "failed") return <section className="quest-program-link"><div className="program-icon" aria-hidden="true">!</div><h2>복구가 필요한 퀘스트야</h2><p>실패 이유를 기록하고 더 작은 복구 퀘스트로 이어갈 수 있어.</p><strong>{quest.title}</strong></section>;
+function DailyTimeInputs({ idPrefix, totalMinutes, onChange }: { idPrefix: string; totalMinutes: number; onChange: (minutes: number) => void }) {
+  const value = splitDailyMinutes(totalMinutes);
+  return <div className="form-pair daily-time-inputs"><label htmlFor={`${idPrefix}-hours`}><input className="xp-input" id={`${idPrefix}-hours`} type="number" min={0} max={23} step={1} value={value.hours} onChange={(event) => onChange(toDailyMinutes({ hours: Number(event.target.value), minutes: value.minutes }))} /> 시간</label><label htmlFor={`${idPrefix}-minutes`}><input className="xp-input" id={`${idPrefix}-minutes`} type="number" min={0} max={59} step={1} value={value.minutes} onChange={(event) => onChange(toDailyMinutes({ hours: value.hours, minutes: Math.min(59, Number(event.target.value)) }))} /> 분</label></div>;
+}
+
+function QuestWindow({ quest, questSpec, isPlanning, status, rewardPreviewState, rewardPreview, onQuestChange, onPreviewReward, onAccept, onOpenRunner, onRecommendNext }: QuestWindowProps) {
+  const view = getQuestWindowView({ status, hasQuestSpec: Boolean(questSpec), isPlanning });
+  if (view === "planning") return <section className="quest-program-loading" role="status" aria-label="다음 퀘스트 준비 중"><div className="quest-loading-emoji" aria-hidden="true">⌛</div></section>;
+  if (view === "active") return <section className="quest-program-link"><div className="program-icon" aria-hidden="true">EXE</div><h2>퀘스트가 실행 중이야</h2><p>완료, 실패, 복구 흐름은 QuestRunner.exe 창에서 처리해.</p><strong>{quest.title}</strong><div className="window-actions"><button className="xp-button primary" type="button" onClick={onOpenRunner}>실행창 앞으로</button></div></section>;
+  if (view === "success") return <section className="quest-program-link"><div className="program-icon" aria-hidden="true">OK</div><h2>오늘의 퀘스트를 완료했어</h2><p>기록은 저장됐고, 다음 오늘의 퀘스트를 추천할 수 있어.</p><strong>{quest.title}</strong><div className="window-actions"><button className="xp-button primary" type="button" onClick={onRecommendNext}>새 퀘스트 추천</button></div></section>;
+  if (view === "failed") return <section className="quest-program-link"><div className="program-icon" aria-hidden="true">!</div><h2>복구가 필요한 퀘스트야</h2><p>실패 이유를 기록하고 더 작은 복구 퀘스트로 이어갈 수 있어.</p><strong>{quest.title}</strong></section>;
+  if (view === "empty") return <section className="quest-program-link"><div className="program-icon" aria-hidden="true">...</div><h2>새 계획이 필요해</h2><p>목표와 오늘의 기록을 바탕으로 지금 할 퀘스트 하나를 불러올게.</p><div className="window-actions"><button className="xp-button primary" type="button" onClick={onRecommendNext}>계획에서 퀘스트 불러오기</button></div></section>;
   const preview = rewardPreview?.preview;
   const canAccept = rewardPreviewState.status === "ready" && Boolean(preview);
 
   return (
     <section className="quest-draft">
-      {status !== "recovery" && <div className="quest-summary"><span>오늘 수행할 퀘스트 초안</span><strong>3 / 4 완료</strong></div>}
+      {status !== "recovery" && <div className="quest-summary"><span>오늘 수행할 퀘스트 초안</span></div>}
+      {questSpec && <div className="quest-spec-details"><p>{questSpec.instruction}</p><dl><div><dt>완료 기준</dt><dd>{questSpec.completionCriteria.join(" · ")}</dd></div><div><dt>예상 시간</dt><dd>{questSpec.estimatedMinutes}분</dd></div>{questSpec.expectedOutput && <div><dt>결과물</dt><dd>{questSpec.expectedOutput}</dd></div>}<div><dt>추적</dt><dd>{questSpec.tracking.targetAmount ?? 1}{questSpec.tracking.targetUnit ?? (questSpec.tracking.mode === "timer" ? "분" : "회")}</dd></div></dl></div>}
       <form className="quest-form">
         <label htmlFor="quest-title">제목</label>
         <input className="xp-input" id="quest-title" value={quest.title} onChange={(event) => onQuestChange({ title: event.target.value })} />
@@ -2074,7 +2526,7 @@ function SettingsWindow({ manager, onSelectStage, onToggleSound }: SettingsWindo
 
 function ProfileWindow({ profile, onSave }: ProfileWindowProps) {
   const [draft, setDraft] = useState(profile);
-  return <form className="profile-edit" onSubmit={(event) => { event.preventDefault(); onSave(draft); }}><div className="profile-form"><label htmlFor="profile-edit-name">이름</label><input className="xp-input" id="profile-edit-name" value={draft.name} onChange={(event) => setDraft({ ...draft, name: event.target.value })} /><label htmlFor="profile-edit-nickname">닉네임</label><input className="xp-input" id="profile-edit-nickname" value={draft.nickname} onChange={(event) => setDraft({ ...draft, nickname: event.target.value })} /><label htmlFor="profile-edit-goal">주요 목표</label><textarea className="xp-textarea" id="profile-edit-goal" value={draft.goal} onChange={(event) => setDraft({ ...draft, goal: event.target.value })} /><label htmlFor="profile-edit-minutes">가능 시간</label><select className="xp-select" id="profile-edit-minutes" value={draft.dailyMinutes} onChange={(event) => setDraft({ ...draft, dailyMinutes: Number(event.target.value) })}><option value={15}>15분</option><option value={30}>30분</option><option value={45}>45분</option><option value={60}>60분</option></select></div><div className="window-actions"><button className="xp-button primary" type="submit">저장</button></div></form>;
+  return <form className="profile-edit" onSubmit={(event) => { event.preventDefault(); onSave(draft); }}><div className="profile-form"><label htmlFor="profile-edit-name">이름</label><input className="xp-input" id="profile-edit-name" value={draft.name} onChange={(event) => setDraft({ ...draft, name: event.target.value })} /><label htmlFor="profile-edit-nickname">닉네임</label><input className="xp-input" id="profile-edit-nickname" value={draft.nickname} onChange={(event) => setDraft({ ...draft, nickname: event.target.value })} /><label htmlFor="profile-edit-goal">주요 목표</label><textarea className="xp-textarea" id="profile-edit-goal" value={draft.goal} onChange={(event) => setDraft({ ...draft, goal: event.target.value })} /><span>가능 시간</span><DailyTimeInputs idPrefix="profile-daily" totalMinutes={draft.dailyMinutes} onChange={(dailyMinutes) => setDraft({ ...draft, dailyMinutes })} /><label htmlFor="profile-edit-target-date">목표 기한</label><input className="xp-input" id="profile-edit-target-date" type="date" value={draft.targetDate} onChange={(event) => setDraft({ ...draft, targetDate: event.target.value })} /></div><div className="window-actions"><button className="xp-button primary" type="submit" disabled={draft.dailyMinutes < 1}>저장</button></div></form>;
 }
 
 function JournalWindow({ logs, sync }: JournalWindowProps) {

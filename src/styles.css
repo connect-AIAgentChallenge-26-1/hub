@@ -560,6 +560,17 @@ label {
   justify-items: start;
 }
 
+.quest-program-loading {
+  display: grid;
+  min-height: 210px;
+  place-items: center;
+}
+
+.quest-loading-emoji {
+  font-size: 34px;
+  line-height: 1;
+}
+
 .quest-program-link h2 {
   margin: 0;
   color: #1f2937;
@@ -2293,6 +2304,52 @@ label {
   grid-template-columns: minmax(0, 1fr) 82px;
   gap: 6px;
   min-width: 0;
+}
+
+.daily-time-inputs {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.daily-time-inputs label {
+  display: grid;
+  grid-template-columns: minmax(48px, 1fr) auto;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.quest-spec-details {
+  margin: 0 0 10px;
+  padding: 7px;
+  color: #252525;
+  font-size: 11px;
+  line-height: 1.45;
+  background: #ffffe1;
+  border: 1px solid #aca899;
+}
+
+.quest-spec-details p {
+  margin: 0 0 6px;
+}
+
+.quest-spec-details dl,
+.quest-spec-details dl div {
+  margin: 0;
+}
+
+.quest-spec-details dl div {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 6px;
+}
+
+.quest-spec-details dt {
+  font-weight: 700;
+}
+
+.quest-spec-details dd {
+  margin: 0;
+  overflow-wrap: anywhere;
 }
 
 .difficulty-row {

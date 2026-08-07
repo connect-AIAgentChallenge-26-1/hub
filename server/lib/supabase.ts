@@ -143,12 +143,12 @@ export function createSupabaseManagerPlanStore(config: SupabaseConfig): ManagerP
       return readInsertedRow(response);
     },
     async savePlanRevision(input) {
-      const response = await fetch(`${baseUrl}/rest/v1/manager_plan_revisions`, {
+      const response = await fetch(`${baseUrl}/rest/v1/rpc/append_manager_plan_revision_v3`, {
         method: "POST",
         headers: { ...headers, prefer: "return=representation" },
-        body: JSON.stringify(toPlanRevisionInsertRow(input)),
+        body: JSON.stringify(toPlanRevisionRpcInput(input)),
       });
-      if (!response.ok) throw new Error(`Supabase manager plan revision insert failed: ${response.status}`);
+      if (!response.ok) throw new Error(`Supabase manager plan revision transaction failed: ${response.status}`);
       return readInsertedRow(response);
     },
   };
@@ -163,29 +163,36 @@ async function readInsertedRow(response: Response): Promise<{ id: string; create
 
 function toGoalPlanInsertRow(input: SaveManagerGoalPlanInput) {
   return {
-    goal: input.goal,
-    category: input.category,
+    goal: input.goalPlan.finalGoal.statement,
+    raw_goal_text: input.rawGoalText,
+    daily_minutes: input.dailyMinutes,
+    target_date: input.targetDate,
+    manager_tone: input.managerTone,
+    nickname: input.nickname,
+    clarification_answer: input.clarificationAnswer ?? null,
     status: "active",
     source: input.source,
     fallback_reason: input.fallbackReason ?? null,
     prompt_version: input.promptVersion,
-    plan_version: 1,
-    plan_json: input.plan,
+    plan_version: 3,
+    goal_brief_json: input.goalPlan.goalBrief,
+    plan_json: input.goalPlan,
   };
 }
 
-function toPlanRevisionInsertRow(input: SaveManagerPlanRevisionInput) {
+function toPlanRevisionRpcInput(input: SaveManagerPlanRevisionInput) {
   return {
-    plan_id: input.planId ?? null,
-    trigger_event_id: input.triggerEventId ?? null,
-    goal: input.goal,
-    source: input.source,
-    fallback_reason: input.fallbackReason ?? null,
-    prompt_version: input.promptVersion,
-    revision_reason: input.rebalance.changes[0]?.reason ?? "success_streak",
-    changes_json: input.rebalance.changes,
-    after_plan_json: input.rebalance.rebalancedPlan,
-    next_quest_json: input.rebalance.nextQuest,
+    p_plan_id: input.planId ?? null,
+    p_trigger_event_id: input.triggerEventId ?? null,
+    p_raw_goal_text: input.rawGoalText,
+    p_source: input.source,
+    p_fallback_reason: input.fallbackReason ?? null,
+    p_prompt_version: input.promptVersion,
+    p_revision_reason: input.rebalance.changes[0]?.reason ?? "anomaly",
+    p_changes_json: input.rebalance.changes,
+    p_after_plan_json: input.rebalance.rebalancedPlan,
+    p_goal_brief_json: input.rebalance.rebalancedPlan.goalBrief,
+    p_next_quest_json: input.rebalance.nextQuest,
   };
 }
 
