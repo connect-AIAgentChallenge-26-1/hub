@@ -26,6 +26,3 @@ flowchart TD
     G -->|설정됨| I
     A --> J[대형폐기물 신고 / 주변 수거함 안내]
 ```
-
-# 개발 기획 - GitHub 이슈
-https://github.com/ymina25/hub/issues
